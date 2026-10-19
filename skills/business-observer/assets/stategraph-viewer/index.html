@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>仿真任务 · 分层运行图</title><link rel="stylesheet" href="/viewer.css"></head>
+<body><header><div class="brand"><span class="mark">◈</span><h1>仿真任务 <span>运行图</span></h1></div><div class="header-right"><span id="connection">连接中</span><a href="/control" target="_blank" rel="noopener">实验操作台 ↗</a></div></header>
+<div class="toolbar"><div class="segments"><button id="behavior-mode" class="active">业务 / 程序层次</button><button id="machine-mode">可执行状态机</button></div><label>运行 <select id="attempt"><option value="latest">跟随最新执行</option></select></label><span class="spacer"></span><button id="collapse">收起</button><button id="expand">展开核心程序</button><button id="fit">适应画布</button><button id="zoom-out" aria-label="缩小">−</button><output id="zoom">100%</output><button id="zoom-in" aria-label="放大">＋</button></div>
+<div class="facts"><strong id="phase">Phase · —</strong><span id="context"></span><span class="spacer"></span><span id="binding"></span></div>
+<main id="viewport" tabindex="0" aria-label="可缩放的业务程序图。点击节点展开，点击源码在节点内查看；拖动空白平移，滚轮缩放。"><div id="canvas-host"></div><nav id="breadcrumbs" aria-label="图中层次"></nav><div id="semantic" class="accessible-graph"></div><div id="empty" hidden></div></main>
+<footer><span><i class="dot green"></i>当前事实 <i class="dot orange"></i>条件未满足 <i class="dot gray"></i>声明 / 未运行</span><span id="selection">点击节点原位展开 · 点击源码继续下钻 · 拖动平移 / 滚轮缩放</span><span id="renderer">PixiJS</span></footer>
+<script src="/pixi.min.js"></script><script type="module" src="/viewer.js"></script></body></html>

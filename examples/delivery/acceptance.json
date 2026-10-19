@@ -1,0 +1,338 @@
+{
+  "checks": [
+    {
+      "id": "normal.state",
+      "requirement": "R4",
+      "case": "normal",
+      "path": [
+        "state"
+      ],
+      "equals": "completed"
+    },
+    {
+      "id": "normal.effects",
+      "requirement": "R4",
+      "case": "normal",
+      "path": [
+        "effects"
+      ],
+      "equals": 1
+    },
+    {
+      "id": "no_grant.state",
+      "requirement": "R2",
+      "case": "no_grant",
+      "path": [
+        "state"
+      ],
+      "equals": "waiting"
+    },
+    {
+      "id": "no_grant.effects",
+      "requirement": "R2",
+      "case": "no_grant",
+      "path": [
+        "effects"
+      ],
+      "equals": 0
+    },
+    {
+      "id": "alternative.state",
+      "requirement": "R2",
+      "case": "alternative",
+      "path": [
+        "state"
+      ],
+      "equals": "completed"
+    },
+    {
+      "id": "alternative.effects",
+      "requirement": "R2",
+      "case": "alternative",
+      "path": [
+        "effects"
+      ],
+      "equals": 1
+    },
+    {
+      "id": "revoked.state",
+      "requirement": "R2",
+      "case": "revoked",
+      "path": [
+        "state"
+      ],
+      "equals": "waiting"
+    },
+    {
+      "id": "revoked.effects",
+      "requirement": "R2",
+      "case": "revoked",
+      "path": [
+        "effects"
+      ],
+      "equals": 0
+    },
+    {
+      "id": "expired.state",
+      "requirement": "R2",
+      "case": "expired",
+      "path": [
+        "state"
+      ],
+      "equals": "waiting"
+    },
+    {
+      "id": "expired.effects",
+      "requirement": "R2",
+      "case": "expired",
+      "path": [
+        "effects"
+      ],
+      "equals": 0
+    },
+    {
+      "id": "bad_scope.state",
+      "requirement": "R2",
+      "case": "bad_scope",
+      "path": [
+        "state"
+      ],
+      "equals": "waiting"
+    },
+    {
+      "id": "bad_scope.effects",
+      "requirement": "R2",
+      "case": "bad_scope",
+      "path": [
+        "effects"
+      ],
+      "equals": 0
+    },
+    {
+      "id": "bad_role.state",
+      "requirement": "R2",
+      "case": "bad_role",
+      "path": [
+        "state"
+      ],
+      "equals": "waiting"
+    },
+    {
+      "id": "bad_role.effects",
+      "requirement": "R2",
+      "case": "bad_role",
+      "path": [
+        "effects"
+      ],
+      "equals": 0
+    },
+    {
+      "id": "edit_after_prepare.state",
+      "requirement": "R1",
+      "case": "edit_after_prepare",
+      "path": [
+        "state"
+      ],
+      "equals": "draft"
+    },
+    {
+      "id": "edit_after_prepare.effects",
+      "requirement": "R1",
+      "case": "edit_after_prepare",
+      "path": [
+        "effects"
+      ],
+      "equals": 0
+    },
+    {
+      "id": "cancel.state",
+      "requirement": "R3",
+      "case": "cancel",
+      "path": [
+        "state"
+      ],
+      "equals": "cancelled"
+    },
+    {
+      "id": "cancel.effects",
+      "requirement": "R3",
+      "case": "cancel",
+      "path": [
+        "effects"
+      ],
+      "equals": 0
+    },
+    {
+      "id": "retry.state",
+      "requirement": "R3",
+      "case": "retry",
+      "path": [
+        "state"
+      ],
+      "equals": "completed"
+    },
+    {
+      "id": "retry.effects",
+      "requirement": "R3",
+      "case": "retry",
+      "path": [
+        "effects"
+      ],
+      "equals": 1
+    },
+    {
+      "id": "duplicate.state",
+      "requirement": "R5",
+      "case": "duplicate",
+      "path": [
+        "state"
+      ],
+      "equals": "completed"
+    },
+    {
+      "id": "duplicate.effects",
+      "requirement": "R5",
+      "case": "duplicate",
+      "path": [
+        "effects"
+      ],
+      "equals": 1
+    },
+    {
+      "id": "worker_failure.state",
+      "requirement": "R3",
+      "case": "worker_failure",
+      "path": [
+        "state"
+      ],
+      "equals": "failed"
+    },
+    {
+      "id": "worker_failure.effects",
+      "requirement": "R3",
+      "case": "worker_failure",
+      "path": [
+        "effects"
+      ],
+      "equals": 0
+    },
+    {
+      "id": "concurrent.state",
+      "requirement": "R5",
+      "case": "concurrent",
+      "path": [
+        "state"
+      ],
+      "equals": "completed"
+    },
+    {
+      "id": "concurrent.effects",
+      "requirement": "R5",
+      "case": "concurrent",
+      "path": [
+        "effects"
+      ],
+      "equals": 1
+    },
+    {
+      "id": "privacy.state",
+      "requirement": "R7",
+      "case": "privacy",
+      "path": [
+        "state"
+      ],
+      "equals": "failed"
+    },
+    {
+      "id": "privacy.effects",
+      "requirement": "R7",
+      "case": "privacy",
+      "path": [
+        "effects"
+      ],
+      "equals": 0
+    },
+    {
+      "id": "resource_wait.state",
+      "requirement": "R7",
+      "case": "resource_wait",
+      "path": [
+        "state"
+      ],
+      "equals": "completed"
+    },
+    {
+      "id": "resource_wait.effects",
+      "requirement": "R7",
+      "case": "resource_wait",
+      "path": [
+        "effects"
+      ],
+      "equals": 1
+    },
+    {
+      "id": "parallel.state",
+      "requirement": "R7",
+      "case": "parallel",
+      "path": [
+        "state"
+      ],
+      "equals": "completed"
+    },
+    {
+      "id": "parallel.effects",
+      "requirement": "R7",
+      "case": "parallel",
+      "path": [
+        "effects"
+      ],
+      "equals": 1
+    }
+  ],
+  "model_checks": [
+    {
+      "id": "approval-any",
+      "requirement": "R2",
+      "path": [
+        "nodes",
+        "authorize",
+        "predicate"
+      ],
+      "equals": "engineer AND ANY eligible grant"
+    },
+    {
+      "id": "integrated-activities",
+      "requirement": "R8",
+      "path": [
+        "machine",
+        "execution",
+        "join",
+        "requires"
+      ],
+      "equals": [
+        "checksum",
+        "privacy"
+      ]
+    },
+    {
+      "id": "complete-join",
+      "requirement": "R7",
+      "path": [
+        "machine",
+        "execution",
+        "join",
+        "policy"
+      ],
+      "equals": "all"
+    },
+    {
+      "id": "inline-execution",
+      "requirement": "R8",
+      "path": [
+        "presentation",
+        "execution_projection"
+      ],
+      "equals": "inline"
+    }
+  ]
+}

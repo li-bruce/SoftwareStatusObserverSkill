@@ -1,0 +1,53 @@
+{
+  "revision": "0.1.0",
+  "requirements": [
+    {
+      "id": "R1",
+      "text": "typed input and versioned edits",
+      "status": "assumption",
+      "source": "REQUIREMENTS.md (synthetic example specification)"
+    },
+    {
+      "id": "R2",
+      "text": "engineer AND ANY eligible grant; substitute authorization",
+      "status": "assumption",
+      "source": "REQUIREMENTS.md (synthetic example specification)"
+    },
+    {
+      "id": "R3",
+      "text": "lifecycle, wait, retry and cancellation",
+      "status": "assumption",
+      "source": "REQUIREMENTS.md (synthetic example specification)"
+    },
+    {
+      "id": "R4",
+      "text": "checksum and fresh commit authorization",
+      "status": "assumption",
+      "source": "REQUIREMENTS.md (synthetic example specification)"
+    },
+    {
+      "id": "R5",
+      "text": "one committed artifact per version",
+      "status": "assumption",
+      "source": "REQUIREMENTS.md (synthetic example specification)"
+    },
+    {
+      "id": "R6",
+      "text": "observer isolation and equal business effects",
+      "status": "assumption",
+      "source": "REQUIREMENTS.md (synthetic example specification)"
+    },
+    {
+      "id": "R7",
+      "text": "Concurrent checks share per-run capacity, wait for slots, return slots and require all results; reject synthetic SECRET: marker.",
+      "status": "assumption",
+      "source": "REQUIREMENTS.md (synthetic example specification)"
+    },
+    {
+      "id": "R8",
+      "text": "All declared activity instances are queryable by run and version; stale runs cannot overwrite or commit new runs; historical views retain the selected state.",
+      "status": "assumption",
+      "source": "REQUIREMENTS.md (synthetic example specification)"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "scan": ["app", "integrations", "observer_generated", "tooling"],
+  "layers": {
+    "business": {"paths": ["app"], "allows": ["business"], "reject_dynamic": true},
+    "integration": {"paths": ["integrations"], "allows": ["business", "observer", "integration"]},
+    "observer": {"paths": ["observer_generated"], "allows": ["observer"]},
+    "tooling": {"paths": ["tooling"], "allows": ["business", "observer", "integration", "tooling"]}
+  },
+  "managed_paths": ["observer_generated/runtime", "observer_generated/behavior.json"],
+  "managed_hashes": {},
+  "regenerations": [],
+  "core_layers": ["business"],
+  "core_resources": ["requirements.txt"],
+  "core_include": ["app", "requirements.txt"]
+}

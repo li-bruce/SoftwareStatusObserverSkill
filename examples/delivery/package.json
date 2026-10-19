@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "type": "module",
+  "description": "Native Node.js assertions for the browser graph; no npm dependencies.",
+  "scripts": {"test": "node tests/test_graph_projection.mjs"}
+}

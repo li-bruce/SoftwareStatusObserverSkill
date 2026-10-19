@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>数据交付 · 操作</title>
+<style>
+body{font:15px/1.65 'Segoe UI','Microsoft YaHei',sans-serif;color:#30454d;background:#f5f7f7;max-width:800px;margin:42px auto;padding:0 24px}h1{font-size:22px;margin-bottom:4px}a{color:#176d66}section{margin-top:22px;padding:20px 24px;border:1px solid #d9e3e4;border-radius:8px;background:white}label{display:block;margin-bottom:14px}input,textarea,select,button{font:inherit;border:1px solid #cbd9dc;border-radius:5px;padding:7px 10px;color:inherit;background:#fff}textarea{display:block;width:calc(100% - 22px);min-height:70px;margin-top:6px}button{cursor:pointer;margin:4px 6px 4px 0}button:hover{background:#eaf4f1}button.primary{background:#197d6d;color:white}#status{white-space:pre-wrap;margin:0}#message{color:#97551f;min-height:24px}small{color:#6f8289}input{width:130px}select{margin-left:10px}
+</style>
+<h1>数据交付</h1><a href="/" target="_blank" rel="noopener">查看程序状态和代码 ↗</a>
+<section>
+  <label for="content">需要检查的内容</label><textarea id="content"></textarea>
+  <label for="capacity">本次最多同时执行的检查数<select id="capacity"><option value="1">1 项</option><option value="2">2 项</option></select></label>
+  <button id="edit">保存内容和名额</button><small>保存后产生新参数版本，需要重新授权。</small>
+</section>
+<section>
+  <label for="grant">授权编号 <input id="grant" value="G1"></label>
+  <button id="approve">批准当前版本</button><button id="revoke">撤销这份授权</button>
+  <div><button id="prepare">只做检查</button><button id="execute" class="primary">检查并提交</button><button id="commit">提交检查结果</button><button id="cancel">取消交付</button></div>
+  <div id="message" role="status"></div><pre id="status">正在读取程序状态。</pre>
+</section>
+<script>
+const $=id=>document.getElementById(id);
+const phases={draft:'待检查',waiting:'等待执行授权',checking:'正在检查',ready:'可以提交',failed:'检查失败',cancelled:'已取消',completed:'已交付'};
+const states={pending:'尚未开始',waiting:'等待可用名额',running:'正在执行',succeeded:'已通过',rejected:'未通过',failed:'执行出错',cancelled:'已取消'};
+const reasons={no_current_authorization:'没有覆盖当前参数版本的有效授权。',check_rejected:'检查未全部通过。',authorization_or_version_changed:'授权或参数版本已经改变，需要重新检查。',process_restarted:'进程已经重启，原检查已中断。'};
+let latest,initial=true;
+async function send(action,values={}){
+  $('message').textContent='';
+  try{const response=await fetch('/api/command',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,...values})});const value=await response.json();if(!response.ok)throw Error(value.error==='busy'?'已有一次检查正在执行。':value.error);await refresh();}
+  catch(e){$('message').textContent='未完成操作：'+e.message;}
+}
+$('edit').onclick=()=>send('edit',{content:$('content').value,capacity:Number($('capacity').value)});
+$('approve').onclick=()=>send('grant',{id:$('grant').value,expires:latest.clock+100});
+$('revoke').onclick=()=>send('revoke',{id:$('grant').value});
+for(const action of ['prepare','execute','commit','cancel'])$(action).onclick=()=>send(action);
+async function refresh(){
+  const response=await fetch('/api/view');const view=await response.json();latest=view.authority.parameters;
+  if(initial){$('content').value=latest.content;$('capacity').value=String(latest.capacity);initial=false;}
+  const execution=latest.execution||{},resource=execution.resources?.workers;
+  const interrupted=latest.executions?.find(r=>r.attempt===latest.attempt)?.disposition==='interrupted';
+  const stateText=id=>(states[execution.activities?.[id]]||'尚未开始')+(interrupted?'（中断前的记录）':'');
+  const grants=latest.grants.filter(g=>g.version===latest.param_version).map(g=>g.id+'（'+(g.revoked?'已撤销':latest.clock>=g.expires?'已到期':'有效')+'）');
+  const lines=['当前状态：'+phases[latest.state]+'　参数版本：'+latest.param_version,
+    '本版本授权：'+(grants.join('、')||'没有'),
+    '计算内容摘要：'+stateText('checksum'),
+    '检查敏感标记：'+stateText('privacy'),
+    (interrupted?'中断前的可用名额：':'本次可用名额：')+(resource?resource.available+' / '+resource.capacity:'尚未分配'),
+    '已保存交付物：'+latest.effects.length+' 个'];
+  if(latest.reason)lines.push(reasons[latest.reason]||(latest.reason.startsWith('worker_error:')?'检查函数发生错误。':latest.reason));
+  $('status').textContent=lines.join('\n');
+}
+async function poll(){try{await refresh();}catch(e){$('message').textContent='暂时无法连接程序。';}finally{setTimeout(poll,400);}}poll();
+</script></html>

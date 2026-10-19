@@ -1,0 +1,701 @@
+{
+  "schema_version": 3,
+  "revision": "3.1",
+  "title": "仿真任务 · 行为调试",
+  "intent": "intent.json",
+  "source_files": [
+    "domain.py",
+    "store.py",
+    "server.py",
+    "build_model.py",
+    "vendor/behavior_model.py",
+    "vendor/semantic_probe.py",
+    "static/index.html",
+    "static/viewer.js",
+    "static/viewer.css",
+    "static/control.html"
+  ],
+  "nodes": [
+    {
+      "id": "read",
+      "kind": "action",
+      "label": "读取任务",
+      "summary": "读取同一 SQLite 快照中的任务和产物。同版本产物已存在时返回 already_committed；后续计算不再执行，也不产生新提交。",
+      "source": {
+        "path": "domain.py",
+        "symbol": "Lab.read_job"
+      },
+      "capture": {
+        "in": {
+          "job_id": "string"
+        },
+        "out": {
+          "outcome": "string",
+          "effect_id": "string",
+          "tx_id": "string",
+          "cells": "number",
+          "steps": "number",
+          "priority": "string",
+          "param_version": "number",
+          "state": "string"
+        }
+      },
+      "requirements": [
+        "R1",
+        "R5"
+      ]
+    },
+    {
+      "id": "estimate",
+      "kind": "function",
+      "label": "计算预算",
+      "summary": "cells × steps × priority 权重传播为所需额度。",
+      "source": {
+        "path": "domain.py",
+        "symbol": "estimate_cost"
+      },
+      "capture": {
+        "in": {
+          "cells": "number",
+          "steps": "number",
+          "priority": "string",
+          "param_version": "number"
+        },
+        "out": {
+          "weight": "number",
+          "units": "number"
+        }
+      },
+      "requirements": [
+        "R4"
+      ],
+      "predicate": "ceil(cells × steps × weight / 1000)"
+    },
+    {
+      "id": "authorize",
+      "kind": "decision",
+      "label": "判断执行许可",
+      "summary": "同项目工程师，并且至少一条审批同时满足全部条件。每次重新求值全部候选。",
+      "source": {
+        "path": "domain.py",
+        "symbol": "Lab.authorize"
+      },
+      "capture": {
+        "in": {
+          "units": "number",
+          "param_version": "number",
+          "clock": "number",
+          "stage": "string"
+        },
+        "out": {
+          "allowed": "boolean",
+          "eligible": [
+            "string"
+          ],
+          "reasons": [
+            "string"
+          ]
+        }
+      },
+      "requirements": [
+        "R2",
+        "R3",
+        "R5"
+      ],
+      "predicate": "member_allowed AND any(grant_matches)",
+      "candidate_table": {
+        "node": "match",
+        "title": "逐条审批 · 同一条内全部满足，候选之间任一有效",
+        "id_field": "id",
+        "columns": [
+          {
+            "field": "scope_ok",
+            "label": "范围"
+          },
+          {
+            "field": "version_ok",
+            "label": "版本"
+          },
+          {
+            "field": "time_ok",
+            "label": "期限"
+          },
+          {
+            "field": "budget_ok",
+            "label": "额度"
+          },
+          {
+            "field": "active_ok",
+            "label": "未撤销"
+          },
+          {
+            "field": "eligible",
+            "label": "有效"
+          }
+        ]
+      }
+    },
+    {
+      "id": "access",
+      "kind": "function",
+      "label": "读取关系与审批",
+      "summary": "权威关系和候选审批读取；不使用历史批准缓存。",
+      "source": {
+        "path": "domain.py",
+        "symbol": "Lab.read_access"
+      },
+      "capture": {
+        "in": {
+          "actor": "string",
+          "project": "string"
+        },
+        "out": {
+          "role": "string",
+          "member_project": "string",
+          "grants": [
+            {
+              "id": "string",
+              "project": "string",
+              "actor": "string",
+              "param_version": "number",
+              "limit_units": "number",
+              "expires": "number",
+              "revoked": "boolean"
+            }
+          ]
+        }
+      },
+      "parent": "authorize"
+    },
+    {
+      "id": "member",
+      "kind": "decision",
+      "label": "项目成员条件",
+      "summary": "成员必须属于任务项目，且角色为 engineer。",
+      "source": {
+        "path": "domain.py",
+        "symbol": "member_allowed"
+      },
+      "capture": {
+        "in": {
+          "role": "string",
+          "member_project": "string",
+          "job_project": "string"
+        },
+        "out": {
+          "allowed": "boolean"
+        }
+      },
+      "parent": "authorize",
+      "predicate": "role == engineer AND member_project == job_project"
+    },
+    {
+      "id": "match",
+      "kind": "decision",
+      "label": "逐条审批匹配",
+      "summary": "同一条审批需同时满足范围、版本、有效期、额度和未撤销。",
+      "source": {
+        "path": "domain.py",
+        "symbol": "grant_matches"
+      },
+      "capture": {
+        "in": {
+          "id": "string",
+          "project": "string",
+          "actor": "string",
+          "param_version": "number",
+          "limit_units": "number",
+          "expires": "number",
+          "revoked": "boolean",
+          "job_project": "string",
+          "job_actor": "string",
+          "job_version": "number",
+          "units": "number",
+          "clock": "number"
+        },
+        "out": {
+          "id": "string",
+          "scope_ok": "boolean",
+          "version_ok": "boolean",
+          "time_ok": "boolean",
+          "budget_ok": "boolean",
+          "active_ok": "boolean",
+          "eligible": "boolean"
+        }
+      },
+      "parent": "authorize",
+      "requirements": [
+        "R2",
+        "R3"
+      ],
+      "predicate": "scope_ok AND version_ok AND time_ok AND budget_ok AND active_ok",
+      "aggregate": {
+        "id_field": "id",
+        "result_field": "eligible",
+        "label": "eligible",
+        "input_field": "units"
+      }
+    },
+    {
+      "id": "wait",
+      "kind": "wait",
+      "label": "等待 / 可重试",
+      "summary": "保存本次失败原因；补齐条件后执行会从参数读取开始重新求值。",
+      "source": {
+        "path": "domain.py",
+        "symbol": "Lab.wait"
+      },
+      "capture": {
+        "in": {
+          "reasons": [
+            "string"
+          ],
+          "previous_state": "string"
+        },
+        "out": {
+          "state": "string",
+          "resume": "string"
+        }
+      },
+      "resume": "更新参数对应审批 / 成员关系后，重新执行；不会自动开跑。",
+      "inspect_target": "authorize",
+      "reason_labels": {
+        "member_required": "成员须属于当前项目，且角色为 engineer",
+        "no_matching_approval": "没有同时满足范围、版本、有效期、额度且未撤销的审批",
+        "parameters_changed_during_compute": "计算期间参数已修改，需匹配新版审批后重新计算"
+      }
+    },
+    {
+      "id": "solve",
+      "kind": "action",
+      "label": "执行计算",
+      "summary": "使用已求值参数运行演示数值计算，返回值尚未提交。",
+      "source": {
+        "path": "domain.py",
+        "symbol": "run_solver"
+      },
+      "capture": {
+        "in": {
+          "cells": "number",
+          "steps": "number",
+          "priority": "string",
+          "param_version": "number"
+        },
+        "out": {
+          "value": "number",
+          "iterations": "number"
+        }
+      },
+      "requirements": [
+        "R1"
+      ]
+    },
+    {
+      "id": "commit",
+      "kind": "effect",
+      "label": "重验并提交产物",
+      "summary": "事务内重新求值审批和参数版本，幂等提交；commit 事件在事务成功后发送。",
+      "source": {
+        "path": "domain.py",
+        "symbol": "Lab.commit_result"
+      },
+      "capture": {
+        "in": {
+          "computed_version": "number",
+          "value": "number",
+          "units": "number"
+        },
+        "out": {
+          "effect_id": "string",
+          "tx_id": "string",
+          "state": "string",
+          "support_ids": [
+            "string"
+          ],
+          "param_version": "number",
+          "value": "number",
+          "outcome": "string"
+        }
+      },
+      "requirements": [
+        "R3",
+        "R5"
+      ]
+    },
+    {
+      "id": "barrier",
+      "kind": "decision",
+      "label": "计算版本屏障",
+      "summary": "防止计算期间参数改版后提交旧计算。",
+      "source": {
+        "path": "domain.py",
+        "symbol": "same_version"
+      },
+      "capture": {
+        "in": {
+          "computed_version": "number",
+          "current_version": "number"
+        },
+        "out": {
+          "allowed": "boolean"
+        }
+      },
+      "parent": "commit",
+      "requirements": [
+        "R5"
+      ],
+      "predicate": "computed_version == current_version"
+    },
+    {
+      "id": "change",
+      "kind": "action",
+      "label": "参数 / 关系变更",
+      "summary": "通过演示业务命令修改事实版本，旧判断立即失效；不从图执行。",
+      "source": {
+        "path": "domain.py",
+        "symbol": "Lab.change"
+      },
+      "capture": {
+        "in": {
+          "command": "string"
+        },
+        "out": {
+          "epoch": "number",
+          "param_version": "number",
+          "clock": "number"
+        }
+      },
+      "requirements": [
+        "R6"
+      ]
+    },
+    {
+      "id": "parameters",
+      "kind": "data",
+      "label": "当前任务参数",
+      "summary": "cells、steps、priority 与 param_version。",
+      "source": {
+        "path": "domain.py",
+        "symbol": "Lab.read_job"
+      },
+      "capture": {
+        "in": {},
+        "out": {
+          "cells": "number",
+          "steps": "number",
+          "priority": "string",
+          "param_version": "number"
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "flow:read:estimate",
+      "from": "read",
+      "to": "estimate",
+      "type": "flow",
+      "label": "参数",
+      "evidence": "declared; check source binding and explicit event dependencies",
+      "short_label": "参数"
+    },
+    {
+      "id": "flow:estimate:authorize",
+      "from": "estimate",
+      "to": "authorize",
+      "type": "flow",
+      "label": "units",
+      "evidence": "declared; check source binding and explicit event dependencies",
+      "short_label": "units"
+    },
+    {
+      "id": "flow:authorize:solve",
+      "from": "authorize",
+      "to": "solve",
+      "type": "flow",
+      "label": "allowed",
+      "evidence": "declared; check source binding and explicit event dependencies",
+      "short_label": "允许"
+    },
+    {
+      "id": "flow:authorize:wait",
+      "from": "authorize",
+      "to": "wait",
+      "type": "flow",
+      "label": "拒绝",
+      "evidence": "declared; check source binding and explicit event dependencies",
+      "short_label": "拒绝",
+      "overview_route": {
+        "path": "M 565 116 L 548 116 L 548 226 L 142 226 L 142 260",
+        "x": 330,
+        "y": 218
+      }
+    },
+    {
+      "id": "flow:solve:commit",
+      "from": "solve",
+      "to": "commit",
+      "type": "flow",
+      "label": "result",
+      "evidence": "declared; check source binding and explicit event dependencies",
+      "short_label": "result"
+    },
+    {
+      "id": "flow:commit:wait",
+      "from": "commit",
+      "to": "wait",
+      "type": "flow",
+      "label": "失败",
+      "evidence": "declared; check source binding and explicit event dependencies",
+      "short_label": "失败"
+    },
+    {
+      "id": "flow:wait:read",
+      "from": "wait",
+      "to": "read",
+      "type": "flow",
+      "label": "重新执行",
+      "evidence": "declared; check source binding and explicit event dependencies",
+      "short_label": "重新执行",
+      "overview_route": {
+        "path": "M 25 332 L 10 332 L 10 116 L 25 116",
+        "x": 47,
+        "y": 218
+      }
+    },
+    {
+      "id": "data:parameters:estimate",
+      "from": "parameters",
+      "to": "estimate",
+      "type": "data",
+      "label": "cells · steps · priority",
+      "evidence": "declared; check source binding and explicit event dependencies",
+      "short_label": "cells · steps · priority"
+    },
+    {
+      "id": "data:estimate:match",
+      "from": "estimate",
+      "to": "match",
+      "type": "data",
+      "label": "units",
+      "evidence": "declared; check source binding and explicit event dependencies",
+      "short_label": "units"
+    },
+    {
+      "id": "data:access:member",
+      "from": "access",
+      "to": "member",
+      "type": "data",
+      "label": "role / project",
+      "evidence": "declared; check source binding and explicit event dependencies",
+      "short_label": "角色"
+    },
+    {
+      "id": "data:access:match",
+      "from": "access",
+      "to": "match",
+      "type": "data",
+      "label": "grants[]",
+      "evidence": "declared; check source binding and explicit event dependencies",
+      "short_label": "审批"
+    },
+    {
+      "id": "data:read:match",
+      "from": "read",
+      "to": "match",
+      "type": "data",
+      "label": "param_version / actor",
+      "evidence": "declared; check source binding and explicit event dependencies",
+      "short_label": "版本"
+    },
+    {
+      "id": "data:solve:barrier",
+      "from": "solve",
+      "to": "barrier",
+      "type": "data",
+      "label": "computed_version",
+      "evidence": "declared; check source binding and explicit event dependencies",
+      "short_label": "computed_version"
+    },
+    {
+      "id": "data:change:parameters",
+      "from": "change",
+      "to": "parameters",
+      "type": "data",
+      "label": "version",
+      "evidence": "declared; check source binding and explicit event dependencies",
+      "short_label": "version"
+    },
+    {
+      "id": "guard:member:authorize",
+      "from": "member",
+      "to": "authorize",
+      "type": "guard",
+      "label": "AND",
+      "evidence": "declared; check source binding and explicit event dependencies",
+      "short_label": "AND"
+    },
+    {
+      "id": "guard:match:authorize",
+      "from": "match",
+      "to": "authorize",
+      "type": "guard",
+      "label": "ANY eligible",
+      "evidence": "declared; check source binding and explicit event dependencies",
+      "short_label": "ANY"
+    },
+    {
+      "id": "guard:authorize:commit",
+      "from": "authorize",
+      "to": "commit",
+      "type": "guard",
+      "label": "重新求值",
+      "evidence": "declared; check source binding and explicit event dependencies",
+      "short_label": "重新求值"
+    },
+    {
+      "id": "guard:barrier:commit",
+      "from": "barrier",
+      "to": "commit",
+      "type": "guard",
+      "label": "版本一致",
+      "evidence": "declared; check source binding and explicit event dependencies",
+      "short_label": "版本一致"
+    },
+    {
+      "id": "contains:authorize:access",
+      "from": "authorize",
+      "to": "access",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "declared; check source binding and explicit event dependencies",
+      "short_label": "展开"
+    },
+    {
+      "id": "contains:authorize:member",
+      "from": "authorize",
+      "to": "member",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "declared; check source binding and explicit event dependencies",
+      "short_label": "展开"
+    },
+    {
+      "id": "contains:authorize:match",
+      "from": "authorize",
+      "to": "match",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "declared; check source binding and explicit event dependencies",
+      "short_label": "展开"
+    },
+    {
+      "id": "contains:commit:barrier",
+      "from": "commit",
+      "to": "barrier",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "declared; check source binding and explicit event dependencies",
+      "short_label": "展开"
+    }
+  ],
+  "default_node": "authorize",
+  "presentation": {
+    "subject": "仿真任务",
+    "states": {
+      "draft": "待执行",
+      "waiting": "等待",
+      "running": "计算中",
+      "completed": "已提交"
+    },
+    "command_panel_url": "/control"
+  },
+  "views": {
+    "dependencies": [
+      {
+        "node": "access",
+        "x": 25,
+        "y": 40
+      },
+      {
+        "node": "member",
+        "x": 295,
+        "y": 40
+      },
+      {
+        "node": "authorize",
+        "x": 565,
+        "y": 150
+      },
+      {
+        "node": "read",
+        "x": 25,
+        "y": 260
+      },
+      {
+        "node": "match",
+        "x": 295,
+        "y": 260
+      },
+      {
+        "node": "estimate",
+        "x": 25,
+        "y": 475
+      }
+    ]
+  },
+  "overview": [
+    {
+      "node": "read",
+      "x": 25,
+      "y": 45
+    },
+    {
+      "node": "estimate",
+      "x": 295,
+      "y": 45
+    },
+    {
+      "node": "authorize",
+      "x": 565,
+      "y": 45
+    },
+    {
+      "node": "solve",
+      "x": 565,
+      "y": 260
+    },
+    {
+      "node": "commit",
+      "x": 295,
+      "y": 260
+    },
+    {
+      "node": "wait",
+      "x": 25,
+      "y": 260
+    }
+  ],
+  "scope": {
+    "observable": [
+      "parameter propagation",
+      "budget output",
+      "grant predicates",
+      "waiting and retry",
+      "committed artifacts"
+    ],
+    "unknowns": [
+      "Synthetic single-job local program; no production solver accuracy claim",
+      "No distributed transactions, arbitrary code extraction, or whole-program semantic proof"
+    ]
+  },
+  "commands": {
+    "execute": {
+      "enabled_in_graph": false,
+      "requires": [
+        "authorize",
+        "barrier"
+      ]
+    }
+  }
+}

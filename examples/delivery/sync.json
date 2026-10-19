@@ -1,0 +1,137 @@
+{
+  "model": "observer_generated/behavior.json",
+  "manifest": "observer_generated/manifest.json",
+  "code_files": [
+    "app/__init__.py",
+    "app/checks.py",
+    "app/ports.py",
+    "app/service.py",
+    "app/store.py",
+    "app/workflow.py"
+  ],
+  "watch_files": [
+    "ownership.json",
+    "tooling/build_graph.py",
+    "tests/scenarios.py",
+    "tests/observe.py",
+    "tests/test_business.py",
+    "main.py",
+    "observer_generated/runtime/__init__.py",
+    "observer_generated/runtime/architecture_guard.py",
+    "observer_generated/runtime/behavior_model.py",
+    "observer_generated/runtime/change_sync.py",
+    "observer_generated/runtime/code_structure.py",
+    "observer_generated/runtime/model_tool.py",
+    "observer_generated/runtime/probe.py",
+    "observer_generated/runtime/semantic_probe.py",
+    "observer_generated/runtime/statechart_contract.py",
+    "observer_generated/runtime/viewer_server.py",
+    "observer_generated/static/PIXI-LICENSE.txt",
+    "observer_generated/static/graph-core.js",
+    "observer_generated/static/index.html",
+    "observer_generated/static/pixi.min.js",
+    "observer_generated/static/viewer.css",
+    "observer_generated/static/viewer.js",
+    "tooling/dev.py",
+    "integrations/bo_server.py",
+    "integrations/control.html",
+    "observer_generated/runtime/worknet_contract.py",
+    "integrations/bo_view/index.html",
+    "integrations/bo_view/viewer.js",
+    "integrations/bo_view/viewer.css",
+    "integrations/bo_view/graph-core.js",
+    "tests/test_execution.py",
+    "tests/test_graph_projection.mjs",
+    "observer_generated/runtime/execution_contract.py",
+    "observer_generated/runtime/requirements_dialogue.py",
+    "tooling/graph_fixture.py",
+    "package.json",
+    "README_CORE.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "acceptance": "acceptance.json",
+  "slice_depth": 1,
+  "probe_callees": [
+    "self.events.emit"
+  ],
+  "required_probes": [
+    {
+      "symbol": "app/service.py::Delivery.commit",
+      "node": "commit",
+      "phase": "commit"
+    }
+  ],
+  "required_runtime_probes": [
+    {
+      "case": "normal",
+      "node": "commit",
+      "phase": "commit"
+    },
+    {
+      "case": "normal",
+      "node": "join",
+      "phase": "decision"
+    },
+    {
+      "case": "normal",
+      "node": "flow.checks",
+      "phase": "enter"
+    }
+  ],
+  "probe_modes": [
+    "on",
+    "off",
+    "fault"
+  ],
+  "observations_command": [
+    "{python}",
+    "-B",
+    "-X",
+    "utf8",
+    "tests/observe.py"
+  ],
+  "test_commands": [
+    [
+      "{python}",
+      "-B",
+      "-X",
+      "utf8",
+      "tests/test_business.py"
+    ],
+    [
+      "{python}",
+      "-B",
+      "-X",
+      "utf8",
+      "observer_generated/runtime/architecture_guard.py",
+      "check",
+      "--root",
+      "."
+    ],
+    [
+      "{python}",
+      "-B",
+      "-X",
+      "utf8",
+      "tests/test_execution.py"
+    ],
+    [
+      "{python}",
+      "-B",
+      "-X",
+      "utf8",
+      "tooling/graph_fixture.py"
+    ],
+    [
+      "node",
+      "tests/test_graph_projection.mjs"
+    ]
+  ],
+  "timeout_seconds": 90,
+  "required_execution_cases": [
+    "normal",
+    "resource_wait",
+    "parallel"
+  ]
+}

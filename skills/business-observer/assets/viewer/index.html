@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>业务流程</title><link rel="stylesheet" href="/viewer.css"></head>
+<body>
+<header><a class="brand" href="/">业务流程</a><nav><span id="connection" role="status"></span><button id="refresh" class="quiet-button">刷新</button><a id="workbench" class="primary-link" hidden href="/workbench">操作任务 ↗</a></nav></header>
+<main>
+  <div class="intro"><div><h1 id="title">正在读取…</h1><p id="purpose"></p></div><span id="business-state" class="state-pill">—</span></div>
+  <div id="alerts" role="status"></div>
+  <section class="current" aria-label="当前情况"><p id="goal"></p><p id="next-step" class="quiet"></p><button id="back-current" hidden>回到当前</button></section>
+  <div class="workspace">
+    <section class="map-panel">
+      <div class="panel-heading"><div class="tabs" role="tablist" aria-label="查看内容"><button role="tab" aria-selected="true" data-view="business">业务流程</button><button role="tab" aria-selected="false" data-view="dependency">执行条件</button><button role="tab" aria-selected="false" data-view="facts">相关信息</button></div><label id="action-wrap">动作 <select id="action-focus"></select></label><label id="focus-wrap" hidden>条件 <select id="focus"></select></label></div>
+      <p id="map-caption" class="map-caption"></p><div id="graph" class="graph" aria-label="业务图"></div><div id="fact-table" hidden></div>
+    </section>
+    <aside id="detail" hidden aria-label="业务说明"></aside>
+  </div>
+  <section class="conditions"><h2>执行前需要</h2><div id="condition-list"></div></section>
+  <details class="history"><summary>最近操作</summary><div id="timeline"></div></details>
+  <details class="technical" id="technical-panel"><summary>技术详情</summary><div class="technical-body">
+    <div class="filters"><label>运行 <select id="run"></select></label><label>对象 <select id="entity"></select></label><label>观察时点 <select id="attempt"><option value="current">当前</option></select></label><button id="auto" aria-pressed="true">自动刷新：开</button></div>
+    <dl><dt>效果记录</dt><dd id="effect-count"></dd><dt>判定依据</dt><dd id="basis-state"></dd><dt>源码对应</dt><dd id="build-state"></dd></dl><p id="clock"></p><p id="updated"></p><p id="event-count"></p><ul id="technical-alerts"></ul><ul id="unknowns"></ul>
+  </div></details>
+</main><script src="/viewer.js"></script>
+</body></html>

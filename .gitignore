@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.planning/
+.validation/
+dist/
+scratch/
+history/
+*.sqlite*
+node_modules/
+examples/delivery/.stategraph/
+examples/delivery/observer_generated/manifest.json

@@ -1,0 +1,4 @@
+interface:
+  display_name: "开发者业务行为图"
+  short_description: "伴随代码修改同步业务抽象、局部程序图、状态机与探针，检查漏同步和业务偏离"
+  default_prompt: "使用 $business-observer 修改这个程序：先记录需求与基线，编码时同步业务抽象、静态局部图、状态机和探针，通过结构及运行反例检查后再交付。"

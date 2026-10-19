@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>业务行为调试</title><link rel="stylesheet" href="/viewer.css"></head>
+<body>
+<header><div><span class="mark">⌘</span><h1><b id="subject">业务流程</b> <span>行为调试</span></h1></div><nav><span id="connection">连接中</span><a id="command-panel" href="/control" target="_blank" hidden>打开实验操作台 ↗</a></nav></header>
+<section class="statusbar"><strong id="entity">—</strong><span id="state">读取中</span><span id="basis"></span><span id="build"></span><span id="health"></span></section>
+<div id="notice" role="status" hidden></div>
+<main><section class="workspace">
+<div class="toolbar"><div class="segmented"><button id="overview" class="active">动作与状态</button><button id="dependencies">判定依赖图</button></div><label>现场 <select id="case"><option value="live">当前程序</option></select></label></div>
+<div class="runbar"><label>运行 <select id="attempt"><option value="latest">当前 / 最近一次</option></select></label><span id="context"></span></div>
+<div class="graph-scroll"><div id="graph" aria-label="业务行为图"></div></div>
+<div class="legend"><span class="live-dot"></span>本次有观测 <span class="ghost-line"></span>声明路径 <span class="wait-dot"></span>未满足 / 已失效 <span id="route-end"></span></div>
+<section class="timeline"><div class="section-title"><h2>运行事件</h2><span id="event-count"></span></div><div id="events"></div></section>
+</section>
+<aside id="inspector"><div class="inspector-head"><span id="node-kind"></span><h2 id="node-title">选择一个节点</h2><code id="node-function"></code><p id="node-summary"></p></div>
+<div class="tabs"><button data-tab="values" class="active">参数与判定</button><button data-tab="deps">依赖</button><button data-tab="source">源码</button></div><div id="detail"></div>
+</aside></main>
+<script src="/viewer.js"></script></body></html>

@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>数据交付 · 分层运行图</title><link rel="stylesheet" href="/viewer.css"></head>
+<body><header><div class="brand"><span class="mark">◈</span><h1>数据交付 <span>运行图</span></h1></div><div class="header-right"><span id="connection">连接中</span><a href="/control" target="_blank" rel="noopener">操作台 ↗</a></div></header>
+<div class="toolbar">
+  <label>版本 <select id="version"><option value="live">当前程序</option></select></label>
+  <label>场景 <select id="case"><option value="normal">授权有效，完成交付</option></select></label>
+  <div class="segments"><button id="behavior-mode" class="active">业务与代码</button><button id="machine-mode">流程状态</button></div>
+  <label id="attempt-label">运行 <select id="attempt"><option value="latest">当前运行</option></select></label>
+  <label id="step-label">查看时刻 <select id="step"><option value="latest">最新状态</option></select></label>
+  <span class="spacer"></span><button id="collapse">收起</button><button id="expand">展开业务节点</button><button id="fit">显示完整图</button>
+  <div class="zoom-controls"><button id="zoom-out" aria-label="缩小">−</button><output id="zoom">100%</output><button id="zoom-in" aria-label="放大">＋</button></div>
+</div>
+<div class="facts"><strong id="phase">流程状态：尚未加载</strong><span id="context"></span><span class="spacer"></span><span id="binding"></span></div>
+<main id="viewport" tabindex="0" aria-label="可缩放的业务程序图。点击节点展开，点击源码在节点内查看；拖动空白平移，滚轮缩放。"><div id="canvas-host"></div><nav id="breadcrumbs" aria-label="图中层次"></nav><div id="semantic" class="accessible-graph"></div><div id="empty" hidden></div></main>
+<footer><span><i class="dot green"></i>正在执行或已通过 <i class="dot orange"></i>正在等待或未通过 <i class="dot gray"></i>尚未开始或没有记录</span><span id="selection">点击节点查看内部状态和函数，点击源码查看实现。</span><span id="renderer">PixiJS</span></footer>
+<script src="/pixi.min.js"></script><script type="module" src="/viewer.js"></script></body></html>

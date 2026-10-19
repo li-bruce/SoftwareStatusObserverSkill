@@ -1,0 +1,167 @@
+{
+  "kind": "bounded-place-transition",
+  "places": [
+    "slots",
+    "checksum_pending",
+    "checksum_running",
+    "checksum_done",
+    "checksum_failed",
+    "privacy_pending",
+    "privacy_running",
+    "privacy_done",
+    "privacy_failed",
+    "joined",
+    "rejected"
+  ],
+  "transitions": [
+    {
+      "id": "start_checksum",
+      "consume": {
+        "checksum_pending": 1,
+        "slots": 1
+      },
+      "produce": {
+        "checksum_running": 1
+      }
+    },
+    {
+      "id": "finish_checksum",
+      "consume": {
+        "checksum_running": 1
+      },
+      "produce": {
+        "checksum_done": 1,
+        "slots": 1
+      },
+      "guard": "checksum_finished"
+    },
+    {
+      "id": "fail_checksum",
+      "consume": {
+        "checksum_running": 1
+      },
+      "produce": {
+        "checksum_failed": 1,
+        "slots": 1
+      },
+      "guard": "checksum_error"
+    },
+    {
+      "id": "start_privacy",
+      "consume": {
+        "privacy_pending": 1,
+        "slots": 1
+      },
+      "produce": {
+        "privacy_running": 1
+      }
+    },
+    {
+      "id": "finish_privacy",
+      "consume": {
+        "privacy_running": 1
+      },
+      "produce": {
+        "privacy_done": 1,
+        "slots": 1
+      },
+      "guard": "privacy_finished"
+    },
+    {
+      "id": "fail_privacy",
+      "consume": {
+        "privacy_running": 1
+      },
+      "produce": {
+        "privacy_failed": 1,
+        "slots": 1
+      },
+      "guard": "privacy_error"
+    },
+    {
+      "id": "join",
+      "consume": {
+        "checksum_done": 1,
+        "privacy_done": 1
+      },
+      "produce": {
+        "joined": 1
+      },
+      "guard": "passed"
+    },
+    {
+      "id": "reject_done_done",
+      "consume": {
+        "checksum_done": 1,
+        "privacy_done": 1
+      },
+      "produce": {
+        "rejected": 1
+      },
+      "guard": "not_passed"
+    },
+    {
+      "id": "reject_failed_done",
+      "consume": {
+        "checksum_failed": 1,
+        "privacy_done": 1
+      },
+      "produce": {
+        "rejected": 1
+      },
+      "guard": "not_passed"
+    },
+    {
+      "id": "reject_done_failed",
+      "consume": {
+        "checksum_done": 1,
+        "privacy_failed": 1
+      },
+      "produce": {
+        "rejected": 1
+      },
+      "guard": "not_passed"
+    },
+    {
+      "id": "reject_failed_failed",
+      "consume": {
+        "checksum_failed": 1,
+        "privacy_failed": 1
+      },
+      "produce": {
+        "rejected": 1
+      },
+      "guard": "not_passed"
+    }
+  ],
+  "resources": [
+    {
+      "id": "worker_slots",
+      "places": [
+        "slots",
+        "checksum_running",
+        "privacy_running"
+      ],
+      "capacity_field": "capacity"
+    }
+  ],
+  "initial": {
+    "slots": "capacity",
+    "checksum_pending": 1,
+    "privacy_pending": 1
+  },
+  "invariants": [
+    "slots + checksum_running + privacy_running == capacity",
+    "all token counts are nonnegative integers",
+    "join consumes both completed tokens"
+  ],
+  "capacity": {
+    "type": "integer",
+    "min": 1,
+    "max": 2
+  },
+  "source": {
+    "path": "app/worknet.py",
+    "symbol": "WorkNet"
+  }
+}

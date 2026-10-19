@@ -1,0 +1,23 @@
+{
+  "candidate_id": "5ea8d4a272c07daac5dea7391d962a78acbf4004643301ed0208d3262b7de9b0",
+  "decisions": {
+    "business": {
+      "action": "unchanged",
+      "reason": "Reviewed R1-R8 against Delivery.prepare/commit, authorized and Store: approval is version-bound and any eligible grant can authorize; commit rechecks inside the transaction and artifacts are unique by version. The published specification is explicitly synthetic."
+    },
+    "state_machine": {
+      "action": "unchanged",
+      "reason": "Phase and ActivityState remain application-owned. ActivityExecution owns per-run capacity and all-join; transitions require the same attempt/version to complete. Store retains all run instances and marks unfinished work interrupted on restart."
+    },
+    "abstraction": {
+      "action": "updated",
+      "reason": "Rebuilt the authored business grouping with Python AST slices for this portable source tree. Original activity/resource/join IDs stay inside the checking node. Graph history uses the selected run and moment without borrowing later results. Deterministic LF output keeps byte fingerprints valid across Git checkouts on Windows and Linux; normalization does not change acceptance values. Unresolved calls and ordinary function locals remain outside claimed runtime coverage."
+    },
+    "probes": {
+      "action": "updated",
+      "reason": "Copied current Skill runtime, retained the application-owned Events interface and BOAdapter. Added portable interpreter resolution and fresh renderer fixtures. Fixed Session.view to flush events before reading state and capture the business snapshot plus busy flag under the session lock; it cannot report an earlier checking snapshot after work has finished. HTTP regression reads the actual committed SQLite row. Verification must compare on/off/fault effects and actual internal states; packaging must run the business core without observer folders."
+    }
+  },
+  "excluded_symbols": {},
+  "requirement_changes": {}
+}

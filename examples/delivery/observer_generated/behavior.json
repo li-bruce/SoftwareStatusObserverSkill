@@ -1,0 +1,2501 @@
+{
+  "schema_version": 3,
+  "revision": "0.1.0",
+  "intent": "intent.json",
+  "source_files": [
+    "app/__init__.py",
+    "app/checks.py",
+    "app/ports.py",
+    "app/service.py",
+    "app/store.py",
+    "app/workflow.py",
+    "integrations/__init__.py",
+    "integrations/bo_adapter.py",
+    "integrations/bo_scenarios.py",
+    "integrations/bo_server.py",
+    "tooling/build_graph.py",
+    "requirements.txt"
+  ],
+  "nodes": [
+    {
+      "id": "flow.input",
+      "label": "读取本次内容",
+      "summary": "读取文本和参数版本",
+      "kind": "function",
+      "layer": "business",
+      "source": {
+        "path": "app/service.py",
+        "symbol": "Delivery.prepare"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "flow.permission",
+      "label": "检查执行权限",
+      "summary": "操作者有执行角色，且至少一份授权有效",
+      "kind": "function",
+      "layer": "business",
+      "source": {
+        "path": "app/service.py",
+        "symbol": "authorized"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "flow.checks",
+      "label": "检查内容",
+      "summary": "两项检查都通过后，才能提交",
+      "kind": "function",
+      "layer": "business",
+      "source": {
+        "path": "app/checks.py",
+        "symbol": "run_checks"
+      },
+      "capture": {
+        "in": {},
+        "out": {
+          "revision": "number",
+          "activity": "string",
+          "event": "string"
+        }
+      }
+    },
+    {
+      "id": "flow.commit",
+      "label": "提交交付物",
+      "summary": "提交前再次检查权限和参数版本",
+      "kind": "function",
+      "layer": "business",
+      "source": {
+        "path": "app/service.py",
+        "symbol": "Delivery.commit"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "flow.wait",
+      "label": "等待或重新执行",
+      "summary": "补充授权或修改内容后，可以重新检查",
+      "kind": "function",
+      "layer": "business",
+      "source": {
+        "path": "app/service.py",
+        "symbol": "Delivery.command"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "read",
+      "label": "读取输入",
+      "summary": "读取输入",
+      "kind": "action",
+      "layer": "program",
+      "source": {
+        "path": "app/service.py",
+        "symbol": "Delivery.prepare"
+      },
+      "capture": {
+        "in": {},
+        "out": {
+          "param_version": "number",
+          "length": "number"
+        }
+      },
+      "parent": "flow.input",
+      "code_evidence": {
+        "symbol": "app/service.py::Delivery.prepare",
+        "ast_hash": "3fc20305477e3a0035b7dda566114be5489c609f5f5e6b3ebfce2b0f7cc6462f",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "execute",
+      "label": "检查并提交指定版本",
+      "summary": "这条命令只提交启动时指定的内容版本",
+      "kind": "action",
+      "layer": "program",
+      "source": {
+        "path": "app/service.py",
+        "symbol": "Delivery.execute"
+      },
+      "capture": {
+        "in": {
+          "expected_version": "number"
+        },
+        "out": {}
+      },
+      "parent": "flow.input",
+      "code_evidence": {
+        "symbol": "app/service.py::Delivery.execute",
+        "ast_hash": "15bf228cd2e9d67fca9485708137386f0bfb9e9e548fa89024f3679da2187bcf",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "authorize",
+      "label": "判断授权是否有效",
+      "summary": "判断授权是否有效",
+      "kind": "decision",
+      "layer": "program",
+      "source": {
+        "path": "app/service.py",
+        "symbol": "authorized"
+      },
+      "capture": {
+        "in": {
+          "role": "string",
+          "grants": "number"
+        },
+        "out": {
+          "allowed": "boolean"
+        }
+      },
+      "parent": "flow.permission",
+      "predicate": "engineer AND ANY eligible grant",
+      "code_evidence": {
+        "symbol": "app/service.py::authorized",
+        "ast_hash": "854f05e1b400664dd2a92e59a3e47fa6a15ef89196f1e97d1dcc857cabb58f7a",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "workers",
+      "label": "本次并发名额",
+      "summary": "每项检查占用一个名额，结束后归还",
+      "kind": "data",
+      "layer": "program",
+      "source": {
+        "path": "app/workflow.py",
+        "symbol": "ActivityExecution.start"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "flow.checks",
+      "execution_role": "resource"
+    },
+    {
+      "id": "checksum",
+      "label": "计算内容摘要",
+      "summary": "计算文本的 SHA-256 摘要",
+      "kind": "function",
+      "layer": "program",
+      "source": {
+        "path": "app/checks.py",
+        "symbol": "checksum"
+      },
+      "capture": {
+        "in": {
+          "length": "number"
+        },
+        "out": {
+          "state": "string",
+          "checksum": "string"
+        }
+      },
+      "parent": "flow.checks",
+      "execution_role": "activity",
+      "code_evidence": {
+        "symbol": "app/checks.py::checksum",
+        "ast_hash": "b6f0dc0ef292c9447fc66d0c0aeb3dafe9d7c58df9489bcc95b00ae634a3fff9",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "privacy",
+      "label": "检查敏感标记",
+      "summary": "检查文本是否包含 SECRET: 标记",
+      "kind": "function",
+      "layer": "program",
+      "source": {
+        "path": "app/checks.py",
+        "symbol": "privacy_check"
+      },
+      "capture": {
+        "in": {
+          "length": "number"
+        },
+        "out": {
+          "state": "string",
+          "safe": "boolean"
+        }
+      },
+      "parent": "flow.checks",
+      "execution_role": "activity",
+      "code_evidence": {
+        "symbol": "app/checks.py::privacy_check",
+        "ast_hash": "682bac723e31b4b5d23b16fc216048b138ced02e4923ac1223da7040170b03b3",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "join",
+      "label": "确认检查结果",
+      "summary": "等待两项检查结束；只有全部通过才继续",
+      "kind": "decision",
+      "layer": "program",
+      "source": {
+        "path": "app/workflow.py",
+        "symbol": "ActivityExecution.join"
+      },
+      "capture": {
+        "in": {},
+        "out": {
+          "passed": "boolean",
+          "tasks": [
+            "string"
+          ]
+        }
+      },
+      "parent": "flow.checks",
+      "execution_role": "join",
+      "predicate": "ALL checks passed",
+      "code_evidence": {
+        "symbol": "app/workflow.py::ActivityExecution.join",
+        "ast_hash": "7e8538e991500971122ddad934e6a28c68f4be4e5441d12e523c511e144de817",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "execution.init",
+      "label": "建立本次活动状态",
+      "summary": "建立本次活动状态",
+      "kind": "function",
+      "layer": "program",
+      "source": {
+        "path": "app/workflow.py",
+        "symbol": "ActivityExecution.__init__"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "workers",
+      "code_evidence": {
+        "symbol": "app/workflow.py::ActivityExecution.__init__",
+        "ast_hash": "4240cdef93893ce8c368a780e542d311bbdb188a89fca3f0f0de12399e189ba8",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "execution.finish",
+      "label": "记录结果并归还名额",
+      "summary": "记录结果并归还名额",
+      "kind": "function",
+      "layer": "program",
+      "source": {
+        "path": "app/workflow.py",
+        "symbol": "ActivityExecution.finish"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "workers",
+      "code_evidence": {
+        "symbol": "app/workflow.py::ActivityExecution.finish",
+        "ast_hash": "ef694bd37a0e6b775245886160c6a711e678df0d80c8a3fa1499668bce39501d",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "execution.invariant",
+      "label": "核对可用和占用的名额",
+      "summary": "核对可用和占用的名额",
+      "kind": "function",
+      "layer": "program",
+      "source": {
+        "path": "app/workflow.py",
+        "symbol": "ActivityExecution.invariant"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "workers",
+      "code_evidence": {
+        "symbol": "app/workflow.py::ActivityExecution.invariant",
+        "ast_hash": "9e10f3b1c6fddad31ff4c3047b2a73d95ac2fa048face1b34931136f6456946e",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "execution.snapshot",
+      "label": "读取全部内部状态",
+      "summary": "读取全部内部状态",
+      "kind": "function",
+      "layer": "program",
+      "source": {
+        "path": "app/workflow.py",
+        "symbol": "ActivityExecution.snapshot"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "workers",
+      "code_evidence": {
+        "symbol": "app/workflow.py::ActivityExecution.snapshot",
+        "ast_hash": "e9012e1b9e21b16a17f9868162f84069a6e66cfc7e5dfd0c59258fa3cacacb74",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "execution.progress",
+      "label": "保存这次运行的状态",
+      "summary": "保存这次运行的状态",
+      "kind": "function",
+      "layer": "program",
+      "source": {
+        "path": "app/service.py",
+        "symbol": "Delivery.execution_progress"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "workers",
+      "code_evidence": {
+        "symbol": "app/service.py::Delivery.execution_progress",
+        "ast_hash": "81a7c44e1f9d4ae0bbe977449f844f86ffeee10937248e6a84e611ddc6f19df0",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "execution.abort",
+      "label": "取消未开始的检查",
+      "summary": "取消未开始的检查",
+      "kind": "function",
+      "layer": "program",
+      "source": {
+        "path": "app/workflow.py",
+        "symbol": "ActivityExecution.abort"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "join",
+      "code_evidence": {
+        "symbol": "app/workflow.py::ActivityExecution.abort",
+        "ast_hash": "11836ec4a87db23bd257761dc951f8f94319060a5cdbe8c46a1ec11d5df11308",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "execution.lookup",
+      "label": "查找指定运行",
+      "summary": "查找指定运行",
+      "kind": "function",
+      "layer": "program",
+      "source": {
+        "path": "app/store.py",
+        "symbol": "Store.execution"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "execution.progress",
+      "code_evidence": {
+        "symbol": "app/store.py::Store.execution",
+        "ast_hash": "2d178fc49e2fc7abd1510ff187467fb237066613ca21c42278fc0b7b35e9f3c9",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "execution.save",
+      "label": "保存指定运行",
+      "summary": "保存指定运行",
+      "kind": "function",
+      "layer": "program",
+      "source": {
+        "path": "app/store.py",
+        "symbol": "Store.put_execution"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "execution.progress",
+      "code_evidence": {
+        "symbol": "app/store.py::Store.put_execution",
+        "ast_hash": "2ed7618a21fc06b933bcf09c21bcc5a465941c9b76e0d070c24d6e7fdf47a4a5",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "execution.update",
+      "label": "更新指定运行的流程状态",
+      "summary": "更新指定运行的流程状态",
+      "kind": "function",
+      "layer": "program",
+      "source": {
+        "path": "app/store.py",
+        "symbol": "Store.update_execution"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "execution.progress",
+      "code_evidence": {
+        "symbol": "app/store.py::Store.update_execution",
+        "ast_hash": "9367e04f361760e42a175f9aea171eaad0359de5c8c0042d804cecb6e4bda747",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "execution.all",
+      "label": "查询全部运行",
+      "summary": "查询全部运行",
+      "kind": "function",
+      "layer": "program",
+      "source": {
+        "path": "app/store.py",
+        "symbol": "Store.snapshot"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "execution.progress",
+      "code_evidence": {
+        "symbol": "app/store.py::Store.snapshot",
+        "ast_hash": "2cdf65666d3f0e1ff0bb154979560e4e62ebf07ef7f1d72308aa4fff983135f7",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "recheck",
+      "label": "提交前再次检查",
+      "summary": "提交前再次检查",
+      "kind": "decision",
+      "layer": "program",
+      "source": {
+        "path": "app/service.py",
+        "symbol": "Delivery.commit"
+      },
+      "capture": {
+        "in": {},
+        "out": {
+          "allowed": "boolean",
+          "version_ok": "boolean"
+        }
+      },
+      "parent": "flow.commit",
+      "code_evidence": {
+        "symbol": "app/service.py::Delivery.commit",
+        "ast_hash": "11ab4e77a077f2a929a0d7a652c204189849389759f1743c5139e7537e9e8c66",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "commit",
+      "label": "保存交付物",
+      "summary": "保存交付物",
+      "kind": "effect",
+      "layer": "program",
+      "source": {
+        "path": "app/service.py",
+        "symbol": "Delivery.commit"
+      },
+      "capture": {
+        "in": {},
+        "out": {
+          "version": "number",
+          "checksum": "string"
+        }
+      },
+      "parent": "flow.commit",
+      "code_evidence": {
+        "symbol": "app/service.py::Delivery.commit",
+        "ast_hash": "11ab4e77a077f2a929a0d7a652c204189849389759f1743c5139e7537e9e8c66",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "wait",
+      "label": "说明不能继续的原因",
+      "summary": "说明不能继续的原因",
+      "kind": "wait",
+      "layer": "program",
+      "source": {
+        "path": "app/service.py",
+        "symbol": "Delivery.prepare"
+      },
+      "capture": {
+        "in": {},
+        "out": {
+          "reason": "string"
+        }
+      },
+      "parent": "flow.wait",
+      "code_evidence": {
+        "symbol": "app/service.py::Delivery.prepare",
+        "ast_hash": "3fc20305477e3a0035b7dda566114be5489c609f5f5e6b3ebfce2b0f7cc6462f",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "change",
+      "label": "修改、取消或补充授权",
+      "summary": "修改、取消或补充授权",
+      "kind": "action",
+      "layer": "program",
+      "source": {
+        "path": "app/service.py",
+        "symbol": "Delivery.command"
+      },
+      "capture": {
+        "in": {},
+        "out": {
+          "action": "string",
+          "state": "string"
+        }
+      },
+      "parent": "flow.wait",
+      "code_evidence": {
+        "symbol": "app/service.py::Delivery.command",
+        "ast_hash": "314df51d1cc88c53691a62024e89499d39be6c9f23701889ddd0d0c840e0d5cd",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "state.draft",
+      "label": "待检查",
+      "summary": "待检查",
+      "kind": "state",
+      "layer": "state",
+      "source": {
+        "path": "app/workflow.py",
+        "symbol": "advance"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "flow.input",
+      "value": "draft"
+    },
+    {
+      "id": "state.waiting",
+      "label": "等待执行授权",
+      "summary": "等待执行授权",
+      "kind": "state",
+      "layer": "state",
+      "source": {
+        "path": "app/workflow.py",
+        "symbol": "advance"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "flow.wait",
+      "value": "waiting"
+    },
+    {
+      "id": "state.checking",
+      "label": "正在检查",
+      "summary": "正在检查",
+      "kind": "state",
+      "layer": "state",
+      "source": {
+        "path": "app/workflow.py",
+        "symbol": "advance"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "flow.checks",
+      "value": "checking"
+    },
+    {
+      "id": "state.ready",
+      "label": "可以提交",
+      "summary": "可以提交",
+      "kind": "state",
+      "layer": "state",
+      "source": {
+        "path": "app/workflow.py",
+        "symbol": "advance"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "flow.commit",
+      "value": "ready"
+    },
+    {
+      "id": "state.failed",
+      "label": "检查失败",
+      "summary": "检查失败",
+      "kind": "state",
+      "layer": "state",
+      "source": {
+        "path": "app/workflow.py",
+        "symbol": "advance"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "flow.wait",
+      "value": "failed"
+    },
+    {
+      "id": "state.cancelled",
+      "label": "已取消",
+      "summary": "已取消",
+      "kind": "state",
+      "layer": "state",
+      "source": {
+        "path": "app/workflow.py",
+        "symbol": "advance"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "flow.wait",
+      "value": "cancelled"
+    },
+    {
+      "id": "state.completed",
+      "label": "已交付",
+      "summary": "已交付",
+      "kind": "state",
+      "layer": "state",
+      "source": {
+        "path": "app/workflow.py",
+        "symbol": "advance"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "flow.commit",
+      "value": "completed"
+    },
+    {
+      "id": "code.8c566caec0ef95e9",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "authorized",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "app/service.py",
+        "symbol": "authorized"
+      },
+      "parent": "read",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "job: dict",
+      "code_evidence": {
+        "symbol": "app/service.py::authorized",
+        "ast_hash": "854f05e1b400664dd2a92e59a3e47fa6a15ef89196f1e97d1dcc857cabb58f7a",
+        "parameters": [
+          {
+            "name": "job",
+            "annotation": "dict"
+          }
+        ],
+        "returns": "bool",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.9ab020fa53084121",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "Delivery.transition",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "app/service.py",
+        "symbol": "Delivery.transition"
+      },
+      "parent": "read",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self, job: dict, event: str",
+      "code_evidence": {
+        "symbol": "app/service.py::Delivery.transition",
+        "ast_hash": "9054ebf37455571ae1312ebd6dbc731029f06eccb8d9f90732e0522f7923b362",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          },
+          {
+            "name": "job",
+            "annotation": "dict"
+          },
+          {
+            "name": "event",
+            "annotation": "str"
+          }
+        ],
+        "returns": null,
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.c84df59e5beba542",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "completed",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "app/workflow.py",
+        "symbol": "completed"
+      },
+      "parent": "read",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "execution: dict | None, attempt: str | None, param_version: int | None",
+      "code_evidence": {
+        "symbol": "app/workflow.py::completed",
+        "ast_hash": "bdc848b7332f2c89425872f7429678a739ba6096fbc9898e2f76186739b595ca",
+        "parameters": [
+          {
+            "name": "execution",
+            "annotation": "dict | None"
+          },
+          {
+            "name": "attempt",
+            "annotation": "str | None"
+          },
+          {
+            "name": "param_version",
+            "annotation": "int | None"
+          }
+        ],
+        "returns": "bool",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.0fc7de430e9f9b0b",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "Delivery.commit",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "app/service.py",
+        "symbol": "Delivery.commit"
+      },
+      "parent": "execute",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self, expected_version: int | None=None",
+      "code_evidence": {
+        "symbol": "app/service.py::Delivery.commit",
+        "ast_hash": "11ab4e77a077f2a929a0d7a652c204189849389759f1743c5139e7537e9e8c66",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          },
+          {
+            "name": "expected_version",
+            "annotation": "int | None"
+          }
+        ],
+        "returns": "dict",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.f004ffbad13ab667",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "eligible_grant",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "app/service.py",
+        "symbol": "eligible_grant"
+      },
+      "parent": "authorize",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "grant: dict, job: dict",
+      "code_evidence": {
+        "symbol": "app/service.py::eligible_grant",
+        "ast_hash": "aa1ee3c087d5821603ac6713d747cb1d6a7f8e24f528dd21e2463a92a2d7247d",
+        "parameters": [
+          {
+            "name": "grant",
+            "annotation": "dict"
+          },
+          {
+            "name": "job",
+            "annotation": "dict"
+          }
+        ],
+        "returns": "bool",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.ac32af971797fecf",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "ActivityExecution.body",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "app/workflow.py",
+        "symbol": "ActivityExecution.body"
+      },
+      "parent": "join",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self",
+      "code_evidence": {
+        "symbol": "app/workflow.py::ActivityExecution.body",
+        "ast_hash": "1015f3990a8dc8981f8e14a6953b45eec1b71a41326b541946b99a3cb401e736",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          }
+        ],
+        "returns": null,
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.1189347cfa78bd4e",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "ActivityExecution.record",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "app/workflow.py",
+        "symbol": "ActivityExecution.record"
+      },
+      "parent": "join",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self, event, activity, before",
+      "code_evidence": {
+        "symbol": "app/workflow.py::ActivityExecution.record",
+        "ast_hash": "4dd064b6c53bc5758f42c042724ed44e0dc5b03e16a206fe68da3c333d63f281",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          },
+          {
+            "name": "event",
+            "annotation": null
+          },
+          {
+            "name": "activity",
+            "annotation": null
+          },
+          {
+            "name": "before",
+            "annotation": null
+          }
+        ],
+        "returns": null,
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.137c932e9a5276a2",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "Store.get",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "app/store.py",
+        "symbol": "Store.get"
+      },
+      "parent": "execution.all",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self",
+      "code_evidence": {
+        "symbol": "app/store.py::Store.get",
+        "ast_hash": "212825762a191ae266e4d7aa0c65ff77f8e7bf7a1527d192465b063d6d006554",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          }
+        ],
+        "returns": "dict",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.1bba09184421903e",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "authorized",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "app/service.py",
+        "symbol": "authorized"
+      },
+      "parent": "recheck",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "job: dict",
+      "code_evidence": {
+        "symbol": "app/service.py::authorized",
+        "ast_hash": "854f05e1b400664dd2a92e59a3e47fa6a15ef89196f1e97d1dcc857cabb58f7a",
+        "parameters": [
+          {
+            "name": "job",
+            "annotation": "dict"
+          }
+        ],
+        "returns": "bool",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.abc699d67116f986",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "Delivery.transition",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "app/service.py",
+        "symbol": "Delivery.transition"
+      },
+      "parent": "recheck",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self, job: dict, event: str",
+      "code_evidence": {
+        "symbol": "app/service.py::Delivery.transition",
+        "ast_hash": "9054ebf37455571ae1312ebd6dbc731029f06eccb8d9f90732e0522f7923b362",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          },
+          {
+            "name": "job",
+            "annotation": "dict"
+          },
+          {
+            "name": "event",
+            "annotation": "str"
+          }
+        ],
+        "returns": null,
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.a91cf5631a56d8f8",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "authorized",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "app/service.py",
+        "symbol": "authorized"
+      },
+      "parent": "wait",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "job: dict",
+      "code_evidence": {
+        "symbol": "app/service.py::authorized",
+        "ast_hash": "854f05e1b400664dd2a92e59a3e47fa6a15ef89196f1e97d1dcc857cabb58f7a",
+        "parameters": [
+          {
+            "name": "job",
+            "annotation": "dict"
+          }
+        ],
+        "returns": "bool",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.52990f65c6aa2534",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "Delivery.transition",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "app/service.py",
+        "symbol": "Delivery.transition"
+      },
+      "parent": "wait",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self, job: dict, event: str",
+      "code_evidence": {
+        "symbol": "app/service.py::Delivery.transition",
+        "ast_hash": "9054ebf37455571ae1312ebd6dbc731029f06eccb8d9f90732e0522f7923b362",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          },
+          {
+            "name": "job",
+            "annotation": "dict"
+          },
+          {
+            "name": "event",
+            "annotation": "str"
+          }
+        ],
+        "returns": null,
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.987727c937c2bc9d",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "completed",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "app/workflow.py",
+        "symbol": "completed"
+      },
+      "parent": "wait",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "execution: dict | None, attempt: str | None, param_version: int | None",
+      "code_evidence": {
+        "symbol": "app/workflow.py::completed",
+        "ast_hash": "bdc848b7332f2c89425872f7429678a739ba6096fbc9898e2f76186739b595ca",
+        "parameters": [
+          {
+            "name": "execution",
+            "annotation": "dict | None"
+          },
+          {
+            "name": "attempt",
+            "annotation": "str | None"
+          },
+          {
+            "name": "param_version",
+            "annotation": "int | None"
+          }
+        ],
+        "returns": "bool",
+        "origin": "python-ast"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "read>authorize:data",
+      "from": "read",
+      "to": "authorize",
+      "type": "data",
+      "label": "使用本次参数",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "authorize>checksum:guard",
+      "from": "authorize",
+      "to": "checksum",
+      "type": "guard",
+      "label": "有执行权限",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "authorize>privacy:guard",
+      "from": "authorize",
+      "to": "privacy",
+      "type": "guard",
+      "label": "有执行权限",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "join>recheck:guard",
+      "from": "join",
+      "to": "recheck",
+      "type": "guard",
+      "label": "两项检查通过",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "recheck>commit:guard",
+      "from": "recheck",
+      "to": "commit",
+      "type": "guard",
+      "label": "当前权限和版本仍有效",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "authorize>wait:flow",
+      "from": "authorize",
+      "to": "wait",
+      "type": "flow",
+      "label": "缺少有效授权",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "recheck>wait:flow",
+      "from": "recheck",
+      "to": "wait",
+      "type": "flow",
+      "label": "权限或版本已改变",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "change>read:flow",
+      "from": "change",
+      "to": "read",
+      "type": "flow",
+      "label": "重新读取内容",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "workers>checksum:resource",
+      "from": "workers",
+      "to": "checksum",
+      "type": "resource",
+      "label": "占用 1 个名额；结束后归还",
+      "evidence": "executable declaration",
+      "units": 1
+    },
+    {
+      "id": "checksum>join:join",
+      "from": "checksum",
+      "to": "join",
+      "type": "join",
+      "label": "等待这项检查完成",
+      "evidence": "executable declaration"
+    },
+    {
+      "id": "workers>privacy:resource",
+      "from": "workers",
+      "to": "privacy",
+      "type": "resource",
+      "label": "占用 1 个名额；结束后归还",
+      "evidence": "executable declaration",
+      "units": 1
+    },
+    {
+      "id": "privacy>join:join",
+      "from": "privacy",
+      "to": "join",
+      "type": "join",
+      "label": "等待这项检查完成",
+      "evidence": "executable declaration"
+    },
+    {
+      "id": "flow.input>read:contains",
+      "from": "flow.input",
+      "to": "read",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "flow.input>execute:contains",
+      "from": "flow.input",
+      "to": "execute",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "flow.permission>authorize:contains",
+      "from": "flow.permission",
+      "to": "authorize",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "flow.checks>workers:contains",
+      "from": "flow.checks",
+      "to": "workers",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "flow.checks>checksum:contains",
+      "from": "flow.checks",
+      "to": "checksum",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "flow.checks>privacy:contains",
+      "from": "flow.checks",
+      "to": "privacy",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "flow.checks>join:contains",
+      "from": "flow.checks",
+      "to": "join",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "workers>execution.init:contains",
+      "from": "workers",
+      "to": "execution.init",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "workers>execution.finish:contains",
+      "from": "workers",
+      "to": "execution.finish",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "workers>execution.invariant:contains",
+      "from": "workers",
+      "to": "execution.invariant",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "workers>execution.snapshot:contains",
+      "from": "workers",
+      "to": "execution.snapshot",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "workers>execution.progress:contains",
+      "from": "workers",
+      "to": "execution.progress",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "join>execution.abort:contains",
+      "from": "join",
+      "to": "execution.abort",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "execution.progress>execution.lookup:contains",
+      "from": "execution.progress",
+      "to": "execution.lookup",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "execution.progress>execution.save:contains",
+      "from": "execution.progress",
+      "to": "execution.save",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "execution.progress>execution.update:contains",
+      "from": "execution.progress",
+      "to": "execution.update",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "execution.progress>execution.all:contains",
+      "from": "execution.progress",
+      "to": "execution.all",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "flow.commit>recheck:contains",
+      "from": "flow.commit",
+      "to": "recheck",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "flow.commit>commit:contains",
+      "from": "flow.commit",
+      "to": "commit",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "flow.wait>wait:contains",
+      "from": "flow.wait",
+      "to": "wait",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "flow.wait>change:contains",
+      "from": "flow.wait",
+      "to": "change",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "flow.input>state.draft:contains",
+      "from": "flow.input",
+      "to": "state.draft",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "flow.wait>state.waiting:contains",
+      "from": "flow.wait",
+      "to": "state.waiting",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "flow.checks>state.checking:contains",
+      "from": "flow.checks",
+      "to": "state.checking",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "flow.commit>state.ready:contains",
+      "from": "flow.commit",
+      "to": "state.ready",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "flow.wait>state.failed:contains",
+      "from": "flow.wait",
+      "to": "state.failed",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "flow.wait>state.cancelled:contains",
+      "from": "flow.wait",
+      "to": "state.cancelled",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "flow.commit>state.completed:contains",
+      "from": "flow.commit",
+      "to": "state.completed",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "contains.code.8c566caec0ef95e9",
+      "from": "read",
+      "to": "code.8c566caec0ef95e9",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.e67a6fead209ea84",
+      "from": "read",
+      "to": "code.8c566caec0ef95e9",
+      "type": "flow",
+      "label": "静态调用 authorized",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 83,
+        "column": 20,
+        "args": [
+          "job"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.9ab020fa53084121",
+      "from": "read",
+      "to": "code.9ab020fa53084121",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.11d0859c7561ea14",
+      "from": "read",
+      "to": "code.9ab020fa53084121",
+      "type": "flow",
+      "label": "静态调用 self.transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 88,
+        "column": 16,
+        "args": [
+          "job",
+          "'block'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.39ab2f3ec015f1a0",
+      "from": "read",
+      "to": "code.9ab020fa53084121",
+      "type": "flow",
+      "label": "静态调用 self.transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 91,
+        "column": 12,
+        "args": [
+          "job",
+          "'start'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.c84df59e5beba542",
+      "from": "read",
+      "to": "code.c84df59e5beba542",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.9e7021c1489e7bc9",
+      "from": "read",
+      "to": "code.c84df59e5beba542",
+      "type": "flow",
+      "label": "静态调用 completed",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 100,
+        "column": 19,
+        "args": [
+          "execution.snapshot()",
+          "job['attempt']",
+          "job['param_version']"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.21ecf949f0bda6cf",
+      "from": "read",
+      "to": "code.9ab020fa53084121",
+      "type": "flow",
+      "label": "静态调用 self.transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 108,
+        "column": 20,
+        "args": [
+          "current",
+          "'fail'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.de06504210ac3553",
+      "from": "read",
+      "to": "code.9ab020fa53084121",
+      "type": "flow",
+      "label": "静态调用 self.transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 124,
+        "column": 16,
+        "args": [
+          "current",
+          "'fail'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.ccfc4145c69a6a8f",
+      "from": "read",
+      "to": "code.9ab020fa53084121",
+      "type": "flow",
+      "label": "静态调用 self.transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 126,
+        "column": 16,
+        "args": [
+          "current",
+          "'checked'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.55a29cc7cbd51155",
+      "from": "execute",
+      "to": "read",
+      "type": "flow",
+      "label": "静态调用 self.prepare",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 169,
+        "column": 8,
+        "args": [],
+        "keywords": {
+          "expected_version": "version"
+        }
+      }
+    },
+    {
+      "id": "contains.code.0fc7de430e9f9b0b",
+      "from": "execute",
+      "to": "code.0fc7de430e9f9b0b",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.fae3b4b36a13d2a2",
+      "from": "execute",
+      "to": "code.0fc7de430e9f9b0b",
+      "type": "flow",
+      "label": "静态调用 self.commit",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 170,
+        "column": 15,
+        "args": [],
+        "keywords": {
+          "expected_version": "version"
+        }
+      }
+    },
+    {
+      "id": "contains.code.f004ffbad13ab667",
+      "from": "authorize",
+      "to": "code.f004ffbad13ab667",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.4c64e7bcb1ccf574",
+      "from": "authorize",
+      "to": "code.f004ffbad13ab667",
+      "type": "flow",
+      "label": "静态调用 eligible_grant",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 16,
+        "column": 45,
+        "args": [
+          "g",
+          "job"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.ac32af971797fecf",
+      "from": "join",
+      "to": "code.ac32af971797fecf",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.da4dca123294f576",
+      "from": "join",
+      "to": "code.ac32af971797fecf",
+      "type": "flow",
+      "label": "静态调用 self.body",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 155,
+        "column": 19,
+        "args": [],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.1189347cfa78bd4e",
+      "from": "join",
+      "to": "code.1189347cfa78bd4e",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.8d8ad0d73241e50f",
+      "from": "join",
+      "to": "code.1189347cfa78bd4e",
+      "type": "flow",
+      "label": "静态调用 self.record",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 157,
+        "column": 63,
+        "args": [
+          "'join'",
+          "self.spec['join']['id']",
+          "before"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.a5c3e8cc4b2385be",
+      "from": "execution.finish",
+      "to": "code.ac32af971797fecf",
+      "type": "flow",
+      "label": "静态调用 self.body",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 145,
+        "column": 19,
+        "args": [],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.c85e7b936df5a2d2",
+      "from": "execution.finish",
+      "to": "code.1189347cfa78bd4e",
+      "type": "flow",
+      "label": "静态调用 self.record",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 150,
+        "column": 12,
+        "args": [
+          "'finish'",
+          "activity",
+          "before"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.1e02e7d1d396942f",
+      "from": "execution.snapshot",
+      "to": "code.ac32af971797fecf",
+      "type": "flow",
+      "label": "静态调用 self.body",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 109,
+        "column": 22,
+        "args": [],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.40f5731ba910a608",
+      "from": "execution.abort",
+      "to": "code.ac32af971797fecf",
+      "type": "flow",
+      "label": "静态调用 self.body",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 163,
+        "column": 19,
+        "args": [],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.ac43f79c54d26418",
+      "from": "execution.abort",
+      "to": "code.1189347cfa78bd4e",
+      "type": "flow",
+      "label": "静态调用 self.record",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 166,
+        "column": 39,
+        "args": [
+          "'abort'",
+          "self.spec['join']['id']",
+          "before"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.892fcebcad28b912",
+      "from": "execution.update",
+      "to": "execution.lookup",
+      "type": "flow",
+      "label": "静态调用 self.execution",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 64,
+        "column": 14,
+        "args": [
+          "attempt"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.8ba8ffb042c56876",
+      "from": "execution.update",
+      "to": "execution.save",
+      "type": "flow",
+      "label": "静态调用 self.put_execution",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 65,
+        "column": 17,
+        "args": [
+          "{**value, **changes}"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.137c932e9a5276a2",
+      "from": "execution.all",
+      "to": "code.137c932e9a5276a2",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.56b07723eb52bcde",
+      "from": "execution.all",
+      "to": "code.137c932e9a5276a2",
+      "type": "flow",
+      "label": "静态调用 self.get",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 72,
+        "column": 22,
+        "args": [],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.1bba09184421903e",
+      "from": "recheck",
+      "to": "code.1bba09184421903e",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.a29b199782c898f7",
+      "from": "recheck",
+      "to": "code.1bba09184421903e",
+      "type": "flow",
+      "label": "静态调用 authorized",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 153,
+        "column": 20,
+        "args": [
+          "job"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.abc699d67116f986",
+      "from": "recheck",
+      "to": "code.abc699d67116f986",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.1016268fe7778a24",
+      "from": "recheck",
+      "to": "code.abc699d67116f986",
+      "type": "flow",
+      "label": "静态调用 self.transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 157,
+        "column": 16,
+        "args": [
+          "job",
+          "'block'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.8863a4a5795dad69",
+      "from": "recheck",
+      "to": "code.abc699d67116f986",
+      "type": "flow",
+      "label": "静态调用 self.transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 161,
+        "column": 12,
+        "args": [
+          "job",
+          "'publish'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.21f2ccff1895643f",
+      "from": "commit",
+      "to": "code.1bba09184421903e",
+      "type": "flow",
+      "label": "静态调用 authorized",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 153,
+        "column": 20,
+        "args": [
+          "job"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.01f725609800a461",
+      "from": "commit",
+      "to": "code.abc699d67116f986",
+      "type": "flow",
+      "label": "静态调用 self.transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 157,
+        "column": 16,
+        "args": [
+          "job",
+          "'block'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.52de65c223c4b00e",
+      "from": "commit",
+      "to": "code.abc699d67116f986",
+      "type": "flow",
+      "label": "静态调用 self.transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 161,
+        "column": 12,
+        "args": [
+          "job",
+          "'publish'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.a91cf5631a56d8f8",
+      "from": "wait",
+      "to": "code.a91cf5631a56d8f8",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.ceca25e368129127",
+      "from": "wait",
+      "to": "code.a91cf5631a56d8f8",
+      "type": "flow",
+      "label": "静态调用 authorized",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 83,
+        "column": 20,
+        "args": [
+          "job"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.52990f65c6aa2534",
+      "from": "wait",
+      "to": "code.52990f65c6aa2534",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.68486930a3304e03",
+      "from": "wait",
+      "to": "code.52990f65c6aa2534",
+      "type": "flow",
+      "label": "静态调用 self.transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 88,
+        "column": 16,
+        "args": [
+          "job",
+          "'block'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.890721d2f79ad5ce",
+      "from": "wait",
+      "to": "code.52990f65c6aa2534",
+      "type": "flow",
+      "label": "静态调用 self.transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 91,
+        "column": 12,
+        "args": [
+          "job",
+          "'start'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.987727c937c2bc9d",
+      "from": "wait",
+      "to": "code.987727c937c2bc9d",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.5a1ff2f480f87c47",
+      "from": "wait",
+      "to": "code.987727c937c2bc9d",
+      "type": "flow",
+      "label": "静态调用 completed",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 100,
+        "column": 19,
+        "args": [
+          "execution.snapshot()",
+          "job['attempt']",
+          "job['param_version']"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.4a381eb3c8a64cf0",
+      "from": "wait",
+      "to": "code.52990f65c6aa2534",
+      "type": "flow",
+      "label": "静态调用 self.transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 108,
+        "column": 20,
+        "args": [
+          "current",
+          "'fail'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.25971590fe1c3b88",
+      "from": "wait",
+      "to": "code.52990f65c6aa2534",
+      "type": "flow",
+      "label": "静态调用 self.transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 124,
+        "column": 16,
+        "args": [
+          "current",
+          "'fail'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.ca8e8e7df4679566",
+      "from": "wait",
+      "to": "code.52990f65c6aa2534",
+      "type": "flow",
+      "label": "静态调用 self.transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 126,
+        "column": 16,
+        "args": [
+          "current",
+          "'checked'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.0d45b6592a09d877",
+      "from": "change",
+      "to": "code.52990f65c6aa2534",
+      "type": "flow",
+      "label": "静态调用 self.transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 44,
+        "column": 16,
+        "args": [
+          "job",
+          "'edit'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.35226fd041a0606a",
+      "from": "change",
+      "to": "code.52990f65c6aa2534",
+      "type": "flow",
+      "label": "静态调用 self.transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 69,
+        "column": 16,
+        "args": [
+          "job",
+          "'cancel'"
+        ],
+        "keywords": {}
+      }
+    }
+  ],
+  "overview": [
+    {
+      "node": "flow.input",
+      "x": 0,
+      "y": 0
+    },
+    {
+      "node": "flow.permission",
+      "x": 400,
+      "y": 0
+    },
+    {
+      "node": "flow.checks",
+      "x": 800,
+      "y": 0
+    },
+    {
+      "node": "flow.commit",
+      "x": 1200,
+      "y": 0
+    },
+    {
+      "node": "flow.wait",
+      "x": 1600,
+      "y": 0
+    }
+  ],
+  "graph_roots": [
+    "flow.input",
+    "flow.permission",
+    "flow.checks",
+    "flow.commit",
+    "flow.wait"
+  ],
+  "machine": {
+    "engine": "transitions.Machine",
+    "version": "0.9.3",
+    "initial": "draft",
+    "state_type": "Phase",
+    "states": [
+      "draft",
+      "waiting",
+      "checking",
+      "ready",
+      "failed",
+      "cancelled",
+      "completed"
+    ],
+    "values": [
+      "draft",
+      "waiting",
+      "checking",
+      "ready",
+      "failed",
+      "cancelled",
+      "completed"
+    ],
+    "transitions": [
+      {
+        "trigger": "start",
+        "source": [
+          "draft",
+          "waiting",
+          "failed",
+          "ready"
+        ],
+        "dest": "checking"
+      },
+      {
+        "trigger": "block",
+        "source": [
+          "draft",
+          "waiting",
+          "failed",
+          "ready",
+          "checking"
+        ],
+        "dest": "waiting"
+      },
+      {
+        "trigger": "checked",
+        "source": "checking",
+        "dest": "ready",
+        "conditions": "execution_complete"
+      },
+      {
+        "trigger": "fail",
+        "source": "checking",
+        "dest": "failed"
+      },
+      {
+        "trigger": "publish",
+        "source": "ready",
+        "dest": "completed",
+        "conditions": "execution_complete"
+      },
+      {
+        "trigger": "cancel",
+        "source": [
+          "draft",
+          "waiting",
+          "checking",
+          "ready",
+          "failed"
+        ],
+        "dest": "cancelled"
+      },
+      {
+        "trigger": "edit",
+        "source": [
+          "draft",
+          "waiting",
+          "checking",
+          "ready",
+          "failed",
+          "completed"
+        ],
+        "dest": "draft"
+      }
+    ],
+    "events": {
+      "start": {
+        "payload": {}
+      },
+      "block": {
+        "payload": {}
+      },
+      "checked": {
+        "payload": {}
+      },
+      "fail": {
+        "payload": {}
+      },
+      "publish": {
+        "payload": {}
+      },
+      "cancel": {
+        "payload": {}
+      },
+      "edit": {
+        "payload": {}
+      }
+    },
+    "event_labels": {
+      "start": "开始检查",
+      "block": "等待有效授权",
+      "checked": "两项检查通过",
+      "fail": "检查失败",
+      "publish": "提交成功",
+      "cancel": "取消",
+      "edit": "修改内容"
+    },
+    "context": {
+      "param_version": {
+        "type": "integer",
+        "min": 1
+      },
+      "clock": {
+        "type": "integer",
+        "min": 0
+      },
+      "capacity": {
+        "type": "integer",
+        "min": 1,
+        "max": 2
+      },
+      "execution": {
+        "type": "object",
+        "schema": "activity-graph/v1"
+      }
+    },
+    "guards": {
+      "execution_complete": {
+        "description": "本次运行的两项检查均已通过，且占用的名额已经归还",
+        "source": {
+          "path": "app/workflow.py",
+          "symbol": "completed"
+        }
+      }
+    },
+    "labels": {
+      "draft": "待检查",
+      "waiting": "等待执行授权",
+      "checking": "正在检查",
+      "ready": "可以提交",
+      "failed": "检查失败",
+      "cancelled": "已取消",
+      "completed": "已交付"
+    },
+    "source": {
+      "path": "app/workflow.py",
+      "symbol": "advance"
+    },
+    "execution": {
+      "schema": "activity-graph/v1",
+      "within": "checking",
+      "parent": "flow.checks",
+      "activity_state_type": "ActivityState",
+      "activity_states": [
+        "pending",
+        "waiting",
+        "running",
+        "succeeded",
+        "rejected",
+        "failed",
+        "cancelled"
+      ],
+      "activities": [
+        {
+          "id": "checksum",
+          "label": "计算内容摘要",
+          "source": {
+            "path": "app/checks.py",
+            "symbol": "checksum"
+          },
+          "requires": {
+            "workers": 1
+          }
+        },
+        {
+          "id": "privacy",
+          "label": "检查敏感标记",
+          "source": {
+            "path": "app/checks.py",
+            "symbol": "privacy_check"
+          },
+          "requires": {
+            "workers": 1
+          }
+        }
+      ],
+      "resources": [
+        {
+          "id": "workers",
+          "label": "本次并发名额",
+          "scope": "run",
+          "capacity_field": "capacity",
+          "min": 1,
+          "max": 2
+        }
+      ],
+      "join": {
+        "id": "join",
+        "label": "确认检查结果",
+        "policy": "all",
+        "requires": [
+          "checksum",
+          "privacy"
+        ],
+        "success_event": "checked",
+        "success_states": [
+          "ready",
+          "completed"
+        ],
+        "guard": "execution_complete"
+      },
+      "source": {
+        "path": "app/workflow.py",
+        "symbol": "ActivityExecution"
+      }
+    }
+  },
+  "presentation": {
+    "subject": "数据交付",
+    "inline_machine_events": [
+      "cancel",
+      "edit"
+    ],
+    "execution_projection": "inline",
+    "default_expanded": []
+  },
+  "scope": {
+    "observable": [
+      "declared activity instances, capacity and waiting",
+      "authorization and parameter versions",
+      "committed SQLite effects"
+    ],
+    "unknowns": [
+      "unselected ordinary function locals",
+      "external services",
+      "process-crash worker restoration"
+    ]
+  },
+  "static_structure": {
+    "files": {
+      "app/__init__.py": "a829ebb4042211c3a39bf40646855698375b065069bbbd2aa61daba1d8e6a51c",
+      "app/checks.py": "c9eb8458cc5020c52f31b9c8a65bb772e401af1d03b8771315d07d913158ea52",
+      "app/ports.py": "aa21b0129c8999d36d924964fef37e975bc909cb95e56dfae51f78522e84ee66",
+      "app/service.py": "50205c0e3744ab4e1aea0a3cc350245621b4355b7c3375a16a4f3f34890c5437",
+      "app/store.py": "3a110acd78ddad46d964f3ae7698e7bbfb98b82a6570b8fa1925cbea08261347",
+      "app/workflow.py": "c68a4790f9ffb23393ea9f71fd8a1e9b5d77540bef8fa693d2ae5003bbfb37ba"
+    },
+    "resolved_calls": 43,
+    "unresolved_calls": 219,
+    "depth": 1,
+    "limits": [
+      "Syntactic call candidates, not executed calls or proven data flow.",
+      "Reflection, decorators, inherited/overridden dispatch, callbacks and local instance aliases may remain unresolved.",
+      "Only explicitly selected Python files; no automatic discovery of every new entry point."
+    ]
+  }
+}

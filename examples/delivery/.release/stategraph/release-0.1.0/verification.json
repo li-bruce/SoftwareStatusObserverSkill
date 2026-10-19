@@ -1,0 +1,61 @@
+{
+  "valid": true,
+  "errors": [],
+  "candidate_id": "5ea8d4a272c07daac5dea7391d962a78acbf4004643301ed0208d3262b7de9b0",
+  "review_hash": "016611c633912095f5417d5a8809253514cb08aa1cb8ebef56a88832cf281d7a",
+  "observations_hash": "fcef33d3f38ba9c26abf7121111155eb1884e59005cc8b00ef3c436fc2011e07",
+  "tests": [
+    {
+      "argv": [
+        "{python}",
+        "-B",
+        "-X",
+        "utf8",
+        "tests/test_business.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-B",
+        "-X",
+        "utf8",
+        "observer_generated/runtime/architecture_guard.py",
+        "check",
+        "--root",
+        "."
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-B",
+        "-X",
+        "utf8",
+        "tests/test_execution.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-B",
+        "-X",
+        "utf8",
+        "tooling/graph_fixture.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tests/test_graph_projection.mjs"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "checked_at": "2026-10-19T10:18:40.734082+00:00",
+  "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+}

@@ -1,0 +1,6 @@
+* text=auto eol=lf
+*.png binary
+*.zip binary
+**/pixi.min.js -whitespace linguist-vendored=true
+examples/delivery/observer_generated/** linguist-generated=true
+examples/delivery/.release/** linguist-generated=true

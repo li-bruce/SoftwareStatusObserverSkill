@@ -1,0 +1,34 @@
+{
+  "schema": "business-discovery/v1",
+  "goal": "处理上传的数据，让用户取得可下载的文件和预览",
+  "sources": [
+    {"id": "U1", "kind": "user", "text": "上传数据后做格式检查和预览生成，再提供下载。生成较慢时可以先继续。", "locator": "演示需求，不是真实用户答复"},
+    {"id": "A1", "kind": "inference", "text": "下载是否需要等待预览，尚未确定。", "locator": "agent 对 U1 的候选理解"}
+  ],
+  "networks": [{
+    "id": "process", "title": "上传后的处理与下载", "actors": ["上传者", "处理服务"],
+    "trigger": "用户上传数据", "outcome": "格式合格的文件可下载；预览何时必须完成待澄清",
+    "nodes": [
+      {"id": "upload", "label": "接收数据", "kind": "action", "source_refs": ["U1"]},
+      {"id": "validate", "label": "检查格式", "kind": "action", "source_refs": ["U1"]},
+      {"id": "preview", "label": "生成预览", "kind": "action", "source_refs": ["U1"]},
+      {"id": "download", "label": "提供下载", "kind": "effect", "source_refs": ["U1"]}
+    ],
+    "edges": [
+      {"id": "e1", "from": "upload", "to": "validate", "relation": "flow", "label": "检查已上传的数据", "source_refs": ["U1"]},
+      {"id": "e2", "from": "upload", "to": "preview", "relation": "data", "label": "以已上传数据生成预览", "source_refs": ["U1"]},
+      {"id": "e3", "from": "validate", "to": "download", "relation": "guard", "label": "格式检查通过", "source_refs": ["U1"]},
+      {"id": "e4", "from": "preview", "to": "download", "relation": "join", "label": "是否必须等待预览，待确认", "source_refs": ["A1"], "decision_refs": ["D1"]}
+    ]
+  }],
+  "decisions": [{
+    "id": "D1", "topic": "completion", "blocking": true, "status": "open", "priority": 1,
+    "source_refs": ["U1"], "affects": ["download", "e4"],
+    "question": "格式检查通过，但预览还在生成时，能否先下载文件？",
+    "why": "这决定提供下载是否必须等待两个处理分支。",
+    "options": [
+      {"id": "both", "label": "等待预览完成", "effect": "两个分支都成功后才提供下载。"},
+      {"id": "format", "label": "先允许下载", "effect": "格式检查通过即可下载，预览在后台继续。"}
+    ]
+  }]
+}

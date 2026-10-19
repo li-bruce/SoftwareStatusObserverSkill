@@ -1,0 +1,9 @@
+{
+  "intent_id": "replace-with-project-goal",
+  "revision": "1",
+  "goal": "用业务语言写下目标和成功效果",
+  "requirements": [
+    {"id": "R1", "text": "描述主体、对象、动作、条件和效果", "status": "assumption", "source": "待与用户需求核对"}
+  ],
+  "exclusions": ["全程序语义等价", "未授权的图写控制"]
+}

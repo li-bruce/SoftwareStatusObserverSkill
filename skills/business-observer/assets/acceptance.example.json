@@ -1,0 +1,11 @@
+{
+  "description": "本示例绑定审批演示领域；使用前改为目标程序已确认需求与独立可观察量。",
+  "checks": [
+    {"id": "no-approval-waits", "requirement": "R2", "case": "no_approval", "path": ["state"], "equals": "waiting_approval"},
+    {"id": "no-approval-no-effect", "requirement": "R2", "case": "no_approval", "path": ["effects"], "equals": 0},
+    {"id": "normal-commits", "requirement": "R4", "case": "normal", "path": ["effects"], "equals": 1}
+  ],
+  "model_checks": [
+    {"id": "approval-quantifier", "requirement": "R3", "path": ["nodes", "authorize", "predicate"], "equals": "member_allowed AND any(grant_matches)"}
+  ]
+}
