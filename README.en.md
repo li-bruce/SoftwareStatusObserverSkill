@@ -9,6 +9,7 @@
 ## What it shows
 
 - Expand a business action into internal activities and key functions, then inspect its source.
+- Keep business, function and state nodes in one graph. Drag and pin nodes, apply layered or stress layouts, and restore positions after reload.
 - Read parameter types, actual values, outcomes and waiting conditions directly on nodes and edges.
 - Follow concurrent activities, available capacity and join conditions to find what blocks progress.
 - Inspect each run and parameter version without confusing current facts, history and missing observations.
@@ -21,7 +22,7 @@ In Codex with `$skill-installer`, enter:
 
 ```text
 Use $skill-installer to install business-observer from:
-https://github.com/li-bruce/SoftwareStatusObserverSkill/tree/v0.1.0/skills/business-observer
+https://github.com/li-bruce/SoftwareStatusObserverSkill/tree/v0.2.0/skills/business-observer
 ```
 
 Or clone this repository and install into a project:

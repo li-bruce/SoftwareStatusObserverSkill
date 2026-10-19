@@ -101,7 +101,7 @@
     "THIRD_PARTY_NOTICES.md"
   ],
   "managed_hashes": {
-    "observer_generated/behavior.json": "5077bc05dae0708bbfbc4a588b5b78f962082e42679d4c397cdfb7060eaf8617",
+    "observer_generated/behavior.json": "3c34e85875a3519875b70c9848e58f3ae8f9b6e04fd45d773175ff221a3b216b",
     "observer_generated/runtime/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "observer_generated/runtime/architecture_guard.py": "ff82147f8ed61e7d7473bbc59a3cedacf546117c71e397d0cf032a83270a852a",
     "observer_generated/runtime/behavior_model.py": "37af8d5926a29eb525773048f3e5e7190e4b7e2239a0a8f858108593924c16b4",
@@ -115,12 +115,16 @@
     "observer_generated/runtime/statechart_contract.py": "513689fece1199c6d07954028c1609c5560dcbb80f444be94ac67c0ef0882a43",
     "observer_generated/runtime/viewer_server.py": "10fa75d9a93662ce07cac457db46d65ecc3fa821a5d4a1a96ec543c7ec862c30",
     "observer_generated/runtime/worknet_contract.py": "19a70d82022f2c2af675f64e7d955b13f5f543949b40c7813b657cd96b0e8193",
+    "observer_generated/static/ELK-LICENSE.md": "637e81f4a1b6b4079535c499fca05e238cf7605c1ff5b76d60d7da7ce96700c9",
     "observer_generated/static/PIXI-LICENSE.txt": "5ce7447bc57f7349ffc48338782fbcabe613696e00712b20d66bc58e780f9473",
-    "observer_generated/static/graph-core.js": "3ae01caa20c242bb0382ea05b8c72f4fed9a7651d346ed59f819676cabffe40c",
-    "observer_generated/static/index.html": "ee5005bb75182403535631e131dea5be0054429dc3502e494fa00774ae3a3e8e",
+    "observer_generated/static/elk-worker.min.js": "e4f5c51c6f2fd564bb64e52e81c4a85a316ef2f24f8b90e1db5eb886c765b030",
+    "observer_generated/static/elk.bundled.js": "1222e44f953ce7746af23801e723708f8e6f436b8b377a6a5fc7552f34a307b3",
+    "observer_generated/static/graph-core.js": "4ece0198d450a7dd2e5f4d4ffca33322b862df2fed3b43a75aa60208f41abb0f",
+    "observer_generated/static/index.html": "8d580a3e57f4496004e52c8bb6622ea9f2624551140002af60d9771d94af0849",
+    "observer_generated/static/layout.js": "18435fbcdcf8a29628c70ae1bfefeaaa7fb3096615d5e9185d419a82c75047f4",
     "observer_generated/static/pixi.min.js": "06d9ef9823e743518793083c296d801e752db128cb1f519fbabe37e1259567ea",
-    "observer_generated/static/viewer.css": "91c1dc25c63e3af2a8b467bc28239b673db077df191409f8c85e55f91f004938",
-    "observer_generated/static/viewer.js": "012cf1fcb4c2c46c65a6452d6b9c1f77bb5f4ef4d04a37303b11f442911a70b6"
+    "observer_generated/static/viewer.css": "5a1779b1bdf45b1ba7c31adc71de1a9cf0d552541ae0c76d69e287c485ddb670",
+    "observer_generated/static/viewer.js": "8cf8b20caee6f0cbd0f9f973151558837a898e43af3bc9f9144f5be3734fee0f"
   },
   "regenerations": [
     {
@@ -170,6 +174,40 @@
         "observer_generated/behavior.json",
         "observer_generated/runtime/behavior_model.py",
         "observer_generated/runtime/code_structure.py"
+      ]
+    },
+    {
+      "reason": "Unified typed node-link graph, local draggable positions, ELK layout and lifecycle edges in the same canvas",
+      "changed": [
+        "observer_generated/behavior.json",
+        "observer_generated/static/ELK-LICENSE.md",
+        "observer_generated/static/elk-worker.min.js",
+        "observer_generated/static/elk.bundled.js",
+        "observer_generated/static/graph-core.js",
+        "observer_generated/static/index.html",
+        "observer_generated/static/layout.js",
+        "observer_generated/static/viewer.css",
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "Regenerate unified graph and shipped layout templates after fixture and source binding updates",
+      "changed": [
+        "observer_generated/static/graph-core.js"
+      ]
+    },
+    {
+      "reason": "Preserve current and historical state boundaries in the unified graph; refine label placement and default relation layout",
+      "changed": [
+        "observer_generated/static/graph-core.js",
+        "observer_generated/static/layout.js",
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "Use a native browser Worker explicitly for ELK; keep layout failure visible and retain positions.",
+      "changed": [
+        "observer_generated/static/viewer.js"
       ]
     }
   ]

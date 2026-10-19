@@ -2461,12 +2461,11 @@
   },
   "presentation": {
     "subject": "数据交付",
-    "inline_machine_events": [
-      "cancel",
-      "edit"
-    ],
+    "layout_id": "delivery-example",
     "execution_projection": "inline",
-    "default_expanded": []
+    "default_expanded": [
+      "flow.checks"
+    ]
   },
   "scope": {
     "observable": [

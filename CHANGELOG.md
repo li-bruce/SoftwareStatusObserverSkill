@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0
+
+- One typed node-link graph for business steps, functions, parameters, resources and lifecycle states.
+- Node dragging, exact pins, saved positions/expansion/camera, incremental expansion and layout undo.
+- Local ELK.js 0.12.0 layered and stress layouts in a Web Worker.
+- Activity-only history frames no longer borrow the run's final lifecycle state.
+- Tests run both real layout algorithms and check persistence, pins, gestures and history boundaries.
+
 ## 0.1.0
 
 First public release / 首次公开发布。

@@ -1,4 +1,6 @@
 * text=auto eol=lf
+**/elk.bundled.js -text -whitespace linguist-vendored
+**/elk-worker.min.js -text -whitespace linguist-vendored
 *.png binary
 *.zip binary
 **/pixi.min.js -whitespace linguist-vendored=true

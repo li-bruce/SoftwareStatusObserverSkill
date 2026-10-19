@@ -1,9 +1,9 @@
 {
   "valid": true,
   "errors": [],
-  "candidate_id": "f9149136194f7a7100389baea6d049d8d076c071a09705db387f929ba11d925a",
-  "review_hash": "8cfae040dce3be3a25b6edbfbf0a761b1bcb33c9126fcf467ada4d39fa29c0ea",
-  "observations_hash": "b777e0f4892badf155de4c9fc4739786c12454450ba75f216b975a0924a9c9b7",
+  "candidate_id": "c13da62d0fbf90ba137d24fd683483eb2f6846d25ef4b43b2435aefc70a80196",
+  "review_hash": "30078d162f222a186ae3c41e5cef029a1106a48d0445be2ba5548fac68b10009",
+  "observations_hash": "91c6eed9d9038072000c7e1e5fa70ce0c04fb2df534a9f905bb1c85fc9b2e0ec",
   "tests": [
     {
       "argv": [
@@ -54,8 +54,15 @@
         "tests/test_graph_projection.mjs"
       ],
       "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tests/test_graph_layout.mjs"
+      ],
+      "exit_code": 0
     }
   ],
-  "checked_at": "2026-10-19T10:29:24.330152+00:00",
+  "checked_at": "2026-10-19T13:26:32.435511+00:00",
   "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
 }

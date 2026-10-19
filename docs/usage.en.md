@@ -33,7 +33,9 @@ When integrated into change checks, unresolved blocking questions prevent accept
 
 The top-level “checking” state is a summary. Each run retains the waiting, running and completion state of every declared activity. Folding nodes only changes presentation. Run identity, parameter version and build version keep records distinct; missing observations are not inferred as success.
 
-After expanding nodes, click “显示完整图” (fit graph), then zoom or pan as needed.
+Business, function, state, parameter and resource nodes share one canvas, with different shapes and colors. Double-click a node, or select it and click “展开” (expand). Select “源码” (source) to open code beside it.
+
+Drag nodes to position them; drag the background to pan. Positions, expansion and camera settings are saved in this browser and restored after reload. Runtime updates only change displayed facts. Select “固定节点” (pin, shortcut P) to preserve an exact position during automatic layout. Choose layered or stress layout, click “自动布局”, and undo if needed. Use “显示完整图” to fit the graph and zoom for details. Layout preferences do not change application state or authorization.
 
 ## Edit code and keep the graph synchronized
 

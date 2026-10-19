@@ -17,7 +17,9 @@ Open the [graph](http://127.0.0.1:8797/) and [control page](http://127.0.0.1:879
 1. Enter public sample text, set capacity to 1, then click **保存内容和名额** (save content and capacity).
 2. Click **批准当前版本** (approve current version), then **检查并提交** (check and submit).
 3. Expand **检查内容** (check content) in the graph. One activity occupies the slot while the other waits; both must pass before submission.
-4. Use **查看时刻** (selected moment) to revisit the wait. Expand functions and click **源码** (source) to inspect implementation.
+4. Use **时刻** (moment) to revisit the wait. Double-click a function to expand parameters and calls; select a node and click **源码** (source) to inspect implementation.
+
+Business, function and state nodes share one graph. Drag nodes to move them; positions are saved in this browser. Pin selected nodes to preserve their position during automatic layout. Choose layered or stress layout, then click **自动布局**. Double-click to expand, drag the background to pan, and use the wheel to zoom.
 
 Capacity 2 allows both activities to run simultaneously. Each activity state belongs to a specific run; **运行** (run) preserves records from older parameter versions.
 

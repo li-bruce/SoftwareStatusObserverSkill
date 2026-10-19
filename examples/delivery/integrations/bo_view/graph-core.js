@@ -10,7 +10,7 @@ export function selectedConfiguration(view,choice='latest',step='latest'){
   const run=configurations(view).find(r=>r.attempt===currentAttempt(view,choice));if(!run)return null;
   if(step==='latest')return run;
   const entry=run.journal.find(e=>String(e.seq)===String(step));
-  return entry?{...run,...entry.after,revision:entry.seq,selectedFrame:entry}:null;
+  return entry?{...run,...entry.after,phase:entry.after.phase??null,finalPhase:run.phase,revision:entry.seq,selectedFrame:entry}:null;
 }
 export function selectedEvents(view,choice,step='latest'){
   const id=currentAttempt(view,choice);let events=view.events.filter(e=>e.attempt===id);
@@ -23,13 +23,15 @@ export function selectedEvents(view,choice,step='latest'){
 export function nodeEvents(node,events){return events.filter(e=>e.node===(node.event_node||node.id));}
 function activityName(view,id){return view.model.nodes.find(n=>n.id===id)?.label||id;}
 function activityColor(state){return ({running:'active',waiting:'blocked',rejected:'blocked',failed:'blocked',succeeded:'ok',cancelled:'historical'})[state]||'declared';}
+function phaseValue(view,configuration,choice){return configuration?.selectedFrame?configuration.phase:choice==='latest'?view.machine.current:configuration?.phase;}
 export function status(node,view,events,choice,configuration=null){
   if(configuration?.disposition==='interrupted'&&(node.execution_role||node.id===view.model.machine.execution?.parent))return 'historical';
   if(node.execution_role==='activity')return activityColor(configuration?.activities[node.id]);
   if(node.execution_role==='resource')return configuration?(configuration.resources[node.id].available===0?'blocked':'ok'):'declared';
   if(node.execution_role==='join')return ({waiting:'blocked',enabled:'active',passed:'ok',rejected:'blocked'})[configuration?.join.state]||'declared';
   if(node.id===view.model.machine.execution?.parent&&configuration)return Object.values(configuration.activities).includes('running')?'active':configuration.join.state==='passed'?'ok':'blocked';
-  if(node.layer==='state')return node.value===(configuration?.phase||view.machine.current)?'active':'declared';
+  if(node.layer==='state')return node.value===phaseValue(view,configuration,choice)?'active':'declared';
+  if(node.field){const e=nodeEvents(node,events).at(-1),values=e?.[node.direction==='in'?'inputs':'outputs'];if(!values||!(node.field in values))return 'declared';}
   if(node.layer==='business'){
     const states=view.model.nodes.filter(n=>n.parent===node.id&&n.layer!=='state').map(n=>status(n,view,events,choice,configuration));
     return ['active','blocked','ok','historical'].find(s=>states.includes(s))||'declared';
@@ -40,6 +42,7 @@ export function status(node,view,events,choice,configuration=null){
   return last.phase==='enter'?'active':'ok';
 }
 export function lines(node,view,events,choice,configuration=null){
+  if(node.field){const e=nodeEvents(node,events).at(-1),values=e?.[node.direction==='in'?'inputs':'outputs'];return [{text:node.field+': '+typeName(node.fieldType),role:'symbol'},{text:values&&node.field in values?compact(values[node.field]):'本次尚未采集',role:values&&node.field in values?'value':'muted'}];}
   const last=nodeEvents(node,events).at(-1),result=[{text:node.signature||node.source?.symbol||node.summary,role:'symbol'}];
   if(node.execution_role){
     if(!configuration){result.push({text:'这次运行尚未保存内部状态',role:'muted'});return result;}
@@ -60,7 +63,7 @@ export function lines(node,view,events,choice,configuration=null){
     }
   }else if(node.layer==='state'){
     result.push({text:`phase: Phase = ${node.value}`,role:'value'});
-    result.push({text:node.value===(configuration?.phase||view.machine.current)?'这次运行的流程状态':'可到达的流程状态',role:'muted'});
+    result.push({text:node.value===phaseValue(view,configuration,choice)?'这次运行的流程状态':'可到达的流程状态',role:'muted'});
     if(node.value==='checking'&&configuration){for(const [id,state] of Object.entries(configuration.activities))result.push({text:activityName(view,id)+'：'+stateLabels[state],role:state==='waiting'?'bad':'value'});}
     return result;
   }else if(node.layer==='business'){
@@ -90,92 +93,87 @@ export function lines(node,view,events,choice,configuration=null){
   return result;
 }
 export function wrapText(text,width=47){const out=[];let row='',units=0;for(const c of text){const size=c.charCodeAt(0)>255?1.8:1;if(c==='\n'||units+size>width){out.push(row);row='';units=0;if(c==='\n')continue;}row+=c;units+=size;}if(row||!out.length)out.push(row);return out;}
-export function layoutGraph(view,expanded,sourceOpen,fullSources,choice,step='latest'){
-  const configuration=selectedConfiguration(view,choice,step),events=selectedEvents(view,choice,step),all=new Map(view.model.nodes.map(n=>[n.id,n])),children=new Map();
-  for(const n of all.values())if(n.parent&&!(view.model.machine.execution&&n.layer==='state')){if(!children.has(n.parent))children.set(n.parent,[]);children.get(n.parent).push(n.id);}
-  const boxes=[],byId=new Map(),base=340;
-  function measure(id){
-    const n=all.get(id),kids=children.get(id)||[],open=expanded.has(id)&&kids.length;
-    const rows=lines(n,view,events,choice,configuration).flatMap(r=>wrapText(r.text).map(text=>({...r,text})));
-    const item={id,node:n,rows,open,kids:[],state:status(n,view,events,choice,configuration),w:base,h:55+rows.length*19+35};
-    if(open){
-      item.kids=kids.map(measure);const cw=Math.max(base,...item.kids.map(x=>x.w));
-      const count=item.kids.length>1?2:1;item.w=count*cw+(count-1)*80+40;
-      let y=item.h+28;for(let i=0;i<item.kids.length;i+=count){const row=item.kids.slice(i,i+count);for(let j=0;j<row.length;j++){row[j].rx=20+j*(cw+80);row[j].ry=y;}y+=Math.max(...row.map(c=>c.h))+66;}item.h=y+8;
+
+export const nodeTypes={business:{label:'业务',glyph:'B',color:0x5075b5},function:{label:'函数',glyph:'ƒ',color:0x387c88},state:{label:'状态',glyph:'S',color:0x9869a0},decision:{label:'判断',glyph:'?',color:0xaf8029},resource:{label:'资源',glyph:'R',color:0x7b8845},data:{label:'参数',glyph:'x',color:0x627f9c},effect:{label:'结果',glyph:'✓',color:0x2d8a70},wait:{label:'等待',glyph:'…',color:0xb38442}};
+export function nodeType(n){return n.layer==='business'?'business':n.kind==='state'?'state':n.execution_role==='resource'?'resource':n.kind==='decision'?'decision':n.kind==='data'?'data':n.kind==='effect'?'effect':n.kind==='wait'?'wait':'function';}
+
+// One typed graph. Folding changes visible nodes, never their identities or facts.
+// The old layoutGraph name remains for integrations; coordinates are assigned by layout.js.
+export function layoutGraph(view,expanded=new Set(),_sourceOpen=new Set(),_fullSources=new Map(),choice='latest',step='latest'){
+  const configuration=selectedConfiguration(view,choice,step),events=selectedEvents(view,choice,step);
+  const all=new Map(view.model.nodes.map(n=>[n.id,n])),children=new Map(),rawEdges=[...view.model.edges];
+  for(const n of view.model.nodes){
+    if(n.layer==='business'||n.kind==='state')continue;
+    for(const [direction,fields] of Object.entries(n.capture||{}))for(const [field,fieldType] of Object.entries(fields)){
+      const id=`field:${n.id}:${direction}:${field}`;
+      all.set(id,{id,label:field,summary:(direction==='in'?'输入参数':'返回值'),kind:'data',layer:'parameter',parent:n.id,
+        field,fieldType,direction,event_node:n.event_node||n.id,origin:'capture-field'});
+      rawEdges.push({id:`capture:${id}`,from:direction==='in'?id:n.id,to:direction==='in'?n.id:id,type:'data',label:direction==='in'?'输入':'返回',origin:'capture-field'});
     }
-    if(sourceOpen.has(id)){
-      const binding=view.manifest.bindings[id];
-      const raw=fullSources.get(id)||binding?.snippet||'没有保存这段源码';
-      const start=fullSources.has(id)?1:binding?.line||1;
-      item.code=raw.split('\n').flatMap((s,i)=>wrapText(`${start+i}  ${s}`,80));
-      item.codeY=item.h+8;item.w=Math.max(item.w,690);item.h+=item.code.length*18+66;
-    }
-    return item;
   }
-  const roots=(view.model.graph_roots||view.model.overview.map(x=>x.node)).map(measure);
-  // A stable two-row route leaves room to unfold a local subgraph without replacing context.
-  const positions=[[0,0],[1,0],[2,0],[2,1],[1,1]],colWidths=[360,360,360],rowHeights=[0,0];
-  roots.forEach((r,i)=>{const [c,row]=positions[i]||[i,0];colWidths[c]=Math.max(colWidths[c]||0,r.w);rowHeights[row]=Math.max(rowHeights[row]||0,r.h);});
-  function place(item,x,y){item.x=x;item.y=y;boxes.push(item);byId.set(item.id,item);for(const c of item.kids)place(c,x+c.rx,y+c.ry);}
-  roots.forEach((r,i)=>{const [c,row]=positions[i]||[i,0];place(r,55+colWidths.slice(0,c).reduce((a,b)=>a+b+190,0),45+(row?rowHeights[0]+170:0));});
-  function visible(id){let n=all.get(id);while(n&&!byId.has(n.id))n=all.get(n.parent);return n?.id;}
+  for(const value of view.model.machine.values)if(!all.has('state.'+value)){
+    all.set('state.'+value,{id:'state.'+value,label:view.model.machine.labels[value],kind:'state',layer:'state',value,source:view.model.machine.source});
+  }
+  for(const n of all.values())if(n.parent){if(!children.has(n.parent))children.set(n.parent,[]);children.get(n.parent).push(n.id);}
+  const visibleIds=new Set(view.model.graph_roots||view.model.overview.map(x=>x.node));
+  // Lifecycle states remain in this canvas, connected to their business owners.
+  for(const n of all.values())if(n.kind==='state')visibleIds.add(n.id);
+  function reveal(id,seen=new Set()){
+    if(seen.has(id))return;seen.add(id);
+    if(expanded.has(id))for(const child of children.get(id)||[]){visibleIds.add(child);reveal(child,seen);}
+  }
+  for(const id of [...visibleIds])reveal(id);
+  const boxes=[...visibleIds].filter(id=>all.has(id)).map((id,i)=>{
+    const node=all.get(id),type=nodeType(node),rows=lines(node,view,events,choice,configuration);
+    return {id,node,type,rows,open:expanded.has(id),kids:children.get(id)||[],state:status(node,view,events,choice,configuration),
+      x:80+(i%5)*230,y:70+Math.floor(i/5)*180,w:190,h:type==='state'?105:135};
+  });
+  const byId=new Map(boxes.map(b=>[b.id,b]));
+  function visible(id){const seen=new Set();let n=all.get(id);while(n&&!byId.has(n.id)){if(seen.has(n.id))return null;seen.add(n.id);n=all.get(n.parent);}return n?.id;}
   const edgeMap=new Map();
-  const evById=new Map(view.events.map(e=>[e.id,e]));
-  const actual=new Set();
-  for(const e of events)for(const d of e.depends||[]){const p=evById.get(d.event);if(p&&p.attempt===e.attempt)actual.add(p.node+'>'+e.node);}
-  for(const e of view.model.edges){
-    if(e.type==='contains')continue;
+  for(const e of rawEdges){
     const from=visible(e.from),to=visible(e.to);
     if(!from||!to||from===to)continue;
-    // A hidden helper call must not look like a business or resource dependency.
-    if(e.origin==='python-ast'&&(from!==e.from||to!==e.to))continue;
-    const key=from+'>'+to;
-    const source=all.get(e.from),target=all.get(e.to),sourceEvents=nodeEvents(source,events),targetEvents=nodeEvents(target,events);
-    const sourceIds=new Set(sourceEvents.map(x=>x.id));
-    let observed=targetEvents.some(x=>(x.depends||[]).some(d=>sourceIds.has(d.event)));
-    // Do not infer a true branch from mere adjacency or another guard reference.
-    if(e.type==='flow')observed=observed&&targetEvents.length>0;
-    if(!sourceEvents.length&&!targetEvents.length)observed=false;
-    const last=sourceEvents.at(-1);
-    const field=e.field||e.label;
-    const value=last?.outputs?.[field]??last?.inputs?.[field];
-    let label=e.label+(value!==undefined?` = ${compact(value)}`:'');
+    if(['python-ast','capture-field'].includes(e.origin)&&(from!==e.from||to!==e.to))continue;
+    const source=all.get(e.from),target=all.get(e.to);
+    if(!source||!target)continue;
+    const sourceEvents=nodeEvents(source,events),targetEvents=nodeEvents(target,events),ids=new Set(sourceEvents.map(x=>x.id));
+    let observed=!['python-ast','capture-field'].includes(e.origin)&&e.type!=='contains'&&targetEvents.some(x=>(x.depends||[]).some(d=>ids.has(d.event)));
+    let label=e.type==='contains'?(target.kind==='state'?'涉及状态':'包含'):e.label;
     if(configuration&&e.type==='resource'){
-      const state=configuration.activities[e.to];observed=state!=='pending';
-      label=state==='running'?'正在占用 '+e.units+' 个名额':state==='waiting'?'名额已用完，正在等待':['succeeded','failed','rejected'].includes(state)?'检查结束，名额已归还':e.label;
+      const state=configuration.activities[e.to];observed=!!state&&state!=='pending';
+      label=state==='running'?`占用 ${e.units} 个名额`:state==='waiting'?'名额已用完，正在等待':['succeeded','failed','rejected'].includes(state)?'已归还名额':e.label;
     }
     if(configuration&&e.type==='join'){
       const state=configuration.activities[e.from];observed=['succeeded','failed','rejected'].includes(state);
-      label=state==='succeeded'?'这项检查已通过':state==='failed'?'检查出错，不能提交':state==='rejected'?'这项检查未通过':'等待这项检查结束';
+      label=state==='succeeded'?'这项检查已通过':state==='failed'?'检查出错':state==='rejected'?'检查未通过':'等待这项检查结束';
     }
-    const current=!!configuration&&['resource','join'].includes(e.type)||choice==='latest'&&view.binding_status.status==='current'&&sourceEvents.at(-1)?.basis.epoch===view.authority.basis.epoch&&sourceEvents.at(-1)?.basis.clock===view.authority.basis.clock;
-    if(edgeMap.has(key)){const found=edgeMap.get(key);found.labels.add(label);if(observed){found.current=found.observed?found.current&&current:current;found.observed=true;}}
+    const current=choice==='latest'&&view.binding_status.status==='current'&&(!sourceEvents.length||sourceEvents.at(-1)?.basis.param_version===view.authority.basis.param_version);
+    // Different relation types sharing endpoints remain separate edges.
+    const key=from+'>'+to+':'+e.type;
+    if(edgeMap.has(key)){const found=edgeMap.get(key);found.labels.add(label);found.observed ||= observed;}
     else edgeMap.set(key,{...e,from,to,labels:new Set([label]),observed,current});
   }
-  return {boxes,byId,edges:[...edgeMap.values()],events,children,all,width:Math.max(...boxes.map(b=>b.x+b.w))+65,height:Math.max(...boxes.map(b=>b.y+b.h))+65};
-}
-export function layoutMachine(view,choice,sourceOpen=new Set(),fullSources=new Map(),step='latest'){
-  const def=view.model.machine,configuration=selectedConfiguration(view,choice,step),values=def.values,boxes=[],byId=new Map();
-  const positions=view.model.machine_layout||{};
-  for(const [i,v] of values.entries()){const [x,y]=(view.model.machine_layout||positions)[v]||[i%3,Math.floor(i/3)],node={id:'state.'+v,label:def.labels[v],kind:'state',layer:'state',value:v,source:def.source};
-    const rows=lines(node,view,selectedEvents(view,choice,step),choice,configuration);
-    for(const t of def.transitions){const sources=Array.isArray(t.source)?t.source:[t.source];if(view.model.presentation.inline_machine_events?.includes(t.trigger)&&sources.some(s=>s===v||v.startsWith(s+'_')))rows.push({text:t.trigger+' → '+(t.dest||'保持状态'),role:'muted'});}
-    const b={id:node.id,node,x:60+x*540,y:50+y*310,w:340,h:90+rows.length*19,rows,state:v===(configuration?.phase||view.machine.current)?'active':'declared',kids:[]};
-    if(sourceOpen.has(b.id)){const binding=view.manifest.bindings[b.id];const raw=fullSources.get(b.id)||binding?.snippet||'';b.code=raw.split('\n').flatMap((s,i)=>wrapText(`${(fullSources.has(b.id)?1:binding?.line||1)+i}  ${s}`,80));b.codeY=b.h+8;b.w=690;b.h+=70+b.code.length*18;}
-    boxes.push(b);byId.set(b.id,b);}
-  const widths=[340,340,340],heights=[];
-  boxes.forEach((b,i)=>{const [c,r]=positions[b.node.value]||[i%3,Math.floor(i/3)];widths[c]=Math.max(widths[c],b.w);heights[r]=Math.max(heights[r]||0,b.h);});
-  boxes.forEach((b,i)=>{const [c,r]=positions[b.node.value]||[i%3,Math.floor(i/3)];b.x=60+widths.slice(0,c).reduce((a,w)=>a+w+200,0);b.y=50+heights.slice(0,r).reduce((a,h)=>a+h+140,0);});
-  const edges=[];
-  for(const t of def.transitions){
+  const attempt=currentAttempt(view,choice);
+  for(const t of view.model.machine.transitions){
     const sources=Array.isArray(t.source)?t.source:[t.source];
-    for(const s of sources)for(const v of values.filter(v=>v===s||v.startsWith(s+'_'))){
-      const to=t.dest||v,guard=[...(Array.isArray(t.conditions)?t.conditions:t.conditions?[t.conditions]:[]),...(t.unless?['!'+t.unless]:[])].join(' && ');
-      const attempt=currentAttempt(view,choice);
-      const seen=view.machine.journal.some(j=>j.event===t.trigger&&j.source===v&&j.target===to&&j.attempt===attempt);
-      if(view.model.presentation.inline_machine_events?.includes(t.trigger)&&!seen)continue;
-      edges.push({id:t.trigger+':'+v,from:'state.'+v,to:'state.'+to,type:'transition',labels:new Set([(def.event_labels?.[t.trigger]||t.trigger)+(guard?'（本次检查全部通过）':'')]),observed:seen,current:choice==='latest',event:t.trigger});
+    for(const source of view.model.machine.values.filter(v=>sources.some(s=>s===v||v.startsWith(s+'_')))){
+      const target=t.dest||source,from='state.'+source,to='state.'+target;
+      if(!byId.has(from)||!byId.has(to))continue;
+      // Activity-only frames do not attest lifecycle transitions at that time.
+      const observed=step==='latest'&&(view.machine.journal||[]).some(j=>j.event===t.trigger&&j.source===source&&j.target===target&&j.attempt===attempt);
+      const id='transition:'+t.trigger+':'+source;
+      edgeMap.set(id,{id,from,to,type:'transition',event:t.trigger,labels:new Set([view.model.machine.event_labels?.[t.trigger]||t.trigger]),observed,current:choice==='latest'});
     }
   }
-  return {boxes,byId,edges,events:selectedEvents(view,choice),children:new Map(),width:Math.max(...boxes.map(b=>b.x+b.w))+50,height:Math.max(...boxes.map(b=>b.y+b.h))+50};
+  const graph={boxes,byId,edges:[...edgeMap.values()],events,configuration,children,all};
+  return graphBounds(graph);
+}
+export function graphBounds(graph){
+  const boxes=graph.boxes;
+  graph.minX=boxes.length?Math.min(...boxes.map(b=>b.x))-55:0;
+  graph.minY=boxes.length?Math.min(...boxes.map(b=>b.y))-55:0;
+  graph.width=(boxes.length?Math.max(...boxes.map(b=>b.x+b.w)):100)-graph.minX+55;
+  graph.height=(boxes.length?Math.max(...boxes.map(b=>b.y+b.h)):100)-graph.minY+55;
+  return graph;
 }

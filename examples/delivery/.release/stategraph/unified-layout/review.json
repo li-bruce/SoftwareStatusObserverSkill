@@ -1,0 +1,23 @@
+{
+  "candidate_id": "c13da62d0fbf90ba137d24fd683483eb2f6846d25ef4b43b2435aefc70a80196",
+  "decisions": {
+    "business": {
+      "action": "unchanged",
+      "reason": "All app source hashes match the accepted baseline. R1-R8, alternative authorization, version binding, transactional recheck and committed effects are unchanged. Layout preferences live only in browser storage and do not invoke application commands."
+    },
+    "state_machine": {
+      "action": "unchanged",
+      "reason": "The real Phase/ActivityExecution declarations and run history are unchanged. The unified projection adds their existing state IDs and declared transitions to the same graph as business/functions. Only matching runtime journal records mark transitions observed; activity-only historical frames leave lifecycle state unknown."
+    },
+    "abstraction": {
+      "action": "updated",
+      "reason": "Replaced the two mutually exclusive views and nested text cards with one typed node-link projection. Preserved containment, data, guards, resource, join and transition edge meanings. Capture fields become derived typed nodes using existing allowlisted event fields. Added local positions, exact pins, expansion/camera persistence, incremental insertion and undo. ELK layered/stress layout runs locally in a worker; stale async layout results cannot replace a newer interaction. Browser drag, reload and exact pin behavior were exercised; automated tests run real ELK and check history boundaries. Independent browser use passed drag/reload, pin-preserving layouts, undo, field expansion, source lookup and historical wait review. Its ELK fallback warning exposed the bundled entry behavior: the viewer now explicitly creates a native browser Worker and passes its factory; browser auto-layout succeeds on that path. Failed layouts keep both coordinates and a persistent failure message."
+    },
+    "probes": {
+      "action": "unchanged",
+      "reason": "No probe payloads or delivery adapters changed. API adds a stable layout namespace and serves local layout assets. Graph/source identities and values continue to come from the same model, manifest and real events; static references are not promoted to observed calls."
+    }
+  },
+  "excluded_symbols": {},
+  "requirement_changes": {}
+}

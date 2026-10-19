@@ -1,5 +1,5 @@
 {
-  "id": "5ea8d4a272c07daac5dea7391d962a78acbf4004643301ed0208d3262b7de9b0",
+  "id": "f9149136194f7a7100389baea6d049d8d076c071a09705db387f929ba11d925a",
   "files": {
     "LICENSE": "41f4bfe9aa8790612dd555d71a9e95fbf12c9f0e84bc6ce232a0aae3af3e2ba3",
     "README_CORE.md": "e549677de78b5845ef3b0c808d3e59ec30c142289806625edae88676b6888da5",
@@ -22,12 +22,12 @@
     "integrations/control.html": "d7c2ef6e4e0399d34d45581513717d12a325b670c77b6507eaad9b3be09a7a94",
     "intent.json": "1c3e52bed04dfa1bd0fea219dc1191e609e511604199df8a2902082350c4c942",
     "main.py": "3c840ec469108183cb8c9bdd4482ebde8e89c70a1f2f0887ff0b6d0de39307cb",
-    "observer_generated/behavior.json": "9b122305295e127827dce999009d2fadcc31dc7beaa1947e9c80cb1e916ae4ca",
+    "observer_generated/behavior.json": "5077bc05dae0708bbfbc4a588b5b78f962082e42679d4c397cdfb7060eaf8617",
     "observer_generated/runtime/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "observer_generated/runtime/architecture_guard.py": "ff82147f8ed61e7d7473bbc59a3cedacf546117c71e397d0cf032a83270a852a",
-    "observer_generated/runtime/behavior_model.py": "8d8db0eebe2ba43711118fdddcd13147c1031cdcad3ed2d717f65a29af81bff1",
+    "observer_generated/runtime/behavior_model.py": "37af8d5926a29eb525773048f3e5e7190e4b7e2239a0a8f858108593924c16b4",
     "observer_generated/runtime/change_sync.py": "e6e2e859bbd8557b8faf17a3bf7607ec166e419750e698beb79dfff74ddc44c9",
-    "observer_generated/runtime/code_structure.py": "c770e8008e5048d68400f4a62b9e3c81401118879cdf118c50a56b25d8259f3b",
+    "observer_generated/runtime/code_structure.py": "01dad9cda1d248150301598fea1186e698c2f3ca62026f5735befbcb74c9c681",
     "observer_generated/runtime/execution_contract.py": "9502b2d348bb8ee00c05288ca3d064d151365292fdef597c156c178871635b78",
     "observer_generated/runtime/model_tool.py": "47b80a2a5d376ef81f34cd91cb050ce58714c3f85ed1212a842c2081bca0d291",
     "observer_generated/runtime/probe.py": "6e12b7cb0d89278b9562435e20eefa339993a1114720dd0f8dac15626d011807",
@@ -42,7 +42,7 @@
     "observer_generated/static/pixi.min.js": "06d9ef9823e743518793083c296d801e752db128cb1f519fbabe37e1259567ea",
     "observer_generated/static/viewer.css": "91c1dc25c63e3af2a8b467bc28239b673db077df191409f8c85e55f91f004938",
     "observer_generated/static/viewer.js": "012cf1fcb4c2c46c65a6452d6b9c1f77bb5f4ef4d04a37303b11f442911a70b6",
-    "ownership.json": "5255d89aee4f4a2dd2264ed34707a99d4f84e9f1423ec8be597edf2d673ee841",
+    "ownership.json": "9ae6194c5e124d13fad7805bc9bf98430924a5eaa917efad7a7933f80b4fe936",
     "package.json": "8a67146171505e033e8a5aaaab4346401681db80f8abdaa9ecd4aa643ceca942",
     "requirements.txt": "6ea77a899e6267ddbcba1051cccb2c7a26af68f5551983a2cd681fa71e1e64a7",
     "sync.json": "52d786118baafe7d4f16a068376dd1ad27eab87c724b9f657d96ceb91b805588",
@@ -57,8 +57,8 @@
   },
   "tools": {
     "change_sync.py": "e6e2e859bbd8557b8faf17a3bf7607ec166e419750e698beb79dfff74ddc44c9",
-    "code_structure.py": "c770e8008e5048d68400f4a62b9e3c81401118879cdf118c50a56b25d8259f3b",
-    "behavior_model.py": "8d8db0eebe2ba43711118fdddcd13147c1031cdcad3ed2d717f65a29af81bff1",
+    "code_structure.py": "01dad9cda1d248150301598fea1186e698c2f3ca62026f5735befbcb74c9c681",
+    "behavior_model.py": "37af8d5926a29eb525773048f3e5e7190e4b7e2239a0a8f858108593924c16b4",
     "statechart_contract.py": "513689fece1199c6d07954028c1609c5560dcbb80f444be94ac67c0ef0882a43",
     "worknet_contract.py": "19a70d82022f2c2af675f64e7d955b13f5f543949b40c7813b657cd96b0e8193",
     "execution_contract.py": "9502b2d348bb8ee00c05288ca3d064d151365292fdef597c156c178871635b78",
@@ -182,7 +182,7 @@
         "parent": "flow.input",
         "code_evidence": {
           "symbol": "app/service.py::Delivery.prepare",
-          "ast_hash": "3fc20305477e3a0035b7dda566114be5489c609f5f5e6b3ebfce2b0f7cc6462f",
+          "ast_hash": "29735bb6943957e832292b262d628627c215d9105d6f07541d8f24ee4e3b08fd",
           "origin": "python-ast"
         }
       },
@@ -205,7 +205,7 @@
         "parent": "flow.input",
         "code_evidence": {
           "symbol": "app/service.py::Delivery.execute",
-          "ast_hash": "15bf228cd2e9d67fca9485708137386f0bfb9e9e548fa89024f3679da2187bcf",
+          "ast_hash": "3d956091fe42826f56612fd7c94b52d8700ff409675512edbbd643607e932e0d",
           "origin": "python-ast"
         }
       },
@@ -232,7 +232,7 @@
         "predicate": "engineer AND ANY eligible grant",
         "code_evidence": {
           "symbol": "app/service.py::authorized",
-          "ast_hash": "854f05e1b400664dd2a92e59a3e47fa6a15ef89196f1e97d1dcc857cabb58f7a",
+          "ast_hash": "0985a1afb76ad27d53b8f4955c0dc507673d26c17afc342c17cb62a4ba71ac6b",
           "origin": "python-ast"
         }
       },
@@ -276,7 +276,7 @@
         "execution_role": "activity",
         "code_evidence": {
           "symbol": "app/checks.py::checksum",
-          "ast_hash": "b6f0dc0ef292c9447fc66d0c0aeb3dafe9d7c58df9489bcc95b00ae634a3fff9",
+          "ast_hash": "0db7844048b44cf26d3fef68e2ca06031988cea67496cadf12afe9eebd0f6a53",
           "origin": "python-ast"
         }
       },
@@ -303,7 +303,7 @@
         "execution_role": "activity",
         "code_evidence": {
           "symbol": "app/checks.py::privacy_check",
-          "ast_hash": "682bac723e31b4b5d23b16fc216048b138ced02e4923ac1223da7040170b03b3",
+          "ast_hash": "3d46dc489ea89566c24915c121af8400e48202422149692bc0439465e8670793",
           "origin": "python-ast"
         }
       },
@@ -331,7 +331,7 @@
         "predicate": "ALL checks passed",
         "code_evidence": {
           "symbol": "app/workflow.py::ActivityExecution.join",
-          "ast_hash": "7e8538e991500971122ddad934e6a28c68f4be4e5441d12e523c511e144de817",
+          "ast_hash": "d5e4d5b2326c8438eb397d383e846b04741143aa19714e29493b634dfb94e7f5",
           "origin": "python-ast"
         }
       },
@@ -352,7 +352,7 @@
         "parent": "workers",
         "code_evidence": {
           "symbol": "app/workflow.py::ActivityExecution.__init__",
-          "ast_hash": "4240cdef93893ce8c368a780e542d311bbdb188a89fca3f0f0de12399e189ba8",
+          "ast_hash": "88b2618f0b94a5fecf7d893ebe0ba8f2bf65a18a125b5cab989909033fe2b758",
           "origin": "python-ast"
         }
       },
@@ -373,7 +373,7 @@
         "parent": "workers",
         "code_evidence": {
           "symbol": "app/workflow.py::ActivityExecution.finish",
-          "ast_hash": "ef694bd37a0e6b775245886160c6a711e678df0d80c8a3fa1499668bce39501d",
+          "ast_hash": "4c617e9c91d0d227eea7796d1bf55a48360be76873e89e2853bf45335e328fe3",
           "origin": "python-ast"
         }
       },
@@ -394,7 +394,7 @@
         "parent": "workers",
         "code_evidence": {
           "symbol": "app/workflow.py::ActivityExecution.invariant",
-          "ast_hash": "9e10f3b1c6fddad31ff4c3047b2a73d95ac2fa048face1b34931136f6456946e",
+          "ast_hash": "62dab588548a16b91f90889477cf1add5df35c48d54aa57c115e7f71356dbbff",
           "origin": "python-ast"
         }
       },
@@ -415,7 +415,7 @@
         "parent": "workers",
         "code_evidence": {
           "symbol": "app/workflow.py::ActivityExecution.snapshot",
-          "ast_hash": "e9012e1b9e21b16a17f9868162f84069a6e66cfc7e5dfd0c59258fa3cacacb74",
+          "ast_hash": "2374e0bb677c29fa8a8dfded574d3d22759f1d6d3f6d5a325e09168bd2aa8d25",
           "origin": "python-ast"
         }
       },
@@ -436,7 +436,7 @@
         "parent": "workers",
         "code_evidence": {
           "symbol": "app/service.py::Delivery.execution_progress",
-          "ast_hash": "81a7c44e1f9d4ae0bbe977449f844f86ffeee10937248e6a84e611ddc6f19df0",
+          "ast_hash": "2db2dbf27111af1cb1268901c7429c8484b00ebfbdbfe05caab75cfffb9c9806",
           "origin": "python-ast"
         }
       },
@@ -457,7 +457,7 @@
         "parent": "join",
         "code_evidence": {
           "symbol": "app/workflow.py::ActivityExecution.abort",
-          "ast_hash": "11836ec4a87db23bd257761dc951f8f94319060a5cdbe8c46a1ec11d5df11308",
+          "ast_hash": "3d59646698d2c8e375c49e6feae8cc9761e9651541f8ddfd3cb24115d86980c0",
           "origin": "python-ast"
         }
       },
@@ -478,7 +478,7 @@
         "parent": "execution.progress",
         "code_evidence": {
           "symbol": "app/store.py::Store.execution",
-          "ast_hash": "2d178fc49e2fc7abd1510ff187467fb237066613ca21c42278fc0b7b35e9f3c9",
+          "ast_hash": "0e2e11dc198b531ea5ebdf68a384988b8345582f35ef7e5a7b58d617b12e39c3",
           "origin": "python-ast"
         }
       },
@@ -499,7 +499,7 @@
         "parent": "execution.progress",
         "code_evidence": {
           "symbol": "app/store.py::Store.put_execution",
-          "ast_hash": "2ed7618a21fc06b933bcf09c21bcc5a465941c9b76e0d070c24d6e7fdf47a4a5",
+          "ast_hash": "c362a0b729bb3ccdc02f6307f9691a5fd9488bdde2ba80c0c6144204320b4b5b",
           "origin": "python-ast"
         }
       },
@@ -520,7 +520,7 @@
         "parent": "execution.progress",
         "code_evidence": {
           "symbol": "app/store.py::Store.update_execution",
-          "ast_hash": "9367e04f361760e42a175f9aea171eaad0359de5c8c0042d804cecb6e4bda747",
+          "ast_hash": "43cd6ad907a4a408528edff3d9f2a75973a44c3e6727d1787c1e86e15a272c12",
           "origin": "python-ast"
         }
       },
@@ -541,7 +541,7 @@
         "parent": "execution.progress",
         "code_evidence": {
           "symbol": "app/store.py::Store.snapshot",
-          "ast_hash": "2cdf65666d3f0e1ff0bb154979560e4e62ebf07ef7f1d72308aa4fff983135f7",
+          "ast_hash": "c343a95d367952111fc9242f79ee9315a78325d5141de1c9e2f6917ea63e9afb",
           "origin": "python-ast"
         }
       },
@@ -565,7 +565,7 @@
         "parent": "flow.commit",
         "code_evidence": {
           "symbol": "app/service.py::Delivery.commit",
-          "ast_hash": "11ab4e77a077f2a929a0d7a652c204189849389759f1743c5139e7537e9e8c66",
+          "ast_hash": "70a2a3acecbe6d4ecb9fad2ea9c7ee30aba245f824c69c6beddd7dd464a44524",
           "origin": "python-ast"
         }
       },
@@ -589,7 +589,7 @@
         "parent": "flow.commit",
         "code_evidence": {
           "symbol": "app/service.py::Delivery.commit",
-          "ast_hash": "11ab4e77a077f2a929a0d7a652c204189849389759f1743c5139e7537e9e8c66",
+          "ast_hash": "70a2a3acecbe6d4ecb9fad2ea9c7ee30aba245f824c69c6beddd7dd464a44524",
           "origin": "python-ast"
         }
       },
@@ -612,7 +612,7 @@
         "parent": "flow.wait",
         "code_evidence": {
           "symbol": "app/service.py::Delivery.prepare",
-          "ast_hash": "3fc20305477e3a0035b7dda566114be5489c609f5f5e6b3ebfce2b0f7cc6462f",
+          "ast_hash": "29735bb6943957e832292b262d628627c215d9105d6f07541d8f24ee4e3b08fd",
           "origin": "python-ast"
         }
       },
@@ -636,7 +636,7 @@
         "parent": "flow.wait",
         "code_evidence": {
           "symbol": "app/service.py::Delivery.command",
-          "ast_hash": "314df51d1cc88c53691a62024e89499d39be6c9f23701889ddd0d0c840e0d5cd",
+          "ast_hash": "b201aa458a8248779eba965a097a31f13074d42d12851006a3f605aa02dbebc2",
           "origin": "python-ast"
         }
       },
@@ -778,7 +778,7 @@
         "signature": "job: dict",
         "code_evidence": {
           "symbol": "app/service.py::authorized",
-          "ast_hash": "854f05e1b400664dd2a92e59a3e47fa6a15ef89196f1e97d1dcc857cabb58f7a",
+          "ast_hash": "0985a1afb76ad27d53b8f4955c0dc507673d26c17afc342c17cb62a4ba71ac6b",
           "parameters": [
             {
               "name": "job",
@@ -808,7 +808,7 @@
         "signature": "self, job: dict, event: str",
         "code_evidence": {
           "symbol": "app/service.py::Delivery.transition",
-          "ast_hash": "9054ebf37455571ae1312ebd6dbc731029f06eccb8d9f90732e0522f7923b362",
+          "ast_hash": "73e59361a98184ce87ed88cda825d6df63eef05293daf341693441bb9b10b0e4",
           "parameters": [
             {
               "name": "self",
@@ -846,7 +846,7 @@
         "signature": "execution: dict | None, attempt: str | None, param_version: int | None",
         "code_evidence": {
           "symbol": "app/workflow.py::completed",
-          "ast_hash": "bdc848b7332f2c89425872f7429678a739ba6096fbc9898e2f76186739b595ca",
+          "ast_hash": "b4ce32871f137dca4f51215d5c7d91fc90335a7d911faeb88ee68f8b9e1b19a6",
           "parameters": [
             {
               "name": "execution",
@@ -884,7 +884,7 @@
         "signature": "self, expected_version: int | None=None",
         "code_evidence": {
           "symbol": "app/service.py::Delivery.commit",
-          "ast_hash": "11ab4e77a077f2a929a0d7a652c204189849389759f1743c5139e7537e9e8c66",
+          "ast_hash": "70a2a3acecbe6d4ecb9fad2ea9c7ee30aba245f824c69c6beddd7dd464a44524",
           "parameters": [
             {
               "name": "self",
@@ -918,7 +918,7 @@
         "signature": "grant: dict, job: dict",
         "code_evidence": {
           "symbol": "app/service.py::eligible_grant",
-          "ast_hash": "aa1ee3c087d5821603ac6713d747cb1d6a7f8e24f528dd21e2463a92a2d7247d",
+          "ast_hash": "f998d9e2d0eda13561119aa1de58cfffb2ab2e34c2bec6598903673f204841a8",
           "parameters": [
             {
               "name": "grant",
@@ -952,7 +952,7 @@
         "signature": "self",
         "code_evidence": {
           "symbol": "app/workflow.py::ActivityExecution.body",
-          "ast_hash": "1015f3990a8dc8981f8e14a6953b45eec1b71a41326b541946b99a3cb401e736",
+          "ast_hash": "4ea2453124460fcda3f961993be003b7a293d357228b64c798a09bfc1f6eda56",
           "parameters": [
             {
               "name": "self",
@@ -982,7 +982,7 @@
         "signature": "self, event, activity, before",
         "code_evidence": {
           "symbol": "app/workflow.py::ActivityExecution.record",
-          "ast_hash": "4dd064b6c53bc5758f42c042724ed44e0dc5b03e16a206fe68da3c333d63f281",
+          "ast_hash": "055bce5994421d89362990a7c18fd93f5fa28f39134771002a011f4dfaaf75a0",
           "parameters": [
             {
               "name": "self",
@@ -1024,7 +1024,7 @@
         "signature": "self",
         "code_evidence": {
           "symbol": "app/store.py::Store.get",
-          "ast_hash": "212825762a191ae266e4d7aa0c65ff77f8e7bf7a1527d192465b063d6d006554",
+          "ast_hash": "f71b625451d56df8880a6c9f482a68cd042cff4331b53f89a6b7f8827522187f",
           "parameters": [
             {
               "name": "self",
@@ -1054,7 +1054,7 @@
         "signature": "job: dict",
         "code_evidence": {
           "symbol": "app/service.py::authorized",
-          "ast_hash": "854f05e1b400664dd2a92e59a3e47fa6a15ef89196f1e97d1dcc857cabb58f7a",
+          "ast_hash": "0985a1afb76ad27d53b8f4955c0dc507673d26c17afc342c17cb62a4ba71ac6b",
           "parameters": [
             {
               "name": "job",
@@ -1084,7 +1084,7 @@
         "signature": "self, job: dict, event: str",
         "code_evidence": {
           "symbol": "app/service.py::Delivery.transition",
-          "ast_hash": "9054ebf37455571ae1312ebd6dbc731029f06eccb8d9f90732e0522f7923b362",
+          "ast_hash": "73e59361a98184ce87ed88cda825d6df63eef05293daf341693441bb9b10b0e4",
           "parameters": [
             {
               "name": "self",
@@ -1122,7 +1122,7 @@
         "signature": "job: dict",
         "code_evidence": {
           "symbol": "app/service.py::authorized",
-          "ast_hash": "854f05e1b400664dd2a92e59a3e47fa6a15ef89196f1e97d1dcc857cabb58f7a",
+          "ast_hash": "0985a1afb76ad27d53b8f4955c0dc507673d26c17afc342c17cb62a4ba71ac6b",
           "parameters": [
             {
               "name": "job",
@@ -1152,7 +1152,7 @@
         "signature": "self, job: dict, event: str",
         "code_evidence": {
           "symbol": "app/service.py::Delivery.transition",
-          "ast_hash": "9054ebf37455571ae1312ebd6dbc731029f06eccb8d9f90732e0522f7923b362",
+          "ast_hash": "73e59361a98184ce87ed88cda825d6df63eef05293daf341693441bb9b10b0e4",
           "parameters": [
             {
               "name": "self",
@@ -1190,7 +1190,7 @@
         "signature": "execution: dict | None, attempt: str | None, param_version: int | None",
         "code_evidence": {
           "symbol": "app/workflow.py::completed",
-          "ast_hash": "bdc848b7332f2c89425872f7429678a739ba6096fbc9898e2f76186739b595ca",
+          "ast_hash": "b4ce32871f137dca4f51215d5c7d91fc90335a7d911faeb88ee68f8b9e1b19a6",
           "parameters": [
             {
               "name": "execution",
@@ -2961,7 +2961,7 @@
     "units": {
       "app/__init__.py": {
         "file_hash": "a829ebb4042211c3a39bf40646855698375b065069bbbd2aa61daba1d8e6a51c",
-        "extractor_hash": "c770e8008e5048d68400f4a62b9e3c81401118879cdf118c50a56b25d8259f3b",
+        "extractor_hash": "01dad9cda1d248150301598fea1186e698c2f3ca62026f5735befbcb74c9c681",
         "imports": {},
         "symbols": {},
         "declarations": [],
@@ -2969,7 +2969,7 @@
       },
       "app/checks.py": {
         "file_hash": "c9eb8458cc5020c52f31b9c8a65bb772e401af1d03b8771315d07d913158ea52",
-        "extractor_hash": "c770e8008e5048d68400f4a62b9e3c81401118879cdf118c50a56b25d8259f3b",
+        "extractor_hash": "01dad9cda1d248150301598fea1186e698c2f3ca62026f5735befbcb74c9c681",
         "imports": {
           "hashlib": "hashlib",
           "ThreadPoolExecutor": "concurrent.futures.ThreadPoolExecutor",
@@ -2984,7 +2984,7 @@
             "class": null,
             "line": 7,
             "end_line": 8,
-            "ast_hash": "b6f0dc0ef292c9447fc66d0c0aeb3dafe9d7c58df9489bcc95b00ae634a3fff9",
+            "ast_hash": "0db7844048b44cf26d3fef68e2ca06031988cea67496cadf12afe9eebd0f6a53",
             "signature": "content: str",
             "parameters": [
               {
@@ -3034,7 +3034,7 @@
             "class": null,
             "line": 11,
             "end_line": 12,
-            "ast_hash": "682bac723e31b4b5d23b16fc216048b138ced02e4923ac1223da7040170b03b3",
+            "ast_hash": "3d46dc489ea89566c24915c121af8400e48202422149692bc0439465e8670793",
             "signature": "content: str",
             "parameters": [
               {
@@ -3063,7 +3063,7 @@
             "class": null,
             "line": 15,
             "end_line": 37,
-            "ast_hash": "63f501b39d1408f70c50bc14233e706296765fb5d47406cc03b4973f48a686c4",
+            "ast_hash": "37cdcac0806a30726cdfcd18fe66f82ea4064a2ff7d58683651e60151e6b6206",
             "signature": "content: str, *, capacity: int=2, execution=None, progress=None, task_hook=None",
             "parameters": [
               {
@@ -3219,7 +3219,7 @@
             "class": null,
             "line": 21,
             "end_line": 30,
-            "ast_hash": "3ad02cd1e0e3b3635469374d757b15c524bb100f6dc192d233f60a39ae1e6834",
+            "ast_hash": "a176796875a655a4a3e6a7da7e30fc11067fb34154ab5d6d3ca2a848790c24aa",
             "signature": "activity",
             "parameters": [
               {
@@ -3314,7 +3314,7 @@
       },
       "app/ports.py": {
         "file_hash": "aa21b0129c8999d36d924964fef37e975bc909cb95e56dfae51f78522e84ee66",
-        "extractor_hash": "c770e8008e5048d68400f4a62b9e3c81401118879cdf118c50a56b25d8259f3b",
+        "extractor_hash": "01dad9cda1d248150301598fea1186e698c2f3ca62026f5735befbcb74c9c681",
         "imports": {
           "Callable": "typing.Callable"
         },
@@ -3327,7 +3327,7 @@
             "class": null,
             "line": 5,
             "end_line": 16,
-            "ast_hash": "048bb04606834bd13ac7c6258df7903cb22197ba751971bdddf663d622685884",
+            "ast_hash": "21c831f0cb0a939845c9fc1fdcc0d0b9f6d6c041e6dad3c012ea34fe679097eb",
             "signature": "Events",
             "parameters": [],
             "returns": null,
@@ -3343,7 +3343,7 @@
             "class": "Events",
             "line": 6,
             "end_line": 8,
-            "ast_hash": "a16b5d6e9cd10afb07c694266b51bba8ab49f94245ab90e3e36d45ba5610d24d",
+            "ast_hash": "2abe880674b14b80c9acdd534b640cb580e1b2637d55d26c5dc6aa322ae14bdf",
             "signature": "self, callback: Callable | None=None",
             "parameters": [
               {
@@ -3372,7 +3372,7 @@
             "class": "Events",
             "line": 10,
             "end_line": 16,
-            "ast_hash": "f88d4f43ae59b3702e5884d68cc860230c031cdcde06fdd1c2e80b6b5b5daa14",
+            "ast_hash": "7c4b52b9136ffdc371409ad6f7591c44a09f6f237124f2216b7db10defb1c988",
             "signature": "self, node: str, phase: str, payload: Callable[[], dict]",
             "parameters": [
               {
@@ -3437,7 +3437,7 @@
       },
       "app/service.py": {
         "file_hash": "50205c0e3744ab4e1aea0a3cc350245621b4355b7c3375a16a4f3f34890c5437",
-        "extractor_hash": "c770e8008e5048d68400f4a62b9e3c81401118879cdf118c50a56b25d8259f3b",
+        "extractor_hash": "01dad9cda1d248150301598fea1186e698c2f3ca62026f5735befbcb74c9c681",
         "imports": {
           "run_checks": "app.checks.run_checks",
           "Events": "app.ports.Events",
@@ -3456,7 +3456,7 @@
             "class": null,
             "line": 9,
             "end_line": 12,
-            "ast_hash": "aa1ee3c087d5821603ac6713d747cb1d6a7f8e24f528dd21e2463a92a2d7247d",
+            "ast_hash": "f998d9e2d0eda13561119aa1de58cfffb2ab2e34c2bec6598903673f204841a8",
             "signature": "grant: dict, job: dict",
             "parameters": [
               {
@@ -3502,7 +3502,7 @@
             "class": null,
             "line": 15,
             "end_line": 16,
-            "ast_hash": "854f05e1b400664dd2a92e59a3e47fa6a15ef89196f1e97d1dcc857cabb58f7a",
+            "ast_hash": "0985a1afb76ad27d53b8f4955c0dc507673d26c17afc342c17cb62a4ba71ac6b",
             "signature": "job: dict",
             "parameters": [
               {
@@ -3552,7 +3552,7 @@
             "class": null,
             "line": 19,
             "end_line": 21,
-            "ast_hash": "18110a21e8bf349f0b4e23f3e6eca0a05eadc5792200915fada831949f274963",
+            "ast_hash": "55fdba23cecbd2b7a24bdf99c1de6b05e8325cdf76d31057e8c61f4dfc2101f6",
             "signature": "job: dict, inputs=None, outputs=None, uses=()",
             "parameters": [
               {
@@ -3602,7 +3602,7 @@
             "class": null,
             "line": 24,
             "end_line": 170,
-            "ast_hash": "ddfe149bff1179b48e61554882d1f442b0dab8f8e4834b7c844bf4bfbfa7ddcb",
+            "ast_hash": "73d4fd6758b5d886cb5678cf0b8d4a3ad5f168e14da7eefd035ee7bdcdfea554",
             "signature": "Delivery",
             "parameters": [],
             "returns": null,
@@ -3618,7 +3618,7 @@
             "class": "Delivery",
             "line": 25,
             "end_line": 26,
-            "ast_hash": "5a3c58c8635ae50b214bee97f98ce35bc20a105aed6bdfa1ee39f2207cb1e685",
+            "ast_hash": "4d52740eac104bd6760d7c90621aba6abd5b4269f5582e4cc2c95a58a51ec110",
             "signature": "self, store: Store, events: Events | None=None, checker=run_checks",
             "parameters": [
               {
@@ -3665,7 +3665,7 @@
             "class": "Delivery",
             "line": 28,
             "end_line": 33,
-            "ast_hash": "9054ebf37455571ae1312ebd6dbc731029f06eccb8d9f90732e0522f7923b362",
+            "ast_hash": "73e59361a98184ce87ed88cda825d6df63eef05293daf341693441bb9b10b0e4",
             "signature": "self, job: dict, event: str",
             "parameters": [
               {
@@ -3754,7 +3754,7 @@
             "class": "Delivery",
             "line": 35,
             "end_line": 74,
-            "ast_hash": "314df51d1cc88c53691a62024e89499d39be6c9f23701889ddd0d0c840e0d5cd",
+            "ast_hash": "b201aa458a8248779eba965a097a31f13074d42d12851006a3f605aa02dbebc2",
             "signature": "self, action: str, **values",
             "parameters": [
               {
@@ -4229,7 +4229,7 @@
             "class": "Delivery",
             "line": 76,
             "end_line": 131,
-            "ast_hash": "3fc20305477e3a0035b7dda566114be5489c609f5f5e6b3ebfce2b0f7cc6462f",
+            "ast_hash": "29735bb6943957e832292b262d628627c215d9105d6f07541d8f24ee4e3b08fd",
             "signature": "self, expected_version: int | None=None",
             "parameters": [
               {
@@ -4784,7 +4784,7 @@
             "class": "Delivery",
             "line": 133,
             "end_line": 146,
-            "ast_hash": "81a7c44e1f9d4ae0bbe977449f844f86ffeee10937248e6a84e611ddc6f19df0",
+            "ast_hash": "2db2dbf27111af1cb1268901c7429c8484b00ebfbdbfe05caab75cfffb9c9806",
             "signature": "self, job: dict, event: str, state: dict",
             "parameters": [
               {
@@ -4921,7 +4921,7 @@
             "class": "Delivery",
             "line": 148,
             "end_line": 165,
-            "ast_hash": "11ab4e77a077f2a929a0d7a652c204189849389759f1743c5139e7537e9e8c66",
+            "ast_hash": "70a2a3acecbe6d4ecb9fad2ea9c7ee30aba245f824c69c6beddd7dd464a44524",
             "signature": "self, expected_version: int | None=None",
             "parameters": [
               {
@@ -5127,7 +5127,7 @@
             "class": "Delivery",
             "line": 167,
             "end_line": 170,
-            "ast_hash": "15bf228cd2e9d67fca9485708137386f0bfb9e9e548fa89024f3679da2187bcf",
+            "ast_hash": "3d956091fe42826f56612fd7c94b52d8700ff409675512edbbd643607e932e0d",
             "signature": "self, expected_version: int | None=None",
             "parameters": [
               {
@@ -5186,7 +5186,7 @@
       },
       "app/store.py": {
         "file_hash": "3a110acd78ddad46d964f3ae7698e7bbfb98b82a6570b8fa1925cbea08261347",
-        "extractor_hash": "c770e8008e5048d68400f4a62b9e3c81401118879cdf118c50a56b25d8259f3b",
+        "extractor_hash": "01dad9cda1d248150301598fea1186e698c2f3ca62026f5735befbcb74c9c681",
         "imports": {
           "json": "json",
           "sqlite3": "sqlite3",
@@ -5202,7 +5202,7 @@
             "class": null,
             "line": 8,
             "end_line": 77,
-            "ast_hash": "c89f5f8a5f3e2b031e315644d66d356a741cc71772c19d670bf6812c15d67b94",
+            "ast_hash": "205bc3519132c992b1cf9a0d7173fc93f967f0afd6a104c6136f54a14d55c16a",
             "signature": "Store",
             "parameters": [],
             "returns": null,
@@ -5218,7 +5218,7 @@
             "class": "Store",
             "line": 9,
             "end_line": 36,
-            "ast_hash": "e532198f23ca9415a835086f90c583376656430b4d77d9579d28237e1654b1fd",
+            "ast_hash": "0ec83afdf83af4fdcda7b8ef35eaca2e66e2acabc0f11370da90dbed53e6504e",
             "signature": "self, path: str=':memory:'",
             "parameters": [
               {
@@ -5471,7 +5471,7 @@
             "class": "Store",
             "line": 39,
             "end_line": 47,
-            "ast_hash": "75665cba400ea6356d7bfaf4086e1c6116a22e41bba4d6e758a095bb88aaa01c",
+            "ast_hash": "27708a2d403a1ce0fdc2b3289956d5660c8d8caac13b32356d41450e0323abdb",
             "signature": "self",
             "parameters": [
               {
@@ -5523,7 +5523,7 @@
             "class": "Store",
             "line": 49,
             "end_line": 50,
-            "ast_hash": "212825762a191ae266e4d7aa0c65ff77f8e7bf7a1527d192465b063d6d006554",
+            "ast_hash": "f71b625451d56df8880a6c9f482a68cd042cff4331b53f89a6b7f8827522187f",
             "signature": "self",
             "parameters": [
               {
@@ -5573,7 +5573,7 @@
             "class": "Store",
             "line": 52,
             "end_line": 53,
-            "ast_hash": "e0275ed568f1a8478d6d36912f77800c4aff07295849a767ffaa520eca006620",
+            "ast_hash": "e61ecc44c4878ed3e2af256185ea2a26ae767384ed04d83548caf18fc6543e35",
             "signature": "self, job: dict",
             "parameters": [
               {
@@ -5622,7 +5622,7 @@
             "class": "Store",
             "line": 55,
             "end_line": 57,
-            "ast_hash": "2d178fc49e2fc7abd1510ff187467fb237066613ca21c42278fc0b7b35e9f3c9",
+            "ast_hash": "0e2e11dc198b531ea5ebdf68a384988b8345582f35ef7e5a7b58d617b12e39c3",
             "signature": "self, attempt: str",
             "parameters": [
               {
@@ -5679,7 +5679,7 @@
             "class": "Store",
             "line": 59,
             "end_line": 61,
-            "ast_hash": "2ed7618a21fc06b933bcf09c21bcc5a465941c9b76e0d070c24d6e7fdf47a4a5",
+            "ast_hash": "c362a0b729bb3ccdc02f6307f9691a5fd9488bdde2ba80c0c6144204320b4b5b",
             "signature": "self, value: dict",
             "parameters": [
               {
@@ -5728,7 +5728,7 @@
             "class": "Store",
             "line": 63,
             "end_line": 65,
-            "ast_hash": "9367e04f361760e42a175f9aea171eaad0359de5c8c0042d804cecb6e4bda747",
+            "ast_hash": "43cd6ad907a4a408528edff3d9f2a75973a44c3e6727d1787c1e86e15a272c12",
             "signature": "self, attempt: str, **changes",
             "parameters": [
               {
@@ -5787,7 +5787,7 @@
             "class": "Store",
             "line": 67,
             "end_line": 68,
-            "ast_hash": "7d95b4c60cd9a3d2c910a74da98a52cb9e428ca41f243f191b2be7200bbcdfcb",
+            "ast_hash": "1d74d4ddb585342272fef8c2138384b3c7a947fc6250ba1928606b4fcffec59a",
             "signature": "self, version: int, checksum: str",
             "parameters": [
               {
@@ -5832,7 +5832,7 @@
             "class": "Store",
             "line": 70,
             "end_line": 74,
-            "ast_hash": "2cdf65666d3f0e1ff0bb154979560e4e62ebf07ef7f1d72308aa4fff983135f7",
+            "ast_hash": "c343a95d367952111fc9242f79ee9315a78325d5141de1c9e2f6917ea63e9afb",
             "signature": "self",
             "parameters": [
               {
@@ -5919,7 +5919,7 @@
             "class": "Store",
             "line": 76,
             "end_line": 77,
-            "ast_hash": "f4e87a9dfd94865d098df4806e6325b9a1b263eaee34fe0ab4fae2bd9ff53080",
+            "ast_hash": "d7b6e1fe975c7d814d4122031c22893fc0029b156a116ff6e1dceddda0014db9",
             "signature": "self",
             "parameters": [
               {
@@ -5949,7 +5949,7 @@
       },
       "app/workflow.py": {
         "file_hash": "c68a4790f9ffb23393ea9f71fd8a1e9b5d77540bef8fa693d2ae5003bbfb37ba",
-        "extractor_hash": "c770e8008e5048d68400f4a62b9e3c81401118879cdf118c50a56b25d8259f3b",
+        "extractor_hash": "01dad9cda1d248150301598fea1186e698c2f3ca62026f5735befbcb74c9c681",
         "imports": {
           "deepcopy": "copy.deepcopy",
           "StrEnum": "enum.StrEnum",
@@ -5966,7 +5966,7 @@
             "class": null,
             "line": 13,
             "end_line": 20,
-            "ast_hash": "3f5d26ab814b38af007da4040b5edf1a97f694d8bf8f3dc4b043ec906fb3c484",
+            "ast_hash": "f6903828b80b4ef27651fd85ae2029fe0d043354795440a857198a903c6e17da",
             "signature": "Phase",
             "parameters": [],
             "returns": null,
@@ -5982,7 +5982,7 @@
             "class": null,
             "line": 23,
             "end_line": 30,
-            "ast_hash": "674dfc9aa113c044375d077b4b85e5fda8fa4898eb429c35051ef28fc1d8072a",
+            "ast_hash": "f87ce727b194148574aa46beb84e1c83192350e99fb0bea11655a74eefd8194c",
             "signature": "ActivityState",
             "parameters": [],
             "returns": null,
@@ -5998,7 +5998,7 @@
             "class": null,
             "line": 57,
             "end_line": 63,
-            "ast_hash": "bdc848b7332f2c89425872f7429678a739ba6096fbc9898e2f76186739b595ca",
+            "ast_hash": "b4ce32871f137dca4f51215d5c7d91fc90335a7d911faeb88ee68f8b9e1b19a6",
             "signature": "execution: dict | None, attempt: str | None, param_version: int | None",
             "parameters": [
               {
@@ -6191,7 +6191,7 @@
             "class": null,
             "line": 66,
             "end_line": 71,
-            "ast_hash": "9a64fc6938686db8a0f8ceceda6e3720e8e714f31d66134beb9bfa7cf7ed2193",
+            "ast_hash": "7b11ac44ad03aa17cdd69cd0de8259be555f22afdf68e7dba5ceaad000a7b336",
             "signature": "state: str, event: str, execution=None, *, attempt=None, param_version=None",
             "parameters": [
               {
@@ -6293,7 +6293,7 @@
             "class": null,
             "line": 74,
             "end_line": 85,
-            "ast_hash": "90556cb2a484ce0529518f5b1465003bfb301904dc4a2815cea04b708facef12",
+            "ast_hash": "cc259b238180c566c501457d1586f60a383b4024b8a62f27b017b2eb2c4f1b1f",
             "signature": "",
             "parameters": [],
             "returns": "dict",
@@ -6369,7 +6369,7 @@
             "class": null,
             "line": 88,
             "end_line": 166,
-            "ast_hash": "4dd49a4f7246c8574485ffcb6e4e0ed7cef1541f79289413fec1f92fe1d640c6",
+            "ast_hash": "f2e887a38d1242fe8a9576893057b6a4a3298e9c11765b21f681f85e759a2a35",
             "signature": "ActivityExecution",
             "parameters": [],
             "returns": null,
@@ -6385,7 +6385,7 @@
             "class": "ActivityExecution",
             "line": 90,
             "end_line": 100,
-            "ast_hash": "4240cdef93893ce8c368a780e542d311bbdb188a89fca3f0f0de12399e189ba8",
+            "ast_hash": "88b2618f0b94a5fecf7d893ebe0ba8f2bf65a18a125b5cab989909033fe2b758",
             "signature": "self, capacity: int=2, *, attempt='direct', param_version=1, progress=None",
             "parameters": [
               {
@@ -6519,7 +6519,7 @@
             "class": "ActivityExecution",
             "line": 102,
             "end_line": 104,
-            "ast_hash": "1015f3990a8dc8981f8e14a6953b45eec1b71a41326b541946b99a3cb401e736",
+            "ast_hash": "4ea2453124460fcda3f961993be003b7a293d357228b64c798a09bfc1f6eda56",
             "signature": "self",
             "parameters": [
               {
@@ -6568,7 +6568,7 @@
             "class": "ActivityExecution",
             "line": 106,
             "end_line": 109,
-            "ast_hash": "e9012e1b9e21b16a17f9868162f84069a6e66cfc7e5dfd0c59258fa3cacacb74",
+            "ast_hash": "2374e0bb677c29fa8a8dfded574d3d22759f1d6d3f6d5a325e09168bd2aa8d25",
             "signature": "self",
             "parameters": [
               {
@@ -6609,7 +6609,7 @@
             "class": "ActivityExecution",
             "line": 111,
             "end_line": 116,
-            "ast_hash": "4dd064b6c53bc5758f42c042724ed44e0dc5b03e16a206fe68da3c333d63f281",
+            "ast_hash": "055bce5994421d89362990a7c18fd93f5fa28f39134771002a011f4dfaaf75a0",
             "signature": "self, event, activity, before",
             "parameters": [
               {
@@ -6701,7 +6701,7 @@
             "class": "ActivityExecution",
             "line": 118,
             "end_line": 125,
-            "ast_hash": "9e10f3b1c6fddad31ff4c3047b2a73d95ac2fa048face1b34931136f6456946e",
+            "ast_hash": "62dab588548a16b91f90889477cf1add5df35c48d54aa57c115e7f71356dbbff",
             "signature": "self",
             "parameters": [
               {
@@ -6861,7 +6861,7 @@
             "class": "ActivityExecution",
             "line": 127,
             "end_line": 139,
-            "ast_hash": "7011cf57858765da7d9e871e0e405083a1a05034d65a4eec698f972884640e07",
+            "ast_hash": "ed417363d33ee9900d7385e3c93208f61ee08f2059ccf8f7eaafcd7fbcdf417e",
             "signature": "self, activity",
             "parameters": [
               {
@@ -7033,7 +7033,7 @@
             "class": "ActivityExecution",
             "line": 141,
             "end_line": 150,
-            "ast_hash": "ef694bd37a0e6b775245886160c6a711e678df0d80c8a3fa1499668bce39501d",
+            "ast_hash": "4c617e9c91d0d227eea7796d1bf55a48360be76873e89e2853bf45335e328fe3",
             "signature": "self, activity, passed: bool, *, error=False",
             "parameters": [
               {
@@ -7208,7 +7208,7 @@
             "class": "ActivityExecution",
             "line": 152,
             "end_line": 158,
-            "ast_hash": "7e8538e991500971122ddad934e6a28c68f4be4e5441d12e523c511e144de817",
+            "ast_hash": "d5e4d5b2326c8438eb397d383e846b04741143aa19714e29493b634dfb94e7f5",
             "signature": "self",
             "parameters": [
               {
@@ -7285,7 +7285,7 @@
             "class": "ActivityExecution",
             "line": 160,
             "end_line": 166,
-            "ast_hash": "11836ec4a87db23bd257761dc951f8f94319060a5cdbe8c46a1ec11d5df11308",
+            "ast_hash": "3d59646698d2c8e375c49e6feae8cc9761e9651541f8ddfd3cb24115d86980c0",
             "signature": "self",
             "parameters": [
               {
@@ -7408,7 +7408,7 @@
         "class": null,
         "line": 7,
         "end_line": 8,
-        "ast_hash": "b6f0dc0ef292c9447fc66d0c0aeb3dafe9d7c58df9489bcc95b00ae634a3fff9",
+        "ast_hash": "0db7844048b44cf26d3fef68e2ca06031988cea67496cadf12afe9eebd0f6a53",
         "signature": "content: str",
         "parameters": [
           {
@@ -7458,7 +7458,7 @@
         "class": null,
         "line": 11,
         "end_line": 12,
-        "ast_hash": "682bac723e31b4b5d23b16fc216048b138ced02e4923ac1223da7040170b03b3",
+        "ast_hash": "3d46dc489ea89566c24915c121af8400e48202422149692bc0439465e8670793",
         "signature": "content: str",
         "parameters": [
           {
@@ -7487,7 +7487,7 @@
         "class": null,
         "line": 15,
         "end_line": 37,
-        "ast_hash": "63f501b39d1408f70c50bc14233e706296765fb5d47406cc03b4973f48a686c4",
+        "ast_hash": "37cdcac0806a30726cdfcd18fe66f82ea4064a2ff7d58683651e60151e6b6206",
         "signature": "content: str, *, capacity: int=2, execution=None, progress=None, task_hook=None",
         "parameters": [
           {
@@ -7643,7 +7643,7 @@
         "class": null,
         "line": 21,
         "end_line": 30,
-        "ast_hash": "3ad02cd1e0e3b3635469374d757b15c524bb100f6dc192d233f60a39ae1e6834",
+        "ast_hash": "a176796875a655a4a3e6a7da7e30fc11067fb34154ab5d6d3ca2a848790c24aa",
         "signature": "activity",
         "parameters": [
           {
@@ -7740,7 +7740,7 @@
         "class": null,
         "line": 5,
         "end_line": 16,
-        "ast_hash": "048bb04606834bd13ac7c6258df7903cb22197ba751971bdddf663d622685884",
+        "ast_hash": "21c831f0cb0a939845c9fc1fdcc0d0b9f6d6c041e6dad3c012ea34fe679097eb",
         "signature": "Events",
         "parameters": [],
         "returns": null,
@@ -7756,7 +7756,7 @@
         "class": "Events",
         "line": 6,
         "end_line": 8,
-        "ast_hash": "a16b5d6e9cd10afb07c694266b51bba8ab49f94245ab90e3e36d45ba5610d24d",
+        "ast_hash": "2abe880674b14b80c9acdd534b640cb580e1b2637d55d26c5dc6aa322ae14bdf",
         "signature": "self, callback: Callable | None=None",
         "parameters": [
           {
@@ -7785,7 +7785,7 @@
         "class": "Events",
         "line": 10,
         "end_line": 16,
-        "ast_hash": "f88d4f43ae59b3702e5884d68cc860230c031cdcde06fdd1c2e80b6b5b5daa14",
+        "ast_hash": "7c4b52b9136ffdc371409ad6f7591c44a09f6f237124f2216b7db10defb1c988",
         "signature": "self, node: str, phase: str, payload: Callable[[], dict]",
         "parameters": [
           {
@@ -7852,7 +7852,7 @@
         "class": null,
         "line": 9,
         "end_line": 12,
-        "ast_hash": "aa1ee3c087d5821603ac6713d747cb1d6a7f8e24f528dd21e2463a92a2d7247d",
+        "ast_hash": "f998d9e2d0eda13561119aa1de58cfffb2ab2e34c2bec6598903673f204841a8",
         "signature": "grant: dict, job: dict",
         "parameters": [
           {
@@ -7898,7 +7898,7 @@
         "class": null,
         "line": 15,
         "end_line": 16,
-        "ast_hash": "854f05e1b400664dd2a92e59a3e47fa6a15ef89196f1e97d1dcc857cabb58f7a",
+        "ast_hash": "0985a1afb76ad27d53b8f4955c0dc507673d26c17afc342c17cb62a4ba71ac6b",
         "signature": "job: dict",
         "parameters": [
           {
@@ -7948,7 +7948,7 @@
         "class": null,
         "line": 19,
         "end_line": 21,
-        "ast_hash": "18110a21e8bf349f0b4e23f3e6eca0a05eadc5792200915fada831949f274963",
+        "ast_hash": "55fdba23cecbd2b7a24bdf99c1de6b05e8325cdf76d31057e8c61f4dfc2101f6",
         "signature": "job: dict, inputs=None, outputs=None, uses=()",
         "parameters": [
           {
@@ -7998,7 +7998,7 @@
         "class": null,
         "line": 24,
         "end_line": 170,
-        "ast_hash": "ddfe149bff1179b48e61554882d1f442b0dab8f8e4834b7c844bf4bfbfa7ddcb",
+        "ast_hash": "73d4fd6758b5d886cb5678cf0b8d4a3ad5f168e14da7eefd035ee7bdcdfea554",
         "signature": "Delivery",
         "parameters": [],
         "returns": null,
@@ -8014,7 +8014,7 @@
         "class": "Delivery",
         "line": 25,
         "end_line": 26,
-        "ast_hash": "5a3c58c8635ae50b214bee97f98ce35bc20a105aed6bdfa1ee39f2207cb1e685",
+        "ast_hash": "4d52740eac104bd6760d7c90621aba6abd5b4269f5582e4cc2c95a58a51ec110",
         "signature": "self, store: Store, events: Events | None=None, checker=run_checks",
         "parameters": [
           {
@@ -8061,7 +8061,7 @@
         "class": "Delivery",
         "line": 28,
         "end_line": 33,
-        "ast_hash": "9054ebf37455571ae1312ebd6dbc731029f06eccb8d9f90732e0522f7923b362",
+        "ast_hash": "73e59361a98184ce87ed88cda825d6df63eef05293daf341693441bb9b10b0e4",
         "signature": "self, job: dict, event: str",
         "parameters": [
           {
@@ -8150,7 +8150,7 @@
         "class": "Delivery",
         "line": 35,
         "end_line": 74,
-        "ast_hash": "314df51d1cc88c53691a62024e89499d39be6c9f23701889ddd0d0c840e0d5cd",
+        "ast_hash": "b201aa458a8248779eba965a097a31f13074d42d12851006a3f605aa02dbebc2",
         "signature": "self, action: str, **values",
         "parameters": [
           {
@@ -8625,7 +8625,7 @@
         "class": "Delivery",
         "line": 76,
         "end_line": 131,
-        "ast_hash": "3fc20305477e3a0035b7dda566114be5489c609f5f5e6b3ebfce2b0f7cc6462f",
+        "ast_hash": "29735bb6943957e832292b262d628627c215d9105d6f07541d8f24ee4e3b08fd",
         "signature": "self, expected_version: int | None=None",
         "parameters": [
           {
@@ -9180,7 +9180,7 @@
         "class": "Delivery",
         "line": 133,
         "end_line": 146,
-        "ast_hash": "81a7c44e1f9d4ae0bbe977449f844f86ffeee10937248e6a84e611ddc6f19df0",
+        "ast_hash": "2db2dbf27111af1cb1268901c7429c8484b00ebfbdbfe05caab75cfffb9c9806",
         "signature": "self, job: dict, event: str, state: dict",
         "parameters": [
           {
@@ -9317,7 +9317,7 @@
         "class": "Delivery",
         "line": 148,
         "end_line": 165,
-        "ast_hash": "11ab4e77a077f2a929a0d7a652c204189849389759f1743c5139e7537e9e8c66",
+        "ast_hash": "70a2a3acecbe6d4ecb9fad2ea9c7ee30aba245f824c69c6beddd7dd464a44524",
         "signature": "self, expected_version: int | None=None",
         "parameters": [
           {
@@ -9523,7 +9523,7 @@
         "class": "Delivery",
         "line": 167,
         "end_line": 170,
-        "ast_hash": "15bf228cd2e9d67fca9485708137386f0bfb9e9e548fa89024f3679da2187bcf",
+        "ast_hash": "3d956091fe42826f56612fd7c94b52d8700ff409675512edbbd643607e932e0d",
         "signature": "self, expected_version: int | None=None",
         "parameters": [
           {
@@ -9584,7 +9584,7 @@
         "class": null,
         "line": 8,
         "end_line": 77,
-        "ast_hash": "c89f5f8a5f3e2b031e315644d66d356a741cc71772c19d670bf6812c15d67b94",
+        "ast_hash": "205bc3519132c992b1cf9a0d7173fc93f967f0afd6a104c6136f54a14d55c16a",
         "signature": "Store",
         "parameters": [],
         "returns": null,
@@ -9600,7 +9600,7 @@
         "class": "Store",
         "line": 9,
         "end_line": 36,
-        "ast_hash": "e532198f23ca9415a835086f90c583376656430b4d77d9579d28237e1654b1fd",
+        "ast_hash": "0ec83afdf83af4fdcda7b8ef35eaca2e66e2acabc0f11370da90dbed53e6504e",
         "signature": "self, path: str=':memory:'",
         "parameters": [
           {
@@ -9853,7 +9853,7 @@
         "class": "Store",
         "line": 39,
         "end_line": 47,
-        "ast_hash": "75665cba400ea6356d7bfaf4086e1c6116a22e41bba4d6e758a095bb88aaa01c",
+        "ast_hash": "27708a2d403a1ce0fdc2b3289956d5660c8d8caac13b32356d41450e0323abdb",
         "signature": "self",
         "parameters": [
           {
@@ -9905,7 +9905,7 @@
         "class": "Store",
         "line": 49,
         "end_line": 50,
-        "ast_hash": "212825762a191ae266e4d7aa0c65ff77f8e7bf7a1527d192465b063d6d006554",
+        "ast_hash": "f71b625451d56df8880a6c9f482a68cd042cff4331b53f89a6b7f8827522187f",
         "signature": "self",
         "parameters": [
           {
@@ -9955,7 +9955,7 @@
         "class": "Store",
         "line": 52,
         "end_line": 53,
-        "ast_hash": "e0275ed568f1a8478d6d36912f77800c4aff07295849a767ffaa520eca006620",
+        "ast_hash": "e61ecc44c4878ed3e2af256185ea2a26ae767384ed04d83548caf18fc6543e35",
         "signature": "self, job: dict",
         "parameters": [
           {
@@ -10004,7 +10004,7 @@
         "class": "Store",
         "line": 55,
         "end_line": 57,
-        "ast_hash": "2d178fc49e2fc7abd1510ff187467fb237066613ca21c42278fc0b7b35e9f3c9",
+        "ast_hash": "0e2e11dc198b531ea5ebdf68a384988b8345582f35ef7e5a7b58d617b12e39c3",
         "signature": "self, attempt: str",
         "parameters": [
           {
@@ -10061,7 +10061,7 @@
         "class": "Store",
         "line": 59,
         "end_line": 61,
-        "ast_hash": "2ed7618a21fc06b933bcf09c21bcc5a465941c9b76e0d070c24d6e7fdf47a4a5",
+        "ast_hash": "c362a0b729bb3ccdc02f6307f9691a5fd9488bdde2ba80c0c6144204320b4b5b",
         "signature": "self, value: dict",
         "parameters": [
           {
@@ -10110,7 +10110,7 @@
         "class": "Store",
         "line": 63,
         "end_line": 65,
-        "ast_hash": "9367e04f361760e42a175f9aea171eaad0359de5c8c0042d804cecb6e4bda747",
+        "ast_hash": "43cd6ad907a4a408528edff3d9f2a75973a44c3e6727d1787c1e86e15a272c12",
         "signature": "self, attempt: str, **changes",
         "parameters": [
           {
@@ -10169,7 +10169,7 @@
         "class": "Store",
         "line": 67,
         "end_line": 68,
-        "ast_hash": "7d95b4c60cd9a3d2c910a74da98a52cb9e428ca41f243f191b2be7200bbcdfcb",
+        "ast_hash": "1d74d4ddb585342272fef8c2138384b3c7a947fc6250ba1928606b4fcffec59a",
         "signature": "self, version: int, checksum: str",
         "parameters": [
           {
@@ -10214,7 +10214,7 @@
         "class": "Store",
         "line": 70,
         "end_line": 74,
-        "ast_hash": "2cdf65666d3f0e1ff0bb154979560e4e62ebf07ef7f1d72308aa4fff983135f7",
+        "ast_hash": "c343a95d367952111fc9242f79ee9315a78325d5141de1c9e2f6917ea63e9afb",
         "signature": "self",
         "parameters": [
           {
@@ -10301,7 +10301,7 @@
         "class": "Store",
         "line": 76,
         "end_line": 77,
-        "ast_hash": "f4e87a9dfd94865d098df4806e6325b9a1b263eaee34fe0ab4fae2bd9ff53080",
+        "ast_hash": "d7b6e1fe975c7d814d4122031c22893fc0029b156a116ff6e1dceddda0014db9",
         "signature": "self",
         "parameters": [
           {
@@ -10333,7 +10333,7 @@
         "class": null,
         "line": 13,
         "end_line": 20,
-        "ast_hash": "3f5d26ab814b38af007da4040b5edf1a97f694d8bf8f3dc4b043ec906fb3c484",
+        "ast_hash": "f6903828b80b4ef27651fd85ae2029fe0d043354795440a857198a903c6e17da",
         "signature": "Phase",
         "parameters": [],
         "returns": null,
@@ -10349,7 +10349,7 @@
         "class": null,
         "line": 23,
         "end_line": 30,
-        "ast_hash": "674dfc9aa113c044375d077b4b85e5fda8fa4898eb429c35051ef28fc1d8072a",
+        "ast_hash": "f87ce727b194148574aa46beb84e1c83192350e99fb0bea11655a74eefd8194c",
         "signature": "ActivityState",
         "parameters": [],
         "returns": null,
@@ -10365,7 +10365,7 @@
         "class": null,
         "line": 57,
         "end_line": 63,
-        "ast_hash": "bdc848b7332f2c89425872f7429678a739ba6096fbc9898e2f76186739b595ca",
+        "ast_hash": "b4ce32871f137dca4f51215d5c7d91fc90335a7d911faeb88ee68f8b9e1b19a6",
         "signature": "execution: dict | None, attempt: str | None, param_version: int | None",
         "parameters": [
           {
@@ -10558,7 +10558,7 @@
         "class": null,
         "line": 66,
         "end_line": 71,
-        "ast_hash": "9a64fc6938686db8a0f8ceceda6e3720e8e714f31d66134beb9bfa7cf7ed2193",
+        "ast_hash": "7b11ac44ad03aa17cdd69cd0de8259be555f22afdf68e7dba5ceaad000a7b336",
         "signature": "state: str, event: str, execution=None, *, attempt=None, param_version=None",
         "parameters": [
           {
@@ -10660,7 +10660,7 @@
         "class": null,
         "line": 74,
         "end_line": 85,
-        "ast_hash": "90556cb2a484ce0529518f5b1465003bfb301904dc4a2815cea04b708facef12",
+        "ast_hash": "cc259b238180c566c501457d1586f60a383b4024b8a62f27b017b2eb2c4f1b1f",
         "signature": "",
         "parameters": [],
         "returns": "dict",
@@ -10736,7 +10736,7 @@
         "class": null,
         "line": 88,
         "end_line": 166,
-        "ast_hash": "4dd49a4f7246c8574485ffcb6e4e0ed7cef1541f79289413fec1f92fe1d640c6",
+        "ast_hash": "f2e887a38d1242fe8a9576893057b6a4a3298e9c11765b21f681f85e759a2a35",
         "signature": "ActivityExecution",
         "parameters": [],
         "returns": null,
@@ -10752,7 +10752,7 @@
         "class": "ActivityExecution",
         "line": 90,
         "end_line": 100,
-        "ast_hash": "4240cdef93893ce8c368a780e542d311bbdb188a89fca3f0f0de12399e189ba8",
+        "ast_hash": "88b2618f0b94a5fecf7d893ebe0ba8f2bf65a18a125b5cab989909033fe2b758",
         "signature": "self, capacity: int=2, *, attempt='direct', param_version=1, progress=None",
         "parameters": [
           {
@@ -10886,7 +10886,7 @@
         "class": "ActivityExecution",
         "line": 102,
         "end_line": 104,
-        "ast_hash": "1015f3990a8dc8981f8e14a6953b45eec1b71a41326b541946b99a3cb401e736",
+        "ast_hash": "4ea2453124460fcda3f961993be003b7a293d357228b64c798a09bfc1f6eda56",
         "signature": "self",
         "parameters": [
           {
@@ -10935,7 +10935,7 @@
         "class": "ActivityExecution",
         "line": 106,
         "end_line": 109,
-        "ast_hash": "e9012e1b9e21b16a17f9868162f84069a6e66cfc7e5dfd0c59258fa3cacacb74",
+        "ast_hash": "2374e0bb677c29fa8a8dfded574d3d22759f1d6d3f6d5a325e09168bd2aa8d25",
         "signature": "self",
         "parameters": [
           {
@@ -10976,7 +10976,7 @@
         "class": "ActivityExecution",
         "line": 111,
         "end_line": 116,
-        "ast_hash": "4dd064b6c53bc5758f42c042724ed44e0dc5b03e16a206fe68da3c333d63f281",
+        "ast_hash": "055bce5994421d89362990a7c18fd93f5fa28f39134771002a011f4dfaaf75a0",
         "signature": "self, event, activity, before",
         "parameters": [
           {
@@ -11068,7 +11068,7 @@
         "class": "ActivityExecution",
         "line": 118,
         "end_line": 125,
-        "ast_hash": "9e10f3b1c6fddad31ff4c3047b2a73d95ac2fa048face1b34931136f6456946e",
+        "ast_hash": "62dab588548a16b91f90889477cf1add5df35c48d54aa57c115e7f71356dbbff",
         "signature": "self",
         "parameters": [
           {
@@ -11228,7 +11228,7 @@
         "class": "ActivityExecution",
         "line": 127,
         "end_line": 139,
-        "ast_hash": "7011cf57858765da7d9e871e0e405083a1a05034d65a4eec698f972884640e07",
+        "ast_hash": "ed417363d33ee9900d7385e3c93208f61ee08f2059ccf8f7eaafcd7fbcdf417e",
         "signature": "self, activity",
         "parameters": [
           {
@@ -11400,7 +11400,7 @@
         "class": "ActivityExecution",
         "line": 141,
         "end_line": 150,
-        "ast_hash": "ef694bd37a0e6b775245886160c6a711e678df0d80c8a3fa1499668bce39501d",
+        "ast_hash": "4c617e9c91d0d227eea7796d1bf55a48360be76873e89e2853bf45335e328fe3",
         "signature": "self, activity, passed: bool, *, error=False",
         "parameters": [
           {
@@ -11575,7 +11575,7 @@
         "class": "ActivityExecution",
         "line": 152,
         "end_line": 158,
-        "ast_hash": "7e8538e991500971122ddad934e6a28c68f4be4e5441d12e523c511e144de817",
+        "ast_hash": "d5e4d5b2326c8438eb397d383e846b04741143aa19714e29493b634dfb94e7f5",
         "signature": "self",
         "parameters": [
           {
@@ -11652,7 +11652,7 @@
         "class": "ActivityExecution",
         "line": 160,
         "end_line": 166,
-        "ast_hash": "11836ec4a87db23bd257761dc951f8f94319060a5cdbe8c46a1ec11d5df11308",
+        "ast_hash": "3d59646698d2c8e375c49e6feae8cc9761e9651541f8ddfd3cb24115d86980c0",
         "signature": "self",
         "parameters": [
           {
@@ -14935,11 +14935,11 @@
   },
   "discovery_path": null,
   "discovery": null,
-  "request": "Normalize Python AST fingerprints across supported versions without changing delivery rules",
+  "request": "Use one typed node-link graph for business, code and state; support dragging, persisted layouts and layout algorithms inspired by yWorks incremental design",
   "requested_requirements": [],
   "previous_manifest": {
     "schema_version": 3,
-    "build_id": "29cc79ef395325c758687e3e0f8cfaccdb063bbc8afc2ebc5d35a211f964b9db",
+    "build_id": "672fd64f798597eb49dfd130c100d1793f7c36da7f5a026a1e2408bca0192e12",
     "files": {
       "app/__init__.py": "a829ebb4042211c3a39bf40646855698375b065069bbbd2aa61daba1d8e6a51c",
       "app/checks.py": "c9eb8458cc5020c52f31b9c8a65bb772e401af1d03b8771315d07d913158ea52",
@@ -14954,7 +14954,7 @@
       "requirements.txt": "6ea77a899e6267ddbcba1051cccb2c7a26af68f5551983a2cd681fa71e1e64a7",
       "tooling/build_graph.py": "01e164ec53066a8accc59edc88bb169a8a7a7ec95fedb4449f137524dcd4f073"
     },
-    "model_hash": "56a239ce610e4e35cbfe3fe90b121ab75e9489485405a975f2d9afae71ce2fdc",
+    "model_hash": "2dc44300c73536e78136d172e678f36e6e4ea3f8eadc264add91fb996303fff8",
     "intent_hash": "6a9c072fc75d3f0bf0bc9d2708e06af4589a15984f66819191a80f9240848f56",
     "model_revision": "0.1.0",
     "bindings": {
@@ -14964,7 +14964,7 @@
         "line": 76,
         "end_line": 131,
         "signature": "self, expected_version: int | None=None",
-        "ast_sha256": "3fc20305477e3a0035b7dda566114be5489c609f5f5e6b3ebfce2b0f7cc6462f",
+        "ast_sha256": "29735bb6943957e832292b262d628627c215d9105d6f07541d8f24ee4e3b08fd",
         "snippet": "    def prepare(self, expected_version: int | None = None) -> dict:\n        with self.store.transaction():\n            job=self.store.get()\n            if expected_version is not None and job['param_version']!=expected_version:return self.store.snapshot()\n            if job['state'] in ('checking','completed','cancelled'):return self.store.snapshot()\n            job['attempt']=uuid.uuid4().hex[:10]\n            job.update(checks={},execution={},prepared_version=None)\n            allowed=authorized(job)\n            self.events.emit('read','read',lambda:observation(job,outputs={'param_version':job['param_version'],'length':len(job['content'])}))\n            self.events.emit('authorize','decision',lambda:observation(job,\n                inputs={'role':job['role'],'grants':len(job['grants'])},outputs={'allowed':allowed},uses=['read']))\n            if not allowed:\n                self.transition(job,'block');job['reason']='no_current_authorization';self.store.put(job)\n                self.events.emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['authorize']))\n                return self.store.snapshot()\n            self.transition(job,'start')\n            execution=ActivityExecution(job['capacity'],attempt=job['attempt'],param_version=job['param_version'])\n            job.update(reason='',execution=execution.snapshot())\n            self.store.put_execution({**job['execution'],'phase':'checking','disposition':'current'})\n            self.store.put(job)\n        # Work runs outside the transaction; edit/revoke/cancel can happen meanwhile.\n        try:\n            result=self.checker(job['content'],capacity=job['capacity'],execution=execution,\n                                progress=lambda event,state:self.execution_progress(job,event,state))\n            if not completed(execution.snapshot(),job['attempt'],job['param_version']) and result['passed']:\n                raise ValueError('检查函数报告通过，但本次运行的活动尚未完成')\n        except Exception as exc:\n            execution.progress=lambda event,state:self.execution_progress(job,event,state)\n            execution.abort()\n            with self.store.transaction():\n                current=self.store.get()\n                if current['state']=='checking' and current['attempt']==job['attempt'] and current['param_version']==job['param_version']:\n                    self.transition(current,'fail');current['reason']='worker_error:'+type(exc).__name__;self.store.put(current)\n            self.events.emit('wait','error',lambda:observation(job,outputs={'reason':'worker_error'},uses=['authorize']))\n            return self.store.snapshot()\n        self.events.emit('checksum','return',lambda:observation(job,inputs={'length':len(job['content'])},\n            outputs={'checksum':result['checksum']},uses=['authorize','read']))\n        self.events.emit('privacy','return',lambda:observation(job,inputs={'length':len(job['content'])},\n            outputs={'safe':result['safe']},uses=['authorize','read']))\n        self.events.emit('join','decision',lambda:observation(job,\n            outputs={'passed':result['passed'],'tasks':list(result['tasks'])},uses=['checksum','privacy']))\n        with self.store.transaction():\n            current=self.store.get()\n            if current['attempt']!=job['attempt'] or current['param_version']!=job['param_version']:\n                return self.store.snapshot()\n            if current['state']=='cancelled':return self.store.snapshot()\n            checks={k:v for k,v in result.items() if k!='execution'}\n            if not result['passed']:\n                self.transition(current,'fail');current['reason']='check_rejected';current['checks']=checks\n            else:\n                self.transition(current,'checked')\n                current.update(checks=checks,prepared_version=job['param_version'],reason='')\n            self.store.put(current)\n        if current['state'] in ('waiting','failed'):\n            self.events.emit('wait','wait',lambda:observation(current,outputs={'reason':current['reason']},uses=['join']))\n        return self.store.snapshot()",
         "calls": [
           "ActivityExecution",
@@ -15037,7 +15037,7 @@
         "line": 15,
         "end_line": 16,
         "signature": "job: dict",
-        "ast_sha256": "854f05e1b400664dd2a92e59a3e47fa6a15ef89196f1e97d1dcc857cabb58f7a",
+        "ast_sha256": "0985a1afb76ad27d53b8f4955c0dc507673d26c17afc342c17cb62a4ba71ac6b",
         "snippet": "def authorized(job: dict) -> bool:\n    return job['role'] == 'engineer' and any(eligible_grant(g,job) for g in job['grants'])",
         "calls": [
           "any",
@@ -15052,7 +15052,7 @@
         "line": 15,
         "end_line": 37,
         "signature": "content: str, *, capacity: int=2, execution=None, progress=None, task_hook=None",
-        "ast_sha256": "63f501b39d1408f70c50bc14233e706296765fb5d47406cc03b4973f48a686c4",
+        "ast_sha256": "37cdcac0806a30726cdfcd18fe66f82ea4064a2ff7d58683651e60151e6b6206",
         "snippet": "def run_checks(content: str,*,capacity: int=2,execution=None,progress=None,task_hook=None) -> dict:\n    execution=execution or ActivityExecution(capacity)\n    execution.progress=progress\n    handlers={'checksum':checksum,'privacy':privacy_check}\n    if set(handlers)!={a['id'] for a in execution.spec['activities']}:\n        raise ValueError('声明的检查项目与实际函数不一致')\n    def work(activity):\n        execution.start(activity)\n        try:\n            if task_hook:task_hook(activity)\n            value=handlers[activity](content)\n        except Exception as exc:\n            execution.finish(activity,False,error=True)\n            return {'ok':False,'error':type(exc).__name__,'value':None}\n        execution.finish(activity,value is not False)\n        return {'ok':value is not False,'value':value}\n    with ThreadPoolExecutor(max_workers=len(handlers)) as pool:\n        jobs={a['id']:pool.submit(work,a['id']) for a in execution.spec['activities']}\n        results={name:future.result() for name,future in jobs.items()}\n    passed=execution.join()\n    return {'passed':passed,'checksum':results['checksum']['value'] or '',\n            'safe':results['privacy']['ok'],'tasks':{n:v['ok'] for n,v in results.items()},\n            'execution':execution.snapshot()}",
         "calls": [
           "ActivityExecution",
@@ -15090,7 +15090,7 @@
         "line": 148,
         "end_line": 165,
         "signature": "self, expected_version: int | None=None",
-        "ast_sha256": "11ab4e77a077f2a929a0d7a652c204189849389759f1743c5139e7537e9e8c66",
+        "ast_sha256": "70a2a3acecbe6d4ecb9fad2ea9c7ee30aba245f824c69c6beddd7dd464a44524",
         "snippet": "    def commit(self, expected_version: int | None = None) -> dict:\n        with self.store.transaction():\n            job=self.store.get()\n            if expected_version is not None and job['param_version']!=expected_version:return self.store.snapshot()\n            if job['state']!='ready':return self.store.snapshot()\n            allowed=authorized(job);version_ok=job['prepared_version']==job['param_version']\n            self.events.emit('recheck','decision',lambda:observation(job,\n                outputs={'allowed':allowed,'version_ok':version_ok},uses=['authorize','join']))\n            if not allowed or not version_ok or not job['checks']['passed']:\n                self.transition(job,'block');job['reason']='authorization_or_version_changed';self.store.put(job)\n                self.events.emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['recheck']))\n                return self.store.snapshot()\n            self.store.artifact(job['param_version'],job['checks']['checksum'])\n            self.transition(job,'publish');self.store.put(job)\n        # Commit event is emitted only after the SQLite transaction succeeded.\n        self.events.emit('commit','commit',lambda:observation(job,\n            outputs={'version':job['param_version'],'checksum':job['checks']['checksum']},uses=['recheck','checksum']))\n        return self.store.snapshot()",
         "calls": [
           "authorized",
@@ -15125,7 +15125,7 @@
         "line": 35,
         "end_line": 74,
         "signature": "self, action: str, **values",
-        "ast_sha256": "314df51d1cc88c53691a62024e89499d39be6c9f23701889ddd0d0c840e0d5cd",
+        "ast_sha256": "b201aa458a8248779eba965a097a31f13074d42d12851006a3f605aa02dbebc2",
         "snippet": "    def command(self, action: str, **values) -> dict:\n        with self.store.transaction():\n            job = self.store.get()\n            if action == 'edit':\n                content = values['content']\n                if not isinstance(content,str) or not 1 <= len(content) <= 4096:\n                    raise ValueError('内容必须是 1 到 4096 个字符的文本')\n                capacity=values.get('capacity',job['capacity'])\n                if type(capacity) is not int or capacity not in (1,2):raise ValueError('并发名额必须是 1 或 2')\n                self.transition(job,'edit')\n                self.store.update_execution(job['attempt'],phase='cancelled',disposition='superseded')\n                job.update(content=content,capacity=capacity,param_version=job['param_version']+1,\n                           checks={},execution={},prepared_version=None,reason='',attempt='none')\n            elif action == 'grant':\n                expires = values['expires']; version = values.get('version',job['param_version'])\n                if type(expires) is not int or expires < 0 or type(version) is not int or version < 1:\n                    raise ValueError('授权版本和有效期必须是合法整数')\n                g = {'id':str(values['id']),'project':values.get('project',job['project']),\n                     'actor':values.get('actor',job['actor']),'version':version,'expires':expires,'revoked':False}\n                if not g['id'] or not isinstance(g['project'],str) or not g['project']:\n                    raise ValueError('授权编号和项目名称不能为空')\n                job['grants'] = [x for x in job['grants'] if x['id'] != g['id']]+[g]\n            elif action == 'revoke':\n                if not any(g['id']==values['id'] for g in job['grants']):raise ValueError('找不到这份授权')\n                for g in job['grants']:\n                    if g['id']==values['id']:g['revoked']=True\n            elif action == 'role':\n                if values['role'] not in ('engineer','viewer'):raise ValueError('操作者角色无效')\n                job['role']=values['role']\n            elif action == 'clock':\n                clock=values['clock']\n                if type(clock) is not int or clock < job['clock']:raise ValueError('时钟必须是整数，且只能向前推进')\n                job['clock']=clock\n            elif action == 'cancel':\n                self.transition(job,'cancel')\n                self.store.update_execution(job['attempt'],disposition='cancelled')\n            else:raise ValueError('不支持这项操作')\n            job['epoch']+=1; self.store.put(job)\n        self.events.emit('change','change',lambda:observation(job,outputs={'action':action,'state':job['state']}))\n        return self.store.snapshot()",
         "calls": [
           "ValueError",
@@ -15211,7 +15211,7 @@
         "line": 76,
         "end_line": 131,
         "signature": "self, expected_version: int | None=None",
-        "ast_sha256": "3fc20305477e3a0035b7dda566114be5489c609f5f5e6b3ebfce2b0f7cc6462f",
+        "ast_sha256": "29735bb6943957e832292b262d628627c215d9105d6f07541d8f24ee4e3b08fd",
         "snippet": "    def prepare(self, expected_version: int | None = None) -> dict:\n        with self.store.transaction():\n            job=self.store.get()\n            if expected_version is not None and job['param_version']!=expected_version:return self.store.snapshot()\n            if job['state'] in ('checking','completed','cancelled'):return self.store.snapshot()\n            job['attempt']=uuid.uuid4().hex[:10]\n            job.update(checks={},execution={},prepared_version=None)\n            allowed=authorized(job)\n            self.events.emit('read','read',lambda:observation(job,outputs={'param_version':job['param_version'],'length':len(job['content'])}))\n            self.events.emit('authorize','decision',lambda:observation(job,\n                inputs={'role':job['role'],'grants':len(job['grants'])},outputs={'allowed':allowed},uses=['read']))\n            if not allowed:\n                self.transition(job,'block');job['reason']='no_current_authorization';self.store.put(job)\n                self.events.emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['authorize']))\n                return self.store.snapshot()\n            self.transition(job,'start')\n            execution=ActivityExecution(job['capacity'],attempt=job['attempt'],param_version=job['param_version'])\n            job.update(reason='',execution=execution.snapshot())\n            self.store.put_execution({**job['execution'],'phase':'checking','disposition':'current'})\n            self.store.put(job)\n        # Work runs outside the transaction; edit/revoke/cancel can happen meanwhile.\n        try:\n            result=self.checker(job['content'],capacity=job['capacity'],execution=execution,\n                                progress=lambda event,state:self.execution_progress(job,event,state))\n            if not completed(execution.snapshot(),job['attempt'],job['param_version']) and result['passed']:\n                raise ValueError('检查函数报告通过，但本次运行的活动尚未完成')\n        except Exception as exc:\n            execution.progress=lambda event,state:self.execution_progress(job,event,state)\n            execution.abort()\n            with self.store.transaction():\n                current=self.store.get()\n                if current['state']=='checking' and current['attempt']==job['attempt'] and current['param_version']==job['param_version']:\n                    self.transition(current,'fail');current['reason']='worker_error:'+type(exc).__name__;self.store.put(current)\n            self.events.emit('wait','error',lambda:observation(job,outputs={'reason':'worker_error'},uses=['authorize']))\n            return self.store.snapshot()\n        self.events.emit('checksum','return',lambda:observation(job,inputs={'length':len(job['content'])},\n            outputs={'checksum':result['checksum']},uses=['authorize','read']))\n        self.events.emit('privacy','return',lambda:observation(job,inputs={'length':len(job['content'])},\n            outputs={'safe':result['safe']},uses=['authorize','read']))\n        self.events.emit('join','decision',lambda:observation(job,\n            outputs={'passed':result['passed'],'tasks':list(result['tasks'])},uses=['checksum','privacy']))\n        with self.store.transaction():\n            current=self.store.get()\n            if current['attempt']!=job['attempt'] or current['param_version']!=job['param_version']:\n                return self.store.snapshot()\n            if current['state']=='cancelled':return self.store.snapshot()\n            checks={k:v for k,v in result.items() if k!='execution'}\n            if not result['passed']:\n                self.transition(current,'fail');current['reason']='check_rejected';current['checks']=checks\n            else:\n                self.transition(current,'checked')\n                current.update(checks=checks,prepared_version=job['param_version'],reason='')\n            self.store.put(current)\n        if current['state'] in ('waiting','failed'):\n            self.events.emit('wait','wait',lambda:observation(current,outputs={'reason':current['reason']},uses=['join']))\n        return self.store.snapshot()",
         "calls": [
           "ActivityExecution",
@@ -15284,7 +15284,7 @@
         "line": 167,
         "end_line": 170,
         "signature": "self, expected_version: int | None=None",
-        "ast_sha256": "15bf228cd2e9d67fca9485708137386f0bfb9e9e548fa89024f3679da2187bcf",
+        "ast_sha256": "3d956091fe42826f56612fd7c94b52d8700ff409675512edbbd643607e932e0d",
         "snippet": "    def execute(self, expected_version: int | None = None) -> dict:\n        version=self.store.snapshot()['param_version'] if expected_version is None else expected_version\n        self.prepare(expected_version=version)\n        return self.commit(expected_version=version)",
         "calls": [
           "self.commit",
@@ -15305,7 +15305,7 @@
         "line": 15,
         "end_line": 16,
         "signature": "job: dict",
-        "ast_sha256": "854f05e1b400664dd2a92e59a3e47fa6a15ef89196f1e97d1dcc857cabb58f7a",
+        "ast_sha256": "0985a1afb76ad27d53b8f4955c0dc507673d26c17afc342c17cb62a4ba71ac6b",
         "snippet": "def authorized(job: dict) -> bool:\n    return job['role'] == 'engineer' and any(eligible_grant(g,job) for g in job['grants'])",
         "calls": [
           "any",
@@ -15320,7 +15320,7 @@
         "line": 127,
         "end_line": 139,
         "signature": "self, activity",
-        "ast_sha256": "7011cf57858765da7d9e871e0e405083a1a05034d65a4eec698f972884640e07",
+        "ast_sha256": "ed417363d33ee9900d7385e3c93208f61ee08f2059ccf8f7eaafcd7fbcdf417e",
         "snippet": "    def start(self,activity):\n        spec=next((a for a in self.spec['activities'] if a['id']==activity),None)\n        if spec is None:raise ValueError('未知检查项目')\n        with self.changed:\n            if self.activities[activity]!='pending':raise ValueError('这项检查已开始，不能重复启动')\n            while any(self.resources[r]['available']<n for r,n in spec['requires'].items()):\n                if self.activities[activity]!='waiting':\n                    before=self.body();self.activities[activity]=ActivityState.WAITING;self.record('wait',activity,before)\n                self.changed.wait()\n            before=self.body()\n            for rid,n in spec['requires'].items():\n                self.resources[rid]['available']-=n;self.resources[rid]['holders'].append(activity)\n            self.activities[activity]=ActivityState.RUNNING;self.record('start',activity,before)",
         "calls": [
           "ValueError",
@@ -15354,7 +15354,7 @@
         "line": 7,
         "end_line": 8,
         "signature": "content: str",
-        "ast_sha256": "b6f0dc0ef292c9447fc66d0c0aeb3dafe9d7c58df9489bcc95b00ae634a3fff9",
+        "ast_sha256": "0db7844048b44cf26d3fef68e2ca06031988cea67496cadf12afe9eebd0f6a53",
         "snippet": "def checksum(content: str) -> str:\n    return hashlib.sha256(content.encode('utf-8')).hexdigest()",
         "calls": [
           "content.encode",
@@ -15370,7 +15370,7 @@
         "line": 11,
         "end_line": 12,
         "signature": "content: str",
-        "ast_sha256": "682bac723e31b4b5d23b16fc216048b138ced02e4923ac1223da7040170b03b3",
+        "ast_sha256": "3d46dc489ea89566c24915c121af8400e48202422149692bc0439465e8670793",
         "snippet": "def privacy_check(content: str) -> bool:\n    return 'SECRET:' not in content",
         "calls": [],
         "guards": [],
@@ -15382,7 +15382,7 @@
         "line": 152,
         "end_line": 158,
         "signature": "self",
-        "ast_sha256": "7e8538e991500971122ddad934e6a28c68f4be4e5441d12e523c511e144de817",
+        "ast_sha256": "d5e4d5b2326c8438eb397d383e846b04741143aa19714e29493b634dfb94e7f5",
         "snippet": "    def join(self) -> bool:\n        with self.changed:\n            if self.join_state!='enabled':raise ValueError('还有检查未完成，不能汇总结果')\n            before=self.body()\n            passed=all(self.activities[a]=='succeeded' for a in self.spec['join']['requires'])\n            self.join_state='passed' if passed else 'rejected';self.record('join',self.spec['join']['id'],before)\n            return passed",
         "calls": [
           "ValueError",
@@ -15408,7 +15408,7 @@
         "line": 90,
         "end_line": 100,
         "signature": "self, capacity: int=2, *, attempt='direct', param_version=1, progress=None",
-        "ast_sha256": "4240cdef93893ce8c368a780e542d311bbdb188a89fca3f0f0de12399e189ba8",
+        "ast_sha256": "88b2618f0b94a5fecf7d893ebe0ba8f2bf65a18a125b5cab989909033fe2b758",
         "snippet": "    def __init__(self,capacity: int=2,*,attempt='direct',param_version=1,progress=None):\n        resource=EXECUTION['resources'][0]\n        if type(capacity) is not int or not resource['min']<=capacity<=resource['max']:\n            raise ValueError('并发名额必须是 1 或 2')\n        if not isinstance(attempt,str) or not attempt or type(param_version) is not int or param_version<1:\n            raise ValueError('运行编号和参数版本无效')\n        self.spec=deepcopy(EXECUTION)\n        self.attempt,self.param_version,self.progress=attempt,param_version,progress\n        self.activities: dict[str,ActivityState]={a['id']:ActivityState.PENDING for a in self.spec['activities']}\n        self.resources={resource['id']:{'capacity':capacity,'available':capacity,'holders':[]}}\n        self.join_state='waiting';self.revision=0;self.journal=[];self.changed=threading.Condition()",
         "calls": [
           "ValueError",
@@ -15435,7 +15435,7 @@
         "line": 141,
         "end_line": 150,
         "signature": "self, activity, passed: bool, *, error=False",
-        "ast_sha256": "ef694bd37a0e6b775245886160c6a711e678df0d80c8a3fa1499668bce39501d",
+        "ast_sha256": "4c617e9c91d0d227eea7796d1bf55a48360be76873e89e2853bf45335e328fe3",
         "snippet": "    def finish(self,activity,passed: bool,*,error=False):\n        with self.changed:\n            if self.activities.get(activity)!='running':raise ValueError('检查尚未开始，不能报告完成')\n            if type(passed) is not bool or type(error) is not bool:raise ValueError('检查结果必须是布尔值')\n            before=self.body();spec=next(a for a in self.spec['activities'] if a['id']==activity)\n            for rid,n in spec['requires'].items():\n                self.resources[rid]['available']+=n;self.resources[rid]['holders'].remove(activity)\n            self.activities[activity]=ActivityState.FAILED if error else ActivityState.SUCCEEDED if passed else ActivityState.REJECTED\n            if all(self.activities[a] in TERMINAL for a in self.spec['join']['requires']):self.join_state='enabled'\n            self.record('finish',activity,before)",
         "calls": [
           "ValueError",
@@ -15478,7 +15478,7 @@
         "line": 118,
         "end_line": 125,
         "signature": "self",
-        "ast_sha256": "9e10f3b1c6fddad31ff4c3047b2a73d95ac2fa048face1b34931136f6456946e",
+        "ast_sha256": "62dab588548a16b91f90889477cf1add5df35c48d54aa57c115e7f71356dbbff",
         "snippet": "    def invariant(self):\n        for resource in self.spec['resources']:\n            rid=resource['id'];r=self.resources[rid]\n            held={a['id']:a['requires'].get(rid,0) for a in self.spec['activities'] if self.activities[a['id']]=='running'}\n            if set(r['holders'])!={a for a,n in held.items() if n} or len(set(r['holders']))!=len(r['holders']):\n                raise RuntimeError('占用名额与运行中的检查不一致')\n            if type(r['available']) is not int or r['available']<0 or r['available']+sum(held.values())!=r['capacity']:\n                raise RuntimeError('可用名额与占用名额之和不等于总数')",
         "calls": [
           "RuntimeError",
@@ -15508,7 +15508,7 @@
         "line": 106,
         "end_line": 109,
         "signature": "self",
-        "ast_sha256": "e9012e1b9e21b16a17f9868162f84069a6e66cfc7e5dfd0c59258fa3cacacb74",
+        "ast_sha256": "2374e0bb677c29fa8a8dfded574d3d22759f1d6d3f6d5a325e09168bd2aa8d25",
         "snippet": "    def snapshot(self):\n        with self.changed:\n            return {'attempt':self.attempt,'param_version':self.param_version,'revision':self.revision,\n                    **self.body(),'journal':deepcopy(self.journal)}",
         "calls": [
           "deepcopy",
@@ -15523,7 +15523,7 @@
         "line": 133,
         "end_line": 146,
         "signature": "self, job: dict, event: str, state: dict",
-        "ast_sha256": "81a7c44e1f9d4ae0bbe977449f844f86ffeee10937248e6a84e611ddc6f19df0",
+        "ast_sha256": "2db2dbf27111af1cb1268901c7429c8484b00ebfbdbfe05caab75cfffb9c9806",
         "snippet": "    def execution_progress(self, job: dict, event: str, state: dict) -> None:\n        with self.store.transaction():\n            current=self.store.get()\n            previous=self.store.execution(job['attempt']) or {'phase':'checking','disposition':'current'}\n            self.store.put_execution({**previous,**state})\n            if current['attempt']==job['attempt'] and current['param_version']==job['param_version']:\n                current['execution']=state;self.store.put(current)\n        last=state['journal'][-1];activity=last['activity']\n        phase='wait' if event=='wait' else 'enter' if event=='start' else 'return'\n        self.events.emit('flow.checks',phase,lambda:observation(job,\n            outputs={'revision':state['revision'],'activity':activity,'event':event},uses=['authorize']))\n        if activity in state['activities']:\n            self.events.emit(activity,phase,lambda:observation(job,\n                outputs={'state':state['activities'][activity]},uses=['authorize']))",
         "calls": [
           "observation",
@@ -15560,7 +15560,7 @@
         "line": 160,
         "end_line": 166,
         "signature": "self",
-        "ast_sha256": "11836ec4a87db23bd257761dc951f8f94319060a5cdbe8c46a1ec11d5df11308",
+        "ast_sha256": "3d59646698d2c8e375c49e6feae8cc9761e9651541f8ddfd3cb24115d86980c0",
         "snippet": "    def abort(self):\n        with self.changed:\n            if any(s=='running' for s in self.activities.values()):raise ValueError('正在执行的检查需要先结束并归还名额')\n            before=self.body()\n            for a,s in self.activities.items():\n                if s not in TERMINAL:self.activities[a]=ActivityState.CANCELLED\n            self.join_state='rejected';self.record('abort',self.spec['join']['id'],before)",
         "calls": [
           "ValueError",
@@ -15588,7 +15588,7 @@
         "line": 55,
         "end_line": 57,
         "signature": "self, attempt: str",
-        "ast_sha256": "2d178fc49e2fc7abd1510ff187467fb237066613ca21c42278fc0b7b35e9f3c9",
+        "ast_sha256": "0e2e11dc198b531ea5ebdf68a384988b8345582f35ef7e5a7b58d617b12e39c3",
         "snippet": "    def execution(self, attempt: str) -> dict | None:\n        row=self.db.execute('SELECT document FROM execution_run WHERE attempt=?',(attempt,)).fetchone()\n        return json.loads(row['document']) if row else None",
         "calls": [
           "json.loads",
@@ -15609,7 +15609,7 @@
         "line": 59,
         "end_line": 61,
         "signature": "self, value: dict",
-        "ast_sha256": "2ed7618a21fc06b933bcf09c21bcc5a465941c9b76e0d070c24d6e7fdf47a4a5",
+        "ast_sha256": "c362a0b729bb3ccdc02f6307f9691a5fd9488bdde2ba80c0c6144204320b4b5b",
         "snippet": "    def put_execution(self, value: dict) -> None:\n        self.db.execute('INSERT INTO execution_run VALUES (?,?) ON CONFLICT(attempt) DO UPDATE SET document=excluded.document',\n                        (value['attempt'],json.dumps(value)))",
         "calls": [
           "json.dumps",
@@ -15624,7 +15624,7 @@
         "line": 63,
         "end_line": 65,
         "signature": "self, attempt: str, **changes",
-        "ast_sha256": "9367e04f361760e42a175f9aea171eaad0359de5c8c0042d804cecb6e4bda747",
+        "ast_sha256": "43cd6ad907a4a408528edff3d9f2a75973a44c3e6727d1787c1e86e15a272c12",
         "snippet": "    def update_execution(self, attempt: str, **changes):\n        value=self.execution(attempt)\n        if value:self.put_execution({**value,**changes})",
         "calls": [
           "self.execution",
@@ -15644,7 +15644,7 @@
         "line": 70,
         "end_line": 74,
         "signature": "self",
-        "ast_sha256": "2cdf65666d3f0e1ff0bb154979560e4e62ebf07ef7f1d72308aa4fff983135f7",
+        "ast_sha256": "c343a95d367952111fc9242f79ee9315a78325d5141de1c9e2f6917ea63e9afb",
         "snippet": "    def snapshot(self) -> dict:\n        with self.lock:\n            return {**self.get(), 'effects':[dict(r) for r in self.db.execute('SELECT * FROM artifact ORDER BY version')],\n                    'journal':[dict(r) for r in self.db.execute('SELECT * FROM journal ORDER BY seq')],\n                    'executions':[json.loads(r['document']) for r in self.db.execute('SELECT document FROM execution_run ORDER BY rowid')]}",
         "calls": [
           "dict",
@@ -15661,7 +15661,7 @@
         "line": 148,
         "end_line": 165,
         "signature": "self, expected_version: int | None=None",
-        "ast_sha256": "11ab4e77a077f2a929a0d7a652c204189849389759f1743c5139e7537e9e8c66",
+        "ast_sha256": "70a2a3acecbe6d4ecb9fad2ea9c7ee30aba245f824c69c6beddd7dd464a44524",
         "snippet": "    def commit(self, expected_version: int | None = None) -> dict:\n        with self.store.transaction():\n            job=self.store.get()\n            if expected_version is not None and job['param_version']!=expected_version:return self.store.snapshot()\n            if job['state']!='ready':return self.store.snapshot()\n            allowed=authorized(job);version_ok=job['prepared_version']==job['param_version']\n            self.events.emit('recheck','decision',lambda:observation(job,\n                outputs={'allowed':allowed,'version_ok':version_ok},uses=['authorize','join']))\n            if not allowed or not version_ok or not job['checks']['passed']:\n                self.transition(job,'block');job['reason']='authorization_or_version_changed';self.store.put(job)\n                self.events.emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['recheck']))\n                return self.store.snapshot()\n            self.store.artifact(job['param_version'],job['checks']['checksum'])\n            self.transition(job,'publish');self.store.put(job)\n        # Commit event is emitted only after the SQLite transaction succeeded.\n        self.events.emit('commit','commit',lambda:observation(job,\n            outputs={'version':job['param_version'],'checksum':job['checks']['checksum']},uses=['recheck','checksum']))\n        return self.store.snapshot()",
         "calls": [
           "authorized",
@@ -15696,7 +15696,7 @@
         "line": 148,
         "end_line": 165,
         "signature": "self, expected_version: int | None=None",
-        "ast_sha256": "11ab4e77a077f2a929a0d7a652c204189849389759f1743c5139e7537e9e8c66",
+        "ast_sha256": "70a2a3acecbe6d4ecb9fad2ea9c7ee30aba245f824c69c6beddd7dd464a44524",
         "snippet": "    def commit(self, expected_version: int | None = None) -> dict:\n        with self.store.transaction():\n            job=self.store.get()\n            if expected_version is not None and job['param_version']!=expected_version:return self.store.snapshot()\n            if job['state']!='ready':return self.store.snapshot()\n            allowed=authorized(job);version_ok=job['prepared_version']==job['param_version']\n            self.events.emit('recheck','decision',lambda:observation(job,\n                outputs={'allowed':allowed,'version_ok':version_ok},uses=['authorize','join']))\n            if not allowed or not version_ok or not job['checks']['passed']:\n                self.transition(job,'block');job['reason']='authorization_or_version_changed';self.store.put(job)\n                self.events.emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['recheck']))\n                return self.store.snapshot()\n            self.store.artifact(job['param_version'],job['checks']['checksum'])\n            self.transition(job,'publish');self.store.put(job)\n        # Commit event is emitted only after the SQLite transaction succeeded.\n        self.events.emit('commit','commit',lambda:observation(job,\n            outputs={'version':job['param_version'],'checksum':job['checks']['checksum']},uses=['recheck','checksum']))\n        return self.store.snapshot()",
         "calls": [
           "authorized",
@@ -15731,7 +15731,7 @@
         "line": 76,
         "end_line": 131,
         "signature": "self, expected_version: int | None=None",
-        "ast_sha256": "3fc20305477e3a0035b7dda566114be5489c609f5f5e6b3ebfce2b0f7cc6462f",
+        "ast_sha256": "29735bb6943957e832292b262d628627c215d9105d6f07541d8f24ee4e3b08fd",
         "snippet": "    def prepare(self, expected_version: int | None = None) -> dict:\n        with self.store.transaction():\n            job=self.store.get()\n            if expected_version is not None and job['param_version']!=expected_version:return self.store.snapshot()\n            if job['state'] in ('checking','completed','cancelled'):return self.store.snapshot()\n            job['attempt']=uuid.uuid4().hex[:10]\n            job.update(checks={},execution={},prepared_version=None)\n            allowed=authorized(job)\n            self.events.emit('read','read',lambda:observation(job,outputs={'param_version':job['param_version'],'length':len(job['content'])}))\n            self.events.emit('authorize','decision',lambda:observation(job,\n                inputs={'role':job['role'],'grants':len(job['grants'])},outputs={'allowed':allowed},uses=['read']))\n            if not allowed:\n                self.transition(job,'block');job['reason']='no_current_authorization';self.store.put(job)\n                self.events.emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['authorize']))\n                return self.store.snapshot()\n            self.transition(job,'start')\n            execution=ActivityExecution(job['capacity'],attempt=job['attempt'],param_version=job['param_version'])\n            job.update(reason='',execution=execution.snapshot())\n            self.store.put_execution({**job['execution'],'phase':'checking','disposition':'current'})\n            self.store.put(job)\n        # Work runs outside the transaction; edit/revoke/cancel can happen meanwhile.\n        try:\n            result=self.checker(job['content'],capacity=job['capacity'],execution=execution,\n                                progress=lambda event,state:self.execution_progress(job,event,state))\n            if not completed(execution.snapshot(),job['attempt'],job['param_version']) and result['passed']:\n                raise ValueError('检查函数报告通过，但本次运行的活动尚未完成')\n        except Exception as exc:\n            execution.progress=lambda event,state:self.execution_progress(job,event,state)\n            execution.abort()\n            with self.store.transaction():\n                current=self.store.get()\n                if current['state']=='checking' and current['attempt']==job['attempt'] and current['param_version']==job['param_version']:\n                    self.transition(current,'fail');current['reason']='worker_error:'+type(exc).__name__;self.store.put(current)\n            self.events.emit('wait','error',lambda:observation(job,outputs={'reason':'worker_error'},uses=['authorize']))\n            return self.store.snapshot()\n        self.events.emit('checksum','return',lambda:observation(job,inputs={'length':len(job['content'])},\n            outputs={'checksum':result['checksum']},uses=['authorize','read']))\n        self.events.emit('privacy','return',lambda:observation(job,inputs={'length':len(job['content'])},\n            outputs={'safe':result['safe']},uses=['authorize','read']))\n        self.events.emit('join','decision',lambda:observation(job,\n            outputs={'passed':result['passed'],'tasks':list(result['tasks'])},uses=['checksum','privacy']))\n        with self.store.transaction():\n            current=self.store.get()\n            if current['attempt']!=job['attempt'] or current['param_version']!=job['param_version']:\n                return self.store.snapshot()\n            if current['state']=='cancelled':return self.store.snapshot()\n            checks={k:v for k,v in result.items() if k!='execution'}\n            if not result['passed']:\n                self.transition(current,'fail');current['reason']='check_rejected';current['checks']=checks\n            else:\n                self.transition(current,'checked')\n                current.update(checks=checks,prepared_version=job['param_version'],reason='')\n            self.store.put(current)\n        if current['state'] in ('waiting','failed'):\n            self.events.emit('wait','wait',lambda:observation(current,outputs={'reason':current['reason']},uses=['join']))\n        return self.store.snapshot()",
         "calls": [
           "ActivityExecution",
@@ -15804,7 +15804,7 @@
         "line": 35,
         "end_line": 74,
         "signature": "self, action: str, **values",
-        "ast_sha256": "314df51d1cc88c53691a62024e89499d39be6c9f23701889ddd0d0c840e0d5cd",
+        "ast_sha256": "b201aa458a8248779eba965a097a31f13074d42d12851006a3f605aa02dbebc2",
         "snippet": "    def command(self, action: str, **values) -> dict:\n        with self.store.transaction():\n            job = self.store.get()\n            if action == 'edit':\n                content = values['content']\n                if not isinstance(content,str) or not 1 <= len(content) <= 4096:\n                    raise ValueError('内容必须是 1 到 4096 个字符的文本')\n                capacity=values.get('capacity',job['capacity'])\n                if type(capacity) is not int or capacity not in (1,2):raise ValueError('并发名额必须是 1 或 2')\n                self.transition(job,'edit')\n                self.store.update_execution(job['attempt'],phase='cancelled',disposition='superseded')\n                job.update(content=content,capacity=capacity,param_version=job['param_version']+1,\n                           checks={},execution={},prepared_version=None,reason='',attempt='none')\n            elif action == 'grant':\n                expires = values['expires']; version = values.get('version',job['param_version'])\n                if type(expires) is not int or expires < 0 or type(version) is not int or version < 1:\n                    raise ValueError('授权版本和有效期必须是合法整数')\n                g = {'id':str(values['id']),'project':values.get('project',job['project']),\n                     'actor':values.get('actor',job['actor']),'version':version,'expires':expires,'revoked':False}\n                if not g['id'] or not isinstance(g['project'],str) or not g['project']:\n                    raise ValueError('授权编号和项目名称不能为空')\n                job['grants'] = [x for x in job['grants'] if x['id'] != g['id']]+[g]\n            elif action == 'revoke':\n                if not any(g['id']==values['id'] for g in job['grants']):raise ValueError('找不到这份授权')\n                for g in job['grants']:\n                    if g['id']==values['id']:g['revoked']=True\n            elif action == 'role':\n                if values['role'] not in ('engineer','viewer'):raise ValueError('操作者角色无效')\n                job['role']=values['role']\n            elif action == 'clock':\n                clock=values['clock']\n                if type(clock) is not int or clock < job['clock']:raise ValueError('时钟必须是整数，且只能向前推进')\n                job['clock']=clock\n            elif action == 'cancel':\n                self.transition(job,'cancel')\n                self.store.update_execution(job['attempt'],disposition='cancelled')\n            else:raise ValueError('不支持这项操作')\n            job['epoch']+=1; self.store.put(job)\n        self.events.emit('change','change',lambda:observation(job,outputs={'action':action,'state':job['state']}))\n        return self.store.snapshot()",
         "calls": [
           "ValueError",
@@ -15890,7 +15890,7 @@
         "line": 66,
         "end_line": 71,
         "signature": "state: str, event: str, execution=None, *, attempt=None, param_version=None",
-        "ast_sha256": "9a64fc6938686db8a0f8ceceda6e3720e8e714f31d66134beb9bfa7cf7ed2193",
+        "ast_sha256": "7b11ac44ad03aa17cdd69cd0de8259be555f22afdf68e7dba5ceaad000a7b336",
         "snippet": "def advance(state: str,event: str,execution=None,*,attempt=None,param_version=None) -> str:\n    holder=SimpleNamespace(execution_complete=lambda:completed(execution,attempt,param_version))\n    Machine(holder,states=STATES,transitions=TRANSITIONS,initial=Phase(state).value,\n            auto_transitions=False,model_attribute='phase')\n    if not holder.trigger(event):raise ValueError('两项检查尚未在本次运行中通过，不能继续提交')\n    return holder.phase",
         "calls": [
           "Machine",
@@ -15914,7 +15914,7 @@
         "line": 66,
         "end_line": 71,
         "signature": "state: str, event: str, execution=None, *, attempt=None, param_version=None",
-        "ast_sha256": "9a64fc6938686db8a0f8ceceda6e3720e8e714f31d66134beb9bfa7cf7ed2193",
+        "ast_sha256": "7b11ac44ad03aa17cdd69cd0de8259be555f22afdf68e7dba5ceaad000a7b336",
         "snippet": "def advance(state: str,event: str,execution=None,*,attempt=None,param_version=None) -> str:\n    holder=SimpleNamespace(execution_complete=lambda:completed(execution,attempt,param_version))\n    Machine(holder,states=STATES,transitions=TRANSITIONS,initial=Phase(state).value,\n            auto_transitions=False,model_attribute='phase')\n    if not holder.trigger(event):raise ValueError('两项检查尚未在本次运行中通过，不能继续提交')\n    return holder.phase",
         "calls": [
           "Machine",
@@ -15938,7 +15938,7 @@
         "line": 66,
         "end_line": 71,
         "signature": "state: str, event: str, execution=None, *, attempt=None, param_version=None",
-        "ast_sha256": "9a64fc6938686db8a0f8ceceda6e3720e8e714f31d66134beb9bfa7cf7ed2193",
+        "ast_sha256": "7b11ac44ad03aa17cdd69cd0de8259be555f22afdf68e7dba5ceaad000a7b336",
         "snippet": "def advance(state: str,event: str,execution=None,*,attempt=None,param_version=None) -> str:\n    holder=SimpleNamespace(execution_complete=lambda:completed(execution,attempt,param_version))\n    Machine(holder,states=STATES,transitions=TRANSITIONS,initial=Phase(state).value,\n            auto_transitions=False,model_attribute='phase')\n    if not holder.trigger(event):raise ValueError('两项检查尚未在本次运行中通过，不能继续提交')\n    return holder.phase",
         "calls": [
           "Machine",
@@ -15962,7 +15962,7 @@
         "line": 66,
         "end_line": 71,
         "signature": "state: str, event: str, execution=None, *, attempt=None, param_version=None",
-        "ast_sha256": "9a64fc6938686db8a0f8ceceda6e3720e8e714f31d66134beb9bfa7cf7ed2193",
+        "ast_sha256": "7b11ac44ad03aa17cdd69cd0de8259be555f22afdf68e7dba5ceaad000a7b336",
         "snippet": "def advance(state: str,event: str,execution=None,*,attempt=None,param_version=None) -> str:\n    holder=SimpleNamespace(execution_complete=lambda:completed(execution,attempt,param_version))\n    Machine(holder,states=STATES,transitions=TRANSITIONS,initial=Phase(state).value,\n            auto_transitions=False,model_attribute='phase')\n    if not holder.trigger(event):raise ValueError('两项检查尚未在本次运行中通过，不能继续提交')\n    return holder.phase",
         "calls": [
           "Machine",
@@ -15986,7 +15986,7 @@
         "line": 66,
         "end_line": 71,
         "signature": "state: str, event: str, execution=None, *, attempt=None, param_version=None",
-        "ast_sha256": "9a64fc6938686db8a0f8ceceda6e3720e8e714f31d66134beb9bfa7cf7ed2193",
+        "ast_sha256": "7b11ac44ad03aa17cdd69cd0de8259be555f22afdf68e7dba5ceaad000a7b336",
         "snippet": "def advance(state: str,event: str,execution=None,*,attempt=None,param_version=None) -> str:\n    holder=SimpleNamespace(execution_complete=lambda:completed(execution,attempt,param_version))\n    Machine(holder,states=STATES,transitions=TRANSITIONS,initial=Phase(state).value,\n            auto_transitions=False,model_attribute='phase')\n    if not holder.trigger(event):raise ValueError('两项检查尚未在本次运行中通过，不能继续提交')\n    return holder.phase",
         "calls": [
           "Machine",
@@ -16010,7 +16010,7 @@
         "line": 66,
         "end_line": 71,
         "signature": "state: str, event: str, execution=None, *, attempt=None, param_version=None",
-        "ast_sha256": "9a64fc6938686db8a0f8ceceda6e3720e8e714f31d66134beb9bfa7cf7ed2193",
+        "ast_sha256": "7b11ac44ad03aa17cdd69cd0de8259be555f22afdf68e7dba5ceaad000a7b336",
         "snippet": "def advance(state: str,event: str,execution=None,*,attempt=None,param_version=None) -> str:\n    holder=SimpleNamespace(execution_complete=lambda:completed(execution,attempt,param_version))\n    Machine(holder,states=STATES,transitions=TRANSITIONS,initial=Phase(state).value,\n            auto_transitions=False,model_attribute='phase')\n    if not holder.trigger(event):raise ValueError('两项检查尚未在本次运行中通过，不能继续提交')\n    return holder.phase",
         "calls": [
           "Machine",
@@ -16034,7 +16034,7 @@
         "line": 66,
         "end_line": 71,
         "signature": "state: str, event: str, execution=None, *, attempt=None, param_version=None",
-        "ast_sha256": "9a64fc6938686db8a0f8ceceda6e3720e8e714f31d66134beb9bfa7cf7ed2193",
+        "ast_sha256": "7b11ac44ad03aa17cdd69cd0de8259be555f22afdf68e7dba5ceaad000a7b336",
         "snippet": "def advance(state: str,event: str,execution=None,*,attempt=None,param_version=None) -> str:\n    holder=SimpleNamespace(execution_complete=lambda:completed(execution,attempt,param_version))\n    Machine(holder,states=STATES,transitions=TRANSITIONS,initial=Phase(state).value,\n            auto_transitions=False,model_attribute='phase')\n    if not holder.trigger(event):raise ValueError('两项检查尚未在本次运行中通过，不能继续提交')\n    return holder.phase",
         "calls": [
           "Machine",
@@ -16058,7 +16058,7 @@
         "line": 15,
         "end_line": 16,
         "signature": "job: dict",
-        "ast_sha256": "854f05e1b400664dd2a92e59a3e47fa6a15ef89196f1e97d1dcc857cabb58f7a",
+        "ast_sha256": "0985a1afb76ad27d53b8f4955c0dc507673d26c17afc342c17cb62a4ba71ac6b",
         "snippet": "def authorized(job: dict) -> bool:\n    return job['role'] == 'engineer' and any(eligible_grant(g,job) for g in job['grants'])",
         "calls": [
           "any",
@@ -16073,7 +16073,7 @@
         "line": 28,
         "end_line": 33,
         "signature": "self, job: dict, event: str",
-        "ast_sha256": "9054ebf37455571ae1312ebd6dbc731029f06eccb8d9f90732e0522f7923b362",
+        "ast_sha256": "73e59361a98184ce87ed88cda825d6df63eef05293daf341693441bb9b10b0e4",
         "snippet": "    def transition(self, job: dict, event: str):\n        old=job['state']\n        job['state']=advance(old,event,job.get('execution'),attempt=job['attempt'],param_version=job['param_version'])\n        self.store.db.execute('INSERT INTO journal(event,source,target,attempt,param_version) VALUES (?,?,?,?,?)',\n                              (event,old,job['state'],job['attempt'],job['param_version']))\n        if event!='edit':self.store.update_execution(job['attempt'],phase=job['state'])",
         "calls": [
           "advance",
@@ -16095,7 +16095,7 @@
         "line": 57,
         "end_line": 63,
         "signature": "execution: dict | None, attempt: str | None, param_version: int | None",
-        "ast_sha256": "bdc848b7332f2c89425872f7429678a739ba6096fbc9898e2f76186739b595ca",
+        "ast_sha256": "b4ce32871f137dca4f51215d5c7d91fc90335a7d911faeb88ee68f8b9e1b19a6",
         "snippet": "def completed(execution: dict | None, attempt: str | None, param_version: int | None) -> bool:\n    if not execution or execution.get('attempt')!=attempt or execution.get('param_version')!=param_version:\n        return False\n    return (execution.get('join',{}).get('state')=='passed'\n            and all(execution.get('activities',{}).get(a)=='succeeded' for a in EXECUTION['join']['requires'])\n            and set(execution.get('resources',{}))=={r['id'] for r in EXECUTION['resources']}\n            and all(r.get('available')==r.get('capacity') and not r.get('holders') for r in execution['resources'].values()))",
         "calls": [
           "all",
@@ -16120,7 +16120,7 @@
         "line": 148,
         "end_line": 165,
         "signature": "self, expected_version: int | None=None",
-        "ast_sha256": "11ab4e77a077f2a929a0d7a652c204189849389759f1743c5139e7537e9e8c66",
+        "ast_sha256": "70a2a3acecbe6d4ecb9fad2ea9c7ee30aba245f824c69c6beddd7dd464a44524",
         "snippet": "    def commit(self, expected_version: int | None = None) -> dict:\n        with self.store.transaction():\n            job=self.store.get()\n            if expected_version is not None and job['param_version']!=expected_version:return self.store.snapshot()\n            if job['state']!='ready':return self.store.snapshot()\n            allowed=authorized(job);version_ok=job['prepared_version']==job['param_version']\n            self.events.emit('recheck','decision',lambda:observation(job,\n                outputs={'allowed':allowed,'version_ok':version_ok},uses=['authorize','join']))\n            if not allowed or not version_ok or not job['checks']['passed']:\n                self.transition(job,'block');job['reason']='authorization_or_version_changed';self.store.put(job)\n                self.events.emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['recheck']))\n                return self.store.snapshot()\n            self.store.artifact(job['param_version'],job['checks']['checksum'])\n            self.transition(job,'publish');self.store.put(job)\n        # Commit event is emitted only after the SQLite transaction succeeded.\n        self.events.emit('commit','commit',lambda:observation(job,\n            outputs={'version':job['param_version'],'checksum':job['checks']['checksum']},uses=['recheck','checksum']))\n        return self.store.snapshot()",
         "calls": [
           "authorized",
@@ -16155,7 +16155,7 @@
         "line": 9,
         "end_line": 12,
         "signature": "grant: dict, job: dict",
-        "ast_sha256": "aa1ee3c087d5821603ac6713d747cb1d6a7f8e24f528dd21e2463a92a2d7247d",
+        "ast_sha256": "f998d9e2d0eda13561119aa1de58cfffb2ab2e34c2bec6598903673f204841a8",
         "snippet": "def eligible_grant(grant: dict, job: dict) -> bool:\n    return (grant['project'] == job['project'] and grant['actor'] == job['actor']\n            and grant['version'] == job['param_version'] and not grant['revoked']\n            and job['clock'] < grant['expires'])",
         "calls": [],
         "guards": [],
@@ -16167,7 +16167,7 @@
         "line": 102,
         "end_line": 104,
         "signature": "self",
-        "ast_sha256": "1015f3990a8dc8981f8e14a6953b45eec1b71a41326b541946b99a3cb401e736",
+        "ast_sha256": "4ea2453124460fcda3f961993be003b7a293d357228b64c798a09bfc1f6eda56",
         "snippet": "    def body(self):\n        return {'activities':dict(self.activities),'resources':deepcopy(self.resources),\n                'join':{'state':self.join_state,'pending':[a for a in self.spec['join']['requires'] if self.activities[a] not in TERMINAL]}}",
         "calls": [
           "deepcopy",
@@ -16182,7 +16182,7 @@
         "line": 111,
         "end_line": 116,
         "signature": "self, event, activity, before",
-        "ast_sha256": "4dd064b6c53bc5758f42c042724ed44e0dc5b03e16a206fe68da3c333d63f281",
+        "ast_sha256": "055bce5994421d89362990a7c18fd93f5fa28f39134771002a011f4dfaaf75a0",
         "snippet": "    def record(self,event,activity,before):\n        self.invariant();self.revision+=1\n        self.journal.append({'seq':self.revision,'event':event,'activity':activity,'before':before,'after':self.body()})\n        # Delivery never acquires this lock while holding a store transaction.\n        if self.progress:self.progress(event,self.snapshot())\n        self.changed.notify_all()",
         "calls": [
           "self.body",
@@ -16206,7 +16206,7 @@
         "line": 49,
         "end_line": 50,
         "signature": "self",
-        "ast_sha256": "212825762a191ae266e4d7aa0c65ff77f8e7bf7a1527d192465b063d6d006554",
+        "ast_sha256": "f71b625451d56df8880a6c9f482a68cd042cff4331b53f89a6b7f8827522187f",
         "snippet": "    def get(self) -> dict:\n        return json.loads(self.db.execute('SELECT document FROM job WHERE id=1').fetchone()[0])",
         "calls": [
           "json.loads",
@@ -16222,7 +16222,7 @@
         "line": 15,
         "end_line": 16,
         "signature": "job: dict",
-        "ast_sha256": "854f05e1b400664dd2a92e59a3e47fa6a15ef89196f1e97d1dcc857cabb58f7a",
+        "ast_sha256": "0985a1afb76ad27d53b8f4955c0dc507673d26c17afc342c17cb62a4ba71ac6b",
         "snippet": "def authorized(job: dict) -> bool:\n    return job['role'] == 'engineer' and any(eligible_grant(g,job) for g in job['grants'])",
         "calls": [
           "any",
@@ -16237,7 +16237,7 @@
         "line": 28,
         "end_line": 33,
         "signature": "self, job: dict, event: str",
-        "ast_sha256": "9054ebf37455571ae1312ebd6dbc731029f06eccb8d9f90732e0522f7923b362",
+        "ast_sha256": "73e59361a98184ce87ed88cda825d6df63eef05293daf341693441bb9b10b0e4",
         "snippet": "    def transition(self, job: dict, event: str):\n        old=job['state']\n        job['state']=advance(old,event,job.get('execution'),attempt=job['attempt'],param_version=job['param_version'])\n        self.store.db.execute('INSERT INTO journal(event,source,target,attempt,param_version) VALUES (?,?,?,?,?)',\n                              (event,old,job['state'],job['attempt'],job['param_version']))\n        if event!='edit':self.store.update_execution(job['attempt'],phase=job['state'])",
         "calls": [
           "advance",
@@ -16259,7 +16259,7 @@
         "line": 15,
         "end_line": 16,
         "signature": "job: dict",
-        "ast_sha256": "854f05e1b400664dd2a92e59a3e47fa6a15ef89196f1e97d1dcc857cabb58f7a",
+        "ast_sha256": "0985a1afb76ad27d53b8f4955c0dc507673d26c17afc342c17cb62a4ba71ac6b",
         "snippet": "def authorized(job: dict) -> bool:\n    return job['role'] == 'engineer' and any(eligible_grant(g,job) for g in job['grants'])",
         "calls": [
           "any",
@@ -16274,7 +16274,7 @@
         "line": 28,
         "end_line": 33,
         "signature": "self, job: dict, event: str",
-        "ast_sha256": "9054ebf37455571ae1312ebd6dbc731029f06eccb8d9f90732e0522f7923b362",
+        "ast_sha256": "73e59361a98184ce87ed88cda825d6df63eef05293daf341693441bb9b10b0e4",
         "snippet": "    def transition(self, job: dict, event: str):\n        old=job['state']\n        job['state']=advance(old,event,job.get('execution'),attempt=job['attempt'],param_version=job['param_version'])\n        self.store.db.execute('INSERT INTO journal(event,source,target,attempt,param_version) VALUES (?,?,?,?,?)',\n                              (event,old,job['state'],job['attempt'],job['param_version']))\n        if event!='edit':self.store.update_execution(job['attempt'],phase=job['state'])",
         "calls": [
           "advance",
@@ -16296,7 +16296,7 @@
         "line": 57,
         "end_line": 63,
         "signature": "execution: dict | None, attempt: str | None, param_version: int | None",
-        "ast_sha256": "bdc848b7332f2c89425872f7429678a739ba6096fbc9898e2f76186739b595ca",
+        "ast_sha256": "b4ce32871f137dca4f51215d5c7d91fc90335a7d911faeb88ee68f8b9e1b19a6",
         "snippet": "def completed(execution: dict | None, attempt: str | None, param_version: int | None) -> bool:\n    if not execution or execution.get('attempt')!=attempt or execution.get('param_version')!=param_version:\n        return False\n    return (execution.get('join',{}).get('state')=='passed'\n            and all(execution.get('activities',{}).get(a)=='succeeded' for a in EXECUTION['join']['requires'])\n            and set(execution.get('resources',{}))=={r['id'] for r in EXECUTION['resources']}\n            and all(r.get('available')==r.get('capacity') and not r.get('holders') for r in execution['resources'].values()))",
         "calls": [
           "all",

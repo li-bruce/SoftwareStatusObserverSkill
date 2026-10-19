@@ -75,7 +75,7 @@ def serve(port=8797):
                 if request.path=='/api/view':
                     if version!='live' and not historical:raise ValueError('unknown version')
                     value=session.view() if not historical else historical['views'][query.get('case',['normal'])[0]]
-                    return self.send({**value,'available_cases':list(historical['views']) if historical else ['live'],
+                    return self.send({**value,'layout_id':'delivery-example','available_cases':list(historical['views']) if historical else ['live'],
                                       'case_names':{k:v[0] for k,v in SCENARIOS.items()},'case_label':value.get('case_label','当前程序')})
                 if request.path=='/api/source':
                     sources=historical['sources'] if historical else SOURCES
@@ -83,7 +83,8 @@ def serve(port=8797):
                     return self.send({'source':sources[query['path'][0]],'build_id':manifest['build_id']})
                 if request.path=='/control':
                     return self.send((ROOT/'integrations/control.html').read_bytes(),kind='text/html; charset=utf-8')
-                names={'/':'index.html','/viewer.css':'viewer.css','/viewer.js':'viewer.js','/graph-core.js':'graph-core.js','/pixi.min.js':'pixi.min.js'}
+                names={'/':'index.html','/viewer.css':'viewer.css','/viewer.js':'viewer.js','/graph-core.js':'graph-core.js','/layout.js':'layout.js',
+                       '/pixi.min.js':'pixi.min.js','/elk.bundled.js':'elk.bundled.js','/elk-worker.min.js':'elk-worker.min.js'}
                 filename=names[request.path]
                 kind='text/html' if filename.endswith('.html') else 'text/css' if filename.endswith('.css') else 'text/javascript'
                 return self.send((ROOT/'observer_generated/static'/filename).read_bytes(),kind=kind+'; charset=utf-8')

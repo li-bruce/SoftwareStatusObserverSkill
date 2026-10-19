@@ -1,162 +1,220 @@
-import {colors as C,compact,executionIds,layoutGraph,layoutMachine,selectedConfiguration,configurations,stateLabels} from './graph-core.js';
-const $=id=>document.getElementById(id);
-const app=new PIXI.Application();
-let version='live',caseChoice='normal',step='latest';
-let view=null,graph=null,choice='latest',mode='behavior',expanded=new Set(),sourceOpen=new Set(),fullSources=new Map();
-let scale=1,pan={x:0,y:0},first=true,dirty=false,drawCount=0,lastKey='',scene=new PIXI.Container(),selected=null;
-const hits=[],metrics={frames:[],nodes:0,edges:0,texts:0};
-await app.init({resizeTo:$('viewport'),preference:'webgl',antialias:true,background:0xf3f5f6,resolution:Math.min(devicePixelRatio,2),autoDensity:true,autoStart:false});
-$('canvas-host').appendChild(app.canvas);app.stage.addChild(scene);
-const gl=app.renderer.gl;
-$('renderer').textContent=`PixiJS ${PIXI.VERSION} · ${gl?'WebGL':'无 WebGL'}`;
-app.canvas.setAttribute('aria-hidden','true');
-function visible(x,y,w,h){return x+w>=-pan.x/scale-40&&y+h>=-pan.y/scale-40&&x<=(-pan.x+app.screen.width)/scale+40&&y<=(-pan.y+app.screen.height)/scale+40;}
-function text(txt,x,y,size=12,color=C.ink,weight='400',width){
-  if(!visible(x,y,width||Math.min(700,txt.length*size*.85),size+8))return;
-  const t=new PIXI.Text({text:txt,style:{fontFamily:'Segoe UI, Microsoft YaHei, sans-serif',fontSize:size,fill:color,fontWeight:weight}});t.position.set(x,y);scene.addChild(t);metrics.texts++;return t;
+import {colors as C,executionIds,layoutGraph,selectedConfiguration,configurations,stateLabels,nodeTypes} from './graph-core.js';
+import {layoutKey,readLayout,writeLayout,placeIncremental,setPosition,togglePin,calculateLayout,applyLayout,topologyKey,GraphGesture} from './layout.js';
+const $=id=>document.getElementById(id),app=new PIXI.Application(),scene=new PIXI.Container();
+// The bundled ELK entry defaults to its Node fallback unless a factory is supplied.
+const layoutWorker=new Worker(new URL('./elk-worker.min.js',import.meta.url));
+const elk=new ELK({workerFactory:()=>layoutWorker}),gesture=new GraphGesture();
+let version='live',caseChoice='normal',choice='latest',step='latest',view=null,graph=null,selected=null;
+let scale=1,pan={x:0,y:0},expanded=new Set(),preferences=null,storageKey=null,first=true,lastKey='',dirty=false;
+let layoutEpoch=0,layoutBusy=false,layoutError=null,undo=null,detailMode=null,saveTimer=null,drawCount=0;
+const hits=[],fullSources=new Map(),metrics={nodes:0,edges:0,texts:0};
+let storage;try{storage=window.localStorage;}catch{storage={getItem(){throw Error('storage unavailable');},setItem(){throw Error('storage unavailable');}};}
+await app.init({resizeTo:$('viewport'),preference:'webgl',antialias:true,background:0xf6f8fa,resolution:Math.min(devicePixelRatio,2),autoDensity:true,autoStart:false});
+$('canvas-host').appendChild(app.canvas);app.stage.addChild(scene);app.canvas.setAttribute('aria-hidden','true');
+$('renderer').textContent='PixiJS / WebGL · ELK';
+function visible(x,y,w,h){return x+w>=-pan.x/scale-60&&y+h>=-pan.y/scale-60&&x<=(-pan.x+app.screen.width)/scale+60&&y<=(-pan.y+app.screen.height)/scale+60;}
+function text(value,x,y,size=12,color=C.ink,align='left',weight='400'){
+  const t=new PIXI.Text({text:String(value),style:{fontFamily:'Segoe UI, Microsoft YaHei, sans-serif',fontSize:size,fill:color,fontWeight:weight}});
+  t.anchor.set(align==='center'?.5:0,0);t.position.set(x,y);scene.addChild(t);metrics.texts++;return t;
 }
-function rect(x,y,w,h,fill,stroke=0,r=8,alpha=1){const g=new PIXI.Graphics().roundRect(x,y,w,h,r).fill({color:fill,alpha});if(stroke)g.stroke({color:stroke,width:1});scene.addChild(g);return g;}
-function color(state){return ({ok:C.green,active:C.green,blocked:C.orange,historical:C.blue})[state]||C.muted;}
-function button(label,x,y,w,action){rect(x,y,w,25,0xf0f5f5,0xd5e1e3,4);text(label,x+7,y+5,11,C.ink);hits.push({x,y,w,h:25,action});}
+function short(value,count=27){const chars=[...String(value)];return chars.length>count?chars.slice(0,count-1).join('')+'…':String(value);}
+function shade(b){return ({active:0x22876e,ok:0x22876e,blocked:0xbd8237,historical:0x688aa8})[b.state]||nodeTypes[b.type].color;}
+function point(b){return {x:b.x+b.w/2,y:b.y+31};}
 function drawEdges(){
-  let lane=0;
+  const lanes=new Map(),labelBoxes=[];
   for(const e of graph.edges){
     const a=graph.byId.get(e.from),b=graph.byId.get(e.to);if(!a||!b)continue;
-    const ac={x:a.x+a.w/2,y:a.y+(a.open?70:a.h/2)},bc={x:b.x+b.w/2,y:b.y+(b.open?70:b.h/2)};
-    let p,q,mx,my,g=new PIXI.Graphics();const color=e.observed?(e.current?C.green:C.blue):C.line;
-    if(a.id===b.id){p={x:a.x+a.w*.7,y:a.y};q={x:a.x+a.w*.3,y:a.y};my=a.y-24;mx=a.x+a.w/2;g.moveTo(p.x,p.y).bezierCurveTo(p.x,my-22,q.x,my-22,q.x,q.y);}
-    else if(Math.abs(bc.x-ac.x)>Math.abs(bc.y-ac.y)*.8){const dir=bc.x>ac.x?1:-1;p={x:dir>0?a.x+a.w:a.x,y:ac.y};q={x:dir>0?b.x:b.x+b.w,y:bc.y};mx=(p.x+q.x)/2;my=(p.y+q.y)/2;g.moveTo(p.x,p.y).bezierCurveTo(mx,p.y,mx,q.y,q.x,q.y);}
-    else {const dir=bc.y>ac.y?1:-1;p={x:ac.x,y:dir>0?a.y+a.h:a.y};q={x:bc.x,y:dir>0?b.y:b.y+b.h};mx=(p.x+q.x)/2;my=(p.y+q.y)/2;g.moveTo(p.x,p.y).bezierCurveTo(p.x,my,q.x,my,q.x,q.y);}
-    if(!visible(Math.min(p.x,q.x)-100,Math.min(p.y,q.y)-50,Math.abs(p.x-q.x)+200,Math.abs(p.y-q.y)+100)){g.destroy();continue;}
-    g.stroke({color,width:e.observed?2.5:1.1,alpha:e.observed?1:.75});scene.addChild(g);metrics.edges++;
-    const angle=Math.atan2(q.y-my,q.x-mx);const arrow=new PIXI.Graphics().poly([q.x,q.y,q.x-7*Math.cos(angle-.5),q.y-7*Math.sin(angle-.5),q.x-7*Math.cos(angle+.5),q.y-7*Math.sin(angle+.5)]).fill(color);scene.addChild(arrow);
-    if(scale>.43){
-      const labels=[...e.labels],shown=labels.slice(0,3).map(l=>l.length>32?l.slice(0,30)+'…':l);
-      if(labels.length>3)shown.push(`共 ${labels.length} 项条件；展开节点查看`);
-      const width=Math.min(245,Math.max(75,...shown.map(l=>l.length*6.3+16))),height=shown.length*17+9,ly=my-height/2;
-      rect(mx-width/2,ly,width,height,0xf8fbfb,0xdce7e8,4,.97);shown.forEach((label,i)=>text(label,mx-width/2+7,ly+5+i*17,10.5,e.observed?color:C.muted));
-      hits.push({x:mx-width/2,y:ly,w:width,h:height,action:()=>{selected=e.id;$('selection').textContent=labels.join(' · ')+' | '+(e.observed?'这次运行有相关记录':'这次运行尚无相关记录');}});
+    const p=point(a),q=point(b),key=[e.from,e.to].sort().join('|'),index=lanes.get(key)||0;lanes.set(key,index+1);
+    const highlight=e.from===selected||e.to===selected,col=e.observed?(e.current?0x328c75:0x718fa7):e.type==='transition'?0xa3a0b7:e.type==='contains'?0xc1ccd5:0xa8b9c7;
+    const dx=q.x-p.x,dy=q.y-p.y,length=Math.hypot(dx,dy)||1,offset=(index+1)*18;
+    let start,end,c1,c2,mid;
+    if(a===b){start={x:p.x-18,y:p.y-18};end={x:p.x+18,y:p.y-18};c1={x:p.x-68,y:p.y-95-offset};c2={x:p.x+68,y:p.y-95-offset};mid={x:p.x,y:p.y-75-offset};}
+    else{
+      start={x:p.x+dx/length*28,y:p.y+dy/length*28};end={x:q.x-dx/length*28,y:q.y-dy/length*28};
+      c1={x:start.x+dx*.32-dy/length*offset,y:start.y+dy*.32+dx/length*offset};
+      c2={x:end.x-dx*.32-dy/length*offset,y:end.y-dy*.32+dx/length*offset};
+      mid={x:(start.x+3*c1.x+3*c2.x+end.x)/8,y:(start.y+3*c1.y+3*c2.y+end.y)/8};
+    }
+    if(!visible(Math.min(p.x,q.x)-120,Math.min(p.y,q.y)-120,Math.abs(dx)+240,Math.abs(dy)+240))continue;
+    const g=new PIXI.Graphics().moveTo(start.x,start.y).bezierCurveTo(c1.x,c1.y,c2.x,c2.y,end.x,end.y).stroke({color:col,width:highlight?2.2:e.observed?1.9:1,alpha:highlight||e.observed?1:e.type==='contains'?.4:.62});scene.addChild(g);metrics.edges++;
+    const angle=Math.atan2(end.y-c2.y,end.x-c2.x);
+    if(e.type!=='contains'){const arrow=new PIXI.Graphics().poly([end.x,end.y,end.x-7*Math.cos(angle-.5),end.y-7*Math.sin(angle-.5),end.x-7*Math.cos(angle+.5),end.y-7*Math.sin(angle+.5)]).fill(col);scene.addChild(arrow);}
+    if(highlight||e.observed&&scale>.4||scale>.5&&e.type!=='contains'){
+      const font=11.5/Math.sqrt(Math.min(1,scale)),label=short([...e.labels].join(' / '),highlight?44:24),w=Math.min(390,[...label].reduce((n,c)=>n+(c.charCodeAt(0)>255?font:font*.57),0)+12),h=font+7;
+      // Put labels along the curve where they avoid nodes and previous labels.
+      const candidates=[.5,.32,.68,.2,.8].map(t=>({x:(1-t)**3*start.x+3*(1-t)**2*t*c1.x+3*(1-t)*t*t*c2.x+t**3*end.x,y:(1-t)**3*start.y+3*(1-t)**2*t*c1.y+3*(1-t)*t*t*c2.y+t**3*end.y}));
+      const collision=(x,y,b)=>x-w/2<b.x+b.w&&x+w/2>b.x&&y-h/2<b.y+b.h&&y+h/2>b.y;
+      const candidate=candidates.find(p=>!graph.boxes.some(b=>collision(p.x,p.y,b))&&!labelBoxes.some(b=>collision(p.x,p.y,b)))||(highlight?mid:null);
+      if(candidate){mid=candidate;const bg=new PIXI.Graphics().roundRect(mid.x-w/2,mid.y-h/2,w,h,4).fill({color:0xf6f8fa,alpha:.96});scene.addChild(bg);text(label,mid.x,mid.y-font/2,font,highlight?0x4c6d85:0x6a8294,'center');labelBoxes.push({x:mid.x-w/2,y:mid.y-h/2,w,h});hits.push({x:mid.x-w/2,y:mid.y-h/2,w,h,edge:e});}
     }
   }
 }
 function drawNode(b){
-  if(!visible(b.x,b.y,b.w,b.h))return;metrics.nodes++;
-  const n=b.node,accent=color(b.state),hasKids=(graph.children?.get(b.id)?.length||0)>0;
-  if(!b.open)rect(b.x,b.y,b.w,b.h,n.layer==='state'?0xf0f6f4:C.white,b.state==='declared'?0xd1dfe3:accent);
-  else rect(b.x,b.y,b.w,Math.min(54+b.rows.length*19,b.h),0xf8fcfb,0,7);
-  rect(b.x,b.y,4,Math.min(46,b.h),accent,0,2);
-  text(n.label,b.x+15,b.y+14,16,C.ink,'600',b.w-35);
-  const layer=n.execution_role==='resource'?'名额':{business:'业务',program:'函数',state:'状态',predicate:'条件'}[n.layer]||'程序';
-  text(layer,b.x+b.w-47,b.y+17,11,C.muted);
-  hits.push({id:b.id,x:b.x,y:b.y,w:b.w,h:43,action:()=>toggle(b.id)});
-  let y=b.y+48;
-  if(scale>.36){for(const row of b.rows){const tint={muted:C.muted,good:C.green,bad:C.orange,symbol:C.blue,value:C.ink}[row.role]||C.ink;text(row.text,b.x+15,y,row.role==='symbol'?12:12,tint,row.role==='symbol'?'600':'400',b.w-30);y+=19;}}
-  else text(n.source?.symbol||n.value||'',b.x+15,y,13,C.muted);
-  const actionY=b.y+55+b.rows.length*19;
-  if(hasKids)button(b.open?'− 收起内部':`＋ 查看 ${graph.children.get(b.id).length} 项内部信息`,b.x+15,actionY,145,()=>toggle(b.id));
-  if(view.manifest.bindings[b.id])button(sourceOpen.has(b.id)?'− 源码':'{ } 源码',b.x+(hasKids?174:15),actionY,84,()=>toggleSource(b.id));
-  if(b.code){
-    const cy=b.y+b.codeY;rect(b.x+12,cy,b.w-24,b.h-b.codeY-12,0xeff3f4,0xd9e3e6,6);
-    const binding=view.manifest.bindings[b.id];text(`${binding.path}:${binding.line} · 代码版本 ${view.manifest.build_id.slice(0,8)}`,b.x+22,cy+13,12,C.blue,'600');
-    if(!fullSources.has(b.id))button('完整文件',b.x+b.w-103,cy+7,80,()=>loadFullSource(b.id));
-    b.code.forEach((line,i)=>text(line,b.x+22,cy+44+i*18,11.5,C.ink,'400',b.w-40));
+  if(!visible(b.x-10,b.y-10,b.w+20,b.h+30))return;metrics.nodes++;
+  const p=point(b),style=nodeTypes[b.type],stroke=shade(b),g=new PIXI.Graphics(),r=b.type==='business'?29:24;
+  if(selected===b.id)g.circle(p.x,p.y,r+7).stroke({color:0x6497c5,width:1.5,alpha:.65});
+  if(b.type==='business'||b.type==='state'){g.circle(p.x,p.y,r).fill(0xffffff).stroke({color:stroke,width:b.state==='declared'?1.7:2.5});if(b.type==='state')g.circle(p.x,p.y,r-5).stroke({color:stroke,width:1});}
+  else if(b.type==='decision'||b.type==='data'){g.poly([p.x,p.y-r-3,p.x+r+5,p.y,p.x,p.y+r+3,p.x-r-5,p.y]).fill(0xffffff).stroke({color:stroke,width:1.8});}
+  else if(b.type==='resource'){for(let k=2;k>=0;k--)g.roundRect(p.x-25,p.y-18+k*5,50,24,7).fill(0xffffff).stroke({color:stroke,width:1.5});}
+  else{g.poly([p.x-30,p.y,p.x-17,p.y-23,p.x+17,p.y-23,p.x+30,p.y,p.x+17,p.y+23,p.x-17,p.y+23]).fill(0xffffff).stroke({color:stroke,width:1.8});}
+  scene.addChild(g);text(b.type==='business'?'业务':style.glyph,p.x,p.y-11,b.type==='business'?13:19,stroke,'center','600');
+  if(b.pinned){const pin=new PIXI.Graphics().circle(p.x+29,p.y-24,5).fill(0x4f7598);scene.addChild(pin);}
+  if(b.kids.length){text(b.open?'−':'+',p.x+38,p.y-4,16,0x467795,'center');hits.push({x:p.x+27,y:p.y-14,w:24,h:26,expand:b.id});}
+  text(short(b.node.label,19),p.x,b.y+65,14/Math.sqrt(Math.min(1,scale)),0x2b4658,'center',b.type==='business'?'600':'500');
+  if(scale>.48){
+    let rows;
+    if(b.type==='state')rows=b.rows.filter(r=>r.role==='value').slice(0,1);
+    else if(b.type==='business')rows=b.rows.filter(r=>['value','good','bad'].includes(r.role)).slice(0,2);
+    else if(b.node.field)rows=b.rows.slice(0,2);
+    else rows=[b.rows[0],...b.rows.filter(r=>r!==b.rows[0]&&['good','bad','value'].includes(r.role))].filter(Boolean).slice(0,2);
+    rows.forEach((row,i)=>text(short(row.text,29),p.x,b.y+91+i*18,11.5/Math.sqrt(Math.min(1,scale)),row.role==='bad'?0xa76d2c:row.role==='good'?0x327e6b:0x637c8d,'center'));
   }
+  hits.push({id:b.id,x:b.x,y:b.y+5,w:b.w,h:b.h-4});
 }
 function draw(){
-  dirty=false;if(!graph)return;const started=performance.now();
-  const old=scene.removeChildren();for(const c of old)c.destroy({children:true,texture:true,textureSource:true});
+  dirty=false;if(!graph)return;
+  for(const c of scene.removeChildren())c.destroy({children:true,texture:true,textureSource:true});
   scene.position.set(pan.x,pan.y);scene.scale.set(scale);hits.length=0;metrics.nodes=metrics.edges=metrics.texts=0;
-  for(const b of graph.boxes)if(b.open&&visible(b.x,b.y,b.w,b.h))rect(b.x-1,b.y-1,b.w+2,b.h+2,0xeaf0f1,0xc3d4d8,10);
-  drawEdges();for(const b of graph.boxes)drawNode(b);
-  app.renderer.render(app.stage);drawCount++;metrics.frames.push(performance.now()-started);if(metrics.frames.length>160)metrics.frames.shift();
-  $('zoom').value=Math.round(scale*100)+'%';
+  drawEdges();for(const b of graph.boxes)drawNode(b);app.renderer.render(app.stage);drawCount++;
+  $('zoom').value=Math.round(scale*100)+'%';updateSemanticGeometry();positionDetail();
 }
 function schedule(){if(!dirty){dirty=true;requestAnimationFrame(draw);}}
-function project(){if(!view)return;$('step-label').hidden=mode==='machine';const previous=graph?.byId.get(selected),anchor=previous?{x:previous.x*scale+pan.x,y:previous.y*scale+pan.y}:null;graph=mode==='machine'?layoutMachine(view,choice,sourceOpen,fullSources):layoutGraph(view,expanded,sourceOpen,fullSources,choice,step);const next=graph.byId.get(selected);if(anchor&&next){pan.x=anchor.x-next.x*scale;pan.y=anchor.y-next.y*scale;}updateSemantic();schedule();}
-function anchorMutate(id,fn){const old=graph.byId.get(id),screen=old?{x:old.x*scale+pan.x,y:old.y*scale+pan.y}:null;fn();project();const next=graph.byId.get(id);if(next&&screen){pan.x=screen.x-next.x*scale;pan.y=screen.y-next.y*scale;}schedule();}
-function toggle(id){selected=id;if(mode==='machine'){toggleSource(id);return;}if(graph.children?.has(id))anchorMutate(id,()=>expanded.has(id)?expanded.delete(id):expanded.add(id));else toggleSource(id);$('selection').textContent='正在查看：'+graph.byId.get(id)?.node.label;}
-function toggleSource(id){if(!view.manifest.bindings[id])return;anchorMutate(id,()=>sourceOpen.has(id)?sourceOpen.delete(id):sourceOpen.add(id));}
-async function loadFullSource(id){const b=view.manifest.bindings[id];const r=await fetch('/api/source?path='+encodeURIComponent(b.path)+'&version='+encodeURIComponent(version));if(!r.ok)return;const data=await r.json();if(data.build_id!==view.manifest.build_id)return;anchorMutate(id,()=>fullSources.set(id,data.source));}
-function fit(){if(!graph)return;scale=Math.max(.18,Math.min(1.12,(app.screen.width-40)/graph.width,(app.screen.height-35)/graph.height));pan={x:(app.screen.width-graph.width*scale)/2,y:(app.screen.height-graph.height*scale)/2};schedule();}
-function zoom(factor,point={x:app.screen.width/2,y:app.screen.height/2}){const next=Math.max(.15,Math.min(2.4,scale*factor));pan.x=point.x-(point.x-pan.x)*next/scale;pan.y=point.y-(point.y-pan.y)*next/scale;scale=next;schedule();}
-function updateSemantic(){
-  const host=$('semantic');host.replaceChildren();
-  for(const b of graph.boxes){const button=document.createElement('button');button.textContent=b.node.label;button.setAttribute('aria-expanded',String(!!b.open));button.onclick=()=>{toggle(b.id);};host.appendChild(button);}
-  const crumb=$('breadcrumbs');crumb.replaceChildren();
-  let n=view.model.nodes.find(n=>n.id===selected),chain=[];
-  while(n){chain.unshift(n);n=view.model.nodes.find(x=>x.id===n.parent);}
-  for(const item of chain){const button=document.createElement('button');button.textContent=item.label;button.onclick=()=>{const b=graph.byId.get(item.id);if(b){scale=Math.max(.5,Math.min(1,(app.screen.width-80)/b.w,(app.screen.height-80)/b.h));pan={x:40-b.x*scale,y:45-b.y*scale};selected=item.id;updateSemantic();schedule();}};crumb.appendChild(button);}
+function save(){
+  if(!preferences)return;preferences.expanded=[...expanded];preferences.camera={x:pan.x,y:pan.y,scale};
+  const saved=writeLayout(storage,storageKey,preferences);
+  if(!layoutBusy)$('layout-status').textContent=layoutError||(saved?'布局已保存':'本次布局未能保存');
 }
-let dragging=null;
-app.canvas.addEventListener('pointerdown',e=>{app.canvas.setPointerCapture(e.pointerId);dragging={x:e.clientX,y:e.clientY,px:pan.x,py:pan.y,moved:false};});
-app.canvas.addEventListener('pointermove',e=>{if(!dragging)return;const dx=e.clientX-dragging.x,dy=e.clientY-dragging.y;if(Math.hypot(dx,dy)>4)dragging.moved=true;if(dragging.moved){pan={x:dragging.px+dx,y:dragging.py+dy};schedule();}});
-app.canvas.addEventListener('pointerup',e=>{if(dragging&&!dragging.moved){const r=app.canvas.getBoundingClientRect(),x=(e.clientX-r.left-pan.x)/scale,y=(e.clientY-r.top-pan.y)/scale;const hit=hits.slice().reverse().find(h=>x>=h.x&&x<=h.x+h.w&&y>=h.y&&y<=h.y+h.h);if(hit)hit.action();}dragging=null;});
-app.canvas.addEventListener('pointercancel',()=>dragging=null);
+function saveSoon(){clearTimeout(saveTimer);saveTimer=setTimeout(save,180);}
+function cancelLayout(){layoutEpoch++;layoutBusy=false;layoutError=null;$('arrange').disabled=false;}
+function project(){
+  if(!view)return;
+  graph=layoutGraph(view,expanded,new Set(),new Map(),choice,step);placeIncremental(graph,preferences);
+  updateSemantic();updateActions();updateDetail();schedule();
+}
+async function arrange(initial=false){
+  if(!graph)return;const epoch=++layoutEpoch,key=topologyKey(graph),scope=storageKey,algorithm=$('layout').value;
+  const previous=JSON.stringify(preferences.positions),camera={scale,pan:{...pan}};
+  layoutBusy=true;layoutError=null;$('arrange').disabled=true;$('layout-status').textContent='正在布局…';
+  try{
+    const positions=await calculateLayout(elk,graph,preferences,algorithm);
+    if(epoch!==layoutEpoch||scope!==storageKey||!graph||key!==topologyKey(graph))return;
+    undo={positions:previous,camera};$('undo-layout').disabled=false;
+    applyLayout(graph,preferences,positions);preferences.algorithm=algorithm;fit();
+  }catch(error){if(epoch===layoutEpoch){console.error(error);layoutError='布局失败，保留原位置';}}
+  finally{if(epoch===layoutEpoch){layoutBusy=false;$('arrange').disabled=false;save();updateActions();schedule();}}
+}
+function fit(){if(!graph)return;scale=Math.max(.12,Math.min(1.05,(app.screen.width-45)/graph.width,(app.screen.height-45)/graph.height));pan={x:(app.screen.width-graph.width*scale)/2-graph.minX*scale,y:(app.screen.height-graph.height*scale)/2-graph.minY*scale};schedule();saveSoon();}
+function zoom(factor,point={x:app.screen.width/2,y:app.screen.height/2}){const next=Math.max(.12,Math.min(3,scale*factor));pan.x=point.x-(point.x-pan.x)*next/scale;pan.y=point.y-(point.y-pan.y)*next/scale;scale=next;schedule();saveSoon();}
+function select(id){selected=id;detailMode=null;$('node-details').hidden=true;updateActions();schedule();}
+function toggle(id){if(!graph?.children.has(id))return;cancelLayout();selected=id;if(expanded.has(id))expanded.delete(id);else expanded.add(id);project();save();}
+function pin(){if(!selected)return;cancelLayout();togglePin(graph,preferences,selected);updateActions();save();schedule();}
+function updateActions(){
+  const b=graph?.byId.get(selected),binding=view?.manifest.bindings[selected];
+  $('node-expand').disabled=!b?.kids.length;$('node-expand').textContent=b?.open?'收起':'展开';
+  $('pin').disabled=!b;$('pin').textContent=b?.pinned?'取消固定':'固定节点';$('details').disabled=!b;$('source').disabled=!binding;
+  $('selection').textContent=b?`${nodeTypes[b.type].label} · ${b.node.label}`+(binding?` · ${binding.path}:${binding.line}`:''):'拖动节点调整布局；双击展开内部关系。';
+}
+function updateSemantic(){
+  const host=$('semantic'),focused=document.activeElement?.dataset.nodeId;host.replaceChildren();
+  for(const b of graph.boxes){const button=document.createElement('button');button.textContent=b.node.label;button.dataset.nodeId=b.id;button.dataset.nodeType=b.type;button.setAttribute('aria-label',b.node.label);button.setAttribute('aria-expanded',String(!!b.open));button.onclick=()=>select(b.id);button.onfocus=()=>select(b.id);host.appendChild(button);}
+  if(focused){const el=[...host.children].find(e=>e.dataset.nodeId===focused);el?.focus({preventScroll:true});}
+}
+function updateSemanticGeometry(){
+  const r=app.canvas.getBoundingClientRect();
+  for(const el of $('semantic').children){const b=graph.byId.get(el.dataset.nodeId);if(b){const p=point(b);el.dataset.x=b.x;el.dataset.y=b.y;el.dataset.pinned=String(!!b.pinned);el.dataset.screenX=r.left+p.x*scale+pan.x;el.dataset.screenY=r.top+p.y*scale+pan.y;}}
+}
+function updateDetail(){
+  const b=graph?.byId.get(selected);if(!b||!detailMode){$('node-details').hidden=true;return;}
+  $('node-details').hidden=false;$('detail-title').textContent=b.node.label;
+  $('detail-rows').replaceChildren(...b.rows.map(r=>{const p=document.createElement('p');p.textContent=r.text;return p;}));
+  const binding=view.manifest.bindings[selected],source=detailMode==='source'&&binding;
+  $('source-code').hidden=!source;$('full-source').hidden=!source;
+  if(source){const key=view.manifest.build_id+':'+binding.path,full=fullSources.get(key);$('detail-title').textContent=`${binding.path}:${binding.line} · ${view.manifest.build_id.slice(0,8)}`;$('source-code').textContent=full??binding.snippet;$('full-source').hidden=!!full;}
+  positionDetail();
+}
+function positionDetail(){
+  if($('node-details').hidden||!graph?.byId.has(selected))return;
+  const b=graph.byId.get(selected),p=point(b),panel=$('node-details'),w=panel.offsetWidth,h=panel.offsetHeight;
+  panel.style.left=Math.max(10,Math.min(app.screen.width-w-10,p.x*scale+pan.x+45))+'px';
+  panel.style.top=Math.max(10,Math.min(app.screen.height-h-12,p.y*scale+pan.y-30))+'px';
+}
+function showDetail(mode){detailMode=mode;updateDetail();}
+$('full-source').onclick=async()=>{
+  const id=selected,build=view.manifest.build_id,binding=view.manifest.bindings[id],requestedVersion=version;
+  const response=await fetch('/api/source?path='+encodeURIComponent(binding.path)+'&version='+encodeURIComponent(requestedVersion));if(!response.ok)return;
+  const data=await response.json();if(view?.manifest.build_id!==build||data.build_id!==build||version!==requestedVersion)return;
+  fullSources.set(build+':'+binding.path,data.source);if(selected===id)updateDetail();
+};
+function hitAt(e){const r=app.canvas.getBoundingClientRect(),x=(e.clientX-r.left-pan.x)/scale,y=(e.clientY-r.top-pan.y)/scale;const under=hits.slice().reverse().filter(h=>x>=h.x&&x<=h.x+h.w&&y>=h.y&&y<=h.y+h.h);return under.find(h=>h.expand)||under.find(h=>h.id)||under[0];}
+app.canvas.addEventListener('pointerdown',e=>{
+  if(e.button!==0||gesture.active)return;
+  const hit=hitAt(e);cancelLayout();app.canvas.setPointerCapture(e.pointerId);
+  if(hit?.id)select(hit.id);
+  gesture.start({pointerId:e.pointerId,x:e.clientX,y:e.clientY},{node:hit?.id?graph.byId.get(hit.id):null,pan,scale});
+  gesture.active.hit=hit;app.canvas.style.cursor=hit?.id?'grabbing':'move';
+});
+app.canvas.addEventListener('pointermove',e=>{
+  const move=gesture.move({pointerId:e.pointerId,x:e.clientX,y:e.clientY});if(!move)return;
+  if(move.kind==='node')setPosition(graph,preferences,move.id,move.x,move.y);else pan={x:move.x,y:move.y};schedule();
+});
+function endDrag(e,cancelled=false){
+  const gestureEnd=gesture.end(e.pointerId);if(!gestureEnd)return;app.canvas.style.cursor='default';
+  if(!gestureEnd.moved&&!cancelled){const h=gestureEnd.hit;if(h?.expand)toggle(h.expand);else if(h?.edge){selected=null;updateActions();$('selection').textContent=[...h.edge.labels].join(' · ')+(h.edge.observed?' · 有运行记录':' · 声明关系');}else if(!h)select(null);}
+  save();schedule();
+}
+app.canvas.addEventListener('pointerup',e=>endDrag(e));app.canvas.addEventListener('pointercancel',e=>endDrag(e,true));app.canvas.addEventListener('lostpointercapture',e=>endDrag(e,true));
+app.canvas.addEventListener('dblclick',e=>{const h=hitAt(e);if(h?.id)toggle(h.id);});
 app.canvas.addEventListener('wheel',e=>{e.preventDefault();const r=app.canvas.getBoundingClientRect();zoom(Math.exp(-e.deltaY*.0015),{x:e.clientX-r.left,y:e.clientY-r.top});},{passive:false});
-$('viewport').addEventListener('keydown',e=>{if(e.key==='0')fit();if(e.key==='+'||e.key==='=')zoom(1.15);if(e.key==='-')zoom(1/1.15);if(e.key==='Escape'){$('collapse').click();}const d={ArrowLeft:[55,0],ArrowRight:[-55,0],ArrowUp:[0,55],ArrowDown:[0,-55]}[e.key];if(d){pan.x+=d[0];pan.y+=d[1];schedule();e.preventDefault();}});
-$('fit').onclick=fit;$('zoom-in').onclick=()=>zoom(1.2);$('zoom-out').onclick=()=>zoom(1/1.2);
-$('collapse').onclick=()=>{expanded.clear();sourceOpen.clear();project();fit();};
-$('expand').onclick=()=>{for(const id of view.model.graph_roots)expanded.add(id);project();fit();};
-for(const value of ['behavior','machine'])$(value+'-mode').onclick=()=>{mode=value;for(const m of ['behavior','machine'])$(m+'-mode').classList.toggle('active',m===value);project();fit();};
-$('attempt').onchange=e=>{choice=e.target.value;step='latest';lastKey='';project();};
-$('step').onchange=e=>{step=e.target.value;project();updateFacts();};
-
+$('viewport').addEventListener('keydown',e=>{
+  if(e.target.closest('#node-details'))return;
+  if(e.key==='0')fit();if(e.key==='+'||e.key==='=')zoom(1.15);if(e.key==='-')zoom(1/1.15);
+  if(e.key.toLowerCase()==='p')pin();if(e.key==='Enter'&&selected){e.preventDefault();toggle(selected);}
+  if(e.key==='Escape'){detailMode=null;select(null);}
+  const delta={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[e.key];
+  if(delta){e.preventDefault();const b=graph?.byId.get(selected),distance=e.shiftKey?80:20;cancelLayout();if(b)setPosition(graph,preferences,b.id,b.x+delta[0]*distance,b.y+delta[1]*distance);else{pan.x-=delta[0]*50;pan.y-=delta[1]*50;}save();schedule();}
+});
+$('fit').onclick=fit;$('zoom-in').onclick=()=>zoom(1.2);$('zoom-out').onclick=()=>zoom(1/1.2);$('arrange').onclick=()=>arrange();
+$('undo-layout').onclick=()=>{if(!undo)return;cancelLayout();preferences.positions=Object.assign(Object.create(null),JSON.parse(undo.positions));scale=undo.camera.scale;pan=undo.camera.pan;undo=null;$('undo-layout').disabled=true;project();save();};
+$('collapse').onclick=()=>{cancelLayout();expanded.clear();detailMode=null;project();save();};
+$('expand').onclick=()=>{cancelLayout();for(const id of view.model.graph_roots)expanded.add(id);project();save();};
+$('node-expand').onclick=()=>toggle(selected);$('pin').onclick=pin;$('details').onclick=()=>showDetail('values');$('source').onclick=()=>showDetail('source');$('close-detail').onclick=()=>{detailMode=null;updateDetail();};
+$('attempt').onchange=e=>{choice=e.target.value;step='latest';lastKey='';project();};$('step').onchange=e=>{step=e.target.value;project();updateFacts();};
 new ResizeObserver(()=>{app.renderer.resize($('viewport').clientWidth,$('viewport').clientHeight);schedule();}).observe($('viewport'));
 function updateFacts(){
-  if(!view)return;
-  const state=selectedConfiguration(view,choice,step),p=view.authority.parameters;
-  const phase=choice==='latest'?view.machine.current:state?.phase;
-  const label=view.model.machine.labels[phase]||'没有保存流程状态';
-  $('phase').textContent=(step!=='latest'&&mode==='behavior'?'流程最终状态：':'流程状态：')+label;
-  const active=configurations(view).filter(r=>r.disposition!=='interrupted'&&Object.values(r.activities).some(s=>s==='running'||s==='waiting')).length;
-  $('context').textContent=`参数版本 ${state?.param_version||p.param_version} · 本次并发名额 ${Object.values(state?.resources||{})[0]?.capacity??p.capacity??'—'}`+(active?` · ${active} 次运行仍有活动未结束`:'')+(step!=='latest'&&mode==='behavior'?` · 正在回看第 ${step} 步的检查状态`:'');
+  if(!view)return;const state=selectedConfiguration(view,choice,step),p=view.authority.parameters;
+  const phase=step!=='latest'?state?.phase:choice==='latest'?view.machine.current:state?.phase;
+  $('phase').textContent=phase?'流程状态：'+view.model.machine.labels[phase]:step!=='latest'?'回看内部活动；该时刻未记录流程状态':'尚无运行记录';
+  $('context').textContent=`参数版本 ${state?.param_version||p.param_version} · 本次名额 ${Object.values(state?.resources||{})[0]?.capacity??p.capacity??'—'}`+(step!=='latest'?` · 第 ${step} 步`:'');
 }
-function frameLabel(entry){
-  const name=view.model.nodes.find(n=>n.id===entry.activity)?.label||entry.activity;
-  const state=entry.after.activities[entry.activity];
-  return `${entry.seq} · ${entry.event==='join'?(entry.after.join.state==='passed'?'两项检查均已通过':'检查未全部通过'):entry.event==='abort'?'检查已停止':name+'：'+(stateLabels[state]||entry.event)}`;
-}
+function frameLabel(entry){const name=view.model.nodes.find(n=>n.id===entry.activity)?.label||entry.activity;return `${entry.seq} · ${entry.event==='join'?(entry.after.join.state==='passed'?'两项检查通过':'检查未全部通过'):entry.event==='abort'?'检查已停止':name+'：'+(stateLabels[entry.after.activities[entry.activity]]||entry.event)}`;}
 async function poll(){
   const requestedVersion=version,requestedCase=caseChoice;
   try{
-    const r=await fetch('/api/view?version='+encodeURIComponent(requestedVersion)+'&case='+encodeURIComponent(requestedCase),{cache:'no-store'});
-    if(!r.ok)throw Error('HTTP '+r.status);const next=await r.json();
-    if(version!==requestedVersion||caseChoice!==requestedCase)return;
-    const states=next.machine.configurations||[];
-    const key=JSON.stringify([version,caseChoice,next.manifest.build_id,next.events.at(-1)?.id,next.machine.current,next.authority.basis,next.binding_status.status,next.busy,choice,states.map(r=>[r.attempt,r.revision,r.phase])]);
-    view=next;$('empty').hidden=true;
-    const cases=next.available_cases||[];
-    if(JSON.stringify([cases,version])!==$('case').dataset.options){
-      $('case').replaceChildren(...cases.map(v=>new Option(v==='live'?'当前操作':next.case_names?.[v]||v,v)));
-      $('case').dataset.options=JSON.stringify([cases,version]);if(cases.includes(caseChoice))$('case').value=caseChoice;
-    }
+    const r=await fetch('/api/view?version='+encodeURIComponent(version)+'&case='+encodeURIComponent(caseChoice),{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);
+    const next=await r.json();if(version!==requestedVersion||caseChoice!==requestedCase)return;
+    const key=JSON.stringify([version,caseChoice,next.manifest.build_id,next.events.at(-1)?.id,next.machine.current,next.authority.basis,next.binding_status.status,next.busy,choice,next.machine.configurations?.map(r=>[r.attempt,r.revision,r.phase])]);
+    view=next;$('empty').hidden=true;$('title').textContent=(view.model.presentation.subject||'程序')+' · 运行图';
+    const nextStorageKey=layoutKey(next.layout_id?{...view.model,presentation:{...view.model.presentation,layout_id:next.layout_id}}:view.model);
+    if(nextStorageKey!==storageKey){cancelLayout();const restored=readLayout(storage,nextStorageKey);preferences=restored.state;storageKey=nextStorageKey;expanded=new Set(restored.restored?preferences.expanded:view.model.presentation.default_expanded||[]);if(preferences.camera){scale=preferences.camera.scale;pan={x:preferences.camera.x,y:preferences.camera.y};}first=true;$('layout').value=preferences.algorithm;}
+    const cases=next.available_cases||[];if(JSON.stringify([cases,version])!==$('case').dataset.options){$('case').replaceChildren(...cases.map(v=>new Option(v==='live'?'当前操作':next.case_names?.[v]||v,v)));$('case').dataset.options=JSON.stringify([cases,version]);if(cases.includes(caseChoice))$('case').value=caseChoice;}
     const gaps=next.health.errors+next.health.dropped+(next.health.parse_errors||0)+(next.health.truncated||0);
-    $('connection').textContent=gaps?'有 '+gaps+' 条调用记录未采集':next.historical?'查看保存的运行':'已连接当前程序';
-    const stale=next.binding_status.status!=='current';$('binding').textContent=stale?'程序尚未加载修改后的代码':'代码版本 '+next.manifest.build_id.slice(0,8);$('binding').classList.toggle('stale',stale);
+    $('connection').textContent=gaps?'有 '+gaps+' 条记录缺失':next.historical?'保存的运行':'已连接';
+    const stale=next.binding_status.status!=='current';$('binding').textContent=stale?'程序尚未加载新代码':'代码版本 '+next.manifest.build_id.slice(0,8);$('binding').classList.toggle('stale',stale);
     if(key!==lastKey){
-      lastKey=key;
-      const selectedRun=selectedConfiguration(view,choice);
-      $('step').replaceChildren(new Option('最新状态','latest'),...(selectedRun?.journal||[]).map(e=>new Option(frameLabel(e),String(e.seq))));
-      if(selectedRun?.journal.some(e=>String(e.seq)===step))$('step').value=step;else step='latest';
-      const select=$('attempt');select.replaceChildren(new Option('当前运行','latest'));
-      const runs=configurations(view);
-      if(runs.length){runs.forEach((run,i)=>select.add(new Option(`第 ${i+1} 次 · 参数版本 ${run.param_version}`+(run.disposition==='superseded'?'（已被新版本替代）':run.disposition==='interrupted'?'（执行已中断）':''),run.attempt)));}
-      else for(const id of executionIds(view))select.add(new Option('运行 '+id,id));
-      select.value=choice;project();if(first){fit();first=false;}
+      lastKey=key;const run=selectedConfiguration(view,choice);
+      $('step').replaceChildren(new Option('最新状态','latest'),...(run?.journal||[]).map(e=>new Option(frameLabel(e),String(e.seq))));if(run?.journal.some(e=>String(e.seq)===step))$('step').value=step;else step='latest';
+      const select=$('attempt');select.replaceChildren(new Option('当前运行','latest'));const runs=configurations(view);
+      if(runs.length)runs.forEach((run,i)=>select.add(new Option(`第 ${i+1} 次 · 版本 ${run.param_version}`+(run.disposition==='superseded'?'（旧版本）':run.disposition==='interrupted'?'（中断）':''),run.attempt)));else for(const id of executionIds(view))select.add(new Option('运行 '+id,id));select.value=choice;
+      const hasPositions=Object.keys(preferences.positions).length>0;project();
+      if(first){first=false;if(!hasPositions)arrange(true);else if(!preferences.camera)fit();}saveSoon();
     }
     updateFacts();
-  }catch(e){console.error(e);$('connection').textContent='暂时无法连接程序';$('empty').textContent='正在等待程序重新连接。';if(!view)$('empty').hidden=false;}
+  }catch(error){console.error(error);$('connection').textContent='暂时无法连接程序';if(!view){$('empty').hidden=false;$('empty').textContent='正在等待程序连接。';}}
   finally{setTimeout(poll,400);}
 }
-// Readable geometry and metrics are used by the local browser tests, not to synthesize observations.
-window.graphDebug={get view(){return view;},get graph(){return graph;},get expanded(){return [...expanded];},get sourceOpen(){return [...sourceOpen];},get metrics(){return {...metrics,drawCount,webgl:!!gl};},get camera(){return {scale,pan};},center(id){const b=graph.byId.get(id),r=app.canvas.getBoundingClientRect();return {x:r.left+(b.x+Math.min(120,b.w/2))*scale+pan.x,y:r.top+(b.y+25)*scale+pan.y};},focus(id){const b=graph.byId.get(id);scale=.9;pan={x:30-b.x*scale,y:25-b.y*scale};schedule();},async benchmark(count=2000){const original=graph;const nodes=[];for(let i=0;i<count;i++){nodes.push({id:'synthetic.'+i,node:{id:'synthetic.'+i,label:'规模夹具 '+i,kind:'function',layer:'program',source:{symbol:'fixture.compute'}},x:(i%50)*390,y:Math.floor(i/50)*210,w:340,h:150,rows:[{text:'value: number = '+i,role:'value'}],kids:[],state:'declared'});}graph={boxes:nodes,byId:new Map(nodes.map(n=>[n.id,n])),edges:nodes.slice(1).map((n,i)=>({from:nodes[i].id,to:n.id,type:'data',labels:new Set(['fixture']),observed:false})),children:new Map(),width:19500,height:Math.ceil(count/50)*210};const saved={scale,pan:{...pan}};scale=.8;pan={x:0,y:0};const times=[];for(let i=0;i<35;i++){pan.x=-i*33;const st=performance.now();draw();times.push(performance.now()-st);await new Promise(requestAnimationFrame);}const stats={synthetic:true,count,edges:graph.edges.length,visibleNodes:metrics.nodes,webgl:!!gl,medianMs:times.sort((a,b)=>a-b)[17],p95Ms:times[33]};graph=original;scale=saved.scale;pan=saved.pan;schedule();return stats;}};
-fetch('/api/versions').then(r=>r.json()).then(v=>{$('version').replaceChildren(...v.versions.map(x=>new Option(x==='live'?'当前程序':x,x)));});
-function clearSelection(){
-  choice='latest';step='latest';lastKey='';first=true;selected=null;expanded.clear();sourceOpen.clear();fullSources.clear();
-  $('selection').textContent='点击节点查看内部状态和函数，点击源码查看实现。';
-  $('phase').textContent='正在加载所选运行';$('context').textContent='';$('binding').textContent='';
-  view=null;graph=null;for(const c of scene.removeChildren())c.destroy({children:true});app.renderer.render(app.stage);
-}
-$('version').onchange=e=>{version=e.target.value;caseChoice='normal';clearSelection();};
-$('case').onchange=e=>{caseChoice=e.target.value;clearSelection();};
+function changeView(){cancelLayout();choice='latest';step='latest';lastKey='';selected=null;detailMode=null;view=null;graph=null;for(const c of scene.removeChildren())c.destroy({children:true});app.renderer.render(app.stage);$('node-details').hidden=true;}
+$('version').onchange=e=>{version=e.target.value;caseChoice='normal';changeView();};$('case').onchange=e=>{caseChoice=e.target.value;changeView();};
+fetch('/api/versions').then(r=>r.json()).then(v=>$('version').replaceChildren(...v.versions.map(x=>new Option(x==='live'?'当前程序':x,x)))).catch(()=>{});
+// Read-only debugging data; UI actions use the same pointer/keyboard handlers as users.
+window.graphDebug={get graph(){return graph;},get view(){return view;},get camera(){return {scale,pan:{...pan}};},get metrics(){return {...metrics,drawCount,webgl:!!app.renderer.gl};},get layoutBusy(){return layoutBusy;}};
 poll();

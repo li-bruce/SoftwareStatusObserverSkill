@@ -14,6 +14,9 @@ def check():
     for source in scripts:
         copy = ROOT/'examples/delivery/observer_generated/runtime'/source.name
         assert source.read_bytes() == copy.read_bytes(), f'Runtime copy is stale: {source.name}'
+    assets = SKILL/'assets/stategraph-viewer'
+    for name in ('graph-core.js', 'layout.js', 'viewer.js', 'viewer.css', 'index.html', 'elk.bundled.js', 'elk-worker.min.js', 'ELK-LICENSE.md'):
+        assert (assets/name).read_bytes() == (ROOT/'examples/delivery/observer_generated/static'/name).read_bytes(), f'Graph template copy is stale: {name}'
     missing = []
     for source in [*ROOT.glob('README*.md'), *ROOT.glob('docs/*.md'), *ROOT.glob('examples/delivery/README*.md'),
                    *SKILL.rglob('*.md')]:

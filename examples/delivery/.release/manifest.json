@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "build_id": "672fd64f798597eb49dfd130c100d1793f7c36da7f5a026a1e2408bca0192e12",
+  "build_id": "644602e13cf063e66f6e9124114fcd1ffb51d09f2a337e5d733b7153aa8222a9",
   "files": {
     "app/__init__.py": "a829ebb4042211c3a39bf40646855698375b065069bbbd2aa61daba1d8e6a51c",
     "app/checks.py": "c9eb8458cc5020c52f31b9c8a65bb772e401af1d03b8771315d07d913158ea52",
@@ -11,11 +11,11 @@
     "integrations/__init__.py": "b32f9f9ea0b6003a61bf784e9a3e45f4e84cd574b5511a24c027d5c7dd438a55",
     "integrations/bo_adapter.py": "64d1dc2d946116e9398558a3b403a2af70bda9ece4a1875a4dc45eb66d9c33cd",
     "integrations/bo_scenarios.py": "0447906894d6f6f78f3e797392c7c128a3cda0a9f3b9b8af0bc0f59a45f00cd7",
-    "integrations/bo_server.py": "ac27ae3a659e99def265904c758e8fb388dd7d38aef2310d6e03acd1bcf0d627",
+    "integrations/bo_server.py": "0b727821e0ca1f66751a6a9998190cd63472095e3a1bb164d10de99374a8872d",
     "requirements.txt": "6ea77a899e6267ddbcba1051cccb2c7a26af68f5551983a2cd681fa71e1e64a7",
-    "tooling/build_graph.py": "01e164ec53066a8accc59edc88bb169a8a7a7ec95fedb4449f137524dcd4f073"
+    "tooling/build_graph.py": "1c3f70700f41f89829672b9a6cb175ea7004888130d2c1217b015129f2284b5c"
   },
-  "model_hash": "2dc44300c73536e78136d172e678f36e6e4ea3f8eadc264add91fb996303fff8",
+  "model_hash": "89d6e6aafc673d6035d475fd76ff4c5ff75325fbf4be6631fa40e1246efa6d35",
   "intent_hash": "6a9c072fc75d3f0bf0bc9d2708e06af4589a15984f66819191a80f9240848f56",
   "model_revision": "0.1.0",
   "bindings": {

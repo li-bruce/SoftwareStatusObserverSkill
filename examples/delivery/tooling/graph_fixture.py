@@ -14,7 +14,7 @@ def main():
     job = run['authority']
     view = {'model': model, 'manifest': loaded, 'events': run['events'],
             'health': run['health'], 'binding_status': {'status': 'current'},
-            'machine': {'current': job['state'], 'configurations': job['executions']},
+            'machine': {'current': job['state'], 'journal': job['journal'], 'configurations': job['executions']},
             'authority': {'basis': {k: job[k] for k in ('param_version', 'epoch', 'clock')},
                           'parameters': job, 'effects': job['effects'], 'state': job['state']}}
     (ROOT/'scratch').mkdir(exist_ok=True)

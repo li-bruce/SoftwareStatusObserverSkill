@@ -48,7 +48,13 @@
     "package.json",
     "README_CORE.md",
     "LICENSE",
-    "THIRD_PARTY_NOTICES.md"
+    "THIRD_PARTY_NOTICES.md",
+    "integrations/bo_view/layout.js",
+    "observer_generated/static/layout.js",
+    "observer_generated/static/elk.bundled.js",
+    "observer_generated/static/elk-worker.min.js",
+    "observer_generated/static/ELK-LICENSE.md",
+    "tests/test_graph_layout.mjs"
   ],
   "acceptance": "acceptance.json",
   "slice_depth": 1,
@@ -126,6 +132,10 @@
     [
       "node",
       "tests/test_graph_projection.mjs"
+    ],
+    [
+      "node",
+      "tests/test_graph_layout.mjs"
     ]
   ],
   "timeout_seconds": 90,

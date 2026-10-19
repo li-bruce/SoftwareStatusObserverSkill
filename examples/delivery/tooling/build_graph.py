@@ -76,8 +76,8 @@ def build():
     roots=['flow.input','flow.permission','flow.checks','flow.commit','flow.wait']
     model={'schema_version':3,'revision':revision,'intent':'intent.json','source_files':files,'nodes':nodes,'edges':edges,
            'overview':[{'node':n,'x':i*400,'y':0} for i,n in enumerate(roots)],'graph_roots':roots,'machine':machine,
-           'presentation':{'subject':'数据交付','inline_machine_events':['cancel','edit'],'execution_projection':'inline',
-                           'default_expanded':[]},
+           'presentation':{'subject':'数据交付','layout_id':'delivery-example','execution_projection':'inline',
+                           'default_expanded':['flow.checks']},
            'scope':{'observable':['declared activity instances, capacity and waiting','authorization and parameter versions','committed SQLite effects'],
                     'unknowns':['unselected ordinary function locals','external services','process-crash worker restoration']}}
     model=enrich(model,scan(ROOT,[p for p in files if p.startswith('app/')]),depth=1)
