@@ -10,9 +10,9 @@ import copy
 import json
 from pathlib import Path
 try:
-    from .behavior_model import contained, digest, read
+    from .behavior_model import ast_fingerprint, contained, digest, read
 except ImportError:
-    from behavior_model import contained, digest, read
+    from behavior_model import ast_fingerprint, contained, digest, read
 
 
 def key(path, name):
@@ -55,7 +55,7 @@ def parse_unit(path, source):
             item = {"id": key(path, name), "path": path, "symbol": name,
                     "kind": "class" if is_class else "function", "class": class_name,
                     "line": node.lineno, "end_line": node.end_lineno,
-                    "ast_hash": digest(ast.dump(node, include_attributes=False).encode()),
+                    "ast_hash": ast_fingerprint(node),
                     "signature": name if is_class else ast.unparse(node.args),
                     "parameters": [], "returns": None, "calls": [], "predicates": [], "fields": []}
             if not is_class:

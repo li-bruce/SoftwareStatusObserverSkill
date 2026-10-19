@@ -13,11 +13,13 @@ failure and retry rules before implementation. Let me inspect decision
 conditions, key parameters and responsible functions in the runtime graph.
 ```
 
-The Skill should first identify actors, triggers, objects, outcomes and waiting conditions. It asks about missing rules that change execution, reuses existing answers, and keeps unanswered questions open. An AI recommendation is not a user decision. See `assets/discovery.example.json`; validate a record with:
+The Skill should first identify actors, triggers, objects, outcomes and waiting conditions. It asks about missing rules that change execution, reuses existing answers, and keeps unanswered questions open. An AI recommendation is not a user decision. See [discovery.example.json](../skills/business-observer/assets/discovery.example.json). Here `<skill>` is the installed `business-observer` directory:
 
 ```text
 python <skill>/scripts/requirements_dialogue.py check --file discovery.json
 ```
+
+If you copy the example to `discovery.json`, D1 is deliberately unresolved. A nonzero exit is expected until an answer is obtained and the record updated.
 
 When integrated into change checks, unresolved blocking questions prevent acceptance. The script validates records and links; reviewers still need to assess whether questions are complete and answers were understood correctly.
 
@@ -30,6 +32,8 @@ When integrated into change checks, unresolved blocking questions prevent accept
 | Local code structure and source | Which function owns this step, and where is its implementation? |
 
 The top-level “checking” state is a summary. Each run retains the waiting, running and completion state of every declared activity. Folding nodes only changes presentation. Run identity, parameter version and build version keep records distinct; missing observations are not inferred as success.
+
+After expanding nodes, click “显示完整图” (fit graph), then zoom or pan as needed.
 
 ## Edit code and keep the graph synchronized
 

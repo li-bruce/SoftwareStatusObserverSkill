@@ -20,6 +20,29 @@ def digest(value):
     return hashlib.sha256(raw).hexdigest()
 
 
+def ast_fingerprint(node):
+    """Hash syntax consistently across Python 3.11-3.13 AST schemas.
+
+    New, empty generic-parameter fields do not change existing Python code.
+    Nonempty parameters and defaults remain part of the fingerprint.
+    """
+    def normalize(value):
+        if isinstance(value, ast.AST):
+            fields = {}
+            for name, child in ast.iter_fields(value):
+                if name == "type_params" and child == []:
+                    continue
+                if name == "default_value" and child is None:
+                    continue
+                fields[name] = normalize(child)
+            return {"node": type(value).__name__, "fields": fields}
+        if isinstance(value, list):
+            return [normalize(child) for child in value]
+        # repr preserves the types of constants, including bytes and complex values.
+        return {"value": repr(value)}
+    return digest(normalize(node))
+
+
 def contained(root, name):
     root = Path(root).absolute().resolve()
     rel = Path(name)
@@ -96,7 +119,7 @@ def symbols(path):
                 line = min([n.lineno] + [d.lineno for d in n.decorator_list])
                 result[name] = {"line": line, "end_line": n.end_lineno,
                     "signature": ast.unparse(n.args) if hasattr(n, "args") else name,
-                    "ast_sha256": digest(ast.dump(n, include_attributes=False).encode()),
+                    "ast_sha256": ast_fingerprint(n),
                     "snippet": "\n".join(source.splitlines()[line-1:n.end_lineno]),
                     "calls": sorted({ast.unparse(c.func) for c in ast.walk(n) if isinstance(c, ast.Call)}),
                     "guards": [{"line": c.lineno, "expression": ast.unparse(c.test)} for c in ast.walk(n) if isinstance(c, (ast.If, ast.IfExp))]}

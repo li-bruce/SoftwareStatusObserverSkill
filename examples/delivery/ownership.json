@@ -101,12 +101,12 @@
     "THIRD_PARTY_NOTICES.md"
   ],
   "managed_hashes": {
-    "observer_generated/behavior.json": "9b122305295e127827dce999009d2fadcc31dc7beaa1947e9c80cb1e916ae4ca",
+    "observer_generated/behavior.json": "5077bc05dae0708bbfbc4a588b5b78f962082e42679d4c397cdfb7060eaf8617",
     "observer_generated/runtime/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "observer_generated/runtime/architecture_guard.py": "ff82147f8ed61e7d7473bbc59a3cedacf546117c71e397d0cf032a83270a852a",
-    "observer_generated/runtime/behavior_model.py": "8d8db0eebe2ba43711118fdddcd13147c1031cdcad3ed2d717f65a29af81bff1",
+    "observer_generated/runtime/behavior_model.py": "37af8d5926a29eb525773048f3e5e7190e4b7e2239a0a8f858108593924c16b4",
     "observer_generated/runtime/change_sync.py": "e6e2e859bbd8557b8faf17a3bf7607ec166e419750e698beb79dfff74ddc44c9",
-    "observer_generated/runtime/code_structure.py": "c770e8008e5048d68400f4a62b9e3c81401118879cdf118c50a56b25d8259f3b",
+    "observer_generated/runtime/code_structure.py": "01dad9cda1d248150301598fea1186e698c2f3ca62026f5735befbcb74c9c681",
     "observer_generated/runtime/execution_contract.py": "9502b2d348bb8ee00c05288ca3d064d151365292fdef597c156c178871635b78",
     "observer_generated/runtime/model_tool.py": "47b80a2a5d376ef81f34cd91cb050ce58714c3f85ed1212a842c2081bca0d291",
     "observer_generated/runtime/probe.py": "6e12b7cb0d89278b9562435e20eefa339993a1114720dd0f8dac15626d011807",
@@ -162,6 +162,14 @@
         "observer_generated/runtime/code_structure.py",
         "observer_generated/runtime/model_tool.py",
         "observer_generated/static/graph-core.js"
+      ]
+    },
+    {
+      "reason": "Normalize AST fingerprints for Python 3.11-3.13; preserve nonempty generic parameters and changes to program syntax",
+      "changed": [
+        "observer_generated/behavior.json",
+        "observer_generated/runtime/behavior_model.py",
+        "observer_generated/runtime/code_structure.py"
       ]
     }
   ]

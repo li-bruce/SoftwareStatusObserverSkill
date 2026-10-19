@@ -11,9 +11,10 @@ First public release / 首次公开发布。
 - Synthetic delivery example, live PixiJS graph, scenario replay and core-only packaging.
 - Bilingual installation and usage guides, pinned Python dependencies and MIT license.
 - Portable Python command resolution and deterministic generated-file line endings.
+- Stable source fingerprints across Python 3.11–3.13 AST schemas.
 - Fix for a stale HTTP state snapshot paired with a completed operation flag.
 
-Reproduce validation with `python tools/verify.py`: 22 clarification tests,
+Reproduce validation with `python tools/verify.py`: 5 AST compatibility tests, 22 clarification tests,
 13 clarification workflow steps, 30 business/activity tests, 16 scenarios in
 3 observation modes, 14 graph assertions, installation/HTTP checks and execution
 of the observer-free core package. These are automated checks, not human usability

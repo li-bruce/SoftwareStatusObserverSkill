@@ -14,11 +14,13 @@
 再开发程序，并让我能从运行图看到判断条件、关键参数和对应函数。
 ```
 
-Skill 应先整理谁触发什么操作、涉及哪些对象、成功或等待的条件，再询问会改变执行结果的缺失规则。已经回答的内容直接引用；尚未回答的问题保留为未决，不把 AI 的建议当成用户决定。示例记录在 `assets/discovery.example.json`，检查命令为：
+Skill 应先整理谁触发什么操作、涉及哪些对象、成功或等待的条件，再询问会改变执行结果的缺失规则。已经回答的内容直接引用；尚未回答的问题保留为未决，不把 AI 的建议当成用户决定。完整记录见 [discovery.example.json](../skills/business-observer/assets/discovery.example.json)。`<skill>` 表示安装后的 `business-observer` 目录：
 
 ```text
 python <skill>/scripts/requirements_dialogue.py check --file discovery.json
 ```
+
+将示例复制为 `discovery.json` 时，D1 故意保留为未决问题；此时检查返回非零属于预期，需要取得回答并更新记录。
 
 涉及权限、提交、等待或恢复的关键问题未解决时，已接入的变更检查会拒绝验收。独立脚本只能校验记录和关联，问题是否完整、回答是否理解正确仍需审阅。
 
@@ -31,6 +33,8 @@ python <skill>/scripts/requirements_dialogue.py check --file discovery.json
 | 局部程序结构与源码 | 哪个函数负责这一步，调用和实现在哪里？ |
 
 主流程的“正在检查”是汇总。内部活动的等待、执行、完成等状态仍保存在每次运行中，可以展开和查询；折叠图不会删除状态。记录按运行身份、参数版本和构建版本对应，缺失数据不推测为成功。
+
+展开节点后，点“显示完整图”调整视野，再按需放大或拖动。
 
 ## 修改代码时
 

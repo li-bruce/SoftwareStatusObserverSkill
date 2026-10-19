@@ -16,6 +16,7 @@ def run(cwd, *args):
 def main():
     (ROOT/'.validation').mkdir(exist_ok=True)
     run(ROOT, 'tools/check_package.py')
+    run(ROOT, 'tests/test_ast_fingerprint.py')
     run(ROOT, 'tests/test_requirements_dialogue.py')
     run(ROOT, 'tests/test_clarification_gate.py')
     prepare()  # Refuse stale source/review before any re-verification.

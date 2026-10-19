@@ -116,7 +116,7 @@
       "parent": "flow.input",
       "code_evidence": {
         "symbol": "app/service.py::Delivery.prepare",
-        "ast_hash": "3fc20305477e3a0035b7dda566114be5489c609f5f5e6b3ebfce2b0f7cc6462f",
+        "ast_hash": "29735bb6943957e832292b262d628627c215d9105d6f07541d8f24ee4e3b08fd",
         "origin": "python-ast"
       }
     },
@@ -139,7 +139,7 @@
       "parent": "flow.input",
       "code_evidence": {
         "symbol": "app/service.py::Delivery.execute",
-        "ast_hash": "15bf228cd2e9d67fca9485708137386f0bfb9e9e548fa89024f3679da2187bcf",
+        "ast_hash": "3d956091fe42826f56612fd7c94b52d8700ff409675512edbbd643607e932e0d",
         "origin": "python-ast"
       }
     },
@@ -166,7 +166,7 @@
       "predicate": "engineer AND ANY eligible grant",
       "code_evidence": {
         "symbol": "app/service.py::authorized",
-        "ast_hash": "854f05e1b400664dd2a92e59a3e47fa6a15ef89196f1e97d1dcc857cabb58f7a",
+        "ast_hash": "0985a1afb76ad27d53b8f4955c0dc507673d26c17afc342c17cb62a4ba71ac6b",
         "origin": "python-ast"
       }
     },
@@ -210,7 +210,7 @@
       "execution_role": "activity",
       "code_evidence": {
         "symbol": "app/checks.py::checksum",
-        "ast_hash": "b6f0dc0ef292c9447fc66d0c0aeb3dafe9d7c58df9489bcc95b00ae634a3fff9",
+        "ast_hash": "0db7844048b44cf26d3fef68e2ca06031988cea67496cadf12afe9eebd0f6a53",
         "origin": "python-ast"
       }
     },
@@ -237,7 +237,7 @@
       "execution_role": "activity",
       "code_evidence": {
         "symbol": "app/checks.py::privacy_check",
-        "ast_hash": "682bac723e31b4b5d23b16fc216048b138ced02e4923ac1223da7040170b03b3",
+        "ast_hash": "3d46dc489ea89566c24915c121af8400e48202422149692bc0439465e8670793",
         "origin": "python-ast"
       }
     },
@@ -265,7 +265,7 @@
       "predicate": "ALL checks passed",
       "code_evidence": {
         "symbol": "app/workflow.py::ActivityExecution.join",
-        "ast_hash": "7e8538e991500971122ddad934e6a28c68f4be4e5441d12e523c511e144de817",
+        "ast_hash": "d5e4d5b2326c8438eb397d383e846b04741143aa19714e29493b634dfb94e7f5",
         "origin": "python-ast"
       }
     },
@@ -286,7 +286,7 @@
       "parent": "workers",
       "code_evidence": {
         "symbol": "app/workflow.py::ActivityExecution.__init__",
-        "ast_hash": "4240cdef93893ce8c368a780e542d311bbdb188a89fca3f0f0de12399e189ba8",
+        "ast_hash": "88b2618f0b94a5fecf7d893ebe0ba8f2bf65a18a125b5cab989909033fe2b758",
         "origin": "python-ast"
       }
     },
@@ -307,7 +307,7 @@
       "parent": "workers",
       "code_evidence": {
         "symbol": "app/workflow.py::ActivityExecution.finish",
-        "ast_hash": "ef694bd37a0e6b775245886160c6a711e678df0d80c8a3fa1499668bce39501d",
+        "ast_hash": "4c617e9c91d0d227eea7796d1bf55a48360be76873e89e2853bf45335e328fe3",
         "origin": "python-ast"
       }
     },
@@ -328,7 +328,7 @@
       "parent": "workers",
       "code_evidence": {
         "symbol": "app/workflow.py::ActivityExecution.invariant",
-        "ast_hash": "9e10f3b1c6fddad31ff4c3047b2a73d95ac2fa048face1b34931136f6456946e",
+        "ast_hash": "62dab588548a16b91f90889477cf1add5df35c48d54aa57c115e7f71356dbbff",
         "origin": "python-ast"
       }
     },
@@ -349,7 +349,7 @@
       "parent": "workers",
       "code_evidence": {
         "symbol": "app/workflow.py::ActivityExecution.snapshot",
-        "ast_hash": "e9012e1b9e21b16a17f9868162f84069a6e66cfc7e5dfd0c59258fa3cacacb74",
+        "ast_hash": "2374e0bb677c29fa8a8dfded574d3d22759f1d6d3f6d5a325e09168bd2aa8d25",
         "origin": "python-ast"
       }
     },
@@ -370,7 +370,7 @@
       "parent": "workers",
       "code_evidence": {
         "symbol": "app/service.py::Delivery.execution_progress",
-        "ast_hash": "81a7c44e1f9d4ae0bbe977449f844f86ffeee10937248e6a84e611ddc6f19df0",
+        "ast_hash": "2db2dbf27111af1cb1268901c7429c8484b00ebfbdbfe05caab75cfffb9c9806",
         "origin": "python-ast"
       }
     },
@@ -391,7 +391,7 @@
       "parent": "join",
       "code_evidence": {
         "symbol": "app/workflow.py::ActivityExecution.abort",
-        "ast_hash": "11836ec4a87db23bd257761dc951f8f94319060a5cdbe8c46a1ec11d5df11308",
+        "ast_hash": "3d59646698d2c8e375c49e6feae8cc9761e9651541f8ddfd3cb24115d86980c0",
         "origin": "python-ast"
       }
     },
@@ -412,7 +412,7 @@
       "parent": "execution.progress",
       "code_evidence": {
         "symbol": "app/store.py::Store.execution",
-        "ast_hash": "2d178fc49e2fc7abd1510ff187467fb237066613ca21c42278fc0b7b35e9f3c9",
+        "ast_hash": "0e2e11dc198b531ea5ebdf68a384988b8345582f35ef7e5a7b58d617b12e39c3",
         "origin": "python-ast"
       }
     },
@@ -433,7 +433,7 @@
       "parent": "execution.progress",
       "code_evidence": {
         "symbol": "app/store.py::Store.put_execution",
-        "ast_hash": "2ed7618a21fc06b933bcf09c21bcc5a465941c9b76e0d070c24d6e7fdf47a4a5",
+        "ast_hash": "c362a0b729bb3ccdc02f6307f9691a5fd9488bdde2ba80c0c6144204320b4b5b",
         "origin": "python-ast"
       }
     },
@@ -454,7 +454,7 @@
       "parent": "execution.progress",
       "code_evidence": {
         "symbol": "app/store.py::Store.update_execution",
-        "ast_hash": "9367e04f361760e42a175f9aea171eaad0359de5c8c0042d804cecb6e4bda747",
+        "ast_hash": "43cd6ad907a4a408528edff3d9f2a75973a44c3e6727d1787c1e86e15a272c12",
         "origin": "python-ast"
       }
     },
@@ -475,7 +475,7 @@
       "parent": "execution.progress",
       "code_evidence": {
         "symbol": "app/store.py::Store.snapshot",
-        "ast_hash": "2cdf65666d3f0e1ff0bb154979560e4e62ebf07ef7f1d72308aa4fff983135f7",
+        "ast_hash": "c343a95d367952111fc9242f79ee9315a78325d5141de1c9e2f6917ea63e9afb",
         "origin": "python-ast"
       }
     },
@@ -499,7 +499,7 @@
       "parent": "flow.commit",
       "code_evidence": {
         "symbol": "app/service.py::Delivery.commit",
-        "ast_hash": "11ab4e77a077f2a929a0d7a652c204189849389759f1743c5139e7537e9e8c66",
+        "ast_hash": "70a2a3acecbe6d4ecb9fad2ea9c7ee30aba245f824c69c6beddd7dd464a44524",
         "origin": "python-ast"
       }
     },
@@ -523,7 +523,7 @@
       "parent": "flow.commit",
       "code_evidence": {
         "symbol": "app/service.py::Delivery.commit",
-        "ast_hash": "11ab4e77a077f2a929a0d7a652c204189849389759f1743c5139e7537e9e8c66",
+        "ast_hash": "70a2a3acecbe6d4ecb9fad2ea9c7ee30aba245f824c69c6beddd7dd464a44524",
         "origin": "python-ast"
       }
     },
@@ -546,7 +546,7 @@
       "parent": "flow.wait",
       "code_evidence": {
         "symbol": "app/service.py::Delivery.prepare",
-        "ast_hash": "3fc20305477e3a0035b7dda566114be5489c609f5f5e6b3ebfce2b0f7cc6462f",
+        "ast_hash": "29735bb6943957e832292b262d628627c215d9105d6f07541d8f24ee4e3b08fd",
         "origin": "python-ast"
       }
     },
@@ -570,7 +570,7 @@
       "parent": "flow.wait",
       "code_evidence": {
         "symbol": "app/service.py::Delivery.command",
-        "ast_hash": "314df51d1cc88c53691a62024e89499d39be6c9f23701889ddd0d0c840e0d5cd",
+        "ast_hash": "b201aa458a8248779eba965a097a31f13074d42d12851006a3f605aa02dbebc2",
         "origin": "python-ast"
       }
     },
@@ -712,7 +712,7 @@
       "signature": "job: dict",
       "code_evidence": {
         "symbol": "app/service.py::authorized",
-        "ast_hash": "854f05e1b400664dd2a92e59a3e47fa6a15ef89196f1e97d1dcc857cabb58f7a",
+        "ast_hash": "0985a1afb76ad27d53b8f4955c0dc507673d26c17afc342c17cb62a4ba71ac6b",
         "parameters": [
           {
             "name": "job",
@@ -742,7 +742,7 @@
       "signature": "self, job: dict, event: str",
       "code_evidence": {
         "symbol": "app/service.py::Delivery.transition",
-        "ast_hash": "9054ebf37455571ae1312ebd6dbc731029f06eccb8d9f90732e0522f7923b362",
+        "ast_hash": "73e59361a98184ce87ed88cda825d6df63eef05293daf341693441bb9b10b0e4",
         "parameters": [
           {
             "name": "self",
@@ -780,7 +780,7 @@
       "signature": "execution: dict | None, attempt: str | None, param_version: int | None",
       "code_evidence": {
         "symbol": "app/workflow.py::completed",
-        "ast_hash": "bdc848b7332f2c89425872f7429678a739ba6096fbc9898e2f76186739b595ca",
+        "ast_hash": "b4ce32871f137dca4f51215d5c7d91fc90335a7d911faeb88ee68f8b9e1b19a6",
         "parameters": [
           {
             "name": "execution",
@@ -818,7 +818,7 @@
       "signature": "self, expected_version: int | None=None",
       "code_evidence": {
         "symbol": "app/service.py::Delivery.commit",
-        "ast_hash": "11ab4e77a077f2a929a0d7a652c204189849389759f1743c5139e7537e9e8c66",
+        "ast_hash": "70a2a3acecbe6d4ecb9fad2ea9c7ee30aba245f824c69c6beddd7dd464a44524",
         "parameters": [
           {
             "name": "self",
@@ -852,7 +852,7 @@
       "signature": "grant: dict, job: dict",
       "code_evidence": {
         "symbol": "app/service.py::eligible_grant",
-        "ast_hash": "aa1ee3c087d5821603ac6713d747cb1d6a7f8e24f528dd21e2463a92a2d7247d",
+        "ast_hash": "f998d9e2d0eda13561119aa1de58cfffb2ab2e34c2bec6598903673f204841a8",
         "parameters": [
           {
             "name": "grant",
@@ -886,7 +886,7 @@
       "signature": "self",
       "code_evidence": {
         "symbol": "app/workflow.py::ActivityExecution.body",
-        "ast_hash": "1015f3990a8dc8981f8e14a6953b45eec1b71a41326b541946b99a3cb401e736",
+        "ast_hash": "4ea2453124460fcda3f961993be003b7a293d357228b64c798a09bfc1f6eda56",
         "parameters": [
           {
             "name": "self",
@@ -916,7 +916,7 @@
       "signature": "self, event, activity, before",
       "code_evidence": {
         "symbol": "app/workflow.py::ActivityExecution.record",
-        "ast_hash": "4dd064b6c53bc5758f42c042724ed44e0dc5b03e16a206fe68da3c333d63f281",
+        "ast_hash": "055bce5994421d89362990a7c18fd93f5fa28f39134771002a011f4dfaaf75a0",
         "parameters": [
           {
             "name": "self",
@@ -958,7 +958,7 @@
       "signature": "self",
       "code_evidence": {
         "symbol": "app/store.py::Store.get",
-        "ast_hash": "212825762a191ae266e4d7aa0c65ff77f8e7bf7a1527d192465b063d6d006554",
+        "ast_hash": "f71b625451d56df8880a6c9f482a68cd042cff4331b53f89a6b7f8827522187f",
         "parameters": [
           {
             "name": "self",
@@ -988,7 +988,7 @@
       "signature": "job: dict",
       "code_evidence": {
         "symbol": "app/service.py::authorized",
-        "ast_hash": "854f05e1b400664dd2a92e59a3e47fa6a15ef89196f1e97d1dcc857cabb58f7a",
+        "ast_hash": "0985a1afb76ad27d53b8f4955c0dc507673d26c17afc342c17cb62a4ba71ac6b",
         "parameters": [
           {
             "name": "job",
@@ -1018,7 +1018,7 @@
       "signature": "self, job: dict, event: str",
       "code_evidence": {
         "symbol": "app/service.py::Delivery.transition",
-        "ast_hash": "9054ebf37455571ae1312ebd6dbc731029f06eccb8d9f90732e0522f7923b362",
+        "ast_hash": "73e59361a98184ce87ed88cda825d6df63eef05293daf341693441bb9b10b0e4",
         "parameters": [
           {
             "name": "self",
@@ -1056,7 +1056,7 @@
       "signature": "job: dict",
       "code_evidence": {
         "symbol": "app/service.py::authorized",
-        "ast_hash": "854f05e1b400664dd2a92e59a3e47fa6a15ef89196f1e97d1dcc857cabb58f7a",
+        "ast_hash": "0985a1afb76ad27d53b8f4955c0dc507673d26c17afc342c17cb62a4ba71ac6b",
         "parameters": [
           {
             "name": "job",
@@ -1086,7 +1086,7 @@
       "signature": "self, job: dict, event: str",
       "code_evidence": {
         "symbol": "app/service.py::Delivery.transition",
-        "ast_hash": "9054ebf37455571ae1312ebd6dbc731029f06eccb8d9f90732e0522f7923b362",
+        "ast_hash": "73e59361a98184ce87ed88cda825d6df63eef05293daf341693441bb9b10b0e4",
         "parameters": [
           {
             "name": "self",
@@ -1124,7 +1124,7 @@
       "signature": "execution: dict | None, attempt: str | None, param_version: int | None",
       "code_evidence": {
         "symbol": "app/workflow.py::completed",
-        "ast_hash": "bdc848b7332f2c89425872f7429678a739ba6096fbc9898e2f76186739b595ca",
+        "ast_hash": "b4ce32871f137dca4f51215d5c7d91fc90335a7d911faeb88ee68f8b9e1b19a6",
         "parameters": [
           {
             "name": "execution",
