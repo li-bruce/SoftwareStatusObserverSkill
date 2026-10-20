@@ -120,11 +120,11 @@
     "observer_generated/static/elk-worker.min.js": "e4f5c51c6f2fd564bb64e52e81c4a85a316ef2f24f8b90e1db5eb886c765b030",
     "observer_generated/static/elk.bundled.js": "1222e44f953ce7746af23801e723708f8e6f436b8b377a6a5fc7552f34a307b3",
     "observer_generated/static/graph-core.js": "4ece0198d450a7dd2e5f4d4ffca33322b862df2fed3b43a75aa60208f41abb0f",
-    "observer_generated/static/index.html": "8d580a3e57f4496004e52c8bb6622ea9f2624551140002af60d9771d94af0849",
-    "observer_generated/static/layout.js": "18435fbcdcf8a29628c70ae1bfefeaaa7fb3096615d5e9185d419a82c75047f4",
+    "observer_generated/static/index.html": "7318354421f782b9416d708aed669feedacffa6bf7474e6a667a2b17e47dc9ac",
+    "observer_generated/static/layout.js": "ac3976d2a53f4c65fc24a41f7d8325149f6441c7c6c002bd78b5639e67178335",
     "observer_generated/static/pixi.min.js": "06d9ef9823e743518793083c296d801e752db128cb1f519fbabe37e1259567ea",
-    "observer_generated/static/viewer.css": "5a1779b1bdf45b1ba7c31adc71de1a9cf0d552541ae0c76d69e287c485ddb670",
-    "observer_generated/static/viewer.js": "8cf8b20caee6f0cbd0f9f973151558837a898e43af3bc9f9144f5be3734fee0f"
+    "observer_generated/static/viewer.css": "a362327210ec47192a8cf6b3ae599bf83e3f3bc090c069db69a6d749dce59fab",
+    "observer_generated/static/viewer.js": "10687166b47a8cef3ca0d0f924b17150519352732837b0611d31697748b5db68"
   },
   "regenerations": [
     {
@@ -207,6 +207,22 @@
     {
       "reason": "Use a native browser Worker explicitly for ELK; keep layout failure visible and retain positions.",
       "changed": [
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "Add persistent display names, notes and focus without changing model identities, facts or layout coordinates.",
+      "changed": [
+        "observer_generated/static/index.html",
+        "observer_generated/static/layout.js",
+        "observer_generated/static/viewer.css",
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "Prioritize the nearest rendered glyph over overlapping label rectangles when dragging or selecting nodes.",
+      "changed": [
+        "observer_generated/static/layout.js",
         "observer_generated/static/viewer.js"
       ]
     }

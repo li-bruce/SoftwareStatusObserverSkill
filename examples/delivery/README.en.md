@@ -21,6 +21,8 @@ Open the [graph](http://127.0.0.1:8797/) and [control page](http://127.0.0.1:879
 
 Business, function and state nodes share one graph. Drag nodes to move them; positions are saved in this browser. Pin selected nodes to preserve their position during automatic layout. Choose layered or stress layout, then click **自动布局**. Double-click to expand, drag the background to pan, and use the wheel to zoom.
 
+Select **名称与备注** to edit a display name or note; typing saves automatically. Original names and source links remain intact. Reload restores focus, and reopening a parent restores its nested expansion. Preferences stay in this browser at the same website address; clearing site data removes them.
+
 Capacity 2 allows both activities to run simultaneously. Each activity state belongs to a specific run; **运行** (run) preserves records from older parameter versions.
 
 ## Try these cases

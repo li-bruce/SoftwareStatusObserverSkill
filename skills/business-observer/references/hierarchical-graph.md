@@ -18,6 +18,14 @@
 - 自动布局由用户明确触发；新视图首次打开可自动计算。固定节点保持精确坐标，其余节点参与重排。提供撤销。
 - 存储不可用或空间已满时说明本次未保存，不能显示“已保存”。异步布局期间发生拖拽、切换版本或展开时，废弃旧布局结果。
 
+## 名称与备注
+
+选中任意类型节点后点“名称与备注”。显示名称和备注在输入时保存，备注摘要直接显示在节点旁；“恢复原名”仅清除自定义名称，保留备注。详细信息仍给出原始名称，函数和参数的源码身份保持不变。
+
+个人标注放在视图偏好中，以稳定节点 ID 为键。它们不写回模型、源码、事件或权限规则；AI 重新生成名称时仍优先显示个人名称。按原 ID 保留暂时折叠或旧版本节点的标注，节点 ID 真正迁移时需要显式迁移，不能凭名称相似自动套用。刷新恢复关注节点与多层展开范围，离开页面前保存最后的视野变化。
+
+参考实现保存在当前浏览器、同一网站地址的 localStorage 中；清除网站数据会删除偏好，不提供跨浏览器或跨设备同步。旧版本的坐标和展开记录可直接读取，不因新增标注字段而重置。
+
 参考实现使用 ELK.js 0.12.0：层次布局采用 layered 算法，强调有向关系；关系布局采用 stress 算法，按图距离组织节点。ELK 在本地 Web Worker 中执行。坐标合并保留固定节点，再处理与节点标签范围的重叠。手动拖动允许任意放置，只有再次布局才会调整未固定的节点。
 
 上述交互借鉴 yWorks 的增量布局原则：采用已有坐标，局部变化时保持开发者对图中位置的记忆。这里使用 ELK，并不包含或复现 yFiles 的专有实现。参考：[yWorks Incremental Layout](https://docs.yworks.com/yfiles-html/dguide/layout-incremental_layout/)、[Hierarchical Layout](https://docs.yworks.com/yfiles-html/api/HierarchicalLayout/)、[ELK.js](https://github.com/kieler/elkjs)、[ELK Stress](https://eclipse.dev/elk/reference/algorithms/org-eclipse-elk-stress.html)。
@@ -29,3 +37,5 @@
 API 保留原模型、manifest、events、authority 和 machine。建议增加稳定的 `layout_id`，让同一项目的当前运行与历史版本共享布局。模型的 `graph_roots`、`parent` 和 `presentation.default_expanded` 控制展开范围；不再用 `machine_layout` 另建状态画布。`/api/source?path=` 只返回已绑定源码及 build_id。
 
 验证真实拖拽、空白平移、刷新恢复、固定节点、两种算法、增量展开、撤销以及节点到源码的连接。历史与当前运行、缺失与真实值必须保持可辨。自动测试不是真人易用性证据；大图性能需单独量测，不能由 WebGL 或一次小图测试推断。
+
+额外验证业务/函数/参数/状态节点的标注保存、多层折叠再展开、生成名称变化后保留个人名称、恢复原名保留备注，以及存储失败和旧布局兼容。ReBAC 的同图表达见 [规则与判定依赖图](rebac-graph.md)。

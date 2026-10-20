@@ -21,3 +21,8 @@ are available in the [upstream project](https://github.com/kieler/elkjs) and its
 [0.12.0 npm source package](https://registry.npmjs.org/elkjs/-/elkjs-0.12.0.tgz).
 The yWorks documentation informed the incremental interaction design; no yFiles
 code is included and this project does not claim to implement yFiles algorithms.
+
+The active viewer's `viewer.js`, `graph-core.js`, `layout.js` and `viewer.css` are
+original project code under MIT. There is no proprietary styling library or remote
+font dependency. `tools/check_package.py` checks the reviewed browser bundle hashes,
+license files and script entrypoints so a dependency change requires another review.

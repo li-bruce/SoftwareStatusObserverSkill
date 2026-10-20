@@ -37,6 +37,12 @@ Business, function, state, parameter and resource nodes share one canvas, with d
 
 Drag nodes to position them; drag the background to pan. Positions, expansion and camera settings are saved in this browser and restored after reload. Runtime updates only change displayed facts. Select “固定节点” (pin, shortcut P) to preserve an exact position during automatic layout. Choose layered or stress layout, click “自动布局”, and undo if needed. Use “显示完整图” to fit the graph and zoom for details. Layout preferences do not change application state or authorization.
 
+Select any node and choose “名称与备注” (name and note). Edits save as you type. Business, function, parameter and state nodes are supported. “恢复原名” restores the generated name while keeping the note. Source identities and runtime facts stay unchanged. Regeneration preserves personal labels; reload restores focus and nested expansion. Folding a parent retains its children's expansion choices.
+
+Preferences are local to this browser and website address. Clearing site data removes them; they do not sync across devices. Storage failures are shown explicitly.
+
+All active layout and styling components are open source: PixiJS (MIT), ELK.js (EPL-2.0), and original JS/CSS (MIT). No yFiles code is included. See [third-party notices](../THIRD_PARTY_NOTICES.md) and the [ReBAC graph design](../skills/business-observer/references/rebac-graph.md) (Chinese, design only; no engine integration yet).
+
 ## Edit code and keep the graph synchronized
 
 From `examples/delivery`:

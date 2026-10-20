@@ -1,5 +1,5 @@
 import {colors as C,executionIds,layoutGraph,selectedConfiguration,configurations,stateLabels,nodeTypes} from './graph-core.js';
-import {layoutKey,readLayout,writeLayout,placeIncremental,setPosition,togglePin,calculateLayout,applyLayout,topologyKey,GraphGesture} from './layout.js';
+import {layoutKey,readLayout,writeLayout,placeIncremental,setPosition,togglePin,calculateLayout,applyLayout,topologyKey,GraphGesture,annotationFor,displayName,setAnnotation,pickHit} from './layout.js';
 const $=id=>document.getElementById(id),app=new PIXI.Application(),scene=new PIXI.Container();
 // The bundled ELK entry defaults to its Node fallback unless a factory is supplied.
 const layoutWorker=new Worker(new URL('./elk-worker.min.js',import.meta.url));
@@ -59,8 +59,10 @@ function drawNode(b){
   else{g.poly([p.x-30,p.y,p.x-17,p.y-23,p.x+17,p.y-23,p.x+30,p.y,p.x+17,p.y+23,p.x-17,p.y+23]).fill(0xffffff).stroke({color:stroke,width:1.8});}
   scene.addChild(g);text(b.type==='business'?'业务':style.glyph,p.x,p.y-11,b.type==='business'?13:19,stroke,'center','600');
   if(b.pinned){const pin=new PIXI.Graphics().circle(p.x+29,p.y-24,5).fill(0x4f7598);scene.addChild(pin);}
+  const annotation=annotationFor(preferences,b.id);
+  if(annotation.label||annotation.note)text('✎',p.x-35,p.y-31,14,0x5075b5,'center');
   if(b.kids.length){text(b.open?'−':'+',p.x+38,p.y-4,16,0x467795,'center');hits.push({x:p.x+27,y:p.y-14,w:24,h:26,expand:b.id});}
-  text(short(b.node.label,19),p.x,b.y+65,14/Math.sqrt(Math.min(1,scale)),0x2b4658,'center',b.type==='business'?'600':'500');
+  text(short(displayName(b.node,preferences),19),p.x,b.y+65,14/Math.sqrt(Math.min(1,scale)),0x2b4658,'center',b.type==='business'?'600':'500');
   if(scale>.48){
     let rows;
     if(b.type==='state')rows=b.rows.filter(r=>r.role==='value').slice(0,1);
@@ -68,8 +70,9 @@ function drawNode(b){
     else if(b.node.field)rows=b.rows.slice(0,2);
     else rows=[b.rows[0],...b.rows.filter(r=>r!==b.rows[0]&&['good','bad','value'].includes(r.role))].filter(Boolean).slice(0,2);
     rows.forEach((row,i)=>text(short(row.text,29),p.x,b.y+91+i*18,11.5/Math.sqrt(Math.min(1,scale)),row.role==='bad'?0xa76d2c:row.role==='good'?0x327e6b:0x637c8d,'center'));
+    if(annotation.note)text(short('备注：'+annotation.note.replace(/\s+/g,' '),27),p.x,b.y+b.h-19,11.5/Math.sqrt(Math.min(1,scale)),0x5075b5,'center');
   }
-  hits.push({id:b.id,x:b.x,y:b.y+5,w:b.w,h:b.h-4});
+  hits.push({id:b.id,x:b.x,y:b.y+5,w:b.w,h:b.h-4,cx:p.x,cy:p.y,r:r+6});
 }
 function draw(){
   dirty=false;if(!graph)return;
@@ -80,15 +83,18 @@ function draw(){
 }
 function schedule(){if(!dirty){dirty=true;requestAnimationFrame(draw);}}
 function save(){
-  if(!preferences)return;preferences.expanded=[...expanded];preferences.camera={x:pan.x,y:pan.y,scale};
+  if(!preferences)return;preferences.expanded=[...expanded];preferences.camera={x:pan.x,y:pan.y,scale};preferences.focus=selected;
   const saved=writeLayout(storage,storageKey,preferences);
-  if(!layoutBusy)$('layout-status').textContent=layoutError||(saved?'布局已保存':'本次布局未能保存');
+  if(!layoutBusy)$('layout-status').textContent=layoutError||(saved?'视图已保存':'本次视图未能保存');
 }
 function saveSoon(){clearTimeout(saveTimer);saveTimer=setTimeout(save,180);}
+window.addEventListener('pagehide',save);
 function cancelLayout(){layoutEpoch++;layoutBusy=false;layoutError=null;$('arrange').disabled=false;}
 function project(){
   if(!view)return;
-  graph=layoutGraph(view,expanded,new Set(),new Map(),choice,step);placeIncremental(graph,preferences);
+  graph=layoutGraph(view,expanded,new Set(),new Map(),choice,step);
+  for(const b of graph.boxes){b.baseHeight=b.h;b.h+=annotationFor(preferences,b.id).note?22:0;}
+  placeIncremental(graph,preferences);
   updateSemantic();updateActions();updateDetail();schedule();
 }
 async function arrange(initial=false){
@@ -105,18 +111,18 @@ async function arrange(initial=false){
 }
 function fit(){if(!graph)return;scale=Math.max(.12,Math.min(1.05,(app.screen.width-45)/graph.width,(app.screen.height-45)/graph.height));pan={x:(app.screen.width-graph.width*scale)/2-graph.minX*scale,y:(app.screen.height-graph.height*scale)/2-graph.minY*scale};schedule();saveSoon();}
 function zoom(factor,point={x:app.screen.width/2,y:app.screen.height/2}){const next=Math.max(.12,Math.min(3,scale*factor));pan.x=point.x-(point.x-pan.x)*next/scale;pan.y=point.y-(point.y-pan.y)*next/scale;scale=next;schedule();saveSoon();}
-function select(id){selected=id;detailMode=null;$('node-details').hidden=true;updateActions();schedule();}
+function select(id){selected=id;detailMode=null;$('node-details').hidden=true;updateActions();schedule();saveSoon();}
 function toggle(id){if(!graph?.children.has(id))return;cancelLayout();selected=id;if(expanded.has(id))expanded.delete(id);else expanded.add(id);project();save();}
 function pin(){if(!selected)return;cancelLayout();togglePin(graph,preferences,selected);updateActions();save();schedule();}
 function updateActions(){
   const b=graph?.byId.get(selected),binding=view?.manifest.bindings[selected];
   $('node-expand').disabled=!b?.kids.length;$('node-expand').textContent=b?.open?'收起':'展开';
-  $('pin').disabled=!b;$('pin').textContent=b?.pinned?'取消固定':'固定节点';$('details').disabled=!b;$('source').disabled=!binding;
-  $('selection').textContent=b?`${nodeTypes[b.type].label} · ${b.node.label}`+(binding?` · ${binding.path}:${binding.line}`:''):'拖动节点调整布局；双击展开内部关系。';
+  $('pin').disabled=!b;$('pin').textContent=b?.pinned?'取消固定':'固定节点';$('annotate').disabled=!b;$('details').disabled=!b;$('source').disabled=!binding;
+  $('selection').textContent=b?`${nodeTypes[b.type].label} · ${displayName(b.node,preferences)}`+(binding?` · ${binding.path}:${binding.line}`:''):'拖动节点调整布局；双击展开内部关系。';
 }
 function updateSemantic(){
   const host=$('semantic'),focused=document.activeElement?.dataset.nodeId;host.replaceChildren();
-  for(const b of graph.boxes){const button=document.createElement('button');button.textContent=b.node.label;button.dataset.nodeId=b.id;button.dataset.nodeType=b.type;button.setAttribute('aria-label',b.node.label);button.setAttribute('aria-expanded',String(!!b.open));button.onclick=()=>select(b.id);button.onfocus=()=>select(b.id);host.appendChild(button);}
+  for(const b of graph.boxes){const button=document.createElement('button'),name=displayName(b.node,preferences);button.textContent=name;button.dataset.nodeId=b.id;button.dataset.nodeType=b.type;button.setAttribute('aria-label',name);button.setAttribute('aria-expanded',String(!!b.open));button.onclick=()=>select(b.id);button.onfocus=()=>{if(selected!==b.id)select(b.id);};host.appendChild(button);}
   if(focused){const el=[...host.children].find(e=>e.dataset.nodeId===focused);el?.focus({preventScroll:true});}
 }
 function updateSemanticGeometry(){
@@ -125,8 +131,12 @@ function updateSemanticGeometry(){
 }
 function updateDetail(){
   const b=graph?.byId.get(selected);if(!b||!detailMode){$('node-details').hidden=true;return;}
-  $('node-details').hidden=false;$('detail-title').textContent=b.node.label;
-  $('detail-rows').replaceChildren(...b.rows.map(r=>{const p=document.createElement('p');p.textContent=r.text;return p;}));
+  const annotation=annotationFor(preferences,b.id),editing=detailMode==='annotation';
+  $('node-details').hidden=false;$('detail-title').textContent=displayName(b.node,preferences);
+  $('annotation-form').hidden=!editing;
+  const rows=[...(annotation.label||editing?[{text:'原名：'+b.node.label}]:[]),
+    ...(editing?[{text:'节点：'+b.id}]:b.rows),...(!editing&&annotation.note?[{text:'备注：'+annotation.note}]:[])];
+  $('detail-rows').replaceChildren(...rows.map(r=>{const p=document.createElement('p');p.textContent=r.text;return p;}));
   const binding=view.manifest.bindings[selected],source=detailMode==='source'&&binding;
   $('source-code').hidden=!source;$('full-source').hidden=!source;
   if(source){const key=view.manifest.build_id+':'+binding.path,full=fullSources.get(key);$('detail-title').textContent=`${binding.path}:${binding.line} · ${view.manifest.build_id.slice(0,8)}`;$('source-code').textContent=full??binding.snippet;$('full-source').hidden=!!full;}
@@ -139,13 +149,28 @@ function positionDetail(){
   panel.style.top=Math.max(10,Math.min(app.screen.height-h-12,p.y*scale+pan.y-30))+'px';
 }
 function showDetail(mode){detailMode=mode;updateDetail();}
+function editAnnotation(){
+  if(!graph?.byId.has(selected))return;const b=graph.byId.get(selected),annotation=annotationFor(preferences,selected);
+  $('node-name').value=annotation.label;$('node-name').placeholder=b.node.label;$('node-note').value=annotation.note;
+  showDetail('annotation');$('node-name').focus({preventScroll:true});
+}
+function saveAnnotation(){
+  const b=graph?.byId.get(selected);if(!b||detailMode!=='annotation')return;
+  cancelLayout();const annotation=setAnnotation(preferences,selected,{label:$('node-name').value,note:$('node-note').value});
+  b.h=b.baseHeight+(annotation.note?22:0);placeIncremental(graph,preferences);
+  for(const el of $('semantic').children){const node=graph.byId.get(el.dataset.nodeId)?.node;if(node){const name=displayName(node,preferences);el.textContent=name;el.setAttribute('aria-label',name);}}
+  updateActions();updateDetail();save();schedule();
+}
+$('node-name').oninput=saveAnnotation;$('node-note').oninput=saveAnnotation;
+$('restore-name').onclick=()=>{$('node-name').value='';saveAnnotation();};
+$('annotation-form').onsubmit=e=>{e.preventDefault();saveAnnotation();detailMode=null;updateDetail();$('viewport').focus({preventScroll:true});};
 $('full-source').onclick=async()=>{
   const id=selected,build=view.manifest.build_id,binding=view.manifest.bindings[id],requestedVersion=version;
   const response=await fetch('/api/source?path='+encodeURIComponent(binding.path)+'&version='+encodeURIComponent(requestedVersion));if(!response.ok)return;
   const data=await response.json();if(view?.manifest.build_id!==build||data.build_id!==build||version!==requestedVersion)return;
   fullSources.set(build+':'+binding.path,data.source);if(selected===id)updateDetail();
 };
-function hitAt(e){const r=app.canvas.getBoundingClientRect(),x=(e.clientX-r.left-pan.x)/scale,y=(e.clientY-r.top-pan.y)/scale;const under=hits.slice().reverse().filter(h=>x>=h.x&&x<=h.x+h.w&&y>=h.y&&y<=h.y+h.h);return under.find(h=>h.expand)||under.find(h=>h.id)||under[0];}
+function hitAt(e){const r=app.canvas.getBoundingClientRect();return pickHit(hits,(e.clientX-r.left-pan.x)/scale,(e.clientY-r.top-pan.y)/scale);}
 app.canvas.addEventListener('pointerdown',e=>{
   if(e.button!==0||gesture.active)return;
   const hit=hitAt(e);cancelLayout();app.canvas.setPointerCapture(e.pointerId);
@@ -178,6 +203,7 @@ $('undo-layout').onclick=()=>{if(!undo)return;cancelLayout();preferences.positio
 $('collapse').onclick=()=>{cancelLayout();expanded.clear();detailMode=null;project();save();};
 $('expand').onclick=()=>{cancelLayout();for(const id of view.model.graph_roots)expanded.add(id);project();save();};
 $('node-expand').onclick=()=>toggle(selected);$('pin').onclick=pin;$('details').onclick=()=>showDetail('values');$('source').onclick=()=>showDetail('source');$('close-detail').onclick=()=>{detailMode=null;updateDetail();};
+$('annotate').onclick=editAnnotation;
 $('attempt').onchange=e=>{choice=e.target.value;step='latest';lastKey='';project();};$('step').onchange=e=>{step=e.target.value;project();updateFacts();};
 new ResizeObserver(()=>{app.renderer.resize($('viewport').clientWidth,$('viewport').clientHeight);schedule();}).observe($('viewport'));
 function updateFacts(){
@@ -195,7 +221,7 @@ async function poll(){
     const key=JSON.stringify([version,caseChoice,next.manifest.build_id,next.events.at(-1)?.id,next.machine.current,next.authority.basis,next.binding_status.status,next.busy,choice,next.machine.configurations?.map(r=>[r.attempt,r.revision,r.phase])]);
     view=next;$('empty').hidden=true;$('title').textContent=(view.model.presentation.subject||'程序')+' · 运行图';
     const nextStorageKey=layoutKey(next.layout_id?{...view.model,presentation:{...view.model.presentation,layout_id:next.layout_id}}:view.model);
-    if(nextStorageKey!==storageKey){cancelLayout();const restored=readLayout(storage,nextStorageKey);preferences=restored.state;storageKey=nextStorageKey;expanded=new Set(restored.restored?preferences.expanded:view.model.presentation.default_expanded||[]);if(preferences.camera){scale=preferences.camera.scale;pan={x:preferences.camera.x,y:preferences.camera.y};}first=true;$('layout').value=preferences.algorithm;}
+    if(nextStorageKey!==storageKey){cancelLayout();const restored=readLayout(storage,nextStorageKey);preferences=restored.state;storageKey=nextStorageKey;selected=preferences.focus;expanded=new Set(restored.restored?preferences.expanded:view.model.presentation.default_expanded||[]);if(preferences.camera){scale=preferences.camera.scale;pan={x:preferences.camera.x,y:preferences.camera.y};}first=true;$('layout').value=preferences.algorithm;}
     const cases=next.available_cases||[];if(JSON.stringify([cases,version])!==$('case').dataset.options){$('case').replaceChildren(...cases.map(v=>new Option(v==='live'?'当前操作':next.case_names?.[v]||v,v)));$('case').dataset.options=JSON.stringify([cases,version]);if(cases.includes(caseChoice))$('case').value=caseChoice;}
     const gaps=next.health.errors+next.health.dropped+(next.health.parse_errors||0)+(next.health.truncated||0);
     $('connection').textContent=gaps?'有 '+gaps+' 条记录缺失':next.historical?'保存的运行':'已连接';
@@ -212,7 +238,7 @@ async function poll(){
   }catch(error){console.error(error);$('connection').textContent='暂时无法连接程序';if(!view){$('empty').hidden=false;$('empty').textContent='正在等待程序连接。';}}
   finally{setTimeout(poll,400);}
 }
-function changeView(){cancelLayout();choice='latest';step='latest';lastKey='';selected=null;detailMode=null;view=null;graph=null;for(const c of scene.removeChildren())c.destroy({children:true});app.renderer.render(app.stage);$('node-details').hidden=true;}
+function changeView(){cancelLayout();choice='latest';step='latest';lastKey='';detailMode=null;view=null;graph=null;for(const c of scene.removeChildren())c.destroy({children:true});app.renderer.render(app.stage);$('node-details').hidden=true;}
 $('version').onchange=e=>{version=e.target.value;caseChoice='normal';changeView();};$('case').onchange=e=>{caseChoice=e.target.value;changeView();};
 fetch('/api/versions').then(r=>r.json()).then(v=>$('version').replaceChildren(...v.versions.map(x=>new Option(x==='live'?'当前程序':x,x)))).catch(()=>{});
 // Read-only debugging data; UI actions use the same pointer/keyboard handlers as users.

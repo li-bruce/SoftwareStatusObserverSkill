@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.0
+
+- Persistent display names and notes for every node type, with original names and source identities retained.
+- Restore selected nodes and nested expansion; preserve older saved layouts and personal labels across regeneration.
+- Open-source viewer dependency audit, retained licenses and checks for reviewed bundles.
+- ReBAC graph design covering rule expressions, relation evidence, evaluation states, freshness and alternative authorization. This is design guidance, not a new authorization engine.
+
 ## 0.2.0
 
 - One typed node-link graph for business steps, functions, parameters, resources and lifecycle states.

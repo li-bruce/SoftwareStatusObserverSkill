@@ -13,6 +13,7 @@
 - 查看并行活动、可用名额和汇合条件，定位是哪一步阻止流程继续。
 - 按运行和参数版本回看状态，区分当前事实、旧记录和缺失信息。
 - 在同一张节点图中查看业务、函数和状态；拖动并固定节点，使用层次或关系布局。刷新后恢复手动布局。
+- 修改节点的显示名称和备注，保留源码身份；刷新、折叠再展开后恢复个人标注与观察层次。
 
 Skill 会主动询问影响权限、状态和执行结果的模糊需求。修改代码时，检查图、状态机、探针和测试是否同步。上层结构来自需求理解，局部程序关系来自 Python AST，运行状态来自实际执行。
 
@@ -22,7 +23,7 @@ Skill 会主动询问影响权限、状态和执行结果的模糊需求。修�
 
 ```text
 使用 $skill-installer，从以下地址安装 business-observer：
-https://github.com/li-bruce/SoftwareStatusObserverSkill/tree/v0.2.0/skills/business-observer
+https://github.com/li-bruce/SoftwareStatusObserverSkill/tree/v0.3.0/skills/business-observer
 ```
 
 也可以克隆仓库后安装到指定项目：

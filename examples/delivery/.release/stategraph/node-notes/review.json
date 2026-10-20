@@ -1,0 +1,23 @@
+{
+  "candidate_id": "574f04d7c713e75af44181291ab35d008398c9e23bc6272f8e28259892621faf",
+  "decisions": {
+    "business": {
+      "action": "unchanged",
+      "reason": "No app source, R1-R8 requirements or acceptance expectations changed. Personal names and notes are browser-local presentation data and do not invoke commands or modify authorization. ReBAC work is explicitly design guidance; the actual authorized/eligible_grant implementation and alternative-grant behavior are unchanged."
+    },
+    "state_machine": {
+      "action": "unchanged",
+      "reason": "Phase, activity execution, resource capacity and history projection retain the accepted declarations. Persisted focus and nested expansion only choose what is visible. Runtime values and historical evidence are not rewritten by display names."
+    },
+    "abstraction": {
+      "action": "updated",
+      "reason": "Stable node IDs now index personal display names and notes, independently of generated labels and source bindings. Old schema-2 layouts migrate without reset. The viewer restores focus and nested expansion; typing and page exit save view preferences. UI shows original names, handles failed storage, and renders free text without HTML. Automated tests cover node types, regeneration, reset, nested folding, old storage and corrupt annotation fields. Actual browser use verified business/function/parameter naming, drag and reload, parent folding/reopening, unchanged coordinates and the original checksum source link. Bundled PixiJS/ELK and MIT-owned viewer files were audited; no proprietary dependency was introduced. Browser testing exposed an overlapping-label hit area stealing a drag. Hit selection now prioritizes the nearest rendered glyph before handles/labels; a regression test covers the collision and the browser confirmed each overlapping node moves independently. Original user positions, pins, camera, labels and expansion were restored after testing."
+    },
+    "probes": {
+      "action": "unchanged",
+      "reason": "No probes, event schemas, server routes or source/effect evidence changed. Display aliases remain separate from node IDs and captured inputs/outputs. ReBAC guidance explicitly identifies that current probes only attest aggregate authorization, not a complete per-grant evaluation trace."
+    }
+  },
+  "excluded_symbols": {},
+  "requirement_changes": {}
+}

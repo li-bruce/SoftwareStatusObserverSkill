@@ -1,5 +1,6 @@
 """Check the shipped Skill, relative documentation links and copied runtime."""
 from pathlib import Path
+import hashlib
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -17,6 +18,19 @@ def check():
     assets = SKILL/'assets/stategraph-viewer'
     for name in ('graph-core.js', 'layout.js', 'viewer.js', 'viewer.css', 'index.html', 'elk.bundled.js', 'elk-worker.min.js', 'ELK-LICENSE.md'):
         assert (assets/name).read_bytes() == (ROOT/'examples/delivery/observer_generated/static'/name).read_bytes(), f'Graph template copy is stale: {name}'
+    # Reviewed open-source distributions. Revisit provenance/licenses on upgrades.
+    bundles = {
+        'pixi.min.js': '06d9ef9823e743518793083c296d801e752db128cb1f519fbabe37e1259567ea',
+        'elk.bundled.js': '1222e44f953ce7746af23801e723708f8e6f436b8b377a6a5fc7552f34a307b3',
+        'elk-worker.min.js': 'e4f5c51c6f2fd564bb64e52e81c4a85a316ef2f24f8b90e1db5eb886c765b030',
+    }
+    for directory in (assets, ROOT/'examples/delivery/observer_generated/static'):
+        for name, digest in bundles.items():
+            assert hashlib.sha256((directory/name).read_bytes()).hexdigest() == digest, f'Review changed viewer dependency: {name}'
+        assert 'Eclipse Public License - v 2.0' in (directory/'ELK-LICENSE.md').read_text(), 'ELK license missing'
+        assert 'The MIT License' in (directory/'PIXI-LICENSE.txt').read_text(), 'PixiJS license missing'
+    page = (assets/'index.html').read_text(encoding='utf-8')
+    assert set(re.findall(r'<script[^>]+src="([^"]+)"', page)) == {'/pixi.min.js', '/elk.bundled.js', '/viewer.js'}, 'Review new browser scripts and their licenses'
     missing = []
     for source in [*ROOT.glob('README*.md'), *ROOT.glob('docs/*.md'), *ROOT.glob('examples/delivery/README*.md'),
                    *SKILL.rglob('*.md')]:

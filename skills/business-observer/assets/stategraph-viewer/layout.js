@@ -1,8 +1,22 @@
 // Layout preferences are local view data. They never change model or runtime facts.
 import {graphBounds} from './graph-core.js';
 export const layoutKey = model => 'business-observer.layout.v2:'+(model.presentation?.layout_id||model.presentation?.subject||model.intent);
-export function emptyLayout(){return {schema:2,positions:Object.create(null),expanded:[],camera:null,algorithm:'stress'};}
+export function emptyLayout(){return {schema:2,positions:Object.create(null),expanded:[],camera:null,algorithm:'stress',annotations:Object.create(null),focus:null};}
 const coordinate = n => typeof n==='number'&&Number.isFinite(n)&&Math.abs(n)<1e7;
+function cleanText(value,limit,multiline=false){
+  if(typeof value!=='string')return '';
+  const cleaned=value.replace(multiline?/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g:/[\u0000-\u001f\u007f]/g,' ').trim();
+  return [...cleaned].slice(0,limit).join('');
+}
+export function annotationFor(state,id){return state.annotations?.[id]||{label:'',note:''};}
+export function displayName(node,state){return annotationFor(state,node.id).label||node.label;}
+export function setAnnotation(state,id,value){
+  if(typeof id!=='string'||!id)return;
+  const annotation={label:cleanText(value?.label,80),note:cleanText(value?.note,500,true)};
+  state.annotations ||= Object.create(null);
+  if(annotation.label||annotation.note)state.annotations[id]=annotation;else delete state.annotations[id];
+  return annotation;
+}
 export function readLayout(storage,key){
   const clean=emptyLayout();
   try{
@@ -10,6 +24,9 @@ export function readLayout(storage,key){
     if(value?.schema!==2)return {state:clean,available:true,restored:false};
     for(const [id,p] of Object.entries(value.positions||{}))if(coordinate(p?.x)&&coordinate(p?.y))clean.positions[id]={x:p.x,y:p.y,pinned:p.pinned===true};
     clean.expanded=Array.isArray(value.expanded)?value.expanded.filter(x=>typeof x==='string'):[];
+    if(value.annotations&&typeof value.annotations==='object'&&!Array.isArray(value.annotations))
+      for(const [id,annotation] of Object.entries(value.annotations))setAnnotation(clean,id,annotation);
+    clean.focus=typeof value.focus==='string'?value.focus:null;
     if(['layered','stress'].includes(value.algorithm))clean.algorithm=value.algorithm;
     if(coordinate(value.camera?.x)&&coordinate(value.camera?.y)&&value.camera.scale>=.12&&value.camera.scale<=3)clean.camera=value.camera;
     return {state:clean,available:true,restored:true};
@@ -80,6 +97,15 @@ export function applyLayout(graph,state,positions){
 
 // A small shared gesture controller makes node drag distinct from canvas pan,
 // including pointer cancellation, scale conversion and lost capture.
+export function pickHit(hits,x,y){
+  const front=hits.slice().reverse(),distance=h=>Math.hypot(x-h.cx,y-h.cy);
+  // Label rectangles can overlap another node's glyph after manual positioning.
+  // Pick the closest actual glyph first, then handles, labels and edge labels.
+  const glyphs=front.filter(h=>h.id&&Number.isFinite(h.r)&&distance(h)<=h.r);
+  if(glyphs.length)return glyphs.sort((a,b)=>distance(a)-distance(b))[0];
+  const under=front.filter(h=>x>=h.x&&x<=h.x+h.w&&y>=h.y&&y<=h.y+h.h);
+  return under.find(h=>h.expand)||under.filter(h=>h.id).sort((a,b)=>distance(a)-distance(b))[0]||under[0];
+}
 export class GraphGesture {
   start(pointer,{node=null,pan,scale}){this.active={pointerId:pointer.pointerId,x:pointer.x,y:pointer.y,node:node?{id:node.id,x:node.x,y:node.y}:null,pan:{...pan},scale,moved:false};}
   move(pointer){
