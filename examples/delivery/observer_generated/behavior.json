@@ -116,7 +116,7 @@
       "parent": "flow.input",
       "code_evidence": {
         "symbol": "app/service.py::Delivery.prepare",
-        "ast_hash": "29735bb6943957e832292b262d628627c215d9105d6f07541d8f24ee4e3b08fd",
+        "ast_hash": "5082d4646031634e830e42671017053a4030211232c800de1a79ccb20f40bd1a",
         "origin": "python-ast"
       }
     },
@@ -159,14 +159,56 @@
           "grants": "number"
         },
         "out": {
-          "allowed": "boolean"
+          "allowed": "boolean",
+          "evaluated_grants": [
+            "string"
+          ]
         }
       },
       "parent": "flow.permission",
       "predicate": "engineer AND ANY eligible grant",
       "code_evidence": {
         "symbol": "app/service.py::authorized",
-        "ast_hash": "0985a1afb76ad27d53b8f4955c0dc507673d26c17afc342c17cb62a4ba71ac6b",
+        "ast_hash": "4cf0381077560159c9ec8862b72ae65e0f89ff4cf2a1cbc549bff00a7fb6c0fa",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "grant",
+      "label": "检查一份授权",
+      "summary": "保留实际执行的条件；短路跳过的条件没有结果",
+      "kind": "decision",
+      "layer": "program",
+      "source": {
+        "path": "app/service.py",
+        "symbol": "eligible_grant"
+      },
+      "capture": {
+        "in": {
+          "grant_id": "string",
+          "grant_version": "number",
+          "param_version": "number",
+          "clock": "number",
+          "expires": "number"
+        },
+        "out": {
+          "allowed": "boolean",
+          "evaluated": [
+            "string"
+          ],
+          "conditions": {
+            "project": "boolean",
+            "actor": "boolean",
+            "version": "boolean",
+            "not_revoked": "boolean",
+            "not_expired": "boolean"
+          }
+        }
+      },
+      "parent": "flow.permission",
+      "code_evidence": {
+        "symbol": "app/service.py::eligible_grant",
+        "ast_hash": "2ba498d9e97b94815a60b059f6e18e33987855bfab7e3ef120553e9c067c1ebc",
         "origin": "python-ast"
       }
     },
@@ -499,7 +541,7 @@
       "parent": "flow.commit",
       "code_evidence": {
         "symbol": "app/service.py::Delivery.commit",
-        "ast_hash": "70a2a3acecbe6d4ecb9fad2ea9c7ee30aba245f824c69c6beddd7dd464a44524",
+        "ast_hash": "329727b072a8ab0c67427d2aff37ee061bfb045a196bfae328f86b0e50143ceb",
         "origin": "python-ast"
       }
     },
@@ -523,7 +565,7 @@
       "parent": "flow.commit",
       "code_evidence": {
         "symbol": "app/service.py::Delivery.commit",
-        "ast_hash": "70a2a3acecbe6d4ecb9fad2ea9c7ee30aba245f824c69c6beddd7dd464a44524",
+        "ast_hash": "329727b072a8ab0c67427d2aff37ee061bfb045a196bfae328f86b0e50143ceb",
         "origin": "python-ast"
       }
     },
@@ -546,7 +588,7 @@
       "parent": "flow.wait",
       "code_evidence": {
         "symbol": "app/service.py::Delivery.prepare",
-        "ast_hash": "29735bb6943957e832292b262d628627c215d9105d6f07541d8f24ee4e3b08fd",
+        "ast_hash": "5082d4646031634e830e42671017053a4030211232c800de1a79ccb20f40bd1a",
         "origin": "python-ast"
       }
     },
@@ -709,14 +751,18 @@
         "in": {},
         "out": {}
       },
-      "signature": "job: dict",
+      "signature": "job: dict, events=None",
       "code_evidence": {
         "symbol": "app/service.py::authorized",
-        "ast_hash": "0985a1afb76ad27d53b8f4955c0dc507673d26c17afc342c17cb62a4ba71ac6b",
+        "ast_hash": "4cf0381077560159c9ec8862b72ae65e0f89ff4cf2a1cbc549bff00a7fb6c0fa",
         "parameters": [
           {
             "name": "job",
             "annotation": "dict"
+          },
+          {
+            "name": "events",
+            "annotation": null
           }
         ],
         "returns": "bool",
@@ -818,7 +864,7 @@
       "signature": "self, expected_version: int | None=None",
       "code_evidence": {
         "symbol": "app/service.py::Delivery.commit",
-        "ast_hash": "70a2a3acecbe6d4ecb9fad2ea9c7ee30aba245f824c69c6beddd7dd464a44524",
+        "ast_hash": "329727b072a8ab0c67427d2aff37ee061bfb045a196bfae328f86b0e50143ceb",
         "parameters": [
           {
             "name": "self",
@@ -830,40 +876,6 @@
           }
         ],
         "returns": "dict",
-        "origin": "python-ast"
-      }
-    },
-    {
-      "id": "code.f004ffbad13ab667",
-      "kind": "function",
-      "layer": "program",
-      "origin": "python-ast",
-      "label": "eligible_grant",
-      "summary": "局部静态调用；是否执行由运行事实确认。",
-      "source": {
-        "path": "app/service.py",
-        "symbol": "eligible_grant"
-      },
-      "parent": "authorize",
-      "capture": {
-        "in": {},
-        "out": {}
-      },
-      "signature": "grant: dict, job: dict",
-      "code_evidence": {
-        "symbol": "app/service.py::eligible_grant",
-        "ast_hash": "f998d9e2d0eda13561119aa1de58cfffb2ab2e34c2bec6598903673f204841a8",
-        "parameters": [
-          {
-            "name": "grant",
-            "annotation": "dict"
-          },
-          {
-            "name": "job",
-            "annotation": "dict"
-          }
-        ],
-        "returns": "bool",
         "origin": "python-ast"
       }
     },
@@ -985,14 +997,18 @@
         "in": {},
         "out": {}
       },
-      "signature": "job: dict",
+      "signature": "job: dict, events=None",
       "code_evidence": {
         "symbol": "app/service.py::authorized",
-        "ast_hash": "0985a1afb76ad27d53b8f4955c0dc507673d26c17afc342c17cb62a4ba71ac6b",
+        "ast_hash": "4cf0381077560159c9ec8862b72ae65e0f89ff4cf2a1cbc549bff00a7fb6c0fa",
         "parameters": [
           {
             "name": "job",
             "annotation": "dict"
+          },
+          {
+            "name": "events",
+            "annotation": null
           }
         ],
         "returns": "bool",
@@ -1053,14 +1069,18 @@
         "in": {},
         "out": {}
       },
-      "signature": "job: dict",
+      "signature": "job: dict, events=None",
       "code_evidence": {
         "symbol": "app/service.py::authorized",
-        "ast_hash": "0985a1afb76ad27d53b8f4955c0dc507673d26c17afc342c17cb62a4ba71ac6b",
+        "ast_hash": "4cf0381077560159c9ec8862b72ae65e0f89ff4cf2a1cbc549bff00a7fb6c0fa",
         "parameters": [
           {
             "name": "job",
             "annotation": "dict"
+          },
+          {
+            "name": "events",
+            "annotation": null
           }
         ],
         "returns": "bool",
@@ -1151,6 +1171,14 @@
       "to": "authorize",
       "type": "data",
       "label": "使用本次参数",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "grant>authorize:data",
+      "from": "grant",
+      "to": "authorize",
+      "type": "data",
+      "label": "任一有效授权可通过",
       "evidence": "business mapping and source binding"
     },
     {
@@ -1263,6 +1291,14 @@
       "id": "flow.permission>authorize:contains",
       "from": "flow.permission",
       "to": "authorize",
+      "type": "contains",
+      "label": "查看内部",
+      "evidence": "business mapping and source binding"
+    },
+    {
+      "id": "flow.permission>grant:contains",
+      "from": "flow.permission",
+      "to": "grant",
       "type": "contains",
       "label": "查看内部",
       "evidence": "business mapping and source binding"
@@ -1477,7 +1513,7 @@
       "evidence": "business-map anchor + Python AST call"
     },
     {
-      "id": "call.e67a6fead209ea84",
+      "id": "call.69eba9166fca360e",
       "from": "read",
       "to": "code.8c566caec0ef95e9",
       "type": "flow",
@@ -1485,10 +1521,11 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 83,
+        "line": 113,
         "column": 20,
         "args": [
-          "job"
+          "job",
+          "self.events"
         ],
         "keywords": {}
       }
@@ -1503,7 +1540,7 @@
       "evidence": "business-map anchor + Python AST call"
     },
     {
-      "id": "call.11d0859c7561ea14",
+      "id": "call.715c3a9aaaf966c4",
       "from": "read",
       "to": "code.9ab020fa53084121",
       "type": "flow",
@@ -1511,7 +1548,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 88,
+        "line": 115,
         "column": 16,
         "args": [
           "job",
@@ -1521,7 +1558,7 @@
       }
     },
     {
-      "id": "call.39ab2f3ec015f1a0",
+      "id": "call.544816a361757e74",
       "from": "read",
       "to": "code.9ab020fa53084121",
       "type": "flow",
@@ -1529,7 +1566,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 91,
+        "line": 118,
         "column": 12,
         "args": [
           "job",
@@ -1548,7 +1585,7 @@
       "evidence": "business-map anchor + Python AST call"
     },
     {
-      "id": "call.9e7021c1489e7bc9",
+      "id": "call.fc7ef9e48b82057b",
       "from": "read",
       "to": "code.c84df59e5beba542",
       "type": "flow",
@@ -1556,7 +1593,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 100,
+        "line": 127,
         "column": 19,
         "args": [
           "execution.snapshot()",
@@ -1567,7 +1604,7 @@
       }
     },
     {
-      "id": "call.21ecf949f0bda6cf",
+      "id": "call.f04d494c2d7312c0",
       "from": "read",
       "to": "code.9ab020fa53084121",
       "type": "flow",
@@ -1575,7 +1612,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 108,
+        "line": 135,
         "column": 20,
         "args": [
           "current",
@@ -1585,7 +1622,7 @@
       }
     },
     {
-      "id": "call.de06504210ac3553",
+      "id": "call.404265fb733a5bc4",
       "from": "read",
       "to": "code.9ab020fa53084121",
       "type": "flow",
@@ -1593,7 +1630,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 124,
+        "line": 151,
         "column": 16,
         "args": [
           "current",
@@ -1603,7 +1640,7 @@
       }
     },
     {
-      "id": "call.ccfc4145c69a6a8f",
+      "id": "call.58c01e733b855ab3",
       "from": "read",
       "to": "code.9ab020fa53084121",
       "type": "flow",
@@ -1611,7 +1648,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 126,
+        "line": 153,
         "column": 16,
         "args": [
           "current",
@@ -1621,7 +1658,7 @@
       }
     },
     {
-      "id": "call.55a29cc7cbd51155",
+      "id": "call.eceb1022a68f5670",
       "from": "execute",
       "to": "read",
       "type": "flow",
@@ -1629,7 +1666,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 169,
+        "line": 196,
         "column": 8,
         "args": [],
         "keywords": {
@@ -1647,7 +1684,7 @@
       "evidence": "business-map anchor + Python AST call"
     },
     {
-      "id": "call.fae3b4b36a13d2a2",
+      "id": "call.a3430f5eaef1dfcb",
       "from": "execute",
       "to": "code.0fc7de430e9f9b0b",
       "type": "flow",
@@ -1655,7 +1692,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 170,
+        "line": 197,
         "column": 15,
         "args": [],
         "keywords": {
@@ -1664,28 +1701,21 @@
       }
     },
     {
-      "id": "contains.code.f004ffbad13ab667",
+      "id": "call.4767738068f3ea78",
       "from": "authorize",
-      "to": "code.f004ffbad13ab667",
-      "type": "contains",
-      "label": "局部函数",
-      "origin": "python-ast",
-      "evidence": "business-map anchor + Python AST call"
-    },
-    {
-      "id": "call.4c64e7bcb1ccf574",
-      "from": "authorize",
-      "to": "code.f004ffbad13ab667",
+      "to": "grant",
       "type": "flow",
       "label": "静态调用 eligible_grant",
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 16,
-        "column": 45,
+        "line": 37,
+        "column": 15,
         "args": [
-          "g",
-          "job"
+          "grant",
+          "job",
+          "events",
+          "call_id"
         ],
         "keywords": {}
       }
@@ -1893,7 +1923,7 @@
       "evidence": "business-map anchor + Python AST call"
     },
     {
-      "id": "call.a29b199782c898f7",
+      "id": "call.6e5f04947990f401",
       "from": "recheck",
       "to": "code.1bba09184421903e",
       "type": "flow",
@@ -1901,10 +1931,11 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 153,
+        "line": 180,
         "column": 20,
         "args": [
-          "job"
+          "job",
+          "self.events"
         ],
         "keywords": {}
       }
@@ -1919,7 +1950,7 @@
       "evidence": "business-map anchor + Python AST call"
     },
     {
-      "id": "call.1016268fe7778a24",
+      "id": "call.49ca533cfe5c3350",
       "from": "recheck",
       "to": "code.abc699d67116f986",
       "type": "flow",
@@ -1927,7 +1958,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 157,
+        "line": 184,
         "column": 16,
         "args": [
           "job",
@@ -1937,7 +1968,7 @@
       }
     },
     {
-      "id": "call.8863a4a5795dad69",
+      "id": "call.d9bc9758f2658c90",
       "from": "recheck",
       "to": "code.abc699d67116f986",
       "type": "flow",
@@ -1945,7 +1976,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 161,
+        "line": 188,
         "column": 12,
         "args": [
           "job",
@@ -1955,7 +1986,7 @@
       }
     },
     {
-      "id": "call.21f2ccff1895643f",
+      "id": "call.022d41178fbd4a48",
       "from": "commit",
       "to": "code.1bba09184421903e",
       "type": "flow",
@@ -1963,16 +1994,17 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 153,
+        "line": 180,
         "column": 20,
         "args": [
-          "job"
+          "job",
+          "self.events"
         ],
         "keywords": {}
       }
     },
     {
-      "id": "call.01f725609800a461",
+      "id": "call.bd2bd9911cb7b353",
       "from": "commit",
       "to": "code.abc699d67116f986",
       "type": "flow",
@@ -1980,7 +2012,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 157,
+        "line": 184,
         "column": 16,
         "args": [
           "job",
@@ -1990,7 +2022,7 @@
       }
     },
     {
-      "id": "call.52de65c223c4b00e",
+      "id": "call.81d15d80c6c7642d",
       "from": "commit",
       "to": "code.abc699d67116f986",
       "type": "flow",
@@ -1998,7 +2030,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 161,
+        "line": 188,
         "column": 12,
         "args": [
           "job",
@@ -2017,7 +2049,7 @@
       "evidence": "business-map anchor + Python AST call"
     },
     {
-      "id": "call.ceca25e368129127",
+      "id": "call.8f7ea7f65076fe6f",
       "from": "wait",
       "to": "code.a91cf5631a56d8f8",
       "type": "flow",
@@ -2025,10 +2057,11 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 83,
+        "line": 113,
         "column": 20,
         "args": [
-          "job"
+          "job",
+          "self.events"
         ],
         "keywords": {}
       }
@@ -2043,7 +2076,7 @@
       "evidence": "business-map anchor + Python AST call"
     },
     {
-      "id": "call.68486930a3304e03",
+      "id": "call.7d0fb44d8cf49f0e",
       "from": "wait",
       "to": "code.52990f65c6aa2534",
       "type": "flow",
@@ -2051,7 +2084,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 88,
+        "line": 115,
         "column": 16,
         "args": [
           "job",
@@ -2061,7 +2094,7 @@
       }
     },
     {
-      "id": "call.890721d2f79ad5ce",
+      "id": "call.38349e9b9695feaf",
       "from": "wait",
       "to": "code.52990f65c6aa2534",
       "type": "flow",
@@ -2069,7 +2102,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 91,
+        "line": 118,
         "column": 12,
         "args": [
           "job",
@@ -2088,7 +2121,7 @@
       "evidence": "business-map anchor + Python AST call"
     },
     {
-      "id": "call.5a1ff2f480f87c47",
+      "id": "call.695fb5326a090c6a",
       "from": "wait",
       "to": "code.987727c937c2bc9d",
       "type": "flow",
@@ -2096,7 +2129,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 100,
+        "line": 127,
         "column": 19,
         "args": [
           "execution.snapshot()",
@@ -2107,7 +2140,7 @@
       }
     },
     {
-      "id": "call.4a381eb3c8a64cf0",
+      "id": "call.6545c4bd35afb6c6",
       "from": "wait",
       "to": "code.52990f65c6aa2534",
       "type": "flow",
@@ -2115,7 +2148,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 108,
+        "line": 135,
         "column": 20,
         "args": [
           "current",
@@ -2125,7 +2158,7 @@
       }
     },
     {
-      "id": "call.25971590fe1c3b88",
+      "id": "call.5459df4579d10584",
       "from": "wait",
       "to": "code.52990f65c6aa2534",
       "type": "flow",
@@ -2133,7 +2166,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 124,
+        "line": 151,
         "column": 16,
         "args": [
           "current",
@@ -2143,7 +2176,7 @@
       }
     },
     {
-      "id": "call.ca8e8e7df4679566",
+      "id": "call.23695fb3d7ade05c",
       "from": "wait",
       "to": "code.52990f65c6aa2534",
       "type": "flow",
@@ -2151,7 +2184,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 126,
+        "line": 153,
         "column": 16,
         "args": [
           "current",
@@ -2161,7 +2194,7 @@
       }
     },
     {
-      "id": "call.0d45b6592a09d877",
+      "id": "call.d6657a5fbcfbda0d",
       "from": "change",
       "to": "code.52990f65c6aa2534",
       "type": "flow",
@@ -2169,7 +2202,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 44,
+        "line": 73,
         "column": 16,
         "args": [
           "job",
@@ -2179,7 +2212,7 @@
       }
     },
     {
-      "id": "call.35226fd041a0606a",
+      "id": "call.b5ff3e63853cc233",
       "from": "change",
       "to": "code.52990f65c6aa2534",
       "type": "flow",
@@ -2187,7 +2220,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 69,
+        "line": 98,
         "column": 16,
         "args": [
           "job",
@@ -2484,12 +2517,12 @@
       "app/__init__.py": "a829ebb4042211c3a39bf40646855698375b065069bbbd2aa61daba1d8e6a51c",
       "app/checks.py": "c9eb8458cc5020c52f31b9c8a65bb772e401af1d03b8771315d07d913158ea52",
       "app/ports.py": "aa21b0129c8999d36d924964fef37e975bc909cb95e56dfae51f78522e84ee66",
-      "app/service.py": "50205c0e3744ab4e1aea0a3cc350245621b4355b7c3375a16a4f3f34890c5437",
+      "app/service.py": "36831277b3ae47a8765bee61548c74d7d1b23a44b897011103e5f3fcde54a2ee",
       "app/store.py": "3a110acd78ddad46d964f3ae7698e7bbfb98b82a6570b8fa1925cbea08261347",
       "app/workflow.py": "c68a4790f9ffb23393ea9f71fd8a1e9b5d77540bef8fa693d2ae5003bbfb37ba"
     },
     "resolved_calls": 43,
-    "unresolved_calls": 219,
+    "unresolved_calls": 226,
     "depth": 1,
     "limits": [
       "Syntactic call candidates, not executed calls or proven data flow.",

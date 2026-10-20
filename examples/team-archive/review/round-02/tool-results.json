@@ -1,0 +1,55 @@
+{
+  "trial": "simulated user; not human usability evidence",
+  "round": 2,
+  "date": "2026-10-20",
+  "results": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "label": "validate-resolutions-and-mapping",
+        "cmd": "& 'C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe' -X utf8 -B 'C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\stategraph-v04-trial-01\\skill\\business-observer\\scripts\\requirements_dialogue.py' validate --file discovery.json --intent intent.json --model behavior.json --acceptance acceptance.json --previous review/round-01/discovery.json",
+        "chunk_id": "fa7e21",
+        "wall_time_seconds": 0.7718962,
+        "exit_code": 0,
+        "original_token_count": 576,
+        "output": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n{\r\n  \"valid\": true,\r\n  \"ready\": false,\r\n  \"errors\": [],\r\n  \"warnings\": [],\r\n  \"blocked\": [\r\n    \"D04\",\r\n    \"D05\",\r\n    \"D06\",\r\n    \"D07\",\r\n    \"D08\"\r\n  ],\r\n  \"questions\": [\r\n    {\r\n      \"id\": \"D04\",\r\n      \"topic\": \"resources\",\r\n      \"question\": \"两项检查是否各占一个名额、允许同时运行？这些名额是整个工具共享，还是每个项目各自拥有？\",\r\n      \"why\": \"决定活动实例、共享容量、资源守恒和真实重叠；占用归还时点结合 D06 的停止语义继续明确。\",\r\n      \"affects\": [\r\n        \"content_check\",\r\n        \"index_check\",\r\n        \"processing_slots\",\r\n        \"slots_content\",\r\n        \"slots_index\"\r\n      ],\r\n      \"blocking\": true,\r\n      \"status\": \"open\",\r\n      \"priority\": 2,\r\n      \"source_refs\": [\r\n        \"U01\"\r\n      ],\r\n      \"depends_on\": [\r\n        \"D03\"\r\n      ]\r\n    },\r\n    {\r\n      \"id\": \"D05\",\r\n      \"topic\": \"authority\",\r\n      \"question\": \"同一版本有两条审批，一条被撤销、另一条仍有效时，是否仍允许归档？另外，谁可以发出审批？\",\r\n      \"why\": \"决定审批者规则、候选逐条求值及汇总条件。\",\r\n      \"affects\": [\r\n        \"approval_check\",\r\n        \"approval_archive\"\r\n      ],\r\n      \"blocking\": true,\r\n      \"status\": \"open\",\r\n      \"priority\": 2,\r\n      \"source_refs\": [\r\n        \"U01\",\r\n        \"U02\"\r\n      ],\r\n      \"depends_on\": [\r\n        \"D02\"\r\n      ]\r\n    },\r\n    {\r\n      \"id\": \"D06\",\r\n      \"topic\": \"consistency\",\r\n      \"question\": \"检查途中审批条件不再满足，或资料改成新版本时，要请求停止旧检查，还是让它跑完但禁止旧结果提交？新版本能否同时另开一次处理？\",\r\n      \"why\": \"决定新旧版本运行隔离、停止请求和实际停止的区别、旧结果提交保护。\",\r\n      \"affects\": [\r\n        \"approval_revoked\",\r\n        \"content_changed\",\r\n        \"approval_check\",\r\n        \"content_check\",\r\n        \"index_check\",\r\n        \"archive_commit\"\r\n      ],\r\n      \"blocking\": true,\r\n      \"status\": \"open\",\r\n      \"priority\": 2,\r\n      \"source_refs\": [\r\n        \"U01\",\r\n        \"U02\"\r\n      ],\r\n      \"depends_on\": [\r\n        \"D02\",\r\n        \"D03\"\r\n      ]\r\n    }\r\n  ],\r\n  \"awaiting_answers\": []\r\n}\r\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "label": "select-round-02-questions-before-marking-asked",
+        "cmd": "& 'C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe' -X utf8 -B 'C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\stategraph-v04-trial-01\\skill\\business-observer\\scripts\\requirements_dialogue.py' questions --file discovery.json",
+        "chunk_id": "8ef265",
+        "wall_time_seconds": 0.7966564,
+        "exit_code": 0,
+        "original_token_count": 576,
+        "output": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n{\r\n  \"valid\": true,\r\n  \"ready\": false,\r\n  \"errors\": [],\r\n  \"warnings\": [],\r\n  \"blocked\": [\r\n    \"D04\",\r\n    \"D05\",\r\n    \"D06\",\r\n    \"D07\",\r\n    \"D08\"\r\n  ],\r\n  \"questions\": [\r\n    {\r\n      \"id\": \"D04\",\r\n      \"topic\": \"resources\",\r\n      \"question\": \"两项检查是否各占一个名额、允许同时运行？这些名额是整个工具共享，还是每个项目各自拥有？\",\r\n      \"why\": \"决定活动实例、共享容量、资源守恒和真实重叠；占用归还时点结合 D06 的停止语义继续明确。\",\r\n      \"affects\": [\r\n        \"content_check\",\r\n        \"index_check\",\r\n        \"processing_slots\",\r\n        \"slots_content\",\r\n        \"slots_index\"\r\n      ],\r\n      \"blocking\": true,\r\n      \"status\": \"open\",\r\n      \"priority\": 2,\r\n      \"source_refs\": [\r\n        \"U01\"\r\n      ],\r\n      \"depends_on\": [\r\n        \"D03\"\r\n      ]\r\n    },\r\n    {\r\n      \"id\": \"D05\",\r\n      \"topic\": \"authority\",\r\n      \"question\": \"同一版本有两条审批，一条被撤销、另一条仍有效时，是否仍允许归档？另外，谁可以发出审批？\",\r\n      \"why\": \"决定审批者规则、候选逐条求值及汇总条件。\",\r\n      \"affects\": [\r\n        \"approval_check\",\r\n        \"approval_archive\"\r\n      ],\r\n      \"blocking\": true,\r\n      \"status\": \"open\",\r\n      \"priority\": 2,\r\n      \"source_refs\": [\r\n        \"U01\",\r\n        \"U02\"\r\n      ],\r\n      \"depends_on\": [\r\n        \"D02\"\r\n      ]\r\n    },\r\n    {\r\n      \"id\": \"D06\",\r\n      \"topic\": \"consistency\",\r\n      \"question\": \"检查途中审批条件不再满足，或资料改成新版本时，要请求停止旧检查，还是让它跑完但禁止旧结果提交？新版本能否同时另开一次处理？\",\r\n      \"why\": \"决定新旧版本运行隔离、停止请求和实际停止的区别、旧结果提交保护。\",\r\n      \"affects\": [\r\n        \"approval_revoked\",\r\n        \"content_changed\",\r\n        \"approval_check\",\r\n        \"content_check\",\r\n        \"index_check\",\r\n        \"archive_commit\"\r\n      ],\r\n      \"blocking\": true,\r\n      \"status\": \"open\",\r\n      \"priority\": 2,\r\n      \"source_refs\": [\r\n        \"U01\",\r\n        \"U02\"\r\n      ],\r\n      \"depends_on\": [\r\n        \"D02\",\r\n        \"D03\"\r\n      ]\r\n    }\r\n  ],\r\n  \"awaiting_answers\": []\r\n}\r\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "label": "readiness-check",
+        "cmd": "& 'C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe' -X utf8 -B 'C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\stategraph-v04-trial-01\\skill\\business-observer\\scripts\\requirements_dialogue.py' check --file discovery.json --intent intent.json --model behavior.json --acceptance acceptance.json --previous review/round-01/discovery.json",
+        "chunk_id": "143879",
+        "wall_time_seconds": 0.7900334,
+        "exit_code": 1,
+        "original_token_count": 608,
+        "output": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n{\r\n  \"valid\": false,\r\n  \"ready\": false,\r\n  \"errors\": [\r\n    {\r\n      \"code\": \"unanswered_business_questions\",\r\n      \"item\": \"D04,D05,D06,D07,D08\"\r\n    }\r\n  ],\r\n  \"warnings\": [],\r\n  \"blocked\": [\r\n    \"D04\",\r\n    \"D05\",\r\n    \"D06\",\r\n    \"D07\",\r\n    \"D08\"\r\n  ],\r\n  \"questions\": [\r\n    {\r\n      \"id\": \"D04\",\r\n      \"topic\": \"resources\",\r\n      \"question\": \"两项检查是否各占一个名额、允许同时运行？这些名额是整个工具共享，还是每个项目各自拥有？\",\r\n      \"why\": \"决定活动实例、共享容量、资源守恒和真实重叠；占用归还时点结合 D06 的停止语义继续明确。\",\r\n      \"affects\": [\r\n        \"content_check\",\r\n        \"index_check\",\r\n        \"processing_slots\",\r\n        \"slots_content\",\r\n        \"slots_index\"\r\n      ],\r\n      \"blocking\": true,\r\n      \"status\": \"open\",\r\n      \"priority\": 2,\r\n      \"source_refs\": [\r\n        \"U01\"\r\n      ],\r\n      \"depends_on\": [\r\n        \"D03\"\r\n      ]\r\n    },\r\n    {\r\n      \"id\": \"D05\",\r\n      \"topic\": \"authority\",\r\n      \"question\": \"同一版本有两条审批，一条被撤销、另一条仍有效时，是否仍允许归档？另外，谁可以发出审批？\",\r\n      \"why\": \"决定审批者规则、候选逐条求值及汇总条件。\",\r\n      \"affects\": [\r\n        \"approval_check\",\r\n        \"approval_archive\"\r\n      ],\r\n      \"blocking\": true,\r\n      \"status\": \"open\",\r\n      \"priority\": 2,\r\n      \"source_refs\": [\r\n        \"U01\",\r\n        \"U02\"\r\n      ],\r\n      \"depends_on\": [\r\n        \"D02\"\r\n      ]\r\n    },\r\n    {\r\n      \"id\": \"D06\",\r\n      \"topic\": \"consistency\",\r\n      \"question\": \"检查途中审批条件不再满足，或资料改成新版本时，要请求停止旧检查，还是让它跑完但禁止旧结果提交？新版本能否同时另开一次处理？\",\r\n      \"why\": \"决定新旧版本运行隔离、停止请求和实际停止的区别、旧结果提交保护。\",\r\n      \"affects\": [\r\n        \"approval_revoked\",\r\n        \"content_changed\",\r\n        \"approval_check\",\r\n        \"content_check\",\r\n        \"index_check\",\r\n        \"archive_commit\"\r\n      ],\r\n      \"blocking\": true,\r\n      \"status\": \"open\",\r\n      \"priority\": 2,\r\n      \"source_refs\": [\r\n        \"U01\",\r\n        \"U02\"\r\n      ],\r\n      \"depends_on\": [\r\n        \"D02\",\r\n        \"D03\"\r\n      ]\r\n    }\r\n  ],\r\n  \"awaiting_answers\": [],\r\n  \"record_valid\": true\r\n}\r\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "label": "focus-graph",
+        "cmd": "& 'C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe' -X utf8 -B 'C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\stategraph-v04-trial-01\\skill\\business-observer\\scripts\\focus_graph.py' --root 'C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\stategraph-v04-trial-01\\project' --model behavior.json --nodes archive_commit scope_check approval_check --depth 1 --max-nodes 16 --max-edges 24 --out review/round-02/focus.json --markdown review/round-02/focus.md",
+        "chunk_id": "42a156",
+        "wall_time_seconds": 0.8437236,
+        "exit_code": 0,
+        "original_token_count": 191,
+        "output": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n{\"valid\": true, \"focus_id\": \"focus:e37a3eaa4da875261ada\", \"coverage\": {\"selected_nodes\": 12, \"total_nodes\": 13, \"crossing_or_omitted_edges\": 2, \"reported_boundaries\": 2, \"limits_hit\": [], \"source_unknowns\": [\"所有可执行节点尚未绑定源码，当前不是可执行模型。\", \"D04：两项检查的并发、名额作用域和占用归还规则。\", \"D05：审批者与多条审批候选的组合规则。\", \"D06：审批撤销、内容修改与进行中运行的关系。\", \"D07：内容检查和索引检查的实际规则与失败结果。\", \"D08：审批和检查的先后、等待的恢复触发。\"], \"evidence_gaps\": [], \"runtime_evidence\": \"not_selected\", \"complete\": false}}\r\n"
+      }
+    }
+  ]
+}

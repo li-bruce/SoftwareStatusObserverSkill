@@ -1,0 +1,27 @@
+{
+  "candidate_id": "f3360f1f857ecd8fcf6cacbbec122cedabc5e41b77bfa209857de4fd7f30591b",
+  "changed_files": [
+    "sync.json"
+  ],
+  "changed_symbols": [],
+  "affected_callers": [],
+  "affected_nodes": [],
+  "unmapped_changed_symbols": [],
+  "changed_requirements": [],
+  "unresolved_call_count": 404,
+  "meaning": "Potential impact plus authored abstraction mapping; semantic truth still needs contract and runtime checks.",
+  "errors": [],
+  "review_errors": [
+    "missing review.json for this candidate"
+  ],
+  "discovery": {
+    "valid": true,
+    "ready": true,
+    "errors": [],
+    "warnings": [],
+    "blocked": [],
+    "questions": [],
+    "awaiting_answers": []
+  },
+  "valid": false
+}

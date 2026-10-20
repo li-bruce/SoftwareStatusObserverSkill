@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.4.0
+
+- Add an independent team-archive project built through actual simulated clarification rounds, implementation, debugging and a dynamic size-limit iteration. Preserve preimplementation expectations, both graph versions, failures, final screenshots and reproducible review records.
+- Verify its final 40 scenarios in three observation modes, 11 whitebox assertions, 13 Python tests, graph history and persistence, targeted mutations, and extracted core execution. Clarify that this is an agent simulation using synthetic data.
+
+- Make observation a required companion track to any chosen development workflow: discuss the graph first, maintain it within the agent's work, then show changes and runtime results without requiring users to manage intermediate files.
+- Search collapsed functions, parameters, custom names and notes; reveal the selected node without resetting saved positions or other expanded regions.
+- Keep later reevaluations and final run fields out of historical frames. Link parameter nodes to their captured function's source.
+- Combine split input/return values only when explicit call, execution, object and build identities match; preserve unknown values when identity is insufficient.
+- Add source-bound whitebox plans and runtime assertions for types, values, field relationships, actual decisions and evidence identity; integrate them with change_sync and protect prior expectations.
+- Capture individual grant conditions once, retain short-circuit behavior and correlate grant/authorization calls.
+- Extract deterministic local graph views with original IDs, typed boundaries, source mappings, budgets and version-filtered runtime evidence; export JSON and Mermaid Markdown.
+- Export explicit synthetic project/review files with portable manifests and integrity checks; never execute imported commands.
+- Add isolated semantic mutations, missing/stale evidence, graph-boundary and bundle-tampering tests. Formal whole-program verification and automatic semantic graph editing remain outside this release.
+- Add a source-backed ReBAC pattern guide covering direct access, groups, roles, inheritance, set operations, tenant scope, context, revocation and consistency, without prescribing one example's permission rules.
+
 ## 0.3.0
 
 - Persistent display names and notes for every node type, with original names and source identities retained.

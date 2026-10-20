@@ -1,0 +1,26 @@
+[
+  {
+    "status": "fulfilled",
+    "value": {
+      "label": "build-model",
+      "cmd": "& 'C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe' -X utf8 -B tooling/build_model.py",
+      "chunk_id": "40f8b2",
+      "wall_time_seconds": 0.8285407,
+      "exit_code": 0,
+      "original_token_count": 30,
+      "output": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n{\"revision\": \"1.0.0\", \"nodes\": 47, \"edges\": 95}\r\n"
+    }
+  },
+  {
+    "status": "fulfilled",
+    "value": {
+      "label": "unit-tests",
+      "cmd": "& 'C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe' -X utf8 -B tooling/tests.py",
+      "chunk_id": "9d1f43",
+      "wall_time_seconds": 0.8794212,
+      "exit_code": 0,
+      "original_token_count": 46,
+      "output": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n..........\r\n----------------------------------------------------------------------\r\nRan 10 tests in 0.122s\r\n\r\nOK\r\n"
+    }
+  }
+]

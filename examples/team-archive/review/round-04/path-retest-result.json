@@ -1,0 +1,11 @@
+{
+  "status": "fulfilled",
+  "value": {
+    "label": "path-retest",
+    "chunk_id": "f8426a",
+    "wall_time_seconds": 0.8618086,
+    "exit_code": 0,
+    "original_token_count": 159,
+    "output": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n{\"valid\": true, \"focus_id\": \"focus:a12fa4939e9312593ce0\", \"coverage\": {\"selected_nodes\": 6, \"total_nodes\": 15, \"crossing_or_omitted_edges\": 8, \"reported_boundaries\": 8, \"limits_hit\": [], \"source_unknowns\": [\"可执行节点尚未绑定源码，当前没有运行证据。\", \"D06：改版时旧活动的结束方式。\", \"D07：具体检查条件和失败后重试范围。\", \"D08：新运行及尚未启动活动的审批门槛。\", \"D09：容量修改是在新建前还是运行中。\"], \"evidence_gaps\": [], \"runtime_evidence\": \"not_selected\", \"complete\": false}}\r\n"
+  }
+}

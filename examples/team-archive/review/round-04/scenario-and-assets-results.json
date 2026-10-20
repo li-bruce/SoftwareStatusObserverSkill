@@ -1,0 +1,24 @@
+[
+  {
+    "status": "fulfilled",
+    "value": {
+      "label": "real-scenarios",
+      "chunk_id": "0e96d7",
+      "wall_time_seconds": 6.6635389,
+      "exit_code": 0,
+      "original_token_count": 13,
+      "output": "{\r\n  \"exit_code\": 0,\r\n  \"output_bytes\": 805792\r\n}\r\n"
+    }
+  },
+  {
+    "status": "fulfilled",
+    "value": {
+      "label": "new-assets",
+      "chunk_id": "6eb605",
+      "wall_time_seconds": 0.9288756,
+      "exit_code": 0,
+      "original_token_count": 128,
+      "output": "{\r\n  \"version\": \"0.4.0-candidate.4\",\r\n  \"file_count\": 63,\r\n  \"mismatches\": [],\r\n  \"runtime_differences\": []\r\n}\r\n\r\nInputObject\r\n-----------                                                                                                            \r\n搜索覆盖完整图中的名称、函数、参数和备注，包括收起的内部节点。选择结果时只展开其所属层级并定位到该节点，保留其他区域的\r\n展开状态和已保存位置；搜索结果不改变规则或运行事实。\r\n\r\n\r\n"
+    }
+  }
+]

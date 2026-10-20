@@ -1,0 +1,100 @@
+Browser tab: 1, Title: "资料柜 · 团队归档", URL: "http://127.0.0.1:8824/".
+1 AXWebArea 资料柜 · 团队归档, URL: 127.0.0.1:8824/
+	2 container
+		3 text LOCAL TEAM ARCHIVE · 模拟演练
+		4 heading 资料柜, Value: 1
+			5 text 资料柜
+		104 text 本地已连接
+		7 link Description: 打开开发者图 ↗, Value: 127.0.0.1:8824/graph
+	8 container
+		9 heading 当前资料, Value: 2
+			10 text 当前资料
+		105 text 内容版本 1
+		106 text 研发资料 / 设计记录 · 直接负责人：林晓 · 文件夹负责人
+		13 container edit-form
+			14 container
+				15 text 标题
+				16 text field (settable) 标题, Value: 接口设计说明, ID: title
+			17 container
+				18 text 资料编号
+				19 text field (settable) 资料编号, Value: RD-001, ID: number
+			20 container
+				21 text 内容
+				22 text entry area (settable) 内容, Value: 模拟资料：版本一的固定内容。, ID: content
+			23 text 修改后生成新内容版本；已归档快照保持不变。
+			24 button 保存新版本
+		25 button (collapsed) 调整分类文件夹, Secondary Actions: Expand
+			26 text 调整分类文件夹
+		27 heading 项目归档大小上限, Value: 2
+			28 text 项目归档大小上限
+		29 container limit-form
+			30 container
+				31 text 上限（字节）
+				32 text field (settable) 上限（字节）, Value: 8192, ID: size-limit
+			33 button 保存项目上限
+			107 text 已保存正文 42 字节 / 当前上限 8192 字节 · 大小符合 · 配置第 9 版
+			35 text 项目内共用，只计算已保存正文的 UTF-8 字节数。默认 8 KiB = 8192 字节，等于上限允许。超限时等待；调大后仍需点击继续。
+		36 heading 发起归档, Value: 2
+			37 text 发起归档
+		38 container
+			39 text 操作人
+			40 pop up button (collapsed, settable) 操作人, Value: 林晓 · 文件夹负责人, ID: operator, Secondary Actions: Expand
+				41 menu
+					42 (selected) 林晓 · 文件夹负责人
+					43 周宁 · 审核员
+					44 陈青 · 审核员
+					45 杜然 · 子目录负责人
+		46 container
+			47 text 本次检查名额
+			48 pop up button (collapsed, settable) 本次检查名额, Value: 1 个 · 依次检查, ID: capacity, Secondary Actions: Expand
+				49 menu
+					50 2 个 · 可同时检查
+					51 (selected) 1 个 · 依次检查
+		108 text 演练中每项检查保留约 4 秒，便于观察并发、等待和取消。
+		53 button 新建一次归档运行, ID: new-run
+		54 heading 审批, Value: 2
+			55 text 审批
+		56 text 任一条仍有效即可
+		57 container
+			58 text 审核员
+			59 pop up button (collapsed, settable) 审核员, Value: 周宁 · 审核员, ID: reviewer, Secondary Actions: Expand
+				60 menu
+					61 (selected) 周宁 · 审核员
+					62 陈青 · 审核员
+		63 container
+			64 text 有效时长
+			65 pop up button (collapsed, settable) 有效时长, Value: 10 分钟, ID: expires, Secondary Actions: Expand
+				66 menu
+					67 (selected) 10 分钟
+					68 15 秒 · 观察到期
+					69 立即到期 · 反例
+		70 button 为当前操作人审批当前版本, ID: approve
+		71 container approvals
+			109 text 版本 1 · bob → alice  有效
+			110 text 截止 16:26:45 · c70d5d2e1da6
+			111 button 撤销
+			112 text 版本 1 · bob → alice  已到期
+			113 text 截止 16:17:56 · 72d836241757
+			114 button 撤销
+		75 heading 归档运行, Value: 2
+			76 text 归档运行
+		115 text 2 次运行
+		78 text 每次运行保留自己的输入、检查结果与名额。继续会重新核对当前资格。
+		103 container runs
+			116 container
+				117 text 第 2 次 · 版本 1 已归档 148fe9a5ee92 · alice 内容检查 已通过 索引检查 已通过 本次名额：可用 1 / 1 · 使用已有归档记录
+			118 container
+				119 text 第 1 次 · 版本 1 已归档 37b27d2862da · alice 内容检查 已通过 索引检查 已通过 本次名额：可用 1 / 1
+		81 heading 固定快照, Value: 2
+			82 text 固定快照
+		120 text 1 份
+		84 container archives
+			121 text 接口设计说明 · 版本 1
+			122 text e6f02fb1c0d8 · RD-001 · 运行 37b27d2862da
+			123 button (collapsed) 查看固定内容快照, Secondary Actions: Expand
+				124 text 查看固定内容快照
+	89 container
+		90 text 仅本地合成数据 · 文件夹用于分类，归档不移动或删除原资料。
+		125 text 构建 e7e5f89d72
+
+The focused UI element is 33 button 保存项目上限

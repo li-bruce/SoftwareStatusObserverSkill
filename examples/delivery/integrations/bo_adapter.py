@@ -20,7 +20,8 @@ class BOAdapter:
         refs = self.bo_refs.setdefault(attempt,{})
         depends = [(refs[n],'recheck' if node=='recheck' else 'data')
                    for n in payload.get('uses',[]) if n in refs]
-        eid = trace.record(node,phase,payload['basis'],lambda:payload,depends=depends)
+        eid = trace.record(node,phase,payload['basis'],lambda:payload,depends=depends,
+                           call_id=payload.get('call_id'), parent_call_id=payload.get('parent_call_id'))
         if eid:
             refs[node]=eid
 

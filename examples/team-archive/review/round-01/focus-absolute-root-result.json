@@ -1,0 +1,8 @@
+{
+  "command": "& 'C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe' -X utf8 -B 'C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\stategraph-v04-trial-01\\skill\\business-observer\\scripts\\focus_graph.py' --root 'C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\stategraph-v04-trial-01\\project' --model behavior.json --nodes archive_commit --depth 1 --max-nodes 12 --max-edges 24 --out review/round-01/focus.json --markdown review/round-01/focus.md",
+  "chunk_id": "db6f63",
+  "wall_time_seconds": 0.5898826,
+  "exit_code": 0,
+  "original_token_count": 226,
+  "output": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n{\"valid\": true, \"focus_id\": \"focus:b2139bff98d78538bd8a\", \"coverage\": {\"selected_nodes\": 5, \"total_nodes\": 10, \"crossing_or_omitted_edges\": 8, \"reported_boundaries\": 8, \"limits_hit\": [], \"source_unknowns\": [\"所有可执行节点尚未绑定源码，当前不是可执行模型。\", \"D01：多层目录的管理范围继承规则。\", \"D02：审批针对的对象及覆盖范围。\", \"D03：归档成功的持久效果。\", \"D04：两项检查的并发、名额作用域和占用归还规则。\", \"D05：审批者与多条审批候选的组合规则。\", \"D06：审批撤销、内容修改与进行中运行的关系。\", \"D07：内容检查和索引检查的实际规则与失败结果。\", \"D08：审批和检查的先后、等待的恢复触发。\"], \"evidence_gaps\": [], \"runtime_evidence\": \"not_selected\", \"complete\": false}}\r\n"
+}

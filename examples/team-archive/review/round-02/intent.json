@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "project_id": "team-archive-trial-01",
+  "title": "团队资料归档：模拟用户演练",
+  "status": "discovery",
+  "requirements": [
+    {"id": "R01", "text": "在本地用 Python 和 SQLite 建立团队资料归档工具；资料位于项目的多层文件夹中。", "source_refs": ["U01"], "status": "stated"},
+    {"id": "R02", "text": "仅资料所在文件夹的直接负责人可以处理；上级文件夹负责人不自动继承下级权限，下级按自己的直接负责人判断。本规则仅适用于本演练项目。", "source_refs": ["U01", "U02"], "status": "confirmed"},
+    {"id": "R03", "text": "归档前需要审批；审批针对一份资料的一个内容版本，且必须匹配具体项目和操作人。审批者、候选组合及运行中撤销处理仍待确认。", "source_refs": ["U01", "U02"], "status": "partially_defined"},
+    {"id": "R04", "text": "归档前进行内容检查和索引检查；具体检查条件及失败规则待确认。", "source_refs": ["U01"], "status": "partially_defined"},
+    {"id": "R05", "text": "处理名额有限，两项检查可能等待；共享范围、占用方式和恢复规则待确认。", "source_refs": ["U01"], "status": "partially_defined"},
+    {"id": "R06", "text": "资料内容可修改；新版本不能沿用旧版本审批。旧检查结果与进行中运行怎样处理仍待确认。", "source_refs": ["U01", "U02"], "status": "partially_defined"},
+    {"id": "R07", "text": "开发者图可拖动、逐层展开，能解释归档依据、等待原因和关键函数实际参数。", "source_refs": ["U01"], "status": "stated"},
+    {"id": "R08", "text": "归档对象是一份资料条目；成功后在 SQLite 保存当时内容的固定快照和对应内容版本。", "source_refs": ["U02"], "status": "confirmed"},
+    {"id": "R09", "text": "同一份资料的同一内容版本不得重复生成归档记录。", "source_refs": ["U02"], "status": "confirmed"},
+    {"id": "R10", "text": "文件夹仅作分类，不归档文件夹；归档不移动或删除原资料。", "source_refs": ["U02"], "status": "confirmed"}
+  ],
+  "constraints": [
+    "本项目为模拟用户演练，不使用生产数据。",
+    "只使用指定 Skill 和本会话需求，Skill 副本只读。",
+    "未回答的业务规则不擅自落实为实现或验收预期。",
+    "应用与开发者图最终应能独立启动；需要服务时先检查 8824。",
+    "实现方案可自行选择；business-observer 是开发期间必须同步维护模型、映射、参数、探针和验证的一条支线，不代替整个应用架构。",
+    "本轮直接负责规则只适用于当前项目，不能推广到其他项目。"
+  ]
+}

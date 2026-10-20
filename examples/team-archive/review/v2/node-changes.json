@@ -1,0 +1,212 @@
+{
+  "from": "v1",
+  "to": "v2",
+  "from_build": "6eb25ba09b2db5caeacd20bbbfc309b9f4d35dfccf59c1f9a293558d0caf4578",
+  "to_build": "e7e5f89d72093f5d99d37f9bb1f19a8b978a31e4cfecaced8a225b8409b3edc3",
+  "project_id_unchanged": true,
+  "layout_id_unchanged": true,
+  "added_nodes": [
+    {
+      "id": "code.f3f4c403913bddaf",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "check_size",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "archive_app/policy.py",
+        "symbol": "check_size"
+      },
+      "parent": "commit_guard",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "content: str, limit_bytes: int, project_id: str, limit_revision: int, trace: TracePort | None=None, basis: dict | None=None, parent: str | None=None, source_event: str | None=None",
+      "code_evidence": {
+        "symbol": "archive_app/policy.py::check_size",
+        "ast_hash": "bae419d3d1ec01a2af4bca7af701b144470d02bbf5d2c9d9f70b6249623cc6de",
+        "parameters": [
+          {
+            "name": "content",
+            "annotation": "str"
+          },
+          {
+            "name": "limit_bytes",
+            "annotation": "int"
+          },
+          {
+            "name": "project_id",
+            "annotation": "str"
+          },
+          {
+            "name": "limit_revision",
+            "annotation": "int"
+          },
+          {
+            "name": "trace",
+            "annotation": "TracePort | None"
+          },
+          {
+            "name": "basis",
+            "annotation": "dict | None"
+          },
+          {
+            "name": "parent",
+            "annotation": "str | None"
+          },
+          {
+            "name": "source_event",
+            "annotation": "str | None"
+          }
+        ],
+        "returns": "dict",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "project_limit",
+      "kind": "data",
+      "label": "项目归档大小上限",
+      "summary": "每项目独立持久化，默认 8192 字节；改变上限不修改内容版本或审批。",
+      "capture": {
+        "in": {
+          "project_id": "string"
+        },
+        "out": {
+          "project_id": "string",
+          "limit_bytes": "number",
+          "limit_revision": "number"
+        }
+      },
+      "parent": "flow.policy",
+      "source": {
+        "path": "archive_app/storage.py",
+        "symbol": "ArchiveStore.project_limit"
+      },
+      "requirements": [
+        "R14",
+        "R15",
+        "R16"
+      ]
+    },
+    {
+      "id": "set_size_limit",
+      "kind": "function",
+      "label": "调整项目大小上限",
+      "summary": "只接受正整数；超限等待，已开始检查自然结束，条件恢复仍需手动继续。",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "flow.policy",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.set_archive_limit"
+      },
+      "requirements": [
+        "R14",
+        "R15",
+        "R16"
+      ],
+      "code_evidence": {
+        "symbol": "archive_app/service.py::ArchiveService.set_archive_limit",
+        "ast_hash": "20bd795b1d58935fb18d238ea9e17432f02ec93edbd28699c3d37d292060889e",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "size_guard",
+      "kind": "decision",
+      "label": "正文是否在当前上限内",
+      "summary": "只计算正文 UTF-8 字节数，等于上限允许；开始、继续、提交时重新读取当前上限。",
+      "capture": {
+        "in": {
+          "project_id": "string",
+          "content_bytes": "number",
+          "limit_bytes": "number",
+          "limit_revision": "number"
+        },
+        "out": {
+          "allowed": "boolean",
+          "content_bytes": "number",
+          "limit_bytes": "number",
+          "limit_revision": "number",
+          "excess_bytes": "number"
+        }
+      },
+      "parent": "flow.policy",
+      "source": {
+        "path": "archive_app/policy.py",
+        "symbol": "check_size"
+      },
+      "requirements": [
+        "R14",
+        "R15",
+        "R16"
+      ],
+      "rule": {
+        "encoding": "utf-8",
+        "body_only": true,
+        "inclusive": true
+      },
+      "code_evidence": {
+        "symbol": "archive_app/policy.py::check_size",
+        "ast_hash": "bae419d3d1ec01a2af4bca7af701b144470d02bbf5d2c9d9f70b6249623cc6de",
+        "origin": "python-ast"
+      }
+    }
+  ],
+  "removed_nodes": [],
+  "changed_captures": [
+    {
+      "id": "commit_guard",
+      "before": {
+        "in": {
+          "stage": "string",
+          "project_id": "string",
+          "folder_id": "string",
+          "operator_id": "string",
+          "run_version": "number",
+          "current_version": "number",
+          "all_passed": "boolean"
+        },
+        "out": {
+          "allowed": "boolean",
+          "scope_allowed": "boolean",
+          "approval_allowed": "boolean",
+          "version_current": "boolean",
+          "reasons": [
+            "string"
+          ]
+        }
+      },
+      "after": {
+        "in": {
+          "stage": "string",
+          "project_id": "string",
+          "folder_id": "string",
+          "operator_id": "string",
+          "run_version": "number",
+          "current_version": "number",
+          "all_passed": "boolean",
+          "content_bytes": "number",
+          "limit_bytes": "number",
+          "limit_revision": "number"
+        },
+        "out": {
+          "allowed": "boolean",
+          "scope_allowed": "boolean",
+          "approval_allowed": "boolean",
+          "size_allowed": "boolean",
+          "version_current": "boolean",
+          "reasons": [
+            "string"
+          ]
+        }
+      }
+    }
+  ],
+  "stable_existing_ids": 55,
+  "unchanged_original_business_expectations": true
+}

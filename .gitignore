@@ -11,3 +11,11 @@ history/
 node_modules/
 examples/delivery/.stategraph/
 examples/delivery/observer_generated/manifest.json
+examples/team-archive/.stategraph/
+examples/team-archive/manifest.json
+examples/team-archive/data/
+examples/team-archive/review/runtime/
+examples/team-archive/review/gate-rehearsal/
+examples/team-archive/review/mutations/
+examples/team-archive/review/*/project-export/
+examples/team-archive/review/*/core-export/

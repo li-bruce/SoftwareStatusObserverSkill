@@ -1,0 +1,28 @@
+{
+  "valid": true,
+  "errors": [],
+  "candidate_id": "aec07a605ef85fd691d5ed15654571c9179fbcd19bd4124a5679ce69ce8c8056",
+  "review_hash": "8e3d30978b214ac8db25eeabe4dff5c3f35c3c1d5133e721a0c085db8691ab27",
+  "observations_hash": "4ece7cc5f04ff13384284e89b382cdf07e9e75543eeb36584dea109aafeb7266",
+  "tests": [
+    {
+      "argv": [
+        "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/tests.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "C:/nvm4w/nodejs/node.exe",
+        "tooling/graph_tests.mjs"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "checked_at": "2026-10-20T07:29:40.611535+00:00",
+  "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+}

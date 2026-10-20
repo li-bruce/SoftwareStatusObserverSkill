@@ -18,6 +18,7 @@ try:
     from .worknet_contract import validate_net
     from .execution_contract import validate_execution_graph, validate_configuration
     from .requirements_dialogue import assess as assess_discovery
+    from .whitebox_contract import static_errors as whitebox_static, assess as assess_whitebox, protected_items
 except ImportError:
     from behavior_model import capture, check as binding_check, contained, digest, read, validate
     from code_structure import scan, enrich, key
@@ -25,6 +26,7 @@ except ImportError:
     from worknet_contract import validate_net
     from execution_contract import validate_execution_graph, validate_configuration
     from requirements_dialogue import assess as assess_discovery
+    from whitebox_contract import static_errors as whitebox_static, assess as assess_whitebox, protected_items
 
 
 def write(path, value):
@@ -49,16 +51,18 @@ def snapshot(root, cfg, previous=None):
     acceptance = read(contained(root, cfg["acceptance"]))
     paths = sorted(set([cfg["config_path"], cfg["model"], model["intent"], cfg["acceptance"],
                         *model["source_files"], *cfg["code_files"], *cfg["watch_files"],
-                        *([cfg['discovery']] if cfg.get('discovery') else [])]) - {cfg["manifest"]})
+                        *([cfg['discovery']] if cfg.get('discovery') else []),
+                        *([cfg['whitebox']] if cfg.get('whitebox') else [])]) - {cfg["manifest"]})
     files = {}
     for name in paths:
         path = contained(root, name)
         files[name] = digest(path.read_bytes()) if path.is_file() else None
     index = scan(root, cfg["code_files"], (previous or {}).get("structure"))
     tools = {name: digest((Path(__file__).parent/name).read_bytes())
-             for name in ("change_sync.py", "code_structure.py", "behavior_model.py", "statechart_contract.py", "worknet_contract.py", "execution_contract.py", "requirements_dialogue.py")}
+             for name in ("change_sync.py", "code_structure.py", "behavior_model.py", "statechart_contract.py", "worknet_contract.py", "execution_contract.py", "requirements_dialogue.py", "whitebox_contract.py")}
     return {"id": digest({"files": files, "tools": tools}), "files": files, "tools": tools, "model": model, "intent": intent,
             "acceptance": acceptance, "structure": index,
+            "whitebox": read(contained(root,cfg["whitebox"])) if cfg.get("whitebox") else None,
             "discovery_path":cfg.get('discovery'),
             "discovery": read(contained(root,cfg['discovery'])) if cfg.get('discovery') else None}
 
@@ -105,6 +109,8 @@ def structural_errors(root, cfg, snap):
             errors.append({"missing_required_probe": required})
     checks = snap["acceptance"].get("checks", [])
     known = {r["id"] for r in snap["intent"]["requirements"]}
+    if snap.get("whitebox"):
+        errors.extend(whitebox_static(snap["whitebox"], snap["model"], snap["structure"], known))
     if not checks or len({c["id"] for c in checks}) != len(checks):
         errors.append("acceptance needs uniquely identified checks")
     for c in checks:
@@ -171,6 +177,8 @@ def review_errors(change, base, current, changes):
             errors.append("classify changed symbol outside selected graph: " + symbol)
     old = {c["id"]: c for c in [*base["acceptance"]["checks"], *base["acceptance"].get("model_checks", [])]}
     new = {c["id"]: c for c in [*current["acceptance"]["checks"], *current["acceptance"].get("model_checks", [])]}
+    old.update({"whitebox:" + k: v for k, v in protected_items(base.get("whitebox")).items()})
+    new.update({"whitebox:" + k: v for k, v in protected_items(current.get("whitebox")).items()})
     allowed = set(base.get("requested_requirements", []))
     old_intent = {r["id"]: r for r in base["intent"]["requirements"]}
     new_intent = {r["id"]: r for r in current["intent"]["requirements"]}
@@ -196,6 +204,8 @@ def inspect(root, cfg, change):
     changes["review_errors"] = review_errors(change, base, current, changes)
     if base.get('discovery_path') and not cfg.get('discovery'):
         changes['errors'].append('configured discovery was removed; preserve its questions and decisions')
+    if base.get("whitebox") and not current.get("whitebox"):
+        changes["errors"].append("configured whitebox contract was removed")
     if cfg.get('discovery'):
         discovery=assess_discovery(current['discovery'],intent=current['intent'],model=current['model'],
                                   acceptance=current['acceptance'],previous=base.get('discovery'))
@@ -277,6 +287,11 @@ def verify(root, cfg, change):
                     for state in configurations:validate_configuration(current['model'],state)
             errors += assess_observations(current["model"], current["acceptance"], payload,
                 cfg.get("probe_modes", ["on", "off", "fault"]), cfg.get("required_runtime_probes", []))
+            if current.get("whitebox"):
+                report = assess_whitebox(current["whitebox"], current["model"], payload,
+                                        capture(root, current["model"])["build_id"])
+                write(change/"checks"/"whitebox.json", report)
+                errors.extend(report["errors"])
         except (ValueError, TypeError, KeyError) as exc:
             errors.append("invalid runtime observations: " + str(exc))
     for i, command in enumerate(cfg.get("test_commands", [])):

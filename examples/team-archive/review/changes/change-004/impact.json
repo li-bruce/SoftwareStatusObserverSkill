@@ -1,0 +1,26 @@
+{
+  "candidate_id": "bc2c0f65658e721d78f9404ed2cbf2d0aabf5f55686ec2c745df60965902a530",
+  "changed_files": [
+    "static/graph/graph-core.js",
+    "static/graph/viewer.js",
+    "tooling/graph_tests.mjs"
+  ],
+  "changed_symbols": [],
+  "affected_callers": [],
+  "affected_nodes": [],
+  "unmapped_changed_symbols": [],
+  "changed_requirements": [],
+  "unresolved_call_count": 452,
+  "meaning": "Potential impact plus authored abstraction mapping; semantic truth still needs contract and runtime checks.",
+  "errors": [],
+  "review_errors": [],
+  "discovery": {
+    "valid": true,
+    "ready": true,
+    "errors": [],
+    "warnings": [],
+    "blocked": [],
+    "questions": [],
+    "awaiting_answers": []
+  }
+}

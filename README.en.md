@@ -1,6 +1,6 @@
 # Software Status Observer Skill
 
-[中文](README.md) · [Installation and usage](docs/usage.en.md) · [Runnable example](examples/delivery/README.en.md)
+[中文](README.md) · [Installation and usage](docs/usage.en.md) · [Runnable example](examples/delivery/README.en.md) · [Independent trial](docs/review/v0.4.0/README.md)
 
 **Understand and debug the programs you build with AI.**
 
@@ -11,9 +11,12 @@
 - Expand a business action into internal activities and key functions, then inspect its source.
 - Keep business, function and state nodes in one graph. Drag and pin nodes, apply layered or stress layouts, and restore positions after reload.
 - Add display names and notes without changing source identities; preserve personal labels and nested expansion across reloads.
+- Search names, functions, parameters and notes, including nodes inside collapsed regions.
 - Read parameter types, actual values, outcomes and waiting conditions directly on nodes and edges.
 - Follow concurrent activities, available capacity and join conditions to find what blocks progress.
 - Inspect each run and parameter version without confusing current facts, history and missing observations.
+
+Use any design method, framework or coding workflow. This Skill adds a required companion track for the chosen scope: application state, source mapping, key parameters, probes and runtime verification.
 
 The Skill asks about unclear requirements that affect permissions, state or outcomes. During edits it checks whether the graph, state machine, probes and tests remain consistent. Business abstractions come from requirements; local code relationships come from Python AST analysis; runtime facts come from execution.
 
@@ -23,7 +26,7 @@ In Codex with `$skill-installer`, enter:
 
 ```text
 Use $skill-installer to install business-observer from:
-https://github.com/li-bruce/SoftwareStatusObserverSkill/tree/v0.3.0/skills/business-observer
+https://github.com/li-bruce/SoftwareStatusObserverSkill/tree/v0.4.0/skills/business-observer
 ```
 
 Or clone this repository and install into a project:
@@ -38,11 +41,12 @@ The script copies the full Skill to `.agents/skills/business-observer` in that p
 
 ```text
 Use $business-observer to implement this feature: …
-First identify the business flows and states, and ask about unclear rules
-that affect outcomes. Keep the layered graph, key functions and parameters,
-real state machine and probes in sync while coding. Before delivery, run
-the checks and explain successful, waiting and failed executions.
+Help me clarify the behavior and states using a graph.
+Follow this project's development approach, maintain the graph and checks
+as you code, then show me the changes and runtime results.
 ```
+
+Describe the feature, answer business questions and inspect the graph. The agent maintains source mappings, probes and checks without asking you to manage intermediate files. Installing a Skill alone does not watch every editor; the agent connects checks to the project's workflow.
 
 ## Run the example
 
@@ -64,6 +68,16 @@ Open the [runtime graph](http://127.0.0.1:8797/) and [control page](http://127.0
 The example uses synthetic text and local SQLite. The graph polls about every 400 ms; checks are deliberately slowed for observation. See the [walkthrough](examples/delivery/README.en.md).
 
 ## Repository layout
+
+The [team archive example](examples/team-archive/README.en.md) was built in a separate conversation from an initial request, followed by clarification, implementation, fixes and a size-limit iteration:
+
+```bash
+python tools/archive_demo.py --port 8824
+```
+
+Open the [application](http://127.0.0.1:8824/) and [developer graph](http://127.0.0.1:8824/graph). The review includes both iterations, actual runtime evidence and screenshots. The requester was simulated by AI; this is not a human usability study.
+
+Version 0.4.0 adds source-bound whitebox contracts throughout development, observed parameter and decision checks, focused graph extraction with explicit boundaries, and allowlisted project exports. See the [design (Chinese)](docs/design/roadmap.zh-CN.md), [development workflow](skills/business-observer/references/continuous-development.md), and [focus/export commands](skills/business-observer/references/focus-and-sharing.md).
 
 | Directory | Purpose |
 |---|---|

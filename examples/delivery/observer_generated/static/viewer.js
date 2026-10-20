@@ -1,5 +1,5 @@
-import {colors as C,executionIds,layoutGraph,selectedConfiguration,configurations,stateLabels,nodeTypes} from './graph-core.js';
-import {layoutKey,readLayout,writeLayout,placeIncremental,setPosition,togglePin,calculateLayout,applyLayout,topologyKey,GraphGesture,annotationFor,displayName,setAnnotation,pickHit} from './layout.js';
+import {colors as C,executionIds,layoutGraph,selectedConfiguration,configurations,stateLabels,nodeTypes,sourceBinding} from './graph-core.js';
+import {layoutKey,readLayout,writeLayout,placeIncremental,setPosition,togglePin,calculateLayout,applyLayout,topologyKey,GraphGesture,annotationFor,displayName,setAnnotation,pickHit,searchNodes,ancestorsToReveal} from './layout.js';
 const $=id=>document.getElementById(id),app=new PIXI.Application(),scene=new PIXI.Container();
 // The bundled ELK entry defaults to its Node fallback unless a factory is supplied.
 const layoutWorker=new Worker(new URL('./elk-worker.min.js',import.meta.url));
@@ -115,7 +115,7 @@ function select(id){selected=id;detailMode=null;$('node-details').hidden=true;up
 function toggle(id){if(!graph?.children.has(id))return;cancelLayout();selected=id;if(expanded.has(id))expanded.delete(id);else expanded.add(id);project();save();}
 function pin(){if(!selected)return;cancelLayout();togglePin(graph,preferences,selected);updateActions();save();schedule();}
 function updateActions(){
-  const b=graph?.byId.get(selected),binding=view?.manifest.bindings[selected];
+  const b=graph?.byId.get(selected),binding=sourceBinding(view,graph?.all,selected);
   $('node-expand').disabled=!b?.kids.length;$('node-expand').textContent=b?.open?'收起':'展开';
   $('pin').disabled=!b;$('pin').textContent=b?.pinned?'取消固定':'固定节点';$('annotate').disabled=!b;$('details').disabled=!b;$('source').disabled=!binding;
   $('selection').textContent=b?`${nodeTypes[b.type].label} · ${displayName(b.node,preferences)}`+(binding?` · ${binding.path}:${binding.line}`:''):'拖动节点调整布局；双击展开内部关系。';
@@ -137,7 +137,7 @@ function updateDetail(){
   const rows=[...(annotation.label||editing?[{text:'原名：'+b.node.label}]:[]),
     ...(editing?[{text:'节点：'+b.id}]:b.rows),...(!editing&&annotation.note?[{text:'备注：'+annotation.note}]:[])];
   $('detail-rows').replaceChildren(...rows.map(r=>{const p=document.createElement('p');p.textContent=r.text;return p;}));
-  const binding=view.manifest.bindings[selected],source=detailMode==='source'&&binding;
+  const binding=sourceBinding(view,graph.all,selected),source=detailMode==='source'&&binding;
   $('source-code').hidden=!source;$('full-source').hidden=!source;
   if(source){const key=view.manifest.build_id+':'+binding.path,full=fullSources.get(key);$('detail-title').textContent=`${binding.path}:${binding.line} · ${view.manifest.build_id.slice(0,8)}`;$('source-code').textContent=full??binding.snippet;$('full-source').hidden=!!full;}
   positionDetail();
@@ -165,7 +165,7 @@ $('node-name').oninput=saveAnnotation;$('node-note').oninput=saveAnnotation;
 $('restore-name').onclick=()=>{$('node-name').value='';saveAnnotation();};
 $('annotation-form').onsubmit=e=>{e.preventDefault();saveAnnotation();detailMode=null;updateDetail();$('viewport').focus({preventScroll:true});};
 $('full-source').onclick=async()=>{
-  const id=selected,build=view.manifest.build_id,binding=view.manifest.bindings[id],requestedVersion=version;
+  const id=selected,build=view.manifest.build_id,binding=sourceBinding(view,graph.all,id),requestedVersion=version;
   const response=await fetch('/api/source?path='+encodeURIComponent(binding.path)+'&version='+encodeURIComponent(requestedVersion));if(!response.ok)return;
   const data=await response.json();if(view?.manifest.build_id!==build||data.build_id!==build||version!==requestedVersion)return;
   fullSources.set(build+':'+binding.path,data.source);if(selected===id)updateDetail();
@@ -204,6 +204,35 @@ $('collapse').onclick=()=>{cancelLayout();expanded.clear();detailMode=null;proje
 $('expand').onclick=()=>{cancelLayout();for(const id of view.model.graph_roots)expanded.add(id);project();save();};
 $('node-expand').onclick=()=>toggle(selected);$('pin').onclick=pin;$('details').onclick=()=>showDetail('values');$('source').onclick=()=>showDetail('source');$('close-detail').onclick=()=>{detailMode=null;updateDetail();};
 $('annotate').onclick=editAnnotation;
+function showSearch(){
+  const list=$('search-results');list.replaceChildren();
+  if(!graph||!$('node-search').value.trim()){list.hidden=true;return;}
+  const results=searchNodes(graph.all,preferences,$('node-search').value);
+  for(const result of results){
+    const button=document.createElement('button');button.type='button';
+    const title=document.createElement('strong'),description=document.createElement('span');
+    const parent=graph.all.get(result.node.parent),context=parent?displayName(parent,preferences):'';
+    title.textContent=result.name;
+    description.textContent=result.node.field?[context,result.node.direction==='in'?'输入':'输出',result.node.fieldType].filter(Boolean).join(' · '):[context,result.node.source?.symbol||result.node.id].filter(Boolean).join(' · ');
+    button.append(title,description);button.onclick=()=>revealResult(result.node.id);list.append(button);
+  }
+  if(!results.length){const empty=document.createElement('p');empty.textContent='没有找到节点';list.append(empty);}
+  list.hidden=false;
+}
+function revealResult(id){
+  if(!graph?.all.has(id))return;
+  cancelLayout();for(const parent of ancestorsToReveal(graph.all,id))expanded.add(parent);
+  project();select(id);
+  const box=graph.byId.get(id);
+  if(box){scale=Math.max(.8,scale);const p=point(box);pan={x:app.screen.width/2-p.x*scale,y:app.screen.height/2-p.y*scale};}
+  $('search-results').hidden=true;save();schedule();$('viewport').focus({preventScroll:true});
+}
+$('node-search').oninput=showSearch;$('node-search').onfocus=showSearch;
+$('node-search').onkeydown=e=>{
+  if(e.key==='Escape')$('search-results').hidden=true;
+  if(e.key==='Enter'){e.preventDefault();const first=graph&&searchNodes(graph.all,preferences,e.target.value,1)[0];if(first)revealResult(first.node.id);}
+};
+document.addEventListener('pointerdown',e=>{if(!e.target.closest('.graph-search'))$('search-results').hidden=true;});
 $('attempt').onchange=e=>{choice=e.target.value;step='latest';lastKey='';project();};$('step').onchange=e=>{step=e.target.value;project();updateFacts();};
 new ResizeObserver(()=>{app.renderer.resize($('viewport').clientWidth,$('viewport').clientHeight);schedule();}).observe($('viewport'));
 function updateFacts(){

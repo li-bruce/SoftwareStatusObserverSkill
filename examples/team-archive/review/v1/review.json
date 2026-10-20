@@ -1,0 +1,23 @@
+{
+  "candidate_id": "f3360f1f857ecd8fcf6cacbbec122cedabc5e41b77bfa209857de4fd7f30591b",
+  "decisions": {
+    "business": {
+      "action": "unchanged",
+      "reason": "只将检查配置中的本机 Python 路径改为 {python}、Node 路径改为 node；真实业务、机器、源码映射、探针和独立预期均未改变。"
+    },
+    "state_machine": {
+      "action": "unchanged",
+      "reason": "只将检查配置中的本机 Python 路径改为 {python}、Node 路径改为 node；真实业务、机器、源码映射、探针和独立预期均未改变。"
+    },
+    "abstraction": {
+      "action": "unchanged",
+      "reason": "只将检查配置中的本机 Python 路径改为 {python}、Node 路径改为 node；真实业务、机器、源码映射、探针和独立预期均未改变。"
+    },
+    "probes": {
+      "action": "unchanged",
+      "reason": "只将检查配置中的本机 Python 路径改为 {python}、Node 路径改为 node；真实业务、机器、源码映射、探针和独立预期均未改变。"
+    }
+  },
+  "excluded_symbols": {},
+  "requirement_changes": {}
+}

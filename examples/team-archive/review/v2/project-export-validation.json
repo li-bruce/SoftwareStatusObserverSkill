@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "exit_code": 0,
+  "root": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\stategraph-v04-trial-01\\project\\review\\v2\\project-export",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "validate.py"
+  ],
+  "package_sha256": "9ef626506984baa7567f915f38198ae46ef38ab30621e070ae2088d82bf45d6b",
+  "includes_frozen_v1": true
+}

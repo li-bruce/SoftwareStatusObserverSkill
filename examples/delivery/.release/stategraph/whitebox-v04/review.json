@@ -1,0 +1,27 @@
+{
+  "candidate_id": "bb09c9dc6f583e1d37e9cebf5be28a4754c9ce7ebbf45f636f0cded0f06a6af7",
+  "decisions": {
+    "business": {
+      "action": "unchanged",
+      "reason": "The five grant conditions retain their order and short circuit behavior; role and ANY authorization remain unchanged. No prior acceptance expectation was edited."
+    },
+    "state_machine": {
+      "action": "unchanged",
+      "reason": "Application lifecycle, activity instances, joins and capacity declarations are unchanged; existing execution tests remain required."
+    },
+    "abstraction": {
+      "action": "updated",
+      "reason": "Grant evaluation now has a source-bound decision node in the existing permission group, with captured input versions and actually evaluated conditions."
+    },
+    "probes": {
+      "action": "updated",
+      "reason": "Actual condition results are collected once in the policy call. Parent and child call IDs connect each grant to its authorization evaluation. Independent whitebox expectations verify those values."
+    }
+  },
+  "excluded_symbols": {
+    "app/service.py::Delivery": "Class container is summarized through its mapped prepare, commit and command methods.",
+    "app/service.py::eligible_grant.remember": "Local helper records an already evaluated boolean without reevaluation; its enclosing eligible_grant is mapped and checked by short-circuit and mutation tests."
+  },
+  "requirement_changes": {},
+  "tool_review": "Reviewed full relation preservation at focus boundaries, required build selection for runtime focus, per-call execution identity, parent linkage, typed membership, and absolute-before-resolve CLI roots. Eight whitebox and eight focus/bundle tests passed; application rules and previous expectations unchanged. Reviewed full-model search including collapsed parameters, aliases and notes. Result selection reveals only ancestors; existing node positions and expanded regions stay unchanged. Real ELK and search regression passed. Search only changes the view. Actual browser search revealed duplicate parameter captions; reviewed the view-only fix adding the owning node, direction and type. No model or business expectation changed. Independent app review found historical reevaluations can share a revision. Template now selects the first exact parent-frame boundary, withholds events when it is missing, and excludes final result/disposition/qualification from past state. Source links for captured fields use the owning function. Regression covers renamed parent, same-revision future evidence and missing frames. Initial test variable name collision was fixed before the passing run. Independent UI trial found inputs split between enter/return. Values now merge only for matching explicit call/run/attempt/entity/build/model/version identity; legacy attempt:node IDs and incomplete identity retain last-event-only behavior. Counterexamples cover each identity boundary."
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "status": "planned_partial_not_run",
+  "basis": "U02: 本次独立演练中的模拟用户明确回答；其余业务前提尚待后续答复。",
+  "checks": [
+    {"id": "direct-manager-allowed", "requirement": "R02", "case": "scope_direct_manager", "path": ["scope_allowed"], "equals": true},
+    {"id": "ancestor-manager-denied", "requirement": "R02", "case": "scope_ancestor_only", "path": ["scope_allowed"], "equals": false},
+    {"id": "child-uses-own-manager", "requirement": "R02", "case": "scope_child_direct_manager", "path": ["scope_allowed"], "equals": true},
+    {"id": "approval-target-exact", "requirement": "R03", "case": "approval_target_exact", "path": ["candidate_target_matches"], "equals": true},
+    {"id": "approval-wrong-project", "requirement": "R03", "case": "approval_target_other_project", "path": ["candidate_target_matches"], "equals": false},
+    {"id": "approval-wrong-operator", "requirement": "R03", "case": "approval_target_other_operator", "path": ["candidate_target_matches"], "equals": false},
+    {"id": "approval-wrong-document", "requirement": "R03", "case": "approval_target_other_document", "path": ["candidate_target_matches"], "equals": false},
+    {"id": "approval-wrong-version", "requirement": "R03", "case": "approval_target_other_version", "path": ["candidate_target_matches"], "equals": false},
+    {"id": "snapshot-content", "requirement": "R08", "case": "archive_snapshot", "path": ["archive", "content"], "equals": "模拟资料：版本一的固定内容。"},
+    {"id": "snapshot-version", "requirement": "R08", "case": "archive_snapshot", "path": ["archive", "content_version"], "equals": 1},
+    {"id": "snapshot-stays-fixed", "requirement": "R08", "case": "edit_after_archive", "path": ["archive", "content"], "equals": "模拟资料：版本一的固定内容。"},
+    {"id": "one-record-per-version", "requirement": "R09", "case": "archive_same_version_twice", "path": ["archive_count_for_version"], "equals": 1},
+    {"id": "preserve-original-document", "requirement": "R10", "case": "archive_snapshot", "path": ["source_document_exists"], "equals": true},
+    {"id": "preserve-original-folder", "requirement": "R10", "case": "archive_snapshot", "path": ["source_folder_unchanged"], "equals": true}
+  ],
+  "model_checks": [
+    {"id": "scope-direct-only-declaration", "requirement": "R02", "path": ["nodes", "scope_check", "rule", "inherit_ancestors"], "equals": false},
+    {"id": "approval-four-target-fields", "requirement": "R03", "path": ["nodes", "approval_check", "rule", "target_fields"], "equals": ["project_id", "operator_id", "document_id", "content_version"]},
+    {"id": "archive-identity-key", "requirement": "R09", "path": ["nodes", "archive_unique", "rule", "unique_fields"], "equals": ["document_id", "content_version"]}
+  ]
+}

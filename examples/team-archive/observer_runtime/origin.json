@@ -1,0 +1,6 @@
+{
+  "source": "skill-candidate-8",
+  "version": "0.4.0-candidate.8",
+  "manifest": "../skill-candidate-8/skill-manifest.json",
+  "runtime_scripts": "byte-identical to candidate-3; verified against candidate-8 hashes"
+}

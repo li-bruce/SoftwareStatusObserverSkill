@@ -1,0 +1,48 @@
+{
+  "passed": true,
+  "candidate_id": "bc2c0f65658e721d78f9404ed2cbf2d0aabf5f55686ec2c745df60965902a530",
+  "build_id": "e7e5f89d72093f5d99d37f9bb1f19a8b978a31e4cfecaced8a225b8409b3edc3",
+  "scenarios": 40,
+  "mode_executions": 120,
+  "business_checks": 63,
+  "model_checks": 9,
+  "whitebox_rules": 6,
+  "whitebox_event_checks": 11,
+  "python_tests": 13,
+  "live_run": "148fe9a5ee92",
+  "actual_worker_starts": {
+    "content_check": 1,
+    "index_check": 1
+  },
+  "manual_resume_required": true,
+  "content_version": 1,
+  "archive_id": "e6f02fb1c0d8",
+  "archive_count": 1,
+  "existing_snapshot_unchanged": true,
+  "final_project_limit": 8192,
+  "commit_fresh_saved_case": {
+    "all_checks_passed": true,
+    "limit_bytes": 1,
+    "allowed": false,
+    "effects": 0
+  },
+  "source_binding": {
+    "live": "current",
+    "v1": "current",
+    "v1_build": "6eb25ba09b2db5caeacd20bbbfc309b9f4d35dfccf59c1f9a293558d0caf4578",
+    "v1_source_has_size_function": false
+  },
+  "v1_zip_sha256_unchanged": "a9b9b706e1c26b517d67f90780165c5c5c0af62c8493b37dd49e9101a1c4d869",
+  "browser_evidence": [
+    "final-build-running-limit.png",
+    "final-manual-continue.png",
+    "after-fix-current-vs-history.png",
+    "layout-v1-same-view.png",
+    "layout-v2-same-view.png",
+    "preserved-annotation.png",
+    "frozen-v1-source.png",
+    "graph-final.png",
+    "application-final.png"
+  ],
+  "scope": "Agent-executed synthetic development and browser simulation, not human user research."
+}

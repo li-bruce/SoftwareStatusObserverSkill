@@ -13,15 +13,7 @@ failure and retry rules before implementation. Let me inspect decision
 conditions, key parameters and responsible functions in the runtime graph.
 ```
 
-The Skill should first identify actors, triggers, objects, outcomes and waiting conditions. It asks about missing rules that change execution, reuses existing answers, and keeps unanswered questions open. An AI recommendation is not a user decision. See [discovery.example.json](../skills/business-observer/assets/discovery.example.json). Here `<skill>` is the installed `business-observer` directory:
-
-```text
-python <skill>/scripts/requirements_dialogue.py check --file discovery.json
-```
-
-If you copy the example to `discovery.json`, D1 is deliberately unresolved. A nonzero exit is expected until an answer is obtained and the record updated.
-
-When integrated into change checks, unresolved blocking questions prevent acceptance. The script validates records and links; reviewers still need to assess whether questions are complete and answers were understood correctly.
+The Skill first discusses a focused graph with you and asks about unclear behavior. Once that is clear, continue with your project's development approach. The agent maintains state definitions, mappings, probes and checks internally. At the end of each iteration, open the updated graph, expand details, search for key parameters and functions, and request further changes. You do not need to fill in review files or run synchronization commands yourself.
 
 ## Read the graph
 
@@ -41,9 +33,19 @@ Select any node and choose “名称与备注” (name and note). Edits save as 
 
 Preferences are local to this browser and website address. Clearing site data removes them; they do not sync across devices. Storage failures are shown explicitly.
 
-All active layout and styling components are open source: PixiJS (MIT), ELK.js (EPL-2.0), and original JS/CSS (MIT). No yFiles code is included. See [third-party notices](../THIRD_PARTY_NOTICES.md) and the [ReBAC graph design](../skills/business-observer/references/rebac-graph.md) (Chinese, design only; no engine integration yet).
+Search by name, function, parameter or note. Results identify the owning function and input/output type. Selecting a result reveals its parents and centers the node, preserving other expanded regions and positions. A captured parameter's source link opens its owning function.
 
-## Edit code and keep the graph synchronized
+All active layout and styling components are open source: PixiJS (MIT), ELK.js (EPL-2.0), and original JS/CSS (MIT). No yFiles code is included. See [third-party notices](../THIRD_PARTY_NOTICES.md) and the [ReBAC graph design](../skills/business-observer/references/rebac-graph.md) (Chinese; the example captures real conditions, while general engine integration remains pending).
+
+## Integration maintainers: internal synchronization
+
+These steps are performed by the agent, or used when troubleshooting the integration. They are not routine user tasks. Installing a Skill alone does not monitor every external editor; unchecked edits cannot be marked synchronized.
+
+Version 0.4 adds a required companion track for the selected scope, while leaving the design method, architecture and coding workflow to the project. Modeling, source mapping, application state and runtime verification remain active throughout coding. Define independent expectations and key parameter contracts before implementation; bind real functions and probes while coding; verify each feature before accepting it. Other coding Skills can implement the feature while following these contracts.
+
+Configure `"whitebox": "whitebox.json"` in `sync.json` for new projects. The checker verifies selected source signatures, observed field types/values, field relationships and build identity. See the [example contract](../examples/delivery/whitebox.json) and [workflow reference](../skills/business-observer/references/continuous-development.md).
+
+Use [focus/export commands](../skills/business-observer/references/focus-and-sharing.md) to discuss a local part of the same graph, retain omitted conditions as explicit boundaries, or export a reproducible set of synthetic files. A static conversation diagram is not an interactive application view.
 
 From `examples/delivery`:
 

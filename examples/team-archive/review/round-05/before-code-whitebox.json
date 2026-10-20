@@ -1,0 +1,351 @@
+{
+  "schema_version": 1,
+  "rules": [
+    {
+      "id": "scope",
+      "requirement": "R02",
+      "node": "scope_check",
+      "source": {
+        "path": "archive_app/policy.py",
+        "symbol": "is_direct_manager"
+      },
+      "parameters": {
+        "project_id": "str",
+        "operator_id": "str",
+        "folder_id": "str",
+        "assignments": "list[dict]"
+      },
+      "returns": "bool",
+      "claim": "直接负责匹配",
+      "basis": "模拟用户 U02–U04",
+      "category": "parameter-and-decision"
+    },
+    {
+      "id": "candidate",
+      "requirement": "R03",
+      "node": "approval_candidate",
+      "source": {
+        "path": "archive_app/policy.py",
+        "symbol": "candidate_allowed"
+      },
+      "parameters": {
+        "grant": "dict",
+        "request": "dict",
+        "now": "float",
+        "reviewers": "list[str]"
+      },
+      "returns": "dict",
+      "claim": "审批目标、角色、排除本人、撤销和严格有效期",
+      "basis": "模拟用户 U02–U04",
+      "category": "parameter-and-decision"
+    },
+    {
+      "id": "content",
+      "requirement": "R04",
+      "node": "content_check",
+      "source": {
+        "path": "archive_app/policy.py",
+        "symbol": "check_content"
+      },
+      "parameters": {
+        "content": "str"
+      },
+      "returns": "dict",
+      "claim": "禁止 SECRET: 标记",
+      "basis": "模拟用户 U02–U04",
+      "category": "parameter-and-decision"
+    },
+    {
+      "id": "index",
+      "requirement": "R04",
+      "node": "index_check",
+      "source": {
+        "path": "archive_app/policy.py",
+        "symbol": "check_index"
+      },
+      "parameters": {
+        "title": "str",
+        "project_id": "str",
+        "document_number": "str"
+      },
+      "returns": "dict",
+      "claim": "三个索引字段齐全",
+      "basis": "模拟用户 U02–U04",
+      "category": "parameter-and-decision"
+    },
+    {
+      "id": "commit",
+      "requirement": "R13",
+      "node": "archive_commit",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.try_commit"
+      },
+      "parameters": {
+        "db": "sqlite3.Connection",
+        "run": "dict",
+        "trace": "TracePort"
+      },
+      "returns": "str | None",
+      "claim": "当前资格、版本和本运行汇合后提交",
+      "basis": "模拟用户 U02–U04",
+      "category": "parameter-and-decision"
+    },
+    {
+      "id": "size",
+      "requirement": "R14",
+      "node": "size_guard",
+      "source": {
+        "path": "archive_app/policy.py",
+        "symbol": "check_size"
+      },
+      "parameters": {
+        "content": "str",
+        "limit_bytes": "int",
+        "project_id": "str",
+        "limit_revision": "int"
+      },
+      "returns": "dict",
+      "claim": "按 UTF-8 正文计算实际字节并与当前上限比较，包含相等边界",
+      "basis": "实际模拟用户 U05-U06",
+      "category": "parameter-and-decision"
+    }
+  ],
+  "checks": [
+    {
+      "id": "scope-actual-true",
+      "rule": "scope",
+      "case": "scope_direct_manager",
+      "phase": "decision",
+      "count": {
+        "min": 1
+      },
+      "fields": [
+        {
+          "path": [
+            "outputs",
+            "allowed"
+          ],
+          "equals": true
+        }
+      ]
+    },
+    {
+      "id": "scope-actual-false",
+      "rule": "scope",
+      "case": "scope_ancestor_only",
+      "phase": "decision",
+      "count": {
+        "min": 1
+      },
+      "fields": [
+        {
+          "path": [
+            "outputs",
+            "allowed"
+          ],
+          "equals": false
+        }
+      ]
+    },
+    {
+      "id": "candidate-target-version",
+      "rule": "candidate",
+      "case": "approval_target_other_version",
+      "phase": "decision",
+      "count": {
+        "min": 1
+      },
+      "fields": [
+        {
+          "path": [
+            "outputs",
+            "version_ok"
+          ],
+          "equals": false
+        }
+      ]
+    },
+    {
+      "id": "candidate-expiry",
+      "rule": "candidate",
+      "case": "approval_at_deadline",
+      "phase": "decision",
+      "count": {
+        "min": 1
+      },
+      "fields": [
+        {
+          "path": [
+            "outputs",
+            "time_ok"
+          ],
+          "equals": false
+        }
+      ]
+    },
+    {
+      "id": "candidate-self",
+      "rule": "candidate",
+      "case": "approval_self",
+      "phase": "decision",
+      "count": {
+        "min": 1
+      },
+      "fields": [
+        {
+          "path": [
+            "outputs",
+            "different_actor"
+          ],
+          "equals": false
+        }
+      ]
+    },
+    {
+      "id": "content-secret",
+      "rule": "content",
+      "case": "secret_content",
+      "phase": "return",
+      "count": {
+        "min": 1
+      },
+      "fields": [
+        {
+          "path": [
+            "outputs",
+            "passed"
+          ],
+          "equals": false
+        }
+      ]
+    },
+    {
+      "id": "index-missing",
+      "rule": "index",
+      "case": "missing_index",
+      "phase": "return",
+      "count": {
+        "min": 1
+      },
+      "fields": [
+        {
+          "path": [
+            "outputs",
+            "passed"
+          ],
+          "equals": false
+        }
+      ]
+    },
+    {
+      "id": "commit-actual-version",
+      "rule": "commit",
+      "case": "archive_snapshot",
+      "phase": "commit",
+      "count": {
+        "min": 1
+      },
+      "fields": [
+        {
+          "path": [
+            "inputs",
+            "content_version"
+          ],
+          "equals": 1
+        }
+      ]
+    },
+    {
+      "id": "size-exact-bytes",
+      "rule": "size",
+      "case": "size_equal",
+      "phase": "decision",
+      "count": {
+        "min": 1
+      },
+      "fields": [
+        {
+          "path": [
+            "inputs",
+            "content_bytes"
+          ],
+          "equals": 8192
+        },
+        {
+          "path": [
+            "inputs",
+            "limit_bytes"
+          ],
+          "equals": 8192
+        },
+        {
+          "path": [
+            "outputs",
+            "allowed"
+          ],
+          "equals": true
+        }
+      ]
+    },
+    {
+      "id": "size-multibyte-over",
+      "rule": "size",
+      "case": "size_utf8_over",
+      "phase": "decision",
+      "count": {
+        "min": 1
+      },
+      "fields": [
+        {
+          "path": [
+            "inputs",
+            "content_bytes"
+          ],
+          "equals": 8193
+        },
+        {
+          "path": [
+            "outputs",
+            "allowed"
+          ],
+          "equals": false
+        }
+      ]
+    },
+    {
+      "id": "size-final-limit",
+      "rule": "size",
+      "case": "size_commit_fresh",
+      "phase": "decision",
+      "count": {
+        "min": 1
+      },
+      "fields": [
+        {
+          "path": [
+            "inputs",
+            "limit_bytes"
+          ],
+          "equals": 1
+        },
+        {
+          "path": [
+            "outputs",
+            "allowed"
+          ],
+          "equals": false
+        }
+      ],
+      "select": [
+        {
+          "path": [
+            "inputs",
+            "limit_bytes"
+          ],
+          "equals": 1
+        }
+      ]
+    }
+  ]
+}

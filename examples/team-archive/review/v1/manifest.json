@@ -1,0 +1,1684 @@
+{
+  "schema_version": 3,
+  "build_id": "6eb25ba09b2db5caeacd20bbbfc309b9f4d35dfccf59c1f9a293558d0caf4578",
+  "files": {
+    "archive_app/__init__.py": "9c75aa19265cd50dd4e0456ca4321ea04570eab22149ded34951187b72dd11a8",
+    "archive_app/policy.py": "a84624b61789ea3895b8e44f02703de401a676fdc1f0eb1bfcc7346aa80da623",
+    "archive_app/ports.py": "14969e2b62c930564de8af83edb7010e5aa984bdbc3fc5293fb73778fbfe158e",
+    "archive_app/service.py": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07",
+    "archive_app/storage.py": "e64da1129d7597b22aa7c142ea25001773689b1997a0919a65d67882021e058f",
+    "archive_app/workflow.py": "88a9cf567ee570ef60ae9edd4315bf9c2e164c98f616184646f747a5892fe229",
+    "integrations/bo_observer.py": "9cd4165579d339ab0a20ad7b0b93e2f412399961935a3551210d2d33592e581c",
+    "integrations/bo_server.py": "5f31cce409cad211136557649564ba8439c1b616cea02432b8516937b6252093",
+    "observer_runtime/behavior_model.py": "37af8d5926a29eb525773048f3e5e7190e4b7e2239a0a8f858108593924c16b4",
+    "observer_runtime/semantic_probe.py": "a081e8dfdecf117858cf0d77eb51b4fa2eb717ca421d1473f0ad9058fd4413bb",
+    "run.py": "88b4cd777fef04e7cb37d009d27dfa814420ba7faf8f6fc9a44555133a050d0e",
+    "static/app.css": "2a4fd73b67b18766d7759d3e7d1e06594124f9f367117018efb1f00debf77939",
+    "static/app.html": "f3675f031c6a68903d53ad516309ebd64d2c57059d786c426cf8717a33666c48",
+    "static/app.js": "a12919415d1d3da276b6109fe1639d13ca48dcb4f39095690f846d97662de287",
+    "static/graph/graph-core.js": "0587de5bfe816665315fa708955cdd626e62751ef2294e70ca80632b60ec2e46",
+    "static/graph/index.html": "607f87df272d05041bc98a58e38abd5df211956756d4992917f6233396cb3bd6",
+    "static/graph/layout.js": "2bcd4f12569982db78ec8fe035cbb5bcc9047f99207b46efa51715fca3d1fb18",
+    "static/graph/viewer.css": "baba2a9b840c23cad89978a2aa1502a288bb947ce42c367e426ceebb22ac0ed7",
+    "static/graph/viewer.js": "49beb9eaa8083902c5abdd0326bb4d9f081523018cf92cff3ee7817d945cfbd7",
+    "tooling/behavior_source.json": "c8026cb12da0b0c258274bc6c4432fc0b1908414322a24aeed3bf0eabf095d6d",
+    "tooling/build_model.py": "b786928e00d318f97b7b2532c42f0ce44615ea46a6eb54577b1b0405f6ccd26b"
+  },
+  "model_hash": "fcb767e1d54e645945a43e7459787a8efde6cd85ef4cf8b9bfcf96933b409bf8",
+  "intent_hash": "4ea69d2b08a76d8e49f6dc5d1ea968f03f89988c4ccf0bc556efb5039edc9c85",
+  "model_revision": "1.0.0",
+  "bindings": {
+    "archive_request": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.create_run",
+      "line": 93,
+      "end_line": 118,
+      "signature": "self, document_id: str, operator_id: str, capacity: int=2",
+      "ast_sha256": "4bad64652b5d98f6cc91923ecdb3a35e997c66d32a0cf4102bbb0855b186394e",
+      "snippet": "    def create_run(self, document_id: str, operator_id: str, capacity: int = 2) -> str:\n        if type(capacity) is not int or capacity not in (1,2):\n            raise ValueError(\"名额只能是 1 或 2\")\n        with self.lock, closing(self.store.connect()) as db:\n            db.execute(\"BEGIN IMMEDIATE\")\n            row = db.execute(\"SELECT * FROM documents WHERE id=?\",(document_id,)).fetchone()\n            if row is None or not db.execute(\"SELECT 1 FROM users WHERE id=?\",(operator_id,)).fetchone():\n                raise ValueError(\"资料或操作人不存在\")\n            doc, ident = dict(row), uuid.uuid4().hex[:12]\n            request = {\"document_id\":doc[\"id\"],\"project_id\":doc[\"project_id\"],\n                       \"operator_id\":operator_id,\"content_version\":doc[\"version\"],\n                       \"content\":doc[\"content\"],\"title\":doc[\"title\"],\"document_number\":doc[\"number\"]}\n            run = {\"id\":ident,\"input\":request,\"phase\":\"created\",\"phase_journal\":[],\n                   \"execution_version\":self.execution_version,\n                   \"created\":float(self.clock()),\"stop_reason\":\"\",\"resume_required\":False,\n                   \"configuration\":initial_configuration(ident,doc[\"version\"],capacity),\n                   \"qualification\":{},\"effect_id\":None}\n            self.store.save_run(db,run)\n            db.commit()\n            trace = self.trace(run)\n            trace.record(\"archive_request\",\"enter\",self.basis(db,run),lambda:{\n                \"inputs\":{\"document_id\":document_id,\"operator_id\":operator_id,\"capacity\":capacity,\n                          \"content_version\":doc[\"version\"]},\"outputs\":{\"attempt\":ident}},\n                call_id=uuid.uuid4().hex)\n        self.advance(ident)\n        return ident",
+      "calls": [
+        "ValueError",
+        "closing",
+        "db.commit",
+        "db.execute",
+        "db.execute('SELECT * FROM documents WHERE id=?', (document_id,)).fetchone",
+        "db.execute('SELECT 1 FROM users WHERE id=?', (operator_id,)).fetchone",
+        "dict",
+        "float",
+        "initial_configuration",
+        "self.advance",
+        "self.basis",
+        "self.clock",
+        "self.store.connect",
+        "self.store.save_run",
+        "self.trace",
+        "trace.record",
+        "type",
+        "uuid.uuid4"
+      ],
+      "guards": [
+        {
+          "line": 94,
+          "expression": "type(capacity) is not int or capacity not in (1, 2)"
+        },
+        {
+          "line": 99,
+          "expression": "row is None or not db.execute('SELECT 1 FROM users WHERE id=?', (operator_id,)).fetchone()"
+        }
+      ],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "document": {
+      "path": "archive_app/storage.py",
+      "symbol": "ArchiveStore.snapshot",
+      "line": 71,
+      "end_line": 78,
+      "signature": "self",
+      "ast_sha256": "341261fd1d565971b28782ed3b987d2f9ef21317448fecf3fd1861330572289c",
+      "snippet": "    def snapshot(self) -> dict:\n        with self.connect() as db:\n            db.execute(\"BEGIN\")\n            data = {table:[dict(r) for r in db.execute(\"SELECT * FROM \"+table)]\n                    for table in (\"users\",\"projects\",\"folders\",\"assignments\",\"documents\",\"grants\",\"archives\")}\n            data[\"runs\"] = [json.loads(r[\"payload\"]) for r in db.execute(\"SELECT payload FROM runs ORDER BY sequence\")]\n            data[\"epoch\"] = db.execute(\"SELECT epoch FROM meta WHERE id=1\").fetchone()[0]\n            return data",
+      "calls": [
+        "db.execute",
+        "db.execute('SELECT epoch FROM meta WHERE id=1').fetchone",
+        "dict",
+        "json.loads",
+        "self.connect"
+      ],
+      "guards": [],
+      "file_sha256": "e64da1129d7597b22aa7c142ea25001773689b1997a0919a65d67882021e058f"
+    },
+    "scope_check": {
+      "path": "archive_app/policy.py",
+      "symbol": "is_direct_manager",
+      "line": 7,
+      "end_line": 18,
+      "signature": "project_id: str, operator_id: str, folder_id: str, assignments: list[dict], trace: TracePort | None=None, basis: dict | None=None, parent: str | None=None",
+      "ast_sha256": "1aa192b1f51ddc4beff4f4192109a5248b6de3ad6520e0280e4e330f05c56cc3",
+      "snippet": "def is_direct_manager(project_id: str, operator_id: str, folder_id: str,\n                      assignments: list[dict], trace: TracePort | None = None,\n                      basis: dict | None = None, parent: str | None = None) -> bool:\n    trace = trace or TracePort()\n    allowed = any(a[\"project_id\"] == project_id and a[\"operator_id\"] == operator_id\n                  and a[\"folder_id\"] == folder_id for a in assignments)\n    trace.record(\"scope_check\", \"decision\", basis or {}, lambda: {\n        \"inputs\": {\"project_id\": project_id, \"operator_id\": operator_id,\n                   \"folder_id\": folder_id, \"assignments\": assignments},\n        \"outputs\": {\"allowed\": allowed, \"inherit_ancestors\": False}},\n        call_id=uuid.uuid4().hex, parent_call_id=parent)\n    return allowed",
+      "calls": [
+        "TracePort",
+        "any",
+        "trace.record",
+        "uuid.uuid4"
+      ],
+      "guards": [],
+      "file_sha256": "a84624b61789ea3895b8e44f02703de401a676fdc1f0eb1bfcc7346aa80da623"
+    },
+    "approval_check": {
+      "path": "archive_app/policy.py",
+      "symbol": "evaluate_approvals",
+      "line": 48,
+      "end_line": 61,
+      "signature": "project_id: str, operator_id: str, document_id: str, content_version: int, approvals: list[dict], reviewers: list[str], now: float, trace: TracePort, basis: dict, parent: str",
+      "ast_sha256": "d0096a98392cf4201c0d5a52f938a42ef3c124e7eccaa759e3f4c0a36148f8f0",
+      "snippet": "def evaluate_approvals(project_id: str, operator_id: str, document_id: str,\n                       content_version: int, approvals: list[dict], reviewers: list[str],\n                       now: float, trace: TracePort, basis: dict, parent: str) -> dict:\n    call = uuid.uuid4().hex\n    request = dict(project_id=project_id, operator_id=operator_id,\n                   document_id=document_id, content_version=content_version)\n    candidates = [{\"id\": g[\"id\"], **candidate_allowed(g, request, now, reviewers,\n                  trace, basis, call)} for g in approvals]\n    allowed = any(c[\"allowed\"] for c in candidates)\n    trace.record(\"approval_check\", \"decision\", basis, lambda: {\n        \"inputs\": {**request, \"clock\": now, \"candidate_count\": len(candidates)},\n        \"outputs\": {\"allowed\": allowed, \"candidates\": candidates}},\n        call_id=call, parent_call_id=parent)\n    return {\"allowed\": allowed, \"candidates\": candidates}",
+      "calls": [
+        "any",
+        "candidate_allowed",
+        "dict",
+        "len",
+        "trace.record",
+        "uuid.uuid4"
+      ],
+      "guards": [],
+      "file_sha256": "a84624b61789ea3895b8e44f02703de401a676fdc1f0eb1bfcc7346aa80da623"
+    },
+    "content_check": {
+      "path": "archive_app/policy.py",
+      "symbol": "check_content",
+      "line": 64,
+      "end_line": 73,
+      "signature": "content: str, trace: TracePort | None=None, basis: dict | None=None, call_id: str | None=None",
+      "ast_sha256": "87163fe4d3d81dca7cffaa17628c69735582c9b5f68920a2e3aaa28db577792f",
+      "snippet": "def check_content(content: str, trace: TracePort | None = None,\n                  basis: dict | None = None, call_id: str | None = None) -> dict:\n    trace = trace or TracePort()\n    result = {\"passed\": \"SECRET:\" not in content, \"marker_present\": \"SECRET:\" in content}\n    trace.record(\"content_check\", \"return\", basis or {}, lambda: {\n        \"inputs\": {\"content_length\": len(content),\n                   \"content_sha256\": hashlib.sha256(content.encode()).hexdigest(),\n                   \"forbidden_marker\": \"SECRET:\"},\n        \"outputs\": result}, call_id=call_id or uuid.uuid4().hex)\n    return result",
+      "calls": [
+        "TracePort",
+        "content.encode",
+        "hashlib.sha256",
+        "hashlib.sha256(content.encode()).hexdigest",
+        "len",
+        "trace.record",
+        "uuid.uuid4"
+      ],
+      "guards": [],
+      "file_sha256": "a84624b61789ea3895b8e44f02703de401a676fdc1f0eb1bfcc7346aa80da623"
+    },
+    "index_check": {
+      "path": "archive_app/policy.py",
+      "symbol": "check_index",
+      "line": 76,
+      "end_line": 88,
+      "signature": "title: str, project_id: str, document_number: str, trace: TracePort | None=None, basis: dict | None=None, call_id: str | None=None",
+      "ast_sha256": "09cab0f651bb5a07ba393c539239e51b887b549b2b49cb062549d97c2b23ce39",
+      "snippet": "def check_index(title: str, project_id: str, document_number: str,\n                trace: TracePort | None = None, basis: dict | None = None,\n                call_id: str | None = None) -> dict:\n    trace = trace or TracePort()\n    result = {\"title_present\": bool(title.strip()),\n              \"project_present\": bool(project_id.strip()),\n              \"number_present\": bool(document_number.strip())}\n    result[\"passed\"] = all(result.values())\n    trace.record(\"index_check\", \"return\", basis or {}, lambda: {\n        \"inputs\": {\"title_length\": len(title), \"project_id\": project_id,\n                   \"document_number\": document_number}, \"outputs\": result},\n        call_id=call_id or uuid.uuid4().hex)\n    return result",
+      "calls": [
+        "TracePort",
+        "all",
+        "bool",
+        "document_number.strip",
+        "len",
+        "project_id.strip",
+        "result.values",
+        "title.strip",
+        "trace.record",
+        "uuid.uuid4"
+      ],
+      "guards": [],
+      "file_sha256": "a84624b61789ea3895b8e44f02703de401a676fdc1f0eb1bfcc7346aa80da623"
+    },
+    "processing_slots": {
+      "path": "archive_app/workflow.py",
+      "symbol": "initial_configuration",
+      "line": 94,
+      "end_line": 103,
+      "signature": "attempt: str, version: int, capacity: int",
+      "ast_sha256": "068eb193f7a25b3326e295ddaa96dafdd5e50bf7dc52e217c80562c351eaea80",
+      "snippet": "def initial_configuration(attempt: str, version: int, capacity: int) -> dict:\n    if type(capacity) is not int or capacity not in (1, 2):\n        raise ValueError(\"处理名额只能选择 1 或 2\")\n    if type(version) is not int or version < 1:\n        raise ValueError(\"内容版本必须是正整数\")\n    return {\"attempt\":attempt,\"param_version\":version,\"revision\":0,\n            \"activities\":{a:\"pending\" for a in ACTIVITIES},\n            \"resources\":{\"processing_slots\":{\"capacity\":capacity,\"available\":capacity,\"holders\":[]}},\n            \"join\":{\"state\":\"waiting\",\"pending\":list(ACTIVITIES)},\"journal\":[],\n            \"results\":{},\"discarded\":[],\"wait_reasons\":{}}",
+      "calls": [
+        "ValueError",
+        "list",
+        "type"
+      ],
+      "guards": [
+        {
+          "line": 95,
+          "expression": "type(capacity) is not int or capacity not in (1, 2)"
+        },
+        {
+          "line": 97,
+          "expression": "type(version) is not int or version < 1"
+        }
+      ],
+      "file_sha256": "88a9cf567ee570ef60ae9edd4315bf9c2e164c98f616184646f747a5892fe229"
+    },
+    "archive_commit": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.try_commit",
+      "line": 206,
+      "end_line": 240,
+      "signature": "self, db: sqlite3.Connection, run: dict, trace: TracePort",
+      "ast_sha256": "2bab3ba59068cca9ea8b888803d8a4fb830c634cceea28303349c61b79bc7c1c",
+      "snippet": "    def try_commit(self, db: sqlite3.Connection, run: dict, trace: TracePort) -> str | None:\n        evaluation = self.evaluate(db,run,trace,\"commit\")\n        cfg, request = run[\"configuration\"], run[\"input\"]\n        same_run = cfg[\"attempt\"]==run[\"id\"] and cfg[\"param_version\"]==request[\"content_version\"]\n        all_passed = (same_run and cfg[\"join\"][\"state\"]==\"passed\"\n                      and all(cfg[\"activities\"][a]==\"succeeded\" and cfg[\"results\"].get(a,{}).get(\"passed\") is True\n                              for a in ACTIVITIES))\n        if not evaluation[\"allowed\"] or not all_passed or run[\"resume_required\"]:\n            change_phase(run,\"pause\",{},float(self.clock()))\n            run[\"resume_required\"] = True\n            self.store.save_run(db,run)\n            db.commit()\n            return None\n        existing = self.store.find_archive(db,request[\"document_id\"],request[\"content_version\"])\n        ident = existing[\"id\"] if existing else uuid.uuid4().hex[:12]\n        if existing is None:\n            db.execute(\"INSERT INTO archives VALUES(?,?,?,?,?,?,?,?,?)\",\n                (ident,request[\"document_id\"],request[\"content_version\"],request[\"content\"],\n                 request[\"title\"],request[\"project_id\"],request[\"document_number\"],run[\"id\"],float(self.clock())))\n        run[\"effect_id\"] = ident\n        run[\"reused_archive\"] = existing is not None\n        change_phase(run,\"publish\",{**evaluation,\"all_passed\":all_passed,\"effect_saved\":True},float(self.clock()))\n        self.store.save_run(db,run)\n        db.commit()\n        # Only after the effect and completed state have committed.\n        if existing is None:\n            trace.record(\"archive_commit\",\"commit\",evaluation[\"basis\"],lambda:{\n                \"inputs\":{\"attempt\":run[\"id\"],\"document_id\":request[\"document_id\"],\n                          \"content_version\":request[\"content_version\"]},\n                \"outputs\":{\"effect_id\":ident,\"persisted\":True}},call_id=uuid.uuid4().hex)\n        else:\n            trace.record(\"archive_unique\",\"read\",evaluation[\"basis\"],lambda:{\n                \"inputs\":{\"document_id\":request[\"document_id\"],\"content_version\":request[\"content_version\"]},\n                \"outputs\":{\"effect_id\":ident,\"reused\":True}},call_id=uuid.uuid4().hex)\n        return ident",
+      "calls": [
+        "all",
+        "cfg['results'].get",
+        "cfg['results'].get(a, {}).get",
+        "change_phase",
+        "db.commit",
+        "db.execute",
+        "float",
+        "self.clock",
+        "self.evaluate",
+        "self.store.find_archive",
+        "self.store.save_run",
+        "trace.record",
+        "uuid.uuid4"
+      ],
+      "guards": [
+        {
+          "line": 213,
+          "expression": "not evaluation['allowed'] or not all_passed or run['resume_required']"
+        },
+        {
+          "line": 221,
+          "expression": "existing is None"
+        },
+        {
+          "line": 231,
+          "expression": "existing is None"
+        },
+        {
+          "line": 220,
+          "expression": "existing"
+        }
+      ],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "approval_revoked": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.revoke_approval",
+      "line": 322,
+      "end_line": 329,
+      "signature": "self, approval_id: str",
+      "ast_sha256": "9ed4f4b6c9803cd1befc069cb5c228b56336cfb2cfe63858d5c5926e6faf7272",
+      "snippet": "    def revoke_approval(self, approval_id: str) -> None:\n        with self.lock, closing(self.store.connect()) as db:\n            db.execute(\"BEGIN IMMEDIATE\")\n            if db.execute(\"UPDATE grants SET revoked=1 WHERE id=?\",(approval_id,)).rowcount!=1:\n                raise ValueError(\"审批不存在\")\n            self.store.bump(db)\n            db.commit()\n        self.tick()",
+      "calls": [
+        "ValueError",
+        "closing",
+        "db.commit",
+        "db.execute",
+        "self.store.bump",
+        "self.store.connect",
+        "self.tick"
+      ],
+      "guards": [
+        {
+          "line": 325,
+          "expression": "db.execute('UPDATE grants SET revoked=1 WHERE id=?', (approval_id,)).rowcount != 1"
+        }
+      ],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "content_changed": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.edit_document",
+      "line": 331,
+      "end_line": 341,
+      "signature": "self, document_id: str, title: str, number: str, content: str",
+      "ast_sha256": "9f3c94a888877610935773a891ce1fff5f914cf54e832f3d2603ceb9b4f9cdfb",
+      "snippet": "    def edit_document(self, document_id: str, title: str, number: str, content: str) -> None:\n        if not all(isinstance(x,str) for x in (title,number,content)) or len(content)>100000:\n            raise ValueError(\"资料字段类型无效或内容过长\")\n        with self.lock, closing(self.store.connect()) as db:\n            db.execute(\"BEGIN IMMEDIATE\")\n            if db.execute(\"UPDATE documents SET title=?,number=?,content=?,version=version+1 WHERE id=?\",\n                          (title,number,content,document_id)).rowcount!=1:\n                raise ValueError(\"资料不存在\")\n            self.store.bump(db)\n            db.commit()\n        self.tick()",
+      "calls": [
+        "ValueError",
+        "all",
+        "closing",
+        "db.commit",
+        "db.execute",
+        "isinstance",
+        "len",
+        "self.store.bump",
+        "self.store.connect",
+        "self.tick"
+      ],
+      "guards": [
+        {
+          "line": 332,
+          "expression": "not all((isinstance(x, str) for x in (title, number, content))) or len(content) > 100000"
+        },
+        {
+          "line": 336,
+          "expression": "db.execute('UPDATE documents SET title=?,number=?,content=?,version=version+1 WHERE id=?', (title, number, content, document_id)).rowcount != 1"
+        }
+      ],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "folder_assignments": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.evaluate",
+      "line": 46,
+      "end_line": 91,
+      "signature": "self, db: sqlite3.Connection, run: dict, trace: TracePort, stage: str",
+      "ast_sha256": "288db27d0d2b6ac6a64c414dc8c3f8e43b4ec03a03d16dd058a7a00fd9b5ba5f",
+      "snippet": "    def evaluate(self, db: sqlite3.Connection, run: dict, trace: TracePort, stage: str) -> dict:\n        request = run[\"input\"]\n        docrow = db.execute(\"SELECT * FROM documents WHERE id=?\",(request[\"document_id\"],)).fetchone()\n        if docrow is None:\n            raise ValueError(\"原资料不存在\")\n        document = dict(docrow)\n        assignments = [dict(r) for r in db.execute(\n            \"SELECT * FROM assignments WHERE project_id=? AND folder_id=?\",\n            (document[\"project_id\"], document[\"folder_id\"]))]\n        # Complete candidate set for this document, including invalid alternatives.\n        approvals = [dict(r) for r in db.execute(\n            \"SELECT * FROM grants WHERE document_id=? ORDER BY id\",(document[\"id\"],))]\n        reviewers = [r[\"id\"] for r in db.execute(\"SELECT id FROM users WHERE role='reviewer'\")]\n        basis, call = self.basis(db,run), uuid.uuid4().hex\n        read_event = trace.record(\"authority_read\", \"read\", basis, lambda: {\n            \"inputs\":{\"document_id\":document[\"id\"]},\n            \"outputs\":{\"project_id\":document[\"project_id\"],\"folder_id\":document[\"folder_id\"],\n                       \"content_version\":document[\"version\"],\"relation_epoch\":basis[\"epoch\"],\n                       \"approval_count\":len(approvals)}}, call_id=call)\n        scope = is_direct_manager(document[\"project_id\"],request[\"operator_id\"],\n                                   document[\"folder_id\"],assignments,trace,basis,call)\n        approval = evaluate_approvals(document[\"project_id\"],request[\"operator_id\"],\n            document[\"id\"],request[\"content_version\"],approvals,reviewers,basis[\"clock\"],trace,basis,call)\n        current = (document[\"version\"] == request[\"content_version\"]\n                   and document[\"project_id\"] == request[\"project_id\"])\n        allowed = scope and approval[\"allowed\"] and current and not run[\"stop_reason\"]\n        reasons = []\n        if not current: reasons.append(\"资料内容版本或所属项目已变化\")\n        if not scope: reasons.append(\"当前不是所在文件夹的直接负责人\")\n        if not approval[\"allowed\"]: reasons.append(\"没有仍有效的审批\")\n        if run[\"stop_reason\"]: reasons.append(\"本次运行已停止接收新工作\")\n        evaluation = {\"allowed\":allowed,\"scope_allowed\":scope,\"approval_allowed\":approval[\"allowed\"],\n            \"version_current\":current,\"reasons\":reasons,\"candidates\":approval[\"candidates\"],\n            \"basis\":basis,\"all_passed\":run[\"configuration\"][\"join\"][\"state\"]==\"passed\"}\n        allowed_ids={c[\"id\"] for c in approval[\"candidates\"] if c[\"allowed\"]}\n        evaluation[\"valid_until\"]=min((g[\"deadline\"] for g in approvals if g[\"id\"] in allowed_ids),default=None)\n        trace.record(\"commit_guard\", \"decision\", basis, lambda: {\n            \"inputs\":{\"stage\":stage,\"project_id\":document[\"project_id\"],\n                \"folder_id\":document[\"folder_id\"],\"operator_id\":request[\"operator_id\"],\n                \"run_version\":request[\"content_version\"],\"current_version\":document[\"version\"],\n                \"all_passed\":evaluation[\"all_passed\"]},\n            \"outputs\":{\"allowed\":allowed,\"scope_allowed\":scope,\n                \"approval_allowed\":approval[\"allowed\"],\"version_current\":current,\"reasons\":reasons}},\n            depends=[(read_event,\"data\")],call_id=uuid.uuid4().hex,parent_call_id=call)\n        run[\"qualification\"] = evaluation\n        return evaluation",
+      "calls": [
+        "ValueError",
+        "db.execute",
+        "db.execute('SELECT * FROM documents WHERE id=?', (request['document_id'],)).fetchone",
+        "dict",
+        "evaluate_approvals",
+        "is_direct_manager",
+        "len",
+        "min",
+        "reasons.append",
+        "self.basis",
+        "trace.record",
+        "uuid.uuid4"
+      ],
+      "guards": [
+        {
+          "line": 49,
+          "expression": "docrow is None"
+        },
+        {
+          "line": 73,
+          "expression": "not current"
+        },
+        {
+          "line": 74,
+          "expression": "not scope"
+        },
+        {
+          "line": 75,
+          "expression": "not approval['allowed']"
+        },
+        {
+          "line": 76,
+          "expression": "run['stop_reason']"
+        }
+      ],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "approval_target": {
+      "path": "archive_app/policy.py",
+      "symbol": "candidate_allowed",
+      "line": 21,
+      "end_line": 45,
+      "signature": "grant: dict, request: dict, now: float, reviewers: list[str], trace: TracePort | None=None, basis: dict | None=None, parent: str | None=None",
+      "ast_sha256": "93bc27a7cd2a6674bdeaf6e2fe634b027a04d3300f8b447c813347ce2b541fb5",
+      "snippet": "def candidate_allowed(grant: dict, request: dict, now: float, reviewers: list[str],\n                      trace: TracePort | None = None, basis: dict | None = None,\n                      parent: str | None = None) -> dict:\n    trace = trace or TracePort()\n    # Each condition is evaluated in this call, including rejected candidates.\n    result = {\n        \"project_ok\": grant[\"project_id\"] == request[\"project_id\"],\n        \"operator_ok\": grant[\"operator_id\"] == request[\"operator_id\"],\n        \"document_ok\": grant[\"document_id\"] == request[\"document_id\"],\n        \"version_ok\": grant[\"content_version\"] == request[\"content_version\"],\n        \"reviewer_ok\": grant[\"reviewer_id\"] in reviewers,\n        \"different_actor\": grant[\"reviewer_id\"] != request[\"operator_id\"],\n        \"not_revoked\": not bool(grant[\"revoked\"]),\n        \"time_ok\": now < grant[\"deadline\"],\n    }\n    result[\"target_matches\"] = all(result[k] for k in\n        (\"project_ok\", \"operator_ok\", \"document_ok\", \"version_ok\"))\n    result[\"allowed\"] = all(result.values())\n    trace.record(\"approval_candidate\", \"decision\", basis or {}, lambda: {\n        \"inputs\": {**grant, \"request_project\": request[\"project_id\"],\n                   \"request_operator\": request[\"operator_id\"],\n                   \"request_document\": request[\"document_id\"],\n                   \"request_version\": request[\"content_version\"], \"clock\": now},\n        \"outputs\": result}, call_id=uuid.uuid4().hex, parent_call_id=parent)\n    return result",
+      "calls": [
+        "TracePort",
+        "all",
+        "bool",
+        "result.values",
+        "trace.record",
+        "uuid.uuid4"
+      ],
+      "guards": [],
+      "file_sha256": "a84624b61789ea3895b8e44f02703de401a676fdc1f0eb1bfcc7346aa80da623"
+    },
+    "archive_unique": {
+      "path": "archive_app/storage.py",
+      "symbol": "ArchiveStore.find_archive",
+      "line": 65,
+      "end_line": 69,
+      "signature": "db: sqlite3.Connection, document_id: str, content_version: int",
+      "ast_sha256": "ab3d6930a346e4f515bee2b8093486faa8c184c14496d2580b7bf4bdabb453b8",
+      "snippet": "    @staticmethod\n    def find_archive(db: sqlite3.Connection, document_id: str, content_version: int) -> dict | None:\n        row = db.execute(\"SELECT * FROM archives WHERE document_id=? AND content_version=?\",\n                         (document_id,content_version)).fetchone()\n        return dict(row) if row else None",
+      "calls": [
+        "db.execute",
+        "db.execute('SELECT * FROM archives WHERE document_id=? AND content_version=?', (document_id, content_version)).fetchone",
+        "dict"
+      ],
+      "guards": [
+        {
+          "line": 69,
+          "expression": "row"
+        }
+      ],
+      "file_sha256": "e64da1129d7597b22aa7c142ea25001773689b1997a0919a65d67882021e058f"
+    },
+    "resume_run": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.resume_run",
+      "line": 272,
+      "end_line": 286,
+      "signature": "self, run_id: str",
+      "ast_sha256": "07a9989642abe33bfedeae319e9ac0ae5207efabb260891215e35c422f12e926",
+      "snippet": "    def resume_run(self, run_id: str) -> dict:\n        with self.lock, closing(self.store.connect()) as db:\n            db.execute(\"BEGIN IMMEDIATE\")\n            run = self.store.get_run(db,run_id)\n            if run[\"phase\"] in TERMINAL or run[\"stop_reason\"]:\n                raise ValueError(\"这次运行已结束或正在停止，请新建运行\")\n            trace = self.trace(run)\n            evaluation = self.evaluate(db,run,trace,\"resume\")\n            run[\"resume_required\"] = not evaluation[\"allowed\"]\n            self.store.save_run(db,run)\n            db.commit()\n            trace.record(\"resume_run\",\"change\",evaluation[\"basis\"],lambda:{\n                \"inputs\":{\"attempt\":run_id},\"outputs\":{\"allowed\":evaluation[\"allowed\"]}},\n                call_id=uuid.uuid4().hex)\n        return self.advance(run_id)",
+      "calls": [
+        "ValueError",
+        "closing",
+        "db.commit",
+        "db.execute",
+        "self.advance",
+        "self.evaluate",
+        "self.store.connect",
+        "self.store.get_run",
+        "self.store.save_run",
+        "self.trace",
+        "trace.record",
+        "uuid.uuid4"
+      ],
+      "guards": [
+        {
+          "line": 276,
+          "expression": "run['phase'] in TERMINAL or run['stop_reason']"
+        }
+      ],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "run_identity": {
+      "path": "archive_app/workflow.py",
+      "symbol": "initial_configuration",
+      "line": 94,
+      "end_line": 103,
+      "signature": "attempt: str, version: int, capacity: int",
+      "ast_sha256": "068eb193f7a25b3326e295ddaa96dafdd5e50bf7dc52e217c80562c351eaea80",
+      "snippet": "def initial_configuration(attempt: str, version: int, capacity: int) -> dict:\n    if type(capacity) is not int or capacity not in (1, 2):\n        raise ValueError(\"处理名额只能选择 1 或 2\")\n    if type(version) is not int or version < 1:\n        raise ValueError(\"内容版本必须是正整数\")\n    return {\"attempt\":attempt,\"param_version\":version,\"revision\":0,\n            \"activities\":{a:\"pending\" for a in ACTIVITIES},\n            \"resources\":{\"processing_slots\":{\"capacity\":capacity,\"available\":capacity,\"holders\":[]}},\n            \"join\":{\"state\":\"waiting\",\"pending\":list(ACTIVITIES)},\"journal\":[],\n            \"results\":{},\"discarded\":[],\"wait_reasons\":{}}",
+      "calls": [
+        "ValueError",
+        "list",
+        "type"
+      ],
+      "guards": [
+        {
+          "line": 95,
+          "expression": "type(capacity) is not int or capacity not in (1, 2)"
+        },
+        {
+          "line": 97,
+          "expression": "type(version) is not int or version < 1"
+        }
+      ],
+      "file_sha256": "88a9cf567ee570ef60ae9edd4315bf9c2e164c98f616184646f747a5892fe229"
+    },
+    "flow.policy": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.evaluate",
+      "line": 46,
+      "end_line": 91,
+      "signature": "self, db: sqlite3.Connection, run: dict, trace: TracePort, stage: str",
+      "ast_sha256": "288db27d0d2b6ac6a64c414dc8c3f8e43b4ec03a03d16dd058a7a00fd9b5ba5f",
+      "snippet": "    def evaluate(self, db: sqlite3.Connection, run: dict, trace: TracePort, stage: str) -> dict:\n        request = run[\"input\"]\n        docrow = db.execute(\"SELECT * FROM documents WHERE id=?\",(request[\"document_id\"],)).fetchone()\n        if docrow is None:\n            raise ValueError(\"原资料不存在\")\n        document = dict(docrow)\n        assignments = [dict(r) for r in db.execute(\n            \"SELECT * FROM assignments WHERE project_id=? AND folder_id=?\",\n            (document[\"project_id\"], document[\"folder_id\"]))]\n        # Complete candidate set for this document, including invalid alternatives.\n        approvals = [dict(r) for r in db.execute(\n            \"SELECT * FROM grants WHERE document_id=? ORDER BY id\",(document[\"id\"],))]\n        reviewers = [r[\"id\"] for r in db.execute(\"SELECT id FROM users WHERE role='reviewer'\")]\n        basis, call = self.basis(db,run), uuid.uuid4().hex\n        read_event = trace.record(\"authority_read\", \"read\", basis, lambda: {\n            \"inputs\":{\"document_id\":document[\"id\"]},\n            \"outputs\":{\"project_id\":document[\"project_id\"],\"folder_id\":document[\"folder_id\"],\n                       \"content_version\":document[\"version\"],\"relation_epoch\":basis[\"epoch\"],\n                       \"approval_count\":len(approvals)}}, call_id=call)\n        scope = is_direct_manager(document[\"project_id\"],request[\"operator_id\"],\n                                   document[\"folder_id\"],assignments,trace,basis,call)\n        approval = evaluate_approvals(document[\"project_id\"],request[\"operator_id\"],\n            document[\"id\"],request[\"content_version\"],approvals,reviewers,basis[\"clock\"],trace,basis,call)\n        current = (document[\"version\"] == request[\"content_version\"]\n                   and document[\"project_id\"] == request[\"project_id\"])\n        allowed = scope and approval[\"allowed\"] and current and not run[\"stop_reason\"]\n        reasons = []\n        if not current: reasons.append(\"资料内容版本或所属项目已变化\")\n        if not scope: reasons.append(\"当前不是所在文件夹的直接负责人\")\n        if not approval[\"allowed\"]: reasons.append(\"没有仍有效的审批\")\n        if run[\"stop_reason\"]: reasons.append(\"本次运行已停止接收新工作\")\n        evaluation = {\"allowed\":allowed,\"scope_allowed\":scope,\"approval_allowed\":approval[\"allowed\"],\n            \"version_current\":current,\"reasons\":reasons,\"candidates\":approval[\"candidates\"],\n            \"basis\":basis,\"all_passed\":run[\"configuration\"][\"join\"][\"state\"]==\"passed\"}\n        allowed_ids={c[\"id\"] for c in approval[\"candidates\"] if c[\"allowed\"]}\n        evaluation[\"valid_until\"]=min((g[\"deadline\"] for g in approvals if g[\"id\"] in allowed_ids),default=None)\n        trace.record(\"commit_guard\", \"decision\", basis, lambda: {\n            \"inputs\":{\"stage\":stage,\"project_id\":document[\"project_id\"],\n                \"folder_id\":document[\"folder_id\"],\"operator_id\":request[\"operator_id\"],\n                \"run_version\":request[\"content_version\"],\"current_version\":document[\"version\"],\n                \"all_passed\":evaluation[\"all_passed\"]},\n            \"outputs\":{\"allowed\":allowed,\"scope_allowed\":scope,\n                \"approval_allowed\":approval[\"allowed\"],\"version_current\":current,\"reasons\":reasons}},\n            depends=[(read_event,\"data\")],call_id=uuid.uuid4().hex,parent_call_id=call)\n        run[\"qualification\"] = evaluation\n        return evaluation",
+      "calls": [
+        "ValueError",
+        "db.execute",
+        "db.execute('SELECT * FROM documents WHERE id=?', (request['document_id'],)).fetchone",
+        "dict",
+        "evaluate_approvals",
+        "is_direct_manager",
+        "len",
+        "min",
+        "reasons.append",
+        "self.basis",
+        "trace.record",
+        "uuid.uuid4"
+      ],
+      "guards": [
+        {
+          "line": 49,
+          "expression": "docrow is None"
+        },
+        {
+          "line": 73,
+          "expression": "not current"
+        },
+        {
+          "line": 74,
+          "expression": "not scope"
+        },
+        {
+          "line": 75,
+          "expression": "not approval['allowed']"
+        },
+        {
+          "line": 76,
+          "expression": "run['stop_reason']"
+        }
+      ],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "flow.checks": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.advance",
+      "line": 146,
+      "end_line": 204,
+      "signature": "self, run_id: str",
+      "ast_sha256": "57719975966bbb17fbf52eb11ebee722cb5320ef22de101f42bb08a3c227cf6c",
+      "snippet": "    def advance(self, run_id: str) -> dict:\n        launches = []\n        with self.lock, closing(self.store.connect()) as db:\n            db.execute(\"BEGIN IMMEDIATE\")\n            run = self.store.get_run(db,run_id)\n            if run[\"phase\"] in TERMINAL:\n                db.commit()\n                return run\n            trace, now = self.trace(run), float(self.clock())\n            evaluation = self.evaluate(db,run,trace,\"schedule\")\n            cfg = run[\"configuration\"]\n            if not evaluation[\"version_current\"]:\n                self.request_stop(run,\"version_changed\",now)\n            if run[\"phase\"]==\"stopping\":\n                self.settle(run,now)\n            else:\n                if cfg[\"join\"][\"state\"]==\"enabled\":\n                    activity_step(run,\"join\",\"checks_join\",now)\n                if cfg[\"join\"][\"state\"]==\"rejected\":\n                    change_phase(run,\"reject\",{\"checks_failed\":True},now)\n                elif not evaluation[\"allowed\"]:\n                    run[\"resume_required\"] = True\n                    if run[\"phase\"]!=\"waiting\":\n                        change_phase(run,\"pause\",{},now)\n                    for a,s in cfg[\"activities\"].items():\n                        if s in (\"pending\",\"waiting\"):\n                            cfg[\"wait_reasons\"][a] = \"等待当前资格恢复后点击继续\"\n                elif run[\"resume_required\"]:\n                    if run[\"phase\"]!=\"waiting\":\n                        change_phase(run,\"pause\",{},now)\n                else:\n                    if run[\"phase\"] in (\"created\",\"waiting\"):\n                        change_phase(run,\"begin\",evaluation,now)\n                    if cfg[\"join\"][\"state\"]==\"passed\" and run[\"phase\"]!=\"ready\":\n                        change_phase(run,\"checked\",{**evaluation,\"all_passed\":True},now)\n                    elif cfg[\"join\"][\"state\"]!=\"passed\":\n                        for activity in ACTIVITIES:\n                            if cfg[\"activities\"][activity] not in (\"pending\",\"waiting\"):\n                                continue\n                            if cfg[\"resources\"][\"processing_slots\"][\"available\"]:\n                                cfg[\"wait_reasons\"].pop(activity,None)\n                                activity_step(run,\"start\",activity,now)\n                                launches.append((deepcopy(run),activity,dict(evaluation[\"basis\"])))\n                            elif cfg[\"activities\"][activity]==\"pending\":\n                                cfg[\"wait_reasons\"][activity] = \"等待本次运行的可用名额\"\n                                activity_step(run,\"wait\",activity,now)\n            if run[\"phase\"]==\"ready\" and self.commit_enabled:\n                self.try_commit(db,run,trace)\n            else:\n                self.store.save_run(db,run)\n                db.commit()\n            self.emit_configuration(run,trace,evaluation[\"basis\"])\n        for saved, activity, basis in launches:\n            worker = threading.Thread(target=self.worker,args=(saved,activity,basis),daemon=True,\n                                      name=\"archive-\"+saved[\"id\"]+\"-\"+activity)\n            with self.lock:\n                self.threads.append(worker)\n            worker.start()\n        return run",
+      "calls": [
+        "activity_step",
+        "cfg['activities'].items",
+        "cfg['wait_reasons'].pop",
+        "change_phase",
+        "closing",
+        "db.commit",
+        "db.execute",
+        "deepcopy",
+        "dict",
+        "float",
+        "launches.append",
+        "self.clock",
+        "self.emit_configuration",
+        "self.evaluate",
+        "self.request_stop",
+        "self.settle",
+        "self.store.connect",
+        "self.store.get_run",
+        "self.store.save_run",
+        "self.threads.append",
+        "self.trace",
+        "self.try_commit",
+        "threading.Thread",
+        "worker.start"
+      ],
+      "guards": [
+        {
+          "line": 151,
+          "expression": "run['phase'] in TERMINAL"
+        },
+        {
+          "line": 157,
+          "expression": "not evaluation['version_current']"
+        },
+        {
+          "line": 159,
+          "expression": "run['phase'] == 'stopping'"
+        },
+        {
+          "line": 192,
+          "expression": "run['phase'] == 'ready' and self.commit_enabled"
+        },
+        {
+          "line": 162,
+          "expression": "cfg['join']['state'] == 'enabled'"
+        },
+        {
+          "line": 164,
+          "expression": "cfg['join']['state'] == 'rejected'"
+        },
+        {
+          "line": 166,
+          "expression": "not evaluation['allowed']"
+        },
+        {
+          "line": 168,
+          "expression": "run['phase'] != 'waiting'"
+        },
+        {
+          "line": 173,
+          "expression": "run['resume_required']"
+        },
+        {
+          "line": 171,
+          "expression": "s in ('pending', 'waiting')"
+        },
+        {
+          "line": 174,
+          "expression": "run['phase'] != 'waiting'"
+        },
+        {
+          "line": 177,
+          "expression": "run['phase'] in ('created', 'waiting')"
+        },
+        {
+          "line": 179,
+          "expression": "cfg['join']['state'] == 'passed' and run['phase'] != 'ready'"
+        },
+        {
+          "line": 181,
+          "expression": "cfg['join']['state'] != 'passed'"
+        },
+        {
+          "line": 183,
+          "expression": "cfg['activities'][activity] not in ('pending', 'waiting')"
+        },
+        {
+          "line": 185,
+          "expression": "cfg['resources']['processing_slots']['available']"
+        },
+        {
+          "line": 189,
+          "expression": "cfg['activities'][activity] == 'pending'"
+        }
+      ],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "flow.archive": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.try_commit",
+      "line": 206,
+      "end_line": 240,
+      "signature": "self, db: sqlite3.Connection, run: dict, trace: TracePort",
+      "ast_sha256": "2bab3ba59068cca9ea8b888803d8a4fb830c634cceea28303349c61b79bc7c1c",
+      "snippet": "    def try_commit(self, db: sqlite3.Connection, run: dict, trace: TracePort) -> str | None:\n        evaluation = self.evaluate(db,run,trace,\"commit\")\n        cfg, request = run[\"configuration\"], run[\"input\"]\n        same_run = cfg[\"attempt\"]==run[\"id\"] and cfg[\"param_version\"]==request[\"content_version\"]\n        all_passed = (same_run and cfg[\"join\"][\"state\"]==\"passed\"\n                      and all(cfg[\"activities\"][a]==\"succeeded\" and cfg[\"results\"].get(a,{}).get(\"passed\") is True\n                              for a in ACTIVITIES))\n        if not evaluation[\"allowed\"] or not all_passed or run[\"resume_required\"]:\n            change_phase(run,\"pause\",{},float(self.clock()))\n            run[\"resume_required\"] = True\n            self.store.save_run(db,run)\n            db.commit()\n            return None\n        existing = self.store.find_archive(db,request[\"document_id\"],request[\"content_version\"])\n        ident = existing[\"id\"] if existing else uuid.uuid4().hex[:12]\n        if existing is None:\n            db.execute(\"INSERT INTO archives VALUES(?,?,?,?,?,?,?,?,?)\",\n                (ident,request[\"document_id\"],request[\"content_version\"],request[\"content\"],\n                 request[\"title\"],request[\"project_id\"],request[\"document_number\"],run[\"id\"],float(self.clock())))\n        run[\"effect_id\"] = ident\n        run[\"reused_archive\"] = existing is not None\n        change_phase(run,\"publish\",{**evaluation,\"all_passed\":all_passed,\"effect_saved\":True},float(self.clock()))\n        self.store.save_run(db,run)\n        db.commit()\n        # Only after the effect and completed state have committed.\n        if existing is None:\n            trace.record(\"archive_commit\",\"commit\",evaluation[\"basis\"],lambda:{\n                \"inputs\":{\"attempt\":run[\"id\"],\"document_id\":request[\"document_id\"],\n                          \"content_version\":request[\"content_version\"]},\n                \"outputs\":{\"effect_id\":ident,\"persisted\":True}},call_id=uuid.uuid4().hex)\n        else:\n            trace.record(\"archive_unique\",\"read\",evaluation[\"basis\"],lambda:{\n                \"inputs\":{\"document_id\":request[\"document_id\"],\"content_version\":request[\"content_version\"]},\n                \"outputs\":{\"effect_id\":ident,\"reused\":True}},call_id=uuid.uuid4().hex)\n        return ident",
+      "calls": [
+        "all",
+        "cfg['results'].get",
+        "cfg['results'].get(a, {}).get",
+        "change_phase",
+        "db.commit",
+        "db.execute",
+        "float",
+        "self.clock",
+        "self.evaluate",
+        "self.store.find_archive",
+        "self.store.save_run",
+        "trace.record",
+        "uuid.uuid4"
+      ],
+      "guards": [
+        {
+          "line": 213,
+          "expression": "not evaluation['allowed'] or not all_passed or run['resume_required']"
+        },
+        {
+          "line": 221,
+          "expression": "existing is None"
+        },
+        {
+          "line": 231,
+          "expression": "existing is None"
+        },
+        {
+          "line": 220,
+          "expression": "existing"
+        }
+      ],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "authority_read": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.evaluate",
+      "line": 46,
+      "end_line": 91,
+      "signature": "self, db: sqlite3.Connection, run: dict, trace: TracePort, stage: str",
+      "ast_sha256": "288db27d0d2b6ac6a64c414dc8c3f8e43b4ec03a03d16dd058a7a00fd9b5ba5f",
+      "snippet": "    def evaluate(self, db: sqlite3.Connection, run: dict, trace: TracePort, stage: str) -> dict:\n        request = run[\"input\"]\n        docrow = db.execute(\"SELECT * FROM documents WHERE id=?\",(request[\"document_id\"],)).fetchone()\n        if docrow is None:\n            raise ValueError(\"原资料不存在\")\n        document = dict(docrow)\n        assignments = [dict(r) for r in db.execute(\n            \"SELECT * FROM assignments WHERE project_id=? AND folder_id=?\",\n            (document[\"project_id\"], document[\"folder_id\"]))]\n        # Complete candidate set for this document, including invalid alternatives.\n        approvals = [dict(r) for r in db.execute(\n            \"SELECT * FROM grants WHERE document_id=? ORDER BY id\",(document[\"id\"],))]\n        reviewers = [r[\"id\"] for r in db.execute(\"SELECT id FROM users WHERE role='reviewer'\")]\n        basis, call = self.basis(db,run), uuid.uuid4().hex\n        read_event = trace.record(\"authority_read\", \"read\", basis, lambda: {\n            \"inputs\":{\"document_id\":document[\"id\"]},\n            \"outputs\":{\"project_id\":document[\"project_id\"],\"folder_id\":document[\"folder_id\"],\n                       \"content_version\":document[\"version\"],\"relation_epoch\":basis[\"epoch\"],\n                       \"approval_count\":len(approvals)}}, call_id=call)\n        scope = is_direct_manager(document[\"project_id\"],request[\"operator_id\"],\n                                   document[\"folder_id\"],assignments,trace,basis,call)\n        approval = evaluate_approvals(document[\"project_id\"],request[\"operator_id\"],\n            document[\"id\"],request[\"content_version\"],approvals,reviewers,basis[\"clock\"],trace,basis,call)\n        current = (document[\"version\"] == request[\"content_version\"]\n                   and document[\"project_id\"] == request[\"project_id\"])\n        allowed = scope and approval[\"allowed\"] and current and not run[\"stop_reason\"]\n        reasons = []\n        if not current: reasons.append(\"资料内容版本或所属项目已变化\")\n        if not scope: reasons.append(\"当前不是所在文件夹的直接负责人\")\n        if not approval[\"allowed\"]: reasons.append(\"没有仍有效的审批\")\n        if run[\"stop_reason\"]: reasons.append(\"本次运行已停止接收新工作\")\n        evaluation = {\"allowed\":allowed,\"scope_allowed\":scope,\"approval_allowed\":approval[\"allowed\"],\n            \"version_current\":current,\"reasons\":reasons,\"candidates\":approval[\"candidates\"],\n            \"basis\":basis,\"all_passed\":run[\"configuration\"][\"join\"][\"state\"]==\"passed\"}\n        allowed_ids={c[\"id\"] for c in approval[\"candidates\"] if c[\"allowed\"]}\n        evaluation[\"valid_until\"]=min((g[\"deadline\"] for g in approvals if g[\"id\"] in allowed_ids),default=None)\n        trace.record(\"commit_guard\", \"decision\", basis, lambda: {\n            \"inputs\":{\"stage\":stage,\"project_id\":document[\"project_id\"],\n                \"folder_id\":document[\"folder_id\"],\"operator_id\":request[\"operator_id\"],\n                \"run_version\":request[\"content_version\"],\"current_version\":document[\"version\"],\n                \"all_passed\":evaluation[\"all_passed\"]},\n            \"outputs\":{\"allowed\":allowed,\"scope_allowed\":scope,\n                \"approval_allowed\":approval[\"allowed\"],\"version_current\":current,\"reasons\":reasons}},\n            depends=[(read_event,\"data\")],call_id=uuid.uuid4().hex,parent_call_id=call)\n        run[\"qualification\"] = evaluation\n        return evaluation",
+      "calls": [
+        "ValueError",
+        "db.execute",
+        "db.execute('SELECT * FROM documents WHERE id=?', (request['document_id'],)).fetchone",
+        "dict",
+        "evaluate_approvals",
+        "is_direct_manager",
+        "len",
+        "min",
+        "reasons.append",
+        "self.basis",
+        "trace.record",
+        "uuid.uuid4"
+      ],
+      "guards": [
+        {
+          "line": 49,
+          "expression": "docrow is None"
+        },
+        {
+          "line": 73,
+          "expression": "not current"
+        },
+        {
+          "line": 74,
+          "expression": "not scope"
+        },
+        {
+          "line": 75,
+          "expression": "not approval['allowed']"
+        },
+        {
+          "line": 76,
+          "expression": "run['stop_reason']"
+        }
+      ],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "approval_candidate": {
+      "path": "archive_app/policy.py",
+      "symbol": "candidate_allowed",
+      "line": 21,
+      "end_line": 45,
+      "signature": "grant: dict, request: dict, now: float, reviewers: list[str], trace: TracePort | None=None, basis: dict | None=None, parent: str | None=None",
+      "ast_sha256": "93bc27a7cd2a6674bdeaf6e2fe634b027a04d3300f8b447c813347ce2b541fb5",
+      "snippet": "def candidate_allowed(grant: dict, request: dict, now: float, reviewers: list[str],\n                      trace: TracePort | None = None, basis: dict | None = None,\n                      parent: str | None = None) -> dict:\n    trace = trace or TracePort()\n    # Each condition is evaluated in this call, including rejected candidates.\n    result = {\n        \"project_ok\": grant[\"project_id\"] == request[\"project_id\"],\n        \"operator_ok\": grant[\"operator_id\"] == request[\"operator_id\"],\n        \"document_ok\": grant[\"document_id\"] == request[\"document_id\"],\n        \"version_ok\": grant[\"content_version\"] == request[\"content_version\"],\n        \"reviewer_ok\": grant[\"reviewer_id\"] in reviewers,\n        \"different_actor\": grant[\"reviewer_id\"] != request[\"operator_id\"],\n        \"not_revoked\": not bool(grant[\"revoked\"]),\n        \"time_ok\": now < grant[\"deadline\"],\n    }\n    result[\"target_matches\"] = all(result[k] for k in\n        (\"project_ok\", \"operator_ok\", \"document_ok\", \"version_ok\"))\n    result[\"allowed\"] = all(result.values())\n    trace.record(\"approval_candidate\", \"decision\", basis or {}, lambda: {\n        \"inputs\": {**grant, \"request_project\": request[\"project_id\"],\n                   \"request_operator\": request[\"operator_id\"],\n                   \"request_document\": request[\"document_id\"],\n                   \"request_version\": request[\"content_version\"], \"clock\": now},\n        \"outputs\": result}, call_id=uuid.uuid4().hex, parent_call_id=parent)\n    return result",
+      "calls": [
+        "TracePort",
+        "all",
+        "bool",
+        "result.values",
+        "trace.record",
+        "uuid.uuid4"
+      ],
+      "guards": [],
+      "file_sha256": "a84624b61789ea3895b8e44f02703de401a676fdc1f0eb1bfcc7346aa80da623"
+    },
+    "commit_guard": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.evaluate",
+      "line": 46,
+      "end_line": 91,
+      "signature": "self, db: sqlite3.Connection, run: dict, trace: TracePort, stage: str",
+      "ast_sha256": "288db27d0d2b6ac6a64c414dc8c3f8e43b4ec03a03d16dd058a7a00fd9b5ba5f",
+      "snippet": "    def evaluate(self, db: sqlite3.Connection, run: dict, trace: TracePort, stage: str) -> dict:\n        request = run[\"input\"]\n        docrow = db.execute(\"SELECT * FROM documents WHERE id=?\",(request[\"document_id\"],)).fetchone()\n        if docrow is None:\n            raise ValueError(\"原资料不存在\")\n        document = dict(docrow)\n        assignments = [dict(r) for r in db.execute(\n            \"SELECT * FROM assignments WHERE project_id=? AND folder_id=?\",\n            (document[\"project_id\"], document[\"folder_id\"]))]\n        # Complete candidate set for this document, including invalid alternatives.\n        approvals = [dict(r) for r in db.execute(\n            \"SELECT * FROM grants WHERE document_id=? ORDER BY id\",(document[\"id\"],))]\n        reviewers = [r[\"id\"] for r in db.execute(\"SELECT id FROM users WHERE role='reviewer'\")]\n        basis, call = self.basis(db,run), uuid.uuid4().hex\n        read_event = trace.record(\"authority_read\", \"read\", basis, lambda: {\n            \"inputs\":{\"document_id\":document[\"id\"]},\n            \"outputs\":{\"project_id\":document[\"project_id\"],\"folder_id\":document[\"folder_id\"],\n                       \"content_version\":document[\"version\"],\"relation_epoch\":basis[\"epoch\"],\n                       \"approval_count\":len(approvals)}}, call_id=call)\n        scope = is_direct_manager(document[\"project_id\"],request[\"operator_id\"],\n                                   document[\"folder_id\"],assignments,trace,basis,call)\n        approval = evaluate_approvals(document[\"project_id\"],request[\"operator_id\"],\n            document[\"id\"],request[\"content_version\"],approvals,reviewers,basis[\"clock\"],trace,basis,call)\n        current = (document[\"version\"] == request[\"content_version\"]\n                   and document[\"project_id\"] == request[\"project_id\"])\n        allowed = scope and approval[\"allowed\"] and current and not run[\"stop_reason\"]\n        reasons = []\n        if not current: reasons.append(\"资料内容版本或所属项目已变化\")\n        if not scope: reasons.append(\"当前不是所在文件夹的直接负责人\")\n        if not approval[\"allowed\"]: reasons.append(\"没有仍有效的审批\")\n        if run[\"stop_reason\"]: reasons.append(\"本次运行已停止接收新工作\")\n        evaluation = {\"allowed\":allowed,\"scope_allowed\":scope,\"approval_allowed\":approval[\"allowed\"],\n            \"version_current\":current,\"reasons\":reasons,\"candidates\":approval[\"candidates\"],\n            \"basis\":basis,\"all_passed\":run[\"configuration\"][\"join\"][\"state\"]==\"passed\"}\n        allowed_ids={c[\"id\"] for c in approval[\"candidates\"] if c[\"allowed\"]}\n        evaluation[\"valid_until\"]=min((g[\"deadline\"] for g in approvals if g[\"id\"] in allowed_ids),default=None)\n        trace.record(\"commit_guard\", \"decision\", basis, lambda: {\n            \"inputs\":{\"stage\":stage,\"project_id\":document[\"project_id\"],\n                \"folder_id\":document[\"folder_id\"],\"operator_id\":request[\"operator_id\"],\n                \"run_version\":request[\"content_version\"],\"current_version\":document[\"version\"],\n                \"all_passed\":evaluation[\"all_passed\"]},\n            \"outputs\":{\"allowed\":allowed,\"scope_allowed\":scope,\n                \"approval_allowed\":approval[\"allowed\"],\"version_current\":current,\"reasons\":reasons}},\n            depends=[(read_event,\"data\")],call_id=uuid.uuid4().hex,parent_call_id=call)\n        run[\"qualification\"] = evaluation\n        return evaluation",
+      "calls": [
+        "ValueError",
+        "db.execute",
+        "db.execute('SELECT * FROM documents WHERE id=?', (request['document_id'],)).fetchone",
+        "dict",
+        "evaluate_approvals",
+        "is_direct_manager",
+        "len",
+        "min",
+        "reasons.append",
+        "self.basis",
+        "trace.record",
+        "uuid.uuid4"
+      ],
+      "guards": [
+        {
+          "line": 49,
+          "expression": "docrow is None"
+        },
+        {
+          "line": 73,
+          "expression": "not current"
+        },
+        {
+          "line": 74,
+          "expression": "not scope"
+        },
+        {
+          "line": 75,
+          "expression": "not approval['allowed']"
+        },
+        {
+          "line": 76,
+          "expression": "run['stop_reason']"
+        }
+      ],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "checks_join": {
+      "path": "archive_app/workflow.py",
+      "symbol": "activity_step",
+      "line": 117,
+      "end_line": 156,
+      "signature": "run: dict, event: str, activity: str, now: float, outcome: str | None=None",
+      "ast_sha256": "0471f26a104e3a66685d8e7128a7abd4eef043aa46e4b8900c32a520a19752f0",
+      "snippet": "def activity_step(run: dict, event: str, activity: str, now: float,\n                  outcome: str | None = None) -> None:\n    cfg = run[\"configuration\"]\n    before = deepcopy({k:cfg[k] for k in (\"activities\",\"resources\",\"join\")})\n    states, resource = cfg[\"activities\"], cfg[\"resources\"][\"processing_slots\"]\n    if event == \"wait\":\n        if states[activity] != \"pending\" or resource[\"available\"] > 0:\n            raise ValueError(\"等待名额的前提不成立\")\n        states[activity] = \"waiting\"\n    elif event == \"start\":\n        if states[activity] not in (\"pending\",\"waiting\") or resource[\"available\"] < 1 or activity in cfg[\"discarded\"]:\n            raise ValueError(\"检查不能启动\")\n        states[activity] = \"running\"\n        resource[\"available\"] -= 1\n        resource[\"holders\"].append(activity)\n    elif event == \"finish\":\n        if states[activity] != \"running\" or outcome not in (\"succeeded\",\"rejected\",\"failed\"):\n            raise ValueError(\"检查尚未运行或结果无效\")\n        states[activity] = outcome\n        resource[\"available\"] += 1\n        resource[\"holders\"].remove(activity)\n        if all(s in ACTIVITY_TERMINAL for s in states.values()):\n            cfg[\"join\"][\"state\"] = \"enabled\"\n    elif event == \"join\":\n        if cfg[\"join\"][\"state\"] != \"enabled\":\n            raise ValueError(\"检查未结束不能汇合\")\n        cfg[\"join\"][\"state\"] = \"passed\" if all(s==\"succeeded\" for s in states.values()) else \"rejected\"\n    elif event == \"abort\":\n        if \"running\" in states.values():\n            raise ValueError(\"运行中的检查尚未结束\")\n        cfg[\"activities\"] = {a:s if s in ACTIVITY_TERMINAL else \"cancelled\" for a,s in states.items()}\n        cfg[\"join\"][\"state\"] = \"rejected\"\n    else:\n        raise ValueError(\"未知活动事件\")\n    cfg[\"join\"][\"pending\"] = [a for a in ACTIVITIES if cfg[\"activities\"][a] not in ACTIVITY_TERMINAL]\n    cfg[\"revision\"] += 1\n    cfg[\"journal\"].append({\"seq\":cfg[\"revision\"],\"event\":event,\"activity\":activity,\n        \"before\":before,\"after\":deepcopy({k:cfg[k] for k in (\"activities\",\"resources\",\"join\")}),\n        \"clock\":now,\"phase\":run[\"phase\"],\"discarded\":list(cfg[\"discarded\"]),\n        \"wait_reasons\":dict(cfg[\"wait_reasons\"])})",
+      "calls": [
+        "ValueError",
+        "all",
+        "cfg['journal'].append",
+        "deepcopy",
+        "dict",
+        "list",
+        "resource['holders'].append",
+        "resource['holders'].remove",
+        "states.items",
+        "states.values"
+      ],
+      "guards": [
+        {
+          "line": 122,
+          "expression": "event == 'wait'"
+        },
+        {
+          "line": 123,
+          "expression": "states[activity] != 'pending' or resource['available'] > 0"
+        },
+        {
+          "line": 126,
+          "expression": "event == 'start'"
+        },
+        {
+          "line": 127,
+          "expression": "states[activity] not in ('pending', 'waiting') or resource['available'] < 1 or activity in cfg['discarded']"
+        },
+        {
+          "line": 132,
+          "expression": "event == 'finish'"
+        },
+        {
+          "line": 133,
+          "expression": "states[activity] != 'running' or outcome not in ('succeeded', 'rejected', 'failed')"
+        },
+        {
+          "line": 138,
+          "expression": "all((s in ACTIVITY_TERMINAL for s in states.values()))"
+        },
+        {
+          "line": 140,
+          "expression": "event == 'join'"
+        },
+        {
+          "line": 141,
+          "expression": "cfg['join']['state'] != 'enabled'"
+        },
+        {
+          "line": 144,
+          "expression": "event == 'abort'"
+        },
+        {
+          "line": 143,
+          "expression": "all((s == 'succeeded' for s in states.values()))"
+        },
+        {
+          "line": 145,
+          "expression": "'running' in states.values()"
+        },
+        {
+          "line": 147,
+          "expression": "s in ACTIVITY_TERMINAL"
+        }
+      ],
+      "file_sha256": "88a9cf567ee570ef60ae9edd4315bf9c2e164c98f616184646f747a5892fe229"
+    },
+    "cancel_run": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.cancel_run",
+      "line": 288,
+      "end_line": 301,
+      "signature": "self, run_id: str",
+      "ast_sha256": "8995812b8640176f445ea06aaa1498d80f08ab33625187111394e6cd077c51ec",
+      "snippet": "    def cancel_run(self, run_id: str) -> dict:\n        with self.lock, closing(self.store.connect()) as db:\n            db.execute(\"BEGIN IMMEDIATE\")\n            run = self.store.get_run(db,run_id)\n            self.request_stop(run,\"user_cancelled\",float(self.clock()))\n            self.settle(run,float(self.clock()))\n            self.store.save_run(db,run)\n            db.commit()\n            trace = self.trace(run)\n            trace.record(\"cancel_run\",\"change\",self.basis(db,run),lambda:{\n                \"inputs\":{\"attempt\":run_id},\"outputs\":{\"phase\":run[\"phase\"],\n                \"running_count\":sum(s==\"running\" for s in run[\"configuration\"][\"activities\"].values())}},\n                call_id=uuid.uuid4().hex)\n        return run",
+      "calls": [
+        "closing",
+        "db.commit",
+        "db.execute",
+        "float",
+        "run['configuration']['activities'].values",
+        "self.basis",
+        "self.clock",
+        "self.request_stop",
+        "self.settle",
+        "self.store.connect",
+        "self.store.get_run",
+        "self.store.save_run",
+        "self.trace",
+        "sum",
+        "trace.record",
+        "uuid.uuid4"
+      ],
+      "guards": [],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "lifecycle": {
+      "path": "archive_app/workflow.py",
+      "symbol": "Workflow",
+      "line": 42,
+      "end_line": 62,
+      "signature": "Workflow",
+      "ast_sha256": "03bf6e1db2883acf65e8866d81c0228934369052e13ff67e7b251e7119ccd163",
+      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
+      "calls": [
+        "Machine",
+        "Phase",
+        "self.evaluation.get"
+      ],
+      "guards": [],
+      "file_sha256": "88a9cf567ee570ef60ae9edd4315bf9c2e164c98f616184646f747a5892fe229"
+    },
+    "issue_approval": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.add_approval",
+      "line": 303,
+      "end_line": 320,
+      "signature": "self, document_id: str, operator_id: str, reviewer_id: str, deadline: float",
+      "ast_sha256": "994e11925cbeffdf600d9a570708803965dcd5e9455ad02a3c1dbfd985f99e58",
+      "snippet": "    def add_approval(self, document_id: str, operator_id: str, reviewer_id: str,\n                     deadline: float) -> str:\n        if type(deadline) not in (int,float) or not math.isfinite(deadline):\n            raise ValueError(\"截止时间无效\")\n        with self.lock, closing(self.store.connect()) as db:\n            db.execute(\"BEGIN IMMEDIATE\")\n            doc = db.execute(\"SELECT * FROM documents WHERE id=?\",(document_id,)).fetchone()\n            reviewer = db.execute(\"SELECT role FROM users WHERE id=?\",(reviewer_id,)).fetchone()\n            if doc is None or reviewer is None or reviewer[\"role\"]!=\"reviewer\" or reviewer_id==operator_id:\n                raise ValueError(\"须由另一名审核员审批\")\n            if not db.execute(\"SELECT 1 FROM users WHERE id=?\",(operator_id,)).fetchone():\n                raise ValueError(\"操作人不存在\")\n            ident = uuid.uuid4().hex[:12]\n            db.execute(\"INSERT INTO grants VALUES(?,?,?,?,?,?,?,0)\",\n                (ident,doc[\"project_id\"],operator_id,document_id,doc[\"version\"],reviewer_id,float(deadline)))\n            self.store.bump(db)\n            db.commit()\n        return ident",
+      "calls": [
+        "ValueError",
+        "closing",
+        "db.commit",
+        "db.execute",
+        "db.execute('SELECT * FROM documents WHERE id=?', (document_id,)).fetchone",
+        "db.execute('SELECT 1 FROM users WHERE id=?', (operator_id,)).fetchone",
+        "db.execute('SELECT role FROM users WHERE id=?', (reviewer_id,)).fetchone",
+        "float",
+        "math.isfinite",
+        "self.store.bump",
+        "self.store.connect",
+        "type",
+        "uuid.uuid4"
+      ],
+      "guards": [
+        {
+          "line": 305,
+          "expression": "type(deadline) not in (int, float) or not math.isfinite(deadline)"
+        },
+        {
+          "line": 311,
+          "expression": "doc is None or reviewer is None or reviewer['role'] != 'reviewer' or (reviewer_id == operator_id)"
+        },
+        {
+          "line": 313,
+          "expression": "not db.execute('SELECT 1 FROM users WHERE id=?', (operator_id,)).fetchone()"
+        }
+      ],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "move_folder": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.move_document",
+      "line": 343,
+      "end_line": 354,
+      "signature": "self, document_id: str, folder_id: str",
+      "ast_sha256": "cfbe26dcb3a71d7f5420c0b376f0b6ca9a8f93cd96b02ef18777385a22951589",
+      "snippet": "    def move_document(self, document_id: str, folder_id: str) -> None:\n        with self.lock, closing(self.store.connect()) as db:\n            db.execute(\"BEGIN IMMEDIATE\")\n            folder = db.execute(\"SELECT * FROM folders WHERE id=?\",(folder_id,)).fetchone()\n            if folder is None:\n                raise ValueError(\"目标文件夹不存在\")\n            if db.execute(\"UPDATE documents SET folder_id=?,project_id=? WHERE id=?\",\n                          (folder_id,folder[\"project_id\"],document_id)).rowcount!=1:\n                raise ValueError(\"资料不存在\")\n            self.store.bump(db)\n            db.commit()\n        self.tick()",
+      "calls": [
+        "ValueError",
+        "closing",
+        "db.commit",
+        "db.execute",
+        "db.execute('SELECT * FROM folders WHERE id=?', (folder_id,)).fetchone",
+        "self.store.bump",
+        "self.store.connect",
+        "self.tick"
+      ],
+      "guards": [
+        {
+          "line": 347,
+          "expression": "folder is None"
+        },
+        {
+          "line": 349,
+          "expression": "db.execute('UPDATE documents SET folder_id=?,project_id=? WHERE id=?', (folder_id, folder['project_id'], document_id)).rowcount != 1"
+        }
+      ],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "recover_run": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.recover_interrupted",
+      "line": 376,
+      "end_line": 394,
+      "signature": "self",
+      "ast_sha256": "73bc67aad3fcfe0cc105fa3ed4e0f38227810ccd6cf8d06d57f2e30912cb17fc",
+      "snippet": "    def recover_interrupted(self) -> None:\n        with self.lock, closing(self.store.connect()) as db:\n            db.execute(\"BEGIN IMMEDIATE\")\n            rows = list(db.execute(\"SELECT payload FROM runs\"))\n            import json\n            for row in rows:\n                run = json.loads(row[\"payload\"])\n                if run[\"phase\"] in TERMINAL:\n                    continue\n                cfg = run[\"configuration\"]\n                for a,s in list(cfg[\"activities\"].items()):\n                    if s==\"running\":\n                        cfg[\"results\"][a]={\"passed\":False,\"error\":\"进程中断\"}\n                        activity_step(run,\"finish\",a,float(self.clock()),\"failed\")\n                activity_step(run,\"abort\",\"checks_join\",float(self.clock()))\n                change_phase(run,\"interrupt\",{\"settled\":True},float(self.clock()))\n                run[\"stop_reason\"]=\"process_interrupted\"\n                self.store.save_run(db,run)\n            db.commit()",
+      "calls": [
+        "activity_step",
+        "cfg['activities'].items",
+        "change_phase",
+        "closing",
+        "db.commit",
+        "db.execute",
+        "float",
+        "json.loads",
+        "list",
+        "self.clock",
+        "self.store.connect",
+        "self.store.save_run"
+      ],
+      "guards": [
+        {
+          "line": 383,
+          "expression": "run['phase'] in TERMINAL"
+        },
+        {
+          "line": 387,
+          "expression": "s == 'running'"
+        }
+      ],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "worker_call": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.worker",
+      "line": 242,
+      "end_line": 270,
+      "signature": "self, run: dict, activity: str, basis: dict",
+      "ast_sha256": "a9782fe30d234227abdc3201216da610eec2740ad43dd87b41f0693d9f15d505",
+      "snippet": "    def worker(self, run: dict, activity: str, basis: dict) -> None:\n        trace, call = self.trace(run), uuid.uuid4().hex\n        trace.record(activity,\"enter\",basis,lambda:{\n            \"inputs\":{\"attempt\":run[\"id\"],\"content_version\":run[\"input\"][\"content_version\"]},\n            \"outputs\":{}},call_id=call)\n        try:\n            if self.worker_hook:\n                self.worker_hook(run[\"id\"],activity)\n            if self.delay:\n                time.sleep(self.delay)\n            params = run[\"input\"]\n            result = (check_content(params[\"content\"],trace,basis,call) if activity==\"content_check\"\n                      else check_index(params[\"title\"],params[\"project_id\"],params[\"document_number\"],trace,basis,call))\n            outcome = \"succeeded\" if result[\"passed\"] else \"rejected\"\n        except Exception:\n            result, outcome = {\"passed\":False,\"error\":\"检查执行出错\"}, \"failed\"\n        with self.lock, closing(self.store.connect()) as db:\n            db.execute(\"BEGIN IMMEDIATE\")\n            current = self.store.get_run(db,run[\"id\"])\n            # An interrupted process's workers cannot be revived into another run.\n            if current[\"configuration\"][\"activities\"][activity]!=\"running\":\n                db.commit()\n                return\n            current[\"configuration\"][\"results\"][activity] = result\n            activity_step(current,\"finish\",activity,float(self.clock()),outcome)\n            self.settle(current,float(self.clock()))\n            self.store.save_run(db,current)\n            db.commit()\n            self.emit_configuration(current,trace,self.basis(db,current))",
+      "calls": [
+        "activity_step",
+        "check_content",
+        "check_index",
+        "closing",
+        "db.commit",
+        "db.execute",
+        "float",
+        "self.basis",
+        "self.clock",
+        "self.emit_configuration",
+        "self.settle",
+        "self.store.connect",
+        "self.store.get_run",
+        "self.store.save_run",
+        "self.trace",
+        "self.worker_hook",
+        "time.sleep",
+        "trace.record",
+        "uuid.uuid4"
+      ],
+      "guards": [
+        {
+          "line": 248,
+          "expression": "self.worker_hook"
+        },
+        {
+          "line": 250,
+          "expression": "self.delay"
+        },
+        {
+          "line": 262,
+          "expression": "current['configuration']['activities'][activity] != 'running'"
+        },
+        {
+          "line": 253,
+          "expression": "activity == 'content_check'"
+        },
+        {
+          "line": 255,
+          "expression": "result['passed']"
+        }
+      ],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "state.created": {
+      "path": "archive_app/workflow.py",
+      "symbol": "Workflow",
+      "line": 42,
+      "end_line": 62,
+      "signature": "Workflow",
+      "ast_sha256": "03bf6e1db2883acf65e8866d81c0228934369052e13ff67e7b251e7119ccd163",
+      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
+      "calls": [
+        "Machine",
+        "Phase",
+        "self.evaluation.get"
+      ],
+      "guards": [],
+      "file_sha256": "88a9cf567ee570ef60ae9edd4315bf9c2e164c98f616184646f747a5892fe229"
+    },
+    "state.checking": {
+      "path": "archive_app/workflow.py",
+      "symbol": "Workflow",
+      "line": 42,
+      "end_line": 62,
+      "signature": "Workflow",
+      "ast_sha256": "03bf6e1db2883acf65e8866d81c0228934369052e13ff67e7b251e7119ccd163",
+      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
+      "calls": [
+        "Machine",
+        "Phase",
+        "self.evaluation.get"
+      ],
+      "guards": [],
+      "file_sha256": "88a9cf567ee570ef60ae9edd4315bf9c2e164c98f616184646f747a5892fe229"
+    },
+    "state.waiting": {
+      "path": "archive_app/workflow.py",
+      "symbol": "Workflow",
+      "line": 42,
+      "end_line": 62,
+      "signature": "Workflow",
+      "ast_sha256": "03bf6e1db2883acf65e8866d81c0228934369052e13ff67e7b251e7119ccd163",
+      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
+      "calls": [
+        "Machine",
+        "Phase",
+        "self.evaluation.get"
+      ],
+      "guards": [],
+      "file_sha256": "88a9cf567ee570ef60ae9edd4315bf9c2e164c98f616184646f747a5892fe229"
+    },
+    "state.ready": {
+      "path": "archive_app/workflow.py",
+      "symbol": "Workflow",
+      "line": 42,
+      "end_line": 62,
+      "signature": "Workflow",
+      "ast_sha256": "03bf6e1db2883acf65e8866d81c0228934369052e13ff67e7b251e7119ccd163",
+      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
+      "calls": [
+        "Machine",
+        "Phase",
+        "self.evaluation.get"
+      ],
+      "guards": [],
+      "file_sha256": "88a9cf567ee570ef60ae9edd4315bf9c2e164c98f616184646f747a5892fe229"
+    },
+    "state.completed": {
+      "path": "archive_app/workflow.py",
+      "symbol": "Workflow",
+      "line": 42,
+      "end_line": 62,
+      "signature": "Workflow",
+      "ast_sha256": "03bf6e1db2883acf65e8866d81c0228934369052e13ff67e7b251e7119ccd163",
+      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
+      "calls": [
+        "Machine",
+        "Phase",
+        "self.evaluation.get"
+      ],
+      "guards": [],
+      "file_sha256": "88a9cf567ee570ef60ae9edd4315bf9c2e164c98f616184646f747a5892fe229"
+    },
+    "state.failed": {
+      "path": "archive_app/workflow.py",
+      "symbol": "Workflow",
+      "line": 42,
+      "end_line": 62,
+      "signature": "Workflow",
+      "ast_sha256": "03bf6e1db2883acf65e8866d81c0228934369052e13ff67e7b251e7119ccd163",
+      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
+      "calls": [
+        "Machine",
+        "Phase",
+        "self.evaluation.get"
+      ],
+      "guards": [],
+      "file_sha256": "88a9cf567ee570ef60ae9edd4315bf9c2e164c98f616184646f747a5892fe229"
+    },
+    "state.stopping": {
+      "path": "archive_app/workflow.py",
+      "symbol": "Workflow",
+      "line": 42,
+      "end_line": 62,
+      "signature": "Workflow",
+      "ast_sha256": "03bf6e1db2883acf65e8866d81c0228934369052e13ff67e7b251e7119ccd163",
+      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
+      "calls": [
+        "Machine",
+        "Phase",
+        "self.evaluation.get"
+      ],
+      "guards": [],
+      "file_sha256": "88a9cf567ee570ef60ae9edd4315bf9c2e164c98f616184646f747a5892fe229"
+    },
+    "state.cancelled": {
+      "path": "archive_app/workflow.py",
+      "symbol": "Workflow",
+      "line": 42,
+      "end_line": 62,
+      "signature": "Workflow",
+      "ast_sha256": "03bf6e1db2883acf65e8866d81c0228934369052e13ff67e7b251e7119ccd163",
+      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
+      "calls": [
+        "Machine",
+        "Phase",
+        "self.evaluation.get"
+      ],
+      "guards": [],
+      "file_sha256": "88a9cf567ee570ef60ae9edd4315bf9c2e164c98f616184646f747a5892fe229"
+    },
+    "state.superseded": {
+      "path": "archive_app/workflow.py",
+      "symbol": "Workflow",
+      "line": 42,
+      "end_line": 62,
+      "signature": "Workflow",
+      "ast_sha256": "03bf6e1db2883acf65e8866d81c0228934369052e13ff67e7b251e7119ccd163",
+      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
+      "calls": [
+        "Machine",
+        "Phase",
+        "self.evaluation.get"
+      ],
+      "guards": [],
+      "file_sha256": "88a9cf567ee570ef60ae9edd4315bf9c2e164c98f616184646f747a5892fe229"
+    },
+    "state.interrupted": {
+      "path": "archive_app/workflow.py",
+      "symbol": "Workflow",
+      "line": 42,
+      "end_line": 62,
+      "signature": "Workflow",
+      "ast_sha256": "03bf6e1db2883acf65e8866d81c0228934369052e13ff67e7b251e7119ccd163",
+      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
+      "calls": [
+        "Machine",
+        "Phase",
+        "self.evaluation.get"
+      ],
+      "guards": [],
+      "file_sha256": "88a9cf567ee570ef60ae9edd4315bf9c2e164c98f616184646f747a5892fe229"
+    },
+    "code.58a42f06ed994d20": {
+      "path": "archive_app/workflow.py",
+      "symbol": "initial_configuration",
+      "line": 94,
+      "end_line": 103,
+      "signature": "attempt: str, version: int, capacity: int",
+      "ast_sha256": "068eb193f7a25b3326e295ddaa96dafdd5e50bf7dc52e217c80562c351eaea80",
+      "snippet": "def initial_configuration(attempt: str, version: int, capacity: int) -> dict:\n    if type(capacity) is not int or capacity not in (1, 2):\n        raise ValueError(\"处理名额只能选择 1 或 2\")\n    if type(version) is not int or version < 1:\n        raise ValueError(\"内容版本必须是正整数\")\n    return {\"attempt\":attempt,\"param_version\":version,\"revision\":0,\n            \"activities\":{a:\"pending\" for a in ACTIVITIES},\n            \"resources\":{\"processing_slots\":{\"capacity\":capacity,\"available\":capacity,\"holders\":[]}},\n            \"join\":{\"state\":\"waiting\",\"pending\":list(ACTIVITIES)},\"journal\":[],\n            \"results\":{},\"discarded\":[],\"wait_reasons\":{}}",
+      "calls": [
+        "ValueError",
+        "list",
+        "type"
+      ],
+      "guards": [
+        {
+          "line": 95,
+          "expression": "type(capacity) is not int or capacity not in (1, 2)"
+        },
+        {
+          "line": 97,
+          "expression": "type(version) is not int or version < 1"
+        }
+      ],
+      "file_sha256": "88a9cf567ee570ef60ae9edd4315bf9c2e164c98f616184646f747a5892fe229"
+    },
+    "code.0c1ff05551810b89": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.trace",
+      "line": 33,
+      "end_line": 39,
+      "signature": "self, run: dict",
+      "ast_sha256": "fffba835ba86d655b9012da2e9771f20abc55900b1e3d6f43ed1fe001ef86591",
+      "snippet": "    def trace(self, run: dict) -> TracePort:\n        if run[\"id\"] not in self.traces:\n            try:\n                self.traces[run[\"id\"]] = self.trace_factory(run[\"input\"][\"document_id\"], run[\"id\"])\n            except Exception:\n                self.traces[run[\"id\"]] = TracePort()\n        return self.traces[run[\"id\"]]",
+      "calls": [
+        "TracePort",
+        "self.trace_factory"
+      ],
+      "guards": [
+        {
+          "line": 34,
+          "expression": "run['id'] not in self.traces"
+        }
+      ],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "code.f3a6c799f69f9f5f": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.basis",
+      "line": 41,
+      "end_line": 44,
+      "signature": "self, db: sqlite3.Connection, run: dict",
+      "ast_sha256": "921f6a0f515546dfc63d21fa2abaac3433ecb766d8cd780b4debe49e51e103f4",
+      "snippet": "    def basis(self, db: sqlite3.Connection, run: dict) -> dict:\n        return {\"param_version\":run[\"input\"][\"content_version\"],\n                \"epoch\":db.execute(\"SELECT epoch FROM meta WHERE id=1\").fetchone()[0],\n                \"clock\":float(self.clock())}",
+      "calls": [
+        "db.execute",
+        "db.execute('SELECT epoch FROM meta WHERE id=1').fetchone",
+        "float",
+        "self.clock"
+      ],
+      "guards": [],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "code.bb6f1114d12b1280": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.advance",
+      "line": 146,
+      "end_line": 204,
+      "signature": "self, run_id: str",
+      "ast_sha256": "57719975966bbb17fbf52eb11ebee722cb5320ef22de101f42bb08a3c227cf6c",
+      "snippet": "    def advance(self, run_id: str) -> dict:\n        launches = []\n        with self.lock, closing(self.store.connect()) as db:\n            db.execute(\"BEGIN IMMEDIATE\")\n            run = self.store.get_run(db,run_id)\n            if run[\"phase\"] in TERMINAL:\n                db.commit()\n                return run\n            trace, now = self.trace(run), float(self.clock())\n            evaluation = self.evaluate(db,run,trace,\"schedule\")\n            cfg = run[\"configuration\"]\n            if not evaluation[\"version_current\"]:\n                self.request_stop(run,\"version_changed\",now)\n            if run[\"phase\"]==\"stopping\":\n                self.settle(run,now)\n            else:\n                if cfg[\"join\"][\"state\"]==\"enabled\":\n                    activity_step(run,\"join\",\"checks_join\",now)\n                if cfg[\"join\"][\"state\"]==\"rejected\":\n                    change_phase(run,\"reject\",{\"checks_failed\":True},now)\n                elif not evaluation[\"allowed\"]:\n                    run[\"resume_required\"] = True\n                    if run[\"phase\"]!=\"waiting\":\n                        change_phase(run,\"pause\",{},now)\n                    for a,s in cfg[\"activities\"].items():\n                        if s in (\"pending\",\"waiting\"):\n                            cfg[\"wait_reasons\"][a] = \"等待当前资格恢复后点击继续\"\n                elif run[\"resume_required\"]:\n                    if run[\"phase\"]!=\"waiting\":\n                        change_phase(run,\"pause\",{},now)\n                else:\n                    if run[\"phase\"] in (\"created\",\"waiting\"):\n                        change_phase(run,\"begin\",evaluation,now)\n                    if cfg[\"join\"][\"state\"]==\"passed\" and run[\"phase\"]!=\"ready\":\n                        change_phase(run,\"checked\",{**evaluation,\"all_passed\":True},now)\n                    elif cfg[\"join\"][\"state\"]!=\"passed\":\n                        for activity in ACTIVITIES:\n                            if cfg[\"activities\"][activity] not in (\"pending\",\"waiting\"):\n                                continue\n                            if cfg[\"resources\"][\"processing_slots\"][\"available\"]:\n                                cfg[\"wait_reasons\"].pop(activity,None)\n                                activity_step(run,\"start\",activity,now)\n                                launches.append((deepcopy(run),activity,dict(evaluation[\"basis\"])))\n                            elif cfg[\"activities\"][activity]==\"pending\":\n                                cfg[\"wait_reasons\"][activity] = \"等待本次运行的可用名额\"\n                                activity_step(run,\"wait\",activity,now)\n            if run[\"phase\"]==\"ready\" and self.commit_enabled:\n                self.try_commit(db,run,trace)\n            else:\n                self.store.save_run(db,run)\n                db.commit()\n            self.emit_configuration(run,trace,evaluation[\"basis\"])\n        for saved, activity, basis in launches:\n            worker = threading.Thread(target=self.worker,args=(saved,activity,basis),daemon=True,\n                                      name=\"archive-\"+saved[\"id\"]+\"-\"+activity)\n            with self.lock:\n                self.threads.append(worker)\n            worker.start()\n        return run",
+      "calls": [
+        "activity_step",
+        "cfg['activities'].items",
+        "cfg['wait_reasons'].pop",
+        "change_phase",
+        "closing",
+        "db.commit",
+        "db.execute",
+        "deepcopy",
+        "dict",
+        "float",
+        "launches.append",
+        "self.clock",
+        "self.emit_configuration",
+        "self.evaluate",
+        "self.request_stop",
+        "self.settle",
+        "self.store.connect",
+        "self.store.get_run",
+        "self.store.save_run",
+        "self.threads.append",
+        "self.trace",
+        "self.try_commit",
+        "threading.Thread",
+        "worker.start"
+      ],
+      "guards": [
+        {
+          "line": 151,
+          "expression": "run['phase'] in TERMINAL"
+        },
+        {
+          "line": 157,
+          "expression": "not evaluation['version_current']"
+        },
+        {
+          "line": 159,
+          "expression": "run['phase'] == 'stopping'"
+        },
+        {
+          "line": 192,
+          "expression": "run['phase'] == 'ready' and self.commit_enabled"
+        },
+        {
+          "line": 162,
+          "expression": "cfg['join']['state'] == 'enabled'"
+        },
+        {
+          "line": 164,
+          "expression": "cfg['join']['state'] == 'rejected'"
+        },
+        {
+          "line": 166,
+          "expression": "not evaluation['allowed']"
+        },
+        {
+          "line": 168,
+          "expression": "run['phase'] != 'waiting'"
+        },
+        {
+          "line": 173,
+          "expression": "run['resume_required']"
+        },
+        {
+          "line": 171,
+          "expression": "s in ('pending', 'waiting')"
+        },
+        {
+          "line": 174,
+          "expression": "run['phase'] != 'waiting'"
+        },
+        {
+          "line": 177,
+          "expression": "run['phase'] in ('created', 'waiting')"
+        },
+        {
+          "line": 179,
+          "expression": "cfg['join']['state'] == 'passed' and run['phase'] != 'ready'"
+        },
+        {
+          "line": 181,
+          "expression": "cfg['join']['state'] != 'passed'"
+        },
+        {
+          "line": 183,
+          "expression": "cfg['activities'][activity] not in ('pending', 'waiting')"
+        },
+        {
+          "line": 185,
+          "expression": "cfg['resources']['processing_slots']['available']"
+        },
+        {
+          "line": 189,
+          "expression": "cfg['activities'][activity] == 'pending'"
+        }
+      ],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "code.27ce332b5cf14cf4": {
+      "path": "archive_app/workflow.py",
+      "symbol": "change_phase",
+      "line": 106,
+      "end_line": 114,
+      "signature": "run: dict, event: str, evaluation: dict, now: float",
+      "ast_sha256": "95bec27ccb2fc0b382ce354379a39f8b034e4bf78a038f0a8ce565f430097355",
+      "snippet": "def change_phase(run: dict, event: str, evaluation: dict, now: float) -> None:\n    workflow = Workflow(run[\"phase\"], evaluation)\n    old = workflow.state\n    if not workflow.trigger(event):\n        raise ValueError(\"状态机拒绝迁移：\" + event)\n    run[\"phase\"] = workflow.state\n    run[\"phase_journal\"].append({\"event\":event,\"source\":old,\"target\":workflow.state,\n                                \"attempt\":run[\"id\"],\"clock\":now,\n                                \"activity_revision\":run[\"configuration\"][\"revision\"]})",
+      "calls": [
+        "ValueError",
+        "Workflow",
+        "run['phase_journal'].append",
+        "workflow.trigger"
+      ],
+      "guards": [
+        {
+          "line": 109,
+          "expression": "not workflow.trigger(event)"
+        }
+      ],
+      "file_sha256": "88a9cf567ee570ef60ae9edd4315bf9c2e164c98f616184646f747a5892fe229"
+    },
+    "code.d31899a8ea590c46": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.tick",
+      "line": 356,
+      "end_line": 367,
+      "signature": "self",
+      "ast_sha256": "c974c02edbae70195c714bd5a8b297816838eca35f98bbd7561c767abbab2514",
+      "snippet": "    def tick(self) -> None:\n        snapshot=self.store.snapshot()\n        now=float(self.clock())\n        for run in snapshot[\"runs\"]:\n            if run[\"phase\"] not in TERMINAL:\n                expiry=tuple((g[\"id\"],now>=g[\"deadline\"]) for g in snapshot[\"grants\"]\n                             if g[\"document_id\"]==run[\"input\"][\"document_id\"])\n                key=(snapshot[\"epoch\"],run[\"configuration\"][\"revision\"],run[\"phase\"],\n                     run[\"resume_required\"],run[\"stop_reason\"],self.commit_enabled,expiry)\n                if self.tick_keys.get(run[\"id\"])!=key:\n                    self.advance(run[\"id\"])\n                    self.tick_keys[run[\"id\"]]=key",
+      "calls": [
+        "float",
+        "self.advance",
+        "self.clock",
+        "self.store.snapshot",
+        "self.tick_keys.get",
+        "tuple"
+      ],
+      "guards": [
+        {
+          "line": 360,
+          "expression": "run['phase'] not in TERMINAL"
+        },
+        {
+          "line": 365,
+          "expression": "self.tick_keys.get(run['id']) != key"
+        }
+      ],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "code.881d8e61a1974236": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.tick",
+      "line": 356,
+      "end_line": 367,
+      "signature": "self",
+      "ast_sha256": "c974c02edbae70195c714bd5a8b297816838eca35f98bbd7561c767abbab2514",
+      "snippet": "    def tick(self) -> None:\n        snapshot=self.store.snapshot()\n        now=float(self.clock())\n        for run in snapshot[\"runs\"]:\n            if run[\"phase\"] not in TERMINAL:\n                expiry=tuple((g[\"id\"],now>=g[\"deadline\"]) for g in snapshot[\"grants\"]\n                             if g[\"document_id\"]==run[\"input\"][\"document_id\"])\n                key=(snapshot[\"epoch\"],run[\"configuration\"][\"revision\"],run[\"phase\"],\n                     run[\"resume_required\"],run[\"stop_reason\"],self.commit_enabled,expiry)\n                if self.tick_keys.get(run[\"id\"])!=key:\n                    self.advance(run[\"id\"])\n                    self.tick_keys[run[\"id\"]]=key",
+      "calls": [
+        "float",
+        "self.advance",
+        "self.clock",
+        "self.store.snapshot",
+        "self.tick_keys.get",
+        "tuple"
+      ],
+      "guards": [
+        {
+          "line": 360,
+          "expression": "run['phase'] not in TERMINAL"
+        },
+        {
+          "line": 365,
+          "expression": "self.tick_keys.get(run['id']) != key"
+        }
+      ],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "code.06e2186c0030c854": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.basis",
+      "line": 41,
+      "end_line": 44,
+      "signature": "self, db: sqlite3.Connection, run: dict",
+      "ast_sha256": "921f6a0f515546dfc63d21fa2abaac3433ecb766d8cd780b4debe49e51e103f4",
+      "snippet": "    def basis(self, db: sqlite3.Connection, run: dict) -> dict:\n        return {\"param_version\":run[\"input\"][\"content_version\"],\n                \"epoch\":db.execute(\"SELECT epoch FROM meta WHERE id=1\").fetchone()[0],\n                \"clock\":float(self.clock())}",
+      "calls": [
+        "db.execute",
+        "db.execute('SELECT epoch FROM meta WHERE id=1').fetchone",
+        "float",
+        "self.clock"
+      ],
+      "guards": [],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "code.0c55d9bef8e2c2ec": {
+      "path": "archive_app/policy.py",
+      "symbol": "is_direct_manager",
+      "line": 7,
+      "end_line": 18,
+      "signature": "project_id: str, operator_id: str, folder_id: str, assignments: list[dict], trace: TracePort | None=None, basis: dict | None=None, parent: str | None=None",
+      "ast_sha256": "1aa192b1f51ddc4beff4f4192109a5248b6de3ad6520e0280e4e330f05c56cc3",
+      "snippet": "def is_direct_manager(project_id: str, operator_id: str, folder_id: str,\n                      assignments: list[dict], trace: TracePort | None = None,\n                      basis: dict | None = None, parent: str | None = None) -> bool:\n    trace = trace or TracePort()\n    allowed = any(a[\"project_id\"] == project_id and a[\"operator_id\"] == operator_id\n                  and a[\"folder_id\"] == folder_id for a in assignments)\n    trace.record(\"scope_check\", \"decision\", basis or {}, lambda: {\n        \"inputs\": {\"project_id\": project_id, \"operator_id\": operator_id,\n                   \"folder_id\": folder_id, \"assignments\": assignments},\n        \"outputs\": {\"allowed\": allowed, \"inherit_ancestors\": False}},\n        call_id=uuid.uuid4().hex, parent_call_id=parent)\n    return allowed",
+      "calls": [
+        "TracePort",
+        "any",
+        "trace.record",
+        "uuid.uuid4"
+      ],
+      "guards": [],
+      "file_sha256": "a84624b61789ea3895b8e44f02703de401a676fdc1f0eb1bfcc7346aa80da623"
+    },
+    "code.fc2bea6773c216f7": {
+      "path": "archive_app/policy.py",
+      "symbol": "evaluate_approvals",
+      "line": 48,
+      "end_line": 61,
+      "signature": "project_id: str, operator_id: str, document_id: str, content_version: int, approvals: list[dict], reviewers: list[str], now: float, trace: TracePort, basis: dict, parent: str",
+      "ast_sha256": "d0096a98392cf4201c0d5a52f938a42ef3c124e7eccaa759e3f4c0a36148f8f0",
+      "snippet": "def evaluate_approvals(project_id: str, operator_id: str, document_id: str,\n                       content_version: int, approvals: list[dict], reviewers: list[str],\n                       now: float, trace: TracePort, basis: dict, parent: str) -> dict:\n    call = uuid.uuid4().hex\n    request = dict(project_id=project_id, operator_id=operator_id,\n                   document_id=document_id, content_version=content_version)\n    candidates = [{\"id\": g[\"id\"], **candidate_allowed(g, request, now, reviewers,\n                  trace, basis, call)} for g in approvals]\n    allowed = any(c[\"allowed\"] for c in candidates)\n    trace.record(\"approval_check\", \"decision\", basis, lambda: {\n        \"inputs\": {**request, \"clock\": now, \"candidate_count\": len(candidates)},\n        \"outputs\": {\"allowed\": allowed, \"candidates\": candidates}},\n        call_id=call, parent_call_id=parent)\n    return {\"allowed\": allowed, \"candidates\": candidates}",
+      "calls": [
+        "any",
+        "candidate_allowed",
+        "dict",
+        "len",
+        "trace.record",
+        "uuid.uuid4"
+      ],
+      "guards": [],
+      "file_sha256": "a84624b61789ea3895b8e44f02703de401a676fdc1f0eb1bfcc7346aa80da623"
+    },
+    "code.02e9e79362dd7b52": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.request_stop",
+      "line": 120,
+      "end_line": 129,
+      "signature": "self, run: dict, reason: str, now: float",
+      "ast_sha256": "eed341edf4c99f86b9c3bb433eccb1a76b1229cc27dc1ecc346e4a1a0848df00",
+      "snippet": "    def request_stop(self, run: dict, reason: str, now: float) -> None:\n        if run[\"phase\"] in TERMINAL:\n            return\n        if run[\"phase\"] != \"stopping\":\n            change_phase(run,\"stop\",{},now)\n        run[\"stop_reason\"] = reason\n        cfg = run[\"configuration\"]\n        cfg[\"discarded\"] = [a for a in ACTIVITIES if cfg[\"activities\"][a] in (\"pending\",\"waiting\")]\n        for a in cfg[\"discarded\"]:\n            cfg[\"wait_reasons\"][a] = \"已作废，不再启动；等待本次其他检查收尾\"",
+      "calls": [
+        "change_phase"
+      ],
+      "guards": [
+        {
+          "line": 121,
+          "expression": "run['phase'] in TERMINAL"
+        },
+        {
+          "line": 123,
+          "expression": "run['phase'] != 'stopping'"
+        }
+      ],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "code.46ead1f94e6333dd": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.settle",
+      "line": 131,
+      "end_line": 136,
+      "signature": "self, run: dict, now: float",
+      "ast_sha256": "9419c35378d29d11c879194b5f3d1561bb6b2410e3747497bcbef3ea0bfc2822",
+      "snippet": "    def settle(self, run: dict, now: float) -> None:\n        cfg = run[\"configuration\"]\n        if run[\"phase\"]==\"stopping\" and \"running\" not in cfg[\"activities\"].values():\n            activity_step(run,\"abort\",\"checks_join\",now)\n            change_phase(run,\"stale_done\" if run[\"stop_reason\"]==\"version_changed\" else \"cancel_done\",\n                         {\"settled\":True},now)",
+      "calls": [
+        "activity_step",
+        "cfg['activities'].values",
+        "change_phase"
+      ],
+      "guards": [
+        {
+          "line": 133,
+          "expression": "run['phase'] == 'stopping' and 'running' not in cfg['activities'].values()"
+        },
+        {
+          "line": 135,
+          "expression": "run['stop_reason'] == 'version_changed'"
+        }
+      ],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "code.c852303e58806ad7": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.trace",
+      "line": 33,
+      "end_line": 39,
+      "signature": "self, run: dict",
+      "ast_sha256": "fffba835ba86d655b9012da2e9771f20abc55900b1e3d6f43ed1fe001ef86591",
+      "snippet": "    def trace(self, run: dict) -> TracePort:\n        if run[\"id\"] not in self.traces:\n            try:\n                self.traces[run[\"id\"]] = self.trace_factory(run[\"input\"][\"document_id\"], run[\"id\"])\n            except Exception:\n                self.traces[run[\"id\"]] = TracePort()\n        return self.traces[run[\"id\"]]",
+      "calls": [
+        "TracePort",
+        "self.trace_factory"
+      ],
+      "guards": [
+        {
+          "line": 34,
+          "expression": "run['id'] not in self.traces"
+        }
+      ],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "code.77eab623e82b416e": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.basis",
+      "line": 41,
+      "end_line": 44,
+      "signature": "self, db: sqlite3.Connection, run: dict",
+      "ast_sha256": "921f6a0f515546dfc63d21fa2abaac3433ecb766d8cd780b4debe49e51e103f4",
+      "snippet": "    def basis(self, db: sqlite3.Connection, run: dict) -> dict:\n        return {\"param_version\":run[\"input\"][\"content_version\"],\n                \"epoch\":db.execute(\"SELECT epoch FROM meta WHERE id=1\").fetchone()[0],\n                \"clock\":float(self.clock())}",
+      "calls": [
+        "db.execute",
+        "db.execute('SELECT epoch FROM meta WHERE id=1').fetchone",
+        "float",
+        "self.clock"
+      ],
+      "guards": [],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    },
+    "code.c0d8ecdb19865c16": {
+      "path": "archive_app/workflow.py",
+      "symbol": "activity_step",
+      "line": 117,
+      "end_line": 156,
+      "signature": "run: dict, event: str, activity: str, now: float, outcome: str | None=None",
+      "ast_sha256": "0471f26a104e3a66685d8e7128a7abd4eef043aa46e4b8900c32a520a19752f0",
+      "snippet": "def activity_step(run: dict, event: str, activity: str, now: float,\n                  outcome: str | None = None) -> None:\n    cfg = run[\"configuration\"]\n    before = deepcopy({k:cfg[k] for k in (\"activities\",\"resources\",\"join\")})\n    states, resource = cfg[\"activities\"], cfg[\"resources\"][\"processing_slots\"]\n    if event == \"wait\":\n        if states[activity] != \"pending\" or resource[\"available\"] > 0:\n            raise ValueError(\"等待名额的前提不成立\")\n        states[activity] = \"waiting\"\n    elif event == \"start\":\n        if states[activity] not in (\"pending\",\"waiting\") or resource[\"available\"] < 1 or activity in cfg[\"discarded\"]:\n            raise ValueError(\"检查不能启动\")\n        states[activity] = \"running\"\n        resource[\"available\"] -= 1\n        resource[\"holders\"].append(activity)\n    elif event == \"finish\":\n        if states[activity] != \"running\" or outcome not in (\"succeeded\",\"rejected\",\"failed\"):\n            raise ValueError(\"检查尚未运行或结果无效\")\n        states[activity] = outcome\n        resource[\"available\"] += 1\n        resource[\"holders\"].remove(activity)\n        if all(s in ACTIVITY_TERMINAL for s in states.values()):\n            cfg[\"join\"][\"state\"] = \"enabled\"\n    elif event == \"join\":\n        if cfg[\"join\"][\"state\"] != \"enabled\":\n            raise ValueError(\"检查未结束不能汇合\")\n        cfg[\"join\"][\"state\"] = \"passed\" if all(s==\"succeeded\" for s in states.values()) else \"rejected\"\n    elif event == \"abort\":\n        if \"running\" in states.values():\n            raise ValueError(\"运行中的检查尚未结束\")\n        cfg[\"activities\"] = {a:s if s in ACTIVITY_TERMINAL else \"cancelled\" for a,s in states.items()}\n        cfg[\"join\"][\"state\"] = \"rejected\"\n    else:\n        raise ValueError(\"未知活动事件\")\n    cfg[\"join\"][\"pending\"] = [a for a in ACTIVITIES if cfg[\"activities\"][a] not in ACTIVITY_TERMINAL]\n    cfg[\"revision\"] += 1\n    cfg[\"journal\"].append({\"seq\":cfg[\"revision\"],\"event\":event,\"activity\":activity,\n        \"before\":before,\"after\":deepcopy({k:cfg[k] for k in (\"activities\",\"resources\",\"join\")}),\n        \"clock\":now,\"phase\":run[\"phase\"],\"discarded\":list(cfg[\"discarded\"]),\n        \"wait_reasons\":dict(cfg[\"wait_reasons\"])})",
+      "calls": [
+        "ValueError",
+        "all",
+        "cfg['journal'].append",
+        "deepcopy",
+        "dict",
+        "list",
+        "resource['holders'].append",
+        "resource['holders'].remove",
+        "states.items",
+        "states.values"
+      ],
+      "guards": [
+        {
+          "line": 122,
+          "expression": "event == 'wait'"
+        },
+        {
+          "line": 123,
+          "expression": "states[activity] != 'pending' or resource['available'] > 0"
+        },
+        {
+          "line": 126,
+          "expression": "event == 'start'"
+        },
+        {
+          "line": 127,
+          "expression": "states[activity] not in ('pending', 'waiting') or resource['available'] < 1 or activity in cfg['discarded']"
+        },
+        {
+          "line": 132,
+          "expression": "event == 'finish'"
+        },
+        {
+          "line": 133,
+          "expression": "states[activity] != 'running' or outcome not in ('succeeded', 'rejected', 'failed')"
+        },
+        {
+          "line": 138,
+          "expression": "all((s in ACTIVITY_TERMINAL for s in states.values()))"
+        },
+        {
+          "line": 140,
+          "expression": "event == 'join'"
+        },
+        {
+          "line": 141,
+          "expression": "cfg['join']['state'] != 'enabled'"
+        },
+        {
+          "line": 144,
+          "expression": "event == 'abort'"
+        },
+        {
+          "line": 143,
+          "expression": "all((s == 'succeeded' for s in states.values()))"
+        },
+        {
+          "line": 145,
+          "expression": "'running' in states.values()"
+        },
+        {
+          "line": 147,
+          "expression": "s in ACTIVITY_TERMINAL"
+        }
+      ],
+      "file_sha256": "88a9cf567ee570ef60ae9edd4315bf9c2e164c98f616184646f747a5892fe229"
+    },
+    "code.e81f5e85b51357b2": {
+      "path": "archive_app/workflow.py",
+      "symbol": "change_phase",
+      "line": 106,
+      "end_line": 114,
+      "signature": "run: dict, event: str, evaluation: dict, now: float",
+      "ast_sha256": "95bec27ccb2fc0b382ce354379a39f8b034e4bf78a038f0a8ce565f430097355",
+      "snippet": "def change_phase(run: dict, event: str, evaluation: dict, now: float) -> None:\n    workflow = Workflow(run[\"phase\"], evaluation)\n    old = workflow.state\n    if not workflow.trigger(event):\n        raise ValueError(\"状态机拒绝迁移：\" + event)\n    run[\"phase\"] = workflow.state\n    run[\"phase_journal\"].append({\"event\":event,\"source\":old,\"target\":workflow.state,\n                                \"attempt\":run[\"id\"],\"clock\":now,\n                                \"activity_revision\":run[\"configuration\"][\"revision\"]})",
+      "calls": [
+        "ValueError",
+        "Workflow",
+        "run['phase_journal'].append",
+        "workflow.trigger"
+      ],
+      "guards": [
+        {
+          "line": 109,
+          "expression": "not workflow.trigger(event)"
+        }
+      ],
+      "file_sha256": "88a9cf567ee570ef60ae9edd4315bf9c2e164c98f616184646f747a5892fe229"
+    },
+    "code.a8e6aac669bf72c8": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.emit_configuration",
+      "line": 138,
+      "end_line": 144,
+      "signature": "self, run: dict, trace: TracePort, basis: dict",
+      "ast_sha256": "70b9e70467c2a0157d5ed3da5af789f937b6a88775394c1443dcf951b8589d1b",
+      "snippet": "    def emit_configuration(self, run: dict, trace: TracePort, basis: dict) -> None:\n        cfg = run[\"configuration\"]\n        trace.record(\"flow.checks\",\"change\",basis,lambda:{\n            \"inputs\":{\"attempt\":run[\"id\"],\"content_version\":run[\"input\"][\"content_version\"]},\n            \"outputs\":{\"revision\":cfg[\"revision\"],\"phase\":run[\"phase\"],\n                       \"available\":cfg[\"resources\"][\"processing_slots\"][\"available\"],\n                       \"join_state\":cfg[\"join\"][\"state\"]}},call_id=uuid.uuid4().hex)",
+      "calls": [
+        "trace.record",
+        "uuid.uuid4"
+      ],
+      "guards": [],
+      "file_sha256": "fb37a78c5347f0f839b65544d72a7a38ea6c8b59b90f30314ff78c2b4c6c6b07"
+    }
+  },
+  "python": "3.13.13",
+  "unknowns": [
+    "只覆盖本地合成资料、直接负责关系和内嵌审批规则，不是通用 ReBAC 引擎。",
+    "正文不进入探针，仅记录内容摘要和长度；外部身份认证、文件系统归档及外部服务不在首版范围。",
+    "未启动且已作废的活动保留 discarded 标识，直到已启动活动结束后执行 abort；该标识由项目测试检查。",
+    "AST 不能证明动态调用完整性；图和有限场景不构成所有调度或真人易用性证明。",
+    "AST evidence does not prove value flow, guard dominance or behavioral equivalence",
+    "External dependencies, interpreter, dynamic patching and omitted files are not attested"
+  ]
+}

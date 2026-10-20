@@ -10,7 +10,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--project', type=Path, required=True, help='Existing project directory')
     args = parser.parse_args()
-    project = args.project.expanduser().resolve()
+    project = args.project.expanduser().absolute().resolve()
     if not project.is_dir():
         parser.error('The target project directory must exist.')
     target = project/'.agents/skills/business-observer'

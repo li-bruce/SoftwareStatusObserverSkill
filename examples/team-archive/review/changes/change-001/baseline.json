@@ -1,0 +1,2497 @@
+{
+  "id": "e7b70f0e734b50e8f3ec78ee0c636a1e9225da0cf60cc5e4fc705c6807471f2b",
+  "files": {
+    "acceptance.json": "cda73c3503d5a9a7f6af6f883cea85fd4384dbe66e543cb9562cb147b037f378",
+    "archive_app/policy.py": "df19b09e8190791f35c6a3b163c72f4e9f22ab141fd5dd16d8baa25da5527bc2",
+    "archive_app/ports.py": "df19b09e8190791f35c6a3b163c72f4e9f22ab141fd5dd16d8baa25da5527bc2",
+    "archive_app/service.py": "df19b09e8190791f35c6a3b163c72f4e9f22ab141fd5dd16d8baa25da5527bc2",
+    "archive_app/storage.py": "df19b09e8190791f35c6a3b163c72f4e9f22ab141fd5dd16d8baa25da5527bc2",
+    "archive_app/workflow.py": "df19b09e8190791f35c6a3b163c72f4e9f22ab141fd5dd16d8baa25da5527bc2",
+    "behavior.json": "4c27f526d6a4eb566bfe22d3e0c85c037bb29880fcbf3e6af046234981af080c",
+    "discovery.json": "fd74fdd77d270c99edf1692602269167f6ee43e5835c57c75c819b03fdd6793f",
+    "integrations/bo_observer.py": "df19b09e8190791f35c6a3b163c72f4e9f22ab141fd5dd16d8baa25da5527bc2",
+    "intent.json": "65dd2910956481b3dc75f7323e854fd12cd79280be8976b7a9bba5029126ea11",
+    "observer_runtime/__init__.py": "9c75aa19265cd50dd4e0456ca4321ea04570eab22149ded34951187b72dd11a8",
+    "observer_runtime/architecture_guard.py": "ff82147f8ed61e7d7473bbc59a3cedacf546117c71e397d0cf032a83270a852a",
+    "observer_runtime/behavior_model.py": "37af8d5926a29eb525773048f3e5e7190e4b7e2239a0a8f858108593924c16b4",
+    "observer_runtime/change_sync.py": "916f08a14612142fd81c8a25208d952b7ae27ae1bac1e45146e354444f03b2b8",
+    "observer_runtime/code_structure.py": "01dad9cda1d248150301598fea1186e698c2f3ca62026f5735befbcb74c9c681",
+    "observer_runtime/execution_contract.py": "9502b2d348bb8ee00c05288ca3d064d151365292fdef597c156c178871635b78",
+    "observer_runtime/focus_graph.py": "ec366eebee41e60dea83f16acd89b334546b58509a174034afa7736b9b31a106",
+    "observer_runtime/model_tool.py": "47b80a2a5d376ef81f34cd91cb050ce58714c3f85ed1212a842c2081bca0d291",
+    "observer_runtime/probe.py": "6e12b7cb0d89278b9562435e20eefa339993a1114720dd0f8dac15626d011807",
+    "observer_runtime/project_bundle.py": "2a05e4eda5946b413c4d4a72b8bd29718705706a616d2bb48618205926171f5c",
+    "observer_runtime/requirements_dialogue.py": "88a0603db9231a64e73b91db42ea8da2ef42eaffb2b4b309ec86f3b33d627f12",
+    "observer_runtime/semantic_probe.py": "a081e8dfdecf117858cf0d77eb51b4fa2eb717ca421d1473f0ad9058fd4413bb",
+    "observer_runtime/statechart_contract.py": "513689fece1199c6d07954028c1609c5560dcbb80f444be94ac67c0ef0882a43",
+    "observer_runtime/viewer_server.py": "10fa75d9a93662ce07cac457db46d65ecc3fa821a5d4a1a96ec543c7ec862c30",
+    "observer_runtime/whitebox_contract.py": "ea6f97242402e93776d1958e11da85e1093a667098527818508cba1c09f0c6de",
+    "observer_runtime/worknet_contract.py": "19a70d82022f2c2af675f64e7d955b13f5f543949b40c7813b657cd96b0e8193",
+    "ownership.json": "d59ad1a195bbd23bb59c38375907e0f80a3c8b2e4fd7000a5dfd4cbd55f765d3",
+    "sync.json": "f4fbed3f248e1d942aae747d0b8cb591490118cdf98f96e053e8b6b39325c0be",
+    "tooling/build_model.py": "df19b09e8190791f35c6a3b163c72f4e9f22ab141fd5dd16d8baa25da5527bc2",
+    "tooling/observe.py": "df19b09e8190791f35c6a3b163c72f4e9f22ab141fd5dd16d8baa25da5527bc2",
+    "tooling/tests.py": "df19b09e8190791f35c6a3b163c72f4e9f22ab141fd5dd16d8baa25da5527bc2",
+    "whitebox.json": "f8bcc4a732382eb4bfd08b9e6a71c00366f9c6ff99473f648f9b24d24ac525b7"
+  },
+  "tools": {
+    "change_sync.py": "916f08a14612142fd81c8a25208d952b7ae27ae1bac1e45146e354444f03b2b8",
+    "code_structure.py": "01dad9cda1d248150301598fea1186e698c2f3ca62026f5735befbcb74c9c681",
+    "behavior_model.py": "37af8d5926a29eb525773048f3e5e7190e4b7e2239a0a8f858108593924c16b4",
+    "statechart_contract.py": "513689fece1199c6d07954028c1609c5560dcbb80f444be94ac67c0ef0882a43",
+    "worknet_contract.py": "19a70d82022f2c2af675f64e7d955b13f5f543949b40c7813b657cd96b0e8193",
+    "execution_contract.py": "9502b2d348bb8ee00c05288ca3d064d151365292fdef597c156c178871635b78",
+    "requirements_dialogue.py": "88a0603db9231a64e73b91db42ea8da2ef42eaffb2b4b309ec86f3b33d627f12",
+    "whitebox_contract.py": "ea6f97242402e93776d1958e11da85e1093a667098527818508cba1c09f0c6de"
+  },
+  "model": {
+    "schema_version": 3,
+    "project_id": "team-archive-trial-01",
+    "revision": "discovery-r03",
+    "title": "团队资料归档 · 候选业务依赖图",
+    "status": "candidate_unbound",
+    "intent": "intent.json",
+    "source_files": [],
+    "presentation": {
+      "layout_id": "team-archive-trial-01",
+      "subject": "资料归档"
+    },
+    "nodes": [
+      {
+        "id": "archive_request",
+        "kind": "action",
+        "label": "负责人发起归档",
+        "summary": "候选入口；具体发起时机与审批、检查顺序未确定。",
+        "binding_status": "pending",
+        "requirements": [
+          "R02"
+        ],
+        "capture": {
+          "in": {},
+          "out": {}
+        }
+      },
+      {
+        "id": "document",
+        "kind": "data",
+        "label": "资料条目与内容版本",
+        "summary": "资料条目直接位于一个分类文件夹；归档针对条目的内容版本，不归档文件夹。",
+        "requirements": [
+          "R01",
+          "R06",
+          "R10"
+        ],
+        "capture": {
+          "in": {},
+          "out": {}
+        }
+      },
+      {
+        "id": "scope_check",
+        "kind": "decision",
+        "label": "是否直接负责所在文件夹",
+        "summary": "只按资料所在文件夹的直接负责人判断，上级负责人不因祖先关系获得权限。",
+        "rule": {
+          "inherit_ancestors": false
+        },
+        "planned_source": {
+          "path": "archive_app/policy.py",
+          "symbol": "is_direct_manager"
+        },
+        "binding_status": "pending",
+        "requirements": [
+          "R02"
+        ],
+        "capture": {
+          "in": {},
+          "out": {}
+        }
+      },
+      {
+        "id": "approval_check",
+        "kind": "decision",
+        "label": "审批是否适用",
+        "summary": "审批目标四字段匹配、审批人为另一名审核员、未撤销且未到截止时刻；任一候选有效即可。撤销后重新判断，没有有效审批则等待。",
+        "rule": {
+          "target_fields": [
+            "project_id",
+            "operator_id",
+            "document_id",
+            "content_version"
+          ],
+          "aggregate": "any",
+          "reviewer_required": true,
+          "exclude_self": true,
+          "valid_time": "now < deadline",
+          "revoked_allowed": false
+        },
+        "planned_source": {
+          "path": "archive_app/policy.py",
+          "symbol": "evaluate_approvals"
+        },
+        "binding_status": "pending",
+        "requirements": [
+          "R03"
+        ],
+        "capture": {
+          "in": {},
+          "out": {}
+        }
+      },
+      {
+        "id": "content_check",
+        "kind": "action",
+        "label": "内容检查",
+        "summary": "可与另一检查并发，各占本次运行一个名额；两项都通过才可提交。具体检查与失败后重试待 D07。",
+        "binding_status": "pending",
+        "requirements": [
+          "R04"
+        ],
+        "capture": {
+          "in": {},
+          "out": {}
+        }
+      },
+      {
+        "id": "index_check",
+        "kind": "action",
+        "label": "索引检查",
+        "summary": "可与另一检查并发，各占本次运行一个名额；两项都通过才可提交。具体检查与失败后重试待 D07。",
+        "binding_status": "pending",
+        "requirements": [
+          "R04"
+        ],
+        "capture": {
+          "in": {},
+          "out": {}
+        }
+      },
+      {
+        "id": "processing_slots",
+        "kind": "data",
+        "label": "每次运行独享名额",
+        "summary": "每次归档运行独享容量；默认 2，可设 1，两项检查各占 1；运行中能否改容量待 D09。",
+        "requirements": [
+          "R05"
+        ],
+        "capture": {
+          "in": {},
+          "out": {}
+        },
+        "rule": {
+          "scope": "run",
+          "default_capacity": 2,
+          "activity_units": 1,
+          "parallel_allowed": true
+        }
+      },
+      {
+        "id": "archive_commit",
+        "kind": "effect",
+        "label": "保存资料版本快照",
+        "summary": "在 SQLite 保存内容的固定快照及对应版本，不移动或删除原资料；同一资料/版本不得重复生成记录。",
+        "planned_source": {
+          "path": "archive_app/store.py",
+          "symbol": "save_archive_snapshot"
+        },
+        "binding_status": "pending",
+        "requirements": [
+          "R08",
+          "R09",
+          "R10"
+        ],
+        "capture": {
+          "in": {},
+          "out": {}
+        },
+        "rule": {
+          "all_checks_passed": true,
+          "current_version_required": true,
+          "current_approval_required": true
+        }
+      },
+      {
+        "id": "approval_revoked",
+        "kind": "action",
+        "label": "撤销审批",
+        "summary": "撤销触发审批重评；有替代有效审批时继续具备审批条件；否则等待。已启动检查完成且保留结果，不提交。",
+        "binding_status": "pending",
+        "requirements": [
+          "R03"
+        ],
+        "capture": {
+          "in": {},
+          "out": {}
+        }
+      },
+      {
+        "id": "content_changed",
+        "kind": "action",
+        "label": "修改资料内容",
+        "summary": "旧审批与旧检查结果不能用于新版本；旧运行保留且不能提交，新版本可另开独立运行，不能覆盖旧运行。旧活动如何结束待 D06。",
+        "binding_status": "pending",
+        "requirements": [
+          "R06"
+        ],
+        "capture": {
+          "in": {},
+          "out": {}
+        }
+      },
+      {
+        "id": "folder_assignments",
+        "kind": "data",
+        "label": "当前文件夹的直接负责人",
+        "summary": "只读取该项目、该文件夹的直接负责关系，不读取祖先作为继承授权。",
+        "requirements": [
+          "R02"
+        ],
+        "capture": {
+          "in": {},
+          "out": {}
+        }
+      },
+      {
+        "id": "approval_target",
+        "kind": "data",
+        "label": "项目 · 操作人 · 资料 · 版本",
+        "summary": "单条审批的四个目标字段必须全部匹配本次请求。",
+        "requirements": [
+          "R03"
+        ],
+        "capture": {
+          "in": {},
+          "out": {}
+        }
+      },
+      {
+        "id": "archive_unique",
+        "kind": "decision",
+        "label": "该资料版本是否已有归档",
+        "summary": "重复请求不能生成第二条同资料同版本的记录。",
+        "rule": {
+          "unique_fields": [
+            "document_id",
+            "content_version"
+          ]
+        },
+        "planned_source": {
+          "path": "archive_app/store.py",
+          "symbol": "find_archive"
+        },
+        "binding_status": "pending",
+        "requirements": [
+          "R09"
+        ],
+        "capture": {
+          "in": {},
+          "out": {}
+        }
+      },
+      {
+        "id": "resume_run",
+        "kind": "action",
+        "label": "点击继续并重查资格",
+        "summary": "审批条件恢复后手动继续，重查当前资格；已完成同版本检查结果保留。",
+        "binding_status": "pending",
+        "requirements": [
+          "R11"
+        ],
+        "capture": {
+          "in": {},
+          "out": {}
+        }
+      },
+      {
+        "id": "run_identity",
+        "kind": "data",
+        "label": "运行身份与内容版本",
+        "summary": "每次运行独立保留活动和结果；旧新版本运行可同时查询，新运行不覆盖仍在结束的旧运行。",
+        "requirements": [
+          "R06"
+        ],
+        "capture": {
+          "in": {},
+          "out": {}
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "request_scope",
+        "from": "archive_request",
+        "to": "scope_check",
+        "type": "data",
+        "label": "判断发起人的管理范围",
+        "evidence": "U01；候选入口 I01"
+      },
+      {
+        "id": "document_scope",
+        "from": "document",
+        "to": "scope_check",
+        "type": "data",
+        "label": "资料所在目录",
+        "evidence": "U01"
+      },
+      {
+        "id": "scope_archive",
+        "from": "scope_check",
+        "to": "archive_commit",
+        "type": "guard",
+        "label": "仅所在文件夹直接负责人",
+        "evidence": "U02；D01 已确认"
+      },
+      {
+        "id": "approval_archive",
+        "from": "approval_check",
+        "to": "archive_commit",
+        "type": "guard",
+        "label": "任一审批有效，提交时仍需适用",
+        "evidence": "U03；已确认规则，具体执行尚未实现"
+      },
+      {
+        "id": "content_archive",
+        "from": "content_check",
+        "to": "archive_commit",
+        "type": "guard",
+        "label": "内容检查通过",
+        "evidence": "U03；已确认规则，具体执行尚未实现"
+      },
+      {
+        "id": "index_archive",
+        "from": "index_check",
+        "to": "archive_commit",
+        "type": "guard",
+        "label": "索引检查通过",
+        "evidence": "U03；已确认规则，具体执行尚未实现"
+      },
+      {
+        "id": "slots_content",
+        "from": "processing_slots",
+        "to": "content_check",
+        "type": "guard",
+        "label": "本运行名额：内容检查占 1",
+        "evidence": "U03；已确认规则，具体执行尚未实现"
+      },
+      {
+        "id": "slots_index",
+        "from": "processing_slots",
+        "to": "index_check",
+        "type": "guard",
+        "label": "本运行名额：索引检查占 1",
+        "evidence": "U03；已确认规则，具体执行尚未实现"
+      },
+      {
+        "id": "document_content",
+        "from": "document",
+        "to": "content_check",
+        "type": "data",
+        "label": "本次运行的内容版本",
+        "evidence": "U03；已确认规则，具体执行尚未实现"
+      },
+      {
+        "id": "document_index",
+        "from": "document",
+        "to": "index_check",
+        "type": "data",
+        "label": "被检查的索引",
+        "evidence": "U01；检查对象细节待 D07"
+      },
+      {
+        "id": "revoke_approval",
+        "from": "approval_revoked",
+        "to": "approval_check",
+        "type": "data",
+        "label": "撤销后重新判断全部候选",
+        "evidence": "U03；已确认规则，具体执行尚未实现"
+      },
+      {
+        "id": "edit_document",
+        "from": "content_changed",
+        "to": "document",
+        "type": "data",
+        "label": "修改内容",
+        "evidence": "U01"
+      },
+      {
+        "id": "edit_approval",
+        "from": "content_changed",
+        "to": "approval_check",
+        "type": "data",
+        "label": "新版本不能沿用旧审批",
+        "evidence": "U03；已确认规则，具体执行尚未实现"
+      },
+      {
+        "id": "assignments_scope",
+        "from": "folder_assignments",
+        "to": "scope_check",
+        "type": "data",
+        "label": "直接负责关系",
+        "evidence": "U02；D01"
+      },
+      {
+        "id": "target_approval",
+        "from": "approval_target",
+        "to": "approval_check",
+        "type": "data",
+        "label": "四个目标字段全部匹配",
+        "evidence": "U02；D02"
+      },
+      {
+        "id": "document_unique",
+        "from": "document",
+        "to": "archive_unique",
+        "type": "data",
+        "label": "资料身份与内容版本",
+        "evidence": "U02；D03"
+      },
+      {
+        "id": "unique_archive",
+        "from": "archive_unique",
+        "to": "archive_commit",
+        "type": "guard",
+        "label": "相同资料版本不重复建档",
+        "evidence": "U02；D03"
+      },
+      {
+        "id": "resume_approval",
+        "from": "resume_run",
+        "to": "approval_check",
+        "type": "flow",
+        "label": "手动继续时重查",
+        "evidence": "U03"
+      },
+      {
+        "id": "resume_scope",
+        "from": "resume_run",
+        "to": "scope_check",
+        "type": "flow",
+        "label": "重新检查资格",
+        "evidence": "U03"
+      },
+      {
+        "id": "run_content",
+        "from": "run_identity",
+        "to": "content_check",
+        "type": "data",
+        "label": "所属运行与版本",
+        "evidence": "U03"
+      },
+      {
+        "id": "run_index",
+        "from": "run_identity",
+        "to": "index_check",
+        "type": "data",
+        "label": "所属运行与版本",
+        "evidence": "U03"
+      },
+      {
+        "id": "run_slots",
+        "from": "run_identity",
+        "to": "processing_slots",
+        "type": "data",
+        "label": "本运行独享容量",
+        "evidence": "U03"
+      },
+      {
+        "id": "edit_run",
+        "from": "content_changed",
+        "to": "run_identity",
+        "type": "data",
+        "label": "旧运行保留；新版本另开",
+        "evidence": "U03"
+      },
+      {
+        "id": "run_archive",
+        "from": "run_identity",
+        "to": "archive_commit",
+        "type": "guard",
+        "label": "旧版本运行不能提交",
+        "evidence": "U03"
+      }
+    ],
+    "overview": [
+      {
+        "node": "document",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "node": "scope_check",
+        "x": 220,
+        "y": 0
+      },
+      {
+        "node": "approval_check",
+        "x": 220,
+        "y": 120
+      },
+      {
+        "node": "content_check",
+        "x": 220,
+        "y": 240
+      },
+      {
+        "node": "index_check",
+        "x": 220,
+        "y": 360
+      },
+      {
+        "node": "archive_commit",
+        "x": 500,
+        "y": 180
+      }
+    ],
+    "scope": {
+      "includes": [
+        "单条资料归档的候选业务依赖",
+        "目录管理范围",
+        "审批",
+        "内容和索引检查",
+        "有限处理名额",
+        "审批撤销和内容修改"
+      ],
+      "excludes": [
+        "生产身份认证与外部发布",
+        "尚未实现的运行事实"
+      ],
+      "unknowns": [
+        "可执行节点尚未绑定源码，当前没有运行证据。",
+        "D06：改版时旧活动的结束方式。",
+        "D07：具体检查条件和失败后重试范围。",
+        "D08：新运行及尚未启动活动的审批门槛。",
+        "D09：容量修改是在新建前还是运行中。"
+      ]
+    },
+    "questions": [
+      "D07",
+      "D08",
+      "D06"
+    ]
+  },
+  "intent": {
+    "schema_version": 1,
+    "project_id": "team-archive-trial-01",
+    "title": "团队资料归档：模拟用户演练",
+    "status": "implementation",
+    "requirements": [
+      {
+        "id": "R01",
+        "text": "在本地用 Python 和 SQLite 建立团队资料归档工具；资料位于项目的多层文件夹中。",
+        "source_refs": [
+          "U01"
+        ],
+        "status": "confirmed",
+        "source": "模拟用户演练：U01"
+      },
+      {
+        "id": "R02",
+        "text": "仅资料所在文件夹的直接负责人可以处理；上级文件夹负责人不自动继承下级权限，下级按自己的直接负责人判断。本规则仅适用于本演练项目。",
+        "source_refs": [
+          "U01",
+          "U02"
+        ],
+        "status": "confirmed",
+        "source": "模拟用户演练：U01,U02"
+      },
+      {
+        "id": "R03",
+        "text": "任一审批目标四字段匹配、审核员非操作人、未撤销且 now < deadline 即有效；撤销重评，无有效审批等待。",
+        "source_refs": [
+          "U01",
+          "U02",
+          "U03",
+          "U04"
+        ],
+        "status": "confirmed",
+        "source": "模拟用户演练：U01,U02,U03,U04"
+      },
+      {
+        "id": "R04",
+        "text": "内容不得包含 SECRET:；索引要求标题、项目、资料编号齐全。两项都通过才可提交，失败后新建运行，不拼用不同运行结果。",
+        "source_refs": [
+          "U01",
+          "U03",
+          "U04"
+        ],
+        "status": "confirmed",
+        "source": "模拟用户演练：U01,U03,U04"
+      },
+      {
+        "id": "R05",
+        "text": "每次运行独享名额，创建时选择 1 或 2，默认 2；两项检查各占 1，实际结束后归还。",
+        "source_refs": [
+          "U01",
+          "U03",
+          "U04"
+        ],
+        "status": "confirmed",
+        "source": "模拟用户演练：U01,U03,U04"
+      },
+      {
+        "id": "R06",
+        "text": "内容改版后旧运行禁止提交；未开始检查作废，已开始检查自然结束；保留全部运行，新版本独立启动且不复用旧审批或旧结果。",
+        "source_refs": [
+          "U01",
+          "U02",
+          "U03",
+          "U04"
+        ],
+        "status": "confirmed",
+        "source": "模拟用户演练：U01,U02,U03,U04"
+      },
+      {
+        "id": "R07",
+        "text": "开发者图可拖动、逐层展开，能解释归档依据、等待原因和关键函数实际参数。",
+        "source_refs": [
+          "U01"
+        ],
+        "status": "confirmed",
+        "source": "模拟用户演练：U01"
+      },
+      {
+        "id": "R08",
+        "text": "归档对象是一份资料条目；成功后在 SQLite 保存当时内容的固定快照和对应内容版本。",
+        "source_refs": [
+          "U02"
+        ],
+        "status": "confirmed",
+        "source": "模拟用户演练：U02"
+      },
+      {
+        "id": "R09",
+        "text": "同一份资料的同一内容版本不得重复生成归档记录。",
+        "source_refs": [
+          "U02"
+        ],
+        "status": "confirmed",
+        "source": "模拟用户演练：U02"
+      },
+      {
+        "id": "R10",
+        "text": "文件夹仅作分类，不归档文件夹；归档不移动或删除原资料。",
+        "source_refs": [
+          "U02"
+        ],
+        "status": "confirmed",
+        "source": "模拟用户演练：U02"
+      },
+      {
+        "id": "R11",
+        "text": "新运行须具备当前资格才启动检查；失去审批后已启动的自然结束，尚未启动的等待；点击继续并重查资格后再开始或提交。",
+        "source_refs": [
+          "U03",
+          "U04"
+        ],
+        "status": "confirmed",
+        "source": "模拟用户演练：U03,U04"
+      },
+      {
+        "id": "R12",
+        "text": "取消本次运行：停止启动未开始的检查，已启动检查实际结束后归还名额，不提交、不删除资料，也不影响其他运行。",
+        "status": "confirmed",
+        "source": "模拟用户 U04",
+        "source_refs": [
+          "U04"
+        ]
+      },
+      {
+        "id": "R13",
+        "text": "目录归属变化按当前直接关系判断；提交事务重新验证权限、审批有效期、内容版本和同运行检查结果。",
+        "status": "confirmed",
+        "source": "模拟用户 U04",
+        "source_refs": [
+          "U04"
+        ]
+      }
+    ],
+    "constraints": [
+      "本项目为模拟用户演练，不使用生产数据。",
+      "只使用指定 Skill 和本会话需求，Skill 副本只读。",
+      "未回答的业务规则不擅自落实为实现或验收预期。",
+      "应用与开发者图最终应能独立启动；需要服务时先检查 8824。",
+      "实现方案可自行选择；business-observer 是开发期间必须同步维护模型、映射、参数、探针和验证的一条支线，不代替整个应用架构。",
+      "本轮直接负责规则只适用于当前项目，不能推广到其他项目。"
+    ]
+  },
+  "acceptance": {
+    "schema_version": 1,
+    "status": "planned_not_run",
+    "basis": "模拟用户 U01–U04；在实现前定义期望，观察程序不读取本文件。",
+    "checks": [
+      {
+        "id": "direct-manager-allowed",
+        "requirement": "R02",
+        "case": "scope_direct_manager",
+        "path": [
+          "scope_allowed"
+        ],
+        "equals": true
+      },
+      {
+        "id": "ancestor-manager-denied",
+        "requirement": "R02",
+        "case": "scope_ancestor_only",
+        "path": [
+          "scope_allowed"
+        ],
+        "equals": false
+      },
+      {
+        "id": "child-uses-own-manager",
+        "requirement": "R02",
+        "case": "scope_child_direct_manager",
+        "path": [
+          "scope_allowed"
+        ],
+        "equals": true
+      },
+      {
+        "id": "approval-target-exact",
+        "requirement": "R03",
+        "case": "approval_target_exact",
+        "path": [
+          "candidate_target_matches"
+        ],
+        "equals": true
+      },
+      {
+        "id": "approval-wrong-project",
+        "requirement": "R03",
+        "case": "approval_target_other_project",
+        "path": [
+          "candidate_target_matches"
+        ],
+        "equals": false
+      },
+      {
+        "id": "approval-wrong-operator",
+        "requirement": "R03",
+        "case": "approval_target_other_operator",
+        "path": [
+          "candidate_target_matches"
+        ],
+        "equals": false
+      },
+      {
+        "id": "approval-wrong-document",
+        "requirement": "R03",
+        "case": "approval_target_other_document",
+        "path": [
+          "candidate_target_matches"
+        ],
+        "equals": false
+      },
+      {
+        "id": "approval-wrong-version",
+        "requirement": "R03",
+        "case": "approval_target_other_version",
+        "path": [
+          "candidate_target_matches"
+        ],
+        "equals": false
+      },
+      {
+        "id": "snapshot-content",
+        "requirement": "R08",
+        "case": "archive_snapshot",
+        "path": [
+          "archive",
+          "content"
+        ],
+        "equals": "模拟资料：版本一的固定内容。"
+      },
+      {
+        "id": "snapshot-version",
+        "requirement": "R08",
+        "case": "archive_snapshot",
+        "path": [
+          "archive",
+          "content_version"
+        ],
+        "equals": 1
+      },
+      {
+        "id": "snapshot-stays-fixed",
+        "requirement": "R08",
+        "case": "edit_after_archive",
+        "path": [
+          "archive",
+          "content"
+        ],
+        "equals": "模拟资料：版本一的固定内容。"
+      },
+      {
+        "id": "one-record-per-version",
+        "requirement": "R09",
+        "case": "archive_same_version_twice",
+        "path": [
+          "archive_count_for_version"
+        ],
+        "equals": 1
+      },
+      {
+        "id": "preserve-original-document",
+        "requirement": "R10",
+        "case": "archive_snapshot",
+        "path": [
+          "source_document_exists"
+        ],
+        "equals": true
+      },
+      {
+        "id": "preserve-original-folder",
+        "requirement": "R10",
+        "case": "archive_snapshot",
+        "path": [
+          "source_folder_unchanged"
+        ],
+        "equals": true
+      },
+      {
+        "id": "approval-expiry-boundary",
+        "requirement": "R03",
+        "case": "approval_at_deadline",
+        "path": [
+          "candidate_allowed"
+        ],
+        "equals": false
+      },
+      {
+        "id": "approval-self-denied",
+        "requirement": "R03",
+        "case": "approval_self",
+        "path": [
+          "candidate_allowed"
+        ],
+        "equals": false
+      },
+      {
+        "id": "approval-role-denied",
+        "requirement": "R03",
+        "case": "approval_not_reviewer",
+        "path": [
+          "candidate_allowed"
+        ],
+        "equals": false
+      },
+      {
+        "id": "approval-alternative",
+        "requirement": "R03",
+        "case": "revoke_with_alternative",
+        "path": [
+          "completed"
+        ],
+        "equals": true
+      },
+      {
+        "id": "approval-missing-waits",
+        "requirement": "R03",
+        "case": "no_approval",
+        "path": [
+          "phase"
+        ],
+        "equals": "waiting"
+      },
+      {
+        "id": "checks-secret-rejected",
+        "requirement": "R04",
+        "case": "secret_content",
+        "path": [
+          "archive_count"
+        ],
+        "equals": 0
+      },
+      {
+        "id": "checks-index-rejected",
+        "requirement": "R04",
+        "case": "missing_index",
+        "path": [
+          "archive_count"
+        ],
+        "equals": 0
+      },
+      {
+        "id": "one-slot-max",
+        "requirement": "R05",
+        "case": "capacity_one",
+        "path": [
+          "max_running"
+        ],
+        "equals": 1
+      },
+      {
+        "id": "one-slot-wait",
+        "requirement": "R05",
+        "case": "capacity_one",
+        "path": [
+          "resource_wait_observed"
+        ],
+        "equals": true
+      },
+      {
+        "id": "two-slots-overlap",
+        "requirement": "R05",
+        "case": "capacity_two",
+        "path": [
+          "max_running"
+        ],
+        "equals": 2
+      },
+      {
+        "id": "incomplete-cannot-commit",
+        "requirement": "R04",
+        "case": "join_pending",
+        "path": [
+          "before_completion_archives"
+        ],
+        "equals": 0
+      },
+      {
+        "id": "approval-loss-no-commit",
+        "requirement": "R11",
+        "case": "loss_and_resume",
+        "path": [
+          "before_resume_archives"
+        ],
+        "equals": 0
+      },
+      {
+        "id": "approval-loss-pending-stays",
+        "requirement": "R11",
+        "case": "loss_and_resume",
+        "path": [
+          "pending_did_not_start"
+        ],
+        "equals": true
+      },
+      {
+        "id": "approval-manual-resume",
+        "requirement": "R11",
+        "case": "loss_and_resume",
+        "path": [
+          "completed"
+        ],
+        "equals": true
+      },
+      {
+        "id": "old-run-cannot-commit",
+        "requirement": "R06",
+        "case": "edit_overlap",
+        "path": [
+          "old_archive_count"
+        ],
+        "equals": 0
+      },
+      {
+        "id": "old-new-coexist",
+        "requirement": "R06",
+        "case": "edit_overlap",
+        "path": [
+          "old_new_visible_while_running"
+        ],
+        "equals": true
+      },
+      {
+        "id": "new-run-own-checks",
+        "requirement": "R06",
+        "case": "edit_overlap",
+        "path": [
+          "new_completed"
+        ],
+        "equals": true
+      },
+      {
+        "id": "cancel-held-until-end",
+        "requirement": "R12",
+        "case": "cancel_running",
+        "path": [
+          "held_after_request"
+        ],
+        "equals": 1
+      },
+      {
+        "id": "cancel-releases-at-end",
+        "requirement": "R12",
+        "case": "cancel_running",
+        "path": [
+          "available_after_end"
+        ],
+        "equals": 1
+      },
+      {
+        "id": "cancel-does-not-commit",
+        "requirement": "R12",
+        "case": "cancel_running",
+        "path": [
+          "archive_count"
+        ],
+        "equals": 0
+      },
+      {
+        "id": "cancel-only-selected-run",
+        "requirement": "R12",
+        "case": "cancel_one_of_two",
+        "path": [
+          "other_completed"
+        ],
+        "equals": true
+      },
+      {
+        "id": "cancel-preserves-document",
+        "requirement": "R12",
+        "case": "cancel_running",
+        "path": [
+          "source_document_exists"
+        ],
+        "equals": true
+      },
+      {
+        "id": "move-denies-at-commit",
+        "requirement": "R13",
+        "case": "move_before_commit",
+        "path": [
+          "archive_count"
+        ],
+        "equals": 0
+      },
+      {
+        "id": "expiry-denies-at-commit",
+        "requirement": "R13",
+        "case": "expire_before_commit",
+        "path": [
+          "archive_count"
+        ],
+        "equals": 0
+      },
+      {
+        "id": "version-denies-at-commit",
+        "requirement": "R13",
+        "case": "edit_before_commit",
+        "path": [
+          "archive_count"
+        ],
+        "equals": 0
+      },
+      {
+        "id": "same-version-concurrent-once",
+        "requirement": "R09",
+        "case": "concurrent_same_version",
+        "path": [
+          "archive_count"
+        ],
+        "equals": 1
+      },
+      {
+        "id": "restart-preserves-history",
+        "requirement": "R06",
+        "case": "restart_interrupted",
+        "path": [
+          "phase"
+        ],
+        "equals": "interrupted"
+      }
+    ],
+    "model_checks": [
+      {
+        "id": "scope-direct-only-declaration",
+        "requirement": "R02",
+        "path": [
+          "nodes",
+          "scope_check",
+          "rule",
+          "inherit_ancestors"
+        ],
+        "equals": false
+      },
+      {
+        "id": "approval-four-target-fields",
+        "requirement": "R03",
+        "path": [
+          "nodes",
+          "approval_check",
+          "rule",
+          "target_fields"
+        ],
+        "equals": [
+          "project_id",
+          "operator_id",
+          "document_id",
+          "content_version"
+        ]
+      },
+      {
+        "id": "archive-identity-key",
+        "requirement": "R09",
+        "path": [
+          "nodes",
+          "archive_unique",
+          "rule",
+          "unique_fields"
+        ],
+        "equals": [
+          "document_id",
+          "content_version"
+        ]
+      },
+      {
+        "id": "per-run-resource-declaration",
+        "requirement": "R05",
+        "path": [
+          "nodes",
+          "processing_slots",
+          "rule",
+          "scope"
+        ],
+        "equals": "run"
+      },
+      {
+        "id": "both-checks-required",
+        "requirement": "R04",
+        "path": [
+          "nodes",
+          "archive_commit",
+          "rule",
+          "all_checks_passed"
+        ],
+        "equals": true
+      },
+      {
+        "id": "approval-any-declaration",
+        "requirement": "R03",
+        "path": [
+          "nodes",
+          "approval_check",
+          "rule",
+          "aggregate"
+        ],
+        "equals": "any"
+      },
+      {
+        "id": "approval-excludes-self",
+        "requirement": "R03",
+        "path": [
+          "nodes",
+          "approval_check",
+          "rule",
+          "exclude_self"
+        ],
+        "equals": true
+      },
+      {
+        "id": "approval-expiry-exclusive",
+        "requirement": "R03",
+        "path": [
+          "nodes",
+          "approval_check",
+          "rule",
+          "valid_time"
+        ],
+        "equals": "now < deadline"
+      }
+    ]
+  },
+  "structure": {
+    "schema_version": 1,
+    "units": {
+      "archive_app/policy.py": {
+        "file_hash": "df19b09e8190791f35c6a3b163c72f4e9f22ab141fd5dd16d8baa25da5527bc2",
+        "extractor_hash": "01dad9cda1d248150301598fea1186e698c2f3ca62026f5735befbcb74c9c681",
+        "imports": {},
+        "symbols": {},
+        "declarations": [],
+        "shadowed_globals": []
+      },
+      "archive_app/ports.py": {
+        "file_hash": "df19b09e8190791f35c6a3b163c72f4e9f22ab141fd5dd16d8baa25da5527bc2",
+        "extractor_hash": "01dad9cda1d248150301598fea1186e698c2f3ca62026f5735befbcb74c9c681",
+        "imports": {},
+        "symbols": {},
+        "declarations": [],
+        "shadowed_globals": []
+      },
+      "archive_app/service.py": {
+        "file_hash": "df19b09e8190791f35c6a3b163c72f4e9f22ab141fd5dd16d8baa25da5527bc2",
+        "extractor_hash": "01dad9cda1d248150301598fea1186e698c2f3ca62026f5735befbcb74c9c681",
+        "imports": {},
+        "symbols": {},
+        "declarations": [],
+        "shadowed_globals": []
+      },
+      "archive_app/storage.py": {
+        "file_hash": "df19b09e8190791f35c6a3b163c72f4e9f22ab141fd5dd16d8baa25da5527bc2",
+        "extractor_hash": "01dad9cda1d248150301598fea1186e698c2f3ca62026f5735befbcb74c9c681",
+        "imports": {},
+        "symbols": {},
+        "declarations": [],
+        "shadowed_globals": []
+      },
+      "archive_app/workflow.py": {
+        "file_hash": "df19b09e8190791f35c6a3b163c72f4e9f22ab141fd5dd16d8baa25da5527bc2",
+        "extractor_hash": "01dad9cda1d248150301598fea1186e698c2f3ca62026f5735befbcb74c9c681",
+        "imports": {},
+        "symbols": {},
+        "declarations": [],
+        "shadowed_globals": []
+      },
+      "integrations/bo_observer.py": {
+        "file_hash": "df19b09e8190791f35c6a3b163c72f4e9f22ab141fd5dd16d8baa25da5527bc2",
+        "extractor_hash": "01dad9cda1d248150301598fea1186e698c2f3ca62026f5735befbcb74c9c681",
+        "imports": {},
+        "symbols": {},
+        "declarations": [],
+        "shadowed_globals": []
+      }
+    },
+    "symbols": {},
+    "edges": [],
+    "unresolved": [],
+    "errors": [],
+    "incremental": {
+      "parsed": [
+        "archive_app/policy.py",
+        "archive_app/ports.py",
+        "archive_app/service.py",
+        "archive_app/storage.py",
+        "archive_app/workflow.py",
+        "integrations/bo_observer.py"
+      ],
+      "reused": []
+    },
+    "limits": [
+      "Syntactic call candidates, not executed calls or proven data flow.",
+      "Reflection, decorators, inherited/overridden dispatch, callbacks and local instance aliases may remain unresolved.",
+      "Only explicitly selected Python files; no automatic discovery of every new entry point."
+    ]
+  },
+  "whitebox": {
+    "schema_version": 1,
+    "rules": [
+      {
+        "id": "scope",
+        "requirement": "R02",
+        "node": "scope_check",
+        "source": {
+          "path": "archive_app/policy.py",
+          "symbol": "is_direct_manager"
+        },
+        "parameters": {
+          "project_id": "str",
+          "operator_id": "str",
+          "folder_id": "str",
+          "assignments": "list[dict]"
+        },
+        "returns": "bool",
+        "claim": "直接负责匹配",
+        "basis": "模拟用户 U02–U04",
+        "category": "parameter-and-decision"
+      },
+      {
+        "id": "candidate",
+        "requirement": "R03",
+        "node": "approval_candidate",
+        "source": {
+          "path": "archive_app/policy.py",
+          "symbol": "candidate_allowed"
+        },
+        "parameters": {
+          "grant": "dict",
+          "request": "dict",
+          "now": "float",
+          "reviewers": "list[str]"
+        },
+        "returns": "dict",
+        "claim": "审批目标、角色、排除本人、撤销和严格有效期",
+        "basis": "模拟用户 U02–U04",
+        "category": "parameter-and-decision"
+      },
+      {
+        "id": "content",
+        "requirement": "R04",
+        "node": "content_check",
+        "source": {
+          "path": "archive_app/policy.py",
+          "symbol": "check_content"
+        },
+        "parameters": {
+          "content": "str"
+        },
+        "returns": "dict",
+        "claim": "禁止 SECRET: 标记",
+        "basis": "模拟用户 U02–U04",
+        "category": "parameter-and-decision"
+      },
+      {
+        "id": "index",
+        "requirement": "R04",
+        "node": "index_check",
+        "source": {
+          "path": "archive_app/policy.py",
+          "symbol": "check_index"
+        },
+        "parameters": {
+          "title": "str",
+          "project_id": "str",
+          "document_number": "str"
+        },
+        "returns": "dict",
+        "claim": "三个索引字段齐全",
+        "basis": "模拟用户 U02–U04",
+        "category": "parameter-and-decision"
+      },
+      {
+        "id": "commit",
+        "requirement": "R13",
+        "node": "archive_commit",
+        "source": {
+          "path": "archive_app/service.py",
+          "symbol": "ArchiveService.try_commit"
+        },
+        "parameters": {
+          "db": "sqlite3.Connection",
+          "run": "dict",
+          "trace": "TracePort"
+        },
+        "returns": "str | None",
+        "claim": "当前资格、版本和本运行汇合后提交",
+        "basis": "模拟用户 U02–U04",
+        "category": "parameter-and-decision"
+      }
+    ],
+    "checks": [
+      {
+        "id": "scope-actual-true",
+        "rule": "scope",
+        "case": "scope_direct_manager",
+        "phase": "decision",
+        "count": {
+          "min": 1
+        },
+        "fields": [
+          {
+            "path": [
+              "outputs",
+              "allowed"
+            ],
+            "equals": true
+          }
+        ]
+      },
+      {
+        "id": "scope-actual-false",
+        "rule": "scope",
+        "case": "scope_ancestor_only",
+        "phase": "decision",
+        "count": {
+          "min": 1
+        },
+        "fields": [
+          {
+            "path": [
+              "outputs",
+              "allowed"
+            ],
+            "equals": false
+          }
+        ]
+      },
+      {
+        "id": "candidate-target-version",
+        "rule": "candidate",
+        "case": "approval_target_other_version",
+        "phase": "decision",
+        "count": {
+          "min": 1
+        },
+        "fields": [
+          {
+            "path": [
+              "outputs",
+              "version_ok"
+            ],
+            "equals": false
+          }
+        ]
+      },
+      {
+        "id": "candidate-expiry",
+        "rule": "candidate",
+        "case": "approval_at_deadline",
+        "phase": "decision",
+        "count": {
+          "min": 1
+        },
+        "fields": [
+          {
+            "path": [
+              "outputs",
+              "time_ok"
+            ],
+            "equals": false
+          }
+        ]
+      },
+      {
+        "id": "candidate-self",
+        "rule": "candidate",
+        "case": "approval_self",
+        "phase": "decision",
+        "count": {
+          "min": 1
+        },
+        "fields": [
+          {
+            "path": [
+              "outputs",
+              "different_actor"
+            ],
+            "equals": false
+          }
+        ]
+      },
+      {
+        "id": "content-secret",
+        "rule": "content",
+        "case": "secret_content",
+        "phase": "return",
+        "count": {
+          "min": 1
+        },
+        "fields": [
+          {
+            "path": [
+              "outputs",
+              "passed"
+            ],
+            "equals": false
+          }
+        ]
+      },
+      {
+        "id": "index-missing",
+        "rule": "index",
+        "case": "missing_index",
+        "phase": "return",
+        "count": {
+          "min": 1
+        },
+        "fields": [
+          {
+            "path": [
+              "outputs",
+              "passed"
+            ],
+            "equals": false
+          }
+        ]
+      },
+      {
+        "id": "commit-actual-version",
+        "rule": "commit",
+        "case": "archive_snapshot",
+        "phase": "commit",
+        "count": {
+          "min": 1
+        },
+        "fields": [
+          {
+            "path": [
+              "inputs",
+              "content_version"
+            ],
+            "equals": 1
+          }
+        ]
+      }
+    ]
+  },
+  "discovery_path": "discovery.json",
+  "discovery": {
+    "schema": "business-discovery/v1",
+    "goal": "模拟用户演练：以 Python 和 SQLite 实现本地团队资料归档，并用同一开发者图解释范围、审批、检查、等待及真实函数参数。",
+    "sources": [
+      {
+        "id": "U01",
+        "kind": "user",
+        "text": "我想做个本地的团队资料归档工具。资料放在项目的多层文件夹里，负责人能处理自己管理范围内的资料。归档前要有审批，还要做内容检查和索引检查；处理名额有限，两项检查可能需要等一等。审批会被撤销，资料内容也会修改。我想在开发时从图上看到为什么可以归档、为什么等着，以及关键函数实际用了什么参数。用 Python 和 SQLite，界面简单清楚，图要能拖动和逐层展开。",
+        "locator": "本独立会话初始模拟用户需求；来源是模拟演练，不是真人试用反馈"
+      },
+      {
+        "id": "I01",
+        "kind": "inference",
+        "text": "用资料、管理范围、审批、两个检查和归档效果构成候选依赖网；尚不能据此确定执行顺序、审批粒度、目录继承、失效处理或成功效果。",
+        "locator": "review/round-01/design.md；开发者候选理解"
+      },
+      {
+        "id": "A01",
+        "kind": "assistant",
+        "text": "1. 负责人管理“项目A”时，是否也能处理所有下级文件夹？如果某个下级文件夹另设负责人，上级负责人是否仍有权限？\n2. 审批针对什么对象：一份资料、这份资料的某个内容版本，还是一个文件夹及其下级资料？\n3. 归档成功后应实际保存什么：只记录“已归档”，保存当时内容的固定快照，还是移动或复制文件到归档目录？",
+        "locator": "review/round-01/dialogue.md；第一轮最终回复的三个实际问题"
+      },
+      {
+        "id": "U02",
+        "kind": "user",
+        "text": "我这里归档的是一份资料条目，文件夹只是分类。负责人只负责自己那个文件夹里直接放的资料，不自动管理更深的文件夹；下级文件夹按自己的负责人来判断。审批针对一份资料的一个内容版本，并且要对应具体项目和操作人。归档成功要在 SQLite 保存当时内容的固定快照和对应版本，同一份资料的同一版本不能重复生成归档记录。文件夹本身不归档，也不移动或删除原资料。",
+        "locator": "review/round-02/dialogue.md；模拟用户实际回答，不是真人试用"
+      },
+      {
+        "id": "U02C",
+        "kind": "user",
+        "text": "开发方案可以由你选择，也可以采用其他设计或编码方法；business-observer 是开发过程中必须同步维护状态机、源码映射、参数、探针与验证材料的一条支线，并不规定整个应用必须采用它的架构。继续根据实际未决业务问题自然提问，不把这次的直接负责规则推广到其他项目。请将本轮真实回答和后续处理记入 review。",
+        "locator": "review/round-02/dialogue.md；试验约束补充"
+      },
+      {
+        "id": "A02",
+        "kind": "assistant",
+        "text": "1. 同一版本有两条审批，一条被撤销、另一条仍有效时，是否仍允许归档？另外，谁可以发出审批？\n2. 两项检查是否各占一个名额、允许同时运行？这些名额是整个工具共享，还是每个项目各自拥有？\n3. 检查途中审批条件不再满足，或资料改成新版本时，要请求停止旧检查，还是让它跑完但禁止旧结果提交？新版本能否同时另开一次处理？",
+        "locator": "review/round-02/dialogue.md；第二轮最终回复的问题"
+      },
+      {
+        "id": "U03",
+        "kind": "user",
+        "text": "有一条仍有效的审批就可以；撤销后重新判断，不要因为最初那条撤销就直接把任务终止。没有有效审批时等着。审批人要是另一名审核员，不能自己给自己批；审批有截止时间，到期那一刻就无效。\n\n名额先按每次归档运行单独设置，两项检查各占一个，默认两个，也能改成一个来观察排队。它们可以同时运行，必须两项都通过才能提交。\n\n中途失去审批时让已经启动的检查正常结束，保留结果，但不提交；条件恢复后我点“继续”，再重新检查资格。内容改版则旧审批和旧检查结果不能用于新版本，旧运行保留可查且不能提交；新版本可以同时开一次新运行。别让新运行覆盖还没结束的旧运行。",
+        "locator": "review/round-03/dialogue.md；实际模拟用户回答"
+      },
+      {
+        "id": "A03",
+        "kind": "assistant",
+        "text": "1. 内容检查和索引检查分别检查哪些条件？检查失败后，是允许重试失败项，还是必须新开一次运行？\n2. 新运行是否必须有有效审批才能启动检查？只有一个名额时，第一项运行中审批失效，尚未启动的第二项是否要等你点击“继续”后再开始？\n3. 内容改版后，旧运行里尚未开始的检查直接作废、已启动的检查自然结束，同时保留全部记录且禁止提交，这样处理是否符合你的意思？",
+        "locator": "review/round-03/dialogue.md；本轮实际追问"
+      },
+      {
+        "id": "U04",
+        "kind": "user",
+        "text": "内容里不能出现 SECRET: 这个标记；索引检查要求标题、项目和资料编号齐全。任一项失败就不能归档，修好以后新开一次运行，不拼用不同运行的结果。新运行先有有效审批才开始检查；如果只有一个名额，第一项做着时审批失效，第二项先等着，我点“继续”且资格恢复后才开始。你说的旧运行收尾方式符合我的意思：未开始的作废，已开始的自然结束，记录都在且不能提交。我还需要一个“取消本次运行”，不删资料，已经开始的检查实际结束后再归还名额。目录归属变化也要按当前关系判断，提交时确保当时的权限和内容版本仍符合要求。",
+        "locator": "review/round-04/dialogue.md；模拟用户实际回答"
+      },
+      {
+        "id": "U04P",
+        "kind": "user",
+        "text": "梳理图时需要我回答业务问题；之后按你选择的开发方案实现，图、状态机、探针和检查由你自行维护。我只想每轮结束查看变化后的图、展开检索、读关键参数和源码，不想手动操作同步命令或填写内部记录。",
+        "locator": "review/round-04/dialogue.md；模拟使用偏好"
+      }
+    ],
+    "networks": [
+      {
+        "id": "archive-network",
+        "title": "资料归档的候选依赖",
+        "actors": [
+          "负责人",
+          "不同于操作人的审核员",
+          "本地归档工具"
+        ],
+        "trigger": "候选入口：负责人请求归档一份资料；与审批、检查的先后待确认。",
+        "outcome": "SQLite 保存一份资料某内容版本的固定快照，同资料同版本至多一条记录；不归档文件夹，不移动或删除原资料。",
+        "nodes": [
+          {
+            "id": "archive_request",
+            "label": "负责人发起归档",
+            "kind": "action",
+            "source_refs": [
+              "U01",
+              "I01"
+            ],
+            "model_nodes": [
+              "archive_request"
+            ]
+          },
+          {
+            "id": "document",
+            "label": "资料条目与内容版本",
+            "kind": "data",
+            "source_refs": [
+              "U01",
+              "U02"
+            ],
+            "model_nodes": [
+              "document"
+            ]
+          },
+          {
+            "id": "scope_check",
+            "label": "是否直接负责所在文件夹",
+            "kind": "condition",
+            "source_refs": [
+              "U02"
+            ],
+            "model_nodes": [
+              "scope_check"
+            ]
+          },
+          {
+            "id": "approval_check",
+            "label": "审批是否适用",
+            "kind": "condition",
+            "source_refs": [
+              "U01",
+              "U02",
+              "U03"
+            ],
+            "model_nodes": [
+              "approval_check"
+            ]
+          },
+          {
+            "id": "content_check",
+            "label": "内容检查",
+            "kind": "action",
+            "source_refs": [
+              "U01",
+              "U03"
+            ],
+            "model_nodes": [
+              "content_check"
+            ]
+          },
+          {
+            "id": "index_check",
+            "label": "索引检查",
+            "kind": "action",
+            "source_refs": [
+              "U01",
+              "U03"
+            ],
+            "model_nodes": [
+              "index_check"
+            ]
+          },
+          {
+            "id": "processing_slots",
+            "label": "每次运行独享名额",
+            "kind": "resource",
+            "source_refs": [
+              "U01",
+              "U03"
+            ],
+            "model_nodes": [
+              "processing_slots"
+            ]
+          },
+          {
+            "id": "archive_commit",
+            "label": "保存资料版本快照",
+            "kind": "effect",
+            "source_refs": [
+              "U02"
+            ],
+            "model_nodes": [
+              "archive_commit"
+            ]
+          },
+          {
+            "id": "approval_revoked",
+            "label": "撤销审批",
+            "kind": "event",
+            "source_refs": [
+              "U01",
+              "U03"
+            ],
+            "model_nodes": [
+              "approval_revoked"
+            ]
+          },
+          {
+            "id": "content_changed",
+            "label": "修改资料内容",
+            "kind": "event",
+            "source_refs": [
+              "U01",
+              "U02",
+              "U03"
+            ],
+            "model_nodes": [
+              "content_changed"
+            ]
+          },
+          {
+            "id": "folder_assignments",
+            "label": "当前文件夹的直接负责人",
+            "kind": "data",
+            "source_refs": [
+              "U02"
+            ],
+            "model_nodes": [
+              "folder_assignments"
+            ]
+          },
+          {
+            "id": "approval_target",
+            "label": "项目 · 操作人 · 资料 · 版本",
+            "kind": "data",
+            "source_refs": [
+              "U02"
+            ],
+            "model_nodes": [
+              "approval_target"
+            ]
+          },
+          {
+            "id": "archive_unique",
+            "label": "该资料版本是否已有归档",
+            "kind": "condition",
+            "source_refs": [
+              "U02"
+            ],
+            "model_nodes": [
+              "archive_unique"
+            ]
+          },
+          {
+            "id": "resume_run",
+            "label": "点击继续并重查资格",
+            "kind": "action",
+            "source_refs": [
+              "U03"
+            ],
+            "model_nodes": [
+              "resume_run"
+            ]
+          },
+          {
+            "id": "run_identity",
+            "label": "运行身份与内容版本",
+            "kind": "data",
+            "source_refs": [
+              "U03"
+            ],
+            "model_nodes": [
+              "run_identity"
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "id": "request_scope",
+            "from": "archive_request",
+            "to": "scope_check",
+            "relation": "data",
+            "label": "判断发起人的管理范围",
+            "source_refs": [
+              "U01",
+              "I01"
+            ]
+          },
+          {
+            "id": "document_scope",
+            "from": "document",
+            "to": "scope_check",
+            "relation": "data",
+            "label": "资料所在目录",
+            "source_refs": [
+              "U01"
+            ],
+            "decision_refs": [
+              "D01"
+            ]
+          },
+          {
+            "id": "scope_archive",
+            "from": "scope_check",
+            "to": "archive_commit",
+            "relation": "guard",
+            "label": "仅所在文件夹直接负责人",
+            "source_refs": [
+              "U02"
+            ],
+            "decision_refs": [
+              "D01"
+            ]
+          },
+          {
+            "id": "approval_archive",
+            "from": "approval_check",
+            "to": "archive_commit",
+            "relation": "guard",
+            "label": "任一审批有效，提交时仍需适用",
+            "source_refs": [
+              "U01",
+              "U02",
+              "U03"
+            ],
+            "decision_refs": [
+              "D02",
+              "D05",
+              "D06"
+            ]
+          },
+          {
+            "id": "content_archive",
+            "from": "content_check",
+            "to": "archive_commit",
+            "relation": "guard",
+            "label": "内容检查通过",
+            "source_refs": [
+              "U01",
+              "U03"
+            ],
+            "decision_refs": [
+              "D07"
+            ]
+          },
+          {
+            "id": "index_archive",
+            "from": "index_check",
+            "to": "archive_commit",
+            "relation": "guard",
+            "label": "索引检查通过",
+            "source_refs": [
+              "U01",
+              "U03"
+            ],
+            "decision_refs": [
+              "D07"
+            ]
+          },
+          {
+            "id": "slots_content",
+            "from": "processing_slots",
+            "to": "content_check",
+            "relation": "resource",
+            "label": "本运行名额：内容检查占 1",
+            "source_refs": [
+              "U01",
+              "U03"
+            ],
+            "decision_refs": [
+              "D04"
+            ]
+          },
+          {
+            "id": "slots_index",
+            "from": "processing_slots",
+            "to": "index_check",
+            "relation": "resource",
+            "label": "本运行名额：索引检查占 1",
+            "source_refs": [
+              "U01",
+              "U03"
+            ],
+            "decision_refs": [
+              "D04"
+            ]
+          },
+          {
+            "id": "document_content",
+            "from": "document",
+            "to": "content_check",
+            "relation": "data",
+            "label": "本次运行的内容版本",
+            "source_refs": [
+              "U01",
+              "U03"
+            ],
+            "decision_refs": [
+              "D06"
+            ]
+          },
+          {
+            "id": "document_index",
+            "from": "document",
+            "to": "index_check",
+            "relation": "data",
+            "label": "被检查的索引",
+            "source_refs": [
+              "U01"
+            ],
+            "decision_refs": [
+              "D07"
+            ]
+          },
+          {
+            "id": "revoke_approval",
+            "from": "approval_revoked",
+            "to": "approval_check",
+            "relation": "event",
+            "label": "撤销后重新判断全部候选",
+            "source_refs": [
+              "U01",
+              "U03"
+            ],
+            "decision_refs": [
+              "D06"
+            ]
+          },
+          {
+            "id": "edit_document",
+            "from": "content_changed",
+            "to": "document",
+            "relation": "event",
+            "label": "修改内容",
+            "source_refs": [
+              "U01"
+            ]
+          },
+          {
+            "id": "edit_approval",
+            "from": "content_changed",
+            "to": "approval_check",
+            "relation": "data",
+            "label": "新版本不能沿用旧审批",
+            "source_refs": [
+              "U02",
+              "U03"
+            ],
+            "decision_refs": [
+              "D02",
+              "D06"
+            ]
+          },
+          {
+            "id": "assignments_scope",
+            "from": "folder_assignments",
+            "to": "scope_check",
+            "relation": "data",
+            "label": "直接负责关系",
+            "source_refs": [
+              "U02"
+            ],
+            "decision_refs": [
+              "D01"
+            ]
+          },
+          {
+            "id": "target_approval",
+            "from": "approval_target",
+            "to": "approval_check",
+            "relation": "data",
+            "label": "四个目标字段全部匹配",
+            "source_refs": [
+              "U02"
+            ],
+            "decision_refs": [
+              "D02"
+            ]
+          },
+          {
+            "id": "document_unique",
+            "from": "document",
+            "to": "archive_unique",
+            "relation": "data",
+            "label": "资料身份与内容版本",
+            "source_refs": [
+              "U02"
+            ],
+            "decision_refs": [
+              "D03"
+            ]
+          },
+          {
+            "id": "unique_archive",
+            "from": "archive_unique",
+            "to": "archive_commit",
+            "relation": "guard",
+            "label": "相同资料版本不重复建档",
+            "source_refs": [
+              "U02"
+            ],
+            "decision_refs": [
+              "D03"
+            ]
+          },
+          {
+            "id": "resume_approval",
+            "from": "resume_run",
+            "to": "approval_check",
+            "relation": "flow",
+            "label": "手动继续时重查",
+            "source_refs": [
+              "U03"
+            ]
+          },
+          {
+            "id": "resume_scope",
+            "from": "resume_run",
+            "to": "scope_check",
+            "relation": "flow",
+            "label": "重新检查资格",
+            "source_refs": [
+              "U03"
+            ]
+          },
+          {
+            "id": "run_content",
+            "from": "run_identity",
+            "to": "content_check",
+            "relation": "data",
+            "label": "所属运行与版本",
+            "source_refs": [
+              "U03"
+            ]
+          },
+          {
+            "id": "run_index",
+            "from": "run_identity",
+            "to": "index_check",
+            "relation": "data",
+            "label": "所属运行与版本",
+            "source_refs": [
+              "U03"
+            ]
+          },
+          {
+            "id": "run_slots",
+            "from": "run_identity",
+            "to": "processing_slots",
+            "relation": "data",
+            "label": "本运行独享容量",
+            "source_refs": [
+              "U03"
+            ]
+          },
+          {
+            "id": "edit_run",
+            "from": "content_changed",
+            "to": "run_identity",
+            "relation": "data",
+            "label": "旧运行保留；新版本另开",
+            "source_refs": [
+              "U03"
+            ]
+          },
+          {
+            "id": "run_archive",
+            "from": "run_identity",
+            "to": "archive_commit",
+            "relation": "guard",
+            "label": "旧版本运行不能提交",
+            "source_refs": [
+              "U03"
+            ]
+          }
+        ]
+      }
+    ],
+    "decisions": [
+      {
+        "id": "D01",
+        "topic": "authority",
+        "question": "负责人管理“项目A”时，是否也能处理所有下级文件夹？如果某个下级文件夹另设负责人，上级负责人是否仍有权限？",
+        "why": "决定目录继承、管理范围计算及越权反例。",
+        "affects": [
+          "scope_check",
+          "document_scope",
+          "scope_archive",
+          "folder_assignments"
+        ],
+        "blocking": true,
+        "status": "resolved",
+        "priority": 1,
+        "source_refs": [
+          "U01"
+        ],
+        "asked_in": [
+          "A01"
+        ],
+        "resolution": {
+          "kind": "user_answer",
+          "text": "负责人仅负责其文件夹直接放置的资料；不继承更深目录，下级目录按自己的负责人判断。",
+          "source_refs": [
+            "U02"
+          ]
+        },
+        "links": {
+          "requirements": [
+            "R02"
+          ],
+          "model_nodes": [
+            "scope_check",
+            "folder_assignments"
+          ],
+          "checks": [
+            "direct-manager-allowed",
+            "ancestor-manager-denied",
+            "child-uses-own-manager",
+            "scope-direct-only-declaration"
+          ]
+        }
+      },
+      {
+        "id": "D02",
+        "topic": "authority",
+        "question": "审批针对什么对象：一份资料、这份资料的某个内容版本，还是一个文件夹及其下级资料？",
+        "why": "决定审批检索、目录覆盖与内容改版后能否沿用审批。",
+        "affects": [
+          "approval_check",
+          "approval_archive",
+          "edit_approval",
+          "approval_target"
+        ],
+        "blocking": true,
+        "status": "resolved",
+        "priority": 1,
+        "source_refs": [
+          "U01"
+        ],
+        "asked_in": [
+          "A01"
+        ],
+        "resolution": {
+          "kind": "user_answer",
+          "text": "审批针对一份资料的一个内容版本，同时对应具体项目和操作人。",
+          "source_refs": [
+            "U02"
+          ]
+        },
+        "links": {
+          "requirements": [
+            "R03"
+          ],
+          "model_nodes": [
+            "approval_check",
+            "approval_target"
+          ],
+          "checks": [
+            "approval-target-exact",
+            "approval-wrong-project",
+            "approval-wrong-operator",
+            "approval-wrong-document",
+            "approval-wrong-version",
+            "approval-four-target-fields"
+          ]
+        }
+      },
+      {
+        "id": "D03",
+        "topic": "completion",
+        "question": "归档成功后应实际保存什么：只记录“已归档”，保存当时内容的固定快照，还是移动或复制文件到归档目录？",
+        "why": "决定实际提交效果、重复归档行为与权威效果验证目标。",
+        "affects": [
+          "archive_commit",
+          "archive_unique",
+          "document"
+        ],
+        "blocking": true,
+        "status": "resolved",
+        "priority": 1,
+        "source_refs": [
+          "U01",
+          "I01"
+        ],
+        "asked_in": [
+          "A01"
+        ],
+        "resolution": {
+          "kind": "user_answer",
+          "text": "归档资料条目，在 SQLite 保存固定内容快照和版本；同资料同版本不重复建档；文件夹不归档，不移动或删除原资料。",
+          "source_refs": [
+            "U02"
+          ]
+        },
+        "links": {
+          "requirements": [
+            "R08",
+            "R09",
+            "R10"
+          ],
+          "model_nodes": [
+            "archive_commit",
+            "archive_unique",
+            "document"
+          ],
+          "checks": [
+            "snapshot-content",
+            "snapshot-version",
+            "snapshot-stays-fixed",
+            "one-record-per-version",
+            "preserve-original-document",
+            "preserve-original-folder",
+            "archive-identity-key"
+          ]
+        }
+      },
+      {
+        "id": "D04",
+        "topic": "resources",
+        "question": "两项检查是否各占一个名额、允许同时运行？这些名额是整个工具共享，还是每个项目各自拥有？",
+        "why": "决定活动实例、共享容量、资源守恒和真实重叠；占用归还时点结合 D06 的停止语义继续明确。",
+        "affects": [
+          "content_check",
+          "index_check",
+          "processing_slots",
+          "slots_content",
+          "slots_index"
+        ],
+        "blocking": true,
+        "status": "resolved",
+        "priority": 2,
+        "source_refs": [
+          "U01"
+        ],
+        "depends_on": [
+          "D03"
+        ],
+        "asked_in": [
+          "A02"
+        ],
+        "resolution": {
+          "kind": "user_answer",
+          "text": "每次归档运行独享名额；两项检查各占一个，默认两个，可设为一个；允许并发，两个检查都通过才能提交。",
+          "source_refs": [
+            "U03"
+          ]
+        },
+        "links": {
+          "requirements": [
+            "R05",
+            "R04"
+          ],
+          "model_nodes": [
+            "processing_slots",
+            "content_check",
+            "index_check"
+          ],
+          "checks": [
+            "per-run-resource-declaration",
+            "both-checks-required"
+          ]
+        }
+      },
+      {
+        "id": "D05",
+        "topic": "authority",
+        "question": "同一版本有两条审批，一条被撤销、另一条仍有效时，是否仍允许归档？另外，谁可以发出审批？",
+        "why": "决定审批者规则、候选逐条求值及汇总条件。",
+        "affects": [
+          "approval_check",
+          "approval_archive"
+        ],
+        "blocking": true,
+        "status": "resolved",
+        "priority": 2,
+        "source_refs": [
+          "U01",
+          "U02"
+        ],
+        "depends_on": [
+          "D02"
+        ],
+        "asked_in": [
+          "A02"
+        ],
+        "resolution": {
+          "kind": "user_answer",
+          "text": "任一条仍有效审批即可；撤销后重新求值全部候选，没有有效审批则等待。审批者须为另一名审核员，不能自批；now 等于 deadline 时已失效。",
+          "source_refs": [
+            "U03"
+          ]
+        },
+        "links": {
+          "requirements": [
+            "R03"
+          ],
+          "model_nodes": [
+            "approval_check"
+          ],
+          "checks": [
+            "approval-any-declaration",
+            "approval-excludes-self",
+            "approval-expiry-exclusive"
+          ]
+        }
+      },
+      {
+        "id": "D06",
+        "topic": "consistency",
+        "question": "内容改版后，旧运行里尚未开始的检查直接作废、已启动的检查自然结束，同时保留全部记录且禁止提交，这样处理是否符合你的意思？",
+        "why": "决定新旧版本运行隔离、停止请求和实际停止的区别、旧结果提交保护。",
+        "affects": [
+          "approval_revoked",
+          "content_changed",
+          "approval_check",
+          "content_check",
+          "index_check",
+          "archive_commit"
+        ],
+        "blocking": true,
+        "status": "resolved",
+        "priority": 2,
+        "source_refs": [
+          "U01",
+          "U02",
+          "U03"
+        ],
+        "depends_on": [
+          "D02",
+          "D03"
+        ],
+        "asked_in": [
+          "A02",
+          "A03"
+        ],
+        "note": "U03 已确认审批失效时已启动检查自然结束并保留结果，手动继续重新检查资格；内容改版使旧运行不可提交且不能复用到新版本，新旧运行独立可查。仍需明确改版时旧活动如何结束，故保持 open。",
+        "resolution": {
+          "kind": "user_answer",
+          "text": "改版时未开始检查作废、已开始自然结束，旧运行可查但不可提交；新运行独立。",
+          "source_refs": [
+            "U04"
+          ]
+        },
+        "links": {
+          "requirements": [
+            "R06"
+          ],
+          "model_nodes": [
+            "content_changed",
+            "run_identity"
+          ],
+          "checks": [
+            "old-run-cannot-commit",
+            "old-new-coexist",
+            "new-run-own-checks"
+          ]
+        }
+      },
+      {
+        "id": "D07",
+        "topic": "completion",
+        "question": "内容检查和索引检查分别检查哪些条件？检查失败后，是允许重试失败项，还是必须新开一次运行？",
+        "why": "没有明确的通过标准就不能建立独立业务验收。",
+        "affects": [
+          "content_check",
+          "index_check",
+          "content_archive",
+          "index_archive"
+        ],
+        "blocking": true,
+        "status": "resolved",
+        "priority": 3,
+        "source_refs": [
+          "U01"
+        ],
+        "depends_on": [
+          "D03"
+        ],
+        "asked_in": [
+          "A03"
+        ],
+        "note": "U03 已确认两项均通过才能提交；具体检查条件与失败后重试范围未答。",
+        "resolution": {
+          "kind": "user_answer",
+          "text": "内容禁用 SECRET:；索引要求标题、项目、编号齐全。失败后新运行，不混用结果。",
+          "source_refs": [
+            "U04"
+          ]
+        },
+        "links": {
+          "requirements": [
+            "R04"
+          ],
+          "model_nodes": [
+            "content_check",
+            "index_check"
+          ],
+          "checks": [
+            "checks-secret-rejected",
+            "checks-index-rejected",
+            "incomplete-cannot-commit"
+          ]
+        }
+      },
+      {
+        "id": "D08",
+        "topic": "concurrency",
+        "question": "新运行是否必须有有效审批才能启动检查？只有一个名额时，第一项运行中审批失效，尚未启动的第二项是否要等你点击“继续”后再开始？",
+        "why": "决定流程启动门槛、等待条件及恢复触发。",
+        "affects": [
+          "archive_request",
+          "approval_check",
+          "content_check",
+          "index_check",
+          "processing_slots"
+        ],
+        "blocking": true,
+        "status": "resolved",
+        "priority": 3,
+        "source_refs": [
+          "U01"
+        ],
+        "depends_on": [
+          "D02",
+          "D04"
+        ],
+        "asked_in": [
+          "A03"
+        ],
+        "note": "U03 已确认失去审批后需手动继续并重查；新运行和未启动活动的审批门槛仍待答。",
+        "resolution": {
+          "kind": "user_answer",
+          "text": "新运行有有效审批才检查；途中失效后未启动检查等待手动继续且资格恢复。",
+          "source_refs": [
+            "U04"
+          ]
+        },
+        "links": {
+          "requirements": [
+            "R11"
+          ],
+          "model_nodes": [
+            "resume_run",
+            "approval_check"
+          ],
+          "checks": [
+            "approval-loss-no-commit",
+            "approval-loss-pending-stays",
+            "approval-manual-resume"
+          ]
+        }
+      },
+      {
+        "id": "D09",
+        "topic": "resources",
+        "blocking": true,
+        "status": "resolved",
+        "priority": 3,
+        "source_refs": [
+          "U03"
+        ],
+        "affects": [
+          "processing_slots"
+        ],
+        "depends_on": [
+          "D04"
+        ],
+        "question": "名额是在创建运行时选定，还是允许对已经开始的运行实时修改？",
+        "why": "决定运行参数是否固定及活动占用中修改容量的行为；U03 尚未明确变更时点。",
+        "resolution": {
+          "kind": "delegated_choice",
+          "text": "首版在创建每次运行时选择 1 或 2 名额，固定为本次运行参数。未要求的运行中修改容量不纳入首版。",
+          "source_refs": [
+            "U03",
+            "U04P"
+          ],
+          "rationale": "按每次运行单独设置的已定范围，将容量作为创建参数；用户授权选择实现方案，首版不扩充运行中修改入口。该选择已在本轮进度明示。"
+        },
+        "links": {
+          "requirements": [
+            "R05"
+          ],
+          "model_nodes": [
+            "processing_slots"
+          ],
+          "checks": [
+            "one-slot-max",
+            "two-slots-overlap"
+          ]
+        }
+      }
+    ],
+    "changes": []
+  },
+  "request": "Implement confirmed simulated archive requirements U01-U04 with current-version transactional commit and independent observation",
+  "requested_requirements": [
+    "R01",
+    "R02",
+    "R03",
+    "R04",
+    "R05",
+    "R06",
+    "R07",
+    "R08",
+    "R09",
+    "R10",
+    "R11",
+    "R12",
+    "R13"
+  ],
+  "previous_manifest": null
+}

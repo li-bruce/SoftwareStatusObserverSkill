@@ -1,0 +1,512 @@
+{
+  "users": [
+    {
+      "id": "alice",
+      "name": "林晓 · 文件夹负责人",
+      "role": "manager"
+    },
+    {
+      "id": "bob",
+      "name": "周宁 · 审核员",
+      "role": "reviewer"
+    },
+    {
+      "id": "carol",
+      "name": "陈青 · 审核员",
+      "role": "reviewer"
+    },
+    {
+      "id": "dana",
+      "name": "杜然 · 子目录负责人",
+      "role": "manager"
+    }
+  ],
+  "projects": [
+    {
+      "id": "P1",
+      "title": "研发资料"
+    },
+    {
+      "id": "P2",
+      "title": "共享资料"
+    }
+  ],
+  "folders": [
+    {
+      "id": "F1",
+      "project_id": "P1",
+      "parent_id": null,
+      "title": "项目资料"
+    },
+    {
+      "id": "F2",
+      "project_id": "P1",
+      "parent_id": "F1",
+      "title": "设计记录"
+    },
+    {
+      "id": "F3",
+      "project_id": "P1",
+      "parent_id": "F2",
+      "title": "历史草稿"
+    },
+    {
+      "id": "F4",
+      "project_id": "P2",
+      "parent_id": null,
+      "title": "其他项目"
+    }
+  ],
+  "assignments": [
+    {
+      "project_id": "P1",
+      "folder_id": "F1",
+      "operator_id": "alice"
+    },
+    {
+      "project_id": "P1",
+      "folder_id": "F2",
+      "operator_id": "alice"
+    },
+    {
+      "project_id": "P1",
+      "folder_id": "F3",
+      "operator_id": "dana"
+    },
+    {
+      "project_id": "P2",
+      "folder_id": "F4",
+      "operator_id": "dana"
+    }
+  ],
+  "documents": [
+    {
+      "id": "DOC-001",
+      "project_id": "P1",
+      "folder_id": "F2",
+      "title": "接口设计说明",
+      "number": "RD-001",
+      "content": "模拟资料：版本一的固定内容。",
+      "version": 1
+    }
+  ],
+  "grants": [
+    {
+      "id": "b4cca0f90cc3",
+      "project_id": "P1",
+      "operator_id": "alice",
+      "document_id": "DOC-001",
+      "content_version": 1,
+      "reviewer_id": "bob",
+      "deadline": 1792482205.6110418,
+      "revoked": 0
+    }
+  ],
+  "archives": [
+    {
+      "id": "52946f163136",
+      "document_id": "DOC-001",
+      "content_version": 1,
+      "content": "模拟资料：版本一的固定内容。",
+      "title": "接口设计说明",
+      "project_id": "P1",
+      "number": "RD-001",
+      "run_id": "ec2fe43d534c",
+      "created": 1792481633.702675
+    }
+  ],
+  "runs": [
+    {
+      "id": "ec2fe43d534c",
+      "input": {
+        "document_id": "DOC-001",
+        "project_id": "P1",
+        "operator_id": "alice",
+        "content_version": 1,
+        "content": "模拟资料：版本一的固定内容。",
+        "title": "接口设计说明",
+        "document_number": "RD-001"
+      },
+      "phase": "completed",
+      "phase_journal": [
+        {
+          "event": "pause",
+          "source": "created",
+          "target": "waiting",
+          "attempt": "ec2fe43d534c",
+          "clock": 1792481599.3972523,
+          "activity_revision": 0
+        },
+        {
+          "event": "begin",
+          "source": "waiting",
+          "target": "checking",
+          "attempt": "ec2fe43d534c",
+          "clock": 1792481629.6121256,
+          "activity_revision": 0
+        },
+        {
+          "event": "checked",
+          "source": "checking",
+          "target": "ready",
+          "attempt": "ec2fe43d534c",
+          "clock": 1792481633.7019641,
+          "activity_revision": 5
+        },
+        {
+          "event": "publish",
+          "source": "ready",
+          "target": "completed",
+          "attempt": "ec2fe43d534c",
+          "clock": 1792481633.7028139,
+          "activity_revision": 5
+        }
+      ],
+      "execution_version": "6eb25ba09b2db5caeacd20bbbfc309b9f4d35dfccf59c1f9a293558d0caf4578",
+      "created": 1792481599.3935103,
+      "stop_reason": "",
+      "resume_required": false,
+      "configuration": {
+        "attempt": "ec2fe43d534c",
+        "param_version": 1,
+        "revision": 5,
+        "activities": {
+          "content_check": "succeeded",
+          "index_check": "succeeded"
+        },
+        "resources": {
+          "processing_slots": {
+            "capacity": 2,
+            "available": 2,
+            "holders": []
+          }
+        },
+        "join": {
+          "state": "passed",
+          "pending": []
+        },
+        "journal": [
+          {
+            "seq": 1,
+            "event": "start",
+            "activity": "content_check",
+            "before": {
+              "activities": {
+                "content_check": "pending",
+                "index_check": "pending"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 2,
+                  "available": 2,
+                  "holders": []
+                }
+              },
+              "join": {
+                "state": "waiting",
+                "pending": [
+                  "content_check",
+                  "index_check"
+                ]
+              }
+            },
+            "after": {
+              "activities": {
+                "content_check": "running",
+                "index_check": "pending"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 2,
+                  "available": 1,
+                  "holders": [
+                    "content_check"
+                  ]
+                }
+              },
+              "join": {
+                "state": "waiting",
+                "pending": [
+                  "content_check",
+                  "index_check"
+                ]
+              }
+            },
+            "clock": 1792481629.6121256,
+            "phase": "checking",
+            "discarded": [],
+            "wait_reasons": {
+              "index_check": "等待当前资格恢复后点击继续"
+            }
+          },
+          {
+            "seq": 2,
+            "event": "start",
+            "activity": "index_check",
+            "before": {
+              "activities": {
+                "content_check": "running",
+                "index_check": "pending"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 2,
+                  "available": 1,
+                  "holders": [
+                    "content_check"
+                  ]
+                }
+              },
+              "join": {
+                "state": "waiting",
+                "pending": [
+                  "content_check",
+                  "index_check"
+                ]
+              }
+            },
+            "after": {
+              "activities": {
+                "content_check": "running",
+                "index_check": "running"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 2,
+                  "available": 0,
+                  "holders": [
+                    "content_check",
+                    "index_check"
+                  ]
+                }
+              },
+              "join": {
+                "state": "waiting",
+                "pending": [
+                  "content_check",
+                  "index_check"
+                ]
+              }
+            },
+            "clock": 1792481629.6121256,
+            "phase": "checking",
+            "discarded": [],
+            "wait_reasons": {}
+          },
+          {
+            "seq": 3,
+            "event": "finish",
+            "activity": "content_check",
+            "before": {
+              "activities": {
+                "content_check": "running",
+                "index_check": "running"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 2,
+                  "available": 0,
+                  "holders": [
+                    "content_check",
+                    "index_check"
+                  ]
+                }
+              },
+              "join": {
+                "state": "waiting",
+                "pending": [
+                  "content_check",
+                  "index_check"
+                ]
+              }
+            },
+            "after": {
+              "activities": {
+                "content_check": "succeeded",
+                "index_check": "running"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 2,
+                  "available": 1,
+                  "holders": [
+                    "index_check"
+                  ]
+                }
+              },
+              "join": {
+                "state": "waiting",
+                "pending": [
+                  "index_check"
+                ]
+              }
+            },
+            "clock": 1792481633.6157172,
+            "phase": "checking",
+            "discarded": [],
+            "wait_reasons": {}
+          },
+          {
+            "seq": 4,
+            "event": "finish",
+            "activity": "index_check",
+            "before": {
+              "activities": {
+                "content_check": "succeeded",
+                "index_check": "running"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 2,
+                  "available": 1,
+                  "holders": [
+                    "index_check"
+                  ]
+                }
+              },
+              "join": {
+                "state": "waiting",
+                "pending": [
+                  "index_check"
+                ]
+              }
+            },
+            "after": {
+              "activities": {
+                "content_check": "succeeded",
+                "index_check": "succeeded"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 2,
+                  "available": 2,
+                  "holders": []
+                }
+              },
+              "join": {
+                "state": "enabled",
+                "pending": []
+              }
+            },
+            "clock": 1792481633.6187978,
+            "phase": "checking",
+            "discarded": [],
+            "wait_reasons": {}
+          },
+          {
+            "seq": 5,
+            "event": "join",
+            "activity": "checks_join",
+            "before": {
+              "activities": {
+                "content_check": "succeeded",
+                "index_check": "succeeded"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 2,
+                  "available": 2,
+                  "holders": []
+                }
+              },
+              "join": {
+                "state": "enabled",
+                "pending": []
+              }
+            },
+            "after": {
+              "activities": {
+                "content_check": "succeeded",
+                "index_check": "succeeded"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 2,
+                  "available": 2,
+                  "holders": []
+                }
+              },
+              "join": {
+                "state": "passed",
+                "pending": []
+              }
+            },
+            "clock": 1792481633.7019641,
+            "phase": "checking",
+            "discarded": [],
+            "wait_reasons": {}
+          }
+        ],
+        "results": {
+          "content_check": {
+            "passed": true,
+            "marker_present": false
+          },
+          "index_check": {
+            "title_present": true,
+            "project_present": true,
+            "number_present": true,
+            "passed": true
+          }
+        },
+        "discarded": [],
+        "wait_reasons": {}
+      },
+      "qualification": {
+        "allowed": true,
+        "scope_allowed": true,
+        "approval_allowed": true,
+        "version_current": true,
+        "reasons": [],
+        "candidates": [
+          {
+            "id": "b4cca0f90cc3",
+            "project_ok": true,
+            "operator_ok": true,
+            "document_ok": true,
+            "version_ok": true,
+            "reviewer_ok": true,
+            "different_actor": true,
+            "not_revoked": true,
+            "time_ok": true,
+            "target_matches": true,
+            "allowed": true
+          }
+        ],
+        "basis": {
+          "param_version": 1,
+          "epoch": 2,
+          "clock": 1792481633.7024996
+        },
+        "all_passed": true,
+        "valid_until": 1792482205.6110418
+      },
+      "effect_id": "52946f163136",
+      "reused_archive": false
+    }
+  ],
+  "epoch": 2,
+  "labels": {
+    "created": "准备归档",
+    "checking": "检查中",
+    "waiting": "等待资格 · 点击继续",
+    "ready": "检查通过，复核提交",
+    "completed": "已归档",
+    "failed": "检查未通过",
+    "stopping": "等待已启动检查结束",
+    "cancelled": "本次运行已取消",
+    "superseded": "内容已改版，本次不可提交",
+    "interrupted": "进程中断，需新建运行"
+  },
+  "clock": 1792482003.550614,
+  "build_id": "6eb25ba09b2db5caeacd20bbbfc309b9f4d35dfccf59c1f9a293558d0caf4578",
+  "delay": 4.0,
+  "binding": {
+    "status": "current",
+    "changed_files": [],
+    "model_changed": false,
+    "intent_changed": false,
+    "directly_affected": [],
+    "possibly_affected": []
+  }
+}

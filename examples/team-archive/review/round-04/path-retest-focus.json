@@ -1,0 +1,438 @@
+{
+  "schema_version": 1,
+  "base": {
+    "project_id": "team-archive-trial-01",
+    "model_revision": "discovery-r03",
+    "model_hash": "553bc79948874d035fa90edd8c1f66e7dd721e5fcee59084b0e4c48716a9569b",
+    "build_id": null
+  },
+  "selection": {
+    "nodes": [
+      "approval_check"
+    ],
+    "depth": 1,
+    "max_nodes": 24,
+    "max_edges": 48,
+    "relations": null,
+    "run_id": null
+  },
+  "nodes": [
+    {
+      "id": "approval_check",
+      "kind": "decision",
+      "label": "审批是否适用",
+      "summary": "审批目标四字段匹配、审批人为另一名审核员、未撤销且未到截止时刻；任一候选有效即可。撤销后重新判断，没有有效审批则等待。",
+      "rule": {
+        "target_fields": [
+          "project_id",
+          "operator_id",
+          "document_id",
+          "content_version"
+        ],
+        "aggregate": "any",
+        "reviewer_required": true,
+        "exclude_self": true,
+        "valid_time": "now < deadline",
+        "revoked_allowed": false
+      },
+      "planned_source": {
+        "path": "archive_app/policy.py",
+        "symbol": "evaluate_approvals"
+      },
+      "binding_status": "pending",
+      "requirements": [
+        "R03"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "approval_revoked",
+      "kind": "action",
+      "label": "撤销审批",
+      "summary": "撤销触发审批重评；有替代有效审批时继续具备审批条件；否则等待。已启动检查完成且保留结果，不提交。",
+      "binding_status": "pending",
+      "requirements": [
+        "R03"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "approval_target",
+      "kind": "data",
+      "label": "项目 · 操作人 · 资料 · 版本",
+      "summary": "单条审批的四个目标字段必须全部匹配本次请求。",
+      "requirements": [
+        "R03"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "archive_commit",
+      "kind": "effect",
+      "label": "保存资料版本快照",
+      "summary": "在 SQLite 保存内容的固定快照及对应版本，不移动或删除原资料；同一资料/版本不得重复生成记录。",
+      "planned_source": {
+        "path": "archive_app/store.py",
+        "symbol": "save_archive_snapshot"
+      },
+      "binding_status": "pending",
+      "requirements": [
+        "R08",
+        "R09",
+        "R10"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "rule": {
+        "all_checks_passed": true,
+        "current_version_required": true,
+        "current_approval_required": true
+      }
+    },
+    {
+      "id": "content_changed",
+      "kind": "action",
+      "label": "修改资料内容",
+      "summary": "旧审批与旧检查结果不能用于新版本；旧运行保留且不能提交，新版本可另开独立运行，不能覆盖旧运行。旧活动如何结束待 D06。",
+      "binding_status": "pending",
+      "requirements": [
+        "R06"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "resume_run",
+      "kind": "action",
+      "label": "点击继续并重查资格",
+      "summary": "审批条件恢复后手动继续，重查当前资格；已完成同版本检查结果保留。",
+      "binding_status": "pending",
+      "requirements": [
+        "R11"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "approval_archive",
+      "from": "approval_check",
+      "to": "archive_commit",
+      "type": "guard",
+      "label": "任一审批有效，提交时仍需适用",
+      "evidence": "U03；已确认规则，具体执行尚未实现"
+    },
+    {
+      "id": "edit_approval",
+      "from": "content_changed",
+      "to": "approval_check",
+      "type": "data",
+      "label": "新版本不能沿用旧审批",
+      "evidence": "U03；已确认规则，具体执行尚未实现"
+    },
+    {
+      "id": "revoke_approval",
+      "from": "approval_revoked",
+      "to": "approval_check",
+      "type": "data",
+      "label": "撤销后重新判断全部候选",
+      "evidence": "U03；已确认规则，具体执行尚未实现"
+    },
+    {
+      "id": "target_approval",
+      "from": "approval_target",
+      "to": "approval_check",
+      "type": "data",
+      "label": "四个目标字段全部匹配",
+      "evidence": "U02；D02"
+    },
+    {
+      "id": "resume_approval",
+      "from": "resume_run",
+      "to": "approval_check",
+      "type": "flow",
+      "label": "手动继续时重查",
+      "evidence": "U03"
+    }
+  ],
+  "boundaries": [
+    {
+      "id": "view:boundary:6f276f8f98a4c368",
+      "edge_id": "content_archive",
+      "from": "content_check",
+      "to": "archive_commit",
+      "type": "guard",
+      "label": "内容检查通过",
+      "relation": {
+        "id": "content_archive",
+        "from": "content_check",
+        "to": "archive_commit",
+        "type": "guard",
+        "label": "内容检查通过",
+        "evidence": "U03；已确认规则，具体执行尚未实现"
+      },
+      "outside": [
+        {
+          "id": "content_check",
+          "label": "内容检查",
+          "kind": "action"
+        }
+      ],
+      "reason": "outside_focus",
+      "meaning": "Original relation continues outside this view; no inferred shortcut."
+    },
+    {
+      "id": "view:boundary:50927fb4027370ee",
+      "edge_id": "edit_document",
+      "from": "content_changed",
+      "to": "document",
+      "type": "data",
+      "label": "修改内容",
+      "relation": {
+        "id": "edit_document",
+        "from": "content_changed",
+        "to": "document",
+        "type": "data",
+        "label": "修改内容",
+        "evidence": "U01"
+      },
+      "outside": [
+        {
+          "id": "document",
+          "label": "资料条目与内容版本",
+          "kind": "data"
+        }
+      ],
+      "reason": "outside_focus",
+      "meaning": "Original relation continues outside this view; no inferred shortcut."
+    },
+    {
+      "id": "view:boundary:ba68b30a1dcd13fc",
+      "edge_id": "edit_run",
+      "from": "content_changed",
+      "to": "run_identity",
+      "type": "data",
+      "label": "旧运行保留；新版本另开",
+      "relation": {
+        "id": "edit_run",
+        "from": "content_changed",
+        "to": "run_identity",
+        "type": "data",
+        "label": "旧运行保留；新版本另开",
+        "evidence": "U03"
+      },
+      "outside": [
+        {
+          "id": "run_identity",
+          "label": "运行身份与内容版本",
+          "kind": "data"
+        }
+      ],
+      "reason": "outside_focus",
+      "meaning": "Original relation continues outside this view; no inferred shortcut."
+    },
+    {
+      "id": "view:boundary:a58a360af561620b",
+      "edge_id": "index_archive",
+      "from": "index_check",
+      "to": "archive_commit",
+      "type": "guard",
+      "label": "索引检查通过",
+      "relation": {
+        "id": "index_archive",
+        "from": "index_check",
+        "to": "archive_commit",
+        "type": "guard",
+        "label": "索引检查通过",
+        "evidence": "U03；已确认规则，具体执行尚未实现"
+      },
+      "outside": [
+        {
+          "id": "index_check",
+          "label": "索引检查",
+          "kind": "action"
+        }
+      ],
+      "reason": "outside_focus",
+      "meaning": "Original relation continues outside this view; no inferred shortcut."
+    },
+    {
+      "id": "view:boundary:6d6f91ee4825772d",
+      "edge_id": "resume_scope",
+      "from": "resume_run",
+      "to": "scope_check",
+      "type": "flow",
+      "label": "重新检查资格",
+      "relation": {
+        "id": "resume_scope",
+        "from": "resume_run",
+        "to": "scope_check",
+        "type": "flow",
+        "label": "重新检查资格",
+        "evidence": "U03"
+      },
+      "outside": [
+        {
+          "id": "scope_check",
+          "label": "是否直接负责所在文件夹",
+          "kind": "decision"
+        }
+      ],
+      "reason": "outside_focus",
+      "meaning": "Original relation continues outside this view; no inferred shortcut."
+    },
+    {
+      "id": "view:boundary:25b3316802e101c8",
+      "edge_id": "run_archive",
+      "from": "run_identity",
+      "to": "archive_commit",
+      "type": "guard",
+      "label": "旧版本运行不能提交",
+      "relation": {
+        "id": "run_archive",
+        "from": "run_identity",
+        "to": "archive_commit",
+        "type": "guard",
+        "label": "旧版本运行不能提交",
+        "evidence": "U03"
+      },
+      "outside": [
+        {
+          "id": "run_identity",
+          "label": "运行身份与内容版本",
+          "kind": "data"
+        }
+      ],
+      "reason": "outside_focus",
+      "meaning": "Original relation continues outside this view; no inferred shortcut."
+    },
+    {
+      "id": "view:boundary:2c78366014fc9e33",
+      "edge_id": "scope_archive",
+      "from": "scope_check",
+      "to": "archive_commit",
+      "type": "guard",
+      "label": "仅所在文件夹直接负责人",
+      "relation": {
+        "id": "scope_archive",
+        "from": "scope_check",
+        "to": "archive_commit",
+        "type": "guard",
+        "label": "仅所在文件夹直接负责人",
+        "evidence": "U02；D01 已确认"
+      },
+      "outside": [
+        {
+          "id": "scope_check",
+          "label": "是否直接负责所在文件夹",
+          "kind": "decision"
+        }
+      ],
+      "reason": "outside_focus",
+      "meaning": "Original relation continues outside this view; no inferred shortcut."
+    },
+    {
+      "id": "view:boundary:8e1ed4a84d29682e",
+      "edge_id": "unique_archive",
+      "from": "archive_unique",
+      "to": "archive_commit",
+      "type": "guard",
+      "label": "相同资料版本不重复建档",
+      "relation": {
+        "id": "unique_archive",
+        "from": "archive_unique",
+        "to": "archive_commit",
+        "type": "guard",
+        "label": "相同资料版本不重复建档",
+        "evidence": "U02；D03"
+      },
+      "outside": [
+        {
+          "id": "archive_unique",
+          "label": "该资料版本是否已有归档",
+          "kind": "decision"
+        }
+      ],
+      "reason": "outside_focus",
+      "meaning": "Original relation continues outside this view; no inferred shortcut."
+    }
+  ],
+  "mapping": {
+    "approval_check": {
+      "nodes": [
+        "approval_check"
+      ],
+      "source": null
+    },
+    "approval_revoked": {
+      "nodes": [
+        "approval_revoked"
+      ],
+      "source": null
+    },
+    "approval_target": {
+      "nodes": [
+        "approval_target"
+      ],
+      "source": null
+    },
+    "archive_commit": {
+      "nodes": [
+        "archive_commit"
+      ],
+      "source": null
+    },
+    "content_changed": {
+      "nodes": [
+        "content_changed"
+      ],
+      "source": null
+    },
+    "resume_run": {
+      "nodes": [
+        "resume_run"
+      ],
+      "source": null
+    }
+  },
+  "events": [],
+  "coverage": {
+    "selected_nodes": 6,
+    "total_nodes": 15,
+    "crossing_or_omitted_edges": 8,
+    "reported_boundaries": 8,
+    "limits_hit": [],
+    "source_unknowns": [
+      "可执行节点尚未绑定源码，当前没有运行证据。",
+      "D06：改版时旧活动的结束方式。",
+      "D07：具体检查条件和失败后重试范围。",
+      "D08：新运行及尚未启动活动的审批门槛。",
+      "D09：容量修改是在新建前还是运行中。"
+    ],
+    "evidence_gaps": [],
+    "runtime_evidence": "not_selected",
+    "complete": false
+  },
+  "questions": [
+    "D07",
+    "D08",
+    "D06"
+  ],
+  "focus_id": "focus:a12fa4939e9312593ce0"
+}

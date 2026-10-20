@@ -1,0 +1,5 @@
+{
+  "reason": "Stabilize authored raw-byte source bindings before final review/verify; no acceptance expectations changed.",
+  "files": [],
+  "preserved": "Pinned runtime and untouched vendor assets retain original hashes via project .gitattributes."
+}

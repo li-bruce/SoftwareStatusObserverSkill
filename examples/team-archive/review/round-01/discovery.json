@@ -1,0 +1,54 @@
+{
+  "schema": "business-discovery/v1",
+  "goal": "模拟用户演练：以 Python 和 SQLite 实现本地团队资料归档，并用同一开发者图解释范围、审批、检查、等待及真实函数参数。",
+  "sources": [
+    {"id": "U01", "kind": "user", "text": "我想做个本地的团队资料归档工具。资料放在项目的多层文件夹里，负责人能处理自己管理范围内的资料。归档前要有审批，还要做内容检查和索引检查；处理名额有限，两项检查可能需要等一等。审批会被撤销，资料内容也会修改。我想在开发时从图上看到为什么可以归档、为什么等着，以及关键函数实际用了什么参数。用 Python 和 SQLite，界面简单清楚，图要能拖动和逐层展开。", "locator": "本独立会话初始模拟用户需求；来源是模拟演练，不是真人试用反馈"},
+    {"id": "I01", "kind": "inference", "text": "用资料、管理范围、审批、两个检查和归档效果构成候选依赖网；尚不能据此确定执行顺序、审批粒度、目录继承、失效处理或成功效果。", "locator": "review/round-01/design.md；开发者候选理解"},
+    {"id": "A01", "kind": "assistant", "text": "1. 负责人管理“项目A”时，是否也能处理所有下级文件夹？如果某个下级文件夹另设负责人，上级负责人是否仍有权限？\n2. 审批针对什么对象：一份资料、这份资料的某个内容版本，还是一个文件夹及其下级资料？\n3. 归档成功后应实际保存什么：只记录“已归档”，保存当时内容的固定快照，还是移动或复制文件到归档目录？", "locator": "review/round-01/dialogue.md；本轮最终回复的三个实际问题"}
+  ],
+  "networks": [{
+    "id": "archive-network",
+    "title": "资料归档的候选依赖",
+    "actors": ["负责人", "审批者（身份规则待定）", "本地归档工具"],
+    "trigger": "候选入口：负责人请求归档一份资料；与审批、检查的先后待确认。",
+    "outcome": "资料完成归档；成功效果待 D03 明确。",
+    "nodes": [
+      {"id": "archive_request", "label": "负责人发起归档", "kind": "action", "source_refs": ["U01", "I01"], "model_nodes": ["archive_request"]},
+      {"id": "document", "label": "多层文件夹中的资料", "kind": "data", "source_refs": ["U01"], "model_nodes": ["document"]},
+      {"id": "scope_check", "label": "是否在管理范围", "kind": "condition", "source_refs": ["U01"], "model_nodes": ["scope_check"]},
+      {"id": "approval_check", "label": "审批是否适用", "kind": "condition", "source_refs": ["U01"], "model_nodes": ["approval_check"]},
+      {"id": "content_check", "label": "内容检查", "kind": "action", "source_refs": ["U01"], "model_nodes": ["content_check"]},
+      {"id": "index_check", "label": "索引检查", "kind": "action", "source_refs": ["U01"], "model_nodes": ["index_check"]},
+      {"id": "processing_slots", "label": "有限处理名额", "kind": "resource", "source_refs": ["U01"], "model_nodes": ["processing_slots"]},
+      {"id": "archive_commit", "label": "提交归档（效果待确认）", "kind": "effect", "source_refs": ["U01", "I01"], "model_nodes": ["archive_commit"]},
+      {"id": "approval_revoked", "label": "撤销审批", "kind": "event", "source_refs": ["U01"], "model_nodes": ["approval_revoked"]},
+      {"id": "content_changed", "label": "修改资料内容", "kind": "event", "source_refs": ["U01"], "model_nodes": ["content_changed"]}
+    ],
+    "edges": [
+      {"id": "request_scope", "from": "archive_request", "to": "scope_check", "relation": "data", "label": "判断发起人的管理范围", "source_refs": ["U01", "I01"]},
+      {"id": "document_scope", "from": "document", "to": "scope_check", "relation": "data", "label": "资料所在目录", "source_refs": ["U01"], "decision_refs": ["D01"]},
+      {"id": "scope_archive", "from": "scope_check", "to": "archive_commit", "relation": "guard", "label": "受管理范围限制", "source_refs": ["U01"], "decision_refs": ["D01"]},
+      {"id": "approval_archive", "from": "approval_check", "to": "archive_commit", "relation": "guard", "label": "归档前需要审批", "source_refs": ["U01"], "decision_refs": ["D02", "D05", "D06"]},
+      {"id": "content_archive", "from": "content_check", "to": "archive_commit", "relation": "guard", "label": "归档前检查；放行规则待定", "source_refs": ["U01"], "decision_refs": ["D07"]},
+      {"id": "index_archive", "from": "index_check", "to": "archive_commit", "relation": "guard", "label": "归档前检查；放行规则待定", "source_refs": ["U01"], "decision_refs": ["D07"]},
+      {"id": "slots_content", "from": "processing_slots", "to": "content_check", "relation": "resource", "label": "可能等待名额；分配规则待定", "source_refs": ["U01"], "decision_refs": ["D04"]},
+      {"id": "slots_index", "from": "processing_slots", "to": "index_check", "relation": "resource", "label": "可能等待名额；分配规则待定", "source_refs": ["U01"], "decision_refs": ["D04"]},
+      {"id": "document_content", "from": "document", "to": "content_check", "relation": "data", "label": "被检查的内容", "source_refs": ["U01"], "decision_refs": ["D06"]},
+      {"id": "document_index", "from": "document", "to": "index_check", "relation": "data", "label": "被检查的索引", "source_refs": ["U01"], "decision_refs": ["D07"]},
+      {"id": "revoke_approval", "from": "approval_revoked", "to": "approval_check", "relation": "event", "label": "撤销后如何处理待定", "source_refs": ["U01"], "decision_refs": ["D06"]},
+      {"id": "edit_document", "from": "content_changed", "to": "document", "relation": "event", "label": "修改内容", "source_refs": ["U01"]},
+      {"id": "edit_approval", "from": "content_changed", "to": "approval_check", "relation": "data", "label": "是否影响原审批待定", "source_refs": ["I01"], "decision_refs": ["D02", "D06"]}
+    ]
+  }],
+  "decisions": [
+    {"id": "D01", "topic": "authority", "question": "负责人管理“项目A”时，是否也能处理所有下级文件夹？如果某个下级文件夹另设负责人，上级负责人是否仍有权限？", "why": "决定目录继承、管理范围计算及越权反例。", "affects": ["scope_check", "document_scope", "scope_archive"], "blocking": true, "status": "open", "priority": 1, "source_refs": ["U01"], "asked_in": ["A01"]},
+    {"id": "D02", "topic": "authority", "question": "审批针对什么对象：一份资料、这份资料的某个内容版本，还是一个文件夹及其下级资料？", "why": "决定审批检索、目录覆盖与内容改版后能否沿用审批。", "affects": ["approval_check", "approval_archive", "edit_approval"], "blocking": true, "status": "open", "priority": 1, "source_refs": ["U01"], "asked_in": ["A01"]},
+    {"id": "D03", "topic": "completion", "question": "归档成功后应实际保存什么：只记录“已归档”，保存当时内容的固定快照，还是移动或复制文件到归档目录？", "why": "决定实际提交效果、重复归档行为与权威效果验证目标。", "affects": ["archive_commit"], "blocking": true, "status": "open", "priority": 1, "source_refs": ["U01", "I01"], "asked_in": ["A01"]},
+    {"id": "D04", "topic": "resources", "question": "两项检查是否可并行，名额在什么范围共享，每项检查何时占用和归还名额？", "why": "决定活动实例、资源守恒、排队与真实重叠的验证。", "affects": ["content_check", "index_check", "processing_slots", "slots_content", "slots_index"], "blocking": true, "status": "open", "priority": 2, "source_refs": ["U01"], "depends_on": ["D03"]},
+    {"id": "D05", "topic": "authority", "question": "谁可以审批；同一资料有多条审批时，需要全部有效，还是任一条有效就可继续？", "why": "决定审批者规则、候选逐条求值及汇总条件。", "affects": ["approval_check", "approval_archive"], "blocking": true, "status": "open", "priority": 2, "source_refs": ["U01"], "depends_on": ["D02"]},
+    {"id": "D06", "topic": "consistency", "question": "排队或检查期间撤销审批、修改资料内容时，旧检查应如何结束；原审批和结果还能用于归档吗？", "why": "决定版本隔离、取消与实际停止、结果有效性和提交复核。", "affects": ["approval_revoked", "content_changed", "approval_check", "content_check", "index_check", "archive_commit"], "blocking": true, "status": "open", "priority": 2, "source_refs": ["U01"], "depends_on": ["D02", "D03"]},
+    {"id": "D07", "topic": "completion", "question": "内容检查和索引检查各自检验什么，失败后是否阻止归档，怎样重新处理？", "why": "没有明确的通过标准就不能建立独立业务验收。", "affects": ["content_check", "index_check", "content_archive", "index_archive"], "blocking": true, "status": "open", "priority": 3, "source_refs": ["U01"], "depends_on": ["D03"]},
+    {"id": "D08", "topic": "concurrency", "question": "检查是否必须等审批后才开始；名额或审批条件恢复后自动继续，还是由负责人再次发起？", "why": "决定流程启动门槛、等待条件及恢复触发。", "affects": ["archive_request", "approval_check", "content_check", "index_check", "processing_slots"], "blocking": true, "status": "open", "priority": 3, "source_refs": ["U01"], "depends_on": ["D02", "D04"]}
+  ],
+  "changes": []
+}

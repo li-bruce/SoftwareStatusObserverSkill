@@ -1,0 +1,875 @@
+{
+  "schema": "business-discovery/v1",
+  "goal": "模拟用户演练：以 Python 和 SQLite 实现本地团队资料归档，并用同一开发者图解释范围、审批、检查、等待及真实函数参数。",
+  "sources": [
+    {
+      "id": "U01",
+      "kind": "user",
+      "text": "我想做个本地的团队资料归档工具。资料放在项目的多层文件夹里，负责人能处理自己管理范围内的资料。归档前要有审批，还要做内容检查和索引检查；处理名额有限，两项检查可能需要等一等。审批会被撤销，资料内容也会修改。我想在开发时从图上看到为什么可以归档、为什么等着，以及关键函数实际用了什么参数。用 Python 和 SQLite，界面简单清楚，图要能拖动和逐层展开。",
+      "locator": "本独立会话初始模拟用户需求；来源是模拟演练，不是真人试用反馈"
+    },
+    {
+      "id": "I01",
+      "kind": "inference",
+      "text": "用资料、管理范围、审批、两个检查和归档效果构成候选依赖网；尚不能据此确定执行顺序、审批粒度、目录继承、失效处理或成功效果。",
+      "locator": "review/round-01/design.md；开发者候选理解"
+    },
+    {
+      "id": "A01",
+      "kind": "assistant",
+      "text": "1. 负责人管理“项目A”时，是否也能处理所有下级文件夹？如果某个下级文件夹另设负责人，上级负责人是否仍有权限？\n2. 审批针对什么对象：一份资料、这份资料的某个内容版本，还是一个文件夹及其下级资料？\n3. 归档成功后应实际保存什么：只记录“已归档”，保存当时内容的固定快照，还是移动或复制文件到归档目录？",
+      "locator": "review/round-01/dialogue.md；第一轮最终回复的三个实际问题"
+    },
+    {
+      "id": "U02",
+      "kind": "user",
+      "text": "我这里归档的是一份资料条目，文件夹只是分类。负责人只负责自己那个文件夹里直接放的资料，不自动管理更深的文件夹；下级文件夹按自己的负责人来判断。审批针对一份资料的一个内容版本，并且要对应具体项目和操作人。归档成功要在 SQLite 保存当时内容的固定快照和对应版本，同一份资料的同一版本不能重复生成归档记录。文件夹本身不归档，也不移动或删除原资料。",
+      "locator": "review/round-02/dialogue.md；模拟用户实际回答，不是真人试用"
+    },
+    {
+      "id": "U02C",
+      "kind": "user",
+      "text": "开发方案可以由你选择，也可以采用其他设计或编码方法；business-observer 是开发过程中必须同步维护状态机、源码映射、参数、探针与验证材料的一条支线，并不规定整个应用必须采用它的架构。继续根据实际未决业务问题自然提问，不把这次的直接负责规则推广到其他项目。请将本轮真实回答和后续处理记入 review。",
+      "locator": "review/round-02/dialogue.md；试验约束补充"
+    },
+    {
+      "id": "A02",
+      "kind": "assistant",
+      "text": "1. 同一版本有两条审批，一条被撤销、另一条仍有效时，是否仍允许归档？另外，谁可以发出审批？\n2. 两项检查是否各占一个名额、允许同时运行？这些名额是整个工具共享，还是每个项目各自拥有？\n3. 检查途中审批条件不再满足，或资料改成新版本时，要请求停止旧检查，还是让它跑完但禁止旧结果提交？新版本能否同时另开一次处理？",
+      "locator": "review/round-02/dialogue.md；第二轮最终回复的问题"
+    },
+    {
+      "id": "U03",
+      "kind": "user",
+      "text": "有一条仍有效的审批就可以；撤销后重新判断，不要因为最初那条撤销就直接把任务终止。没有有效审批时等着。审批人要是另一名审核员，不能自己给自己批；审批有截止时间，到期那一刻就无效。\n\n名额先按每次归档运行单独设置，两项检查各占一个，默认两个，也能改成一个来观察排队。它们可以同时运行，必须两项都通过才能提交。\n\n中途失去审批时让已经启动的检查正常结束，保留结果，但不提交；条件恢复后我点“继续”，再重新检查资格。内容改版则旧审批和旧检查结果不能用于新版本，旧运行保留可查且不能提交；新版本可以同时开一次新运行。别让新运行覆盖还没结束的旧运行。",
+      "locator": "review/round-03/dialogue.md；实际模拟用户回答"
+    },
+    {
+      "id": "A03",
+      "kind": "assistant",
+      "text": "1. 内容检查和索引检查分别检查哪些条件？检查失败后，是允许重试失败项，还是必须新开一次运行？\n2. 新运行是否必须有有效审批才能启动检查？只有一个名额时，第一项运行中审批失效，尚未启动的第二项是否要等你点击“继续”后再开始？\n3. 内容改版后，旧运行里尚未开始的检查直接作废、已启动的检查自然结束，同时保留全部记录且禁止提交，这样处理是否符合你的意思？",
+      "locator": "review/round-03/dialogue.md；本轮实际追问"
+    }
+  ],
+  "networks": [
+    {
+      "id": "archive-network",
+      "title": "资料归档的候选依赖",
+      "actors": [
+        "负责人",
+        "不同于操作人的审核员",
+        "本地归档工具"
+      ],
+      "trigger": "候选入口：负责人请求归档一份资料；与审批、检查的先后待确认。",
+      "outcome": "SQLite 保存一份资料某内容版本的固定快照，同资料同版本至多一条记录；不归档文件夹，不移动或删除原资料。",
+      "nodes": [
+        {
+          "id": "archive_request",
+          "label": "负责人发起归档",
+          "kind": "action",
+          "source_refs": [
+            "U01",
+            "I01"
+          ],
+          "model_nodes": [
+            "archive_request"
+          ]
+        },
+        {
+          "id": "document",
+          "label": "资料条目与内容版本",
+          "kind": "data",
+          "source_refs": [
+            "U01",
+            "U02"
+          ],
+          "model_nodes": [
+            "document"
+          ]
+        },
+        {
+          "id": "scope_check",
+          "label": "是否直接负责所在文件夹",
+          "kind": "condition",
+          "source_refs": [
+            "U02"
+          ],
+          "model_nodes": [
+            "scope_check"
+          ]
+        },
+        {
+          "id": "approval_check",
+          "label": "审批是否适用",
+          "kind": "condition",
+          "source_refs": [
+            "U01",
+            "U02",
+            "U03"
+          ],
+          "model_nodes": [
+            "approval_check"
+          ]
+        },
+        {
+          "id": "content_check",
+          "label": "内容检查",
+          "kind": "action",
+          "source_refs": [
+            "U01",
+            "U03"
+          ],
+          "model_nodes": [
+            "content_check"
+          ]
+        },
+        {
+          "id": "index_check",
+          "label": "索引检查",
+          "kind": "action",
+          "source_refs": [
+            "U01",
+            "U03"
+          ],
+          "model_nodes": [
+            "index_check"
+          ]
+        },
+        {
+          "id": "processing_slots",
+          "label": "每次运行独享名额",
+          "kind": "resource",
+          "source_refs": [
+            "U01",
+            "U03"
+          ],
+          "model_nodes": [
+            "processing_slots"
+          ]
+        },
+        {
+          "id": "archive_commit",
+          "label": "保存资料版本快照",
+          "kind": "effect",
+          "source_refs": [
+            "U02"
+          ],
+          "model_nodes": [
+            "archive_commit"
+          ]
+        },
+        {
+          "id": "approval_revoked",
+          "label": "撤销审批",
+          "kind": "event",
+          "source_refs": [
+            "U01",
+            "U03"
+          ],
+          "model_nodes": [
+            "approval_revoked"
+          ]
+        },
+        {
+          "id": "content_changed",
+          "label": "修改资料内容",
+          "kind": "event",
+          "source_refs": [
+            "U01",
+            "U02",
+            "U03"
+          ],
+          "model_nodes": [
+            "content_changed"
+          ]
+        },
+        {
+          "id": "folder_assignments",
+          "label": "当前文件夹的直接负责人",
+          "kind": "data",
+          "source_refs": [
+            "U02"
+          ],
+          "model_nodes": [
+            "folder_assignments"
+          ]
+        },
+        {
+          "id": "approval_target",
+          "label": "项目 · 操作人 · 资料 · 版本",
+          "kind": "data",
+          "source_refs": [
+            "U02"
+          ],
+          "model_nodes": [
+            "approval_target"
+          ]
+        },
+        {
+          "id": "archive_unique",
+          "label": "该资料版本是否已有归档",
+          "kind": "condition",
+          "source_refs": [
+            "U02"
+          ],
+          "model_nodes": [
+            "archive_unique"
+          ]
+        },
+        {
+          "id": "resume_run",
+          "label": "点击继续并重查资格",
+          "kind": "action",
+          "source_refs": [
+            "U03"
+          ],
+          "model_nodes": [
+            "resume_run"
+          ]
+        },
+        {
+          "id": "run_identity",
+          "label": "运行身份与内容版本",
+          "kind": "data",
+          "source_refs": [
+            "U03"
+          ],
+          "model_nodes": [
+            "run_identity"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "id": "request_scope",
+          "from": "archive_request",
+          "to": "scope_check",
+          "relation": "data",
+          "label": "判断发起人的管理范围",
+          "source_refs": [
+            "U01",
+            "I01"
+          ]
+        },
+        {
+          "id": "document_scope",
+          "from": "document",
+          "to": "scope_check",
+          "relation": "data",
+          "label": "资料所在目录",
+          "source_refs": [
+            "U01"
+          ],
+          "decision_refs": [
+            "D01"
+          ]
+        },
+        {
+          "id": "scope_archive",
+          "from": "scope_check",
+          "to": "archive_commit",
+          "relation": "guard",
+          "label": "仅所在文件夹直接负责人",
+          "source_refs": [
+            "U02"
+          ],
+          "decision_refs": [
+            "D01"
+          ]
+        },
+        {
+          "id": "approval_archive",
+          "from": "approval_check",
+          "to": "archive_commit",
+          "relation": "guard",
+          "label": "任一审批有效，提交时仍需适用",
+          "source_refs": [
+            "U01",
+            "U02",
+            "U03"
+          ],
+          "decision_refs": [
+            "D02",
+            "D05",
+            "D06"
+          ]
+        },
+        {
+          "id": "content_archive",
+          "from": "content_check",
+          "to": "archive_commit",
+          "relation": "guard",
+          "label": "内容检查通过",
+          "source_refs": [
+            "U01",
+            "U03"
+          ],
+          "decision_refs": [
+            "D07"
+          ]
+        },
+        {
+          "id": "index_archive",
+          "from": "index_check",
+          "to": "archive_commit",
+          "relation": "guard",
+          "label": "索引检查通过",
+          "source_refs": [
+            "U01",
+            "U03"
+          ],
+          "decision_refs": [
+            "D07"
+          ]
+        },
+        {
+          "id": "slots_content",
+          "from": "processing_slots",
+          "to": "content_check",
+          "relation": "resource",
+          "label": "本运行名额：内容检查占 1",
+          "source_refs": [
+            "U01",
+            "U03"
+          ],
+          "decision_refs": [
+            "D04"
+          ]
+        },
+        {
+          "id": "slots_index",
+          "from": "processing_slots",
+          "to": "index_check",
+          "relation": "resource",
+          "label": "本运行名额：索引检查占 1",
+          "source_refs": [
+            "U01",
+            "U03"
+          ],
+          "decision_refs": [
+            "D04"
+          ]
+        },
+        {
+          "id": "document_content",
+          "from": "document",
+          "to": "content_check",
+          "relation": "data",
+          "label": "本次运行的内容版本",
+          "source_refs": [
+            "U01",
+            "U03"
+          ],
+          "decision_refs": [
+            "D06"
+          ]
+        },
+        {
+          "id": "document_index",
+          "from": "document",
+          "to": "index_check",
+          "relation": "data",
+          "label": "被检查的索引",
+          "source_refs": [
+            "U01"
+          ],
+          "decision_refs": [
+            "D07"
+          ]
+        },
+        {
+          "id": "revoke_approval",
+          "from": "approval_revoked",
+          "to": "approval_check",
+          "relation": "event",
+          "label": "撤销后重新判断全部候选",
+          "source_refs": [
+            "U01",
+            "U03"
+          ],
+          "decision_refs": [
+            "D06"
+          ]
+        },
+        {
+          "id": "edit_document",
+          "from": "content_changed",
+          "to": "document",
+          "relation": "event",
+          "label": "修改内容",
+          "source_refs": [
+            "U01"
+          ]
+        },
+        {
+          "id": "edit_approval",
+          "from": "content_changed",
+          "to": "approval_check",
+          "relation": "data",
+          "label": "新版本不能沿用旧审批",
+          "source_refs": [
+            "U02",
+            "U03"
+          ],
+          "decision_refs": [
+            "D02",
+            "D06"
+          ]
+        },
+        {
+          "id": "assignments_scope",
+          "from": "folder_assignments",
+          "to": "scope_check",
+          "relation": "data",
+          "label": "直接负责关系",
+          "source_refs": [
+            "U02"
+          ],
+          "decision_refs": [
+            "D01"
+          ]
+        },
+        {
+          "id": "target_approval",
+          "from": "approval_target",
+          "to": "approval_check",
+          "relation": "data",
+          "label": "四个目标字段全部匹配",
+          "source_refs": [
+            "U02"
+          ],
+          "decision_refs": [
+            "D02"
+          ]
+        },
+        {
+          "id": "document_unique",
+          "from": "document",
+          "to": "archive_unique",
+          "relation": "data",
+          "label": "资料身份与内容版本",
+          "source_refs": [
+            "U02"
+          ],
+          "decision_refs": [
+            "D03"
+          ]
+        },
+        {
+          "id": "unique_archive",
+          "from": "archive_unique",
+          "to": "archive_commit",
+          "relation": "guard",
+          "label": "相同资料版本不重复建档",
+          "source_refs": [
+            "U02"
+          ],
+          "decision_refs": [
+            "D03"
+          ]
+        },
+        {
+          "id": "resume_approval",
+          "from": "resume_run",
+          "to": "approval_check",
+          "relation": "flow",
+          "label": "手动继续时重查",
+          "source_refs": [
+            "U03"
+          ]
+        },
+        {
+          "id": "resume_scope",
+          "from": "resume_run",
+          "to": "scope_check",
+          "relation": "flow",
+          "label": "重新检查资格",
+          "source_refs": [
+            "U03"
+          ]
+        },
+        {
+          "id": "run_content",
+          "from": "run_identity",
+          "to": "content_check",
+          "relation": "data",
+          "label": "所属运行与版本",
+          "source_refs": [
+            "U03"
+          ]
+        },
+        {
+          "id": "run_index",
+          "from": "run_identity",
+          "to": "index_check",
+          "relation": "data",
+          "label": "所属运行与版本",
+          "source_refs": [
+            "U03"
+          ]
+        },
+        {
+          "id": "run_slots",
+          "from": "run_identity",
+          "to": "processing_slots",
+          "relation": "data",
+          "label": "本运行独享容量",
+          "source_refs": [
+            "U03"
+          ]
+        },
+        {
+          "id": "edit_run",
+          "from": "content_changed",
+          "to": "run_identity",
+          "relation": "data",
+          "label": "旧运行保留；新版本另开",
+          "source_refs": [
+            "U03"
+          ]
+        },
+        {
+          "id": "run_archive",
+          "from": "run_identity",
+          "to": "archive_commit",
+          "relation": "guard",
+          "label": "旧版本运行不能提交",
+          "source_refs": [
+            "U03"
+          ]
+        }
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "id": "D01",
+      "topic": "authority",
+      "question": "负责人管理“项目A”时，是否也能处理所有下级文件夹？如果某个下级文件夹另设负责人，上级负责人是否仍有权限？",
+      "why": "决定目录继承、管理范围计算及越权反例。",
+      "affects": [
+        "scope_check",
+        "document_scope",
+        "scope_archive",
+        "folder_assignments"
+      ],
+      "blocking": true,
+      "status": "resolved",
+      "priority": 1,
+      "source_refs": [
+        "U01"
+      ],
+      "asked_in": [
+        "A01"
+      ],
+      "resolution": {
+        "kind": "user_answer",
+        "text": "负责人仅负责其文件夹直接放置的资料；不继承更深目录，下级目录按自己的负责人判断。",
+        "source_refs": [
+          "U02"
+        ]
+      },
+      "links": {
+        "requirements": [
+          "R02"
+        ],
+        "model_nodes": [
+          "scope_check",
+          "folder_assignments"
+        ],
+        "checks": [
+          "direct-manager-allowed",
+          "ancestor-manager-denied",
+          "child-uses-own-manager",
+          "scope-direct-only-declaration"
+        ]
+      }
+    },
+    {
+      "id": "D02",
+      "topic": "authority",
+      "question": "审批针对什么对象：一份资料、这份资料的某个内容版本，还是一个文件夹及其下级资料？",
+      "why": "决定审批检索、目录覆盖与内容改版后能否沿用审批。",
+      "affects": [
+        "approval_check",
+        "approval_archive",
+        "edit_approval",
+        "approval_target"
+      ],
+      "blocking": true,
+      "status": "resolved",
+      "priority": 1,
+      "source_refs": [
+        "U01"
+      ],
+      "asked_in": [
+        "A01"
+      ],
+      "resolution": {
+        "kind": "user_answer",
+        "text": "审批针对一份资料的一个内容版本，同时对应具体项目和操作人。",
+        "source_refs": [
+          "U02"
+        ]
+      },
+      "links": {
+        "requirements": [
+          "R03"
+        ],
+        "model_nodes": [
+          "approval_check",
+          "approval_target"
+        ],
+        "checks": [
+          "approval-target-exact",
+          "approval-wrong-project",
+          "approval-wrong-operator",
+          "approval-wrong-document",
+          "approval-wrong-version",
+          "approval-four-target-fields"
+        ]
+      }
+    },
+    {
+      "id": "D03",
+      "topic": "completion",
+      "question": "归档成功后应实际保存什么：只记录“已归档”，保存当时内容的固定快照，还是移动或复制文件到归档目录？",
+      "why": "决定实际提交效果、重复归档行为与权威效果验证目标。",
+      "affects": [
+        "archive_commit",
+        "archive_unique",
+        "document"
+      ],
+      "blocking": true,
+      "status": "resolved",
+      "priority": 1,
+      "source_refs": [
+        "U01",
+        "I01"
+      ],
+      "asked_in": [
+        "A01"
+      ],
+      "resolution": {
+        "kind": "user_answer",
+        "text": "归档资料条目，在 SQLite 保存固定内容快照和版本；同资料同版本不重复建档；文件夹不归档，不移动或删除原资料。",
+        "source_refs": [
+          "U02"
+        ]
+      },
+      "links": {
+        "requirements": [
+          "R08",
+          "R09",
+          "R10"
+        ],
+        "model_nodes": [
+          "archive_commit",
+          "archive_unique",
+          "document"
+        ],
+        "checks": [
+          "snapshot-content",
+          "snapshot-version",
+          "snapshot-stays-fixed",
+          "one-record-per-version",
+          "preserve-original-document",
+          "preserve-original-folder",
+          "archive-identity-key"
+        ]
+      }
+    },
+    {
+      "id": "D04",
+      "topic": "resources",
+      "question": "两项检查是否各占一个名额、允许同时运行？这些名额是整个工具共享，还是每个项目各自拥有？",
+      "why": "决定活动实例、共享容量、资源守恒和真实重叠；占用归还时点结合 D06 的停止语义继续明确。",
+      "affects": [
+        "content_check",
+        "index_check",
+        "processing_slots",
+        "slots_content",
+        "slots_index"
+      ],
+      "blocking": true,
+      "status": "resolved",
+      "priority": 2,
+      "source_refs": [
+        "U01"
+      ],
+      "depends_on": [
+        "D03"
+      ],
+      "asked_in": [
+        "A02"
+      ],
+      "resolution": {
+        "kind": "user_answer",
+        "text": "每次归档运行独享名额；两项检查各占一个，默认两个，可设为一个；允许并发，两个检查都通过才能提交。",
+        "source_refs": [
+          "U03"
+        ]
+      },
+      "links": {
+        "requirements": [
+          "R05",
+          "R04"
+        ],
+        "model_nodes": [
+          "processing_slots",
+          "content_check",
+          "index_check"
+        ],
+        "checks": [
+          "per-run-resource-declaration",
+          "both-checks-required"
+        ]
+      }
+    },
+    {
+      "id": "D05",
+      "topic": "authority",
+      "question": "同一版本有两条审批，一条被撤销、另一条仍有效时，是否仍允许归档？另外，谁可以发出审批？",
+      "why": "决定审批者规则、候选逐条求值及汇总条件。",
+      "affects": [
+        "approval_check",
+        "approval_archive"
+      ],
+      "blocking": true,
+      "status": "resolved",
+      "priority": 2,
+      "source_refs": [
+        "U01",
+        "U02"
+      ],
+      "depends_on": [
+        "D02"
+      ],
+      "asked_in": [
+        "A02"
+      ],
+      "resolution": {
+        "kind": "user_answer",
+        "text": "任一条仍有效审批即可；撤销后重新求值全部候选，没有有效审批则等待。审批者须为另一名审核员，不能自批；now 等于 deadline 时已失效。",
+        "source_refs": [
+          "U03"
+        ]
+      },
+      "links": {
+        "requirements": [
+          "R03"
+        ],
+        "model_nodes": [
+          "approval_check"
+        ],
+        "checks": [
+          "approval-any-declaration",
+          "approval-excludes-self",
+          "approval-expiry-exclusive"
+        ]
+      }
+    },
+    {
+      "id": "D06",
+      "topic": "consistency",
+      "question": "内容改版后，旧运行里尚未开始的检查直接作废、已启动的检查自然结束，同时保留全部记录且禁止提交，这样处理是否符合你的意思？",
+      "why": "决定新旧版本运行隔离、停止请求和实际停止的区别、旧结果提交保护。",
+      "affects": [
+        "approval_revoked",
+        "content_changed",
+        "approval_check",
+        "content_check",
+        "index_check",
+        "archive_commit"
+      ],
+      "blocking": true,
+      "status": "open",
+      "priority": 2,
+      "source_refs": [
+        "U01",
+        "U02",
+        "U03"
+      ],
+      "depends_on": [
+        "D02",
+        "D03"
+      ],
+      "asked_in": [
+        "A02",
+        "A03"
+      ],
+      "note": "U03 已确认审批失效时已启动检查自然结束并保留结果，手动继续重新检查资格；内容改版使旧运行不可提交且不能复用到新版本，新旧运行独立可查。仍需明确改版时旧活动如何结束，故保持 open。"
+    },
+    {
+      "id": "D07",
+      "topic": "completion",
+      "question": "内容检查和索引检查分别检查哪些条件？检查失败后，是允许重试失败项，还是必须新开一次运行？",
+      "why": "没有明确的通过标准就不能建立独立业务验收。",
+      "affects": [
+        "content_check",
+        "index_check",
+        "content_archive",
+        "index_archive"
+      ],
+      "blocking": true,
+      "status": "open",
+      "priority": 3,
+      "source_refs": [
+        "U01"
+      ],
+      "depends_on": [
+        "D03"
+      ],
+      "asked_in": [
+        "A03"
+      ],
+      "note": "U03 已确认两项均通过才能提交；具体检查条件与失败后重试范围未答。"
+    },
+    {
+      "id": "D08",
+      "topic": "concurrency",
+      "question": "新运行是否必须有有效审批才能启动检查？只有一个名额时，第一项运行中审批失效，尚未启动的第二项是否要等你点击“继续”后再开始？",
+      "why": "决定流程启动门槛、等待条件及恢复触发。",
+      "affects": [
+        "archive_request",
+        "approval_check",
+        "content_check",
+        "index_check",
+        "processing_slots"
+      ],
+      "blocking": true,
+      "status": "open",
+      "priority": 3,
+      "source_refs": [
+        "U01"
+      ],
+      "depends_on": [
+        "D02",
+        "D04"
+      ],
+      "asked_in": [
+        "A03"
+      ],
+      "note": "U03 已确认失去审批后需手动继续并重查；新运行和未启动活动的审批门槛仍待答。"
+    },
+    {
+      "id": "D09",
+      "topic": "resources",
+      "blocking": true,
+      "status": "open",
+      "priority": 3,
+      "source_refs": [
+        "U03"
+      ],
+      "affects": [
+        "processing_slots"
+      ],
+      "depends_on": [
+        "D04"
+      ],
+      "question": "名额是在创建运行时选定，还是允许对已经开始的运行实时修改？",
+      "why": "决定运行参数是否固定及活动占用中修改容量的行为；U03 尚未明确变更时点。"
+    }
+  ],
+  "changes": []
+}

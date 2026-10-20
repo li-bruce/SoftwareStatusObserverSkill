@@ -1,0 +1,22 @@
+{
+  "kind": "agent-executed browser tasks with synthetic data; not a human usability study",
+  "build_id": "6eb25ba09b2db5caeacd20bbbfc309b9f4d35dfccf59c1f9a293558d0caf4578",
+  "application": "http://127.0.0.1:8824/",
+  "graph": "http://127.0.0.1:8824/graph",
+  "tasks": [
+    {"task": "Without approval create a run", "result": "Both checks stayed unstarted, 2/2 capacity available, explicit wait reason and Continue button."},
+    {"task": "Approve the waiting run, then Continue", "result": "Approval alone left the run waiting. Continue started two real checks; both passed and one immutable archive appeared.", "screenshot": "application.png"},
+    {"task": "Search hidden content_version nodes", "result": "Results showed owner function, input/output and type. Selecting content check expanded only its ancestors and retained the other expanded group."},
+    {"task": "Read the selected parameter and loaded source", "result": "Actual content_version=1, policy.py:64 and build 6eb25ba0 visible together; entry and return fields merged only with complete matching call identity.", "screenshot": "parameter-source.png"},
+    {"task": "Inspect two approval candidates after one revocation", "result": "Both candidates remained visible; revoked candidate not_revoked=false/allowed=false; alternative true; aggregate allowed=true.", "screenshot": "approval-alternatives.png"},
+    {"task": "Replay capacity-one step 2", "result": "Recorded phase checking; content running, index waiting, no future return value. Missing parameter evidence remained unknown.", "screenshot": "history-wait.png"},
+    {"task": "Rename, annotate, pin and drag business node", "result": "Display name 本次双检查 and note saved. Drag from (701,498) to (922,490), then reload retained the visible position, pin, label, note and focus.", "screenshots": ["layout-dragged.png", "layout-restored.png"]},
+    {"task": "Switch algorithm and undo layout", "result": "Hierarchical layout executed through real ELK worker. Undo became enabled and returned previous geometry; fixed node and annotation remained."},
+    {"task": "Change source while old process is running", "result": "Candidate process displayed a source/loading mismatch banner. Accepted process displayed code version 6eb25ba0."}
+  ],
+  "limits": [
+    "These are finite browser tasks and source/core tests, not all user journeys or scheduling interleavings.",
+    "Collapsed relation labels can still become crowded with several relation types; expand and use hierarchical layout to inspect them.",
+    "Browser local storage preserves view preferences; selection of historical case/time resets to current operation on reload."
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "rules": [{
+    "id": "version-match", "requirement": "R1", "category": "parameter",
+    "claim": "本次授权只适用于相同参数版本",
+    "basis": "requirements.md 中已确定的参数版本约定",
+    "node": "permission", "source": {"path": "app/policy.py", "symbol": "allowed"},
+    "parameters": {"request": "dict"}, "returns": "bool"
+  }],
+  "checks": [{
+    "id": "current-version", "rule": "version-match", "case": "allowed",
+    "phase": "decision", "count": {"min": 1},
+    "fields": [
+      {"path": ["inputs", "version"], "type": "integer", "min": 1,
+       "compare": {"path": ["inputs", "grant_version"], "op": "eq"}},
+      {"path": ["outputs", "allowed"], "type": "boolean", "equals": true}
+    ]
+  }]
+}

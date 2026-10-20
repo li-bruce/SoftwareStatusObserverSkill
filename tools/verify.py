@@ -19,6 +19,8 @@ def main():
     run(ROOT, 'tests/test_ast_fingerprint.py')
     run(ROOT, 'tests/test_requirements_dialogue.py')
     run(ROOT, 'tests/test_clarification_gate.py')
+    run(ROOT, 'tests/test_whitebox.py')
+    run(ROOT, 'tests/test_focus_bundle.py')
     prepare()  # Refuse stale source/review before any re-verification.
     run(EXAMPLE, 'tooling/dev.py', 'verify')
     run(EXAMPLE, 'tooling/dev.py', 'accept')
@@ -34,7 +36,20 @@ def main():
         assert json.loads(result.stdout) == {'state': 'completed', 'effects': 1}, result.stdout
     run(ROOT, 'tests/test_installation.py')
     run(ROOT, 'tests/test_runtime_http.py')
-    print('PASS: clarification, code/graph sync, business scenarios, graph history, HTTP runtime, installation and core package.')
+    run(ROOT, 'tools/archive_demo.py', '--verify')
+    archive_example = ROOT/'examples/team-archive'
+    archive_package = 'dist/core-'+uuid.uuid4().hex[:8]+'.zip'
+    run(archive_example, 'observer_runtime/architecture_guard.py', 'package',
+        '--root', '.', '--out', archive_package)
+    with tempfile.TemporaryDirectory(dir=ROOT/'.validation') as folder:
+        with zipfile.ZipFile(archive_example/archive_package) as archive:
+            assert not any(n.startswith(('observer_runtime/', 'integrations/')) for n in archive.namelist())
+            archive.extractall(folder)
+        # This recorded independent smoke test imports only the extracted business core.
+        subprocess.run([sys.executable, '-I', '-B', '-X', 'utf8',
+                        str(archive_example/'review/round-04/core_export_smoke.py'), folder],
+                       cwd=folder, check=True)
+    print('PASS: clarification, code/graph sync, business scenarios, graph history, HTTP runtime, installation, core package and independent archive example.')
 
 
 if __name__ == '__main__':

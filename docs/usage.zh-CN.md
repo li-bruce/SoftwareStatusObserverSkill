@@ -14,17 +14,17 @@
 再开发程序，并让我能从运行图看到判断条件、关键参数和对应函数。
 ```
 
-Skill 应先整理谁触发什么操作、涉及哪些对象、成功或等待的条件，再询问会改变执行结果的缺失规则。已经回答的内容直接引用；尚未回答的问题保留为未决，不把 AI 的建议当成用户决定。完整记录见 [discovery.example.json](../skills/business-observer/assets/discovery.example.json)。`<skill>` 表示安装后的 `business-observer` 目录：
+Skill 应先整理谁触发什么操作、涉及哪些对象、成功或等待的条件，用局部图与你讨论，再询问会改变结果的缺失规则。已有答案直接引用，未回答的问题保持未决。
 
-```text
-python <skill>/scripts/requirements_dialogue.py check --file discovery.json
-```
-
-将示例复制为 `discovery.json` 时，D1 故意保留为未决问题；此时检查返回非零属于预期，需要取得回答并更新记录。
-
-涉及权限、提交、等待或恢复的关键问题未解决时，已接入的变更检查会拒绝验收。独立脚本只能校验记录和关联，问题是否完整、回答是否理解正确仍需审阅。
+明确后，按项目原有方式继续开发。AI 自行维护模型、状态机、源码映射、探针和检查材料；你不需要填写内部记录或手动同步。每轮结束打开更新图，查看变化、展开内部关系、检索关键参数和函数，再提出下一步修改。
 
 ## 看懂运行图
+
+可采用任何方案设计、规定的开发流程或编码 Skill。business-observer 作为必需支线贯穿整个过程：开始实现前保存独立预期和关键参数要求；编码中绑定真实函数并接入探针；每个功能完成时执行检查。其他编码 Skill 可以负责实现，但需要遵守同一模型、参数和验证约定。
+
+AI 会接入白盒检查，核对核心函数、参数类型、真实输入与结果及运行版本。中间记录保存在项目内，需要排查接入问题时可以查看[全过程开发说明](../skills/business-observer/references/continuous-development.md)。
+
+对话中可让 AI：“从完整图提取我正在修改的部分，保留范围外的条件和源码关联，先展示给我确认。”工具输出 JSON 与 Markdown；显示在对话中的静态图不等于可交互页面。共享或换环境使用[局部图与导出命令](../skills/business-observer/references/focus-and-sharing.md)。
 
 | 层次 | 要回答的问题 |
 |---|---|
@@ -42,9 +42,13 @@ python <skill>/scripts/requirements_dialogue.py check --file discovery.json
 
 这些偏好保存在当前浏览器、同一网站地址下；清除网站数据会删除它们，不会自动同步到其他设备。保存失败时页面明确提示。
 
-布局与样式依赖均开源：PixiJS 为 MIT、ELK.js 为 EPL-2.0，自写 JS/CSS 为 MIT；没有引入 yFiles 代码，见 [第三方声明](../THIRD_PARTY_NOTICES.md)。规则权限的表达方案见 [ReBAC 图设计](../skills/business-observer/references/rebac-graph.md)，该部分当前是设计分析。
+搜索名称、函数、参数或备注，可找到收起层级中的节点。结果会注明所属节点、输入／输出和类型；选中后展开相关层级并定位，其他展开区域和位置保留。参数节点的“源码”会打开采集该参数的函数。
 
-## 修改代码时
+布局与样式依赖均开源：PixiJS 为 MIT、ELK.js 为 EPL-2.0，自写 JS/CSS 为 MIT；没有引入 yFiles 代码，见 [第三方声明](../THIRD_PARTY_NOTICES.md)。规则权限的表达方案见 [ReBAC 图设计](../skills/business-observer/references/rebac-graph.md)，当前示例已有真实子条件采集；通用 ReBAC 引擎适配仍待接入。
+
+## 接入维护者：内部同步命令
+
+以下是 AI 自动执行或维护者排障时使用的步骤，不是日常用户的操作要求。新项目由 AI 在 `sync.json` 配置 `"whitebox": "whitebox.json"`，并将检查接入项目现有入口。安装 Skill 不会自动监听所有外部编辑；未经过检查的改动不能显示为已同步。
 
 在示例目录 `examples/delivery` 中执行：
 

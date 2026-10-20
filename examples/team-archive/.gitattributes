@@ -1,0 +1,21 @@
+# Project authored sources and protected inputs have stable LF bytes.
+* text eol=lf
+*.sqlite3 -text
+*.zip -text
+*.png -text
+# Pinned runtime and untouched vendor assets retain their original raw hashes.
+observer_runtime/** -text
+static/graph/pixi.min.js -text
+static/graph/elk.bundled.js -text
+static/graph/elk-worker.min.js -text
+static/graph/PIXI-LICENSE.txt -text
+static/graph/ELK-LICENSE.md -text
+static/graph/layout.js -text
+static/graph/index.html -text
+# Recorded evidence and receipts are preserved byte-for-byte.
+.stategraph/** -text
+review/** -text
+# Keep the trial's unchanged package markers byte-identical in Git exports.
+archive_app/__init__.py -text
+integrations/__init__.py -text
+tooling/__init__.py -text

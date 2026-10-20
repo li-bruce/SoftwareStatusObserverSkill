@@ -1,0 +1,28 @@
+{
+  "candidate_id": "2078cc1a2a5d94307d8aa77f89d0d1eee4d94621e8b112eeaa3a770b2ec5aa93",
+  "decisions": {
+    "business": {
+      "action": "unchanged",
+      "reason": "Only AGENTS.md changed among tracked inputs: the public example now points to the repository Skill and portable validation commands. All 63 business expectations and the business implementation remain byte-identical to the independent final trial."
+    },
+    "state_machine": {
+      "action": "unchanged",
+      "reason": "Application lifecycle, activity instances, capacity ownership, waiting and manual resumption are unchanged. Run all 120 scenario/mode combinations again from the copied project."
+    },
+    "abstraction": {
+      "action": "unchanged",
+      "reason": "Model, stable node identities, current/historical configuration labels, source snapshots and layout identity are unchanged. Packaging guidance does not change the graph."
+    },
+    "probes": {
+      "action": "unchanged",
+      "reason": "Source-bound fields, actual decisions and event identities are unchanged. Re-run the six whitebox rules and eleven checks; do not accept copied evidence in place of execution."
+    }
+  },
+  "excluded_symbols": {},
+  "requirement_changes": {},
+  "publication": {
+    "from_candidate": "bc2c0f65658e721d78f9404ed2cbf2d0aabf5f55686ec2c745df60965902a530",
+    "expected_unchanged_build": "e7e5f89d72093f5d99d37f9bb1f19a8b978a31e4cfecaced8a225b8409b3edc3",
+    "reason": "Public release is authorized by the repository owner in the originating conversation. The independent trial itself did not publish externally."
+  }
+}

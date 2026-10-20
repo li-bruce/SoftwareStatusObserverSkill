@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "scan": [
+    "archive_app",
+    "integrations",
+    "observer_runtime",
+    "run.py",
+    "tooling",
+    "validate.py"
+  ],
+  "layers": {
+    "business": {
+      "paths": [
+        "archive_app"
+      ],
+      "allows": [
+        "business"
+      ],
+      "reject_dynamic": true
+    },
+    "integration": {
+      "paths": [
+        "integrations",
+        "run.py"
+      ],
+      "allows": [
+        "business",
+        "observer",
+        "integration"
+      ]
+    },
+    "observer": {
+      "paths": [
+        "observer_runtime"
+      ],
+      "allows": [
+        "observer"
+      ]
+    },
+    "tooling": {
+      "paths": [
+        "tooling",
+        "validate.py"
+      ],
+      "allows": [
+        "business",
+        "integration",
+        "observer",
+        "tooling"
+      ]
+    }
+  },
+  "managed_paths": [
+    "observer_runtime"
+  ],
+  "managed_hashes": {
+    "observer_runtime/LICENSE.txt": "41f4bfe9aa8790612dd555d71a9e95fbf12c9f0e84bc6ce232a0aae3af3e2ba3",
+    "observer_runtime/__init__.py": "9c75aa19265cd50dd4e0456ca4321ea04570eab22149ded34951187b72dd11a8",
+    "observer_runtime/architecture_guard.py": "ff82147f8ed61e7d7473bbc59a3cedacf546117c71e397d0cf032a83270a852a",
+    "observer_runtime/behavior_model.py": "37af8d5926a29eb525773048f3e5e7190e4b7e2239a0a8f858108593924c16b4",
+    "observer_runtime/change_sync.py": "916f08a14612142fd81c8a25208d952b7ae27ae1bac1e45146e354444f03b2b8",
+    "observer_runtime/code_structure.py": "01dad9cda1d248150301598fea1186e698c2f3ca62026f5735befbcb74c9c681",
+    "observer_runtime/execution_contract.py": "9502b2d348bb8ee00c05288ca3d064d151365292fdef597c156c178871635b78",
+    "observer_runtime/focus_graph.py": "ec366eebee41e60dea83f16acd89b334546b58509a174034afa7736b9b31a106",
+    "observer_runtime/model_tool.py": "47b80a2a5d376ef81f34cd91cb050ce58714c3f85ed1212a842c2081bca0d291",
+    "observer_runtime/origin.json": "8415994878a999e4e30c79dddaf5c615e77038cdda58a4922f8ea7dab18cf902",
+    "observer_runtime/probe.py": "6e12b7cb0d89278b9562435e20eefa339993a1114720dd0f8dac15626d011807",
+    "observer_runtime/project_bundle.py": "2a05e4eda5946b413c4d4a72b8bd29718705706a616d2bb48618205926171f5c",
+    "observer_runtime/requirements_dialogue.py": "88a0603db9231a64e73b91db42ea8da2ef42eaffb2b4b309ec86f3b33d627f12",
+    "observer_runtime/semantic_probe.py": "a081e8dfdecf117858cf0d77eb51b4fa2eb717ca421d1473f0ad9058fd4413bb",
+    "observer_runtime/statechart_contract.py": "513689fece1199c6d07954028c1609c5560dcbb80f444be94ac67c0ef0882a43",
+    "observer_runtime/viewer_server.py": "10fa75d9a93662ce07cac457db46d65ecc3fa821a5d4a1a96ec543c7ec862c30",
+    "observer_runtime/whitebox_contract.py": "ea6f97242402e93776d1958e11da85e1093a667098527818508cba1c09f0c6de",
+    "observer_runtime/worknet_contract.py": "19a70d82022f2c2af675f64e7d955b13f5f543949b40c7813b657cd96b0e8193"
+  },
+  "regenerations": [
+    {
+      "reason": "Pinned candidate-7 runtime verified byte-identical; project adapter boundaries reviewed",
+      "changed": [
+        "observer_runtime/LICENSE.txt",
+        "observer_runtime/__init__.py",
+        "observer_runtime/architecture_guard.py",
+        "observer_runtime/behavior_model.py",
+        "observer_runtime/change_sync.py",
+        "observer_runtime/code_structure.py",
+        "observer_runtime/execution_contract.py",
+        "observer_runtime/focus_graph.py",
+        "observer_runtime/model_tool.py",
+        "observer_runtime/origin.json",
+        "observer_runtime/probe.py",
+        "observer_runtime/project_bundle.py",
+        "observer_runtime/requirements_dialogue.py",
+        "observer_runtime/semantic_probe.py",
+        "observer_runtime/statechart_contract.py",
+        "observer_runtime/viewer_server.py",
+        "observer_runtime/whitebox_contract.py",
+        "observer_runtime/worknet_contract.py"
+      ]
+    },
+    {
+      "reason": "Update provenance to candidate-8; runtime scripts remain byte-identical",
+      "changed": [
+        "observer_runtime/origin.json"
+      ]
+    }
+  ],
+  "core_layers": [
+    "business"
+  ],
+  "core_resources": [
+    "requirements.txt"
+  ],
+  "core_include": [
+    "archive_app",
+    "requirements.txt"
+  ]
+}

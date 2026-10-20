@@ -10,6 +10,22 @@ function cleanText(value,limit,multiline=false){
 }
 export function annotationFor(state,id){return state.annotations?.[id]||{label:'',note:''};}
 export function displayName(node,state){return annotationFor(state,node.id).label||node.label;}
+// Search the complete model, including nodes hidden by a collapsed parent.
+export function searchNodes(all,state,query,limit=20){
+  const normalize=value=>String(value||'').normalize('NFKC').toLocaleLowerCase();
+  const terms=normalize(query).trim().split(/\s+/).filter(Boolean);if(!terms.length)return [];
+  return [...all.values()].map(node=>{
+    const annotation=annotationFor(state,node.id),name=displayName(node,state);
+    const primary=normalize([name,node.label,node.id].join(' '));
+    const haystack=normalize([primary,annotation.note,node.kind,node.field,node.fieldType,node.source?.path,node.source?.symbol].join(' '));
+    return {node,name,score:terms.every(term=>primary.includes(term))?0:1,match:terms.every(term=>haystack.includes(term))};
+  }).filter(entry=>entry.match).sort((a,b)=>a.score-b.score||a.node.id.localeCompare(b.node.id)).slice(0,limit);
+}
+export function ancestorsToReveal(all,id){
+  const parents=[],seen=new Set([id]);let parent=all.get(id)?.parent;
+  while(parent&&all.has(parent)&&!seen.has(parent)){parents.push(parent);seen.add(parent);parent=all.get(parent)?.parent;}
+  return parents;
+}
 export function setAnnotation(state,id,value){
   if(typeof id!=='string'||!id)return;
   const annotation={label:cleanText(value?.label,80),note:cleanText(value?.note,500,true)};

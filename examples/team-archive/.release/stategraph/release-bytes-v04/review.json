@@ -1,0 +1,12 @@
+{
+  "candidate_id": "befadbdd157ea321dbc4039c9e793db228255e79db68c06faa87c0c20b44c384",
+  "decisions": {
+    "business": {"action": "unchanged", "reason": "Only .gitattributes changed. Preserve the original three package marker files instead of allowing the nested text rule to normalize their CRLF bytes. Actual business files and all independent expectations remain unchanged."},
+    "state_machine": {"action": "unchanged", "reason": "Lifecycle, activity execution, resource ownership and transitions are unchanged. Repeat the full runtime verification from the published bytes."},
+    "abstraction": {"action": "unchanged", "reason": "No model, source mapping or stable node identity changed. The original build must remain e7e5f89d72093f5d99d37f9bb1f19a8b978a31e4cfecaced8a225b8409b3edc3."},
+    "probes": {"action": "unchanged", "reason": "Probe implementations, event fields and whitebox expectations are unchanged; repeat all actual parameter and decision checks."}
+  },
+  "excluded_symbols": {},
+  "requirement_changes": {},
+  "publication_failure": "The first full Git export was rejected because the nested .gitattributes overrode the root rule and normalized archive_app/__init__.py. Its original CRLF bytes are now explicitly preserved in the nested rules; no fingerprints or expected outcomes were rewritten."
+}

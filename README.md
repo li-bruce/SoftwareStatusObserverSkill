@@ -1,6 +1,6 @@
 # Software Status Observer Skill
 
-[English](README.en.md) · [安装与使用](docs/usage.zh-CN.md) · [运行示例](examples/delivery/README.md)
+[English](README.en.md) · [安装与使用](docs/usage.zh-CN.md) · [运行示例](examples/delivery/README.md) · [独立开发演练](docs/review/v0.4.0/README.md)
 
 **在 Vibe Coding 中，帮助开发者看懂和调试 AI 生成的程序。**
 
@@ -14,6 +14,9 @@
 - 按运行和参数版本回看状态，区分当前事实、旧记录和缺失信息。
 - 在同一张节点图中查看业务、函数和状态；拖动并固定节点，使用层次或关系布局。刷新后恢复手动布局。
 - 修改节点的显示名称和备注，保留源码身份；刷新、折叠再展开后恢复个人标注与观察层次。
+- 搜索函数、参数、名称或备注，直接定位到收起层级中的节点。
+
+用户可以采用任何设计、框架和编码流程。本 Skill 是其中必须维护的观察与验证支线：随开发接入应用状态机、源码映射、关键参数和探针，再核对实际运行。
 
 Skill 会主动询问影响权限、状态和执行结果的模糊需求。修改代码时，检查图、状态机、探针和测试是否同步。上层结构来自需求理解，局部程序关系来自 Python AST，运行状态来自实际执行。
 
@@ -23,7 +26,7 @@ Skill 会主动询问影响权限、状态和执行结果的模糊需求。修�
 
 ```text
 使用 $skill-installer，从以下地址安装 business-observer：
-https://github.com/li-bruce/SoftwareStatusObserverSkill/tree/v0.3.0/skills/business-observer
+https://github.com/li-bruce/SoftwareStatusObserverSkill/tree/v0.4.0/skills/business-observer
 ```
 
 也可以克隆仓库后安装到指定项目：
@@ -38,10 +41,11 @@ python tools/install_skill.py --project /path/to/your-project
 
 ```text
 使用 $business-observer 开发这个功能：……
-先梳理业务链和状态，询问会影响执行结果的未明确规则。
-编码时同步维护分层图、关键函数和参数、真实状态机及探针。
-交付前检查同步情况，并用实际运行解释成功、等待和失败路径。
+先用图帮我理清业务和状态；开发方案按本项目的要求执行。
+开发中自行维护图和检查，完成后让我查看变化和运行结果。
 ```
+
+日常只需描述需求、回答关键业务问题和查看图。AI 负责中间的源码映射、探针、同步与验证；无需逐步操作内部文件或命令。安装 Skill 本身不会在后台监听所有编辑器，AI 会在接入项目时配置相应检查入口。
 
 ## 运行示例
 
@@ -62,7 +66,17 @@ python tools/demo.py
 
 示例使用合成文本和本地 SQLite。图约每 400 ms 更新；检查刻意放慢以方便观察。完整操作见[示例说明](examples/delivery/README.md)。
 
+另一个[资料归档示例](examples/team-archive/README.md)是在新会话中从需求开始开发的，保留了提问、实现、发现问题、修复和增加大小上限的全过程：
+
+```bash
+python tools/archive_demo.py --port 8824
+```
+
+打开[操作台](http://127.0.0.1:8824/)与[开发者图](http://127.0.0.1:8824/graph)。审查材料包含首版与修改后的图、真实参数、截图和复现命令；其中需求方由 AI 模拟，明确区别于真人使用测试。
+
 ## 项目内容
+
+v0.4.0 增加贯穿开发过程的白盒约定、实际参数与判断检查、带边界的局部图提取，以及显式文件清单导出。设计依据见[路线与关系设计](docs/design/roadmap.zh-CN.md)，可运行命令见[全过程开发](skills/business-observer/references/continuous-development.md)和[局部图与共享](skills/business-observer/references/focus-and-sharing.md)。
 
 | 目录 | 内容 |
 |---|---|
@@ -70,6 +84,7 @@ python tools/demo.py
 | `examples/delivery/app/` | 示例自己的状态机、并发活动和业务代码 |
 | `examples/delivery/integrations/` | 可选观测接入和页面源文件 |
 | `examples/delivery/observer_generated/` | 生成的图、页面和运行库副本 |
+| `examples/team-archive/` | 独立会话开发的资料归档程序及两轮验证记录 |
 | `tests/`、`tools/` | 安装、发布检查和回归测试 |
 
 ## 验证与边界
@@ -80,7 +95,7 @@ python tools/verify.py
 
 检查包括需求澄清、权限和版本反例、并发与资源等待、旧新运行隔离、图回看、观测开启/关闭/故障时的结果一致性，以及剔除观测层后的核心包运行。修改记录与验收流程见[使用说明](docs/usage.zh-CN.md)。
 
-首版提供 Python 参考实现，Skill 和示例界面以中文为主。其他语言需要对应的静态分析和运行适配。图覆盖明确选取的业务路径与内部活动；不会采集全部函数局部变量。检查通过不等于证明整个软件或权限系统正确。
+当前提供 Python 参考实现，Skill 和示例界面以中文为主。其他语言需要对应的静态分析和运行适配。图覆盖明确选取的业务路径与内部活动；不会采集全部函数局部变量。检查通过不等于证明整个软件或权限系统正确。
 
 当前图支持查看和下钻；执行仍通过示例操作页。图上修改节点并控制程序尚未实现。示例用于本地开发，不提供生产部署、用户认证或崩溃后工作线程恢复。
 

@@ -1,0 +1,73 @@
+{
+  "candidate_id": "aec07a605ef85fd691d5ed15654571c9179fbcd19bd4124a5679ce69ce8c8056",
+  "decisions": {
+    "business": {
+      "action": "updated",
+      "reason": "实现 U01-U04 / R01-R13 的当前目录直接负责人、另一审核员的完整目标版本审批、严格期限、独立运行、同次双检查、恢复/取消/改版及唯一快照事务。保留原始独立预期。"
+    },
+    "state_machine": {
+      "action": "updated",
+      "reason": "应用自身 transitions 状态机与 activities/resources/join 事务记录作为唯一执行状态；每次实际线程开始和结束保存配置，旧新运行独立。"
+    },
+    "abstraction": {
+      "action": "updated",
+      "reason": "保留原业务 ID，增加提交前权威读、实际 worker/恢复/目录/审批命令映射，并从 AST 生成局部函数参数；业务分组和静态结构/实际事实分开。"
+    },
+    "probes": {
+      "action": "updated",
+      "reason": "记录真实候选判断、直接关系、检查输入摘要/结果及提交后效果；同 call 合并采集字段，历史帧首个精确边界，不借未来 disposition。仅捕获必要字段，观测故障隔离。"
+    }
+  },
+  "excluded_symbols": {
+    "archive_app/ports.py::TracePort": "中立可选输出端口，不作业务判定；关闭不构造载荷、接收器抛错不传播，规则测试及 on/off/fault 场景验证。类与方法作为观测边界分类，不冒充业务步骤。",
+    "archive_app/ports.py::TracePort.__init__": "中立可选输出端口，不作业务判定；关闭不构造载荷、接收器抛错不传播，规则测试及 on/off/fault 场景验证。类与方法作为观测边界分类，不冒充业务步骤。",
+    "archive_app/ports.py::TracePort.record": "中立可选输出端口，不作业务判定；关闭不构造载荷、接收器抛错不传播，规则测试及 on/off/fault 场景验证。类与方法作为观测边界分类，不冒充业务步骤。",
+    "archive_app/ports.py::no_trace": "中立可选输出端口，不作业务判定；关闭不构造载荷、接收器抛错不传播，规则测试及 on/off/fault 场景验证。类与方法作为观测边界分类，不冒充业务步骤。",
+    "archive_app/service.py::ArchiveService": "服务容器保存锁、时钟、真实线程及可选输出端口。具体业务由已映射命令和 evaluate/advance/worker/commit 节点承担；execution_version 仅记录创建构建，不参与权限。",
+    "archive_app/service.py::ArchiveService.__init__": "服务容器保存锁、时钟、真实线程及可选输出端口。具体业务由已映射命令和 evaluate/advance/worker/commit 节点承担；execution_version 仅记录创建构建，不参与权限。",
+    "archive_app/service.py::ArchiveService.close": "调度与关停包装实际 advance/tick，不另造状态；关闭等待真实线程。核心场景通过受控真实线程检验，浏览器服务以实际定时调度执行。无限调度集合未证明。",
+    "archive_app/service.py::ArchiveService.start_scheduler": "调度与关停包装实际 advance/tick，不另造状态；关闭等待真实线程。核心场景通过受控真实线程检验，浏览器服务以实际定时调度执行。无限调度集合未证明。",
+    "archive_app/service.py::ArchiveService.start_scheduler.loop": "调度与关停包装实际 advance/tick，不另造状态；关闭等待真实线程。核心场景通过受控真实线程检验，浏览器服务以实际定时调度执行。无限调度集合未证明。",
+    "archive_app/storage.py::ArchiveStore": "SQLite 连接和建表边界。唯一(document_id, content_version)约束承接 R13，try_commit 事务和并发重复用例验证真实记录。SQL 未伪装成 AST 全量数据流。",
+    "archive_app/storage.py::ArchiveStore.__init__": "SQLite 连接和建表边界。唯一(document_id, content_version)约束承接 R13，try_commit 事务和并发重复用例验证真实记录。SQL 未伪装成 AST 全量数据流。",
+    "archive_app/storage.py::ArchiveStore.bump": "权威关系修订号更新，被审批/目录/内容命令在实际事务中调用；读取依据在 authority_read/evaluate 参数中显示。",
+    "archive_app/storage.py::ArchiveStore.connect": "SQLite 连接和建表边界。唯一(document_id, content_version)约束承接 R13，try_commit 事务和并发重复用例验证真实记录。SQL 未伪装成 AST 全量数据流。",
+    "archive_app/storage.py::ArchiveStore.get_run": "按独立运行 ID 读写完整配置的持久化助手，包含版本/活动/资源/结果；在实际业务节点下折叠，edit_overlap/cancel_one_of_two/restart 和执行契约验证作用范围。",
+    "archive_app/storage.py::ArchiveStore.save_run": "按独立运行 ID 读写完整配置的持久化助手，包含版本/活动/资源/结果；在实际业务节点下折叠，edit_overlap/cancel_one_of_two/restart 和执行契约验证作用范围。",
+    "archive_app/storage.py::ArchiveStore.seed": "仅初始化明确标注的本地合成资料和人员；不是生产身份或真实权限来源，独立场景沿固定合成关系验证。",
+    "archive_app/workflow.py::Phase": "真实 transitions.Machine 的枚举、装配与同源导出；graph.machine 与运行声明核对。状态节点来自这一声明，不另造观察状态机。",
+    "archive_app/workflow.py::Workflow.__init__": "真实 transitions.Machine 的枚举、装配与同源导出；graph.machine 与运行声明核对。状态节点来自这一声明，不另造观察状态机。",
+    "archive_app/workflow.py::Workflow.all_passed": "真实状态机 guard，分别读取同一调用交入的判定；lifecycle/commit_guard/checks_join 承载图上表达。独立未完成不能推进、资格失效、取消自然结束及事务提交场景覆盖相关门槛。",
+    "archive_app/workflow.py::Workflow.approved": "真实状态机 guard，分别读取同一调用交入的判定；lifecycle/commit_guard/checks_join 承载图上表达。独立未完成不能推进、资格失效、取消自然结束及事务提交场景覆盖相关门槛。",
+    "archive_app/workflow.py::Workflow.checks_failed": "真实状态机 guard，分别读取同一调用交入的判定；lifecycle/commit_guard/checks_join 承载图上表达。独立未完成不能推进、资格失效、取消自然结束及事务提交场景覆盖相关门槛。",
+    "archive_app/workflow.py::Workflow.effect_saved": "真实状态机 guard，分别读取同一调用交入的判定；lifecycle/commit_guard/checks_join 承载图上表达。独立未完成不能推进、资格失效、取消自然结束及事务提交场景覆盖相关门槛。",
+    "archive_app/workflow.py::Workflow.settled": "真实状态机 guard，分别读取同一调用交入的判定；lifecycle/commit_guard/checks_join 承载图上表达。独立未完成不能推进、资格失效、取消自然结束及事务提交场景覆盖相关门槛。",
+    "archive_app/workflow.py::definition": "真实 transitions.Machine 的枚举、装配与同源导出；graph.machine 与运行声明核对。状态节点来自这一声明，不另造观察状态机。",
+    "integrations/bo_observer.py::BOObserver": "可剔除观测适配器：异步 sink、捕获白名单、构建/调用身份及 gap 健康信息；不提供权限判断。关闭/故障/队列满测试与独立核心包执行检验隔离。",
+    "integrations/bo_observer.py::BOObserver.__init__": "可剔除观测适配器：异步 sink、捕获白名单、构建/调用身份及 gap 健康信息；不提供权限判断。关闭/故障/队列满测试与独立核心包执行检验隔离。",
+    "integrations/bo_observer.py::BOObserver.close": "可剔除观测适配器：异步 sink、捕获白名单、构建/调用身份及 gap 健康信息；不提供权限判断。关闭/故障/队列满测试与独立核心包执行检验隔离。",
+    "integrations/bo_observer.py::BOObserver.health": "可剔除观测适配器：异步 sink、捕获白名单、构建/调用身份及 gap 健康信息；不提供权限判断。关闭/故障/队列满测试与独立核心包执行检验隔离。",
+    "integrations/bo_observer.py::BOObserver.snapshot": "可剔除观测适配器：异步 sink、捕获白名单、构建/调用身份及 gap 健康信息；不提供权限判断。关闭/故障/队列满测试与独立核心包执行检验隔离。",
+    "integrations/bo_observer.py::BOObserver.trace": "可剔除观测适配器：异步 sink、捕获白名单、构建/调用身份及 gap 健康信息；不提供权限判断。关闭/故障/队列满测试与独立核心包执行检验隔离。",
+    "integrations/bo_observer.py::BOObserver.write": "可剔除观测适配器：异步 sink、捕获白名单、构建/调用身份及 gap 健康信息；不提供权限判断。关闭/故障/队列满测试与独立核心包执行检验隔离。",
+    "integrations/bo_server.py::LocalApplication": "本地合成演练的命令路由和只读视图，命令调用已映射服务；历史场景使用已保存权威快照，运行构建不匹配时禁用当前源码关联。HTTP/浏览器验证覆盖此适配层，非生产鉴权。",
+    "integrations/bo_server.py::LocalApplication.__init__": "本地合成演练的命令路由和只读视图，命令调用已映射服务；历史场景使用已保存权威快照，运行构建不匹配时禁用当前源码关联。HTTP/浏览器验证覆盖此适配层，非生产鉴权。",
+    "integrations/bo_server.py::LocalApplication.cases": "本地合成演练的命令路由和只读视图，命令调用已映射服务；历史场景使用已保存权威快照，运行构建不匹配时禁用当前源码关联。HTTP/浏览器验证覆盖此适配层，非生产鉴权。",
+    "integrations/bo_server.py::LocalApplication.command": "本地合成演练的命令路由和只读视图，命令调用已映射服务；历史场景使用已保存权威快照，运行构建不匹配时禁用当前源码关联。HTTP/浏览器验证覆盖此适配层，非生产鉴权。",
+    "integrations/bo_server.py::LocalApplication.graph_view": "本地合成演练的命令路由和只读视图，命令调用已映射服务；历史场景使用已保存权威快照，运行构建不匹配时禁用当前源码关联。HTTP/浏览器验证覆盖此适配层，非生产鉴权。",
+    "integrations/bo_server.py::LocalApplication.state": "本地合成演练的命令路由和只读视图，命令调用已映射服务；历史场景使用已保存权威快照，运行构建不匹配时禁用当前源码关联。HTTP/浏览器验证覆盖此适配层，非生产鉴权。",
+    "integrations/bo_server.py::serve": "仅回环 HTTP 入口、同源命令限制、静态资源及载入源码服务；页面文件不作为业务效果证据。源码读取限加载清单，写命令仍经过核心事务保护。",
+    "integrations/bo_server.py::serve.Handler": "仅回环 HTTP 入口、同源命令限制、静态资源及载入源码服务；页面文件不作为业务效果证据。源码读取限加载清单，写命令仍经过核心事务保护。",
+    "integrations/bo_server.py::serve.Handler.do_GET": "仅回环 HTTP 入口、同源命令限制、静态资源及载入源码服务；页面文件不作为业务效果证据。源码读取限加载清单，写命令仍经过核心事务保护。",
+    "integrations/bo_server.py::serve.Handler.do_POST": "仅回环 HTTP 入口、同源命令限制、静态资源及载入源码服务；页面文件不作为业务效果证据。源码读取限加载清单，写命令仍经过核心事务保护。",
+    "integrations/bo_server.py::serve.Handler.log_message": "仅回环 HTTP 入口、同源命令限制、静态资源及载入源码服务；页面文件不作为业务效果证据。源码读取限加载清单，写命令仍经过核心事务保护。",
+    "integrations/bo_server.py::serve.Handler.reply": "仅回环 HTTP 入口、同源命令限制、静态资源及载入源码服务；页面文件不作为业务效果证据。源码读取限加载清单，写命令仍经过核心事务保护。",
+    "run.py::main": "模块导入前 capture/check，加载后再次比对；默认要求已验收 manifest，开发候选显式标识未验收。保存的旧运行与当前构建不匹配时仅作历史状态。"
+  },
+  "requirement_changes": {},
+  "limits": [
+    "本地合成演练，不是生产身份系统或通用 ReBAC。",
+    "有限真实线程场景，不是全部交错证明；浏览器任务不是真人易用性研究。",
+    "LF 格式调整已在验收前记录；固定上游文件保留字节，未改写测试期望。"
+  ]
+}

@@ -1,0 +1,157 @@
+Browser tab: 2, Title: "开发者运行图", URL: "http://127.0.0.1:8824/graph".
+1 AXWebArea 开发者运行图, URL: 127.0.0.1:8824/graph
+	2 container
+		3 text ◉
+		4 heading 资料归档 · 运行图, Value: 1, ID: title
+			233 text 资料归档 · 运行图
+		6 text 布局
+		7 pop up button (collapsed, settable) 布局, Value: 层次布局, ID: layout, Secondary Actions: Expand
+			8 menu
+				9 (selected) 层次布局
+				10 关系布局
+		11 button 自动布局, ID: arrange
+		12 button (disabled) 撤销布局, ID: undo-layout
+		234 text 视图已保存
+		235 text 已连接
+		15 link Description: 操作台 ↗, Value: 127.0.0.1:8824/control
+	16 container
+		17 text 版本
+		18 pop up button (collapsed, settable) 版本, Value: 当前程序, ID: version, Secondary Actions: Expand
+			19 menu
+				20 (selected) 当前程序
+				21 第一版 · 已冻结
+	22 container
+		23 text 场景
+		24 pop up button (collapsed, settable) 场景, Value: 当前操作, ID: case, Secondary Actions: Expand
+			25 menu
+				26 (selected) 当前操作
+				27 正常归档 · 固定版本快照
+				28 撤销一条 · 另一条仍有效
+				29 内容包含禁用标记
+				30 索引缺少标题
+				31 1 个名额 · 索引排队
+				32 2 个名额 · 两项实际重叠
+				33 一项未完成 · 不能提交
+				34 审批失效 · 保留结果后手动继续
+				35 内容改版 · 旧新运行同时可查
+				36 取消本次 · 实际结束后归还名额
+				37 提交前目录变化
+				38 提交时恰好到期
+				39 提交前内容改版
+				40 同版本并发 · 只有一条归档
+				41 正文恰好 8192 字节 · 允许归档
+				42 UTF-8 正文 8193 字节 · 等待
+				43 运行中调小上限 · 恢复后手动继续
+				44 检查通过后调小上限 · 提交重新判断
+				45 仍超限时继续 · 不启动检查
+	46 container
+		47 text 运行
+		48 pop up button (collapsed, settable) 运行, Value: 当前运行, ID: attempt, Secondary Actions: Expand
+			49 menu
+				236 (selected) 当前运行
+				237 第 1 次 · 版本 1
+	51 container
+		52 text 时刻
+		53 pop up button (collapsed, settable) 时刻, Value: 最新状态, ID: step, Secondary Actions: Expand
+			54 menu
+				238 (selected) 最新状态
+				239 1 · 内容检查：正在执行
+				240 2 · 索引检查：等待可用名额
+				241 3 · 内容检查：已通过
+				242 4 · 索引检查：正在执行
+				243 5 · 索引检查：已通过
+				244 6 · 两项检查通过
+	56 button 收起, ID: collapse
+	57 button 展开一级, ID: expand
+	58 button 显示完整图, ID: fit
+	59 button Description: 缩小, ID: zoom-out
+	60 text 99%
+	61 button Description: 放大, ID: zoom-in
+	245 text 流程状态：已归档
+	246 text 内容版本 1 · 本次名额 1 · 正文 42 / 上限 8192 字节
+	64 search text field (settable) Description: 搜索节点, Value: 正文是否在当前上限内, ID: node-search
+	247 text 代码版本 01113409
+	66 container Description: 统一节点连接图。拖动节点调整位置，拖动空白平移；双击展开，滚轮缩放。选中节点后按 P 固定，方向键移动。, ID: viewport
+		67 container semantic
+			248 button (expanded) Description: 核对归档资格, Secondary Actions: Collapse
+			249 button (expanded) Description: 本次双检查, Secondary Actions: Collapse
+			250 button (collapsed) Description: 复核并保存快照, Secondary Actions: Expand
+			251 button (collapsed) Description: 负责人发起归档, Secondary Actions: Expand
+			252 button (collapsed) Description: 资料条目与内容版本, Secondary Actions: Expand
+			253 button (collapsed) Description: 是否直接负责所在文件夹, Secondary Actions: Expand
+			254 button (collapsed) Description: 审批是否适用, Secondary Actions: Expand
+			255 button (collapsed) Description: 当前文件夹的直接负责人, Secondary Actions: Expand
+			256 button (collapsed) Description: 项目 · 操作人 · 资料 · 版本, Secondary Actions: Expand
+			257 button (collapsed) Description: 点击继续并重查资格, Secondary Actions: Expand
+			258 button (collapsed) Description: 读取当前权威关系, Secondary Actions: Expand
+			259 button (collapsed) Description: 调整分类文件夹, Secondary Actions: Expand
+			260 button (collapsed) Description: 项目归档大小上限, Secondary Actions: Expand
+			261 button (expanded) Description: 正文是否在当前上限内, Secondary Actions: Collapse
+			262 button (collapsed) Description: project_id, Secondary Actions: Expand
+			263 button (collapsed) Description: content_bytes, Secondary Actions: Expand
+			264 button (collapsed) Description: limit_bytes, Secondary Actions: Expand
+			265 button (collapsed) Description: limit_revision, Secondary Actions: Expand
+			266 button (collapsed) Description: allowed, Secondary Actions: Expand
+			267 button (collapsed) Description: content_bytes, Secondary Actions: Expand
+			268 button (collapsed) Description: limit_bytes, Secondary Actions: Expand
+			269 button (collapsed) Description: limit_revision, Secondary Actions: Expand
+			270 button (collapsed) Description: excess_bytes, Secondary Actions: Expand
+			271 button (collapsed) Description: 调整项目大小上限, Secondary Actions: Expand
+			272 button (expanded) Description: 内容检查, Secondary Actions: Collapse
+			273 button (collapsed) Description: attempt, Secondary Actions: Expand
+			274 button (collapsed) Description: content_version, Secondary Actions: Expand
+			275 button (collapsed) Description: content_length, Secondary Actions: Expand
+			276 button (collapsed) Description: content_sha256, Secondary Actions: Expand
+			277 button (collapsed) Description: forbidden_marker, Secondary Actions: Expand
+			278 button (collapsed) Description: passed, Secondary Actions: Expand
+			279 button (collapsed) Description: marker_present, Secondary Actions: Expand
+			280 button (collapsed) Description: 索引检查, Secondary Actions: Expand
+			281 button (collapsed) Description: 每次运行独享名额, Secondary Actions: Expand
+			282 button (collapsed) Description: 修改资料内容, Secondary Actions: Expand
+			283 button (collapsed) Description: 运行身份与内容版本, Secondary Actions: Expand
+			284 button (collapsed) Description: 本次两项均通过, Secondary Actions: Expand
+			285 button (collapsed) Description: 取消本次运行, Secondary Actions: Expand
+			286 button (collapsed) Description: 本次流程状态, Secondary Actions: Expand
+			287 button (collapsed) Description: 恢复中断记录, Secondary Actions: Expand
+			288 button (collapsed) Description: 执行并保存检查结果, Secondary Actions: Expand
+		100 container 节点类型
+			101 text ● 业务 ⬡ 函数 ◎ 状态 ◆ 判断 ▱ 资源 ◇ 参数
+		163 container Description: 节点旁的详细信息, ID: node-details
+			289 text archive_app/policy.py:64 · 01113409
+			165 button Description: 关闭详细信息, ID: close-detail
+			166 container detail-rows
+				290 text check_size
+				291 text 参数 project_id: str = P1
+				292 text 参数 content_bytes: number = 42
+				293 text 参数 limit_bytes: number = 8192
+				294 text 参数 limit_revision: number = 3
+				295 text 返回 allowed: bool = true
+				296 text 返回 content_bytes: number = 42
+				297 text 返回 limit_bytes: number = 8192
+				298 text 返回 limit_revision: number = 3
+				299 text 返回 excess_bytes: number = 0
+			232 button 完整文件, ID: full-source
+			300 text def check_size(content: str, limit_bytes: int, project_id: str, limit_revision: int,
+               trace: TracePort | None = None, basis: dict | None = None,
+               parent: str | None = None, source_event: str | None = None) -> dict:
+    trace = trace or TracePort()
+    content_bytes = len(content.encode("utf-8"))
+    result = {"content_bytes":content_bytes,"limit_bytes":limit_bytes,
+              "limit_revision":limit_revision,"allowed":content_bytes <= limit_bytes,
+              "excess_bytes":max(0,content_bytes-limit_bytes)}
+    trace.record("size_guard","decision",basis or {},lambda:{
+        "inputs":{"project_id":project_id,"content_bytes":content_bytes,
+                  "limit_bytes":limit_bytes,"limit_revision":limit_revision},
+        "outputs":result},call_id=uuid.uuid4().hex,parent_call_id=parent,
+        depends=[(source_event,"data")] if source_event else [])
+    return result
+	102 container
+		301 text 判断 · 正文是否在当前上限内 · archive_app/policy.py:64
+		104 button 收起, ID: node-expand
+		105 button 固定节点, ID: pin
+		106 button 名称与备注, ID: annotate
+		107 button 详细值, ID: details
+		108 button 源码, ID: source
+		109 text PixiJS / WebGL · ELK
+
+The focused UI element is 108 button 源码, ID: source

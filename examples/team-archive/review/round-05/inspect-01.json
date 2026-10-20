@@ -1,0 +1,142 @@
+{
+  "candidate_id": "8832f00f962337b9cecf1723a03d55ad8407831bf376934e210965bd642625f3",
+  "changed_files": [
+    "acceptance.json",
+    "archive_app/policy.py",
+    "archive_app/service.py",
+    "archive_app/storage.py",
+    "behavior.json",
+    "discovery.json",
+    "integrations/bo_server.py",
+    "intent.json",
+    "static/app.html",
+    "static/app.js",
+    "static/graph/graph-core.js",
+    "static/graph/viewer.js",
+    "sync.json",
+    "tooling/build_model.py",
+    "tooling/graph_tests.mjs",
+    "tooling/observe.py",
+    "tooling/scenarios.py",
+    "tooling/size_scenarios.py",
+    "tooling/tests.py",
+    "whitebox.json"
+  ],
+  "changed_symbols": [
+    "archive_app/policy.py::check_size",
+    "archive_app/service.py::ArchiveService",
+    "archive_app/service.py::ArchiveService.advance",
+    "archive_app/service.py::ArchiveService.evaluate",
+    "archive_app/service.py::ArchiveService.set_archive_limit",
+    "archive_app/storage.py::ArchiveStore",
+    "archive_app/storage.py::ArchiveStore.__init__",
+    "archive_app/storage.py::ArchiveStore.project_limit",
+    "archive_app/storage.py::ArchiveStore.seed",
+    "archive_app/storage.py::ArchiveStore.snapshot",
+    "integrations/bo_server.py::LocalApplication",
+    "integrations/bo_server.py::LocalApplication.__init__",
+    "integrations/bo_server.py::LocalApplication.cases",
+    "integrations/bo_server.py::LocalApplication.command",
+    "integrations/bo_server.py::LocalApplication.graph_view",
+    "integrations/bo_server.py::LocalApplication.version_sources",
+    "integrations/bo_server.py::serve",
+    "integrations/bo_server.py::serve.Handler",
+    "integrations/bo_server.py::serve.Handler.do_GET"
+  ],
+  "affected_callers": [
+    "archive_app/service.py::ArchiveService.create_run",
+    "archive_app/service.py::ArchiveService.edit_document",
+    "archive_app/service.py::ArchiveService.move_document",
+    "archive_app/service.py::ArchiveService.resume_run",
+    "archive_app/service.py::ArchiveService.revoke_approval",
+    "archive_app/service.py::ArchiveService.start_scheduler.loop",
+    "archive_app/service.py::ArchiveService.tick",
+    "archive_app/service.py::ArchiveService.try_commit"
+  ],
+  "affected_nodes": [
+    "approval_check",
+    "approval_revoked",
+    "archive_commit",
+    "archive_request",
+    "authority_read",
+    "code.881d8e61a1974236",
+    "code.bb6f1114d12b1280",
+    "code.d31899a8ea590c46",
+    "code.f3f4c403913bddaf",
+    "commit_guard",
+    "content_changed",
+    "document",
+    "flow.archive",
+    "flow.checks",
+    "flow.policy",
+    "folder_assignments",
+    "move_folder",
+    "project_limit",
+    "resume_run",
+    "set_size_limit",
+    "size_guard"
+  ],
+  "unmapped_changed_symbols": [
+    "archive_app/service.py::ArchiveService",
+    "archive_app/storage.py::ArchiveStore",
+    "archive_app/storage.py::ArchiveStore.__init__",
+    "archive_app/storage.py::ArchiveStore.seed",
+    "integrations/bo_server.py::LocalApplication",
+    "integrations/bo_server.py::LocalApplication.__init__",
+    "integrations/bo_server.py::LocalApplication.cases",
+    "integrations/bo_server.py::LocalApplication.command",
+    "integrations/bo_server.py::LocalApplication.graph_view",
+    "integrations/bo_server.py::LocalApplication.version_sources",
+    "integrations/bo_server.py::serve",
+    "integrations/bo_server.py::serve.Handler",
+    "integrations/bo_server.py::serve.Handler.do_GET"
+  ],
+  "changed_requirements": [
+    {
+      "id": "R14",
+      "text": "每个项目共用归档正文大小上限，默认 8192 字节；仅按 UTF-8 正文计量，等于上限允许。设置值必须为正整数，拒绝小数、零、负数且不取整。",
+      "status": "confirmed",
+      "source": "模拟用户 U05-U06",
+      "source_refs": [
+        "U05",
+        "U06"
+      ]
+    },
+    {
+      "id": "R15",
+      "text": "开始/继续/提交按当前项目上限判断。超限时已启动检查自然结束、未启动等待、禁止提交；调大后须手动继续，复用同版本已通过检查。上限变化不改内容版本、不自动撤销审批，不改已有快照。",
+      "status": "confirmed",
+      "source": "模拟用户 U05-U06",
+      "source_refs": [
+        "U05",
+        "U06"
+      ]
+    },
+    {
+      "id": "R16",
+      "text": "同一开发者图显示正文实际字节数、读取的上限/修订号及超限原因；保留首版坐标、标注和稳定节点 ID，提供可比较的首版/当前图及对应加载源码。",
+      "status": "confirmed",
+      "source": "模拟用户 U05-U06",
+      "source_refs": [
+        "U05",
+        "U06"
+      ]
+    }
+  ],
+  "unresolved_call_count": 452,
+  "meaning": "Potential impact plus authored abstraction mapping; semantic truth still needs contract and runtime checks.",
+  "errors": [],
+  "review_errors": [
+    "missing review.json for this candidate"
+  ],
+  "discovery": {
+    "valid": true,
+    "ready": true,
+    "errors": [],
+    "warnings": [],
+    "blocked": [],
+    "questions": [],
+    "awaiting_answers": []
+  },
+  "valid": false
+}

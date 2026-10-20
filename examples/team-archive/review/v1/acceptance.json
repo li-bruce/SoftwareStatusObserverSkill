@@ -1,0 +1,477 @@
+{
+  "schema_version": 1,
+  "status": "planned_not_run",
+  "basis": "模拟用户 U01–U04；在实现前定义期望，观察程序不读取本文件。",
+  "checks": [
+    {
+      "id": "direct-manager-allowed",
+      "requirement": "R02",
+      "case": "scope_direct_manager",
+      "path": [
+        "scope_allowed"
+      ],
+      "equals": true
+    },
+    {
+      "id": "ancestor-manager-denied",
+      "requirement": "R02",
+      "case": "scope_ancestor_only",
+      "path": [
+        "scope_allowed"
+      ],
+      "equals": false
+    },
+    {
+      "id": "child-uses-own-manager",
+      "requirement": "R02",
+      "case": "scope_child_direct_manager",
+      "path": [
+        "scope_allowed"
+      ],
+      "equals": true
+    },
+    {
+      "id": "approval-target-exact",
+      "requirement": "R03",
+      "case": "approval_target_exact",
+      "path": [
+        "candidate_target_matches"
+      ],
+      "equals": true
+    },
+    {
+      "id": "approval-wrong-project",
+      "requirement": "R03",
+      "case": "approval_target_other_project",
+      "path": [
+        "candidate_target_matches"
+      ],
+      "equals": false
+    },
+    {
+      "id": "approval-wrong-operator",
+      "requirement": "R03",
+      "case": "approval_target_other_operator",
+      "path": [
+        "candidate_target_matches"
+      ],
+      "equals": false
+    },
+    {
+      "id": "approval-wrong-document",
+      "requirement": "R03",
+      "case": "approval_target_other_document",
+      "path": [
+        "candidate_target_matches"
+      ],
+      "equals": false
+    },
+    {
+      "id": "approval-wrong-version",
+      "requirement": "R03",
+      "case": "approval_target_other_version",
+      "path": [
+        "candidate_target_matches"
+      ],
+      "equals": false
+    },
+    {
+      "id": "snapshot-content",
+      "requirement": "R08",
+      "case": "archive_snapshot",
+      "path": [
+        "archive",
+        "content"
+      ],
+      "equals": "模拟资料：版本一的固定内容。"
+    },
+    {
+      "id": "snapshot-version",
+      "requirement": "R08",
+      "case": "archive_snapshot",
+      "path": [
+        "archive",
+        "content_version"
+      ],
+      "equals": 1
+    },
+    {
+      "id": "snapshot-stays-fixed",
+      "requirement": "R08",
+      "case": "edit_after_archive",
+      "path": [
+        "archive",
+        "content"
+      ],
+      "equals": "模拟资料：版本一的固定内容。"
+    },
+    {
+      "id": "one-record-per-version",
+      "requirement": "R09",
+      "case": "archive_same_version_twice",
+      "path": [
+        "archive_count_for_version"
+      ],
+      "equals": 1
+    },
+    {
+      "id": "preserve-original-document",
+      "requirement": "R10",
+      "case": "archive_snapshot",
+      "path": [
+        "source_document_exists"
+      ],
+      "equals": true
+    },
+    {
+      "id": "preserve-original-folder",
+      "requirement": "R10",
+      "case": "archive_snapshot",
+      "path": [
+        "source_folder_unchanged"
+      ],
+      "equals": true
+    },
+    {
+      "id": "approval-expiry-boundary",
+      "requirement": "R03",
+      "case": "approval_at_deadline",
+      "path": [
+        "candidate_allowed"
+      ],
+      "equals": false
+    },
+    {
+      "id": "approval-self-denied",
+      "requirement": "R03",
+      "case": "approval_self",
+      "path": [
+        "candidate_allowed"
+      ],
+      "equals": false
+    },
+    {
+      "id": "approval-role-denied",
+      "requirement": "R03",
+      "case": "approval_not_reviewer",
+      "path": [
+        "candidate_allowed"
+      ],
+      "equals": false
+    },
+    {
+      "id": "approval-alternative",
+      "requirement": "R03",
+      "case": "revoke_with_alternative",
+      "path": [
+        "completed"
+      ],
+      "equals": true
+    },
+    {
+      "id": "approval-missing-waits",
+      "requirement": "R03",
+      "case": "no_approval",
+      "path": [
+        "phase"
+      ],
+      "equals": "waiting"
+    },
+    {
+      "id": "checks-secret-rejected",
+      "requirement": "R04",
+      "case": "secret_content",
+      "path": [
+        "archive_count"
+      ],
+      "equals": 0
+    },
+    {
+      "id": "checks-index-rejected",
+      "requirement": "R04",
+      "case": "missing_index",
+      "path": [
+        "archive_count"
+      ],
+      "equals": 0
+    },
+    {
+      "id": "one-slot-max",
+      "requirement": "R05",
+      "case": "capacity_one",
+      "path": [
+        "max_running"
+      ],
+      "equals": 1
+    },
+    {
+      "id": "one-slot-wait",
+      "requirement": "R05",
+      "case": "capacity_one",
+      "path": [
+        "resource_wait_observed"
+      ],
+      "equals": true
+    },
+    {
+      "id": "two-slots-overlap",
+      "requirement": "R05",
+      "case": "capacity_two",
+      "path": [
+        "max_running"
+      ],
+      "equals": 2
+    },
+    {
+      "id": "incomplete-cannot-commit",
+      "requirement": "R04",
+      "case": "join_pending",
+      "path": [
+        "before_completion_archives"
+      ],
+      "equals": 0
+    },
+    {
+      "id": "approval-loss-no-commit",
+      "requirement": "R11",
+      "case": "loss_and_resume",
+      "path": [
+        "before_resume_archives"
+      ],
+      "equals": 0
+    },
+    {
+      "id": "approval-loss-pending-stays",
+      "requirement": "R11",
+      "case": "loss_and_resume",
+      "path": [
+        "pending_did_not_start"
+      ],
+      "equals": true
+    },
+    {
+      "id": "approval-manual-resume",
+      "requirement": "R11",
+      "case": "loss_and_resume",
+      "path": [
+        "completed"
+      ],
+      "equals": true
+    },
+    {
+      "id": "old-run-cannot-commit",
+      "requirement": "R06",
+      "case": "edit_overlap",
+      "path": [
+        "old_archive_count"
+      ],
+      "equals": 0
+    },
+    {
+      "id": "old-new-coexist",
+      "requirement": "R06",
+      "case": "edit_overlap",
+      "path": [
+        "old_new_visible_while_running"
+      ],
+      "equals": true
+    },
+    {
+      "id": "new-run-own-checks",
+      "requirement": "R06",
+      "case": "edit_overlap",
+      "path": [
+        "new_completed"
+      ],
+      "equals": true
+    },
+    {
+      "id": "cancel-held-until-end",
+      "requirement": "R12",
+      "case": "cancel_running",
+      "path": [
+        "held_after_request"
+      ],
+      "equals": 1
+    },
+    {
+      "id": "cancel-releases-at-end",
+      "requirement": "R12",
+      "case": "cancel_running",
+      "path": [
+        "available_after_end"
+      ],
+      "equals": 1
+    },
+    {
+      "id": "cancel-does-not-commit",
+      "requirement": "R12",
+      "case": "cancel_running",
+      "path": [
+        "archive_count"
+      ],
+      "equals": 0
+    },
+    {
+      "id": "cancel-only-selected-run",
+      "requirement": "R12",
+      "case": "cancel_one_of_two",
+      "path": [
+        "other_completed"
+      ],
+      "equals": true
+    },
+    {
+      "id": "cancel-preserves-document",
+      "requirement": "R12",
+      "case": "cancel_running",
+      "path": [
+        "source_document_exists"
+      ],
+      "equals": true
+    },
+    {
+      "id": "move-denies-at-commit",
+      "requirement": "R13",
+      "case": "move_before_commit",
+      "path": [
+        "archive_count"
+      ],
+      "equals": 0
+    },
+    {
+      "id": "expiry-denies-at-commit",
+      "requirement": "R13",
+      "case": "expire_before_commit",
+      "path": [
+        "archive_count"
+      ],
+      "equals": 0
+    },
+    {
+      "id": "version-denies-at-commit",
+      "requirement": "R13",
+      "case": "edit_before_commit",
+      "path": [
+        "archive_count"
+      ],
+      "equals": 0
+    },
+    {
+      "id": "same-version-concurrent-once",
+      "requirement": "R09",
+      "case": "concurrent_same_version",
+      "path": [
+        "archive_count"
+      ],
+      "equals": 1
+    },
+    {
+      "id": "restart-preserves-history",
+      "requirement": "R06",
+      "case": "restart_interrupted",
+      "path": [
+        "phase"
+      ],
+      "equals": "interrupted"
+    }
+  ],
+  "model_checks": [
+    {
+      "id": "scope-direct-only-declaration",
+      "requirement": "R02",
+      "path": [
+        "nodes",
+        "scope_check",
+        "rule",
+        "inherit_ancestors"
+      ],
+      "equals": false
+    },
+    {
+      "id": "approval-four-target-fields",
+      "requirement": "R03",
+      "path": [
+        "nodes",
+        "approval_check",
+        "rule",
+        "target_fields"
+      ],
+      "equals": [
+        "project_id",
+        "operator_id",
+        "document_id",
+        "content_version"
+      ]
+    },
+    {
+      "id": "archive-identity-key",
+      "requirement": "R09",
+      "path": [
+        "nodes",
+        "archive_unique",
+        "rule",
+        "unique_fields"
+      ],
+      "equals": [
+        "document_id",
+        "content_version"
+      ]
+    },
+    {
+      "id": "per-run-resource-declaration",
+      "requirement": "R05",
+      "path": [
+        "nodes",
+        "processing_slots",
+        "rule",
+        "scope"
+      ],
+      "equals": "run"
+    },
+    {
+      "id": "both-checks-required",
+      "requirement": "R04",
+      "path": [
+        "nodes",
+        "archive_commit",
+        "rule",
+        "all_checks_passed"
+      ],
+      "equals": true
+    },
+    {
+      "id": "approval-any-declaration",
+      "requirement": "R03",
+      "path": [
+        "nodes",
+        "approval_check",
+        "rule",
+        "aggregate"
+      ],
+      "equals": "any"
+    },
+    {
+      "id": "approval-excludes-self",
+      "requirement": "R03",
+      "path": [
+        "nodes",
+        "approval_check",
+        "rule",
+        "exclude_self"
+      ],
+      "equals": true
+    },
+    {
+      "id": "approval-expiry-exclusive",
+      "requirement": "R03",
+      "path": [
+        "nodes",
+        "approval_check",
+        "rule",
+        "valid_time"
+      ],
+      "equals": "now < deadline"
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "business_errors": [],
+  "whitebox": {
+    "valid": true,
+    "errors": [],
+    "checks": [
+      {
+        "check": "scope-actual-true",
+        "rule": "scope",
+        "requirement": "R02",
+        "case": "scope_direct_manager",
+        "node": "scope_check",
+        "source": {
+          "path": "archive_app/policy.py",
+          "symbol": "is_direct_manager"
+        },
+        "events": [
+          "b4cc24bf702e:1"
+        ],
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "check": "scope-actual-false",
+        "rule": "scope",
+        "requirement": "R02",
+        "case": "scope_ancestor_only",
+        "node": "scope_check",
+        "source": {
+          "path": "archive_app/policy.py",
+          "symbol": "is_direct_manager"
+        },
+        "events": [
+          "ad1c82653942:1"
+        ],
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "check": "candidate-target-version",
+        "rule": "candidate",
+        "requirement": "R03",
+        "case": "approval_target_other_version",
+        "node": "approval_candidate",
+        "source": {
+          "path": "archive_app/policy.py",
+          "symbol": "candidate_allowed"
+        },
+        "events": [
+          "5ded17f899f2:1"
+        ],
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "check": "candidate-expiry",
+        "rule": "candidate",
+        "requirement": "R03",
+        "case": "approval_at_deadline",
+        "node": "approval_candidate",
+        "source": {
+          "path": "archive_app/policy.py",
+          "symbol": "candidate_allowed"
+        },
+        "events": [
+          "6d3a5049dbca:1"
+        ],
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "check": "candidate-self",
+        "rule": "candidate",
+        "requirement": "R03",
+        "case": "approval_self",
+        "node": "approval_candidate",
+        "source": {
+          "path": "archive_app/policy.py",
+          "symbol": "candidate_allowed"
+        },
+        "events": [
+          "adb324891e94:1"
+        ],
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "check": "content-secret",
+        "rule": "content",
+        "requirement": "R04",
+        "case": "secret_content",
+        "node": "content_check",
+        "source": {
+          "path": "archive_app/policy.py",
+          "symbol": "check_content"
+        },
+        "events": [
+          "7b6c9f13f783:11"
+        ],
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "check": "index-missing",
+        "rule": "index",
+        "requirement": "R04",
+        "case": "missing_index",
+        "node": "index_check",
+        "source": {
+          "path": "archive_app/policy.py",
+          "symbol": "check_index"
+        },
+        "events": [
+          "0d46417de809:11"
+        ],
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "check": "commit-actual-version",
+        "rule": "commit",
+        "requirement": "R13",
+        "case": "archive_snapshot",
+        "node": "archive_commit",
+        "source": {
+          "path": "archive_app/service.py",
+          "symbol": "ArchiveService.try_commit"
+        },
+        "events": [
+          "2f08a3c5d041:30"
+        ],
+        "status": "passed",
+        "errors": []
+      }
+    ],
+    "coverage": {
+      "rules": 5,
+      "checks": 8,
+      "passed": 8
+    },
+    "scope": "Declared source bindings and observed values; missing evidence never passes."
+  },
+  "execution_errors": [],
+  "runs": 90
+}

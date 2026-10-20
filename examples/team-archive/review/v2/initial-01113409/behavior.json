@@ -1,0 +1,3509 @@
+{
+  "schema_version": 3,
+  "project_id": "team-archive-trial-01",
+  "revision": "1.1.0",
+  "title": "团队资料归档 · 候选业务依赖图",
+  "status": "candidate",
+  "intent": "intent.json",
+  "source_files": [
+    "archive_app/__init__.py",
+    "archive_app/policy.py",
+    "archive_app/ports.py",
+    "archive_app/service.py",
+    "archive_app/storage.py",
+    "archive_app/workflow.py",
+    "integrations/bo_observer.py",
+    "integrations/bo_server.py",
+    "observer_runtime/behavior_model.py",
+    "observer_runtime/semantic_probe.py",
+    "run.py",
+    "static/app.css",
+    "static/app.html",
+    "static/app.js",
+    "static/graph/graph-core.js",
+    "static/graph/index.html",
+    "static/graph/layout.js",
+    "static/graph/viewer.css",
+    "static/graph/viewer.js",
+    "tooling/behavior_source.json",
+    "tooling/build_model.py"
+  ],
+  "presentation": {
+    "layout_id": "team-archive-trial-01",
+    "subject": "资料归档",
+    "default_expanded": [],
+    "title": "团队资料归档 · 开发者运行图"
+  },
+  "nodes": [
+    {
+      "id": "archive_request",
+      "kind": "action",
+      "label": "负责人发起归档",
+      "summary": "候选入口；具体发起时机与审批、检查顺序未确定。",
+      "requirements": [
+        "R02"
+      ],
+      "capture": {
+        "in": {
+          "document_id": "string",
+          "operator_id": "string",
+          "capacity": "number",
+          "content_version": "number"
+        },
+        "out": {
+          "attempt": "string"
+        }
+      },
+      "parent": "flow.policy",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.create_run"
+      },
+      "code_evidence": {
+        "symbol": "archive_app/service.py::ArchiveService.create_run",
+        "ast_hash": "4bad64652b5d98f6cc91923ecdb3a35e997c66d32a0cf4102bbb0855b186394e",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "document",
+      "kind": "data",
+      "label": "资料条目与内容版本",
+      "summary": "资料条目直接位于一个分类文件夹；归档针对条目的内容版本，不归档文件夹。",
+      "requirements": [
+        "R01",
+        "R06",
+        "R10"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "flow.policy",
+      "source": {
+        "path": "archive_app/storage.py",
+        "symbol": "ArchiveStore.snapshot"
+      }
+    },
+    {
+      "id": "scope_check",
+      "kind": "decision",
+      "label": "是否直接负责所在文件夹",
+      "summary": "只按资料所在文件夹的直接负责人判断，上级负责人不因祖先关系获得权限。",
+      "rule": {
+        "inherit_ancestors": false
+      },
+      "requirements": [
+        "R02"
+      ],
+      "capture": {
+        "in": {
+          "project_id": "string",
+          "operator_id": "string",
+          "folder_id": "string",
+          "assignments": [
+            {
+              "project_id": "string",
+              "operator_id": "string",
+              "folder_id": "string"
+            }
+          ]
+        },
+        "out": {
+          "allowed": "boolean",
+          "inherit_ancestors": "boolean"
+        }
+      },
+      "parent": "flow.policy",
+      "source": {
+        "path": "archive_app/policy.py",
+        "symbol": "is_direct_manager"
+      },
+      "code_evidence": {
+        "symbol": "archive_app/policy.py::is_direct_manager",
+        "ast_hash": "1aa192b1f51ddc4beff4f4192109a5248b6de3ad6520e0280e4e330f05c56cc3",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "approval_check",
+      "kind": "decision",
+      "label": "审批是否适用",
+      "summary": "审批目标四字段匹配、审批人为另一名审核员、未撤销且未到截止时刻；任一候选有效即可。撤销后重新判断，没有有效审批则等待。",
+      "rule": {
+        "target_fields": [
+          "project_id",
+          "operator_id",
+          "document_id",
+          "content_version"
+        ],
+        "aggregate": "any",
+        "reviewer_required": true,
+        "exclude_self": true,
+        "valid_time": "now < deadline",
+        "revoked_allowed": false
+      },
+      "requirements": [
+        "R03"
+      ],
+      "capture": {
+        "in": {
+          "project_id": "string",
+          "operator_id": "string",
+          "document_id": "string",
+          "content_version": "number",
+          "clock": "number",
+          "candidate_count": "number"
+        },
+        "out": {
+          "allowed": "boolean",
+          "candidates": [
+            {
+              "id": "string",
+              "project_ok": "boolean",
+              "operator_ok": "boolean",
+              "document_ok": "boolean",
+              "version_ok": "boolean",
+              "reviewer_ok": "boolean",
+              "different_actor": "boolean",
+              "not_revoked": "boolean",
+              "time_ok": "boolean",
+              "target_matches": "boolean",
+              "allowed": "boolean"
+            }
+          ]
+        }
+      },
+      "parent": "flow.policy",
+      "source": {
+        "path": "archive_app/policy.py",
+        "symbol": "evaluate_approvals"
+      },
+      "code_evidence": {
+        "symbol": "archive_app/policy.py::evaluate_approvals",
+        "ast_hash": "d0096a98392cf4201c0d5a52f938a42ef3c124e7eccaa759e3f4c0a36148f8f0",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "content_check",
+      "kind": "action",
+      "label": "内容检查",
+      "summary": "对本次固定输入检查 SECRET: 标记；不记录正文，只观察长度、摘要和实际判断。",
+      "requirements": [
+        "R04"
+      ],
+      "capture": {
+        "in": {
+          "attempt": "string",
+          "content_version": "number",
+          "content_length": "number",
+          "content_sha256": "string",
+          "forbidden_marker": "string"
+        },
+        "out": {
+          "passed": "boolean",
+          "marker_present": "boolean"
+        }
+      },
+      "parent": "flow.checks",
+      "source": {
+        "path": "archive_app/policy.py",
+        "symbol": "check_content"
+      },
+      "execution_role": "activity",
+      "code_evidence": {
+        "symbol": "archive_app/policy.py::check_content",
+        "ast_hash": "87163fe4d3d81dca7cffaa17628c69735582c9b5f68920a2e3aaa28db577792f",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "index_check",
+      "kind": "action",
+      "label": "索引检查",
+      "summary": "检查本次标题、项目和资料编号是否齐全。",
+      "requirements": [
+        "R04"
+      ],
+      "capture": {
+        "in": {
+          "attempt": "string",
+          "content_version": "number",
+          "title_length": "number",
+          "project_id": "string",
+          "document_number": "string"
+        },
+        "out": {
+          "title_present": "boolean",
+          "project_present": "boolean",
+          "number_present": "boolean",
+          "passed": "boolean"
+        }
+      },
+      "parent": "flow.checks",
+      "source": {
+        "path": "archive_app/policy.py",
+        "symbol": "check_index"
+      },
+      "execution_role": "activity",
+      "code_evidence": {
+        "symbol": "archive_app/policy.py::check_index",
+        "ast_hash": "09cab0f651bb5a07ba393c539239e51b887b549b2b49cb062549d97c2b23ce39",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "processing_slots",
+      "kind": "data",
+      "label": "每次运行独享名额",
+      "summary": "本次运行独享容量，创建时选 1 或 2；检查实际结束后归还。",
+      "requirements": [
+        "R05"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "rule": {
+        "scope": "run",
+        "default_capacity": 2,
+        "activity_units": 1,
+        "parallel_allowed": true
+      },
+      "parent": "flow.checks",
+      "source": {
+        "path": "archive_app/workflow.py",
+        "symbol": "initial_configuration"
+      },
+      "execution_role": "resource"
+    },
+    {
+      "id": "archive_commit",
+      "kind": "effect",
+      "label": "保存资料版本快照",
+      "summary": "在 SQLite 保存内容的固定快照及对应版本，不移动或删除原资料；同一资料/版本不得重复生成记录。",
+      "requirements": [
+        "R08",
+        "R09",
+        "R10"
+      ],
+      "capture": {
+        "in": {
+          "attempt": "string",
+          "document_id": "string",
+          "content_version": "number"
+        },
+        "out": {
+          "effect_id": "string",
+          "persisted": "boolean"
+        }
+      },
+      "rule": {
+        "all_checks_passed": true,
+        "current_version_required": true,
+        "current_approval_required": true
+      },
+      "parent": "flow.archive",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.try_commit"
+      },
+      "code_evidence": {
+        "symbol": "archive_app/service.py::ArchiveService.try_commit",
+        "ast_hash": "2bab3ba59068cca9ea8b888803d8a4fb830c634cceea28303349c61b79bc7c1c",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "approval_revoked",
+      "kind": "action",
+      "label": "撤销审批",
+      "summary": "撤销触发审批重评；有替代有效审批时继续具备审批条件；否则等待。已启动检查完成且保留结果，不提交。",
+      "requirements": [
+        "R03"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "approval_check",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.revoke_approval"
+      },
+      "code_evidence": {
+        "symbol": "archive_app/service.py::ArchiveService.revoke_approval",
+        "ast_hash": "9ed4f4b6c9803cd1befc069cb5c228b56336cfb2cfe63858d5c5926e6faf7272",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "content_changed",
+      "kind": "action",
+      "label": "修改资料内容",
+      "summary": "旧运行不再提交；未开始检查作废，已开始自然结束，新版本另建独立运行。",
+      "requirements": [
+        "R06"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "flow.checks",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.edit_document"
+      },
+      "code_evidence": {
+        "symbol": "archive_app/service.py::ArchiveService.edit_document",
+        "ast_hash": "9f3c94a888877610935773a891ce1fff5f914cf54e832f3d2603ceb9b4f9cdfb",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "folder_assignments",
+      "kind": "data",
+      "label": "当前文件夹的直接负责人",
+      "summary": "只读取该项目、该文件夹的直接负责关系，不读取祖先作为继承授权。",
+      "requirements": [
+        "R02"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "flow.policy",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.evaluate"
+      }
+    },
+    {
+      "id": "approval_target",
+      "kind": "data",
+      "label": "项目 · 操作人 · 资料 · 版本",
+      "summary": "单条审批的四个目标字段必须全部匹配本次请求。",
+      "requirements": [
+        "R03"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "flow.policy",
+      "source": {
+        "path": "archive_app/policy.py",
+        "symbol": "candidate_allowed"
+      }
+    },
+    {
+      "id": "archive_unique",
+      "kind": "decision",
+      "label": "该资料版本是否已有归档",
+      "summary": "重复请求不能生成第二条同资料同版本的记录。",
+      "rule": {
+        "unique_fields": [
+          "document_id",
+          "content_version"
+        ]
+      },
+      "requirements": [
+        "R09"
+      ],
+      "capture": {
+        "in": {
+          "document_id": "string",
+          "content_version": "number"
+        },
+        "out": {
+          "effect_id": "string",
+          "reused": "boolean"
+        }
+      },
+      "parent": "flow.archive",
+      "source": {
+        "path": "archive_app/storage.py",
+        "symbol": "ArchiveStore.find_archive"
+      },
+      "code_evidence": {
+        "symbol": "archive_app/storage.py::ArchiveStore.find_archive",
+        "ast_hash": "ab3d6930a346e4f515bee2b8093486faa8c184c14496d2580b7bf4bdabb453b8",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "resume_run",
+      "kind": "action",
+      "label": "点击继续并重查资格",
+      "summary": "审批条件恢复后手动继续，重查当前资格；已完成同版本检查结果保留。",
+      "requirements": [
+        "R11"
+      ],
+      "capture": {
+        "in": {
+          "attempt": "string"
+        },
+        "out": {
+          "allowed": "boolean"
+        }
+      },
+      "parent": "flow.policy",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.resume_run"
+      },
+      "code_evidence": {
+        "symbol": "archive_app/service.py::ArchiveService.resume_run",
+        "ast_hash": "07a9989642abe33bfedeae319e9ac0ae5207efabb260891215e35c422f12e926",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "run_identity",
+      "kind": "data",
+      "label": "运行身份与内容版本",
+      "summary": "每次运行独立保留活动和结果；旧新版本运行可同时查询，新运行不覆盖仍在结束的旧运行。",
+      "requirements": [
+        "R06"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "flow.checks",
+      "source": {
+        "path": "archive_app/workflow.py",
+        "symbol": "initial_configuration"
+      }
+    },
+    {
+      "id": "flow.policy",
+      "kind": "action",
+      "label": "核对归档资格",
+      "summary": "直接负责、有效审批和正文大小均满足当前条件。",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "layer": "business",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.evaluate"
+      }
+    },
+    {
+      "id": "flow.checks",
+      "kind": "action",
+      "label": "完成本次两项检查",
+      "summary": "每次运行独享名额；保留各活动实例与资源状态。",
+      "capture": {
+        "in": {
+          "attempt": "string",
+          "content_version": "number"
+        },
+        "out": {
+          "revision": "number",
+          "phase": "string",
+          "available": "number",
+          "join_state": "string"
+        }
+      },
+      "layer": "business",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.advance"
+      }
+    },
+    {
+      "id": "flow.archive",
+      "kind": "action",
+      "label": "复核并保存快照",
+      "summary": "同一事务核对当前关系、版本、审批、项目大小上限及本次检查结果。",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "layer": "business",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.try_commit"
+      }
+    },
+    {
+      "id": "authority_read",
+      "kind": "function",
+      "label": "读取当前权威关系",
+      "summary": "同一 SQLite 事务读取资料、直接负责人和完整审批候选。",
+      "capture": {
+        "in": {
+          "document_id": "string"
+        },
+        "out": {
+          "project_id": "string",
+          "folder_id": "string",
+          "content_version": "number",
+          "relation_epoch": "number",
+          "approval_count": "number"
+        }
+      },
+      "parent": "flow.policy",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.evaluate"
+      },
+      "code_evidence": {
+        "symbol": "archive_app/service.py::ArchiveService.evaluate",
+        "ast_hash": "90e6e754efbd8cba9f8b724c4d1fe0db15d4d8e15b8297aa4a001f667b3917f9",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "approval_candidate",
+      "kind": "decision",
+      "label": "逐条判断审批",
+      "summary": "每条审批独立计算全部目标、身份、撤销与期限条件。",
+      "capture": {
+        "in": {
+          "id": "string",
+          "project_id": "string",
+          "operator_id": "string",
+          "document_id": "string",
+          "content_version": "number",
+          "reviewer_id": "string",
+          "deadline": "number",
+          "revoked": "number",
+          "request_project": "string",
+          "request_operator": "string",
+          "request_document": "string",
+          "request_version": "number",
+          "clock": "number"
+        },
+        "out": {
+          "project_ok": "boolean",
+          "operator_ok": "boolean",
+          "document_ok": "boolean",
+          "version_ok": "boolean",
+          "reviewer_ok": "boolean",
+          "different_actor": "boolean",
+          "not_revoked": "boolean",
+          "time_ok": "boolean",
+          "target_matches": "boolean",
+          "allowed": "boolean"
+        }
+      },
+      "parent": "approval_check",
+      "source": {
+        "path": "archive_app/policy.py",
+        "symbol": "candidate_allowed"
+      },
+      "code_evidence": {
+        "symbol": "archive_app/policy.py::candidate_allowed",
+        "ast_hash": "93bc27a7cd2a6674bdeaf6e2fe634b027a04d3300f8b447c813347ce2b541fb5",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "commit_guard",
+      "kind": "decision",
+      "label": "当前是否仍有资格",
+      "summary": "提交前重读当前版本与关系，不能沿用历史绿色结果。",
+      "capture": {
+        "in": {
+          "stage": "string",
+          "project_id": "string",
+          "folder_id": "string",
+          "operator_id": "string",
+          "run_version": "number",
+          "current_version": "number",
+          "all_passed": "boolean",
+          "content_bytes": "number",
+          "limit_bytes": "number",
+          "limit_revision": "number"
+        },
+        "out": {
+          "allowed": "boolean",
+          "scope_allowed": "boolean",
+          "approval_allowed": "boolean",
+          "size_allowed": "boolean",
+          "version_current": "boolean",
+          "reasons": [
+            "string"
+          ]
+        }
+      },
+      "parent": "flow.archive",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.evaluate"
+      },
+      "code_evidence": {
+        "symbol": "archive_app/service.py::ArchiveService.evaluate",
+        "ast_hash": "90e6e754efbd8cba9f8b724c4d1fe0db15d4d8e15b8297aa4a001f667b3917f9",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "checks_join",
+      "kind": "data",
+      "label": "本次两项均通过",
+      "summary": "ALL 汇合只使用同次运行同一内容版本的结果。",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "flow.checks",
+      "source": {
+        "path": "archive_app/workflow.py",
+        "symbol": "activity_step"
+      },
+      "execution_role": "join"
+    },
+    {
+      "id": "cancel_run",
+      "kind": "action",
+      "label": "取消本次运行",
+      "summary": "阻止尚未开始的检查，等待已启动检查实际结束再归还名额。",
+      "capture": {
+        "in": {
+          "attempt": "string"
+        },
+        "out": {
+          "phase": "string",
+          "running_count": "number"
+        }
+      },
+      "parent": "flow.checks",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.cancel_run"
+      },
+      "code_evidence": {
+        "symbol": "archive_app/service.py::ArchiveService.cancel_run",
+        "ast_hash": "8995812b8640176f445ea06aaa1498d80f08ab33625187111394e6cd077c51ec",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "lifecycle",
+      "kind": "data",
+      "label": "本次流程状态",
+      "summary": "展开查看实际状态迁移；历史时刻使用该帧记录的状态。",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "flow.checks",
+      "source": {
+        "path": "archive_app/workflow.py",
+        "symbol": "Workflow"
+      }
+    },
+    {
+      "id": "issue_approval",
+      "kind": "function",
+      "label": "为当前版本审批",
+      "summary": "记录另一名审核员的版本绑定审批；既有等待运行仍需手动继续。",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "approval_check",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.add_approval"
+      },
+      "code_evidence": {
+        "symbol": "archive_app/service.py::ArchiveService.add_approval",
+        "ast_hash": "994e11925cbeffdf600d9a570708803965dcd5e9455ad02a3c1dbfd985f99e58",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "move_folder",
+      "kind": "function",
+      "label": "调整分类文件夹",
+      "summary": "更新当前目录及关系版本，当前直接负责人关系随之重查。",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "flow.policy",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.move_document"
+      },
+      "code_evidence": {
+        "symbol": "archive_app/service.py::ArchiveService.move_document",
+        "ast_hash": "cfbe26dcb3a71d7f5420c0b376f0b6ca9a8f93cd96b02ef18777385a22951589",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "recover_run",
+      "kind": "function",
+      "label": "恢复中断记录",
+      "summary": "重启不复活已失去的工作线程；保留记录并释放其容量。",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "flow.checks",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.recover_interrupted"
+      },
+      "code_evidence": {
+        "symbol": "archive_app/service.py::ArchiveService.recover_interrupted",
+        "ast_hash": "73bc67aad3fcfe0cc105fa3ed4e0f38227810ccd6cf8d06d57f2e30912cb17fc",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "worker_call",
+      "kind": "function",
+      "label": "执行并保存检查结果",
+      "summary": "真实工作线程结束后更新同次运行，随后归还所占名额。",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "flow.checks",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.worker"
+      },
+      "code_evidence": {
+        "symbol": "archive_app/service.py::ArchiveService.worker",
+        "ast_hash": "a9782fe30d234227abdc3201216da610eec2740ad43dd87b41f0693d9f15d505",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "project_limit",
+      "kind": "data",
+      "label": "项目归档大小上限",
+      "summary": "每项目独立持久化，默认 8192 字节；改变上限不修改内容版本或审批。",
+      "capture": {
+        "in": {
+          "project_id": "string"
+        },
+        "out": {
+          "project_id": "string",
+          "limit_bytes": "number",
+          "limit_revision": "number"
+        }
+      },
+      "parent": "flow.policy",
+      "source": {
+        "path": "archive_app/storage.py",
+        "symbol": "ArchiveStore.project_limit"
+      },
+      "requirements": [
+        "R14",
+        "R15",
+        "R16"
+      ]
+    },
+    {
+      "id": "size_guard",
+      "kind": "decision",
+      "label": "正文是否在当前上限内",
+      "summary": "只计算正文 UTF-8 字节数，等于上限允许；开始、继续、提交时重新读取当前上限。",
+      "capture": {
+        "in": {
+          "project_id": "string",
+          "content_bytes": "number",
+          "limit_bytes": "number",
+          "limit_revision": "number"
+        },
+        "out": {
+          "allowed": "boolean",
+          "content_bytes": "number",
+          "limit_bytes": "number",
+          "limit_revision": "number",
+          "excess_bytes": "number"
+        }
+      },
+      "parent": "flow.policy",
+      "source": {
+        "path": "archive_app/policy.py",
+        "symbol": "check_size"
+      },
+      "requirements": [
+        "R14",
+        "R15",
+        "R16"
+      ],
+      "rule": {
+        "encoding": "utf-8",
+        "body_only": true,
+        "inclusive": true
+      },
+      "code_evidence": {
+        "symbol": "archive_app/policy.py::check_size",
+        "ast_hash": "bae419d3d1ec01a2af4bca7af701b144470d02bbf5d2c9d9f70b6249623cc6de",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "set_size_limit",
+      "kind": "function",
+      "label": "调整项目大小上限",
+      "summary": "只接受正整数；超限等待，已开始检查自然结束，条件恢复仍需手动继续。",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "parent": "flow.policy",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.set_archive_limit"
+      },
+      "requirements": [
+        "R14",
+        "R15",
+        "R16"
+      ],
+      "code_evidence": {
+        "symbol": "archive_app/service.py::ArchiveService.set_archive_limit",
+        "ast_hash": "20bd795b1d58935fb18d238ea9e17432f02ec93edbd28699c3d37d292060889e",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "state.created",
+      "kind": "state",
+      "layer": "state",
+      "value": "created",
+      "label": "准备归档",
+      "summary": "程序持久化状态 created",
+      "parent": "lifecycle",
+      "source": {
+        "path": "archive_app/workflow.py",
+        "symbol": "Workflow"
+      }
+    },
+    {
+      "id": "state.checking",
+      "kind": "state",
+      "layer": "state",
+      "value": "checking",
+      "label": "检查中",
+      "summary": "程序持久化状态 checking",
+      "parent": "lifecycle",
+      "source": {
+        "path": "archive_app/workflow.py",
+        "symbol": "Workflow"
+      }
+    },
+    {
+      "id": "state.waiting",
+      "kind": "state",
+      "layer": "state",
+      "value": "waiting",
+      "label": "等待资格 · 点击继续",
+      "summary": "程序持久化状态 waiting",
+      "parent": "lifecycle",
+      "source": {
+        "path": "archive_app/workflow.py",
+        "symbol": "Workflow"
+      }
+    },
+    {
+      "id": "state.ready",
+      "kind": "state",
+      "layer": "state",
+      "value": "ready",
+      "label": "检查通过，复核提交",
+      "summary": "程序持久化状态 ready",
+      "parent": "lifecycle",
+      "source": {
+        "path": "archive_app/workflow.py",
+        "symbol": "Workflow"
+      }
+    },
+    {
+      "id": "state.completed",
+      "kind": "state",
+      "layer": "state",
+      "value": "completed",
+      "label": "已归档",
+      "summary": "程序持久化状态 completed",
+      "parent": "lifecycle",
+      "source": {
+        "path": "archive_app/workflow.py",
+        "symbol": "Workflow"
+      }
+    },
+    {
+      "id": "state.failed",
+      "kind": "state",
+      "layer": "state",
+      "value": "failed",
+      "label": "检查未通过",
+      "summary": "程序持久化状态 failed",
+      "parent": "lifecycle",
+      "source": {
+        "path": "archive_app/workflow.py",
+        "symbol": "Workflow"
+      }
+    },
+    {
+      "id": "state.stopping",
+      "kind": "state",
+      "layer": "state",
+      "value": "stopping",
+      "label": "等待已启动检查结束",
+      "summary": "程序持久化状态 stopping",
+      "parent": "lifecycle",
+      "source": {
+        "path": "archive_app/workflow.py",
+        "symbol": "Workflow"
+      }
+    },
+    {
+      "id": "state.cancelled",
+      "kind": "state",
+      "layer": "state",
+      "value": "cancelled",
+      "label": "本次运行已取消",
+      "summary": "程序持久化状态 cancelled",
+      "parent": "lifecycle",
+      "source": {
+        "path": "archive_app/workflow.py",
+        "symbol": "Workflow"
+      }
+    },
+    {
+      "id": "state.superseded",
+      "kind": "state",
+      "layer": "state",
+      "value": "superseded",
+      "label": "内容已改版，本次不可提交",
+      "summary": "程序持久化状态 superseded",
+      "parent": "lifecycle",
+      "source": {
+        "path": "archive_app/workflow.py",
+        "symbol": "Workflow"
+      }
+    },
+    {
+      "id": "state.interrupted",
+      "kind": "state",
+      "layer": "state",
+      "value": "interrupted",
+      "label": "进程中断，需新建运行",
+      "summary": "程序持久化状态 interrupted",
+      "parent": "lifecycle",
+      "source": {
+        "path": "archive_app/workflow.py",
+        "symbol": "Workflow"
+      }
+    },
+    {
+      "id": "code.58a42f06ed994d20",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "initial_configuration",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "archive_app/workflow.py",
+        "symbol": "initial_configuration"
+      },
+      "parent": "archive_request",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "attempt: str, version: int, capacity: int",
+      "code_evidence": {
+        "symbol": "archive_app/workflow.py::initial_configuration",
+        "ast_hash": "068eb193f7a25b3326e295ddaa96dafdd5e50bf7dc52e217c80562c351eaea80",
+        "parameters": [
+          {
+            "name": "attempt",
+            "annotation": "str"
+          },
+          {
+            "name": "version",
+            "annotation": "int"
+          },
+          {
+            "name": "capacity",
+            "annotation": "int"
+          }
+        ],
+        "returns": "dict",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.0c1ff05551810b89",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "ArchiveService.trace",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.trace"
+      },
+      "parent": "archive_request",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self, run: dict",
+      "code_evidence": {
+        "symbol": "archive_app/service.py::ArchiveService.trace",
+        "ast_hash": "fffba835ba86d655b9012da2e9771f20abc55900b1e3d6f43ed1fe001ef86591",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          },
+          {
+            "name": "run",
+            "annotation": "dict"
+          }
+        ],
+        "returns": "TracePort",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.f3a6c799f69f9f5f",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "ArchiveService.basis",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.basis"
+      },
+      "parent": "archive_request",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self, db: sqlite3.Connection, run: dict",
+      "code_evidence": {
+        "symbol": "archive_app/service.py::ArchiveService.basis",
+        "ast_hash": "921f6a0f515546dfc63d21fa2abaac3433ecb766d8cd780b4debe49e51e103f4",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          },
+          {
+            "name": "db",
+            "annotation": "sqlite3.Connection"
+          },
+          {
+            "name": "run",
+            "annotation": "dict"
+          }
+        ],
+        "returns": "dict",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.bb6f1114d12b1280",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "ArchiveService.advance",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.advance"
+      },
+      "parent": "archive_request",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self, run_id: str",
+      "code_evidence": {
+        "symbol": "archive_app/service.py::ArchiveService.advance",
+        "ast_hash": "aa8400987395c1f22c24afb50a11d32ece36edae4a29974075f521628e77ce3b",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          },
+          {
+            "name": "run_id",
+            "annotation": "str"
+          }
+        ],
+        "returns": "dict",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.27ce332b5cf14cf4",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "change_phase",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "archive_app/workflow.py",
+        "symbol": "change_phase"
+      },
+      "parent": "archive_commit",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "run: dict, event: str, evaluation: dict, now: float",
+      "code_evidence": {
+        "symbol": "archive_app/workflow.py::change_phase",
+        "ast_hash": "95bec27ccb2fc0b382ce354379a39f8b034e4bf78a038f0a8ce565f430097355",
+        "parameters": [
+          {
+            "name": "run",
+            "annotation": "dict"
+          },
+          {
+            "name": "event",
+            "annotation": "str"
+          },
+          {
+            "name": "evaluation",
+            "annotation": "dict"
+          },
+          {
+            "name": "now",
+            "annotation": "float"
+          }
+        ],
+        "returns": "None",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.d31899a8ea590c46",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "ArchiveService.tick",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.tick"
+      },
+      "parent": "approval_revoked",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self",
+      "code_evidence": {
+        "symbol": "archive_app/service.py::ArchiveService.tick",
+        "ast_hash": "c974c02edbae70195c714bd5a8b297816838eca35f98bbd7561c767abbab2514",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          }
+        ],
+        "returns": "None",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.881d8e61a1974236",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "ArchiveService.tick",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.tick"
+      },
+      "parent": "content_changed",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self",
+      "code_evidence": {
+        "symbol": "archive_app/service.py::ArchiveService.tick",
+        "ast_hash": "c974c02edbae70195c714bd5a8b297816838eca35f98bbd7561c767abbab2514",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          }
+        ],
+        "returns": "None",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.06e2186c0030c854",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "ArchiveService.basis",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.basis"
+      },
+      "parent": "commit_guard",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self, db: sqlite3.Connection, run: dict",
+      "code_evidence": {
+        "symbol": "archive_app/service.py::ArchiveService.basis",
+        "ast_hash": "921f6a0f515546dfc63d21fa2abaac3433ecb766d8cd780b4debe49e51e103f4",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          },
+          {
+            "name": "db",
+            "annotation": "sqlite3.Connection"
+          },
+          {
+            "name": "run",
+            "annotation": "dict"
+          }
+        ],
+        "returns": "dict",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.0c55d9bef8e2c2ec",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "is_direct_manager",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "archive_app/policy.py",
+        "symbol": "is_direct_manager"
+      },
+      "parent": "commit_guard",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "project_id: str, operator_id: str, folder_id: str, assignments: list[dict], trace: TracePort | None=None, basis: dict | None=None, parent: str | None=None",
+      "code_evidence": {
+        "symbol": "archive_app/policy.py::is_direct_manager",
+        "ast_hash": "1aa192b1f51ddc4beff4f4192109a5248b6de3ad6520e0280e4e330f05c56cc3",
+        "parameters": [
+          {
+            "name": "project_id",
+            "annotation": "str"
+          },
+          {
+            "name": "operator_id",
+            "annotation": "str"
+          },
+          {
+            "name": "folder_id",
+            "annotation": "str"
+          },
+          {
+            "name": "assignments",
+            "annotation": "list[dict]"
+          },
+          {
+            "name": "trace",
+            "annotation": "TracePort | None"
+          },
+          {
+            "name": "basis",
+            "annotation": "dict | None"
+          },
+          {
+            "name": "parent",
+            "annotation": "str | None"
+          }
+        ],
+        "returns": "bool",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.fc2bea6773c216f7",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "evaluate_approvals",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "archive_app/policy.py",
+        "symbol": "evaluate_approvals"
+      },
+      "parent": "commit_guard",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "project_id: str, operator_id: str, document_id: str, content_version: int, approvals: list[dict], reviewers: list[str], now: float, trace: TracePort, basis: dict, parent: str",
+      "code_evidence": {
+        "symbol": "archive_app/policy.py::evaluate_approvals",
+        "ast_hash": "d0096a98392cf4201c0d5a52f938a42ef3c124e7eccaa759e3f4c0a36148f8f0",
+        "parameters": [
+          {
+            "name": "project_id",
+            "annotation": "str"
+          },
+          {
+            "name": "operator_id",
+            "annotation": "str"
+          },
+          {
+            "name": "document_id",
+            "annotation": "str"
+          },
+          {
+            "name": "content_version",
+            "annotation": "int"
+          },
+          {
+            "name": "approvals",
+            "annotation": "list[dict]"
+          },
+          {
+            "name": "reviewers",
+            "annotation": "list[str]"
+          },
+          {
+            "name": "now",
+            "annotation": "float"
+          },
+          {
+            "name": "trace",
+            "annotation": "TracePort"
+          },
+          {
+            "name": "basis",
+            "annotation": "dict"
+          },
+          {
+            "name": "parent",
+            "annotation": "str"
+          }
+        ],
+        "returns": "dict",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.f3f4c403913bddaf",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "check_size",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "archive_app/policy.py",
+        "symbol": "check_size"
+      },
+      "parent": "commit_guard",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "content: str, limit_bytes: int, project_id: str, limit_revision: int, trace: TracePort | None=None, basis: dict | None=None, parent: str | None=None, source_event: str | None=None",
+      "code_evidence": {
+        "symbol": "archive_app/policy.py::check_size",
+        "ast_hash": "bae419d3d1ec01a2af4bca7af701b144470d02bbf5d2c9d9f70b6249623cc6de",
+        "parameters": [
+          {
+            "name": "content",
+            "annotation": "str"
+          },
+          {
+            "name": "limit_bytes",
+            "annotation": "int"
+          },
+          {
+            "name": "project_id",
+            "annotation": "str"
+          },
+          {
+            "name": "limit_revision",
+            "annotation": "int"
+          },
+          {
+            "name": "trace",
+            "annotation": "TracePort | None"
+          },
+          {
+            "name": "basis",
+            "annotation": "dict | None"
+          },
+          {
+            "name": "parent",
+            "annotation": "str | None"
+          },
+          {
+            "name": "source_event",
+            "annotation": "str | None"
+          }
+        ],
+        "returns": "dict",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.02e9e79362dd7b52",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "ArchiveService.request_stop",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.request_stop"
+      },
+      "parent": "cancel_run",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self, run: dict, reason: str, now: float",
+      "code_evidence": {
+        "symbol": "archive_app/service.py::ArchiveService.request_stop",
+        "ast_hash": "eed341edf4c99f86b9c3bb433eccb1a76b1229cc27dc1ecc346e4a1a0848df00",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          },
+          {
+            "name": "run",
+            "annotation": "dict"
+          },
+          {
+            "name": "reason",
+            "annotation": "str"
+          },
+          {
+            "name": "now",
+            "annotation": "float"
+          }
+        ],
+        "returns": "None",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.46ead1f94e6333dd",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "ArchiveService.settle",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.settle"
+      },
+      "parent": "cancel_run",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self, run: dict, now: float",
+      "code_evidence": {
+        "symbol": "archive_app/service.py::ArchiveService.settle",
+        "ast_hash": "9419c35378d29d11c879194b5f3d1561bb6b2410e3747497bcbef3ea0bfc2822",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          },
+          {
+            "name": "run",
+            "annotation": "dict"
+          },
+          {
+            "name": "now",
+            "annotation": "float"
+          }
+        ],
+        "returns": "None",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.c852303e58806ad7",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "ArchiveService.trace",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.trace"
+      },
+      "parent": "cancel_run",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self, run: dict",
+      "code_evidence": {
+        "symbol": "archive_app/service.py::ArchiveService.trace",
+        "ast_hash": "fffba835ba86d655b9012da2e9771f20abc55900b1e3d6f43ed1fe001ef86591",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          },
+          {
+            "name": "run",
+            "annotation": "dict"
+          }
+        ],
+        "returns": "TracePort",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.77eab623e82b416e",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "ArchiveService.basis",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.basis"
+      },
+      "parent": "cancel_run",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self, db: sqlite3.Connection, run: dict",
+      "code_evidence": {
+        "symbol": "archive_app/service.py::ArchiveService.basis",
+        "ast_hash": "921f6a0f515546dfc63d21fa2abaac3433ecb766d8cd780b4debe49e51e103f4",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          },
+          {
+            "name": "db",
+            "annotation": "sqlite3.Connection"
+          },
+          {
+            "name": "run",
+            "annotation": "dict"
+          }
+        ],
+        "returns": "dict",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.c0d8ecdb19865c16",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "activity_step",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "archive_app/workflow.py",
+        "symbol": "activity_step"
+      },
+      "parent": "recover_run",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "run: dict, event: str, activity: str, now: float, outcome: str | None=None",
+      "code_evidence": {
+        "symbol": "archive_app/workflow.py::activity_step",
+        "ast_hash": "0471f26a104e3a66685d8e7128a7abd4eef043aa46e4b8900c32a520a19752f0",
+        "parameters": [
+          {
+            "name": "run",
+            "annotation": "dict"
+          },
+          {
+            "name": "event",
+            "annotation": "str"
+          },
+          {
+            "name": "activity",
+            "annotation": "str"
+          },
+          {
+            "name": "now",
+            "annotation": "float"
+          },
+          {
+            "name": "outcome",
+            "annotation": "str | None"
+          }
+        ],
+        "returns": "None",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.e81f5e85b51357b2",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "change_phase",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "archive_app/workflow.py",
+        "symbol": "change_phase"
+      },
+      "parent": "recover_run",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "run: dict, event: str, evaluation: dict, now: float",
+      "code_evidence": {
+        "symbol": "archive_app/workflow.py::change_phase",
+        "ast_hash": "95bec27ccb2fc0b382ce354379a39f8b034e4bf78a038f0a8ce565f430097355",
+        "parameters": [
+          {
+            "name": "run",
+            "annotation": "dict"
+          },
+          {
+            "name": "event",
+            "annotation": "str"
+          },
+          {
+            "name": "evaluation",
+            "annotation": "dict"
+          },
+          {
+            "name": "now",
+            "annotation": "float"
+          }
+        ],
+        "returns": "None",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.a8e6aac669bf72c8",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "ArchiveService.emit_configuration",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "archive_app/service.py",
+        "symbol": "ArchiveService.emit_configuration"
+      },
+      "parent": "worker_call",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self, run: dict, trace: TracePort, basis: dict",
+      "code_evidence": {
+        "symbol": "archive_app/service.py::ArchiveService.emit_configuration",
+        "ast_hash": "70b9e70467c2a0157d5ed3da5af789f937b6a88775394c1443dcf951b8589d1b",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          },
+          {
+            "name": "run",
+            "annotation": "dict"
+          },
+          {
+            "name": "trace",
+            "annotation": "TracePort"
+          },
+          {
+            "name": "basis",
+            "annotation": "dict"
+          }
+        ],
+        "returns": "None",
+        "origin": "python-ast"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "request_scope",
+      "from": "archive_request",
+      "to": "scope_check",
+      "type": "data",
+      "label": "判断发起人的管理范围",
+      "evidence": "U01；候选入口 I01"
+    },
+    {
+      "id": "document_scope",
+      "from": "document",
+      "to": "scope_check",
+      "type": "data",
+      "label": "资料所在目录",
+      "evidence": "U01"
+    },
+    {
+      "id": "scope_archive",
+      "from": "scope_check",
+      "to": "archive_commit",
+      "type": "guard",
+      "label": "仅所在文件夹直接负责人",
+      "evidence": "U02；D01 已确认"
+    },
+    {
+      "id": "approval_archive",
+      "from": "approval_check",
+      "to": "archive_commit",
+      "type": "guard",
+      "label": "任一审批有效，提交时仍需适用",
+      "evidence": "U03；已确认规则，具体执行尚未实现"
+    },
+    {
+      "id": "document_content",
+      "from": "document",
+      "to": "content_check",
+      "type": "data",
+      "label": "本次运行的内容版本",
+      "evidence": "U03；已确认规则，具体执行尚未实现"
+    },
+    {
+      "id": "document_index",
+      "from": "document",
+      "to": "index_check",
+      "type": "data",
+      "label": "被检查的索引",
+      "evidence": "U01；检查对象细节待 D07"
+    },
+    {
+      "id": "revoke_approval",
+      "from": "approval_revoked",
+      "to": "approval_check",
+      "type": "data",
+      "label": "撤销后重新判断全部候选",
+      "evidence": "U03；已确认规则，具体执行尚未实现"
+    },
+    {
+      "id": "edit_document",
+      "from": "content_changed",
+      "to": "document",
+      "type": "data",
+      "label": "修改内容",
+      "evidence": "U01"
+    },
+    {
+      "id": "edit_approval",
+      "from": "content_changed",
+      "to": "approval_check",
+      "type": "data",
+      "label": "新版本不能沿用旧审批",
+      "evidence": "U03；已确认规则，具体执行尚未实现"
+    },
+    {
+      "id": "assignments_scope",
+      "from": "folder_assignments",
+      "to": "scope_check",
+      "type": "data",
+      "label": "直接负责关系",
+      "evidence": "U02；D01"
+    },
+    {
+      "id": "target_approval",
+      "from": "approval_target",
+      "to": "approval_check",
+      "type": "data",
+      "label": "四个目标字段全部匹配",
+      "evidence": "U02；D02"
+    },
+    {
+      "id": "document_unique",
+      "from": "document",
+      "to": "archive_unique",
+      "type": "data",
+      "label": "资料身份与内容版本",
+      "evidence": "U02；D03"
+    },
+    {
+      "id": "unique_archive",
+      "from": "archive_unique",
+      "to": "archive_commit",
+      "type": "guard",
+      "label": "相同资料版本不重复建档",
+      "evidence": "U02；D03"
+    },
+    {
+      "id": "resume_approval",
+      "from": "resume_run",
+      "to": "approval_check",
+      "type": "flow",
+      "label": "手动继续时重查",
+      "evidence": "U03"
+    },
+    {
+      "id": "resume_scope",
+      "from": "resume_run",
+      "to": "scope_check",
+      "type": "flow",
+      "label": "重新检查资格",
+      "evidence": "U03"
+    },
+    {
+      "id": "run_content",
+      "from": "run_identity",
+      "to": "content_check",
+      "type": "data",
+      "label": "所属运行与版本",
+      "evidence": "U03"
+    },
+    {
+      "id": "run_index",
+      "from": "run_identity",
+      "to": "index_check",
+      "type": "data",
+      "label": "所属运行与版本",
+      "evidence": "U03"
+    },
+    {
+      "id": "run_slots",
+      "from": "run_identity",
+      "to": "processing_slots",
+      "type": "data",
+      "label": "本运行独享容量",
+      "evidence": "U03"
+    },
+    {
+      "id": "edit_run",
+      "from": "content_changed",
+      "to": "run_identity",
+      "type": "data",
+      "label": "旧运行保留；新版本另开",
+      "evidence": "U03"
+    },
+    {
+      "id": "run_archive",
+      "from": "run_identity",
+      "to": "archive_commit",
+      "type": "guard",
+      "label": "旧版本运行不能提交",
+      "evidence": "U03"
+    },
+    {
+      "id": "contains:archive_request",
+      "from": "flow.policy",
+      "to": "archive_request",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:document",
+      "from": "flow.policy",
+      "to": "document",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:scope_check",
+      "from": "flow.policy",
+      "to": "scope_check",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:approval_check",
+      "from": "flow.policy",
+      "to": "approval_check",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:content_check",
+      "from": "flow.checks",
+      "to": "content_check",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:index_check",
+      "from": "flow.checks",
+      "to": "index_check",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:processing_slots",
+      "from": "flow.checks",
+      "to": "processing_slots",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:archive_commit",
+      "from": "flow.archive",
+      "to": "archive_commit",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:approval_revoked",
+      "from": "approval_check",
+      "to": "approval_revoked",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:content_changed",
+      "from": "flow.checks",
+      "to": "content_changed",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:folder_assignments",
+      "from": "flow.policy",
+      "to": "folder_assignments",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:approval_target",
+      "from": "flow.policy",
+      "to": "approval_target",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:archive_unique",
+      "from": "flow.archive",
+      "to": "archive_unique",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:resume_run",
+      "from": "flow.policy",
+      "to": "resume_run",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:run_identity",
+      "from": "flow.checks",
+      "to": "run_identity",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:authority_read",
+      "from": "flow.policy",
+      "to": "authority_read",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:approval_candidate",
+      "from": "approval_check",
+      "to": "approval_candidate",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:commit_guard",
+      "from": "flow.archive",
+      "to": "commit_guard",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:checks_join",
+      "from": "flow.checks",
+      "to": "checks_join",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:cancel_run",
+      "from": "flow.checks",
+      "to": "cancel_run",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:lifecycle",
+      "from": "flow.checks",
+      "to": "lifecycle",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:issue_approval",
+      "from": "approval_check",
+      "to": "issue_approval",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:move_folder",
+      "from": "flow.policy",
+      "to": "move_folder",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:recover_run",
+      "from": "flow.checks",
+      "to": "recover_run",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:worker_call",
+      "from": "flow.checks",
+      "to": "worker_call",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:project_limit",
+      "from": "flow.policy",
+      "to": "project_limit",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:size_guard",
+      "from": "flow.policy",
+      "to": "size_guard",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:set_size_limit",
+      "from": "flow.policy",
+      "to": "set_size_limit",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:state.created",
+      "from": "lifecycle",
+      "to": "state.created",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:state.checking",
+      "from": "lifecycle",
+      "to": "state.checking",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:state.waiting",
+      "from": "lifecycle",
+      "to": "state.waiting",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:state.ready",
+      "from": "lifecycle",
+      "to": "state.ready",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:state.completed",
+      "from": "lifecycle",
+      "to": "state.completed",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:state.failed",
+      "from": "lifecycle",
+      "to": "state.failed",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:state.stopping",
+      "from": "lifecycle",
+      "to": "state.stopping",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:state.cancelled",
+      "from": "lifecycle",
+      "to": "state.cancelled",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:state.superseded",
+      "from": "lifecycle",
+      "to": "state.superseded",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "contains:state.interrupted",
+      "from": "lifecycle",
+      "to": "state.interrupted",
+      "type": "contains",
+      "label": "包含",
+      "evidence": "项目业务分组"
+    },
+    {
+      "id": "resource:content_check",
+      "from": "processing_slots",
+      "to": "content_check",
+      "type": "resource",
+      "units": 1,
+      "label": "占用 1 个本运行名额",
+      "evidence": "实际执行声明 machine.execution"
+    },
+    {
+      "id": "join:content_check",
+      "from": "content_check",
+      "to": "checks_join",
+      "type": "join",
+      "label": "本次检查结束",
+      "evidence": "实际 ALL 汇合声明"
+    },
+    {
+      "id": "resource:index_check",
+      "from": "processing_slots",
+      "to": "index_check",
+      "type": "resource",
+      "units": 1,
+      "label": "占用 1 个本运行名额",
+      "evidence": "实际执行声明 machine.execution"
+    },
+    {
+      "id": "join:index_check",
+      "from": "index_check",
+      "to": "checks_join",
+      "type": "join",
+      "label": "本次检查结束",
+      "evidence": "实际 ALL 汇合声明"
+    },
+    {
+      "id": "all-to-commit",
+      "from": "checks_join",
+      "to": "archive_commit",
+      "type": "guard",
+      "label": "同次两项通过",
+      "evidence": "U03-U04"
+    },
+    {
+      "id": "policy-to-checks",
+      "from": "flow.policy",
+      "to": "flow.checks",
+      "type": "flow",
+      "label": "当前资格满足后开始",
+      "evidence": "U04"
+    },
+    {
+      "id": "checks-to-archive",
+      "from": "flow.checks",
+      "to": "flow.archive",
+      "type": "flow",
+      "label": "两项通过再复核",
+      "evidence": "U03-U04"
+    },
+    {
+      "id": "candidate-to-aggregate",
+      "from": "approval_candidate",
+      "to": "approval_check",
+      "type": "guard",
+      "label": "至少一条有效",
+      "evidence": "U03"
+    },
+    {
+      "id": "limit-to-size",
+      "from": "project_limit",
+      "to": "size_guard",
+      "type": "data",
+      "label": "读取当前字节上限",
+      "evidence": "U05-U06"
+    },
+    {
+      "id": "set-to-limit",
+      "from": "set_size_limit",
+      "to": "project_limit",
+      "type": "data",
+      "label": "保存项目配置",
+      "evidence": "U06"
+    },
+    {
+      "id": "size-to-commit",
+      "from": "size_guard",
+      "to": "commit_guard",
+      "type": "guard",
+      "label": "当前正文不超限",
+      "evidence": "U05-U06"
+    },
+    {
+      "id": "contains.code.58a42f06ed994d20",
+      "from": "archive_request",
+      "to": "code.58a42f06ed994d20",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.5594249977fa8c06",
+      "from": "archive_request",
+      "to": "code.58a42f06ed994d20",
+      "type": "flow",
+      "label": "静态调用 initial_configuration",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 119,
+        "column": 35,
+        "args": [
+          "ident",
+          "doc['version']",
+          "capacity"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.0c1ff05551810b89",
+      "from": "archive_request",
+      "to": "code.0c1ff05551810b89",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.9fc95990e1e9ac06",
+      "from": "archive_request",
+      "to": "code.0c1ff05551810b89",
+      "type": "flow",
+      "label": "静态调用 self.trace",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 123,
+        "column": 20,
+        "args": [
+          "run"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.f3a6c799f69f9f5f",
+      "from": "archive_request",
+      "to": "code.f3a6c799f69f9f5f",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.1b02686aa3e46744",
+      "from": "archive_request",
+      "to": "code.f3a6c799f69f9f5f",
+      "type": "flow",
+      "label": "静态调用 self.basis",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 124,
+        "column": 51,
+        "args": [
+          "db",
+          "run"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.bb6f1114d12b1280",
+      "from": "archive_request",
+      "to": "code.bb6f1114d12b1280",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.fa8ba4ca732650b2",
+      "from": "archive_request",
+      "to": "code.bb6f1114d12b1280",
+      "type": "flow",
+      "label": "静态调用 self.advance",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 128,
+        "column": 8,
+        "args": [
+          "ident"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.8eb8f41640be34fe",
+      "from": "approval_check",
+      "to": "approval_candidate",
+      "type": "flow",
+      "label": "静态调用 candidate_allowed",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 54,
+        "column": 36,
+        "args": [
+          "g",
+          "request",
+          "now",
+          "reviewers",
+          "trace",
+          "basis",
+          "call"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.0c7b14eac6c6df6d",
+      "from": "archive_commit",
+      "to": "commit_guard",
+      "type": "flow",
+      "label": "静态调用 self.evaluate",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 221,
+        "column": 21,
+        "args": [
+          "db",
+          "run",
+          "trace",
+          "'commit'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.27ce332b5cf14cf4",
+      "from": "archive_commit",
+      "to": "code.27ce332b5cf14cf4",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.8312aa6992a480f2",
+      "from": "archive_commit",
+      "to": "code.27ce332b5cf14cf4",
+      "type": "flow",
+      "label": "静态调用 change_phase",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 228,
+        "column": 12,
+        "args": [
+          "run",
+          "'pause'",
+          "{}",
+          "float(self.clock())"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.928f5f51f80fb94a",
+      "from": "archive_commit",
+      "to": "code.27ce332b5cf14cf4",
+      "type": "flow",
+      "label": "静态调用 change_phase",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 241,
+        "column": 8,
+        "args": [
+          "run",
+          "'publish'",
+          "{**evaluation, 'all_passed': all_passed, 'effect_saved': True}",
+          "float(self.clock())"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.d31899a8ea590c46",
+      "from": "approval_revoked",
+      "to": "code.d31899a8ea590c46",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.871b5047fce73da1",
+      "from": "approval_revoked",
+      "to": "code.d31899a8ea590c46",
+      "type": "flow",
+      "label": "静态调用 self.tick",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 343,
+        "column": 8,
+        "args": [],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.881d8e61a1974236",
+      "from": "content_changed",
+      "to": "code.881d8e61a1974236",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.ceb8b49391976e43",
+      "from": "content_changed",
+      "to": "code.881d8e61a1974236",
+      "type": "flow",
+      "label": "静态调用 self.tick",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 373,
+        "column": 8,
+        "args": [],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.1430cdb9d08c98ac",
+      "from": "resume_run",
+      "to": "code.0c1ff05551810b89",
+      "type": "flow",
+      "label": "静态调用 self.trace",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 292,
+        "column": 20,
+        "args": [
+          "run"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.2cda396937c3f80a",
+      "from": "resume_run",
+      "to": "authority_read",
+      "type": "flow",
+      "label": "静态调用 self.evaluate",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 293,
+        "column": 25,
+        "args": [
+          "db",
+          "run",
+          "trace",
+          "'resume'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.1da8546788d52363",
+      "from": "resume_run",
+      "to": "code.bb6f1114d12b1280",
+      "type": "flow",
+      "label": "静态调用 self.advance",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 300,
+        "column": 15,
+        "args": [
+          "run_id"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.d040eb29edf243e0",
+      "from": "authority_read",
+      "to": "code.f3a6c799f69f9f5f",
+      "type": "flow",
+      "label": "静态调用 self.basis",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 59,
+        "column": 22,
+        "args": [
+          "db",
+          "run"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.c4e22a5744faa375",
+      "from": "authority_read",
+      "to": "scope_check",
+      "type": "flow",
+      "label": "静态调用 is_direct_manager",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 69,
+        "column": 16,
+        "args": [
+          "document['project_id']",
+          "request['operator_id']",
+          "document['folder_id']",
+          "assignments",
+          "trace",
+          "basis",
+          "call"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.5f3798e3b5941a85",
+      "from": "authority_read",
+      "to": "approval_check",
+      "type": "flow",
+      "label": "静态调用 evaluate_approvals",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 71,
+        "column": 19,
+        "args": [
+          "document['project_id']",
+          "request['operator_id']",
+          "document['id']",
+          "request['content_version']",
+          "approvals",
+          "reviewers",
+          "basis['clock']",
+          "trace",
+          "basis",
+          "call"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.bf20b8a939cfb310",
+      "from": "authority_read",
+      "to": "size_guard",
+      "type": "flow",
+      "label": "静态调用 check_size",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 73,
+        "column": 15,
+        "args": [
+          "request['content']",
+          "limit['limit_bytes']",
+          "document['project_id']",
+          "limit['limit_revision']",
+          "trace",
+          "basis",
+          "call",
+          "limit_event"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.06e2186c0030c854",
+      "from": "commit_guard",
+      "to": "code.06e2186c0030c854",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.c5b6e365f9c1c0b0",
+      "from": "commit_guard",
+      "to": "code.06e2186c0030c854",
+      "type": "flow",
+      "label": "静态调用 self.basis",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 59,
+        "column": 22,
+        "args": [
+          "db",
+          "run"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.0c55d9bef8e2c2ec",
+      "from": "commit_guard",
+      "to": "code.0c55d9bef8e2c2ec",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.d4b6007794e484aa",
+      "from": "commit_guard",
+      "to": "code.0c55d9bef8e2c2ec",
+      "type": "flow",
+      "label": "静态调用 is_direct_manager",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 69,
+        "column": 16,
+        "args": [
+          "document['project_id']",
+          "request['operator_id']",
+          "document['folder_id']",
+          "assignments",
+          "trace",
+          "basis",
+          "call"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.fc2bea6773c216f7",
+      "from": "commit_guard",
+      "to": "code.fc2bea6773c216f7",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.b6bdd4e8ba50e476",
+      "from": "commit_guard",
+      "to": "code.fc2bea6773c216f7",
+      "type": "flow",
+      "label": "静态调用 evaluate_approvals",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 71,
+        "column": 19,
+        "args": [
+          "document['project_id']",
+          "request['operator_id']",
+          "document['id']",
+          "request['content_version']",
+          "approvals",
+          "reviewers",
+          "basis['clock']",
+          "trace",
+          "basis",
+          "call"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.f3f4c403913bddaf",
+      "from": "commit_guard",
+      "to": "code.f3f4c403913bddaf",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.24a8f9708bbbaf1b",
+      "from": "commit_guard",
+      "to": "code.f3f4c403913bddaf",
+      "type": "flow",
+      "label": "静态调用 check_size",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 73,
+        "column": 15,
+        "args": [
+          "request['content']",
+          "limit['limit_bytes']",
+          "document['project_id']",
+          "limit['limit_revision']",
+          "trace",
+          "basis",
+          "call",
+          "limit_event"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.02e9e79362dd7b52",
+      "from": "cancel_run",
+      "to": "code.02e9e79362dd7b52",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.a91da86a8074e4ee",
+      "from": "cancel_run",
+      "to": "code.02e9e79362dd7b52",
+      "type": "flow",
+      "label": "静态调用 self.request_stop",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 306,
+        "column": 12,
+        "args": [
+          "run",
+          "'user_cancelled'",
+          "float(self.clock())"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.46ead1f94e6333dd",
+      "from": "cancel_run",
+      "to": "code.46ead1f94e6333dd",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.55d9253645fcced4",
+      "from": "cancel_run",
+      "to": "code.46ead1f94e6333dd",
+      "type": "flow",
+      "label": "静态调用 self.settle",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 307,
+        "column": 12,
+        "args": [
+          "run",
+          "float(self.clock())"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.c852303e58806ad7",
+      "from": "cancel_run",
+      "to": "code.c852303e58806ad7",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.b2b7c39f257488fd",
+      "from": "cancel_run",
+      "to": "code.c852303e58806ad7",
+      "type": "flow",
+      "label": "静态调用 self.trace",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 310,
+        "column": 20,
+        "args": [
+          "run"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.77eab623e82b416e",
+      "from": "cancel_run",
+      "to": "code.77eab623e82b416e",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.3cb1f8e7377a7700",
+      "from": "cancel_run",
+      "to": "code.77eab623e82b416e",
+      "type": "flow",
+      "label": "静态调用 self.basis",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 311,
+        "column": 47,
+        "args": [
+          "db",
+          "run"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.350703b1e87f812d",
+      "from": "move_folder",
+      "to": "code.d31899a8ea590c46",
+      "type": "flow",
+      "label": "静态调用 self.tick",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 386,
+        "column": 8,
+        "args": [],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.c0d8ecdb19865c16",
+      "from": "recover_run",
+      "to": "code.c0d8ecdb19865c16",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.5c540d3b23af28e2",
+      "from": "recover_run",
+      "to": "code.c0d8ecdb19865c16",
+      "type": "flow",
+      "label": "静态调用 activity_step",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 421,
+        "column": 24,
+        "args": [
+          "run",
+          "'finish'",
+          "a",
+          "float(self.clock())",
+          "'failed'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.4d636dc658e38f16",
+      "from": "recover_run",
+      "to": "code.c0d8ecdb19865c16",
+      "type": "flow",
+      "label": "静态调用 activity_step",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 422,
+        "column": 16,
+        "args": [
+          "run",
+          "'abort'",
+          "'checks_join'",
+          "float(self.clock())"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.e81f5e85b51357b2",
+      "from": "recover_run",
+      "to": "code.e81f5e85b51357b2",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.6daca36ce1419688",
+      "from": "recover_run",
+      "to": "code.e81f5e85b51357b2",
+      "type": "flow",
+      "label": "静态调用 change_phase",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 423,
+        "column": 16,
+        "args": [
+          "run",
+          "'interrupt'",
+          "{'settled': True}",
+          "float(self.clock())"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.8358785a092ed5b1",
+      "from": "worker_call",
+      "to": "code.c852303e58806ad7",
+      "type": "flow",
+      "label": "静态调用 self.trace",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 257,
+        "column": 22,
+        "args": [
+          "run"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.df8dab465f5595cd",
+      "from": "worker_call",
+      "to": "content_check",
+      "type": "flow",
+      "label": "静态调用 check_content",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 267,
+        "column": 22,
+        "args": [
+          "params['content']",
+          "trace",
+          "basis",
+          "call"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.8133208313df7752",
+      "from": "worker_call",
+      "to": "index_check",
+      "type": "flow",
+      "label": "静态调用 check_index",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 268,
+        "column": 27,
+        "args": [
+          "params['title']",
+          "params['project_id']",
+          "params['document_number']",
+          "trace",
+          "basis",
+          "call"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.ce59eabff55ece54",
+      "from": "worker_call",
+      "to": "code.c0d8ecdb19865c16",
+      "type": "flow",
+      "label": "静态调用 activity_step",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 280,
+        "column": 12,
+        "args": [
+          "current",
+          "'finish'",
+          "activity",
+          "float(self.clock())",
+          "outcome"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.b119f002aebcd8cd",
+      "from": "worker_call",
+      "to": "code.46ead1f94e6333dd",
+      "type": "flow",
+      "label": "静态调用 self.settle",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 281,
+        "column": 12,
+        "args": [
+          "current",
+          "float(self.clock())"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.a8e6aac669bf72c8",
+      "from": "worker_call",
+      "to": "code.a8e6aac669bf72c8",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.396b06398776aa07",
+      "from": "worker_call",
+      "to": "code.a8e6aac669bf72c8",
+      "type": "flow",
+      "label": "静态调用 self.emit_configuration",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 284,
+        "column": 12,
+        "args": [
+          "current",
+          "trace",
+          "self.basis(db, current)"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.3190fc4bc6d107fa",
+      "from": "worker_call",
+      "to": "code.77eab623e82b416e",
+      "type": "flow",
+      "label": "静态调用 self.basis",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 284,
+        "column": 50,
+        "args": [
+          "db",
+          "current"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.273b6899b3dd2d5c",
+      "from": "set_size_limit",
+      "to": "code.d31899a8ea590c46",
+      "type": "flow",
+      "label": "静态调用 self.tick",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 360,
+        "column": 8,
+        "args": [],
+        "keywords": {}
+      }
+    }
+  ],
+  "overview": [
+    {
+      "node": "flow.policy",
+      "x": 80,
+      "y": 120
+    },
+    {
+      "node": "flow.checks",
+      "x": 480,
+      "y": 120
+    },
+    {
+      "node": "flow.archive",
+      "x": 880,
+      "y": 120
+    }
+  ],
+  "scope": {
+    "includes": [
+      "单条资料归档的候选业务依赖",
+      "目录管理范围",
+      "审批",
+      "内容和索引检查",
+      "有限处理名额",
+      "审批撤销和内容修改"
+    ],
+    "excludes": [
+      "生产身份认证与外部发布",
+      "尚未实现的运行事实"
+    ],
+    "unknowns": [
+      "只覆盖本地合成资料、直接负责关系和内嵌审批规则，不是通用 ReBAC 引擎。",
+      "正文不进入探针，仅记录内容摘要和长度；外部身份认证、文件系统归档及外部服务不在首版范围。",
+      "未启动且已作废的活动保留 discarded 标识，直到已启动活动结束后执行 abort；该标识由项目测试检查。",
+      "AST 不能证明动态调用完整性；图和有限场景不构成所有调度或真人易用性证明。"
+    ]
+  },
+  "questions": [],
+  "machine": {
+    "engine": "transitions.Machine",
+    "version": "0.9.3",
+    "states": [
+      "created",
+      "checking",
+      "waiting",
+      "ready",
+      "completed",
+      "failed",
+      "stopping",
+      "cancelled",
+      "superseded",
+      "interrupted"
+    ],
+    "values": [
+      "created",
+      "checking",
+      "waiting",
+      "ready",
+      "completed",
+      "failed",
+      "stopping",
+      "cancelled",
+      "superseded",
+      "interrupted"
+    ],
+    "initial": "created",
+    "state_type": "Phase (str enum)",
+    "transitions": [
+      {
+        "trigger": "begin",
+        "source": [
+          "created",
+          "waiting"
+        ],
+        "dest": "checking",
+        "conditions": "approved"
+      },
+      {
+        "trigger": "pause",
+        "source": [
+          "created",
+          "checking",
+          "waiting",
+          "ready"
+        ],
+        "dest": "waiting"
+      },
+      {
+        "trigger": "checked",
+        "source": [
+          "checking",
+          "waiting"
+        ],
+        "dest": "ready",
+        "conditions": [
+          "all_passed",
+          "approved"
+        ]
+      },
+      {
+        "trigger": "publish",
+        "source": "ready",
+        "dest": "completed",
+        "conditions": [
+          "all_passed",
+          "approved",
+          "effect_saved"
+        ]
+      },
+      {
+        "trigger": "reject",
+        "source": [
+          "created",
+          "checking",
+          "waiting",
+          "ready"
+        ],
+        "dest": "failed",
+        "conditions": "checks_failed"
+      },
+      {
+        "trigger": "stop",
+        "source": [
+          "created",
+          "checking",
+          "waiting",
+          "ready"
+        ],
+        "dest": "stopping"
+      },
+      {
+        "trigger": "cancel_done",
+        "source": "stopping",
+        "dest": "cancelled",
+        "conditions": "settled"
+      },
+      {
+        "trigger": "stale_done",
+        "source": "stopping",
+        "dest": "superseded",
+        "conditions": "settled"
+      },
+      {
+        "trigger": "interrupt",
+        "source": [
+          "created",
+          "checking",
+          "waiting",
+          "ready",
+          "stopping"
+        ],
+        "dest": "interrupted",
+        "conditions": "settled"
+      }
+    ],
+    "events": {
+      "begin": {
+        "payload": {}
+      },
+      "pause": {
+        "payload": {}
+      },
+      "checked": {
+        "payload": {}
+      },
+      "publish": {
+        "payload": {}
+      },
+      "reject": {
+        "payload": {}
+      },
+      "stop": {
+        "payload": {}
+      },
+      "cancel_done": {
+        "payload": {}
+      },
+      "stale_done": {
+        "payload": {}
+      },
+      "interrupt": {
+        "payload": {}
+      }
+    },
+    "labels": {
+      "created": "准备归档",
+      "checking": "检查中",
+      "waiting": "等待资格 · 点击继续",
+      "ready": "检查通过，复核提交",
+      "completed": "已归档",
+      "failed": "检查未通过",
+      "stopping": "等待已启动检查结束",
+      "cancelled": "本次运行已取消",
+      "superseded": "内容已改版，本次不可提交",
+      "interrupted": "进程中断，需新建运行"
+    },
+    "event_labels": {
+      "begin": "开始检查",
+      "pause": "等待",
+      "checked": "两项通过",
+      "publish": "提交归档",
+      "stop": "停止新检查",
+      "cancel_done": "取消完成",
+      "stale_done": "旧版本收尾",
+      "reject": "检查失败",
+      "interrupt": "记录中断"
+    },
+    "context": {
+      "param_version": {
+        "type": "integer",
+        "min": 1,
+        "readonly": true
+      },
+      "capacity": {
+        "type": "integer",
+        "min": 1,
+        "max": 2,
+        "readonly": true
+      },
+      "operator_id": {
+        "type": "string",
+        "readonly": true
+      },
+      "document_id": {
+        "type": "string",
+        "readonly": true
+      }
+    },
+    "guards": {
+      "approved": "Authoritative evaluation.approved",
+      "all_passed": "Authoritative evaluation.all_passed",
+      "effect_saved": "Authoritative evaluation.effect_saved",
+      "checks_failed": "Authoritative evaluation.checks_failed",
+      "settled": "Authoritative evaluation.settled"
+    },
+    "source": {
+      "path": "archive_app/workflow.py",
+      "symbol": "Workflow"
+    },
+    "persistence": "SQLite runs.payload: phase, phase_journal and activity configuration in one transaction",
+    "execution": {
+      "schema": "activity-graph/v1",
+      "within": "checking",
+      "parent": "flow.checks",
+      "activity_state_type": "ActivityState (str)",
+      "activity_states": [
+        "pending",
+        "waiting",
+        "running",
+        "succeeded",
+        "rejected",
+        "failed",
+        "cancelled"
+      ],
+      "activities": [
+        {
+          "id": "content_check",
+          "source": {
+            "path": "archive_app/policy.py",
+            "symbol": "check_content"
+          },
+          "requires": {
+            "processing_slots": 1
+          }
+        },
+        {
+          "id": "index_check",
+          "source": {
+            "path": "archive_app/policy.py",
+            "symbol": "check_index"
+          },
+          "requires": {
+            "processing_slots": 1
+          }
+        }
+      ],
+      "resources": [
+        {
+          "id": "processing_slots",
+          "scope": "run",
+          "min": 1,
+          "max": 2
+        }
+      ],
+      "join": {
+        "id": "checks_join",
+        "policy": "all",
+        "requires": [
+          "content_check",
+          "index_check"
+        ],
+        "success_states": [
+          "ready",
+          "completed"
+        ],
+        "guard": "all_passed"
+      }
+    }
+  },
+  "graph_roots": [
+    "flow.policy",
+    "flow.checks",
+    "flow.archive"
+  ],
+  "static_structure": {
+    "files": {
+      "archive_app/policy.py": "b17c14c493cf809bfdba9cda281c1df66a5a0177a3217e01948d423ba42c667d",
+      "archive_app/ports.py": "14969e2b62c930564de8af83edb7010e5aa984bdbc3fc5293fb73778fbfe158e",
+      "archive_app/service.py": "433c652bc1d4adc108b2403475479573af6828cda2d84131006bb8a9b7bc9066",
+      "archive_app/storage.py": "d016008f9c08e75628cef7e8876d2e1da825ba6b6b00b45e22d71d8516d07bb0",
+      "archive_app/workflow.py": "88a9cf567ee570ef60ae9edd4315bf9c2e164c98f616184646f747a5892fe229",
+      "integrations/bo_observer.py": "9cd4165579d339ab0a20ad7b0b93e2f412399961935a3551210d2d33592e581c",
+      "integrations/bo_server.py": "6a4beb8839b5d94493473af75a6e803f3d50bfeaa9ff0be7907ddfb76c7da65c",
+      "run.py": "88b4cd777fef04e7cb37d009d27dfa814420ba7faf8f6fc9a44555133a050d0e"
+    },
+    "resolved_calls": 86,
+    "unresolved_calls": 452,
+    "depth": 1,
+    "limits": [
+      "Syntactic call candidates, not executed calls or proven data flow.",
+      "Reflection, decorators, inherited/overridden dispatch, callbacks and local instance aliases may remain unresolved.",
+      "Only explicitly selected Python files; no automatic discovery of every new entry point."
+    ]
+  }
+}

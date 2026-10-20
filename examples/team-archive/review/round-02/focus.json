@@ -1,0 +1,482 @@
+{
+  "schema_version": 1,
+  "base": {
+    "project_id": "team-archive-trial-01",
+    "model_revision": "discovery-r02",
+    "model_hash": "7143351cae06a0ba36b68c0a6b25c128619f8116fdf42e97c635ac0c25faec43",
+    "build_id": null
+  },
+  "selection": {
+    "nodes": [
+      "approval_check",
+      "archive_commit",
+      "scope_check"
+    ],
+    "depth": 1,
+    "max_nodes": 16,
+    "max_edges": 24,
+    "relations": null,
+    "run_id": null
+  },
+  "nodes": [
+    {
+      "id": "approval_check",
+      "kind": "decision",
+      "label": "审批是否适用",
+      "summary": "审批必须匹配项目、操作人、资料和内容版本；审批者、多条组合、运行中撤销影响待回答。",
+      "rule": {
+        "target_fields": [
+          "project_id",
+          "operator_id",
+          "document_id",
+          "content_version"
+        ]
+      },
+      "planned_source": {
+        "path": "archive_app/policy.py",
+        "symbol": "evaluate_approvals"
+      },
+      "binding_status": "pending",
+      "requirements": [
+        "R03"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "approval_revoked",
+      "kind": "action",
+      "label": "撤销审批",
+      "summary": "已知审批可能撤销；对等待、运行和提交的影响待确认。",
+      "binding_status": "pending",
+      "requirements": [
+        "R03"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "approval_target",
+      "kind": "data",
+      "label": "项目 · 操作人 · 资料 · 版本",
+      "summary": "单条审批的四个目标字段必须全部匹配本次请求。",
+      "requirements": [
+        "R03"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "archive_commit",
+      "kind": "effect",
+      "label": "保存资料版本快照",
+      "summary": "在 SQLite 保存内容的固定快照及对应版本，不移动或删除原资料；同一资料/版本不得重复生成记录。",
+      "planned_source": {
+        "path": "archive_app/store.py",
+        "symbol": "save_archive_snapshot"
+      },
+      "binding_status": "pending",
+      "requirements": [
+        "R08",
+        "R09",
+        "R10"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "archive_request",
+      "kind": "action",
+      "label": "负责人发起归档",
+      "summary": "候选入口；具体发起时机与审批、检查顺序未确定。",
+      "binding_status": "pending",
+      "requirements": [
+        "R02"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "archive_unique",
+      "kind": "decision",
+      "label": "该资料版本是否已有归档",
+      "summary": "重复请求不能生成第二条同资料同版本的记录。",
+      "rule": {
+        "unique_fields": [
+          "document_id",
+          "content_version"
+        ]
+      },
+      "planned_source": {
+        "path": "archive_app/store.py",
+        "symbol": "find_archive"
+      },
+      "binding_status": "pending",
+      "requirements": [
+        "R09"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "content_changed",
+      "kind": "action",
+      "label": "修改资料内容",
+      "summary": "新版本不能沿用旧版本审批；旧检查与运行如何结束、能否提交仍待确认。",
+      "binding_status": "pending",
+      "requirements": [
+        "R06"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "content_check",
+      "kind": "action",
+      "label": "内容检查",
+      "summary": "归档前需做；检查规则、执行顺序和失败语义待回答。",
+      "binding_status": "pending",
+      "requirements": [
+        "R04"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "document",
+      "kind": "data",
+      "label": "资料条目与内容版本",
+      "summary": "资料条目直接位于一个分类文件夹；归档针对条目的内容版本，不归档文件夹。",
+      "requirements": [
+        "R01",
+        "R06",
+        "R10"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "folder_assignments",
+      "kind": "data",
+      "label": "当前文件夹的直接负责人",
+      "summary": "只读取该项目、该文件夹的直接负责关系，不读取祖先作为继承授权。",
+      "requirements": [
+        "R02"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "index_check",
+      "kind": "action",
+      "label": "索引检查",
+      "summary": "归档前需做；检查规则、执行顺序和失败语义待回答。",
+      "binding_status": "pending",
+      "requirements": [
+        "R04"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "scope_check",
+      "kind": "decision",
+      "label": "是否直接负责所在文件夹",
+      "summary": "只按资料所在文件夹的直接负责人判断，上级负责人不因祖先关系获得权限。",
+      "rule": {
+        "inherit_ancestors": false
+      },
+      "planned_source": {
+        "path": "archive_app/policy.py",
+        "symbol": "is_direct_manager"
+      },
+      "binding_status": "pending",
+      "requirements": [
+        "R02"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "approval_archive",
+      "from": "approval_check",
+      "to": "archive_commit",
+      "type": "guard",
+      "label": "目标必须匹配；组合规则待定",
+      "evidence": "U02；D02 已确认；D05、D06 待答"
+    },
+    {
+      "id": "assignments_scope",
+      "from": "folder_assignments",
+      "to": "scope_check",
+      "type": "data",
+      "label": "直接负责关系",
+      "evidence": "U02；D01"
+    },
+    {
+      "id": "content_archive",
+      "from": "content_check",
+      "to": "archive_commit",
+      "type": "guard",
+      "label": "归档前检查；放行规则待定",
+      "evidence": "U01；待 D07"
+    },
+    {
+      "id": "document_content",
+      "from": "document",
+      "to": "content_check",
+      "type": "data",
+      "label": "被检查的内容",
+      "evidence": "U01；版本规则待 D06"
+    },
+    {
+      "id": "document_index",
+      "from": "document",
+      "to": "index_check",
+      "type": "data",
+      "label": "被检查的索引",
+      "evidence": "U01；检查对象细节待 D07"
+    },
+    {
+      "id": "document_scope",
+      "from": "document",
+      "to": "scope_check",
+      "type": "data",
+      "label": "资料所在目录",
+      "evidence": "U01"
+    },
+    {
+      "id": "document_unique",
+      "from": "document",
+      "to": "archive_unique",
+      "type": "data",
+      "label": "资料身份与内容版本",
+      "evidence": "U02；D03"
+    },
+    {
+      "id": "edit_approval",
+      "from": "content_changed",
+      "to": "approval_check",
+      "type": "data",
+      "label": "新版本不能沿用旧审批",
+      "evidence": "由 U02、D02 直接推出；旧运行行为待 D06"
+    },
+    {
+      "id": "edit_document",
+      "from": "content_changed",
+      "to": "document",
+      "type": "data",
+      "label": "修改内容",
+      "evidence": "U01"
+    },
+    {
+      "id": "index_archive",
+      "from": "index_check",
+      "to": "archive_commit",
+      "type": "guard",
+      "label": "归档前检查；放行规则待定",
+      "evidence": "U01；待 D07"
+    },
+    {
+      "id": "request_scope",
+      "from": "archive_request",
+      "to": "scope_check",
+      "type": "data",
+      "label": "判断发起人的管理范围",
+      "evidence": "U01；候选入口 I01"
+    },
+    {
+      "id": "revoke_approval",
+      "from": "approval_revoked",
+      "to": "approval_check",
+      "type": "data",
+      "label": "撤销后如何处理待定",
+      "evidence": "U01；待 D06"
+    },
+    {
+      "id": "scope_archive",
+      "from": "scope_check",
+      "to": "archive_commit",
+      "type": "guard",
+      "label": "仅所在文件夹直接负责人",
+      "evidence": "U02；D01 已确认"
+    },
+    {
+      "id": "target_approval",
+      "from": "approval_target",
+      "to": "approval_check",
+      "type": "data",
+      "label": "四个目标字段全部匹配",
+      "evidence": "U02；D02"
+    },
+    {
+      "id": "unique_archive",
+      "from": "archive_unique",
+      "to": "archive_commit",
+      "type": "guard",
+      "label": "相同资料版本不重复建档",
+      "evidence": "U02；D03"
+    }
+  ],
+  "boundaries": [
+    {
+      "id": "view:boundary:f76b22d995c15828",
+      "edge_id": "slots_content",
+      "from": "processing_slots",
+      "to": "content_check",
+      "type": "guard",
+      "label": "可能等待名额；分配规则待定",
+      "outside": [
+        {
+          "id": "processing_slots",
+          "label": "有限处理名额",
+          "kind": "data"
+        }
+      ],
+      "reason": "outside_focus",
+      "meaning": "Original relation continues outside this view; no inferred shortcut."
+    },
+    {
+      "id": "view:boundary:9fece81cc5e3a346",
+      "edge_id": "slots_index",
+      "from": "processing_slots",
+      "to": "index_check",
+      "type": "guard",
+      "label": "可能等待名额；分配规则待定",
+      "outside": [
+        {
+          "id": "processing_slots",
+          "label": "有限处理名额",
+          "kind": "data"
+        }
+      ],
+      "reason": "outside_focus",
+      "meaning": "Original relation continues outside this view; no inferred shortcut."
+    }
+  ],
+  "mapping": {
+    "approval_check": {
+      "nodes": [
+        "approval_check"
+      ],
+      "source": null
+    },
+    "approval_revoked": {
+      "nodes": [
+        "approval_revoked"
+      ],
+      "source": null
+    },
+    "approval_target": {
+      "nodes": [
+        "approval_target"
+      ],
+      "source": null
+    },
+    "archive_commit": {
+      "nodes": [
+        "archive_commit"
+      ],
+      "source": null
+    },
+    "archive_request": {
+      "nodes": [
+        "archive_request"
+      ],
+      "source": null
+    },
+    "archive_unique": {
+      "nodes": [
+        "archive_unique"
+      ],
+      "source": null
+    },
+    "content_changed": {
+      "nodes": [
+        "content_changed"
+      ],
+      "source": null
+    },
+    "content_check": {
+      "nodes": [
+        "content_check"
+      ],
+      "source": null
+    },
+    "document": {
+      "nodes": [
+        "document"
+      ],
+      "source": null
+    },
+    "folder_assignments": {
+      "nodes": [
+        "folder_assignments"
+      ],
+      "source": null
+    },
+    "index_check": {
+      "nodes": [
+        "index_check"
+      ],
+      "source": null
+    },
+    "scope_check": {
+      "nodes": [
+        "scope_check"
+      ],
+      "source": null
+    }
+  },
+  "events": [],
+  "coverage": {
+    "selected_nodes": 12,
+    "total_nodes": 13,
+    "crossing_or_omitted_edges": 2,
+    "reported_boundaries": 2,
+    "limits_hit": [],
+    "source_unknowns": [
+      "所有可执行节点尚未绑定源码，当前不是可执行模型。",
+      "D04：两项检查的并发、名额作用域和占用归还规则。",
+      "D05：审批者与多条审批候选的组合规则。",
+      "D06：审批撤销、内容修改与进行中运行的关系。",
+      "D07：内容检查和索引检查的实际规则与失败结果。",
+      "D08：审批和检查的先后、等待的恢复触发。"
+    ],
+    "evidence_gaps": [],
+    "runtime_evidence": "not_selected",
+    "complete": false
+  },
+  "questions": [
+    "D05",
+    "D04",
+    "D06"
+  ],
+  "focus_id": "focus:e37a3eaa4da875261ada"
+}

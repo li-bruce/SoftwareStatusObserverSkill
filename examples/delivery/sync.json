@@ -54,7 +54,10 @@
     "observer_generated/static/elk.bundled.js",
     "observer_generated/static/elk-worker.min.js",
     "observer_generated/static/ELK-LICENSE.md",
-    "tests/test_graph_layout.mjs"
+    "tests/test_graph_layout.mjs",
+    "observer_generated/runtime/whitebox_contract.py",
+    "observer_generated/runtime/focus_graph.py",
+    "observer_generated/runtime/project_bundle.py"
   ],
   "acceptance": "acceptance.json",
   "slice_depth": 1,
@@ -143,5 +146,6 @@
     "normal",
     "resource_wait",
     "parallel"
-  ]
+  ],
+  "whitebox": "whitebox.json"
 }

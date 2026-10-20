@@ -1,0 +1,323 @@
+{
+  "schema_version": 1,
+  "base": {
+    "project_id": "team-archive-trial-01",
+    "model_revision": "discovery-r01",
+    "model_hash": "67d51e45ffcb2b4186b9a4b2262e0fcc73c1fcc19b38c5a1783f4291300d9afa",
+    "build_id": null
+  },
+  "selection": {
+    "nodes": [
+      "archive_commit"
+    ],
+    "depth": 1,
+    "max_nodes": 12,
+    "max_edges": 24,
+    "relations": null,
+    "run_id": null
+  },
+  "nodes": [
+    {
+      "id": "approval_check",
+      "kind": "decision",
+      "label": "审批是否适用",
+      "summary": "审批对象、审批者、多条候选组合、撤销影响待回答。",
+      "binding_status": "pending",
+      "requirements": [
+        "R03"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "archive_commit",
+      "kind": "effect",
+      "label": "提交归档（效果待确认）",
+      "summary": "只声明归档目标；不预设移动、复制、锁定或快照，也不预设提交事务。",
+      "binding_status": "pending",
+      "requirements": [
+        "R08"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "content_check",
+      "kind": "action",
+      "label": "内容检查",
+      "summary": "归档前需做；检查规则、执行顺序和失败语义待回答。",
+      "binding_status": "pending",
+      "requirements": [
+        "R04"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "index_check",
+      "kind": "action",
+      "label": "索引检查",
+      "summary": "归档前需做；检查规则、执行顺序和失败语义待回答。",
+      "binding_status": "pending",
+      "requirements": [
+        "R04"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "scope_check",
+      "kind": "decision",
+      "label": "是否在管理范围",
+      "summary": "目录继承及下级负责人是否截断上级权限待回答。",
+      "binding_status": "pending",
+      "requirements": [
+        "R02"
+      ],
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "approval_archive",
+      "from": "approval_check",
+      "to": "archive_commit",
+      "type": "guard",
+      "label": "归档前需要审批",
+      "evidence": "U01；有效性规则待 D02、D05、D06"
+    },
+    {
+      "id": "content_archive",
+      "from": "content_check",
+      "to": "archive_commit",
+      "type": "guard",
+      "label": "归档前检查；放行规则待定",
+      "evidence": "U01；待 D07"
+    },
+    {
+      "id": "index_archive",
+      "from": "index_check",
+      "to": "archive_commit",
+      "type": "guard",
+      "label": "归档前检查；放行规则待定",
+      "evidence": "U01；待 D07"
+    },
+    {
+      "id": "scope_archive",
+      "from": "scope_check",
+      "to": "archive_commit",
+      "type": "guard",
+      "label": "受管理范围限制",
+      "evidence": "U01；继承规则待 D01"
+    }
+  ],
+  "boundaries": [
+    {
+      "id": "view:boundary:b5f0b2209042bdc9",
+      "edge_id": "document_content",
+      "from": "document",
+      "to": "content_check",
+      "type": "data",
+      "label": "被检查的内容",
+      "outside": [
+        {
+          "id": "document",
+          "label": "多层文件夹中的资料",
+          "kind": "data"
+        }
+      ],
+      "reason": "outside_focus",
+      "meaning": "Original relation continues outside this view; no inferred shortcut."
+    },
+    {
+      "id": "view:boundary:f4f2bb80015176c0",
+      "edge_id": "document_index",
+      "from": "document",
+      "to": "index_check",
+      "type": "data",
+      "label": "被检查的索引",
+      "outside": [
+        {
+          "id": "document",
+          "label": "多层文件夹中的资料",
+          "kind": "data"
+        }
+      ],
+      "reason": "outside_focus",
+      "meaning": "Original relation continues outside this view; no inferred shortcut."
+    },
+    {
+      "id": "view:boundary:4e02a69ff3360705",
+      "edge_id": "document_scope",
+      "from": "document",
+      "to": "scope_check",
+      "type": "data",
+      "label": "资料所在目录",
+      "outside": [
+        {
+          "id": "document",
+          "label": "多层文件夹中的资料",
+          "kind": "data"
+        }
+      ],
+      "reason": "outside_focus",
+      "meaning": "Original relation continues outside this view; no inferred shortcut."
+    },
+    {
+      "id": "view:boundary:5409d42adffc9e2a",
+      "edge_id": "edit_approval",
+      "from": "content_changed",
+      "to": "approval_check",
+      "type": "data",
+      "label": "是否影响原审批待定",
+      "outside": [
+        {
+          "id": "content_changed",
+          "label": "修改资料内容",
+          "kind": "action"
+        }
+      ],
+      "reason": "outside_focus",
+      "meaning": "Original relation continues outside this view; no inferred shortcut."
+    },
+    {
+      "id": "view:boundary:ddbbcca9fe770ad7",
+      "edge_id": "request_scope",
+      "from": "archive_request",
+      "to": "scope_check",
+      "type": "data",
+      "label": "判断发起人的管理范围",
+      "outside": [
+        {
+          "id": "archive_request",
+          "label": "负责人发起归档",
+          "kind": "action"
+        }
+      ],
+      "reason": "outside_focus",
+      "meaning": "Original relation continues outside this view; no inferred shortcut."
+    },
+    {
+      "id": "view:boundary:38b65c7b5e586d15",
+      "edge_id": "revoke_approval",
+      "from": "approval_revoked",
+      "to": "approval_check",
+      "type": "data",
+      "label": "撤销后如何处理待定",
+      "outside": [
+        {
+          "id": "approval_revoked",
+          "label": "撤销审批",
+          "kind": "action"
+        }
+      ],
+      "reason": "outside_focus",
+      "meaning": "Original relation continues outside this view; no inferred shortcut."
+    },
+    {
+      "id": "view:boundary:f76b22d995c15828",
+      "edge_id": "slots_content",
+      "from": "processing_slots",
+      "to": "content_check",
+      "type": "guard",
+      "label": "可能等待名额；分配规则待定",
+      "outside": [
+        {
+          "id": "processing_slots",
+          "label": "有限处理名额",
+          "kind": "data"
+        }
+      ],
+      "reason": "outside_focus",
+      "meaning": "Original relation continues outside this view; no inferred shortcut."
+    },
+    {
+      "id": "view:boundary:9fece81cc5e3a346",
+      "edge_id": "slots_index",
+      "from": "processing_slots",
+      "to": "index_check",
+      "type": "guard",
+      "label": "可能等待名额；分配规则待定",
+      "outside": [
+        {
+          "id": "processing_slots",
+          "label": "有限处理名额",
+          "kind": "data"
+        }
+      ],
+      "reason": "outside_focus",
+      "meaning": "Original relation continues outside this view; no inferred shortcut."
+    }
+  ],
+  "mapping": {
+    "approval_check": {
+      "nodes": [
+        "approval_check"
+      ],
+      "source": null
+    },
+    "archive_commit": {
+      "nodes": [
+        "archive_commit"
+      ],
+      "source": null
+    },
+    "content_check": {
+      "nodes": [
+        "content_check"
+      ],
+      "source": null
+    },
+    "index_check": {
+      "nodes": [
+        "index_check"
+      ],
+      "source": null
+    },
+    "scope_check": {
+      "nodes": [
+        "scope_check"
+      ],
+      "source": null
+    }
+  },
+  "events": [],
+  "coverage": {
+    "selected_nodes": 5,
+    "total_nodes": 10,
+    "crossing_or_omitted_edges": 8,
+    "reported_boundaries": 8,
+    "limits_hit": [],
+    "source_unknowns": [
+      "所有可执行节点尚未绑定源码，当前不是可执行模型。",
+      "D01：多层目录的管理范围继承规则。",
+      "D02：审批针对的对象及覆盖范围。",
+      "D03：归档成功的持久效果。",
+      "D04：两项检查的并发、名额作用域和占用归还规则。",
+      "D05：审批者与多条审批候选的组合规则。",
+      "D06：审批撤销、内容修改与进行中运行的关系。",
+      "D07：内容检查和索引检查的实际规则与失败结果。",
+      "D08：审批和检查的先后、等待的恢复触发。"
+    ],
+    "evidence_gaps": [],
+    "runtime_evidence": "not_selected",
+    "complete": false
+  },
+  "questions": [
+    "D01",
+    "D02",
+    "D03"
+  ],
+  "focus_id": "focus:b2139bff98d78538bd8a"
+}

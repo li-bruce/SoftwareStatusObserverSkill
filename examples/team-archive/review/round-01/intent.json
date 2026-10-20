@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "project_id": "team-archive-trial-01",
+  "title": "团队资料归档：模拟用户演练",
+  "status": "discovery",
+  "requirements": [
+    {"id": "R01", "text": "在本地用 Python 和 SQLite 建立团队资料归档工具；资料位于项目的多层文件夹中。", "source_refs": ["U01"], "status": "stated"},
+    {"id": "R02", "text": "负责人能处理自己管理范围内的资料；目录继承和下级负责人影响待确认。", "source_refs": ["U01"], "status": "partially_defined"},
+    {"id": "R03", "text": "归档前需要审批；审批可被撤销，审批对象、候选组合和失效处理待确认。", "source_refs": ["U01"], "status": "partially_defined"},
+    {"id": "R04", "text": "归档前进行内容检查和索引检查；具体检查条件及失败规则待确认。", "source_refs": ["U01"], "status": "partially_defined"},
+    {"id": "R05", "text": "处理名额有限，两项检查可能等待；共享范围、占用方式和恢复规则待确认。", "source_refs": ["U01"], "status": "partially_defined"},
+    {"id": "R06", "text": "资料内容可修改；修改与已发审批、检查结果及进行中运行的关系待确认。", "source_refs": ["U01"], "status": "partially_defined"},
+    {"id": "R07", "text": "开发者图可拖动、逐层展开，能解释归档依据、等待原因和关键函数实际参数。", "source_refs": ["U01"], "status": "stated"},
+    {"id": "R08", "text": "归档成功应有可核对的持久效果；具体效果尚未由模拟用户定义。", "source_refs": ["I01"], "status": "question"}
+  ],
+  "constraints": [
+    "本项目为模拟用户演练，不使用生产数据。",
+    "只使用指定 Skill 和本会话需求，Skill 副本只读。",
+    "未回答的业务规则不擅自落实为实现或验收预期。",
+    "应用与开发者图最终应能独立启动；需要服务时先检查 8824。"
+  ]
+}

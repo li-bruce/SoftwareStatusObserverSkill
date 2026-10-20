@@ -1,0 +1,205 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Package references and 15 copied runtime modules match.
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+......................
+----------------------------------------------------------------------
+Ran 22 tests in 0.306s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{"step": "\u5f00\u59cb\u65f6\u4fdd\u5b58\u672a\u51b3\u95ee\u9898", "passed": true}
+{"step": "\u5173\u952e\u95ee\u9898\u672a\u56de\u7b54\uff0c\u4e0d\u80fd\u4ea4\u4ed8", "passed": true}
+{"step": "\u56de\u7b54\u5df2\u5173\u8054\u539f\u56fe\u548c\u6743\u9650\u53cd\u4f8b\uff0c\u8fd0\u884c\u68c0\u67e5\u901a\u8fc7", "passed": true}
+{"step": "\u9a8c\u6536\u540c\u4e00\u56de\u7b54\u548c\u5b9e\u73b0", "passed": true}
+{"step": "\u5f53\u524d\u56de\u7b54\u4e0e\u9a8c\u6536\u4e00\u81f4", "passed": true}
+{"step": "\u56de\u7b54\u6539\u53d8\u4f7f\u65e7\u9a8c\u6536\u5931\u6548", "passed": true}
+{"step": "\u5f00\u59cb\u4e0b\u4e00\u6b21\u9700\u6c42\u8c03\u6574", "passed": true}
+{"step": "\u5220\u9664\u5df2\u786e\u8ba4\u95ee\u9898\u4e0d\u80fd\u9690\u85cf\u539f\u51b3\u5b9a", "passed": true}
+{"step": "\u7a7a\u8bb0\u5f55\u4e0d\u80fd\u7ed5\u8fc7\u5df2\u63a5\u5165\u7684\u6f84\u6e05\u68c0\u67e5", "passed": true}
+{"step": "\u5220\u9664\u914d\u7f6e\u4e0d\u80fd\u9759\u9ed8\u53d6\u6d88\u6f84\u6e05\u68c0\u67e5", "passed": true}
+{"step": "\u6062\u590d\u539f\u89c4\u5219\u540e\u901a\u8fc7\u5b9e\u9645\u8fd0\u884c", "passed": true}
+{"step": "\u9a8c\u6536\u6062\u590d\u540e\u7684\u8bb0\u5f55", "passed": true}
+{"step": "\u6700\u7ec8\u68c0\u67e5", "passed": true}
+{"passed": true, "steps": 13, "report": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.validation\\staged-full-v04-2\\.validation\\gate-20261020-163132-014521\\report.json"}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+........
+----------------------------------------------------------------------
+Ran 8 tests in 0.028s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+........
+----------------------------------------------------------------------
+Ran 8 tests in 0.571s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "valid": true,
+  "status": "current",
+  "errors": [],
+  "candidate_id": "bb09c9dc6f583e1d37e9cebf5be28a4754c9ce7ebbf45f636f0cded0f06a6af7"
+}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "valid": true,
+  "errors": [],
+  "candidate_id": "bb09c9dc6f583e1d37e9cebf5be28a4754c9ce7ebbf45f636f0cded0f06a6af7",
+  "review_hash": "b52919146e152746862ebbda8a9f705cc565288f4c6dd8d2006d8c0646197e87",
+  "observations_hash": "abac0527a934f374b9ba78f41153cdb13dad115ab0931a299689c82c6264b85e",
+  "tests": [
+    {
+      "argv": [
+        "{python}",
+        "-B",
+        "-X",
+        "utf8",
+        "tests/test_business.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-B",
+        "-X",
+        "utf8",
+        "observer_generated/runtime/architecture_guard.py",
+        "check",
+        "--root",
+        "."
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-B",
+        "-X",
+        "utf8",
+        "tests/test_execution.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-B",
+        "-X",
+        "utf8",
+        "tooling/graph_fixture.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tests/test_graph_projection.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tests/test_graph_layout.mjs"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "checked_at": "2026-10-20T08:32:35.330210+00:00",
+  "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "valid": true,
+  "status": "current",
+  "errors": [],
+  "candidate_id": "bb09c9dc6f583e1d37e9cebf5be28a4754c9ce7ebbf45f636f0cded0f06a6af7"
+}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "valid": true,
+  "status": "current",
+  "errors": [],
+  "candidate_id": "bb09c9dc6f583e1d37e9cebf5be28a4754c9ce7ebbf45f636f0cded0f06a6af7"
+}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "valid": true,
+  "files": 58,
+  "package": {
+    "path": "dist/core-57bef362.zip",
+    "files": 11,
+    "sha256": "4126d88dcc260577fcd6856c9c0fb950c6554a064024a91b8d726ed44f496931",
+    "retains": "business state machine; neutral observation port has no observer implementation"
+  }
+}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.448s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+.
+----------------------------------------------------------------------
+Ran 1 test in 2.994s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "valid": false,
+  "status": "needs_sync",
+  "errors": [
+    "review belongs to an older candidate",
+    "verification is failed or stale",
+    "change is not accepted for current inputs",
+    "manifest does not match accepted inputs"
+  ],
+  "candidate_id": "16a767a06853a9b68a286bc6e68678c57fb145bac8af7d2c854c60cc95ae3f49"
+}
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.validation\staged-full-v04-2\tools\archive_demo.py", line 53, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.validation\staged-full-v04-2\tools\archive_demo.py", line 40, in main
+    prepare()
+    ~~~~~~~^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.validation\staged-full-v04-2\tools\archive_demo.py", line 29, in prepare
+    run("observer_runtime/change_sync.py", "check", "--root", ".")
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.validation\staged-full-v04-2\tools\archive_demo.py", line 13, in run
+    subprocess.run(
+    ~~~~~~~~~~~~~~^
+        [sys.executable, "-B", "-X", "utf8", *map(str, args)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        cwd=EXAMPLE, check=True,
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Lvi_P\miniforge3\Lib\subprocess.py", line 577, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe', '-B', '-X', 'utf8', 'observer_runtime/change_sync.py', 'check', '--root', '.']' returned non-zero exit status 1.
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.validation\staged-full-v04-2\tools\verify.py", line 56, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.validation\staged-full-v04-2\tools\verify.py", line 39, in main
+    run(ROOT, 'tools/archive_demo.py', '--verify')
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.validation\staged-full-v04-2\tools\verify.py", line 13, in run
+    subprocess.run([sys.executable, '-B', '-X', 'utf8', *map(str, args)], cwd=cwd, check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\subprocess.py", line 577, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe', '-B', '-X', 'utf8', 'tools/archive_demo.py', '--verify']' returned non-zero exit status 1.

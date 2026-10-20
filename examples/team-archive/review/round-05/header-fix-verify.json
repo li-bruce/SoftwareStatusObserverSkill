@@ -1,0 +1,28 @@
+{
+  "valid": true,
+  "errors": [],
+  "candidate_id": "bc2c0f65658e721d78f9404ed2cbf2d0aabf5f55686ec2c745df60965902a530",
+  "review_hash": "ef5b80236cc01baa2c1c1906831b88c1b40cd8825ee7c876f434349aab54fc8d",
+  "observations_hash": "1256a2b68859dbc2d1a1790882a27ae45c3167f9c115a5cdea5adb130e709057",
+  "tests": [
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/tests.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tooling/graph_tests.mjs"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "checked_at": "2026-10-20T08:14:28.771920+00:00",
+  "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+}

@@ -1,0 +1,14 @@
+{
+  "tree": "9ee987c524a1cc5393f778ccb5a246580045386d",
+  "directory": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.validation\\staged-full-v04-3",
+  "exit_code": 0,
+  "command": "python tools/verify.py",
+  "execution": "Extracted exact Git tree into a new directory before running checks",
+  "archive_candidate": {
+    "candidate_id": "befadbdd157ea321dbc4039c9e793db228255e79db68c06faa87c0c20b44c384",
+    "build_id": "e7e5f89d72093f5d99d37f9bb1f19a8b978a31e4cfecaced8a225b8409b3edc3",
+    "verification_hash": "2fce07dbe71086977038f7b27d0050b714e7a34b7c320478da321fd113f4d2b7"
+  },
+  "scope": "Skill, delivery example, independent archive example, runtime observations, source-bound checks, graph history, installation, HTTP and both extracted business core packages",
+  "log_sha256": "92adc36db275a471e29349d95a520cde995c755a6062916dae31607a68cb9bec"
+}

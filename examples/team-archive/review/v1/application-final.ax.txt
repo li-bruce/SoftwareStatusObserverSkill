@@ -1,0 +1,85 @@
+Browser tab: 1, Title: "资料柜 · 团队归档", URL: "http://127.0.0.1:8824/".
+1 AXWebArea 资料柜 · 团队归档, URL: 127.0.0.1:8824/
+	2 container
+		3 text LOCAL TEAM ARCHIVE · 模拟演练
+		4 heading 资料柜, Value: 1
+			5 text 资料柜
+		79 text 本地已连接
+		7 link Description: 打开开发者图 ↗, Value: 127.0.0.1:8824/graph
+	8 container
+		9 heading 当前资料, Value: 2
+			10 text 当前资料
+		80 text 内容版本 1
+		81 text 研发资料 / 设计记录 · 直接负责人：林晓 · 文件夹负责人
+		13 container edit-form
+			14 container
+				15 text 标题
+				16 text field (settable) 标题, Value: 接口设计说明, ID: title
+			17 container
+				18 text 资料编号
+				19 text field (settable) 资料编号, Value: RD-001, ID: number
+			20 container
+				21 text 内容
+				22 text entry area (settable) 内容, Value: 模拟资料：版本一的固定内容。, ID: content
+			23 text 修改后生成新内容版本；已归档快照保持不变。
+			24 button 保存新版本
+		25 button (collapsed) 调整分类文件夹, Secondary Actions: Expand
+			26 text 调整分类文件夹
+		27 heading 发起归档, Value: 2
+			28 text 发起归档
+		29 container
+			30 text 操作人
+			31 pop up button (collapsed, settable) 操作人, Value: 林晓 · 文件夹负责人, ID: operator, Secondary Actions: Expand
+				32 menu
+					33 (selected) 林晓 · 文件夹负责人
+					34 周宁 · 审核员
+					35 陈青 · 审核员
+					36 杜然 · 子目录负责人
+		37 container
+			38 text 本次检查名额
+			39 pop up button (collapsed, settable) 本次检查名额, Value: 2 个 · 可同时检查, ID: capacity, Secondary Actions: Expand
+				40 menu
+					41 (selected) 2 个 · 可同时检查
+					42 1 个 · 依次检查
+		82 text 演练中每项检查保留约 4 秒，便于观察并发、等待和取消。
+		44 button 新建一次归档运行, ID: new-run
+		45 heading 审批, Value: 2
+			46 text 审批
+		47 text 任一条仍有效即可
+		48 container
+			49 text 审核员
+			50 pop up button (collapsed, settable) 审核员, Value: 周宁 · 审核员, ID: reviewer, Secondary Actions: Expand
+				51 menu
+					52 (selected) 周宁 · 审核员
+					53 陈青 · 审核员
+		54 container
+			55 text 有效时长
+			56 pop up button (collapsed, settable) 有效时长, Value: 10 分钟, ID: expires, Secondary Actions: Expand
+				57 menu
+					58 (selected) 10 分钟
+					59 15 秒 · 观察到期
+					60 立即到期 · 反例
+		61 button 为当前操作人审批当前版本, ID: approve
+		78 container approvals
+			83 text 版本 1 · bob → alice  有效
+			84 text 截止 15:43:25 · b4cca0f90cc3
+			85 button 撤销
+		63 heading 归档运行, Value: 2
+			64 text 归档运行
+		86 text 1 次运行
+		66 text 每次运行保留自己的输入、检查结果与名额。继续会重新核对当前资格。
+		87 container
+			88 text 第 1 次 · 版本 1 已归档 ec2fe43d534c · alice 内容检查 已通过 索引检查 已通过 本次名额：可用 2 / 2
+		68 heading 固定快照, Value: 2
+			69 text 固定快照
+		89 text 1 份
+		90 container archives
+			91 text 接口设计说明 · 版本 1
+			92 text 52946f163136 · RD-001 · 运行 ec2fe43d534c
+			93 button (collapsed) 查看固定内容快照, Secondary Actions: Expand
+				94 text 查看固定内容快照
+	72 container
+		73 text 仅本地合成数据 · 文件夹用于分类，归档不移动或删除原资料。
+		95 text 构建 6eb25ba09b
+
+The focused UI element is 1 AXWebArea 资料柜 · 团队归档, URL: 127.0.0.1:8824/

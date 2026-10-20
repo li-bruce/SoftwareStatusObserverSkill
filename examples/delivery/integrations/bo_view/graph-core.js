@@ -10,17 +10,38 @@ export function selectedConfiguration(view,choice='latest',step='latest'){
   const run=configurations(view).find(r=>r.attempt===currentAttempt(view,choice));if(!run)return null;
   if(step==='latest')return run;
   const entry=run.journal.find(e=>String(e.seq)===String(step));
-  return entry?{...run,...entry.after,phase:entry.after.phase??null,finalPhase:run.phase,revision:entry.seq,selectedFrame:entry}:null;
+  // Historical frames contain recorded state only, never the run's later
+  // results, disposition or current qualification.
+  return entry?{attempt:run.attempt,param_version:run.param_version,...entry.after,
+    phase:entry.after.phase??entry.phase??null,revision:entry.seq,selectedFrame:entry}:null;
 }
 export function selectedEvents(view,choice,step='latest'){
   const id=currentAttempt(view,choice);let events=view.events.filter(e=>e.attempt===id);
   if(step!=='latest'){
-    const frame=events.filter(e=>e.node==='flow.checks'&&e.outputs.revision<=Number(step)).at(-1);
+    // A later reevaluation may reuse an activity revision. Only its first exact
+    // recorded boundary belongs to this frame; absent boundaries stay unknown.
+    const parent=view.model.machine.execution?.parent;
+    const frame=events.find(e=>e.node===parent&&e.outputs?.revision===Number(step));
     events=frame?events.filter(e=>e.seq<=frame.seq):[];
   }
   return events;
 }
+export function sourceBinding(view,all,id){
+  const direct=view?.manifest.bindings[id];if(direct)return direct;
+  const node=all?.get(id);
+  return node?.field?view?.manifest.bindings[node.event_node||node.parent]:undefined;
+}
 export function nodeEvents(node,events){return events.filter(e=>e.node===(node.event_node||node.id));}
+export function callValues(node,events){
+  const calls=nodeEvents(node,events),last=calls.at(-1);
+  if(!last)return {inputs:{},outputs:{}};
+  const keys=['call_id','run_id','attempt','entity','build_id','model_revision'];
+  // Old probes used attempt:node for every call. That is not enough identity
+  // to merge values; keep the last event until the caller supplies a call ID.
+  const identified=keys.every(k=>typeof last[k]==='string'&&last[k])&&last.call_id!==`${last.attempt}:${last.node}`;
+  const same=identified?calls.filter(e=>keys.every(k=>e[k]===last[k])&&e.basis?.param_version===last.basis?.param_version):[last];
+  return same.reduce((values,e)=>({inputs:{...values.inputs,...e.inputs},outputs:{...values.outputs,...e.outputs}}),{inputs:{},outputs:{}});
+}
 function activityName(view,id){return view.model.nodes.find(n=>n.id===id)?.label||id;}
 function activityColor(state){return ({running:'active',waiting:'blocked',rejected:'blocked',failed:'blocked',succeeded:'ok',cancelled:'historical'})[state]||'declared';}
 function phaseValue(view,configuration,choice){return configuration?.selectedFrame?configuration.phase:choice==='latest'?view.machine.current:configuration?.phase;}
@@ -31,7 +52,7 @@ export function status(node,view,events,choice,configuration=null){
   if(node.execution_role==='join')return ({waiting:'blocked',enabled:'active',passed:'ok',rejected:'blocked'})[configuration?.join.state]||'declared';
   if(node.id===view.model.machine.execution?.parent&&configuration)return Object.values(configuration.activities).includes('running')?'active':configuration.join.state==='passed'?'ok':'blocked';
   if(node.layer==='state')return node.value===phaseValue(view,configuration,choice)?'active':'declared';
-  if(node.field){const e=nodeEvents(node,events).at(-1),values=e?.[node.direction==='in'?'inputs':'outputs'];if(!values||!(node.field in values))return 'declared';}
+  if(node.field){const values=callValues(node,events)[node.direction==='in'?'inputs':'outputs'];if(!(node.field in values))return 'declared';}
   if(node.layer==='business'){
     const states=view.model.nodes.filter(n=>n.parent===node.id&&n.layer!=='state').map(n=>status(n,view,events,choice,configuration));
     return ['active','blocked','ok','historical'].find(s=>states.includes(s))||'declared';
@@ -42,7 +63,7 @@ export function status(node,view,events,choice,configuration=null){
   return last.phase==='enter'?'active':'ok';
 }
 export function lines(node,view,events,choice,configuration=null){
-  if(node.field){const e=nodeEvents(node,events).at(-1),values=e?.[node.direction==='in'?'inputs':'outputs'];return [{text:node.field+': '+typeName(node.fieldType),role:'symbol'},{text:values&&node.field in values?compact(values[node.field]):'本次尚未采集',role:values&&node.field in values?'value':'muted'}];}
+  if(node.field){const values=callValues(node,events)[node.direction==='in'?'inputs':'outputs'];return [{text:node.field+': '+typeName(node.fieldType),role:'symbol'},{text:node.field in values?compact(values[node.field]):'本次尚未采集',role:node.field in values?'value':'muted'}];}
   const last=nodeEvents(node,events).at(-1),result=[{text:node.signature||node.source?.symbol||node.summary,role:'symbol'}];
   if(node.execution_role){
     if(!configuration){result.push({text:'这次运行尚未保存内部状态',role:'muted'});return result;}
@@ -83,7 +104,7 @@ export function lines(node,view,events,choice,configuration=null){
     return result;
   }
   for(const [direction,spec] of Object.entries(node.capture||{})){
-    const vals=last?.[direction==='in'?'inputs':'outputs']||{};
+    const vals=callValues(node,events)[direction==='in'?'inputs':'outputs'];
     for(const [key,t] of Object.entries(spec)){
       if(!(key in vals)||key==='state')continue;
       result.push({text:`${direction==='in'?'参数':'返回'} ${key}: ${typeName(t)} = ${compact(vals[key])}`,role:vals[key]===false?'bad':'value'});

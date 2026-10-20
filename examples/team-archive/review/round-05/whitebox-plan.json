@@ -1,0 +1,14 @@
+{
+  "valid": true,
+  "errors": [],
+  "status": "planned",
+  "rules": [
+    "scope",
+    "candidate",
+    "content",
+    "index",
+    "commit",
+    "size"
+  ],
+  "meaning": "Plan shape only; implementation and runtime are not verified."
+}

@@ -1,0 +1,141 @@
+{
+  "model": "behavior.json",
+  "manifest": "manifest.json",
+  "code_files": [
+    "archive_app/ports.py",
+    "archive_app/policy.py",
+    "archive_app/workflow.py",
+    "archive_app/storage.py",
+    "archive_app/service.py",
+    "integrations/bo_observer.py",
+    "integrations/bo_server.py",
+    "run.py"
+  ],
+  "watch_files": [
+    "tooling/build_model.py",
+    "tooling/observe.py",
+    "tooling/tests.py",
+    "ownership.json",
+    "observer_runtime/architecture_guard.py",
+    "observer_runtime/behavior_model.py",
+    "observer_runtime/change_sync.py",
+    "observer_runtime/code_structure.py",
+    "observer_runtime/execution_contract.py",
+    "observer_runtime/focus_graph.py",
+    "observer_runtime/model_tool.py",
+    "observer_runtime/probe.py",
+    "observer_runtime/project_bundle.py",
+    "observer_runtime/requirements_dialogue.py",
+    "observer_runtime/semantic_probe.py",
+    "observer_runtime/statechart_contract.py",
+    "observer_runtime/viewer_server.py",
+    "observer_runtime/whitebox_contract.py",
+    "observer_runtime/worknet_contract.py",
+    "observer_runtime/__init__.py",
+    "tooling/scenarios.py",
+    "tooling/behavior_source.json",
+    "requirements.txt",
+    "static/graph/ELK-LICENSE.md",
+    "static/graph/elk-worker.min.js",
+    "static/graph/elk.bundled.js",
+    "static/graph/graph-core.js",
+    "static/graph/index.html",
+    "static/graph/layout.js",
+    "static/graph/PIXI-LICENSE.txt",
+    "static/graph/pixi.min.js",
+    "static/graph/viewer.css",
+    "static/graph/viewer.js",
+    "static/app.html",
+    "static/app.css",
+    "static/app.js",
+    "AGENTS.md",
+    "validate.py",
+    ".gitattributes",
+    "tooling/graph_tests.mjs",
+    "tooling/mutations.py",
+    "observer_runtime/origin.json",
+    "tooling/size_scenarios.py"
+  ],
+  "acceptance": "acceptance.json",
+  "discovery": "discovery.json",
+  "whitebox": "whitebox.json",
+  "slice_depth": 1,
+  "probe_callees": [
+    "trace.record"
+  ],
+  "required_probes": [
+    {
+      "node": "scope_check",
+      "phase": "decision"
+    },
+    {
+      "node": "approval_candidate",
+      "phase": "decision"
+    },
+    {
+      "node": "archive_commit",
+      "phase": "commit"
+    },
+    {
+      "node": "project_limit",
+      "phase": "read"
+    },
+    {
+      "node": "size_guard",
+      "phase": "decision"
+    }
+  ],
+  "required_runtime_probes": [
+    {
+      "case": "archive_snapshot",
+      "node": "archive_commit",
+      "phase": "commit"
+    },
+    {
+      "case": "secret_content",
+      "node": "content_check",
+      "phase": "return"
+    },
+    {
+      "case": "size_commit_fresh",
+      "node": "size_guard",
+      "phase": "decision"
+    }
+  ],
+  "probe_modes": [
+    "on",
+    "off",
+    "fault"
+  ],
+  "required_execution_cases": [
+    "capacity_one",
+    "capacity_two",
+    "edit_overlap",
+    "cancel_running",
+    "loss_and_resume",
+    "join_pending",
+    "size_running_restore",
+    "size_commit_fresh"
+  ],
+  "observations_command": [
+    "{python}",
+    "-X",
+    "utf8",
+    "-B",
+    "tooling/observe.py"
+  ],
+  "test_commands": [
+    [
+      "{python}",
+      "-X",
+      "utf8",
+      "-B",
+      "tooling/tests.py"
+    ],
+    [
+      "node",
+      "tooling/graph_tests.mjs"
+    ]
+  ],
+  "timeout_seconds": 120
+}

@@ -1,32 +1,32 @@
 {
   "schema_version": 3,
-  "build_id": "644602e13cf063e66f6e9124114fcd1ffb51d09f2a337e5d733b7153aa8222a9",
+  "build_id": "c2d9f056fe7532418c2b6ca34171076d5939725b63adaa9dc3f54b1457ee1460",
   "files": {
     "app/__init__.py": "a829ebb4042211c3a39bf40646855698375b065069bbbd2aa61daba1d8e6a51c",
     "app/checks.py": "c9eb8458cc5020c52f31b9c8a65bb772e401af1d03b8771315d07d913158ea52",
     "app/ports.py": "aa21b0129c8999d36d924964fef37e975bc909cb95e56dfae51f78522e84ee66",
-    "app/service.py": "50205c0e3744ab4e1aea0a3cc350245621b4355b7c3375a16a4f3f34890c5437",
+    "app/service.py": "36831277b3ae47a8765bee61548c74d7d1b23a44b897011103e5f3fcde54a2ee",
     "app/store.py": "3a110acd78ddad46d964f3ae7698e7bbfb98b82a6570b8fa1925cbea08261347",
     "app/workflow.py": "c68a4790f9ffb23393ea9f71fd8a1e9b5d77540bef8fa693d2ae5003bbfb37ba",
     "integrations/__init__.py": "b32f9f9ea0b6003a61bf784e9a3e45f4e84cd574b5511a24c027d5c7dd438a55",
-    "integrations/bo_adapter.py": "64d1dc2d946116e9398558a3b403a2af70bda9ece4a1875a4dc45eb66d9c33cd",
+    "integrations/bo_adapter.py": "1fb04d1d6e94861e8fb9cff4ead6571c77277666449f5ae55a90bbdff8ce0f39",
     "integrations/bo_scenarios.py": "0447906894d6f6f78f3e797392c7c128a3cda0a9f3b9b8af0bc0f59a45f00cd7",
     "integrations/bo_server.py": "0b727821e0ca1f66751a6a9998190cd63472095e3a1bb164d10de99374a8872d",
     "requirements.txt": "6ea77a899e6267ddbcba1051cccb2c7a26af68f5551983a2cd681fa71e1e64a7",
-    "tooling/build_graph.py": "1c3f70700f41f89829672b9a6cb175ea7004888130d2c1217b015129f2284b5c"
+    "tooling/build_graph.py": "21fcc8d0a84b2af4aa1502eac9b79f53322d01e04ba288105e943363818bf28e"
   },
-  "model_hash": "89d6e6aafc673d6035d475fd76ff4c5ff75325fbf4be6631fa40e1246efa6d35",
+  "model_hash": "618fb71019c6ed16417df833eec7f92ab111037109652ede2e3bc864cf6cd7d1",
   "intent_hash": "6a9c072fc75d3f0bf0bc9d2708e06af4589a15984f66819191a80f9240848f56",
   "model_revision": "0.1.0",
   "bindings": {
     "flow.input": {
       "path": "app/service.py",
       "symbol": "Delivery.prepare",
-      "line": 76,
-      "end_line": 131,
+      "line": 105,
+      "end_line": 158,
       "signature": "self, expected_version: int | None=None",
-      "ast_sha256": "29735bb6943957e832292b262d628627c215d9105d6f07541d8f24ee4e3b08fd",
-      "snippet": "    def prepare(self, expected_version: int | None = None) -> dict:\n        with self.store.transaction():\n            job=self.store.get()\n            if expected_version is not None and job['param_version']!=expected_version:return self.store.snapshot()\n            if job['state'] in ('checking','completed','cancelled'):return self.store.snapshot()\n            job['attempt']=uuid.uuid4().hex[:10]\n            job.update(checks={},execution={},prepared_version=None)\n            allowed=authorized(job)\n            self.events.emit('read','read',lambda:observation(job,outputs={'param_version':job['param_version'],'length':len(job['content'])}))\n            self.events.emit('authorize','decision',lambda:observation(job,\n                inputs={'role':job['role'],'grants':len(job['grants'])},outputs={'allowed':allowed},uses=['read']))\n            if not allowed:\n                self.transition(job,'block');job['reason']='no_current_authorization';self.store.put(job)\n                self.events.emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['authorize']))\n                return self.store.snapshot()\n            self.transition(job,'start')\n            execution=ActivityExecution(job['capacity'],attempt=job['attempt'],param_version=job['param_version'])\n            job.update(reason='',execution=execution.snapshot())\n            self.store.put_execution({**job['execution'],'phase':'checking','disposition':'current'})\n            self.store.put(job)\n        # Work runs outside the transaction; edit/revoke/cancel can happen meanwhile.\n        try:\n            result=self.checker(job['content'],capacity=job['capacity'],execution=execution,\n                                progress=lambda event,state:self.execution_progress(job,event,state))\n            if not completed(execution.snapshot(),job['attempt'],job['param_version']) and result['passed']:\n                raise ValueError('检查函数报告通过，但本次运行的活动尚未完成')\n        except Exception as exc:\n            execution.progress=lambda event,state:self.execution_progress(job,event,state)\n            execution.abort()\n            with self.store.transaction():\n                current=self.store.get()\n                if current['state']=='checking' and current['attempt']==job['attempt'] and current['param_version']==job['param_version']:\n                    self.transition(current,'fail');current['reason']='worker_error:'+type(exc).__name__;self.store.put(current)\n            self.events.emit('wait','error',lambda:observation(job,outputs={'reason':'worker_error'},uses=['authorize']))\n            return self.store.snapshot()\n        self.events.emit('checksum','return',lambda:observation(job,inputs={'length':len(job['content'])},\n            outputs={'checksum':result['checksum']},uses=['authorize','read']))\n        self.events.emit('privacy','return',lambda:observation(job,inputs={'length':len(job['content'])},\n            outputs={'safe':result['safe']},uses=['authorize','read']))\n        self.events.emit('join','decision',lambda:observation(job,\n            outputs={'passed':result['passed'],'tasks':list(result['tasks'])},uses=['checksum','privacy']))\n        with self.store.transaction():\n            current=self.store.get()\n            if current['attempt']!=job['attempt'] or current['param_version']!=job['param_version']:\n                return self.store.snapshot()\n            if current['state']=='cancelled':return self.store.snapshot()\n            checks={k:v for k,v in result.items() if k!='execution'}\n            if not result['passed']:\n                self.transition(current,'fail');current['reason']='check_rejected';current['checks']=checks\n            else:\n                self.transition(current,'checked')\n                current.update(checks=checks,prepared_version=job['param_version'],reason='')\n            self.store.put(current)\n        if current['state'] in ('waiting','failed'):\n            self.events.emit('wait','wait',lambda:observation(current,outputs={'reason':current['reason']},uses=['join']))\n        return self.store.snapshot()",
+      "ast_sha256": "5082d4646031634e830e42671017053a4030211232c800de1a79ccb20f40bd1a",
+      "snippet": "    def prepare(self, expected_version: int | None = None) -> dict:\n        with self.store.transaction():\n            job=self.store.get()\n            if expected_version is not None and job['param_version']!=expected_version:return self.store.snapshot()\n            if job['state'] in ('checking','completed','cancelled'):return self.store.snapshot()\n            job['attempt']=uuid.uuid4().hex[:10]\n            job.update(checks={},execution={},prepared_version=None)\n            self.events.emit('read','read',lambda:observation(job,outputs={'param_version':job['param_version'],'length':len(job['content'])}))\n            allowed=authorized(job, self.events)\n            if not allowed:\n                self.transition(job,'block');job['reason']='no_current_authorization';self.store.put(job)\n                self.events.emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['authorize']))\n                return self.store.snapshot()\n            self.transition(job,'start')\n            execution=ActivityExecution(job['capacity'],attempt=job['attempt'],param_version=job['param_version'])\n            job.update(reason='',execution=execution.snapshot())\n            self.store.put_execution({**job['execution'],'phase':'checking','disposition':'current'})\n            self.store.put(job)\n        # Work runs outside the transaction; edit/revoke/cancel can happen meanwhile.\n        try:\n            result=self.checker(job['content'],capacity=job['capacity'],execution=execution,\n                                progress=lambda event,state:self.execution_progress(job,event,state))\n            if not completed(execution.snapshot(),job['attempt'],job['param_version']) and result['passed']:\n                raise ValueError('检查函数报告通过，但本次运行的活动尚未完成')\n        except Exception as exc:\n            execution.progress=lambda event,state:self.execution_progress(job,event,state)\n            execution.abort()\n            with self.store.transaction():\n                current=self.store.get()\n                if current['state']=='checking' and current['attempt']==job['attempt'] and current['param_version']==job['param_version']:\n                    self.transition(current,'fail');current['reason']='worker_error:'+type(exc).__name__;self.store.put(current)\n            self.events.emit('wait','error',lambda:observation(job,outputs={'reason':'worker_error'},uses=['authorize']))\n            return self.store.snapshot()\n        self.events.emit('checksum','return',lambda:observation(job,inputs={'length':len(job['content'])},\n            outputs={'checksum':result['checksum']},uses=['authorize','read']))\n        self.events.emit('privacy','return',lambda:observation(job,inputs={'length':len(job['content'])},\n            outputs={'safe':result['safe']},uses=['authorize','read']))\n        self.events.emit('join','decision',lambda:observation(job,\n            outputs={'passed':result['passed'],'tasks':list(result['tasks'])},uses=['checksum','privacy']))\n        with self.store.transaction():\n            current=self.store.get()\n            if current['attempt']!=job['attempt'] or current['param_version']!=job['param_version']:\n                return self.store.snapshot()\n            if current['state']=='cancelled':return self.store.snapshot()\n            checks={k:v for k,v in result.items() if k!='execution'}\n            if not result['passed']:\n                self.transition(current,'fail');current['reason']='check_rejected';current['checks']=checks\n            else:\n                self.transition(current,'checked')\n                current.update(checks=checks,prepared_version=job['param_version'],reason='')\n            self.store.put(current)\n        if current['state'] in ('waiting','failed'):\n            self.events.emit('wait','wait',lambda:observation(current,outputs={'reason':current['reason']},uses=['join']))\n        return self.store.snapshot()",
       "calls": [
         "ActivityExecution",
         "ValueError",
@@ -54,58 +54,79 @@
       ],
       "guards": [
         {
-          "line": 129,
+          "line": 156,
           "expression": "current['state'] in ('waiting', 'failed')"
         },
         {
-          "line": 79,
+          "line": 108,
           "expression": "expected_version is not None and job['param_version'] != expected_version"
         },
         {
-          "line": 80,
+          "line": 109,
           "expression": "job['state'] in ('checking', 'completed', 'cancelled')"
         },
         {
-          "line": 87,
+          "line": 114,
           "expression": "not allowed"
         },
         {
-          "line": 100,
+          "line": 127,
           "expression": "not completed(execution.snapshot(), job['attempt'], job['param_version']) and result['passed']"
         },
         {
-          "line": 119,
+          "line": 146,
           "expression": "current['attempt'] != job['attempt'] or current['param_version'] != job['param_version']"
         },
         {
-          "line": 121,
+          "line": 148,
           "expression": "current['state'] == 'cancelled'"
         },
         {
-          "line": 123,
+          "line": 150,
           "expression": "not result['passed']"
         },
         {
-          "line": 107,
+          "line": 134,
           "expression": "current['state'] == 'checking' and current['attempt'] == job['attempt'] and (current['param_version'] == job['param_version'])"
         }
       ],
-      "file_sha256": "50205c0e3744ab4e1aea0a3cc350245621b4355b7c3375a16a4f3f34890c5437"
+      "file_sha256": "36831277b3ae47a8765bee61548c74d7d1b23a44b897011103e5f3fcde54a2ee"
     },
     "flow.permission": {
       "path": "app/service.py",
       "symbol": "authorized",
-      "line": 15,
-      "end_line": 16,
-      "signature": "job: dict",
-      "ast_sha256": "0985a1afb76ad27d53b8f4955c0dc507673d26c17afc342c17cb62a4ba71ac6b",
-      "snippet": "def authorized(job: dict) -> bool:\n    return job['role'] == 'engineer' and any(eligible_grant(g,job) for g in job['grants'])",
+      "line": 30,
+      "end_line": 45,
+      "signature": "job: dict, events=None",
+      "ast_sha256": "4cf0381077560159c9ec8862b72ae65e0f89ff4cf2a1cbc549bff00a7fb6c0fa",
+      "snippet": "def authorized(job: dict, events=None) -> bool:\n    call_id = uuid.uuid4().hex if events is not None else None\n    evaluated = []\n    allowed = False\n    if job['role'] == 'engineer':\n        for grant in job['grants']:\n            evaluated.append(grant['id'])\n            if eligible_grant(grant, job, events, call_id):\n                allowed = True\n                break\n    if events is not None:\n        events.emit('authorize', 'decision', lambda: {\n            **observation(job, inputs={'role': job['role'], 'grants': len(job['grants'])},\n                          outputs={'allowed': allowed, 'evaluated_grants': evaluated}),\n            'call_id': call_id})\n    return allowed",
       "calls": [
-        "any",
-        "eligible_grant"
+        "eligible_grant",
+        "evaluated.append",
+        "events.emit",
+        "len",
+        "observation",
+        "uuid.uuid4"
       ],
-      "guards": [],
-      "file_sha256": "50205c0e3744ab4e1aea0a3cc350245621b4355b7c3375a16a4f3f34890c5437"
+      "guards": [
+        {
+          "line": 34,
+          "expression": "job['role'] == 'engineer'"
+        },
+        {
+          "line": 40,
+          "expression": "events is not None"
+        },
+        {
+          "line": 31,
+          "expression": "events is not None"
+        },
+        {
+          "line": 37,
+          "expression": "eligible_grant(grant, job, events, call_id)"
+        }
+      ],
+      "file_sha256": "36831277b3ae47a8765bee61548c74d7d1b23a44b897011103e5f3fcde54a2ee"
     },
     "flow.checks": {
       "path": "app/checks.py",
@@ -148,11 +169,11 @@
     "flow.commit": {
       "path": "app/service.py",
       "symbol": "Delivery.commit",
-      "line": 148,
-      "end_line": 165,
+      "line": 175,
+      "end_line": 192,
       "signature": "self, expected_version: int | None=None",
-      "ast_sha256": "70a2a3acecbe6d4ecb9fad2ea9c7ee30aba245f824c69c6beddd7dd464a44524",
-      "snippet": "    def commit(self, expected_version: int | None = None) -> dict:\n        with self.store.transaction():\n            job=self.store.get()\n            if expected_version is not None and job['param_version']!=expected_version:return self.store.snapshot()\n            if job['state']!='ready':return self.store.snapshot()\n            allowed=authorized(job);version_ok=job['prepared_version']==job['param_version']\n            self.events.emit('recheck','decision',lambda:observation(job,\n                outputs={'allowed':allowed,'version_ok':version_ok},uses=['authorize','join']))\n            if not allowed or not version_ok or not job['checks']['passed']:\n                self.transition(job,'block');job['reason']='authorization_or_version_changed';self.store.put(job)\n                self.events.emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['recheck']))\n                return self.store.snapshot()\n            self.store.artifact(job['param_version'],job['checks']['checksum'])\n            self.transition(job,'publish');self.store.put(job)\n        # Commit event is emitted only after the SQLite transaction succeeded.\n        self.events.emit('commit','commit',lambda:observation(job,\n            outputs={'version':job['param_version'],'checksum':job['checks']['checksum']},uses=['recheck','checksum']))\n        return self.store.snapshot()",
+      "ast_sha256": "329727b072a8ab0c67427d2aff37ee061bfb045a196bfae328f86b0e50143ceb",
+      "snippet": "    def commit(self, expected_version: int | None = None) -> dict:\n        with self.store.transaction():\n            job=self.store.get()\n            if expected_version is not None and job['param_version']!=expected_version:return self.store.snapshot()\n            if job['state']!='ready':return self.store.snapshot()\n            allowed=authorized(job, self.events);version_ok=job['prepared_version']==job['param_version']\n            self.events.emit('recheck','decision',lambda:observation(job,\n                outputs={'allowed':allowed,'version_ok':version_ok},uses=['authorize','join']))\n            if not allowed or not version_ok or not job['checks']['passed']:\n                self.transition(job,'block');job['reason']='authorization_or_version_changed';self.store.put(job)\n                self.events.emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['recheck']))\n                return self.store.snapshot()\n            self.store.artifact(job['param_version'],job['checks']['checksum'])\n            self.transition(job,'publish');self.store.put(job)\n        # Commit event is emitted only after the SQLite transaction succeeded.\n        self.events.emit('commit','commit',lambda:observation(job,\n            outputs={'version':job['param_version'],'checksum':job['checks']['checksum']},uses=['recheck','checksum']))\n        return self.store.snapshot()",
       "calls": [
         "authorized",
         "observation",
@@ -166,25 +187,25 @@
       ],
       "guards": [
         {
-          "line": 151,
+          "line": 178,
           "expression": "expected_version is not None and job['param_version'] != expected_version"
         },
         {
-          "line": 152,
+          "line": 179,
           "expression": "job['state'] != 'ready'"
         },
         {
-          "line": 156,
+          "line": 183,
           "expression": "not allowed or not version_ok or (not job['checks']['passed'])"
         }
       ],
-      "file_sha256": "50205c0e3744ab4e1aea0a3cc350245621b4355b7c3375a16a4f3f34890c5437"
+      "file_sha256": "36831277b3ae47a8765bee61548c74d7d1b23a44b897011103e5f3fcde54a2ee"
     },
     "flow.wait": {
       "path": "app/service.py",
       "symbol": "Delivery.command",
-      "line": 35,
-      "end_line": 74,
+      "line": 64,
+      "end_line": 103,
       "signature": "self, action: str, **values",
       "ast_sha256": "b201aa458a8248779eba965a097a31f13074d42d12851006a3f605aa02dbebc2",
       "snippet": "    def command(self, action: str, **values) -> dict:\n        with self.store.transaction():\n            job = self.store.get()\n            if action == 'edit':\n                content = values['content']\n                if not isinstance(content,str) or not 1 <= len(content) <= 4096:\n                    raise ValueError('内容必须是 1 到 4096 个字符的文本')\n                capacity=values.get('capacity',job['capacity'])\n                if type(capacity) is not int or capacity not in (1,2):raise ValueError('并发名额必须是 1 或 2')\n                self.transition(job,'edit')\n                self.store.update_execution(job['attempt'],phase='cancelled',disposition='superseded')\n                job.update(content=content,capacity=capacity,param_version=job['param_version']+1,\n                           checks={},execution={},prepared_version=None,reason='',attempt='none')\n            elif action == 'grant':\n                expires = values['expires']; version = values.get('version',job['param_version'])\n                if type(expires) is not int or expires < 0 or type(version) is not int or version < 1:\n                    raise ValueError('授权版本和有效期必须是合法整数')\n                g = {'id':str(values['id']),'project':values.get('project',job['project']),\n                     'actor':values.get('actor',job['actor']),'version':version,'expires':expires,'revoked':False}\n                if not g['id'] or not isinstance(g['project'],str) or not g['project']:\n                    raise ValueError('授权编号和项目名称不能为空')\n                job['grants'] = [x for x in job['grants'] if x['id'] != g['id']]+[g]\n            elif action == 'revoke':\n                if not any(g['id']==values['id'] for g in job['grants']):raise ValueError('找不到这份授权')\n                for g in job['grants']:\n                    if g['id']==values['id']:g['revoked']=True\n            elif action == 'role':\n                if values['role'] not in ('engineer','viewer'):raise ValueError('操作者角色无效')\n                job['role']=values['role']\n            elif action == 'clock':\n                clock=values['clock']\n                if type(clock) is not int or clock < job['clock']:raise ValueError('时钟必须是整数，且只能向前推进')\n                job['clock']=clock\n            elif action == 'cancel':\n                self.transition(job,'cancel')\n                self.store.update_execution(job['attempt'],disposition='cancelled')\n            else:raise ValueError('不支持这项操作')\n            job['epoch']+=1; self.store.put(job)\n        self.events.emit('change','change',lambda:observation(job,outputs={'action':action,'state':job['state']}))\n        return self.store.snapshot()",
@@ -208,72 +229,72 @@
       ],
       "guards": [
         {
-          "line": 38,
+          "line": 67,
           "expression": "action == 'edit'"
         },
         {
-          "line": 40,
+          "line": 69,
           "expression": "not isinstance(content, str) or not 1 <= len(content) <= 4096"
         },
         {
-          "line": 43,
+          "line": 72,
           "expression": "type(capacity) is not int or capacity not in (1, 2)"
         },
         {
-          "line": 48,
+          "line": 77,
           "expression": "action == 'grant'"
         },
         {
-          "line": 50,
+          "line": 79,
           "expression": "type(expires) is not int or expires < 0 or type(version) is not int or (version < 1)"
         },
         {
-          "line": 54,
+          "line": 83,
           "expression": "not g['id'] or not isinstance(g['project'], str) or (not g['project'])"
         },
         {
-          "line": 57,
+          "line": 86,
           "expression": "action == 'revoke'"
         },
         {
-          "line": 58,
+          "line": 87,
           "expression": "not any((g['id'] == values['id'] for g in job['grants']))"
         },
         {
-          "line": 61,
+          "line": 90,
           "expression": "action == 'role'"
         },
         {
-          "line": 60,
+          "line": 89,
           "expression": "g['id'] == values['id']"
         },
         {
-          "line": 62,
+          "line": 91,
           "expression": "values['role'] not in ('engineer', 'viewer')"
         },
         {
-          "line": 64,
+          "line": 93,
           "expression": "action == 'clock'"
         },
         {
-          "line": 66,
+          "line": 95,
           "expression": "type(clock) is not int or clock < job['clock']"
         },
         {
-          "line": 68,
+          "line": 97,
           "expression": "action == 'cancel'"
         }
       ],
-      "file_sha256": "50205c0e3744ab4e1aea0a3cc350245621b4355b7c3375a16a4f3f34890c5437"
+      "file_sha256": "36831277b3ae47a8765bee61548c74d7d1b23a44b897011103e5f3fcde54a2ee"
     },
     "read": {
       "path": "app/service.py",
       "symbol": "Delivery.prepare",
-      "line": 76,
-      "end_line": 131,
+      "line": 105,
+      "end_line": 158,
       "signature": "self, expected_version: int | None=None",
-      "ast_sha256": "29735bb6943957e832292b262d628627c215d9105d6f07541d8f24ee4e3b08fd",
-      "snippet": "    def prepare(self, expected_version: int | None = None) -> dict:\n        with self.store.transaction():\n            job=self.store.get()\n            if expected_version is not None and job['param_version']!=expected_version:return self.store.snapshot()\n            if job['state'] in ('checking','completed','cancelled'):return self.store.snapshot()\n            job['attempt']=uuid.uuid4().hex[:10]\n            job.update(checks={},execution={},prepared_version=None)\n            allowed=authorized(job)\n            self.events.emit('read','read',lambda:observation(job,outputs={'param_version':job['param_version'],'length':len(job['content'])}))\n            self.events.emit('authorize','decision',lambda:observation(job,\n                inputs={'role':job['role'],'grants':len(job['grants'])},outputs={'allowed':allowed},uses=['read']))\n            if not allowed:\n                self.transition(job,'block');job['reason']='no_current_authorization';self.store.put(job)\n                self.events.emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['authorize']))\n                return self.store.snapshot()\n            self.transition(job,'start')\n            execution=ActivityExecution(job['capacity'],attempt=job['attempt'],param_version=job['param_version'])\n            job.update(reason='',execution=execution.snapshot())\n            self.store.put_execution({**job['execution'],'phase':'checking','disposition':'current'})\n            self.store.put(job)\n        # Work runs outside the transaction; edit/revoke/cancel can happen meanwhile.\n        try:\n            result=self.checker(job['content'],capacity=job['capacity'],execution=execution,\n                                progress=lambda event,state:self.execution_progress(job,event,state))\n            if not completed(execution.snapshot(),job['attempt'],job['param_version']) and result['passed']:\n                raise ValueError('检查函数报告通过，但本次运行的活动尚未完成')\n        except Exception as exc:\n            execution.progress=lambda event,state:self.execution_progress(job,event,state)\n            execution.abort()\n            with self.store.transaction():\n                current=self.store.get()\n                if current['state']=='checking' and current['attempt']==job['attempt'] and current['param_version']==job['param_version']:\n                    self.transition(current,'fail');current['reason']='worker_error:'+type(exc).__name__;self.store.put(current)\n            self.events.emit('wait','error',lambda:observation(job,outputs={'reason':'worker_error'},uses=['authorize']))\n            return self.store.snapshot()\n        self.events.emit('checksum','return',lambda:observation(job,inputs={'length':len(job['content'])},\n            outputs={'checksum':result['checksum']},uses=['authorize','read']))\n        self.events.emit('privacy','return',lambda:observation(job,inputs={'length':len(job['content'])},\n            outputs={'safe':result['safe']},uses=['authorize','read']))\n        self.events.emit('join','decision',lambda:observation(job,\n            outputs={'passed':result['passed'],'tasks':list(result['tasks'])},uses=['checksum','privacy']))\n        with self.store.transaction():\n            current=self.store.get()\n            if current['attempt']!=job['attempt'] or current['param_version']!=job['param_version']:\n                return self.store.snapshot()\n            if current['state']=='cancelled':return self.store.snapshot()\n            checks={k:v for k,v in result.items() if k!='execution'}\n            if not result['passed']:\n                self.transition(current,'fail');current['reason']='check_rejected';current['checks']=checks\n            else:\n                self.transition(current,'checked')\n                current.update(checks=checks,prepared_version=job['param_version'],reason='')\n            self.store.put(current)\n        if current['state'] in ('waiting','failed'):\n            self.events.emit('wait','wait',lambda:observation(current,outputs={'reason':current['reason']},uses=['join']))\n        return self.store.snapshot()",
+      "ast_sha256": "5082d4646031634e830e42671017053a4030211232c800de1a79ccb20f40bd1a",
+      "snippet": "    def prepare(self, expected_version: int | None = None) -> dict:\n        with self.store.transaction():\n            job=self.store.get()\n            if expected_version is not None and job['param_version']!=expected_version:return self.store.snapshot()\n            if job['state'] in ('checking','completed','cancelled'):return self.store.snapshot()\n            job['attempt']=uuid.uuid4().hex[:10]\n            job.update(checks={},execution={},prepared_version=None)\n            self.events.emit('read','read',lambda:observation(job,outputs={'param_version':job['param_version'],'length':len(job['content'])}))\n            allowed=authorized(job, self.events)\n            if not allowed:\n                self.transition(job,'block');job['reason']='no_current_authorization';self.store.put(job)\n                self.events.emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['authorize']))\n                return self.store.snapshot()\n            self.transition(job,'start')\n            execution=ActivityExecution(job['capacity'],attempt=job['attempt'],param_version=job['param_version'])\n            job.update(reason='',execution=execution.snapshot())\n            self.store.put_execution({**job['execution'],'phase':'checking','disposition':'current'})\n            self.store.put(job)\n        # Work runs outside the transaction; edit/revoke/cancel can happen meanwhile.\n        try:\n            result=self.checker(job['content'],capacity=job['capacity'],execution=execution,\n                                progress=lambda event,state:self.execution_progress(job,event,state))\n            if not completed(execution.snapshot(),job['attempt'],job['param_version']) and result['passed']:\n                raise ValueError('检查函数报告通过，但本次运行的活动尚未完成')\n        except Exception as exc:\n            execution.progress=lambda event,state:self.execution_progress(job,event,state)\n            execution.abort()\n            with self.store.transaction():\n                current=self.store.get()\n                if current['state']=='checking' and current['attempt']==job['attempt'] and current['param_version']==job['param_version']:\n                    self.transition(current,'fail');current['reason']='worker_error:'+type(exc).__name__;self.store.put(current)\n            self.events.emit('wait','error',lambda:observation(job,outputs={'reason':'worker_error'},uses=['authorize']))\n            return self.store.snapshot()\n        self.events.emit('checksum','return',lambda:observation(job,inputs={'length':len(job['content'])},\n            outputs={'checksum':result['checksum']},uses=['authorize','read']))\n        self.events.emit('privacy','return',lambda:observation(job,inputs={'length':len(job['content'])},\n            outputs={'safe':result['safe']},uses=['authorize','read']))\n        self.events.emit('join','decision',lambda:observation(job,\n            outputs={'passed':result['passed'],'tasks':list(result['tasks'])},uses=['checksum','privacy']))\n        with self.store.transaction():\n            current=self.store.get()\n            if current['attempt']!=job['attempt'] or current['param_version']!=job['param_version']:\n                return self.store.snapshot()\n            if current['state']=='cancelled':return self.store.snapshot()\n            checks={k:v for k,v in result.items() if k!='execution'}\n            if not result['passed']:\n                self.transition(current,'fail');current['reason']='check_rejected';current['checks']=checks\n            else:\n                self.transition(current,'checked')\n                current.update(checks=checks,prepared_version=job['param_version'],reason='')\n            self.store.put(current)\n        if current['state'] in ('waiting','failed'):\n            self.events.emit('wait','wait',lambda:observation(current,outputs={'reason':current['reason']},uses=['join']))\n        return self.store.snapshot()",
       "calls": [
         "ActivityExecution",
         "ValueError",
@@ -301,49 +322,49 @@
       ],
       "guards": [
         {
-          "line": 129,
+          "line": 156,
           "expression": "current['state'] in ('waiting', 'failed')"
         },
         {
-          "line": 79,
+          "line": 108,
           "expression": "expected_version is not None and job['param_version'] != expected_version"
         },
         {
-          "line": 80,
+          "line": 109,
           "expression": "job['state'] in ('checking', 'completed', 'cancelled')"
         },
         {
-          "line": 87,
+          "line": 114,
           "expression": "not allowed"
         },
         {
-          "line": 100,
+          "line": 127,
           "expression": "not completed(execution.snapshot(), job['attempt'], job['param_version']) and result['passed']"
         },
         {
-          "line": 119,
+          "line": 146,
           "expression": "current['attempt'] != job['attempt'] or current['param_version'] != job['param_version']"
         },
         {
-          "line": 121,
+          "line": 148,
           "expression": "current['state'] == 'cancelled'"
         },
         {
-          "line": 123,
+          "line": 150,
           "expression": "not result['passed']"
         },
         {
-          "line": 107,
+          "line": 134,
           "expression": "current['state'] == 'checking' and current['attempt'] == job['attempt'] and (current['param_version'] == job['param_version'])"
         }
       ],
-      "file_sha256": "50205c0e3744ab4e1aea0a3cc350245621b4355b7c3375a16a4f3f34890c5437"
+      "file_sha256": "36831277b3ae47a8765bee61548c74d7d1b23a44b897011103e5f3fcde54a2ee"
     },
     "execute": {
       "path": "app/service.py",
       "symbol": "Delivery.execute",
-      "line": 167,
-      "end_line": 170,
+      "line": 194,
+      "end_line": 197,
       "signature": "self, expected_version: int | None=None",
       "ast_sha256": "3d956091fe42826f56612fd7c94b52d8700ff409675512edbbd643607e932e0d",
       "snippet": "    def execute(self, expected_version: int | None = None) -> dict:\n        version=self.store.snapshot()['param_version'] if expected_version is None else expected_version\n        self.prepare(expected_version=version)\n        return self.commit(expected_version=version)",
@@ -354,26 +375,71 @@
       ],
       "guards": [
         {
-          "line": 168,
+          "line": 195,
           "expression": "expected_version is None"
         }
       ],
-      "file_sha256": "50205c0e3744ab4e1aea0a3cc350245621b4355b7c3375a16a4f3f34890c5437"
+      "file_sha256": "36831277b3ae47a8765bee61548c74d7d1b23a44b897011103e5f3fcde54a2ee"
     },
     "authorize": {
       "path": "app/service.py",
       "symbol": "authorized",
-      "line": 15,
-      "end_line": 16,
-      "signature": "job: dict",
-      "ast_sha256": "0985a1afb76ad27d53b8f4955c0dc507673d26c17afc342c17cb62a4ba71ac6b",
-      "snippet": "def authorized(job: dict) -> bool:\n    return job['role'] == 'engineer' and any(eligible_grant(g,job) for g in job['grants'])",
+      "line": 30,
+      "end_line": 45,
+      "signature": "job: dict, events=None",
+      "ast_sha256": "4cf0381077560159c9ec8862b72ae65e0f89ff4cf2a1cbc549bff00a7fb6c0fa",
+      "snippet": "def authorized(job: dict, events=None) -> bool:\n    call_id = uuid.uuid4().hex if events is not None else None\n    evaluated = []\n    allowed = False\n    if job['role'] == 'engineer':\n        for grant in job['grants']:\n            evaluated.append(grant['id'])\n            if eligible_grant(grant, job, events, call_id):\n                allowed = True\n                break\n    if events is not None:\n        events.emit('authorize', 'decision', lambda: {\n            **observation(job, inputs={'role': job['role'], 'grants': len(job['grants'])},\n                          outputs={'allowed': allowed, 'evaluated_grants': evaluated}),\n            'call_id': call_id})\n    return allowed",
       "calls": [
-        "any",
-        "eligible_grant"
+        "eligible_grant",
+        "evaluated.append",
+        "events.emit",
+        "len",
+        "observation",
+        "uuid.uuid4"
       ],
-      "guards": [],
-      "file_sha256": "50205c0e3744ab4e1aea0a3cc350245621b4355b7c3375a16a4f3f34890c5437"
+      "guards": [
+        {
+          "line": 34,
+          "expression": "job['role'] == 'engineer'"
+        },
+        {
+          "line": 40,
+          "expression": "events is not None"
+        },
+        {
+          "line": 31,
+          "expression": "events is not None"
+        },
+        {
+          "line": 37,
+          "expression": "eligible_grant(grant, job, events, call_id)"
+        }
+      ],
+      "file_sha256": "36831277b3ae47a8765bee61548c74d7d1b23a44b897011103e5f3fcde54a2ee"
+    },
+    "grant": {
+      "path": "app/service.py",
+      "symbol": "eligible_grant",
+      "line": 9,
+      "end_line": 27,
+      "signature": "grant: dict, job: dict, events=None, parent_call_id=None",
+      "ast_sha256": "2ba498d9e97b94815a60b059f6e18e33987855bfab7e3ef120553e9c067c1ebc",
+      "snippet": "def eligible_grant(grant: dict, job: dict, events=None, parent_call_id=None) -> bool:\n    conditions = {}\n    def remember(name, value):\n        conditions[name] = value\n        return value\n    allowed = (remember('project', grant['project'] == job['project'])\n               and remember('actor', grant['actor'] == job['actor'])\n               and remember('version', grant['version'] == job['param_version'])\n               and remember('not_revoked', not grant['revoked'])\n               and remember('not_expired', job['clock'] < grant['expires']))\n    if events is not None:\n        events.emit('grant', 'decision', lambda: {\n            **observation(job, inputs={'grant_id': grant['id'], 'grant_version': grant['version'],\n                          'param_version': job['param_version'], 'clock': job['clock'],\n                          'expires': grant['expires']},\n                          outputs={'allowed': allowed, 'conditions': dict(conditions),\n                                   'evaluated': list(conditions)}),\n            'call_id': uuid.uuid4().hex, 'parent_call_id': parent_call_id})\n    return allowed",
+      "calls": [
+        "dict",
+        "events.emit",
+        "list",
+        "observation",
+        "remember",
+        "uuid.uuid4"
+      ],
+      "guards": [
+        {
+          "line": 19,
+          "expression": "events is not None"
+        }
+      ],
+      "file_sha256": "36831277b3ae47a8765bee61548c74d7d1b23a44b897011103e5f3fcde54a2ee"
     },
     "workers": {
       "path": "app/workflow.py",
@@ -581,8 +647,8 @@
     "execution.progress": {
       "path": "app/service.py",
       "symbol": "Delivery.execution_progress",
-      "line": 133,
-      "end_line": 146,
+      "line": 160,
+      "end_line": 173,
       "signature": "self, job: dict, event: str, state: dict",
       "ast_sha256": "2db2dbf27111af1cb1268901c7429c8484b00ebfbdbfe05caab75cfffb9c9806",
       "snippet": "    def execution_progress(self, job: dict, event: str, state: dict) -> None:\n        with self.store.transaction():\n            current=self.store.get()\n            previous=self.store.execution(job['attempt']) or {'phase':'checking','disposition':'current'}\n            self.store.put_execution({**previous,**state})\n            if current['attempt']==job['attempt'] and current['param_version']==job['param_version']:\n                current['execution']=state;self.store.put(current)\n        last=state['journal'][-1];activity=last['activity']\n        phase='wait' if event=='wait' else 'enter' if event=='start' else 'return'\n        self.events.emit('flow.checks',phase,lambda:observation(job,\n            outputs={'revision':state['revision'],'activity':activity,'event':event},uses=['authorize']))\n        if activity in state['activities']:\n            self.events.emit(activity,phase,lambda:observation(job,\n                outputs={'state':state['activities'][activity]},uses=['authorize']))",
@@ -597,23 +663,23 @@
       ],
       "guards": [
         {
-          "line": 144,
+          "line": 171,
           "expression": "activity in state['activities']"
         },
         {
-          "line": 138,
+          "line": 165,
           "expression": "current['attempt'] == job['attempt'] and current['param_version'] == job['param_version']"
         },
         {
-          "line": 141,
+          "line": 168,
           "expression": "event == 'wait'"
         },
         {
-          "line": 141,
+          "line": 168,
           "expression": "event == 'start'"
         }
       ],
-      "file_sha256": "50205c0e3744ab4e1aea0a3cc350245621b4355b7c3375a16a4f3f34890c5437"
+      "file_sha256": "36831277b3ae47a8765bee61548c74d7d1b23a44b897011103e5f3fcde54a2ee"
     },
     "execution.abort": {
       "path": "app/workflow.py",
@@ -719,11 +785,11 @@
     "recheck": {
       "path": "app/service.py",
       "symbol": "Delivery.commit",
-      "line": 148,
-      "end_line": 165,
+      "line": 175,
+      "end_line": 192,
       "signature": "self, expected_version: int | None=None",
-      "ast_sha256": "70a2a3acecbe6d4ecb9fad2ea9c7ee30aba245f824c69c6beddd7dd464a44524",
-      "snippet": "    def commit(self, expected_version: int | None = None) -> dict:\n        with self.store.transaction():\n            job=self.store.get()\n            if expected_version is not None and job['param_version']!=expected_version:return self.store.snapshot()\n            if job['state']!='ready':return self.store.snapshot()\n            allowed=authorized(job);version_ok=job['prepared_version']==job['param_version']\n            self.events.emit('recheck','decision',lambda:observation(job,\n                outputs={'allowed':allowed,'version_ok':version_ok},uses=['authorize','join']))\n            if not allowed or not version_ok or not job['checks']['passed']:\n                self.transition(job,'block');job['reason']='authorization_or_version_changed';self.store.put(job)\n                self.events.emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['recheck']))\n                return self.store.snapshot()\n            self.store.artifact(job['param_version'],job['checks']['checksum'])\n            self.transition(job,'publish');self.store.put(job)\n        # Commit event is emitted only after the SQLite transaction succeeded.\n        self.events.emit('commit','commit',lambda:observation(job,\n            outputs={'version':job['param_version'],'checksum':job['checks']['checksum']},uses=['recheck','checksum']))\n        return self.store.snapshot()",
+      "ast_sha256": "329727b072a8ab0c67427d2aff37ee061bfb045a196bfae328f86b0e50143ceb",
+      "snippet": "    def commit(self, expected_version: int | None = None) -> dict:\n        with self.store.transaction():\n            job=self.store.get()\n            if expected_version is not None and job['param_version']!=expected_version:return self.store.snapshot()\n            if job['state']!='ready':return self.store.snapshot()\n            allowed=authorized(job, self.events);version_ok=job['prepared_version']==job['param_version']\n            self.events.emit('recheck','decision',lambda:observation(job,\n                outputs={'allowed':allowed,'version_ok':version_ok},uses=['authorize','join']))\n            if not allowed or not version_ok or not job['checks']['passed']:\n                self.transition(job,'block');job['reason']='authorization_or_version_changed';self.store.put(job)\n                self.events.emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['recheck']))\n                return self.store.snapshot()\n            self.store.artifact(job['param_version'],job['checks']['checksum'])\n            self.transition(job,'publish');self.store.put(job)\n        # Commit event is emitted only after the SQLite transaction succeeded.\n        self.events.emit('commit','commit',lambda:observation(job,\n            outputs={'version':job['param_version'],'checksum':job['checks']['checksum']},uses=['recheck','checksum']))\n        return self.store.snapshot()",
       "calls": [
         "authorized",
         "observation",
@@ -737,28 +803,28 @@
       ],
       "guards": [
         {
-          "line": 151,
+          "line": 178,
           "expression": "expected_version is not None and job['param_version'] != expected_version"
         },
         {
-          "line": 152,
+          "line": 179,
           "expression": "job['state'] != 'ready'"
         },
         {
-          "line": 156,
+          "line": 183,
           "expression": "not allowed or not version_ok or (not job['checks']['passed'])"
         }
       ],
-      "file_sha256": "50205c0e3744ab4e1aea0a3cc350245621b4355b7c3375a16a4f3f34890c5437"
+      "file_sha256": "36831277b3ae47a8765bee61548c74d7d1b23a44b897011103e5f3fcde54a2ee"
     },
     "commit": {
       "path": "app/service.py",
       "symbol": "Delivery.commit",
-      "line": 148,
-      "end_line": 165,
+      "line": 175,
+      "end_line": 192,
       "signature": "self, expected_version: int | None=None",
-      "ast_sha256": "70a2a3acecbe6d4ecb9fad2ea9c7ee30aba245f824c69c6beddd7dd464a44524",
-      "snippet": "    def commit(self, expected_version: int | None = None) -> dict:\n        with self.store.transaction():\n            job=self.store.get()\n            if expected_version is not None and job['param_version']!=expected_version:return self.store.snapshot()\n            if job['state']!='ready':return self.store.snapshot()\n            allowed=authorized(job);version_ok=job['prepared_version']==job['param_version']\n            self.events.emit('recheck','decision',lambda:observation(job,\n                outputs={'allowed':allowed,'version_ok':version_ok},uses=['authorize','join']))\n            if not allowed or not version_ok or not job['checks']['passed']:\n                self.transition(job,'block');job['reason']='authorization_or_version_changed';self.store.put(job)\n                self.events.emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['recheck']))\n                return self.store.snapshot()\n            self.store.artifact(job['param_version'],job['checks']['checksum'])\n            self.transition(job,'publish');self.store.put(job)\n        # Commit event is emitted only after the SQLite transaction succeeded.\n        self.events.emit('commit','commit',lambda:observation(job,\n            outputs={'version':job['param_version'],'checksum':job['checks']['checksum']},uses=['recheck','checksum']))\n        return self.store.snapshot()",
+      "ast_sha256": "329727b072a8ab0c67427d2aff37ee061bfb045a196bfae328f86b0e50143ceb",
+      "snippet": "    def commit(self, expected_version: int | None = None) -> dict:\n        with self.store.transaction():\n            job=self.store.get()\n            if expected_version is not None and job['param_version']!=expected_version:return self.store.snapshot()\n            if job['state']!='ready':return self.store.snapshot()\n            allowed=authorized(job, self.events);version_ok=job['prepared_version']==job['param_version']\n            self.events.emit('recheck','decision',lambda:observation(job,\n                outputs={'allowed':allowed,'version_ok':version_ok},uses=['authorize','join']))\n            if not allowed or not version_ok or not job['checks']['passed']:\n                self.transition(job,'block');job['reason']='authorization_or_version_changed';self.store.put(job)\n                self.events.emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['recheck']))\n                return self.store.snapshot()\n            self.store.artifact(job['param_version'],job['checks']['checksum'])\n            self.transition(job,'publish');self.store.put(job)\n        # Commit event is emitted only after the SQLite transaction succeeded.\n        self.events.emit('commit','commit',lambda:observation(job,\n            outputs={'version':job['param_version'],'checksum':job['checks']['checksum']},uses=['recheck','checksum']))\n        return self.store.snapshot()",
       "calls": [
         "authorized",
         "observation",
@@ -772,28 +838,28 @@
       ],
       "guards": [
         {
-          "line": 151,
+          "line": 178,
           "expression": "expected_version is not None and job['param_version'] != expected_version"
         },
         {
-          "line": 152,
+          "line": 179,
           "expression": "job['state'] != 'ready'"
         },
         {
-          "line": 156,
+          "line": 183,
           "expression": "not allowed or not version_ok or (not job['checks']['passed'])"
         }
       ],
-      "file_sha256": "50205c0e3744ab4e1aea0a3cc350245621b4355b7c3375a16a4f3f34890c5437"
+      "file_sha256": "36831277b3ae47a8765bee61548c74d7d1b23a44b897011103e5f3fcde54a2ee"
     },
     "wait": {
       "path": "app/service.py",
       "symbol": "Delivery.prepare",
-      "line": 76,
-      "end_line": 131,
+      "line": 105,
+      "end_line": 158,
       "signature": "self, expected_version: int | None=None",
-      "ast_sha256": "29735bb6943957e832292b262d628627c215d9105d6f07541d8f24ee4e3b08fd",
-      "snippet": "    def prepare(self, expected_version: int | None = None) -> dict:\n        with self.store.transaction():\n            job=self.store.get()\n            if expected_version is not None and job['param_version']!=expected_version:return self.store.snapshot()\n            if job['state'] in ('checking','completed','cancelled'):return self.store.snapshot()\n            job['attempt']=uuid.uuid4().hex[:10]\n            job.update(checks={},execution={},prepared_version=None)\n            allowed=authorized(job)\n            self.events.emit('read','read',lambda:observation(job,outputs={'param_version':job['param_version'],'length':len(job['content'])}))\n            self.events.emit('authorize','decision',lambda:observation(job,\n                inputs={'role':job['role'],'grants':len(job['grants'])},outputs={'allowed':allowed},uses=['read']))\n            if not allowed:\n                self.transition(job,'block');job['reason']='no_current_authorization';self.store.put(job)\n                self.events.emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['authorize']))\n                return self.store.snapshot()\n            self.transition(job,'start')\n            execution=ActivityExecution(job['capacity'],attempt=job['attempt'],param_version=job['param_version'])\n            job.update(reason='',execution=execution.snapshot())\n            self.store.put_execution({**job['execution'],'phase':'checking','disposition':'current'})\n            self.store.put(job)\n        # Work runs outside the transaction; edit/revoke/cancel can happen meanwhile.\n        try:\n            result=self.checker(job['content'],capacity=job['capacity'],execution=execution,\n                                progress=lambda event,state:self.execution_progress(job,event,state))\n            if not completed(execution.snapshot(),job['attempt'],job['param_version']) and result['passed']:\n                raise ValueError('检查函数报告通过，但本次运行的活动尚未完成')\n        except Exception as exc:\n            execution.progress=lambda event,state:self.execution_progress(job,event,state)\n            execution.abort()\n            with self.store.transaction():\n                current=self.store.get()\n                if current['state']=='checking' and current['attempt']==job['attempt'] and current['param_version']==job['param_version']:\n                    self.transition(current,'fail');current['reason']='worker_error:'+type(exc).__name__;self.store.put(current)\n            self.events.emit('wait','error',lambda:observation(job,outputs={'reason':'worker_error'},uses=['authorize']))\n            return self.store.snapshot()\n        self.events.emit('checksum','return',lambda:observation(job,inputs={'length':len(job['content'])},\n            outputs={'checksum':result['checksum']},uses=['authorize','read']))\n        self.events.emit('privacy','return',lambda:observation(job,inputs={'length':len(job['content'])},\n            outputs={'safe':result['safe']},uses=['authorize','read']))\n        self.events.emit('join','decision',lambda:observation(job,\n            outputs={'passed':result['passed'],'tasks':list(result['tasks'])},uses=['checksum','privacy']))\n        with self.store.transaction():\n            current=self.store.get()\n            if current['attempt']!=job['attempt'] or current['param_version']!=job['param_version']:\n                return self.store.snapshot()\n            if current['state']=='cancelled':return self.store.snapshot()\n            checks={k:v for k,v in result.items() if k!='execution'}\n            if not result['passed']:\n                self.transition(current,'fail');current['reason']='check_rejected';current['checks']=checks\n            else:\n                self.transition(current,'checked')\n                current.update(checks=checks,prepared_version=job['param_version'],reason='')\n            self.store.put(current)\n        if current['state'] in ('waiting','failed'):\n            self.events.emit('wait','wait',lambda:observation(current,outputs={'reason':current['reason']},uses=['join']))\n        return self.store.snapshot()",
+      "ast_sha256": "5082d4646031634e830e42671017053a4030211232c800de1a79ccb20f40bd1a",
+      "snippet": "    def prepare(self, expected_version: int | None = None) -> dict:\n        with self.store.transaction():\n            job=self.store.get()\n            if expected_version is not None and job['param_version']!=expected_version:return self.store.snapshot()\n            if job['state'] in ('checking','completed','cancelled'):return self.store.snapshot()\n            job['attempt']=uuid.uuid4().hex[:10]\n            job.update(checks={},execution={},prepared_version=None)\n            self.events.emit('read','read',lambda:observation(job,outputs={'param_version':job['param_version'],'length':len(job['content'])}))\n            allowed=authorized(job, self.events)\n            if not allowed:\n                self.transition(job,'block');job['reason']='no_current_authorization';self.store.put(job)\n                self.events.emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['authorize']))\n                return self.store.snapshot()\n            self.transition(job,'start')\n            execution=ActivityExecution(job['capacity'],attempt=job['attempt'],param_version=job['param_version'])\n            job.update(reason='',execution=execution.snapshot())\n            self.store.put_execution({**job['execution'],'phase':'checking','disposition':'current'})\n            self.store.put(job)\n        # Work runs outside the transaction; edit/revoke/cancel can happen meanwhile.\n        try:\n            result=self.checker(job['content'],capacity=job['capacity'],execution=execution,\n                                progress=lambda event,state:self.execution_progress(job,event,state))\n            if not completed(execution.snapshot(),job['attempt'],job['param_version']) and result['passed']:\n                raise ValueError('检查函数报告通过，但本次运行的活动尚未完成')\n        except Exception as exc:\n            execution.progress=lambda event,state:self.execution_progress(job,event,state)\n            execution.abort()\n            with self.store.transaction():\n                current=self.store.get()\n                if current['state']=='checking' and current['attempt']==job['attempt'] and current['param_version']==job['param_version']:\n                    self.transition(current,'fail');current['reason']='worker_error:'+type(exc).__name__;self.store.put(current)\n            self.events.emit('wait','error',lambda:observation(job,outputs={'reason':'worker_error'},uses=['authorize']))\n            return self.store.snapshot()\n        self.events.emit('checksum','return',lambda:observation(job,inputs={'length':len(job['content'])},\n            outputs={'checksum':result['checksum']},uses=['authorize','read']))\n        self.events.emit('privacy','return',lambda:observation(job,inputs={'length':len(job['content'])},\n            outputs={'safe':result['safe']},uses=['authorize','read']))\n        self.events.emit('join','decision',lambda:observation(job,\n            outputs={'passed':result['passed'],'tasks':list(result['tasks'])},uses=['checksum','privacy']))\n        with self.store.transaction():\n            current=self.store.get()\n            if current['attempt']!=job['attempt'] or current['param_version']!=job['param_version']:\n                return self.store.snapshot()\n            if current['state']=='cancelled':return self.store.snapshot()\n            checks={k:v for k,v in result.items() if k!='execution'}\n            if not result['passed']:\n                self.transition(current,'fail');current['reason']='check_rejected';current['checks']=checks\n            else:\n                self.transition(current,'checked')\n                current.update(checks=checks,prepared_version=job['param_version'],reason='')\n            self.store.put(current)\n        if current['state'] in ('waiting','failed'):\n            self.events.emit('wait','wait',lambda:observation(current,outputs={'reason':current['reason']},uses=['join']))\n        return self.store.snapshot()",
       "calls": [
         "ActivityExecution",
         "ValueError",
@@ -821,49 +887,49 @@
       ],
       "guards": [
         {
-          "line": 129,
+          "line": 156,
           "expression": "current['state'] in ('waiting', 'failed')"
         },
         {
-          "line": 79,
+          "line": 108,
           "expression": "expected_version is not None and job['param_version'] != expected_version"
         },
         {
-          "line": 80,
+          "line": 109,
           "expression": "job['state'] in ('checking', 'completed', 'cancelled')"
         },
         {
-          "line": 87,
+          "line": 114,
           "expression": "not allowed"
         },
         {
-          "line": 100,
+          "line": 127,
           "expression": "not completed(execution.snapshot(), job['attempt'], job['param_version']) and result['passed']"
         },
         {
-          "line": 119,
+          "line": 146,
           "expression": "current['attempt'] != job['attempt'] or current['param_version'] != job['param_version']"
         },
         {
-          "line": 121,
+          "line": 148,
           "expression": "current['state'] == 'cancelled'"
         },
         {
-          "line": 123,
+          "line": 150,
           "expression": "not result['passed']"
         },
         {
-          "line": 107,
+          "line": 134,
           "expression": "current['state'] == 'checking' and current['attempt'] == job['attempt'] and (current['param_version'] == job['param_version'])"
         }
       ],
-      "file_sha256": "50205c0e3744ab4e1aea0a3cc350245621b4355b7c3375a16a4f3f34890c5437"
+      "file_sha256": "36831277b3ae47a8765bee61548c74d7d1b23a44b897011103e5f3fcde54a2ee"
     },
     "change": {
       "path": "app/service.py",
       "symbol": "Delivery.command",
-      "line": 35,
-      "end_line": 74,
+      "line": 64,
+      "end_line": 103,
       "signature": "self, action: str, **values",
       "ast_sha256": "b201aa458a8248779eba965a097a31f13074d42d12851006a3f605aa02dbebc2",
       "snippet": "    def command(self, action: str, **values) -> dict:\n        with self.store.transaction():\n            job = self.store.get()\n            if action == 'edit':\n                content = values['content']\n                if not isinstance(content,str) or not 1 <= len(content) <= 4096:\n                    raise ValueError('内容必须是 1 到 4096 个字符的文本')\n                capacity=values.get('capacity',job['capacity'])\n                if type(capacity) is not int or capacity not in (1,2):raise ValueError('并发名额必须是 1 或 2')\n                self.transition(job,'edit')\n                self.store.update_execution(job['attempt'],phase='cancelled',disposition='superseded')\n                job.update(content=content,capacity=capacity,param_version=job['param_version']+1,\n                           checks={},execution={},prepared_version=None,reason='',attempt='none')\n            elif action == 'grant':\n                expires = values['expires']; version = values.get('version',job['param_version'])\n                if type(expires) is not int or expires < 0 or type(version) is not int or version < 1:\n                    raise ValueError('授权版本和有效期必须是合法整数')\n                g = {'id':str(values['id']),'project':values.get('project',job['project']),\n                     'actor':values.get('actor',job['actor']),'version':version,'expires':expires,'revoked':False}\n                if not g['id'] or not isinstance(g['project'],str) or not g['project']:\n                    raise ValueError('授权编号和项目名称不能为空')\n                job['grants'] = [x for x in job['grants'] if x['id'] != g['id']]+[g]\n            elif action == 'revoke':\n                if not any(g['id']==values['id'] for g in job['grants']):raise ValueError('找不到这份授权')\n                for g in job['grants']:\n                    if g['id']==values['id']:g['revoked']=True\n            elif action == 'role':\n                if values['role'] not in ('engineer','viewer'):raise ValueError('操作者角色无效')\n                job['role']=values['role']\n            elif action == 'clock':\n                clock=values['clock']\n                if type(clock) is not int or clock < job['clock']:raise ValueError('时钟必须是整数，且只能向前推进')\n                job['clock']=clock\n            elif action == 'cancel':\n                self.transition(job,'cancel')\n                self.store.update_execution(job['attempt'],disposition='cancelled')\n            else:raise ValueError('不支持这项操作')\n            job['epoch']+=1; self.store.put(job)\n        self.events.emit('change','change',lambda:observation(job,outputs={'action':action,'state':job['state']}))\n        return self.store.snapshot()",
@@ -887,63 +953,63 @@
       ],
       "guards": [
         {
-          "line": 38,
+          "line": 67,
           "expression": "action == 'edit'"
         },
         {
-          "line": 40,
+          "line": 69,
           "expression": "not isinstance(content, str) or not 1 <= len(content) <= 4096"
         },
         {
-          "line": 43,
+          "line": 72,
           "expression": "type(capacity) is not int or capacity not in (1, 2)"
         },
         {
-          "line": 48,
+          "line": 77,
           "expression": "action == 'grant'"
         },
         {
-          "line": 50,
+          "line": 79,
           "expression": "type(expires) is not int or expires < 0 or type(version) is not int or (version < 1)"
         },
         {
-          "line": 54,
+          "line": 83,
           "expression": "not g['id'] or not isinstance(g['project'], str) or (not g['project'])"
         },
         {
-          "line": 57,
+          "line": 86,
           "expression": "action == 'revoke'"
         },
         {
-          "line": 58,
+          "line": 87,
           "expression": "not any((g['id'] == values['id'] for g in job['grants']))"
         },
         {
-          "line": 61,
+          "line": 90,
           "expression": "action == 'role'"
         },
         {
-          "line": 60,
+          "line": 89,
           "expression": "g['id'] == values['id']"
         },
         {
-          "line": 62,
+          "line": 91,
           "expression": "values['role'] not in ('engineer', 'viewer')"
         },
         {
-          "line": 64,
+          "line": 93,
           "expression": "action == 'clock'"
         },
         {
-          "line": 66,
+          "line": 95,
           "expression": "type(clock) is not int or clock < job['clock']"
         },
         {
-          "line": 68,
+          "line": 97,
           "expression": "action == 'cancel'"
         }
       ],
-      "file_sha256": "50205c0e3744ab4e1aea0a3cc350245621b4355b7c3375a16a4f3f34890c5437"
+      "file_sha256": "36831277b3ae47a8765bee61548c74d7d1b23a44b897011103e5f3fcde54a2ee"
     },
     "state.draft": {
       "path": "app/workflow.py",
@@ -1116,23 +1182,44 @@
     "code.8c566caec0ef95e9": {
       "path": "app/service.py",
       "symbol": "authorized",
-      "line": 15,
-      "end_line": 16,
-      "signature": "job: dict",
-      "ast_sha256": "0985a1afb76ad27d53b8f4955c0dc507673d26c17afc342c17cb62a4ba71ac6b",
-      "snippet": "def authorized(job: dict) -> bool:\n    return job['role'] == 'engineer' and any(eligible_grant(g,job) for g in job['grants'])",
+      "line": 30,
+      "end_line": 45,
+      "signature": "job: dict, events=None",
+      "ast_sha256": "4cf0381077560159c9ec8862b72ae65e0f89ff4cf2a1cbc549bff00a7fb6c0fa",
+      "snippet": "def authorized(job: dict, events=None) -> bool:\n    call_id = uuid.uuid4().hex if events is not None else None\n    evaluated = []\n    allowed = False\n    if job['role'] == 'engineer':\n        for grant in job['grants']:\n            evaluated.append(grant['id'])\n            if eligible_grant(grant, job, events, call_id):\n                allowed = True\n                break\n    if events is not None:\n        events.emit('authorize', 'decision', lambda: {\n            **observation(job, inputs={'role': job['role'], 'grants': len(job['grants'])},\n                          outputs={'allowed': allowed, 'evaluated_grants': evaluated}),\n            'call_id': call_id})\n    return allowed",
       "calls": [
-        "any",
-        "eligible_grant"
+        "eligible_grant",
+        "evaluated.append",
+        "events.emit",
+        "len",
+        "observation",
+        "uuid.uuid4"
       ],
-      "guards": [],
-      "file_sha256": "50205c0e3744ab4e1aea0a3cc350245621b4355b7c3375a16a4f3f34890c5437"
+      "guards": [
+        {
+          "line": 34,
+          "expression": "job['role'] == 'engineer'"
+        },
+        {
+          "line": 40,
+          "expression": "events is not None"
+        },
+        {
+          "line": 31,
+          "expression": "events is not None"
+        },
+        {
+          "line": 37,
+          "expression": "eligible_grant(grant, job, events, call_id)"
+        }
+      ],
+      "file_sha256": "36831277b3ae47a8765bee61548c74d7d1b23a44b897011103e5f3fcde54a2ee"
     },
     "code.9ab020fa53084121": {
       "path": "app/service.py",
       "symbol": "Delivery.transition",
-      "line": 28,
-      "end_line": 33,
+      "line": 57,
+      "end_line": 62,
       "signature": "self, job: dict, event: str",
       "ast_sha256": "73e59361a98184ce87ed88cda825d6df63eef05293daf341693441bb9b10b0e4",
       "snippet": "    def transition(self, job: dict, event: str):\n        old=job['state']\n        job['state']=advance(old,event,job.get('execution'),attempt=job['attempt'],param_version=job['param_version'])\n        self.store.db.execute('INSERT INTO journal(event,source,target,attempt,param_version) VALUES (?,?,?,?,?)',\n                              (event,old,job['state'],job['attempt'],job['param_version']))\n        if event!='edit':self.store.update_execution(job['attempt'],phase=job['state'])",
@@ -1144,11 +1231,11 @@
       ],
       "guards": [
         {
-          "line": 33,
+          "line": 62,
           "expression": "event != 'edit'"
         }
       ],
-      "file_sha256": "50205c0e3744ab4e1aea0a3cc350245621b4355b7c3375a16a4f3f34890c5437"
+      "file_sha256": "36831277b3ae47a8765bee61548c74d7d1b23a44b897011103e5f3fcde54a2ee"
     },
     "code.c84df59e5beba542": {
       "path": "app/workflow.py",
@@ -1178,11 +1265,11 @@
     "code.0fc7de430e9f9b0b": {
       "path": "app/service.py",
       "symbol": "Delivery.commit",
-      "line": 148,
-      "end_line": 165,
+      "line": 175,
+      "end_line": 192,
       "signature": "self, expected_version: int | None=None",
-      "ast_sha256": "70a2a3acecbe6d4ecb9fad2ea9c7ee30aba245f824c69c6beddd7dd464a44524",
-      "snippet": "    def commit(self, expected_version: int | None = None) -> dict:\n        with self.store.transaction():\n            job=self.store.get()\n            if expected_version is not None and job['param_version']!=expected_version:return self.store.snapshot()\n            if job['state']!='ready':return self.store.snapshot()\n            allowed=authorized(job);version_ok=job['prepared_version']==job['param_version']\n            self.events.emit('recheck','decision',lambda:observation(job,\n                outputs={'allowed':allowed,'version_ok':version_ok},uses=['authorize','join']))\n            if not allowed or not version_ok or not job['checks']['passed']:\n                self.transition(job,'block');job['reason']='authorization_or_version_changed';self.store.put(job)\n                self.events.emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['recheck']))\n                return self.store.snapshot()\n            self.store.artifact(job['param_version'],job['checks']['checksum'])\n            self.transition(job,'publish');self.store.put(job)\n        # Commit event is emitted only after the SQLite transaction succeeded.\n        self.events.emit('commit','commit',lambda:observation(job,\n            outputs={'version':job['param_version'],'checksum':job['checks']['checksum']},uses=['recheck','checksum']))\n        return self.store.snapshot()",
+      "ast_sha256": "329727b072a8ab0c67427d2aff37ee061bfb045a196bfae328f86b0e50143ceb",
+      "snippet": "    def commit(self, expected_version: int | None = None) -> dict:\n        with self.store.transaction():\n            job=self.store.get()\n            if expected_version is not None and job['param_version']!=expected_version:return self.store.snapshot()\n            if job['state']!='ready':return self.store.snapshot()\n            allowed=authorized(job, self.events);version_ok=job['prepared_version']==job['param_version']\n            self.events.emit('recheck','decision',lambda:observation(job,\n                outputs={'allowed':allowed,'version_ok':version_ok},uses=['authorize','join']))\n            if not allowed or not version_ok or not job['checks']['passed']:\n                self.transition(job,'block');job['reason']='authorization_or_version_changed';self.store.put(job)\n                self.events.emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['recheck']))\n                return self.store.snapshot()\n            self.store.artifact(job['param_version'],job['checks']['checksum'])\n            self.transition(job,'publish');self.store.put(job)\n        # Commit event is emitted only after the SQLite transaction succeeded.\n        self.events.emit('commit','commit',lambda:observation(job,\n            outputs={'version':job['param_version'],'checksum':job['checks']['checksum']},uses=['recheck','checksum']))\n        return self.store.snapshot()",
       "calls": [
         "authorized",
         "observation",
@@ -1196,31 +1283,19 @@
       ],
       "guards": [
         {
-          "line": 151,
+          "line": 178,
           "expression": "expected_version is not None and job['param_version'] != expected_version"
         },
         {
-          "line": 152,
+          "line": 179,
           "expression": "job['state'] != 'ready'"
         },
         {
-          "line": 156,
+          "line": 183,
           "expression": "not allowed or not version_ok or (not job['checks']['passed'])"
         }
       ],
-      "file_sha256": "50205c0e3744ab4e1aea0a3cc350245621b4355b7c3375a16a4f3f34890c5437"
-    },
-    "code.f004ffbad13ab667": {
-      "path": "app/service.py",
-      "symbol": "eligible_grant",
-      "line": 9,
-      "end_line": 12,
-      "signature": "grant: dict, job: dict",
-      "ast_sha256": "f998d9e2d0eda13561119aa1de58cfffb2ab2e34c2bec6598903673f204841a8",
-      "snippet": "def eligible_grant(grant: dict, job: dict) -> bool:\n    return (grant['project'] == job['project'] and grant['actor'] == job['actor']\n            and grant['version'] == job['param_version'] and not grant['revoked']\n            and job['clock'] < grant['expires'])",
-      "calls": [],
-      "guards": [],
-      "file_sha256": "50205c0e3744ab4e1aea0a3cc350245621b4355b7c3375a16a4f3f34890c5437"
+      "file_sha256": "36831277b3ae47a8765bee61548c74d7d1b23a44b897011103e5f3fcde54a2ee"
     },
     "code.ac32af971797fecf": {
       "path": "app/workflow.py",
@@ -1280,23 +1355,44 @@
     "code.1bba09184421903e": {
       "path": "app/service.py",
       "symbol": "authorized",
-      "line": 15,
-      "end_line": 16,
-      "signature": "job: dict",
-      "ast_sha256": "0985a1afb76ad27d53b8f4955c0dc507673d26c17afc342c17cb62a4ba71ac6b",
-      "snippet": "def authorized(job: dict) -> bool:\n    return job['role'] == 'engineer' and any(eligible_grant(g,job) for g in job['grants'])",
+      "line": 30,
+      "end_line": 45,
+      "signature": "job: dict, events=None",
+      "ast_sha256": "4cf0381077560159c9ec8862b72ae65e0f89ff4cf2a1cbc549bff00a7fb6c0fa",
+      "snippet": "def authorized(job: dict, events=None) -> bool:\n    call_id = uuid.uuid4().hex if events is not None else None\n    evaluated = []\n    allowed = False\n    if job['role'] == 'engineer':\n        for grant in job['grants']:\n            evaluated.append(grant['id'])\n            if eligible_grant(grant, job, events, call_id):\n                allowed = True\n                break\n    if events is not None:\n        events.emit('authorize', 'decision', lambda: {\n            **observation(job, inputs={'role': job['role'], 'grants': len(job['grants'])},\n                          outputs={'allowed': allowed, 'evaluated_grants': evaluated}),\n            'call_id': call_id})\n    return allowed",
       "calls": [
-        "any",
-        "eligible_grant"
+        "eligible_grant",
+        "evaluated.append",
+        "events.emit",
+        "len",
+        "observation",
+        "uuid.uuid4"
       ],
-      "guards": [],
-      "file_sha256": "50205c0e3744ab4e1aea0a3cc350245621b4355b7c3375a16a4f3f34890c5437"
+      "guards": [
+        {
+          "line": 34,
+          "expression": "job['role'] == 'engineer'"
+        },
+        {
+          "line": 40,
+          "expression": "events is not None"
+        },
+        {
+          "line": 31,
+          "expression": "events is not None"
+        },
+        {
+          "line": 37,
+          "expression": "eligible_grant(grant, job, events, call_id)"
+        }
+      ],
+      "file_sha256": "36831277b3ae47a8765bee61548c74d7d1b23a44b897011103e5f3fcde54a2ee"
     },
     "code.abc699d67116f986": {
       "path": "app/service.py",
       "symbol": "Delivery.transition",
-      "line": 28,
-      "end_line": 33,
+      "line": 57,
+      "end_line": 62,
       "signature": "self, job: dict, event: str",
       "ast_sha256": "73e59361a98184ce87ed88cda825d6df63eef05293daf341693441bb9b10b0e4",
       "snippet": "    def transition(self, job: dict, event: str):\n        old=job['state']\n        job['state']=advance(old,event,job.get('execution'),attempt=job['attempt'],param_version=job['param_version'])\n        self.store.db.execute('INSERT INTO journal(event,source,target,attempt,param_version) VALUES (?,?,?,?,?)',\n                              (event,old,job['state'],job['attempt'],job['param_version']))\n        if event!='edit':self.store.update_execution(job['attempt'],phase=job['state'])",
@@ -1308,32 +1404,53 @@
       ],
       "guards": [
         {
-          "line": 33,
+          "line": 62,
           "expression": "event != 'edit'"
         }
       ],
-      "file_sha256": "50205c0e3744ab4e1aea0a3cc350245621b4355b7c3375a16a4f3f34890c5437"
+      "file_sha256": "36831277b3ae47a8765bee61548c74d7d1b23a44b897011103e5f3fcde54a2ee"
     },
     "code.a91cf5631a56d8f8": {
       "path": "app/service.py",
       "symbol": "authorized",
-      "line": 15,
-      "end_line": 16,
-      "signature": "job: dict",
-      "ast_sha256": "0985a1afb76ad27d53b8f4955c0dc507673d26c17afc342c17cb62a4ba71ac6b",
-      "snippet": "def authorized(job: dict) -> bool:\n    return job['role'] == 'engineer' and any(eligible_grant(g,job) for g in job['grants'])",
+      "line": 30,
+      "end_line": 45,
+      "signature": "job: dict, events=None",
+      "ast_sha256": "4cf0381077560159c9ec8862b72ae65e0f89ff4cf2a1cbc549bff00a7fb6c0fa",
+      "snippet": "def authorized(job: dict, events=None) -> bool:\n    call_id = uuid.uuid4().hex if events is not None else None\n    evaluated = []\n    allowed = False\n    if job['role'] == 'engineer':\n        for grant in job['grants']:\n            evaluated.append(grant['id'])\n            if eligible_grant(grant, job, events, call_id):\n                allowed = True\n                break\n    if events is not None:\n        events.emit('authorize', 'decision', lambda: {\n            **observation(job, inputs={'role': job['role'], 'grants': len(job['grants'])},\n                          outputs={'allowed': allowed, 'evaluated_grants': evaluated}),\n            'call_id': call_id})\n    return allowed",
       "calls": [
-        "any",
-        "eligible_grant"
+        "eligible_grant",
+        "evaluated.append",
+        "events.emit",
+        "len",
+        "observation",
+        "uuid.uuid4"
       ],
-      "guards": [],
-      "file_sha256": "50205c0e3744ab4e1aea0a3cc350245621b4355b7c3375a16a4f3f34890c5437"
+      "guards": [
+        {
+          "line": 34,
+          "expression": "job['role'] == 'engineer'"
+        },
+        {
+          "line": 40,
+          "expression": "events is not None"
+        },
+        {
+          "line": 31,
+          "expression": "events is not None"
+        },
+        {
+          "line": 37,
+          "expression": "eligible_grant(grant, job, events, call_id)"
+        }
+      ],
+      "file_sha256": "36831277b3ae47a8765bee61548c74d7d1b23a44b897011103e5f3fcde54a2ee"
     },
     "code.52990f65c6aa2534": {
       "path": "app/service.py",
       "symbol": "Delivery.transition",
-      "line": 28,
-      "end_line": 33,
+      "line": 57,
+      "end_line": 62,
       "signature": "self, job: dict, event: str",
       "ast_sha256": "73e59361a98184ce87ed88cda825d6df63eef05293daf341693441bb9b10b0e4",
       "snippet": "    def transition(self, job: dict, event: str):\n        old=job['state']\n        job['state']=advance(old,event,job.get('execution'),attempt=job['attempt'],param_version=job['param_version'])\n        self.store.db.execute('INSERT INTO journal(event,source,target,attempt,param_version) VALUES (?,?,?,?,?)',\n                              (event,old,job['state'],job['attempt'],job['param_version']))\n        if event!='edit':self.store.update_execution(job['attempt'],phase=job['state'])",
@@ -1345,11 +1462,11 @@
       ],
       "guards": [
         {
-          "line": 33,
+          "line": 62,
           "expression": "event != 'edit'"
         }
       ],
-      "file_sha256": "50205c0e3744ab4e1aea0a3cc350245621b4355b7c3375a16a4f3f34890c5437"
+      "file_sha256": "36831277b3ae47a8765bee61548c74d7d1b23a44b897011103e5f3fcde54a2ee"
     },
     "code.987727c937c2bc9d": {
       "path": "app/workflow.py",

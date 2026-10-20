@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>资料柜 · 团队归档</title><link rel="stylesheet" href="/app.css"></head>
+<body><header><div><span class="eyebrow">LOCAL TEAM ARCHIVE · 模拟演练</span><h1>资料柜</h1></div><nav><span id="connection" role="status">连接中</span><a href="/graph" target="_blank" rel="noopener">打开开发者图 ↗</a></nav></header>
+<main><section class="workspace">
+<div class="section-title"><h2>当前资料</h2><span id="version" class="tag"></span></div>
+<p class="muted" id="location"></p>
+<form id="edit-form"><label>标题<input id="title" autocomplete="off"></label><label>资料编号<input id="number" autocomplete="off"></label><label>内容<textarea id="content" rows="7"></textarea></label><div class="form-actions"><span class="muted">修改后生成新内容版本；已归档快照保持不变。</span><button type="submit" class="secondary">保存新版本</button></div></form>
+<details><summary>调整分类文件夹</summary><div class="inline"><select id="folder" aria-label="分类文件夹"></select><button id="move" class="secondary">变更归属</button></div><p class="muted">直接负责人按新目录判断，上级目录不继承权限。</p></details>
+<div class="section-title spaced"><h2>发起归档</h2></div>
+<div class="row"><label>操作人<select id="operator"></select></label><label>本次检查名额<select id="capacity"><option value="2">2 个 · 可同时检查</option><option value="1">1 个 · 依次检查</option></select></label></div>
+<p class="muted" id="delay-note"></p><button id="new-run" class="primary full">新建一次归档运行</button>
+<div class="section-title spaced"><h2>审批</h2><span class="muted">任一条仍有效即可</span></div>
+<div class="row"><label>审核员<select id="reviewer"></select></label><label>有效时长<select id="expires"><option value="600">10 分钟</option><option value="15">15 秒 · 观察到期</option><option value="0">立即到期 · 反例</option></select></label></div>
+<button id="approve" class="secondary full">为当前操作人审批当前版本</button><div id="approvals" class="approval-list"></div>
+</section>
+<section class="activity"><div class="section-title"><h2>归档运行</h2><span id="run-count" class="muted"></span></div><p class="muted">每次运行保留自己的输入、检查结果与名额。继续会重新核对当前资格。</p><div id="runs"></div>
+<div class="section-title spaced"><h2>固定快照</h2><span id="archive-count" class="muted"></span></div><div id="archives"></div>
+</section></main>
+<div id="notice" role="status" hidden></div><footer>仅本地合成数据 · 文件夹用于分类，归档不移动或删除原资料。<span id="build"></span></footer>
+<script src="/app.js"></script></body></html>

@@ -26,7 +26,12 @@ def build():
     node('execute','检查并提交指定版本','Delivery.execute','flow.input',kind='action',
          inputs={'expected_version':'number'},summary='这条命令只提交启动时指定的内容版本')
     node('authorize','判断授权是否有效','authorized','flow.permission',kind='decision',
-         inputs={'role':'string','grants':'number'},outputs={'allowed':'boolean'},predicate='engineer AND ANY eligible grant')
+         inputs={'role':'string','grants':'number'},outputs={'allowed':'boolean','evaluated_grants':['string']},predicate='engineer AND ANY eligible grant')
+    node('grant','检查一份授权','eligible_grant','flow.permission',kind='decision',
+         inputs={'grant_id':'string','grant_version':'number','param_version':'number','clock':'number','expires':'number'},
+         outputs={'allowed':'boolean','evaluated':['string'],
+                  'conditions':{k:'boolean' for k in ('project','actor','version','not_revoked','not_expired')}},
+         summary='保留实际执行的条件；短路跳过的条件没有结果')
     for resource in execution['resources']:
         node(resource['id'],resource['label'],'ActivityExecution.start',execution['parent'],path='app/workflow.py',
              kind='data',execution_role='resource',summary='每项检查占用一个名额，结束后归还')
@@ -62,7 +67,7 @@ def build():
     def edge(a,b,type,label,**extra):
         edges.append({'id':a+'>'+b+':'+type,'from':a,'to':b,'type':type,'label':label,
                       'evidence':'executable declaration' if type in ('resource','join') else 'business mapping and source binding',**extra})
-    for a,b,type,label in [('read','authorize','data','使用本次参数'),('authorize','checksum','guard','有执行权限'),
+    for a,b,type,label in [('read','authorize','data','使用本次参数'),('grant','authorize','data','任一有效授权可通过'),('authorize','checksum','guard','有执行权限'),
         ('authorize','privacy','guard','有执行权限'),('join','recheck','guard','两项检查通过'),
         ('recheck','commit','guard','当前权限和版本仍有效'),('authorize','wait','flow','缺少有效授权'),
         ('recheck','wait','flow','权限或版本已改变'),('change','read','flow','重新读取内容')]:edge(a,b,type,label)

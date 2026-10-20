@@ -1,0 +1,126 @@
+Browser tab: 2, Title: "开发者运行图", URL: "http://127.0.0.1:8824/graph".
+1 AXWebArea 开发者运行图, URL: 127.0.0.1:8824/graph
+	2 container
+		3 text ◉
+		4 heading 资料归档 · 运行图, Value: 1, ID: title
+			163 text 资料归档 · 运行图
+		6 text 布局
+		7 pop up button (collapsed, settable) 布局, Value: 层次布局, ID: layout, Secondary Actions: Expand
+			8 menu
+				9 (selected) 层次布局
+				10 关系布局
+		11 button 自动布局, ID: arrange
+		12 button (disabled) 撤销布局, ID: undo-layout
+		119 text 视图已保存
+		164 text 保存的运行
+		15 link Description: 操作台 ↗, Value: 127.0.0.1:8824/control
+	16 container
+		17 text 版本
+		18 pop up button (collapsed, settable) 版本, Value: 当前程序, ID: version, Secondary Actions: Expand
+			19 menu
+				20 (selected) 当前程序
+	21 container
+		22 text 场景
+		23 pop up button (collapsed, settable) 场景, Value: 撤销一条 · 另一条仍有效, ID: case, Secondary Actions: Expand
+			24 menu
+				25 当前操作
+				26 正常归档 · 固定版本快照
+				27 (selected) 撤销一条 · 另一条仍有效
+				28 内容包含禁用标记
+				29 索引缺少标题
+				30 1 个名额 · 索引排队
+				31 2 个名额 · 两项实际重叠
+				32 一项未完成 · 不能提交
+				33 审批失效 · 保留结果后手动继续
+				34 内容改版 · 旧新运行同时可查
+				35 取消本次 · 实际结束后归还名额
+				36 提交前目录变化
+				37 提交时恰好到期
+				38 提交前内容改版
+				39 同版本并发 · 只有一条归档
+	40 container
+		41 text 运行
+		42 pop up button (collapsed, settable) 运行, Value: 当前运行, ID: attempt, Secondary Actions: Expand
+			43 menu
+				110 (selected) 当前运行
+				111 第 1 次 · 版本 1
+	46 container
+		47 text 时刻
+		48 pop up button (collapsed, settable) 时刻, Value: 最新状态, ID: step, Secondary Actions: Expand
+			49 menu
+				112 (selected) 最新状态
+				113 1 · 内容检查：正在执行
+				114 2 · 索引检查：正在执行
+				115 3 · 索引检查：已通过
+				116 4 · 内容检查：已通过
+				117 5 · 两项检查通过
+	56 button 收起, ID: collapse
+	57 button 展开一级, ID: expand
+	58 button 显示完整图, ID: fit
+	59 button Description: 缩小, ID: zoom-out
+	92 text 99%
+	61 button Description: 放大, ID: zoom-in
+	165 text 保存的场景 · 流程状态：已归档
+	166 text 内容版本 1 · 本次名额 2
+	123 search text field (settable) Description: 搜索节点, Value: content_version, ID: node-search
+	167 text 代码版本 6eb25ba0
+	66 container Description: 统一节点连接图。拖动节点调整位置，拖动空白平移；双击展开，滚轮缩放。选中节点后按 P 固定，方向键移动。, ID: viewport
+		67 container semantic
+			125 button (expanded) Description: 核对归档资格, Secondary Actions: Collapse
+			126 button (expanded) Description: 本次双检查, Secondary Actions: Collapse
+			127 button (collapsed) Description: 复核并保存快照, Secondary Actions: Expand
+			128 button (collapsed) Description: 负责人发起归档, Secondary Actions: Expand
+			129 button (collapsed) Description: 资料条目与内容版本, Secondary Actions: Expand
+			130 button (collapsed) Description: 是否直接负责所在文件夹, Secondary Actions: Expand
+			131 button (collapsed) Description: 审批是否适用, Secondary Actions: Expand
+			132 button (collapsed) Description: 当前文件夹的直接负责人, Secondary Actions: Expand
+			133 button (collapsed) Description: 项目 · 操作人 · 资料 · 版本, Secondary Actions: Expand
+			134 button (collapsed) Description: 点击继续并重查资格, Secondary Actions: Expand
+			135 button (collapsed) Description: 读取当前权威关系, Secondary Actions: Expand
+			136 button (collapsed) Description: 调整分类文件夹, Secondary Actions: Expand
+			137 button (expanded) Description: 内容检查, Secondary Actions: Collapse
+			138 button (collapsed) Description: attempt, Secondary Actions: Expand
+			139 button (collapsed) Description: content_version, Secondary Actions: Expand
+			140 button (collapsed) Description: content_length, Secondary Actions: Expand
+			141 button (collapsed) Description: content_sha256, Secondary Actions: Expand
+			142 button (collapsed) Description: forbidden_marker, Secondary Actions: Expand
+			143 button (collapsed) Description: passed, Secondary Actions: Expand
+			144 button (collapsed) Description: marker_present, Secondary Actions: Expand
+			145 button (collapsed) Description: 索引检查, Secondary Actions: Expand
+			146 button (collapsed) Description: 每次运行独享名额, Secondary Actions: Expand
+			147 button (collapsed) Description: 修改资料内容, Secondary Actions: Expand
+			148 button (collapsed) Description: 运行身份与内容版本, Secondary Actions: Expand
+			149 button (collapsed) Description: 本次两项均通过, Secondary Actions: Expand
+			150 button (collapsed) Description: 取消本次运行, Secondary Actions: Expand
+			151 button (collapsed) Description: 本次流程状态, Secondary Actions: Expand
+			152 button (collapsed) Description: 恢复中断记录, Secondary Actions: Expand
+			153 button (collapsed) Description: 执行并保存检查结果, Secondary Actions: Expand
+		71 container 节点类型
+			72 text ● 业务 ⬡ 函数 ◎ 状态 ◆ 判断 ▱ 资源 ◇ 参数
+		154 container Description: 节点旁的详细信息, ID: node-details
+			155 text archive_app/policy.py:64 · 6eb25ba0
+			156 button Description: 关闭详细信息, ID: close-detail
+			157 container detail-rows
+				158 text content_version: number
+				159 text 1
+			160 button 完整文件, ID: full-source
+			161 text def check_content(content: str, trace: TracePort | None = None,
+                  basis: dict | None = None, call_id: str | None = None) -> dict:
+    trace = trace or TracePort()
+    result = {"passed": "SECRET:" not in content, "marker_present": "SECRET:" in content}
+    trace.record("content_check", "return", basis or {}, lambda: {
+        "inputs": {"content_length": len(content),
+                   "content_sha256": hashlib.sha256(content.encode()).hexdigest(),
+                   "forbidden_marker": "SECRET:"},
+        "outputs": result}, call_id=call_id or uuid.uuid4().hex)
+    return result
+	73 container
+		162 text 参数 · content_version · archive_app/policy.py:64
+		75 button (disabled) 展开, ID: node-expand
+		76 button 固定节点, ID: pin
+		77 button 名称与备注, ID: annotate
+		78 button 详细值, ID: details
+		79 button 源码, ID: source
+		80 text PixiJS / WebGL · ELK
+
+The focused UI element is 79 button 源码, ID: source

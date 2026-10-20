@@ -6,3 +6,8 @@
 **/pixi.min.js -whitespace linguist-vendored=true
 examples/delivery/observer_generated/** linguist-generated=true
 examples/delivery/.release/** linguist-generated=true
+examples/team-archive/.release/** linguist-generated=true
+examples/team-archive/observer_runtime/** linguist-generated=true
+examples/team-archive/review/** linguist-generated=true
+examples/team-archive/static/graph/elk.bundled.js -text -whitespace linguist-vendored
+examples/team-archive/static/graph/elk-worker.min.js -text -whitespace linguist-vendored

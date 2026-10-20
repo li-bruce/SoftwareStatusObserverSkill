@@ -1,0 +1,1033 @@
+{
+  "users": [
+    {
+      "id": "alice",
+      "name": "林晓 · 文件夹负责人",
+      "role": "manager"
+    },
+    {
+      "id": "bob",
+      "name": "周宁 · 审核员",
+      "role": "reviewer"
+    },
+    {
+      "id": "carol",
+      "name": "陈青 · 审核员",
+      "role": "reviewer"
+    },
+    {
+      "id": "dana",
+      "name": "杜然 · 子目录负责人",
+      "role": "manager"
+    }
+  ],
+  "projects": [
+    {
+      "id": "P1",
+      "title": "研发资料",
+      "archive_limit_bytes": 1,
+      "limit_revision": 8
+    },
+    {
+      "id": "P2",
+      "title": "共享资料",
+      "archive_limit_bytes": 8192,
+      "limit_revision": 1
+    }
+  ],
+  "folders": [
+    {
+      "id": "F1",
+      "project_id": "P1",
+      "parent_id": null,
+      "title": "项目资料"
+    },
+    {
+      "id": "F2",
+      "project_id": "P1",
+      "parent_id": "F1",
+      "title": "设计记录"
+    },
+    {
+      "id": "F3",
+      "project_id": "P1",
+      "parent_id": "F2",
+      "title": "历史草稿"
+    },
+    {
+      "id": "F4",
+      "project_id": "P2",
+      "parent_id": null,
+      "title": "其他项目"
+    }
+  ],
+  "assignments": [
+    {
+      "project_id": "P1",
+      "folder_id": "F1",
+      "operator_id": "alice"
+    },
+    {
+      "project_id": "P1",
+      "folder_id": "F2",
+      "operator_id": "alice"
+    },
+    {
+      "project_id": "P1",
+      "folder_id": "F3",
+      "operator_id": "dana"
+    },
+    {
+      "project_id": "P2",
+      "folder_id": "F4",
+      "operator_id": "dana"
+    }
+  ],
+  "documents": [
+    {
+      "id": "DOC-001",
+      "project_id": "P1",
+      "folder_id": "F2",
+      "title": "接口设计说明",
+      "number": "RD-001",
+      "content": "模拟资料：版本一的固定内容。",
+      "version": 1
+    }
+  ],
+  "grants": [
+    {
+      "id": "72d836241757",
+      "project_id": "P1",
+      "operator_id": "alice",
+      "document_id": "DOC-001",
+      "content_version": 1,
+      "reviewer_id": "bob",
+      "deadline": 1792484276.2051558,
+      "revoked": 0
+    },
+    {
+      "id": "c70d5d2e1da6",
+      "project_id": "P1",
+      "operator_id": "alice",
+      "document_id": "DOC-001",
+      "content_version": 1,
+      "reviewer_id": "bob",
+      "deadline": 1792484805.527629,
+      "revoked": 0
+    }
+  ],
+  "archives": [
+    {
+      "id": "e6f02fb1c0d8",
+      "document_id": "DOC-001",
+      "content_version": 1,
+      "content": "模拟资料：版本一的固定内容。",
+      "title": "接口设计说明",
+      "project_id": "P1",
+      "number": "RD-001",
+      "run_id": "37b27d2862da",
+      "created": 1792483836.5873475
+    }
+  ],
+  "runs": [
+    {
+      "id": "37b27d2862da",
+      "input": {
+        "document_id": "DOC-001",
+        "project_id": "P1",
+        "operator_id": "alice",
+        "content_version": 1,
+        "content": "模拟资料：版本一的固定内容。",
+        "title": "接口设计说明",
+        "document_number": "RD-001"
+      },
+      "phase": "completed",
+      "phase_journal": [
+        {
+          "event": "begin",
+          "source": "created",
+          "target": "checking",
+          "attempt": "37b27d2862da",
+          "clock": 1792483683.6340952,
+          "activity_revision": 0
+        },
+        {
+          "event": "pause",
+          "source": "checking",
+          "target": "waiting",
+          "attempt": "37b27d2862da",
+          "clock": 1792483683.6693473,
+          "activity_revision": 2
+        },
+        {
+          "event": "begin",
+          "source": "waiting",
+          "target": "checking",
+          "attempt": "37b27d2862da",
+          "clock": 1792483832.533804,
+          "activity_revision": 3
+        },
+        {
+          "event": "checked",
+          "source": "checking",
+          "target": "ready",
+          "attempt": "37b27d2862da",
+          "clock": 1792483836.5864453,
+          "activity_revision": 6
+        },
+        {
+          "event": "publish",
+          "source": "ready",
+          "target": "completed",
+          "attempt": "37b27d2862da",
+          "clock": 1792483836.5873764,
+          "activity_revision": 6
+        }
+      ],
+      "execution_version": "01113409f359d41272c4dbb42f670f75624e6d45b4399ebd9d1def7284007aac",
+      "created": 1792483683.6289306,
+      "stop_reason": "",
+      "resume_required": false,
+      "configuration": {
+        "attempt": "37b27d2862da",
+        "param_version": 1,
+        "revision": 6,
+        "activities": {
+          "content_check": "succeeded",
+          "index_check": "succeeded"
+        },
+        "resources": {
+          "processing_slots": {
+            "capacity": 1,
+            "available": 1,
+            "holders": []
+          }
+        },
+        "join": {
+          "state": "passed",
+          "pending": []
+        },
+        "journal": [
+          {
+            "seq": 1,
+            "event": "start",
+            "activity": "content_check",
+            "before": {
+              "activities": {
+                "content_check": "pending",
+                "index_check": "pending"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 1,
+                  "available": 1,
+                  "holders": []
+                }
+              },
+              "join": {
+                "state": "waiting",
+                "pending": [
+                  "content_check",
+                  "index_check"
+                ]
+              }
+            },
+            "after": {
+              "activities": {
+                "content_check": "running",
+                "index_check": "pending"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 1,
+                  "available": 0,
+                  "holders": [
+                    "content_check"
+                  ]
+                }
+              },
+              "join": {
+                "state": "waiting",
+                "pending": [
+                  "content_check",
+                  "index_check"
+                ]
+              }
+            },
+            "clock": 1792483683.6340952,
+            "phase": "checking",
+            "discarded": [],
+            "wait_reasons": {}
+          },
+          {
+            "seq": 2,
+            "event": "wait",
+            "activity": "index_check",
+            "before": {
+              "activities": {
+                "content_check": "running",
+                "index_check": "pending"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 1,
+                  "available": 0,
+                  "holders": [
+                    "content_check"
+                  ]
+                }
+              },
+              "join": {
+                "state": "waiting",
+                "pending": [
+                  "content_check",
+                  "index_check"
+                ]
+              }
+            },
+            "after": {
+              "activities": {
+                "content_check": "running",
+                "index_check": "waiting"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 1,
+                  "available": 0,
+                  "holders": [
+                    "content_check"
+                  ]
+                }
+              },
+              "join": {
+                "state": "waiting",
+                "pending": [
+                  "content_check",
+                  "index_check"
+                ]
+              }
+            },
+            "clock": 1792483683.6340952,
+            "phase": "checking",
+            "discarded": [],
+            "wait_reasons": {
+              "index_check": "等待本次运行的可用名额"
+            }
+          },
+          {
+            "seq": 3,
+            "event": "finish",
+            "activity": "content_check",
+            "before": {
+              "activities": {
+                "content_check": "running",
+                "index_check": "waiting"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 1,
+                  "available": 0,
+                  "holders": [
+                    "content_check"
+                  ]
+                }
+              },
+              "join": {
+                "state": "waiting",
+                "pending": [
+                  "content_check",
+                  "index_check"
+                ]
+              }
+            },
+            "after": {
+              "activities": {
+                "content_check": "succeeded",
+                "index_check": "waiting"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 1,
+                  "available": 1,
+                  "holders": []
+                }
+              },
+              "join": {
+                "state": "waiting",
+                "pending": [
+                  "index_check"
+                ]
+              }
+            },
+            "clock": 1792483687.641122,
+            "phase": "waiting",
+            "discarded": [],
+            "wait_reasons": {
+              "index_check": "正文 42 字节，当前上限 1 字节，超出 41 字节；条件恢复后点击继续"
+            }
+          },
+          {
+            "seq": 4,
+            "event": "start",
+            "activity": "index_check",
+            "before": {
+              "activities": {
+                "content_check": "succeeded",
+                "index_check": "waiting"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 1,
+                  "available": 1,
+                  "holders": []
+                }
+              },
+              "join": {
+                "state": "waiting",
+                "pending": [
+                  "index_check"
+                ]
+              }
+            },
+            "after": {
+              "activities": {
+                "content_check": "succeeded",
+                "index_check": "running"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 1,
+                  "available": 0,
+                  "holders": [
+                    "index_check"
+                  ]
+                }
+              },
+              "join": {
+                "state": "waiting",
+                "pending": [
+                  "index_check"
+                ]
+              }
+            },
+            "clock": 1792483832.533804,
+            "phase": "checking",
+            "discarded": [],
+            "wait_reasons": {}
+          },
+          {
+            "seq": 5,
+            "event": "finish",
+            "activity": "index_check",
+            "before": {
+              "activities": {
+                "content_check": "succeeded",
+                "index_check": "running"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 1,
+                  "available": 0,
+                  "holders": [
+                    "index_check"
+                  ]
+                }
+              },
+              "join": {
+                "state": "waiting",
+                "pending": [
+                  "index_check"
+                ]
+              }
+            },
+            "after": {
+              "activities": {
+                "content_check": "succeeded",
+                "index_check": "succeeded"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 1,
+                  "available": 1,
+                  "holders": []
+                }
+              },
+              "join": {
+                "state": "enabled",
+                "pending": []
+              }
+            },
+            "clock": 1792483836.5409484,
+            "phase": "checking",
+            "discarded": [],
+            "wait_reasons": {}
+          },
+          {
+            "seq": 6,
+            "event": "join",
+            "activity": "checks_join",
+            "before": {
+              "activities": {
+                "content_check": "succeeded",
+                "index_check": "succeeded"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 1,
+                  "available": 1,
+                  "holders": []
+                }
+              },
+              "join": {
+                "state": "enabled",
+                "pending": []
+              }
+            },
+            "after": {
+              "activities": {
+                "content_check": "succeeded",
+                "index_check": "succeeded"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 1,
+                  "available": 1,
+                  "holders": []
+                }
+              },
+              "join": {
+                "state": "passed",
+                "pending": []
+              }
+            },
+            "clock": 1792483836.5864453,
+            "phase": "checking",
+            "discarded": [],
+            "wait_reasons": {}
+          }
+        ],
+        "results": {
+          "content_check": {
+            "passed": true,
+            "marker_present": false
+          },
+          "index_check": {
+            "title_present": true,
+            "project_present": true,
+            "number_present": true,
+            "passed": true
+          }
+        },
+        "discarded": [],
+        "wait_reasons": {}
+      },
+      "qualification": {
+        "allowed": true,
+        "scope_allowed": true,
+        "approval_allowed": true,
+        "version_current": true,
+        "size_allowed": true,
+        "size": {
+          "content_bytes": 42,
+          "limit_bytes": 8192,
+          "limit_revision": 3,
+          "allowed": true,
+          "excess_bytes": 0
+        },
+        "reasons": [],
+        "candidates": [
+          {
+            "id": "72d836241757",
+            "project_ok": true,
+            "operator_ok": true,
+            "document_ok": true,
+            "version_ok": true,
+            "reviewer_ok": true,
+            "different_actor": true,
+            "not_revoked": true,
+            "time_ok": true,
+            "target_matches": true,
+            "allowed": true
+          }
+        ],
+        "basis": {
+          "param_version": 1,
+          "epoch": 4,
+          "clock": 1792483836.5870695
+        },
+        "all_passed": true,
+        "valid_until": 1792484276.2051558
+      },
+      "effect_id": "e6f02fb1c0d8",
+      "reused_archive": false
+    },
+    {
+      "id": "148fe9a5ee92",
+      "input": {
+        "document_id": "DOC-001",
+        "project_id": "P1",
+        "operator_id": "alice",
+        "content_version": 1,
+        "content": "模拟资料：版本一的固定内容。",
+        "title": "接口设计说明",
+        "document_number": "RD-001"
+      },
+      "phase": "completed",
+      "phase_journal": [
+        {
+          "event": "begin",
+          "source": "created",
+          "target": "checking",
+          "attempt": "148fe9a5ee92",
+          "clock": 1792484205.774378,
+          "activity_revision": 0
+        },
+        {
+          "event": "pause",
+          "source": "checking",
+          "target": "waiting",
+          "attempt": "148fe9a5ee92",
+          "clock": 1792484205.8104143,
+          "activity_revision": 2
+        },
+        {
+          "event": "begin",
+          "source": "waiting",
+          "target": "checking",
+          "attempt": "148fe9a5ee92",
+          "clock": 1792484267.3697317,
+          "activity_revision": 3
+        },
+        {
+          "event": "checked",
+          "source": "checking",
+          "target": "ready",
+          "attempt": "148fe9a5ee92",
+          "clock": 1792484271.4374914,
+          "activity_revision": 6
+        },
+        {
+          "event": "publish",
+          "source": "ready",
+          "target": "completed",
+          "attempt": "148fe9a5ee92",
+          "clock": 1792484271.4392967,
+          "activity_revision": 6
+        }
+      ],
+      "execution_version": "e7e5f89d72093f5d99d37f9bb1f19a8b978a31e4cfecaced8a225b8409b3edc3",
+      "created": 1792484205.7659411,
+      "stop_reason": "",
+      "resume_required": false,
+      "configuration": {
+        "attempt": "148fe9a5ee92",
+        "param_version": 1,
+        "revision": 6,
+        "activities": {
+          "content_check": "succeeded",
+          "index_check": "succeeded"
+        },
+        "resources": {
+          "processing_slots": {
+            "capacity": 1,
+            "available": 1,
+            "holders": []
+          }
+        },
+        "join": {
+          "state": "passed",
+          "pending": []
+        },
+        "journal": [
+          {
+            "seq": 1,
+            "event": "start",
+            "activity": "content_check",
+            "before": {
+              "activities": {
+                "content_check": "pending",
+                "index_check": "pending"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 1,
+                  "available": 1,
+                  "holders": []
+                }
+              },
+              "join": {
+                "state": "waiting",
+                "pending": [
+                  "content_check",
+                  "index_check"
+                ]
+              }
+            },
+            "after": {
+              "activities": {
+                "content_check": "running",
+                "index_check": "pending"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 1,
+                  "available": 0,
+                  "holders": [
+                    "content_check"
+                  ]
+                }
+              },
+              "join": {
+                "state": "waiting",
+                "pending": [
+                  "content_check",
+                  "index_check"
+                ]
+              }
+            },
+            "clock": 1792484205.774378,
+            "phase": "checking",
+            "discarded": [],
+            "wait_reasons": {}
+          },
+          {
+            "seq": 2,
+            "event": "wait",
+            "activity": "index_check",
+            "before": {
+              "activities": {
+                "content_check": "running",
+                "index_check": "pending"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 1,
+                  "available": 0,
+                  "holders": [
+                    "content_check"
+                  ]
+                }
+              },
+              "join": {
+                "state": "waiting",
+                "pending": [
+                  "content_check",
+                  "index_check"
+                ]
+              }
+            },
+            "after": {
+              "activities": {
+                "content_check": "running",
+                "index_check": "waiting"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 1,
+                  "available": 0,
+                  "holders": [
+                    "content_check"
+                  ]
+                }
+              },
+              "join": {
+                "state": "waiting",
+                "pending": [
+                  "content_check",
+                  "index_check"
+                ]
+              }
+            },
+            "clock": 1792484205.774378,
+            "phase": "checking",
+            "discarded": [],
+            "wait_reasons": {
+              "index_check": "等待本次运行的可用名额"
+            }
+          },
+          {
+            "seq": 3,
+            "event": "finish",
+            "activity": "content_check",
+            "before": {
+              "activities": {
+                "content_check": "running",
+                "index_check": "waiting"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 1,
+                  "available": 0,
+                  "holders": [
+                    "content_check"
+                  ]
+                }
+              },
+              "join": {
+                "state": "waiting",
+                "pending": [
+                  "content_check",
+                  "index_check"
+                ]
+              }
+            },
+            "after": {
+              "activities": {
+                "content_check": "succeeded",
+                "index_check": "waiting"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 1,
+                  "available": 1,
+                  "holders": []
+                }
+              },
+              "join": {
+                "state": "waiting",
+                "pending": [
+                  "index_check"
+                ]
+              }
+            },
+            "clock": 1792484209.7833214,
+            "phase": "waiting",
+            "discarded": [],
+            "wait_reasons": {
+              "index_check": "正文 42 字节，当前上限 1 字节，超出 41 字节；条件恢复后点击继续"
+            }
+          },
+          {
+            "seq": 4,
+            "event": "start",
+            "activity": "index_check",
+            "before": {
+              "activities": {
+                "content_check": "succeeded",
+                "index_check": "waiting"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 1,
+                  "available": 1,
+                  "holders": []
+                }
+              },
+              "join": {
+                "state": "waiting",
+                "pending": [
+                  "index_check"
+                ]
+              }
+            },
+            "after": {
+              "activities": {
+                "content_check": "succeeded",
+                "index_check": "running"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 1,
+                  "available": 0,
+                  "holders": [
+                    "index_check"
+                  ]
+                }
+              },
+              "join": {
+                "state": "waiting",
+                "pending": [
+                  "index_check"
+                ]
+              }
+            },
+            "clock": 1792484267.3697317,
+            "phase": "checking",
+            "discarded": [],
+            "wait_reasons": {}
+          },
+          {
+            "seq": 5,
+            "event": "finish",
+            "activity": "index_check",
+            "before": {
+              "activities": {
+                "content_check": "succeeded",
+                "index_check": "running"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 1,
+                  "available": 0,
+                  "holders": [
+                    "index_check"
+                  ]
+                }
+              },
+              "join": {
+                "state": "waiting",
+                "pending": [
+                  "index_check"
+                ]
+              }
+            },
+            "after": {
+              "activities": {
+                "content_check": "succeeded",
+                "index_check": "succeeded"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 1,
+                  "available": 1,
+                  "holders": []
+                }
+              },
+              "join": {
+                "state": "enabled",
+                "pending": []
+              }
+            },
+            "clock": 1792484271.3767006,
+            "phase": "checking",
+            "discarded": [],
+            "wait_reasons": {}
+          },
+          {
+            "seq": 6,
+            "event": "join",
+            "activity": "checks_join",
+            "before": {
+              "activities": {
+                "content_check": "succeeded",
+                "index_check": "succeeded"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 1,
+                  "available": 1,
+                  "holders": []
+                }
+              },
+              "join": {
+                "state": "enabled",
+                "pending": []
+              }
+            },
+            "after": {
+              "activities": {
+                "content_check": "succeeded",
+                "index_check": "succeeded"
+              },
+              "resources": {
+                "processing_slots": {
+                  "capacity": 1,
+                  "available": 1,
+                  "holders": []
+                }
+              },
+              "join": {
+                "state": "passed",
+                "pending": []
+              }
+            },
+            "clock": 1792484271.4374914,
+            "phase": "checking",
+            "discarded": [],
+            "wait_reasons": {}
+          }
+        ],
+        "results": {
+          "content_check": {
+            "passed": true,
+            "marker_present": false
+          },
+          "index_check": {
+            "title_present": true,
+            "project_present": true,
+            "number_present": true,
+            "passed": true
+          }
+        },
+        "discarded": [],
+        "wait_reasons": {}
+      },
+      "qualification": {
+        "allowed": true,
+        "scope_allowed": true,
+        "approval_allowed": true,
+        "version_current": true,
+        "size_allowed": true,
+        "size": {
+          "content_bytes": 42,
+          "limit_bytes": 8192,
+          "limit_revision": 7,
+          "allowed": true,
+          "excess_bytes": 0
+        },
+        "reasons": [],
+        "candidates": [
+          {
+            "id": "72d836241757",
+            "project_ok": true,
+            "operator_ok": true,
+            "document_ok": true,
+            "version_ok": true,
+            "reviewer_ok": true,
+            "different_actor": true,
+            "not_revoked": true,
+            "time_ok": true,
+            "target_matches": true,
+            "allowed": true
+          },
+          {
+            "id": "c70d5d2e1da6",
+            "project_ok": true,
+            "operator_ok": true,
+            "document_ok": true,
+            "version_ok": true,
+            "reviewer_ok": true,
+            "different_actor": true,
+            "not_revoked": true,
+            "time_ok": true,
+            "target_matches": true,
+            "allowed": true
+          }
+        ],
+        "basis": {
+          "param_version": 1,
+          "epoch": 9,
+          "clock": 1792484271.43862
+        },
+        "all_passed": true,
+        "valid_until": 1792484276.2051558
+      },
+      "effect_id": "e6f02fb1c0d8",
+      "reused_archive": true
+    }
+  ],
+  "epoch": 10,
+  "labels": {
+    "created": "准备归档",
+    "checking": "检查中",
+    "waiting": "等待资格 · 点击继续",
+    "ready": "检查通过，复核提交",
+    "completed": "已归档",
+    "failed": "检查未通过",
+    "stopping": "等待已启动检查结束",
+    "cancelled": "本次运行已取消",
+    "superseded": "内容已改版，本次不可提交",
+    "interrupted": "进程中断，需新建运行"
+  },
+  "clock": 1792484305.2691498,
+  "build_id": "e7e5f89d72093f5d99d37f9bb1f19a8b978a31e4cfecaced8a225b8409b3edc3",
+  "delay": 4.0,
+  "binding": {
+    "status": "current",
+    "changed_files": [],
+    "model_changed": false,
+    "intent_changed": false,
+    "directly_affected": [],
+    "possibly_affected": []
+  }
+}

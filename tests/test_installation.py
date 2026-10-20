@@ -9,6 +9,13 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class InstallationTests(unittest.TestCase):
+    def test_relative_project_from_target_directory(self):
+        (ROOT/'.validation').mkdir(exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=ROOT/'.validation') as folder:
+            subprocess.run([sys.executable, str(ROOT/'tools/install_skill.py'), '--project', '.'],
+                           cwd=folder, check=True, capture_output=True)
+            self.assertTrue((Path(folder)/'.agents/skills/business-observer/SKILL.md').is_file())
+
     def test_full_copy_and_refuse_overwrite(self):
         (ROOT/'.validation').mkdir(exist_ok=True)
         with tempfile.TemporaryDirectory(dir=ROOT/'.validation') as folder:

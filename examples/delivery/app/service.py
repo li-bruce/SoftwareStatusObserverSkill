@@ -6,14 +6,43 @@ from app.workflow import advance, ActivityExecution, completed
 import uuid
 
 
-def eligible_grant(grant: dict, job: dict) -> bool:
-    return (grant['project'] == job['project'] and grant['actor'] == job['actor']
-            and grant['version'] == job['param_version'] and not grant['revoked']
-            and job['clock'] < grant['expires'])
+def eligible_grant(grant: dict, job: dict, events=None, parent_call_id=None) -> bool:
+    conditions = {}
+    def remember(name, value):
+        conditions[name] = value
+        return value
+    allowed = (remember('project', grant['project'] == job['project'])
+               and remember('actor', grant['actor'] == job['actor'])
+               and remember('version', grant['version'] == job['param_version'])
+               and remember('not_revoked', not grant['revoked'])
+               and remember('not_expired', job['clock'] < grant['expires']))
+    if events is not None:
+        events.emit('grant', 'decision', lambda: {
+            **observation(job, inputs={'grant_id': grant['id'], 'grant_version': grant['version'],
+                          'param_version': job['param_version'], 'clock': job['clock'],
+                          'expires': grant['expires']},
+                          outputs={'allowed': allowed, 'conditions': dict(conditions),
+                                   'evaluated': list(conditions)}),
+            'call_id': uuid.uuid4().hex, 'parent_call_id': parent_call_id})
+    return allowed
 
 
-def authorized(job: dict) -> bool:
-    return job['role'] == 'engineer' and any(eligible_grant(g,job) for g in job['grants'])
+def authorized(job: dict, events=None) -> bool:
+    call_id = uuid.uuid4().hex if events is not None else None
+    evaluated = []
+    allowed = False
+    if job['role'] == 'engineer':
+        for grant in job['grants']:
+            evaluated.append(grant['id'])
+            if eligible_grant(grant, job, events, call_id):
+                allowed = True
+                break
+    if events is not None:
+        events.emit('authorize', 'decision', lambda: {
+            **observation(job, inputs={'role': job['role'], 'grants': len(job['grants'])},
+                          outputs={'allowed': allowed, 'evaluated_grants': evaluated}),
+            'call_id': call_id})
+    return allowed
 
 
 def observation(job: dict, inputs=None, outputs=None, uses=()) -> dict:
@@ -80,10 +109,8 @@ class Delivery:
             if job['state'] in ('checking','completed','cancelled'):return self.store.snapshot()
             job['attempt']=uuid.uuid4().hex[:10]
             job.update(checks={},execution={},prepared_version=None)
-            allowed=authorized(job)
             self.events.emit('read','read',lambda:observation(job,outputs={'param_version':job['param_version'],'length':len(job['content'])}))
-            self.events.emit('authorize','decision',lambda:observation(job,
-                inputs={'role':job['role'],'grants':len(job['grants'])},outputs={'allowed':allowed},uses=['read']))
+            allowed=authorized(job, self.events)
             if not allowed:
                 self.transition(job,'block');job['reason']='no_current_authorization';self.store.put(job)
                 self.events.emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['authorize']))
@@ -150,7 +177,7 @@ class Delivery:
             job=self.store.get()
             if expected_version is not None and job['param_version']!=expected_version:return self.store.snapshot()
             if job['state']!='ready':return self.store.snapshot()
-            allowed=authorized(job);version_ok=job['prepared_version']==job['param_version']
+            allowed=authorized(job, self.events);version_ok=job['prepared_version']==job['param_version']
             self.events.emit('recheck','decision',lambda:observation(job,
                 outputs={'allowed':allowed,'version_ok':version_ok},uses=['authorize','join']))
             if not allowed or not version_ok or not job['checks']['passed']:

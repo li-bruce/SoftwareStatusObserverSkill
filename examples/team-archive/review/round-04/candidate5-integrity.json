@@ -1,0 +1,9 @@
+{
+  "version": "0.4.0-candidate.5",
+  "file_count": 63,
+  "mismatches": [],
+  "runtime_differences": [],
+  "changes_from_candidate4": [
+    "assets/stategraph-viewer/viewer.js"
+  ]
+}
