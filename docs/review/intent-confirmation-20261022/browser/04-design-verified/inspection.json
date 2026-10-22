@@ -1,0 +1,1478 @@
+{
+  "url": "http://127.0.0.1:8866/graph",
+  "network_idle": false,
+  "text": "◉\n项目派生与数据流转 · 设计图\n设计声明 · 尚未实现\n执行需两端 connect 已明确；本轮核对撤权后能否沿用已配置连接。\n当前讨论\n取消聚焦\n视图\n分层全图\n业务流\n状态机\n函数与参数\n权限判断\n并发与资源\n数据依赖\n实际运行\n等待与异常\n共享关系\n分析细节\n筛选\n画布\n圆形分组\n层次布局\n关系布局\n自动布局\n撤销布局\n收起全部\n展开一级\n适应画布\n−\n＋\n71%\n选中节点\n定位\n展开\n固定节点\n☆ 核心\n名称 / 批注\n参数值\n源码\n项目视图已加载\n创建项目\n派生新项目\n配置流转关系\n手动执行 JSON 复制\n类型、方向、端口与格式规则\n两端 connect·授权时点待确认\n目标输入获得当前 JSON\n判断依赖：类型、方向、端口与格式规则 → 手动执行 JSON 复制，1 条\n判断依赖：两端 connect·授权时点待确认 → 手动执行 JSON 复制，1 条\n判断依赖：类型、方向、端口与格式规则 → 配置流转关系，1 条\n传值：配置流转关系 → 手动执行 JSON 复制，1 条\n流程：手动执行 JSON 复制 → 目标输入获得当前 JSON，1 条\n传值：创建项目 → 配置流转关系，1 条\n概览\n节点与区域\nB\n业务\n业务处理过程\nƒ\n函数\n函数或方法\nS\n状态\n状态机中的状态\n?\n判断\n条件或规则判断\nR\n资源\n可用量与占用量\nx\n参数\n输入、返回或数据\n✓\n结果\n写入等执行结果\n…\n等待\n等待条件满足\n\n颜色区分类型，展开的圈保持同色。深填充表示核心或选中节点，运行情况看角标。\n\n连线\n调用\n流程\n状态迁移\n判断依赖\n传值\n资源\n汇合\n共享引用\n● 有运行记录\n节点标记\n▶ 执行中　✓ 已完成\n! 等待 / 未通过\n· 历史事实\n＋N 子节点　− 收起\n● 固定　✎ 批注　★ 核心\n↗ 同一节点的共享入口\n\n圈内空白拖动整组；圈外空白移动画布。\n\n双击展开；拖动节点或圈内空白移动整组。\nPixiJS / WebGL · ELK",
+  "controls": [
+    {
+      "tag": "BUTTON",
+      "id": "discussion-focus",
+      "text": "当前讨论",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "discussion-clear",
+      "text": "取消聚焦",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "SELECT",
+      "id": "analysis-view",
+      "text": "分层全图\n业务流\n状态机\n函数与参数\n权限判断\n并发与资源\n数据依赖\n实际运行\n等待与异常\n共享关系",
+      "label": "分析视图",
+      "type": "select-one"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "analysis-details",
+      "text": "分析细节",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "filter-toggle",
+      "text": "筛选",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "INPUT",
+      "id": "node-search",
+      "text": "",
+      "label": "搜索节点",
+      "type": "search"
+    },
+    {
+      "tag": "SELECT",
+      "id": "capture-mode",
+      "text": "全部核心事件仅选中区域",
+      "label": "记录范围",
+      "type": "select-one"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "record-start",
+      "text": "● 开始记录",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "record-stop",
+      "text": "■ 结束记录",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "SELECT",
+      "id": "record-list",
+      "text": "实时观察",
+      "label": "选择记录",
+      "type": "select-one"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "replay-prev",
+      "text": "‹",
+      "label": "上一步",
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "replay-play",
+      "text": "播放",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "replay-next",
+      "text": "›",
+      "label": "下一步",
+      "type": "submit"
+    },
+    {
+      "tag": "INPUT",
+      "id": "replay-range",
+      "text": "",
+      "label": "回放步骤位置",
+      "type": "range"
+    },
+    {
+      "tag": "SELECT",
+      "id": "replay-grain",
+      "text": "按当前层级逐个原始事件",
+      "label": "播放粒度",
+      "type": "select-one"
+    },
+    {
+      "tag": "SELECT",
+      "id": "replay-speed",
+      "text": "慢速正常快速",
+      "label": "回放速度",
+      "type": "select-one"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "replay-live",
+      "text": "返回实时",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "SELECT",
+      "id": "replay-events",
+      "text": "",
+      "label": "记录中的步骤",
+      "type": "select-one"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "replay-locate",
+      "text": "定位",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "replay-export",
+      "text": "导出",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "SELECT",
+      "id": "layout",
+      "text": "圆形分组\n层次布局\n关系布局",
+      "label": "布局算法",
+      "type": "select-one"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "arrange",
+      "text": "自动布局",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "undo-layout",
+      "text": "撤销布局",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "collapse",
+      "text": "收起全部",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "expand",
+      "text": "展开一级",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "fit",
+      "text": "适应画布",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "zoom-out",
+      "text": "−",
+      "label": "缩小",
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "zoom-in",
+      "text": "＋",
+      "label": "放大",
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "focus-selection",
+      "text": "定位",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "node-expand",
+      "text": "展开",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "pin",
+      "text": "固定节点",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "core-toggle",
+      "text": "☆ 核心",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "annotate",
+      "text": "名称 / 批注",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "details",
+      "text": "参数值",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "source",
+      "text": "源码",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "reference-origin",
+      "text": "原节点",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "创建项目",
+      "label": "创建项目",
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "派生新项目",
+      "label": "派生新项目",
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "配置流转关系",
+      "label": "配置流转关系",
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "手动执行 JSON 复制",
+      "label": "手动执行 JSON 复制",
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "类型、方向、端口与格式规则",
+      "label": "类型、方向、端口与格式规则",
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "两端 connect·授权时点待确认",
+      "label": "两端 connect·授权时点待确认",
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "目标输入获得当前 JSON",
+      "label": "目标输入获得当前 JSON",
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "判断依赖：类型、方向、端口与格式规则 → 手动执行 JSON 复制，1 条",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "判断依赖：两端 connect·授权时点待确认 → 手动执行 JSON 复制，1 条",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "判断依赖：类型、方向、端口与格式规则 → 配置流转关系，1 条",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "传值：配置流转关系 → 手动执行 JSON 复制，1 条",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "流程：手动执行 JSON 复制 → 目标输入获得当前 JSON，1 条",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "传值：创建项目 → 配置流转关系，1 条",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "概览",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "close-filters",
+      "text": "×",
+      "label": "关闭筛选",
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "全选",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "清空",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "全选",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "清空",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "全选",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "清空",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "SELECT",
+      "id": "filter-scope",
+      "text": "全部权限相关执行配置已采集事件等待或未通过共享成员",
+      "label": null,
+      "type": "select-one"
+    },
+    {
+      "tag": "INPUT",
+      "id": "filter-query",
+      "text": "",
+      "label": null,
+      "type": "text"
+    },
+    {
+      "tag": "SELECT",
+      "id": "filter-depth",
+      "text": "全部层级顶层第 1 层",
+      "label": null,
+      "type": "select-one"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "filter-reset",
+      "text": "恢复本视图",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "INPUT",
+      "id": "custom-view-name",
+      "text": "",
+      "label": "自定义视图名称",
+      "type": "text"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "保存视图",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "delete-view",
+      "text": "删除此自定义视图",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "close-edge",
+      "text": "×",
+      "label": "关闭关系明细",
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "close-detail",
+      "text": "×",
+      "label": "关闭详细信息",
+      "type": "submit"
+    },
+    {
+      "tag": "INPUT",
+      "id": "node-name",
+      "text": "",
+      "label": null,
+      "type": "text"
+    },
+    {
+      "tag": "INPUT",
+      "id": "node-core",
+      "text": "",
+      "label": null,
+      "type": "checkbox"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "restore-name",
+      "text": "恢复原名",
+      "label": null,
+      "type": "button"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "完成",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "full-source",
+      "text": "完整文件",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "SELECT",
+      "id": "version",
+      "text": "live",
+      "label": null,
+      "type": "select-one"
+    },
+    {
+      "tag": "SELECT",
+      "id": "case",
+      "text": "当前操作",
+      "label": null,
+      "type": "select-one"
+    },
+    {
+      "tag": "SELECT",
+      "id": "attempt",
+      "text": "当前运行",
+      "label": null,
+      "type": "select-one"
+    },
+    {
+      "tag": "SELECT",
+      "id": "step",
+      "text": "最新状态",
+      "label": null,
+      "type": "select-one"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "legend-toggle",
+      "text": "",
+      "label": null,
+      "type": "submit"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "legend-close",
+      "text": "",
+      "label": null,
+      "type": "submit"
+    }
+  ],
+  "graph": {
+    "metrics": {
+      "nodes": 7,
+      "edges": 6,
+      "texts": 23,
+      "drawCount": 4,
+      "webgl": true
+    },
+    "camera": {
+      "scale": 0.7139399597944914,
+      "pan": {
+        "x": -32.55806522223506,
+        "y": 374.3920640607564
+      }
+    },
+    "graph": {
+      "boxes": [
+        {
+          "id": "create_project",
+          "node": {
+            "id": "create_project",
+            "label": "创建项目",
+            "kind": "action",
+            "layer": "business",
+            "summary": "",
+            "origin": "design",
+            "capture": {}
+          },
+          "type": "business",
+          "rows": [],
+          "open": false,
+          "kids": [
+            "project_created"
+          ],
+          "state": "declared",
+          "x": 80,
+          "y": 70,
+          "w": 190,
+          "h": 135,
+          "baseHeight": 135,
+          "pinned": false
+        },
+        {
+          "id": "derive_project",
+          "node": {
+            "id": "derive_project",
+            "label": "派生新项目",
+            "kind": "action",
+            "layer": "business",
+            "summary": "",
+            "origin": "design",
+            "capture": {}
+          },
+          "type": "business",
+          "rows": [],
+          "open": false,
+          "kids": [
+            "source_project",
+            "derive_permission",
+            "project_derived"
+          ],
+          "state": "declared",
+          "x": 310,
+          "y": 70,
+          "w": 190,
+          "h": 135,
+          "baseHeight": 135,
+          "pinned": false
+        },
+        {
+          "id": "configure_relation",
+          "node": {
+            "id": "configure_relation",
+            "label": "配置流转关系",
+            "kind": "action",
+            "layer": "business",
+            "summary": "",
+            "origin": "design",
+            "capture": {}
+          },
+          "type": "business",
+          "rows": [],
+          "open": false,
+          "kids": [
+            "relation_permission",
+            "relation_configured"
+          ],
+          "state": "declared",
+          "x": 540,
+          "y": 70,
+          "w": 190,
+          "h": 135,
+          "baseHeight": 135,
+          "pinned": false
+        },
+        {
+          "id": "transfer_data",
+          "node": {
+            "id": "transfer_data",
+            "label": "手动执行 JSON 复制",
+            "kind": "action",
+            "layer": "business",
+            "summary": "Fixed collection->processing->reporting types and ports; validate existence, output-to-input and exact format. A configured link does not transfer. Manual execution copies the current JSON value. Independently created projects may connect.",
+            "origin": "design",
+            "capture": {}
+          },
+          "type": "business",
+          "rows": [
+            {
+              "text": "Fixed collection->processing->reporting types and ports; validate existence, output-to-input and exact format. A configured link does not transfer. Manual execution copies the current JSON value. Independently created projects may connect.",
+              "role": "muted"
+            }
+          ],
+          "open": true,
+          "kids": [
+            "type_port_rules",
+            "execute_permission",
+            "transfer_effect"
+          ],
+          "state": "declared",
+          "x": 770,
+          "y": 70,
+          "w": 190,
+          "h": 135,
+          "baseHeight": 135,
+          "pinned": false
+        },
+        {
+          "id": "type_port_rules",
+          "node": {
+            "id": "type_port_rules",
+            "label": "类型、方向、端口与格式规则",
+            "kind": "decision",
+            "layer": "design",
+            "summary": "",
+            "origin": "design",
+            "capture": {},
+            "parent": "transfer_data"
+          },
+          "type": "decision",
+          "rows": [],
+          "open": false,
+          "kids": [],
+          "state": "declared",
+          "x": 483.591396013194,
+          "y": 235.3580846100075,
+          "w": 190,
+          "h": 135,
+          "baseHeight": 135,
+          "pinned": false
+        },
+        {
+          "id": "execute_permission",
+          "node": {
+            "id": "execute_permission",
+            "label": "两端 connect·授权时点待确认",
+            "kind": "decision",
+            "layer": "design",
+            "summary": "“执行也要有两边的 connect 权限”与“配置时已授权，后面按连接执行”尚未确定使用当前权限还是历史许可。",
+            "origin": "design",
+            "capture": {},
+            "parent": "transfer_data"
+          },
+          "type": "decision",
+          "rows": [
+            {
+              "text": "“执行也要有两边的 connect 权限”与“配置时已授权，后面按连接执行”尚未确定使用当前权限还是历史许可。",
+              "role": "muted"
+            }
+          ],
+          "open": false,
+          "kids": [],
+          "state": "declared",
+          "x": 770,
+          "y": -260.71616922001476,
+          "w": 190,
+          "h": 135,
+          "baseHeight": 135,
+          "pinned": false
+        },
+        {
+          "id": "transfer_effect",
+          "node": {
+            "id": "transfer_effect",
+            "label": "目标输入获得当前 JSON",
+            "kind": "effect",
+            "layer": "design",
+            "summary": "",
+            "origin": "design",
+            "capture": {},
+            "parent": "transfer_data"
+          },
+          "type": "effect",
+          "rows": [],
+          "open": false,
+          "kids": [],
+          "state": "declared",
+          "x": 1056.4086039868062,
+          "y": 235.35808461000732,
+          "w": 190,
+          "h": 135,
+          "baseHeight": 135,
+          "pinned": false
+        }
+      ],
+      "byId": {},
+      "edges": [
+        {
+          "id": "transfer_guard",
+          "from": "type_port_rules",
+          "to": "transfer_data",
+          "type": "guard",
+          "label": "符合预设类型与端口规则",
+          "origin": "design",
+          "labels": {},
+          "members": [
+            {
+              "id": "transfer_guard",
+              "from": "type_port_rules",
+              "to": "transfer_data",
+              "type": "guard",
+              "label": "符合预设类型与端口规则",
+              "origin": "design",
+              "observed": false,
+              "current": false
+            }
+          ],
+          "observed": false,
+          "current": false
+        },
+        {
+          "id": "execute_guard",
+          "from": "execute_permission",
+          "to": "transfer_data",
+          "type": "guard",
+          "label": "两端 connect；历史许可还是当前权限待确认",
+          "origin": "design",
+          "labels": {},
+          "members": [
+            {
+              "id": "execute_guard",
+              "from": "execute_permission",
+              "to": "transfer_data",
+              "type": "guard",
+              "label": "两端 connect；历史许可还是当前权限待确认",
+              "origin": "design",
+              "observed": false,
+              "current": false
+            }
+          ],
+          "observed": false,
+          "current": false
+        },
+        {
+          "id": "connection_type_guard",
+          "from": "type_port_rules",
+          "to": "configure_relation",
+          "type": "guard",
+          "label": "连接需满足固定类型和端口规则",
+          "origin": "design",
+          "labels": {},
+          "members": [
+            {
+              "id": "connection_type_guard",
+              "from": "type_port_rules",
+              "to": "configure_relation",
+              "type": "guard",
+              "label": "连接需满足固定类型和端口规则",
+              "origin": "design",
+              "observed": false,
+              "current": false
+            }
+          ],
+          "observed": false,
+          "current": false
+        },
+        {
+          "id": "relation_for_transfer",
+          "from": "configure_relation",
+          "to": "transfer_data",
+          "type": "data",
+          "label": "指定项目间流转关系",
+          "origin": "design",
+          "labels": {},
+          "members": [
+            {
+              "id": "relation_for_transfer",
+              "from": "relation_configured",
+              "to": "transfer_data",
+              "type": "data",
+              "label": "指定项目间流转关系",
+              "origin": "design",
+              "observed": false,
+              "current": false
+            }
+          ],
+          "observed": false,
+          "current": false
+        },
+        {
+          "id": "transfer_result",
+          "from": "transfer_data",
+          "to": "transfer_effect",
+          "type": "flow",
+          "label": "copy current JSON into target input",
+          "origin": "design",
+          "labels": {},
+          "members": [
+            {
+              "id": "transfer_result",
+              "from": "transfer_data",
+              "to": "transfer_effect",
+              "type": "flow",
+              "label": "copy current JSON into target input",
+              "origin": "design",
+              "observed": false,
+              "current": false
+            }
+          ],
+          "observed": false,
+          "current": false
+        },
+        {
+          "id": "independent_project_connection",
+          "from": "create_project",
+          "to": "configure_relation",
+          "type": "data",
+          "label": "独立创建的项目也可连接",
+          "origin": "design",
+          "labels": {},
+          "members": [
+            {
+              "id": "independent_project_connection",
+              "from": "project_created",
+              "to": "configure_relation",
+              "type": "data",
+              "label": "独立创建的项目也可连接",
+              "origin": "design",
+              "observed": false,
+              "current": false
+            }
+          ],
+          "observed": false,
+          "current": false
+        }
+      ],
+      "rawEdges": [
+        {
+          "id": "source_to_derivation",
+          "from": "source_project",
+          "to": "derive_project",
+          "type": "data",
+          "label": "same type and source ID; independent contents",
+          "origin": "design"
+        },
+        {
+          "id": "derive_guard",
+          "from": "derive_permission",
+          "to": "derive_project",
+          "type": "guard",
+          "label": "须具备相应权限",
+          "origin": "design"
+        },
+        {
+          "id": "relation_guard",
+          "from": "relation_permission",
+          "to": "configure_relation",
+          "type": "guard",
+          "label": "须具备相应权限",
+          "origin": "design"
+        },
+        {
+          "id": "transfer_guard",
+          "from": "type_port_rules",
+          "to": "transfer_data",
+          "type": "guard",
+          "label": "符合预设类型与端口规则",
+          "origin": "design"
+        },
+        {
+          "id": "execute_guard",
+          "from": "execute_permission",
+          "to": "transfer_data",
+          "type": "guard",
+          "label": "两端 connect；历史许可还是当前权限待确认",
+          "origin": "design"
+        },
+        {
+          "id": "connection_type_guard",
+          "from": "type_port_rules",
+          "to": "configure_relation",
+          "type": "guard",
+          "label": "连接需满足固定类型和端口规则",
+          "origin": "design"
+        },
+        {
+          "id": "create_effect",
+          "from": "create_project",
+          "to": "project_created",
+          "type": "flow",
+          "label": "创建得到项目",
+          "origin": "design"
+        },
+        {
+          "id": "derive_effect",
+          "from": "derive_project",
+          "to": "project_derived",
+          "type": "flow",
+          "label": "派生得到新项目",
+          "origin": "design"
+        },
+        {
+          "id": "configure_effect",
+          "from": "configure_relation",
+          "to": "relation_configured",
+          "type": "flow",
+          "label": "配置项目间关系",
+          "origin": "design"
+        },
+        {
+          "id": "relation_for_transfer",
+          "from": "relation_configured",
+          "to": "transfer_data",
+          "type": "data",
+          "label": "指定项目间流转关系",
+          "origin": "design"
+        },
+        {
+          "id": "transfer_result",
+          "from": "transfer_data",
+          "to": "transfer_effect",
+          "type": "flow",
+          "label": "copy current JSON into target input",
+          "origin": "design"
+        },
+        {
+          "id": "independent_project_connection",
+          "from": "project_created",
+          "to": "configure_relation",
+          "type": "data",
+          "label": "独立创建的项目也可连接",
+          "origin": "design"
+        }
+      ],
+      "events": [],
+      "configuration": null,
+      "children": {},
+      "all": {},
+      "minX": 25,
+      "minY": -450.5742538300222,
+      "width": 1391.5742538300221,
+      "height": 1103.1485076600443,
+      "regions": [
+        {
+          "id": "transfer_data",
+          "root": "transfer_data",
+          "depth": 0,
+          "ids": [
+            "transfer_data",
+            "type_port_rules",
+            "execute_permission",
+            "transfer_effect"
+          ],
+          "self": true,
+          "cx": 865,
+          "cy": 101,
+          "radius": 511.5742538300222,
+          "x": 353.4257461699778,
+          "y": -410.5742538300222,
+          "w": 1023.1485076600444,
+          "h": 1023.1485076600444
+        }
+      ]
+    },
+    "view": {
+      "stage": "design",
+      "layout_id": "project-flow-trial-main",
+      "model": {
+        "project_id": "project-flow-trial-20261022",
+        "nodes": [
+          {
+            "id": "create_project",
+            "label": "创建项目",
+            "kind": "action",
+            "layer": "business",
+            "summary": "",
+            "origin": "design",
+            "capture": {}
+          },
+          {
+            "id": "derive_project",
+            "label": "派生新项目",
+            "kind": "action",
+            "layer": "business",
+            "summary": "",
+            "origin": "design",
+            "capture": {}
+          },
+          {
+            "id": "configure_relation",
+            "label": "配置流转关系",
+            "kind": "action",
+            "layer": "business",
+            "summary": "",
+            "origin": "design",
+            "capture": {}
+          },
+          {
+            "id": "transfer_data",
+            "label": "手动执行 JSON 复制",
+            "kind": "action",
+            "layer": "business",
+            "summary": "Fixed collection->processing->reporting types and ports; validate existence, output-to-input and exact format. A configured link does not transfer. Manual execution copies the current JSON value. Independently created projects may connect.",
+            "origin": "design",
+            "capture": {}
+          },
+          {
+            "id": "source_project",
+            "label": "已有项目",
+            "kind": "data",
+            "layer": "design",
+            "summary": "",
+            "origin": "design",
+            "capture": {},
+            "parent": "derive_project"
+          },
+          {
+            "id": "derive_permission",
+            "label": "来源所有者或显式 derive",
+            "kind": "decision",
+            "layer": "design",
+            "summary": "",
+            "origin": "design",
+            "capture": {},
+            "parent": "derive_project"
+          },
+          {
+            "id": "relation_permission",
+            "label": "两端均有 connect 权限",
+            "kind": "decision",
+            "layer": "design",
+            "summary": "",
+            "origin": "design",
+            "capture": {},
+            "parent": "configure_relation"
+          },
+          {
+            "id": "type_port_rules",
+            "label": "类型、方向、端口与格式规则",
+            "kind": "decision",
+            "layer": "design",
+            "summary": "",
+            "origin": "design",
+            "capture": {},
+            "parent": "transfer_data"
+          },
+          {
+            "id": "execute_permission",
+            "label": "两端 connect·授权时点待确认",
+            "kind": "decision",
+            "layer": "design",
+            "summary": "“执行也要有两边的 connect 权限”与“配置时已授权，后面按连接执行”尚未确定使用当前权限还是历史许可。",
+            "origin": "design",
+            "capture": {},
+            "parent": "transfer_data"
+          },
+          {
+            "id": "project_created",
+            "label": "项目已创建",
+            "kind": "state",
+            "layer": "state",
+            "summary": "",
+            "origin": "design",
+            "capture": {},
+            "parent": "create_project"
+          },
+          {
+            "id": "project_derived",
+            "label": "独立新项目：同类型、记录来源",
+            "kind": "state",
+            "layer": "state",
+            "summary": "",
+            "origin": "design",
+            "capture": {},
+            "parent": "derive_project"
+          },
+          {
+            "id": "relation_configured",
+            "label": "流转关系已配置",
+            "kind": "state",
+            "layer": "state",
+            "summary": "",
+            "origin": "design",
+            "capture": {},
+            "parent": "configure_relation"
+          },
+          {
+            "id": "transfer_effect",
+            "label": "目标输入获得当前 JSON",
+            "kind": "effect",
+            "layer": "design",
+            "summary": "",
+            "origin": "design",
+            "capture": {},
+            "parent": "transfer_data"
+          }
+        ],
+        "edges": [
+          {
+            "id": "source_to_derivation",
+            "from": "source_project",
+            "to": "derive_project",
+            "type": "data",
+            "label": "same type and source ID; independent contents",
+            "origin": "design"
+          },
+          {
+            "id": "derive_guard",
+            "from": "derive_permission",
+            "to": "derive_project",
+            "type": "guard",
+            "label": "须具备相应权限",
+            "origin": "design"
+          },
+          {
+            "id": "relation_guard",
+            "from": "relation_permission",
+            "to": "configure_relation",
+            "type": "guard",
+            "label": "须具备相应权限",
+            "origin": "design"
+          },
+          {
+            "id": "transfer_guard",
+            "from": "type_port_rules",
+            "to": "transfer_data",
+            "type": "guard",
+            "label": "符合预设类型与端口规则",
+            "origin": "design"
+          },
+          {
+            "id": "execute_guard",
+            "from": "execute_permission",
+            "to": "transfer_data",
+            "type": "guard",
+            "label": "两端 connect；历史许可还是当前权限待确认",
+            "origin": "design"
+          },
+          {
+            "id": "connection_type_guard",
+            "from": "type_port_rules",
+            "to": "configure_relation",
+            "type": "guard",
+            "label": "连接需满足固定类型和端口规则",
+            "origin": "design"
+          },
+          {
+            "id": "create_effect",
+            "from": "create_project",
+            "to": "project_created",
+            "type": "flow",
+            "label": "创建得到项目",
+            "origin": "design"
+          },
+          {
+            "id": "derive_effect",
+            "from": "derive_project",
+            "to": "project_derived",
+            "type": "flow",
+            "label": "派生得到新项目",
+            "origin": "design"
+          },
+          {
+            "id": "configure_effect",
+            "from": "configure_relation",
+            "to": "relation_configured",
+            "type": "flow",
+            "label": "配置项目间关系",
+            "origin": "design"
+          },
+          {
+            "id": "relation_for_transfer",
+            "from": "relation_configured",
+            "to": "transfer_data",
+            "type": "data",
+            "label": "指定项目间流转关系",
+            "origin": "design"
+          },
+          {
+            "id": "transfer_result",
+            "from": "transfer_data",
+            "to": "transfer_effect",
+            "type": "flow",
+            "label": "copy current JSON into target input",
+            "origin": "design"
+          },
+          {
+            "id": "independent_project_connection",
+            "from": "project_created",
+            "to": "configure_relation",
+            "type": "data",
+            "label": "独立创建的项目也可连接",
+            "origin": "design"
+          }
+        ],
+        "machine": {
+          "values": [],
+          "labels": {},
+          "transitions": []
+        },
+        "graph_roots": [
+          "create_project",
+          "derive_project",
+          "configure_relation",
+          "transfer_data"
+        ],
+        "presentation": {
+          "subject": "项目派生与数据流转"
+        }
+      },
+      "manifest": {
+        "build_id": "79173f77388817964b5dd67312dfeabba2b3e2fdf3b97c50bdf4c76262efb8f9",
+        "bindings": {}
+      },
+      "binding_status": {
+        "status": "design"
+      },
+      "events": [],
+      "machine": {
+        "configurations": [],
+        "current": null,
+        "journal": []
+      },
+      "authority": {
+        "basis": {},
+        "parameters": {}
+      },
+      "health": {
+        "errors": 0,
+        "dropped": 0
+      },
+      "busy": false,
+      "historical": false,
+      "available_cases": [
+        "live"
+      ]
+    }
+  },
+  "page_errors": [],
+  "ready_error": null,
+  "console": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  ],
+  "failed_requests": []
+}

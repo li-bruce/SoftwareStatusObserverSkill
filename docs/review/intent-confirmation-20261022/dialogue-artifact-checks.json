@@ -1,0 +1,71 @@
+{
+  "scope": "Stored records and identity, not automated proof of natural-language meaning",
+  "checks": [
+    {
+      "check": "initial_ambiguities_remain_open",
+      "passed": true,
+      "evidence": "round-001"
+    },
+    {
+      "check": "answered_questions_closed",
+      "passed": true,
+      "evidence": "round-002"
+    },
+    {
+      "check": "new_execution_authority_is_open",
+      "passed": true,
+      "evidence": "round-002"
+    },
+    {
+      "check": "ambiguous_reply_not_fabricated_as_answer",
+      "passed": true,
+      "evidence": "round-003"
+    },
+    {
+      "check": "answered_questions_not_repeated",
+      "passed": true,
+      "evidence": "rounds 001-003"
+    },
+    {
+      "check": "graph_identity_preserved",
+      "passed": true,
+      "evidence": "rounds 001-003"
+    },
+    {
+      "check": "only_execution_authority_node_added",
+      "passed": true,
+      "evidence": "round-002 minus round-001"
+    },
+    {
+      "check": "round_1_unfinished_gate_not_passed",
+      "passed": true,
+      "evidence": "round-001/discovery-completion-check.json"
+    },
+    {
+      "check": "round_1_independent_validator_blocks",
+      "passed": true,
+      "evidence": "recomputed from round-001/discovery.snapshot.json"
+    },
+    {
+      "check": "round_2_unfinished_gate_not_passed",
+      "passed": true,
+      "evidence": "round-002/discovery-completion-check.json"
+    },
+    {
+      "check": "round_2_independent_validator_blocks",
+      "passed": true,
+      "evidence": "recomputed from round-002/discovery.snapshot.json"
+    },
+    {
+      "check": "round_3_unfinished_gate_not_passed",
+      "passed": true,
+      "evidence": "round-003/discovery-completion-check.json"
+    },
+    {
+      "check": "round_3_independent_validator_blocks",
+      "passed": true,
+      "evidence": "recomputed from round-003/discovery.snapshot.json"
+    }
+  ],
+  "passed": true
+}

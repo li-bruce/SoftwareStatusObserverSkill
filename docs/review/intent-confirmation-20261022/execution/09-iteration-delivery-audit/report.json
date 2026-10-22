@@ -1,0 +1,59 @@
+{
+  "scope": "Current local source, declaration, exact recorded frames and configured checks",
+  "active_change": ".stategraph/derive-type",
+  "checks": [
+    {
+      "name": "live_model_equals_current_declaration",
+      "passed": true
+    },
+    {
+      "name": "public_export_preserves_recorded_frames",
+      "passed": true,
+      "compared_frames": 26
+    },
+    {
+      "name": "recording_has_no_known_gap",
+      "passed": true,
+      "gaps": []
+    },
+    {
+      "name": "accepted_verification_passes",
+      "passed": true,
+      "reports": {
+        "mapping": {
+          "status": "passed",
+          "errors": [],
+          "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+          "stategraph_export": "checked",
+          "witnesses": 117,
+          "projection_checks": 2112
+        },
+        "state_rules": {
+          "status": "passed",
+          "errors": []
+        },
+        "project_checks": {
+          "status": "passed",
+          "errors": [],
+          "scope": "Configured project tests, architecture and viewer checks"
+        },
+        "business": {
+          "status": "passed",
+          "errors": [],
+          "assertions": {
+            "required": 408,
+            "executed": 408
+          },
+          "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+        }
+      },
+      "candidate_id": "ee2202994bcdd5e7cd9796fec6937965494e28c94d69ad424a2359ab5c1f4ecf"
+    },
+    {
+      "name": "current_source_and_architecture_gate",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "passed": true
+}

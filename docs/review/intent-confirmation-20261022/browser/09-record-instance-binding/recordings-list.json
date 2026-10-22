@@ -1,0 +1,24 @@
+{
+  "active": null,
+  "recordings": [
+    {
+      "id": "b933479dcd8b4b23a57f064536b0d7f4",
+      "label": "操作记录",
+      "status": "stopped",
+      "started_at": "2026-10-22T10:58:38.838626+00:00",
+      "ended_at": "2026-10-22T11:00:35.090019+00:00",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "events": 26,
+      "commands": 0,
+      "gaps": [],
+      "capture": {
+        "mode": "all",
+        "nodes": null,
+        "roots": [],
+        "boundary_nodes": []
+      },
+      "capture_filtered": 0
+    }
+  ],
+  "error": ""
+}

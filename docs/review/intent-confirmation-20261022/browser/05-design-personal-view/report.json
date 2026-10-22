@@ -1,0 +1,8 @@
+{
+  "stage": "seed",
+  "url": "http://127.0.0.1:8866",
+  "checks": [],
+  "errors": [],
+  "failure": "TimeoutError('Page.click: Timeout 30000ms exceeded.\\nCall log:\\n  - waiting for locator(\"#discussion-clear\")\\n    - locator resolved to <button hidden=\"\" id=\"discussion-clear\">取消聚焦</button>\\n  - attempting click action\\n    2 × waiting for element to be visible, enabled and stable\\n      - element is not visible\\n    - retrying click action\\n    - waiting 20ms\\n    2 × waiting for element to be visible, enabled and stable\\n      - element is not visible\\n    - retrying click action\\n      - waiting 100ms\\n    57 × waiting for element to be visible, enabled and stable\\n       - element is not visible\\n     - retrying click action\\n       - waiting 500ms\\n')",
+  "passed": false
+}

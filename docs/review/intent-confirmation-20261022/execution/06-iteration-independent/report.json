@@ -1,0 +1,577 @@
+{
+  "scope": "Authorized optional derivation type, inherited defaults, no copied rows, current permission/type/port rules, and real event frames",
+  "source_hashes": {
+    "app/__init__.py": "5af4f590235aed9faae5d6b06ec8362046099123b59feb4a5de4000abae28bf6",
+    "app/domain.py": "c1a270bf5d92bfd5f4f10194b9ed0a1f45e8ae91baa6ca3e1c42f187172f3854",
+    "app/ports.py": "953b72f95d8f5959f48b9303a99a13fd4567ce671c29b17027caf14e52a66924",
+    "app/store.py": "cdb5387033173c5a6891d53482cbaeadd0fb882a45fdf9d7bb33ec96365f357c",
+    "bo_stategraph/__init__.py": "0571254ae4242ad3f03d8433ff67edf79b46670518492d1a602874a24985cc09",
+    "bo_stategraph/bo_contracts.py": "c2de500b94af9f2fb3549bdbb46a7251dc7e0145f3b0d60896ea99df2f4933e5",
+    "bo_stategraph/execution_contract.py": "9502b2d348bb8ee00c05288ca3d064d151365292fdef597c156c178871635b78",
+    "bo_stategraph/query.py": "62f7f54134a138019c05f75751d3f760c196985a41ed53371f31fe9402206ec0",
+    "bo_stategraph/workflow.py": "9d06567642ebd5ec6e34a3fd5d71c3f88ad1790068497f19912ebbe9dbfddde3",
+    "integrations/__init__.py": "f45cffd99b0081cef3ea20dc83ddd565b9a831de1ac8b6d9cbf9087ab2aae42e",
+    "integrations/bo_adapter.py": "c2126cd46070f3a5979e092c47b43e82a782e71d2a1ca80cc9b6e2ccf54fa1dd",
+    "integrations/bo_server.py": "aac74a8fbccd8d28e1810e846d4395509c67f015613be0221e70b06e135ea643"
+  },
+  "source_unchanged_during_check": true,
+  "script_sha256": "c330b4fa7b63b73442e161e3dd75cd832637a0696eb87d67082ce965735393df",
+  "checks": [
+    {
+      "name": "on_explicit_collection",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "d4c32643a194",
+          "name": "Independent",
+          "type": "collection",
+          "owner": "bob",
+          "source_id": "collect-a"
+        },
+        "new_project_has_no_data_links_grants": true,
+        "runtime": {
+          "mode": "on",
+          "events": 7,
+          "frames": 7,
+          "operation_id": "8986734de7194daea08098e532497af7",
+          "derive_events": [
+            {
+              "id": "cdf790e09d13:15",
+              "node": "derive_project",
+              "inputs": {
+                "actor": "bob",
+                "source_id": "collect-a",
+                "target_type": "collection",
+                "source_type": "collection"
+              },
+              "outputs": {
+                "project_id": "d4c32643a194",
+                "owner": "bob",
+                "type": "collection",
+                "source_id": "collect-a"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "on_explicit_processing",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "3f32b2986682",
+          "name": "Independent",
+          "type": "processing",
+          "owner": "bob",
+          "source_id": "collect-a"
+        },
+        "new_project_has_no_data_links_grants": true,
+        "runtime": {
+          "mode": "on",
+          "events": 7,
+          "frames": 7,
+          "operation_id": "51ca36fded2848a1b5a132c1daa7e34d",
+          "derive_events": [
+            {
+              "id": "006d59bcb10a:15",
+              "node": "derive_project",
+              "inputs": {
+                "actor": "bob",
+                "source_id": "collect-a",
+                "target_type": "processing",
+                "source_type": "collection"
+              },
+              "outputs": {
+                "project_id": "3f32b2986682",
+                "owner": "bob",
+                "type": "processing",
+                "source_id": "collect-a"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "on_explicit_report",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "83a1e44b587e",
+          "name": "Independent",
+          "type": "report",
+          "owner": "bob",
+          "source_id": "collect-a"
+        },
+        "new_project_has_no_data_links_grants": true,
+        "runtime": {
+          "mode": "on",
+          "events": 7,
+          "frames": 7,
+          "operation_id": "f3a27f2ce7684a3f92f0fed6e9f5a2db",
+          "derive_events": [
+            {
+              "id": "868cfbb841bf:15",
+              "node": "derive_project",
+              "inputs": {
+                "actor": "bob",
+                "source_id": "collect-a",
+                "target_type": "report",
+                "source_type": "collection"
+              },
+              "outputs": {
+                "project_id": "83a1e44b587e",
+                "owner": "bob",
+                "type": "report",
+                "source_id": "collect-a"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "on_default_collection",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "b330d474f6b5",
+          "name": "Default",
+          "type": "collection",
+          "owner": "bob",
+          "source_id": "collect-a"
+        },
+        "runtime": {
+          "mode": "on",
+          "events": 7,
+          "frames": 7,
+          "operation_id": "557e6bf20bed4b34a44a5f0d667e757a",
+          "derive_events": [
+            {
+              "id": "499935ff6ee4:6",
+              "node": "derive_project",
+              "inputs": {
+                "actor": "bob",
+                "source_id": "collect-a",
+                "target_type": null,
+                "source_type": "collection"
+              },
+              "outputs": {
+                "project_id": "b330d474f6b5",
+                "owner": "bob",
+                "type": "collection",
+                "source_id": "collect-a"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "on_default_processing",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "6cc83522adc5",
+          "name": "Default",
+          "type": "processing",
+          "owner": "bob",
+          "source_id": "process-b"
+        },
+        "runtime": {
+          "mode": "on",
+          "events": 7,
+          "frames": 7,
+          "operation_id": "670ea9d66cf84ea8a95dddef7f7302ae",
+          "derive_events": [
+            {
+              "id": "f71109de4d5f:6",
+              "node": "derive_project",
+              "inputs": {
+                "actor": "bob",
+                "source_id": "process-b",
+                "target_type": null,
+                "source_type": "processing"
+              },
+              "outputs": {
+                "project_id": "6cc83522adc5",
+                "owner": "bob",
+                "type": "processing",
+                "source_id": "process-b"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "on_default_report",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "2fcd7d1d6e2a",
+          "name": "Default",
+          "type": "report",
+          "owner": "carol",
+          "source_id": "report-c"
+        },
+        "runtime": {
+          "mode": "on",
+          "events": 7,
+          "frames": 7,
+          "operation_id": "005a7547cf274ce8a1a7f9cc8fe0a857",
+          "derive_events": [
+            {
+              "id": "d9995efe4e8e:6",
+              "node": "derive_project",
+              "inputs": {
+                "actor": "carol",
+                "source_id": "report-c",
+                "target_type": null,
+                "source_type": "report"
+              },
+              "outputs": {
+                "project_id": "2fcd7d1d6e2a",
+                "owner": "carol",
+                "type": "report",
+                "source_id": "report-c"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "on_unauthorized",
+      "passed": true,
+      "evidence": {
+        "result": {
+          "ok": false,
+          "code": "derive_denied",
+          "operation_id": "4388f8ce497d42069c6261770692c947"
+        },
+        "business_rows_unchanged": true,
+        "runtime": {
+          "mode": "on",
+          "events": 5,
+          "frames": 5,
+          "operation_id": "4388f8ce497d42069c6261770692c947",
+          "derive_events": []
+        }
+      }
+    },
+    {
+      "name": "on_unknown_type",
+      "passed": true,
+      "evidence": {
+        "result": {
+          "ok": false,
+          "code": "unknown_type",
+          "operation_id": "d8c93f7ce1794cdda8da9a18a7e9922b"
+        },
+        "business_rows_unchanged": true,
+        "runtime": {
+          "mode": "on",
+          "events": 6,
+          "frames": 6,
+          "operation_id": "d8c93f7ce1794cdda8da9a18a7e9922b",
+          "derive_events": []
+        }
+      }
+    },
+    {
+      "name": "off_explicit_collection",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "14bf31f68070",
+          "name": "Independent",
+          "type": "collection",
+          "owner": "bob",
+          "source_id": "collect-a"
+        },
+        "new_project_has_no_data_links_grants": true,
+        "runtime": {
+          "mode": "off",
+          "export_valid": true
+        }
+      }
+    },
+    {
+      "name": "off_explicit_processing",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "a9a17cd44b50",
+          "name": "Independent",
+          "type": "processing",
+          "owner": "bob",
+          "source_id": "collect-a"
+        },
+        "new_project_has_no_data_links_grants": true,
+        "runtime": {
+          "mode": "off",
+          "export_valid": true
+        }
+      }
+    },
+    {
+      "name": "off_explicit_report",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "0c87bc8da087",
+          "name": "Independent",
+          "type": "report",
+          "owner": "bob",
+          "source_id": "collect-a"
+        },
+        "new_project_has_no_data_links_grants": true,
+        "runtime": {
+          "mode": "off",
+          "export_valid": true
+        }
+      }
+    },
+    {
+      "name": "off_default_collection",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "4c50a395f1a7",
+          "name": "Default",
+          "type": "collection",
+          "owner": "bob",
+          "source_id": "collect-a"
+        },
+        "runtime": {
+          "mode": "off",
+          "export_valid": true
+        }
+      }
+    },
+    {
+      "name": "off_default_processing",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "486d167fdf15",
+          "name": "Default",
+          "type": "processing",
+          "owner": "bob",
+          "source_id": "process-b"
+        },
+        "runtime": {
+          "mode": "off",
+          "export_valid": true
+        }
+      }
+    },
+    {
+      "name": "off_default_report",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "e849bb7363f9",
+          "name": "Default",
+          "type": "report",
+          "owner": "carol",
+          "source_id": "report-c"
+        },
+        "runtime": {
+          "mode": "off",
+          "export_valid": true
+        }
+      }
+    },
+    {
+      "name": "off_unauthorized",
+      "passed": true,
+      "evidence": {
+        "result": {
+          "ok": false,
+          "code": "derive_denied",
+          "operation_id": "89d8c08da8d64633a3522e5ef99ea9ac"
+        },
+        "business_rows_unchanged": true,
+        "runtime": {
+          "mode": "off",
+          "export_valid": true
+        }
+      }
+    },
+    {
+      "name": "off_unknown_type",
+      "passed": true,
+      "evidence": {
+        "result": {
+          "ok": false,
+          "code": "unknown_type",
+          "operation_id": "9bcb8ad08d8f4391946bd89598ec52d8"
+        },
+        "business_rows_unchanged": true,
+        "runtime": {
+          "mode": "off",
+          "export_valid": true
+        }
+      }
+    },
+    {
+      "name": "fault_explicit_collection",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "3495cb3f0d2e",
+          "name": "Independent",
+          "type": "collection",
+          "owner": "bob",
+          "source_id": "collect-a"
+        },
+        "new_project_has_no_data_links_grants": true,
+        "runtime": {
+          "mode": "fault",
+          "export_valid": true
+        }
+      }
+    },
+    {
+      "name": "fault_explicit_processing",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "b1a01b711f7a",
+          "name": "Independent",
+          "type": "processing",
+          "owner": "bob",
+          "source_id": "collect-a"
+        },
+        "new_project_has_no_data_links_grants": true,
+        "runtime": {
+          "mode": "fault",
+          "export_valid": true
+        }
+      }
+    },
+    {
+      "name": "fault_explicit_report",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "9987a5e55a27",
+          "name": "Independent",
+          "type": "report",
+          "owner": "bob",
+          "source_id": "collect-a"
+        },
+        "new_project_has_no_data_links_grants": true,
+        "runtime": {
+          "mode": "fault",
+          "export_valid": true
+        }
+      }
+    },
+    {
+      "name": "fault_default_collection",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "a8bfaa8be96b",
+          "name": "Default",
+          "type": "collection",
+          "owner": "bob",
+          "source_id": "collect-a"
+        },
+        "runtime": {
+          "mode": "fault",
+          "export_valid": true
+        }
+      }
+    },
+    {
+      "name": "fault_default_processing",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "110f388fa094",
+          "name": "Default",
+          "type": "processing",
+          "owner": "bob",
+          "source_id": "process-b"
+        },
+        "runtime": {
+          "mode": "fault",
+          "export_valid": true
+        }
+      }
+    },
+    {
+      "name": "fault_default_report",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "43b5082efcb4",
+          "name": "Default",
+          "type": "report",
+          "owner": "carol",
+          "source_id": "report-c"
+        },
+        "runtime": {
+          "mode": "fault",
+          "export_valid": true
+        }
+      }
+    },
+    {
+      "name": "fault_unauthorized",
+      "passed": true,
+      "evidence": {
+        "result": {
+          "ok": false,
+          "code": "derive_denied",
+          "operation_id": "c85f67b576a44d20a311f8be4e206de1"
+        },
+        "business_rows_unchanged": true,
+        "runtime": {
+          "mode": "fault",
+          "export_valid": true
+        }
+      }
+    },
+    {
+      "name": "fault_unknown_type",
+      "passed": true,
+      "evidence": {
+        "result": {
+          "ok": false,
+          "code": "unknown_type",
+          "operation_id": "c4e31b081cef482aaa21de8424ea283d"
+        },
+        "business_rows_unchanged": true,
+        "runtime": {
+          "mode": "fault",
+          "export_valid": true
+        }
+      }
+    },
+    {
+      "name": "resulting_type_controls_ports_without_inheritance",
+      "passed": true,
+      "evidence": {
+        "derived_type": "report",
+        "collection_to_report_rejected": true,
+        "processing_to_report_copied": {
+          "total": 12
+        },
+        "runtime": {
+          "mode": "on",
+          "events": 10,
+          "frames": 10,
+          "operation_id": "a83f185ed3ed454bbd25f486939302b3",
+          "derive_events": []
+        }
+      }
+    }
+  ],
+  "passed": true
+}

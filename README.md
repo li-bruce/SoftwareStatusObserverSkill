@@ -22,7 +22,7 @@ AI 默认在内部依据状态网引导开发，用户可以采用任何框架�
 
 Python 的状态网保存在独立模块中。业务既可使用状态机引擎，也可使用自己的函数逻辑；模型、监控和导出不会因此消失。见[两种实现的可运行示例](examples/python-modes/README.md)与[模块契约](skills/business-observer/references/independent-python.md)。完整示例通过 `/api/stategraph/export` 下载全部已建模节点、关系、状态声明和保留的运行证据，页面筛选不影响导出。
 
-Skill 会主动询问影响权限、状态和执行结果的模糊需求。修改代码时，检查图、状态机、探针和测试是否同步。上层结构来自需求理解，局部程序关系来自 Python AST，运行状态来自实际执行。
+Skill 根据用户当前描述建图，通过必要的澄清或反例确认图是否符合原意；不主动深入推演、补完业务流程或推荐规则。用户或其他 Skill 补充规则后，再更新同一张图和对应检查。修改代码时，检查图、状态机、探针和测试是否同步。上层结构来自需求理解，局部程序关系来自 Python AST，运行状态来自实际执行。
 
 ## 安装 Skill
 
@@ -30,8 +30,10 @@ Skill 会主动询问影响权限、状态和执行结果的模糊需求。修�
 
 ```text
 使用 $skill-installer，从以下地址安装 business-observer：
-https://github.com/li-bruce/SoftwareStatusObserverSkill/tree/v0.5.0/skills/business-observer
+https://github.com/li-bruce/SoftwareStatusObserverSkill/tree/main/skills/business-observer
 ```
+
+`main` 提供最新提交；历史标签保留对应版本。已安装旧版时，请先保留自己的修改，再更新完整 Skill 目录。
 
 也可以克隆仓库后安装到指定项目：
 
@@ -80,6 +82,8 @@ python tools/archive_demo.py --port 8824
 
 ## 项目内容
 
+2026-10-22 更新明确了“确认用户意图”的引导范围，保留消除歧义所需的追问和反例。新增[项目流转系统独立试用记录](docs/review/intent-confirmation-20261022/README.md)，包含实际模拟对话、跨类型派生迭代、失败与修复、截图及可运行源码包。
+
 v0.5.0 完成独立状态网替换、共同校验和统一实例，新增源码范围扫描与收尾映射检查、项目内个人配置、事件保留和版本化升级。映射正确与业务正确分别报告。代码变化及试用证据见[本轮审查材料](docs/review/refactor-round1/README.md)。
 
 v0.4.0 增加贯穿开发过程的白盒约定、实际参数与判断检查、带边界的局部图提取，以及显式文件清单导出。设计依据见[路线与关系设计](docs/design/roadmap.zh-CN.md)，可运行命令见[全过程开发](skills/business-observer/references/continuous-development.md)和[局部图与共享](skills/business-observer/references/focus-and-sharing.md)。
@@ -96,7 +100,7 @@ v0.4.0 增加贯穿开发过程的白盒约定、实际参数与判断检查、�
 
 ## 验证与边界
 
-本地修订加入受保护的[映射清单](skills/business-observer/references/mapping-contract.md)：从实际存储取值，逐项核对每个约定场景的实例和公共导出，删除场景或必需字段会使验收失败。既有项目接入本版时需要补齐 `sync.json` 的 `mapping_contract` 和对应观察输出，不能用重新建立基线跳过检查。非法状态定义、未支持的引擎语义和错误 guard 接线在加载前报错；实际运行违规保留原值并报告约束失败。
+当前版本包含受保护的[映射清单](skills/business-observer/references/mapping-contract.md)：从实际存储取值，逐项核对每个约定场景的实例和公共导出，删除场景或必需字段会使验收失败。既有项目接入本版时需要补齐 `sync.json` 的 `mapping_contract` 和对应观察输出，不能用重新建立基线跳过检查。非法状态定义、未支持的引擎语义和错误 guard 接线在加载前报错；实际运行违规保留原值并报告约束失败。
 
 ```bash
 python tools/verify.py

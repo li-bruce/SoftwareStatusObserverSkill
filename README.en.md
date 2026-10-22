@@ -22,7 +22,7 @@ By default, the coding agent uses the state network to guide implementation inte
 
 The Python state network lives in an independent module. Business code may use a state-machine engine or ordinary functions; structure, observation and export remain available in either case. See the [runnable two-mode example](examples/python-modes/README.md) and [module contract](skills/business-observer/references/independent-python.md) (Chinese). Full demos expose `/api/stategraph/export` for the complete declared graph and retained runtime evidence, independently of viewport filters.
 
-The Skill asks about unclear requirements that affect permissions, state or outcomes. During edits it checks whether the graph, state machine, probes and tests remain consistent. Business abstractions come from requirements; local code relationships come from Python AST analysis; runtime facts come from execution.
+The Skill builds the graph from the user's current description and uses necessary clarifications or counterexamples to confirm that it reflects their intent. It does not proactively develop missing business workflows or recommend business rules. When the user or another Skill supplies further rules, it updates the same graph and its checks. During edits it checks whether the graph, state machine, probes and tests remain consistent. Business abstractions come from requirements; local code relationships come from Python AST analysis; runtime facts come from execution.
 
 ## Install the Skill
 
@@ -30,8 +30,10 @@ In Codex with `$skill-installer`, enter:
 
 ```text
 Use $skill-installer to install business-observer from:
-https://github.com/li-bruce/SoftwareStatusObserverSkill/tree/v0.5.0/skills/business-observer
+https://github.com/li-bruce/SoftwareStatusObserverSkill/tree/main/skills/business-observer
 ```
+
+`main` contains the latest commits; historical tags retain their original versions. If upgrading an existing installation, preserve your edits before updating the complete Skill directory.
 
 Or clone this repository and install into a project:
 
@@ -73,6 +75,8 @@ The example uses synthetic text and local SQLite. The graph polls about every 40
 
 ## Repository layout
 
+The 2026-10-22 update focuses clarification on confirming the user's intent, retaining questions and counterexamples needed to resolve ambiguity. The [independent project-flow trial](docs/review/intent-confirmation-20261022/README.md) (Chinese) includes actual simulated dialogue, a cross-type derivation iteration, failures and fixes, screenshots, and runnable source packages.
+
 Version 0.5.0 moves complete lifecycle coordination into the independent state module, unifies validation and instance queries, and adds independent source inventory, stage completion checks, project-local preferences, bounded event retention and versioned upgrades. Mapping fidelity and business correctness have separate reports. See the [code and trial review](docs/review/refactor-round1/README.md) (Chinese).
 
 The [team archive example](examples/team-archive/README.en.md) was built in a separate conversation from an initial request, followed by clarification, implementation, fixes and a size-limit iteration:
@@ -96,7 +100,7 @@ Version 0.4.0 adds source-bound whitebox contracts throughout development, obser
 
 ## Checks and scope
 
-The local revision adds a protected [mapping plan](skills/business-observer/references/mapping-contract.md) (Chinese). It compares actual store values with each required scenario's instances and the public export. Removing required scenarios or fields fails acceptance. Existing projects must add `mapping_contract` to `sync.json` and provide the corresponding observations; recreating a baseline is not a migration. Invalid definitions, unsupported engine semantics and missing guard bindings fail before loading. Runtime violations remain visible as actual facts and fail constraint checks.
+The current version includes a protected [mapping plan](skills/business-observer/references/mapping-contract.md) (Chinese). It compares actual store values with each required scenario's instances and the public export. Removing required scenarios or fields fails acceptance. Existing projects must add `mapping_contract` to `sync.json` and provide the corresponding observations; recreating a baseline is not a migration. Invalid definitions, unsupported engine semantics and missing guard bindings fail before loading. Runtime violations remain visible as actual facts and fail constraint checks.
 
 ```bash
 python tools/verify.py

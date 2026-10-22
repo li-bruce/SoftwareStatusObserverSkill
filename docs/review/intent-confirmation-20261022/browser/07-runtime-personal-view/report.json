@@ -1,0 +1,61 @@
+{
+  "stage": "verify",
+  "url": "http://127.0.0.1:8870",
+  "checks": [
+    {
+      "name": "label_note_core_and_position_persist",
+      "passed": true,
+      "position": {
+        "x": 382.3809523809524,
+        "y": 39.523809523809526
+      },
+      "revision": 4
+    },
+    {
+      "name": "same_node_expands_to_region",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "graph": {
+    "model_nodes": [
+      "create_project",
+      "derive_project",
+      "configure_relation",
+      "transfer_data",
+      "source_project",
+      "derive_permission",
+      "relation_permission",
+      "type_port_rules",
+      "execute_permission",
+      "project_created",
+      "project_derived",
+      "relation_configured",
+      "transfer_effect",
+      "permission_fact",
+      "operation_checking",
+      "operation_result",
+      "function_create_project",
+      "function_derive_project",
+      "function_configure_relation",
+      "function_transfer_data",
+      "state_checking",
+      "state_completed",
+      "state_rejected",
+      "code.d594fd3f9939fb68",
+      "code.86d8141cf20b4631",
+      "code.55fddd799bef9f11",
+      "code.95dc4982c2a5a528",
+      "code.5d776df94f321e43"
+    ],
+    "stage": "runtime",
+    "metrics": {
+      "nodes": 8,
+      "edges": 6,
+      "texts": 31,
+      "drawCount": 3,
+      "webgl": true
+    }
+  },
+  "passed": true
+}

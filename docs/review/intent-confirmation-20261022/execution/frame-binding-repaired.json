@@ -1,0 +1,12 @@
+{
+  "recording": "docs\\review\\intent-confirmation-20261022\\browser\\10-runtime-frames-repaired\\recording-799093103f7147828203c6e54115fee5.json",
+  "events": 26,
+  "frames": 26,
+  "states": [
+    "checking",
+    "completed",
+    "rejected"
+  ],
+  "errors": [],
+  "passed": true
+}

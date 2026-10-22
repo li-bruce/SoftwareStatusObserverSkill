@@ -1,0 +1,3347 @@
+{
+  "schema": "stategraph-recording/v1",
+  "id": "b933479dcd8b4b23a57f064536b0d7f4",
+  "label": "操作记录",
+  "status": "stopped",
+  "started_at": "2026-10-22T10:58:38.838626+00:00",
+  "ended_at": "2026-10-22T11:00:35.090019+00:00",
+  "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+  "run_id": "1391fd32c883",
+  "start_seq": 0,
+  "end_seq": 26,
+  "context": {
+    "authority": {
+      "entity": null,
+      "state": null,
+      "basis": {
+        "param_version": 1
+      },
+      "parameters": {},
+      "effects": []
+    },
+    "machine": {
+      "configurations": [],
+      "current": null,
+      "journal": [],
+      "state_revision": 0
+    },
+    "health": {
+      "enabled": true,
+      "run_id": "1391fd32c883",
+      "attempted": 0,
+      "written": 0,
+      "errors": 0,
+      "dropped": 0,
+      "queued": 0,
+      "filtered": 0,
+      "capture_nodes": null,
+      "retention": null
+    },
+    "binding_status": {
+      "status": "current",
+      "changed_files": [],
+      "model_changed": false,
+      "intent_changed": false,
+      "directly_affected": [],
+      "possibly_affected": []
+    },
+    "historical": true,
+    "busy": false,
+    "model": {
+      "schema_version": 3,
+      "revision": "1",
+      "project_id": "project-flow-trial-20261022",
+      "title": "项目派生与数据流转",
+      "intent": "intent.json",
+      "source_files": [
+        "app/__init__.py",
+        "app/domain.py",
+        "app/store.py",
+        "app/ports.py",
+        "bo_stategraph/workflow.py",
+        "bo_stategraph/query.py",
+        "integrations/__init__.py",
+        "integrations/bo_adapter.py",
+        "integrations/bo_server.py",
+        "server.py",
+        "static/app.html",
+        "static/app.js",
+        "static/app.css"
+      ],
+      "nodes": [
+        {
+          "id": "create_project",
+          "label": "创建项目",
+          "kind": "action",
+          "source": {
+            "path": "app/domain.py",
+            "symbol": "Projects.create_project"
+          },
+          "summary": "创建项目；来源为已确认规则，实际值由原函数探针提供。",
+          "capture": {
+            "in": {
+              "actor": "string",
+              "name": "string",
+              "type": "string"
+            },
+            "out": {
+              "project_id": "string",
+              "owner": "string",
+              "type": "string"
+            }
+          },
+          "requirements": [
+            "R1"
+          ],
+          "layer": "business"
+        },
+        {
+          "id": "derive_project",
+          "label": "派生新项目",
+          "kind": "action",
+          "source": {
+            "path": "app/domain.py",
+            "symbol": "Projects.derive_project"
+          },
+          "summary": "派生新项目；来源为已确认规则，实际值由原函数探针提供。",
+          "capture": {
+            "in": {
+              "actor": "string",
+              "source_id": "string"
+            },
+            "out": {
+              "project_id": "string",
+              "owner": "string",
+              "type": "string",
+              "source_id": "string"
+            }
+          },
+          "requirements": [
+            "R2",
+            "R3"
+          ],
+          "layer": "business"
+        },
+        {
+          "id": "configure_relation",
+          "label": "配置流转关系",
+          "kind": "action",
+          "source": {
+            "path": "app/domain.py",
+            "symbol": "Projects.configure_relation"
+          },
+          "summary": "配置流转关系；来源为已确认规则，实际值由原函数探针提供。",
+          "capture": {
+            "in": {
+              "actor": "string",
+              "source_id": "string",
+              "target_id": "string",
+              "source_port": "string",
+              "target_port": "string"
+            },
+            "out": {
+              "link_id": "string"
+            }
+          },
+          "requirements": [],
+          "layer": "business"
+        },
+        {
+          "id": "transfer_data",
+          "label": "手动执行 JSON 复制",
+          "kind": "action",
+          "summary": "Fixed collection->processing->reporting types and ports; validate existence, output-to-input and exact format. A configured link does not transfer. Manual execution copies the current JSON value. Independently created projects may connect.",
+          "source": {
+            "path": "app/domain.py",
+            "symbol": "Projects.execute_relation"
+          },
+          "capture": {
+            "in": {
+              "actor": "string",
+              "link_id": "string",
+              "source_id": "string",
+              "target_id": "string",
+              "value_hash": "string",
+              "source_revision": "number"
+            },
+            "out": {
+              "before": "string",
+              "after": "string",
+              "value_hash": "string"
+            }
+          },
+          "requirements": [
+            "R8",
+            "R9",
+            "R10"
+          ],
+          "layer": "business"
+        },
+        {
+          "id": "source_project",
+          "label": "已有项目",
+          "kind": "data",
+          "parent": "derive_project",
+          "source": {
+            "path": "app/domain.py",
+            "symbol": "Projects._project"
+          },
+          "summary": "已有项目；来源为已确认规则，实际值由原函数探针提供。",
+          "capture": {
+            "in": {
+              "project_id": "string"
+            },
+            "out": {
+              "project_id": "string",
+              "type": "string",
+              "owner": "string",
+              "source_id": "string"
+            }
+          },
+          "requirements": []
+        },
+        {
+          "id": "derive_permission",
+          "label": "来源所有者或显式 derive",
+          "kind": "decision",
+          "parent": "derive_project",
+          "source": {
+            "path": "app/domain.py",
+            "symbol": "Projects.derive_project"
+          },
+          "summary": "来源所有者或显式 derive；来源为已确认规则，实际值由原函数探针提供。",
+          "capture": {
+            "in": {
+              "actor": "string",
+              "source_id": "string"
+            },
+            "out": {
+              "allowed": "boolean"
+            }
+          },
+          "requirements": [
+            "R4"
+          ],
+          "semantic_roles": [
+            "permission"
+          ],
+          "code_evidence": {
+            "symbol": "app/domain.py::Projects.derive_project",
+            "ast_hash": "7e0afdc32a06daad49cab417eb8603f6a6bb896c897f48d2965f5ad66f0bbb53",
+            "origin": "python-ast"
+          }
+        },
+        {
+          "id": "relation_permission",
+          "label": "两端均有 connect 权限",
+          "kind": "decision",
+          "parent": "configure_relation",
+          "source": {
+            "path": "app/domain.py",
+            "symbol": "check_connect"
+          },
+          "summary": "两端均有 connect 权限；来源为已确认规则，实际值由原函数探针提供。",
+          "capture": {
+            "in": {
+              "actor": "string",
+              "source_id": "string",
+              "target_id": "string"
+            },
+            "out": {
+              "source_allowed": "boolean",
+              "target_allowed": "boolean",
+              "allowed": "boolean"
+            }
+          },
+          "requirements": [
+            "R5"
+          ],
+          "semantic_roles": [
+            "permission"
+          ],
+          "code_evidence": {
+            "symbol": "app/domain.py::check_connect",
+            "ast_hash": "6c02bbae65c1c116d7f186e488c38c6f664cd098eb7a946a570f2f95bcb6077e",
+            "origin": "python-ast"
+          }
+        },
+        {
+          "id": "type_port_rules",
+          "label": "类型、方向、端口与格式规则",
+          "kind": "decision",
+          "parent": "transfer_data",
+          "source": {
+            "path": "app/domain.py",
+            "symbol": "check_path"
+          },
+          "summary": "类型、方向、端口与格式规则；来源为已确认规则，实际值由原函数探针提供。",
+          "capture": {
+            "in": {
+              "source_type": "string",
+              "target_type": "string",
+              "source_port": "string",
+              "target_port": "string",
+              "source_format": "string",
+              "target_format": "string"
+            },
+            "out": {
+              "type_ok": "boolean",
+              "source_output_exists": "boolean",
+              "target_input_exists": "boolean",
+              "format_ok": "boolean",
+              "allowed": "boolean"
+            }
+          },
+          "requirements": [
+            "R6",
+            "R7"
+          ],
+          "code_evidence": {
+            "symbol": "app/domain.py::check_path",
+            "ast_hash": "ffaf41c022988d3bb5f464d6d2f62b1572e5b1f1cdf47d9e731772acdf741583",
+            "origin": "python-ast"
+          }
+        },
+        {
+          "id": "execute_permission",
+          "label": "每次执行重验两端 connect",
+          "kind": "decision",
+          "parent": "transfer_data",
+          "summary": "每次执行重新检查两端 connect 及类型端口规则，失败不写目标数据。",
+          "source": {
+            "path": "app/domain.py",
+            "symbol": "check_connect"
+          },
+          "capture": {
+            "in": {
+              "actor": "string",
+              "source_id": "string",
+              "target_id": "string"
+            },
+            "out": {
+              "source_allowed": "boolean",
+              "target_allowed": "boolean",
+              "allowed": "boolean"
+            }
+          },
+          "requirements": [
+            "R10"
+          ],
+          "semantic_roles": [
+            "permission"
+          ],
+          "code_evidence": {
+            "symbol": "app/domain.py::check_connect",
+            "ast_hash": "6c02bbae65c1c116d7f186e488c38c6f664cd098eb7a946a570f2f95bcb6077e",
+            "origin": "python-ast"
+          }
+        },
+        {
+          "id": "project_created",
+          "label": "项目已创建",
+          "kind": "state",
+          "parent": "create_project",
+          "source": {
+            "path": "app/domain.py",
+            "symbol": "Projects.create_project"
+          },
+          "summary": "项目已创建；来源为已确认规则，实际值由原函数探针提供。",
+          "capture": {
+            "in": {},
+            "out": {}
+          },
+          "requirements": []
+        },
+        {
+          "id": "project_derived",
+          "label": "独立新项目：同类型、记录来源",
+          "kind": "state",
+          "parent": "derive_project",
+          "source": {
+            "path": "app/domain.py",
+            "symbol": "Projects.derive_project"
+          },
+          "summary": "独立新项目：同类型、记录来源；来源为已确认规则，实际值由原函数探针提供。",
+          "capture": {
+            "in": {},
+            "out": {}
+          },
+          "requirements": []
+        },
+        {
+          "id": "relation_configured",
+          "label": "流转关系已配置",
+          "kind": "state",
+          "parent": "configure_relation",
+          "source": {
+            "path": "app/domain.py",
+            "symbol": "Projects.configure_relation"
+          },
+          "summary": "流转关系已配置；来源为已确认规则，实际值由原函数探针提供。",
+          "capture": {
+            "in": {},
+            "out": {}
+          },
+          "requirements": []
+        },
+        {
+          "id": "transfer_effect",
+          "label": "目标输入获得当前 JSON",
+          "kind": "effect",
+          "parent": "transfer_data",
+          "source": {
+            "path": "app/domain.py",
+            "symbol": "Projects._perform"
+          },
+          "summary": "目标输入获得当前 JSON；来源为已确认规则，实际值由原函数探针提供。",
+          "capture": {
+            "in": {
+              "target_id": "string",
+              "link_id": "string"
+            },
+            "out": {
+              "operation_id": "string",
+              "effect_id": "string",
+              "value_hash": "string",
+              "before": "string",
+              "after": "string"
+            }
+          },
+          "requirements": [],
+          "code_evidence": {
+            "symbol": "app/domain.py::Projects._perform",
+            "ast_hash": "c94e03259fa09ab311c4b187878e3371828f1af4df622d09ddff280f54987612",
+            "origin": "python-ast"
+          }
+        },
+        {
+          "id": "permission_fact",
+          "kind": "decision",
+          "label": "读取本项目的所有者与显式授权",
+          "summary": "读取本项目的所有者与显式授权；只展示实际读取或执行结果。",
+          "source": {
+            "path": "app/domain.py",
+            "symbol": "permission"
+          },
+          "parent": "execute_permission",
+          "capture": {
+            "in": {
+              "actor": "string",
+              "project_id": "string",
+              "action": "string",
+              "owner_id": "string"
+            },
+            "out": {
+              "owner": "boolean",
+              "explicit_grant": "boolean",
+              "allowed": "boolean"
+            }
+          },
+          "code_evidence": {
+            "symbol": "app/domain.py::permission",
+            "ast_hash": "9e6766ad8ce4bd8bbdeed0d8fe6d4da01715ab3920a4465fa5857bff22d256eb",
+            "origin": "python-ast"
+          }
+        },
+        {
+          "id": "operation_checking",
+          "kind": "function",
+          "label": "进入事务内检查",
+          "summary": "进入事务内检查；只展示实际读取或执行结果。",
+          "source": {
+            "path": "app/domain.py",
+            "symbol": "Projects._perform"
+          },
+          "parent": "transfer_data",
+          "capture": {
+            "in": {
+              "actor": "string",
+              "action": "string"
+            },
+            "out": {
+              "state": "string",
+              "operation_id": "string"
+            }
+          },
+          "code_evidence": {
+            "symbol": "app/domain.py::Projects._perform",
+            "ast_hash": "c94e03259fa09ab311c4b187878e3371828f1af4df622d09ddff280f54987612",
+            "origin": "python-ast"
+          }
+        },
+        {
+          "id": "operation_result",
+          "kind": "effect",
+          "label": "事务提交后的实际结果",
+          "summary": "事务提交后的实际结果；只展示实际读取或执行结果。",
+          "source": {
+            "path": "app/domain.py",
+            "symbol": "Projects._perform"
+          },
+          "parent": "transfer_data",
+          "capture": {
+            "in": {
+              "actor": "string",
+              "action": "string"
+            },
+            "out": {
+              "operation_id": "string",
+              "state": "string",
+              "reason": "string",
+              "effect_id": "string",
+              "value_hash": "string"
+            }
+          },
+          "code_evidence": {
+            "symbol": "app/domain.py::Projects._perform",
+            "ast_hash": "c94e03259fa09ab311c4b187878e3371828f1af4df622d09ddff280f54987612",
+            "origin": "python-ast"
+          }
+        },
+        {
+          "id": "function_create_project",
+          "kind": "function",
+          "label": "Projects.create_project",
+          "summary": "核心函数及参数；静态调用与实际事件分别标识。",
+          "source": {
+            "path": "app/domain.py",
+            "symbol": "Projects.create_project"
+          },
+          "parent": "create_project",
+          "capture": {
+            "in": {},
+            "out": {}
+          },
+          "code_evidence": {
+            "symbol": "app/domain.py::Projects.create_project",
+            "ast_hash": "ac5f55ca14d1cc3755ba06b1169a8250274a9725f445fac2f96bc8417f1a2594",
+            "origin": "python-ast"
+          }
+        },
+        {
+          "id": "function_derive_project",
+          "kind": "function",
+          "label": "Projects.derive_project",
+          "summary": "核心函数及参数；静态调用与实际事件分别标识。",
+          "source": {
+            "path": "app/domain.py",
+            "symbol": "Projects.derive_project"
+          },
+          "parent": "derive_project",
+          "capture": {
+            "in": {},
+            "out": {}
+          },
+          "code_evidence": {
+            "symbol": "app/domain.py::Projects.derive_project",
+            "ast_hash": "7e0afdc32a06daad49cab417eb8603f6a6bb896c897f48d2965f5ad66f0bbb53",
+            "origin": "python-ast"
+          }
+        },
+        {
+          "id": "function_configure_relation",
+          "kind": "function",
+          "label": "Projects.configure_relation",
+          "summary": "核心函数及参数；静态调用与实际事件分别标识。",
+          "source": {
+            "path": "app/domain.py",
+            "symbol": "Projects.configure_relation"
+          },
+          "parent": "configure_relation",
+          "capture": {
+            "in": {},
+            "out": {}
+          },
+          "code_evidence": {
+            "symbol": "app/domain.py::Projects.configure_relation",
+            "ast_hash": "aabb8592404942e2873bf134400f75abad199c94abe8c0f3b6d0e0e0c7e410e9",
+            "origin": "python-ast"
+          }
+        },
+        {
+          "id": "function_transfer_data",
+          "kind": "function",
+          "label": "Projects.execute_relation",
+          "summary": "核心函数及参数；静态调用与实际事件分别标识。",
+          "source": {
+            "path": "app/domain.py",
+            "symbol": "Projects.execute_relation"
+          },
+          "parent": "transfer_data",
+          "capture": {
+            "in": {},
+            "out": {}
+          },
+          "code_evidence": {
+            "symbol": "app/domain.py::Projects.execute_relation",
+            "ast_hash": "b67319f8dadc5fe5546cc597105439ad517ec33b98d7a9472509ec64fda40c9b",
+            "origin": "python-ast"
+          }
+        },
+        {
+          "id": "state_checking",
+          "kind": "state",
+          "layer": "state",
+          "value": "checking",
+          "label": "检查中",
+          "summary": "单次同步数据库操作的真实状态；不是项目业务生命周期。",
+          "parent": "transfer_data",
+          "capture": {
+            "in": {},
+            "out": {}
+          }
+        },
+        {
+          "id": "state_completed",
+          "kind": "state",
+          "layer": "state",
+          "value": "completed",
+          "label": "已提交",
+          "summary": "单次同步数据库操作的真实状态；不是项目业务生命周期。",
+          "parent": "transfer_data",
+          "capture": {
+            "in": {},
+            "out": {}
+          }
+        },
+        {
+          "id": "state_rejected",
+          "kind": "state",
+          "layer": "state",
+          "value": "rejected",
+          "label": "已拒绝",
+          "summary": "单次同步数据库操作的真实状态；不是项目业务生命周期。",
+          "parent": "transfer_data",
+          "capture": {
+            "in": {},
+            "out": {}
+          }
+        },
+        {
+          "id": "code.d594fd3f9939fb68",
+          "kind": "function",
+          "layer": "program",
+          "origin": "python-ast",
+          "label": "Projects._perform",
+          "summary": "局部静态调用；是否执行由运行事实确认。",
+          "source": {
+            "path": "app/domain.py",
+            "symbol": "Projects._perform"
+          },
+          "parent": "derive_permission",
+          "capture": {
+            "in": {},
+            "out": {}
+          },
+          "signature": "self, actor, action, work, *, source_id='', target_id='', link_id=''",
+          "code_evidence": {
+            "symbol": "app/domain.py::Projects._perform",
+            "ast_hash": "c94e03259fa09ab311c4b187878e3371828f1af4df622d09ddff280f54987612",
+            "parameters": [
+              {
+                "name": "self",
+                "annotation": null
+              },
+              {
+                "name": "actor",
+                "annotation": null
+              },
+              {
+                "name": "action",
+                "annotation": null
+              },
+              {
+                "name": "work",
+                "annotation": null
+              },
+              {
+                "name": "source_id",
+                "annotation": null
+              },
+              {
+                "name": "target_id",
+                "annotation": null
+              },
+              {
+                "name": "link_id",
+                "annotation": null
+              }
+            ],
+            "returns": null,
+            "origin": "python-ast"
+          }
+        },
+        {
+          "id": "code.86d8141cf20b4631",
+          "kind": "function",
+          "layer": "program",
+          "origin": "python-ast",
+          "label": "permission",
+          "summary": "局部静态调用；是否执行由运行事实确认。",
+          "source": {
+            "path": "app/domain.py",
+            "symbol": "permission"
+          },
+          "parent": "relation_permission",
+          "capture": {
+            "in": {},
+            "out": {}
+          },
+          "signature": "db, actor: str, project: dict, action: str, trace",
+          "code_evidence": {
+            "symbol": "app/domain.py::permission",
+            "ast_hash": "9e6766ad8ce4bd8bbdeed0d8fe6d4da01715ab3920a4465fa5857bff22d256eb",
+            "parameters": [
+              {
+                "name": "db",
+                "annotation": null
+              },
+              {
+                "name": "actor",
+                "annotation": "str"
+              },
+              {
+                "name": "project",
+                "annotation": "dict"
+              },
+              {
+                "name": "action",
+                "annotation": "str"
+              },
+              {
+                "name": "trace",
+                "annotation": null
+              }
+            ],
+            "returns": "bool",
+            "origin": "python-ast"
+          }
+        },
+        {
+          "id": "code.55fddd799bef9f11",
+          "kind": "function",
+          "layer": "program",
+          "origin": "python-ast",
+          "label": "next_state",
+          "summary": "局部静态调用；是否执行由运行事实确认。",
+          "source": {
+            "path": "bo_stategraph/workflow.py",
+            "symbol": "next_state"
+          },
+          "parent": "transfer_effect",
+          "capture": {
+            "in": {},
+            "out": {}
+          },
+          "signature": "state: str, event: str",
+          "code_evidence": {
+            "symbol": "bo_stategraph/workflow.py::next_state",
+            "ast_hash": "229194072372f9c5cc2fa259067f3008f7c6a61cdc6b229c1581bb3c6762dd00",
+            "parameters": [
+              {
+                "name": "state",
+                "annotation": "str"
+              },
+              {
+                "name": "event",
+                "annotation": "str"
+              }
+            ],
+            "returns": "str",
+            "origin": "python-ast"
+          }
+        },
+        {
+          "id": "code.95dc4982c2a5a528",
+          "kind": "function",
+          "layer": "program",
+          "origin": "python-ast",
+          "label": "Projects._perform",
+          "summary": "局部静态调用；是否执行由运行事实确认。",
+          "source": {
+            "path": "app/domain.py",
+            "symbol": "Projects._perform"
+          },
+          "parent": "function_create_project",
+          "capture": {
+            "in": {},
+            "out": {}
+          },
+          "signature": "self, actor, action, work, *, source_id='', target_id='', link_id=''",
+          "code_evidence": {
+            "symbol": "app/domain.py::Projects._perform",
+            "ast_hash": "c94e03259fa09ab311c4b187878e3371828f1af4df622d09ddff280f54987612",
+            "parameters": [
+              {
+                "name": "self",
+                "annotation": null
+              },
+              {
+                "name": "actor",
+                "annotation": null
+              },
+              {
+                "name": "action",
+                "annotation": null
+              },
+              {
+                "name": "work",
+                "annotation": null
+              },
+              {
+                "name": "source_id",
+                "annotation": null
+              },
+              {
+                "name": "target_id",
+                "annotation": null
+              },
+              {
+                "name": "link_id",
+                "annotation": null
+              }
+            ],
+            "returns": null,
+            "origin": "python-ast"
+          }
+        },
+        {
+          "id": "code.5d776df94f321e43",
+          "kind": "function",
+          "layer": "program",
+          "origin": "python-ast",
+          "label": "Projects._perform",
+          "summary": "局部静态调用；是否执行由运行事实确认。",
+          "source": {
+            "path": "app/domain.py",
+            "symbol": "Projects._perform"
+          },
+          "parent": "function_configure_relation",
+          "capture": {
+            "in": {},
+            "out": {}
+          },
+          "signature": "self, actor, action, work, *, source_id='', target_id='', link_id=''",
+          "code_evidence": {
+            "symbol": "app/domain.py::Projects._perform",
+            "ast_hash": "c94e03259fa09ab311c4b187878e3371828f1af4df622d09ddff280f54987612",
+            "parameters": [
+              {
+                "name": "self",
+                "annotation": null
+              },
+              {
+                "name": "actor",
+                "annotation": null
+              },
+              {
+                "name": "action",
+                "annotation": null
+              },
+              {
+                "name": "work",
+                "annotation": null
+              },
+              {
+                "name": "source_id",
+                "annotation": null
+              },
+              {
+                "name": "target_id",
+                "annotation": null
+              },
+              {
+                "name": "link_id",
+                "annotation": null
+              }
+            ],
+            "returns": null,
+            "origin": "python-ast"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "source_to_derivation",
+          "from": "source_project",
+          "to": "derive_project",
+          "type": "data",
+          "label": "same type and source ID; independent contents",
+          "evidence": "confirmed conversation; runtime execution is separately observed"
+        },
+        {
+          "id": "derive_guard",
+          "from": "derive_permission",
+          "to": "derive_project",
+          "type": "guard",
+          "label": "须具备相应权限",
+          "evidence": "confirmed conversation; runtime execution is separately observed"
+        },
+        {
+          "id": "relation_guard",
+          "from": "relation_permission",
+          "to": "configure_relation",
+          "type": "guard",
+          "label": "须具备相应权限",
+          "evidence": "confirmed conversation; runtime execution is separately observed"
+        },
+        {
+          "id": "transfer_guard",
+          "from": "type_port_rules",
+          "to": "transfer_data",
+          "type": "guard",
+          "label": "符合预设类型与端口规则",
+          "evidence": "confirmed conversation; runtime execution is separately observed"
+        },
+        {
+          "id": "execute_guard",
+          "from": "execute_permission",
+          "to": "transfer_data",
+          "type": "guard",
+          "label": "当前两端 connect 同时满足",
+          "evidence": "confirmed conversation; runtime execution is separately observed"
+        },
+        {
+          "id": "connection_type_guard",
+          "from": "type_port_rules",
+          "to": "configure_relation",
+          "type": "guard",
+          "label": "连接需满足固定类型和端口规则",
+          "evidence": "confirmed conversation; runtime execution is separately observed"
+        },
+        {
+          "id": "create_effect",
+          "from": "create_project",
+          "to": "project_created",
+          "type": "flow",
+          "label": "创建得到项目",
+          "evidence": "confirmed conversation; runtime execution is separately observed"
+        },
+        {
+          "id": "derive_effect",
+          "from": "derive_project",
+          "to": "project_derived",
+          "type": "flow",
+          "label": "派生得到新项目",
+          "evidence": "confirmed conversation; runtime execution is separately observed"
+        },
+        {
+          "id": "configure_effect",
+          "from": "configure_relation",
+          "to": "relation_configured",
+          "type": "flow",
+          "label": "配置项目间关系",
+          "evidence": "confirmed conversation; runtime execution is separately observed"
+        },
+        {
+          "id": "relation_for_transfer",
+          "from": "relation_configured",
+          "to": "transfer_data",
+          "type": "data",
+          "label": "指定项目间流转关系",
+          "evidence": "confirmed conversation; runtime execution is separately observed"
+        },
+        {
+          "id": "transfer_result",
+          "from": "transfer_data",
+          "to": "transfer_effect",
+          "type": "flow",
+          "label": "copy current JSON into target input",
+          "evidence": "confirmed conversation; runtime execution is separately observed"
+        },
+        {
+          "id": "independent_project_connection",
+          "from": "project_created",
+          "to": "configure_relation",
+          "type": "data",
+          "label": "独立创建的项目也可连接",
+          "evidence": "confirmed conversation; runtime execution is separately observed"
+        },
+        {
+          "id": "contains:source_project",
+          "from": "derive_project",
+          "to": "source_project",
+          "type": "contains",
+          "label": "展开",
+          "evidence": "authored grouping; stable identities"
+        },
+        {
+          "id": "contains:derive_permission",
+          "from": "derive_project",
+          "to": "derive_permission",
+          "type": "contains",
+          "label": "展开",
+          "evidence": "authored grouping; stable identities"
+        },
+        {
+          "id": "contains:relation_permission",
+          "from": "configure_relation",
+          "to": "relation_permission",
+          "type": "contains",
+          "label": "展开",
+          "evidence": "authored grouping; stable identities"
+        },
+        {
+          "id": "contains:type_port_rules",
+          "from": "transfer_data",
+          "to": "type_port_rules",
+          "type": "contains",
+          "label": "展开",
+          "evidence": "authored grouping; stable identities"
+        },
+        {
+          "id": "contains:execute_permission",
+          "from": "transfer_data",
+          "to": "execute_permission",
+          "type": "contains",
+          "label": "展开",
+          "evidence": "authored grouping; stable identities"
+        },
+        {
+          "id": "contains:project_created",
+          "from": "create_project",
+          "to": "project_created",
+          "type": "contains",
+          "label": "展开",
+          "evidence": "authored grouping; stable identities"
+        },
+        {
+          "id": "contains:project_derived",
+          "from": "derive_project",
+          "to": "project_derived",
+          "type": "contains",
+          "label": "展开",
+          "evidence": "authored grouping; stable identities"
+        },
+        {
+          "id": "contains:relation_configured",
+          "from": "configure_relation",
+          "to": "relation_configured",
+          "type": "contains",
+          "label": "展开",
+          "evidence": "authored grouping; stable identities"
+        },
+        {
+          "id": "contains:transfer_effect",
+          "from": "transfer_data",
+          "to": "transfer_effect",
+          "type": "contains",
+          "label": "展开",
+          "evidence": "authored grouping; stable identities"
+        },
+        {
+          "id": "contains:permission_fact",
+          "from": "execute_permission",
+          "to": "permission_fact",
+          "type": "contains",
+          "label": "展开",
+          "evidence": "authored grouping; stable identities"
+        },
+        {
+          "id": "contains:operation_checking",
+          "from": "transfer_data",
+          "to": "operation_checking",
+          "type": "contains",
+          "label": "展开",
+          "evidence": "authored grouping; stable identities"
+        },
+        {
+          "id": "contains:operation_result",
+          "from": "transfer_data",
+          "to": "operation_result",
+          "type": "contains",
+          "label": "展开",
+          "evidence": "authored grouping; stable identities"
+        },
+        {
+          "id": "contains:function_create_project",
+          "from": "create_project",
+          "to": "function_create_project",
+          "type": "contains",
+          "label": "展开",
+          "evidence": "authored grouping; stable identities"
+        },
+        {
+          "id": "contains:function_derive_project",
+          "from": "derive_project",
+          "to": "function_derive_project",
+          "type": "contains",
+          "label": "展开",
+          "evidence": "authored grouping; stable identities"
+        },
+        {
+          "id": "contains:function_configure_relation",
+          "from": "configure_relation",
+          "to": "function_configure_relation",
+          "type": "contains",
+          "label": "展开",
+          "evidence": "authored grouping; stable identities"
+        },
+        {
+          "id": "contains:function_transfer_data",
+          "from": "transfer_data",
+          "to": "function_transfer_data",
+          "type": "contains",
+          "label": "展开",
+          "evidence": "authored grouping; stable identities"
+        },
+        {
+          "id": "contains:state_checking",
+          "from": "transfer_data",
+          "to": "state_checking",
+          "type": "contains",
+          "label": "展开",
+          "evidence": "authored grouping; stable identities"
+        },
+        {
+          "id": "contains:state_completed",
+          "from": "transfer_data",
+          "to": "state_completed",
+          "type": "contains",
+          "label": "展开",
+          "evidence": "authored grouping; stable identities"
+        },
+        {
+          "id": "contains:state_rejected",
+          "from": "transfer_data",
+          "to": "state_rejected",
+          "type": "contains",
+          "label": "展开",
+          "evidence": "authored grouping; stable identities"
+        },
+        {
+          "id": "contains.code.d594fd3f9939fb68",
+          "from": "derive_permission",
+          "to": "code.d594fd3f9939fb68",
+          "type": "contains",
+          "label": "局部函数",
+          "origin": "python-ast",
+          "evidence": "business-map anchor + Python AST call"
+        },
+        {
+          "id": "call.8bc6d70b8a2848d4",
+          "from": "derive_permission",
+          "to": "code.d594fd3f9939fb68",
+          "type": "flow",
+          "label": "静态调用 self._perform",
+          "origin": "python-ast",
+          "evidence": "python-ast syntactic reference",
+          "callsite": {
+            "line": 146,
+            "column": 15,
+            "args": [
+              "actor",
+              "'derive'",
+              "work"
+            ],
+            "keywords": {
+              "source_id": "source_id"
+            }
+          }
+        },
+        {
+          "id": "contains.code.86d8141cf20b4631",
+          "from": "relation_permission",
+          "to": "code.86d8141cf20b4631",
+          "type": "contains",
+          "label": "局部函数",
+          "origin": "python-ast",
+          "evidence": "business-map anchor + Python AST call"
+        },
+        {
+          "id": "call.d991f7af9b36c64d",
+          "from": "relation_permission",
+          "to": "code.86d8141cf20b4631",
+          "type": "flow",
+          "label": "静态调用 permission",
+          "origin": "python-ast",
+          "evidence": "python-ast syntactic reference",
+          "callsite": {
+            "line": 32,
+            "column": 21,
+            "args": [
+              "db",
+              "actor",
+              "source",
+              "'connect'",
+              "trace"
+            ],
+            "keywords": {}
+          }
+        },
+        {
+          "id": "call.52e8383090094d06",
+          "from": "relation_permission",
+          "to": "code.86d8141cf20b4631",
+          "type": "flow",
+          "label": "静态调用 permission",
+          "origin": "python-ast",
+          "evidence": "python-ast syntactic reference",
+          "callsite": {
+            "line": 33,
+            "column": 21,
+            "args": [
+              "db",
+              "actor",
+              "target",
+              "'connect'",
+              "trace"
+            ],
+            "keywords": {}
+          }
+        },
+        {
+          "id": "call.4fd720f9933f3c01",
+          "from": "execute_permission",
+          "to": "permission_fact",
+          "type": "flow",
+          "label": "静态调用 permission",
+          "origin": "python-ast",
+          "evidence": "python-ast syntactic reference",
+          "callsite": {
+            "line": 32,
+            "column": 21,
+            "args": [
+              "db",
+              "actor",
+              "source",
+              "'connect'",
+              "trace"
+            ],
+            "keywords": {}
+          }
+        },
+        {
+          "id": "call.6d3f0cc6976ecdd4",
+          "from": "execute_permission",
+          "to": "permission_fact",
+          "type": "flow",
+          "label": "静态调用 permission",
+          "origin": "python-ast",
+          "evidence": "python-ast syntactic reference",
+          "callsite": {
+            "line": 33,
+            "column": 21,
+            "args": [
+              "db",
+              "actor",
+              "target",
+              "'connect'",
+              "trace"
+            ],
+            "keywords": {}
+          }
+        },
+        {
+          "id": "contains.code.55fddd799bef9f11",
+          "from": "transfer_effect",
+          "to": "code.55fddd799bef9f11",
+          "type": "contains",
+          "label": "局部函数",
+          "origin": "python-ast",
+          "evidence": "business-map anchor + Python AST call"
+        },
+        {
+          "id": "call.2db69efef4f97677",
+          "from": "transfer_effect",
+          "to": "code.55fddd799bef9f11",
+          "type": "flow",
+          "label": "静态调用 next_state",
+          "origin": "python-ast",
+          "evidence": "python-ast syntactic reference",
+          "callsite": {
+            "line": 96,
+            "column": 24,
+            "args": [
+              "'checking'",
+              "'commit'"
+            ],
+            "keywords": {}
+          }
+        },
+        {
+          "id": "call.81e14567321608fd",
+          "from": "transfer_effect",
+          "to": "code.55fddd799bef9f11",
+          "type": "flow",
+          "label": "静态调用 next_state",
+          "origin": "python-ast",
+          "evidence": "python-ast syntactic reference",
+          "callsite": {
+            "line": 101,
+            "column": 24,
+            "args": [
+              "'checking'",
+              "'reject'"
+            ],
+            "keywords": {}
+          }
+        },
+        {
+          "id": "call.d1e26b0a5737a1bd",
+          "from": "operation_checking",
+          "to": "code.55fddd799bef9f11",
+          "type": "flow",
+          "label": "静态调用 next_state",
+          "origin": "python-ast",
+          "evidence": "python-ast syntactic reference",
+          "callsite": {
+            "line": 96,
+            "column": 24,
+            "args": [
+              "'checking'",
+              "'commit'"
+            ],
+            "keywords": {}
+          }
+        },
+        {
+          "id": "call.52c2714a53847baa",
+          "from": "operation_checking",
+          "to": "code.55fddd799bef9f11",
+          "type": "flow",
+          "label": "静态调用 next_state",
+          "origin": "python-ast",
+          "evidence": "python-ast syntactic reference",
+          "callsite": {
+            "line": 101,
+            "column": 24,
+            "args": [
+              "'checking'",
+              "'reject'"
+            ],
+            "keywords": {}
+          }
+        },
+        {
+          "id": "call.272bc6f3dd301d17",
+          "from": "operation_result",
+          "to": "code.55fddd799bef9f11",
+          "type": "flow",
+          "label": "静态调用 next_state",
+          "origin": "python-ast",
+          "evidence": "python-ast syntactic reference",
+          "callsite": {
+            "line": 96,
+            "column": 24,
+            "args": [
+              "'checking'",
+              "'commit'"
+            ],
+            "keywords": {}
+          }
+        },
+        {
+          "id": "call.7a85d4719c1d5792",
+          "from": "operation_result",
+          "to": "code.55fddd799bef9f11",
+          "type": "flow",
+          "label": "静态调用 next_state",
+          "origin": "python-ast",
+          "evidence": "python-ast syntactic reference",
+          "callsite": {
+            "line": 101,
+            "column": 24,
+            "args": [
+              "'checking'",
+              "'reject'"
+            ],
+            "keywords": {}
+          }
+        },
+        {
+          "id": "contains.code.95dc4982c2a5a528",
+          "from": "function_create_project",
+          "to": "code.95dc4982c2a5a528",
+          "type": "contains",
+          "label": "局部函数",
+          "origin": "python-ast",
+          "evidence": "business-map anchor + Python AST call"
+        },
+        {
+          "id": "call.9ac12047c6266287",
+          "from": "function_create_project",
+          "to": "code.95dc4982c2a5a528",
+          "type": "flow",
+          "label": "静态调用 self._perform",
+          "origin": "python-ast",
+          "evidence": "python-ast syntactic reference",
+          "callsite": {
+            "line": 128,
+            "column": 15,
+            "args": [
+              "actor",
+              "'create'",
+              "work"
+            ],
+            "keywords": {}
+          }
+        },
+        {
+          "id": "call.d15693e24ec338ff",
+          "from": "function_derive_project",
+          "to": "code.d594fd3f9939fb68",
+          "type": "flow",
+          "label": "静态调用 self._perform",
+          "origin": "python-ast",
+          "evidence": "python-ast syntactic reference",
+          "callsite": {
+            "line": 146,
+            "column": 15,
+            "args": [
+              "actor",
+              "'derive'",
+              "work"
+            ],
+            "keywords": {
+              "source_id": "source_id"
+            }
+          }
+        },
+        {
+          "id": "contains.code.5d776df94f321e43",
+          "from": "function_configure_relation",
+          "to": "code.5d776df94f321e43",
+          "type": "contains",
+          "label": "局部函数",
+          "origin": "python-ast",
+          "evidence": "business-map anchor + Python AST call"
+        },
+        {
+          "id": "call.6f1b874109e6283c",
+          "from": "function_configure_relation",
+          "to": "code.5d776df94f321e43",
+          "type": "flow",
+          "label": "静态调用 self._perform",
+          "origin": "python-ast",
+          "evidence": "python-ast syntactic reference",
+          "callsite": {
+            "line": 161,
+            "column": 15,
+            "args": [
+              "actor",
+              "'connect'",
+              "work"
+            ],
+            "keywords": {
+              "source_id": "source_id",
+              "target_id": "target_id"
+            }
+          }
+        },
+        {
+          "id": "call.a788e441c8be90e8",
+          "from": "function_transfer_data",
+          "to": "transfer_effect",
+          "type": "flow",
+          "label": "静态调用 self._perform",
+          "origin": "python-ast",
+          "evidence": "python-ast syntactic reference",
+          "callsite": {
+            "line": 191,
+            "column": 15,
+            "args": [
+              "actor",
+              "'execute'",
+              "work"
+            ],
+            "keywords": {
+              "link_id": "link_id"
+            }
+          }
+        }
+      ],
+      "overview": [
+        {
+          "node": "create_project",
+          "x": 0,
+          "y": 100
+        },
+        {
+          "node": "derive_project",
+          "x": 280,
+          "y": 100
+        },
+        {
+          "node": "configure_relation",
+          "x": 560,
+          "y": 100
+        },
+        {
+          "node": "transfer_data",
+          "x": 840,
+          "y": 100
+        }
+      ],
+      "graph_roots": [
+        "create_project",
+        "derive_project",
+        "configure_relation",
+        "transfer_data"
+      ],
+      "machine": {
+        "engine": "python.explicit",
+        "version": "1",
+        "state_type": "OperationState",
+        "states": [
+          "checking",
+          "completed",
+          "rejected"
+        ],
+        "values": [
+          "checking",
+          "completed",
+          "rejected"
+        ],
+        "labels": {
+          "checking": "检查中",
+          "completed": "已提交",
+          "rejected": "已拒绝"
+        },
+        "initial": "checking",
+        "context": {
+          "actor": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          },
+          "source_id": {
+            "type": "string"
+          },
+          "target_id": {
+            "type": "string"
+          },
+          "link_id": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "effect_id": {
+            "type": "string"
+          },
+          "value_hash": {
+            "type": "string"
+          }
+        },
+        "events": {
+          "commit": {
+            "payload": {}
+          },
+          "reject": {
+            "payload": {}
+          }
+        },
+        "guards": {},
+        "transitions": [
+          {
+            "source": "checking",
+            "trigger": "commit",
+            "dest": "completed"
+          },
+          {
+            "source": "checking",
+            "trigger": "reject",
+            "dest": "rejected"
+          }
+        ]
+      },
+      "presentation": {
+        "subject": "项目派生与数据流转",
+        "context_fields": [
+          {
+            "key": "actor",
+            "label": "actor"
+          },
+          {
+            "key": "action",
+            "label": "action"
+          },
+          {
+            "key": "source_id",
+            "label": "source_id"
+          },
+          {
+            "key": "target_id",
+            "label": "target_id"
+          },
+          {
+            "key": "link_id",
+            "label": "link_id"
+          },
+          {
+            "key": "reason",
+            "label": "reason"
+          },
+          {
+            "key": "effect_id",
+            "label": "effect_id"
+          },
+          {
+            "key": "value_hash",
+            "label": "value_hash"
+          }
+        ],
+        "recording": {
+          "parameters": [
+            "actor",
+            "action",
+            "source_id",
+            "target_id",
+            "link_id",
+            "reason",
+            "effect_id",
+            "value_hash"
+          ]
+        }
+      },
+      "scope": {
+        "unknowns": [
+          "演示用户切换不提供生产认证。",
+          "同步事务无业务等待、取消或自动恢复。",
+          "JSON 正文不作语义校验；图只保存长度受限的演示值预览和散列。",
+          "未采集所有局部变量和外部动态调用。",
+          "操作日志可查询全部实例；有界事件历史可能过期，不据此补造中间状态。"
+        ]
+      },
+      "static_structure": {
+        "files": {
+          "app/__init__.py": "5af4f590235aed9faae5d6b06ec8362046099123b59feb4a5de4000abae28bf6",
+          "app/domain.py": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745",
+          "app/ports.py": "05a613bab8d79b46eda1c5eb0e62eb5e0d11fbbb08ed5606d109f1a3da70ffe4",
+          "app/store.py": "cdb5387033173c5a6891d53482cbaeadd0fb882a45fdf9d7bb33ec96365f357c",
+          "bo_stategraph/query.py": "7f97cfa5742e16f418618028a9d4bb80854e6a72b58867fd37c8c716b343abf2",
+          "bo_stategraph/workflow.py": "9d06567642ebd5ec6e34a3fd5d71c3f88ad1790068497f19912ebbe9dbfddde3",
+          "integrations/__init__.py": "f45cffd99b0081cef3ea20dc83ddd565b9a831de1ac8b6d9cbf9087ab2aae42e",
+          "integrations/bo_adapter.py": "b584a00d7a2fa02f6d5ae2cea5296bd00f3d4c2542cd879b6a71af5617ddbb73",
+          "integrations/bo_server.py": "3e771dc43c12501f06d2042bbac91f9cfa03534b8bc001da0a7ba3d0f6f8ed8f",
+          "server.py": "bd08644336dfca9281b97cb7b01fa0df0304c34dff3801d0eee6008f8fccf64e"
+        },
+        "resolved_calls": 76,
+        "unresolved_calls": 197,
+        "depth": 1,
+        "limits": [
+          "Syntactic call candidates, not executed calls or proven data flow.",
+          "Reflection, decorators, inherited/overridden dispatch, callbacks and local instance aliases may remain unresolved.",
+          "Only explicitly selected Python files; no automatic discovery of every new entry point."
+        ]
+      }
+    },
+    "manifest": {
+      "schema_version": 3,
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "files": {
+        "app/__init__.py": "5af4f590235aed9faae5d6b06ec8362046099123b59feb4a5de4000abae28bf6",
+        "app/domain.py": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745",
+        "app/ports.py": "05a613bab8d79b46eda1c5eb0e62eb5e0d11fbbb08ed5606d109f1a3da70ffe4",
+        "app/store.py": "cdb5387033173c5a6891d53482cbaeadd0fb882a45fdf9d7bb33ec96365f357c",
+        "bo_stategraph/query.py": "7f97cfa5742e16f418618028a9d4bb80854e6a72b58867fd37c8c716b343abf2",
+        "bo_stategraph/workflow.py": "9d06567642ebd5ec6e34a3fd5d71c3f88ad1790068497f19912ebbe9dbfddde3",
+        "integrations/__init__.py": "f45cffd99b0081cef3ea20dc83ddd565b9a831de1ac8b6d9cbf9087ab2aae42e",
+        "integrations/bo_adapter.py": "b584a00d7a2fa02f6d5ae2cea5296bd00f3d4c2542cd879b6a71af5617ddbb73",
+        "integrations/bo_server.py": "3e771dc43c12501f06d2042bbac91f9cfa03534b8bc001da0a7ba3d0f6f8ed8f",
+        "server.py": "bd08644336dfca9281b97cb7b01fa0df0304c34dff3801d0eee6008f8fccf64e",
+        "static/app.css": "ac70577c2d8496ba4dd7b4a19bd8675615696f407c424f9d84a16d1508617596",
+        "static/app.html": "6a4d3dfcb3784764e355c6df3fa94874017caf4dbc7b208a9ae63f2d53011c2c",
+        "static/app.js": "a9e64338b819578b77f158b9b8b7809f11c5eb12eed0bfeeeef54a3a845d6f16"
+      },
+      "model_hash": "f82e99bd820cceb5ff3f68eb66c97ecedb40b281a7d20ecd5a4dc8f0147a540c",
+      "intent_hash": "07622b60374f93b68584dba1ad8a66e81c5ec27991f8e76b1697d9d76e59e1af",
+      "model_revision": "1",
+      "bindings": {
+        "create_project": {
+          "path": "app/domain.py",
+          "symbol": "Projects.create_project",
+          "line": 116,
+          "end_line": 128,
+          "signature": "self, actor: str, name: str, project_type: str",
+          "ast_sha256": "ac5f55ca14d1cc3755ba06b1169a8250274a9725f445fac2f96bc8417f1a2594",
+          "snippet": "    def create_project(self, actor: str, name: str, project_type: str) -> dict:\n        def work(db, trace, context):\n            if project_type not in TYPES:\n                raise Rejected('unknown_type')\n            if not isinstance(name,str) or not name.strip():\n                raise Rejected('name_required')\n            ident = uuid.uuid4().hex[:12]\n            db.execute('INSERT INTO projects VALUES(?,?,?,?,NULL)', (ident,name.strip(),project_type,actor))\n            context['target_id'] = ident\n            trace.bo_emit('create_project','return',lambda:{'inputs':{'actor':actor,'name':name,'type':project_type},\n                          'outputs':{'project_id':ident,'owner':actor,'type':project_type}})\n            return dict(project_id=ident)\n        return self._perform(actor,'create',work)",
+          "calls": [
+            "Rejected",
+            "db.execute",
+            "dict",
+            "isinstance",
+            "name.strip",
+            "self._perform",
+            "trace.bo_emit",
+            "uuid.uuid4"
+          ],
+          "guards": [
+            {
+              "line": 118,
+              "expression": "project_type not in TYPES"
+            },
+            {
+              "line": 120,
+              "expression": "not isinstance(name, str) or not name.strip()"
+            }
+          ],
+          "file_sha256": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745"
+        },
+        "derive_project": {
+          "path": "app/domain.py",
+          "symbol": "Projects.derive_project",
+          "line": 130,
+          "end_line": 146,
+          "signature": "self, actor: str, source_id: str, name: str",
+          "ast_sha256": "7e0afdc32a06daad49cab417eb8603f6a6bb896c897f48d2965f5ad66f0bbb53",
+          "snippet": "    def derive_project(self, actor: str, source_id: str, name: str) -> dict:\n        def work(db, trace, context):\n            source = self._project(db, source_id, trace)\n            allowed = permission(db,actor,source,'derive',trace)\n            trace.bo_emit('derive_permission','decision',lambda:{'inputs':{'actor':actor,'source_id':source_id},'outputs':{'allowed':allowed}})\n            if not allowed:\n                raise Rejected('derive_denied')\n            if not isinstance(name,str) or not name.strip():\n                raise Rejected('name_required')\n            ident = uuid.uuid4().hex[:12]\n            # Inserting only a project row deliberately copies no grants, links or values.\n            db.execute('INSERT INTO projects VALUES(?,?,?,?,?)',(ident,name.strip(),source['type'],actor,source_id))\n            context['target_id'] = ident\n            trace.bo_emit('derive_project','return',lambda:{'inputs':{'actor':actor,'source_id':source_id},\n                          'outputs':{'project_id':ident,'owner':actor,'type':source['type'],'source_id':source_id}})\n            return dict(project_id=ident)\n        return self._perform(actor,'derive',work,source_id=source_id)",
+          "calls": [
+            "Rejected",
+            "db.execute",
+            "dict",
+            "isinstance",
+            "name.strip",
+            "permission",
+            "self._perform",
+            "self._project",
+            "trace.bo_emit",
+            "uuid.uuid4"
+          ],
+          "guards": [
+            {
+              "line": 135,
+              "expression": "not allowed"
+            },
+            {
+              "line": 137,
+              "expression": "not isinstance(name, str) or not name.strip()"
+            }
+          ],
+          "file_sha256": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745"
+        },
+        "configure_relation": {
+          "path": "app/domain.py",
+          "symbol": "Projects.configure_relation",
+          "line": 148,
+          "end_line": 161,
+          "signature": "self, actor: str, source_id: str, source_port: str, target_id: str, target_port: str",
+          "ast_sha256": "aabb8592404942e2873bf134400f75abad199c94abe8c0f3b6d0e0e0c7e410e9",
+          "snippet": "    def configure_relation(self, actor: str, source_id: str, source_port: str, target_id: str, target_port: str) -> dict:\n        def work(db, trace, context):\n            source, target = self._project(db,source_id,trace), self._project(db,target_id,trace)\n            if not check_connect(db,actor,source,target,trace):\n                raise Rejected('connect_denied')\n            if not check_path(db,source,source_port,target,target_port,trace):\n                raise Rejected('invalid_path')\n            ident = uuid.uuid4().hex[:12]\n            db.execute('INSERT INTO links VALUES(?,?,?,?,?,?)',(ident,source_id,source_port,target_id,target_port,actor))\n            context['link_id'] = ident\n            trace.bo_emit('configure_relation','return',lambda:{'inputs':{'actor':actor,'source_id':source_id,'target_id':target_id,\n                          'source_port':source_port,'target_port':target_port},'outputs':{'link_id':ident}})\n            return dict(link_id=ident)\n        return self._perform(actor,'connect',work,source_id=source_id,target_id=target_id)",
+          "calls": [
+            "Rejected",
+            "check_connect",
+            "check_path",
+            "db.execute",
+            "dict",
+            "self._perform",
+            "self._project",
+            "trace.bo_emit",
+            "uuid.uuid4"
+          ],
+          "guards": [
+            {
+              "line": 151,
+              "expression": "not check_connect(db, actor, source, target, trace)"
+            },
+            {
+              "line": 153,
+              "expression": "not check_path(db, source, source_port, target, target_port, trace)"
+            }
+          ],
+          "file_sha256": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745"
+        },
+        "transfer_data": {
+          "path": "app/domain.py",
+          "symbol": "Projects.execute_relation",
+          "line": 163,
+          "end_line": 191,
+          "signature": "self, actor: str, link_id: str",
+          "ast_sha256": "b67319f8dadc5fe5546cc597105439ad517ec33b98d7a9472509ec64fda40c9b",
+          "snippet": "    def execute_relation(self, actor: str, link_id: str) -> dict:\n        def work(db, trace, context):\n            row = db.execute('SELECT * FROM links WHERE id=?',(link_id,)).fetchone()\n            if row is None:\n                raise Rejected('link_not_found')\n            link = dict(row)\n            context.update(source_id=link['source_id'], target_id=link['target_id'])\n            source = self._project(db,link['source_id'],trace)\n            target = self._project(db,link['target_id'],trace)\n            if not check_connect(db,actor,source,target,trace,executing=True):\n                raise Rejected('connect_denied')\n            if not check_path(db,source,link['source_port'],target,link['target_port'],trace):\n                raise Rejected('invalid_path')\n            value = db.execute('SELECT value_json,revision FROM port_values WHERE project_id=? AND port=? AND direction=?',\n                               (source['id'],link['source_port'],'out')).fetchone()\n            if value is None:\n                raise Rejected('no_source_value')\n            raw = value['value_json']\n            before = db.execute('SELECT value_json FROM port_values WHERE project_id=? AND port=? AND direction=?',\n                                (target['id'],link['target_port'],'in')).fetchone()\n            old = before['value_json'] if before else None\n            context['value_hash'] = value_digest(raw)\n            trace.bo_emit('transfer_data','return',lambda:{'inputs':{'actor':actor,'link_id':link_id,'source_id':source['id'],\n                          'target_id':target['id'],'source_revision':value['revision'],'value_hash':context['value_hash']},\n                          'outputs':{'before':old[:180] if old is not None else '(absent)','after':raw[:180],'value_hash':context['value_hash']}})\n            db.execute('INSERT INTO port_values VALUES(?,?,?,?,1) ON CONFLICT(project_id,port,direction) DO UPDATE SET value_json=excluded.value_json,revision=port_values.revision+1',\n                       (target['id'],link['target_port'],'in',raw))\n            return dict(link_id=link_id,before_preview=old[:180] if old is not None else '(absent)',after_preview=raw[:180])\n        return self._perform(actor,'execute',work,link_id=link_id)",
+          "calls": [
+            "Rejected",
+            "check_connect",
+            "check_path",
+            "context.update",
+            "db.execute",
+            "db.execute('SELECT * FROM links WHERE id=?', (link_id,)).fetchone",
+            "db.execute('SELECT value_json FROM port_values WHERE project_id=? AND port=? AND direction=?', (target['id'], link['target_port'], 'in')).fetchone",
+            "db.execute('SELECT value_json,revision FROM port_values WHERE project_id=? AND port=? AND direction=?', (source['id'], link['source_port'], 'out')).fetchone",
+            "dict",
+            "self._perform",
+            "self._project",
+            "trace.bo_emit",
+            "value_digest"
+          ],
+          "guards": [
+            {
+              "line": 166,
+              "expression": "row is None"
+            },
+            {
+              "line": 172,
+              "expression": "not check_connect(db, actor, source, target, trace, executing=True)"
+            },
+            {
+              "line": 174,
+              "expression": "not check_path(db, source, link['source_port'], target, link['target_port'], trace)"
+            },
+            {
+              "line": 178,
+              "expression": "value is None"
+            },
+            {
+              "line": 183,
+              "expression": "before"
+            },
+            {
+              "line": 190,
+              "expression": "old is not None"
+            },
+            {
+              "line": 187,
+              "expression": "old is not None"
+            }
+          ],
+          "file_sha256": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745"
+        },
+        "source_project": {
+          "path": "app/domain.py",
+          "symbol": "Projects._project",
+          "line": 71,
+          "end_line": 78,
+          "signature": "self, db, ident: str, trace",
+          "ast_sha256": "97b703c1962f97bc4a1254583459e8bd740ddbb985f8f30f9e0c2c7b15383731",
+          "snippet": "    def _project(self, db, ident: str, trace) -> dict:\n        row = db.execute('SELECT * FROM projects WHERE id=?', (ident,)).fetchone()\n        if row is None:\n            raise Rejected('project_not_found')\n        project = dict(row)\n        trace.bo_emit('source_project', 'read', lambda: {'inputs': {'project_id':ident},\n                      'outputs': {'project_id':ident, 'type':project['type'], 'owner':project['owner'], 'source_id':project['source_id']}})\n        return project",
+          "calls": [
+            "Rejected",
+            "db.execute",
+            "db.execute('SELECT * FROM projects WHERE id=?', (ident,)).fetchone",
+            "dict",
+            "trace.bo_emit"
+          ],
+          "guards": [
+            {
+              "line": 73,
+              "expression": "row is None"
+            }
+          ],
+          "file_sha256": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745"
+        },
+        "derive_permission": {
+          "path": "app/domain.py",
+          "symbol": "Projects.derive_project",
+          "line": 130,
+          "end_line": 146,
+          "signature": "self, actor: str, source_id: str, name: str",
+          "ast_sha256": "7e0afdc32a06daad49cab417eb8603f6a6bb896c897f48d2965f5ad66f0bbb53",
+          "snippet": "    def derive_project(self, actor: str, source_id: str, name: str) -> dict:\n        def work(db, trace, context):\n            source = self._project(db, source_id, trace)\n            allowed = permission(db,actor,source,'derive',trace)\n            trace.bo_emit('derive_permission','decision',lambda:{'inputs':{'actor':actor,'source_id':source_id},'outputs':{'allowed':allowed}})\n            if not allowed:\n                raise Rejected('derive_denied')\n            if not isinstance(name,str) or not name.strip():\n                raise Rejected('name_required')\n            ident = uuid.uuid4().hex[:12]\n            # Inserting only a project row deliberately copies no grants, links or values.\n            db.execute('INSERT INTO projects VALUES(?,?,?,?,?)',(ident,name.strip(),source['type'],actor,source_id))\n            context['target_id'] = ident\n            trace.bo_emit('derive_project','return',lambda:{'inputs':{'actor':actor,'source_id':source_id},\n                          'outputs':{'project_id':ident,'owner':actor,'type':source['type'],'source_id':source_id}})\n            return dict(project_id=ident)\n        return self._perform(actor,'derive',work,source_id=source_id)",
+          "calls": [
+            "Rejected",
+            "db.execute",
+            "dict",
+            "isinstance",
+            "name.strip",
+            "permission",
+            "self._perform",
+            "self._project",
+            "trace.bo_emit",
+            "uuid.uuid4"
+          ],
+          "guards": [
+            {
+              "line": 135,
+              "expression": "not allowed"
+            },
+            {
+              "line": 137,
+              "expression": "not isinstance(name, str) or not name.strip()"
+            }
+          ],
+          "file_sha256": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745"
+        },
+        "relation_permission": {
+          "path": "app/domain.py",
+          "symbol": "check_connect",
+          "line": 31,
+          "end_line": 41,
+          "signature": "db, actor: str, source: dict, target: dict, trace, *, executing=False",
+          "ast_sha256": "6c02bbae65c1c116d7f186e488c38c6f664cd098eb7a946a570f2f95bcb6077e",
+          "snippet": "def check_connect(db, actor: str, source: dict, target: dict, trace, *, executing=False) -> bool:\n    source_allowed = permission(db, actor, source, 'connect', trace)\n    target_allowed = permission(db, actor, target, 'connect', trace)\n    allowed = source_allowed and target_allowed\n    builder = lambda: {'inputs': {'actor': actor, 'source_id': source['id'], 'target_id': target['id']},\n                       'outputs': {'source_allowed': source_allowed, 'target_allowed': target_allowed, 'allowed': allowed}}\n    if executing:\n        trace.bo_emit('execute_permission', 'decision', builder)\n    else:\n        trace.bo_emit('relation_permission', 'decision', builder)\n    return allowed",
+          "calls": [
+            "permission",
+            "trace.bo_emit"
+          ],
+          "guards": [
+            {
+              "line": 37,
+              "expression": "executing"
+            }
+          ],
+          "file_sha256": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745"
+        },
+        "type_port_rules": {
+          "path": "app/domain.py",
+          "symbol": "check_path",
+          "line": 44,
+          "end_line": 62,
+          "signature": "db, source: dict, source_port: str, target: dict, target_port: str, trace",
+          "ast_sha256": "ffaf41c022988d3bb5f464d6d2f62b1572e5b1f1cdf47d9e731772acdf741583",
+          "snippet": "def check_path(db, source: dict, source_port: str, target: dict, target_port: str, trace) -> bool:\n    # Read current rules inside the same transaction as the eventual write.\n    out_port = db.execute('SELECT * FROM ports WHERE project_type=? AND name=? AND direction=?',\n                          (source['type'], source_port, 'out')).fetchone()\n    in_port = db.execute('SELECT * FROM ports WHERE project_type=? AND name=? AND direction=?',\n                         (target['type'], target_port, 'in')).fetchone()\n    type_ok = db.execute('SELECT 1 FROM type_edges WHERE source_type=? AND target_type=?',\n                         (source['type'], target['type'])).fetchone() is not None\n    source_exists, target_exists = out_port is not None, in_port is not None\n    source_format = out_port['format'] if out_port else ''\n    target_format = in_port['format'] if in_port else ''\n    format_ok = source_exists and target_exists and source_format == target_format\n    allowed = type_ok and source_exists and target_exists and format_ok\n    trace.bo_emit('type_port_rules', 'decision', lambda: {\n        'inputs': {'source_type':source['type'], 'target_type':target['type'], 'source_port':source_port,\n                   'target_port':target_port, 'source_format':source_format, 'target_format':target_format},\n        'outputs': {'type_ok':type_ok, 'source_output_exists':source_exists, 'target_input_exists':target_exists,\n                    'format_ok':format_ok, 'allowed':allowed}})\n    return allowed",
+          "calls": [
+            "db.execute",
+            "db.execute('SELECT * FROM ports WHERE project_type=? AND name=? AND direction=?', (source['type'], source_port, 'out')).fetchone",
+            "db.execute('SELECT * FROM ports WHERE project_type=? AND name=? AND direction=?', (target['type'], target_port, 'in')).fetchone",
+            "db.execute('SELECT 1 FROM type_edges WHERE source_type=? AND target_type=?', (source['type'], target['type'])).fetchone",
+            "trace.bo_emit"
+          ],
+          "guards": [
+            {
+              "line": 53,
+              "expression": "out_port"
+            },
+            {
+              "line": 54,
+              "expression": "in_port"
+            }
+          ],
+          "file_sha256": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745"
+        },
+        "execute_permission": {
+          "path": "app/domain.py",
+          "symbol": "check_connect",
+          "line": 31,
+          "end_line": 41,
+          "signature": "db, actor: str, source: dict, target: dict, trace, *, executing=False",
+          "ast_sha256": "6c02bbae65c1c116d7f186e488c38c6f664cd098eb7a946a570f2f95bcb6077e",
+          "snippet": "def check_connect(db, actor: str, source: dict, target: dict, trace, *, executing=False) -> bool:\n    source_allowed = permission(db, actor, source, 'connect', trace)\n    target_allowed = permission(db, actor, target, 'connect', trace)\n    allowed = source_allowed and target_allowed\n    builder = lambda: {'inputs': {'actor': actor, 'source_id': source['id'], 'target_id': target['id']},\n                       'outputs': {'source_allowed': source_allowed, 'target_allowed': target_allowed, 'allowed': allowed}}\n    if executing:\n        trace.bo_emit('execute_permission', 'decision', builder)\n    else:\n        trace.bo_emit('relation_permission', 'decision', builder)\n    return allowed",
+          "calls": [
+            "permission",
+            "trace.bo_emit"
+          ],
+          "guards": [
+            {
+              "line": 37,
+              "expression": "executing"
+            }
+          ],
+          "file_sha256": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745"
+        },
+        "project_created": {
+          "path": "app/domain.py",
+          "symbol": "Projects.create_project",
+          "line": 116,
+          "end_line": 128,
+          "signature": "self, actor: str, name: str, project_type: str",
+          "ast_sha256": "ac5f55ca14d1cc3755ba06b1169a8250274a9725f445fac2f96bc8417f1a2594",
+          "snippet": "    def create_project(self, actor: str, name: str, project_type: str) -> dict:\n        def work(db, trace, context):\n            if project_type not in TYPES:\n                raise Rejected('unknown_type')\n            if not isinstance(name,str) or not name.strip():\n                raise Rejected('name_required')\n            ident = uuid.uuid4().hex[:12]\n            db.execute('INSERT INTO projects VALUES(?,?,?,?,NULL)', (ident,name.strip(),project_type,actor))\n            context['target_id'] = ident\n            trace.bo_emit('create_project','return',lambda:{'inputs':{'actor':actor,'name':name,'type':project_type},\n                          'outputs':{'project_id':ident,'owner':actor,'type':project_type}})\n            return dict(project_id=ident)\n        return self._perform(actor,'create',work)",
+          "calls": [
+            "Rejected",
+            "db.execute",
+            "dict",
+            "isinstance",
+            "name.strip",
+            "self._perform",
+            "trace.bo_emit",
+            "uuid.uuid4"
+          ],
+          "guards": [
+            {
+              "line": 118,
+              "expression": "project_type not in TYPES"
+            },
+            {
+              "line": 120,
+              "expression": "not isinstance(name, str) or not name.strip()"
+            }
+          ],
+          "file_sha256": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745"
+        },
+        "project_derived": {
+          "path": "app/domain.py",
+          "symbol": "Projects.derive_project",
+          "line": 130,
+          "end_line": 146,
+          "signature": "self, actor: str, source_id: str, name: str",
+          "ast_sha256": "7e0afdc32a06daad49cab417eb8603f6a6bb896c897f48d2965f5ad66f0bbb53",
+          "snippet": "    def derive_project(self, actor: str, source_id: str, name: str) -> dict:\n        def work(db, trace, context):\n            source = self._project(db, source_id, trace)\n            allowed = permission(db,actor,source,'derive',trace)\n            trace.bo_emit('derive_permission','decision',lambda:{'inputs':{'actor':actor,'source_id':source_id},'outputs':{'allowed':allowed}})\n            if not allowed:\n                raise Rejected('derive_denied')\n            if not isinstance(name,str) or not name.strip():\n                raise Rejected('name_required')\n            ident = uuid.uuid4().hex[:12]\n            # Inserting only a project row deliberately copies no grants, links or values.\n            db.execute('INSERT INTO projects VALUES(?,?,?,?,?)',(ident,name.strip(),source['type'],actor,source_id))\n            context['target_id'] = ident\n            trace.bo_emit('derive_project','return',lambda:{'inputs':{'actor':actor,'source_id':source_id},\n                          'outputs':{'project_id':ident,'owner':actor,'type':source['type'],'source_id':source_id}})\n            return dict(project_id=ident)\n        return self._perform(actor,'derive',work,source_id=source_id)",
+          "calls": [
+            "Rejected",
+            "db.execute",
+            "dict",
+            "isinstance",
+            "name.strip",
+            "permission",
+            "self._perform",
+            "self._project",
+            "trace.bo_emit",
+            "uuid.uuid4"
+          ],
+          "guards": [
+            {
+              "line": 135,
+              "expression": "not allowed"
+            },
+            {
+              "line": 137,
+              "expression": "not isinstance(name, str) or not name.strip()"
+            }
+          ],
+          "file_sha256": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745"
+        },
+        "relation_configured": {
+          "path": "app/domain.py",
+          "symbol": "Projects.configure_relation",
+          "line": 148,
+          "end_line": 161,
+          "signature": "self, actor: str, source_id: str, source_port: str, target_id: str, target_port: str",
+          "ast_sha256": "aabb8592404942e2873bf134400f75abad199c94abe8c0f3b6d0e0e0c7e410e9",
+          "snippet": "    def configure_relation(self, actor: str, source_id: str, source_port: str, target_id: str, target_port: str) -> dict:\n        def work(db, trace, context):\n            source, target = self._project(db,source_id,trace), self._project(db,target_id,trace)\n            if not check_connect(db,actor,source,target,trace):\n                raise Rejected('connect_denied')\n            if not check_path(db,source,source_port,target,target_port,trace):\n                raise Rejected('invalid_path')\n            ident = uuid.uuid4().hex[:12]\n            db.execute('INSERT INTO links VALUES(?,?,?,?,?,?)',(ident,source_id,source_port,target_id,target_port,actor))\n            context['link_id'] = ident\n            trace.bo_emit('configure_relation','return',lambda:{'inputs':{'actor':actor,'source_id':source_id,'target_id':target_id,\n                          'source_port':source_port,'target_port':target_port},'outputs':{'link_id':ident}})\n            return dict(link_id=ident)\n        return self._perform(actor,'connect',work,source_id=source_id,target_id=target_id)",
+          "calls": [
+            "Rejected",
+            "check_connect",
+            "check_path",
+            "db.execute",
+            "dict",
+            "self._perform",
+            "self._project",
+            "trace.bo_emit",
+            "uuid.uuid4"
+          ],
+          "guards": [
+            {
+              "line": 151,
+              "expression": "not check_connect(db, actor, source, target, trace)"
+            },
+            {
+              "line": 153,
+              "expression": "not check_path(db, source, source_port, target, target_port, trace)"
+            }
+          ],
+          "file_sha256": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745"
+        },
+        "transfer_effect": {
+          "path": "app/domain.py",
+          "symbol": "Projects._perform",
+          "line": 80,
+          "end_line": 114,
+          "signature": "self, actor, action, work, *, source_id='', target_id='', link_id=''",
+          "ast_sha256": "c94e03259fa09ab311c4b187878e3371828f1af4df622d09ddff280f54987612",
+          "snippet": "    def _perform(self, actor, action, work, *, source_id='', target_id='', link_id=''):\n        operation_id = uuid.uuid4().hex\n        trace = self.events.bo_trace(operation_id)\n        context = dict(actor=actor, action=action, source_id=source_id, target_id=target_id,\n                       link_id=link_id, reason='', effect_id='', value_hash='')\n        with self.store.connect() as db:\n            db.execute('BEGIN IMMEDIATE')\n            db.execute('INSERT INTO operations(id,state,revision,build_id,actor,action,source_id,target_id,link_id,reason,effect_id,value_hash) VALUES(?,?,1,?,?,?,?,?,?,?,?,?)',\n                       (operation_id,'checking',self.build_id,*context.values()))\n            trace.bo_emit('operation_checking','enter',lambda:{'inputs':{'actor':actor,'action':action},'outputs':{'state':'checking','operation_id':operation_id}})\n            db.execute('SAVEPOINT business')\n            try:\n                if db.execute('SELECT 1 FROM users WHERE id=?',(actor,)).fetchone() is None:\n                    raise Rejected('unknown_user')\n                result = work(db, trace, context)\n                result.update(ok=True, operation_id=operation_id)\n                state = next_state('checking', 'commit')\n                context['effect_id'] = operation_id\n            except Rejected as exc:\n                db.execute('ROLLBACK TO business')\n                context.update(reason=exc.code, effect_id='', value_hash='')\n                state = next_state('checking','reject')\n                result = dict(ok=False,code=exc.code,operation_id=operation_id)\n            db.execute('RELEASE business')\n            db.execute('UPDATE operations SET state=?,revision=2,source_id=?,target_id=?,link_id=?,reason=?,effect_id=?,value_hash=?,result_json=? WHERE id=?',\n                       (state,context['source_id'],context['target_id'],context['link_id'],context['reason'],context['effect_id'],context['value_hash'],json.dumps(result,ensure_ascii=False),operation_id))\n            db.commit()\n        # Effects are observed only after the actual commit.\n        trace.bo_emit('operation_result','commit',lambda:{'inputs':{'actor':actor,'action':action},'outputs':{\n            'operation_id':operation_id,'state':state,'reason':context['reason'],'effect_id':context['effect_id'],'value_hash':context['value_hash']}})\n        if action == 'execute' and result['ok']:\n            trace.bo_emit('transfer_effect','commit',lambda:{'inputs':{'target_id':context['target_id'],'link_id':link_id},\n                          'outputs':{'operation_id':operation_id,'effect_id':context['effect_id'],'value_hash':context['value_hash'],\n                                     'before':result['before_preview'],'after':result['after_preview']}})\n        return result",
+          "calls": [
+            "Rejected",
+            "context.update",
+            "context.values",
+            "db.commit",
+            "db.execute",
+            "db.execute('SELECT 1 FROM users WHERE id=?', (actor,)).fetchone",
+            "dict",
+            "json.dumps",
+            "next_state",
+            "result.update",
+            "self.events.bo_trace",
+            "self.store.connect",
+            "trace.bo_emit",
+            "uuid.uuid4",
+            "work"
+          ],
+          "guards": [
+            {
+              "line": 110,
+              "expression": "action == 'execute' and result['ok']"
+            },
+            {
+              "line": 92,
+              "expression": "db.execute('SELECT 1 FROM users WHERE id=?', (actor,)).fetchone() is None"
+            }
+          ],
+          "file_sha256": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745"
+        },
+        "permission_fact": {
+          "path": "app/domain.py",
+          "symbol": "permission",
+          "line": 20,
+          "end_line": 28,
+          "signature": "db, actor: str, project: dict, action: str, trace",
+          "ast_sha256": "9e6766ad8ce4bd8bbdeed0d8fe6d4da01715ab3920a4465fa5857bff22d256eb",
+          "snippet": "def permission(db, actor: str, project: dict, action: str, trace) -> bool:\n    owner = project['owner'] == actor\n    granted = db.execute('SELECT 1 FROM grants WHERE project_id=? AND actor=? AND permission=?',\n                         (project['id'], actor, action)).fetchone() is not None\n    allowed = owner or granted\n    trace.bo_emit('permission_fact', 'decision', lambda: {\n        'inputs': {'actor': actor, 'project_id': project['id'], 'action': action, 'owner_id': project['owner']},\n        'outputs': {'owner': owner, 'explicit_grant': granted, 'allowed': allowed}})\n    return allowed",
+          "calls": [
+            "db.execute",
+            "db.execute('SELECT 1 FROM grants WHERE project_id=? AND actor=? AND permission=?', (project['id'], actor, action)).fetchone",
+            "trace.bo_emit"
+          ],
+          "guards": [],
+          "file_sha256": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745"
+        },
+        "operation_checking": {
+          "path": "app/domain.py",
+          "symbol": "Projects._perform",
+          "line": 80,
+          "end_line": 114,
+          "signature": "self, actor, action, work, *, source_id='', target_id='', link_id=''",
+          "ast_sha256": "c94e03259fa09ab311c4b187878e3371828f1af4df622d09ddff280f54987612",
+          "snippet": "    def _perform(self, actor, action, work, *, source_id='', target_id='', link_id=''):\n        operation_id = uuid.uuid4().hex\n        trace = self.events.bo_trace(operation_id)\n        context = dict(actor=actor, action=action, source_id=source_id, target_id=target_id,\n                       link_id=link_id, reason='', effect_id='', value_hash='')\n        with self.store.connect() as db:\n            db.execute('BEGIN IMMEDIATE')\n            db.execute('INSERT INTO operations(id,state,revision,build_id,actor,action,source_id,target_id,link_id,reason,effect_id,value_hash) VALUES(?,?,1,?,?,?,?,?,?,?,?,?)',\n                       (operation_id,'checking',self.build_id,*context.values()))\n            trace.bo_emit('operation_checking','enter',lambda:{'inputs':{'actor':actor,'action':action},'outputs':{'state':'checking','operation_id':operation_id}})\n            db.execute('SAVEPOINT business')\n            try:\n                if db.execute('SELECT 1 FROM users WHERE id=?',(actor,)).fetchone() is None:\n                    raise Rejected('unknown_user')\n                result = work(db, trace, context)\n                result.update(ok=True, operation_id=operation_id)\n                state = next_state('checking', 'commit')\n                context['effect_id'] = operation_id\n            except Rejected as exc:\n                db.execute('ROLLBACK TO business')\n                context.update(reason=exc.code, effect_id='', value_hash='')\n                state = next_state('checking','reject')\n                result = dict(ok=False,code=exc.code,operation_id=operation_id)\n            db.execute('RELEASE business')\n            db.execute('UPDATE operations SET state=?,revision=2,source_id=?,target_id=?,link_id=?,reason=?,effect_id=?,value_hash=?,result_json=? WHERE id=?',\n                       (state,context['source_id'],context['target_id'],context['link_id'],context['reason'],context['effect_id'],context['value_hash'],json.dumps(result,ensure_ascii=False),operation_id))\n            db.commit()\n        # Effects are observed only after the actual commit.\n        trace.bo_emit('operation_result','commit',lambda:{'inputs':{'actor':actor,'action':action},'outputs':{\n            'operation_id':operation_id,'state':state,'reason':context['reason'],'effect_id':context['effect_id'],'value_hash':context['value_hash']}})\n        if action == 'execute' and result['ok']:\n            trace.bo_emit('transfer_effect','commit',lambda:{'inputs':{'target_id':context['target_id'],'link_id':link_id},\n                          'outputs':{'operation_id':operation_id,'effect_id':context['effect_id'],'value_hash':context['value_hash'],\n                                     'before':result['before_preview'],'after':result['after_preview']}})\n        return result",
+          "calls": [
+            "Rejected",
+            "context.update",
+            "context.values",
+            "db.commit",
+            "db.execute",
+            "db.execute('SELECT 1 FROM users WHERE id=?', (actor,)).fetchone",
+            "dict",
+            "json.dumps",
+            "next_state",
+            "result.update",
+            "self.events.bo_trace",
+            "self.store.connect",
+            "trace.bo_emit",
+            "uuid.uuid4",
+            "work"
+          ],
+          "guards": [
+            {
+              "line": 110,
+              "expression": "action == 'execute' and result['ok']"
+            },
+            {
+              "line": 92,
+              "expression": "db.execute('SELECT 1 FROM users WHERE id=?', (actor,)).fetchone() is None"
+            }
+          ],
+          "file_sha256": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745"
+        },
+        "operation_result": {
+          "path": "app/domain.py",
+          "symbol": "Projects._perform",
+          "line": 80,
+          "end_line": 114,
+          "signature": "self, actor, action, work, *, source_id='', target_id='', link_id=''",
+          "ast_sha256": "c94e03259fa09ab311c4b187878e3371828f1af4df622d09ddff280f54987612",
+          "snippet": "    def _perform(self, actor, action, work, *, source_id='', target_id='', link_id=''):\n        operation_id = uuid.uuid4().hex\n        trace = self.events.bo_trace(operation_id)\n        context = dict(actor=actor, action=action, source_id=source_id, target_id=target_id,\n                       link_id=link_id, reason='', effect_id='', value_hash='')\n        with self.store.connect() as db:\n            db.execute('BEGIN IMMEDIATE')\n            db.execute('INSERT INTO operations(id,state,revision,build_id,actor,action,source_id,target_id,link_id,reason,effect_id,value_hash) VALUES(?,?,1,?,?,?,?,?,?,?,?,?)',\n                       (operation_id,'checking',self.build_id,*context.values()))\n            trace.bo_emit('operation_checking','enter',lambda:{'inputs':{'actor':actor,'action':action},'outputs':{'state':'checking','operation_id':operation_id}})\n            db.execute('SAVEPOINT business')\n            try:\n                if db.execute('SELECT 1 FROM users WHERE id=?',(actor,)).fetchone() is None:\n                    raise Rejected('unknown_user')\n                result = work(db, trace, context)\n                result.update(ok=True, operation_id=operation_id)\n                state = next_state('checking', 'commit')\n                context['effect_id'] = operation_id\n            except Rejected as exc:\n                db.execute('ROLLBACK TO business')\n                context.update(reason=exc.code, effect_id='', value_hash='')\n                state = next_state('checking','reject')\n                result = dict(ok=False,code=exc.code,operation_id=operation_id)\n            db.execute('RELEASE business')\n            db.execute('UPDATE operations SET state=?,revision=2,source_id=?,target_id=?,link_id=?,reason=?,effect_id=?,value_hash=?,result_json=? WHERE id=?',\n                       (state,context['source_id'],context['target_id'],context['link_id'],context['reason'],context['effect_id'],context['value_hash'],json.dumps(result,ensure_ascii=False),operation_id))\n            db.commit()\n        # Effects are observed only after the actual commit.\n        trace.bo_emit('operation_result','commit',lambda:{'inputs':{'actor':actor,'action':action},'outputs':{\n            'operation_id':operation_id,'state':state,'reason':context['reason'],'effect_id':context['effect_id'],'value_hash':context['value_hash']}})\n        if action == 'execute' and result['ok']:\n            trace.bo_emit('transfer_effect','commit',lambda:{'inputs':{'target_id':context['target_id'],'link_id':link_id},\n                          'outputs':{'operation_id':operation_id,'effect_id':context['effect_id'],'value_hash':context['value_hash'],\n                                     'before':result['before_preview'],'after':result['after_preview']}})\n        return result",
+          "calls": [
+            "Rejected",
+            "context.update",
+            "context.values",
+            "db.commit",
+            "db.execute",
+            "db.execute('SELECT 1 FROM users WHERE id=?', (actor,)).fetchone",
+            "dict",
+            "json.dumps",
+            "next_state",
+            "result.update",
+            "self.events.bo_trace",
+            "self.store.connect",
+            "trace.bo_emit",
+            "uuid.uuid4",
+            "work"
+          ],
+          "guards": [
+            {
+              "line": 110,
+              "expression": "action == 'execute' and result['ok']"
+            },
+            {
+              "line": 92,
+              "expression": "db.execute('SELECT 1 FROM users WHERE id=?', (actor,)).fetchone() is None"
+            }
+          ],
+          "file_sha256": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745"
+        },
+        "function_create_project": {
+          "path": "app/domain.py",
+          "symbol": "Projects.create_project",
+          "line": 116,
+          "end_line": 128,
+          "signature": "self, actor: str, name: str, project_type: str",
+          "ast_sha256": "ac5f55ca14d1cc3755ba06b1169a8250274a9725f445fac2f96bc8417f1a2594",
+          "snippet": "    def create_project(self, actor: str, name: str, project_type: str) -> dict:\n        def work(db, trace, context):\n            if project_type not in TYPES:\n                raise Rejected('unknown_type')\n            if not isinstance(name,str) or not name.strip():\n                raise Rejected('name_required')\n            ident = uuid.uuid4().hex[:12]\n            db.execute('INSERT INTO projects VALUES(?,?,?,?,NULL)', (ident,name.strip(),project_type,actor))\n            context['target_id'] = ident\n            trace.bo_emit('create_project','return',lambda:{'inputs':{'actor':actor,'name':name,'type':project_type},\n                          'outputs':{'project_id':ident,'owner':actor,'type':project_type}})\n            return dict(project_id=ident)\n        return self._perform(actor,'create',work)",
+          "calls": [
+            "Rejected",
+            "db.execute",
+            "dict",
+            "isinstance",
+            "name.strip",
+            "self._perform",
+            "trace.bo_emit",
+            "uuid.uuid4"
+          ],
+          "guards": [
+            {
+              "line": 118,
+              "expression": "project_type not in TYPES"
+            },
+            {
+              "line": 120,
+              "expression": "not isinstance(name, str) or not name.strip()"
+            }
+          ],
+          "file_sha256": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745"
+        },
+        "function_derive_project": {
+          "path": "app/domain.py",
+          "symbol": "Projects.derive_project",
+          "line": 130,
+          "end_line": 146,
+          "signature": "self, actor: str, source_id: str, name: str",
+          "ast_sha256": "7e0afdc32a06daad49cab417eb8603f6a6bb896c897f48d2965f5ad66f0bbb53",
+          "snippet": "    def derive_project(self, actor: str, source_id: str, name: str) -> dict:\n        def work(db, trace, context):\n            source = self._project(db, source_id, trace)\n            allowed = permission(db,actor,source,'derive',trace)\n            trace.bo_emit('derive_permission','decision',lambda:{'inputs':{'actor':actor,'source_id':source_id},'outputs':{'allowed':allowed}})\n            if not allowed:\n                raise Rejected('derive_denied')\n            if not isinstance(name,str) or not name.strip():\n                raise Rejected('name_required')\n            ident = uuid.uuid4().hex[:12]\n            # Inserting only a project row deliberately copies no grants, links or values.\n            db.execute('INSERT INTO projects VALUES(?,?,?,?,?)',(ident,name.strip(),source['type'],actor,source_id))\n            context['target_id'] = ident\n            trace.bo_emit('derive_project','return',lambda:{'inputs':{'actor':actor,'source_id':source_id},\n                          'outputs':{'project_id':ident,'owner':actor,'type':source['type'],'source_id':source_id}})\n            return dict(project_id=ident)\n        return self._perform(actor,'derive',work,source_id=source_id)",
+          "calls": [
+            "Rejected",
+            "db.execute",
+            "dict",
+            "isinstance",
+            "name.strip",
+            "permission",
+            "self._perform",
+            "self._project",
+            "trace.bo_emit",
+            "uuid.uuid4"
+          ],
+          "guards": [
+            {
+              "line": 135,
+              "expression": "not allowed"
+            },
+            {
+              "line": 137,
+              "expression": "not isinstance(name, str) or not name.strip()"
+            }
+          ],
+          "file_sha256": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745"
+        },
+        "function_configure_relation": {
+          "path": "app/domain.py",
+          "symbol": "Projects.configure_relation",
+          "line": 148,
+          "end_line": 161,
+          "signature": "self, actor: str, source_id: str, source_port: str, target_id: str, target_port: str",
+          "ast_sha256": "aabb8592404942e2873bf134400f75abad199c94abe8c0f3b6d0e0e0c7e410e9",
+          "snippet": "    def configure_relation(self, actor: str, source_id: str, source_port: str, target_id: str, target_port: str) -> dict:\n        def work(db, trace, context):\n            source, target = self._project(db,source_id,trace), self._project(db,target_id,trace)\n            if not check_connect(db,actor,source,target,trace):\n                raise Rejected('connect_denied')\n            if not check_path(db,source,source_port,target,target_port,trace):\n                raise Rejected('invalid_path')\n            ident = uuid.uuid4().hex[:12]\n            db.execute('INSERT INTO links VALUES(?,?,?,?,?,?)',(ident,source_id,source_port,target_id,target_port,actor))\n            context['link_id'] = ident\n            trace.bo_emit('configure_relation','return',lambda:{'inputs':{'actor':actor,'source_id':source_id,'target_id':target_id,\n                          'source_port':source_port,'target_port':target_port},'outputs':{'link_id':ident}})\n            return dict(link_id=ident)\n        return self._perform(actor,'connect',work,source_id=source_id,target_id=target_id)",
+          "calls": [
+            "Rejected",
+            "check_connect",
+            "check_path",
+            "db.execute",
+            "dict",
+            "self._perform",
+            "self._project",
+            "trace.bo_emit",
+            "uuid.uuid4"
+          ],
+          "guards": [
+            {
+              "line": 151,
+              "expression": "not check_connect(db, actor, source, target, trace)"
+            },
+            {
+              "line": 153,
+              "expression": "not check_path(db, source, source_port, target, target_port, trace)"
+            }
+          ],
+          "file_sha256": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745"
+        },
+        "function_transfer_data": {
+          "path": "app/domain.py",
+          "symbol": "Projects.execute_relation",
+          "line": 163,
+          "end_line": 191,
+          "signature": "self, actor: str, link_id: str",
+          "ast_sha256": "b67319f8dadc5fe5546cc597105439ad517ec33b98d7a9472509ec64fda40c9b",
+          "snippet": "    def execute_relation(self, actor: str, link_id: str) -> dict:\n        def work(db, trace, context):\n            row = db.execute('SELECT * FROM links WHERE id=?',(link_id,)).fetchone()\n            if row is None:\n                raise Rejected('link_not_found')\n            link = dict(row)\n            context.update(source_id=link['source_id'], target_id=link['target_id'])\n            source = self._project(db,link['source_id'],trace)\n            target = self._project(db,link['target_id'],trace)\n            if not check_connect(db,actor,source,target,trace,executing=True):\n                raise Rejected('connect_denied')\n            if not check_path(db,source,link['source_port'],target,link['target_port'],trace):\n                raise Rejected('invalid_path')\n            value = db.execute('SELECT value_json,revision FROM port_values WHERE project_id=? AND port=? AND direction=?',\n                               (source['id'],link['source_port'],'out')).fetchone()\n            if value is None:\n                raise Rejected('no_source_value')\n            raw = value['value_json']\n            before = db.execute('SELECT value_json FROM port_values WHERE project_id=? AND port=? AND direction=?',\n                                (target['id'],link['target_port'],'in')).fetchone()\n            old = before['value_json'] if before else None\n            context['value_hash'] = value_digest(raw)\n            trace.bo_emit('transfer_data','return',lambda:{'inputs':{'actor':actor,'link_id':link_id,'source_id':source['id'],\n                          'target_id':target['id'],'source_revision':value['revision'],'value_hash':context['value_hash']},\n                          'outputs':{'before':old[:180] if old is not None else '(absent)','after':raw[:180],'value_hash':context['value_hash']}})\n            db.execute('INSERT INTO port_values VALUES(?,?,?,?,1) ON CONFLICT(project_id,port,direction) DO UPDATE SET value_json=excluded.value_json,revision=port_values.revision+1',\n                       (target['id'],link['target_port'],'in',raw))\n            return dict(link_id=link_id,before_preview=old[:180] if old is not None else '(absent)',after_preview=raw[:180])\n        return self._perform(actor,'execute',work,link_id=link_id)",
+          "calls": [
+            "Rejected",
+            "check_connect",
+            "check_path",
+            "context.update",
+            "db.execute",
+            "db.execute('SELECT * FROM links WHERE id=?', (link_id,)).fetchone",
+            "db.execute('SELECT value_json FROM port_values WHERE project_id=? AND port=? AND direction=?', (target['id'], link['target_port'], 'in')).fetchone",
+            "db.execute('SELECT value_json,revision FROM port_values WHERE project_id=? AND port=? AND direction=?', (source['id'], link['source_port'], 'out')).fetchone",
+            "dict",
+            "self._perform",
+            "self._project",
+            "trace.bo_emit",
+            "value_digest"
+          ],
+          "guards": [
+            {
+              "line": 166,
+              "expression": "row is None"
+            },
+            {
+              "line": 172,
+              "expression": "not check_connect(db, actor, source, target, trace, executing=True)"
+            },
+            {
+              "line": 174,
+              "expression": "not check_path(db, source, link['source_port'], target, link['target_port'], trace)"
+            },
+            {
+              "line": 178,
+              "expression": "value is None"
+            },
+            {
+              "line": 183,
+              "expression": "before"
+            },
+            {
+              "line": 190,
+              "expression": "old is not None"
+            },
+            {
+              "line": 187,
+              "expression": "old is not None"
+            }
+          ],
+          "file_sha256": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745"
+        },
+        "code.d594fd3f9939fb68": {
+          "path": "app/domain.py",
+          "symbol": "Projects._perform",
+          "line": 80,
+          "end_line": 114,
+          "signature": "self, actor, action, work, *, source_id='', target_id='', link_id=''",
+          "ast_sha256": "c94e03259fa09ab311c4b187878e3371828f1af4df622d09ddff280f54987612",
+          "snippet": "    def _perform(self, actor, action, work, *, source_id='', target_id='', link_id=''):\n        operation_id = uuid.uuid4().hex\n        trace = self.events.bo_trace(operation_id)\n        context = dict(actor=actor, action=action, source_id=source_id, target_id=target_id,\n                       link_id=link_id, reason='', effect_id='', value_hash='')\n        with self.store.connect() as db:\n            db.execute('BEGIN IMMEDIATE')\n            db.execute('INSERT INTO operations(id,state,revision,build_id,actor,action,source_id,target_id,link_id,reason,effect_id,value_hash) VALUES(?,?,1,?,?,?,?,?,?,?,?,?)',\n                       (operation_id,'checking',self.build_id,*context.values()))\n            trace.bo_emit('operation_checking','enter',lambda:{'inputs':{'actor':actor,'action':action},'outputs':{'state':'checking','operation_id':operation_id}})\n            db.execute('SAVEPOINT business')\n            try:\n                if db.execute('SELECT 1 FROM users WHERE id=?',(actor,)).fetchone() is None:\n                    raise Rejected('unknown_user')\n                result = work(db, trace, context)\n                result.update(ok=True, operation_id=operation_id)\n                state = next_state('checking', 'commit')\n                context['effect_id'] = operation_id\n            except Rejected as exc:\n                db.execute('ROLLBACK TO business')\n                context.update(reason=exc.code, effect_id='', value_hash='')\n                state = next_state('checking','reject')\n                result = dict(ok=False,code=exc.code,operation_id=operation_id)\n            db.execute('RELEASE business')\n            db.execute('UPDATE operations SET state=?,revision=2,source_id=?,target_id=?,link_id=?,reason=?,effect_id=?,value_hash=?,result_json=? WHERE id=?',\n                       (state,context['source_id'],context['target_id'],context['link_id'],context['reason'],context['effect_id'],context['value_hash'],json.dumps(result,ensure_ascii=False),operation_id))\n            db.commit()\n        # Effects are observed only after the actual commit.\n        trace.bo_emit('operation_result','commit',lambda:{'inputs':{'actor':actor,'action':action},'outputs':{\n            'operation_id':operation_id,'state':state,'reason':context['reason'],'effect_id':context['effect_id'],'value_hash':context['value_hash']}})\n        if action == 'execute' and result['ok']:\n            trace.bo_emit('transfer_effect','commit',lambda:{'inputs':{'target_id':context['target_id'],'link_id':link_id},\n                          'outputs':{'operation_id':operation_id,'effect_id':context['effect_id'],'value_hash':context['value_hash'],\n                                     'before':result['before_preview'],'after':result['after_preview']}})\n        return result",
+          "calls": [
+            "Rejected",
+            "context.update",
+            "context.values",
+            "db.commit",
+            "db.execute",
+            "db.execute('SELECT 1 FROM users WHERE id=?', (actor,)).fetchone",
+            "dict",
+            "json.dumps",
+            "next_state",
+            "result.update",
+            "self.events.bo_trace",
+            "self.store.connect",
+            "trace.bo_emit",
+            "uuid.uuid4",
+            "work"
+          ],
+          "guards": [
+            {
+              "line": 110,
+              "expression": "action == 'execute' and result['ok']"
+            },
+            {
+              "line": 92,
+              "expression": "db.execute('SELECT 1 FROM users WHERE id=?', (actor,)).fetchone() is None"
+            }
+          ],
+          "file_sha256": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745"
+        },
+        "code.86d8141cf20b4631": {
+          "path": "app/domain.py",
+          "symbol": "permission",
+          "line": 20,
+          "end_line": 28,
+          "signature": "db, actor: str, project: dict, action: str, trace",
+          "ast_sha256": "9e6766ad8ce4bd8bbdeed0d8fe6d4da01715ab3920a4465fa5857bff22d256eb",
+          "snippet": "def permission(db, actor: str, project: dict, action: str, trace) -> bool:\n    owner = project['owner'] == actor\n    granted = db.execute('SELECT 1 FROM grants WHERE project_id=? AND actor=? AND permission=?',\n                         (project['id'], actor, action)).fetchone() is not None\n    allowed = owner or granted\n    trace.bo_emit('permission_fact', 'decision', lambda: {\n        'inputs': {'actor': actor, 'project_id': project['id'], 'action': action, 'owner_id': project['owner']},\n        'outputs': {'owner': owner, 'explicit_grant': granted, 'allowed': allowed}})\n    return allowed",
+          "calls": [
+            "db.execute",
+            "db.execute('SELECT 1 FROM grants WHERE project_id=? AND actor=? AND permission=?', (project['id'], actor, action)).fetchone",
+            "trace.bo_emit"
+          ],
+          "guards": [],
+          "file_sha256": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745"
+        },
+        "code.55fddd799bef9f11": {
+          "path": "bo_stategraph/workflow.py",
+          "symbol": "next_state",
+          "line": 22,
+          "end_line": 26,
+          "signature": "state: str, event: str",
+          "ast_sha256": "229194072372f9c5cc2fa259067f3008f7c6a61cdc6b229c1581bb3c6762dd00",
+          "snippet": "def next_state(state: str, event: str) -> str:\n    for transition in DEFINITION['transitions']:\n        if transition['source'] == state and transition['trigger'] == event:\n            return transition['dest']\n    raise ValueError('undeclared operation transition')",
+          "calls": [
+            "ValueError"
+          ],
+          "guards": [
+            {
+              "line": 24,
+              "expression": "transition['source'] == state and transition['trigger'] == event"
+            }
+          ],
+          "file_sha256": "9d06567642ebd5ec6e34a3fd5d71c3f88ad1790068497f19912ebbe9dbfddde3"
+        },
+        "code.95dc4982c2a5a528": {
+          "path": "app/domain.py",
+          "symbol": "Projects._perform",
+          "line": 80,
+          "end_line": 114,
+          "signature": "self, actor, action, work, *, source_id='', target_id='', link_id=''",
+          "ast_sha256": "c94e03259fa09ab311c4b187878e3371828f1af4df622d09ddff280f54987612",
+          "snippet": "    def _perform(self, actor, action, work, *, source_id='', target_id='', link_id=''):\n        operation_id = uuid.uuid4().hex\n        trace = self.events.bo_trace(operation_id)\n        context = dict(actor=actor, action=action, source_id=source_id, target_id=target_id,\n                       link_id=link_id, reason='', effect_id='', value_hash='')\n        with self.store.connect() as db:\n            db.execute('BEGIN IMMEDIATE')\n            db.execute('INSERT INTO operations(id,state,revision,build_id,actor,action,source_id,target_id,link_id,reason,effect_id,value_hash) VALUES(?,?,1,?,?,?,?,?,?,?,?,?)',\n                       (operation_id,'checking',self.build_id,*context.values()))\n            trace.bo_emit('operation_checking','enter',lambda:{'inputs':{'actor':actor,'action':action},'outputs':{'state':'checking','operation_id':operation_id}})\n            db.execute('SAVEPOINT business')\n            try:\n                if db.execute('SELECT 1 FROM users WHERE id=?',(actor,)).fetchone() is None:\n                    raise Rejected('unknown_user')\n                result = work(db, trace, context)\n                result.update(ok=True, operation_id=operation_id)\n                state = next_state('checking', 'commit')\n                context['effect_id'] = operation_id\n            except Rejected as exc:\n                db.execute('ROLLBACK TO business')\n                context.update(reason=exc.code, effect_id='', value_hash='')\n                state = next_state('checking','reject')\n                result = dict(ok=False,code=exc.code,operation_id=operation_id)\n            db.execute('RELEASE business')\n            db.execute('UPDATE operations SET state=?,revision=2,source_id=?,target_id=?,link_id=?,reason=?,effect_id=?,value_hash=?,result_json=? WHERE id=?',\n                       (state,context['source_id'],context['target_id'],context['link_id'],context['reason'],context['effect_id'],context['value_hash'],json.dumps(result,ensure_ascii=False),operation_id))\n            db.commit()\n        # Effects are observed only after the actual commit.\n        trace.bo_emit('operation_result','commit',lambda:{'inputs':{'actor':actor,'action':action},'outputs':{\n            'operation_id':operation_id,'state':state,'reason':context['reason'],'effect_id':context['effect_id'],'value_hash':context['value_hash']}})\n        if action == 'execute' and result['ok']:\n            trace.bo_emit('transfer_effect','commit',lambda:{'inputs':{'target_id':context['target_id'],'link_id':link_id},\n                          'outputs':{'operation_id':operation_id,'effect_id':context['effect_id'],'value_hash':context['value_hash'],\n                                     'before':result['before_preview'],'after':result['after_preview']}})\n        return result",
+          "calls": [
+            "Rejected",
+            "context.update",
+            "context.values",
+            "db.commit",
+            "db.execute",
+            "db.execute('SELECT 1 FROM users WHERE id=?', (actor,)).fetchone",
+            "dict",
+            "json.dumps",
+            "next_state",
+            "result.update",
+            "self.events.bo_trace",
+            "self.store.connect",
+            "trace.bo_emit",
+            "uuid.uuid4",
+            "work"
+          ],
+          "guards": [
+            {
+              "line": 110,
+              "expression": "action == 'execute' and result['ok']"
+            },
+            {
+              "line": 92,
+              "expression": "db.execute('SELECT 1 FROM users WHERE id=?', (actor,)).fetchone() is None"
+            }
+          ],
+          "file_sha256": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745"
+        },
+        "code.5d776df94f321e43": {
+          "path": "app/domain.py",
+          "symbol": "Projects._perform",
+          "line": 80,
+          "end_line": 114,
+          "signature": "self, actor, action, work, *, source_id='', target_id='', link_id=''",
+          "ast_sha256": "c94e03259fa09ab311c4b187878e3371828f1af4df622d09ddff280f54987612",
+          "snippet": "    def _perform(self, actor, action, work, *, source_id='', target_id='', link_id=''):\n        operation_id = uuid.uuid4().hex\n        trace = self.events.bo_trace(operation_id)\n        context = dict(actor=actor, action=action, source_id=source_id, target_id=target_id,\n                       link_id=link_id, reason='', effect_id='', value_hash='')\n        with self.store.connect() as db:\n            db.execute('BEGIN IMMEDIATE')\n            db.execute('INSERT INTO operations(id,state,revision,build_id,actor,action,source_id,target_id,link_id,reason,effect_id,value_hash) VALUES(?,?,1,?,?,?,?,?,?,?,?,?)',\n                       (operation_id,'checking',self.build_id,*context.values()))\n            trace.bo_emit('operation_checking','enter',lambda:{'inputs':{'actor':actor,'action':action},'outputs':{'state':'checking','operation_id':operation_id}})\n            db.execute('SAVEPOINT business')\n            try:\n                if db.execute('SELECT 1 FROM users WHERE id=?',(actor,)).fetchone() is None:\n                    raise Rejected('unknown_user')\n                result = work(db, trace, context)\n                result.update(ok=True, operation_id=operation_id)\n                state = next_state('checking', 'commit')\n                context['effect_id'] = operation_id\n            except Rejected as exc:\n                db.execute('ROLLBACK TO business')\n                context.update(reason=exc.code, effect_id='', value_hash='')\n                state = next_state('checking','reject')\n                result = dict(ok=False,code=exc.code,operation_id=operation_id)\n            db.execute('RELEASE business')\n            db.execute('UPDATE operations SET state=?,revision=2,source_id=?,target_id=?,link_id=?,reason=?,effect_id=?,value_hash=?,result_json=? WHERE id=?',\n                       (state,context['source_id'],context['target_id'],context['link_id'],context['reason'],context['effect_id'],context['value_hash'],json.dumps(result,ensure_ascii=False),operation_id))\n            db.commit()\n        # Effects are observed only after the actual commit.\n        trace.bo_emit('operation_result','commit',lambda:{'inputs':{'actor':actor,'action':action},'outputs':{\n            'operation_id':operation_id,'state':state,'reason':context['reason'],'effect_id':context['effect_id'],'value_hash':context['value_hash']}})\n        if action == 'execute' and result['ok']:\n            trace.bo_emit('transfer_effect','commit',lambda:{'inputs':{'target_id':context['target_id'],'link_id':link_id},\n                          'outputs':{'operation_id':operation_id,'effect_id':context['effect_id'],'value_hash':context['value_hash'],\n                                     'before':result['before_preview'],'after':result['after_preview']}})\n        return result",
+          "calls": [
+            "Rejected",
+            "context.update",
+            "context.values",
+            "db.commit",
+            "db.execute",
+            "db.execute('SELECT 1 FROM users WHERE id=?', (actor,)).fetchone",
+            "dict",
+            "json.dumps",
+            "next_state",
+            "result.update",
+            "self.events.bo_trace",
+            "self.store.connect",
+            "trace.bo_emit",
+            "uuid.uuid4",
+            "work"
+          ],
+          "guards": [
+            {
+              "line": 110,
+              "expression": "action == 'execute' and result['ok']"
+            },
+            {
+              "line": 92,
+              "expression": "db.execute('SELECT 1 FROM users WHERE id=?', (actor,)).fetchone() is None"
+            }
+          ],
+          "file_sha256": "5c68938dd79e9c167625513927e022334bfc8989e3cd0ad638890a4dfd3a2745"
+        }
+      },
+      "python": "3.13.13",
+      "unknowns": [
+        "演示用户切换不提供生产认证。",
+        "同步事务无业务等待、取消或自动恢复。",
+        "JSON 正文不作语义校验；图只保存长度受限的演示值预览和散列。",
+        "未采集所有局部变量和外部动态调用。",
+        "操作日志可查询全部实例；有界事件历史可能过期，不据此补造中间状态。",
+        "AST evidence does not prove value flow, guard dominance or behavioral equivalence",
+        "External dependencies, interpreter, dynamic patching and omitted files are not attested"
+      ]
+    },
+    "events": []
+  },
+  "final": {
+    "authority": {
+      "entity": "5233d6dd4142415e9a90b90b37de345e",
+      "state": "rejected",
+      "basis": {
+        "param_version": 1
+      },
+      "parameters": {
+        "actor": "dave",
+        "action": "execute",
+        "source_id": "collect-a",
+        "target_id": "process-b",
+        "link_id": "10850d3cbb20",
+        "reason": "connect_denied",
+        "effect_id": "",
+        "value_hash": ""
+      },
+      "effects": []
+    },
+    "machine": {
+      "configurations": [
+        {
+          "attempt": "c89857ecbf42491c89efe776a385107c",
+          "phase": "completed",
+          "state_revision": 2,
+          "run_build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+          "context": {
+            "actor": "alice",
+            "action": "connect",
+            "source_id": "collect-a",
+            "target_id": "process-b",
+            "link_id": "10850d3cbb20",
+            "reason": "",
+            "effect_id": "c89857ecbf42491c89efe776a385107c",
+            "value_hash": ""
+          },
+          "revision": 2,
+          "param_version": 1,
+          "journal": []
+        },
+        {
+          "attempt": "7e853b74abba4c9a822c97428f3f7a14",
+          "phase": "completed",
+          "state_revision": 2,
+          "run_build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+          "context": {
+            "actor": "alice",
+            "action": "execute",
+            "source_id": "collect-a",
+            "target_id": "process-b",
+            "link_id": "10850d3cbb20",
+            "reason": "",
+            "effect_id": "7e853b74abba4c9a822c97428f3f7a14",
+            "value_hash": "d8b8b951b3518a3add3baf9c2f6ef7df64f285847513e9fc739c96a9aedace32"
+          },
+          "revision": 2,
+          "param_version": 1,
+          "journal": []
+        },
+        {
+          "attempt": "5233d6dd4142415e9a90b90b37de345e",
+          "phase": "rejected",
+          "state_revision": 2,
+          "run_build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+          "context": {
+            "actor": "dave",
+            "action": "execute",
+            "source_id": "collect-a",
+            "target_id": "process-b",
+            "link_id": "10850d3cbb20",
+            "reason": "connect_denied",
+            "effect_id": "",
+            "value_hash": ""
+          },
+          "revision": 2,
+          "param_version": 1,
+          "journal": []
+        }
+      ],
+      "current": "rejected",
+      "journal": [],
+      "state_revision": 6
+    },
+    "health": {
+      "enabled": true,
+      "run_id": "1391fd32c883",
+      "attempted": 26,
+      "written": 26,
+      "errors": 0,
+      "dropped": 0,
+      "queued": 0,
+      "filtered": 0,
+      "capture_nodes": null,
+      "retention": null
+    },
+    "binding_status": {
+      "status": "current",
+      "changed_files": [],
+      "model_changed": false,
+      "intent_changed": false,
+      "directly_affected": [],
+      "possibly_affected": []
+    },
+    "historical": true,
+    "busy": false
+  },
+  "sources": {
+    "app/__init__.py": "\"\"\"Project management domain. No dependency on observation collectors or Web UI.\"\"\"\n",
+    "app/domain.py": "\"\"\"Project creation, independent derivation and checked JSON transfer.\"\"\"\nimport hashlib\nimport json\nimport uuid\nfrom .ports import BOEvents\nfrom .store import TYPES\nfrom bo_stategraph.workflow import next_state, validate_loaded\n\n\nclass Rejected(Exception):\n    def __init__(self, code):\n        self.code = code\n        super().__init__(code)\n\n\ndef value_digest(raw: str) -> str:\n    return hashlib.sha256(raw.encode('utf-8')).hexdigest()\n\n\ndef permission(db, actor: str, project: dict, action: str, trace) -> bool:\n    owner = project['owner'] == actor\n    granted = db.execute('SELECT 1 FROM grants WHERE project_id=? AND actor=? AND permission=?',\n                         (project['id'], actor, action)).fetchone() is not None\n    allowed = owner or granted\n    trace.bo_emit('permission_fact', 'decision', lambda: {\n        'inputs': {'actor': actor, 'project_id': project['id'], 'action': action, 'owner_id': project['owner']},\n        'outputs': {'owner': owner, 'explicit_grant': granted, 'allowed': allowed}})\n    return allowed\n\n\ndef check_connect(db, actor: str, source: dict, target: dict, trace, *, executing=False) -> bool:\n    source_allowed = permission(db, actor, source, 'connect', trace)\n    target_allowed = permission(db, actor, target, 'connect', trace)\n    allowed = source_allowed and target_allowed\n    builder = lambda: {'inputs': {'actor': actor, 'source_id': source['id'], 'target_id': target['id']},\n                       'outputs': {'source_allowed': source_allowed, 'target_allowed': target_allowed, 'allowed': allowed}}\n    if executing:\n        trace.bo_emit('execute_permission', 'decision', builder)\n    else:\n        trace.bo_emit('relation_permission', 'decision', builder)\n    return allowed\n\n\ndef check_path(db, source: dict, source_port: str, target: dict, target_port: str, trace) -> bool:\n    # Read current rules inside the same transaction as the eventual write.\n    out_port = db.execute('SELECT * FROM ports WHERE project_type=? AND name=? AND direction=?',\n                          (source['type'], source_port, 'out')).fetchone()\n    in_port = db.execute('SELECT * FROM ports WHERE project_type=? AND name=? AND direction=?',\n                         (target['type'], target_port, 'in')).fetchone()\n    type_ok = db.execute('SELECT 1 FROM type_edges WHERE source_type=? AND target_type=?',\n                         (source['type'], target['type'])).fetchone() is not None\n    source_exists, target_exists = out_port is not None, in_port is not None\n    source_format = out_port['format'] if out_port else ''\n    target_format = in_port['format'] if in_port else ''\n    format_ok = source_exists and target_exists and source_format == target_format\n    allowed = type_ok and source_exists and target_exists and format_ok\n    trace.bo_emit('type_port_rules', 'decision', lambda: {\n        'inputs': {'source_type':source['type'], 'target_type':target['type'], 'source_port':source_port,\n                   'target_port':target_port, 'source_format':source_format, 'target_format':target_format},\n        'outputs': {'type_ok':type_ok, 'source_output_exists':source_exists, 'target_input_exists':target_exists,\n                    'format_ok':format_ok, 'allowed':allowed}})\n    return allowed\n\n\nclass Projects:\n    def __init__(self, store, *, build_id='core', events=None):\n        validate_loaded()\n        self.store, self.build_id = store, build_id\n        self.events = events or BOEvents()\n\n    def _project(self, db, ident: str, trace) -> dict:\n        row = db.execute('SELECT * FROM projects WHERE id=?', (ident,)).fetchone()\n        if row is None:\n            raise Rejected('project_not_found')\n        project = dict(row)\n        trace.bo_emit('source_project', 'read', lambda: {'inputs': {'project_id':ident},\n                      'outputs': {'project_id':ident, 'type':project['type'], 'owner':project['owner'], 'source_id':project['source_id']}})\n        return project\n\n    def _perform(self, actor, action, work, *, source_id='', target_id='', link_id=''):\n        operation_id = uuid.uuid4().hex\n        trace = self.events.bo_trace(operation_id)\n        context = dict(actor=actor, action=action, source_id=source_id, target_id=target_id,\n                       link_id=link_id, reason='', effect_id='', value_hash='')\n        with self.store.connect() as db:\n            db.execute('BEGIN IMMEDIATE')\n            db.execute('INSERT INTO operations(id,state,revision,build_id,actor,action,source_id,target_id,link_id,reason,effect_id,value_hash) VALUES(?,?,1,?,?,?,?,?,?,?,?,?)',\n                       (operation_id,'checking',self.build_id,*context.values()))\n            trace.bo_emit('operation_checking','enter',lambda:{'inputs':{'actor':actor,'action':action},'outputs':{'state':'checking','operation_id':operation_id}})\n            db.execute('SAVEPOINT business')\n            try:\n                if db.execute('SELECT 1 FROM users WHERE id=?',(actor,)).fetchone() is None:\n                    raise Rejected('unknown_user')\n                result = work(db, trace, context)\n                result.update(ok=True, operation_id=operation_id)\n                state = next_state('checking', 'commit')\n                context['effect_id'] = operation_id\n            except Rejected as exc:\n                db.execute('ROLLBACK TO business')\n                context.update(reason=exc.code, effect_id='', value_hash='')\n                state = next_state('checking','reject')\n                result = dict(ok=False,code=exc.code,operation_id=operation_id)\n            db.execute('RELEASE business')\n            db.execute('UPDATE operations SET state=?,revision=2,source_id=?,target_id=?,link_id=?,reason=?,effect_id=?,value_hash=?,result_json=? WHERE id=?',\n                       (state,context['source_id'],context['target_id'],context['link_id'],context['reason'],context['effect_id'],context['value_hash'],json.dumps(result,ensure_ascii=False),operation_id))\n            db.commit()\n        # Effects are observed only after the actual commit.\n        trace.bo_emit('operation_result','commit',lambda:{'inputs':{'actor':actor,'action':action},'outputs':{\n            'operation_id':operation_id,'state':state,'reason':context['reason'],'effect_id':context['effect_id'],'value_hash':context['value_hash']}})\n        if action == 'execute' and result['ok']:\n            trace.bo_emit('transfer_effect','commit',lambda:{'inputs':{'target_id':context['target_id'],'link_id':link_id},\n                          'outputs':{'operation_id':operation_id,'effect_id':context['effect_id'],'value_hash':context['value_hash'],\n                                     'before':result['before_preview'],'after':result['after_preview']}})\n        return result\n\n    def create_project(self, actor: str, name: str, project_type: str) -> dict:\n        def work(db, trace, context):\n            if project_type not in TYPES:\n                raise Rejected('unknown_type')\n            if not isinstance(name,str) or not name.strip():\n                raise Rejected('name_required')\n            ident = uuid.uuid4().hex[:12]\n            db.execute('INSERT INTO projects VALUES(?,?,?,?,NULL)', (ident,name.strip(),project_type,actor))\n            context['target_id'] = ident\n            trace.bo_emit('create_project','return',lambda:{'inputs':{'actor':actor,'name':name,'type':project_type},\n                          'outputs':{'project_id':ident,'owner':actor,'type':project_type}})\n            return dict(project_id=ident)\n        return self._perform(actor,'create',work)\n\n    def derive_project(self, actor: str, source_id: str, name: str) -> dict:\n        def work(db, trace, context):\n            source = self._project(db, source_id, trace)\n            allowed = permission(db,actor,source,'derive',trace)\n            trace.bo_emit('derive_permission','decision',lambda:{'inputs':{'actor':actor,'source_id':source_id},'outputs':{'allowed':allowed}})\n            if not allowed:\n                raise Rejected('derive_denied')\n            if not isinstance(name,str) or not name.strip():\n                raise Rejected('name_required')\n            ident = uuid.uuid4().hex[:12]\n            # Inserting only a project row deliberately copies no grants, links or values.\n            db.execute('INSERT INTO projects VALUES(?,?,?,?,?)',(ident,name.strip(),source['type'],actor,source_id))\n            context['target_id'] = ident\n            trace.bo_emit('derive_project','return',lambda:{'inputs':{'actor':actor,'source_id':source_id},\n                          'outputs':{'project_id':ident,'owner':actor,'type':source['type'],'source_id':source_id}})\n            return dict(project_id=ident)\n        return self._perform(actor,'derive',work,source_id=source_id)\n\n    def configure_relation(self, actor: str, source_id: str, source_port: str, target_id: str, target_port: str) -> dict:\n        def work(db, trace, context):\n            source, target = self._project(db,source_id,trace), self._project(db,target_id,trace)\n            if not check_connect(db,actor,source,target,trace):\n                raise Rejected('connect_denied')\n            if not check_path(db,source,source_port,target,target_port,trace):\n                raise Rejected('invalid_path')\n            ident = uuid.uuid4().hex[:12]\n            db.execute('INSERT INTO links VALUES(?,?,?,?,?,?)',(ident,source_id,source_port,target_id,target_port,actor))\n            context['link_id'] = ident\n            trace.bo_emit('configure_relation','return',lambda:{'inputs':{'actor':actor,'source_id':source_id,'target_id':target_id,\n                          'source_port':source_port,'target_port':target_port},'outputs':{'link_id':ident}})\n            return dict(link_id=ident)\n        return self._perform(actor,'connect',work,source_id=source_id,target_id=target_id)\n\n    def execute_relation(self, actor: str, link_id: str) -> dict:\n        def work(db, trace, context):\n            row = db.execute('SELECT * FROM links WHERE id=?',(link_id,)).fetchone()\n            if row is None:\n                raise Rejected('link_not_found')\n            link = dict(row)\n            context.update(source_id=link['source_id'], target_id=link['target_id'])\n            source = self._project(db,link['source_id'],trace)\n            target = self._project(db,link['target_id'],trace)\n            if not check_connect(db,actor,source,target,trace,executing=True):\n                raise Rejected('connect_denied')\n            if not check_path(db,source,link['source_port'],target,link['target_port'],trace):\n                raise Rejected('invalid_path')\n            value = db.execute('SELECT value_json,revision FROM port_values WHERE project_id=? AND port=? AND direction=?',\n                               (source['id'],link['source_port'],'out')).fetchone()\n            if value is None:\n                raise Rejected('no_source_value')\n            raw = value['value_json']\n            before = db.execute('SELECT value_json FROM port_values WHERE project_id=? AND port=? AND direction=?',\n                                (target['id'],link['target_port'],'in')).fetchone()\n            old = before['value_json'] if before else None\n            context['value_hash'] = value_digest(raw)\n            trace.bo_emit('transfer_data','return',lambda:{'inputs':{'actor':actor,'link_id':link_id,'source_id':source['id'],\n                          'target_id':target['id'],'source_revision':value['revision'],'value_hash':context['value_hash']},\n                          'outputs':{'before':old[:180] if old is not None else '(absent)','after':raw[:180],'value_hash':context['value_hash']}})\n            db.execute('INSERT INTO port_values VALUES(?,?,?,?,1) ON CONFLICT(project_id,port,direction) DO UPDATE SET value_json=excluded.value_json,revision=port_values.revision+1',\n                       (target['id'],link['target_port'],'in',raw))\n            return dict(link_id=link_id,before_preview=old[:180] if old is not None else '(absent)',after_preview=raw[:180])\n        return self._perform(actor,'execute',work,link_id=link_id)\n",
+    "app/ports.py": "\"\"\"Neutral, optional events. Even a broken payload builder cannot alter business results.\"\"\"\n\n\nclass BOTrace:\n    def __init__(self, sink=None):\n        self.sink = sink\n        self.sequence = 0\n        self.errors = 0\n\n    def bo_emit(self, node, phase, builder, *, depends=()):\n        if self.sink is None:\n            return None\n        try:\n            self.sequence += 1\n            return self.sink(node, phase, {'param_version': 1}, builder,\n                             call_id=f'{node}:{self.sequence}', depends=depends)\n        except Exception:\n            self.errors += 1\n            return None\n\n\nclass BOEvents:\n    def __init__(self, factory=None):\n        self.factory = factory\n\n    def bo_trace(self, entity):\n        try:\n            return BOTrace(self.factory(entity) if self.factory else None)\n        except Exception:\n            return BOTrace()\n",
+    "app/store.py": "\"\"\"SQLite is the authority for projects, grants, ports, JSON values and operation results.\"\"\"\nimport json\nimport sqlite3\nfrom pathlib import Path\n\nSCHEMA = '''\nCREATE TABLE IF NOT EXISTS users(id TEXT PRIMARY KEY, name TEXT NOT NULL);\nCREATE TABLE IF NOT EXISTS projects(id TEXT PRIMARY KEY,name TEXT NOT NULL,type TEXT NOT NULL,\n owner TEXT NOT NULL REFERENCES users(id),source_id TEXT REFERENCES projects(id));\nCREATE TABLE IF NOT EXISTS grants(project_id TEXT REFERENCES projects(id),actor TEXT REFERENCES users(id),\n permission TEXT CHECK(permission IN ('derive','connect')),PRIMARY KEY(project_id,actor,permission));\nCREATE TABLE IF NOT EXISTS ports(project_type TEXT,name TEXT,direction TEXT,format TEXT,\n PRIMARY KEY(project_type,name,direction));\nCREATE TABLE IF NOT EXISTS type_edges(source_type TEXT,target_type TEXT,PRIMARY KEY(source_type,target_type));\nCREATE TABLE IF NOT EXISTS links(id TEXT PRIMARY KEY,source_id TEXT REFERENCES projects(id),source_port TEXT,\n target_id TEXT REFERENCES projects(id),target_port TEXT,creator TEXT REFERENCES users(id));\nCREATE TABLE IF NOT EXISTS port_values(project_id TEXT REFERENCES projects(id),port TEXT,direction TEXT,\n value_json TEXT NOT NULL,revision INTEGER NOT NULL,PRIMARY KEY(project_id,port,direction));\nCREATE TABLE IF NOT EXISTS operations(id TEXT PRIMARY KEY,state TEXT,revision INTEGER,build_id TEXT,\n actor TEXT,action TEXT,source_id TEXT,target_id TEXT,link_id TEXT,reason TEXT,effect_id TEXT,value_hash TEXT,\n before_json TEXT,after_json TEXT,result_json TEXT,created_at TEXT DEFAULT CURRENT_TIMESTAMP);\n'''\nTYPES = ('collection', 'processing', 'report')\n\n\nclass Connection(sqlite3.Connection):\n    def __exit__(self, exc_type, exc_value, traceback):\n        try:\n            return super().__exit__(exc_type, exc_value, traceback)\n        finally:\n            self.close()\n\n\nclass Store:\n    def __init__(self, path):\n        self.path = Path(path).absolute()\n        self.path.parent.mkdir(parents=True, exist_ok=True)\n        with self.connect() as db:\n            db.executescript(SCHEMA)\n            db.executemany('INSERT OR IGNORE INTO ports VALUES(?,?,?,?)', [\n                ('collection','records','out','dataset/v1'), ('processing','records','in','dataset/v1'),\n                ('processing','result','out','result/v1'), ('report','result','in','result/v1')])\n            db.executemany('INSERT OR IGNORE INTO type_edges VALUES(?,?)', [('collection','processing'),('processing','report')])\n\n    def connect(self):\n        db = sqlite3.connect(self.path, timeout=5, factory=Connection)\n        db.row_factory = sqlite3.Row\n        db.execute('PRAGMA foreign_keys=ON')\n        return db\n\n    def seed_demo(self):\n        with self.connect() as db:\n            if db.execute('SELECT COUNT(*) FROM users').fetchone()[0]:\n                return\n            db.executemany('INSERT INTO users VALUES(?,?)', [('alice','小林'),('bob','小周'),('carol','小陈'),('dave','访客小王')])\n            db.executemany('INSERT INTO projects VALUES(?,?,?,?,?)', [\n                ('collect-a','采集 A','collection','alice',None),\n                ('process-b','处理 B','processing','bob',None),\n                ('report-c','报告 C','report','carol',None)])\n            db.executemany('INSERT INTO grants VALUES(?,?,?)', [\n                ('process-b','alice','connect'), ('collect-a','bob','derive'), ('collect-a','bob','connect'),\n                ('report-c','bob','connect'), ('process-b','carol','connect'), ('collect-a','dave','connect')])\n            db.executemany('INSERT INTO port_values VALUES(?,?,?,?,1)', [\n                ('collect-a','records','out',json.dumps({'batch':'A','items':[{'id':1,'value':12}]})),\n                ('process-b','records','in',json.dumps({'old':True})),\n                ('process-b','result','out',json.dumps({'total':12}))])\n\n    def snapshot(self):\n        with self.connect() as db:\n            db.execute('BEGIN')\n            result = {table: [dict(r) for r in db.execute('SELECT * FROM '+table+' ORDER BY rowid')]\n                      for table in ('users','projects','grants','ports','type_edges','links','port_values','operations')}\n        return result\n",
+    "bo_stategraph/query.py": "\"\"\"One adapter from real SQLite operations to the public instance protocol.\"\"\"\nfrom .workflow import CONTEXT\n\n\ndef bo_machine(snapshot):\n    configurations = []\n    for row in snapshot['operations']:\n        configurations.append({'attempt':row['id'], 'phase':row['state'], 'state_revision':row['revision'],\n                               'run_build_id':row['build_id'], 'context':{k:row[k] for k in CONTEXT},\n                               'revision':row['revision'], 'param_version':1, 'journal':[]})\n    return {'configurations':configurations, 'current':configurations[-1]['phase'] if configurations else None,\n            'journal':[], 'state_revision':sum(r['revision'] for r in snapshot['operations'])}\n",
+    "bo_stategraph/workflow.py": "\"\"\"Declared lifecycle of a synchronous database operation; no extra business workflow.\"\"\"\nfrom .bo_contracts import validate_runtime_definition\n\nCONTEXT = {k: {'type': 'string'} for k in\n           ('actor', 'action', 'source_id', 'target_id', 'link_id', 'reason', 'effect_id', 'value_hash')}\nDEFINITION = {\n    'engine': 'python.explicit', 'version': '1', 'state_type': 'OperationState',\n    'states': ['checking', 'completed', 'rejected'], 'values': ['checking', 'completed', 'rejected'],\n    'labels': {'checking': '检查中', 'completed': '已提交', 'rejected': '已拒绝'},\n    'initial': 'checking', 'context': CONTEXT,\n    'events': {'commit': {'payload': {}}, 'reject': {'payload': {}}}, 'guards': {},\n    'transitions': [\n        {'source': 'checking', 'trigger': 'commit', 'dest': 'completed'},\n        {'source': 'checking', 'trigger': 'reject', 'dest': 'rejected'}],\n}\n\n\ndef validate_loaded():\n    validate_runtime_definition(DEFINITION, loaded_engine='python.explicit', loaded_version='1', guard_names=[])\n\n\ndef next_state(state: str, event: str) -> str:\n    for transition in DEFINITION['transitions']:\n        if transition['source'] == state and transition['trigger'] == event:\n            return transition['dest']\n    raise ValueError('undeclared operation transition')\n",
+    "integrations/__init__.py": "\"\"\"Optional observer and HTTP integration.\"\"\"\n",
+    "integrations/bo_adapter.py": "\"\"\"Shared query, selected probes, bounded logs and optional recording service.\"\"\"\nimport json\nfrom pathlib import Path\nfrom app.ports import BOEvents\nfrom bo_stategraph import BOStateGraph, bo_export_view\nfrom bo_stategraph.query import bo_machine\nfrom bo_stategraph.workflow import DEFINITION\nfrom observer_runtime.behavior_model import capture, check\nfrom observer_runtime.semantic_probe import Pins, Trace\nfrom observer_runtime.bo_retention import EventHistory\nfrom observer_runtime.recording_session import Recordings\n\n\nclass BOAdapter:\n    def __init__(self, root, store, mode='on', *, recordings=False):\n        self.root, self.store = Path(root).absolute(), store\n        self.model = json.loads((self.root/'behavior.json').read_text(encoding='utf-8'))\n        self.manifest = capture(self.root,self.model)\n        self.graph = BOStateGraph(self.model,build_id=self.manifest['build_id'],mode='observe',\n                                  instance_provider=lambda:bo_machine(self.store.snapshot()))\n        self.graph.bo_require_definition(DEFINITION)\n        log = store.path.parent/'events.jsonl'\n        self.history = EventHistory(project_root=self.root,path=log)\n        self.mode = mode\n        self.pins = Pins(self.model,self.manifest['build_id'],enabled=mode!='off',sink=self.bo_sink,\n                         project_root=self.root)\n        self.events = BOEvents(self.bo_trace)\n        self.recordings = Recordings(store.path.parent/'recordings',self.bo_view,self.bo_sources(),\n                event_source=self.history,scope_setter=self.pins.bo_set_scope) if recordings else None\n\n    def bo_sink(self, text):\n        if self.mode == 'fault':\n            raise OSError('deliberate observer sink failure')\n        self.history.append(json.loads(text))\n\n    def bo_trace(self, entity):\n        if self.mode == 'off':\n            return None\n        return Trace(self.pins,entity,entity).record\n\n    def bo_sources(self):\n        return {path:(self.root/path).read_text(encoding='utf-8-sig') for path in self.manifest['files'] if path.endswith('.py')}\n\n    def bo_view(self):\n        snapshot = self.store.snapshot()\n        machine = bo_machine(snapshot)\n        latest = snapshot['operations'][-1] if snapshot['operations'] else None\n        return {'stage':'runtime','layout_id':'project-flow-trial-main','model':self.model,'manifest':self.manifest,\n                'binding_status':check(self.root,self.model,self.manifest),\n                'events':self.history.snapshot(),'machine':machine,'health':self.pins.health(),\n                'authority':{'entity':latest['id'] if latest else None,'state':latest['state'] if latest else None,\n                             'basis':{'param_version':1},'parameters':{'attempt':latest['id'],**machine['configurations'][-1]['context']} if latest else {},'effects':[]},\n                'busy':False,'historical':False,'available_cases':['live']}\n\n    def bo_export(self):\n        return bo_export_view(self.bo_view(),graph=self.graph)\n\n    def close(self):\n        self.pins.close()\n        if self.recordings:\n            self.recordings.close()\n",
+    "integrations/bo_server.py": "\"\"\"Loopback application API and optional shared observer surface.\"\"\"\nimport json\nimport mimetypes\nfrom http.server import BaseHTTPRequestHandler, ThreadingHTTPServer\nfrom urllib.parse import urlsplit, parse_qs\nfrom observer_runtime.bo_web import BOWeb\nfrom observer_runtime.view_preferences import Preferences, PreferenceConflict\n\n\ndef bo_http_server(root, service, adapter, port):\n    web = BOWeb(root,assets=root/'static/graph')\n    preferences = Preferences(root,'project-flow-trial-main')\n    sources = adapter.bo_sources()\n\n    class Handler(BaseHTTPRequestHandler):\n        def log_message(self,*args):\n            pass\n\n        def reply(self,value,code=200,mime='application/json'):\n            data=value if isinstance(value,bytes) else json.dumps(value,ensure_ascii=False).encode('utf-8')\n            self.send_response(code)\n            self.send_header('Content-Type',mime+'; charset=utf-8')\n            self.send_header('Content-Length',str(len(data)))\n            self.send_header('Cache-Control','no-store')\n            self.send_header('X-Content-Type-Options','nosniff')\n            self.end_headers()\n            self.wfile.write(data)\n\n        def local(self):\n            hosts={f'localhost:{self.server.server_port}',f'127.0.0.1:{self.server.server_port}'}\n            origin=self.headers.get('Origin')\n            return self.headers.get('Host') in hosts and (not origin or origin=='http://'+self.headers['Host'])\n\n        def do_GET(self):\n            if not self.local(): return self.reply({'error':'local_request_required'},403)\n            url=urlsplit(self.path);path=url.path;query=parse_qs(url.query)\n            try:\n                if not web.allowed(path): return self.reply({'code':'bo_web_disabled'},404)\n                if path=='/api/projects': return self.reply(service.store.snapshot())\n                if path=='/api/view': return self.reply(adapter.bo_view())\n                if path in ('/api/stategraph','/api/stategraph/export'): return self.reply(adapter.bo_export())\n                if path=='/api/design': return self.reply(web.get(path))\n                if path=='/api/preferences': return self.reply(preferences.read())\n                if path=='/api/recordings': return self.reply(adapter.recordings.list())\n                if path.startswith('/api/recordings/'): return self.reply(adapter.recordings.get(path.rsplit('/',1)[1]))\n                if path=='/api/source':\n                    name=query.get('path',[''])[0]\n                    selected=sources; build=adapter.manifest['build_id']\n                    if query.get('recording'):\n                        recording=adapter.recordings.get(query['recording'][0]);selected=recording['sources'];build=recording['build_id']\n                    if name not in selected: return self.reply({'error':'source_not_in_scope'},404)\n                    return self.reply({'source':selected[name],'build_id':build})\n                if path in ('/','/app','/control'):\n                    return self.reply(web.entry_html((root/'static/app.html').read_bytes()),mime='text/html')\n                if path in ('/app.js','/app.css'):\n                    return self.reply((root/'static'/path[1:]).read_bytes(),mime=mimetypes.guess_type(path)[0])\n                name='index.html' if path in ('/graph','/graph/') else path[1:]\n                if name and '/' not in name and '\\\\' not in name and not name.startswith('.') and (root/'static/graph'/name).is_file():\n                    return self.reply((root/'static/graph'/name).read_bytes(),mime=mimetypes.guess_type(name)[0] or 'application/octet-stream')\n                return self.reply({'error':'not_found'},404)\n            except (ValueError,KeyError) as exc:\n                return self.reply({'error':str(exc)},400)\n\n        def do_POST(self):\n            if not self.local(): return self.reply({'error':'local_request_required'},403)\n            path=urlsplit(self.path).path\n            try:\n                if not web.allowed(path): return self.reply({'code':'bo_web_disabled'},404)\n                length=int(self.headers.get('Content-Length','0'))\n                if not 0<length<=2*1024*1024: return self.reply({'error':'invalid_request_size'},400)\n                data=json.loads(self.rfile.read(length))\n                if not isinstance(data,dict): return self.reply({'error':'object_required'},400)\n                if path=='/api/preferences': return self.reply(preferences.save(data))\n                if path=='/api/recordings/start': return self.reply(adapter.recordings.start(data.get('label',''),data.get('scope')))\n                if path=='/api/recordings/stop': return self.reply(adapter.recordings.stop())\n                if path=='/api/create': result=service.create_project(data['actor'],data['name'],data['type'])\n                elif path=='/api/derive': result=service.derive_project(data['actor'],data['source_id'],data['name'])\n                elif path=='/api/connect': result=service.configure_relation(data['actor'],data['source_id'],data['source_port'],data['target_id'],data['target_port'])\n                elif path=='/api/execute': result=service.execute_relation(data['actor'],data['link_id'])\n                else: return self.reply({'error':'not_found'},404)\n                adapter.pins.flush()\n                return self.reply(result,200 if result['ok'] else 409)\n            except PreferenceConflict as exc: return self.reply({'error':str(exc)},409)\n            except (ValueError,KeyError,TypeError): return self.reply({'error':'invalid_request'},400)\n            except Exception:\n                return self.reply({'error':'operation_unavailable'},503)\n\n    return ThreadingHTTPServer(('127.0.0.1',port),Handler)\n",
+    "server.py": "\"\"\"Run the local demo: python -X utf8 server.py --port 8870.\"\"\"\nimport argparse\nfrom pathlib import Path\nfrom app.store import Store\nfrom app.domain import Projects\nfrom integrations.bo_adapter import BOAdapter\nfrom integrations.bo_server import bo_http_server\n\n\ndef main():\n    parser=argparse.ArgumentParser(description=__doc__)\n    parser.add_argument('--port',type=int,default=8870)\n    parser.add_argument('--db',type=Path)\n    parser.add_argument('--probe-mode',choices=['on','off','fault'],default='on')\n    args=parser.parse_args()\n    root=Path(__file__).resolve().parent\n    store=Store(args.db or root/'data/demo.sqlite3');store.seed_demo()\n    adapter=BOAdapter(root,store,args.probe_mode,recordings=True)\n    service=Projects(store,build_id=adapter.manifest['build_id'],events=adapter.events)\n    server=bo_http_server(root,service,adapter,args.port)\n    print(f'Project Flow: http://127.0.0.1:{server.server_port}/ ; graph: /graph',flush=True)\n    try: server.serve_forever()\n    except KeyboardInterrupt: pass\n    finally: server.server_close();adapter.close()\n\n\nif __name__=='__main__': main()\n"
+  },
+  "events": [
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:1",
+      "seq": 1,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "c89857ecbf42491c89efe776a385107c",
+      "attempt": "c89857ecbf42491c89efe776a385107c",
+      "node": "operation_checking",
+      "phase": "enter",
+      "call_id": "operation_checking:1",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "actor": "alice",
+        "action": "connect"
+      },
+      "outputs": {
+        "state": "checking",
+        "operation_id": "c89857ecbf42491c89efe776a385107c"
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:58:45.064709+00:00"
+    },
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:2",
+      "seq": 2,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "c89857ecbf42491c89efe776a385107c",
+      "attempt": "c89857ecbf42491c89efe776a385107c",
+      "node": "source_project",
+      "phase": "read",
+      "call_id": "source_project:2",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "project_id": "collect-a"
+      },
+      "outputs": {
+        "project_id": "collect-a",
+        "type": "collection",
+        "owner": "alice",
+        "source_id": null
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:58:45.064955+00:00"
+    },
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:3",
+      "seq": 3,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "c89857ecbf42491c89efe776a385107c",
+      "attempt": "c89857ecbf42491c89efe776a385107c",
+      "node": "source_project",
+      "phase": "read",
+      "call_id": "source_project:3",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "project_id": "process-b"
+      },
+      "outputs": {
+        "project_id": "process-b",
+        "type": "processing",
+        "owner": "bob",
+        "source_id": null
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:58:45.064993+00:00"
+    },
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:4",
+      "seq": 4,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "c89857ecbf42491c89efe776a385107c",
+      "attempt": "c89857ecbf42491c89efe776a385107c",
+      "node": "permission_fact",
+      "phase": "decision",
+      "call_id": "permission_fact:4",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "actor": "alice",
+        "project_id": "collect-a",
+        "action": "connect",
+        "owner_id": "alice"
+      },
+      "outputs": {
+        "owner": true,
+        "explicit_grant": false,
+        "allowed": true
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:58:45.065170+00:00"
+    },
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:5",
+      "seq": 5,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "c89857ecbf42491c89efe776a385107c",
+      "attempt": "c89857ecbf42491c89efe776a385107c",
+      "node": "permission_fact",
+      "phase": "decision",
+      "call_id": "permission_fact:5",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "actor": "alice",
+        "project_id": "process-b",
+        "action": "connect",
+        "owner_id": "bob"
+      },
+      "outputs": {
+        "owner": false,
+        "explicit_grant": true,
+        "allowed": true
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:58:45.065200+00:00"
+    },
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:6",
+      "seq": 6,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "c89857ecbf42491c89efe776a385107c",
+      "attempt": "c89857ecbf42491c89efe776a385107c",
+      "node": "relation_permission",
+      "phase": "decision",
+      "call_id": "relation_permission:6",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "actor": "alice",
+        "source_id": "collect-a",
+        "target_id": "process-b"
+      },
+      "outputs": {
+        "source_allowed": true,
+        "target_allowed": true,
+        "allowed": true
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:58:45.065216+00:00"
+    },
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:7",
+      "seq": 7,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "c89857ecbf42491c89efe776a385107c",
+      "attempt": "c89857ecbf42491c89efe776a385107c",
+      "node": "type_port_rules",
+      "phase": "decision",
+      "call_id": "type_port_rules:7",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "source_type": "collection",
+        "target_type": "processing",
+        "source_port": "records",
+        "target_port": "records",
+        "source_format": "dataset/v1",
+        "target_format": "dataset/v1"
+      },
+      "outputs": {
+        "type_ok": true,
+        "source_output_exists": true,
+        "target_input_exists": true,
+        "format_ok": true,
+        "allowed": true
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:58:45.065311+00:00"
+    },
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:8",
+      "seq": 8,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "c89857ecbf42491c89efe776a385107c",
+      "attempt": "c89857ecbf42491c89efe776a385107c",
+      "node": "configure_relation",
+      "phase": "return",
+      "call_id": "configure_relation:8",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "actor": "alice",
+        "source_id": "collect-a",
+        "target_id": "process-b",
+        "source_port": "records",
+        "target_port": "records"
+      },
+      "outputs": {
+        "link_id": "10850d3cbb20"
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:58:45.065412+00:00"
+    },
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:9",
+      "seq": 9,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "c89857ecbf42491c89efe776a385107c",
+      "attempt": "c89857ecbf42491c89efe776a385107c",
+      "node": "operation_result",
+      "phase": "commit",
+      "call_id": "operation_result:9",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "actor": "alice",
+        "action": "connect"
+      },
+      "outputs": {
+        "operation_id": "c89857ecbf42491c89efe776a385107c",
+        "state": "completed",
+        "reason": "",
+        "effect_id": "c89857ecbf42491c89efe776a385107c",
+        "value_hash": ""
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:58:45.067775+00:00"
+    },
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:10",
+      "seq": 10,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "7e853b74abba4c9a822c97428f3f7a14",
+      "attempt": "7e853b74abba4c9a822c97428f3f7a14",
+      "node": "operation_checking",
+      "phase": "enter",
+      "call_id": "operation_checking:1",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "actor": "alice",
+        "action": "execute"
+      },
+      "outputs": {
+        "state": "checking",
+        "operation_id": "7e853b74abba4c9a822c97428f3f7a14"
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:58:57.607307+00:00"
+    },
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:11",
+      "seq": 11,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "7e853b74abba4c9a822c97428f3f7a14",
+      "attempt": "7e853b74abba4c9a822c97428f3f7a14",
+      "node": "source_project",
+      "phase": "read",
+      "call_id": "source_project:2",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "project_id": "collect-a"
+      },
+      "outputs": {
+        "project_id": "collect-a",
+        "type": "collection",
+        "owner": "alice",
+        "source_id": null
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:58:57.607674+00:00"
+    },
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:12",
+      "seq": 12,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "7e853b74abba4c9a822c97428f3f7a14",
+      "attempt": "7e853b74abba4c9a822c97428f3f7a14",
+      "node": "source_project",
+      "phase": "read",
+      "call_id": "source_project:3",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "project_id": "process-b"
+      },
+      "outputs": {
+        "project_id": "process-b",
+        "type": "processing",
+        "owner": "bob",
+        "source_id": null
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:58:57.607733+00:00"
+    },
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:13",
+      "seq": 13,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "7e853b74abba4c9a822c97428f3f7a14",
+      "attempt": "7e853b74abba4c9a822c97428f3f7a14",
+      "node": "permission_fact",
+      "phase": "decision",
+      "call_id": "permission_fact:4",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "actor": "alice",
+        "project_id": "collect-a",
+        "action": "connect",
+        "owner_id": "alice"
+      },
+      "outputs": {
+        "owner": true,
+        "explicit_grant": false,
+        "allowed": true
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:58:57.607802+00:00"
+    },
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:14",
+      "seq": 14,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "7e853b74abba4c9a822c97428f3f7a14",
+      "attempt": "7e853b74abba4c9a822c97428f3f7a14",
+      "node": "permission_fact",
+      "phase": "decision",
+      "call_id": "permission_fact:5",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "actor": "alice",
+        "project_id": "process-b",
+        "action": "connect",
+        "owner_id": "bob"
+      },
+      "outputs": {
+        "owner": false,
+        "explicit_grant": true,
+        "allowed": true
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:58:57.607831+00:00"
+    },
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:15",
+      "seq": 15,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "7e853b74abba4c9a822c97428f3f7a14",
+      "attempt": "7e853b74abba4c9a822c97428f3f7a14",
+      "node": "execute_permission",
+      "phase": "decision",
+      "call_id": "execute_permission:6",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "actor": "alice",
+        "source_id": "collect-a",
+        "target_id": "process-b"
+      },
+      "outputs": {
+        "source_allowed": true,
+        "target_allowed": true,
+        "allowed": true
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:58:57.607851+00:00"
+    },
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:16",
+      "seq": 16,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "7e853b74abba4c9a822c97428f3f7a14",
+      "attempt": "7e853b74abba4c9a822c97428f3f7a14",
+      "node": "type_port_rules",
+      "phase": "decision",
+      "call_id": "type_port_rules:7",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "source_type": "collection",
+        "target_type": "processing",
+        "source_port": "records",
+        "target_port": "records",
+        "source_format": "dataset/v1",
+        "target_format": "dataset/v1"
+      },
+      "outputs": {
+        "type_ok": true,
+        "source_output_exists": true,
+        "target_input_exists": true,
+        "format_ok": true,
+        "allowed": true
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:58:57.607941+00:00"
+    },
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:17",
+      "seq": 17,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "7e853b74abba4c9a822c97428f3f7a14",
+      "attempt": "7e853b74abba4c9a822c97428f3f7a14",
+      "node": "transfer_data",
+      "phase": "return",
+      "call_id": "transfer_data:8",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "actor": "alice",
+        "link_id": "10850d3cbb20",
+        "source_id": "collect-a",
+        "target_id": "process-b",
+        "value_hash": "d8b8b951b3518a3add3baf9c2f6ef7df64f285847513e9fc739c96a9aedace32",
+        "source_revision": 1
+      },
+      "outputs": {
+        "before": "{\"old\": true}",
+        "after": "{\"batch\": \"A\", \"items\": [{\"id\": 1, \"value\": 12}]}",
+        "value_hash": "d8b8b951b3518a3add3baf9c2f6ef7df64f285847513e9fc739c96a9aedace32"
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:58:57.608030+00:00"
+    },
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:18",
+      "seq": 18,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "7e853b74abba4c9a822c97428f3f7a14",
+      "attempt": "7e853b74abba4c9a822c97428f3f7a14",
+      "node": "operation_result",
+      "phase": "commit",
+      "call_id": "operation_result:9",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "actor": "alice",
+        "action": "execute"
+      },
+      "outputs": {
+        "operation_id": "7e853b74abba4c9a822c97428f3f7a14",
+        "state": "completed",
+        "reason": "",
+        "effect_id": "7e853b74abba4c9a822c97428f3f7a14",
+        "value_hash": "d8b8b951b3518a3add3baf9c2f6ef7df64f285847513e9fc739c96a9aedace32"
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:58:57.610704+00:00"
+    },
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:19",
+      "seq": 19,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "7e853b74abba4c9a822c97428f3f7a14",
+      "attempt": "7e853b74abba4c9a822c97428f3f7a14",
+      "node": "transfer_effect",
+      "phase": "commit",
+      "call_id": "transfer_effect:10",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "target_id": "process-b",
+        "link_id": "10850d3cbb20"
+      },
+      "outputs": {
+        "operation_id": "7e853b74abba4c9a822c97428f3f7a14",
+        "effect_id": "7e853b74abba4c9a822c97428f3f7a14",
+        "value_hash": "d8b8b951b3518a3add3baf9c2f6ef7df64f285847513e9fc739c96a9aedace32",
+        "before": "{\"old\": true}",
+        "after": "{\"batch\": \"A\", \"items\": [{\"id\": 1, \"value\": 12}]}"
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:58:57.610746+00:00"
+    },
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:20",
+      "seq": 20,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "5233d6dd4142415e9a90b90b37de345e",
+      "attempt": "5233d6dd4142415e9a90b90b37de345e",
+      "node": "operation_checking",
+      "phase": "enter",
+      "call_id": "operation_checking:1",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "actor": "dave",
+        "action": "execute"
+      },
+      "outputs": {
+        "state": "checking",
+        "operation_id": "5233d6dd4142415e9a90b90b37de345e"
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:59:13.644051+00:00"
+    },
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:21",
+      "seq": 21,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "5233d6dd4142415e9a90b90b37de345e",
+      "attempt": "5233d6dd4142415e9a90b90b37de345e",
+      "node": "source_project",
+      "phase": "read",
+      "call_id": "source_project:2",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "project_id": "collect-a"
+      },
+      "outputs": {
+        "project_id": "collect-a",
+        "type": "collection",
+        "owner": "alice",
+        "source_id": null
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:59:13.644446+00:00"
+    },
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:22",
+      "seq": 22,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "5233d6dd4142415e9a90b90b37de345e",
+      "attempt": "5233d6dd4142415e9a90b90b37de345e",
+      "node": "source_project",
+      "phase": "read",
+      "call_id": "source_project:3",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "project_id": "process-b"
+      },
+      "outputs": {
+        "project_id": "process-b",
+        "type": "processing",
+        "owner": "bob",
+        "source_id": null
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:59:13.644500+00:00"
+    },
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:23",
+      "seq": 23,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "5233d6dd4142415e9a90b90b37de345e",
+      "attempt": "5233d6dd4142415e9a90b90b37de345e",
+      "node": "permission_fact",
+      "phase": "decision",
+      "call_id": "permission_fact:4",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "actor": "dave",
+        "project_id": "collect-a",
+        "action": "connect",
+        "owner_id": "alice"
+      },
+      "outputs": {
+        "owner": false,
+        "explicit_grant": true,
+        "allowed": true
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:59:13.644572+00:00"
+    },
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:24",
+      "seq": 24,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "5233d6dd4142415e9a90b90b37de345e",
+      "attempt": "5233d6dd4142415e9a90b90b37de345e",
+      "node": "permission_fact",
+      "phase": "decision",
+      "call_id": "permission_fact:5",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "actor": "dave",
+        "project_id": "process-b",
+        "action": "connect",
+        "owner_id": "bob"
+      },
+      "outputs": {
+        "owner": false,
+        "explicit_grant": false,
+        "allowed": false
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:59:13.644600+00:00"
+    },
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:25",
+      "seq": 25,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "5233d6dd4142415e9a90b90b37de345e",
+      "attempt": "5233d6dd4142415e9a90b90b37de345e",
+      "node": "execute_permission",
+      "phase": "decision",
+      "call_id": "execute_permission:6",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "actor": "dave",
+        "source_id": "collect-a",
+        "target_id": "process-b"
+      },
+      "outputs": {
+        "source_allowed": true,
+        "target_allowed": false,
+        "allowed": false
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:59:13.644620+00:00"
+    },
+    {
+      "schema_version": 3,
+      "id": "1391fd32c883:26",
+      "seq": 26,
+      "run_id": "1391fd32c883",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "model_revision": "1",
+      "entity": "5233d6dd4142415e9a90b90b37de345e",
+      "attempt": "5233d6dd4142415e9a90b90b37de345e",
+      "node": "operation_result",
+      "phase": "commit",
+      "call_id": "operation_result:7",
+      "parent_call_id": null,
+      "basis": {
+        "param_version": 1
+      },
+      "inputs": {
+        "actor": "dave",
+        "action": "execute"
+      },
+      "outputs": {
+        "operation_id": "5233d6dd4142415e9a90b90b37de345e",
+        "state": "rejected",
+        "reason": "connect_denied",
+        "effect_id": "",
+        "value_hash": ""
+      },
+      "depends": [],
+      "observed_at": "2026-10-22T10:59:13.647044+00:00"
+    }
+  ],
+  "commands": [],
+  "gaps": [],
+  "capture": {
+    "mode": "all",
+    "nodes": null,
+    "roots": [],
+    "boundary_nodes": []
+  },
+  "command_fields": [],
+  "scope_excluded": 0,
+  "capture_filtered": 0
+}

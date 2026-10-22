@@ -1,0 +1,23 @@
+{
+  "frozen_inputs_unchanged": true,
+  "frozen_inputs": [
+    {
+      "path": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\intent-fixture.md",
+      "before": "255ed2e4d06013d6999b62afb68adf5036c67c444afbb29b22f5ca5c0efb335e",
+      "current": "255ed2e4d06013d6999b62afb68adf5036c67c444afbb29b22f5ca5c0efb335e"
+    },
+    {
+      "path": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\skills\\business-observer\\SKILL.md",
+      "before": "e17c4ab68414bd1f2d40cb8ca24975a810572705569bec192bd361f644f4a545",
+      "current": "e17c4ab68414bd1f2d40cb8ca24975a810572705569bec192bd361f644f4a545"
+    },
+    {
+      "path": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\skills\\business-observer\\references\\requirements-dialogue.md",
+      "before": "0cbbbc34eee18838e3de2ec1d61795b718634d00cc0886f9086bc9ab95e87d56",
+      "current": "0cbbbc34eee18838e3de2ec1d61795b718634d00cc0886f9086bc9ab95e87d56"
+    }
+  ],
+  "installed_files": 93,
+  "installed_matches_source": true,
+  "mismatches": []
+}

@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-10-22 (main)
+
+- Limit discovery to confirming the user's current intent. Retain clarifications and counterexamples that resolve actual ambiguity, without recommending additional business rules or workflows.
+- Align the Skill, agent prompt, permission guidance and bilingual usage instructions with this boundary. Source mapping, runtime observation and acceptance checks remain required.
+- Preserve an independent project-flow trial with actual simulated dialogue, failed checks, fixes, screenshots and runnable source packages. Its cross-type derivation iteration keeps prior node identities and assertions; the final 33 scenarios run in three observation modes.
+- Point installation instructions to `main` so new installations include the latest changes rather than the older `v0.5.0` tag.
+
 ## 0.5.0
 
 - Move complete example lifecycle, activity, resource, scheduling, cancellation and recovery coordination into `bo_stategraph`; retain old paths as delegates and compare old/new actual behavior.

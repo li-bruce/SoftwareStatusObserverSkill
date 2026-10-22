@@ -1,0 +1,60 @@
+{
+  "active": null,
+  "recordings": [
+    {
+      "id": "cfd2e4de22224d0d88ca203f57ce9bc0",
+      "label": "操作记录",
+      "status": "stopped",
+      "started_at": "2026-10-22T13:35:27.403876+00:00",
+      "ended_at": "2026-10-22T13:36:23.279532+00:00",
+      "build_id": "173a0e7fd4b3634105c12fc6df3dc88456c9a3ec27d1f0e7e48bf2323441ffc5",
+      "events": 26,
+      "commands": 0,
+      "gaps": [],
+      "capture": {
+        "mode": "all",
+        "nodes": null,
+        "roots": [],
+        "boundary_nodes": []
+      },
+      "capture_filtered": 0
+    },
+    {
+      "id": "799093103f7147828203c6e54115fee5",
+      "label": "操作记录",
+      "status": "stopped",
+      "started_at": "2026-10-22T11:23:02.014480+00:00",
+      "ended_at": "2026-10-22T11:23:36.673227+00:00",
+      "build_id": "a930599fbf9839f7b4386aef00cdcdd367ea1790870277aa26554ece5e3f6a8e",
+      "events": 26,
+      "commands": 0,
+      "gaps": [],
+      "capture": {
+        "mode": "all",
+        "nodes": null,
+        "roots": [],
+        "boundary_nodes": []
+      },
+      "capture_filtered": 0
+    },
+    {
+      "id": "b933479dcd8b4b23a57f064536b0d7f4",
+      "label": "操作记录",
+      "status": "stopped",
+      "started_at": "2026-10-22T10:58:38.838626+00:00",
+      "ended_at": "2026-10-22T11:00:35.090019+00:00",
+      "build_id": "8edd2112643f3a858a9287230aa25e3f5bce43eaa09b2d35b0663a085c87202f",
+      "events": 26,
+      "commands": 0,
+      "gaps": [],
+      "capture": {
+        "mode": "all",
+        "nodes": null,
+        "roots": [],
+        "boundary_nodes": []
+      },
+      "capture_filtered": 0
+    }
+  ],
+  "error": ""
+}

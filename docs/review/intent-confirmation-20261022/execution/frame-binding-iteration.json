@@ -1,0 +1,12 @@
+{
+  "recording": "docs\\review\\intent-confirmation-20261022\\browser\\12-iteration-runtime\\recording-cfd2e4de22224d0d88ca203f57ce9bc0.json",
+  "events": 26,
+  "frames": 26,
+  "states": [
+    "checking",
+    "completed",
+    "rejected"
+  ],
+  "errors": [],
+  "passed": true
+}

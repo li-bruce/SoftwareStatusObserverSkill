@@ -1,0 +1,58 @@
+{
+  "stage": "seed",
+  "url": "http://127.0.0.1:8866",
+  "checks": [
+    {
+      "name": "node_drag_changes_position",
+      "passed": true,
+      "before": {
+        "x": 310,
+        "y": 70
+      },
+      "after": {
+        "x": 382.3809523809524,
+        "y": 39.523809523809526
+      }
+    },
+    {
+      "name": "label_note_core_and_position_persist",
+      "passed": true,
+      "position": {
+        "x": 382.3809523809524,
+        "y": 39.523809523809526
+      },
+      "revision": 4
+    },
+    {
+      "name": "same_node_expands_to_region",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "graph": {
+    "model_nodes": [
+      "create_project",
+      "derive_project",
+      "configure_relation",
+      "transfer_data",
+      "source_project",
+      "derive_permission",
+      "relation_permission",
+      "type_port_rules",
+      "execute_permission",
+      "project_created",
+      "project_derived",
+      "relation_configured",
+      "transfer_effect"
+    ],
+    "stage": "design",
+    "metrics": {
+      "nodes": 7,
+      "edges": 6,
+      "texts": 24,
+      "drawCount": 6,
+      "webgl": true
+    }
+  },
+  "passed": true
+}

@@ -1,0 +1,216 @@
+{
+  "scope": "Concrete synthetic project cases and direct SQLite results",
+  "source_hashes": {
+    "app\\__init__.py": "5af4f590235aed9faae5d6b06ec8362046099123b59feb4a5de4000abae28bf6",
+    "app\\domain.py": "174bcf2ef1ea0d8bacea4125d6d6b9696f6f911c301da8e820f5a66e2bfe6663",
+    "app\\ports.py": "953b72f95d8f5959f48b9303a99a13fd4567ce671c29b17027caf14e52a66924",
+    "app\\store.py": "cdb5387033173c5a6891d53482cbaeadd0fb882a45fdf9d7bb33ec96365f357c",
+    "bo_stategraph\\__init__.py": "0571254ae4242ad3f03d8433ff67edf79b46670518492d1a602874a24985cc09",
+    "bo_stategraph\\bo_contracts.py": "c2de500b94af9f2fb3549bdbb46a7251dc7e0145f3b0d60896ea99df2f4933e5",
+    "bo_stategraph\\execution_contract.py": "9502b2d348bb8ee00c05288ca3d064d151365292fdef597c156c178871635b78",
+    "bo_stategraph\\query.py": "62f7f54134a138019c05f75751d3f760c196985a41ed53371f31fe9402206ec0",
+    "bo_stategraph\\workflow.py": "9d06567642ebd5ec6e34a3fd5d71c3f88ad1790068497f19912ebbe9dbfddde3"
+  },
+  "source_unchanged_during_check": true,
+  "check_script_sha256": "6c8ac976ecb0af8ee7e61fc97cd7b8684ebde6cfd7a8a737b08f85fa9f30aa10",
+  "checks": [
+    {
+      "name": "create_owner_type_and_independent_origin",
+      "passed": true,
+      "evidence": {
+        "id": "03af34e524c5",
+        "name": "Independent",
+        "type": "report",
+        "owner": "alice",
+        "source_id": null
+      }
+    },
+    {
+      "name": "derive_grantee_without_copying_data_grants_or_links",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "bcfb40ca7505",
+          "name": "Derived",
+          "type": "collection",
+          "owner": "bob",
+          "source_id": "collect-a"
+        },
+        "data": 0,
+        "grants": 0,
+        "links": 0
+      }
+    },
+    {
+      "name": "derive_permission_is_distinct_from_connect",
+      "passed": true,
+      "evidence": {
+        "ok": false,
+        "code": "derive_denied",
+        "operation_id": "b4067732031c45f0ae633dcfb7df5bc3"
+      }
+    },
+    {
+      "name": "independent_projects_connect_without_transferring",
+      "passed": true,
+      "evidence": {
+        "result": {
+          "link_id": "ebd1c929b68a",
+          "ok": true,
+          "operation_id": "ad849532223840e284e3568b729735b8"
+        },
+        "target_unchanged": true,
+        "both_independent": true
+      }
+    },
+    {
+      "name": "both_endpoint_permissions_required_dave",
+      "passed": true,
+      "evidence": {
+        "ok": false,
+        "code": "connect_denied",
+        "operation_id": "d434bcaaa18543f7a4ce485fd2c4aff0"
+      }
+    },
+    {
+      "name": "both_endpoint_permissions_required_carol",
+      "passed": true,
+      "evidence": {
+        "ok": false,
+        "code": "connect_denied",
+        "operation_id": "0cc1df73b6c84d249f82967997cbe801"
+      }
+    },
+    {
+      "name": "preset_type_pair_rejected",
+      "passed": true,
+      "evidence": {
+        "ok": false,
+        "code": "invalid_path",
+        "operation_id": "ce1ba30b956f43419aa8dd5a8e5b5dec"
+      }
+    },
+    {
+      "name": "missing_port",
+      "passed": true,
+      "evidence": {
+        "ok": false,
+        "code": "invalid_path",
+        "operation_id": "4044c43d8ee646d8bb0d8e37ccedb08f"
+      }
+    },
+    {
+      "name": "wrong_direction",
+      "passed": true,
+      "evidence": {
+        "ok": false,
+        "code": "invalid_path",
+        "operation_id": "eda62bde0d1142a784cb0da6fd485c66"
+      }
+    },
+    {
+      "name": "execute_rechecks_revoke_target",
+      "passed": true,
+      "evidence": {
+        "result": {
+          "ok": false,
+          "code": "connect_denied",
+          "operation_id": "1151757162744f4d829e6fbcb1361f77"
+        },
+        "stored_state": "rejected",
+        "target_unchanged": true
+      }
+    },
+    {
+      "name": "execute_rechecks_change_format",
+      "passed": true,
+      "evidence": {
+        "result": {
+          "ok": false,
+          "code": "invalid_path",
+          "operation_id": "38168c97fdc64d50bf7f7f39b19f1ea7"
+        },
+        "stored_state": "rejected",
+        "target_unchanged": true
+      }
+    },
+    {
+      "name": "execute_rechecks_remove_type_rule",
+      "passed": true,
+      "evidence": {
+        "result": {
+          "ok": false,
+          "code": "invalid_path",
+          "operation_id": "5f94ee2f504340ec8db7437dd1dec2c4"
+        },
+        "stored_state": "rejected",
+        "target_unchanged": true
+      }
+    },
+    {
+      "name": "copies_current_json_without_continuous_transfer",
+      "passed": true,
+      "evidence": {
+        "result": {
+          "link_id": "e3fae1161610",
+          "before_preview": "{\"old\": true}",
+          "after_preview": "{\"message\": \"sample\", \"nested\": {\"items\": [1, {\"value\": false}, null]}}",
+          "ok": true,
+          "operation_id": "d08f2bbb8b9c499c833e9a07815bb52f"
+        },
+        "copied_value": {
+          "message": "sample",
+          "nested": {
+            "items": [
+              1,
+              {
+                "value": false
+              },
+              null
+            ]
+          }
+        },
+        "source_later_change_did_not_rewrite_target": true
+      }
+    },
+    {
+      "name": "observer_off_does_not_change_business",
+      "passed": true,
+      "evidence": {
+        "business_ok": true,
+        "injected_failure_calls": 0
+      }
+    },
+    {
+      "name": "observer_failing_sink_does_not_change_business",
+      "passed": true,
+      "evidence": {
+        "business_ok": true,
+        "injected_failure_calls": 21
+      }
+    },
+    {
+      "name": "observer_failing_factory_does_not_change_business",
+      "passed": true,
+      "evidence": {
+        "business_ok": true,
+        "injected_failure_calls": 2
+      }
+    },
+    {
+      "name": "illegal_transition_fails",
+      "passed": true,
+      "evidence": {
+        "rejected": true
+      }
+    },
+    {
+      "name": "malformed_definition_fails",
+      "passed": true,
+      "evidence": {
+        "rejected": true
+      }
+    }
+  ],
+  "passed": true
+}

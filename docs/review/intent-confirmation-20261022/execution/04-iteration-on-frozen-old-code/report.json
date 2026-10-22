@@ -1,0 +1,325 @@
+{
+  "scope": "Authorized optional derivation type, inherited defaults, no copied rows, current permission/type/port rules, and real event frames",
+  "source_hashes": {
+    "app/__init__.py": "5af4f590235aed9faae5d6b06ec8362046099123b59feb4a5de4000abae28bf6",
+    "app/domain.py": "174bcf2ef1ea0d8bacea4125d6d6b9696f6f911c301da8e820f5a66e2bfe6663",
+    "app/ports.py": "953b72f95d8f5959f48b9303a99a13fd4567ce671c29b17027caf14e52a66924",
+    "app/store.py": "cdb5387033173c5a6891d53482cbaeadd0fb882a45fdf9d7bb33ec96365f357c",
+    "bo_stategraph/__init__.py": "0571254ae4242ad3f03d8433ff67edf79b46670518492d1a602874a24985cc09",
+    "bo_stategraph/bo_contracts.py": "c2de500b94af9f2fb3549bdbb46a7251dc7e0145f3b0d60896ea99df2f4933e5",
+    "bo_stategraph/execution_contract.py": "9502b2d348bb8ee00c05288ca3d064d151365292fdef597c156c178871635b78",
+    "bo_stategraph/query.py": "62f7f54134a138019c05f75751d3f760c196985a41ed53371f31fe9402206ec0",
+    "bo_stategraph/workflow.py": "9d06567642ebd5ec6e34a3fd5d71c3f88ad1790068497f19912ebbe9dbfddde3",
+    "integrations/__init__.py": "f45cffd99b0081cef3ea20dc83ddd565b9a831de1ac8b6d9cbf9087ab2aae42e",
+    "integrations/bo_adapter.py": "c2126cd46070f3a5979e092c47b43e82a782e71d2a1ca80cc9b6e2ccf54fa1dd",
+    "integrations/bo_server.py": "3e771dc43c12501f06d2042bbac91f9cfa03534b8bc001da0a7ba3d0f6f8ed8f"
+  },
+  "source_unchanged_during_check": true,
+  "script_sha256": "e5d5e387b283a85c5bfd9e20e89336f60a791a286698b6c6cc1cea0e69ad058b",
+  "checks": [
+    {
+      "name": "on_explicit_collection",
+      "passed": false,
+      "error": "TypeError(\"Projects.derive_project() got an unexpected keyword argument 'project_type'\")",
+      "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 29, in check\n    results.append({'name': name, 'passed': True, 'evidence': fn()})\n                                                              ~~^^\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 72, in explicit\n    result = app.derive_project('bob', 'collect-a', 'Independent', project_type=target_type)\nTypeError: Projects.derive_project() got an unexpected keyword argument 'project_type'\n"
+    },
+    {
+      "name": "on_explicit_processing",
+      "passed": false,
+      "error": "TypeError(\"Projects.derive_project() got an unexpected keyword argument 'project_type'\")",
+      "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 29, in check\n    results.append({'name': name, 'passed': True, 'evidence': fn()})\n                                                              ~~^^\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 72, in explicit\n    result = app.derive_project('bob', 'collect-a', 'Independent', project_type=target_type)\nTypeError: Projects.derive_project() got an unexpected keyword argument 'project_type'\n"
+    },
+    {
+      "name": "on_explicit_report",
+      "passed": false,
+      "error": "TypeError(\"Projects.derive_project() got an unexpected keyword argument 'project_type'\")",
+      "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 29, in check\n    results.append({'name': name, 'passed': True, 'evidence': fn()})\n                                                              ~~^^\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 72, in explicit\n    result = app.derive_project('bob', 'collect-a', 'Independent', project_type=target_type)\nTypeError: Projects.derive_project() got an unexpected keyword argument 'project_type'\n"
+    },
+    {
+      "name": "on_default_collection",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "8b5b42457c33",
+          "name": "Default",
+          "type": "collection",
+          "owner": "bob",
+          "source_id": "collect-a"
+        },
+        "runtime": {
+          "mode": "on",
+          "events": 6,
+          "frames": 6,
+          "operation_id": "34419de18da6466fb8ffcc35b425d059",
+          "derive_events": [
+            {
+              "id": "b05a971169fc:5",
+              "node": "derive_project",
+              "inputs": {
+                "actor": "bob",
+                "source_id": "collect-a"
+              },
+              "outputs": {
+                "project_id": "8b5b42457c33",
+                "owner": "bob",
+                "type": "collection",
+                "source_id": "collect-a"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "on_default_processing",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "108895c8f673",
+          "name": "Default",
+          "type": "processing",
+          "owner": "bob",
+          "source_id": "process-b"
+        },
+        "runtime": {
+          "mode": "on",
+          "events": 6,
+          "frames": 6,
+          "operation_id": "508c71e532974f99b903eae4e25c37bf",
+          "derive_events": [
+            {
+              "id": "45c8ad4c357a:5",
+              "node": "derive_project",
+              "inputs": {
+                "actor": "bob",
+                "source_id": "process-b"
+              },
+              "outputs": {
+                "project_id": "108895c8f673",
+                "owner": "bob",
+                "type": "processing",
+                "source_id": "process-b"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "on_default_report",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "01efbb01af75",
+          "name": "Default",
+          "type": "report",
+          "owner": "carol",
+          "source_id": "report-c"
+        },
+        "runtime": {
+          "mode": "on",
+          "events": 6,
+          "frames": 6,
+          "operation_id": "2b64d8dd4c884ecca25426b1067d81a0",
+          "derive_events": [
+            {
+              "id": "22bbea6ef663:5",
+              "node": "derive_project",
+              "inputs": {
+                "actor": "carol",
+                "source_id": "report-c"
+              },
+              "outputs": {
+                "project_id": "01efbb01af75",
+                "owner": "carol",
+                "type": "report",
+                "source_id": "report-c"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "on_unauthorized",
+      "passed": false,
+      "error": "TypeError(\"Projects.derive_project() got an unexpected keyword argument 'project_type'\")",
+      "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 29, in check\n    results.append({'name': name, 'passed': True, 'evidence': fn()})\n                                                              ~~^^\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 102, in denied\n    result = app.derive_project(actor, 'collect-a', 'Rejected', project_type=requested)\nTypeError: Projects.derive_project() got an unexpected keyword argument 'project_type'\n"
+    },
+    {
+      "name": "on_unknown_type",
+      "passed": false,
+      "error": "TypeError(\"Projects.derive_project() got an unexpected keyword argument 'project_type'\")",
+      "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 29, in check\n    results.append({'name': name, 'passed': True, 'evidence': fn()})\n                                                              ~~^^\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 102, in denied\n    result = app.derive_project(actor, 'collect-a', 'Rejected', project_type=requested)\nTypeError: Projects.derive_project() got an unexpected keyword argument 'project_type'\n"
+    },
+    {
+      "name": "off_explicit_collection",
+      "passed": false,
+      "error": "TypeError(\"Projects.derive_project() got an unexpected keyword argument 'project_type'\")",
+      "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 29, in check\n    results.append({'name': name, 'passed': True, 'evidence': fn()})\n                                                              ~~^^\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 72, in explicit\n    result = app.derive_project('bob', 'collect-a', 'Independent', project_type=target_type)\nTypeError: Projects.derive_project() got an unexpected keyword argument 'project_type'\n"
+    },
+    {
+      "name": "off_explicit_processing",
+      "passed": false,
+      "error": "TypeError(\"Projects.derive_project() got an unexpected keyword argument 'project_type'\")",
+      "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 29, in check\n    results.append({'name': name, 'passed': True, 'evidence': fn()})\n                                                              ~~^^\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 72, in explicit\n    result = app.derive_project('bob', 'collect-a', 'Independent', project_type=target_type)\nTypeError: Projects.derive_project() got an unexpected keyword argument 'project_type'\n"
+    },
+    {
+      "name": "off_explicit_report",
+      "passed": false,
+      "error": "TypeError(\"Projects.derive_project() got an unexpected keyword argument 'project_type'\")",
+      "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 29, in check\n    results.append({'name': name, 'passed': True, 'evidence': fn()})\n                                                              ~~^^\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 72, in explicit\n    result = app.derive_project('bob', 'collect-a', 'Independent', project_type=target_type)\nTypeError: Projects.derive_project() got an unexpected keyword argument 'project_type'\n"
+    },
+    {
+      "name": "off_default_collection",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "a20d88a12bb8",
+          "name": "Default",
+          "type": "collection",
+          "owner": "bob",
+          "source_id": "collect-a"
+        },
+        "runtime": {
+          "mode": "off",
+          "export_valid": true
+        }
+      }
+    },
+    {
+      "name": "off_default_processing",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "007eb40c89f5",
+          "name": "Default",
+          "type": "processing",
+          "owner": "bob",
+          "source_id": "process-b"
+        },
+        "runtime": {
+          "mode": "off",
+          "export_valid": true
+        }
+      }
+    },
+    {
+      "name": "off_default_report",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "c324119adc52",
+          "name": "Default",
+          "type": "report",
+          "owner": "carol",
+          "source_id": "report-c"
+        },
+        "runtime": {
+          "mode": "off",
+          "export_valid": true
+        }
+      }
+    },
+    {
+      "name": "off_unauthorized",
+      "passed": false,
+      "error": "TypeError(\"Projects.derive_project() got an unexpected keyword argument 'project_type'\")",
+      "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 29, in check\n    results.append({'name': name, 'passed': True, 'evidence': fn()})\n                                                              ~~^^\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 102, in denied\n    result = app.derive_project(actor, 'collect-a', 'Rejected', project_type=requested)\nTypeError: Projects.derive_project() got an unexpected keyword argument 'project_type'\n"
+    },
+    {
+      "name": "off_unknown_type",
+      "passed": false,
+      "error": "TypeError(\"Projects.derive_project() got an unexpected keyword argument 'project_type'\")",
+      "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 29, in check\n    results.append({'name': name, 'passed': True, 'evidence': fn()})\n                                                              ~~^^\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 102, in denied\n    result = app.derive_project(actor, 'collect-a', 'Rejected', project_type=requested)\nTypeError: Projects.derive_project() got an unexpected keyword argument 'project_type'\n"
+    },
+    {
+      "name": "fault_explicit_collection",
+      "passed": false,
+      "error": "TypeError(\"Projects.derive_project() got an unexpected keyword argument 'project_type'\")",
+      "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 29, in check\n    results.append({'name': name, 'passed': True, 'evidence': fn()})\n                                                              ~~^^\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 72, in explicit\n    result = app.derive_project('bob', 'collect-a', 'Independent', project_type=target_type)\nTypeError: Projects.derive_project() got an unexpected keyword argument 'project_type'\n"
+    },
+    {
+      "name": "fault_explicit_processing",
+      "passed": false,
+      "error": "TypeError(\"Projects.derive_project() got an unexpected keyword argument 'project_type'\")",
+      "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 29, in check\n    results.append({'name': name, 'passed': True, 'evidence': fn()})\n                                                              ~~^^\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 72, in explicit\n    result = app.derive_project('bob', 'collect-a', 'Independent', project_type=target_type)\nTypeError: Projects.derive_project() got an unexpected keyword argument 'project_type'\n"
+    },
+    {
+      "name": "fault_explicit_report",
+      "passed": false,
+      "error": "TypeError(\"Projects.derive_project() got an unexpected keyword argument 'project_type'\")",
+      "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 29, in check\n    results.append({'name': name, 'passed': True, 'evidence': fn()})\n                                                              ~~^^\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 72, in explicit\n    result = app.derive_project('bob', 'collect-a', 'Independent', project_type=target_type)\nTypeError: Projects.derive_project() got an unexpected keyword argument 'project_type'\n"
+    },
+    {
+      "name": "fault_default_collection",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "064da791e56d",
+          "name": "Default",
+          "type": "collection",
+          "owner": "bob",
+          "source_id": "collect-a"
+        },
+        "runtime": {
+          "mode": "fault",
+          "export_valid": true
+        }
+      }
+    },
+    {
+      "name": "fault_default_processing",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "711ceead0d27",
+          "name": "Default",
+          "type": "processing",
+          "owner": "bob",
+          "source_id": "process-b"
+        },
+        "runtime": {
+          "mode": "fault",
+          "export_valid": true
+        }
+      }
+    },
+    {
+      "name": "fault_default_report",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "a70c9e7b0585",
+          "name": "Default",
+          "type": "report",
+          "owner": "carol",
+          "source_id": "report-c"
+        },
+        "runtime": {
+          "mode": "fault",
+          "export_valid": true
+        }
+      }
+    },
+    {
+      "name": "fault_unauthorized",
+      "passed": false,
+      "error": "TypeError(\"Projects.derive_project() got an unexpected keyword argument 'project_type'\")",
+      "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 29, in check\n    results.append({'name': name, 'passed': True, 'evidence': fn()})\n                                                              ~~^^\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 102, in denied\n    result = app.derive_project(actor, 'collect-a', 'Rejected', project_type=requested)\nTypeError: Projects.derive_project() got an unexpected keyword argument 'project_type'\n"
+    },
+    {
+      "name": "fault_unknown_type",
+      "passed": false,
+      "error": "TypeError(\"Projects.derive_project() got an unexpected keyword argument 'project_type'\")",
+      "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 29, in check\n    results.append({'name': name, 'passed': True, 'evidence': fn()})\n                                                              ~~^^\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 102, in denied\n    result = app.derive_project(actor, 'collect-a', 'Rejected', project_type=requested)\nTypeError: Projects.derive_project() got an unexpected keyword argument 'project_type'\n"
+    },
+    {
+      "name": "resulting_type_controls_ports_without_inheritance",
+      "passed": false,
+      "error": "TypeError(\"Projects.derive_project() got an unexpected keyword argument 'project_type'\")",
+      "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 29, in check\n    results.append({'name': name, 'passed': True, 'evidence': fn()})\n                                                              ~~^^\n  File \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\docs\\review\\intent-confirmation-20261022\\check_iteration.py\", line 114, in resulting_type_controls_ports\n    derived = app.derive_project('bob','collect-a','Report',project_type='report')\nTypeError: Projects.derive_project() got an unexpected keyword argument 'project_type'\n"
+    }
+  ],
+  "passed": false
+}

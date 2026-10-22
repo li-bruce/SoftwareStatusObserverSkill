@@ -1,0 +1,215 @@
+{
+  "scope": "Stable graph identities and previous assertions; authorized R2 meaning changes reviewed separately",
+  "checks": [
+    {
+      "name": "existing_graph_node_ids_retained",
+      "passed": true,
+      "before": 28,
+      "after": 29,
+      "missing": []
+    },
+    {
+      "name": "existing_source_anchors_retained",
+      "passed": true,
+      "changed": []
+    },
+    {
+      "name": "authored_edge_ids_retained",
+      "passed": true
+    },
+    {
+      "name": "declared_machine_not_silently_replaced",
+      "passed": true
+    },
+    {
+      "name": "original_business_case_expectations_preserved",
+      "passed": true,
+      "before_cases": 25,
+      "after_cases": 33
+    },
+    {
+      "name": "acceptance.json:checks:old_assertions_preserved",
+      "passed": true,
+      "before_count": 74,
+      "after_count": 136
+    },
+    {
+      "name": "acceptance.json:model_checks:old_assertions_preserved",
+      "passed": true,
+      "before_count": 0,
+      "after_count": 0
+    },
+    {
+      "name": "whitebox.json:checks:old_assertions_preserved",
+      "passed": true,
+      "before_count": 17,
+      "after_count": 24
+    },
+    {
+      "name": "mapping.json:fields:old_assertions_preserved",
+      "passed": true,
+      "before_count": 11,
+      "after_count": 11
+    },
+    {
+      "name": "mapping.json:cases:old_assertions_preserved",
+      "passed": true,
+      "before_count": 25,
+      "after_count": 33
+    },
+    {
+      "name": "existing_capture_fields_not_removed",
+      "passed": true
+    }
+  ],
+  "details": {
+    "derive_capture_before": {
+      "in": {
+        "actor": "string",
+        "source_id": "string"
+      },
+      "out": {
+        "project_id": "string",
+        "owner": "string",
+        "type": "string",
+        "source_id": "string"
+      }
+    },
+    "derive_capture_after": {
+      "in": {
+        "actor": "string",
+        "source_id": "string",
+        "target_type": "string",
+        "source_type": "string"
+      },
+      "out": {
+        "project_id": "string",
+        "owner": "string",
+        "type": "string",
+        "source_id": "string"
+      }
+    },
+    "derive_labels_before": {
+      "derive_project": "派生新项目",
+      "project_derived": "独立新项目：同类型、记录来源"
+    },
+    "derive_labels_after": {
+      "derive_project": "派生新项目",
+      "project_derived": "独立空项目：可选类型、记录来源"
+    },
+    "new_graph_node_ids": [
+      "derive_type"
+    ],
+    "changed_existing_files": [
+      {
+        "path": "acceptance.json",
+        "change": "modified",
+        "before_sha256": "764bfa2c17e6bb4b0285499aed41e178df69e3ea1d2444c2d4ec3689d2848536",
+        "after_sha256": "dce7ff7997a3f337397be1d745cdbb7d9447c2f860020944a057cd9e276918b4"
+      },
+      {
+        "path": "app/domain.py",
+        "change": "modified",
+        "before_sha256": "174bcf2ef1ea0d8bacea4125d6d6b9696f6f911c301da8e820f5a66e2bfe6663",
+        "after_sha256": "c1a270bf5d92bfd5f4f10194b9ed0a1f45e8ae91baa6ca3e1c42f187172f3854"
+      },
+      {
+        "path": "behavior.json",
+        "change": "modified",
+        "before_sha256": "6079f4bfffc9b432944f2980bc47f5f17cbbafe47aee0c99db46a93f087455b8",
+        "after_sha256": "d401f25f15dfef8932345fefaa9fdd4abd96cfcd3ecc5169abf96d9ce9f8314f"
+      },
+      {
+        "path": "bo_stategraph/config/design-focus.json",
+        "change": "modified",
+        "before_sha256": "7a4cd2d69a3a032f451e857f2ae1802e59008ea54491528105ccbb4eee28a335",
+        "after_sha256": "d8fec9211abb0ab90c991c7a1b8c87e93fb4e2f15591ec953ec6368f16d4fdd2"
+      },
+      {
+        "path": "discovery.json",
+        "change": "modified",
+        "before_sha256": "865176579a6a3c8e4645b59f2d7321af1d6bef2230b5af57bb55c7652a483775",
+        "after_sha256": "4fc1c6b9a7f6306068b23a3b74a451afdda62306ab6d8e0cb05d4ab9038206b5"
+      },
+      {
+        "path": "integrations/bo_server.py",
+        "change": "modified",
+        "before_sha256": "3e771dc43c12501f06d2042bbac91f9cfa03534b8bc001da0a7ba3d0f6f8ed8f",
+        "after_sha256": "aac74a8fbccd8d28e1810e846d4395509c67f015613be0221e70b06e135ea643"
+      },
+      {
+        "path": "intent.json",
+        "change": "modified",
+        "before_sha256": "d501b8a7e40a8aaefb7339f268963f0b29f3bac10c1fe06ba35c282bec6f1b95",
+        "after_sha256": "e792a0473fa3083bdf6aa67c04c68290aeb638df8ca08151f6cf285f185ef1e9"
+      },
+      {
+        "path": "mapping.json",
+        "change": "modified",
+        "before_sha256": "9738d68f75c0027398c43306c45da6f2ecb67960cd14f62868be0d280d821bfd",
+        "after_sha256": "486c011e0819dc96917b02047ae4c6c67c997023e9500b18fe7411ecfd160276"
+      },
+      {
+        "path": "ownership.json",
+        "change": "modified",
+        "before_sha256": "c1b07e65cf32d2827ca1c5db6e6f931e409adc67d0dfe8837c60dff59ef8b376",
+        "after_sha256": "6916db4667de693fd2413faaebeaebfa5fe617f6315591bf04cdc862d66b9b2b"
+      },
+      {
+        "path": "requirements.md",
+        "change": "modified",
+        "before_sha256": "6d528426d26344591c2c678ebbc43c051c7e6666c44e10ecdd1343ef8a449f8d",
+        "after_sha256": "3a63bba7eb5e640658d1ba5e2a1bd2f0fc12d20e3b04a2013c736f00209ccda8"
+      },
+      {
+        "path": "static/app.html",
+        "change": "modified",
+        "before_sha256": "6a4d3dfcb3784764e355c6df3fa94874017caf4dbc7b208a9ae63f2d53011c2c",
+        "after_sha256": "e74929e3acb645456b59d50d3f469f3e9e2a244307df21ff648f98b65c6bfe8c"
+      },
+      {
+        "path": "static/app.js",
+        "change": "modified",
+        "before_sha256": "a9e64338b819578b77f158b9b8b7809f11c5eb12eed0bfeeeef54a3a845d6f16",
+        "after_sha256": "928ae0a8bf3e9b54aeb658514afb3d349d9caf262daefb395c1067c6f9b30f7a"
+      },
+      {
+        "path": "sync.json",
+        "change": "modified",
+        "before_sha256": "44f13baa931992bf583a5614d3e31a97df499dd17f93cbe1218ff257d47e271b",
+        "after_sha256": "bdbe1ef103cf000256e67f4164ec8a715c6f48a8d9f7b4c8d3c58a9eb1e9cc7e"
+      },
+      {
+        "path": "tests/cases.json",
+        "change": "modified",
+        "before_sha256": "f09b038c3dba9cbd0658cdd7126979e398d7536c377a5fa850d525a8e5ef08ba",
+        "after_sha256": "7f826cb9f2471936692f8ad39cd1ed6ca7ca6e29536248b7301e9f7f6f8b4c9a"
+      },
+      {
+        "path": "tests/scenarios.py",
+        "change": "modified",
+        "before_sha256": "93e0207f8887796ef81098dc633057bfe528902f92e624c34b0fe778c2e30aa6",
+        "after_sha256": "af896a94bfc364081ddc01243cb5c3a5ac9b49b47984cf4fa25b6772a683a516"
+      },
+      {
+        "path": "tooling/build_model.py",
+        "change": "modified",
+        "before_sha256": "e25bbec947bc60fe29a6ec26caaad3a088116563ea7c335d0505e497350e953c",
+        "after_sha256": "e41b7034c5d9eed8c8941a659551ce6330304b030d5d2a1819600f953b7d34f5"
+      },
+      {
+        "path": "tooling/review_candidate.py",
+        "change": "modified",
+        "before_sha256": "33f5ac798b3f0bd6af6a373f4a01fc8004464705a2cf9d95419f6e122b95d6bb",
+        "after_sha256": "19c01a79c8da1093c489d6143c41d324678811f556150a58dc1ce00d615b86f5"
+      },
+      {
+        "path": "whitebox.json",
+        "change": "modified",
+        "before_sha256": "54ed3663cc305f27152ae4b8076e476418c11762e9c0a6066cf87b4d83fe2232",
+        "after_sha256": "1a102d2b3217aa0673ac88ad910aa11ce975faa88663496150f562ad674c4946"
+      }
+    ]
+  },
+  "passed": true
+}

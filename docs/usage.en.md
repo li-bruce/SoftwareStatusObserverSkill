@@ -8,12 +8,12 @@ Install the complete `business-observer` directory, not just `SKILL.md`. In a ne
 
 ```text
 Use $business-observer to add approval to file exports.
-Exports require authorization and content checks. Clarify concurrency,
-failure and retry rules before implementation. Let me inspect decision
-conditions, key parameters and responsible functions in the runtime graph.
+Exports require authorization and content checks. Build a graph from this
+description and confirm that it reflects my intent before implementation.
+Let me inspect decisions, key parameters and functions in the runtime graph.
 ```
 
-The Skill first discusses a focused graph with you and asks about unclear behavior. Once that is clear, continue with your project's development approach. The agent maintains state definitions, mappings, probes and checks internally. At the end of each iteration, open the updated graph, expand details, search for key parameters and functions, and request further changes. You do not need to fill in review files or run synchronization commands yourself.
+The Skill first builds a focused graph from your description, then uses necessary clarifications or counterexamples to confirm its interpretation. It does not proactively expand the workflow or recommend business rules. Later additions from you or another Skill update the same graph and its checks. Once that is clear, continue with your project's development approach. The agent maintains state definitions, mappings, probes and checks internally. At the end of each iteration, open the updated graph, expand details, search for key parameters and functions, and request further changes. You do not need to fill in review files or run synchronization commands yourself.
 
 ## Read the graph
 

@@ -1,0 +1,55 @@
+{
+  "export_valid": true,
+  "nodes": 28,
+  "instances": 5,
+  "recordings": [
+    {
+      "id": "b933479dcd8b4b23a57f064536b0d7f4",
+      "events": 26,
+      "keys": [
+        "schema",
+        "id",
+        "label",
+        "status",
+        "started_at",
+        "ended_at",
+        "build_id",
+        "run_id",
+        "start_seq",
+        "end_seq",
+        "context",
+        "final",
+        "sources",
+        "events",
+        "commands",
+        "gaps",
+        "capture",
+        "command_fields",
+        "scope_excluded",
+        "capture_filtered"
+      ],
+      "event_keys": [
+        "schema_version",
+        "id",
+        "seq",
+        "run_id",
+        "build_id",
+        "model_revision",
+        "entity",
+        "attempt",
+        "node",
+        "phase",
+        "call_id",
+        "parent_call_id",
+        "basis",
+        "inputs",
+        "outputs",
+        "depends",
+        "observed_at"
+      ],
+      "gaps": [],
+      "unbound_events": [],
+      "value_changes": 2
+    }
+  ]
+}

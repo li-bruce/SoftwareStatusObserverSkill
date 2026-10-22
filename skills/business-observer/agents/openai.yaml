@@ -1,4 +1,4 @@
 interface:
   display_name: "开发者业务行为图"
-  short_description: "先通过对话理清业务和状态，开发中自动维护运行图，让开发者查看变化、参数和源码"
-  default_prompt: "使用 $business-observer 开发这个功能：先用图帮我理清业务和状态，开发过程自行维护图与检查，完成后让我查看变化和运行结果。"
+  short_description: "根据用户描述建图，通过对话确认理解，开发中维护运行图、参数和源码关联"
+  default_prompt: "使用 $business-observer 开发这个功能：根据我的描述建图并确认理解一致，开发过程自行维护图与检查，完成后让我查看变化和运行结果。"

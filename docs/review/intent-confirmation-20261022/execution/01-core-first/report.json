@@ -1,0 +1,203 @@
+{
+  "scope": "Concrete synthetic project cases and direct SQLite results",
+  "checks": [
+    {
+      "name": "create_owner_type_and_independent_origin",
+      "passed": true,
+      "evidence": {
+        "id": "e1dba72ed4d6",
+        "name": "Independent",
+        "type": "report",
+        "owner": "alice",
+        "source_id": null
+      }
+    },
+    {
+      "name": "derive_grantee_without_copying_data_grants_or_links",
+      "passed": true,
+      "evidence": {
+        "project": {
+          "id": "91246fba1a2f",
+          "name": "Derived",
+          "type": "collection",
+          "owner": "bob",
+          "source_id": "collect-a"
+        },
+        "data": 0,
+        "grants": 0,
+        "links": 0
+      }
+    },
+    {
+      "name": "derive_permission_is_distinct_from_connect",
+      "passed": true,
+      "evidence": {
+        "ok": false,
+        "code": "derive_denied",
+        "operation_id": "308111bb55574fb1a885393ebdfb0d5f"
+      }
+    },
+    {
+      "name": "independent_projects_connect_without_transferring",
+      "passed": true,
+      "evidence": {
+        "result": {
+          "link_id": "8fc09471d472",
+          "ok": true,
+          "operation_id": "d295a345bdf044c3b0037932dfa74314"
+        },
+        "target_unchanged": true,
+        "both_independent": true
+      }
+    },
+    {
+      "name": "both_endpoint_permissions_required_dave",
+      "passed": true,
+      "evidence": {
+        "ok": false,
+        "code": "connect_denied",
+        "operation_id": "e725f1eb0d5f4403b515535e2facaccc"
+      }
+    },
+    {
+      "name": "both_endpoint_permissions_required_carol",
+      "passed": true,
+      "evidence": {
+        "ok": false,
+        "code": "connect_denied",
+        "operation_id": "a818b8b6710a484f80359fe9ec3107a9"
+      }
+    },
+    {
+      "name": "preset_type_pair_rejected",
+      "passed": true,
+      "evidence": {
+        "ok": false,
+        "code": "invalid_path",
+        "operation_id": "ec205eabb2364b54a18ab89822649fff"
+      }
+    },
+    {
+      "name": "missing_port",
+      "passed": true,
+      "evidence": {
+        "ok": false,
+        "code": "invalid_path",
+        "operation_id": "2c504a235d604895aa7d64dd0b0baf64"
+      }
+    },
+    {
+      "name": "wrong_direction",
+      "passed": true,
+      "evidence": {
+        "ok": false,
+        "code": "invalid_path",
+        "operation_id": "6b1a76f7e87640bfa44471501be55852"
+      }
+    },
+    {
+      "name": "execute_rechecks_revoke_target",
+      "passed": true,
+      "evidence": {
+        "result": {
+          "ok": false,
+          "code": "connect_denied",
+          "operation_id": "1f462d890d344527896fe7a9d533ccae"
+        },
+        "stored_state": "rejected",
+        "target_unchanged": true
+      }
+    },
+    {
+      "name": "execute_rechecks_change_format",
+      "passed": true,
+      "evidence": {
+        "result": {
+          "ok": false,
+          "code": "invalid_path",
+          "operation_id": "99c11338914b4e7cad0c364e50ca3909"
+        },
+        "stored_state": "rejected",
+        "target_unchanged": true
+      }
+    },
+    {
+      "name": "execute_rechecks_remove_type_rule",
+      "passed": true,
+      "evidence": {
+        "result": {
+          "ok": false,
+          "code": "invalid_path",
+          "operation_id": "51b905cd8db148e5ac009e6dfeb7a640"
+        },
+        "stored_state": "rejected",
+        "target_unchanged": true
+      }
+    },
+    {
+      "name": "copies_current_json_without_continuous_transfer",
+      "passed": true,
+      "evidence": {
+        "result": {
+          "link_id": "ba636c23a06b",
+          "before_preview": "{\"old\": true}",
+          "after_preview": "{\"message\": \"sample\", \"nested\": {\"items\": [1, {\"value\": false}, null]}}",
+          "ok": true,
+          "operation_id": "9b2e7b6f55414ecb9cf4621d812221a7"
+        },
+        "copied_value": {
+          "message": "sample",
+          "nested": {
+            "items": [
+              1,
+              {
+                "value": false
+              },
+              null
+            ]
+          }
+        },
+        "source_later_change_did_not_rewrite_target": true
+      }
+    },
+    {
+      "name": "observer_off_does_not_change_business",
+      "passed": true,
+      "evidence": {
+        "business_ok": true,
+        "injected_failure_calls": 0
+      }
+    },
+    {
+      "name": "observer_failing_sink_does_not_change_business",
+      "passed": true,
+      "evidence": {
+        "business_ok": true,
+        "injected_failure_calls": 21
+      }
+    },
+    {
+      "name": "observer_failing_factory_does_not_change_business",
+      "passed": true,
+      "evidence": {
+        "business_ok": true,
+        "injected_failure_calls": 2
+      }
+    },
+    {
+      "name": "illegal_transition_fails",
+      "passed": true,
+      "evidence": {
+        "rejected": true
+      }
+    },
+    {
+      "name": "malformed_definition_fails",
+      "passed": true,
+      "evidence": {
+        "rejected": true
+      }
+    }
+  ],
+  "passed": true
+}

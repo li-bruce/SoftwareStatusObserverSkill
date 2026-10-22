@@ -1,0 +1,9 @@
+{
+  "schema": 1,
+  "project_id": "project-flow-trial-main",
+  "revision": 2,
+  "entries": {
+    "business-observer.layout.v2:project-flow-trial-main:analysis": "{\"advanced\":false,\"custom\":[],\"overrides\":{},\"selected\":\"overview\",\"annotations\":{}}",
+    "business-observer.layout.v2:project-flow-trial-main": "{\"schema\":2,\"positions\":{\"create_project\":{\"x\":80,\"y\":70,\"pinned\":false},\"derive_project\":{\"x\":310,\"y\":70,\"pinned\":false},\"configure_relation\":{\"x\":540,\"y\":70,\"pinned\":false},\"transfer_data\":{\"x\":770,\"y\":70,\"pinned\":false},\"type_port_rules\":{\"x\":483.591396013194,\"y\":235.3580846100075,\"pinned\":false},\"execute_permission\":{\"x\":770,\"y\":-260.71616922001476,\"pinned\":false},\"transfer_effect\":{\"x\":1056.4086039868062,\"y\":235.35808461000732,\"pinned\":false}},\"expanded\":[\"transfer_data\"],\"camera\":{\"x\":-32.55806522223506,\"y\":374.3920640607564,\"scale\":0.7139399597944914},\"algorithm\":\"cluster\",\"annotations\":{},\"focus\":null,\"filters\":{\"nodes\":[\"business\",\"function\",\"state\",\"decision\",\"resource\",\"data\",\"effect\",\"wait\"],\"edges\":[\"call\",\"flow\",\"transition\",\"guard\",\"data\",\"resource\",\"join\",\"shared\",\"other\"],\"regions\":[\"business\",\"function\",\"state\",\"decision\",\"resource\",\"data\",\"effect\",\"wait\"],\"depth\":\"all\"}}"
+  }
+}

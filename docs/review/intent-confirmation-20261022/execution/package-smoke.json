@@ -1,0 +1,31 @@
+{
+  "archive_sha256": "4639a80bb26fd45e58f796605d9a0c33280cec6079d1f230005c4e5353511941",
+  "extracted_source": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.validation\\intent-confirmation-20261022\\package-smoke\\project",
+  "checks": [
+    {
+      "name": "reachable:/",
+      "passed": true
+    },
+    {
+      "name": "reachable:/graph",
+      "passed": true
+    },
+    {
+      "name": "reachable:/pixi.min.js",
+      "passed": true
+    },
+    {
+      "name": "reachable:/elk.bundled.js",
+      "passed": true
+    },
+    {
+      "name": "create_through_real_http_and_read_stored_result",
+      "passed": true
+    },
+    {
+      "name": "package_public_export_validates",
+      "passed": true
+    }
+  ],
+  "passed": true
+}
