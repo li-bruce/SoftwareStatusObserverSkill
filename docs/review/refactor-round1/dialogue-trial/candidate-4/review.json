@@ -1,0 +1,48 @@
+{
+  "candidate_id": "850811ce570b4cd3befa58c8af5e1f79cf1c2a4e00b2e97d8c10454d2e312004",
+  "decisions": {
+    "business": {
+      "action": "updated",
+      "reason": "Implement U02/U03/U04 only: printer-scoped alternative approvals, expiry before start, parallel checks, eligible FIFO, independent versions and selected-run cancellation."
+    },
+    "state_machine": {
+      "action": "updated",
+      "reason": "Public BOStateGraph installed by bo_upgrade; query.py supplies actual SQLite instances and exact event-bound runtime frames. Executor consumes bo_stategraph/declaration.py. SQLite writer transaction owns shared printer occupancy and queue; all transaction snapshots checked with the project shared-resource extension."
+    },
+    "abstraction": {
+      "action": "updated",
+      "reason": "Stable business IDs retain round-01 meaning; all implementation functions including transaction callbacks bind to current source, static auxiliaries remain under analysis details."
+    },
+    "probes": {
+      "action": "updated",
+      "reason": "Commit probes follow SQLite commit. Actual parameters, predicate flags, wait reasons and effect IDs are compared independently; overridden checker functions are attributed to the actual worker/callback, not falsely to the default checker."
+    }
+  },
+  "excluded_symbols": {
+    "app/ports.py::EventPort": "Class declaration is a structural container; its constructor and every method are source-mapped. The class object itself is not a separate business action.",
+    "app/store.py::Store": "Class declaration is a structural container; its constructor and every method are source-mapped. The class object itself is not a separate business action.",
+    "bo_stategraph/workflow.py::Workflow": "Class declaration is a structural container; its constructor and every method are source-mapped. The class object itself is not a separate business action.",
+    "integrations/bo_app.py::BOApplication": "Class declaration is a structural container; its constructor and every method are source-mapped. The class object itself is not a separate business action.",
+    "integrations/bo_capture.py::BOCapture": "Class declaration is a structural container; its constructor and every method are source-mapped. The class object itself is not a separate business action.",
+    "server.py::serve.Handler": "Class declaration is a structural container; its constructor and every method are source-mapped. The class object itself is not a separate business action."
+  },
+  "requirement_changes": {
+    "R01": "Authorized initial implementation; source U02/U03/U04 and preserved discovery history. Expectations authored before final runtime validation.",
+    "R02": "Authorized initial implementation; source U02/U03/U04 and preserved discovery history. Expectations authored before final runtime validation.",
+    "R03": "Authorized initial implementation; source U02/U03/U04 and preserved discovery history. Expectations authored before final runtime validation.",
+    "R04": "Authorized initial implementation; source U02/U03/U04 and preserved discovery history. Expectations authored before final runtime validation.",
+    "R05": "Authorized initial implementation; source U02/U03/U04 and preserved discovery history. Expectations authored before final runtime validation.",
+    "R06": "Authorized initial implementation; source U02/U03/U04 and preserved discovery history. Expectations authored before final runtime validation.",
+    "R07": "Authorized initial implementation; source U02/U03/U04 and preserved discovery history. Expectations authored before final runtime validation.",
+    "R08": "Authorized initial implementation; source U02/U03/U04 and preserved discovery history. Expectations authored before final runtime validation.",
+    "R09": "Authorized initial implementation; source U02/U03/U04 and preserved discovery history. Expectations authored before final runtime validation.",
+    "R10": "Authorized initial implementation; source U02/U03/U04 and preserved discovery history. Expectations authored before final runtime validation.",
+    "R11": "Authorized initial implementation; source U02/U03/U04 and preserved discovery history. Expectations authored before final runtime validation."
+  },
+  "limits": [
+    "No real printer or mesh parsing",
+    "Local synthetic actor identities, not authentication",
+    "No automatic retry of interrupted checks after process crash; persisted waiting/printing ownership can resume",
+    "No inferred causal edges or arbitrary natural-language equivalence"
+  ]
+}

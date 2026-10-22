@@ -1,0 +1,50 @@
+{
+  "scope": "Synthetic failure injection through the actual CLI, not a human dialogue trial",
+  "checks": [
+    {
+      "case": "guided baseline",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "case": "guided keeps normal structural checks",
+      "passed": true,
+      "exit_code": 1
+    },
+    {
+      "case": "explicit opt-out changes design only",
+      "passed": true,
+      "exit_code": 1
+    },
+    {
+      "case": "silence cannot select opt-out",
+      "passed": true,
+      "exit_code": 2
+    },
+    {
+      "case": "observe still requires runtime probes",
+      "passed": true,
+      "exit_code": 2
+    },
+    {
+      "case": "missing independent module fails",
+      "passed": true,
+      "exit_code": 1
+    },
+    {
+      "case": "removing stategraph configuration fails",
+      "passed": true,
+      "exit_code": 1
+    },
+    {
+      "case": "observe still requires the state declaration",
+      "passed": true,
+      "exit_code": 1
+    },
+    {
+      "case": "restored configuration and model pass structure",
+      "passed": true,
+      "exit_code": 1
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "checks": [
+    "reachable HTTP and current loaded source binding",
+    "initial view contains five high-level nodes",
+    "click selects actual node",
+    "node resolves bound source snapshot",
+    "double click expands a same-type region",
+    "locate actual authorization wait reason",
+    "recover with preserved queue position",
+    "cancellation retains printer until stop confirmation",
+    "early replay contains no future state or event markers",
+    "name annotation and core marker persist after reload",
+    "group drag moves root and hidden descendants together",
+    "search resolves folded function",
+    "state filter finds deep nodes without manual unfolding",
+    "stale preference write rejected explicitly"
+  ],
+  "errors": [
+    "AssertionError [ERR_ASSERTION]: The input did not match the regular expression /已保存/. Input:\n\n'正在记录 3253906ffeb8'\n\n    at C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\stategraph-refactor-trial-20261022\\tests\\browser.cjs:50:148"
+  ],
+  "valid": false
+}

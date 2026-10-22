@@ -1,7 +1,7 @@
 """Run the activities declared inside the application's checking state."""
 import hashlib
 from concurrent.futures import ThreadPoolExecutor
-from app.workflow import ActivityExecution
+from bo_stategraph.workflow import ActivityExecution
 
 
 def checksum(content: str) -> str:

@@ -11,7 +11,7 @@ import uuid
 from archive_app.policy import is_direct_manager, candidate_allowed
 from archive_app.service import ArchiveService
 from archive_app.storage import ArchiveStore
-from archive_app.workflow import TERMINAL
+from bo_stategraph.workflow import TERMINAL
 from integrations.bo_observer import BOObserver
 
 ROOT = Path(__file__).absolute().parents[1]

@@ -1,0 +1,235 @@
+{
+  "previous": [
+    {
+      "id": "D01",
+      "topic": "authority",
+      "question": "审批权是整个工作室通用，还是只对指定打印机有效？有审批权的人能否批准自己提交的任务？",
+      "why": "确定授权作用域与是否允许自批，避免把角色名称当作任意打印许可。",
+      "affects": [
+        "approval",
+        "e-approval-queue"
+      ],
+      "blocking": true,
+      "status": "open",
+      "priority": 1,
+      "source_refs": [
+        "U01"
+      ],
+      "asked_in": [
+        "A01"
+      ]
+    },
+    {
+      "id": "D02",
+      "topic": "resources",
+      "question": "检查和审批通过后，机器空闲时是否按排队顺序自动开始，还是必须有人再点一次开始？",
+      "why": "确定等待的解除条件和触发者；机器选择与兼容性需要结合回答继续细化。",
+      "affects": [
+        "queue",
+        "printer",
+        "printing",
+        "e-queue-printing"
+      ],
+      "blocking": true,
+      "status": "open",
+      "priority": 1,
+      "source_refs": [
+        "U01"
+      ],
+      "asked_in": [
+        "A01"
+      ]
+    },
+    {
+      "id": "D03",
+      "topic": "parameters",
+      "question": "改尺寸、材料或打印参数后，旧检查和审批是否全部作废？如果旧版本已在打印，是继续打完，还是停止后重新排队？",
+      "why": "确定检查与审批绑定哪个版本，以及新旧运行能否共存。",
+      "affects": [
+        "parameter-change",
+        "checks",
+        "approval",
+        "printing"
+      ],
+      "blocking": true,
+      "status": "open",
+      "priority": 1,
+      "source_refs": [
+        "U01"
+      ],
+      "asked_in": [
+        "A01"
+      ]
+    }
+  ],
+  "current": [
+    {
+      "id": "D01",
+      "topic": "authority",
+      "question": "审批权是整个工作室通用，还是只对指定打印机有效？有审批权的人能否批准自己提交的任务？",
+      "why": "确定授权作用域与是否允许自批，避免把角色名称当作任意打印许可。",
+      "affects": [
+        "approval",
+        "e-approval-queue"
+      ],
+      "blocking": true,
+      "status": "resolved",
+      "priority": 1,
+      "source_refs": [
+        "U01",
+        "U02"
+      ],
+      "asked_in": [
+        "A01"
+      ],
+      "resolution": {
+        "kind": "user_answer",
+        "text": "审批权按指定打印机；每份审批对应任务；审批人不能是任务提交人。",
+        "source_refs": [
+          "U02"
+        ]
+      }
+    },
+    {
+      "id": "D02",
+      "topic": "resources",
+      "question": "检查和审批通过后，机器空闲时是否按排队顺序自动开始，还是必须有人再点一次开始？",
+      "why": "确定等待的解除条件和触发者；机器选择与兼容性需要结合回答继续细化。",
+      "affects": [
+        "queue",
+        "printer",
+        "printing",
+        "e-queue-printing"
+      ],
+      "blocking": true,
+      "status": "resolved",
+      "priority": 1,
+      "source_refs": [
+        "U01",
+        "U02"
+      ],
+      "asked_in": [
+        "A01"
+      ],
+      "resolution": {
+        "kind": "user_answer",
+        "text": "机器空闲后按入队先后自动开始；同一人可提交多份任务。机器选择及入队时点尚未回答，由 D05 单独处理。",
+        "source_refs": [
+          "U02"
+        ]
+      }
+    },
+    {
+      "id": "D03",
+      "topic": "parameters",
+      "question": "改尺寸、材料或打印参数后，旧检查和审批是否全部作废？如果旧版本已在打印，是继续打完，还是停止后重新排队？",
+      "why": "确定检查与审批绑定哪个版本，以及新旧运行能否共存。",
+      "affects": [
+        "parameter-change",
+        "checks",
+        "approval",
+        "printing"
+      ],
+      "blocking": true,
+      "status": "open",
+      "priority": 1,
+      "source_refs": [
+        "U01",
+        "U02"
+      ],
+      "asked_in": [
+        "A01"
+      ],
+      "note": "模拟需求方明确尚未想清且要求不代定；继续 open/blocking，本轮不重复提问，不实现依赖参数变更规则的行为。"
+    },
+    {
+      "id": "D04",
+      "topic": "concurrency",
+      "question": "尺寸与材料检查能否并行，使用机器是否必须等两项通过？",
+      "why": "决定检查分支和汇合条件。",
+      "affects": [
+        "checks",
+        "check-size",
+        "check-material"
+      ],
+      "blocking": true,
+      "status": "resolved",
+      "priority": 1,
+      "source_refs": [
+        "U02"
+      ],
+      "resolution": {
+        "kind": "user_answer",
+        "text": "尺寸与材料同时检查；两项都通过才能使用机器。",
+        "source_refs": [
+          "U02"
+        ]
+      }
+    },
+    {
+      "id": "D05",
+      "topic": "resources",
+      "question": "是否由提交人指定一台打印机，尺寸、材料都通过且该任务获批后，才进入这台机器的队列？还是先入队，再等待检查和审批？",
+      "why": "明确指定资源和 FIFO 的入队时间；不能将提交时间冒充已确认的入队时间。",
+      "affects": [
+        "submit",
+        "checks",
+        "approval",
+        "queue",
+        "printer"
+      ],
+      "blocking": true,
+      "status": "open",
+      "priority": 1,
+      "source_refs": [
+        "U01",
+        "U02"
+      ],
+      "asked_in": [
+        "A02"
+      ]
+    },
+    {
+      "id": "D06",
+      "topic": "authority",
+      "question": "排队期间审批被撤销或审批人失去该机审批权，任务应退出队列，还是保留位置等待重新审批？已经开始打印的任务是否继续？",
+      "why": "权限变化会影响等待、队列位置和已在进行的打印，不能从初次审批推定永久许可。",
+      "affects": [
+        "approval",
+        "queue",
+        "printing"
+      ],
+      "blocking": true,
+      "status": "open",
+      "priority": 1,
+      "source_refs": [
+        "U01",
+        "U02"
+      ],
+      "asked_in": [
+        "A02"
+      ]
+    },
+    {
+      "id": "D07",
+      "topic": "completion",
+      "question": "本轮先使用本地模拟打印机，还是需要连接真实设备？打印完成或取消时，是否收到设备的完成／停止确认后才释放机器？",
+      "why": "决定本地模拟或外部设备的执行边界，以及何种实际效果可释放独占资源。",
+      "affects": [
+        "printing",
+        "printer-stopped",
+        "printer"
+      ],
+      "blocking": true,
+      "status": "open",
+      "priority": 1,
+      "source_refs": [
+        "U01",
+        "U02"
+      ],
+      "asked_in": [
+        "A02"
+      ]
+    }
+  ]
+}

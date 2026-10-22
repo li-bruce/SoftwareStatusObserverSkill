@@ -7,7 +7,7 @@ import threading
 import unittest
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
-from app.workflow import ActivityExecution,advance
+from bo_stategraph.workflow import ActivityExecution,advance
 from app.checks import run_checks
 from app.service import Delivery
 from app.store import Store

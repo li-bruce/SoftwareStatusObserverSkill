@@ -1,0 +1,12 @@
+{
+  "url": "http://127.0.0.1:50393",
+  "binding": "current",
+  "build_id": "b19425320930645d21df49a0df6ddb29ccf82c714ec6c233ed9d91b52bba5f19",
+  "instances": 5,
+  "revision": 71,
+  "event_count": 151,
+  "frame_count": 151,
+  "recording": "f3214bb29d134293b674ffd009eeb3ea",
+  "database": "data/studio-public.sqlite",
+  "observed_at": "2026-10-22T13:11:32.5223914+08:00"
+}

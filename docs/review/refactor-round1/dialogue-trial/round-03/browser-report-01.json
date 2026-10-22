@@ -1,0 +1,17 @@
+{
+  "checks": [
+    "reachable HTTP and current loaded source binding",
+    "initial view contains five high-level nodes",
+    "click selects actual node",
+    "node resolves bound source snapshot",
+    "double click expands a same-type region",
+    "locate actual authorization wait reason",
+    "recover with preserved queue position",
+    "cancellation retains printer until stop confirmation",
+    "early replay contains no future state or event markers"
+  ],
+  "errors": [
+    "locator.innerText: Error: Node is not an HTMLElement\nCall log:\n\u001b[2m  - waiting for locator('[data-node=\"approval\"]')\u001b[22m\n\n    at C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\stategraph-refactor-trial-20261022\\tests\\browser.cjs:35:124"
+  ],
+  "valid": false
+}

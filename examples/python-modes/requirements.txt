@@ -1,0 +1,2 @@
+# Only the optional state-machine execution example needs this package (MIT).
+transitions==0.9.3

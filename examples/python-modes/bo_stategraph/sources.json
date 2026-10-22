@@ -1,0 +1,16 @@
+{
+  "files": {
+    "intent.json": "0ce2e8a5a6b5068e864303ea935048b7b92f364754e98ae96ef9cf542b6cd607",
+    "bo_stategraph/driver.py": "9ee9460c5a8e37122220e5b8a7bb8ba0dd6f69350c416c2b091e89e4fb492f4b",
+    "bo_stategraph/bo_contracts.py": "2a5639208ccb10f41c1c013858c1961fc6459b4b094954a0581d17050c471a65",
+    "bo_stategraph/execution_contract.py": "9502b2d348bb8ee00c05288ca3d064d151365292fdef597c156c178871635b78",
+    "app.py": "8dcd9b5281b7721092c765a95330cf5256a3382d439c8ded6bbd22a0355b1da5",
+    "run.py": "176c88e86edd940bc02033bd344bb54d0921b7a896055b25a6ce99405cfbda75",
+    "build_model.py": "b18c686cd52083bec664e8e31057cec8789700912610185b470ee88d9c093528",
+    "test_modes.py": "3ed99a8813da5e6bc792eb462f4735310ed390315b1ccd748b4c13a2fea45a32",
+    "bo_stategraph/__init__.py": "577631905e58c6e0700ca225312a0a2fa57bf21e3a631bb4dd3539d6951ff561",
+    "bo_stategraph/binding.py": "75873bc3ef9bd3090ec166858c2baae4745b564ef062681c1c7a61524ad46c12",
+    "bo_stategraph/model.json": "bd8856b1632b046ec0aff5ba1ae1a2d5d5a45501142d1420b2e5d9e3b63d54a7"
+  },
+  "build_id": "f89300d6c016c3e9775ee7bfb211dadadec59c84e67e641c71fbab6e80bcc317"
+}

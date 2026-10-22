@@ -1,0 +1,461 @@
+{
+  "valid": true,
+  "meaning": "Stale source rejected; after truthful remapping the injected business defect is still rejected by unchanged independent expectations",
+  "mutations": [
+    {
+      "mutation": "expiry_inclusive",
+      "directory": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\stategraph-refactor-trial-20261022\\.validation\\expiry_inclusive-6d6e6880",
+      "stale_gate_exit": 1,
+      "mapping": {
+        "valid": true,
+        "errors": [],
+        "checks": 437,
+        "scope": "Explicit implementation witnesses; unexercised behavior remains unknown."
+      },
+      "business_errors": [
+        {
+          "requirement": "R01",
+          "check": "policy:expired",
+          "mode": "on",
+          "expected": false,
+          "actual": true
+        },
+        {
+          "requirement": "R01",
+          "check": "policy:expired",
+          "mode": "off",
+          "expected": false,
+          "actual": true
+        },
+        {
+          "requirement": "R01",
+          "check": "policy:expired",
+          "mode": "fault",
+          "expected": false,
+          "actual": true
+        },
+        {
+          "requirement": "R01",
+          "check": "expiry:at_deadline",
+          "mode": "on",
+          "expected": "blocked",
+          "actual": "printing"
+        },
+        {
+          "requirement": "R01",
+          "check": "expiry:at_deadline",
+          "mode": "off",
+          "expected": "blocked",
+          "actual": "printing"
+        },
+        {
+          "requirement": "R01",
+          "check": "expiry:at_deadline",
+          "mode": "fault",
+          "expected": "blocked",
+          "actual": "printing"
+        },
+        {
+          "requirement": "R01",
+          "check": "expiry:no_start",
+          "mode": "on",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R01",
+          "check": "expiry:no_start",
+          "mode": "off",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R01",
+          "check": "expiry:no_start",
+          "mode": "fault",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R01",
+          "check": "expiry_window:state",
+          "mode": "on",
+          "expected": "blocked",
+          "actual": "printing"
+        },
+        {
+          "requirement": "R01",
+          "check": "expiry_window:state",
+          "mode": "off",
+          "expected": "blocked",
+          "actual": "printing"
+        },
+        {
+          "requirement": "R01",
+          "check": "expiry_window:state",
+          "mode": "fault",
+          "expected": "blocked",
+          "actual": "printing"
+        },
+        {
+          "requirement": "R01",
+          "check": "expiry_window:owner_empty",
+          "mode": "on",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R01",
+          "check": "expiry_window:owner_empty",
+          "mode": "off",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R01",
+          "check": "expiry_window:owner_empty",
+          "mode": "fault",
+          "expected": true,
+          "actual": false
+        }
+      ],
+      "expected_contract_unchanged": true,
+      "source_regenerated": true
+    },
+    {
+      "mutation": "reject_exact_size",
+      "directory": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\stategraph-refactor-trial-20261022\\.validation\\reject_exact_size-b2373159",
+      "stale_gate_exit": 1,
+      "mapping": {
+        "valid": true,
+        "errors": [],
+        "checks": 437,
+        "scope": "Explicit implementation witnesses; unexercised behavior remains unknown."
+      },
+      "business_errors": [
+        {
+          "requirement": "R10",
+          "check": "size_boundaries:states",
+          "mode": "on",
+          "expected": [
+            "awaiting_approval",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed"
+          ],
+          "actual": [
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed"
+          ]
+        },
+        {
+          "requirement": "R10",
+          "check": "size_boundaries:states",
+          "mode": "off",
+          "expected": [
+            "awaiting_approval",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed"
+          ],
+          "actual": [
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed"
+          ]
+        },
+        {
+          "requirement": "R10",
+          "check": "size_boundaries:states",
+          "mode": "fault",
+          "expected": [
+            "awaiting_approval",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed"
+          ],
+          "actual": [
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed",
+            "check_failed"
+          ]
+        }
+      ],
+      "expected_contract_unchanged": true,
+      "source_regenerated": true
+    },
+    {
+      "mutation": "ignore_maintenance",
+      "directory": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\stategraph-refactor-trial-20261022\\.validation\\ignore_maintenance-e5be3cf0",
+      "stale_gate_exit": 1,
+      "mapping": {
+        "valid": true,
+        "errors": [],
+        "checks": 437,
+        "scope": "Explicit implementation witnesses; unexercised behavior remains unknown."
+      },
+      "business_errors": [
+        {
+          "requirement": "R12",
+          "check": "maintenance_flow:after_complete_empty",
+          "mode": "on",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R12",
+          "check": "maintenance_flow:after_complete_empty",
+          "mode": "off",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R12",
+          "check": "maintenance_flow:after_complete_empty",
+          "mode": "fault",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R12",
+          "check": "maintenance_flow:state_constraints",
+          "mode": "on",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R12",
+          "check": "maintenance_flow:state_constraints",
+          "mode": "off",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R12",
+          "check": "maintenance_flow:state_constraints",
+          "mode": "fault",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R12",
+          "check": "maintenance_scope:p1_waits",
+          "mode": "on",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R12",
+          "check": "maintenance_scope:p1_waits",
+          "mode": "off",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R12",
+          "check": "maintenance_scope:p1_waits",
+          "mode": "fault",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R12",
+          "check": "maintenance_scope:state_constraints",
+          "mode": "on",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R12",
+          "check": "maintenance_scope:state_constraints",
+          "mode": "off",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R12",
+          "check": "maintenance_scope:state_constraints",
+          "mode": "fault",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R13",
+          "check": "maintenance_restart:no_timeout",
+          "mode": "on",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R13",
+          "check": "maintenance_restart:no_timeout",
+          "mode": "off",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R13",
+          "check": "maintenance_restart:no_timeout",
+          "mode": "fault",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R13",
+          "check": "maintenance_restart:state_constraints",
+          "mode": "on",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R13",
+          "check": "maintenance_restart:state_constraints",
+          "mode": "off",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R13",
+          "check": "maintenance_restart:state_constraints",
+          "mode": "fault",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R12",
+          "check": "maintenance_approval:state_constraints",
+          "mode": "on",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R12",
+          "check": "maintenance_approval:state_constraints",
+          "mode": "off",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R12",
+          "check": "maintenance_approval:state_constraints",
+          "mode": "fault",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R12",
+          "check": "maintenance_cancel:confirm_releases",
+          "mode": "on",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R12",
+          "check": "maintenance_cancel:confirm_releases",
+          "mode": "off",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R12",
+          "check": "maintenance_cancel:confirm_releases",
+          "mode": "fault",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R12",
+          "check": "maintenance_cancel:maintenance_still_blocks",
+          "mode": "on",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R12",
+          "check": "maintenance_cancel:maintenance_still_blocks",
+          "mode": "off",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R12",
+          "check": "maintenance_cancel:maintenance_still_blocks",
+          "mode": "fault",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R12",
+          "check": "maintenance_cancel:state_constraints",
+          "mode": "on",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R12",
+          "check": "maintenance_cancel:state_constraints",
+          "mode": "off",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R12",
+          "check": "maintenance_cancel:state_constraints",
+          "mode": "fault",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R12",
+          "check": "maintenance_race:serialized_start",
+          "mode": "off",
+          "expected": true,
+          "actual": false
+        },
+        {
+          "requirement": "R12",
+          "check": "maintenance_race:state_constraints",
+          "mode": "off",
+          "expected": true,
+          "actual": false
+        }
+      ],
+      "expected_contract_unchanged": true,
+      "source_regenerated": true
+    }
+  ]
+}

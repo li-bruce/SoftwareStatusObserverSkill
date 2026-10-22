@@ -1,0 +1,271 @@
+{
+  "checked_at": "2026-10-21T08:37:45.413481+00:00",
+  "projects": [
+    {
+      "project": "delivery",
+      "build_id": "11d3a3fbe7512ac1d1568c34c9b8efbb2701ef7ef4b20637800cb95bd7f7c911",
+      "verify": {
+        "valid": true,
+        "errors": [],
+        "candidate_id": "3d9259e65d02ff9e0812b34a1dc65b0f9ad393bde9c3483c45e2e284c6fac37c",
+        "review_hash": "244d16630f12c37f7b579c84957ce9a9a389b695da329a70a7131525268bb074",
+        "observations_hash": "2cb8aaf26ba51bd4d415e243ef3cfb4aa5f7ac15d816e74f2da2d0c50eb443a1",
+        "tests": [
+          {
+            "argv": [
+              "{python}",
+              "-B",
+              "-X",
+              "utf8",
+              "tests/test_business.py"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "{python}",
+              "-B",
+              "-X",
+              "utf8",
+              "observer_generated/runtime/architecture_guard.py",
+              "check",
+              "--root",
+              "."
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "{python}",
+              "-B",
+              "-X",
+              "utf8",
+              "tests/test_execution.py"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "{python}",
+              "-B",
+              "-X",
+              "utf8",
+              "tooling/graph_fixture.py"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "node",
+              "tests/test_graph_projection.mjs"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "node",
+              "tests/test_graph_layout.mjs"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "{python}",
+              "-X",
+              "utf8",
+              "-B",
+              "tests/test_recording.py"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "node",
+              "tests/test_recorded_views.mjs"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "{python}",
+              "-X",
+              "utf8",
+              "-B",
+              "tests/test_stategraph_module.py"
+            ],
+            "exit_code": 0
+          }
+        ],
+        "checked_at": "2026-10-21T08:33:57.331480+00:00",
+        "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+      },
+      "accept": {
+        "valid": true,
+        "status": "current",
+        "errors": [],
+        "candidate_id": "3d9259e65d02ff9e0812b34a1dc65b0f9ad393bde9c3483c45e2e284c6fac37c"
+      },
+      "check": {
+        "valid": true,
+        "status": "current",
+        "errors": [],
+        "candidate_id": "3d9259e65d02ff9e0812b34a1dc65b0f9ad393bde9c3483c45e2e284c6fac37c"
+      }
+    },
+    {
+      "project": "archive",
+      "build_id": "6b9d254e59337efa2e5c72ce0c9df365535692071ee6b769c9c8e2cd9c057f49",
+      "verify": {
+        "valid": true,
+        "errors": [],
+        "candidate_id": "592a1ea468d69d6531245dbba3edcfc9288cd98a429773aae492ce9a5b318e2d",
+        "review_hash": "f8caebbaf58f32f5afd8cc156d22936648bb6b6ee989de407065fcfe2b24d505",
+        "observations_hash": "2dcc9052cee11d2c333f7bed80fb2ebc6e0952016fb5b1b22fa6ff3bdc669c63",
+        "tests": [
+          {
+            "argv": [
+              "{python}",
+              "-X",
+              "utf8",
+              "-B",
+              "tooling/tests.py"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "node",
+              "tooling/graph_tests.mjs"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "{python}",
+              "-X",
+              "utf8",
+              "-B",
+              "tooling/test_recording.py"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "node",
+              "tooling/test_recorded_views.mjs"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "{python}",
+              "-X",
+              "utf8",
+              "-B",
+              "tooling/test_stategraph_module.py"
+            ],
+            "exit_code": 0
+          }
+        ],
+        "checked_at": "2026-10-21T08:34:17.167045+00:00",
+        "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+      },
+      "accept": {
+        "valid": true,
+        "status": "current",
+        "errors": [],
+        "candidate_id": "592a1ea468d69d6531245dbba3edcfc9288cd98a429773aae492ce9a5b318e2d"
+      },
+      "check": {
+        "valid": true,
+        "status": "current",
+        "errors": [],
+        "candidate_id": "592a1ea468d69d6531245dbba3edcfc9288cd98a429773aae492ce9a5b318e2d"
+      }
+    },
+    {
+      "project": "active-demo",
+      "build_id": "6b9d254e59337efa2e5c72ce0c9df365535692071ee6b769c9c8e2cd9c057f49",
+      "verify": {
+        "valid": true,
+        "errors": [],
+        "candidate_id": "ec3639ff283a05f2a694de979ed6006c763670fbd1e920642fdb4048b4984899",
+        "review_hash": "182f83ddf3a6e5f13edb6737bc53c9f6da54e82f3673a7ad944ae5625c7fca48",
+        "observations_hash": "3d37e1b003666d78910fa2ae6a02b2795e7801b9f598d71342f9abcd012e97d6",
+        "tests": [
+          {
+            "argv": [
+              "{python}",
+              "-X",
+              "utf8",
+              "-B",
+              "tooling/tests.py"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "node",
+              "tooling/graph_tests.mjs"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "{python}",
+              "-X",
+              "utf8",
+              "-B",
+              "tooling/test_recording.py"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "node",
+              "tooling/test_recorded_views.mjs"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "{python}",
+              "-X",
+              "utf8",
+              "-B",
+              "tooling/test_stategraph_module.py"
+            ],
+            "exit_code": 0
+          }
+        ],
+        "checked_at": "2026-10-21T08:34:36.658153+00:00",
+        "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+      },
+      "accept": {
+        "valid": true,
+        "status": "current",
+        "errors": [],
+        "candidate_id": "ec3639ff283a05f2a694de979ed6006c763670fbd1e920642fdb4048b4984899"
+      },
+      "check": {
+        "valid": true,
+        "status": "current",
+        "errors": [],
+        "candidate_id": "ec3639ff283a05f2a694de979ed6006c763670fbd1e920642fdb4048b4984899"
+      }
+    }
+  ],
+  "runtime": {
+    "build_id": "6b9d254e59337efa2e5c72ce0c9df365535692071ee6b769c9c8e2cd9c057f49",
+    "binding": "current",
+    "nodes": 59,
+    "edges": 124,
+    "configurations": 15,
+    "original_data_unchanged": true,
+    "saved_recordings": 5,
+    "full_model_equals_view": true,
+    "export_integrity_checked": true
+  },
+  "installed_skill_matches": true,
+  "scope": "Current loaded graph and selected program paths; not arbitrary-code completeness or human usability proof."
+}

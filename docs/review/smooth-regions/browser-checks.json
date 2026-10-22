@@ -1,0 +1,347 @@
+{
+  "initialReloadPositionsPreserved": true,
+  "latestReloadPositionsPreserved": false,
+  "initialNodes": [
+    {
+      "id": "flow.policy",
+      "pinned": "false",
+      "x": "850.9170935735226",
+      "y": "941.388876104327"
+    },
+    {
+      "id": "flow.checks",
+      "pinned": "true",
+      "x": "457.5278292007689",
+      "y": "281.6198972365809"
+    },
+    {
+      "id": "flow.archive",
+      "pinned": "false",
+      "x": "352",
+      "y": "1409.0398750496884"
+    },
+    {
+      "id": "content_check",
+      "pinned": "false",
+      "x": "239.7747644228126",
+      "y": "-15.26083379309199"
+    },
+    {
+      "id": "index_check",
+      "pinned": "false",
+      "x": "703.9312897499083",
+      "y": "259.39580373883825"
+    },
+    {
+      "id": "processing_slots",
+      "pinned": "false",
+      "x": "1064.5278292007688",
+      "y": "207.49093682355942"
+    },
+    {
+      "id": "content_changed",
+      "pinned": "false",
+      "x": "800.8451090372218",
+      "y": "448.4595357682571"
+    },
+    {
+      "id": "run_identity",
+      "pinned": "false",
+      "x": "534.5968204694846",
+      "y": "581.3305753552357"
+    },
+    {
+      "id": "checks_join",
+      "pinned": "false",
+      "x": "173.58225539838944",
+      "y": "667.1657851744568"
+    },
+    {
+      "id": "cancel_run",
+      "pinned": "false",
+      "x": "217.82427825914726",
+      "y": "439.9092191179262"
+    },
+    {
+      "id": "lifecycle",
+      "pinned": "false",
+      "x": "-34.472170799231094",
+      "y": "377.7488576496024"
+    },
+    {
+      "id": "recover_run",
+      "pinned": "false",
+      "x": "-137.71658086895968",
+      "y": "129.8452232928032"
+    },
+    {
+      "id": "worker_call",
+      "pinned": "false",
+      "x": "-125.84302685959176",
+      "y": "-78.453475709455"
+    },
+    {
+      "id": "archive_commit",
+      "pinned": "false",
+      "x": "352",
+      "y": "1202.0398750496884"
+    },
+    {
+      "id": "archive_unique",
+      "pinned": "false",
+      "x": "614",
+      "y": "1560.3056455773703"
+    },
+    {
+      "id": "commit_guard",
+      "pinned": "false",
+      "x": "90",
+      "y": "1560.3056455773703"
+    }
+  ],
+  "beforeLatestReload": [
+    {
+      "id": "flow.policy",
+      "pinned": "false",
+      "x": "850.9170935735226",
+      "y": "941.388876104327"
+    },
+    {
+      "id": "flow.checks",
+      "pinned": "true",
+      "x": "555.6272512208451",
+      "y": "85.25836830760244"
+    },
+    {
+      "id": "flow.archive",
+      "pinned": "false",
+      "x": "352",
+      "y": "1409.0398750496884"
+    },
+    {
+      "id": "content_check",
+      "pinned": "false",
+      "x": "613.0730630104495",
+      "y": "-952.8546991447565"
+    },
+    {
+      "id": "field:content_check:in:attempt",
+      "pinned": "false",
+      "x": "498.18646911899543",
+      "y": "-438.0907808820739"
+    },
+    {
+      "id": "field:content_check:in:content_version",
+      "pinned": "false",
+      "x": "757.7562590151751",
+      "y": "-438.0907808820739"
+    },
+    {
+      "id": "field:content_check:in:content_length",
+      "pinned": "false",
+      "x": "760.1864691189954",
+      "y": "-171.29099059185455"
+    },
+    {
+      "id": "field:content_check:in:content_sha256",
+      "pinned": "false",
+      "x": "679.1896950486068",
+      "y": "46.61989723658098"
+    },
+    {
+      "id": "field:content_check:in:forbidden_marker",
+      "pinned": "false",
+      "x": "398.5005230258371",
+      "y": "-24.090780882073886"
+    },
+    {
+      "id": "field:content_check:out:passed",
+      "pinned": "false",
+      "x": "154.8691892825425",
+      "y": "-100.58031247319968"
+    },
+    {
+      "id": "field:content_check:out:marker_present",
+      "pinned": "false",
+      "x": "238.61667922281572",
+      "y": "-438.0907808820739"
+    },
+    {
+      "id": "index_check",
+      "pinned": "false",
+      "x": "703.9312897499083",
+      "y": "259.39580373883825"
+    },
+    {
+      "id": "processing_slots",
+      "pinned": "false",
+      "x": "1064.5278292007688",
+      "y": "207.49093682355942"
+    },
+    {
+      "id": "content_changed",
+      "pinned": "false",
+      "x": "800.8451090372218",
+      "y": "448.4595357682571"
+    },
+    {
+      "id": "run_identity",
+      "pinned": "false",
+      "x": "534.5968204694846",
+      "y": "581.3305753552357"
+    },
+    {
+      "id": "checks_join",
+      "pinned": "false",
+      "x": "173.58225539838944",
+      "y": "667.1657851744568"
+    },
+    {
+      "id": "cancel_run",
+      "pinned": "false",
+      "x": "217.82427825914726",
+      "y": "439.9092191179262"
+    },
+    {
+      "id": "lifecycle",
+      "pinned": "false",
+      "x": "-34.472170799231094",
+      "y": "377.7488576496024"
+    },
+    {
+      "id": "recover_run",
+      "pinned": "false",
+      "x": "-137.71658086895968",
+      "y": "129.8452232928032"
+    },
+    {
+      "id": "worker_call",
+      "pinned": "false",
+      "x": "-125.84302685959176",
+      "y": "-78.453475709455"
+    }
+  ],
+  "afterLatestReload": [
+    {
+      "id": "flow.policy",
+      "pinned": "false",
+      "x": "850.9170935735226",
+      "y": "941.388876104327"
+    },
+    {
+      "id": "flow.checks",
+      "pinned": "true",
+      "x": "555.6272512208451",
+      "y": "85.25836830760244"
+    },
+    {
+      "id": "flow.archive",
+      "pinned": "false",
+      "x": "352",
+      "y": "1409.0398750496884"
+    },
+    {
+      "id": "content_check",
+      "pinned": "false",
+      "x": "521.8007635687939",
+      "y": "-216.82401299575224"
+    },
+    {
+      "id": "field:content_check:in:attempt",
+      "pinned": "false",
+      "x": "498.18646911899543",
+      "y": "-438.0907808820739"
+    },
+    {
+      "id": "field:content_check:in:content_version",
+      "pinned": "false",
+      "x": "757.7562590151751",
+      "y": "-438.0907808820739"
+    },
+    {
+      "id": "field:content_check:in:content_length",
+      "pinned": "false",
+      "x": "760.1864691189954",
+      "y": "-171.29099059185455"
+    },
+    {
+      "id": "field:content_check:in:content_sha256",
+      "pinned": "false",
+      "x": "679.1896950486068",
+      "y": "46.61989723658098"
+    },
+    {
+      "id": "field:content_check:in:forbidden_marker",
+      "pinned": "false",
+      "x": "398.5005230258371",
+      "y": "-24.090780882073886"
+    },
+    {
+      "id": "field:content_check:out:passed",
+      "pinned": "false",
+      "x": "154.8691892825425",
+      "y": "-100.58031247319968"
+    },
+    {
+      "id": "field:content_check:out:marker_present",
+      "pinned": "false",
+      "x": "238.61667922281572",
+      "y": "-438.0907808820739"
+    },
+    {
+      "id": "index_check",
+      "pinned": "false",
+      "x": "703.9312897499083",
+      "y": "259.39580373883825"
+    },
+    {
+      "id": "processing_slots",
+      "pinned": "false",
+      "x": "1064.5278292007688",
+      "y": "207.49093682355942"
+    },
+    {
+      "id": "content_changed",
+      "pinned": "false",
+      "x": "800.8451090372218",
+      "y": "448.4595357682571"
+    },
+    {
+      "id": "run_identity",
+      "pinned": "false",
+      "x": "534.5968204694846",
+      "y": "581.3305753552357"
+    },
+    {
+      "id": "checks_join",
+      "pinned": "false",
+      "x": "173.58225539838944",
+      "y": "667.1657851744568"
+    },
+    {
+      "id": "cancel_run",
+      "pinned": "false",
+      "x": "217.82427825914726",
+      "y": "439.9092191179262"
+    },
+    {
+      "id": "lifecycle",
+      "pinned": "false",
+      "x": "-34.472170799231094",
+      "y": "377.7488576496024"
+    },
+    {
+      "id": "recover_run",
+      "pinned": "false",
+      "x": "-137.71658086895968",
+      "y": "129.8452232928032"
+    },
+    {
+      "id": "worker_call",
+      "pinned": "false",
+      "x": "-125.84302685959176",
+      "y": "-78.453475709455"
+    }
+  ],
+  "build": "35311737d38d94f35bcc2c0253a52d0e1257405ee8e3cf6a6d7cc5fec9d1c84d"
+}

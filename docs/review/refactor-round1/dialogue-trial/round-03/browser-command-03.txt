@@ -1,0 +1,12 @@
+{"checks":["reachable HTTP and current loaded source binding","initial view contains five high-level nodes","click selects actual node","node resolves bound source snapshot","double click expands a same-type region","locate actual authorization wait reason","recover with preserved queue position","cancellation retains printer until stop confirmation","early replay contains no future state or event markers","name annotation and core marker persist after reload","group drag moves root and hidden descendants together","search resolves folded function","state filter finds deep nodes without manual unfolding","stale preference write rejected explicitly","record controls create explicit saved record","all graph interactions leave business effects unchanged","real browser at width 1440","real browser at width 390","real browser at width 320","no browser page errors"],"errors":[],"valid":true}
+Starting server 1/1: "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.venv\Scripts\python.exe" -X utf8 -B server.py --demo --port 50293 --db .test-data/browser-e007a527816e403481fe835e5dd6d05b.sqlite
+Waiting for server on port 50293...
+Server ready on port 50293
+
+All 1 server(s) ready
+Running: node tests/browser.cjs http://127.0.0.1:50293
+
+
+Stopping 1 server(s)...
+Server 1 stopped
+All servers stopped

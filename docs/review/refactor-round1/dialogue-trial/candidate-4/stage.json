@@ -1,0 +1,17 @@
+{
+  "status": "accepted",
+  "source_candidate": "candidate-4",
+  "candidate_id": "850811ce570b4cd3befa58c8af5e1f79cf1c2a4e00b2e97d8c10454d2e312004",
+  "build_id": "b19425320930645d21df49a0df6ddb29ccf82c714ec6c233ed9d91b52bba5f19",
+  "original_baseline_sha256": "87679321584fc7df5c5fc70b7965fdd31fce2eb98bc7e1da32c78ec794481b4f",
+  "original_baseline_preserved": true,
+  "accepted_source_zip_sha256": "c80a90fd92cb069b31b826e75c7262575642c7733599bad3165b9c66b548488b",
+  "public_file_count": 49,
+  "business_assertions": {
+    "required": 228,
+    "executed": 228
+  },
+  "mapping_witnesses": 256,
+  "browser_checks": 24,
+  "stage_boundary": "Before printer-maintenance request implementation; requirements simulated by parent chat, not human usability."
+}

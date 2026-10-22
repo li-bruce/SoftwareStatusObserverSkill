@@ -1,0 +1,932 @@
+{
+  "build": "04d3157872cd3eab5e96f01618f06706b7134cc3ab0018c2d314f0526a596713",
+  "binding": {
+    "status": "current",
+    "changed_files": [],
+    "model_changed": false,
+    "intent_changed": false,
+    "directly_affected": [],
+    "possibly_affected": []
+  },
+  "health": {
+    "enabled": true,
+    "run_id": "c8f88e4112ac",
+    "attempted": 154,
+    "written": 154,
+    "errors": 0,
+    "dropped": 0,
+    "queued": 0,
+    "mode": "on",
+    "evidence": "available"
+  },
+  "preservation": {
+    "meta": {
+      "before": 1,
+      "after": 1,
+      "old_rows_unchanged": false,
+      "expected_change": "One synthetic approval increments the authority epoch from 15 to 16.",
+      "verified": true
+    },
+    "users": {
+      "before": 4,
+      "after": 4,
+      "old_rows_unchanged": true
+    },
+    "projects": {
+      "before": 2,
+      "after": 2,
+      "old_rows_unchanged": true
+    },
+    "folders": {
+      "before": 4,
+      "after": 4,
+      "old_rows_unchanged": true
+    },
+    "assignments": {
+      "before": 4,
+      "after": 4,
+      "old_rows_unchanged": true
+    },
+    "documents": {
+      "before": 1,
+      "after": 1,
+      "old_rows_unchanged": true
+    },
+    "grants": {
+      "before": 6,
+      "after": 7,
+      "old_rows_unchanged": true
+    },
+    "runs": {
+      "before": 8,
+      "after": 10,
+      "old_rows_unchanged": true
+    },
+    "archives": {
+      "before": 1,
+      "after": 1,
+      "old_rows_unchanged": true
+    }
+  },
+  "runs": [
+    {
+      "attempt": "b26a26b2c34a",
+      "param_version": 1,
+      "revision": 5,
+      "activities": {
+        "content_check": "succeeded",
+        "index_check": "succeeded"
+      },
+      "resources": {
+        "processing_slots": {
+          "capacity": 2,
+          "available": 2,
+          "holders": []
+        }
+      },
+      "join": {
+        "state": "passed",
+        "pending": []
+      },
+      "journal": [
+        {
+          "seq": 1,
+          "event": "start",
+          "activity": "content_check",
+          "before": {
+            "activities": {
+              "content_check": "pending",
+              "index_check": "pending"
+            },
+            "resources": {
+              "processing_slots": {
+                "capacity": 2,
+                "available": 2,
+                "holders": []
+              }
+            },
+            "join": {
+              "state": "waiting",
+              "pending": [
+                "content_check",
+                "index_check"
+              ]
+            }
+          },
+          "after": {
+            "activities": {
+              "content_check": "running",
+              "index_check": "pending"
+            },
+            "resources": {
+              "processing_slots": {
+                "capacity": 2,
+                "available": 1,
+                "holders": [
+                  "content_check"
+                ]
+              }
+            },
+            "join": {
+              "state": "waiting",
+              "pending": [
+                "content_check",
+                "index_check"
+              ]
+            }
+          },
+          "clock": 1792499997.9951289,
+          "phase": "checking",
+          "discarded": [],
+          "wait_reasons": {}
+        },
+        {
+          "seq": 2,
+          "event": "start",
+          "activity": "index_check",
+          "before": {
+            "activities": {
+              "content_check": "running",
+              "index_check": "pending"
+            },
+            "resources": {
+              "processing_slots": {
+                "capacity": 2,
+                "available": 1,
+                "holders": [
+                  "content_check"
+                ]
+              }
+            },
+            "join": {
+              "state": "waiting",
+              "pending": [
+                "content_check",
+                "index_check"
+              ]
+            }
+          },
+          "after": {
+            "activities": {
+              "content_check": "running",
+              "index_check": "running"
+            },
+            "resources": {
+              "processing_slots": {
+                "capacity": 2,
+                "available": 0,
+                "holders": [
+                  "content_check",
+                  "index_check"
+                ]
+              }
+            },
+            "join": {
+              "state": "waiting",
+              "pending": [
+                "content_check",
+                "index_check"
+              ]
+            }
+          },
+          "clock": 1792499997.9951289,
+          "phase": "checking",
+          "discarded": [],
+          "wait_reasons": {}
+        },
+        {
+          "seq": 3,
+          "event": "finish",
+          "activity": "index_check",
+          "before": {
+            "activities": {
+              "content_check": "running",
+              "index_check": "running"
+            },
+            "resources": {
+              "processing_slots": {
+                "capacity": 2,
+                "available": 0,
+                "holders": [
+                  "content_check",
+                  "index_check"
+                ]
+              }
+            },
+            "join": {
+              "state": "waiting",
+              "pending": [
+                "content_check",
+                "index_check"
+              ]
+            }
+          },
+          "after": {
+            "activities": {
+              "content_check": "running",
+              "index_check": "succeeded"
+            },
+            "resources": {
+              "processing_slots": {
+                "capacity": 2,
+                "available": 1,
+                "holders": [
+                  "content_check"
+                ]
+              }
+            },
+            "join": {
+              "state": "waiting",
+              "pending": [
+                "content_check"
+              ]
+            }
+          },
+          "clock": 1792500002.0036132,
+          "phase": "checking",
+          "discarded": [],
+          "wait_reasons": {}
+        },
+        {
+          "seq": 4,
+          "event": "finish",
+          "activity": "content_check",
+          "before": {
+            "activities": {
+              "content_check": "running",
+              "index_check": "succeeded"
+            },
+            "resources": {
+              "processing_slots": {
+                "capacity": 2,
+                "available": 1,
+                "holders": [
+                  "content_check"
+                ]
+              }
+            },
+            "join": {
+              "state": "waiting",
+              "pending": [
+                "content_check"
+              ]
+            }
+          },
+          "after": {
+            "activities": {
+              "content_check": "succeeded",
+              "index_check": "succeeded"
+            },
+            "resources": {
+              "processing_slots": {
+                "capacity": 2,
+                "available": 2,
+                "holders": []
+              }
+            },
+            "join": {
+              "state": "enabled",
+              "pending": []
+            }
+          },
+          "clock": 1792500002.0122569,
+          "phase": "checking",
+          "discarded": [],
+          "wait_reasons": {}
+        },
+        {
+          "seq": 5,
+          "event": "join",
+          "activity": "checks_join",
+          "before": {
+            "activities": {
+              "content_check": "succeeded",
+              "index_check": "succeeded"
+            },
+            "resources": {
+              "processing_slots": {
+                "capacity": 2,
+                "available": 2,
+                "holders": []
+              }
+            },
+            "join": {
+              "state": "enabled",
+              "pending": []
+            }
+          },
+          "after": {
+            "activities": {
+              "content_check": "succeeded",
+              "index_check": "succeeded"
+            },
+            "resources": {
+              "processing_slots": {
+                "capacity": 2,
+                "available": 2,
+                "holders": []
+              }
+            },
+            "join": {
+              "state": "passed",
+              "pending": []
+            }
+          },
+          "clock": 1792500002.0836253,
+          "phase": "checking",
+          "discarded": [],
+          "wait_reasons": {}
+        }
+      ],
+      "results": {
+        "index_check": {
+          "title_present": true,
+          "project_present": true,
+          "number_present": true,
+          "passed": true
+        },
+        "content_check": {
+          "passed": true,
+          "marker_present": false
+        }
+      },
+      "discarded": [],
+      "wait_reasons": {},
+      "phase": "completed",
+      "disposition": "current",
+      "qualification": {
+        "allowed": true,
+        "scope_allowed": true,
+        "approval_allowed": true,
+        "version_current": true,
+        "size_allowed": true,
+        "size": {
+          "content_bytes": 42,
+          "limit_bytes": 8192,
+          "limit_revision": 9,
+          "allowed": true,
+          "excess_bytes": 0
+        },
+        "reasons": [],
+        "candidates": [
+          {
+            "id": "1d44dfb47f6a",
+            "project_ok": true,
+            "operator_ok": true,
+            "document_ok": true,
+            "version_ok": true,
+            "reviewer_ok": true,
+            "different_actor": true,
+            "not_revoked": true,
+            "time_ok": false,
+            "target_matches": true,
+            "allowed": false
+          },
+          {
+            "id": "3f5d8c5a1478",
+            "project_ok": true,
+            "operator_ok": true,
+            "document_ok": true,
+            "version_ok": true,
+            "reviewer_ok": true,
+            "different_actor": true,
+            "not_revoked": true,
+            "time_ok": false,
+            "target_matches": true,
+            "allowed": false
+          },
+          {
+            "id": "3fb0a4ec05d2",
+            "project_ok": true,
+            "operator_ok": true,
+            "document_ok": true,
+            "version_ok": true,
+            "reviewer_ok": true,
+            "different_actor": true,
+            "not_revoked": true,
+            "time_ok": true,
+            "target_matches": true,
+            "allowed": true
+          },
+          {
+            "id": "72d836241757",
+            "project_ok": true,
+            "operator_ok": true,
+            "document_ok": true,
+            "version_ok": true,
+            "reviewer_ok": true,
+            "different_actor": true,
+            "not_revoked": true,
+            "time_ok": false,
+            "target_matches": true,
+            "allowed": false
+          },
+          {
+            "id": "a30dab60079b",
+            "project_ok": true,
+            "operator_ok": true,
+            "document_ok": true,
+            "version_ok": true,
+            "reviewer_ok": true,
+            "different_actor": true,
+            "not_revoked": true,
+            "time_ok": false,
+            "target_matches": true,
+            "allowed": false
+          },
+          {
+            "id": "c049ff128151",
+            "project_ok": true,
+            "operator_ok": true,
+            "document_ok": true,
+            "version_ok": true,
+            "reviewer_ok": true,
+            "different_actor": true,
+            "not_revoked": true,
+            "time_ok": false,
+            "target_matches": true,
+            "allowed": false
+          },
+          {
+            "id": "c70d5d2e1da6",
+            "project_ok": true,
+            "operator_ok": true,
+            "document_ok": true,
+            "version_ok": true,
+            "reviewer_ok": true,
+            "different_actor": true,
+            "not_revoked": true,
+            "time_ok": false,
+            "target_matches": true,
+            "allowed": false
+          }
+        ],
+        "basis": {
+          "param_version": 1,
+          "epoch": 16,
+          "clock": 1792500002.084459
+        },
+        "all_passed": true,
+        "valid_until": 1792500597.6748626
+      },
+      "stop_reason": "",
+      "resume_required": false,
+      "run_build_id": "04d3157872cd3eab5e96f01618f06706b7134cc3ab0018c2d314f0526a596713",
+      "source_status": "current"
+    },
+    {
+      "attempt": "509e83d16396",
+      "param_version": 1,
+      "revision": 6,
+      "activities": {
+        "content_check": "succeeded",
+        "index_check": "succeeded"
+      },
+      "resources": {
+        "processing_slots": {
+          "capacity": 1,
+          "available": 1,
+          "holders": []
+        }
+      },
+      "join": {
+        "state": "passed",
+        "pending": []
+      },
+      "journal": [
+        {
+          "seq": 1,
+          "event": "start",
+          "activity": "content_check",
+          "before": {
+            "activities": {
+              "content_check": "pending",
+              "index_check": "pending"
+            },
+            "resources": {
+              "processing_slots": {
+                "capacity": 1,
+                "available": 1,
+                "holders": []
+              }
+            },
+            "join": {
+              "state": "waiting",
+              "pending": [
+                "content_check",
+                "index_check"
+              ]
+            }
+          },
+          "after": {
+            "activities": {
+              "content_check": "running",
+              "index_check": "pending"
+            },
+            "resources": {
+              "processing_slots": {
+                "capacity": 1,
+                "available": 0,
+                "holders": [
+                  "content_check"
+                ]
+              }
+            },
+            "join": {
+              "state": "waiting",
+              "pending": [
+                "content_check",
+                "index_check"
+              ]
+            }
+          },
+          "clock": 1792500041.3409953,
+          "phase": "checking",
+          "discarded": [],
+          "wait_reasons": {}
+        },
+        {
+          "seq": 2,
+          "event": "wait",
+          "activity": "index_check",
+          "before": {
+            "activities": {
+              "content_check": "running",
+              "index_check": "pending"
+            },
+            "resources": {
+              "processing_slots": {
+                "capacity": 1,
+                "available": 0,
+                "holders": [
+                  "content_check"
+                ]
+              }
+            },
+            "join": {
+              "state": "waiting",
+              "pending": [
+                "content_check",
+                "index_check"
+              ]
+            }
+          },
+          "after": {
+            "activities": {
+              "content_check": "running",
+              "index_check": "waiting"
+            },
+            "resources": {
+              "processing_slots": {
+                "capacity": 1,
+                "available": 0,
+                "holders": [
+                  "content_check"
+                ]
+              }
+            },
+            "join": {
+              "state": "waiting",
+              "pending": [
+                "content_check",
+                "index_check"
+              ]
+            }
+          },
+          "clock": 1792500041.3409953,
+          "phase": "checking",
+          "discarded": [],
+          "wait_reasons": {
+            "index_check": "等待本次运行的可用名额"
+          }
+        },
+        {
+          "seq": 3,
+          "event": "finish",
+          "activity": "content_check",
+          "before": {
+            "activities": {
+              "content_check": "running",
+              "index_check": "waiting"
+            },
+            "resources": {
+              "processing_slots": {
+                "capacity": 1,
+                "available": 0,
+                "holders": [
+                  "content_check"
+                ]
+              }
+            },
+            "join": {
+              "state": "waiting",
+              "pending": [
+                "content_check",
+                "index_check"
+              ]
+            }
+          },
+          "after": {
+            "activities": {
+              "content_check": "succeeded",
+              "index_check": "waiting"
+            },
+            "resources": {
+              "processing_slots": {
+                "capacity": 1,
+                "available": 1,
+                "holders": []
+              }
+            },
+            "join": {
+              "state": "waiting",
+              "pending": [
+                "index_check"
+              ]
+            }
+          },
+          "clock": 1792500045.3475432,
+          "phase": "checking",
+          "discarded": [],
+          "wait_reasons": {
+            "index_check": "等待本次运行的可用名额"
+          }
+        },
+        {
+          "seq": 4,
+          "event": "start",
+          "activity": "index_check",
+          "before": {
+            "activities": {
+              "content_check": "succeeded",
+              "index_check": "waiting"
+            },
+            "resources": {
+              "processing_slots": {
+                "capacity": 1,
+                "available": 1,
+                "holders": []
+              }
+            },
+            "join": {
+              "state": "waiting",
+              "pending": [
+                "index_check"
+              ]
+            }
+          },
+          "after": {
+            "activities": {
+              "content_check": "succeeded",
+              "index_check": "running"
+            },
+            "resources": {
+              "processing_slots": {
+                "capacity": 1,
+                "available": 0,
+                "holders": [
+                  "index_check"
+                ]
+              }
+            },
+            "join": {
+              "state": "waiting",
+              "pending": [
+                "index_check"
+              ]
+            }
+          },
+          "clock": 1792500045.3914351,
+          "phase": "checking",
+          "discarded": [],
+          "wait_reasons": {}
+        },
+        {
+          "seq": 5,
+          "event": "finish",
+          "activity": "index_check",
+          "before": {
+            "activities": {
+              "content_check": "succeeded",
+              "index_check": "running"
+            },
+            "resources": {
+              "processing_slots": {
+                "capacity": 1,
+                "available": 0,
+                "holders": [
+                  "index_check"
+                ]
+              }
+            },
+            "join": {
+              "state": "waiting",
+              "pending": [
+                "index_check"
+              ]
+            }
+          },
+          "after": {
+            "activities": {
+              "content_check": "succeeded",
+              "index_check": "succeeded"
+            },
+            "resources": {
+              "processing_slots": {
+                "capacity": 1,
+                "available": 1,
+                "holders": []
+              }
+            },
+            "join": {
+              "state": "enabled",
+              "pending": []
+            }
+          },
+          "clock": 1792500049.3987355,
+          "phase": "checking",
+          "discarded": [],
+          "wait_reasons": {}
+        },
+        {
+          "seq": 6,
+          "event": "join",
+          "activity": "checks_join",
+          "before": {
+            "activities": {
+              "content_check": "succeeded",
+              "index_check": "succeeded"
+            },
+            "resources": {
+              "processing_slots": {
+                "capacity": 1,
+                "available": 1,
+                "holders": []
+              }
+            },
+            "join": {
+              "state": "enabled",
+              "pending": []
+            }
+          },
+          "after": {
+            "activities": {
+              "content_check": "succeeded",
+              "index_check": "succeeded"
+            },
+            "resources": {
+              "processing_slots": {
+                "capacity": 1,
+                "available": 1,
+                "holders": []
+              }
+            },
+            "join": {
+              "state": "passed",
+              "pending": []
+            }
+          },
+          "clock": 1792500049.4680016,
+          "phase": "checking",
+          "discarded": [],
+          "wait_reasons": {}
+        }
+      ],
+      "results": {
+        "content_check": {
+          "passed": true,
+          "marker_present": false
+        },
+        "index_check": {
+          "title_present": true,
+          "project_present": true,
+          "number_present": true,
+          "passed": true
+        }
+      },
+      "discarded": [],
+      "wait_reasons": {},
+      "phase": "completed",
+      "disposition": "current",
+      "qualification": {
+        "allowed": true,
+        "scope_allowed": true,
+        "approval_allowed": true,
+        "version_current": true,
+        "size_allowed": true,
+        "size": {
+          "content_bytes": 42,
+          "limit_bytes": 8192,
+          "limit_revision": 9,
+          "allowed": true,
+          "excess_bytes": 0
+        },
+        "reasons": [],
+        "candidates": [
+          {
+            "id": "1d44dfb47f6a",
+            "project_ok": true,
+            "operator_ok": true,
+            "document_ok": true,
+            "version_ok": true,
+            "reviewer_ok": true,
+            "different_actor": true,
+            "not_revoked": true,
+            "time_ok": false,
+            "target_matches": true,
+            "allowed": false
+          },
+          {
+            "id": "3f5d8c5a1478",
+            "project_ok": true,
+            "operator_ok": true,
+            "document_ok": true,
+            "version_ok": true,
+            "reviewer_ok": true,
+            "different_actor": true,
+            "not_revoked": true,
+            "time_ok": false,
+            "target_matches": true,
+            "allowed": false
+          },
+          {
+            "id": "3fb0a4ec05d2",
+            "project_ok": true,
+            "operator_ok": true,
+            "document_ok": true,
+            "version_ok": true,
+            "reviewer_ok": true,
+            "different_actor": true,
+            "not_revoked": true,
+            "time_ok": true,
+            "target_matches": true,
+            "allowed": true
+          },
+          {
+            "id": "72d836241757",
+            "project_ok": true,
+            "operator_ok": true,
+            "document_ok": true,
+            "version_ok": true,
+            "reviewer_ok": true,
+            "different_actor": true,
+            "not_revoked": true,
+            "time_ok": false,
+            "target_matches": true,
+            "allowed": false
+          },
+          {
+            "id": "a30dab60079b",
+            "project_ok": true,
+            "operator_ok": true,
+            "document_ok": true,
+            "version_ok": true,
+            "reviewer_ok": true,
+            "different_actor": true,
+            "not_revoked": true,
+            "time_ok": false,
+            "target_matches": true,
+            "allowed": false
+          },
+          {
+            "id": "c049ff128151",
+            "project_ok": true,
+            "operator_ok": true,
+            "document_ok": true,
+            "version_ok": true,
+            "reviewer_ok": true,
+            "different_actor": true,
+            "not_revoked": true,
+            "time_ok": false,
+            "target_matches": true,
+            "allowed": false
+          },
+          {
+            "id": "c70d5d2e1da6",
+            "project_ok": true,
+            "operator_ok": true,
+            "document_ok": true,
+            "version_ok": true,
+            "reviewer_ok": true,
+            "different_actor": true,
+            "not_revoked": true,
+            "time_ok": false,
+            "target_matches": true,
+            "allowed": false
+          }
+        ],
+        "basis": {
+          "param_version": 1,
+          "epoch": 16,
+          "clock": 1792500049.4688303
+        },
+        "all_passed": true,
+        "valid_until": 1792500597.6748626
+      },
+      "stop_reason": "",
+      "resume_required": false,
+      "run_build_id": "04d3157872cd3eab5e96f01618f06706b7134cc3ab0018c2d314f0526a596713",
+      "source_status": "current"
+    }
+  ]
+}

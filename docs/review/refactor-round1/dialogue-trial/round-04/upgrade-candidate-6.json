@@ -1,0 +1,1 @@
+{"valid": true, "release": "2026.10-refactor1", "protocols": {"behavior": 3, "event": 3, "activity": "activity-graph/v1", "export": "bo-stategraph/v1", "recording": 1, "runtime_frames": 1, "preferences": 1}, "changes": ["static/graph/renderer.js", "static/graph/viewer.css", "static/graph/viewer.js"], "conflicts": [], "retained_legacy_files": []}

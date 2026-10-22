@@ -1,0 +1,542 @@
+{
+  "checked_at": "2026-10-20T15:06:40.224Z",
+  "origin": "http://localhost:8824/graph",
+  "checks": [
+    {
+      "check": "circle blank drag",
+      "groupDelta": {
+        "dx": 197.26197676468598,
+        "dy": -161.85598093512704
+      },
+      "referenceMembersMoved": 4,
+      "canonicalMembersUnchanged": 4
+    },
+    {
+      "check": "canvas pan",
+      "worldPositionsUnchanged": true,
+      "screenDelta": [
+        20,
+        35
+      ]
+    },
+    {
+      "check": "independent folding",
+      "canonicalMembersRemaining": 4,
+      "referenceMembersHidden": 4
+    },
+    {
+      "check": "group layout and expansion reload",
+      "passed": true
+    },
+    {
+      "check": "preset projections",
+      "results": [
+        {
+          "id": "business",
+          "edges": [
+            "guard",
+            "data",
+            "data",
+            "data",
+            "guard",
+            "flow",
+            "flow"
+          ],
+          "nodes": [
+            "business",
+            "business",
+            "business"
+          ]
+        },
+        {
+          "id": "states",
+          "edges": [
+            "transition",
+            "transition",
+            "transition",
+            "transition",
+            "transition",
+            "transition",
+            "transition",
+            "transition",
+            "transition",
+            "transition",
+            "transition",
+            "transition",
+            "transition",
+            "transition",
+            "transition",
+            "transition",
+            "transition",
+            "transition",
+            "transition",
+            "transition",
+            "transition",
+            "transition",
+            "transition",
+            "transition"
+          ],
+          "nodes": [
+            "state",
+            "state",
+            "state",
+            "state",
+            "state",
+            "state",
+            "state",
+            "state",
+            "state",
+            "state"
+          ]
+        },
+        {
+          "id": "functions",
+          "edges": [
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "call",
+            "call",
+            "call"
+          ],
+          "nodes": [
+            "function",
+            "data",
+            "function",
+            "function",
+            "function",
+            "function",
+            "data",
+            "data",
+            "function",
+            "data",
+            "function",
+            "function",
+            "data",
+            "function",
+            "function",
+            "function",
+            "function",
+            "data",
+            "function",
+            "function",
+            "function",
+            "function",
+            "function",
+            "function",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data"
+          ]
+        },
+        {
+          "id": "permission",
+          "edges": [
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "guard"
+          ],
+          "nodes": [
+            "function",
+            "data",
+            "decision",
+            "decision",
+            "function",
+            "function",
+            "function",
+            "data",
+            "data",
+            "decision",
+            "data",
+            "decision",
+            "decision",
+            "decision",
+            "function",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data"
+          ]
+        },
+        {
+          "id": "resources",
+          "edges": [
+            "resource",
+            "join",
+            "resource",
+            "join"
+          ],
+          "nodes": [
+            "function",
+            "function",
+            "resource",
+            "decision",
+            "state"
+          ]
+        },
+        {
+          "id": "data",
+          "edges": [
+            "data",
+            "data",
+            "guard",
+            "guard",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "data",
+            "guard",
+            "data",
+            "data",
+            "data",
+            "guard",
+            "guard",
+            "data",
+            "data",
+            "guard",
+            "call",
+            "call",
+            "call",
+            "call",
+            "call",
+            "call",
+            "call"
+          ],
+          "nodes": [
+            "function",
+            "data",
+            "decision",
+            "decision",
+            "function",
+            "function",
+            "effect",
+            "function",
+            "data",
+            "data",
+            "decision",
+            "function",
+            "data",
+            "function",
+            "decision",
+            "decision",
+            "function",
+            "data",
+            "function",
+            "function",
+            "function",
+            "data",
+            "decision",
+            "function"
+          ]
+        },
+        {
+          "id": "runtime",
+          "edges": [],
+          "nodes": []
+        },
+        {
+          "id": "blocked",
+          "edges": [],
+          "nodes": []
+        },
+        {
+          "id": "shared",
+          "edges": [
+            "shared",
+            "shared",
+            "shared",
+            "shared"
+          ],
+          "nodes": [
+            "function",
+            "function",
+            "resource",
+            "decision",
+            "state",
+            "function",
+            "function",
+            "resource",
+            "decision"
+          ]
+        }
+      ]
+    },
+    {
+      "check": "custom combination reload",
+      "value": {
+        "label": "检查与名额",
+        "nodes": [
+          {
+            "id": "content_check",
+            "type": "function",
+            "x": "681.2196046216059",
+            "y": "408.6759639697907"
+          },
+          {
+            "id": "index_check",
+            "type": "function",
+            "x": "570.0757342857482",
+            "y": "735.7223964850461"
+          },
+          {
+            "id": "processing_slots",
+            "type": "resource",
+            "x": "455.6025788357945",
+            "y": "82.95979474977594"
+          },
+          {
+            "id": "checks_join",
+            "type": "decision",
+            "x": "105.85808461000738",
+            "y": "396.6439657019039"
+          }
+        ],
+        "value": "custom-mvgskfgq"
+      },
+      "passed": true
+    },
+    {
+      "check": "replay early frame",
+      "eventIndex": 17,
+      "analysisPreserved": true,
+      "content": "active",
+      "index": "blocked",
+      "resource": "blocked",
+      "join": "blocked"
+    },
+    {
+      "check": "evidenced resource allocation animation",
+      "active": "true",
+      "analysis": "custom-mvgskfgq",
+      "animation": "[\"summary:processing_slots|index_check|resource|false|false|model\"]",
+      "event": "52 · 22:29:30 · 完成本次两项检查 · 状态改变",
+      "nodes": [
+        {
+          "id": "content_check",
+          "state": "ok"
+        },
+        {
+          "id": "index_check",
+          "state": "active"
+        },
+        {
+          "id": "processing_slots",
+          "state": "blocked"
+        },
+        {
+          "id": "checks_join",
+          "state": "blocked"
+        }
+      ],
+      "phase": "记录回放 · 流程状态：检查中"
+    },
+    {
+      "check": "live parallel execution",
+      "context": "内容版本 1 · 本次名额 2 · 本次正文 42 字节 · 当前项目上限 8192 字节",
+      "nodes": [
+        {
+          "id": "content_check",
+          "state": "active"
+        },
+        {
+          "id": "index_check",
+          "state": "active"
+        },
+        {
+          "id": "processing_slots",
+          "state": "blocked"
+        },
+        {
+          "id": "checks_join",
+          "state": "blocked"
+        }
+      ],
+      "phase": "流程状态：检查中",
+      "record": "正在记录 · 0 个事件、0 次操作",
+      "startDisabled": true
+    },
+    {
+      "check": "same recording, second attempt waits for resource",
+      "context": "内容版本 1 · 本次名额 1 · 本次正文 42 字节 · 当前项目上限 8192 字节",
+      "nodes": [
+        {
+          "id": "content_check",
+          "state": "active"
+        },
+        {
+          "id": "index_check",
+          "state": "blocked"
+        },
+        {
+          "id": "processing_slots",
+          "state": "blocked"
+        },
+        {
+          "id": "checks_join",
+          "state": "blocked"
+        }
+      ],
+      "phase": "流程状态：检查中",
+      "record": "正在记录 · 71 个事件、2 次操作",
+      "startDisabled": true
+    },
+    {
+      "check": "function preset keeps judgment functions with their parameters",
+      "edges": 20,
+      "nodes": 29,
+      "types": [
+        "function",
+        "data",
+        "decision"
+      ]
+    },
+    {
+      "check": "multi-attempt replay identity and resource capacity",
+      "parallel": {
+        "context": "内容版本 1 · 本次名额 2 · 保存时上限 8192 字节",
+        "nodes": [
+          {
+            "id": "content_check",
+            "state": "active"
+          },
+          {
+            "id": "index_check",
+            "state": "active"
+          },
+          {
+            "id": "processing_slots",
+            "state": "blocked"
+          },
+          {
+            "id": "checks_join",
+            "state": "blocked"
+          }
+        ],
+        "note": "运行 5751b243 · 回放不执行程序"
+      },
+      "serial": {
+        "context": "内容版本 1 · 本次名额 1 · 保存时上限 8192 字节",
+        "nodes": [
+          {
+            "id": "content_check",
+            "state": "active"
+          },
+          {
+            "id": "index_check",
+            "state": "blocked"
+          },
+          {
+            "id": "processing_slots",
+            "state": "blocked"
+          },
+          {
+            "id": "checks_join",
+            "state": "blocked"
+          }
+        ],
+        "note": "运行 87e4387e · 回放不执行程序"
+      }
+    },
+    {
+      "check": "event location and bound source",
+      "title": "archive_app/policy.py:92 · df455572",
+      "containsCheckIndex": true
+    },
+    {
+      "check": "accepted viewer reload and stored recording",
+      "connection": "已连接 · 回放记录",
+      "recording": "146c9751a3db41edb78a6690f44b9b61",
+      "cursor": 126,
+      "view": "custom-mvgskfgq",
+      "consoleScopeStart": "2026-10-20T15:05:15.332Z",
+      "consoleErrors": [],
+      "earlierConnectionErrors": 11
+    }
+  ]
+}

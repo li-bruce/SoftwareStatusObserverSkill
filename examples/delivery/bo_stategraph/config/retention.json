@@ -1,0 +1,6 @@
+{
+  "memory_events": 10000,
+  "memory_seconds": 1800,
+  "log_bytes": 8388608,
+  "log_backups": 2
+}

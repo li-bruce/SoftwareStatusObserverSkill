@@ -1,0 +1,1 @@
+{"valid": true, "release": "2026.10-refactor1", "protocols": {"behavior": 3, "event": 3, "activity": "activity-graph/v1", "export": "bo-stategraph/v1", "recording": 1, "runtime_frames": 1, "preferences": 1}, "changes": ["observer_runtime/change_sync.py", "observer_runtime/source_migration.py"], "conflicts": [], "retained_legacy_files": []}

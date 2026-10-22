@@ -4,13 +4,13 @@ from pathlib import Path
 import sys
 ROOT = Path(__file__).absolute().parents[1]
 sys.path.insert(0,str(ROOT))
-from archive_app.workflow import definition
+from bo_stategraph.workflow import definition
 from observer_runtime.code_structure import scan, enrich
 
 
 def build() -> dict:
     model = json.loads((ROOT/"tooling/behavior_source.json").read_text(encoding="utf-8-sig"))
-    model.update(revision="1.1.0",status="candidate",machine=definition())
+    model.update(revision="1.1.0",status="implemented",machine=definition())
     nodes = {n["id"]:n for n in model["nodes"]}
     bindings = {
         "archive_request":("service","ArchiveService.create_run"),
@@ -77,12 +77,24 @@ def build() -> dict:
         for ident in children:
             nodes[ident]["parent"]=group
     for ident,(module,symbol) in bindings.items():
-        nodes[ident]["source"]={"path":"archive_app/"+module+".py","symbol":symbol}
+        nodes[ident]["source"]={"path":("bo_stategraph/" if module=="workflow" else "archive_app/")+module+".py","symbol":symbol}
         nodes[ident].pop("planned_source",None)
         nodes[ident].pop("binding_status",None)
     for ident in ("content_check","index_check"):
         nodes[ident]["execution_role"]="activity"
+    for ident,label,symbol,parent in [('run.storage','保存运行状态','ArchiveStore.save_run','flow.checks'),
+            ('run.lookup','读取指定运行','ArchiveStore.get_run','flow.checks'),
+            ('relations.revision','更新关系修订号','ArchiveStore.bump','flow.policy')]:
+        nodes[ident]={'id':ident,'label':label,'summary':label,'kind':'function','layer':'program',
+            'parent':parent,'analysis_level':'advanced','source':{'path':'archive_app/storage.py','symbol':symbol}}
     nodes["processing_slots"]["execution_role"]="resource"
+    for symbol,label,parent in [('schedule','安排等待、启动与汇合','flow.checks'),
+            ('request_stop','停止启动新检查','cancel_run'),('settle','等待运行检查收尾','cancel_run'),
+            ('checks_passed','核对同次检查结果','checks_join'),('interrupt','标记中断并归还名额','recover_run'),
+            ('finish_activity','完成活动并记录结果','worker_call'),('resume','恢复本次运行','resume_run')]:
+        ident='execution.'+symbol
+        nodes[ident]={'id':ident,'label':label,'summary':label,'kind':'function','layer':'program',
+            'parent':parent,'analysis_level':'advanced','source':{'path':'bo_stategraph/workflow.py','symbol':symbol}}
     nodes["checks_join"]["execution_role"]="join"
     nodes["processing_slots"]["summary"]="本次运行独享容量，创建时选 1 或 2；检查实际结束后归还。"
     nodes["content_changed"]["summary"]="旧运行不再提交；未开始检查作废，已开始自然结束，新版本另建独立运行。"
@@ -153,6 +165,13 @@ def build() -> dict:
     model["overview"]=[{"node":n,"x":80+i*400,"y":120} for i,n in enumerate(model["graph_roots"])]
     model["presentation"].update(default_expanded=[],
                                  title="团队资料归档 · 开发者运行图")
+    model["presentation"]["replay_parameters"]={
+        "content_bytes":{"node":"size_guard","direction":"in","field":"content_bytes"},
+        "limit_bytes":{"node":"project_limit","direction":"out","field":"limit_bytes"},
+        "limit_revision":{"node":"project_limit","direction":"out","field":"limit_revision"},
+    }
+    model['presentation']['context_fields']=[{'key':'content_bytes','label':'本次正文','unit':'字节'},
+        {'key':'limit_bytes','label':'当前项目上限','saved_label':'保存时上限','unit':'字节'}]
     model["scope"]["unknowns"]=[
         "只覆盖本地合成资料、直接负责关系和内嵌审批规则，不是通用 ReBAC 引擎。",
         "正文不进入探针，仅记录内容摘要和长度；外部身份认证、文件系统归档及外部服务不在首版范围。",
@@ -162,9 +181,17 @@ def build() -> dict:
     cfg=json.loads((ROOT/"sync.json").read_text(encoding="utf-8"))
     model["source_files"]=sorted(set(cfg["code_files"]+[
         "tooling/build_model.py","tooling/behavior_source.json","archive_app/__init__.py",
-        "observer_runtime/semantic_probe.py","observer_runtime/behavior_model.py",
+        "observer_runtime/semantic_probe.py","observer_runtime/behavior_model.py","observer_runtime/recording_session.py","observer_runtime/bo_stategraph.py",
         "run.py","static/app.html","static/app.css","static/app.js",
-        "static/graph/index.html","static/graph/viewer.js","static/graph/graph-core.js","static/graph/layout.js","static/graph/viewer.css"]))
+        "static/graph/index.html","static/graph/viewer.js","static/graph/graph-core.js","static/graph/layout.js","static/graph/viewer.css",
+        "static/graph/analysis.js","static/graph/recording.js","static/graph/glyphs.js","static/graph/replay-steps.js"]))
+    model.setdefault('presentation', {})['recording']={'parameters': ['param_version', 'attempt', 'capacity', 'content_bytes', 'limit_bytes', 'limit_revision'], 'command_fields': ['document_id', 'operator_id', 'reviewer_id', 'approval_id', 'run_id', 'folder_id', 'project_id', 'capacity', 'seconds', 'limit_bytes', 'param_version', 'expected_version']}
+    model['source_files']=sorted(set(model['source_files']+[p.relative_to(ROOT).as_posix() for p in (ROOT/'bo_stategraph').glob('*.py')]+['static/graph/preferences.js','observer_runtime/view_preferences.py','observer_runtime/bo_retention.py']))
+    for node in model['nodes']:
+        if node['id'] in ['scope_check','approval_check','approval_candidate','commit_guard','folder_assignments','approval_target','project_limit','size_guard','authority_read']:
+            node['basis_fields']=['param_version','epoch','clock']
+        if node['id'] in ['scope_check', 'approval_check', 'approval_candidate', 'commit_guard', 'folder_assignments', 'approval_target']: node['semantic_roles']=['permission']
+        if node.get('execution_role') in ('resource','join'): node['analysis_level']='advanced'
     model=enrich(model,scan(ROOT,cfg["code_files"]),depth=cfg.get("slice_depth",1))
     (ROOT/"behavior.json").write_text(json.dumps(model,ensure_ascii=False,indent=2),encoding="utf-8",newline="\n")
     return model

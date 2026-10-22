@@ -6,7 +6,8 @@
     "tooling",
     "tests",
     "observer_generated",
-    "main.py"
+    "main.py",
+    "bo_stategraph"
   ],
   "layers": {
     "business": {
@@ -15,7 +16,8 @@
         "main.py"
       ],
       "allows": [
-        "business"
+        "business",
+        "stategraph"
       ],
       "reject_dynamic": true,
       "external": [
@@ -43,7 +45,8 @@
       "allows": [
         "business",
         "observer",
-        "integration"
+        "integration",
+        "stategraph"
       ]
     },
     "observer": {
@@ -51,7 +54,8 @@
         "observer_generated"
       ],
       "allows": [
-        "observer"
+        "observer",
+        "stategraph"
       ]
     },
     "tooling": {
@@ -63,7 +67,8 @@
         "integration",
         "observer",
         "tooling",
-        "test"
+        "test",
+        "stategraph"
       ]
     },
     "test": {
@@ -74,17 +79,31 @@
         "business",
         "integration",
         "observer",
-        "test"
+        "test",
+        "stategraph"
+      ]
+    },
+    "stategraph": {
+      "paths": [
+        "bo_stategraph"
+      ],
+      "allows": [
+        "stategraph"
       ]
     }
   },
   "managed_paths": [
+    "bo_stategraph/__init__.py",
+    "bo_stategraph/bo_contracts.py",
+    "bo_stategraph/execution_contract.py",
+    "bo_stategraph/runtime-version.json",
+    "observer_generated/behavior.json",
     "observer_generated/runtime",
-    "observer_generated/static",
-    "observer_generated/behavior.json"
+    "observer_generated/static"
   ],
   "core_layers": [
-    "business"
+    "business",
+    "stategraph"
   ],
   "core_resources": [
     "requirements.txt",
@@ -98,36 +117,64 @@
     "requirements.txt",
     "README_CORE.md",
     "LICENSE",
-    "THIRD_PARTY_NOTICES.md"
+    "THIRD_PARTY_NOTICES.md",
+    "bo_stategraph"
   ],
   "managed_hashes": {
-    "observer_generated/behavior.json": "07a88fe74ee070ccae7d54f18cb4f6b1e8760aec790c298f7c0a76b756d4725d",
+    "bo_stategraph/__init__.py": "577631905e58c6e0700ca225312a0a2fa57bf21e3a631bb4dd3539d6951ff561",
+    "bo_stategraph/bo_contracts.py": "2a5639208ccb10f41c1c013858c1961fc6459b4b094954a0581d17050c471a65",
+    "bo_stategraph/execution_contract.py": "9502b2d348bb8ee00c05288ca3d064d151365292fdef597c156c178871635b78",
+    "bo_stategraph/runtime-version.json": "004f34742eade5381c5d069d1c84533991cefd4b78c93d1143f4f28ab97539e4",
+    "observer_generated/behavior.json": "fab6bbf75a8fd78d04523353d0c986248f5af41530183b8a2b993c242a17eb6b",
     "observer_generated/runtime/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "observer_generated/runtime/architecture_guard.py": "ff82147f8ed61e7d7473bbc59a3cedacf546117c71e397d0cf032a83270a852a",
-    "observer_generated/runtime/behavior_model.py": "37af8d5926a29eb525773048f3e5e7190e4b7e2239a0a8f858108593924c16b4",
-    "observer_generated/runtime/change_sync.py": "916f08a14612142fd81c8a25208d952b7ae27ae1bac1e45146e354444f03b2b8",
+    "observer_generated/runtime/architecture_guard.py": "09d631a2ff11f32731a25aa21d1382d3a40a824655adabb9dd56d353035367e8",
+    "observer_generated/runtime/behavior_model.py": "7165f6139fed267dab5b44b64fd7398f1624e0d4bf3c32fdc112fa042aad9a94",
+    "observer_generated/runtime/bo_contracts.py": "0d1d70ac496a9d0c84f0e88394b65e72d08f0ceb6dca933bc9da19303dfeea29",
+    "observer_generated/runtime/bo_retention.py": "b5a0f17bd789bc3f8d81cf8089f218344040d2ad29577bb5865c7b870bac86e9",
+    "observer_generated/runtime/bo_runtime.py": "7c16cf2e58971309afb3da9fc41b96cb58b6a48d6113d3fff14e93fb5e7a02c9",
+    "observer_generated/runtime/bo_stategraph.py": "d704fc786b49337ca75d06b8a8ca7b1d6471af9c08c3d02d571b434f664e23b2",
+    "observer_generated/runtime/bo_sync.py": "f3fdb5c555073aa106bc32796fb05046d77f2d58bb417ae24bc3d532a20b9a69",
+    "observer_generated/runtime/bo_upgrade.py": "9d12c0d6fbd02bc6a66858629e31b7a4832dcfc5b030b49a1290e6bb04a1111e",
+    "observer_generated/runtime/change_sync.py": "7308dfd24682fabba7cdca2898297d159629a8e4f5b35cbf2497b881541c19e6",
     "observer_generated/runtime/code_structure.py": "01dad9cda1d248150301598fea1186e698c2f3ca62026f5735befbcb74c9c681",
-    "observer_generated/runtime/execution_contract.py": "9502b2d348bb8ee00c05288ca3d064d151365292fdef597c156c178871635b78",
+    "observer_generated/runtime/execution_contract.py": "cf8c1cce153b039883e4f95d9913420e287f2dba4849fa00647b0a05a894fb12",
     "observer_generated/runtime/focus_graph.py": "ec366eebee41e60dea83f16acd89b334546b58509a174034afa7736b9b31a106",
+    "observer_generated/runtime/mapping_contract.py": "5c66b054d2a2086861fe63489cf49d4f08909d64424b7dce6407766508213296",
     "observer_generated/runtime/model_tool.py": "47b80a2a5d376ef81f34cd91cb050ce58714c3f85ed1212a842c2081bca0d291",
+    "observer_generated/runtime/origin.json": "a3f74398b76af60ec82aeeb3ff4f0efd78c7316949ad257a513d8376cc6de3b5",
     "observer_generated/runtime/probe.py": "6e12b7cb0d89278b9562435e20eefa339993a1114720dd0f8dac15626d011807",
     "observer_generated/runtime/project_bundle.py": "2a05e4eda5946b413c4d4a72b8bd29718705706a616d2bb48618205926171f5c",
+    "observer_generated/runtime/recording_session.py": "f65564a2cd0745ad2b1962506286735e177109de0716376c2bb4368db8cd78bb",
     "observer_generated/runtime/requirements_dialogue.py": "88a0603db9231a64e73b91db42ea8da2ef42eaffb2b4b309ec86f3b33d627f12",
-    "observer_generated/runtime/semantic_probe.py": "a081e8dfdecf117858cf0d77eb51b4fa2eb717ca421d1473f0ad9058fd4413bb",
-    "observer_generated/runtime/statechart_contract.py": "513689fece1199c6d07954028c1609c5560dcbb80f444be94ac67c0ef0882a43",
+    "observer_generated/runtime/runtime_frames.py": "45f36d2e53ec2837d9b4177bbbcfd0d03c009de2b5328eeec1b3158dc6b7a9ba",
+    "observer_generated/runtime/semantic_probe.py": "7a76181cbef2122e6d54105c07bc10e63f81d0d63130c2010fa7c375f09a40e2",
+    "observer_generated/runtime/source_migration.py": "874c6c782a82f9ee2886454797338b69f0874245526ea29cb0972a1d8586571f",
+    "observer_generated/runtime/statechart_contract.py": "9bb6beb6ed2444e73fc0d601aa45d54401e9b44feb82782fb2fa1cdfa7206d5a",
+    "observer_generated/runtime/sync_config.py": "5384af51fbf089e4902773490fcaf5194c3a5a0c05a02dc4fc745621650ecedc",
+    "observer_generated/runtime/sync_io.py": "2afd0eac53ed9ae47dd551e04958a33a1935354aa51826cf93b2f4c69416f7df",
+    "observer_generated/runtime/sync_verify.py": "8f95683985bf218ab96e3ccfafc624d963df24cefda6a13fba21288619dc3e4b",
+    "observer_generated/runtime/view_preferences.py": "0c03f77ec7a7374480cf232684ea9d8e6f4013dde258dd8b1a5be01772344261",
     "observer_generated/runtime/viewer_server.py": "10fa75d9a93662ce07cac457db46d65ecc3fa821a5d4a1a96ec543c7ec862c30",
     "observer_generated/runtime/whitebox_contract.py": "ea6f97242402e93776d1958e11da85e1093a667098527818508cba1c09f0c6de",
     "observer_generated/runtime/worknet_contract.py": "19a70d82022f2c2af675f64e7d955b13f5f543949b40c7813b657cd96b0e8193",
     "observer_generated/static/ELK-LICENSE.md": "637e81f4a1b6b4079535c499fca05e238cf7605c1ff5b76d60d7da7ce96700c9",
     "observer_generated/static/PIXI-LICENSE.txt": "5ce7447bc57f7349ffc48338782fbcabe613696e00712b20d66bc58e780f9473",
+    "observer_generated/static/analysis.js": "4d3e8e2a5079064228fced0de2f127e9fdb8a2e3a8752439c6579252d92441c2",
     "observer_generated/static/elk-worker.min.js": "e4f5c51c6f2fd564bb64e52e81c4a85a316ef2f24f8b90e1db5eb886c765b030",
     "observer_generated/static/elk.bundled.js": "1222e44f953ce7746af23801e723708f8e6f436b8b377a6a5fc7552f34a307b3",
-    "observer_generated/static/graph-core.js": "5e2348269d70bd763efd28f53cbbf2ef3f7834cfc322bdbb0da5916126c1404a",
-    "observer_generated/static/index.html": "607f87df272d05041bc98a58e38abd5df211956756d4992917f6233396cb3bd6",
-    "observer_generated/static/layout.js": "2bcd4f12569982db78ec8fe035cbb5bcc9047f99207b46efa51715fca3d1fb18",
+    "observer_generated/static/glyphs.js": "bcb44b53b59d0b387a46e13d8f363d775fbbb536442072e69a861f75fb9c7a76",
+    "observer_generated/static/graph-core.js": "22ecd27b1b1fa30987da60cdf1a7370690e40baecebe51436f40ee80650d532a",
+    "observer_generated/static/index.html": "6f44c82ae2f4065458f702c03c5087c713ef44ec5fd370d7b265f20006a42379",
+    "observer_generated/static/layout.js": "76d9d851cec9435e18eec0feddaaf09d1fa089c6229c938279343201f12b3290",
     "observer_generated/static/pixi.min.js": "06d9ef9823e743518793083c296d801e752db128cb1f519fbabe37e1259567ea",
-    "observer_generated/static/viewer.css": "5f90674ff00fa1dfe77ba29b0e10b5e435143ea39bc1daef72827e21c82a5cd6",
-    "observer_generated/static/viewer.js": "51f65e1d7945cde2fea4d559f3572b6fec4ce1c3375a991f96334f04d6895403"
+    "observer_generated/static/polling.js": "4afd72f3ad9368350880da2c92b0b564ca795610c70f3e331d9e8d9f896249f5",
+    "observer_generated/static/preferences.js": "999acca5c27f23dc89bdd8496b5e7b792bedd3ec3645f9730d01373bf084929e",
+    "observer_generated/static/recording.js": "35531cdadcf6f991449e56d65cc2f795648bd986e527a2aa9df7ab4b6594057e",
+    "observer_generated/static/renderer.js": "8a246d7bf2043aa353bc2c836b937fcc0434de87820237005499ed3231a52434",
+    "observer_generated/static/replay-steps.js": "86107c3d772604e4d3ee08650517cbd0352627448e51a4fd079532767e7fedc8",
+    "observer_generated/static/runtime-frames.js": "d40a54ded1b11b08357146914b0496c8355a56a87e483cca64346cd68803ebce",
+    "observer_generated/static/viewer.css": "bc116acaa256d80cde1d7b786ef14a4e3b44909ba410eff2eb0afb877963ca0b",
+    "observer_generated/static/viewer.js": "cda8e73e8e951cba41b3242ee5a9c40a9d90f4f004dc2569fb53d9fb521d78ee"
   },
   "regenerations": [
     {
@@ -274,6 +321,371 @@
       "changed": [
         "observer_generated/static/graph-core.js"
       ]
+    },
+    {
+      "reason": "按所属层级布局与显示区域，保留运行事实及个人视图",
+      "changed": []
+    },
+    {
+      "reason": "父子分组布局与嵌套区域",
+      "changed": [
+        "observer_generated/static/graph-core.js",
+        "observer_generated/static/index.html",
+        "observer_generated/static/layout.js",
+        "observer_generated/static/viewer.css",
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "保留固定节点时先预留所属组空间",
+      "changed": [
+        "observer_generated/static/layout.js"
+      ]
+    },
+    {
+      "reason": "按子树实际尺寸安排邻近节点，固定组优先",
+      "changed": []
+    },
+    {
+      "reason": "按子树实际尺寸安排邻近节点，固定组优先",
+      "changed": [
+        "observer_generated/static/index.html",
+        "observer_generated/static/layout.js",
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "关闭详情后将键盘焦点返回图，工具栏支持 Esc 清除选择",
+      "changed": [
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "层级区域采用平滑闭合曲线，完整包住节点和内层区域，并保留已有坐标",
+      "changed": [
+        "observer_generated/static/layout.js",
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "自动布局为圆滑区域预留实际边界，避免相邻组相交",
+      "changed": [
+        "observer_generated/static/layout.js"
+      ]
+    },
+    {
+      "reason": "展开区域采用圆形复合节点，分层连线保留原始关系，核心节点带动全部后代",
+      "changed": [
+        "observer_generated/static/graph-core.js",
+        "observer_generated/static/index.html",
+        "observer_generated/static/layout.js",
+        "observer_generated/static/viewer.css",
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "大尺寸圆形分组的避让按实际边界计算",
+      "changed": [
+        "observer_generated/static/layout.js"
+      ]
+    },
+    {
+      "reason": "圆形包围按子组实际范围收紧，移动仍以核心节点为锚点",
+      "changed": [
+        "observer_generated/static/layout.js"
+      ]
+    },
+    {
+      "reason": "保持节点类型及线型可辨，局部放大时清楚显示关系与参数",
+      "changed": [
+        "observer_generated/static/layout.js",
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "圆形复合节点、层级端口与保留隐藏后代位置的整组拖动",
+      "changed": [
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "隔离关系按钮的回车事件，避免误触节点折叠",
+      "changed": [
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "圆边标题避让，防止内层区域遮盖外层标题",
+      "changed": [
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "关系明细随运行刷新更新，避免轮询时意外关闭；保留关系键盘焦点",
+      "changed": [
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "所有可展开节点以类型色圆圈表示；保留跨圈真实端点，增加筛选并减少无变化重绘",
+      "changed": [
+        "observer_generated/static/graph-core.js",
+        "observer_generated/static/index.html",
+        "observer_generated/static/layout.js",
+        "observer_generated/static/viewer.css",
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "所有类型的展开圈、真实跨圈端点、可保存筛选及稳定渲染",
+      "changed": [
+        "observer_generated/static/layout.js",
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "增加独立记录模块、分析视图与共享成员投影，业务层保持原规则；同步源码及检查。",
+      "changed": [
+        "observer_generated/behavior.json",
+        "observer_generated/runtime/recording_session.py",
+        "observer_generated/static/analysis.js",
+        "observer_generated/static/glyphs.js",
+        "observer_generated/static/graph-core.js",
+        "observer_generated/static/index.html",
+        "observer_generated/static/layout.js",
+        "observer_generated/static/recording.js",
+        "observer_generated/static/viewer.css",
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "增加独立记录模块、分析视图与共享成员投影，业务层保持原规则；同步源码及检查。",
+      "changed": [
+        "observer_generated/static/glyphs.js",
+        "observer_generated/static/graph-core.js",
+        "observer_generated/static/recording.js",
+        "observer_generated/static/viewer.css",
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "增加独立记录模块、分析视图与共享成员投影，业务层保持原规则；同步源码及检查。",
+      "changed": []
+    },
+    {
+      "reason": "增加独立记录模块、分析视图与共享成员投影，业务层保持原规则；同步源码及检查。",
+      "changed": [
+        "observer_generated/static/analysis.js",
+        "observer_generated/static/viewer.css",
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "增加独立记录模块、分析视图与共享成员投影，业务层保持原规则；同步源码及检查。",
+      "changed": [
+        "observer_generated/static/graph-core.js",
+        "observer_generated/static/recording.js"
+      ]
+    },
+    {
+      "reason": "增加独立记录模块、分析视图与共享成员投影，业务层保持原规则；同步源码及检查。",
+      "changed": [
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "记录范围、按层级回放、变化值与核心标注；观测入口使用 bo_ 前缀，业务条件与效果不变。",
+      "changed": [
+        "observer_generated/behavior.json",
+        "observer_generated/runtime/recording_session.py",
+        "observer_generated/runtime/semantic_probe.py",
+        "observer_generated/static/index.html",
+        "observer_generated/static/layout.js",
+        "observer_generated/static/replay-steps.js",
+        "observer_generated/static/viewer.css",
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "记录范围、按层级回放、变化值与核心标注；观测入口使用 bo_ 前缀，业务条件与效果不变。",
+      "changed": [
+        "observer_generated/static/replay-steps.js",
+        "observer_generated/static/viewer.css",
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "记录范围、按层级回放、变化值与核心标注；观测入口使用 bo_ 前缀，业务条件与效果不变。",
+      "changed": [
+        "observer_generated/static/recording.js",
+        "observer_generated/static/replay-steps.js",
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "记录范围、按层级回放、变化值与核心标注；观测入口使用 bo_ 前缀，业务条件与效果不变。",
+      "changed": []
+    },
+    {
+      "reason": "记录范围、按层级回放、变化值与核心标注；观测入口使用 bo_ 前缀，业务条件与效果不变。",
+      "changed": [
+        "observer_generated/static/glyphs.js",
+        "observer_generated/static/viewer.css",
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "记录范围、按层级回放、变化值与核心标注；观测入口使用 bo_ 前缀，业务条件与效果不变。",
+      "changed": [
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "独立状态网模块与全图导出；默认内部引导或用户选择跟随时均保留监控、源码适配和检查。既有业务规则不变。",
+      "changed": [
+        "observer_generated/behavior.json",
+        "observer_generated/runtime/bo_stategraph.py",
+        "observer_generated/runtime/change_sync.py"
+      ]
+    },
+    {
+      "reason": "完整状态机迁入 bo_stategraph；共享校验、项目配置与记录工具由规范源复制",
+      "changed": [
+        "observer_generated/behavior.json",
+        "observer_generated/runtime/architecture_guard.py",
+        "observer_generated/runtime/behavior_model.py",
+        "observer_generated/runtime/bo_contracts.py",
+        "observer_generated/runtime/bo_retention.py",
+        "observer_generated/runtime/bo_stategraph.py",
+        "observer_generated/runtime/bo_sync.py",
+        "observer_generated/runtime/change_sync.py",
+        "observer_generated/runtime/mapping_contract.py",
+        "observer_generated/runtime/recording_session.py",
+        "observer_generated/runtime/statechart_contract.py",
+        "observer_generated/runtime/view_preferences.py",
+        "observer_generated/static/analysis.js",
+        "observer_generated/static/graph-core.js",
+        "observer_generated/static/index.html",
+        "observer_generated/static/layout.js",
+        "observer_generated/static/preferences.js",
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "规范源复制；公共状态协议和查询改为独立模块的兼容转发，新增升级清单",
+      "changed": [
+        "bo_stategraph/__init__.py",
+        "bo_stategraph/bo_contracts.py",
+        "bo_stategraph/execution_contract.py",
+        "bo_stategraph/runtime-version.json",
+        "observer_generated/behavior.json",
+        "observer_generated/runtime/behavior_model.py",
+        "observer_generated/runtime/bo_contracts.py",
+        "observer_generated/runtime/bo_runtime.py",
+        "observer_generated/runtime/bo_stategraph.py",
+        "observer_generated/runtime/bo_upgrade.py",
+        "observer_generated/runtime/change_sync.py",
+        "observer_generated/runtime/execution_contract.py",
+        "observer_generated/runtime/origin.json",
+        "observer_generated/runtime/sync_config.py",
+        "observer_generated/runtime/sync_io.py",
+        "observer_generated/runtime/sync_verify.py",
+        "observer_generated/static/polling.js",
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "完整迁移状态调度与恢复、统一实例和模型校验；生成直接内容与高级节点",
+      "changed": [
+        "bo_stategraph/__init__.py",
+        "bo_stategraph/runtime-version.json",
+        "observer_generated/behavior.json",
+        "observer_generated/runtime/bo_contracts.py",
+        "observer_generated/runtime/bo_stategraph.py",
+        "observer_generated/runtime/bo_upgrade.py",
+        "observer_generated/runtime/execution_contract.py",
+        "observer_generated/runtime/recording_session.py"
+      ]
+    },
+    {
+      "reason": "公共组件保留历史依据，按模型配置当前参数；验证报告分离项目检查",
+      "changed": [
+        "bo_stategraph/runtime-version.json",
+        "observer_generated/runtime/sync_verify.py",
+        "observer_generated/static/graph-core.js",
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "绘制与对象生命周期从页面协调器迁出；有限数值校验覆盖嵌套个人视图；公共源同步后验证",
+      "changed": [
+        "bo_stategraph/runtime-version.json",
+        "observer_generated/runtime/view_preferences.py",
+        "observer_generated/static/renderer.js",
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "源码范围与实际值对照强制检查；监视任务随配置和验收状态刷新，配置编辑中持续监听",
+      "changed": [
+        "bo_stategraph/runtime-version.json",
+        "observer_generated/runtime/bo_sync.py",
+        "observer_generated/runtime/change_sync.py",
+        "observer_generated/runtime/sync_config.py"
+      ]
+    },
+    {
+      "reason": "独立试用发现同名自定义类绕过公共协议；新增真实导出和同源实例校验，公共核心与模板按规范源更新",
+      "changed": [
+        "bo_stategraph/__init__.py",
+        "bo_stategraph/runtime-version.json",
+        "observer_generated/runtime/sync_verify.py"
+      ]
+    },
+    {
+      "reason": "Reviewed optional exact runtime frames and missing activity handling; canonical sources regenerated and shared snapshot boundaries tested.",
+      "changed": [
+        "bo_stategraph/runtime-version.json",
+        "observer_generated/runtime/bo_upgrade.py",
+        "observer_generated/runtime/origin.json",
+        "observer_generated/runtime/recording_session.py",
+        "observer_generated/runtime/runtime_frames.py",
+        "observer_generated/static/analysis.js",
+        "observer_generated/static/graph-core.js",
+        "observer_generated/static/recording.js",
+        "observer_generated/static/replay-steps.js",
+        "observer_generated/static/runtime-frames.js"
+      ]
+    },
+    {
+      "reason": "Normalize live sources to repository LF before byte-level release fingerprints; frozen evidence remains unchanged.",
+      "changed": [
+        "bo_stategraph/runtime-version.json",
+        "observer_generated/runtime/origin.json",
+        "observer_generated/static/renderer.js",
+        "observer_generated/static/viewer.css",
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "Public narrow-toolbar fix reproduced by independent trial; shared CSS now owns it.",
+      "changed": [
+        "bo_stategraph/runtime-version.json",
+        "observer_generated/static/viewer.css"
+      ]
+    },
+    {
+      "reason": "Explicit source moves preserve graph/probe/whitebox identities without relaxing assertions; reviewed canonical runtime update.",
+      "changed": [
+        "bo_stategraph/runtime-version.json",
+        "observer_generated/runtime/change_sync.py",
+        "observer_generated/runtime/source_migration.py"
+      ]
     }
+  ],
+  "core_exclude": [
+    "bo_stategraph/config/views/*",
+    "bo_stategraph/config/views/.local-*.tmp",
+    "bo_stategraph/config/views/local.json"
   ]
 }

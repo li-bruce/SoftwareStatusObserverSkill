@@ -1,0 +1,368 @@
+{
+  "checks": {
+    "dragCircle": true,
+    "foldedMove": true,
+    "reloadMove": true,
+    "typeDepthFilter": true,
+    "edgeFilter": true,
+    "reloadFilter": true,
+    "filterRetainsPositions": true,
+    "idleDoesNotDraw": true,
+    "runtimeRefresh": true,
+    "boundedPool": true,
+    "repeatedActionsReuseObjects": true,
+    "historicalSwitch": true,
+    "functionCircle": true,
+    "noRendererErrors": true
+  },
+  "idle": {
+    "start": {
+      "time": 1792499806508,
+      "metrics": {
+        "activeObjects": "281",
+        "contextLost": "false",
+        "createdGraphics": "202",
+        "createdText": "129",
+        "drawCount": "4",
+        "poolSize": "331"
+      }
+    },
+    "end": {
+      "time": 1792499845516,
+      "metrics": {
+        "activeObjects": "281",
+        "contextLost": "false",
+        "createdGraphics": "202",
+        "createdText": "129",
+        "drawCount": "4",
+        "poolSize": "331"
+      }
+    }
+  },
+  "drag": [
+    {
+      "id": "flow.policy",
+      "dx": 0,
+      "dy": 0,
+      "child": false
+    },
+    {
+      "id": "flow.checks",
+      "dx": 204.1832484659251,
+      "dy": -116.67614198052843,
+      "child": true
+    },
+    {
+      "id": "flow.archive",
+      "dx": 0,
+      "dy": 0,
+      "child": false
+    },
+    {
+      "id": "content_check",
+      "dx": 204.1832484659251,
+      "dy": -116.67614198052843,
+      "child": true
+    },
+    {
+      "id": "index_check",
+      "dx": 204.1832484659251,
+      "dy": -116.67614198052843,
+      "child": true
+    },
+    {
+      "id": "processing_slots",
+      "dx": 204.1832484659251,
+      "dy": -116.67614198052843,
+      "child": true
+    },
+    {
+      "id": "content_changed",
+      "dx": 204.1832484659252,
+      "dy": -116.67614198052843,
+      "child": true
+    },
+    {
+      "id": "run_identity",
+      "dx": 204.1832484659251,
+      "dy": -116.67614198052843,
+      "child": true
+    },
+    {
+      "id": "checks_join",
+      "dx": 204.1832484659251,
+      "dy": -116.67614198052843,
+      "child": true
+    },
+    {
+      "id": "cancel_run",
+      "dx": 204.1832484659251,
+      "dy": -116.67614198052843,
+      "child": true
+    },
+    {
+      "id": "lifecycle",
+      "dx": 204.1832484659251,
+      "dy": -116.67614198052843,
+      "child": true
+    },
+    {
+      "id": "recover_run",
+      "dx": 204.1832484659251,
+      "dy": -116.67614198052843,
+      "child": true
+    },
+    {
+      "id": "worker_call",
+      "dx": 204.1832484659251,
+      "dy": -116.67614198052843,
+      "child": true
+    }
+  ],
+  "stress": {
+    "cycles": 66,
+    "actions": 462,
+    "samples": [
+      {
+        "cycle": 3,
+        "time": 1792499847885,
+        "activeObjects": "141",
+        "contextLost": "false",
+        "createdGraphics": "245",
+        "createdText": "148",
+        "drawCount": "26",
+        "poolSize": "223"
+      },
+      {
+        "cycle": 6,
+        "time": 1792499850148,
+        "activeObjects": "141",
+        "contextLost": "false",
+        "createdGraphics": "245",
+        "createdText": "148",
+        "drawCount": "48",
+        "poolSize": "223"
+      },
+      {
+        "cycle": 9,
+        "time": 1792499852361,
+        "activeObjects": "141",
+        "contextLost": "false",
+        "createdGraphics": "245",
+        "createdText": "148",
+        "drawCount": "70",
+        "poolSize": "223"
+      },
+      {
+        "cycle": 12,
+        "time": 1792499854550,
+        "activeObjects": "141",
+        "contextLost": "false",
+        "createdGraphics": "245",
+        "createdText": "148",
+        "drawCount": "91",
+        "poolSize": "223"
+      },
+      {
+        "cycle": 15,
+        "time": 1792499856704,
+        "activeObjects": "141",
+        "contextLost": "false",
+        "createdGraphics": "245",
+        "createdText": "148",
+        "drawCount": "111",
+        "poolSize": "223"
+      },
+      {
+        "cycle": 18,
+        "time": 1792499858921,
+        "activeObjects": "141",
+        "contextLost": "false",
+        "createdGraphics": "245",
+        "createdText": "148",
+        "drawCount": "134",
+        "poolSize": "223"
+      },
+      {
+        "cycle": 21,
+        "time": 1792500076969,
+        "activeObjects": "68",
+        "contextLost": "false",
+        "createdGraphics": "270",
+        "createdText": "173",
+        "drawCount": "31",
+        "poolSize": "183"
+      },
+      {
+        "cycle": 24,
+        "time": 1792500079131,
+        "activeObjects": "68",
+        "contextLost": "false",
+        "createdGraphics": "270",
+        "createdText": "173",
+        "drawCount": "54",
+        "poolSize": "183"
+      },
+      {
+        "cycle": 27,
+        "time": 1792500081213,
+        "activeObjects": "68",
+        "contextLost": "false",
+        "createdGraphics": "270",
+        "createdText": "173",
+        "drawCount": "74",
+        "poolSize": "183"
+      },
+      {
+        "cycle": 30,
+        "time": 1792500083327,
+        "activeObjects": "68",
+        "contextLost": "false",
+        "createdGraphics": "270",
+        "createdText": "173",
+        "drawCount": "95",
+        "poolSize": "183"
+      },
+      {
+        "cycle": 33,
+        "time": 1792500085475,
+        "activeObjects": "68",
+        "contextLost": "false",
+        "createdGraphics": "270",
+        "createdText": "173",
+        "drawCount": "117",
+        "poolSize": "183"
+      },
+      {
+        "cycle": 36,
+        "time": 1792500087596,
+        "activeObjects": "68",
+        "contextLost": "false",
+        "createdGraphics": "270",
+        "createdText": "173",
+        "drawCount": "137",
+        "poolSize": "183"
+      },
+      {
+        "cycle": 39,
+        "time": 1792500089733,
+        "activeObjects": "68",
+        "contextLost": "false",
+        "createdGraphics": "270",
+        "createdText": "173",
+        "drawCount": "159",
+        "poolSize": "183"
+      },
+      {
+        "cycle": 42,
+        "time": 1792500091831,
+        "activeObjects": "68",
+        "contextLost": "false",
+        "createdGraphics": "270",
+        "createdText": "173",
+        "drawCount": "179",
+        "poolSize": "183"
+      },
+      {
+        "cycle": 45,
+        "time": 1792500180162,
+        "activeObjects": "68",
+        "contextLost": "false",
+        "createdGraphics": "270",
+        "createdText": "173",
+        "drawCount": "201",
+        "poolSize": "183"
+      },
+      {
+        "cycle": 48,
+        "time": 1792500182331,
+        "activeObjects": "68",
+        "contextLost": "false",
+        "createdGraphics": "270",
+        "createdText": "173",
+        "drawCount": "224",
+        "poolSize": "183"
+      },
+      {
+        "cycle": 51,
+        "time": 1792500184463,
+        "activeObjects": "68",
+        "contextLost": "false",
+        "createdGraphics": "270",
+        "createdText": "173",
+        "drawCount": "244",
+        "poolSize": "183"
+      },
+      {
+        "cycle": 54,
+        "time": 1792500186559,
+        "activeObjects": "68",
+        "contextLost": "false",
+        "createdGraphics": "270",
+        "createdText": "173",
+        "drawCount": "263",
+        "poolSize": "183"
+      },
+      {
+        "cycle": 57,
+        "time": 1792500188713,
+        "activeObjects": "68",
+        "contextLost": "false",
+        "createdGraphics": "270",
+        "createdText": "173",
+        "drawCount": "285",
+        "poolSize": "183"
+      },
+      {
+        "cycle": 60,
+        "time": 1792500190845,
+        "activeObjects": "68",
+        "contextLost": "false",
+        "createdGraphics": "270",
+        "createdText": "173",
+        "drawCount": "304",
+        "poolSize": "183"
+      },
+      {
+        "cycle": 63,
+        "time": 1792500192995,
+        "activeObjects": "68",
+        "contextLost": "false",
+        "createdGraphics": "270",
+        "createdText": "173",
+        "drawCount": "326",
+        "poolSize": "183"
+      },
+      {
+        "cycle": 66,
+        "time": 1792500195131,
+        "activeObjects": "68",
+        "contextLost": "false",
+        "createdGraphics": "270",
+        "createdText": "173",
+        "drawCount": "348",
+        "poolSize": "183"
+      }
+    ],
+    "note": "Three action batches, with a planned service restart and other checks between them; wall time is not a continuous benchmark."
+  },
+  "runtime": {
+    "observed": "第 10 次 · 版本 1\n检查中\n509e83d16396 · alice\n内容检查\n正在检查\n索引检查\n等待可用名额 · 等待本次运行的可用名额\n本次名额：可用 0 / 1\n取消本次运行\n第 9 次 · 版本 1\n已归档\nb26a26b2c34a · alice\n内容检查\n已通过\n索引检查\n已通过\n本次名额：可用 2 / 2 · 使用已有归档记录\n第 8 次 · 版本 1\n已归档\nc2203f83985d · alice\n内容检查\n",
+    "graphFacts": "流程状态：检查中\n内容版本 1 · 本次名额 1 · 本次正文 42 字节 · 当前项目上限 8192 字节\n代码版本 04d31578"
+  },
+  "logs": [
+    {
+      "level": "error",
+      "message": "TypeError: Failed to fetch\n    at poll (http://localhost:8824/viewer.js:505:19)",
+      "timestamp": "2026-10-20T12:39:19.790Z",
+      "url": "http://localhost:8824/viewer.js"
+    },
+    {
+      "level": "error",
+      "message": "TypeError: Failed to fetch\n    at poll (http://localhost:8824/viewer.js:505:19)",
+      "timestamp": "2026-10-20T12:39:20.194Z",
+      "url": "http://localhost:8824/viewer.js"
+    }
+  ],
+  "logNote": "Two network errors occurred during the planned local service restart. No other warning/error was recorded; the internal native crash page was not accessible."
+}

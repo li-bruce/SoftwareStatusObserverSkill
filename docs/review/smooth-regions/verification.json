@@ -1,0 +1,40 @@
+{
+  "build_id": "35311737d38d94f35bcc2c0253a52d0e1257405ee8e3cf6a6d7cc5fec9d1c84d",
+  "binding": "current",
+  "busy": false,
+  "health": {
+    "enabled": true,
+    "run_id": "6b11cdb9e5cf",
+    "attempted": 51,
+    "written": 51,
+    "errors": 0,
+    "dropped": 0,
+    "queued": 0,
+    "mode": "on",
+    "evidence": "available"
+  },
+  "authoritative_tables": {
+    "documents": {
+      "unchanged": true,
+      "count": 1
+    },
+    "archives": {
+      "unchanged": true,
+      "count": 1
+    }
+  },
+  "verification": {
+    "delivery": {
+      "valid": true,
+      "errors": []
+    },
+    "archive": {
+      "valid": true,
+      "errors": []
+    },
+    "active-demo": {
+      "valid": true,
+      "errors": []
+    }
+  }
+}

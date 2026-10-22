@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 const source=await readFile(new URL('../static/graph/graph-core.js',import.meta.url),'utf8');
-const {selectedConfiguration,selectedEvents,status,layoutGraph,callValues,sourceBinding,sizeContext,lines}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
+const {selectedConfiguration,selectedEvents,status,layoutGraph,callValues,sourceBinding,parameterSummary:sizeContext,lines}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
 const frame={seq:1,phase:'checking',after:{activities:{content_check:'running',index_check:'pending'},resources:{processing_slots:{capacity:1,available:0,holders:['content_check']}},join:{state:'waiting',pending:['content_check','index_check']}}};
 const run={attempt:'r',param_version:1,phase:'interrupted',disposition:'interrupted',results:{future:true},qualification:{future:true},discarded:['index_check'],journal:[frame]};
 const view={model:{nodes:[],edges:[],machine:{execution:{parent:'actual-parent'},values:[],transitions:[]},overview:[]},machine:{configurations:[run]},authority:{parameters:{attempt:'r'},basis:{param_version:1,epoch:1}},events:[
@@ -14,7 +14,7 @@ const view={model:{nodes:[],edges:[],machine:{execution:{parent:'actual-parent'}
 const historical=selectedConfiguration(view,'latest','1');
 assert.equal(historical.phase,'checking');
 for(const field of ['results','qualification','disposition','stop_reason'])assert.equal(historical[field],undefined,field+' cannot borrow final state');
-assert.deepEqual(historical.discarded,[]);
+assert.equal(historical.discarded,undefined,'a frame without discard facts must remain unknown');
 assert.equal(status({id:'content_check',execution_role:'activity'},view,[],'latest',historical),'active');
 assert.deepEqual(selectedEvents(view,'latest','1').map(e=>e.seq),[1,2]);
 assert.deepEqual(selectedEvents(view,'latest','2'),[]);
@@ -30,6 +30,12 @@ const opened=layoutGraph(staticView,new Set(['root','child']));
 assert(opened.all.has('field:child:in:content_version'));
 assert(opened.byId.has('root')&&opened.byId.has('other'));
 assert.equal(opened.all.get('field:child:in:content_version').event_node,'child');
+staticView.model.nodes.push({id:'state.checking',kind:'state',parent:'child',label:'正在检查',value:'checking'});
+staticView.model.machine.values=['checking'];staticView.model.machine.labels={checking:'正在检查'};
+const closedParent=layoutGraph(staticView,new Set(['child']));
+assert.deepEqual(closedParent.boxes.map(b=>b.id),['root','other'],'saved inner expansion cannot bypass a collapsed outer parent');
+assert.ok(closedParent.all.has('state.checking'),'all states remain searchable in the full model');
+assert.ok(layoutGraph(staticView,new Set(['root','child'])).byId.has('state.checking'),'state appears in its actual nested owner');
 const callEvents=[
   {node:'child',call_id:'a',inputs:{content_version:1},outputs:{}},
   {node:'child',call_id:'a',inputs:{length:3},outputs:{passed:true}}]
@@ -46,7 +52,9 @@ assert.deepEqual(callValues({id:'child'},callEvents.map(e=>({...e,run_id:undefin
 staticView.manifest={bindings:{child:{path:'source.py',line:4}}};
 assert.equal(sourceBinding(staticView,opened.all,'field:child:in:content_version').line,4);
 const sizeView=structuredClone(view);
-sizeView.model.nodes=[{id:'size_guard',kind:'decision'},{id:'project_limit',kind:'data'}];
+sizeView.model.nodes=[{id:'size_guard',kind:'decision',basis_fields:['param_version','epoch']},{id:'project_limit',kind:'data',basis_fields:['param_version','epoch']}];
+sizeView.model.presentation={context_fields:[{key:'content_bytes',label:'本次正文',unit:'字节'},
+  {key:'limit_bytes',label:'当前项目上限',saved_label:'保存时上限',unit:'字节'}]};
 sizeView.authority.basis={param_version:1,epoch:2};
 const sizeEvents=[{node:'size_guard',phase:'decision',basis:{param_version:1,epoch:1},inputs:{limit_bytes:8192},outputs:{allowed:true}}];
 assert.equal(status({id:'field:size_guard:out:allowed',field:'allowed',direction:'out',event_node:'size_guard'},sizeView,sizeEvents,'latest'),'historical');
@@ -55,7 +63,7 @@ assert.equal(status({id:'project_limit',kind:'data'},sizeView,[{node:'project_li
 sizeView.authority.parameters={limit_bytes:1,limit_revision:2,content_bytes:42};
 const completedRun={phase:'completed',qualification:{size:{content_bytes:42,limit_bytes:8192,limit_revision:1}}};
 assert.equal(sizeContext(sizeView,completedRun),'本次正文 42 字节 · 当前项目上限 1 字节');
-assert.equal(sizeContext({...sizeView,historical:true},completedRun),'本次正文 42 字节 · 保存时上限 8192 字节');
+assert.equal(sizeContext({...sizeView,historical:true,authority:{parameters:{content_bytes:42,limit_bytes:8192}}},completedRun),'本次正文 42 字节 · 保存时上限 8192 字节');
 assert.equal(sizeContext(sizeView,completedRun,'1'),'');
 assert.equal(sizeContext({...sizeView,authority:{parameters:{}}},completedRun),'');
 assert(lines({id:'size_guard',kind:'decision',summary:'UTF-8 正文大小判断'},sizeView,sizeEvents,'latest',completedRun).some(row=>row.text.includes('历史判断/读取')));

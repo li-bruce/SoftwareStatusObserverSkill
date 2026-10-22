@@ -1,0 +1,1 @@
+{"valid": true, "errors": [], "scenarios": 69, "state_frames": 2013, "scope": "explicit business assertions, every recorded transaction's shared resource invariants, observation isolation and static imports"}

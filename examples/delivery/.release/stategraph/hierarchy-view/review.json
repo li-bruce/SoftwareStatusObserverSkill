@@ -1,0 +1,23 @@
+{
+  "candidate_id": "c8fed2a35981a97fec36701f9444cba19aac743d0b5db2d3ada06f8d96c51232",
+  "decisions": {
+    "business": {
+      "action": "unchanged",
+      "reason": "本轮只修改开发者图的显示与交互，审批、版本、提交等业务源码及预期未改。"
+    },
+    "state_machine": {
+      "action": "unchanged",
+      "reason": "实际机器、活动、资源及运行采集不变；状态节点按原 parent 逐层显示，折叠不删除完整状态。"
+    },
+    "abstraction": {
+      "action": "updated",
+      "reason": "按已有 parent 安排子树与嵌套区域；默认仅高层，保留恢复视图；关联高亮不改变边类型、节点身份或运行事实。新增层级、固定坐标、折叠和选择测试。"
+    },
+    "probes": {
+      "action": "unchanged",
+      "reason": "探针、事件身份、历史边界及源绑定实现未改；保留已有白盒和运行场景验证。"
+    }
+  },
+  "excluded_symbols": {},
+  "requirement_changes": {}
+}

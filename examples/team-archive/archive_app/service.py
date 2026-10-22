@@ -9,8 +9,9 @@ import uuid
 from .ports import TracePort, no_trace
 from .policy import is_direct_manager, evaluate_approvals, check_content, check_index, check_size
 from .storage import ArchiveStore
-from .workflow import (ACTIVITIES, ACTIVE, TERMINAL, activity_step, change_phase,
-                       initial_configuration)
+from bo_stategraph.workflow import (ACTIVITIES, ACTIVE, TERMINAL, activity_step, change_phase,
+                       initial_configuration, request_stop, settle, schedule, checks_passed, interrupt,
+                       finish_activity, resume)
 
 
 class ArchiveService:
@@ -21,7 +22,6 @@ class ArchiveService:
         self.worker_hook, self.delay = worker_hook, delay
         self.execution_version = execution_version
         self.lock = threading.RLock()
-        self.traces = {}
         self.threads = []
         self.tick_keys = {}
         self.commit_enabled = True
@@ -31,12 +31,10 @@ class ArchiveService:
             self.recover_interrupted()
 
     def trace(self, run: dict) -> TracePort:
-        if run["id"] not in self.traces:
-            try:
-                self.traces[run["id"]] = self.trace_factory(run["input"]["document_id"], run["id"])
-            except Exception:
-                self.traces[run["id"]] = TracePort()
-        return self.traces[run["id"]]
+        try:
+            return self.trace_factory(run["input"]["document_id"], run["id"])
+        except Exception:
+            return TracePort()
 
     def basis(self, db: sqlite3.Connection, run: dict) -> dict:
         return {"param_version":run["input"]["content_version"],
@@ -58,10 +56,10 @@ class ArchiveService:
         reviewers = [r["id"] for r in db.execute("SELECT id FROM users WHERE role='reviewer'")]
         basis, call = self.basis(db,run), uuid.uuid4().hex
         limit = self.store.project_limit(db,document["project_id"])
-        limit_event = trace.record("project_limit","read",basis,lambda:{
+        limit_event = trace.bo_record("project_limit","read",basis,lambda:{
             "inputs":{"project_id":document["project_id"]},"outputs":limit},
             call_id=uuid.uuid4().hex,parent_call_id=call)
-        read_event = trace.record("authority_read", "read", basis, lambda: {
+        read_event = trace.bo_record("authority_read", "read", basis, lambda: {
             "inputs":{"document_id":document["id"]},
             "outputs":{"project_id":document["project_id"],"folder_id":document["folder_id"],
                        "content_version":document["version"],"relation_epoch":basis["epoch"],
@@ -88,7 +86,7 @@ class ArchiveService:
             "basis":basis,"all_passed":run["configuration"]["join"]["state"]=="passed"}
         allowed_ids={c["id"] for c in approval["candidates"] if c["allowed"]}
         evaluation["valid_until"]=min((g["deadline"] for g in approvals if g["id"] in allowed_ids),default=None)
-        trace.record("commit_guard", "decision", basis, lambda: {
+        trace.bo_record("commit_guard", "decision", basis, lambda: {
             "inputs":{"stage":stage,"project_id":document["project_id"],
                 "folder_id":document["folder_id"],"operator_id":request["operator_id"],
                 "run_version":request["content_version"],"current_version":document["version"],
@@ -121,7 +119,7 @@ class ArchiveService:
             self.store.save_run(db,run)
             db.commit()
             trace = self.trace(run)
-            trace.record("archive_request","enter",self.basis(db,run),lambda:{
+            trace.bo_record("archive_request","enter",self.basis(db,run),lambda:{
                 "inputs":{"document_id":document_id,"operator_id":operator_id,"capacity":capacity,
                           "content_version":doc["version"]},"outputs":{"attempt":ident}},
                 call_id=uuid.uuid4().hex)
@@ -129,26 +127,14 @@ class ArchiveService:
         return ident
 
     def request_stop(self, run: dict, reason: str, now: float) -> None:
-        if run["phase"] in TERMINAL:
-            return
-        if run["phase"] != "stopping":
-            change_phase(run,"stop",{},now)
-        run["stop_reason"] = reason
-        cfg = run["configuration"]
-        cfg["discarded"] = [a for a in ACTIVITIES if cfg["activities"][a] in ("pending","waiting")]
-        for a in cfg["discarded"]:
-            cfg["wait_reasons"][a] = "已作废，不再启动；等待本次其他检查收尾"
+        return request_stop(run, reason, now)
 
     def settle(self, run: dict, now: float) -> None:
-        cfg = run["configuration"]
-        if run["phase"]=="stopping" and "running" not in cfg["activities"].values():
-            activity_step(run,"abort","checks_join",now)
-            change_phase(run,"stale_done" if run["stop_reason"]=="version_changed" else "cancel_done",
-                         {"settled":True},now)
+        return settle(run, now)
 
     def emit_configuration(self, run: dict, trace: TracePort, basis: dict) -> None:
         cfg = run["configuration"]
-        trace.record("flow.checks","change",basis,lambda:{
+        trace.bo_record("flow.checks","change",basis,lambda:{
             "inputs":{"attempt":run["id"],"content_version":run["input"]["content_version"]},
             "outputs":{"revision":cfg["revision"],"phase":run["phase"],
                        "available":cfg["resources"]["processing_slots"]["available"],
@@ -164,45 +150,7 @@ class ArchiveService:
                 return run
             trace, now = self.trace(run), float(self.clock())
             evaluation = self.evaluate(db,run,trace,"schedule")
-            cfg = run["configuration"]
-            if not evaluation["version_current"]:
-                self.request_stop(run,"version_changed",now)
-            if run["phase"]=="stopping":
-                self.settle(run,now)
-            else:
-                if cfg["join"]["state"]=="enabled":
-                    activity_step(run,"join","checks_join",now)
-                if cfg["join"]["state"]=="rejected":
-                    change_phase(run,"reject",{"checks_failed":True},now)
-                elif not evaluation["allowed"]:
-                    run["resume_required"] = True
-                    if run["phase"]!="waiting":
-                        change_phase(run,"pause",{},now)
-                    for a,s in cfg["activities"].items():
-                        if s in ("pending","waiting"):
-                            cfg["wait_reasons"][a] = "；".join(evaluation["reasons"])+"；条件恢复后点击继续"
-                elif run["resume_required"]:
-                    if run["phase"]!="waiting":
-                        change_phase(run,"pause",{},now)
-                    for a,s in cfg["activities"].items():
-                        if s in ("pending","waiting"):
-                            cfg["wait_reasons"][a] = "当前条件已恢复，等待点击继续"
-                else:
-                    if run["phase"] in ("created","waiting"):
-                        change_phase(run,"begin",evaluation,now)
-                    if cfg["join"]["state"]=="passed" and run["phase"]!="ready":
-                        change_phase(run,"checked",{**evaluation,"all_passed":True},now)
-                    elif cfg["join"]["state"]!="passed":
-                        for activity in ACTIVITIES:
-                            if cfg["activities"][activity] not in ("pending","waiting"):
-                                continue
-                            if cfg["resources"]["processing_slots"]["available"]:
-                                cfg["wait_reasons"].pop(activity,None)
-                                activity_step(run,"start",activity,now)
-                                launches.append((deepcopy(run),activity,dict(evaluation["basis"])))
-                            elif cfg["activities"][activity]=="pending":
-                                cfg["wait_reasons"][activity] = "等待本次运行的可用名额"
-                                activity_step(run,"wait",activity,now)
+            launches = schedule(run, evaluation, now)
             if run["phase"]=="ready" and self.commit_enabled:
                 self.try_commit(db,run,trace)
             else:
@@ -213,17 +161,15 @@ class ArchiveService:
             worker = threading.Thread(target=self.worker,args=(saved,activity,basis),daemon=True,
                                       name="archive-"+saved["id"]+"-"+activity)
             with self.lock:
+                self.threads = [thread for thread in self.threads if thread.is_alive()]
                 self.threads.append(worker)
-            worker.start()
+                worker.start()
         return run
 
     def try_commit(self, db: sqlite3.Connection, run: dict, trace: TracePort) -> str | None:
         evaluation = self.evaluate(db,run,trace,"commit")
         cfg, request = run["configuration"], run["input"]
-        same_run = cfg["attempt"]==run["id"] and cfg["param_version"]==request["content_version"]
-        all_passed = (same_run and cfg["join"]["state"]=="passed"
-                      and all(cfg["activities"][a]=="succeeded" and cfg["results"].get(a,{}).get("passed") is True
-                              for a in ACTIVITIES))
+        all_passed = checks_passed(run)
         if not evaluation["allowed"] or not all_passed or run["resume_required"]:
             change_phase(run,"pause",{},float(self.clock()))
             run["resume_required"] = True
@@ -243,19 +189,19 @@ class ArchiveService:
         db.commit()
         # Only after the effect and completed state have committed.
         if existing is None:
-            trace.record("archive_commit","commit",evaluation["basis"],lambda:{
+            trace.bo_record("archive_commit","commit",evaluation["basis"],lambda:{
                 "inputs":{"attempt":run["id"],"document_id":request["document_id"],
                           "content_version":request["content_version"]},
                 "outputs":{"effect_id":ident,"persisted":True}},call_id=uuid.uuid4().hex)
         else:
-            trace.record("archive_unique","read",evaluation["basis"],lambda:{
+            trace.bo_record("archive_unique","read",evaluation["basis"],lambda:{
                 "inputs":{"document_id":request["document_id"],"content_version":request["content_version"]},
                 "outputs":{"effect_id":ident,"reused":True}},call_id=uuid.uuid4().hex)
         return ident
 
     def worker(self, run: dict, activity: str, basis: dict) -> None:
         trace, call = self.trace(run), uuid.uuid4().hex
-        trace.record(activity,"enter",basis,lambda:{
+        trace.bo_record(activity,"enter",basis,lambda:{
             "inputs":{"attempt":run["id"],"content_version":run["input"]["content_version"]},
             "outputs":{}},call_id=call)
         try:
@@ -276,9 +222,7 @@ class ArchiveService:
             if current["configuration"]["activities"][activity]!="running":
                 db.commit()
                 return
-            current["configuration"]["results"][activity] = result
-            activity_step(current,"finish",activity,float(self.clock()),outcome)
-            self.settle(current,float(self.clock()))
+            finish_activity(current, activity, result, outcome, float(self.clock()))
             self.store.save_run(db,current)
             db.commit()
             self.emit_configuration(current,trace,self.basis(db,current))
@@ -291,10 +235,10 @@ class ArchiveService:
                 raise ValueError("这次运行已结束或正在停止，请新建运行")
             trace = self.trace(run)
             evaluation = self.evaluate(db,run,trace,"resume")
-            run["resume_required"] = not evaluation["allowed"]
+            resume(run, evaluation)
             self.store.save_run(db,run)
             db.commit()
-            trace.record("resume_run","change",evaluation["basis"],lambda:{
+            trace.bo_record("resume_run","change",evaluation["basis"],lambda:{
                 "inputs":{"attempt":run_id},"outputs":{"allowed":evaluation["allowed"]}},
                 call_id=uuid.uuid4().hex)
         return self.advance(run_id)
@@ -308,7 +252,7 @@ class ArchiveService:
             self.store.save_run(db,run)
             db.commit()
             trace = self.trace(run)
-            trace.record("cancel_run","change",self.basis(db,run),lambda:{
+            trace.bo_record("cancel_run","change",self.basis(db,run),lambda:{
                 "inputs":{"attempt":run_id},"outputs":{"phase":run["phase"],
                 "running_count":sum(s=="running" for s in run["configuration"]["activities"].values())}},
                 call_id=uuid.uuid4().hex)
@@ -387,6 +331,8 @@ class ArchiveService:
 
     def tick(self) -> None:
         snapshot=self.store.snapshot()
+        active_ids = {run['id'] for run in snapshot['runs'] if run['phase'] not in TERMINAL}
+        self.tick_keys = {key:value for key,value in self.tick_keys.items() if key in active_ids}
         now=float(self.clock())
         for run in snapshot["runs"]:
             if run["phase"] not in TERMINAL:
@@ -414,14 +360,7 @@ class ArchiveService:
                 run = json.loads(row["payload"])
                 if run["phase"] in TERMINAL:
                     continue
-                cfg = run["configuration"]
-                for a,s in list(cfg["activities"].items()):
-                    if s=="running":
-                        cfg["results"][a]={"passed":False,"error":"进程中断"}
-                        activity_step(run,"finish",a,float(self.clock()),"failed")
-                activity_step(run,"abort","checks_join",float(self.clock()))
-                change_phase(run,"interrupt",{"settled":True},float(self.clock()))
-                run["stop_reason"]="process_interrupted"
+                interrupt(run, float(self.clock()))
                 self.store.save_run(db,run)
             db.commit()
 

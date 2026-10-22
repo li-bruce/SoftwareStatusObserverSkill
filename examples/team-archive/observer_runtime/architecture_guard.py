@@ -5,6 +5,7 @@ business layer are rejected as uncovered. This is not a sandbox or semantic proo
 """
 from __future__ import annotations
 import argparse
+import fnmatch
 import ast
 import hashlib
 import json
@@ -150,7 +151,8 @@ def main():
         target = inside(root, a.out)
         if target.exists():
             raise ValueError('refuse to overwrite existing package')
-        paths = collect(root, cfg['core_include'])
+        paths = [name for name in collect(root, cfg['core_include'])
+                 if not any(fnmatch.fnmatchcase(name, pattern) for pattern in cfg.get('core_exclude', []))]
         for name in paths:
             layer = owner(name, cfg)
             if layer not in cfg['core_layers'] and not any(matches(name,p) for p in cfg.get('core_resources', [])):

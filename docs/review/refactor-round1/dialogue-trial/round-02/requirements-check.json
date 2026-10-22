@@ -1,0 +1,25 @@
+{
+  "valid": false,
+  "ready": false,
+  "errors": [
+    {
+      "code": "unanswered_business_questions",
+      "item": "D03,D05,D06,D07"
+    }
+  ],
+  "warnings": [],
+  "blocked": [
+    "D03",
+    "D05",
+    "D06",
+    "D07"
+  ],
+  "questions": [],
+  "awaiting_answers": [
+    "D03",
+    "D05",
+    "D06",
+    "D07"
+  ],
+  "record_valid": true
+}

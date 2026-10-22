@@ -1,0 +1,77 @@
+{
+  "valid": false,
+  "errors": [
+    {
+      "weakened_verification": "required_probes",
+      "removed": [
+        {
+          "symbol": "bo_stategraph/workflow.py::Workflow.schedule",
+          "node": "printing",
+          "phase": "commit"
+        },
+        {
+          "symbol": "bo_stategraph/workflow.py::Workflow.confirm",
+          "node": "printer-stopped",
+          "phase": "commit"
+        },
+        {
+          "symbol": "bo_stategraph/workflow.py::Workflow.run_checks",
+          "node": "checks",
+          "phase": "decision"
+        }
+      ]
+    },
+    "acceptance changed outside recorded request: R01/whitebox:rule:expiry-check",
+    "acceptance changed outside recorded request: R08/whitebox:rule:error-visible",
+    "acceptance changed outside recorded request: R09/whitebox:rule:cancel-waits",
+    "acceptance changed outside recorded request: R06/whitebox:rule:confirmation-release"
+  ],
+  "reports": {
+    "mapping": {
+      "status": "failed",
+      "errors": [
+        {
+          "weakened_verification": "required_probes",
+          "removed": [
+            {
+              "symbol": "bo_stategraph/workflow.py::Workflow.schedule",
+              "node": "printing",
+              "phase": "commit"
+            },
+            {
+              "symbol": "bo_stategraph/workflow.py::Workflow.confirm",
+              "node": "printer-stopped",
+              "phase": "commit"
+            },
+            {
+              "symbol": "bo_stategraph/workflow.py::Workflow.run_checks",
+              "node": "checks",
+              "phase": "decision"
+            }
+          ]
+        },
+        "acceptance changed outside recorded request: R01/whitebox:rule:expiry-check",
+        "acceptance changed outside recorded request: R08/whitebox:rule:error-visible",
+        "acceptance changed outside recorded request: R09/whitebox:rule:cancel-waits",
+        "acceptance changed outside recorded request: R06/whitebox:rule:confirmation-release"
+      ],
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses"
+    },
+    "state_rules": {
+      "status": "not_run",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "not_run",
+      "errors": [],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "not_run",
+      "errors": [],
+      "assertions": {},
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "candidate_id": "c9af0c168714b26f4946f88affba7c917e0289d359c10db16993425960e47216"
+}

@@ -1,0 +1,15 @@
+{
+  "valid": true,
+  "files": 568,
+  "steps": [
+    {
+      "script": "tools/demo.py",
+      "exit_code": 0
+    },
+    {
+      "script": "tools/archive_demo.py",
+      "exit_code": 0
+    }
+  ],
+  "meaning": "Fresh directory restores reviewed approval without existing local state"
+}

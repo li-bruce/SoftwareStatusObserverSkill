@@ -1,0 +1,19 @@
+{
+  "valid": true,
+  "ready": false,
+  "errors": [],
+  "warnings": [],
+  "blocked": [
+    "D03",
+    "D05",
+    "D06",
+    "D07"
+  ],
+  "questions": [],
+  "awaiting_answers": [
+    "D03",
+    "D05",
+    "D06",
+    "D07"
+  ]
+}

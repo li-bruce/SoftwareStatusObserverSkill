@@ -13,8 +13,8 @@ for(const id of ['checksum','privacy','workers','join'])assert.ok(graph.byId.has
 assert.ok(!graph.boxes.some(b=>b.id.startsWith('net.')),'不应另外生成一套分析节点');
 assert.ok(graph.edges.some(e=>[...e.labels].includes('名额已用完，正在等待')));
 assert.ok(graph.edges.some(e=>[...e.labels].includes('等待这项检查结束')));
-assert.ok(graph.byId.get('join').rows.some(r=>r.text==='还有检查未完成'));
-assert.ok(!graph.byId.get('join').rows.some(r=>r.text==='两项检查均已通过'),'回看等待时不能显示未来完成结果');
+assert.ok(graph.byId.get('join').rows.some(r=>r.text==='还有活动未完成'));
+assert.ok(!graph.byId.get('join').rows.some(r=>r.text==='全部活动已通过'),'回看等待时不能显示未来完成结果');
 const summary=lines(view.model.nodes.find(n=>n.id==='flow.checks'),view,[],'latest',current);
 assert.ok(summary.some(r=>r.text.includes('正在执行')));
 assert.ok(summary.some(r=>r.text.includes('等待可用名额')));

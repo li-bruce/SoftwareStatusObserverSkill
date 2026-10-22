@@ -1,0 +1,23 @@
+{
+  "candidate_id": "3d9259e65d02ff9e0812b34a1dc65b0f9ad393bde9c3483c45e2e284c6fac37c",
+  "excluded_symbols": {},
+  "requirement_changes": {},
+  "decisions": {
+    "business": {
+      "action": "unchanged",
+      "reason": "业务文件、需求、独立预期及白盒契约与本轮开始基线逐字节相同。"
+    },
+    "state_machine": {
+      "action": "updated",
+      "reason": "独立模块保留完整声明、实例查询、迁移核对与导出。原执行器和活动配置不变；默认内部引导及跟随实现均保留监控与检查。"
+    },
+    "abstraction": {
+      "action": "updated",
+      "reason": "全图导出不受页面筛选影响；包含所有类型、父子及跨层关系、源码映射和覆盖边界，不新增业务关系。"
+    },
+    "probes": {
+      "action": "unchanged",
+      "reason": "原探针和采集范围未改。新模块基于已有真实快照和证据导出，模式检查禁止移除运行探针要求。"
+    }
+  }
+}

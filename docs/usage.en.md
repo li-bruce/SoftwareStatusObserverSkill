@@ -27,11 +27,13 @@ The top-level “checking” state is a summary. Each run retains the waiting, r
 
 Business, function, state, parameter and resource nodes share one canvas, with different shapes and colors. Double-click a node, or select it and click “展开” (expand). Select “源码” (source) to open code beside it.
 
-Drag nodes to position them; drag the background to pan. Positions, expansion and camera settings are saved in this browser and restored after reload. Runtime updates only change displayed facts. Select “固定节点” (pin, shortcut P) to preserve an exact position during automatic layout. Choose layered or stress layout, click “自动布局”, and undo if needed. Use “显示完整图” to fit the graph and zoom for details. Layout preferences do not change application state or authorization.
+Drag nodes to position them, empty group interiors to move the group, and the canvas background to pan. Positions, expansion and camera settings are saved in the project. Runtime updates only change displayed facts. Select “固定节点” (pin, shortcut P) to preserve a position during automatic layout. Choose circular grouping, layered or stress layout, click “自动布局”, and undo if needed. Layout preferences do not change application state or authorization.
 
-Select any node and choose “名称与备注” (name and note). Edits save as you type. Business, function, parameter and state nodes are supported. “恢复原名” restores the generated name while keeping the note. Source identities and runtime facts stay unchanged. Regeneration preserves personal labels; reload restores focus and nested expansion. Folding a parent retains its children's expansion choices.
+Select any node and choose “名称与备注” (name and note), edit its label, note or core marker, then save. Business, function, parameter and state nodes are supported. “恢复原名” restores the generated name while keeping the note. Source identities and runtime facts stay unchanged. Stable node IDs preserve personal labels across regeneration. Folding a parent retains its children's expansion choices.
 
-Preferences are local to this browser and website address. Clearing site data removes them; they do not sync across devices. Storage failures are shown explicitly.
+Preferences live in `bo_stategraph/config/views/local.json`. They survive a server restart, port change or cleared browser cache. Git and core exports exclude this personal file. Conflicting or failed saves are reported; runtime upgrades do not overwrite it. Real-time collaborative editing is not provided.
+
+The initial view shows high-level nodes. Expand for key functions, state and values; “分析细节” reveals auxiliary code, resources and joins. To replay operations, select all instrumented events or a focused region, start recording, operate the application, then stop. Steps follow the current view and show before/after values. Uncaptured behavior remains unknown.
 
 Search by name, function, parameter or note. Results identify the owning function and input/output type. Selecting a result reveals its parents and centers the node, preserving other expanded regions and positions. A captured parameter's source link opens its owning function.
 
@@ -53,6 +55,7 @@ From `examples/delivery`:
 python observer_generated/runtime/change_sync.py begin --root . --change .stategraph/my-change --request "Describe the change"
 # Edit business code, relevant probes, tooling/build_graph.py and tests.
 python tooling/dev.py graph --reason "Explain the graph or state-definition update"
+python observer_generated/runtime/bo_sync.py scan --root .
 python tooling/dev.py inspect
 ```
 
@@ -67,11 +70,13 @@ python tooling/dev.py archive --label my-change
 
 `verify` executes the program and counterexamples. `accept` accepts only that verified candidate. `check` compares the current inputs before delivery. Later edits to code, graph, rules, tools or tests invalidate the old acceptance. Do not rewrite expected outcomes to hide a bug.
 
+Source inventory discovers new files independently of the existing graph. Unmapped symbols require a reasoned classification. Reports separate mapping fidelity, state/resource constraints, business expectations and project checks. A faithfully displayed bug can pass mapping while failing business validation. Continue an active change rather than hiding drift in a new baseline.
+
 Commands in `sync.json` are argument arrays, never shell strings. `{python}` resolves to the current interpreter. First launch restores a fixed, reviewed release baseline; edited code is not automatically approved.
 
 ## Separation and runtime modes
 
-Business code depends on its own optional interface in `app/ports.py`. Files prefixed `bo_` and `observer_generated/` implement observation. The real state machine and resource constraints belong to the application and remain active when observation is disabled.
+Business code uses its neutral interface in `app/ports.py`. Complete state execution, resource constraints and unified queries live in `bo_stategraph/` and remain when observation is disabled. Optional capture and UI wiring use `integrations/bo_*.py` and runtime tools. Observation does not simulate a second business state. See the [module migration guide](../skills/business-observer/references/independent-python.md) for upgrades.
 
 ```bash
 python tooling/dev.py ownership
@@ -80,4 +85,4 @@ python tooling/dev.py core --out dist/delivery-core.zip
 
 The core ZIP contains business source, requirements and licenses without the observer implementation or pages. Install its requirements, then run `python main.py`. The neutral interface retains no-op calls. Tests compare results with probes enabled, disabled and failing.
 
-Probes add payload, queue and storage costs; state recording and graph polling also have a cost. The example retains run history and has no long-running retention policy or production performance claim. Its 400 ms polling and deliberate delays are not performance measurements.
+Probes add payload, queue and storage costs; state recording and graph polling also have a cost. `bo_stategraph/config/retention.json` bounds the event cache and rotating logs. Saved recordings and business storage are not deleted with the cache. Incremental APIs and performance baselines remain future work. The 400 ms polling and deliberate delays are not performance measurements.

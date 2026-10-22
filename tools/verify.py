@@ -21,6 +21,13 @@ def main():
     run(ROOT, 'tests/test_clarification_gate.py')
     run(ROOT, 'tests/test_whitebox.py')
     run(ROOT, 'tests/test_focus_bundle.py')
+    run(ROOT, 'tools/test_stategraph_module.py')
+    run(ROOT, 'tools/test_recording.py')
+    run(ROOT, 'tools/test_refactor.py')
+    run(ROOT, 'tools/test_workflow_migration.py')
+    run(ROOT, 'tools/test_archive_service_migration.py')
+    run(ROOT, 'examples/python-modes/test_modes.py')
+    subprocess.run(['node','tools/test_refactor_view.mjs'],cwd=ROOT,check=True)
     prepare()  # Refuse stale source/review before any re-verification.
     run(EXAMPLE, 'tooling/dev.py', 'verify')
     run(EXAMPLE, 'tooling/dev.py', 'accept')

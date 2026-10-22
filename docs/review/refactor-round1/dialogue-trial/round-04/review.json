@@ -1,0 +1,294 @@
+{
+  "candidate_id": "bc453f43a9f1dbdbab723f47ba075677f96111e3ba7da1f070584ac361a88792",
+  "decisions": {
+    "business": {
+      "action": "updated",
+      "reason": "Preserve U02/U03/U04; add only U05/U06 maintenance: admission continues, administrator-only manual toggling, active prints continue, eligible FIFO resumes."
+    },
+    "state_machine": {
+      "action": "updated",
+      "reason": "Public BOStateGraph installed by bo_upgrade; query.py supplies actual SQLite instances and exact event-bound runtime frames. User U05 explicitly selected ordinary Python functions: app/workflow.py contains ordinary business functions without stategraph imports; explicit source_moves retain prior probe and whitebox identities. Declaration now describes observed behavior, public graph exports observe mode. SQLite writer transaction owns shared printer occupancy and queue; all transaction snapshots checked with the project shared-resource extension."
+    },
+    "abstraction": {
+      "action": "updated",
+      "reason": "Stable business IDs retain round-01 meaning; all implementation functions including transaction callbacks bind to current source, static auxiliaries remain under analysis details."
+    },
+    "probes": {
+      "action": "updated",
+      "reason": "Commit probes follow SQLite commit. Actual parameters, predicate flags, wait reasons and effect IDs are compared independently; overridden checker functions are attributed to the actual worker/callback, not falsely to the default checker."
+    }
+  },
+  "excluded_symbols": {
+    "app/ports.py::EventPort": "Class declaration is a structural container; its constructor and every method are source-mapped. The class object itself is not a separate business action.",
+    "app/store.py::Store": "Class declaration is a structural container; its constructor and every method are source-mapped. The class object itself is not a separate business action.",
+    "app/workflow.py::Workflow": "Class declaration is a structural container; its constructor and every method are source-mapped. The class object itself is not a separate business action.",
+    "integrations/bo_app.py::BOApplication": "Class declaration is a structural container; its constructor and every method are source-mapped. The class object itself is not a separate business action.",
+    "integrations/bo_capture.py::BOCapture": "Class declaration is a structural container; its constructor and every method are source-mapped. The class object itself is not a separate business action.",
+    "server.py::serve.Handler": "Class declaration is a structural container; its constructor and every method are source-mapped. The class object itself is not a separate business action."
+  },
+  "requirement_changes": {
+    "R01": "Only R11 mode choice and new R12/R13 maintenance semantics are authorized by U05/U06; prior expectations preserved. New expectations authored before implementation; only whitebox rule.source and probe.symbol rebind through reviewed one-to-one source_moves; assertions, phase, node and parameters preserved.",
+    "R02": "Only R11 mode choice and new R12/R13 maintenance semantics are authorized by U05/U06; prior expectations preserved. New expectations authored before implementation; only whitebox rule.source and probe.symbol rebind through reviewed one-to-one source_moves; assertions, phase, node and parameters preserved.",
+    "R03": "Only R11 mode choice and new R12/R13 maintenance semantics are authorized by U05/U06; prior expectations preserved. New expectations authored before implementation; only whitebox rule.source and probe.symbol rebind through reviewed one-to-one source_moves; assertions, phase, node and parameters preserved.",
+    "R04": "Only R11 mode choice and new R12/R13 maintenance semantics are authorized by U05/U06; prior expectations preserved. New expectations authored before implementation; only whitebox rule.source and probe.symbol rebind through reviewed one-to-one source_moves; assertions, phase, node and parameters preserved.",
+    "R05": "Only R11 mode choice and new R12/R13 maintenance semantics are authorized by U05/U06; prior expectations preserved. New expectations authored before implementation; only whitebox rule.source and probe.symbol rebind through reviewed one-to-one source_moves; assertions, phase, node and parameters preserved.",
+    "R06": "Only R11 mode choice and new R12/R13 maintenance semantics are authorized by U05/U06; prior expectations preserved. New expectations authored before implementation; only whitebox rule.source and probe.symbol rebind through reviewed one-to-one source_moves; assertions, phase, node and parameters preserved.",
+    "R07": "Only R11 mode choice and new R12/R13 maintenance semantics are authorized by U05/U06; prior expectations preserved. New expectations authored before implementation; only whitebox rule.source and probe.symbol rebind through reviewed one-to-one source_moves; assertions, phase, node and parameters preserved.",
+    "R08": "Only R11 mode choice and new R12/R13 maintenance semantics are authorized by U05/U06; prior expectations preserved. New expectations authored before implementation; only whitebox rule.source and probe.symbol rebind through reviewed one-to-one source_moves; assertions, phase, node and parameters preserved.",
+    "R09": "Only R11 mode choice and new R12/R13 maintenance semantics are authorized by U05/U06; prior expectations preserved. New expectations authored before implementation; only whitebox rule.source and probe.symbol rebind through reviewed one-to-one source_moves; assertions, phase, node and parameters preserved.",
+    "R10": "Only R11 mode choice and new R12/R13 maintenance semantics are authorized by U05/U06; prior expectations preserved. New expectations authored before implementation; only whitebox rule.source and probe.symbol rebind through reviewed one-to-one source_moves; assertions, phase, node and parameters preserved.",
+    "R11": "Only R11 mode choice and new R12/R13 maintenance semantics are authorized by U05/U06; prior expectations preserved. New expectations authored before implementation; only whitebox rule.source and probe.symbol rebind through reviewed one-to-one source_moves; assertions, phase, node and parameters preserved.",
+    "R12": "Only R11 mode choice and new R12/R13 maintenance semantics are authorized by U05/U06; prior expectations preserved. New expectations authored before implementation; only whitebox rule.source and probe.symbol rebind through reviewed one-to-one source_moves; assertions, phase, node and parameters preserved.",
+    "R13": "Only R11 mode choice and new R12/R13 maintenance semantics are authorized by U05/U06; prior expectations preserved. New expectations authored before implementation; only whitebox rule.source and probe.symbol rebind through reviewed one-to-one source_moves; assertions, phase, node and parameters preserved."
+  },
+  "limits": [
+    "No real printer or mesh parsing",
+    "Local synthetic actor identities, not authentication",
+    "No automatic retry of interrupted checks after process crash; persisted waiting/printing ownership can resume",
+    "No inferred causal edges or arbitrary natural-language equivalence"
+  ],
+  "source_moves": [
+    {
+      "from": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow"
+      },
+      "to": {
+        "path": "app/workflow.py",
+        "symbol": "Workflow"
+      },
+      "reason": "U05 requests ordinary Python business implementation and observe modes; retain this exact function/class identity and all protected observations while moving its source location."
+    },
+    {
+      "from": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.__init__"
+      },
+      "to": {
+        "path": "app/workflow.py",
+        "symbol": "Workflow.__init__"
+      },
+      "reason": "U05 requests ordinary Python business implementation and observe modes; retain this exact function/class identity and all protected observations while moving its source location."
+    },
+    {
+      "from": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow._emit"
+      },
+      "to": {
+        "path": "app/workflow.py",
+        "symbol": "Workflow._emit"
+      },
+      "reason": "U05 requests ordinary Python business implementation and observe modes; retain this exact function/class identity and all protected observations while moving its source location."
+    },
+    {
+      "from": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.submit"
+      },
+      "to": {
+        "path": "app/workflow.py",
+        "symbol": "Workflow.submit"
+      },
+      "reason": "U05 requests ordinary Python business implementation and observe modes; retain this exact function/class identity and all protected observations while moving its source location."
+    },
+    {
+      "from": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.submit.create"
+      },
+      "to": {
+        "path": "app/workflow.py",
+        "symbol": "Workflow.submit.create"
+      },
+      "reason": "U05 requests ordinary Python business implementation and observe modes; retain this exact function/class identity and all protected observations while moving its source location."
+    },
+    {
+      "from": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow._check"
+      },
+      "to": {
+        "path": "app/workflow.py",
+        "symbol": "Workflow._check"
+      },
+      "reason": "U05 requests ordinary Python business implementation and observe modes; retain this exact function/class identity and all protected observations while moving its source location."
+    },
+    {
+      "from": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow._check.start"
+      },
+      "to": {
+        "path": "app/workflow.py",
+        "symbol": "Workflow._check.start"
+      },
+      "reason": "U05 requests ordinary Python business implementation and observe modes; retain this exact function/class identity and all protected observations while moving its source location."
+    },
+    {
+      "from": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow._check.finish"
+      },
+      "to": {
+        "path": "app/workflow.py",
+        "symbol": "Workflow._check.finish"
+      },
+      "reason": "U05 requests ordinary Python business implementation and observe modes; retain this exact function/class identity and all protected observations while moving its source location."
+    },
+    {
+      "from": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.run_checks"
+      },
+      "to": {
+        "path": "app/workflow.py",
+        "symbol": "Workflow.run_checks"
+      },
+      "reason": "U05 requests ordinary Python business implementation and observe modes; retain this exact function/class identity and all protected observations while moving its source location."
+    },
+    {
+      "from": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.run_checks.join"
+      },
+      "to": {
+        "path": "app/workflow.py",
+        "symbol": "Workflow.run_checks.join"
+      },
+      "reason": "U05 requests ordinary Python business implementation and observe modes; retain this exact function/class identity and all protected observations while moving its source location."
+    },
+    {
+      "from": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.set_role"
+      },
+      "to": {
+        "path": "app/workflow.py",
+        "symbol": "Workflow.set_role"
+      },
+      "reason": "U05 requests ordinary Python business implementation and observe modes; retain this exact function/class identity and all protected observations while moving its source location."
+    },
+    {
+      "from": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.approve"
+      },
+      "to": {
+        "path": "app/workflow.py",
+        "symbol": "Workflow.approve"
+      },
+      "reason": "U05 requests ordinary Python business implementation and observe modes; retain this exact function/class identity and all protected observations while moving its source location."
+    },
+    {
+      "from": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.approve.add"
+      },
+      "to": {
+        "path": "app/workflow.py",
+        "symbol": "Workflow.approve.add"
+      },
+      "reason": "U05 requests ordinary Python business implementation and observe modes; retain this exact function/class identity and all protected observations while moving its source location."
+    },
+    {
+      "from": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.revoke"
+      },
+      "to": {
+        "path": "app/workflow.py",
+        "symbol": "Workflow.revoke"
+      },
+      "reason": "U05 requests ordinary Python business implementation and observe modes; retain this exact function/class identity and all protected observations while moving its source location."
+    },
+    {
+      "from": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.revoke.change"
+      },
+      "to": {
+        "path": "app/workflow.py",
+        "symbol": "Workflow.revoke.change"
+      },
+      "reason": "U05 requests ordinary Python business implementation and observe modes; retain this exact function/class identity and all protected observations while moving its source location."
+    },
+    {
+      "from": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow._authorization"
+      },
+      "to": {
+        "path": "app/workflow.py",
+        "symbol": "Workflow._authorization"
+      },
+      "reason": "U05 requests ordinary Python business implementation and observe modes; retain this exact function/class identity and all protected observations while moving its source location."
+    },
+    {
+      "from": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.schedule"
+      },
+      "to": {
+        "path": "app/workflow.py",
+        "symbol": "Workflow.schedule"
+      },
+      "reason": "U05 requests ordinary Python business implementation and observe modes; retain this exact function/class identity and all protected observations while moving its source location."
+    },
+    {
+      "from": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.schedule.dispatch"
+      },
+      "to": {
+        "path": "app/workflow.py",
+        "symbol": "Workflow.schedule.dispatch"
+      },
+      "reason": "U05 requests ordinary Python business implementation and observe modes; retain this exact function/class identity and all protected observations while moving its source location."
+    },
+    {
+      "from": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.cancel"
+      },
+      "to": {
+        "path": "app/workflow.py",
+        "symbol": "Workflow.cancel"
+      },
+      "reason": "U05 requests ordinary Python business implementation and observe modes; retain this exact function/class identity and all protected observations while moving its source location."
+    },
+    {
+      "from": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.cancel.request"
+      },
+      "to": {
+        "path": "app/workflow.py",
+        "symbol": "Workflow.cancel.request"
+      },
+      "reason": "U05 requests ordinary Python business implementation and observe modes; retain this exact function/class identity and all protected observations while moving its source location."
+    },
+    {
+      "from": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.confirm"
+      },
+      "to": {
+        "path": "app/workflow.py",
+        "symbol": "Workflow.confirm"
+      },
+      "reason": "U05 requests ordinary Python business implementation and observe modes; retain this exact function/class identity and all protected observations while moving its source location."
+    },
+    {
+      "from": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.confirm.release"
+      },
+      "to": {
+        "path": "app/workflow.py",
+        "symbol": "Workflow.confirm.release"
+      },
+      "reason": "U05 requests ordinary Python business implementation and observe modes; retain this exact function/class identity and all protected observations while moving its source location."
+    }
+  ]
+}

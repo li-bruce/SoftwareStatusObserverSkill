@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.5.0
+
+- Move complete example lifecycle, activity, resource, scheduling, cancellation and recovery coordination into `bo_stategraph`; retain old paths as delegates and compare old/new actual behavior.
+- Share graph, type, hierarchy and activity validation. Use one authoritative instance query for Python, the viewer, recording and export. Preserve actual invalid facts with diagnostics.
+- Discover source changes independently of existing graph nodes, maintain internal tasks and reject missing classifications, probes, assertions and implementation witnesses. Verify the public runtime export protocol.
+- Support explicitly reviewed one-to-one function moves while preserving authored graph IDs, required probes and whitebox assertions; relocating source is not a business-rule change.
+- Separate mapping fidelity, state/resource constraints, authored business expectations and project test reports.
+- Persist personal layouts, labels, notes and view filters in the project with atomic writes and revision conflicts. Bound event caches and rotating logs; record directly from event intake.
+- Add versioned runtime upgrades, conflict refusal and rollback. Separate drawing/object lifetime, preferences and polling from page coordination; show direct nodes first with advanced details on demand.
+- Support exact event-bound transaction snapshots for ordinary Python state and shared-resource replay. Missing snapshots remain unknown; history is never filled from the final state.
+- Normalize live release sources before fingerprinting and preserve frozen evidence bytes across Git checkouts.
+- Shorten the Skill, align its integration instructions with code, and require reuse of the public query/export and full graph components. Review materials retain independent simulated dialogue, defects and subsequent fixes.
+- Incremental event APIs, production performance baselines, general Petri analysis, universal ReBAC engines and graph-driven business commands remain out of scope.
+
 ## 0.4.0
 
 - Add an independent team-archive project built through actual simulated clarification rounds, implementation, debugging and a dynamic size-limit iteration. Preserve preimplementation expectations, both graph versions, failures, final screenshots and reproducible review records.

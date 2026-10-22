@@ -1,0 +1,16 @@
+{
+  "checks": [
+    "public instances contain actual runs with complete revision and persisted build provenance",
+    "HTTP view and public bo_export use same instances and global shared printers",
+    "unchanged full Pixi viewer starts with five business nodes"
+  ],
+  "errors": [
+    "page.waitForFunction: Timeout 30000ms exceeded.\n    at C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\stategraph-refactor-trial-20261022\\tests\\browser.cjs:18:200"
+  ],
+  "limits": [
+    "Scripted browser acceptance, not human usability.",
+    "Public replay does not reconstruct intermediate global printer snapshots; event fields and interval endpoints are verified."
+  ],
+  "browserErrors": [],
+  "valid": false
+}

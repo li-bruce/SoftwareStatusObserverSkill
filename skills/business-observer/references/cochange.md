@@ -1,14 +1,26 @@
 # 伴随修改与检查机制
 
-本流程用于正在开发或持续修改的程序。业务抽象由需求约束，局部结构由静态证据生成，可执行状态机由真实程序声明导出，运行事实由实际探针/存储读取。每个小变更都维护这几部分，不在最终写完代码后才补图。
+本流程用于正在开发或持续修改的程序。业务抽象由需求约束，局部结构由静态证据生成，独立状态声明与程序的真实执行关联，运行事实由实际探针/存储读取。默认 AI 在内部按状态网引导开发；用户明确拒绝这种方法时，跟随其实现维护模型。两种方式都必须在每个小变更中维护底层监控、源码适配、图和验证，不在最终写完代码后才补图。配置见 [独立状态网](independent-python.md)。
 
 ## 项目接入
 
+移动或重命名已绑定函数时，在本轮 `review.json` 写 `source_moves`，例如：
+
+```json
+{"source_moves":[{"from":{"path":"old.py","symbol":"commit"},"to":{"path":"app/service.py","symbol":"commit"},"reason":"移动原实现，保留原图节点、探针和检查要求"}]}
+```
+
+旧/新符号必须分别存在于本轮基线和当前 AST 清单中，映射必须一对一，原有人工图节点 ID 要指向新符号。此记录只允许 `required_probes.symbol` 和白盒规则的 `source` 换位置，不允许删除探针、改变 node/phase、删参数检查或改业务预期。实际源码、必需探针和白盒运行仍由原检查执行；迁移表本身不证明语义等价。它由 AI 在内部维护，不为技术搬迁追加业务确认。测试命令保持稳定入口；该表不改写任意命令或数据字段。
+
 沿用 `intent.json`、`behavior.json`、`manifest.json`，增加项目自己的 `sync.json` 和 `acceptance.json`。参考 [配置示例](../assets/sync.example.json) 和 [验收约束示例](../assets/acceptance.example.json)，按本项目的领域和路径修改，不继承示例审批规则作为通用要求。
+
+assets 中各示例说明字段，并非可拼接运行的整套脚手架。完整、相互匹配的源码/模型/检查配置以仓库 `examples/delivery` 和 `examples/team-archive` 为准；接入时使用实际项目路径和业务定义。
 
 `sync.json` 的关键字段：
 
 - `code_files`：选入静态索引的 Python 文件，同时列入行为模型的 `source_files`。新入口/新文件必须判断是否加入，未扫描内容不在覆盖声明内。
+- `source_scope`：非空源码根目录、带理由的排除项及 `require_symbol_classification: true`。独立状态网项目必须配置；范围内实现不能只加入 watch 来绕过映射。
+- `require_mapping_witnesses: true`：独立状态网项目必须用真实实现值对照观测投影，不能关闭。
 - `watch_files`：模型生成器、业务验证脚本等额外输入。观测/测试命令中的项目 `.py` 脚本必须被跟踪；工具自身内容也参与版本绑定。
 - `discovery`：需求澄清记录的项目相对路径，如 `discovery.json`。新接入项目添加此项；文件自动纳入版本绑定。关键问题未解决、答案来源不符、业务网未映射或决定缺少需求/验收项，会使 verify/check 失败。旧项目未配置时保持兼容，不声称已启用澄清检查。流程见 [需求提炼与反问](requirements-dialogue.md)。
 - `required_probes`：必需的字面量探针点，包含 node、phase 和可选 `path::symbol`。`probe_callees` 指定真实调用形式，例如 `trace.record`。
@@ -21,7 +33,7 @@
 ```python
 from vendor.code_structure import scan, enrich
 
-index = scan(root, ["domain.py", "workflow.py", "store.py"])
+index = scan(root, ["domain.py", "bo_stategraph/workflow.py", "store.py"])
 model = enrich(authored_model, index, depth=1)
 ```
 

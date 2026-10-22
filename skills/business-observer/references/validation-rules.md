@@ -16,6 +16,8 @@
 
 每个领域规则记录：来源、适用条件、输入/操作、预期性质、取证位置、执行检查器与版本。图、测试和实现可以共同使用枚举和身份；测试预期不能直接调用被测判定来计算。
 
+阶段报告分别列出 `mapping`、`state_rules`、`business` 和 `project_checks`。`mapping_contract.py` 将实际存储、函数输入/输出或接收者身份，与统一实例查询和探针中的对应值比较；数据必须来自独立读取，不能把同一投影复制两份充当对照。`business` 使用事先写定的预期，`project_checks` 记录架构、页面等项目测试。实际程序违规且图准确反映时，映射可通过，状态或业务规则仍失败；把错误程序显示成正常流程则映射也必须失败。
+
 复杂条件可借鉴 [MC/DC](https://swehb.nasa.gov/plugins/viewsource/viewpagesrc.action?pageId=180584662)：在可行条件下，让每个条件独立影响判定。说明耦合条件和未覆盖组合；不要把普通分支测试称为已达到 MC/DC。参数组合参考 [NIST](https://csrc.nist.gov/pubs/ir/7878/final)，操作序列可使用 [Hypothesis](https://hypothesis.readthedocs.io/en/latest/stateful.html)。这些是覆盖方法，不能替用户确定规则。
 
 并发性质先区分“不能发生错误”与“在什么前提下一定能继续”。保留公平调度、超时和外部服务假设。有限场景通过不证明全部调度成立。Petri 的资源、等待与汇合语义仍进入应用原状态配置，不另建权威分析层。

@@ -1,0 +1,111 @@
+{
+  "delivery": {
+    "valid": true,
+    "candidate_id": "68491c262dba4981df1173d4d9451a73cc3ac588e18de88722fbade572a8d487",
+    "tests": [
+      {
+        "argv": [
+          "{python}",
+          "-B",
+          "-X",
+          "utf8",
+          "tests/test_business.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "argv": [
+          "{python}",
+          "-B",
+          "-X",
+          "utf8",
+          "observer_generated/runtime/architecture_guard.py",
+          "check",
+          "--root",
+          "."
+        ],
+        "exit_code": 0
+      },
+      {
+        "argv": [
+          "{python}",
+          "-B",
+          "-X",
+          "utf8",
+          "tests/test_execution.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "argv": [
+          "{python}",
+          "-B",
+          "-X",
+          "utf8",
+          "tooling/graph_fixture.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "argv": [
+          "node",
+          "tests/test_graph_projection.mjs"
+        ],
+        "exit_code": 0
+      },
+      {
+        "argv": [
+          "node",
+          "tests/test_graph_layout.mjs"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "archive": {
+    "valid": true,
+    "candidate_id": "76d174eb8406dc2f9e9d9c3cec70750a5a80fad075b976ea4f6d8d1a39a53751",
+    "tests": [
+      {
+        "argv": [
+          "{python}",
+          "-X",
+          "utf8",
+          "-B",
+          "tooling/tests.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "argv": [
+          "node",
+          "tooling/graph_tests.mjs"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "active-demo": {
+    "valid": true,
+    "candidate_id": "5cefe0b64905632f3e20570fec8f1a22fe8707420a6b41591ff16730807396fd",
+    "tests": [
+      {
+        "argv": [
+          "{python}",
+          "-X",
+          "utf8",
+          "-B",
+          "tooling/tests.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "argv": [
+          "node",
+          "tooling/graph_tests.mjs"
+        ],
+        "exit_code": 0
+      }
+    ]
+  }
+}

@@ -1,0 +1,229 @@
+{
+  "checked_at": "2026-10-21T08:11:31.187561+00:00",
+  "scope": "Selected business, structural, recording, replay and isolation checks; not proof of all behavior.",
+  "projects": [
+    {
+      "project": "delivery",
+      "build_id": "1d74a4fbadfbbefddc36f3e25f76ac165c79439d266f8dc0ca52dfc5ec9113d9",
+      "verify": {
+        "valid": true,
+        "errors": [],
+        "candidate_id": "08dfb242fddae7b36783c6ad7d6d2e5fc2909af5c53e5c427f79fcb772a969e6",
+        "review_hash": "20d43108028bbfeb912214d5bb93f97e9f99fd97bdf249ad4d691637fd8f3c54",
+        "observations_hash": "25d5995a028cb1818afab63c25f7fc8ebaf8ea63e5105429f8f5ee08e936446b",
+        "tests": [
+          {
+            "argv": [
+              "{python}",
+              "-B",
+              "-X",
+              "utf8",
+              "tests/test_business.py"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "{python}",
+              "-B",
+              "-X",
+              "utf8",
+              "observer_generated/runtime/architecture_guard.py",
+              "check",
+              "--root",
+              "."
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "{python}",
+              "-B",
+              "-X",
+              "utf8",
+              "tests/test_execution.py"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "{python}",
+              "-B",
+              "-X",
+              "utf8",
+              "tooling/graph_fixture.py"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "node",
+              "tests/test_graph_projection.mjs"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "node",
+              "tests/test_graph_layout.mjs"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "{python}",
+              "-X",
+              "utf8",
+              "-B",
+              "tests/test_recording.py"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "node",
+              "tests/test_recorded_views.mjs"
+            ],
+            "exit_code": 0
+          }
+        ],
+        "checked_at": "2026-10-21T08:07:05.141775+00:00",
+        "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+      },
+      "accept": {
+        "valid": true,
+        "status": "current",
+        "errors": [],
+        "candidate_id": "08dfb242fddae7b36783c6ad7d6d2e5fc2909af5c53e5c427f79fcb772a969e6"
+      },
+      "check": {
+        "valid": true,
+        "status": "current",
+        "errors": [],
+        "candidate_id": "08dfb242fddae7b36783c6ad7d6d2e5fc2909af5c53e5c427f79fcb772a969e6"
+      }
+    },
+    {
+      "project": "archive",
+      "build_id": "45450bbde2ad4341132f9efc646f3e2627d82e6b199993af94ec0108d2f842b0",
+      "verify": {
+        "valid": true,
+        "errors": [],
+        "candidate_id": "e74d7a7f5732d1cd61efc60780c1bfce8c6072c1c073fa364ece61e22977cbc1",
+        "review_hash": "4d928af18522866fdf348a7fc54a3d8b0f2e1d55cf4399b146de705a523c6ef5",
+        "observations_hash": "1c4f2f71af6460f958f43870457c0db639f16852cef7af7a4705f3984b4acf27",
+        "tests": [
+          {
+            "argv": [
+              "{python}",
+              "-X",
+              "utf8",
+              "-B",
+              "tooling/tests.py"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "node",
+              "tooling/graph_tests.mjs"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "{python}",
+              "-X",
+              "utf8",
+              "-B",
+              "tooling/test_recording.py"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "node",
+              "tooling/test_recorded_views.mjs"
+            ],
+            "exit_code": 0
+          }
+        ],
+        "checked_at": "2026-10-21T08:07:26.358936+00:00",
+        "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+      },
+      "accept": {
+        "valid": true,
+        "status": "current",
+        "errors": [],
+        "candidate_id": "e74d7a7f5732d1cd61efc60780c1bfce8c6072c1c073fa364ece61e22977cbc1"
+      },
+      "check": {
+        "valid": true,
+        "status": "current",
+        "errors": [],
+        "candidate_id": "e74d7a7f5732d1cd61efc60780c1bfce8c6072c1c073fa364ece61e22977cbc1"
+      }
+    },
+    {
+      "project": "active-demo",
+      "build_id": "45450bbde2ad4341132f9efc646f3e2627d82e6b199993af94ec0108d2f842b0",
+      "verify": {
+        "valid": true,
+        "errors": [],
+        "candidate_id": "3ed5dc397f0197b42be4bcfb1923b1240e194ee887412bcdd324f6586491f622",
+        "review_hash": "a625f91aaad95b8a2f760386c2fed89e2b21971ad42ebe2ebc2ed99281435c39",
+        "observations_hash": "a758c01b02bae0735ea214f0becb863f46d16e3c6e92623e9a35dc2f0ac98669",
+        "tests": [
+          {
+            "argv": [
+              "{python}",
+              "-X",
+              "utf8",
+              "-B",
+              "tooling/tests.py"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "node",
+              "tooling/graph_tests.mjs"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "{python}",
+              "-X",
+              "utf8",
+              "-B",
+              "tooling/test_recording.py"
+            ],
+            "exit_code": 0
+          },
+          {
+            "argv": [
+              "node",
+              "tooling/test_recorded_views.mjs"
+            ],
+            "exit_code": 0
+          }
+        ],
+        "checked_at": "2026-10-21T08:07:49.248278+00:00",
+        "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+      },
+      "accept": {
+        "valid": true,
+        "status": "current",
+        "errors": [],
+        "candidate_id": "3ed5dc397f0197b42be4bcfb1923b1240e194ee887412bcdd324f6586491f622"
+      },
+      "check": {
+        "valid": true,
+        "status": "current",
+        "errors": [],
+        "candidate_id": "3ed5dc397f0197b42be4bcfb1923b1240e194ee887412bcdd324f6586491f622"
+      }
+    }
+  ]
+}

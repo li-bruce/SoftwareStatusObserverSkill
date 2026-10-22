@@ -1,0 +1,2 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{"valid": true, "errors": [], "scenarios": 69, "state_frames": 2013, "scope": "explicit business assertions, every recorded transaction's shared resource invariants, observation isolation and static imports"}

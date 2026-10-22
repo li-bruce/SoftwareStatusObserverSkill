@@ -1,0 +1,362 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Package references and 27 copied runtime modules match.
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+......................
+----------------------------------------------------------------------
+Ran 22 tests in 0.303s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{"step": "\u5f00\u59cb\u65f6\u4fdd\u5b58\u672a\u51b3\u95ee\u9898", "passed": true}
+{"step": "\u5173\u952e\u95ee\u9898\u672a\u56de\u7b54\uff0c\u4e0d\u80fd\u4ea4\u4ed8", "passed": true}
+{"step": "\u56de\u7b54\u5df2\u5173\u8054\u539f\u56fe\u548c\u6743\u9650\u53cd\u4f8b\uff0c\u8fd0\u884c\u68c0\u67e5\u901a\u8fc7", "passed": true}
+{"step": "\u9a8c\u6536\u540c\u4e00\u56de\u7b54\u548c\u5b9e\u73b0", "passed": true}
+{"step": "\u5f53\u524d\u56de\u7b54\u4e0e\u9a8c\u6536\u4e00\u81f4", "passed": true}
+{"step": "\u56de\u7b54\u6539\u53d8\u4f7f\u65e7\u9a8c\u6536\u5931\u6548", "passed": true}
+{"step": "\u5f00\u59cb\u4e0b\u4e00\u6b21\u9700\u6c42\u8c03\u6574", "passed": true}
+{"step": "\u5220\u9664\u5df2\u786e\u8ba4\u95ee\u9898\u4e0d\u80fd\u9690\u85cf\u539f\u51b3\u5b9a", "passed": true}
+{"step": "\u7a7a\u8bb0\u5f55\u4e0d\u80fd\u7ed5\u8fc7\u5df2\u63a5\u5165\u7684\u6f84\u6e05\u68c0\u67e5", "passed": true}
+{"step": "\u5220\u9664\u914d\u7f6e\u4e0d\u80fd\u9759\u9ed8\u53d6\u6d88\u6f84\u6e05\u68c0\u67e5", "passed": true}
+{"step": "\u6062\u590d\u539f\u89c4\u5219\u540e\u901a\u8fc7\u5b9e\u9645\u8fd0\u884c", "passed": true}
+{"step": "\u9a8c\u6536\u6062\u590d\u540e\u7684\u8bb0\u5f55", "passed": true}
+{"step": "\u6700\u7ec8\u68c0\u67e5", "passed": true}
+{"passed": true, "steps": 13, "report": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.validation\\gate-20261022-121754-765828\\report.json"}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+........
+----------------------------------------------------------------------
+Ran 8 tests in 0.028s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+........
+----------------------------------------------------------------------
+Ran 8 tests in 0.528s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.028s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.228s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+...................
+----------------------------------------------------------------------
+Ran 19 tests in 2.886s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.076s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+PASS: 30 old/new SQLite and worker scenarios; states, activities, resource ownership, effects and observed values match.
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.060s
+
+OK
+PASS: direct/advanced projection, full search inventory, explicit permission roles, ID migration, persisted save and conflict status.
+PASS: one in-flight poll and closed viewer never restarts polling.
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "valid": true,
+  "status": "current",
+  "errors": [],
+  "candidate_id": "9df7b6a1cb09418022558868c665ac0e4f12e418e93a06ea9c96fbfc09e708b4"
+}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "valid": true,
+  "errors": [],
+  "candidate_id": "9df7b6a1cb09418022558868c665ac0e4f12e418e93a06ea9c96fbfc09e708b4",
+  "reports": {
+    "mapping": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+      "witnesses": 201
+    },
+    "state_rules": {
+      "status": "passed",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "passed",
+      "errors": [],
+      "assertions": {
+        "required": 96,
+        "executed": 96
+      },
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "review_hash": "70b6d594148e9ca662c3acbb68938de4624bb3ccd2adcd406fdcee45b18ac0dd",
+  "observations_hash": "6d87d0f298cad0b35d6488c6187e22e68eb7561ebb4b4dc2e3b3a1069b108ea2",
+  "tests": [
+    {
+      "argv": [
+        "{python}",
+        "-B",
+        "-X",
+        "utf8",
+        "tests/test_business.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-B",
+        "-X",
+        "utf8",
+        "observer_generated/runtime/architecture_guard.py",
+        "check",
+        "--root",
+        "."
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-B",
+        "-X",
+        "utf8",
+        "tests/test_execution.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-B",
+        "-X",
+        "utf8",
+        "tooling/graph_fixture.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tests/test_graph_projection.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tests/test_graph_layout.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tests/test_recording.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tests/test_recorded_views.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tests/test_stategraph_module.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "checked_at": "2026-10-22T04:19:20.010559+00:00",
+  "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "valid": true,
+  "status": "current",
+  "errors": [],
+  "candidate_id": "9df7b6a1cb09418022558868c665ac0e4f12e418e93a06ea9c96fbfc09e708b4"
+}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "valid": true,
+  "status": "current",
+  "errors": [],
+  "candidate_id": "9df7b6a1cb09418022558868c665ac0e4f12e418e93a06ea9c96fbfc09e708b4"
+}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "valid": true,
+  "files": 98,
+  "package": {
+    "path": "dist/core-7c204e81.zip",
+    "files": 18,
+    "sha256": "71c902434b86b5db5c064c48720691b9beab9c222b1c9996d4481d980754b13d",
+    "retains": "business state machine; neutral observation port has no observer implementation"
+  }
+}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.498s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.529s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "valid": true,
+  "status": "current",
+  "errors": [],
+  "candidate_id": "87abbc314ba8e0cdfe4b854f9118416845c13aa2e9c7435b6e19a71e534d8f58"
+}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "valid": true,
+  "errors": [],
+  "candidate_id": "87abbc314ba8e0cdfe4b854f9118416845c13aa2e9c7435b6e19a71e534d8f58",
+  "reports": {
+    "mapping": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+      "witnesses": 480
+    },
+    "state_rules": {
+      "status": "passed",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "passed",
+      "errors": [],
+      "assertions": {
+        "required": 189,
+        "executed": 189
+      },
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "review_hash": "321cf0caac5c36a59c3f3d91e8f71eb39aeed2009dc6a5192cf8b21a3fd52a1c",
+  "observations_hash": "86ddd2f96adbc0f6fcebba0d956c4dad2626251c5f9b98ef29ee21175b45e33c",
+  "tests": [
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/tests.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tooling/graph_tests.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/test_recording.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tooling/test_recorded_views.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/test_stategraph_module.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "checked_at": "2026-10-22T04:20:02.687959+00:00",
+  "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "valid": true,
+  "status": "current",
+  "errors": [],
+  "candidate_id": "87abbc314ba8e0cdfe4b854f9118416845c13aa2e9c7435b6e19a71e534d8f58"
+}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "valid": true,
+  "status": "current",
+  "errors": [],
+  "candidate_id": "87abbc314ba8e0cdfe4b854f9118416845c13aa2e9c7435b6e19a71e534d8f58"
+}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{"valid": true, "errors": [], "ownership": {"archive_app/__init__.py": "business", "archive_app/policy.py": "business", "archive_app/ports.py": "business", "archive_app/service.py": "business", "archive_app/storage.py": "business", "archive_app/workflow.py": "business", "bo_stategraph/__init__.py": "stategraph", "bo_stategraph/bo_contracts.py": "stategraph", "bo_stategraph/config/retention.json": "stategraph", "bo_stategraph/execution_contract.py": "stategraph", "bo_stategraph/query.py": "stategraph", "bo_stategraph/runtime-version.json": "stategraph", "bo_stategraph/workflow.py": "stategraph", "integrations/__init__.py": "integration", "integrations/bo_observer.py": "integration", "integrations/bo_server.py": "integration", "observer_runtime/LICENSE.txt": "observer", "observer_runtime/__init__.py": "observer", "observer_runtime/architecture_guard.py": "observer", "observer_runtime/behavior_model.py": "observer", "observer_runtime/bo_contracts.py": "observer", "observer_runtime/bo_retention.py": "observer", "observer_runtime/bo_runtime.py": "observer", "observer_runtime/bo_stategraph.py": "observer", "observer_runtime/bo_sync.py": "observer", "observer_runtime/bo_upgrade.py": "observer", "observer_runtime/change_sync.py": "observer", "observer_runtime/code_structure.py": "observer", "observer_runtime/execution_contract.py": "observer", "observer_runtime/focus_graph.py": "observer", "observer_runtime/mapping_contract.py": "observer", "observer_runtime/model_tool.py": "observer", "observer_runtime/origin.json": "observer", "observer_runtime/probe.py": "observer", "observer_runtime/project_bundle.py": "observer", "observer_runtime/recording_session.py": "observer", "observer_runtime/requirements_dialogue.py": "observer", "observer_runtime/semantic_probe.py": "observer", "observer_runtime/statechart_contract.py": "observer", "observer_runtime/sync_config.py": "observer", "observer_runtime/sync_io.py": "observer", "observer_runtime/sync_verify.py": "observer", "observer_runtime/view_preferences.py": "observer", "observer_runtime/viewer_server.py": "observer", "observer_runtime/whitebox_contract.py": "observer", "observer_runtime/worknet_contract.py": "observer", "run.py": "integration", "tooling/__init__.py": "tooling", "tooling/behavior_source.json": "tooling", "tooling/build_model.py": "tooling", "tooling/graph_tests.mjs": "tooling", "tooling/mutations.py": "tooling", "tooling/observe.py": "tooling", "tooling/scenarios.py": "tooling", "tooling/size_scenarios.py": "tooling", "tooling/test_recorded_views.mjs": "tooling", "tooling/test_recording.py": "tooling", "tooling/test_stategraph_module.py": "tooling", "tooling/tests.py": "tooling", "validate.py": "tooling"}, "imports": [{"from": "archive_app/policy.py", "to": "archive_app/ports.py", "line": 4}, {"from": "archive_app/policy.py", "to": "archive_app/ports.py", "line": 4}, {"from": "archive_app/service.py", "to": "archive_app/ports.py", "line": 9}, {"from": "archive_app/service.py", "to": "archive_app/ports.py", "line": 9}, {"from": "archive_app/service.py", "to": "archive_app/ports.py", "line": 9}, {"from": "archive_app/service.py", "to": "archive_app/policy.py", "line": 10}, {"from": "archive_app/service.py", "to": "archive_app/policy.py", "line": 10}, {"from": "archive_app/service.py", "to": "archive_app/policy.py", "line": 10}, {"from": "archive_app/service.py", "to": "archive_app/policy.py", "line": 10}, {"from": "archive_app/service.py", "to": "archive_app/policy.py", "line": 10}, {"from": "archive_app/service.py", "to": "archive_app/policy.py", "line": 10}, {"from": "archive_app/service.py", "to": "archive_app/storage.py", "line": 11}, {"from": "archive_app/service.py", "to": "archive_app/storage.py", "line": 11}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/workflow.py", "to": "bo_stategraph/workflow.py", "line": 2}, {"from": "archive_app/workflow.py", "to": "bo_stategraph/workflow.py", "line": 2}, {"from": "bo_stategraph/__init__.py", "to": "bo_stategraph/bo_contracts.py", "line": 17}, {"from": "bo_stategraph/__init__.py", "to": "bo_stategraph/bo_contracts.py", "line": 17}, {"from": "bo_stategraph/__init__.py", "to": "bo_stategraph/bo_contracts.py", "line": 17}, {"from": "bo_stategraph/__init__.py", "to": "bo_stategraph/bo_contracts.py", "line": 17}, {"from": "bo_stategraph/__init__.py", "to": "bo_stategraph/bo_contracts.py", "line": 17}, {"from": "bo_stategraph/__init__.py", "to": "bo_stategraph/execution_contract.py", "line": 18}, {"from": "bo_stategraph/__init__.py", "to": "bo_stategraph/execution_contract.py", "line": 18}, {"from": "bo_stategraph/__init__.py", "to": "bo_stategraph/execution_contract.py", "line": 18}, {"from": "bo_stategraph/bo_contracts.py", "to": "bo_stategraph/execution_contract.py", "line": 162}, {"from": "bo_stategraph/bo_contracts.py", "to": "bo_stategraph/execution_contract.py", "line": 162}, {"from": "integrations/bo_observer.py", "to": "archive_app/ports.py", "line": 5}, {"from": "integrations/bo_observer.py", "to": "archive_app/ports.py", "line": 5}, {"from": "integrations/bo_observer.py", "to": "observer_runtime/semantic_probe.py", "line": 6}, {"from": "integrations/bo_observer.py", "to": "observer_runtime/semantic_probe.py", "line": 6}, {"from": "integrations/bo_observer.py", "to": "observer_runtime/semantic_probe.py", "line": 6}, {"from": "integrations/bo_observer.py", "to": "observer_runtime/bo_retention.py", "line": 7}, {"from": "integrations/bo_observer.py", "to": "observer_runtime/bo_retention.py", "line": 7}, {"from": "integrations/bo_observer.py", "to": "bo_stategraph/__init__.py", "line": 8}, {"from": "integrations/bo_observer.py", "to": "bo_stategraph/__init__.py", "line": 8}, {"from": "integrations/bo_server.py", "to": "archive_app/service.py", "line": 10}, {"from": "integrations/bo_server.py", "to": "archive_app/service.py", "line": 10}, {"from": "integrations/bo_server.py", "to": "archive_app/storage.py", "line": 11}, {"from": "integrations/bo_server.py", "to": "archive_app/storage.py", "line": 11}, {"from": "integrations/bo_server.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "integrations/bo_server.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "integrations/bo_server.py", "to": "integrations/bo_observer.py", "line": 13}, {"from": "integrations/bo_server.py", "to": "integrations/bo_observer.py", "line": 13}, {"from": "integrations/bo_server.py", "to": "observer_runtime/behavior_model.py", "line": 14}, {"from": "integrations/bo_server.py", "to": "observer_runtime/behavior_model.py", "line": 14}, {"from": "integrations/bo_server.py", "to": "observer_runtime/recording_session.py", "line": 15}, {"from": "integrations/bo_server.py", "to": "observer_runtime/recording_session.py", "line": 15}, {"from": "integrations/bo_server.py", "to": "observer_runtime/view_preferences.py", "line": 16}, {"from": "integrations/bo_server.py", "to": "observer_runtime/view_preferences.py", "line": 16}, {"from": "integrations/bo_server.py", "to": "observer_runtime/view_preferences.py", "line": 16}, {"from": "integrations/bo_server.py", "to": "bo_stategraph/__init__.py", "line": 17}, {"from": "integrations/bo_server.py", "to": "bo_stategraph/__init__.py", "line": 17}, {"from": "integrations/bo_server.py", "to": "bo_stategraph/query.py", "line": 18}, {"from": "integrations/bo_server.py", "to": "bo_stategraph/query.py", "line": 18}, {"from": "observer_runtime/behavior_model.py", "to": "observer_runtime/bo_contracts.py", "line": 13}, {"from": "observer_runtime/behavior_model.py", "to": "observer_runtime/bo_contracts.py", "line": 13}, {"from": "observer_runtime/bo_contracts.py", "to": "observer_runtime/bo_runtime.py", "line": 3}, {"from": "observer_runtime/bo_contracts.py", "to": "observer_runtime/bo_runtime.py", "line": 3}, {"from": "observer_runtime/bo_stategraph.py", "to": "observer_runtime/bo_runtime.py", "line": 3}, {"from": "observer_runtime/bo_stategraph.py", "to": "observer_runtime/bo_runtime.py", "line": 3}, {"from": "observer_runtime/bo_upgrade.py", "to": "observer_runtime/behavior_model.py", "line": 14}, {"from": "observer_runtime/bo_upgrade.py", "to": "observer_runtime/behavior_model.py", "line": 14}, {"from": "observer_runtime/bo_upgrade.py", "to": "observer_runtime/behavior_model.py", "line": 14}, {"from": "observer_runtime/bo_upgrade.py", "to": "observer_runtime/sync_io.py", "line": 15}, {"from": "observer_runtime/bo_upgrade.py", "to": "observer_runtime/sync_io.py", "line": 15}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/bo_sync.py", "line": 12}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/bo_sync.py", "line": 12}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/bo_sync.py", "line": 12}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/behavior_model.py", "line": 13}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/behavior_model.py", "line": 13}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/behavior_model.py", "line": 13}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/behavior_model.py", "line": 13}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/behavior_model.py", "line": 13}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/behavior_model.py", "line": 13}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/behavior_model.py", "line": 13}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/code_structure.py", "line": 14}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/code_structure.py", "line": 14}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/code_structure.py", "line": 14}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/code_structure.py", "line": 14}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/statechart_contract.py", "line": 15}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/statechart_contract.py", "line": 15}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/worknet_contract.py", "line": 16}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/worknet_contract.py", "line": 16}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/execution_contract.py", "line": 17}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/execution_contract.py", "line": 17}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/execution_contract.py", "line": 17}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/requirements_dialogue.py", "line": 18}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/requirements_dialogue.py", "line": 18}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/whitebox_contract.py", "line": 19}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/whitebox_contract.py", "line": 19}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/whitebox_contract.py", "line": 19}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/sync_config.py", "line": 32}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/sync_config.py", "line": 32}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/sync_config.py", "line": 32}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/sync_io.py", "line": 33}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/sync_io.py", "line": 33}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/sync_io.py", "line": 33}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/sync_verify.py", "line": 34}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/sync_verify.py", "line": 34}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/sync_verify.py", "line": 34}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/sync_verify.py", "line": 34}, {"from": "observer_runtime/code_structure.py", "to": "observer_runtime/behavior_model.py", "line": 13}, {"from": "observer_runtime/code_structure.py", "to": "observer_runtime/behavior_model.py", "line": 13}, {"from": "observer_runtime/code_structure.py", "to": "observer_runtime/behavior_model.py", "line": 13}, {"from": "observer_runtime/code_structure.py", "to": "observer_runtime/behavior_model.py", "line": 13}, {"from": "observer_runtime/code_structure.py", "to": "observer_runtime/behavior_model.py", "line": 13}, {"from": "observer_runtime/execution_contract.py", "to": "observer_runtime/bo_runtime.py", "line": 3}, {"from": "observer_runtime/execution_contract.py", "to": "observer_runtime/bo_runtime.py", "line": 3}, {"from": "observer_runtime/focus_graph.py", "to": "observer_runtime/behavior_model.py", "line": 10}, {"from": "observer_runtime/focus_graph.py", "to": "observer_runtime/behavior_model.py", "line": 10}, {"from": "observer_runtime/focus_graph.py", "to": "observer_runtime/behavior_model.py", "line": 10}, {"from": "observer_runtime/focus_graph.py", "to": "observer_runtime/behavior_model.py", "line": 10}, {"from": "observer_runtime/project_bundle.py", "to": "observer_runtime/behavior_model.py", "line": 8}, {"from": "observer_runtime/project_bundle.py", "to": "observer_runtime/behavior_model.py", "line": 8}, {"from": "observer_runtime/project_bundle.py", "to": "observer_runtime/behavior_model.py", "line": 8}, {"from": "observer_runtime/project_bundle.py", "to": "observer_runtime/behavior_model.py", "line": 8}, {"from": "observer_runtime/statechart_contract.py", "to": "observer_runtime/bo_contracts.py", "line": 11}, {"from": "observer_runtime/statechart_contract.py", "to": "observer_runtime/bo_contracts.py", "line": 11}, {"from": "observer_runtime/sync_config.py", "to": "observer_runtime/behavior_model.py", "line": 4}, {"from": "observer_runtime/sync_config.py", "to": "observer_runtime/behavior_model.py", "line": 4}, {"from": "observer_runtime/sync_config.py", "to": "observer_runtime/behavior_model.py", "line": 4}, {"from": "observer_runtime/sync_config.py", "to": "observer_runtime/behavior_model.py", "line": 4}, {"from": "observer_runtime/sync_config.py", "to": "observer_runtime/code_structure.py", "line": 5}, {"from": "observer_runtime/sync_config.py", "to": "observer_runtime/code_structure.py", "line": 5}, {"from": "observer_runtime/sync_config.py", "to": "observer_runtime/bo_sync.py", "line": 6}, {"from": "observer_runtime/sync_config.py", "to": "observer_runtime/bo_sync.py", "line": 6}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/sync_io.py", "line": 7}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/sync_io.py", "line": 7}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/sync_io.py", "line": 7}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/behavior_model.py", "line": 8}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/behavior_model.py", "line": 8}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/behavior_model.py", "line": 8}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/behavior_model.py", "line": 8}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/statechart_contract.py", "line": 9}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/statechart_contract.py", "line": 9}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/worknet_contract.py", "line": 10}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/worknet_contract.py", "line": 10}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/execution_contract.py", "line": 11}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/execution_contract.py", "line": 11}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/whitebox_contract.py", "line": 12}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/whitebox_contract.py", "line": 12}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/mapping_contract.py", "line": 13}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/mapping_contract.py", "line": 13}, {"from": "observer_runtime/whitebox_contract.py", "to": "observer_runtime/behavior_model.py", "line": 12}, {"from": "observer_runtime/whitebox_contract.py", "to": "observer_runtime/behavior_model.py", "line": 12}, {"from": "observer_runtime/whitebox_contract.py", "to": "observer_runtime/behavior_model.py", "line": 12}, {"from": "observer_runtime/whitebox_contract.py", "to": "observer_runtime/behavior_model.py", "line": 12}, {"from": "observer_runtime/whitebox_contract.py", "to": "observer_runtime/behavior_model.py", "line": 12}, {"from": "observer_runtime/whitebox_contract.py", "to": "observer_runtime/code_structure.py", "line": 13}, {"from": "observer_runtime/whitebox_contract.py", "to": "observer_runtime/code_structure.py", "line": 13}, {"from": "observer_runtime/whitebox_contract.py", "to": "observer_runtime/code_structure.py", "line": 13}, {"from": "run.py", "to": "observer_runtime/behavior_model.py", "line": 6}, {"from": "run.py", "to": "observer_runtime/behavior_model.py", "line": 6}, {"from": "run.py", "to": "observer_runtime/behavior_model.py", "line": 6}, {"from": "run.py", "to": "integrations/bo_server.py", "line": 27}, {"from": "run.py", "to": "integrations/bo_server.py", "line": 27}, {"from": "tooling/build_model.py", "to": "bo_stategraph/workflow.py", "line": 7}, {"from": "tooling/build_model.py", "to": "bo_stategraph/workflow.py", "line": 7}, {"from": "tooling/build_model.py", "to": "observer_runtime/code_structure.py", "line": 8}, {"from": "tooling/build_model.py", "to": "observer_runtime/code_structure.py", "line": 8}, {"from": "tooling/build_model.py", "to": "observer_runtime/code_structure.py", "line": 8}, {"from": "tooling/observe.py", "to": "observer_runtime/behavior_model.py", "line": 7}, {"from": "tooling/observe.py", "to": "observer_runtime/behavior_model.py", "line": 7}, {"from": "tooling/observe.py", "to": "observer_runtime/mapping_contract.py", "line": 8}, {"from": "tooling/observe.py", "to": "observer_runtime/mapping_contract.py", "line": 8}, {"from": "tooling/observe.py", "to": "bo_stategraph/__init__.py", "line": 9}, {"from": "tooling/observe.py", "to": "bo_stategraph/__init__.py", "line": 9}, {"from": "tooling/observe.py", "to": "bo_stategraph/query.py", "line": 10}, {"from": "tooling/observe.py", "to": "bo_stategraph/query.py", "line": 10}, {"from": "tooling/observe.py", "to": "bo_stategraph/workflow.py", "line": 17}, {"from": "tooling/observe.py", "to": "bo_stategraph/workflow.py", "line": 17}, {"from": "tooling/observe.py", "to": "tooling/scenarios.py", "line": 18}, {"from": "tooling/observe.py", "to": "tooling/scenarios.py", "line": 18}, {"from": "tooling/observe.py", "to": "tooling/scenarios.py", "line": 18}, {"from": "tooling/observe.py", "to": "tooling/size_scenarios.py", "line": 19}, {"from": "tooling/observe.py", "to": "tooling/size_scenarios.py", "line": 19}, {"from": "tooling/observe.py", "to": "tooling/size_scenarios.py", "line": 19}, {"from": "tooling/scenarios.py", "to": "archive_app/policy.py", "line": 11}, {"from": "tooling/scenarios.py", "to": "archive_app/policy.py", "line": 11}, {"from": "tooling/scenarios.py", "to": "archive_app/policy.py", "line": 11}, {"from": "tooling/scenarios.py", "to": "archive_app/service.py", "line": 12}, {"from": "tooling/scenarios.py", "to": "archive_app/service.py", "line": 12}, {"from": "tooling/scenarios.py", "to": "archive_app/storage.py", "line": 13}, {"from": "tooling/scenarios.py", "to": "archive_app/storage.py", "line": 13}, {"from": "tooling/scenarios.py", "to": "bo_stategraph/workflow.py", "line": 14}, {"from": "tooling/scenarios.py", "to": "bo_stategraph/workflow.py", "line": 14}, {"from": "tooling/scenarios.py", "to": "integrations/bo_observer.py", "line": 15}, {"from": "tooling/scenarios.py", "to": "integrations/bo_observer.py", "line": 15}, {"from": "tooling/size_scenarios.py", "to": "archive_app/storage.py", "line": 2}, {"from": "tooling/size_scenarios.py", "to": "archive_app/storage.py", "line": 2}, {"from": "tooling/size_scenarios.py", "to": "tooling/scenarios.py", "line": 3}, {"from": "tooling/size_scenarios.py", "to": "tooling/scenarios.py", "line": 3}, {"from": "tooling/test_stategraph_module.py", "to": "bo_stategraph/__init__.py", "line": 12}, {"from": "tooling/test_stategraph_module.py", "to": "bo_stategraph/__init__.py", "line": 12}, {"from": "tooling/test_stategraph_module.py", "to": "bo_stategraph/__init__.py", "line": 12}, {"from": "tooling/test_stategraph_module.py", "to": "bo_stategraph/__init__.py", "line": 12}, {"from": "tooling/tests.py", "to": "archive_app/policy.py", "line": 12}, {"from": "tooling/tests.py", "to": "archive_app/policy.py", "line": 12}, {"from": "tooling/tests.py", "to": "archive_app/policy.py", "line": 12}, {"from": "tooling/tests.py", "to": "archive_app/policy.py", "line": 12}, {"from": "tooling/tests.py", "to": "archive_app/policy.py", "line": 12}, {"from": "tooling/tests.py", "to": "archive_app/storage.py", "line": 13}, {"from": "tooling/tests.py", "to": "archive_app/storage.py", "line": 13}, {"from": "tooling/tests.py", "to": "archive_app/service.py", "line": 14}, {"from": "tooling/tests.py", "to": "archive_app/service.py", "line": 14}, {"from": "tooling/tests.py", "to": "bo_stategraph/workflow.py", "line": 15}, {"from": "tooling/tests.py", "to": "bo_stategraph/workflow.py", "line": 15}, {"from": "tooling/tests.py", "to": "bo_stategraph/workflow.py", "line": 15}, {"from": "tooling/tests.py", "to": "bo_stategraph/workflow.py", "line": 15}, {"from": "tooling/tests.py", "to": "archive_app/ports.py", "line": 16}, {"from": "tooling/tests.py", "to": "archive_app/ports.py", "line": 16}, {"from": "tooling/tests.py", "to": "observer_runtime/semantic_probe.py", "line": 17}, {"from": "tooling/tests.py", "to": "observer_runtime/semantic_probe.py", "line": 17}, {"from": "tooling/tests.py", "to": "observer_runtime/semantic_probe.py", "line": 17}, {"from": "tooling/tests.py", "to": "integrations/bo_server.py", "line": 28}, {"from": "tooling/tests.py", "to": "integrations/bo_server.py", "line": 28}, {"from": "tooling/tests.py", "to": "observer_runtime/behavior_model.py", "line": 29}, {"from": "tooling/tests.py", "to": "observer_runtime/behavior_model.py", "line": 29}], "managed": ["bo_stategraph/__init__.py", "bo_stategraph/bo_contracts.py", "bo_stategraph/execution_contract.py", "bo_stategraph/runtime-version.json", "observer_runtime/LICENSE.txt", "observer_runtime/__init__.py", "observer_runtime/architecture_guard.py", "observer_runtime/behavior_model.py", "observer_runtime/bo_contracts.py", "observer_runtime/bo_retention.py", "observer_runtime/bo_runtime.py", "observer_runtime/bo_stategraph.py", "observer_runtime/bo_sync.py", "observer_runtime/bo_upgrade.py", "observer_runtime/change_sync.py", "observer_runtime/code_structure.py", "observer_runtime/execution_contract.py", "observer_runtime/focus_graph.py", "observer_runtime/mapping_contract.py", "observer_runtime/model_tool.py", "observer_runtime/origin.json", "observer_runtime/probe.py", "observer_runtime/project_bundle.py", "observer_runtime/recording_session.py", "observer_runtime/requirements_dialogue.py", "observer_runtime/semantic_probe.py", "observer_runtime/statechart_contract.py", "observer_runtime/sync_config.py", "observer_runtime/sync_io.py", "observer_runtime/sync_verify.py", "observer_runtime/view_preferences.py", "observer_runtime/viewer_server.py", "observer_runtime/whitebox_contract.py", "observer_runtime/worknet_contract.py"], "limits": ["Python static imports in configured scan paths", "Dynamic aliases and external package internals need independent review", "Sealing is a recorded regeneration, not business acceptance; run change_sync verify"]}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+.............
+----------------------------------------------------------------------
+Ran 13 tests in 1.508s
+
+OK
+Graph invariants passed: exact boundary, missing boundary, historical phase, no final disposition/results, stable folded IDs.
+Project validation passed, including accepted source/model synchronization.
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{"valid": true, "errors": [], "ownership": {"archive_app/__init__.py": "business", "archive_app/policy.py": "business", "archive_app/ports.py": "business", "archive_app/service.py": "business", "archive_app/storage.py": "business", "archive_app/workflow.py": "business", "bo_stategraph/__init__.py": "stategraph", "bo_stategraph/bo_contracts.py": "stategraph", "bo_stategraph/config/retention.json": "stategraph", "bo_stategraph/execution_contract.py": "stategraph", "bo_stategraph/query.py": "stategraph", "bo_stategraph/runtime-version.json": "stategraph", "bo_stategraph/workflow.py": "stategraph", "integrations/__init__.py": "integration", "integrations/bo_observer.py": "integration", "integrations/bo_server.py": "integration", "observer_runtime/LICENSE.txt": "observer", "observer_runtime/__init__.py": "observer", "observer_runtime/architecture_guard.py": "observer", "observer_runtime/behavior_model.py": "observer", "observer_runtime/bo_contracts.py": "observer", "observer_runtime/bo_retention.py": "observer", "observer_runtime/bo_runtime.py": "observer", "observer_runtime/bo_stategraph.py": "observer", "observer_runtime/bo_sync.py": "observer", "observer_runtime/bo_upgrade.py": "observer", "observer_runtime/change_sync.py": "observer", "observer_runtime/code_structure.py": "observer", "observer_runtime/execution_contract.py": "observer", "observer_runtime/focus_graph.py": "observer", "observer_runtime/mapping_contract.py": "observer", "observer_runtime/model_tool.py": "observer", "observer_runtime/origin.json": "observer", "observer_runtime/probe.py": "observer", "observer_runtime/project_bundle.py": "observer", "observer_runtime/recording_session.py": "observer", "observer_runtime/requirements_dialogue.py": "observer", "observer_runtime/semantic_probe.py": "observer", "observer_runtime/statechart_contract.py": "observer", "observer_runtime/sync_config.py": "observer", "observer_runtime/sync_io.py": "observer", "observer_runtime/sync_verify.py": "observer", "observer_runtime/view_preferences.py": "observer", "observer_runtime/viewer_server.py": "observer", "observer_runtime/whitebox_contract.py": "observer", "observer_runtime/worknet_contract.py": "observer", "run.py": "integration", "tooling/__init__.py": "tooling", "tooling/behavior_source.json": "tooling", "tooling/build_model.py": "tooling", "tooling/graph_tests.mjs": "tooling", "tooling/mutations.py": "tooling", "tooling/observe.py": "tooling", "tooling/scenarios.py": "tooling", "tooling/size_scenarios.py": "tooling", "tooling/test_recorded_views.mjs": "tooling", "tooling/test_recording.py": "tooling", "tooling/test_stategraph_module.py": "tooling", "tooling/tests.py": "tooling", "validate.py": "tooling"}, "imports": [{"from": "archive_app/policy.py", "to": "archive_app/ports.py", "line": 4}, {"from": "archive_app/policy.py", "to": "archive_app/ports.py", "line": 4}, {"from": "archive_app/service.py", "to": "archive_app/ports.py", "line": 9}, {"from": "archive_app/service.py", "to": "archive_app/ports.py", "line": 9}, {"from": "archive_app/service.py", "to": "archive_app/ports.py", "line": 9}, {"from": "archive_app/service.py", "to": "archive_app/policy.py", "line": 10}, {"from": "archive_app/service.py", "to": "archive_app/policy.py", "line": 10}, {"from": "archive_app/service.py", "to": "archive_app/policy.py", "line": 10}, {"from": "archive_app/service.py", "to": "archive_app/policy.py", "line": 10}, {"from": "archive_app/service.py", "to": "archive_app/policy.py", "line": 10}, {"from": "archive_app/service.py", "to": "archive_app/policy.py", "line": 10}, {"from": "archive_app/service.py", "to": "archive_app/storage.py", "line": 11}, {"from": "archive_app/service.py", "to": "archive_app/storage.py", "line": 11}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/service.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "archive_app/workflow.py", "to": "bo_stategraph/workflow.py", "line": 2}, {"from": "archive_app/workflow.py", "to": "bo_stategraph/workflow.py", "line": 2}, {"from": "bo_stategraph/__init__.py", "to": "bo_stategraph/bo_contracts.py", "line": 17}, {"from": "bo_stategraph/__init__.py", "to": "bo_stategraph/bo_contracts.py", "line": 17}, {"from": "bo_stategraph/__init__.py", "to": "bo_stategraph/bo_contracts.py", "line": 17}, {"from": "bo_stategraph/__init__.py", "to": "bo_stategraph/bo_contracts.py", "line": 17}, {"from": "bo_stategraph/__init__.py", "to": "bo_stategraph/bo_contracts.py", "line": 17}, {"from": "bo_stategraph/__init__.py", "to": "bo_stategraph/execution_contract.py", "line": 18}, {"from": "bo_stategraph/__init__.py", "to": "bo_stategraph/execution_contract.py", "line": 18}, {"from": "bo_stategraph/__init__.py", "to": "bo_stategraph/execution_contract.py", "line": 18}, {"from": "bo_stategraph/bo_contracts.py", "to": "bo_stategraph/execution_contract.py", "line": 162}, {"from": "bo_stategraph/bo_contracts.py", "to": "bo_stategraph/execution_contract.py", "line": 162}, {"from": "integrations/bo_observer.py", "to": "archive_app/ports.py", "line": 5}, {"from": "integrations/bo_observer.py", "to": "archive_app/ports.py", "line": 5}, {"from": "integrations/bo_observer.py", "to": "observer_runtime/semantic_probe.py", "line": 6}, {"from": "integrations/bo_observer.py", "to": "observer_runtime/semantic_probe.py", "line": 6}, {"from": "integrations/bo_observer.py", "to": "observer_runtime/semantic_probe.py", "line": 6}, {"from": "integrations/bo_observer.py", "to": "observer_runtime/bo_retention.py", "line": 7}, {"from": "integrations/bo_observer.py", "to": "observer_runtime/bo_retention.py", "line": 7}, {"from": "integrations/bo_observer.py", "to": "bo_stategraph/__init__.py", "line": 8}, {"from": "integrations/bo_observer.py", "to": "bo_stategraph/__init__.py", "line": 8}, {"from": "integrations/bo_server.py", "to": "archive_app/service.py", "line": 10}, {"from": "integrations/bo_server.py", "to": "archive_app/service.py", "line": 10}, {"from": "integrations/bo_server.py", "to": "archive_app/storage.py", "line": 11}, {"from": "integrations/bo_server.py", "to": "archive_app/storage.py", "line": 11}, {"from": "integrations/bo_server.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "integrations/bo_server.py", "to": "bo_stategraph/workflow.py", "line": 12}, {"from": "integrations/bo_server.py", "to": "integrations/bo_observer.py", "line": 13}, {"from": "integrations/bo_server.py", "to": "integrations/bo_observer.py", "line": 13}, {"from": "integrations/bo_server.py", "to": "observer_runtime/behavior_model.py", "line": 14}, {"from": "integrations/bo_server.py", "to": "observer_runtime/behavior_model.py", "line": 14}, {"from": "integrations/bo_server.py", "to": "observer_runtime/recording_session.py", "line": 15}, {"from": "integrations/bo_server.py", "to": "observer_runtime/recording_session.py", "line": 15}, {"from": "integrations/bo_server.py", "to": "observer_runtime/view_preferences.py", "line": 16}, {"from": "integrations/bo_server.py", "to": "observer_runtime/view_preferences.py", "line": 16}, {"from": "integrations/bo_server.py", "to": "observer_runtime/view_preferences.py", "line": 16}, {"from": "integrations/bo_server.py", "to": "bo_stategraph/__init__.py", "line": 17}, {"from": "integrations/bo_server.py", "to": "bo_stategraph/__init__.py", "line": 17}, {"from": "integrations/bo_server.py", "to": "bo_stategraph/query.py", "line": 18}, {"from": "integrations/bo_server.py", "to": "bo_stategraph/query.py", "line": 18}, {"from": "observer_runtime/behavior_model.py", "to": "observer_runtime/bo_contracts.py", "line": 13}, {"from": "observer_runtime/behavior_model.py", "to": "observer_runtime/bo_contracts.py", "line": 13}, {"from": "observer_runtime/bo_contracts.py", "to": "observer_runtime/bo_runtime.py", "line": 3}, {"from": "observer_runtime/bo_contracts.py", "to": "observer_runtime/bo_runtime.py", "line": 3}, {"from": "observer_runtime/bo_stategraph.py", "to": "observer_runtime/bo_runtime.py", "line": 3}, {"from": "observer_runtime/bo_stategraph.py", "to": "observer_runtime/bo_runtime.py", "line": 3}, {"from": "observer_runtime/bo_upgrade.py", "to": "observer_runtime/behavior_model.py", "line": 14}, {"from": "observer_runtime/bo_upgrade.py", "to": "observer_runtime/behavior_model.py", "line": 14}, {"from": "observer_runtime/bo_upgrade.py", "to": "observer_runtime/behavior_model.py", "line": 14}, {"from": "observer_runtime/bo_upgrade.py", "to": "observer_runtime/sync_io.py", "line": 15}, {"from": "observer_runtime/bo_upgrade.py", "to": "observer_runtime/sync_io.py", "line": 15}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/bo_sync.py", "line": 12}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/bo_sync.py", "line": 12}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/bo_sync.py", "line": 12}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/behavior_model.py", "line": 13}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/behavior_model.py", "line": 13}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/behavior_model.py", "line": 13}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/behavior_model.py", "line": 13}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/behavior_model.py", "line": 13}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/behavior_model.py", "line": 13}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/behavior_model.py", "line": 13}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/code_structure.py", "line": 14}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/code_structure.py", "line": 14}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/code_structure.py", "line": 14}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/code_structure.py", "line": 14}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/statechart_contract.py", "line": 15}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/statechart_contract.py", "line": 15}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/worknet_contract.py", "line": 16}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/worknet_contract.py", "line": 16}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/execution_contract.py", "line": 17}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/execution_contract.py", "line": 17}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/execution_contract.py", "line": 17}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/requirements_dialogue.py", "line": 18}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/requirements_dialogue.py", "line": 18}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/whitebox_contract.py", "line": 19}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/whitebox_contract.py", "line": 19}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/whitebox_contract.py", "line": 19}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/sync_config.py", "line": 32}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/sync_config.py", "line": 32}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/sync_config.py", "line": 32}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/sync_io.py", "line": 33}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/sync_io.py", "line": 33}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/sync_io.py", "line": 33}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/sync_verify.py", "line": 34}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/sync_verify.py", "line": 34}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/sync_verify.py", "line": 34}, {"from": "observer_runtime/change_sync.py", "to": "observer_runtime/sync_verify.py", "line": 34}, {"from": "observer_runtime/code_structure.py", "to": "observer_runtime/behavior_model.py", "line": 13}, {"from": "observer_runtime/code_structure.py", "to": "observer_runtime/behavior_model.py", "line": 13}, {"from": "observer_runtime/code_structure.py", "to": "observer_runtime/behavior_model.py", "line": 13}, {"from": "observer_runtime/code_structure.py", "to": "observer_runtime/behavior_model.py", "line": 13}, {"from": "observer_runtime/code_structure.py", "to": "observer_runtime/behavior_model.py", "line": 13}, {"from": "observer_runtime/execution_contract.py", "to": "observer_runtime/bo_runtime.py", "line": 3}, {"from": "observer_runtime/execution_contract.py", "to": "observer_runtime/bo_runtime.py", "line": 3}, {"from": "observer_runtime/focus_graph.py", "to": "observer_runtime/behavior_model.py", "line": 10}, {"from": "observer_runtime/focus_graph.py", "to": "observer_runtime/behavior_model.py", "line": 10}, {"from": "observer_runtime/focus_graph.py", "to": "observer_runtime/behavior_model.py", "line": 10}, {"from": "observer_runtime/focus_graph.py", "to": "observer_runtime/behavior_model.py", "line": 10}, {"from": "observer_runtime/project_bundle.py", "to": "observer_runtime/behavior_model.py", "line": 8}, {"from": "observer_runtime/project_bundle.py", "to": "observer_runtime/behavior_model.py", "line": 8}, {"from": "observer_runtime/project_bundle.py", "to": "observer_runtime/behavior_model.py", "line": 8}, {"from": "observer_runtime/project_bundle.py", "to": "observer_runtime/behavior_model.py", "line": 8}, {"from": "observer_runtime/statechart_contract.py", "to": "observer_runtime/bo_contracts.py", "line": 11}, {"from": "observer_runtime/statechart_contract.py", "to": "observer_runtime/bo_contracts.py", "line": 11}, {"from": "observer_runtime/sync_config.py", "to": "observer_runtime/behavior_model.py", "line": 4}, {"from": "observer_runtime/sync_config.py", "to": "observer_runtime/behavior_model.py", "line": 4}, {"from": "observer_runtime/sync_config.py", "to": "observer_runtime/behavior_model.py", "line": 4}, {"from": "observer_runtime/sync_config.py", "to": "observer_runtime/behavior_model.py", "line": 4}, {"from": "observer_runtime/sync_config.py", "to": "observer_runtime/code_structure.py", "line": 5}, {"from": "observer_runtime/sync_config.py", "to": "observer_runtime/code_structure.py", "line": 5}, {"from": "observer_runtime/sync_config.py", "to": "observer_runtime/bo_sync.py", "line": 6}, {"from": "observer_runtime/sync_config.py", "to": "observer_runtime/bo_sync.py", "line": 6}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/sync_io.py", "line": 7}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/sync_io.py", "line": 7}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/sync_io.py", "line": 7}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/behavior_model.py", "line": 8}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/behavior_model.py", "line": 8}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/behavior_model.py", "line": 8}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/behavior_model.py", "line": 8}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/statechart_contract.py", "line": 9}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/statechart_contract.py", "line": 9}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/worknet_contract.py", "line": 10}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/worknet_contract.py", "line": 10}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/execution_contract.py", "line": 11}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/execution_contract.py", "line": 11}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/whitebox_contract.py", "line": 12}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/whitebox_contract.py", "line": 12}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/mapping_contract.py", "line": 13}, {"from": "observer_runtime/sync_verify.py", "to": "observer_runtime/mapping_contract.py", "line": 13}, {"from": "observer_runtime/whitebox_contract.py", "to": "observer_runtime/behavior_model.py", "line": 12}, {"from": "observer_runtime/whitebox_contract.py", "to": "observer_runtime/behavior_model.py", "line": 12}, {"from": "observer_runtime/whitebox_contract.py", "to": "observer_runtime/behavior_model.py", "line": 12}, {"from": "observer_runtime/whitebox_contract.py", "to": "observer_runtime/behavior_model.py", "line": 12}, {"from": "observer_runtime/whitebox_contract.py", "to": "observer_runtime/behavior_model.py", "line": 12}, {"from": "observer_runtime/whitebox_contract.py", "to": "observer_runtime/code_structure.py", "line": 13}, {"from": "observer_runtime/whitebox_contract.py", "to": "observer_runtime/code_structure.py", "line": 13}, {"from": "observer_runtime/whitebox_contract.py", "to": "observer_runtime/code_structure.py", "line": 13}, {"from": "run.py", "to": "observer_runtime/behavior_model.py", "line": 6}, {"from": "run.py", "to": "observer_runtime/behavior_model.py", "line": 6}, {"from": "run.py", "to": "observer_runtime/behavior_model.py", "line": 6}, {"from": "run.py", "to": "integrations/bo_server.py", "line": 27}, {"from": "run.py", "to": "integrations/bo_server.py", "line": 27}, {"from": "tooling/build_model.py", "to": "bo_stategraph/workflow.py", "line": 7}, {"from": "tooling/build_model.py", "to": "bo_stategraph/workflow.py", "line": 7}, {"from": "tooling/build_model.py", "to": "observer_runtime/code_structure.py", "line": 8}, {"from": "tooling/build_model.py", "to": "observer_runtime/code_structure.py", "line": 8}, {"from": "tooling/build_model.py", "to": "observer_runtime/code_structure.py", "line": 8}, {"from": "tooling/observe.py", "to": "observer_runtime/behavior_model.py", "line": 7}, {"from": "tooling/observe.py", "to": "observer_runtime/behavior_model.py", "line": 7}, {"from": "tooling/observe.py", "to": "observer_runtime/mapping_contract.py", "line": 8}, {"from": "tooling/observe.py", "to": "observer_runtime/mapping_contract.py", "line": 8}, {"from": "tooling/observe.py", "to": "bo_stategraph/__init__.py", "line": 9}, {"from": "tooling/observe.py", "to": "bo_stategraph/__init__.py", "line": 9}, {"from": "tooling/observe.py", "to": "bo_stategraph/query.py", "line": 10}, {"from": "tooling/observe.py", "to": "bo_stategraph/query.py", "line": 10}, {"from": "tooling/observe.py", "to": "bo_stategraph/workflow.py", "line": 17}, {"from": "tooling/observe.py", "to": "bo_stategraph/workflow.py", "line": 17}, {"from": "tooling/observe.py", "to": "tooling/scenarios.py", "line": 18}, {"from": "tooling/observe.py", "to": "tooling/scenarios.py", "line": 18}, {"from": "tooling/observe.py", "to": "tooling/scenarios.py", "line": 18}, {"from": "tooling/observe.py", "to": "tooling/size_scenarios.py", "line": 19}, {"from": "tooling/observe.py", "to": "tooling/size_scenarios.py", "line": 19}, {"from": "tooling/observe.py", "to": "tooling/size_scenarios.py", "line": 19}, {"from": "tooling/scenarios.py", "to": "archive_app/policy.py", "line": 11}, {"from": "tooling/scenarios.py", "to": "archive_app/policy.py", "line": 11}, {"from": "tooling/scenarios.py", "to": "archive_app/policy.py", "line": 11}, {"from": "tooling/scenarios.py", "to": "archive_app/service.py", "line": 12}, {"from": "tooling/scenarios.py", "to": "archive_app/service.py", "line": 12}, {"from": "tooling/scenarios.py", "to": "archive_app/storage.py", "line": 13}, {"from": "tooling/scenarios.py", "to": "archive_app/storage.py", "line": 13}, {"from": "tooling/scenarios.py", "to": "bo_stategraph/workflow.py", "line": 14}, {"from": "tooling/scenarios.py", "to": "bo_stategraph/workflow.py", "line": 14}, {"from": "tooling/scenarios.py", "to": "integrations/bo_observer.py", "line": 15}, {"from": "tooling/scenarios.py", "to": "integrations/bo_observer.py", "line": 15}, {"from": "tooling/size_scenarios.py", "to": "archive_app/storage.py", "line": 2}, {"from": "tooling/size_scenarios.py", "to": "archive_app/storage.py", "line": 2}, {"from": "tooling/size_scenarios.py", "to": "tooling/scenarios.py", "line": 3}, {"from": "tooling/size_scenarios.py", "to": "tooling/scenarios.py", "line": 3}, {"from": "tooling/test_stategraph_module.py", "to": "bo_stategraph/__init__.py", "line": 12}, {"from": "tooling/test_stategraph_module.py", "to": "bo_stategraph/__init__.py", "line": 12}, {"from": "tooling/test_stategraph_module.py", "to": "bo_stategraph/__init__.py", "line": 12}, {"from": "tooling/test_stategraph_module.py", "to": "bo_stategraph/__init__.py", "line": 12}, {"from": "tooling/tests.py", "to": "archive_app/policy.py", "line": 12}, {"from": "tooling/tests.py", "to": "archive_app/policy.py", "line": 12}, {"from": "tooling/tests.py", "to": "archive_app/policy.py", "line": 12}, {"from": "tooling/tests.py", "to": "archive_app/policy.py", "line": 12}, {"from": "tooling/tests.py", "to": "archive_app/policy.py", "line": 12}, {"from": "tooling/tests.py", "to": "archive_app/storage.py", "line": 13}, {"from": "tooling/tests.py", "to": "archive_app/storage.py", "line": 13}, {"from": "tooling/tests.py", "to": "archive_app/service.py", "line": 14}, {"from": "tooling/tests.py", "to": "archive_app/service.py", "line": 14}, {"from": "tooling/tests.py", "to": "bo_stategraph/workflow.py", "line": 15}, {"from": "tooling/tests.py", "to": "bo_stategraph/workflow.py", "line": 15}, {"from": "tooling/tests.py", "to": "bo_stategraph/workflow.py", "line": 15}, {"from": "tooling/tests.py", "to": "bo_stategraph/workflow.py", "line": 15}, {"from": "tooling/tests.py", "to": "archive_app/ports.py", "line": 16}, {"from": "tooling/tests.py", "to": "archive_app/ports.py", "line": 16}, {"from": "tooling/tests.py", "to": "observer_runtime/semantic_probe.py", "line": 17}, {"from": "tooling/tests.py", "to": "observer_runtime/semantic_probe.py", "line": 17}, {"from": "tooling/tests.py", "to": "observer_runtime/semantic_probe.py", "line": 17}, {"from": "tooling/tests.py", "to": "integrations/bo_server.py", "line": 28}, {"from": "tooling/tests.py", "to": "integrations/bo_server.py", "line": 28}, {"from": "tooling/tests.py", "to": "observer_runtime/behavior_model.py", "line": 29}, {"from": "tooling/tests.py", "to": "observer_runtime/behavior_model.py", "line": 29}], "managed": ["bo_stategraph/__init__.py", "bo_stategraph/bo_contracts.py", "bo_stategraph/execution_contract.py", "bo_stategraph/runtime-version.json", "observer_runtime/LICENSE.txt", "observer_runtime/__init__.py", "observer_runtime/architecture_guard.py", "observer_runtime/behavior_model.py", "observer_runtime/bo_contracts.py", "observer_runtime/bo_retention.py", "observer_runtime/bo_runtime.py", "observer_runtime/bo_stategraph.py", "observer_runtime/bo_sync.py", "observer_runtime/bo_upgrade.py", "observer_runtime/change_sync.py", "observer_runtime/code_structure.py", "observer_runtime/execution_contract.py", "observer_runtime/focus_graph.py", "observer_runtime/mapping_contract.py", "observer_runtime/model_tool.py", "observer_runtime/origin.json", "observer_runtime/probe.py", "observer_runtime/project_bundle.py", "observer_runtime/recording_session.py", "observer_runtime/requirements_dialogue.py", "observer_runtime/semantic_probe.py", "observer_runtime/statechart_contract.py", "observer_runtime/sync_config.py", "observer_runtime/sync_io.py", "observer_runtime/sync_verify.py", "observer_runtime/view_preferences.py", "observer_runtime/viewer_server.py", "observer_runtime/whitebox_contract.py", "observer_runtime/worknet_contract.py"], "limits": ["Python static imports in configured scan paths", "Dynamic aliases and external package internals need independent review", "Sealing is a recorded regeneration, not business acceptance; run change_sync verify"], "package": {"path": "dist/core-294ae162.zip", "files": 14, "sha256": "8ed44ec151153bb9a67f78c0bc1021b80117db90cbb58009a5b9635fbf5a0ada", "retains": "business state machine; neutral observation port has no observer implementation"}}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{"passed": true, "normal_archive": true, "immutable_snapshot": true, "content_rejection": true, "cancel_natural_completion": true, "observer_modules_loaded": false, "package_root": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\\u5e73\u53f0\u8f6f\u8457\\SoftwareStatusObserverSkill\\.validation\\tmptxr5rk3n"}
+PASS: clarification, code/graph sync, business scenarios, graph history, HTTP runtime, installation, core package and independent archive example.

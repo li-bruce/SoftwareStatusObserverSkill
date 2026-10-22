@@ -1,0 +1,5249 @@
+{
+  "schema_version": 3,
+  "revision": "print-r1",
+  "title": "工作室 · 3D 打印执行图",
+  "intent": "intent.json",
+  "source_files": [
+    "AGENTS.md",
+    "app/checks.py",
+    "app/policy.py",
+    "app/ports.py",
+    "app/store.py",
+    "bo_stategraph/__init__.py",
+    "bo_stategraph/config/retention.json",
+    "bo_stategraph/declaration.py",
+    "bo_stategraph/workflow.py",
+    "config/printers.json",
+    "integrations/bo_app.py",
+    "integrations/bo_capture.py",
+    "main.py",
+    "observer_runtime/__init__.py",
+    "observer_runtime/architecture_guard.py",
+    "observer_runtime/behavior_model.py",
+    "observer_runtime/bo_contracts.py",
+    "observer_runtime/bo_retention.py",
+    "observer_runtime/bo_runtime.py",
+    "observer_runtime/bo_stategraph.py",
+    "observer_runtime/bo_sync.py",
+    "observer_runtime/bo_upgrade.py",
+    "observer_runtime/change_sync.py",
+    "observer_runtime/code_structure.py",
+    "observer_runtime/execution_contract.py",
+    "observer_runtime/focus_graph.py",
+    "observer_runtime/mapping_contract.py",
+    "observer_runtime/model_tool.py",
+    "observer_runtime/probe.py",
+    "observer_runtime/project_bundle.py",
+    "observer_runtime/recording_session.py",
+    "observer_runtime/requirements_dialogue.py",
+    "observer_runtime/semantic_probe.py",
+    "observer_runtime/statechart_contract.py",
+    "observer_runtime/sync_config.py",
+    "observer_runtime/sync_io.py",
+    "observer_runtime/sync_verify.py",
+    "observer_runtime/view_preferences.py",
+    "observer_runtime/viewer_server.py",
+    "observer_runtime/whitebox_contract.py",
+    "observer_runtime/worknet_contract.py",
+    "ownership.json",
+    "review/round-03/prepare.py",
+    "server.py",
+    "static/index.html",
+    "static/viewer.css",
+    "static/viewer.js",
+    "tests/__init__.py",
+    "tests/browser.cjs",
+    "tests/scenarios.py",
+    "tests/test_policy.py",
+    "tests/test_project.py",
+    "tooling/browser_check.ps1",
+    "tooling/build_model.py",
+    "tooling/contracts.py",
+    "tooling/gate.py",
+    "tooling/mutation_check.py",
+    "tooling/observe.py",
+    "tooling/review_candidate.py"
+  ],
+  "nodes": [
+    {
+      "id": "submit",
+      "kind": "action",
+      "label": "提交与版本",
+      "summary": "提交与版本；函数身份来自源码，值只来自已采集调用，展开可查看参数和源代码。",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.submit"
+      },
+      "capture": {
+        "in": {
+          "printer_id": "string",
+          "task_id": "string",
+          "run_id": "string",
+          "actor": "string",
+          "approver": "string",
+          "approval_id": "string",
+          "dimensions": "string",
+          "material": "string",
+          "parameters": "string",
+          "value": "string",
+          "capability": "string",
+          "clock": "number",
+          "version": "number",
+          "run_version": "number",
+          "grant_version": "number",
+          "expires": "number",
+          "active": "boolean",
+          "kind": "string",
+          "implementation": "string"
+        },
+        "out": {
+          "eligible": "boolean",
+          "task_ok": "boolean",
+          "printer_ok": "boolean",
+          "version_ok": "boolean",
+          "other_actor": "boolean",
+          "role_ok": "boolean",
+          "active_ok": "boolean",
+          "time_ok": "boolean",
+          "id": "string",
+          "version": "number",
+          "expires": "number",
+          "printer_id": "string",
+          "task_id": "string",
+          "approver": "string",
+          "run_id": "string",
+          "approval_id": "string",
+          "state": "string",
+          "passed": "boolean",
+          "allowed": "boolean",
+          "unchanged": "boolean",
+          "duplicate": "boolean",
+          "released": "boolean",
+          "revoked": "boolean",
+          "queue_seq": "number",
+          "effect_id": "number",
+          "clock": "number",
+          "reason": "string",
+          "size": "string",
+          "material": "string",
+          "activity_state": "string",
+          "failures": [
+            "string"
+          ],
+          "error_type": "string",
+          "error": "string",
+          "candidates": [
+            {
+              "eligible": "boolean",
+              "task_ok": "boolean",
+              "printer_ok": "boolean",
+              "version_ok": "boolean",
+              "other_actor": "boolean",
+              "role_ok": "boolean",
+              "active_ok": "boolean",
+              "time_ok": "boolean",
+              "id": "string",
+              "version": "number",
+              "expires": "number",
+              "printer_id": "string",
+              "task_id": "string",
+              "approver": "string"
+            }
+          ]
+        }
+      },
+      "requirements": [
+        "R03"
+      ],
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow.submit",
+        "ast_hash": "61d62e7cd385f3b96bcf0b1b0b74c37777b89626bbe84da0792d55ecf5cf6681",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "parameter-change",
+      "kind": "action",
+      "label": "参数变化建立新版本",
+      "summary": "参数变化建立新版本；函数身份来自源码，值只来自已采集调用，展开可查看参数和源代码。",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.submit"
+      },
+      "capture": {
+        "in": {
+          "printer_id": "string",
+          "task_id": "string",
+          "run_id": "string",
+          "actor": "string",
+          "approver": "string",
+          "approval_id": "string",
+          "dimensions": "string",
+          "material": "string",
+          "parameters": "string",
+          "value": "string",
+          "capability": "string",
+          "clock": "number",
+          "version": "number",
+          "run_version": "number",
+          "grant_version": "number",
+          "expires": "number",
+          "active": "boolean",
+          "kind": "string",
+          "implementation": "string"
+        },
+        "out": {
+          "eligible": "boolean",
+          "task_ok": "boolean",
+          "printer_ok": "boolean",
+          "version_ok": "boolean",
+          "other_actor": "boolean",
+          "role_ok": "boolean",
+          "active_ok": "boolean",
+          "time_ok": "boolean",
+          "id": "string",
+          "version": "number",
+          "expires": "number",
+          "printer_id": "string",
+          "task_id": "string",
+          "approver": "string",
+          "run_id": "string",
+          "approval_id": "string",
+          "state": "string",
+          "passed": "boolean",
+          "allowed": "boolean",
+          "unchanged": "boolean",
+          "duplicate": "boolean",
+          "released": "boolean",
+          "revoked": "boolean",
+          "queue_seq": "number",
+          "effect_id": "number",
+          "clock": "number",
+          "reason": "string",
+          "size": "string",
+          "material": "string",
+          "activity_state": "string",
+          "failures": [
+            "string"
+          ],
+          "error_type": "string",
+          "error": "string",
+          "candidates": [
+            {
+              "eligible": "boolean",
+              "task_ok": "boolean",
+              "printer_ok": "boolean",
+              "version_ok": "boolean",
+              "other_actor": "boolean",
+              "role_ok": "boolean",
+              "active_ok": "boolean",
+              "time_ok": "boolean",
+              "id": "string",
+              "version": "number",
+              "expires": "number",
+              "printer_id": "string",
+              "task_id": "string",
+              "approver": "string"
+            }
+          ]
+        }
+      },
+      "requirements": [
+        "R03"
+      ],
+      "parent": "submit",
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow.submit",
+        "ast_hash": "61d62e7cd385f3b96bcf0b1b0b74c37777b89626bbe84da0792d55ecf5cf6681",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "checks",
+      "kind": "action",
+      "label": "并行检查与汇合",
+      "summary": "并行检查与汇合；函数身份来自源码，值只来自已采集调用，展开可查看参数和源代码。",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.run_checks"
+      },
+      "capture": {
+        "in": {
+          "printer_id": "string",
+          "task_id": "string",
+          "run_id": "string",
+          "actor": "string",
+          "approver": "string",
+          "approval_id": "string",
+          "dimensions": "string",
+          "material": "string",
+          "parameters": "string",
+          "value": "string",
+          "capability": "string",
+          "clock": "number",
+          "version": "number",
+          "run_version": "number",
+          "grant_version": "number",
+          "expires": "number",
+          "active": "boolean",
+          "kind": "string",
+          "implementation": "string"
+        },
+        "out": {
+          "eligible": "boolean",
+          "task_ok": "boolean",
+          "printer_ok": "boolean",
+          "version_ok": "boolean",
+          "other_actor": "boolean",
+          "role_ok": "boolean",
+          "active_ok": "boolean",
+          "time_ok": "boolean",
+          "id": "string",
+          "version": "number",
+          "expires": "number",
+          "printer_id": "string",
+          "task_id": "string",
+          "approver": "string",
+          "run_id": "string",
+          "approval_id": "string",
+          "state": "string",
+          "passed": "boolean",
+          "allowed": "boolean",
+          "unchanged": "boolean",
+          "duplicate": "boolean",
+          "released": "boolean",
+          "revoked": "boolean",
+          "queue_seq": "number",
+          "effect_id": "number",
+          "clock": "number",
+          "reason": "string",
+          "size": "string",
+          "material": "string",
+          "activity_state": "string",
+          "failures": [
+            "string"
+          ],
+          "error_type": "string",
+          "error": "string",
+          "candidates": [
+            {
+              "eligible": "boolean",
+              "task_ok": "boolean",
+              "printer_ok": "boolean",
+              "version_ok": "boolean",
+              "other_actor": "boolean",
+              "role_ok": "boolean",
+              "active_ok": "boolean",
+              "time_ok": "boolean",
+              "id": "string",
+              "version": "number",
+              "expires": "number",
+              "printer_id": "string",
+              "task_id": "string",
+              "approver": "string"
+            }
+          ]
+        }
+      },
+      "requirements": [
+        "R02",
+        "R08"
+      ],
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow.run_checks",
+        "ast_hash": "ccdc3df1444305f61b7b1e13aecabe693e775f561303cb76a935ec7235f51c31",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "check-size",
+      "kind": "function",
+      "label": "检查三边尺寸",
+      "summary": "检查三边尺寸；函数身份来自源码，值只来自已采集调用，展开可查看参数和源代码。",
+      "source": {
+        "path": "app/checks.py",
+        "symbol": "check_size"
+      },
+      "capture": {
+        "in": {
+          "printer_id": "string",
+          "task_id": "string",
+          "run_id": "string",
+          "actor": "string",
+          "approver": "string",
+          "approval_id": "string",
+          "dimensions": "string",
+          "material": "string",
+          "parameters": "string",
+          "value": "string",
+          "capability": "string",
+          "clock": "number",
+          "version": "number",
+          "run_version": "number",
+          "grant_version": "number",
+          "expires": "number",
+          "active": "boolean",
+          "kind": "string",
+          "implementation": "string"
+        },
+        "out": {
+          "eligible": "boolean",
+          "task_ok": "boolean",
+          "printer_ok": "boolean",
+          "version_ok": "boolean",
+          "other_actor": "boolean",
+          "role_ok": "boolean",
+          "active_ok": "boolean",
+          "time_ok": "boolean",
+          "id": "string",
+          "version": "number",
+          "expires": "number",
+          "printer_id": "string",
+          "task_id": "string",
+          "approver": "string",
+          "run_id": "string",
+          "approval_id": "string",
+          "state": "string",
+          "passed": "boolean",
+          "allowed": "boolean",
+          "unchanged": "boolean",
+          "duplicate": "boolean",
+          "released": "boolean",
+          "revoked": "boolean",
+          "queue_seq": "number",
+          "effect_id": "number",
+          "clock": "number",
+          "reason": "string",
+          "size": "string",
+          "material": "string",
+          "activity_state": "string",
+          "failures": [
+            "string"
+          ],
+          "error_type": "string",
+          "error": "string",
+          "candidates": [
+            {
+              "eligible": "boolean",
+              "task_ok": "boolean",
+              "printer_ok": "boolean",
+              "version_ok": "boolean",
+              "other_actor": "boolean",
+              "role_ok": "boolean",
+              "active_ok": "boolean",
+              "time_ok": "boolean",
+              "id": "string",
+              "version": "number",
+              "expires": "number",
+              "printer_id": "string",
+              "task_id": "string",
+              "approver": "string"
+            }
+          ]
+        }
+      },
+      "requirements": [
+        "R10"
+      ],
+      "parent": "checks",
+      "code_evidence": {
+        "symbol": "app/checks.py::check_size",
+        "ast_hash": "e55bc5863ab6e58248f63a3009bde201546008157914ed9f942c46066819c34e",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "check-material",
+      "kind": "function",
+      "label": "检查材料",
+      "summary": "检查材料；函数身份来自源码，值只来自已采集调用，展开可查看参数和源代码。",
+      "source": {
+        "path": "app/checks.py",
+        "symbol": "check_material"
+      },
+      "capture": {
+        "in": {
+          "printer_id": "string",
+          "task_id": "string",
+          "run_id": "string",
+          "actor": "string",
+          "approver": "string",
+          "approval_id": "string",
+          "dimensions": "string",
+          "material": "string",
+          "parameters": "string",
+          "value": "string",
+          "capability": "string",
+          "clock": "number",
+          "version": "number",
+          "run_version": "number",
+          "grant_version": "number",
+          "expires": "number",
+          "active": "boolean",
+          "kind": "string",
+          "implementation": "string"
+        },
+        "out": {
+          "eligible": "boolean",
+          "task_ok": "boolean",
+          "printer_ok": "boolean",
+          "version_ok": "boolean",
+          "other_actor": "boolean",
+          "role_ok": "boolean",
+          "active_ok": "boolean",
+          "time_ok": "boolean",
+          "id": "string",
+          "version": "number",
+          "expires": "number",
+          "printer_id": "string",
+          "task_id": "string",
+          "approver": "string",
+          "run_id": "string",
+          "approval_id": "string",
+          "state": "string",
+          "passed": "boolean",
+          "allowed": "boolean",
+          "unchanged": "boolean",
+          "duplicate": "boolean",
+          "released": "boolean",
+          "revoked": "boolean",
+          "queue_seq": "number",
+          "effect_id": "number",
+          "clock": "number",
+          "reason": "string",
+          "size": "string",
+          "material": "string",
+          "activity_state": "string",
+          "failures": [
+            "string"
+          ],
+          "error_type": "string",
+          "error": "string",
+          "candidates": [
+            {
+              "eligible": "boolean",
+              "task_ok": "boolean",
+              "printer_ok": "boolean",
+              "version_ok": "boolean",
+              "other_actor": "boolean",
+              "role_ok": "boolean",
+              "active_ok": "boolean",
+              "time_ok": "boolean",
+              "id": "string",
+              "version": "number",
+              "expires": "number",
+              "printer_id": "string",
+              "task_id": "string",
+              "approver": "string"
+            }
+          ]
+        }
+      },
+      "requirements": [
+        "R10"
+      ],
+      "parent": "checks",
+      "code_evidence": {
+        "symbol": "app/checks.py::check_material",
+        "ast_hash": "7f52c1d73c422780befbe12765197086016a146f904afd86798b198fc5b193fe",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "check-worker",
+      "kind": "function",
+      "label": "检查调用与异常边界",
+      "summary": "检查调用与异常边界；函数身份来自源码，值只来自已采集调用，展开可查看参数和源代码。",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow._check"
+      },
+      "capture": {
+        "in": {
+          "printer_id": "string",
+          "task_id": "string",
+          "run_id": "string",
+          "actor": "string",
+          "approver": "string",
+          "approval_id": "string",
+          "dimensions": "string",
+          "material": "string",
+          "parameters": "string",
+          "value": "string",
+          "capability": "string",
+          "clock": "number",
+          "version": "number",
+          "run_version": "number",
+          "grant_version": "number",
+          "expires": "number",
+          "active": "boolean",
+          "kind": "string",
+          "implementation": "string"
+        },
+        "out": {
+          "eligible": "boolean",
+          "task_ok": "boolean",
+          "printer_ok": "boolean",
+          "version_ok": "boolean",
+          "other_actor": "boolean",
+          "role_ok": "boolean",
+          "active_ok": "boolean",
+          "time_ok": "boolean",
+          "id": "string",
+          "version": "number",
+          "expires": "number",
+          "printer_id": "string",
+          "task_id": "string",
+          "approver": "string",
+          "run_id": "string",
+          "approval_id": "string",
+          "state": "string",
+          "passed": "boolean",
+          "allowed": "boolean",
+          "unchanged": "boolean",
+          "duplicate": "boolean",
+          "released": "boolean",
+          "revoked": "boolean",
+          "queue_seq": "number",
+          "effect_id": "number",
+          "clock": "number",
+          "reason": "string",
+          "size": "string",
+          "material": "string",
+          "activity_state": "string",
+          "failures": [
+            "string"
+          ],
+          "error_type": "string",
+          "error": "string",
+          "candidates": [
+            {
+              "eligible": "boolean",
+              "task_ok": "boolean",
+              "printer_ok": "boolean",
+              "version_ok": "boolean",
+              "other_actor": "boolean",
+              "role_ok": "boolean",
+              "active_ok": "boolean",
+              "time_ok": "boolean",
+              "id": "string",
+              "version": "number",
+              "expires": "number",
+              "printer_id": "string",
+              "task_id": "string",
+              "approver": "string"
+            }
+          ]
+        }
+      },
+      "requirements": [
+        "R08"
+      ],
+      "parent": "checks",
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow._check",
+        "ast_hash": "0708232fadb0d18fd86c5543c60b5ac21ecc57f046d680217470fbcacee9b31b",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "approval",
+      "kind": "decision",
+      "label": "当前审批资格",
+      "summary": "当前审批资格；函数身份来自源码，值只来自已采集调用，展开可查看参数和源代码。",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow._authorization"
+      },
+      "capture": {
+        "in": {
+          "printer_id": "string",
+          "task_id": "string",
+          "run_id": "string",
+          "actor": "string",
+          "approver": "string",
+          "approval_id": "string",
+          "dimensions": "string",
+          "material": "string",
+          "parameters": "string",
+          "value": "string",
+          "capability": "string",
+          "clock": "number",
+          "version": "number",
+          "run_version": "number",
+          "grant_version": "number",
+          "expires": "number",
+          "active": "boolean",
+          "kind": "string",
+          "implementation": "string"
+        },
+        "out": {
+          "eligible": "boolean",
+          "task_ok": "boolean",
+          "printer_ok": "boolean",
+          "version_ok": "boolean",
+          "other_actor": "boolean",
+          "role_ok": "boolean",
+          "active_ok": "boolean",
+          "time_ok": "boolean",
+          "id": "string",
+          "version": "number",
+          "expires": "number",
+          "printer_id": "string",
+          "task_id": "string",
+          "approver": "string",
+          "run_id": "string",
+          "approval_id": "string",
+          "state": "string",
+          "passed": "boolean",
+          "allowed": "boolean",
+          "unchanged": "boolean",
+          "duplicate": "boolean",
+          "released": "boolean",
+          "revoked": "boolean",
+          "queue_seq": "number",
+          "effect_id": "number",
+          "clock": "number",
+          "reason": "string",
+          "size": "string",
+          "material": "string",
+          "activity_state": "string",
+          "failures": [
+            "string"
+          ],
+          "error_type": "string",
+          "error": "string",
+          "candidates": [
+            {
+              "eligible": "boolean",
+              "task_ok": "boolean",
+              "printer_ok": "boolean",
+              "version_ok": "boolean",
+              "other_actor": "boolean",
+              "role_ok": "boolean",
+              "active_ok": "boolean",
+              "time_ok": "boolean",
+              "id": "string",
+              "version": "number",
+              "expires": "number",
+              "printer_id": "string",
+              "task_id": "string",
+              "approver": "string"
+            }
+          ]
+        }
+      },
+      "requirements": [
+        "R01",
+        "R05"
+      ],
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow._authorization",
+        "ast_hash": "41946dae392f7fa97600d18dce55f7d989d70251cd067eb8c8145c37d16d47eb",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "grant-match",
+      "kind": "decision",
+      "label": "逐份审批条件",
+      "summary": "逐份审批条件；函数身份来自源码，值只来自已采集调用，展开可查看参数和源代码。",
+      "source": {
+        "path": "app/policy.py",
+        "symbol": "grant_matches"
+      },
+      "capture": {
+        "in": {
+          "printer_id": "string",
+          "task_id": "string",
+          "run_id": "string",
+          "actor": "string",
+          "approver": "string",
+          "approval_id": "string",
+          "dimensions": "string",
+          "material": "string",
+          "parameters": "string",
+          "value": "string",
+          "capability": "string",
+          "clock": "number",
+          "version": "number",
+          "run_version": "number",
+          "grant_version": "number",
+          "expires": "number",
+          "active": "boolean",
+          "kind": "string",
+          "implementation": "string"
+        },
+        "out": {
+          "eligible": "boolean",
+          "task_ok": "boolean",
+          "printer_ok": "boolean",
+          "version_ok": "boolean",
+          "other_actor": "boolean",
+          "role_ok": "boolean",
+          "active_ok": "boolean",
+          "time_ok": "boolean",
+          "id": "string",
+          "version": "number",
+          "expires": "number",
+          "printer_id": "string",
+          "task_id": "string",
+          "approver": "string",
+          "run_id": "string",
+          "approval_id": "string",
+          "state": "string",
+          "passed": "boolean",
+          "allowed": "boolean",
+          "unchanged": "boolean",
+          "duplicate": "boolean",
+          "released": "boolean",
+          "revoked": "boolean",
+          "queue_seq": "number",
+          "effect_id": "number",
+          "clock": "number",
+          "reason": "string",
+          "size": "string",
+          "material": "string",
+          "activity_state": "string",
+          "failures": [
+            "string"
+          ],
+          "error_type": "string",
+          "error": "string",
+          "candidates": [
+            {
+              "eligible": "boolean",
+              "task_ok": "boolean",
+              "printer_ok": "boolean",
+              "version_ok": "boolean",
+              "other_actor": "boolean",
+              "role_ok": "boolean",
+              "active_ok": "boolean",
+              "time_ok": "boolean",
+              "id": "string",
+              "version": "number",
+              "expires": "number",
+              "printer_id": "string",
+              "task_id": "string",
+              "approver": "string"
+            }
+          ]
+        }
+      },
+      "requirements": [
+        "R01",
+        "R03"
+      ],
+      "parent": "approval",
+      "code_evidence": {
+        "symbol": "app/policy.py::grant_matches",
+        "ast_hash": "2d901750d3db1c60ca1f83ff3da245024a514562d4acd734ffb807ea1eb9bff0",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "approval-change",
+      "kind": "action",
+      "label": "审批与权限变更",
+      "summary": "审批与权限变更；函数身份来自源码，值只来自已采集调用，展开可查看参数和源代码。",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.approve"
+      },
+      "capture": {
+        "in": {
+          "printer_id": "string",
+          "task_id": "string",
+          "run_id": "string",
+          "actor": "string",
+          "approver": "string",
+          "approval_id": "string",
+          "dimensions": "string",
+          "material": "string",
+          "parameters": "string",
+          "value": "string",
+          "capability": "string",
+          "clock": "number",
+          "version": "number",
+          "run_version": "number",
+          "grant_version": "number",
+          "expires": "number",
+          "active": "boolean",
+          "kind": "string",
+          "implementation": "string"
+        },
+        "out": {
+          "eligible": "boolean",
+          "task_ok": "boolean",
+          "printer_ok": "boolean",
+          "version_ok": "boolean",
+          "other_actor": "boolean",
+          "role_ok": "boolean",
+          "active_ok": "boolean",
+          "time_ok": "boolean",
+          "id": "string",
+          "version": "number",
+          "expires": "number",
+          "printer_id": "string",
+          "task_id": "string",
+          "approver": "string",
+          "run_id": "string",
+          "approval_id": "string",
+          "state": "string",
+          "passed": "boolean",
+          "allowed": "boolean",
+          "unchanged": "boolean",
+          "duplicate": "boolean",
+          "released": "boolean",
+          "revoked": "boolean",
+          "queue_seq": "number",
+          "effect_id": "number",
+          "clock": "number",
+          "reason": "string",
+          "size": "string",
+          "material": "string",
+          "activity_state": "string",
+          "failures": [
+            "string"
+          ],
+          "error_type": "string",
+          "error": "string",
+          "candidates": [
+            {
+              "eligible": "boolean",
+              "task_ok": "boolean",
+              "printer_ok": "boolean",
+              "version_ok": "boolean",
+              "other_actor": "boolean",
+              "role_ok": "boolean",
+              "active_ok": "boolean",
+              "time_ok": "boolean",
+              "id": "string",
+              "version": "number",
+              "expires": "number",
+              "printer_id": "string",
+              "task_id": "string",
+              "approver": "string"
+            }
+          ]
+        }
+      },
+      "requirements": [
+        "R01",
+        "R05"
+      ],
+      "parent": "approval",
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow.approve",
+        "ast_hash": "0fd2d8edce8697649211113354cffed93608cd3a9bc71aea3d3dee130c8891ee",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "queue",
+      "kind": "wait",
+      "label": "队列与等待",
+      "summary": "队列与等待；函数身份来自源码，值只来自已采集调用，展开可查看参数和源代码。",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.schedule"
+      },
+      "capture": {
+        "in": {
+          "printer_id": "string",
+          "task_id": "string",
+          "run_id": "string",
+          "actor": "string",
+          "approver": "string",
+          "approval_id": "string",
+          "dimensions": "string",
+          "material": "string",
+          "parameters": "string",
+          "value": "string",
+          "capability": "string",
+          "clock": "number",
+          "version": "number",
+          "run_version": "number",
+          "grant_version": "number",
+          "expires": "number",
+          "active": "boolean",
+          "kind": "string",
+          "implementation": "string"
+        },
+        "out": {
+          "eligible": "boolean",
+          "task_ok": "boolean",
+          "printer_ok": "boolean",
+          "version_ok": "boolean",
+          "other_actor": "boolean",
+          "role_ok": "boolean",
+          "active_ok": "boolean",
+          "time_ok": "boolean",
+          "id": "string",
+          "version": "number",
+          "expires": "number",
+          "printer_id": "string",
+          "task_id": "string",
+          "approver": "string",
+          "run_id": "string",
+          "approval_id": "string",
+          "state": "string",
+          "passed": "boolean",
+          "allowed": "boolean",
+          "unchanged": "boolean",
+          "duplicate": "boolean",
+          "released": "boolean",
+          "revoked": "boolean",
+          "queue_seq": "number",
+          "effect_id": "number",
+          "clock": "number",
+          "reason": "string",
+          "size": "string",
+          "material": "string",
+          "activity_state": "string",
+          "failures": [
+            "string"
+          ],
+          "error_type": "string",
+          "error": "string",
+          "candidates": [
+            {
+              "eligible": "boolean",
+              "task_ok": "boolean",
+              "printer_ok": "boolean",
+              "version_ok": "boolean",
+              "other_actor": "boolean",
+              "role_ok": "boolean",
+              "active_ok": "boolean",
+              "time_ok": "boolean",
+              "id": "string",
+              "version": "number",
+              "expires": "number",
+              "printer_id": "string",
+              "task_id": "string",
+              "approver": "string"
+            }
+          ]
+        }
+      },
+      "requirements": [
+        "R04",
+        "R05"
+      ],
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow.schedule",
+        "ast_hash": "05fa42bfc2d3aa8eefbb77ab14e6cf3da65bfe20ce9cb95b82840af3ae92df5c",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "printing",
+      "kind": "effect",
+      "label": "占用打印机",
+      "summary": "占用打印机；函数身份来自源码，值只来自已采集调用，展开可查看参数和源代码。",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.schedule"
+      },
+      "capture": {
+        "in": {
+          "printer_id": "string",
+          "task_id": "string",
+          "run_id": "string",
+          "actor": "string",
+          "approver": "string",
+          "approval_id": "string",
+          "dimensions": "string",
+          "material": "string",
+          "parameters": "string",
+          "value": "string",
+          "capability": "string",
+          "clock": "number",
+          "version": "number",
+          "run_version": "number",
+          "grant_version": "number",
+          "expires": "number",
+          "active": "boolean",
+          "kind": "string",
+          "implementation": "string"
+        },
+        "out": {
+          "eligible": "boolean",
+          "task_ok": "boolean",
+          "printer_ok": "boolean",
+          "version_ok": "boolean",
+          "other_actor": "boolean",
+          "role_ok": "boolean",
+          "active_ok": "boolean",
+          "time_ok": "boolean",
+          "id": "string",
+          "version": "number",
+          "expires": "number",
+          "printer_id": "string",
+          "task_id": "string",
+          "approver": "string",
+          "run_id": "string",
+          "approval_id": "string",
+          "state": "string",
+          "passed": "boolean",
+          "allowed": "boolean",
+          "unchanged": "boolean",
+          "duplicate": "boolean",
+          "released": "boolean",
+          "revoked": "boolean",
+          "queue_seq": "number",
+          "effect_id": "number",
+          "clock": "number",
+          "reason": "string",
+          "size": "string",
+          "material": "string",
+          "activity_state": "string",
+          "failures": [
+            "string"
+          ],
+          "error_type": "string",
+          "error": "string",
+          "candidates": [
+            {
+              "eligible": "boolean",
+              "task_ok": "boolean",
+              "printer_ok": "boolean",
+              "version_ok": "boolean",
+              "other_actor": "boolean",
+              "role_ok": "boolean",
+              "active_ok": "boolean",
+              "time_ok": "boolean",
+              "id": "string",
+              "version": "number",
+              "expires": "number",
+              "printer_id": "string",
+              "task_id": "string",
+              "approver": "string"
+            }
+          ]
+        }
+      },
+      "requirements": [
+        "R07"
+      ],
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow.schedule",
+        "ast_hash": "05fa42bfc2d3aa8eefbb77ab14e6cf3da65bfe20ce9cb95b82840af3ae92df5c",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "printer",
+      "kind": "data",
+      "label": "共享打印机资源",
+      "summary": "共享打印机资源；函数身份来自源码，值只来自已采集调用，展开可查看参数和源代码。",
+      "source": {
+        "path": "app/store.py",
+        "symbol": "Store.snapshot"
+      },
+      "capture": {
+        "in": {
+          "printer_id": "string",
+          "task_id": "string",
+          "run_id": "string",
+          "actor": "string",
+          "approver": "string",
+          "approval_id": "string",
+          "dimensions": "string",
+          "material": "string",
+          "parameters": "string",
+          "value": "string",
+          "capability": "string",
+          "clock": "number",
+          "version": "number",
+          "run_version": "number",
+          "grant_version": "number",
+          "expires": "number",
+          "active": "boolean",
+          "kind": "string",
+          "implementation": "string"
+        },
+        "out": {
+          "eligible": "boolean",
+          "task_ok": "boolean",
+          "printer_ok": "boolean",
+          "version_ok": "boolean",
+          "other_actor": "boolean",
+          "role_ok": "boolean",
+          "active_ok": "boolean",
+          "time_ok": "boolean",
+          "id": "string",
+          "version": "number",
+          "expires": "number",
+          "printer_id": "string",
+          "task_id": "string",
+          "approver": "string",
+          "run_id": "string",
+          "approval_id": "string",
+          "state": "string",
+          "passed": "boolean",
+          "allowed": "boolean",
+          "unchanged": "boolean",
+          "duplicate": "boolean",
+          "released": "boolean",
+          "revoked": "boolean",
+          "queue_seq": "number",
+          "effect_id": "number",
+          "clock": "number",
+          "reason": "string",
+          "size": "string",
+          "material": "string",
+          "activity_state": "string",
+          "failures": [
+            "string"
+          ],
+          "error_type": "string",
+          "error": "string",
+          "candidates": [
+            {
+              "eligible": "boolean",
+              "task_ok": "boolean",
+              "printer_ok": "boolean",
+              "version_ok": "boolean",
+              "other_actor": "boolean",
+              "role_ok": "boolean",
+              "active_ok": "boolean",
+              "time_ok": "boolean",
+              "id": "string",
+              "version": "number",
+              "expires": "number",
+              "printer_id": "string",
+              "task_id": "string",
+              "approver": "string"
+            }
+          ]
+        }
+      },
+      "requirements": [
+        "R07"
+      ],
+      "parent": "printing"
+    },
+    {
+      "id": "cancel",
+      "kind": "action",
+      "label": "取消选中运行",
+      "summary": "取消选中运行；函数身份来自源码，值只来自已采集调用，展开可查看参数和源代码。",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.cancel"
+      },
+      "capture": {
+        "in": {
+          "printer_id": "string",
+          "task_id": "string",
+          "run_id": "string",
+          "actor": "string",
+          "approver": "string",
+          "approval_id": "string",
+          "dimensions": "string",
+          "material": "string",
+          "parameters": "string",
+          "value": "string",
+          "capability": "string",
+          "clock": "number",
+          "version": "number",
+          "run_version": "number",
+          "grant_version": "number",
+          "expires": "number",
+          "active": "boolean",
+          "kind": "string",
+          "implementation": "string"
+        },
+        "out": {
+          "eligible": "boolean",
+          "task_ok": "boolean",
+          "printer_ok": "boolean",
+          "version_ok": "boolean",
+          "other_actor": "boolean",
+          "role_ok": "boolean",
+          "active_ok": "boolean",
+          "time_ok": "boolean",
+          "id": "string",
+          "version": "number",
+          "expires": "number",
+          "printer_id": "string",
+          "task_id": "string",
+          "approver": "string",
+          "run_id": "string",
+          "approval_id": "string",
+          "state": "string",
+          "passed": "boolean",
+          "allowed": "boolean",
+          "unchanged": "boolean",
+          "duplicate": "boolean",
+          "released": "boolean",
+          "revoked": "boolean",
+          "queue_seq": "number",
+          "effect_id": "number",
+          "clock": "number",
+          "reason": "string",
+          "size": "string",
+          "material": "string",
+          "activity_state": "string",
+          "failures": [
+            "string"
+          ],
+          "error_type": "string",
+          "error": "string",
+          "candidates": [
+            {
+              "eligible": "boolean",
+              "task_ok": "boolean",
+              "printer_ok": "boolean",
+              "version_ok": "boolean",
+              "other_actor": "boolean",
+              "role_ok": "boolean",
+              "active_ok": "boolean",
+              "time_ok": "boolean",
+              "id": "string",
+              "version": "number",
+              "expires": "number",
+              "printer_id": "string",
+              "task_id": "string",
+              "approver": "string"
+            }
+          ]
+        }
+      },
+      "requirements": [
+        "R09"
+      ],
+      "parent": "printing",
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow.cancel",
+        "ast_hash": "2ec933f2c25e7e6eb62fe0bdc6acf228f0fd98e326b17121151f5ce61abcf532",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "printer-stopped",
+      "kind": "effect",
+      "label": "设备确认与释放",
+      "summary": "设备确认与释放；函数身份来自源码，值只来自已采集调用，展开可查看参数和源代码。",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.confirm"
+      },
+      "capture": {
+        "in": {
+          "printer_id": "string",
+          "task_id": "string",
+          "run_id": "string",
+          "actor": "string",
+          "approver": "string",
+          "approval_id": "string",
+          "dimensions": "string",
+          "material": "string",
+          "parameters": "string",
+          "value": "string",
+          "capability": "string",
+          "clock": "number",
+          "version": "number",
+          "run_version": "number",
+          "grant_version": "number",
+          "expires": "number",
+          "active": "boolean",
+          "kind": "string",
+          "implementation": "string"
+        },
+        "out": {
+          "eligible": "boolean",
+          "task_ok": "boolean",
+          "printer_ok": "boolean",
+          "version_ok": "boolean",
+          "other_actor": "boolean",
+          "role_ok": "boolean",
+          "active_ok": "boolean",
+          "time_ok": "boolean",
+          "id": "string",
+          "version": "number",
+          "expires": "number",
+          "printer_id": "string",
+          "task_id": "string",
+          "approver": "string",
+          "run_id": "string",
+          "approval_id": "string",
+          "state": "string",
+          "passed": "boolean",
+          "allowed": "boolean",
+          "unchanged": "boolean",
+          "duplicate": "boolean",
+          "released": "boolean",
+          "revoked": "boolean",
+          "queue_seq": "number",
+          "effect_id": "number",
+          "clock": "number",
+          "reason": "string",
+          "size": "string",
+          "material": "string",
+          "activity_state": "string",
+          "failures": [
+            "string"
+          ],
+          "error_type": "string",
+          "error": "string",
+          "candidates": [
+            {
+              "eligible": "boolean",
+              "task_ok": "boolean",
+              "printer_ok": "boolean",
+              "version_ok": "boolean",
+              "other_actor": "boolean",
+              "role_ok": "boolean",
+              "active_ok": "boolean",
+              "time_ok": "boolean",
+              "id": "string",
+              "version": "number",
+              "expires": "number",
+              "printer_id": "string",
+              "task_id": "string",
+              "approver": "string"
+            }
+          ]
+        }
+      },
+      "requirements": [
+        "R06"
+      ],
+      "parent": "printing",
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow.confirm",
+        "ast_hash": "449e8b6a0250a0a32be36bca565a34f1720ee9a68b18495ccb93ef1ae639e6cc",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "lifecycle",
+      "kind": "function",
+      "label": "完整生命周期",
+      "summary": "完整生命周期；函数身份来自源码，值只来自已采集调用，展开可查看参数和源代码。",
+      "source": {
+        "path": "bo_stategraph/declaration.py",
+        "symbol": "definition"
+      },
+      "capture": {
+        "in": {
+          "printer_id": "string",
+          "task_id": "string",
+          "run_id": "string",
+          "actor": "string",
+          "approver": "string",
+          "approval_id": "string",
+          "dimensions": "string",
+          "material": "string",
+          "parameters": "string",
+          "value": "string",
+          "capability": "string",
+          "clock": "number",
+          "version": "number",
+          "run_version": "number",
+          "grant_version": "number",
+          "expires": "number",
+          "active": "boolean",
+          "kind": "string",
+          "implementation": "string"
+        },
+        "out": {
+          "eligible": "boolean",
+          "task_ok": "boolean",
+          "printer_ok": "boolean",
+          "version_ok": "boolean",
+          "other_actor": "boolean",
+          "role_ok": "boolean",
+          "active_ok": "boolean",
+          "time_ok": "boolean",
+          "id": "string",
+          "version": "number",
+          "expires": "number",
+          "printer_id": "string",
+          "task_id": "string",
+          "approver": "string",
+          "run_id": "string",
+          "approval_id": "string",
+          "state": "string",
+          "passed": "boolean",
+          "allowed": "boolean",
+          "unchanged": "boolean",
+          "duplicate": "boolean",
+          "released": "boolean",
+          "revoked": "boolean",
+          "queue_seq": "number",
+          "effect_id": "number",
+          "clock": "number",
+          "reason": "string",
+          "size": "string",
+          "material": "string",
+          "activity_state": "string",
+          "failures": [
+            "string"
+          ],
+          "error_type": "string",
+          "error": "string",
+          "candidates": [
+            {
+              "eligible": "boolean",
+              "task_ok": "boolean",
+              "printer_ok": "boolean",
+              "version_ok": "boolean",
+              "other_actor": "boolean",
+              "role_ok": "boolean",
+              "active_ok": "boolean",
+              "time_ok": "boolean",
+              "id": "string",
+              "version": "number",
+              "expires": "number",
+              "printer_id": "string",
+              "task_id": "string",
+              "approver": "string"
+            }
+          ]
+        }
+      },
+      "requirements": [
+        "R11"
+      ],
+      "parent": "queue",
+      "code_evidence": {
+        "symbol": "bo_stategraph/declaration.py::definition",
+        "ast_hash": "4d398780d3be1f56bd43a46bf0d91a4b66dcc550094c7bfd27a9b645955a4f9c",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "state.checking",
+      "kind": "state",
+      "layer": "state",
+      "value": "checking",
+      "label": "检查中",
+      "summary": "项目执行器声明的持久状态",
+      "parent": "lifecycle",
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "state.check_failed",
+      "kind": "state",
+      "layer": "state",
+      "value": "check_failed",
+      "label": "检查失败",
+      "summary": "项目执行器声明的持久状态",
+      "parent": "lifecycle",
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "state.check_error",
+      "kind": "state",
+      "layer": "state",
+      "value": "check_error",
+      "label": "检查异常",
+      "summary": "项目执行器声明的持久状态",
+      "parent": "lifecycle",
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "state.awaiting_approval",
+      "kind": "state",
+      "layer": "state",
+      "value": "awaiting_approval",
+      "label": "等待审批",
+      "summary": "项目执行器声明的持久状态",
+      "parent": "lifecycle",
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "state.queued",
+      "kind": "state",
+      "layer": "state",
+      "value": "queued",
+      "label": "等待机器",
+      "summary": "项目执行器声明的持久状态",
+      "parent": "lifecycle",
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "state.blocked",
+      "kind": "state",
+      "layer": "state",
+      "value": "blocked",
+      "label": "等待有效审批",
+      "summary": "项目执行器声明的持久状态",
+      "parent": "lifecycle",
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "state.printing",
+      "kind": "state",
+      "layer": "state",
+      "value": "printing",
+      "label": "打印中",
+      "summary": "项目执行器声明的持久状态",
+      "parent": "lifecycle",
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "state.stopping",
+      "kind": "state",
+      "layer": "state",
+      "value": "stopping",
+      "label": "等待停止确认",
+      "summary": "项目执行器声明的持久状态",
+      "parent": "lifecycle",
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "state.completed",
+      "kind": "state",
+      "layer": "state",
+      "value": "completed",
+      "label": "已完成",
+      "summary": "项目执行器声明的持久状态",
+      "parent": "lifecycle",
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "state.cancelled",
+      "kind": "state",
+      "layer": "state",
+      "value": "cancelled",
+      "label": "已取消",
+      "summary": "项目执行器声明的持久状态",
+      "parent": "lifecycle",
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "state.superseded",
+      "kind": "state",
+      "layer": "state",
+      "value": "superseded",
+      "label": "旧版本作废",
+      "summary": "项目执行器声明的持久状态",
+      "parent": "lifecycle",
+      "capture": {
+        "in": {},
+        "out": {}
+      }
+    },
+    {
+      "id": "internal.754d53c05700",
+      "kind": "function",
+      "label": "EventPort.__init__",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "app/ports.py",
+        "symbol": "EventPort.__init__"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "app/ports.py::EventPort.__init__",
+        "ast_hash": "f434edaec46354cb74843f567a924d71ebd2b1b6606c61cff180195fbc18f50c",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.7169d4f33be4",
+      "kind": "function",
+      "label": "EventPort.bo_emit",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "app/ports.py",
+        "symbol": "EventPort.bo_emit"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "app/ports.py::EventPort.bo_emit",
+        "ast_hash": "65b174451eaaa491a02c3a290b597c722c650e48168efa7856843b8ea05fb0dd",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.db322c4e6104",
+      "kind": "function",
+      "label": "Store.__init__",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "app/store.py",
+        "symbol": "Store.__init__"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "app/store.py::Store.__init__",
+        "ast_hash": "9fbd8c900fe033385b232738717d888cd15ae7b455c50cd6302582720907afe7",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.e2167ed950a0",
+      "kind": "function",
+      "label": "Store.connect",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "app/store.py",
+        "symbol": "Store.connect"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "app/store.py::Store.connect",
+        "ast_hash": "bdf1075ab46be1786c0739b229b3163f74a61397ef24b6bb999a7556a8450026",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.a5f63d79f81f",
+      "kind": "function",
+      "label": "Store.change",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "app/store.py",
+        "symbol": "Store.change"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "app/store.py::Store.change",
+        "ast_hash": "db492052769c407678143ad3d37295dd6caba5943b10b0e3f4cbfb949752ed27",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.3e01f606f2be",
+      "kind": "function",
+      "label": "Store.history",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "app/store.py",
+        "symbol": "Store.history"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "app/store.py::Store.history",
+        "ast_hash": "d769c02dc72259045aff008e2b879f429ba9fb9730c34af7874b947f5dbe5bc6",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.072cc691db42",
+      "kind": "function",
+      "label": "BOStateGraph.__init__",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "bo_stategraph/__init__.py",
+        "symbol": "BOStateGraph.__init__"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "bo_stategraph/__init__.py::BOStateGraph.__init__",
+        "ast_hash": "85e3a9a9795ffea4e95b378a1c86d583f2614d69326d5f437999cdff9d38e89a",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.4542a230c9f1",
+      "kind": "function",
+      "label": "BOStateGraph.bo_definition",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "bo_stategraph/__init__.py",
+        "symbol": "BOStateGraph.bo_definition"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "bo_stategraph/__init__.py::BOStateGraph.bo_definition",
+        "ast_hash": "d87c7109c474f48fadfa1d67d115274787317aceac7fd8500723315616788c3e",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.d2d94c06d0cb",
+      "kind": "function",
+      "label": "BOStateGraph.bo_instances",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "bo_stategraph/__init__.py",
+        "symbol": "BOStateGraph.bo_instances"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "bo_stategraph/__init__.py::BOStateGraph.bo_instances",
+        "ast_hash": "d6ed3679ceb9faf9fe10787bcb2396d385d519699905b5dce5dd33f669d24401",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.0647f1304d01",
+      "kind": "function",
+      "label": "BOStateGraph.bo_export",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "bo_stategraph/__init__.py",
+        "symbol": "BOStateGraph.bo_export"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "bo_stategraph/__init__.py::BOStateGraph.bo_export",
+        "ast_hash": "d46bb7daa99b8e0dcaefe6fd94c8b938b1121f3c5f024eb4a2575f020c3d30e5",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.e1ab014947c6",
+      "kind": "function",
+      "label": "validate_instances",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "bo_stategraph/__init__.py",
+        "symbol": "validate_instances"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "bo_stategraph/__init__.py::validate_instances",
+        "ast_hash": "e6d39a3f5426539fbf46d122104de1302b8ca0854e9d6f4add4418fea0cfb86e",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.3589b42935b7",
+      "kind": "function",
+      "label": "transition",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "bo_stategraph/declaration.py",
+        "symbol": "transition"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "bo_stategraph/declaration.py::transition",
+        "ast_hash": "345b4c239c734f0239d1663b57032b8a232f8c6bbbbebe39290af752db4ea321",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.454f0aaf9756",
+      "kind": "function",
+      "label": "Workflow.__init__",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.__init__"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow.__init__",
+        "ast_hash": "9e43bb9331055efc12257c925fb5633fa09fc49a233dda8fc4335097dd8461bf",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.802087d53a3c",
+      "kind": "function",
+      "label": "Workflow._emit",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow._emit"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow._emit",
+        "ast_hash": "a5caea6ae11dd24a9d7eecc4191beab784279c7bbec1da4b64de657159c686b8",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.7accbda09e3b",
+      "kind": "function",
+      "label": "Workflow.submit.create",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "submit",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.submit.create"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow.submit.create",
+        "ast_hash": "6406149290725fa47731e84f7d2bb4d236a1058fca2d4dcdaa4cb7abd2f73c7a",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.49897fc6bf56",
+      "kind": "function",
+      "label": "Workflow._check.start",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "check-worker",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow._check.start"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow._check.start",
+        "ast_hash": "6fbfd128f3a804be2cffad38a05481fcd33dcc5f297ffc7625850ef8388c38cf",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.32630898874b",
+      "kind": "function",
+      "label": "Workflow._check.finish",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "check-worker",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow._check.finish"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow._check.finish",
+        "ast_hash": "444a5182091fe57773f05f1938c89a64f6837600a594fe0f7773a12acb0fe5f2",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.ab9f7d2bb106",
+      "kind": "function",
+      "label": "Workflow.run_checks.join",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "checks",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.run_checks.join"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow.run_checks.join",
+        "ast_hash": "76ccd971a1bb0dccd3a5d6221a49491067e70d54ae0e48de529ca2f628e72f22",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.3cf2454731d5",
+      "kind": "function",
+      "label": "Workflow.set_role",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.set_role"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow.set_role",
+        "ast_hash": "bcabe444ddd6361a91fdbde7f9811c11f89a5c7e3a6f1379f06dae5826d0d507",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.a790bda440bf",
+      "kind": "function",
+      "label": "Workflow.approve.add",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "approval-change",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.approve.add"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow.approve.add",
+        "ast_hash": "c954dc098215be6738ba41828ed209f10208a55a129c1368f30a217350ef2e1f",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.e8370f86a60e",
+      "kind": "function",
+      "label": "Workflow.revoke",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.revoke"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow.revoke",
+        "ast_hash": "62d2bfed4153faedf9bc34771df2fdca22411502a4b5342d6c439947a99d03cf",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.21cffa8d7809",
+      "kind": "function",
+      "label": "Workflow.revoke.change",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "internal.e8370f86a60e",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.revoke.change"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow.revoke.change",
+        "ast_hash": "aaba68ab3c8bbcad129870a733b70bca96fdeb59bab76903c2443ba062d8dd06",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.546f79d04863",
+      "kind": "function",
+      "label": "Workflow.schedule.dispatch",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "queue",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.schedule.dispatch"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow.schedule.dispatch",
+        "ast_hash": "3691dc4219634d21d34488cc8d8d0edd8d7512c5fed916b6fe14ddbff88447d7",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.a1ea134870bb",
+      "kind": "function",
+      "label": "Workflow.cancel.request",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "cancel",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.cancel.request"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow.cancel.request",
+        "ast_hash": "6bcc60ae8cda11ff8e54cb82c3b5d36a86248d5c2067ff6d12c98438803eb1aa",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.e92f06c3cb44",
+      "kind": "function",
+      "label": "Workflow.confirm.release",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "printer-stopped",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.confirm.release"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow.confirm.release",
+        "ast_hash": "965371af090428248546e299c1f1622f11b0513411c98cdbac20b008f13c5984",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.a13a218ff282",
+      "kind": "function",
+      "label": "BOApplication.__init__",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "integrations/bo_app.py",
+        "symbol": "BOApplication.__init__"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "integrations/bo_app.py::BOApplication.__init__",
+        "ast_hash": "22981d7c43b422a1a60ed47326cac0bd32cb620cff56613481727a87f3955778",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.46c00e2a6dd9",
+      "kind": "function",
+      "label": "BOApplication.bo_view",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "integrations/bo_app.py",
+        "symbol": "BOApplication.bo_view"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "integrations/bo_app.py::BOApplication.bo_view",
+        "ast_hash": "8ac4124a43006784314ce2fc956233d3084d0829110854e5300a27ce9fceb9d0",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.938610ad0915",
+      "kind": "function",
+      "label": "BOApplication.bo_preferences",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "integrations/bo_app.py",
+        "symbol": "BOApplication.bo_preferences"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "integrations/bo_app.py::BOApplication.bo_preferences",
+        "ast_hash": "6a96c0fd4cddcd9bbf50e3d4427046ba081c69b0a9010aa7cc716d9369b5d718",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.9563f5d10d25",
+      "kind": "function",
+      "label": "BOApplication.bo_record",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "integrations/bo_app.py",
+        "symbol": "BOApplication.bo_record"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "integrations/bo_app.py::BOApplication.bo_record",
+        "ast_hash": "fe76192eef758aeca3750cd7c40fa646bd3754cf6f8fec65d7ec2d0b2c71f1f8",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.fbada283e812",
+      "kind": "function",
+      "label": "BOApplication.bo_command",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "integrations/bo_app.py",
+        "symbol": "BOApplication.bo_command"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "integrations/bo_app.py::BOApplication.bo_command",
+        "ast_hash": "a8f4c9894284740fb6d190b158416dd9a31038603a145f1261795b7b5b17de96",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.607f404203b2",
+      "kind": "function",
+      "label": "BOApplication.bo_tick",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "integrations/bo_app.py",
+        "symbol": "BOApplication.bo_tick"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "integrations/bo_app.py::BOApplication.bo_tick",
+        "ast_hash": "760f7e32fe6a108d3add976ef8e208f43d302e2b183520a49b5fbb05c9334df1",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.84dd13ad3a04",
+      "kind": "function",
+      "label": "BOApplication.bo_demo",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "integrations/bo_app.py",
+        "symbol": "BOApplication.bo_demo"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "integrations/bo_app.py::BOApplication.bo_demo",
+        "ast_hash": "7100c6dafebc9f75816f05c8df4b3d25c4fdd5420df99db24ca0a0a7cf0ba443",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.199df18671a0",
+      "kind": "function",
+      "label": "BOCapture.__init__",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "integrations/bo_capture.py",
+        "symbol": "BOCapture.__init__"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "integrations/bo_capture.py::BOCapture.__init__",
+        "ast_hash": "ba6c365c61789f4a5d2228f0ecde1b87a7e2522f171e40a701dc84afd30894da",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.662d7c5077f0",
+      "kind": "function",
+      "label": "BOCapture.bo_record",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "integrations/bo_capture.py",
+        "symbol": "BOCapture.bo_record"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "integrations/bo_capture.py::BOCapture.bo_record",
+        "ast_hash": "ce44d773873c580cf12afa9dfe98228b0d47b63c8fc4de0ad03dcc4530d3798a",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.3be65d679820",
+      "kind": "function",
+      "label": "BOCapture.bo_health",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "integrations/bo_capture.py",
+        "symbol": "BOCapture.bo_health"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "integrations/bo_capture.py::BOCapture.bo_health",
+        "ast_hash": "a96c7ea8c7f790de74603c56bb5e6b7df339f49df5c8ebde838ff1623b8c4e40",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.1c72f90eed1e",
+      "kind": "function",
+      "label": "main",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "main.py",
+        "symbol": "main"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "main.py::main",
+        "ast_hash": "27e75937d6b3887fc16de62e513def666d5a730ed1442bb17e9f532f2a95aa52",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.b1d0a4c43843",
+      "kind": "function",
+      "label": "serve",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "lifecycle",
+      "source": {
+        "path": "server.py",
+        "symbol": "serve"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "server.py::serve",
+        "ast_hash": "bbf8ee1e1ebd389805ea5fb853a25447c65e8f5bc5739e91eba7a16a066455bd",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.6cdac42e70ab",
+      "kind": "function",
+      "label": "serve.Handler.log_message",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "internal.b1d0a4c43843",
+      "source": {
+        "path": "server.py",
+        "symbol": "serve.Handler.log_message"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "server.py::serve.Handler.log_message",
+        "ast_hash": "28cd724c32e597c9d660c3105b1d324718397db063ccb043921602de4f22df3f",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.7a8add53f946",
+      "kind": "function",
+      "label": "serve.Handler.reply",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "internal.b1d0a4c43843",
+      "source": {
+        "path": "server.py",
+        "symbol": "serve.Handler.reply"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "server.py::serve.Handler.reply",
+        "ast_hash": "a575a79cdbf3dab2bcd1c633e9853b620a3bad77339f74c90f8f7b2111966b9b",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.fcc8c75271ce",
+      "kind": "function",
+      "label": "serve.Handler.do_GET",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "internal.b1d0a4c43843",
+      "source": {
+        "path": "server.py",
+        "symbol": "serve.Handler.do_GET"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "server.py::serve.Handler.do_GET",
+        "ast_hash": "61bcf12f2b7629e83016cd12aeeaa721f4edf3b76e99b9181f9d7751cd2e2435",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.b51958782a07",
+      "kind": "function",
+      "label": "serve.Handler.do_POST",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "internal.b1d0a4c43843",
+      "source": {
+        "path": "server.py",
+        "symbol": "serve.Handler.do_POST"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "server.py::serve.Handler.do_POST",
+        "ast_hash": "0b708ce97f16550d497cffede1faeccefae6578613c35158745d35d00678466b",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "internal.d0690e875ad7",
+      "kind": "function",
+      "label": "serve.timer",
+      "summary": "实际源码函数；静态身份可定位。是否执行及局部值仅以显式事件为依据。",
+      "parent": "internal.b1d0a4c43843",
+      "source": {
+        "path": "server.py",
+        "symbol": "serve.timer"
+      },
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "analysis_detail": true,
+      "code_evidence": {
+        "symbol": "server.py::serve.timer",
+        "ast_hash": "e973f0fffaaab90399f7d9838dbb3873451c3b48374422b7e5189dc69621ffba",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.028e67939c6ccf3a",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "Workflow._emit",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow._emit"
+      },
+      "parent": "submit",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self, node, phase, receipt, run_id, builder, call_id=None",
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow._emit",
+        "ast_hash": "a5caea6ae11dd24a9d7eecc4191beab784279c7bbec1da4b64de657159c686b8",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          },
+          {
+            "name": "node",
+            "annotation": null
+          },
+          {
+            "name": "phase",
+            "annotation": null
+          },
+          {
+            "name": "receipt",
+            "annotation": null
+          },
+          {
+            "name": "run_id",
+            "annotation": null
+          },
+          {
+            "name": "builder",
+            "annotation": null
+          },
+          {
+            "name": "call_id",
+            "annotation": null
+          }
+        ],
+        "returns": null,
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.19727f35511872bc",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "Workflow.run_checks",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.run_checks"
+      },
+      "parent": "submit",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self, run_id: str",
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow.run_checks",
+        "ast_hash": "ccdc3df1444305f61b7b1e13aecabe693e775f561303cb76a935ec7235f51c31",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          },
+          {
+            "name": "run_id",
+            "annotation": "str"
+          }
+        ],
+        "returns": null,
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.9d74bd8fdd3c3948",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "Workflow._emit",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow._emit"
+      },
+      "parent": "checks",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self, node, phase, receipt, run_id, builder, call_id=None",
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow._emit",
+        "ast_hash": "a5caea6ae11dd24a9d7eecc4191beab784279c7bbec1da4b64de657159c686b8",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          },
+          {
+            "name": "node",
+            "annotation": null
+          },
+          {
+            "name": "phase",
+            "annotation": null
+          },
+          {
+            "name": "receipt",
+            "annotation": null
+          },
+          {
+            "name": "run_id",
+            "annotation": null
+          },
+          {
+            "name": "builder",
+            "annotation": null
+          },
+          {
+            "name": "call_id",
+            "annotation": null
+          }
+        ],
+        "returns": null,
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.e962584e4b0ff0dd",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "Workflow.schedule",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.schedule"
+      },
+      "parent": "checks",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self",
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow.schedule",
+        "ast_hash": "05fa42bfc2d3aa8eefbb77ab14e6cf3da65bfe20ce9cb95b82840af3ae92df5c",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          }
+        ],
+        "returns": null,
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.d67f37b3573d1508",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "Workflow._emit",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow._emit"
+      },
+      "parent": "approval-change",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self, node, phase, receipt, run_id, builder, call_id=None",
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow._emit",
+        "ast_hash": "a5caea6ae11dd24a9d7eecc4191beab784279c7bbec1da4b64de657159c686b8",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          },
+          {
+            "name": "node",
+            "annotation": null
+          },
+          {
+            "name": "phase",
+            "annotation": null
+          },
+          {
+            "name": "receipt",
+            "annotation": null
+          },
+          {
+            "name": "run_id",
+            "annotation": null
+          },
+          {
+            "name": "builder",
+            "annotation": null
+          },
+          {
+            "name": "call_id",
+            "annotation": null
+          }
+        ],
+        "returns": null,
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.83cc6c8ccf05bcd8",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "Workflow.schedule",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.schedule"
+      },
+      "parent": "approval-change",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self",
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow.schedule",
+        "ast_hash": "05fa42bfc2d3aa8eefbb77ab14e6cf3da65bfe20ce9cb95b82840af3ae92df5c",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          }
+        ],
+        "returns": null,
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.8d517f817e3bc6d4",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "Workflow._emit",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow._emit"
+      },
+      "parent": "printing",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self, node, phase, receipt, run_id, builder, call_id=None",
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow._emit",
+        "ast_hash": "a5caea6ae11dd24a9d7eecc4191beab784279c7bbec1da4b64de657159c686b8",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          },
+          {
+            "name": "node",
+            "annotation": null
+          },
+          {
+            "name": "phase",
+            "annotation": null
+          },
+          {
+            "name": "receipt",
+            "annotation": null
+          },
+          {
+            "name": "run_id",
+            "annotation": null
+          },
+          {
+            "name": "builder",
+            "annotation": null
+          },
+          {
+            "name": "call_id",
+            "annotation": null
+          }
+        ],
+        "returns": null,
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.39e20632f04c9f13",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "Store.snapshot",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "app/store.py",
+        "symbol": "Store.snapshot"
+      },
+      "parent": "internal.a5f63d79f81f",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self, connection=None",
+      "code_evidence": {
+        "symbol": "app/store.py::Store.snapshot",
+        "ast_hash": "3847e7a9099dd809812d7cb7bb4399b457df99e2e0271ff37b9f7af22a03fff1",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          },
+          {
+            "name": "connection",
+            "annotation": null
+          }
+        ],
+        "returns": "dict",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.a1adffefb6144b23",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "transition",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "bo_stategraph/declaration.py",
+        "symbol": "transition"
+      },
+      "parent": "internal.7accbda09e3b",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "connection, run_id: str, trigger: str",
+      "code_evidence": {
+        "symbol": "bo_stategraph/declaration.py::transition",
+        "ast_hash": "345b4c239c734f0239d1663b57032b8a232f8c6bbbbebe39290af752db4ea321",
+        "parameters": [
+          {
+            "name": "connection",
+            "annotation": null
+          },
+          {
+            "name": "run_id",
+            "annotation": "str"
+          },
+          {
+            "name": "trigger",
+            "annotation": "str"
+          }
+        ],
+        "returns": "str",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.2d87b12b77940413",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "transition",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "bo_stategraph/declaration.py",
+        "symbol": "transition"
+      },
+      "parent": "internal.ab9f7d2bb106",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "connection, run_id: str, trigger: str",
+      "code_evidence": {
+        "symbol": "bo_stategraph/declaration.py::transition",
+        "ast_hash": "345b4c239c734f0239d1663b57032b8a232f8c6bbbbebe39290af752db4ea321",
+        "parameters": [
+          {
+            "name": "connection",
+            "annotation": null
+          },
+          {
+            "name": "run_id",
+            "annotation": "str"
+          },
+          {
+            "name": "trigger",
+            "annotation": "str"
+          }
+        ],
+        "returns": "str",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.1c5d9db4cfeaa237",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "Workflow._authorization",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow._authorization"
+      },
+      "parent": "internal.546f79d04863",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "self, c, run: dict, now: float",
+      "code_evidence": {
+        "symbol": "bo_stategraph/workflow.py::Workflow._authorization",
+        "ast_hash": "41946dae392f7fa97600d18dce55f7d989d70251cd067eb8c8145c37d16d47eb",
+        "parameters": [
+          {
+            "name": "self",
+            "annotation": null
+          },
+          {
+            "name": "c",
+            "annotation": null
+          },
+          {
+            "name": "run",
+            "annotation": "dict"
+          },
+          {
+            "name": "now",
+            "annotation": "float"
+          }
+        ],
+        "returns": "dict",
+        "origin": "python-ast"
+      }
+    },
+    {
+      "id": "code.b6717956baef28ba",
+      "kind": "function",
+      "layer": "program",
+      "origin": "python-ast",
+      "label": "transition",
+      "summary": "局部静态调用；是否执行由运行事实确认。",
+      "source": {
+        "path": "bo_stategraph/declaration.py",
+        "symbol": "transition"
+      },
+      "parent": "internal.a1ea134870bb",
+      "capture": {
+        "in": {},
+        "out": {}
+      },
+      "signature": "connection, run_id: str, trigger: str",
+      "code_evidence": {
+        "symbol": "bo_stategraph/declaration.py::transition",
+        "ast_hash": "345b4c239c734f0239d1663b57032b8a232f8c6bbbbebe39290af752db4ea321",
+        "parameters": [
+          {
+            "name": "connection",
+            "annotation": null
+          },
+          {
+            "name": "run_id",
+            "annotation": "str"
+          },
+          {
+            "name": "trigger",
+            "annotation": "str"
+          }
+        ],
+        "returns": "str",
+        "origin": "python-ast"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "declared:submit:checks:flow",
+      "from": "submit",
+      "to": "checks",
+      "type": "flow",
+      "label": "新运行",
+      "evidence": "authored business declaration; not an executed call"
+    },
+    {
+      "id": "declared:checks:queue:guard",
+      "from": "checks",
+      "to": "queue",
+      "type": "guard",
+      "label": "两项通过",
+      "evidence": "authored business declaration; not an executed call"
+    },
+    {
+      "id": "declared:approval:queue:guard",
+      "from": "approval",
+      "to": "queue",
+      "type": "guard",
+      "label": "任一有效审批",
+      "evidence": "authored business declaration; not an executed call"
+    },
+    {
+      "id": "declared:queue:printing:flow",
+      "from": "queue",
+      "to": "printing",
+      "type": "flow",
+      "label": "最早有资格任务",
+      "evidence": "authored business declaration; not an executed call"
+    },
+    {
+      "id": "declared:printer:printing:guard",
+      "from": "printer",
+      "to": "printing",
+      "type": "guard",
+      "label": "该机空闲，事务内占用",
+      "evidence": "authored business declaration; not an executed call"
+    },
+    {
+      "id": "declared:cancel:printer-stopped:flow",
+      "from": "cancel",
+      "to": "printer-stopped",
+      "type": "flow",
+      "label": "请求停止后等待确认",
+      "evidence": "authored business declaration; not an executed call"
+    },
+    {
+      "id": "declared:printer-stopped:queue:flow",
+      "from": "printer-stopped",
+      "to": "queue",
+      "type": "flow",
+      "label": "释放后自动调度",
+      "evidence": "authored business declaration; not an executed call"
+    },
+    {
+      "id": "declared:parameter-change:checks:flow",
+      "from": "parameter-change",
+      "to": "checks",
+      "type": "flow",
+      "label": "新版本重新检查",
+      "evidence": "authored business declaration; not an executed call"
+    },
+    {
+      "id": "declared:grant-match:approval:guard",
+      "from": "grant-match",
+      "to": "approval",
+      "type": "guard",
+      "label": "OR",
+      "evidence": "authored business declaration; not an executed call"
+    },
+    {
+      "id": "declared:check-size:checks:guard",
+      "from": "check-size",
+      "to": "checks",
+      "type": "guard",
+      "label": "ALL",
+      "evidence": "authored business declaration; not an executed call"
+    },
+    {
+      "id": "declared:check-material:checks:guard",
+      "from": "check-material",
+      "to": "checks",
+      "type": "guard",
+      "label": "ALL",
+      "evidence": "authored business declaration; not an executed call"
+    },
+    {
+      "id": "contains:parameter-change",
+      "from": "submit",
+      "to": "parameter-change",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:check-size",
+      "from": "checks",
+      "to": "check-size",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:check-material",
+      "from": "checks",
+      "to": "check-material",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:check-worker",
+      "from": "checks",
+      "to": "check-worker",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:grant-match",
+      "from": "approval",
+      "to": "grant-match",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:approval-change",
+      "from": "approval",
+      "to": "approval-change",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:printer",
+      "from": "printing",
+      "to": "printer",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:cancel",
+      "from": "printing",
+      "to": "cancel",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:printer-stopped",
+      "from": "printing",
+      "to": "printer-stopped",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:lifecycle",
+      "from": "queue",
+      "to": "lifecycle",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:state.checking",
+      "from": "lifecycle",
+      "to": "state.checking",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:state.check_failed",
+      "from": "lifecycle",
+      "to": "state.check_failed",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:state.check_error",
+      "from": "lifecycle",
+      "to": "state.check_error",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:state.awaiting_approval",
+      "from": "lifecycle",
+      "to": "state.awaiting_approval",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:state.queued",
+      "from": "lifecycle",
+      "to": "state.queued",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:state.blocked",
+      "from": "lifecycle",
+      "to": "state.blocked",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:state.printing",
+      "from": "lifecycle",
+      "to": "state.printing",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:state.stopping",
+      "from": "lifecycle",
+      "to": "state.stopping",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:state.completed",
+      "from": "lifecycle",
+      "to": "state.completed",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:state.cancelled",
+      "from": "lifecycle",
+      "to": "state.cancelled",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:state.superseded",
+      "from": "lifecycle",
+      "to": "state.superseded",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.754d53c05700",
+      "from": "lifecycle",
+      "to": "internal.754d53c05700",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.7169d4f33be4",
+      "from": "lifecycle",
+      "to": "internal.7169d4f33be4",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.db322c4e6104",
+      "from": "lifecycle",
+      "to": "internal.db322c4e6104",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.e2167ed950a0",
+      "from": "lifecycle",
+      "to": "internal.e2167ed950a0",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.a5f63d79f81f",
+      "from": "lifecycle",
+      "to": "internal.a5f63d79f81f",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.3e01f606f2be",
+      "from": "lifecycle",
+      "to": "internal.3e01f606f2be",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.072cc691db42",
+      "from": "lifecycle",
+      "to": "internal.072cc691db42",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.4542a230c9f1",
+      "from": "lifecycle",
+      "to": "internal.4542a230c9f1",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.d2d94c06d0cb",
+      "from": "lifecycle",
+      "to": "internal.d2d94c06d0cb",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.0647f1304d01",
+      "from": "lifecycle",
+      "to": "internal.0647f1304d01",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.e1ab014947c6",
+      "from": "lifecycle",
+      "to": "internal.e1ab014947c6",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.3589b42935b7",
+      "from": "lifecycle",
+      "to": "internal.3589b42935b7",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.454f0aaf9756",
+      "from": "lifecycle",
+      "to": "internal.454f0aaf9756",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.802087d53a3c",
+      "from": "lifecycle",
+      "to": "internal.802087d53a3c",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.7accbda09e3b",
+      "from": "submit",
+      "to": "internal.7accbda09e3b",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.49897fc6bf56",
+      "from": "check-worker",
+      "to": "internal.49897fc6bf56",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.32630898874b",
+      "from": "check-worker",
+      "to": "internal.32630898874b",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.ab9f7d2bb106",
+      "from": "checks",
+      "to": "internal.ab9f7d2bb106",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.3cf2454731d5",
+      "from": "lifecycle",
+      "to": "internal.3cf2454731d5",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.a790bda440bf",
+      "from": "approval-change",
+      "to": "internal.a790bda440bf",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.e8370f86a60e",
+      "from": "lifecycle",
+      "to": "internal.e8370f86a60e",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.21cffa8d7809",
+      "from": "internal.e8370f86a60e",
+      "to": "internal.21cffa8d7809",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.546f79d04863",
+      "from": "queue",
+      "to": "internal.546f79d04863",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.a1ea134870bb",
+      "from": "cancel",
+      "to": "internal.a1ea134870bb",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.e92f06c3cb44",
+      "from": "printer-stopped",
+      "to": "internal.e92f06c3cb44",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.a13a218ff282",
+      "from": "lifecycle",
+      "to": "internal.a13a218ff282",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.46c00e2a6dd9",
+      "from": "lifecycle",
+      "to": "internal.46c00e2a6dd9",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.938610ad0915",
+      "from": "lifecycle",
+      "to": "internal.938610ad0915",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.9563f5d10d25",
+      "from": "lifecycle",
+      "to": "internal.9563f5d10d25",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.fbada283e812",
+      "from": "lifecycle",
+      "to": "internal.fbada283e812",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.607f404203b2",
+      "from": "lifecycle",
+      "to": "internal.607f404203b2",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.84dd13ad3a04",
+      "from": "lifecycle",
+      "to": "internal.84dd13ad3a04",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.199df18671a0",
+      "from": "lifecycle",
+      "to": "internal.199df18671a0",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.662d7c5077f0",
+      "from": "lifecycle",
+      "to": "internal.662d7c5077f0",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.3be65d679820",
+      "from": "lifecycle",
+      "to": "internal.3be65d679820",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.1c72f90eed1e",
+      "from": "lifecycle",
+      "to": "internal.1c72f90eed1e",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.b1d0a4c43843",
+      "from": "lifecycle",
+      "to": "internal.b1d0a4c43843",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.6cdac42e70ab",
+      "from": "internal.b1d0a4c43843",
+      "to": "internal.6cdac42e70ab",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.7a8add53f946",
+      "from": "internal.b1d0a4c43843",
+      "to": "internal.7a8add53f946",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.fcc8c75271ce",
+      "from": "internal.b1d0a4c43843",
+      "to": "internal.fcc8c75271ce",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.b51958782a07",
+      "from": "internal.b1d0a4c43843",
+      "to": "internal.b51958782a07",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains:internal.d0690e875ad7",
+      "from": "internal.b1d0a4c43843",
+      "to": "internal.d0690e875ad7",
+      "type": "contains",
+      "label": "展开",
+      "evidence": "authored hierarchy"
+    },
+    {
+      "id": "contains.code.028e67939c6ccf3a",
+      "from": "submit",
+      "to": "code.028e67939c6ccf3a",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.77d190328aecb915",
+      "from": "submit",
+      "to": "code.028e67939c6ccf3a",
+      "type": "flow",
+      "label": "静态调用 self._emit",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 58,
+        "column": 8,
+        "args": [
+          "'submit'",
+          "'commit'",
+          "receipt",
+          "actual_id",
+          "lambda: {'inputs': {'printer_id': printer_id, 'dimensions': json.dumps(dimensions), 'material': material, 'parameters': json.dumps(parameters, sort_keys=True)}, 'outputs': receipt[0]}"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.19727f35511872bc",
+      "from": "submit",
+      "to": "code.19727f35511872bc",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.a49246c8a8d8251c",
+      "from": "submit",
+      "to": "code.19727f35511872bc",
+      "type": "flow",
+      "label": "静态调用 self.run_checks",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 60,
+        "column": 12,
+        "args": [
+          "actual_id"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.856101041e325b14",
+      "from": "parameter-change",
+      "to": "code.028e67939c6ccf3a",
+      "type": "flow",
+      "label": "静态调用 self._emit",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 58,
+        "column": 8,
+        "args": [
+          "'submit'",
+          "'commit'",
+          "receipt",
+          "actual_id",
+          "lambda: {'inputs': {'printer_id': printer_id, 'dimensions': json.dumps(dimensions), 'material': material, 'parameters': json.dumps(parameters, sort_keys=True)}, 'outputs': receipt[0]}"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.f991a22f4b72b6ec",
+      "from": "parameter-change",
+      "to": "code.19727f35511872bc",
+      "type": "flow",
+      "label": "静态调用 self.run_checks",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 60,
+        "column": 12,
+        "args": [
+          "actual_id"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.9d74bd8fdd3c3948",
+      "from": "checks",
+      "to": "code.9d74bd8fdd3c3948",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.663784d6d4783eb8",
+      "from": "checks",
+      "to": "code.9d74bd8fdd3c3948",
+      "type": "flow",
+      "label": "静态调用 self._emit",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 103,
+        "column": 8,
+        "args": [
+          "'checks'",
+          "'decision'",
+          "receipt",
+          "run_id",
+          "lambda: {'inputs': {}, 'outputs': receipt[0]}"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.e962584e4b0ff0dd",
+      "from": "checks",
+      "to": "code.e962584e4b0ff0dd",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.06377c017c1dbf08",
+      "from": "checks",
+      "to": "code.e962584e4b0ff0dd",
+      "type": "flow",
+      "label": "静态调用 self.schedule",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 104,
+        "column": 8,
+        "args": [],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.b85fe829cb5d1f85",
+      "from": "check-worker",
+      "to": "code.9d74bd8fdd3c3948",
+      "type": "flow",
+      "label": "静态调用 self._emit",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 74,
+        "column": 8,
+        "args": [
+          "probe_node",
+          "'enter'",
+          "receipt",
+          "run_id",
+          "lambda: {'inputs': {'value': json.dumps(args[0]), 'capability': json.dumps(args[1]), 'implementation': function.__module__ + '.' + function.__qualname__}, 'outputs': {}}",
+          "call_id"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.32906945d6ab7d7f",
+      "from": "check-worker",
+      "to": "code.9d74bd8fdd3c3948",
+      "type": "flow",
+      "label": "静态调用 self._emit",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 84,
+        "column": 8,
+        "args": [
+          "probe_node",
+          "'error' if state == 'error' else 'return'",
+          "receipt",
+          "run_id",
+          "lambda: {'inputs': {'value': json.dumps(args[0]), 'capability': json.dumps(args[1]), 'implementation': function.__module__ + '.' + function.__qualname__}, 'outputs': {**result, 'activity_state': state}}",
+          "call_id"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.9901a80451bcebc0",
+      "from": "approval",
+      "to": "grant-match",
+      "type": "flow",
+      "label": "静态调用 grant_matches",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 145,
+        "column": 20,
+        "args": [
+          "grant",
+          "run",
+          "bool(role and role[0])",
+          "now"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.d67f37b3573d1508",
+      "from": "approval-change",
+      "to": "code.d67f37b3573d1508",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.6596d04bcac0621a",
+      "from": "approval-change",
+      "to": "code.d67f37b3573d1508",
+      "type": "flow",
+      "label": "静态调用 self._emit",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 127,
+        "column": 8,
+        "args": [
+          "'approval-change'",
+          "'commit'",
+          "receipt",
+          "run_id",
+          "lambda: {'inputs': {'actor': approver, 'expires': expires}, 'outputs': receipt[0]}"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.83cc6c8ccf05bcd8",
+      "from": "approval-change",
+      "to": "code.83cc6c8ccf05bcd8",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.e90f3cf54d28fd83",
+      "from": "approval-change",
+      "to": "code.83cc6c8ccf05bcd8",
+      "type": "flow",
+      "label": "静态调用 self.schedule",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 128,
+        "column": 8,
+        "args": [],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.addafda97b45d187",
+      "from": "queue",
+      "to": "internal.802087d53a3c",
+      "type": "flow",
+      "label": "静态调用 self._emit",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 186,
+        "column": 12,
+        "args": [
+          "'approval'",
+          "'decision'",
+          "receipt",
+          "decision['run_id']",
+          "lambda d=decision: {'inputs': {'clock': d['clock'], 'version': d['version']}, 'outputs': d}"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.32e9f8a853fd8e68",
+      "from": "queue",
+      "to": "internal.802087d53a3c",
+      "type": "flow",
+      "label": "静态调用 self._emit",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 188,
+        "column": 16,
+        "args": [
+          "'grant-match'",
+          "'decision'",
+          "receipt",
+          "decision['run_id']",
+          "lambda d=decision, g=candidate: {'inputs': {'clock': d['clock'], 'run_version': d['version'], 'grant_version': g['version'], 'expires': g['expires'], 'printer_id': g['printer_id'], 'task_id': g['task_id'], 'approver': g['approver']}, 'outputs': g}"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.d60f2bf13d8cccae",
+      "from": "queue",
+      "to": "internal.802087d53a3c",
+      "type": "flow",
+      "label": "静态调用 self._emit",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 190,
+        "column": 12,
+        "args": [
+          "'printing'",
+          "'commit'",
+          "receipt",
+          "start['run_id']",
+          "lambda s=start: {'inputs': {'clock': s['clock']}, 'outputs': s}"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.80b609b53504de1b",
+      "from": "queue",
+      "to": "internal.802087d53a3c",
+      "type": "flow",
+      "label": "静态调用 self._emit",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 193,
+        "column": 16,
+        "args": [
+          "'queue'",
+          "'wait'",
+          "receipt",
+          "run['id']",
+          "lambda r=run: {'inputs': {'printer_id': r['printer_id']}, 'outputs': {'state': r['state'], 'reason': r['reason'], 'queue_seq': r['queue_seq']}}"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.8d517f817e3bc6d4",
+      "from": "printing",
+      "to": "code.8d517f817e3bc6d4",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.888ed86185ef18c4",
+      "from": "printing",
+      "to": "code.8d517f817e3bc6d4",
+      "type": "flow",
+      "label": "静态调用 self._emit",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 186,
+        "column": 12,
+        "args": [
+          "'approval'",
+          "'decision'",
+          "receipt",
+          "decision['run_id']",
+          "lambda d=decision: {'inputs': {'clock': d['clock'], 'version': d['version']}, 'outputs': d}"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.a275b17484f6f923",
+      "from": "printing",
+      "to": "code.8d517f817e3bc6d4",
+      "type": "flow",
+      "label": "静态调用 self._emit",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 188,
+        "column": 16,
+        "args": [
+          "'grant-match'",
+          "'decision'",
+          "receipt",
+          "decision['run_id']",
+          "lambda d=decision, g=candidate: {'inputs': {'clock': d['clock'], 'run_version': d['version'], 'grant_version': g['version'], 'expires': g['expires'], 'printer_id': g['printer_id'], 'task_id': g['task_id'], 'approver': g['approver']}, 'outputs': g}"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.4312450e52a67194",
+      "from": "printing",
+      "to": "code.8d517f817e3bc6d4",
+      "type": "flow",
+      "label": "静态调用 self._emit",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 190,
+        "column": 12,
+        "args": [
+          "'printing'",
+          "'commit'",
+          "receipt",
+          "start['run_id']",
+          "lambda s=start: {'inputs': {'clock': s['clock']}, 'outputs': s}"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.368849bfcc001e9e",
+      "from": "printing",
+      "to": "code.8d517f817e3bc6d4",
+      "type": "flow",
+      "label": "静态调用 self._emit",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 193,
+        "column": 16,
+        "args": [
+          "'queue'",
+          "'wait'",
+          "receipt",
+          "run['id']",
+          "lambda r=run: {'inputs': {'printer_id': r['printer_id']}, 'outputs': {'state': r['state'], 'reason': r['reason'], 'queue_seq': r['queue_seq']}}"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.89b7b5189f7b0cda",
+      "from": "cancel",
+      "to": "code.8d517f817e3bc6d4",
+      "type": "flow",
+      "label": "静态调用 self._emit",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 211,
+        "column": 8,
+        "args": [
+          "'cancel'",
+          "'commit'",
+          "receipt",
+          "run_id",
+          "lambda: {'inputs': {'run_id': run_id}, 'outputs': receipt[0]}"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.cb3b66c2ae766a70",
+      "from": "cancel",
+      "to": "printing",
+      "type": "flow",
+      "label": "静态调用 self.schedule",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 212,
+        "column": 8,
+        "args": [],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.b422215572109681",
+      "from": "printer-stopped",
+      "to": "code.8d517f817e3bc6d4",
+      "type": "flow",
+      "label": "静态调用 self._emit",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 232,
+        "column": 8,
+        "args": [
+          "'printer-stopped'",
+          "'commit'",
+          "receipt",
+          "run_id",
+          "lambda: {'inputs': {'kind': kind}, 'outputs': receipt[0]}"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.9af318742117f0e4",
+      "from": "printer-stopped",
+      "to": "printing",
+      "type": "flow",
+      "label": "静态调用 self.schedule",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 233,
+        "column": 8,
+        "args": [],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.aa54adf70eb1d9d1",
+      "from": "internal.db322c4e6104",
+      "to": "internal.e2167ed950a0",
+      "type": "flow",
+      "label": "静态调用 self.connect",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 13,
+        "column": 21,
+        "args": [],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.8ca6756b7902ce56",
+      "from": "internal.a5f63d79f81f",
+      "to": "internal.e2167ed950a0",
+      "type": "flow",
+      "label": "静态调用 self.connect",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 60,
+        "column": 21,
+        "args": [],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.39e20632f04c9f13",
+      "from": "internal.a5f63d79f81f",
+      "to": "code.39e20632f04c9f13",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.1d4b406e7e5b1306",
+      "from": "internal.a5f63d79f81f",
+      "to": "code.39e20632f04c9f13",
+      "type": "flow",
+      "label": "静态调用 self.snapshot",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 64,
+        "column": 27,
+        "args": [
+          "c"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.8128d5c26dcc594e",
+      "from": "internal.3e01f606f2be",
+      "to": "internal.e2167ed950a0",
+      "type": "flow",
+      "label": "静态调用 self.connect",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 73,
+        "column": 21,
+        "args": [],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.622b76b0f7f62df3",
+      "from": "internal.4542a230c9f1",
+      "to": "lifecycle",
+      "type": "flow",
+      "label": "静态调用 definition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 9,
+        "column": 15,
+        "args": [],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.6cf152badeeb3278",
+      "from": "internal.0647f1304d01",
+      "to": "internal.4542a230c9f1",
+      "type": "flow",
+      "label": "静态调用 self.bo_definition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 17,
+        "column": 30,
+        "args": [],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.d906cda7af591e1a",
+      "from": "internal.0647f1304d01",
+      "to": "internal.d2d94c06d0cb",
+      "type": "flow",
+      "label": "静态调用 self.bo_instances",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 17,
+        "column": 65,
+        "args": [
+          "snap"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.16d1c534f95c1b84",
+      "from": "internal.0647f1304d01",
+      "to": "internal.e1ab014947c6",
+      "type": "flow",
+      "label": "静态调用 validate_instances",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 17,
+        "column": 131,
+        "args": [
+          "snap"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.a1adffefb6144b23",
+      "from": "internal.7accbda09e3b",
+      "to": "code.a1adffefb6144b23",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.8ee378b0cf100957",
+      "from": "internal.7accbda09e3b",
+      "to": "code.a1adffefb6144b23",
+      "type": "flow",
+      "label": "静态调用 transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 47,
+        "column": 24,
+        "args": [
+          "c",
+          "row['id']",
+          "'invalidate'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.2d87b12b77940413",
+      "from": "internal.ab9f7d2bb106",
+      "to": "code.2d87b12b77940413",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.89b5cb21a9c15b2f",
+      "from": "internal.ab9f7d2bb106",
+      "to": "code.2d87b12b77940413",
+      "type": "flow",
+      "label": "静态调用 transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 99,
+        "column": 20,
+        "args": [
+          "c",
+          "run_id",
+          "trigger"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.6806f3c8c9738397",
+      "from": "internal.3cf2454731d5",
+      "to": "internal.802087d53a3c",
+      "type": "flow",
+      "label": "静态调用 self._emit",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 108,
+        "column": 8,
+        "args": [
+          "'approval-change'",
+          "'change'",
+          "receipt",
+          "None",
+          "lambda: {'inputs': {'actor': actor, 'printer_id': printer_id, 'active': active}, 'outputs': {}}"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.734ac4fac65c36c7",
+      "from": "internal.3cf2454731d5",
+      "to": "queue",
+      "type": "flow",
+      "label": "静态调用 self.schedule",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 109,
+        "column": 8,
+        "args": [],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.993c7e137e37d158",
+      "from": "internal.e8370f86a60e",
+      "to": "internal.802087d53a3c",
+      "type": "flow",
+      "label": "静态调用 self._emit",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 136,
+        "column": 8,
+        "args": [
+          "'approval-change'",
+          "'change'",
+          "receipt",
+          "None",
+          "lambda: {'inputs': {'approval_id': approval_id}, 'outputs': {'revoked': True}}"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.7483d4c1faa447f6",
+      "from": "internal.e8370f86a60e",
+      "to": "queue",
+      "type": "flow",
+      "label": "静态调用 self.schedule",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 137,
+        "column": 8,
+        "args": [],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.1c5d9db4cfeaa237",
+      "from": "internal.546f79d04863",
+      "to": "code.1c5d9db4cfeaa237",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.c15fb3ad7b76584d",
+      "from": "internal.546f79d04863",
+      "to": "code.1c5d9db4cfeaa237",
+      "type": "flow",
+      "label": "静态调用 self._authorization",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 154,
+        "column": 23,
+        "args": [
+          "c",
+          "run",
+          "self.clock()"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.48042cbc98aa8877",
+      "from": "internal.546f79d04863",
+      "to": "internal.3589b42935b7",
+      "type": "flow",
+      "label": "静态调用 transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 159,
+        "column": 20,
+        "args": [
+          "c",
+          "run['id']",
+          "'admit'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.d949389c248b2ea8",
+      "from": "internal.546f79d04863",
+      "to": "internal.3589b42935b7",
+      "type": "flow",
+      "label": "静态调用 transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 162,
+        "column": 20,
+        "args": [
+          "c",
+          "run['id']",
+          "'restore_approval'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.d492a19b4c9f31e7",
+      "from": "internal.546f79d04863",
+      "to": "internal.3589b42935b7",
+      "type": "flow",
+      "label": "静态调用 transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 165,
+        "column": 20,
+        "args": [
+          "c",
+          "run['id']",
+          "'lose_approval'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.f285ddc295483242",
+      "from": "internal.546f79d04863",
+      "to": "code.1c5d9db4cfeaa237",
+      "type": "flow",
+      "label": "静态调用 self._authorization",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 171,
+        "column": 27,
+        "args": [
+          "c",
+          "run",
+          "self.clock()"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.935e957ae56c38f7",
+      "from": "internal.546f79d04863",
+      "to": "internal.3589b42935b7",
+      "type": "flow",
+      "label": "静态调用 transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 174,
+        "column": 24,
+        "args": [
+          "c",
+          "run['id']",
+          "'lose_approval'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.b0c0384579463290",
+      "from": "internal.546f79d04863",
+      "to": "internal.3589b42935b7",
+      "type": "flow",
+      "label": "静态调用 transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 177,
+        "column": 20,
+        "args": [
+          "c",
+          "run['id']",
+          "'start'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "contains.code.b6717956baef28ba",
+      "from": "internal.a1ea134870bb",
+      "to": "code.b6717956baef28ba",
+      "type": "contains",
+      "label": "局部函数",
+      "origin": "python-ast",
+      "evidence": "business-map anchor + Python AST call"
+    },
+    {
+      "id": "call.d8feffe4fa68fe4c",
+      "from": "internal.a1ea134870bb",
+      "to": "code.b6717956baef28ba",
+      "type": "flow",
+      "label": "静态调用 transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 202,
+        "column": 24,
+        "args": [
+          "c",
+          "run_id",
+          "'cancel_print'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.d666330b44caa246",
+      "from": "internal.a1ea134870bb",
+      "to": "code.b6717956baef28ba",
+      "type": "flow",
+      "label": "静态调用 transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 207,
+        "column": 24,
+        "args": [
+          "c",
+          "run_id",
+          "'cancel_pending'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.9de8c332ae34c43f",
+      "from": "internal.e92f06c3cb44",
+      "to": "code.b6717956baef28ba",
+      "type": "flow",
+      "label": "静态调用 transition",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 226,
+        "column": 20,
+        "args": [
+          "c",
+          "run_id",
+          "'complete_confirmed' if kind == 'complete' else 'stop_confirmed'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.61c51064c0dfdeed",
+      "from": "internal.9563f5d10d25",
+      "to": "internal.46c00e2a6dd9",
+      "type": "flow",
+      "label": "静态调用 self.bo_view",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 62,
+        "column": 23,
+        "args": [],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.a6109cf592125867",
+      "from": "internal.9563f5d10d25",
+      "to": "internal.46c00e2a6dd9",
+      "type": "flow",
+      "label": "静态调用 self.bo_view",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 68,
+        "column": 20,
+        "args": [],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.59d57477b49e26c5",
+      "from": "internal.84dd13ad3a04",
+      "to": "internal.9563f5d10d25",
+      "type": "flow",
+      "label": "静态调用 self.bo_record",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 98,
+        "column": 8,
+        "args": [
+          "'start'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.6a9537f565456983",
+      "from": "internal.84dd13ad3a04",
+      "to": "internal.9563f5d10d25",
+      "type": "flow",
+      "label": "静态调用 self.bo_record",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 123,
+        "column": 17,
+        "args": [
+          "'stop'"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.b89ce28921b6ee8f",
+      "from": "internal.fcc8c75271ce",
+      "to": "internal.7a8add53f946",
+      "type": "flow",
+      "label": "静态调用 self.reply",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 33,
+        "column": 20,
+        "args": [
+          "app.bo_view()"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.01150db1569862cf",
+      "from": "internal.fcc8c75271ce",
+      "to": "internal.7a8add53f946",
+      "type": "flow",
+      "label": "静态调用 self.reply",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 35,
+        "column": 20,
+        "args": [
+          "app.graph.bo_export()"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.6dadf196b291923b",
+      "from": "internal.fcc8c75271ce",
+      "to": "internal.7a8add53f946",
+      "type": "flow",
+      "label": "静态调用 self.reply",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 37,
+        "column": 20,
+        "args": [
+          "app.bo_preferences()"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.f1cad89889196f04",
+      "from": "internal.fcc8c75271ce",
+      "to": "internal.7a8add53f946",
+      "type": "flow",
+      "label": "静态调用 self.reply",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 39,
+        "column": 20,
+        "args": [
+          "{'saved': [p.stem for p in app.recordings_dir.glob('*.json')], 'active': app.recording['id'] if app.recording else None}"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.fd34f04cf8efdfbf",
+      "from": "internal.fcc8c75271ce",
+      "to": "internal.7a8add53f946",
+      "type": "flow",
+      "label": "静态调用 self.reply",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 44,
+        "column": 20,
+        "args": [
+          "json.loads((app.recordings_dir / (ident + '.json')).read_text())"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.14a449ab94f29b14",
+      "from": "internal.fcc8c75271ce",
+      "to": "internal.7a8add53f946",
+      "type": "flow",
+      "label": "静态调用 self.reply",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 47,
+        "column": 20,
+        "args": [
+          "{'path': path, 'build_id': app.manifest['build_id'], 'text': app.sources[path]}"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.b96bac654b847ed6",
+      "from": "internal.fcc8c75271ce",
+      "to": "internal.7a8add53f946",
+      "type": "flow",
+      "label": "静态调用 self.reply",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 56,
+        "column": 20,
+        "args": [
+          "{'error': 'not_found'}",
+          "404"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.cbe77b4db2431678",
+      "from": "internal.fcc8c75271ce",
+      "to": "internal.7a8add53f946",
+      "type": "flow",
+      "label": "静态调用 self.reply",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 58,
+        "column": 16,
+        "args": [
+          "{'error': str(exc)}",
+          "400"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.d78e837ca0d6b04a",
+      "from": "internal.b51958782a07",
+      "to": "internal.7a8add53f946",
+      "type": "flow",
+      "label": "静态调用 self.reply",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 65,
+        "column": 20,
+        "args": [
+          "{'error': 'cross_origin_denied'}",
+          "403"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.9dc09d56a58964ad",
+      "from": "internal.b51958782a07",
+      "to": "internal.7a8add53f946",
+      "type": "flow",
+      "label": "静态调用 self.reply",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 68,
+        "column": 20,
+        "args": [
+          "{'error': 'body_too_large'}",
+          "413"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.bcf9e0872614141b",
+      "from": "internal.b51958782a07",
+      "to": "internal.7a8add53f946",
+      "type": "flow",
+      "label": "静态调用 self.reply",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 71,
+        "column": 20,
+        "args": [
+          "app.bo_preferences(data)"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.b59c4f1ed7df9be7",
+      "from": "internal.b51958782a07",
+      "to": "internal.7a8add53f946",
+      "type": "flow",
+      "label": "静态调用 self.reply",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 73,
+        "column": 20,
+        "args": [
+          "app.bo_record('start')"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.1f5aa65c7816df80",
+      "from": "internal.b51958782a07",
+      "to": "internal.7a8add53f946",
+      "type": "flow",
+      "label": "静态调用 self.reply",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 75,
+        "column": 20,
+        "args": [
+          "app.bo_record('stop')"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.08206437078f5756",
+      "from": "internal.b51958782a07",
+      "to": "internal.7a8add53f946",
+      "type": "flow",
+      "label": "静态调用 self.reply",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 77,
+        "column": 20,
+        "args": [
+          "app.bo_command(data)"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.7052f0ddb44a1eca",
+      "from": "internal.b51958782a07",
+      "to": "internal.7a8add53f946",
+      "type": "flow",
+      "label": "静态调用 self.reply",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 79,
+        "column": 20,
+        "args": [
+          "{'error': 'not_found'}",
+          "404"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.7dc1d8627ee56642",
+      "from": "internal.b51958782a07",
+      "to": "internal.7a8add53f946",
+      "type": "flow",
+      "label": "静态调用 self.reply",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 81,
+        "column": 16,
+        "args": [
+          "{'error': str(exc)}",
+          "409"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.f57e0f7d4a84885b",
+      "from": "internal.b51958782a07",
+      "to": "internal.7a8add53f946",
+      "type": "flow",
+      "label": "静态调用 self.reply",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 83,
+        "column": 16,
+        "args": [
+          "{'error': str(exc), 'type': type(exc).__name__}",
+          "400"
+        ],
+        "keywords": {}
+      }
+    }
+  ],
+  "graph_roots": [
+    "submit",
+    "checks",
+    "approval",
+    "queue",
+    "printing"
+  ],
+  "overview": [
+    {
+      "node": "submit",
+      "x": 160,
+      "y": 200
+    },
+    {
+      "node": "checks",
+      "x": 400,
+      "y": 200
+    },
+    {
+      "node": "approval",
+      "x": 640,
+      "y": 200
+    },
+    {
+      "node": "queue",
+      "x": 880,
+      "y": 200
+    },
+    {
+      "node": "printing",
+      "x": 1120,
+      "y": 200
+    }
+  ],
+  "scope": {
+    "unknowns": [
+      "静态调用不证明实际调用；外部库内部与动态回调未完整展开",
+      "本地模拟设备，不解析模型文件，不验证真实打印效果",
+      "共享资源由项目 bo_stategraph.validate_instances 检查；冻结 activity-graph/v1 的运行内资源检查不适用",
+      "无多用户身份认证；本地操作者提供合成身份",
+      "事件顺序不是因果证明；本版不构造推测的因果边"
+    ]
+  },
+  "machine": {
+    "engine": "project-python-sqlite",
+    "version": "1",
+    "state_type": "str",
+    "states": [
+      "checking",
+      "check_failed",
+      "check_error",
+      "awaiting_approval",
+      "queued",
+      "blocked",
+      "printing",
+      "stopping",
+      "completed",
+      "cancelled",
+      "superseded"
+    ],
+    "values": [
+      "checking",
+      "check_failed",
+      "check_error",
+      "awaiting_approval",
+      "queued",
+      "blocked",
+      "printing",
+      "stopping",
+      "completed",
+      "cancelled",
+      "superseded"
+    ],
+    "initial": "checking",
+    "context": {
+      "version": {
+        "type": "integer",
+        "min": 1
+      }
+    },
+    "events": {
+      "checks_passed": {
+        "payload": {}
+      },
+      "checks_failed": {
+        "payload": {}
+      },
+      "checks_error": {
+        "payload": {}
+      },
+      "admit": {
+        "payload": {}
+      },
+      "lose_approval": {
+        "payload": {}
+      },
+      "restore_approval": {
+        "payload": {}
+      },
+      "start": {
+        "payload": {}
+      },
+      "cancel_print": {
+        "payload": {}
+      },
+      "stop_confirmed": {
+        "payload": {}
+      },
+      "complete_confirmed": {
+        "payload": {}
+      },
+      "cancel_pending": {
+        "payload": {}
+      },
+      "invalidate": {
+        "payload": {}
+      }
+    },
+    "transitions": [
+      {
+        "trigger": "checks_passed",
+        "source": "checking",
+        "dest": "awaiting_approval"
+      },
+      {
+        "trigger": "checks_failed",
+        "source": "checking",
+        "dest": "check_failed"
+      },
+      {
+        "trigger": "checks_error",
+        "source": "checking",
+        "dest": "check_error"
+      },
+      {
+        "trigger": "admit",
+        "source": "awaiting_approval",
+        "dest": "queued"
+      },
+      {
+        "trigger": "lose_approval",
+        "source": "queued",
+        "dest": "blocked"
+      },
+      {
+        "trigger": "restore_approval",
+        "source": "blocked",
+        "dest": "queued"
+      },
+      {
+        "trigger": "start",
+        "source": "queued",
+        "dest": "printing"
+      },
+      {
+        "trigger": "cancel_print",
+        "source": "printing",
+        "dest": "stopping"
+      },
+      {
+        "trigger": "stop_confirmed",
+        "source": "stopping",
+        "dest": "cancelled"
+      },
+      {
+        "trigger": "complete_confirmed",
+        "source": [
+          "printing",
+          "stopping"
+        ],
+        "dest": "completed"
+      },
+      {
+        "trigger": "cancel_pending",
+        "source": [
+          "checking",
+          "awaiting_approval",
+          "queued",
+          "blocked",
+          "check_failed",
+          "check_error"
+        ],
+        "dest": "cancelled"
+      },
+      {
+        "trigger": "invalidate",
+        "source": [
+          "checking",
+          "awaiting_approval",
+          "queued",
+          "blocked",
+          "check_failed",
+          "check_error"
+        ],
+        "dest": "superseded"
+      }
+    ],
+    "labels": {
+      "checking": "检查中",
+      "check_failed": "检查失败",
+      "check_error": "检查异常",
+      "awaiting_approval": "等待审批",
+      "queued": "等待机器",
+      "blocked": "等待有效审批",
+      "printing": "打印中",
+      "stopping": "等待停止确认",
+      "completed": "已完成",
+      "cancelled": "已取消",
+      "superseded": "旧版本作废"
+    },
+    "guards": {},
+    "source": {
+      "path": "bo_stategraph/declaration.py",
+      "symbol": "definition"
+    }
+  },
+  "presentation": {
+    "subject": "打印任务",
+    "states": {
+      "checking": "检查中",
+      "check_failed": "检查失败",
+      "check_error": "检查异常",
+      "awaiting_approval": "等待审批",
+      "queued": "等待机器",
+      "blocked": "等待有效审批",
+      "printing": "打印中",
+      "stopping": "等待停止确认",
+      "completed": "已完成",
+      "cancelled": "已取消",
+      "superseded": "旧版本作废"
+    }
+  },
+  "project_execution": {
+    "scope": "SQLite shared",
+    "activities": [
+      "size",
+      "material"
+    ],
+    "join": "all",
+    "resource_capacity": 1,
+    "release": "device confirmation"
+  },
+  "static_structure": {
+    "files": {
+      "app/checks.py": "d2fd02f85bab8140d01be0fc7e41950eb784a4474e9ed310a17d7fd51a23aeff",
+      "app/policy.py": "4cfabd0c0514f0d926be9dd9a4bcd545cbbaf63cdba081c2cbb7a36d48632d47",
+      "app/ports.py": "f8817e3b2783789f266e8d54051a890d5852cc590ff9e07bbc7d41ebf9afad1d",
+      "app/store.py": "cd6c143d0cf46e4a47fcffba643501a82fbe9b05d0d1d0014e6f04c239945382",
+      "bo_stategraph/__init__.py": "fce75fd4b268cd2020989f1a3e83dbbb6c06e35d0f62cd6d59e7b0da8e8725da",
+      "bo_stategraph/declaration.py": "64683a6dfe19a6dd9bf08e5a6631592b5da33f71e4fec701f9a55b6d1b8fd141",
+      "bo_stategraph/workflow.py": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b",
+      "integrations/bo_app.py": "61905662894d2255abe44b4025c6ca46da58532c163308870b18bc7a1b54480c",
+      "integrations/bo_capture.py": "4e69f3ccf941c910cf9e8cbe101713d102c69796bd84a0cda94059a2e736ead2",
+      "main.py": "d6ce91845d015ba244ab4f332d38240ae86245989fcae2ae54938a8f104b85ff",
+      "server.py": "a0eb67acec78ae930daa5518cb6afcd406413922a29087d7e8674ecd94c8a247"
+    },
+    "resolved_calls": 72,
+    "unresolved_calls": 345,
+    "depth": 1,
+    "limits": [
+      "Syntactic call candidates, not executed calls or proven data flow.",
+      "Reflection, decorators, inherited/overridden dispatch, callbacks and local instance aliases may remain unresolved.",
+      "Only explicitly selected Python files; no automatic discovery of every new entry point."
+    ]
+  }
+}

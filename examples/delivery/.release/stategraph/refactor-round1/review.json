@@ -1,0 +1,40 @@
+{
+  "candidate_id": "65c36533eda4ad3e66e25bc3bfc43e0048a8ea696045fb446bbd34be9fdf1566",
+  "decisions": {
+    "business": {
+      "action": "unchanged",
+      "reason": "本轮重构保留原有需求、业务预期和事务边界；30 个归档旧新真实场景、交付旧新活动执行对照及完整业务回归核对行为。新增等待实例记录补齐观测，不改变授权或执行结果。"
+    },
+    "state_machine": {
+      "action": "updated",
+      "reason": "完整声明、执行推进、活动/资源/等待/汇合、停止和中断机制集中到 bo_stategraph；原入口只委托。公共校验、实例、页面和导出使用同一协议和实际存储。"
+    },
+    "abstraction": {
+      "action": "updated",
+      "reason": "保留业务和状态 ID，源码绑定迁移至独立模块，新增执行/存储关键函数；默认直接内容，高级辅助节点按需打开。"
+    },
+    "probes": {
+      "action": "updated",
+      "reason": "保留关键探针和原预期；增加实际存储到实例的映射对照、所有源码独立清单、保留策略和独立录制入口。映射、状态约束、业务验证分项报告。"
+    }
+  },
+  "excluded_symbols": {
+    "app/checks.py::run_checks.work": "线程内调用包装：两项实际检查、开始/等待/完成及资源归还分别由 checksum/privacy 与 ActivityExecution 节点表示；并发和异常场景验证。",
+    "app/ports.py::BOEvents": "观测端口及空实现，屏蔽采集故障；on/off/fault 和端口异常测试覆盖，不作为额外业务动作显示。",
+    "app/ports.py::BOEvents.__init__": "观测端口及空实现，屏蔽采集故障；on/off/fault 和端口异常测试覆盖，不作为额外业务动作显示。",
+    "app/ports.py::BOEvents.bo_emit": "观测端口及空实现，屏蔽采集故障；on/off/fault 和端口异常测试覆盖，不作为额外业务动作显示。",
+    "app/service.py::Delivery": "类命名空间或启动/关闭接线，实际领域方法与状态机另有映射；实例身份、核心包启动及关闭由真实场景验证。",
+    "app/service.py::Delivery.__init__": "类命名空间或启动/关闭接线，实际领域方法与状态机另有映射；实例身份、核心包启动及关闭由真实场景验证。",
+    "app/service.py::eligible_grant.remember": "同次条件值的局部收集器，实际求值字段进入 grant 事件，未求值的短路条件不补造；由 grant 判定节点表示。",
+    "app/service.py::observation": "载荷白名单组装，attempt/version/epoch/clock 随调用进入真实探针；不执行领域动作。字段由白盒事件及映射测试检查。",
+    "app/store.py::Store": "类命名空间或启动/关闭接线，实际领域方法与状态机另有映射；实例身份、核心包启动及关闭由真实场景验证。",
+    "app/store.py::Store.__init__": "类命名空间或启动/关闭接线，实际领域方法与状态机另有映射；实例身份、核心包启动及关闭由真实场景验证。",
+    "app/store.py::Store.close": "类命名空间或启动/关闭接线，实际领域方法与状态机另有映射；实例身份、核心包启动及关闭由真实场景验证。",
+    "app/store.py::Store.transaction": "SQLite 事务上下文与共享锁；不是独立业务步骤。实际写入节点与提交后事件表示边界；真实存储效果、并发和核心包测试覆盖。",
+    "bo_stategraph/workflow.py::ActivityExecution": "执行声明/枚举/类型容器；由 machine 状态、事件、上下文及活动声明完整投影，运行时再次比较实际 definition；不重复绘制 Python 类型壳。",
+    "bo_stategraph/workflow.py::ActivityState": "执行声明/枚举/类型容器；由 machine 状态、事件、上下文及活动声明完整投影，运行时再次比较实际 definition；不重复绘制 Python 类型壳。",
+    "bo_stategraph/workflow.py::Phase": "执行声明/枚举/类型容器；由 machine 状态、事件、上下文及活动声明完整投影，运行时再次比较实际 definition；不重复绘制 Python 类型壳。",
+    "bo_stategraph/workflow.py::definition": "执行声明/枚举/类型容器；由 machine 状态、事件、上下文及活动声明完整投影，运行时再次比较实际 definition；不重复绘制 Python 类型壳。"
+  },
+  "requirement_changes": {}
+}

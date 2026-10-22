@@ -1,6 +1,6 @@
 # Software Status Observer Skill
 
-[English](README.en.md) · [安装与使用](docs/usage.zh-CN.md) · [运行示例](examples/delivery/README.md) · [独立开发演练](docs/review/v0.4.0/README.md)
+[English](README.en.md) · [安装与使用](docs/usage.zh-CN.md) · [运行示例](examples/delivery/README.md) · [本轮重构与验收](docs/review/refactor-round1/README.md)
 
 **在 Vibe Coding 中，帮助开发者看懂和调试 AI 生成的程序。**
 
@@ -13,10 +13,14 @@
 - 查看并行活动、可用名额和汇合条件，定位是哪一步阻止流程继续。
 - 按运行和参数版本回看状态，区分当前事实、旧记录和缺失信息。
 - 在同一张节点图中查看业务、函数和状态；拖动并固定节点，使用层次或关系布局。刷新后恢复手动布局。
+- 开始/结束记录程序操作，回放核心事件并定位源码；按业务流、状态机、函数、资源等预设或自定义组合筛选。圈内空白可拖动整组，共享节点通过引用入口显示。见[操作与验证材料](docs/review/recorded-views/README.md)。
+- 可记录全部核心事件或仅选中区域；回放按当前层级组织步骤，显示状态与数值的前后变化。支持节点批注与核心标记。见[本次操作说明与验证](docs/review/focused-replay/README.md)和[类型、规则、采集设计](skills/business-observer/references/types-rules-capture.md)。
 - 修改节点的显示名称和备注，保留源码身份；刷新、折叠再展开后恢复个人标注与观察层次。
 - 搜索函数、参数、名称或备注，直接定位到收起层级中的节点。
 
-用户可以采用任何设计、框架和编码流程。本 Skill 是其中必须维护的观察与验证支线：随开发接入应用状态机、源码映射、关键参数和探针，再核对实际运行。
+AI 默认在内部依据状态网引导开发，用户可以采用任何框架和编码流程。用户明确要求不用这种开发方法时，AI 跟随其实现适配状态网。两种方式都必须维护底层监控、随源码更新的图、参数映射和验证，用户不需要操作中间构建步骤。
+
+Python 的状态网保存在独立模块中。业务既可使用状态机引擎，也可使用自己的函数逻辑；模型、监控和导出不会因此消失。见[两种实现的可运行示例](examples/python-modes/README.md)与[模块契约](skills/business-observer/references/independent-python.md)。完整示例通过 `/api/stategraph/export` 下载全部已建模节点、关系、状态声明和保留的运行证据，页面筛选不影响导出。
 
 Skill 会主动询问影响权限、状态和执行结果的模糊需求。修改代码时，检查图、状态机、探针和测试是否同步。上层结构来自需求理解，局部程序关系来自 Python AST，运行状态来自实际执行。
 
@@ -26,7 +30,7 @@ Skill 会主动询问影响权限、状态和执行结果的模糊需求。修�
 
 ```text
 使用 $skill-installer，从以下地址安装 business-observer：
-https://github.com/li-bruce/SoftwareStatusObserverSkill/tree/v0.4.0/skills/business-observer
+https://github.com/li-bruce/SoftwareStatusObserverSkill/tree/v0.5.0/skills/business-observer
 ```
 
 也可以克隆仓库后安装到指定项目：
@@ -76,12 +80,15 @@ python tools/archive_demo.py --port 8824
 
 ## 项目内容
 
+v0.5.0 完成独立状态网替换、共同校验和统一实例，新增源码范围扫描与收尾映射检查、项目内个人配置、事件保留和版本化升级。映射正确与业务正确分别报告。代码变化及试用证据见[本轮审查材料](docs/review/refactor-round1/README.md)。
+
 v0.4.0 增加贯穿开发过程的白盒约定、实际参数与判断检查、带边界的局部图提取，以及显式文件清单导出。设计依据见[路线与关系设计](docs/design/roadmap.zh-CN.md)，可运行命令见[全过程开发](skills/business-observer/references/continuous-development.md)和[局部图与共享](skills/business-observer/references/focus-and-sharing.md)。
 
 | 目录 | 内容 |
 |---|---|
 | `skills/business-observer/` | Skill 提示、检查脚本、探针和图模板 |
-| `examples/delivery/app/` | 示例自己的状态机、并发活动和业务代码 |
+| `examples/delivery/app/` | 领域函数、业务存储和事务 |
+| `examples/*/bo_stategraph/` | 完整状态执行、活动/资源机制、共同协议和统一查询；个人配置在 config/views |
 | `examples/delivery/integrations/` | 可选观测接入和页面源文件 |
 | `examples/delivery/observer_generated/` | 生成的图、页面和运行库副本 |
 | `examples/team-archive/` | 独立会话开发的资料归档程序及两轮验证记录 |

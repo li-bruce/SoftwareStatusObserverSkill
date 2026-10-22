@@ -36,9 +36,17 @@ def review(root):
     # Synthetic review for failure-injection tests only; never used by installation.
     _, impact = sync(root, 'inspect')
     change = json.loads((root/'.stategraph/active.json').read_text())['change']
+    release = ROOT/'examples/delivery/.release/stategraph'
+    active = Path(json.loads((release/'active.json').read_text())['change']).name
+    shipped = json.loads((release/active/'review.json').read_text(encoding='utf-8'))
+    # This fixture changes only dialogue data. Reuse the actual reviewed symbol
+    # classification for byte-identical source; new or edited source gets no waiver.
+    exclusions = {symbol: reason for symbol, reason in shipped['excluded_symbols'].items()
+                  if (root/symbol.split('::')[0]).read_bytes() ==
+                     (ROOT/'examples/delivery'/symbol.split('::')[0]).read_bytes()}
     save(root/change/'review.json', {
         'candidate_id': impact['candidate_id'],
         'decisions': {part: {'action': 'unchanged', 'reason': 'Synthetic test retains the shipped delivery rules and implementation.'}
                       for part in ('business', 'state_machine', 'abstraction', 'probes')},
-        'excluded_symbols': {}, 'requirement_changes': {}})
+        'excluded_symbols': exclusions, 'requirement_changes': {}})
     return impact

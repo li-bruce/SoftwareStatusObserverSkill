@@ -1,0 +1,1 @@
+{"events_in_memory":8000,"jsonl_rotate_bytes":4194304,"jsonl_files":2,"saved_recording_max_events":20000,"saved_recordings":"explicit files; never deleted by UI cache cleanup","authority_history":"SQLite transaction history; not UI cache","capture_scope":"all integrated core probes","playback_scope":"selected run and revision"}

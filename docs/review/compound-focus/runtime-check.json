@@ -1,0 +1,46 @@
+{
+  "checked_at": "2026-10-20T11:34:15.812499+00:00",
+  "build_id": "7fff406edeecb3653e8f0850b0602fdc62dd47d943c7f7e051bc8c83974c9021",
+  "binding": {
+    "status": "current",
+    "changed_files": [],
+    "model_changed": false,
+    "intent_changed": false,
+    "directly_affected": [],
+    "possibly_affected": []
+  },
+  "last_run": {
+    "id": "c2203f83985d",
+    "phase": "completed",
+    "source_status": "current",
+    "run_build_id": "7fff406edeecb3653e8f0850b0602fdc62dd47d943c7f7e051bc8c83974c9021"
+  },
+  "health": {
+    "enabled": true,
+    "run_id": "6a0b2cc2700c",
+    "attempted": 59,
+    "written": 59,
+    "errors": 0,
+    "dropped": 0,
+    "queued": 0,
+    "mode": "on",
+    "evidence": "available"
+  },
+  "preservation": {
+    "documents": {
+      "before_count": 1,
+      "after_count": 1,
+      "original_rows_unchanged": true
+    },
+    "archives": {
+      "before_count": 1,
+      "after_count": 1,
+      "original_rows_unchanged": true
+    },
+    "runs": {
+      "before_count": 5,
+      "after_count": 8,
+      "original_rows_unchanged": true
+    }
+  }
+}

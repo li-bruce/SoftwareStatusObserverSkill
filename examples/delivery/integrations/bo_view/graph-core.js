@@ -29,6 +29,8 @@ export function selectedEvents(view,choice,step='latest'){
 export function sourceBinding(view,all,id){
   const direct=view?.manifest.bindings[id];if(direct)return direct;
   const node=all?.get(id);
+  if(node?.referenceOf)return view?.manifest.bindings[node.referenceOf]||
+    view?.manifest.bindings[node.event_node];
   return node?.field?view?.manifest.bindings[node.event_node||node.parent]:undefined;
 }
 export function nodeEvents(node,events){return events.filter(e=>e.node===(node.event_node||node.id));}
@@ -44,13 +46,26 @@ export function callValues(node,events){
 }
 function activityName(view,id){return view.model.nodes.find(n=>n.id===id)?.label||id;}
 function activityColor(state){return ({running:'active',waiting:'blocked',rejected:'blocked',failed:'blocked',succeeded:'ok',cancelled:'historical'})[state]||'declared';}
+function resourceOf(node,view,configuration){return view.machine.shared_resources?.[node.id]||configuration?.resources?.[node.id];}
 function phaseValue(view,configuration,choice){return configuration?.selectedFrame?configuration.phase:choice==='latest'?view.machine.current:configuration?.phase;}
+export function parameterSummary(view,_configuration=null,step='latest'){
+  if(step!=='latest')return '';
+  const parameters=view.authority?.parameters||{},fields=view.model.presentation?.context_fields||[];
+  return fields.filter(f=>parameters[f.key]!==undefined).map(f=>
+    (view.historical?(f.saved_label||f.label):f.label)+' '+compact(parameters[f.key])+(f.unit?' '+f.unit:'')).join(' · ');
+}
+function staleBasis(node,view,last){
+  const owner=view.model.nodes.find(n=>n.id===(node.event_node||node.id))||node;
+  const fields=owner.basis_fields||['param_version'];
+  return fields.some(key=>last.basis?.[key]!==view.authority.basis?.[key]);
+}
 export function status(node,view,events,choice,configuration=null){
+  if(node.referenceOf)node={...node,id:node.referenceOf};
   if(configuration?.disposition==='interrupted'&&(node.execution_role||node.id===view.model.machine.execution?.parent))return 'historical';
-  if(node.execution_role==='activity')return activityColor(configuration?.activities[node.id]);
-  if(node.execution_role==='resource')return configuration?(configuration.resources[node.id].available===0?'blocked':'ok'):'declared';
-  if(node.execution_role==='join')return ({waiting:'blocked',enabled:'active',passed:'ok',rejected:'blocked'})[configuration?.join.state]||'declared';
-  if(node.id===view.model.machine.execution?.parent&&configuration)return Object.values(configuration.activities).includes('running')?'active':configuration.join.state==='passed'?'ok':'blocked';
+  if(node.execution_role==='activity')return activityColor(configuration?.activities?.[node.id]);
+  if(node.execution_role==='resource'){const r=resourceOf(node,view,configuration);return typeof r?.available==='number'?(r.available===0?'blocked':'ok'):'declared';}
+  if(node.execution_role==='join')return ({waiting:'blocked',enabled:'active',passed:'ok',rejected:'blocked'})[configuration?.join?.state]||'declared';
+  if(node.id===view.model.machine.execution?.parent&&configuration)return Object.values(configuration.activities||{}).includes('running')?'active':configuration.join?.state==='passed'?'ok':'blocked';
   if(node.layer==='state')return node.value===phaseValue(view,configuration,choice)?'active':'declared';
   if(node.field){const values=callValues(node,events)[node.direction==='in'?'inputs':'outputs'];if(!(node.field in values))return 'declared';}
   if(node.layer==='business'){
@@ -58,51 +73,55 @@ export function status(node,view,events,choice,configuration=null){
     return ['active','blocked','ok','historical'].find(s=>states.includes(s))||'declared';
   }
   const last=nodeEvents(node,events).at(-1);if(!last)return 'declared';
-  if(view.binding_status.status!=='current'||choice!=='latest'||last.basis.param_version!==view.authority.basis.param_version)return 'historical';
+  if(view.binding_status.status!=='current'||choice!=='latest'||staleBasis(node,view,last))return 'historical';
   if(last.phase==='wait'||last.phase==='error'||last.outputs.allowed===false||last.outputs.safe===false)return 'blocked';
   return last.phase==='enter'?'active':'ok';
 }
 export function lines(node,view,events,choice,configuration=null){
+  if(node.referenceOf)node={...node,id:node.referenceOf};
   if(node.field){const values=callValues(node,events)[node.direction==='in'?'inputs':'outputs'];return [{text:node.field+': '+typeName(node.fieldType),role:'symbol'},{text:node.field in values?compact(values[node.field]):'本次尚未采集',role:node.field in values?'value':'muted'}];}
   const last=nodeEvents(node,events).at(-1),result=[{text:node.signature||node.source?.symbol||node.summary,role:'symbol'}];
+  if(node.execution_role==='resource'){
+    const r=resourceOf(node,view,configuration);
+    if(!r){result.push({text:'此边界未记录资源状态',role:'muted'});return result;}
+    for(const [field,value] of Object.entries(r))result.push({text:`${node.field_labels?.[field]||field}：${compact(value)}`,role:field==='available'&&value===0?'bad':'value'});
+    return result;
+  }
   if(node.execution_role){
     if(!configuration){result.push({text:'这次运行尚未保存内部状态',role:'muted'});return result;}
     if(node.execution_role==='activity'){
-      const state=configuration.activities[node.id];result.push({text:stateLabels[state],role:state==='waiting'||state==='failed'||state==='rejected'?'bad':'good'});
+      const state=configuration.activities?.[node.id];result.push({text:stateLabels[state]||state||'未记录',role:state==='waiting'||state==='failed'||state==='rejected'?'bad':'good'});
       if(configuration.disposition==='interrupted')result[result.length-1]={text:'执行已中断；最后记录为「'+stateLabels[state]+'」',role:'muted'};
-      result.push({text:`state: ${view.model.machine.execution.activity_state_type||'str'} = ${state}`,role:'value'});
-      if(node.id==='privacy')result.push({text:'检查文本是否含有 SECRET: 标记',role:'muted'});
-    }else if(node.execution_role==='resource'){
-      const r=configuration.resources[node.id];result.push({text:(configuration.disposition==='interrupted'?'中断前：':'')+`可用 ${r.available} / 共 ${r.capacity} 个名额`,role:r.available?'good':'bad'});
-      result.push({text:`available: int = ${r.available}`,role:'value'});
-      result.push({text:r.holders.length?'正在占用：'+r.holders.map(x=>activityName(view,x)).join('、'):'没有检查占用名额',role:'muted'});
-      return result;
+      result.push({text:`state: ${view.model.machine.execution?.activity_state_type||'str'} = ${state??'未记录'}`,role:'value'});
+      if(node.summary)result.push({text:node.summary,role:'muted'});
     }else{
-      const j=configuration.join;result.push({text:({waiting:'还有检查未完成',enabled:'检查已结束，正在确认结果',passed:'两项检查均已通过',rejected:'检查未全部通过，不能提交'})[j.state],role:j.state==='passed'?'good':'bad'});
-      if(j.pending.length)result.push({text:'仍需等待：'+j.pending.map(x=>activityName(view,x)).join('、'),role:'muted'});
-      result.push({text:'两项结果都通过，才进入「可以提交」',role:'muted'});return result;
+      const j=configuration.join;if(!j){result.push({text:'此边界未记录汇合状态',role:'muted'});return result;}
+      result.push({text:({waiting:'还有活动未完成',enabled:'活动已结束，正在确认结果',passed:'全部活动已通过',rejected:'活动未全部通过'})[j.state]||j.state,role:j.state==='passed'?'good':'bad'});
+      if(j.pending?.length)result.push({text:'仍需等待：'+j.pending.map(x=>activityName(view,x)).join('、'),role:'muted'});
+      if(node.summary)result.push({text:node.summary,role:'muted'});return result;
     }
   }else if(node.layer==='state'){
     result.push({text:`phase: Phase = ${node.value}`,role:'value'});
     result.push({text:node.value===phaseValue(view,configuration,choice)?'这次运行的流程状态':'可到达的流程状态',role:'muted'});
-    if(node.value==='checking'&&configuration){for(const [id,state] of Object.entries(configuration.activities))result.push({text:activityName(view,id)+'：'+stateLabels[state],role:state==='waiting'?'bad':'value'});}
+    if(node.value===view.model.machine.execution?.within&&configuration){for(const [id,state] of Object.entries(configuration.activities||{}))result.push({text:activityName(view,id)+'：'+stateLabels[state],role:state==='waiting'?'bad':'value'});}
     return result;
   }else if(node.layer==='business'){
     result.push({text:node.summary,role:'muted'});
     if(node.id===view.model.machine.execution?.parent){
       if(configuration){
         if(configuration.disposition==='interrupted')result.push({text:'这次执行已中断；下方是最后保存的状态',role:'bad'});
-        for(const [id,state] of Object.entries(configuration.activities))result.push({text:activityName(view,id)+'：'+stateLabels[state],role:state==='waiting'||state==='failed'?'bad':'value'});
-        for(const r of Object.values(configuration.resources))result.push({text:`本次可用名额：${r.available} / ${r.capacity}`,role:'value'});
+        for(const [id,state] of Object.entries(configuration.activities||{}))result.push({text:activityName(view,id)+'：'+stateLabels[state],role:state==='waiting'||state==='failed'?'bad':'value'});
+        for(const r of Object.values(configuration.resources||{}))result.push({text:`本次可用名额：${r.available} / ${r.capacity}`,role:'value'});
       }else result.push({text:'尚未开始检查',role:'muted'});
     }else{
       const names={'allowed':'允许执行','version_ok':'参数版本仍有效','param_version':'参数版本','length':'文本长度','version':'已提交版本','reason':'不能继续的原因'};
       const reasons={no_current_authorization:'没有有效授权',check_rejected:'检查未全部通过',authorization_or_version_changed:'授权或参数版本已经改变',worker_error:'检查函数发生错误',process_restarted:'进程重启，原检查已中断'};
       const ids=view.model.nodes.filter(n=>n.parent===node.id&&n.layer!=='state').map(n=>n.id);
-      for(const id of ids){const e=events.filter(e=>e.node===id).at(-1);if(e)for(const [k,v] of Object.entries(e.outputs).filter(([k])=>names[k]).slice(0,2))result.push({text:`${names[k]}：${v===true?'是':v===false?'否':k==='reason'?(reasons[v]||v):compact(v)}`,role:v===false?'bad':'value'});}
+      for(const id of ids){const e=events.filter(e=>e.node===id).at(-1),child=view.model.nodes.find(n=>n.id===id);if(e)for(const [k,v] of Object.entries(e.outputs).slice(0,2))result.push({text:`${child?.field_labels?.[k]||names[k]||k}：${v===true?'是':v===false?'否':k==='reason'?(reasons[v]||v):compact(v)}`,role:v===false?'bad':'value'});}
     }
     return result;
   }
+  if(last&&staleBasis(node,view,last))result.push({text:'历史判断/读取：依据已改变，等待重新求值',role:'muted'});
   for(const [direction,spec] of Object.entries(node.capture||{})){
     const vals=callValues(node,events)[direction==='in'?'inputs':'outputs'];
     for(const [key,t] of Object.entries(spec)){
@@ -116,11 +135,11 @@ export function lines(node,view,events,choice,configuration=null){
 export function wrapText(text,width=47){const out=[];let row='',units=0;for(const c of text){const size=c.charCodeAt(0)>255?1.8:1;if(c==='\n'||units+size>width){out.push(row);row='';units=0;if(c==='\n')continue;}row+=c;units+=size;}if(row||!out.length)out.push(row);return out;}
 
 export const nodeTypes={business:{label:'业务',glyph:'B',color:0x5075b5},function:{label:'函数',glyph:'ƒ',color:0x387c88},state:{label:'状态',glyph:'S',color:0x9869a0},decision:{label:'判断',glyph:'?',color:0xaf8029},resource:{label:'资源',glyph:'R',color:0x7b8845},data:{label:'参数',glyph:'x',color:0x627f9c},effect:{label:'结果',glyph:'✓',color:0x2d8a70},wait:{label:'等待',glyph:'…',color:0xb38442}};
-export function nodeType(n){return n.layer==='business'?'business':n.kind==='state'?'state':n.execution_role==='resource'?'resource':n.kind==='decision'?'decision':n.kind==='data'?'data':n.kind==='effect'?'effect':n.kind==='wait'?'wait':'function';}
+export function nodeType(n){return n.layer==='business'?'business':n.kind==='state'?'state':n.execution_role==='resource'?'resource':n.kind==='decision'||n.execution_role==='join'?'decision':n.kind==='data'?'data':n.kind==='effect'?'effect':n.kind==='wait'?'wait':'function';}
 
 // One typed graph. Folding changes visible nodes, never their identities or facts.
 // The old layoutGraph name remains for integrations; coordinates are assigned by layout.js.
-export function layoutGraph(view,expanded=new Set(),_sourceOpen=new Set(),_fullSources=new Map(),choice='latest',step='latest'){
+export function layoutGraph(view,expanded=new Set(),_sourceOpen=new Set(),_fullSources=new Map(),choice='latest',step='latest',options={}){
   const configuration=selectedConfiguration(view,choice,step),events=selectedEvents(view,choice,step);
   const all=new Map(view.model.nodes.map(n=>[n.id,n])),children=new Map(),rawEdges=[...view.model.edges];
   for(const n of view.model.nodes){
@@ -135,18 +154,36 @@ export function layoutGraph(view,expanded=new Set(),_sourceOpen=new Set(),_fullS
   for(const value of view.model.machine.values)if(!all.has('state.'+value)){
     all.set('state.'+value,{id:'state.'+value,label:view.model.machine.labels[value],kind:'state',layer:'state',value,source:view.model.machine.source});
   }
+  // Membership is a view reference to one canonical identity, not another call.
+  for(const m of options.memberships||[]){
+    const member=all.get(m.member),group=all.get(m.group);
+    if(!member||!group||member.parent===group.id||member.id===group.id)continue;
+    const id='ref:'+encodeURIComponent(group.id)+':'+encodeURIComponent(member.id);
+    all.set(id,{...member,id,parent:group.id,referenceOf:member.id,event_node:member.event_node||member.id,
+      summary:'共享入口：'+m.reason,origin:'membership-reference',membership:m});
+    rawEdges.push({id:'shared:'+id,from:id,to:member.id,type:'shared',label:'同一个节点',evidence:m.evidence});
+  }
+  let matched=null;
+  if(options.match){
+    matched=options.match(all,events,n=>status(n,view,events,choice,configuration));
+    for(const id of matched){
+      const node=all.get(id),seen=new Set([id]);let parent=node.parent;
+      while(parent&&!matched.has(parent)&&!seen.has(parent)){seen.add(parent);parent=all.get(parent)?.parent;}
+      all.set(id,{...node,parent:parent&&matched.has(parent)?parent:undefined});
+    }
+  }
   for(const n of all.values())if(n.parent){if(!children.has(n.parent))children.set(n.parent,[]);children.get(n.parent).push(n.id);}
-  const visibleIds=new Set(view.model.graph_roots||view.model.overview.map(x=>x.node));
-  // Lifecycle states remain in this canvas, connected to their business owners.
-  for(const n of all.values())if(n.kind==='state')visibleIds.add(n.id);
+  const visibleIds=matched?new Set([...matched].filter(id=>!all.get(id).parent)):new Set(view.model.graph_roots||view.model.overview.map(x=>x.node));
+  // State nodes follow the same containment and expansion rules as functions.
+  // Folding affects visibility only; all states and facts remain in `all`.
   function reveal(id,seen=new Set()){
     if(seen.has(id))return;seen.add(id);
-    if(expanded.has(id))for(const child of children.get(id)||[]){visibleIds.add(child);reveal(child,seen);}
+    if(expanded.has(id))for(const child of children.get(id)||[])if(!matched||matched.has(child)){visibleIds.add(child);reveal(child,seen);}
   }
   for(const id of [...visibleIds])reveal(id);
-  const boxes=[...visibleIds].filter(id=>all.has(id)).map((id,i)=>{
+  const boxes=[...visibleIds].filter(id=>all.has(id)&&(!options.include||options.include(all.get(id)))).map((id,i)=>{
     const node=all.get(id),type=nodeType(node),rows=lines(node,view,events,choice,configuration);
-    return {id,node,type,rows,open:expanded.has(id),kids:children.get(id)||[],state:status(node,view,events,choice,configuration),
+    return {id,node,type,rows,open:expanded.has(id),kids:(children.get(id)||[]).filter(id=>(!matched||matched.has(id))&&(!options.include||options.include(all.get(id)))),state:status(node,view,events,choice,configuration),
       x:80+(i%5)*230,y:70+Math.floor(i/5)*180,w:190,h:type==='state'?105:135};
   });
   const byId=new Map(boxes.map(b=>[b.id,b]));
@@ -154,26 +191,27 @@ export function layoutGraph(view,expanded=new Set(),_sourceOpen=new Set(),_fullS
   const edgeMap=new Map();
   for(const e of rawEdges){
     const from=visible(e.from),to=visible(e.to);
-    if(!from||!to||from===to)continue;
+    if(!from||!to||(from===to&&e.from!==e.to))continue;
     if(['python-ast','capture-field'].includes(e.origin)&&(from!==e.from||to!==e.to))continue;
     const source=all.get(e.from),target=all.get(e.to);
     if(!source||!target)continue;
     const sourceEvents=nodeEvents(source,events),targetEvents=nodeEvents(target,events),ids=new Set(sourceEvents.map(x=>x.id));
-    let observed=!['python-ast','capture-field'].includes(e.origin)&&e.type!=='contains'&&targetEvents.some(x=>(x.depends||[]).some(d=>ids.has(d.event)));
+    let observed=!['python-ast','capture-field'].includes(e.origin)&&!['contains','shared'].includes(e.type)&&targetEvents.some(x=>(x.depends||[]).some(d=>ids.has(d.event)&&d.type===e.type));
     let label=e.type==='contains'?(target.kind==='state'?'涉及状态':'包含'):e.label;
     if(configuration&&e.type==='resource'){
-      const state=configuration.activities[e.to];observed=!!state&&state!=='pending';
+      const state=configuration.activities?.[e.to];observed=!!state&&state!=='pending';
       label=state==='running'?`占用 ${e.units} 个名额`:state==='waiting'?'名额已用完，正在等待':['succeeded','failed','rejected'].includes(state)?'已归还名额':e.label;
     }
     if(configuration&&e.type==='join'){
-      const state=configuration.activities[e.from];observed=['succeeded','failed','rejected'].includes(state);
+      const state=configuration.activities?.[e.from];observed=['succeeded','failed','rejected'].includes(state);
       label=state==='succeeded'?'这项检查已通过':state==='failed'?'检查出错':state==='rejected'?'检查未通过':'等待这项检查结束';
     }
     const current=choice==='latest'&&view.binding_status.status==='current'&&(!sourceEvents.length||sourceEvents.at(-1)?.basis.param_version===view.authority.basis.param_version);
     // Different relation types sharing endpoints remain separate edges.
-    const key=from+'>'+to+':'+e.type;
-    if(edgeMap.has(key)){const found=edgeMap.get(key);found.labels.add(label);found.observed ||= observed;}
-    else edgeMap.set(key,{...e,from,to,labels:new Set([label]),observed,current});
+    const key=from+'>'+to+':'+e.type+':'+(e.origin||'model');
+    const member={...e,label,observed,current};
+    if(edgeMap.has(key)){const found=edgeMap.get(key);found.labels.add(label);found.observed ||= observed;found.members.push(member);}
+    else edgeMap.set(key,{...e,from,to,labels:new Set([label]),members:[member],observed,current});
   }
   const attempt=currentAttempt(view,choice);
   for(const t of view.model.machine.transitions){
@@ -187,7 +225,7 @@ export function layoutGraph(view,expanded=new Set(),_sourceOpen=new Set(),_fullS
       edgeMap.set(id,{id,from,to,type:'transition',event:t.trigger,labels:new Set([view.model.machine.event_labels?.[t.trigger]||t.trigger]),observed,current:choice==='latest'});
     }
   }
-  const graph={boxes,byId,edges:[...edgeMap.values()],events,configuration,children,all};
+  const graph={boxes,byId,edges:[...edgeMap.values()],rawEdges,events,configuration,children,all};
   return graphBounds(graph);
 }
 export function graphBounds(graph){

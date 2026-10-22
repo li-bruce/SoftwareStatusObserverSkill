@@ -1,0 +1,35 @@
+{
+  "revision_date": "2026-10-22",
+  "scope": "Documentation revision only; product tests from 2026-10-21 were not rerun.",
+  "local_links_checked": 35,
+  "missing_or_invalid_links": [],
+  "audited_source_files_checked": 50,
+  "changed_audited_sources": [],
+  "package_check": {
+    "command": ".venv/Scripts/python.exe -B -X utf8 tools/check_package.py",
+    "exit_code": 0,
+    "result": "Package references and 17 copied runtime modules match."
+  },
+  "documents": [
+    {
+      "path": "docs/assessment/2026-10-21/README.md",
+      "sha256": "8689aaf2dbe1d6952b326c4fc2b0f679527dd7ec171526e3d0cacbdff84a94e2",
+      "lines": 341
+    },
+    {
+      "path": "docs/assessment/2026-10-21/NEXT-DEVELOPMENT.md",
+      "sha256": "52e9fe733357f1b372f74cf644539fdf0fb2bff27b6ecdd7d558fd733b90225b",
+      "lines": 246
+    }
+  ],
+  "historical_evidence_preserved": [
+    "inventory.json",
+    "checks.json",
+    "baseline-summary.json",
+    "check-00.log",
+    "check-01.log",
+    "check-02.log",
+    "reproductions.json",
+    "report-check.json"
+  ]
+}

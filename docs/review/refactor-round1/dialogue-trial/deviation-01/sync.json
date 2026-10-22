@@ -1,0 +1,157 @@
+{
+  "model": "behavior.json",
+  "manifest": "manifest.json",
+  "code_files": [
+    "app/checks.py",
+    "app/policy.py",
+    "app/ports.py",
+    "app/store.py",
+    "bo_stategraph/__init__.py",
+    "bo_stategraph/declaration.py",
+    "bo_stategraph/workflow.py",
+    "integrations/bo_app.py",
+    "integrations/bo_capture.py",
+    "server.py",
+    "main.py"
+  ],
+  "watch_files": [
+    "AGENTS.md",
+    "ownership.json",
+    "config/printers.json",
+    "bo_stategraph/config/retention.json",
+    "observer_runtime/__init__.py",
+    "observer_runtime/architecture_guard.py",
+    "observer_runtime/behavior_model.py",
+    "observer_runtime/bo_contracts.py",
+    "observer_runtime/bo_retention.py",
+    "observer_runtime/bo_runtime.py",
+    "observer_runtime/bo_stategraph.py",
+    "observer_runtime/bo_sync.py",
+    "observer_runtime/bo_upgrade.py",
+    "observer_runtime/change_sync.py",
+    "observer_runtime/code_structure.py",
+    "observer_runtime/execution_contract.py",
+    "observer_runtime/focus_graph.py",
+    "observer_runtime/mapping_contract.py",
+    "observer_runtime/model_tool.py",
+    "observer_runtime/probe.py",
+    "observer_runtime/project_bundle.py",
+    "observer_runtime/recording_session.py",
+    "observer_runtime/requirements_dialogue.py",
+    "observer_runtime/semantic_probe.py",
+    "observer_runtime/statechart_contract.py",
+    "observer_runtime/sync_config.py",
+    "observer_runtime/sync_io.py",
+    "observer_runtime/sync_verify.py",
+    "observer_runtime/view_preferences.py",
+    "observer_runtime/viewer_server.py",
+    "observer_runtime/whitebox_contract.py",
+    "observer_runtime/worknet_contract.py",
+    "static/index.html",
+    "static/viewer.css",
+    "static/viewer.js",
+    "tests/__init__.py",
+    "tests/browser.cjs",
+    "tests/scenarios.py",
+    "tests/test_policy.py",
+    "tests/test_project.py",
+    "tooling/browser_check.ps1",
+    "tooling/build_model.py",
+    "tooling/contracts.py",
+    "tooling/gate.py",
+    "tooling/mutation_check.py",
+    "tooling/observe.py",
+    "tooling/review_candidate.py",
+    "review/round-03/prepare.py"
+  ],
+  "acceptance": "acceptance.json",
+  "discovery": "discovery.json",
+  "slice_depth": 1,
+  "probe_callees": [
+    "self._emit"
+  ],
+  "probe_modes": [
+    "on",
+    "off",
+    "fault"
+  ],
+  "require_mapping_witnesses": true,
+  "source_scope": {
+    "roots": [
+      "."
+    ],
+    "exclude": {
+      "review/*": "轮次记录与文档重现脚本，非业务实现",
+      "tooling/*": "开发检查入口，作为 watch_files 单独绑定",
+      "tests/*": "独立测试，作为 watch_files 单独绑定",
+      "observer_runtime/*": "冻结 Skill 通用运行库，文件及散列通过 watch_files 与 ownership 单独绑定；不作为本项目业务函数"
+    },
+    "require_symbol_classification": true
+  },
+  "observations_command": [
+    "{python}",
+    "-B",
+    "-X",
+    "utf8",
+    "tooling/observe.py"
+  ],
+  "test_commands": [
+    [
+      "{python}",
+      "-B",
+      "-X",
+      "utf8",
+      "tests/test_policy.py"
+    ],
+    [
+      "{python}",
+      "-B",
+      "-X",
+      "utf8",
+      "tests/test_project.py"
+    ]
+  ],
+  "timeout_seconds": 120,
+  "whitebox": "whitebox.json",
+  "stategraph": {
+    "module": "bo_stategraph/__init__.py",
+    "development_mode": "guided",
+    "execution_mode": "drive",
+    "decision_source": "skill-default",
+    "decision": "普通 Python 项目执行器消费同一生命周期声明"
+  },
+  "required_probes": [
+    {
+      "symbol": "bo_stategraph/workflow.py::Workflow.schedule",
+      "node": "printing",
+      "phase": "commit"
+    },
+    {
+      "symbol": "bo_stategraph/workflow.py::Workflow.confirm",
+      "node": "printer-stopped",
+      "phase": "commit"
+    },
+    {
+      "symbol": "bo_stategraph/workflow.py::Workflow.run_checks",
+      "node": "checks",
+      "phase": "decision"
+    }
+  ],
+  "required_runtime_probes": [
+    {
+      "case": "happy",
+      "node": "printing",
+      "phase": "commit"
+    },
+    {
+      "case": "happy",
+      "node": "printer-stopped",
+      "phase": "commit"
+    },
+    {
+      "case": "check_error",
+      "node": "check-worker",
+      "phase": "error"
+    }
+  ]
+}

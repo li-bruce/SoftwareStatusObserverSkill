@@ -9,6 +9,10 @@ import hashlib
 import json
 from pathlib import Path
 import sys
+try:
+    from .bo_contracts import validate_graph
+except ImportError:
+    from bo_contracts import validate_graph
 
 
 def read(path):
@@ -55,51 +59,21 @@ def contained(root, name):
 
 
 def validate(root, model):
+    nodes = validate_graph(model)
     if model.get("schema_version") != 3:
         raise ValueError("expected model v3")
-    for key in ("revision", "intent", "source_files", "nodes", "edges", "overview", "scope"):
-        if not model.get(key):
-            raise ValueError(f"missing {key}")
-    nodes = {n["id"]: n for n in model["nodes"]}
-    if len(nodes) != len(model["nodes"]):
-        raise ValueError("duplicate nodes")
     intent = read(contained(root, model["intent"]))
     requirements = {r["id"] for r in intent["requirements"]}
-    for r in intent["requirements"]:
-        if r.get("status") not in {"confirmed", "assumption", "pending"} or not r.get("source"):
+    for requirement in intent["requirements"]:
+        if requirement.get("status") not in {"confirmed", "assumption", "pending"} or not requirement.get("source"):
             raise ValueError("missing requirement provenance")
-    for n in nodes.values():
-        if n["kind"] not in {"action", "function", "decision", "wait", "effect", "data", "state"}:
-            raise ValueError("invalid node kind")
-        if not n.get("label") or not n.get("summary"):
-            raise ValueError("node lacks developer explanation")
-        if n["kind"] not in {"data", "state"} and not n.get("source"):
-            raise ValueError(f"executable node lacks source: {n['id']}")
-        if n.get("source"):
-            contained(root, n["source"]["path"])
-            if n["source"]["path"] not in model["source_files"]:
+    for node in nodes.values():
+        if node.get("source"):
+            contained(root, node["source"]["path"])
+            if node["source"]["path"] not in model["source_files"]:
                 raise ValueError("source binding outside explicit scope")
-        if set(n.get("requirements", [])) - requirements:
+        if set(node.get("requirements", [])) - requirements:
             raise ValueError("unknown requirement")
-        seen = {n["id"]}
-        parent = n.get("parent")
-        while parent:
-            if parent not in nodes or parent in seen:
-                raise ValueError("missing parent or hierarchy cycle")
-            seen.add(parent)
-            parent = nodes[parent].get("parent")
-    edge_ids = set()
-    for e in model["edges"]:
-        if e["id"] in edge_ids or e["from"] not in nodes or e["to"] not in nodes:
-            raise ValueError("duplicate/dangling edge")
-        edge_ids.add(e["id"])
-        if e["type"] not in {"flow", "data", "guard", "contains", "resource", "join"} or not e.get("evidence"):
-            raise ValueError("edge needs type and provenance")
-        if e['type'] in {'resource','join'} and not model.get('machine',{}).get('execution'):
-            raise ValueError('resource and join edges need an executable activity declaration')
-    for item in model["overview"]:
-        if item["node"] not in nodes:
-            raise ValueError("unknown overview node")
     for name in model["source_files"]:
         if not contained(root, name).is_file():
             raise ValueError(f"missing tracked source: {name}")

@@ -1,0 +1,113 @@
+{
+  "valid": true,
+  "errors": [],
+  "checks": [
+    {
+      "check": "grant-version",
+      "rule": "grant-version",
+      "requirement": "R03",
+      "case": "happy",
+      "node": "grant-match",
+      "source": {
+        "path": "app/policy.py",
+        "symbol": "grant_matches"
+      },
+      "events": [
+        "9655f79c7c74:25",
+        "9655f79c7c74:28",
+        "9655f79c7c74:33",
+        "9655f79c7c74:37",
+        "9655f79c7c74:39"
+      ],
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "check": "expiry-check",
+      "rule": "expiry-check",
+      "requirement": "R01",
+      "case": "expiry_window",
+      "node": "approval",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow._authorization"
+      },
+      "events": [
+        "26ff129ea417:16"
+      ],
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "check": "parallel-result",
+      "rule": "parallel-result",
+      "requirement": "R02",
+      "case": "happy",
+      "node": "check-size",
+      "source": {
+        "path": "app/checks.py",
+        "symbol": "check_size"
+      },
+      "events": [
+        "9655f79c7c74:7",
+        "9655f79c7c74:15"
+      ],
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "check": "error-visible",
+      "rule": "error-visible",
+      "requirement": "R08",
+      "case": "check_error",
+      "node": "check-worker",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow._check"
+      },
+      "events": [
+        "9279cc1f9d6c:9"
+      ],
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "check": "cancel-waits",
+      "rule": "cancel-waits",
+      "requirement": "R09",
+      "case": "version_printing",
+      "node": "cancel",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.cancel"
+      },
+      "events": [
+        "43cbb02294cd:33"
+      ],
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "check": "confirmation-release",
+      "rule": "confirmation-release",
+      "requirement": "R06",
+      "case": "version_printing",
+      "node": "printer-stopped",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.confirm"
+      },
+      "events": [
+        "43cbb02294cd:38"
+      ],
+      "status": "passed",
+      "errors": []
+    }
+  ],
+  "coverage": {
+    "rules": 6,
+    "checks": 6,
+    "passed": 6
+  },
+  "scope": "Declared source bindings and observed values; missing evidence never passes."
+}

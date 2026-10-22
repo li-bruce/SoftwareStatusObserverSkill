@@ -1,0 +1,6 @@
+
+# Personal views are never regenerated or shipped with the executable core.
+bo_stategraph/config/views/local.json
+bo_stategraph/config/views/.local-*.tmp
+
+bo_stategraph/config/views/local.lock

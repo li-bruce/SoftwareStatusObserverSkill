@@ -1,6 +1,6 @@
 # Software Status Observer Skill
 
-[中文](README.md) · [Installation and usage](docs/usage.en.md) · [Runnable example](examples/delivery/README.en.md) · [Independent trial](docs/review/v0.4.0/README.md)
+[中文](README.md) · [Installation and usage](docs/usage.en.md) · [Runnable example](examples/delivery/README.en.md) · [Refactor review](docs/review/refactor-round1/README.md)
 
 **Understand and debug the programs you build with AI.**
 
@@ -10,13 +10,17 @@
 
 - Expand a business action into internal activities and key functions, then inspect its source.
 - Keep business, function and state nodes in one graph. Drag and pin nodes, apply layered or stress layouts, and restore positions after reload.
+- Start and stop a recording of program operations, replay instrumented events, and locate their source. Use preset or custom analysis views, drag groups from their empty interior, and inspect shared nodes through references. See the [walkthrough and checks (Chinese)](docs/review/recorded-views/README.md).
+- Capture all instrumented core events or a selected region. Replay steps follow the visible abstraction level and show before/after values. Add node notes and core markers. See the [focused replay review](docs/review/focused-replay/README.md) and [type, rule and capture design](skills/business-observer/references/types-rules-capture.md) (Chinese).
 - Add display names and notes without changing source identities; preserve personal labels and nested expansion across reloads.
 - Search names, functions, parameters and notes, including nodes inside collapsed regions.
 - Read parameter types, actual values, outcomes and waiting conditions directly on nodes and edges.
 - Follow concurrent activities, available capacity and join conditions to find what blocks progress.
 - Inspect each run and parameter version without confusing current facts, history and missing observations.
 
-Use any design method, framework or coding workflow. This Skill adds a required companion track for the chosen scope: application state, source mapping, key parameters, probes and runtime verification.
+By default, the coding agent uses the state network to guide implementation internally. Users may choose any framework or coding workflow. If a user explicitly declines this development approach, the agent adapts the network to their implementation. Both modes require instrumentation, source-driven model updates, graph display and verification, without exposing intermediate maintenance steps as a user workflow.
+
+The Python state network lives in an independent module. Business code may use a state-machine engine or ordinary functions; structure, observation and export remain available in either case. See the [runnable two-mode example](examples/python-modes/README.md) and [module contract](skills/business-observer/references/independent-python.md) (Chinese). Full demos expose `/api/stategraph/export` for the complete declared graph and retained runtime evidence, independently of viewport filters.
 
 The Skill asks about unclear requirements that affect permissions, state or outcomes. During edits it checks whether the graph, state machine, probes and tests remain consistent. Business abstractions come from requirements; local code relationships come from Python AST analysis; runtime facts come from execution.
 
@@ -26,7 +30,7 @@ In Codex with `$skill-installer`, enter:
 
 ```text
 Use $skill-installer to install business-observer from:
-https://github.com/li-bruce/SoftwareStatusObserverSkill/tree/v0.4.0/skills/business-observer
+https://github.com/li-bruce/SoftwareStatusObserverSkill/tree/v0.5.0/skills/business-observer
 ```
 
 Or clone this repository and install into a project:
@@ -69,6 +73,8 @@ The example uses synthetic text and local SQLite. The graph polls about every 40
 
 ## Repository layout
 
+Version 0.5.0 moves complete lifecycle coordination into the independent state module, unifies validation and instance queries, and adds independent source inventory, stage completion checks, project-local preferences, bounded event retention and versioned upgrades. Mapping fidelity and business correctness have separate reports. See the [code and trial review](docs/review/refactor-round1/README.md) (Chinese).
+
 The [team archive example](examples/team-archive/README.en.md) was built in a separate conversation from an initial request, followed by clarification, implementation, fixes and a size-limit iteration:
 
 ```bash
@@ -82,7 +88,8 @@ Version 0.4.0 adds source-bound whitebox contracts throughout development, obser
 | Directory | Purpose |
 |---|---|
 | `skills/business-observer/` | Skill instructions, checks, probes and graph templates |
-| `examples/delivery/app/` | Application-owned state machine, concurrent activities and business code |
+| `examples/delivery/app/` | Domain functions, storage and transactions |
+| `examples/*/bo_stategraph/` | Complete lifecycle and activity execution, shared contracts and queries; preferences under config/views |
 | `examples/delivery/integrations/` | Optional observer adapter and viewer sources |
 | `examples/delivery/observer_generated/` | Generated graph, viewer and copied runtime helpers |
 | `tests/`, `tools/` | Installation, release checks and regression tests |

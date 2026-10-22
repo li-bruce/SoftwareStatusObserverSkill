@@ -10,7 +10,7 @@ def is_direct_manager(project_id: str, operator_id: str, folder_id: str,
     trace = trace or TracePort()
     allowed = any(a["project_id"] == project_id and a["operator_id"] == operator_id
                   and a["folder_id"] == folder_id for a in assignments)
-    trace.record("scope_check", "decision", basis or {}, lambda: {
+    trace.bo_record("scope_check", "decision", basis or {}, lambda: {
         "inputs": {"project_id": project_id, "operator_id": operator_id,
                    "folder_id": folder_id, "assignments": assignments},
         "outputs": {"allowed": allowed, "inherit_ancestors": False}},
@@ -36,7 +36,7 @@ def candidate_allowed(grant: dict, request: dict, now: float, reviewers: list[st
     result["target_matches"] = all(result[k] for k in
         ("project_ok", "operator_ok", "document_ok", "version_ok"))
     result["allowed"] = all(result.values())
-    trace.record("approval_candidate", "decision", basis or {}, lambda: {
+    trace.bo_record("approval_candidate", "decision", basis or {}, lambda: {
         "inputs": {**grant, "request_project": request["project_id"],
                    "request_operator": request["operator_id"],
                    "request_document": request["document_id"],
@@ -54,7 +54,7 @@ def evaluate_approvals(project_id: str, operator_id: str, document_id: str,
     candidates = [{"id": g["id"], **candidate_allowed(g, request, now, reviewers,
                   trace, basis, call)} for g in approvals]
     allowed = any(c["allowed"] for c in candidates)
-    trace.record("approval_check", "decision", basis, lambda: {
+    trace.bo_record("approval_check", "decision", basis, lambda: {
         "inputs": {**request, "clock": now, "candidate_count": len(candidates)},
         "outputs": {"allowed": allowed, "candidates": candidates}},
         call_id=call, parent_call_id=parent)
@@ -69,7 +69,7 @@ def check_size(content: str, limit_bytes: int, project_id: str, limit_revision: 
     result = {"content_bytes":content_bytes,"limit_bytes":limit_bytes,
               "limit_revision":limit_revision,"allowed":content_bytes <= limit_bytes,
               "excess_bytes":max(0,content_bytes-limit_bytes)}
-    trace.record("size_guard","decision",basis or {},lambda:{
+    trace.bo_record("size_guard","decision",basis or {},lambda:{
         "inputs":{"project_id":project_id,"content_bytes":content_bytes,
                   "limit_bytes":limit_bytes,"limit_revision":limit_revision},
         "outputs":result},call_id=uuid.uuid4().hex,parent_call_id=parent,
@@ -81,7 +81,7 @@ def check_content(content: str, trace: TracePort | None = None,
                   basis: dict | None = None, call_id: str | None = None) -> dict:
     trace = trace or TracePort()
     result = {"passed": "SECRET:" not in content, "marker_present": "SECRET:" in content}
-    trace.record("content_check", "return", basis or {}, lambda: {
+    trace.bo_record("content_check", "return", basis or {}, lambda: {
         "inputs": {"content_length": len(content),
                    "content_sha256": hashlib.sha256(content.encode()).hexdigest(),
                    "forbidden_marker": "SECRET:"},
@@ -97,7 +97,7 @@ def check_index(title: str, project_id: str, document_number: str,
               "project_present": bool(project_id.strip()),
               "number_present": bool(document_number.strip())}
     result["passed"] = all(result.values())
-    trace.record("index_check", "return", basis or {}, lambda: {
+    trace.bo_record("index_check", "return", basis or {}, lambda: {
         "inputs": {"title_length": len(title), "project_id": project_id,
                    "document_number": document_number}, "outputs": result},
         call_id=call_id or uuid.uuid4().hex)

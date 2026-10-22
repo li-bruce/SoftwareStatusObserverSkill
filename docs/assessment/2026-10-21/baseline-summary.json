@@ -1,0 +1,142 @@
+{
+  "skill": {
+    "path": "skills/business-observer/SKILL.md",
+    "bytes": 21209,
+    "lines": 118,
+    "characters": 8715,
+    "sha256": "c70595e8e08c7b4aa54b3f29bbb753c3eb3640755164949f31330c9611039f51"
+  },
+  "reference_characters": 53932,
+  "projects": {
+    "delivery": {
+      "test_commands": [
+        [
+          "{python}",
+          "-B",
+          "-X",
+          "utf8",
+          "tests/test_business.py"
+        ],
+        [
+          "{python}",
+          "-B",
+          "-X",
+          "utf8",
+          "observer_generated/runtime/architecture_guard.py",
+          "check",
+          "--root",
+          "."
+        ],
+        [
+          "{python}",
+          "-B",
+          "-X",
+          "utf8",
+          "tests/test_execution.py"
+        ],
+        [
+          "{python}",
+          "-B",
+          "-X",
+          "utf8",
+          "tooling/graph_fixture.py"
+        ],
+        [
+          "node",
+          "tests/test_graph_projection.mjs"
+        ],
+        [
+          "node",
+          "tests/test_graph_layout.mjs"
+        ],
+        [
+          "{python}",
+          "-X",
+          "utf8",
+          "-B",
+          "tests/test_recording.py"
+        ],
+        [
+          "node",
+          "tests/test_recorded_views.mjs"
+        ],
+        [
+          "{python}",
+          "-X",
+          "utf8",
+          "-B",
+          "tests/test_stategraph_module.py"
+        ]
+      ],
+      "probe_modes": [
+        "on",
+        "off",
+        "fault"
+      ],
+      "cases": 16,
+      "runs": 48,
+      "modes": {
+        "on": 16,
+        "off": 16,
+        "fault": 16
+      },
+      "build_id": "11d3a3fbe7512ac1d1568c34c9b8efbb2701ef7ef4b20637800cb95bd7f7c911",
+      "acceptance_checks": 32,
+      "whitebox_rules": 2,
+      "whitebox_checks": 7,
+      "decisions": "discovery gate not configured"
+    },
+    "team-archive": {
+      "test_commands": [
+        [
+          "{python}",
+          "-X",
+          "utf8",
+          "-B",
+          "tooling/tests.py"
+        ],
+        [
+          "node",
+          "tooling/graph_tests.mjs"
+        ],
+        [
+          "{python}",
+          "-X",
+          "utf8",
+          "-B",
+          "tooling/test_recording.py"
+        ],
+        [
+          "node",
+          "tooling/test_recorded_views.mjs"
+        ],
+        [
+          "{python}",
+          "-X",
+          "utf8",
+          "-B",
+          "tooling/test_stategraph_module.py"
+        ]
+      ],
+      "probe_modes": [
+        "on",
+        "off",
+        "fault"
+      ],
+      "cases": 40,
+      "runs": 120,
+      "modes": {
+        "on": 40,
+        "off": 40,
+        "fault": 40
+      },
+      "build_id": "6b9d254e59337efa2e5c72ce0c9df365535692071ee6b769c9c8e2cd9c057f49",
+      "acceptance_checks": 63,
+      "whitebox_rules": 6,
+      "whitebox_checks": 11,
+      "decisions": {
+        "resolved": 13
+      }
+    }
+  }
+}

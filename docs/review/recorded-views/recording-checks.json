@@ -1,0 +1,64 @@
+{
+  "records": [
+    {
+      "id": "146c9751a3db41edb78a6690f44b9b61",
+      "label": "操作记录",
+      "status": "stopped",
+      "started_at": "2026-10-20T14:54:21.427302+00:00",
+      "ended_at": "2026-10-20T14:55:48.608485+00:00",
+      "build_id": "df4555725234f9b7d2196bf4b65ab99355444d3e303ac9c5389bd174cab7eaff",
+      "events": 174,
+      "commands": 3,
+      "gaps": [],
+      "bytes": 771649,
+      "seq_first": 1,
+      "seq_last": 174,
+      "attempts": [
+        "5751b2433680",
+        "87e4387e3e05"
+      ],
+      "actions": [
+        "approve",
+        "run",
+        "run"
+      ],
+      "source_snapshot_sha256": "869520446be2aa0dac54ecd775e2c0e0fc7576c3f70e75c3a9feb5cd8e3ceb0d",
+      "current_viewer_sha256": "0bab11c3b6955d97a6353cb2d3f0cef2d0e358693428de2d296f5703d921aec4",
+      "source_snapshot_matches_recording": true,
+      "source_differs_from_current": true
+    },
+    {
+      "id": "c1d59567728c443aaf3b577685099360",
+      "label": "操作记录",
+      "status": "stopped",
+      "started_at": "2026-10-20T14:29:03.942822+00:00",
+      "ended_at": "2026-10-20T14:29:37.260578+00:00",
+      "build_id": "f7ccc18fd0be60dd54e4c8355f21c56717203058ffcb034d33b790702537cdd9",
+      "events": 97,
+      "commands": 2,
+      "gaps": [],
+      "bytes": 673272,
+      "seq_first": 1,
+      "seq_last": 97,
+      "attempts": [
+        "ccb46c47f463"
+      ],
+      "actions": [
+        "approve",
+        "run"
+      ],
+      "source_snapshot_sha256": "b5fe040f5158ceb53f40d3843501c69cd3e613e580f88a0e9596e4b01a36bf1e",
+      "current_viewer_sha256": "0bab11c3b6955d97a6353cb2d3f0cef2d0e358693428de2d296f5703d921aec4",
+      "source_snapshot_matches_recording": true,
+      "source_differs_from_current": true
+    }
+  ],
+  "runtime": {
+    "runs": 13,
+    "initial_runs": 10,
+    "documents_unchanged": true,
+    "archives_unchanged": true,
+    "prior_runs_preserved": true,
+    "current_build": "47f44b63e1a974d0640e9bf6ca177626d0661c6a6b7f3f67528e6915d20f0737"
+  }
+}

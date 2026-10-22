@@ -1,0 +1,23 @@
+{
+  "initialIds": [
+    "flow.policy",
+    "flow.checks",
+    "flow.archive"
+  ],
+  "draggedAndRestored": {
+    "emphasis": "selected",
+    "name": "内容合格",
+    "pinned": "true",
+    "x": 511.0989379432059,
+    "y": 1071.1117278566903
+  },
+  "nestedReopenPreserved": true,
+  "versionSwitchPreserved": true,
+  "directNeighborHighlighted": true,
+  "unrelatedNodeDimmed": true,
+  "escapeAfterClosingDetails": true,
+  "parameterSource": "archive_app/policy.py:64 (frozen v1)",
+  "runtimeCoordinatesUnchanged": true,
+  "runtimeVisibleNodes": 23,
+  "finalScreenshot": "07-final-hierarchy.png"
+}

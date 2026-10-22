@@ -1,0 +1,79 @@
+{
+  "intent_id": "studio-print-trial",
+  "revision": "round-03",
+  "goal": "构建工作室 3D 打印任务 Python 工具，并用只读开发者图查看真实函数、参数、等待原因和执行路线。",
+  "requirements": [
+    {
+      "id": "R01",
+      "text": "匹配任务及指定打印机且非提交人自批的有效审批，至少一份可使授权成立。 审批人仍有该机权限、未撤销且开始前当前时间早于到期时刻。",
+      "status": "confirmed",
+      "source": "discovery.json:D01"
+    },
+    {
+      "id": "R02",
+      "text": "尺寸与材料并行检查并汇合，两项都通过才能用机器；具体校验输入等 D09。",
+      "status": "confirmed",
+      "source": "discovery.json:D04"
+    },
+    {
+      "id": "R03",
+      "text": "尺寸、材料或打印参数任一变化均新建版本；新版本不复用旧检查和旧审批。未开始打印的旧版本作废；正在打印的旧版本继续完成，新版本另建运行，不混用状态与证据。",
+      "status": "confirmed",
+      "source": "discovery.json:D03"
+    },
+    {
+      "id": "R04",
+      "text": "提交时指定打印机；两项检查及审批都通过后才进入指定机器队列。",
+      "status": "confirmed",
+      "source": "discovery.json:D05"
+    },
+    {
+      "id": "R05",
+      "text": "撤销审批或撤销审批人对该机的权限后重新判断全部可用审批；任一有效则继续，否则保留队列位置等待。恢复后自动继续，后续有资格任务可越过暂时无资格任务，按原入队顺序选择。打印已开始后不因审批变化停止。",
+      "status": "confirmed",
+      "source": "discovery.json:D06"
+    },
+    {
+      "id": "R06",
+      "text": "仅本地模拟设备；取消已开始的打印须等待设备停止确认，正常完成须等待设备完成确认；收到确认才释放机器。取消所涵盖的运行范围由 D08 待定。",
+      "status": "confirmed",
+      "source": "discovery.json:D07"
+    },
+    {
+      "id": "R07",
+      "text": "两台本地模拟打印机，各有一个共享容量；同一人可多次提交。",
+      "status": "confirmed",
+      "source": "discovery.json:D10"
+    },
+    {
+      "id": "R08",
+      "text": "检查失败分别可见；检查异常保留明确错误。",
+      "status": "confirmed",
+      "source": "discovery.json:D11"
+    },
+    {
+      "id": "R09",
+      "text": "仅取消选中的那一次运行，不影响其他运行。",
+      "status": "confirmed",
+      "source": "discovery.json:U04"
+    },
+    {
+      "id": "R10",
+      "text": "填写三边毫米尺寸，有限正数，逐轴不超过配置上限，等于允许；不解析模型文件。PLA/ABS 按机器配置检查。",
+      "status": "confirmed",
+      "source": "discovery.json:U04"
+    },
+    {
+      "id": "R11",
+      "text": "只读图显示真实函数、实际参数、等待恢复路线和资源效果；采集关闭或失败不改变业务。",
+      "status": "confirmed",
+      "source": "discovery.json:U01"
+    }
+  ],
+  "exclusions": [
+    "真实设备",
+    "真人可用性证据",
+    "未验证的任意并发调度",
+    "图操作执行业务命令"
+  ]
+}

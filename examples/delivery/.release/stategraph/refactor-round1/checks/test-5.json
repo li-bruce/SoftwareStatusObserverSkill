@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "node",
+    "tests/test_graph_layout.mjs"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"valid\":true,\"coverage\":\"unified nodes and edges, real ELK layered/stress, drag/pan, pins, persisted annotations and focus, nested expansion, upgrade, source identity and history boundary\"}\n{\"valid\":true,\"coverage\":\"all expandable types, centered self relations, true cross-circle endpoints, foreground routing, independent node/edge/circle/depth filters, preference persistence, idle polling and exact expiry\"}\n",
+  "stderr": ""
+}

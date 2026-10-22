@@ -2,7 +2,7 @@
   "schema_version": 3,
   "project_id": "team-archive-trial-01",
   "revision": "discovery-r03",
-  "title": "团队资料归档 · 候选业务依赖图",
+  "title": "团队资料归档 · 开发者运行图",
   "status": "candidate_unbound",
   "intent": "intent.json",
   "source_files": [],
@@ -15,7 +15,7 @@
       "id": "archive_request",
       "kind": "action",
       "label": "负责人发起归档",
-      "summary": "候选入口；具体发起时机与审批、检查顺序未确定。",
+      "summary": "负责人发起归档；程序核对当前资格，执行检查并在提交前再次复核。",
       "binding_status": "pending",
       "requirements": [
         "R02"
@@ -515,7 +515,8 @@
       "D07：具体检查条件和失败后重试范围。",
       "D08：新运行及尚未启动活动的审批门槛。",
       "D09：容量修改是在新建前还是运行中。"
-    ]
+    ],
+    "observable": []
   },
   "questions": [
     "D07",

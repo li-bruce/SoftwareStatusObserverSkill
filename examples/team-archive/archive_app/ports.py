@@ -2,12 +2,12 @@
 from collections.abc import Callable
 
 
-class TracePort:
+class BOTracePort:
     def __init__(self, receiver: Callable | None = None):
         self.receiver = receiver
         self.errors = 0
 
-    def record(self, node, phase, basis, builder, **kwargs):
+    def bo_record(self, node, phase, basis, builder, **kwargs):
         if self.receiver is None:
             return None
         try:
@@ -16,6 +16,10 @@ class TracePort:
             self.errors += 1
             return None
 
+    record = bo_record  # Compatibility for earlier adapters.
+
+
+TracePort = BOTracePort
 
 def no_trace(entity: str, attempt: str) -> TracePort:
     return TracePort()

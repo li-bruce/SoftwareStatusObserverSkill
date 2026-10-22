@@ -1,0 +1,2216 @@
+{
+  "schema_version": 3,
+  "build_id": "6782df19fe09e3ad7d08eb04f2174b750a027d8403f2286241697a5bb84f9692",
+  "files": {
+    "AGENTS.md": "82424f38c92ef5c4fdd54b3e82e6b2e5b3b69835d5e8b6e667a22ae2f37bf4ec",
+    "app/checks.py": "d2fd02f85bab8140d01be0fc7e41950eb784a4474e9ed310a17d7fd51a23aeff",
+    "app/policy.py": "4cfabd0c0514f0d926be9dd9a4bcd545cbbaf63cdba081c2cbb7a36d48632d47",
+    "app/ports.py": "f8817e3b2783789f266e8d54051a890d5852cc590ff9e07bbc7d41ebf9afad1d",
+    "app/store.py": "cd6c143d0cf46e4a47fcffba643501a82fbe9b05d0d1d0014e6f04c239945382",
+    "bo_stategraph/__init__.py": "fce75fd4b268cd2020989f1a3e83dbbb6c06e35d0f62cd6d59e7b0da8e8725da",
+    "bo_stategraph/config/retention.json": "45bcb9805ab37e44369fcf1405246cd4187f7b15e0cfc6cc83c88fd15e8c8c34",
+    "bo_stategraph/declaration.py": "64683a6dfe19a6dd9bf08e5a6631592b5da33f71e4fec701f9a55b6d1b8fd141",
+    "bo_stategraph/workflow.py": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b",
+    "config/printers.json": "ec4b30b1ac80f3180e68c4e6309208ce996a12948e01dceed3d8d76d6ddbccd2",
+    "integrations/bo_app.py": "61905662894d2255abe44b4025c6ca46da58532c163308870b18bc7a1b54480c",
+    "integrations/bo_capture.py": "4e69f3ccf941c910cf9e8cbe101713d102c69796bd84a0cda94059a2e736ead2",
+    "main.py": "d6ce91845d015ba244ab4f332d38240ae86245989fcae2ae54938a8f104b85ff",
+    "observer_runtime/__init__.py": "a77b606a45ae8fa9b04f6bde02430ee4f2c66fdac651ca1b132ccc92810565b4",
+    "observer_runtime/architecture_guard.py": "09d631a2ff11f32731a25aa21d1382d3a40a824655adabb9dd56d353035367e8",
+    "observer_runtime/behavior_model.py": "7165f6139fed267dab5b44b64fd7398f1624e0d4bf3c32fdc112fa042aad9a94",
+    "observer_runtime/bo_contracts.py": "2a5639208ccb10f41c1c013858c1961fc6459b4b094954a0581d17050c471a65",
+    "observer_runtime/bo_retention.py": "b5a0f17bd789bc3f8d81cf8089f218344040d2ad29577bb5865c7b870bac86e9",
+    "observer_runtime/bo_runtime.py": "7c16cf2e58971309afb3da9fc41b96cb58b6a48d6113d3fff14e93fb5e7a02c9",
+    "observer_runtime/bo_stategraph.py": "fcfbd491c6c23ab4c8b30ccd346a96dc56cd27e7c8e8887e1392648a12be5b13",
+    "observer_runtime/bo_sync.py": "b0e6201c7d49c1efcd36ff75ff98b557dfffec1b848281db9c3620105cb2612d",
+    "observer_runtime/bo_upgrade.py": "5f5dd26d4c20bcd10894a7339634c75378d01db3c010307c79c59b57db5a7de3",
+    "observer_runtime/change_sync.py": "ccaf624d0bff8a69cf54d4f2c68ad3482344a256c186087661bf3eb5fe3fa701",
+    "observer_runtime/code_structure.py": "01dad9cda1d248150301598fea1186e698c2f3ca62026f5735befbcb74c9c681",
+    "observer_runtime/execution_contract.py": "9502b2d348bb8ee00c05288ca3d064d151365292fdef597c156c178871635b78",
+    "observer_runtime/focus_graph.py": "ec366eebee41e60dea83f16acd89b334546b58509a174034afa7736b9b31a106",
+    "observer_runtime/mapping_contract.py": "5c66b054d2a2086861fe63489cf49d4f08909d64424b7dce6407766508213296",
+    "observer_runtime/model_tool.py": "47b80a2a5d376ef81f34cd91cb050ce58714c3f85ed1212a842c2081bca0d291",
+    "observer_runtime/probe.py": "6e12b7cb0d89278b9562435e20eefa339993a1114720dd0f8dac15626d011807",
+    "observer_runtime/project_bundle.py": "2a05e4eda5946b413c4d4a72b8bd29718705706a616d2bb48618205926171f5c",
+    "observer_runtime/recording_session.py": "81678830bb0d16b58f4ad05a7884d8a6a17eb5740c4cba61d89df0a76cad0418",
+    "observer_runtime/requirements_dialogue.py": "88a0603db9231a64e73b91db42ea8da2ef42eaffb2b4b309ec86f3b33d627f12",
+    "observer_runtime/semantic_probe.py": "7a76181cbef2122e6d54105c07bc10e63f81d0d63130c2010fa7c375f09a40e2",
+    "observer_runtime/statechart_contract.py": "9bb6beb6ed2444e73fc0d601aa45d54401e9b44feb82782fb2fa1cdfa7206d5a",
+    "observer_runtime/sync_config.py": "cf1b6ac5a9ff7b9a5ad0eb6665b0c227985bd1ddc977682b66a45f5cd819a46e",
+    "observer_runtime/sync_io.py": "2afd0eac53ed9ae47dd551e04958a33a1935354aa51826cf93b2f4c69416f7df",
+    "observer_runtime/sync_verify.py": "a6a21ab79007b150e80b65483fbd82d8ead90ccbcfcf342f35b0f7a6c985d190",
+    "observer_runtime/view_preferences.py": "0e76e2cc5e566f6664fbf154cb431949123f5fe973893ac9fcafb696666eb093",
+    "observer_runtime/viewer_server.py": "10fa75d9a93662ce07cac457db46d65ecc3fa821a5d4a1a96ec543c7ec862c30",
+    "observer_runtime/whitebox_contract.py": "ea6f97242402e93776d1958e11da85e1093a667098527818508cba1c09f0c6de",
+    "observer_runtime/worknet_contract.py": "19a70d82022f2c2af675f64e7d955b13f5f543949b40c7813b657cd96b0e8193",
+    "ownership.json": "e404fe80b4b7f5c9a5b698b80b7813b21f149b0ea53f00e91bd2af51179215fd",
+    "review/round-03/prepare.py": "a56d1a96a615f539805a951822685e96bee9cb69f547a591bb318718725f51e8",
+    "server.py": "a0eb67acec78ae930daa5518cb6afcd406413922a29087d7e8674ecd94c8a247",
+    "static/index.html": "1ba9fe53d3cc32a1c7590bbd8a7084d7a278897daf23c6bd59e00a4a56caf656",
+    "static/viewer.css": "6f88f7da342a94afecd6652d376b84774721adf3e496a9ec34dd252f141e6f35",
+    "static/viewer.js": "296e0f4e631660de72902e25f2d7b85fe30ce896d1c1ca466efb5e5e021ee33d",
+    "tests/__init__.py": "f0e4c724ea338d0f98af8751b5629cc442c71b519fc9c4d594674040595a58da",
+    "tests/browser.cjs": "b233f72ff250ddca3dd10e658d0e9c27e6b44d535efd73cc4787c255b89f734e",
+    "tests/scenarios.py": "d143f724fc3a1375ae043d0b39aaf395aae522347cd19ed1962ceb1c86e9ccdb",
+    "tests/test_policy.py": "05cc4a5285985e9fcaa83687b84af243b3ef9543dda9910b428f61711c871cc0",
+    "tests/test_project.py": "4e7f9aa2eafdfe8cfa95ba677e191d5cb0a28d622380016ada43099f24e322c3",
+    "tooling/browser_check.ps1": "57ec78cc6f646a4f3df3b3c0055e60c595e414382132e429c3d07456574d573c",
+    "tooling/build_model.py": "fa5c84a45e12611af9c77cb0aec2cf06e8d23208c9dbc398c7e5b0531ffafcd4",
+    "tooling/contracts.py": "c9d393a0b5dae9fec023bc82036678f51f9b756bcdf5ec43fe3ce7b2142753f5",
+    "tooling/gate.py": "2977c2a972fb4072a85d0cae75d3c42952a5e5d24823fb172fbdef2a336474be",
+    "tooling/mutation_check.py": "6172245c119116a863a8290de3f5fc88aa75e73743e928b71da37e2681a03ee1",
+    "tooling/observe.py": "236787742a8325431fbbb80c7ca25cd7655e6223fd789a5af43f8b1ecf2365b8",
+    "tooling/review_candidate.py": "7e20507ef3ca44b8676bbd66fdc23a35b0f705d81450e22a34dfd67ae24739b7"
+  },
+  "model_hash": "9ee11e1a8a1bfc21b38c5fd4a94ea708ca7553d5914272a9b0740bcb9b11c831",
+  "intent_hash": "5e6355488cda1589448050736af780cd468b185287110938822e7f60d6fc8a0a",
+  "model_revision": "print-r1",
+  "bindings": {
+    "submit": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.submit",
+      "line": 29,
+      "end_line": 61,
+      "signature": "self, submitter: str, printer_id: str, dimensions: list, material: str, parameters: dict, task_id=None",
+      "ast_sha256": "61d62e7cd385f3b96bcf0b1b0b74c37777b89626bbe84da0792d55ecf5cf6681",
+      "snippet": "    def submit(self, submitter: str, printer_id: str, dimensions: list, material: str, parameters: dict, task_id=None) -> str:\n        task_id = task_id or uuid.uuid4().hex[:10]\n        run_id = uuid.uuid4().hex[:12]\n        def create(c):\n            if not c.execute(\"SELECT 1 FROM printers WHERE id=?\", (printer_id,)).fetchone():\n                raise ValueError(\"unknown printer\")\n            old = c.execute(\"SELECT * FROM tasks WHERE id=?\", (task_id,)).fetchone()\n            if old:\n                if old[\"submitter\"] != submitter:\n                    raise PermissionError(\"only original submitter may change parameters\")\n                latest = c.execute(\"SELECT * FROM runs WHERE task_id=? AND version=?\", (task_id, old[\"version\"])).fetchone()\n                if latest[\"printer_id\"] != printer_id:\n                    raise ValueError(\"printer reassignment is outside this version operation\")\n                if json.loads(latest[\"dimensions\"]) == dimensions and latest[\"material\"] == material and json.loads(latest[\"parameters\"]) == parameters:\n                    return {\"run_id\": latest[\"id\"], \"unchanged\": True}\n                version = old[\"version\"] + 1\n                for row in c.execute(\"SELECT id,state FROM runs WHERE task_id=?\", (task_id,)).fetchall():\n                    if row[\"state\"] in (\"checking\", \"awaiting_approval\", \"queued\", \"blocked\", \"check_failed\", \"check_error\"):\n                        transition(c, row[\"id\"], \"invalidate\")\n                        c.execute(\"UPDATE runs SET reason='new_version' WHERE id=?\", (row[\"id\"],))\n                c.execute(\"UPDATE tasks SET version=? WHERE id=?\", (version, task_id))\n            else:\n                version = 1\n                c.execute(\"INSERT INTO tasks VALUES(?,?,?)\", (task_id, submitter, version))\n            c.execute(\"INSERT INTO runs VALUES(?,?,?,?,?,?,?,?,?,?,?)\", (run_id, task_id, version, submitter, printer_id, json.dumps(dimensions), material, json.dumps(parameters, allow_nan=False, sort_keys=True), \"checking\", None, \"checks_pending\"))\n            c.executemany(\"INSERT INTO activities(run_id,name,state) VALUES(?,?,'pending')\", [(run_id, \"size\"), (run_id, \"material\")])\n            return {\"run_id\": run_id, \"unchanged\": False, \"version\": version}\n        receipt = self.store.change(\"submit_or_revise\", create)\n        actual_id = receipt[0][\"run_id\"]\n        self._emit(\"submit\", \"commit\", receipt, actual_id, lambda: {\"inputs\": {\"printer_id\": printer_id, \"dimensions\": json.dumps(dimensions), \"material\": material, \"parameters\": json.dumps(parameters, sort_keys=True)}, \"outputs\": receipt[0]})\n        if not receipt[0][\"unchanged\"]:\n            self.run_checks(actual_id)\n        return actual_id",
+      "calls": [
+        "PermissionError",
+        "ValueError",
+        "c.execute",
+        "c.execute('SELECT * FROM runs WHERE task_id=? AND version=?', (task_id, old['version'])).fetchone",
+        "c.execute('SELECT * FROM tasks WHERE id=?', (task_id,)).fetchone",
+        "c.execute('SELECT 1 FROM printers WHERE id=?', (printer_id,)).fetchone",
+        "c.execute('SELECT id,state FROM runs WHERE task_id=?', (task_id,)).fetchall",
+        "c.executemany",
+        "json.dumps",
+        "json.loads",
+        "self._emit",
+        "self.run_checks",
+        "self.store.change",
+        "transition",
+        "uuid.uuid4"
+      ],
+      "guards": [
+        {
+          "line": 59,
+          "expression": "not receipt[0]['unchanged']"
+        },
+        {
+          "line": 33,
+          "expression": "not c.execute('SELECT 1 FROM printers WHERE id=?', (printer_id,)).fetchone()"
+        },
+        {
+          "line": 36,
+          "expression": "old"
+        },
+        {
+          "line": 37,
+          "expression": "old['submitter'] != submitter"
+        },
+        {
+          "line": 40,
+          "expression": "latest['printer_id'] != printer_id"
+        },
+        {
+          "line": 42,
+          "expression": "json.loads(latest['dimensions']) == dimensions and latest['material'] == material and (json.loads(latest['parameters']) == parameters)"
+        },
+        {
+          "line": 46,
+          "expression": "row['state'] in ('checking', 'awaiting_approval', 'queued', 'blocked', 'check_failed', 'check_error')"
+        }
+      ],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "parameter-change": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.submit",
+      "line": 29,
+      "end_line": 61,
+      "signature": "self, submitter: str, printer_id: str, dimensions: list, material: str, parameters: dict, task_id=None",
+      "ast_sha256": "61d62e7cd385f3b96bcf0b1b0b74c37777b89626bbe84da0792d55ecf5cf6681",
+      "snippet": "    def submit(self, submitter: str, printer_id: str, dimensions: list, material: str, parameters: dict, task_id=None) -> str:\n        task_id = task_id or uuid.uuid4().hex[:10]\n        run_id = uuid.uuid4().hex[:12]\n        def create(c):\n            if not c.execute(\"SELECT 1 FROM printers WHERE id=?\", (printer_id,)).fetchone():\n                raise ValueError(\"unknown printer\")\n            old = c.execute(\"SELECT * FROM tasks WHERE id=?\", (task_id,)).fetchone()\n            if old:\n                if old[\"submitter\"] != submitter:\n                    raise PermissionError(\"only original submitter may change parameters\")\n                latest = c.execute(\"SELECT * FROM runs WHERE task_id=? AND version=?\", (task_id, old[\"version\"])).fetchone()\n                if latest[\"printer_id\"] != printer_id:\n                    raise ValueError(\"printer reassignment is outside this version operation\")\n                if json.loads(latest[\"dimensions\"]) == dimensions and latest[\"material\"] == material and json.loads(latest[\"parameters\"]) == parameters:\n                    return {\"run_id\": latest[\"id\"], \"unchanged\": True}\n                version = old[\"version\"] + 1\n                for row in c.execute(\"SELECT id,state FROM runs WHERE task_id=?\", (task_id,)).fetchall():\n                    if row[\"state\"] in (\"checking\", \"awaiting_approval\", \"queued\", \"blocked\", \"check_failed\", \"check_error\"):\n                        transition(c, row[\"id\"], \"invalidate\")\n                        c.execute(\"UPDATE runs SET reason='new_version' WHERE id=?\", (row[\"id\"],))\n                c.execute(\"UPDATE tasks SET version=? WHERE id=?\", (version, task_id))\n            else:\n                version = 1\n                c.execute(\"INSERT INTO tasks VALUES(?,?,?)\", (task_id, submitter, version))\n            c.execute(\"INSERT INTO runs VALUES(?,?,?,?,?,?,?,?,?,?,?)\", (run_id, task_id, version, submitter, printer_id, json.dumps(dimensions), material, json.dumps(parameters, allow_nan=False, sort_keys=True), \"checking\", None, \"checks_pending\"))\n            c.executemany(\"INSERT INTO activities(run_id,name,state) VALUES(?,?,'pending')\", [(run_id, \"size\"), (run_id, \"material\")])\n            return {\"run_id\": run_id, \"unchanged\": False, \"version\": version}\n        receipt = self.store.change(\"submit_or_revise\", create)\n        actual_id = receipt[0][\"run_id\"]\n        self._emit(\"submit\", \"commit\", receipt, actual_id, lambda: {\"inputs\": {\"printer_id\": printer_id, \"dimensions\": json.dumps(dimensions), \"material\": material, \"parameters\": json.dumps(parameters, sort_keys=True)}, \"outputs\": receipt[0]})\n        if not receipt[0][\"unchanged\"]:\n            self.run_checks(actual_id)\n        return actual_id",
+      "calls": [
+        "PermissionError",
+        "ValueError",
+        "c.execute",
+        "c.execute('SELECT * FROM runs WHERE task_id=? AND version=?', (task_id, old['version'])).fetchone",
+        "c.execute('SELECT * FROM tasks WHERE id=?', (task_id,)).fetchone",
+        "c.execute('SELECT 1 FROM printers WHERE id=?', (printer_id,)).fetchone",
+        "c.execute('SELECT id,state FROM runs WHERE task_id=?', (task_id,)).fetchall",
+        "c.executemany",
+        "json.dumps",
+        "json.loads",
+        "self._emit",
+        "self.run_checks",
+        "self.store.change",
+        "transition",
+        "uuid.uuid4"
+      ],
+      "guards": [
+        {
+          "line": 59,
+          "expression": "not receipt[0]['unchanged']"
+        },
+        {
+          "line": 33,
+          "expression": "not c.execute('SELECT 1 FROM printers WHERE id=?', (printer_id,)).fetchone()"
+        },
+        {
+          "line": 36,
+          "expression": "old"
+        },
+        {
+          "line": 37,
+          "expression": "old['submitter'] != submitter"
+        },
+        {
+          "line": 40,
+          "expression": "latest['printer_id'] != printer_id"
+        },
+        {
+          "line": 42,
+          "expression": "json.loads(latest['dimensions']) == dimensions and latest['material'] == material and (json.loads(latest['parameters']) == parameters)"
+        },
+        {
+          "line": 46,
+          "expression": "row['state'] in ('checking', 'awaiting_approval', 'queued', 'blocked', 'check_failed', 'check_error')"
+        }
+      ],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "checks": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.run_checks",
+      "line": 87,
+      "end_line": 104,
+      "signature": "self, run_id: str",
+      "ast_sha256": "ccdc3df1444305f61b7b1e13aecabe693e775f561303cb76a935ec7235f51c31",
+      "snippet": "    def run_checks(self, run_id: str):\n        with ThreadPoolExecutor(max_workers=2, thread_name_prefix=\"printer-check\") as pool:\n            futures = [pool.submit(self._check, run_id, name) for name in (\"size\", \"material\")]\n            for future in futures:\n                future.result()\n        def join(c):\n            run = c.execute(\"SELECT * FROM runs WHERE id=?\", (run_id,)).fetchone()\n            activities = [dict(a) for a in c.execute(\"SELECT * FROM activities WHERE run_id=? ORDER BY name\", (run_id,))]\n            if run[\"state\"] != \"checking\":\n                return {\"state\": run[\"state\"], \"passed\": False, \"reason\": \"run_no_longer_current\"}\n            states = [a[\"state\"] for a in activities]\n            trigger = \"checks_error\" if \"error\" in states else \"checks_passed\" if states == [\"passed\", \"passed\"] else \"checks_failed\"\n            state = transition(c, run_id, trigger)\n            c.execute(\"UPDATE runs SET reason=? WHERE id=?\", (\"approval_required\" if trigger == \"checks_passed\" else trigger, run_id))\n            return {\"state\": state, \"passed\": trigger == \"checks_passed\", \"size\": next(a[\"state\"] for a in activities if a[\"name\"] == \"size\"), \"material\": next(a[\"state\"] for a in activities if a[\"name\"] == \"material\")}\n        receipt = self.store.change(\"check_join\", join)\n        self._emit(\"checks\", \"decision\", receipt, run_id, lambda: {\"inputs\": {}, \"outputs\": receipt[0]})\n        self.schedule()",
+      "calls": [
+        "ThreadPoolExecutor",
+        "c.execute",
+        "c.execute('SELECT * FROM runs WHERE id=?', (run_id,)).fetchone",
+        "dict",
+        "future.result",
+        "next",
+        "pool.submit",
+        "self._emit",
+        "self.schedule",
+        "self.store.change",
+        "transition"
+      ],
+      "guards": [
+        {
+          "line": 95,
+          "expression": "run['state'] != 'checking'"
+        },
+        {
+          "line": 98,
+          "expression": "'error' in states"
+        },
+        {
+          "line": 98,
+          "expression": "states == ['passed', 'passed']"
+        },
+        {
+          "line": 100,
+          "expression": "trigger == 'checks_passed'"
+        }
+      ],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "check-size": {
+      "path": "app/checks.py",
+      "symbol": "check_size",
+      "line": 4,
+      "end_line": 13,
+      "signature": "dimensions: list, limits: list",
+      "ast_sha256": "e55bc5863ab6e58248f63a3009bde201546008157914ed9f942c46066819c34e",
+      "snippet": "def check_size(dimensions: list, limits: list) -> dict:\n    failures = []\n    if not isinstance(dimensions, list) or len(dimensions) != 3:\n        return {\"passed\": False, \"failures\": [\"dimensions: expected three axes\"]}\n    for axis, value, limit in zip((\"length\", \"width\", \"height\"), dimensions, limits):\n        if type(value) not in (int, float) or not math.isfinite(value) or value <= 0:\n            failures.append(axis + \": must be finite and positive\")\n        elif value > limit:\n            failures.append(axis + \": exceeds printer limit\")\n    return {\"passed\": not failures, \"failures\": failures}",
+      "calls": [
+        "failures.append",
+        "isinstance",
+        "len",
+        "math.isfinite",
+        "type",
+        "zip"
+      ],
+      "guards": [
+        {
+          "line": 6,
+          "expression": "not isinstance(dimensions, list) or len(dimensions) != 3"
+        },
+        {
+          "line": 9,
+          "expression": "type(value) not in (int, float) or not math.isfinite(value) or value <= 0"
+        },
+        {
+          "line": 11,
+          "expression": "value > limit"
+        }
+      ],
+      "file_sha256": "d2fd02f85bab8140d01be0fc7e41950eb784a4474e9ed310a17d7fd51a23aeff"
+    },
+    "check-material": {
+      "path": "app/checks.py",
+      "symbol": "check_material",
+      "line": 15,
+      "end_line": 17,
+      "signature": "material: str, supported: list",
+      "ast_sha256": "7f52c1d73c422780befbe12765197086016a146f904afd86798b198fc5b193fe",
+      "snippet": "def check_material(material: str, supported: list) -> dict:\n    passed = material in (\"PLA\", \"ABS\") and material in supported\n    return {\"passed\": passed, \"failures\": [] if passed else [\"material: unsupported by this printer\"]}",
+      "calls": [],
+      "guards": [
+        {
+          "line": 17,
+          "expression": "passed"
+        }
+      ],
+      "file_sha256": "d2fd02f85bab8140d01be0fc7e41950eb784a4474e9ed310a17d7fd51a23aeff"
+    },
+    "check-worker": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow._check",
+      "line": 63,
+      "end_line": 85,
+      "signature": "self, run_id: str, name: str",
+      "ast_sha256": "0708232fadb0d18fd86c5543c60b5ac21ecc57f046d680217470fbcacee9b31b",
+      "snippet": "    def _check(self, run_id: str, name: str) -> dict:\n        call_id = uuid.uuid4().hex\n        def start(c):\n            c.execute(\"UPDATE activities SET state='running',started=? WHERE run_id=? AND name=?\", (time.monotonic(), run_id, name))\n        receipt = self.store.change(\"check_start:\" + name, start)\n        run = next(r for r in receipt[2][\"runs\"] if r[\"id\"] == run_id)\n        printer = next(p for p in receipt[2][\"printers\"] if p[\"id\"] == run[\"printer_id\"])\n        args = (run[\"dimensions\"], printer[\"limits\"]) if name == \"size\" else (run[\"material\"], printer[\"materials\"])\n        function = self.check_functions[name]\n        default_function = check_size if name == \"size\" else check_material\n        probe_node = \"check-\" + name if function is default_function else \"check-worker\"\n        self._emit(probe_node, \"enter\", receipt, run_id, lambda: {\"inputs\": {\"value\": json.dumps(args[0]), \"capability\": json.dumps(args[1]), \"implementation\": function.__module__ + \".\" + function.__qualname__}, \"outputs\": {}}, call_id)\n        try:\n            result = function(*args)\n            state = \"passed\" if result[\"passed\"] else \"failed\"\n        except Exception as exc:\n            result = {\"passed\": False, \"failures\": [], \"error_type\": type(exc).__name__, \"error\": str(exc)[:200]}\n            state = \"error\"\n        def finish(c):\n            c.execute(\"UPDATE activities SET state=?,result=?,ended=? WHERE run_id=? AND name=?\", (state, json.dumps(result), time.monotonic(), run_id, name))\n        receipt = self.store.change(\"check_finish:\" + name, finish)\n        self._emit(probe_node, \"error\" if state == \"error\" else \"return\", receipt, run_id, lambda: {\"inputs\": {\"value\": json.dumps(args[0]), \"capability\": json.dumps(args[1]), \"implementation\": function.__module__ + \".\" + function.__qualname__}, \"outputs\": {**result, \"activity_state\": state}}, call_id)\n        return result",
+      "calls": [
+        "c.execute",
+        "function",
+        "json.dumps",
+        "next",
+        "self._emit",
+        "self.store.change",
+        "str",
+        "time.monotonic",
+        "type",
+        "uuid.uuid4"
+      ],
+      "guards": [
+        {
+          "line": 70,
+          "expression": "name == 'size'"
+        },
+        {
+          "line": 72,
+          "expression": "name == 'size'"
+        },
+        {
+          "line": 73,
+          "expression": "function is default_function"
+        },
+        {
+          "line": 77,
+          "expression": "result['passed']"
+        },
+        {
+          "line": 84,
+          "expression": "state == 'error'"
+        }
+      ],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "approval": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow._authorization",
+      "line": 139,
+      "end_line": 147,
+      "signature": "self, c, run: dict, now: float",
+      "ast_sha256": "41946dae392f7fa97600d18dce55f7d989d70251cd067eb8c8145c37d16d47eb",
+      "snippet": "    def _authorization(self, c, run: dict, now: float) -> dict:\n        # Read all task candidates, including mismatching version/printer evidence.\n        candidates = []\n        for row in c.execute(\"SELECT * FROM approvals WHERE task_id=? ORDER BY rowid\", (run[\"task_id\"],)):\n            grant = dict(row)\n            role = c.execute(\"SELECT active FROM roles WHERE actor=? AND printer_id=?\", (grant[\"approver\"], run[\"printer_id\"])).fetchone()\n            flags = grant_matches(grant, run, bool(role and role[0]), now)\n            candidates.append({\"id\": grant[\"id\"], \"version\": grant[\"version\"], \"expires\": grant[\"expires\"], \"printer_id\": grant[\"printer_id\"], \"task_id\": grant[\"task_id\"], \"approver\": grant[\"approver\"], **flags})\n        return {\"allowed\": any(g[\"eligible\"] for g in candidates), \"candidates\": candidates, \"clock\": now, \"version\": run[\"version\"]}",
+      "calls": [
+        "any",
+        "bool",
+        "c.execute",
+        "c.execute('SELECT active FROM roles WHERE actor=? AND printer_id=?', (grant['approver'], run['printer_id'])).fetchone",
+        "candidates.append",
+        "dict",
+        "grant_matches"
+      ],
+      "guards": [],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "grant-match": {
+      "path": "app/policy.py",
+      "symbol": "grant_matches",
+      "line": 3,
+      "end_line": 13,
+      "signature": "grant: dict, run: dict, has_role: bool, now: float",
+      "ast_sha256": "2d901750d3db1c60ca1f83ff3da245024a514562d4acd734ffb807ea1eb9bff0",
+      "snippet": "def grant_matches(grant: dict, run: dict, has_role: bool, now: float) -> dict:\n    conditions = {\n        \"task_ok\": grant[\"task_id\"] == run[\"task_id\"],\n        \"printer_ok\": grant[\"printer_id\"] == run[\"printer_id\"],\n        \"version_ok\": grant[\"version\"] == run[\"version\"],\n        \"other_actor\": grant[\"approver\"] != run[\"submitter\"],\n        \"role_ok\": bool(has_role),\n        \"active_ok\": not bool(grant[\"revoked\"]),\n        \"time_ok\": now < grant[\"expires\"],\n    }\n    return {**conditions, \"eligible\": all(conditions.values())}",
+      "calls": [
+        "all",
+        "bool",
+        "conditions.values"
+      ],
+      "guards": [],
+      "file_sha256": "4cfabd0c0514f0d926be9dd9a4bcd545cbbaf63cdba081c2cbb7a36d48632d47"
+    },
+    "approval-change": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.approve",
+      "line": 111,
+      "end_line": 129,
+      "signature": "self, run_id: str, approver: str, expires: float",
+      "ast_sha256": "0fd2d8edce8697649211113354cffed93608cd3a9bc71aea3d3dee130c8891ee",
+      "snippet": "    def approve(self, run_id: str, approver: str, expires: float) -> str:\n        if type(expires) not in (int, float) or not math.isfinite(expires):\n            raise ValueError(\"expiry must be finite\")\n        approval_id = uuid.uuid4().hex[:12]\n        def add(c):\n            run = c.execute(\"SELECT * FROM runs WHERE id=?\", (run_id,)).fetchone()\n            if run is None:\n                raise ValueError(\"unknown run\")\n            role = c.execute(\"SELECT active FROM roles WHERE actor=? AND printer_id=?\", (approver, run[\"printer_id\"])).fetchone()\n            if approver == run[\"submitter\"] or not role or not role[0]:\n                raise PermissionError(\"self approval or missing printer role\")\n            if expires <= self.clock():\n                raise ValueError(\"approval already expired\")\n            c.execute(\"INSERT INTO approvals VALUES(?,?,?,?,?,?,0)\", (approval_id, run[\"task_id\"], run[\"version\"], run[\"printer_id\"], approver, expires))\n            return {\"approval_id\": approval_id, \"expires\": expires}\n        receipt = self.store.change(\"approve\", add)\n        self._emit(\"approval-change\", \"commit\", receipt, run_id, lambda: {\"inputs\": {\"actor\": approver, \"expires\": expires}, \"outputs\": receipt[0]})\n        self.schedule()\n        return approval_id",
+      "calls": [
+        "PermissionError",
+        "ValueError",
+        "c.execute",
+        "c.execute('SELECT * FROM runs WHERE id=?', (run_id,)).fetchone",
+        "c.execute('SELECT active FROM roles WHERE actor=? AND printer_id=?', (approver, run['printer_id'])).fetchone",
+        "math.isfinite",
+        "self._emit",
+        "self.clock",
+        "self.schedule",
+        "self.store.change",
+        "type",
+        "uuid.uuid4"
+      ],
+      "guards": [
+        {
+          "line": 112,
+          "expression": "type(expires) not in (int, float) or not math.isfinite(expires)"
+        },
+        {
+          "line": 117,
+          "expression": "run is None"
+        },
+        {
+          "line": 120,
+          "expression": "approver == run['submitter'] or not role or (not role[0])"
+        },
+        {
+          "line": 122,
+          "expression": "expires <= self.clock()"
+        }
+      ],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "queue": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.schedule",
+      "line": 149,
+      "end_line": 194,
+      "signature": "self",
+      "ast_sha256": "05fa42bfc2d3aa8eefbb77ab14e6cf3da65bfe20ce9cb95b82840af3ae92df5c",
+      "snippet": "    def schedule(self):\n        def dispatch(c):\n            decisions, starts = [], []\n            for row in c.execute(\"SELECT * FROM runs WHERE state IN ('awaiting_approval','queued','blocked') ORDER BY rowid\").fetchall():\n                run = dict(row)\n                auth = self._authorization(c, run, self.clock())\n                decisions.append({\"run_id\": run[\"id\"], **auth})\n                if auth[\"allowed\"] and run[\"state\"] == \"awaiting_approval\":\n                    c.execute(\"UPDATE counters SET value=value+1 WHERE name='queue'\")\n                    seq = c.execute(\"SELECT value FROM counters WHERE name='queue'\").fetchone()[0]\n                    transition(c, run[\"id\"], \"admit\")\n                    c.execute(\"UPDATE runs SET queue_seq=?,reason='printer_busy' WHERE id=?\", (seq, run[\"id\"]))\n                elif auth[\"allowed\"] and run[\"state\"] == \"blocked\":\n                    transition(c, run[\"id\"], \"restore_approval\")\n                    c.execute(\"UPDATE runs SET reason='printer_busy' WHERE id=?\", (run[\"id\"],))\n                elif not auth[\"allowed\"] and run[\"state\"] == \"queued\":\n                    transition(c, run[\"id\"], \"lose_approval\")\n                    c.execute(\"UPDATE runs SET reason='no_valid_approval' WHERE id=?\", (run[\"id\"],))\n            for printer in c.execute(\"SELECT * FROM printers WHERE occupant IS NULL ORDER BY id\").fetchall():\n                for row in c.execute(\"SELECT * FROM runs WHERE printer_id=? AND state='queued' ORDER BY queue_seq\", (printer[\"id\"],)).fetchall():\n                    run = dict(row)\n                    # Re-read time and authorization immediately before claiming the device, inside the same writer transaction.\n                    auth = self._authorization(c, run, self.clock())\n                    decisions.append({\"run_id\": run[\"id\"], **auth})\n                    if not auth[\"allowed\"]:\n                        transition(c, run[\"id\"], \"lose_approval\")\n                        c.execute(\"UPDATE runs SET reason='no_valid_approval' WHERE id=?\", (run[\"id\"],))\n                        continue\n                    transition(c, run[\"id\"], \"start\")\n                    c.execute(\"UPDATE printers SET occupant=? WHERE id=?\", (run[\"id\"], printer[\"id\"]))\n                    c.execute(\"UPDATE runs SET reason='' WHERE id=?\", (run[\"id\"],))\n                    effect = c.execute(\"INSERT INTO effects(run_id,kind,printer_id,clock) VALUES(?,'start',?,?)\", (run[\"id\"], printer[\"id\"], auth[\"clock\"])).lastrowid\n                    starts.append({\"run_id\": run[\"id\"], \"printer_id\": printer[\"id\"], \"effect_id\": effect, \"clock\": auth[\"clock\"], \"state\": \"printing\"})\n                    break\n            return {\"decisions\": decisions, \"starts\": starts}\n        receipt = self.store.change(\"schedule\", dispatch)\n        for decision in receipt[0][\"decisions\"]:\n            self._emit(\"approval\", \"decision\", receipt, decision[\"run_id\"], lambda d=decision: {\"inputs\": {\"clock\": d[\"clock\"], \"version\": d[\"version\"]}, \"outputs\": d})\n            for candidate in decision[\"candidates\"]:\n                self._emit(\"grant-match\", \"decision\", receipt, decision[\"run_id\"], lambda d=decision, g=candidate: {\"inputs\": {\"clock\": d[\"clock\"], \"run_version\": d[\"version\"], \"grant_version\": g[\"version\"], \"expires\": g[\"expires\"], \"printer_id\": g[\"printer_id\"], \"task_id\": g[\"task_id\"], \"approver\": g[\"approver\"]}, \"outputs\": g})\n        for start in receipt[0][\"starts\"]:\n            self._emit(\"printing\", \"commit\", receipt, start[\"run_id\"], lambda s=start: {\"inputs\": {\"clock\": s[\"clock\"]}, \"outputs\": s})\n        for run in receipt[2][\"runs\"]:\n            if run[\"state\"] in (\"awaiting_approval\", \"queued\", \"blocked\"):\n                self._emit(\"queue\", \"wait\", receipt, run[\"id\"], lambda r=run: {\"inputs\": {\"printer_id\": r[\"printer_id\"]}, \"outputs\": {\"state\": r[\"state\"], \"reason\": r[\"reason\"], \"queue_seq\": r[\"queue_seq\"]}})\n        return receipt[0]",
+      "calls": [
+        "c.execute",
+        "c.execute(\"SELECT * FROM runs WHERE printer_id=? AND state='queued' ORDER BY queue_seq\", (printer['id'],)).fetchall",
+        "c.execute(\"SELECT * FROM runs WHERE state IN ('awaiting_approval','queued','blocked') ORDER BY rowid\").fetchall",
+        "c.execute(\"SELECT value FROM counters WHERE name='queue'\").fetchone",
+        "c.execute('SELECT * FROM printers WHERE occupant IS NULL ORDER BY id').fetchall",
+        "decisions.append",
+        "dict",
+        "self._authorization",
+        "self._emit",
+        "self.clock",
+        "self.store.change",
+        "starts.append",
+        "transition"
+      ],
+      "guards": [
+        {
+          "line": 192,
+          "expression": "run['state'] in ('awaiting_approval', 'queued', 'blocked')"
+        },
+        {
+          "line": 156,
+          "expression": "auth['allowed'] and run['state'] == 'awaiting_approval'"
+        },
+        {
+          "line": 161,
+          "expression": "auth['allowed'] and run['state'] == 'blocked'"
+        },
+        {
+          "line": 173,
+          "expression": "not auth['allowed']"
+        },
+        {
+          "line": 164,
+          "expression": "not auth['allowed'] and run['state'] == 'queued'"
+        }
+      ],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "printing": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.schedule",
+      "line": 149,
+      "end_line": 194,
+      "signature": "self",
+      "ast_sha256": "05fa42bfc2d3aa8eefbb77ab14e6cf3da65bfe20ce9cb95b82840af3ae92df5c",
+      "snippet": "    def schedule(self):\n        def dispatch(c):\n            decisions, starts = [], []\n            for row in c.execute(\"SELECT * FROM runs WHERE state IN ('awaiting_approval','queued','blocked') ORDER BY rowid\").fetchall():\n                run = dict(row)\n                auth = self._authorization(c, run, self.clock())\n                decisions.append({\"run_id\": run[\"id\"], **auth})\n                if auth[\"allowed\"] and run[\"state\"] == \"awaiting_approval\":\n                    c.execute(\"UPDATE counters SET value=value+1 WHERE name='queue'\")\n                    seq = c.execute(\"SELECT value FROM counters WHERE name='queue'\").fetchone()[0]\n                    transition(c, run[\"id\"], \"admit\")\n                    c.execute(\"UPDATE runs SET queue_seq=?,reason='printer_busy' WHERE id=?\", (seq, run[\"id\"]))\n                elif auth[\"allowed\"] and run[\"state\"] == \"blocked\":\n                    transition(c, run[\"id\"], \"restore_approval\")\n                    c.execute(\"UPDATE runs SET reason='printer_busy' WHERE id=?\", (run[\"id\"],))\n                elif not auth[\"allowed\"] and run[\"state\"] == \"queued\":\n                    transition(c, run[\"id\"], \"lose_approval\")\n                    c.execute(\"UPDATE runs SET reason='no_valid_approval' WHERE id=?\", (run[\"id\"],))\n            for printer in c.execute(\"SELECT * FROM printers WHERE occupant IS NULL ORDER BY id\").fetchall():\n                for row in c.execute(\"SELECT * FROM runs WHERE printer_id=? AND state='queued' ORDER BY queue_seq\", (printer[\"id\"],)).fetchall():\n                    run = dict(row)\n                    # Re-read time and authorization immediately before claiming the device, inside the same writer transaction.\n                    auth = self._authorization(c, run, self.clock())\n                    decisions.append({\"run_id\": run[\"id\"], **auth})\n                    if not auth[\"allowed\"]:\n                        transition(c, run[\"id\"], \"lose_approval\")\n                        c.execute(\"UPDATE runs SET reason='no_valid_approval' WHERE id=?\", (run[\"id\"],))\n                        continue\n                    transition(c, run[\"id\"], \"start\")\n                    c.execute(\"UPDATE printers SET occupant=? WHERE id=?\", (run[\"id\"], printer[\"id\"]))\n                    c.execute(\"UPDATE runs SET reason='' WHERE id=?\", (run[\"id\"],))\n                    effect = c.execute(\"INSERT INTO effects(run_id,kind,printer_id,clock) VALUES(?,'start',?,?)\", (run[\"id\"], printer[\"id\"], auth[\"clock\"])).lastrowid\n                    starts.append({\"run_id\": run[\"id\"], \"printer_id\": printer[\"id\"], \"effect_id\": effect, \"clock\": auth[\"clock\"], \"state\": \"printing\"})\n                    break\n            return {\"decisions\": decisions, \"starts\": starts}\n        receipt = self.store.change(\"schedule\", dispatch)\n        for decision in receipt[0][\"decisions\"]:\n            self._emit(\"approval\", \"decision\", receipt, decision[\"run_id\"], lambda d=decision: {\"inputs\": {\"clock\": d[\"clock\"], \"version\": d[\"version\"]}, \"outputs\": d})\n            for candidate in decision[\"candidates\"]:\n                self._emit(\"grant-match\", \"decision\", receipt, decision[\"run_id\"], lambda d=decision, g=candidate: {\"inputs\": {\"clock\": d[\"clock\"], \"run_version\": d[\"version\"], \"grant_version\": g[\"version\"], \"expires\": g[\"expires\"], \"printer_id\": g[\"printer_id\"], \"task_id\": g[\"task_id\"], \"approver\": g[\"approver\"]}, \"outputs\": g})\n        for start in receipt[0][\"starts\"]:\n            self._emit(\"printing\", \"commit\", receipt, start[\"run_id\"], lambda s=start: {\"inputs\": {\"clock\": s[\"clock\"]}, \"outputs\": s})\n        for run in receipt[2][\"runs\"]:\n            if run[\"state\"] in (\"awaiting_approval\", \"queued\", \"blocked\"):\n                self._emit(\"queue\", \"wait\", receipt, run[\"id\"], lambda r=run: {\"inputs\": {\"printer_id\": r[\"printer_id\"]}, \"outputs\": {\"state\": r[\"state\"], \"reason\": r[\"reason\"], \"queue_seq\": r[\"queue_seq\"]}})\n        return receipt[0]",
+      "calls": [
+        "c.execute",
+        "c.execute(\"SELECT * FROM runs WHERE printer_id=? AND state='queued' ORDER BY queue_seq\", (printer['id'],)).fetchall",
+        "c.execute(\"SELECT * FROM runs WHERE state IN ('awaiting_approval','queued','blocked') ORDER BY rowid\").fetchall",
+        "c.execute(\"SELECT value FROM counters WHERE name='queue'\").fetchone",
+        "c.execute('SELECT * FROM printers WHERE occupant IS NULL ORDER BY id').fetchall",
+        "decisions.append",
+        "dict",
+        "self._authorization",
+        "self._emit",
+        "self.clock",
+        "self.store.change",
+        "starts.append",
+        "transition"
+      ],
+      "guards": [
+        {
+          "line": 192,
+          "expression": "run['state'] in ('awaiting_approval', 'queued', 'blocked')"
+        },
+        {
+          "line": 156,
+          "expression": "auth['allowed'] and run['state'] == 'awaiting_approval'"
+        },
+        {
+          "line": 161,
+          "expression": "auth['allowed'] and run['state'] == 'blocked'"
+        },
+        {
+          "line": 173,
+          "expression": "not auth['allowed']"
+        },
+        {
+          "line": 164,
+          "expression": "not auth['allowed'] and run['state'] == 'queued'"
+        }
+      ],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "printer": {
+      "path": "app/store.py",
+      "symbol": "Store.snapshot",
+      "line": 43,
+      "end_line": 57,
+      "signature": "self, connection=None",
+      "ast_sha256": "3847e7a9099dd809812d7cb7bb4399b457df99e2e0271ff37b9f7af22a03fff1",
+      "snippet": "    def snapshot(self, connection=None) -> dict:\n        if connection is None:\n            with closing(self.connect()) as c:\n                c.execute(\"BEGIN\")\n                return self.snapshot(c)\n        result = {table: [dict(row) for row in connection.execute(\"SELECT * FROM \" + table + \" ORDER BY rowid\")] for table in TABLES}\n        for row in result[\"runs\"]:\n            for field in (\"dimensions\", \"parameters\"):\n                row[field] = json.loads(row[field])\n        for row in result[\"printers\"]:\n            for field in (\"limits\", \"materials\"):\n                row[field] = json.loads(row[field])\n        for row in result[\"activities\"]:\n            row[\"result\"] = json.loads(row[\"result\"]) if row[\"result\"] else None\n        return result",
+      "calls": [
+        "c.execute",
+        "closing",
+        "connection.execute",
+        "dict",
+        "json.loads",
+        "self.connect",
+        "self.snapshot"
+      ],
+      "guards": [
+        {
+          "line": 44,
+          "expression": "connection is None"
+        },
+        {
+          "line": 56,
+          "expression": "row['result']"
+        }
+      ],
+      "file_sha256": "cd6c143d0cf46e4a47fcffba643501a82fbe9b05d0d1d0014e6f04c239945382"
+    },
+    "cancel": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.cancel",
+      "line": 196,
+      "end_line": 212,
+      "signature": "self, run_id: str",
+      "ast_sha256": "2ec933f2c25e7e6eb62fe0bdc6acf228f0fd98e326b17121151f5ce61abcf532",
+      "snippet": "    def cancel(self, run_id: str):\n        def request(c):\n            run = c.execute(\"SELECT * FROM runs WHERE id=?\", (run_id,)).fetchone()\n            if not run:\n                raise ValueError(\"unknown run\")\n            if run[\"state\"] == \"printing\":\n                state = transition(c, run_id, \"cancel_print\")\n                c.execute(\"UPDATE runs SET reason='device_stop_confirmation' WHERE id=?\", (run_id,))\n            elif run[\"state\"] in (\"stopping\", \"completed\", \"cancelled\", \"superseded\"):\n                state = run[\"state\"]\n            else:\n                state = transition(c, run_id, \"cancel_pending\")\n                c.execute(\"UPDATE runs SET reason='' WHERE id=?\", (run_id,))\n            return {\"state\": state}\n        receipt = self.store.change(\"cancel_run\", request)\n        self._emit(\"cancel\", \"commit\", receipt, run_id, lambda: {\"inputs\": {\"run_id\": run_id}, \"outputs\": receipt[0]})\n        self.schedule()",
+      "calls": [
+        "ValueError",
+        "c.execute",
+        "c.execute('SELECT * FROM runs WHERE id=?', (run_id,)).fetchone",
+        "self._emit",
+        "self.schedule",
+        "self.store.change",
+        "transition"
+      ],
+      "guards": [
+        {
+          "line": 199,
+          "expression": "not run"
+        },
+        {
+          "line": 201,
+          "expression": "run['state'] == 'printing'"
+        },
+        {
+          "line": 204,
+          "expression": "run['state'] in ('stopping', 'completed', 'cancelled', 'superseded')"
+        }
+      ],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "printer-stopped": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.confirm",
+      "line": 214,
+      "end_line": 233,
+      "signature": "self, run_id: str, kind: str",
+      "ast_sha256": "449e8b6a0250a0a32be36bca565a34f1720ee9a68b18495ccb93ef1ae639e6cc",
+      "snippet": "    def confirm(self, run_id: str, kind: str):\n        if kind not in (\"complete\", \"stop\"):\n            raise ValueError(\"unknown device confirmation\")\n        def release(c):\n            run = c.execute(\"SELECT * FROM runs WHERE id=?\", (run_id,)).fetchone()\n            if not run:\n                raise ValueError(\"unknown run\")\n            if run[\"state\"] in (\"completed\", \"cancelled\"):\n                return {\"state\": run[\"state\"], \"duplicate\": True}\n            printer = c.execute(\"SELECT * FROM printers WHERE id=?\", (run[\"printer_id\"],)).fetchone()\n            if printer[\"occupant\"] != run_id:\n                raise ValueError(\"confirmation does not match device occupant\")\n            state = transition(c, run_id, \"complete_confirmed\" if kind == \"complete\" else \"stop_confirmed\")\n            c.execute(\"UPDATE printers SET occupant=NULL WHERE id=? AND occupant=?\", (run[\"printer_id\"], run_id))\n            c.execute(\"UPDATE runs SET reason='' WHERE id=?\", (run_id,))\n            effect = c.execute(\"INSERT INTO effects(run_id,kind,printer_id,clock) VALUES(?,?,?,?)\", (run_id, kind, run[\"printer_id\"], self.clock())).lastrowid\n            return {\"state\": state, \"duplicate\": False, \"effect_id\": effect, \"printer_id\": run[\"printer_id\"], \"released\": True}\n        receipt = self.store.change(\"device_\" + kind, release)\n        self._emit(\"printer-stopped\", \"commit\", receipt, run_id, lambda: {\"inputs\": {\"kind\": kind}, \"outputs\": receipt[0]})\n        self.schedule()",
+      "calls": [
+        "ValueError",
+        "c.execute",
+        "c.execute('SELECT * FROM printers WHERE id=?', (run['printer_id'],)).fetchone",
+        "c.execute('SELECT * FROM runs WHERE id=?', (run_id,)).fetchone",
+        "self._emit",
+        "self.clock",
+        "self.schedule",
+        "self.store.change",
+        "transition"
+      ],
+      "guards": [
+        {
+          "line": 215,
+          "expression": "kind not in ('complete', 'stop')"
+        },
+        {
+          "line": 219,
+          "expression": "not run"
+        },
+        {
+          "line": 221,
+          "expression": "run['state'] in ('completed', 'cancelled')"
+        },
+        {
+          "line": 224,
+          "expression": "printer['occupant'] != run_id"
+        },
+        {
+          "line": 226,
+          "expression": "kind == 'complete'"
+        }
+      ],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "lifecycle": {
+      "path": "bo_stategraph/declaration.py",
+      "symbol": "definition",
+      "line": 18,
+      "end_line": 19,
+      "signature": "",
+      "ast_sha256": "4d398780d3be1f56bd43a46bf0d91a4b66dcc550094c7bfd27a9b645955a4f9c",
+      "snippet": "def definition() -> dict:\n    return {\"engine\": \"project-python-sqlite\", \"version\": \"1\", \"state_type\": \"str\", \"states\": list(LABELS), \"values\": list(LABELS), \"initial\": \"checking\", \"context\": {\"version\": {\"type\": \"integer\", \"min\": 1}}, \"events\": {t[\"trigger\"]: {\"payload\": {}} for t in TRANSITIONS}, \"transitions\": TRANSITIONS, \"labels\": LABELS, \"guards\": {}, \"source\": {\"path\": \"bo_stategraph/declaration.py\", \"symbol\": \"definition\"}}",
+      "calls": [
+        "list"
+      ],
+      "guards": [],
+      "file_sha256": "64683a6dfe19a6dd9bf08e5a6631592b5da33f71e4fec701f9a55b6d1b8fd141"
+    },
+    "internal.754d53c05700": {
+      "path": "app/ports.py",
+      "symbol": "EventPort.__init__",
+      "line": 3,
+      "end_line": 5,
+      "signature": "self, callback=None",
+      "ast_sha256": "f434edaec46354cb74843f567a924d71ebd2b1b6606c61cff180195fbc18f50c",
+      "snippet": "    def __init__(self, callback=None):\n        self.callback = callback\n        self.errors = 0",
+      "calls": [],
+      "guards": [],
+      "file_sha256": "f8817e3b2783789f266e8d54051a890d5852cc590ff9e07bbc7d41ebf9afad1d"
+    },
+    "internal.7169d4f33be4": {
+      "path": "app/ports.py",
+      "symbol": "EventPort.bo_emit",
+      "line": 7,
+      "end_line": 13,
+      "signature": "self, node, phase, context, builder",
+      "ast_sha256": "65b174451eaaa491a02c3a290b597c722c650e48168efa7856843b8ea05fb0dd",
+      "snippet": "    def bo_emit(self, node, phase, context, builder):\n        if self.callback is None:\n            return\n        try:\n            self.callback(node, phase, context, builder())\n        except Exception:\n            self.errors += 1",
+      "calls": [
+        "builder",
+        "self.callback"
+      ],
+      "guards": [
+        {
+          "line": 8,
+          "expression": "self.callback is None"
+        }
+      ],
+      "file_sha256": "f8817e3b2783789f266e8d54051a890d5852cc590ff9e07bbc7d41ebf9afad1d"
+    },
+    "internal.db322c4e6104": {
+      "path": "app/store.py",
+      "symbol": "Store.__init__",
+      "line": 10,
+      "end_line": 35,
+      "signature": "self, path: str, printers: list",
+      "ast_sha256": "9fbd8c900fe033385b232738717d888cd15ae7b455c50cd6302582720907afe7",
+      "snippet": "    def __init__(self, path: str, printers: list):\n        self.path = str(path)\n        Path(path).parent.mkdir(parents=True, exist_ok=True)\n        with closing(self.connect()) as c:\n            c.executescript('''\n            CREATE TABLE IF NOT EXISTS tasks(id TEXT PRIMARY KEY, submitter TEXT NOT NULL, version INTEGER NOT NULL);\n            CREATE TABLE IF NOT EXISTS runs(id TEXT PRIMARY KEY, task_id TEXT NOT NULL, version INTEGER NOT NULL,\n              submitter TEXT NOT NULL, printer_id TEXT NOT NULL, dimensions TEXT NOT NULL, material TEXT NOT NULL,\n              parameters TEXT NOT NULL, state TEXT NOT NULL, queue_seq INTEGER, reason TEXT NOT NULL,\n              UNIQUE(task_id,version));\n            CREATE TABLE IF NOT EXISTS activities(run_id TEXT, name TEXT, state TEXT NOT NULL, result TEXT,\n              started REAL, ended REAL, PRIMARY KEY(run_id,name));\n            CREATE TABLE IF NOT EXISTS printers(id TEXT PRIMARY KEY, limits TEXT NOT NULL, materials TEXT NOT NULL,\n              occupant TEXT UNIQUE);\n            CREATE TABLE IF NOT EXISTS roles(actor TEXT, printer_id TEXT, active INTEGER NOT NULL, PRIMARY KEY(actor,printer_id));\n            CREATE TABLE IF NOT EXISTS approvals(id TEXT PRIMARY KEY, task_id TEXT NOT NULL, version INTEGER NOT NULL,\n              printer_id TEXT NOT NULL, approver TEXT NOT NULL, expires REAL NOT NULL, revoked INTEGER NOT NULL);\n            CREATE TABLE IF NOT EXISTS effects(id INTEGER PRIMARY KEY AUTOINCREMENT, run_id TEXT NOT NULL,\n              kind TEXT NOT NULL, printer_id TEXT NOT NULL, clock REAL NOT NULL);\n            CREATE TABLE IF NOT EXISTS history(revision INTEGER PRIMARY KEY AUTOINCREMENT, action TEXT NOT NULL, snapshot TEXT NOT NULL);\n            CREATE TABLE IF NOT EXISTS counters(name TEXT PRIMARY KEY, value INTEGER NOT NULL);\n            INSERT OR IGNORE INTO counters VALUES('queue',0);\n            ''')\n            for p in printers:\n                c.execute(\"INSERT OR IGNORE INTO printers VALUES(?,?,?,NULL)\", (p[\"id\"], json.dumps(p[\"limits\"]), json.dumps(p[\"materials\"])))\n            c.commit()",
+      "calls": [
+        "Path",
+        "Path(path).parent.mkdir",
+        "c.commit",
+        "c.execute",
+        "c.executescript",
+        "closing",
+        "json.dumps",
+        "self.connect",
+        "str"
+      ],
+      "guards": [],
+      "file_sha256": "cd6c143d0cf46e4a47fcffba643501a82fbe9b05d0d1d0014e6f04c239945382"
+    },
+    "internal.e2167ed950a0": {
+      "path": "app/store.py",
+      "symbol": "Store.connect",
+      "line": 37,
+      "end_line": 41,
+      "signature": "self",
+      "ast_sha256": "bdf1075ab46be1786c0739b229b3163f74a61397ef24b6bb999a7556a8450026",
+      "snippet": "    def connect(self):\n        c = sqlite3.connect(self.path, timeout=15)\n        c.row_factory = sqlite3.Row\n        c.execute(\"PRAGMA foreign_keys=ON\")\n        return c",
+      "calls": [
+        "c.execute",
+        "sqlite3.connect"
+      ],
+      "guards": [],
+      "file_sha256": "cd6c143d0cf46e4a47fcffba643501a82fbe9b05d0d1d0014e6f04c239945382"
+    },
+    "internal.a5f63d79f81f": {
+      "path": "app/store.py",
+      "symbol": "Store.change",
+      "line": 59,
+      "end_line": 70,
+      "signature": "self, action: str, operation",
+      "ast_sha256": "db492052769c407678143ad3d37295dd6caba5943b10b0e3f4cbfb949752ed27",
+      "snippet": "    def change(self, action: str, operation) -> tuple:\n        with closing(self.connect()) as c:\n            try:\n                c.execute(\"BEGIN IMMEDIATE\")\n                result = operation(c)\n                snapshot = self.snapshot(c)\n                revision = c.execute(\"INSERT INTO history(action,snapshot) VALUES(?,?)\", (action, json.dumps(snapshot, ensure_ascii=False))).lastrowid\n                c.commit()\n                return result, revision, snapshot\n            except BaseException:\n                c.rollback()\n                raise",
+      "calls": [
+        "c.commit",
+        "c.execute",
+        "c.rollback",
+        "closing",
+        "json.dumps",
+        "operation",
+        "self.connect",
+        "self.snapshot"
+      ],
+      "guards": [],
+      "file_sha256": "cd6c143d0cf46e4a47fcffba643501a82fbe9b05d0d1d0014e6f04c239945382"
+    },
+    "internal.3e01f606f2be": {
+      "path": "app/store.py",
+      "symbol": "Store.history",
+      "line": 72,
+      "end_line": 74,
+      "signature": "self",
+      "ast_sha256": "d769c02dc72259045aff008e2b879f429ba9fb9730c34af7874b947f5dbe5bc6",
+      "snippet": "    def history(self) -> list:\n        with closing(self.connect()) as c:\n            return [{\"revision\": r[\"revision\"], \"action\": r[\"action\"], \"snapshot\": json.loads(r[\"snapshot\"])} for r in c.execute(\"SELECT * FROM history ORDER BY revision\")]",
+      "calls": [
+        "c.execute",
+        "closing",
+        "json.loads",
+        "self.connect"
+      ],
+      "guards": [],
+      "file_sha256": "cd6c143d0cf46e4a47fcffba643501a82fbe9b05d0d1d0014e6f04c239945382"
+    },
+    "internal.072cc691db42": {
+      "path": "bo_stategraph/__init__.py",
+      "symbol": "BOStateGraph.__init__",
+      "line": 5,
+      "end_line": 6,
+      "signature": "self, store",
+      "ast_sha256": "85e3a9a9795ffea4e95b378a1c86d583f2614d69326d5f437999cdff9d38e89a",
+      "snippet": "    def __init__(self, store):\n        self.store = store",
+      "calls": [],
+      "guards": [],
+      "file_sha256": "fce75fd4b268cd2020989f1a3e83dbbb6c06e35d0f62cd6d59e7b0da8e8725da"
+    },
+    "internal.4542a230c9f1": {
+      "path": "bo_stategraph/__init__.py",
+      "symbol": "BOStateGraph.bo_definition",
+      "line": 8,
+      "end_line": 9,
+      "signature": "self",
+      "ast_sha256": "d87c7109c474f48fadfa1d67d115274787317aceac7fd8500723315616788c3e",
+      "snippet": "    def bo_definition(self):\n        return definition()",
+      "calls": [
+        "definition"
+      ],
+      "guards": [],
+      "file_sha256": "fce75fd4b268cd2020989f1a3e83dbbb6c06e35d0f62cd6d59e7b0da8e8725da"
+    },
+    "internal.d2d94c06d0cb": {
+      "path": "bo_stategraph/__init__.py",
+      "symbol": "BOStateGraph.bo_instances",
+      "line": 11,
+      "end_line": 13,
+      "signature": "self, snapshot=None",
+      "ast_sha256": "d6ed3679ceb9faf9fe10787bcb2396d385d519699905b5dce5dd33f669d24401",
+      "snippet": "    def bo_instances(self, snapshot=None):\n        snap = snapshot if snapshot is not None else self.store.snapshot()\n        return [{\"id\": r[\"id\"], \"task_id\": r[\"task_id\"], \"version\": r[\"version\"], \"state\": r[\"state\"], \"printer_id\": r[\"printer_id\"], \"queue_seq\": r[\"queue_seq\"], \"reason\": r[\"reason\"], \"parameters\": {\"dimensions\": r[\"dimensions\"], \"material\": r[\"material\"], \"printing\": r[\"parameters\"]}, \"activities\": [a for a in snap[\"activities\"] if a[\"run_id\"] == r[\"id\"]], \"occupies\": [p[\"id\"] for p in snap[\"printers\"] if p[\"occupant\"] == r[\"id\"]]} for r in snap[\"runs\"]]",
+      "calls": [
+        "self.store.snapshot"
+      ],
+      "guards": [
+        {
+          "line": 12,
+          "expression": "snapshot is not None"
+        }
+      ],
+      "file_sha256": "fce75fd4b268cd2020989f1a3e83dbbb6c06e35d0f62cd6d59e7b0da8e8725da"
+    },
+    "internal.0647f1304d01": {
+      "path": "bo_stategraph/__init__.py",
+      "symbol": "BOStateGraph.bo_export",
+      "line": 15,
+      "end_line": 17,
+      "signature": "self",
+      "ast_sha256": "d46bb7daa99b8e0dcaefe6fd94c8b938b1121f3c5f024eb4a2575f020c3d30e5",
+      "snippet": "    def bo_export(self):\n        snap = self.store.snapshot()\n        return {\"definition\": self.bo_definition(), \"instances\": self.bo_instances(snap), \"resources\": snap[\"printers\"], \"checks\": validate_instances(snap), \"source\": \"SQLite authoritative snapshot\", \"coverage\": \"two shared printers; submitted dimensions; local simulated device\"}",
+      "calls": [
+        "self.bo_definition",
+        "self.bo_instances",
+        "self.store.snapshot",
+        "validate_instances"
+      ],
+      "guards": [],
+      "file_sha256": "fce75fd4b268cd2020989f1a3e83dbbb6c06e35d0f62cd6d59e7b0da8e8725da"
+    },
+    "internal.e1ab014947c6": {
+      "path": "bo_stategraph/__init__.py",
+      "symbol": "validate_instances",
+      "line": 19,
+      "end_line": 41,
+      "signature": "snapshot: dict",
+      "ast_sha256": "e6d39a3f5426539fbf46d122104de1302b8ca0854e9d6f4add4418fea0cfb86e",
+      "snippet": "def validate_instances(snapshot: dict) -> list:\n    \"\"\"Project extension: shared printer capacity, ALL checks, and run identities.\n\n    The frozen activity-graph checker supports per-run resource pools only.\n    These shared resources are checked here, against the actual SQLite snapshot.\n    \"\"\"\n    errors = []\n    runs = {r[\"id\"]: r for r in snapshot[\"runs\"]}\n    for p in snapshot[\"printers\"]:\n        running = [r for r in runs.values() if r[\"printer_id\"] == p[\"id\"] and r[\"state\"] in (\"printing\", \"stopping\")]\n        if len(running) > 1:\n            errors.append(\"printer capacity exceeded: \" + p[\"id\"])\n        if {r[\"id\"] for r in running} != ({p[\"occupant\"]} if p[\"occupant\"] else set()):\n            errors.append(\"occupancy differs from running states: \" + p[\"id\"])\n    for r in runs.values():\n        acts = [a for a in snapshot[\"activities\"] if a[\"run_id\"] == r[\"id\"]]\n        if sorted(a[\"name\"] for a in acts) != [\"material\", \"size\"]:\n            errors.append(\"missing parallel activity: \" + r[\"id\"])\n        if r[\"state\"] in (\"queued\", \"blocked\", \"printing\", \"stopping\", \"completed\") and any(a[\"state\"] != \"passed\" for a in acts):\n            errors.append(\"ALL check barrier violated: \" + r[\"id\"])\n        if r[\"state\"] in (\"queued\", \"blocked\", \"printing\", \"stopping\", \"completed\") and r[\"queue_seq\"] is None:\n            errors.append(\"missing queue identity: \" + r[\"id\"])\n    return errors",
+      "calls": [
+        "any",
+        "errors.append",
+        "len",
+        "runs.values",
+        "set",
+        "sorted"
+      ],
+      "guards": [
+        {
+          "line": 29,
+          "expression": "len(running) > 1"
+        },
+        {
+          "line": 31,
+          "expression": "{r['id'] for r in running} != ({p['occupant']} if p['occupant'] else set())"
+        },
+        {
+          "line": 35,
+          "expression": "sorted((a['name'] for a in acts)) != ['material', 'size']"
+        },
+        {
+          "line": 37,
+          "expression": "r['state'] in ('queued', 'blocked', 'printing', 'stopping', 'completed') and any((a['state'] != 'passed' for a in acts))"
+        },
+        {
+          "line": 39,
+          "expression": "r['state'] in ('queued', 'blocked', 'printing', 'stopping', 'completed') and r['queue_seq'] is None"
+        },
+        {
+          "line": 31,
+          "expression": "p['occupant']"
+        }
+      ],
+      "file_sha256": "fce75fd4b268cd2020989f1a3e83dbbb6c06e35d0f62cd6d59e7b0da8e8725da"
+    },
+    "internal.3589b42935b7": {
+      "path": "bo_stategraph/declaration.py",
+      "symbol": "transition",
+      "line": 21,
+      "end_line": 28,
+      "signature": "connection, run_id: str, trigger: str",
+      "ast_sha256": "345b4c239c734f0239d1663b57032b8a232f8c6bbbbebe39290af752db4ea321",
+      "snippet": "def transition(connection, run_id: str, trigger: str) -> str:\n    current = connection.execute(\"SELECT state FROM runs WHERE id=?\", (run_id,)).fetchone()[0]\n    for t in TRANSITIONS:\n        sources = t[\"source\"] if isinstance(t[\"source\"], list) else [t[\"source\"]]\n        if t[\"trigger\"] == trigger and current in sources:\n            connection.execute(\"UPDATE runs SET state=? WHERE id=?\", (t[\"dest\"], run_id))\n            return t[\"dest\"]\n    raise ValueError(f\"Invalid transition: {current} / {trigger}\")",
+      "calls": [
+        "ValueError",
+        "connection.execute",
+        "connection.execute('SELECT state FROM runs WHERE id=?', (run_id,)).fetchone",
+        "isinstance"
+      ],
+      "guards": [
+        {
+          "line": 25,
+          "expression": "t['trigger'] == trigger and current in sources"
+        },
+        {
+          "line": 24,
+          "expression": "isinstance(t['source'], list)"
+        }
+      ],
+      "file_sha256": "64683a6dfe19a6dd9bf08e5a6631592b5da33f71e4fec701f9a55b6d1b8fd141"
+    },
+    "internal.454f0aaf9756": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.__init__",
+      "line": 13,
+      "end_line": 17,
+      "signature": "self, store, events=None, clock=None, check_functions=None",
+      "ast_sha256": "9e43bb9331055efc12257c925fb5633fa09fc49a233dda8fc4335097dd8461bf",
+      "snippet": "    def __init__(self, store, events=None, clock=None, check_functions=None):\n        self.store = store\n        self.events = events or EventPort()\n        self.clock = clock or time.time\n        self.check_functions = check_functions or {\"size\": check_size, \"material\": check_material}",
+      "calls": [
+        "EventPort"
+      ],
+      "guards": [],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "internal.802087d53a3c": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow._emit",
+      "line": 19,
+      "end_line": 27,
+      "signature": "self, node, phase, receipt, run_id, builder, call_id=None",
+      "ast_sha256": "a5caea6ae11dd24a9d7eecc4191beab784279c7bbec1da4b64de657159c686b8",
+      "snippet": "    def _emit(self, node, phase, receipt, run_id, builder, call_id=None):\n        if self.events.callback is None:\n            return\n        try:\n            run = next((r for r in receipt[2][\"runs\"] if r[\"id\"] == run_id), None)\n            context = {\"revision\": receipt[1], \"attempt\": run_id or \"administration\", \"entity\": run[\"task_id\"] if run else \"studio\", \"param_version\": run[\"version\"] if run else 0, \"call_id\": call_id or uuid.uuid4().hex}\n            self.events.bo_emit(node, phase, context, builder)\n        except Exception:\n            self.events.errors += 1",
+      "calls": [
+        "next",
+        "self.events.bo_emit",
+        "uuid.uuid4"
+      ],
+      "guards": [
+        {
+          "line": 20,
+          "expression": "self.events.callback is None"
+        },
+        {
+          "line": 24,
+          "expression": "run"
+        },
+        {
+          "line": 24,
+          "expression": "run"
+        }
+      ],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "internal.7accbda09e3b": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.submit.create",
+      "line": 32,
+      "end_line": 55,
+      "signature": "c",
+      "ast_sha256": "6406149290725fa47731e84f7d2bb4d236a1058fca2d4dcdaa4cb7abd2f73c7a",
+      "snippet": "        def create(c):\n            if not c.execute(\"SELECT 1 FROM printers WHERE id=?\", (printer_id,)).fetchone():\n                raise ValueError(\"unknown printer\")\n            old = c.execute(\"SELECT * FROM tasks WHERE id=?\", (task_id,)).fetchone()\n            if old:\n                if old[\"submitter\"] != submitter:\n                    raise PermissionError(\"only original submitter may change parameters\")\n                latest = c.execute(\"SELECT * FROM runs WHERE task_id=? AND version=?\", (task_id, old[\"version\"])).fetchone()\n                if latest[\"printer_id\"] != printer_id:\n                    raise ValueError(\"printer reassignment is outside this version operation\")\n                if json.loads(latest[\"dimensions\"]) == dimensions and latest[\"material\"] == material and json.loads(latest[\"parameters\"]) == parameters:\n                    return {\"run_id\": latest[\"id\"], \"unchanged\": True}\n                version = old[\"version\"] + 1\n                for row in c.execute(\"SELECT id,state FROM runs WHERE task_id=?\", (task_id,)).fetchall():\n                    if row[\"state\"] in (\"checking\", \"awaiting_approval\", \"queued\", \"blocked\", \"check_failed\", \"check_error\"):\n                        transition(c, row[\"id\"], \"invalidate\")\n                        c.execute(\"UPDATE runs SET reason='new_version' WHERE id=?\", (row[\"id\"],))\n                c.execute(\"UPDATE tasks SET version=? WHERE id=?\", (version, task_id))\n            else:\n                version = 1\n                c.execute(\"INSERT INTO tasks VALUES(?,?,?)\", (task_id, submitter, version))\n            c.execute(\"INSERT INTO runs VALUES(?,?,?,?,?,?,?,?,?,?,?)\", (run_id, task_id, version, submitter, printer_id, json.dumps(dimensions), material, json.dumps(parameters, allow_nan=False, sort_keys=True), \"checking\", None, \"checks_pending\"))\n            c.executemany(\"INSERT INTO activities(run_id,name,state) VALUES(?,?,'pending')\", [(run_id, \"size\"), (run_id, \"material\")])\n            return {\"run_id\": run_id, \"unchanged\": False, \"version\": version}",
+      "calls": [
+        "PermissionError",
+        "ValueError",
+        "c.execute",
+        "c.execute('SELECT * FROM runs WHERE task_id=? AND version=?', (task_id, old['version'])).fetchone",
+        "c.execute('SELECT * FROM tasks WHERE id=?', (task_id,)).fetchone",
+        "c.execute('SELECT 1 FROM printers WHERE id=?', (printer_id,)).fetchone",
+        "c.execute('SELECT id,state FROM runs WHERE task_id=?', (task_id,)).fetchall",
+        "c.executemany",
+        "json.dumps",
+        "json.loads",
+        "transition"
+      ],
+      "guards": [
+        {
+          "line": 33,
+          "expression": "not c.execute('SELECT 1 FROM printers WHERE id=?', (printer_id,)).fetchone()"
+        },
+        {
+          "line": 36,
+          "expression": "old"
+        },
+        {
+          "line": 37,
+          "expression": "old['submitter'] != submitter"
+        },
+        {
+          "line": 40,
+          "expression": "latest['printer_id'] != printer_id"
+        },
+        {
+          "line": 42,
+          "expression": "json.loads(latest['dimensions']) == dimensions and latest['material'] == material and (json.loads(latest['parameters']) == parameters)"
+        },
+        {
+          "line": 46,
+          "expression": "row['state'] in ('checking', 'awaiting_approval', 'queued', 'blocked', 'check_failed', 'check_error')"
+        }
+      ],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "internal.49897fc6bf56": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow._check.start",
+      "line": 65,
+      "end_line": 66,
+      "signature": "c",
+      "ast_sha256": "6fbfd128f3a804be2cffad38a05481fcd33dcc5f297ffc7625850ef8388c38cf",
+      "snippet": "        def start(c):\n            c.execute(\"UPDATE activities SET state='running',started=? WHERE run_id=? AND name=?\", (time.monotonic(), run_id, name))",
+      "calls": [
+        "c.execute",
+        "time.monotonic"
+      ],
+      "guards": [],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "internal.32630898874b": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow._check.finish",
+      "line": 81,
+      "end_line": 82,
+      "signature": "c",
+      "ast_sha256": "444a5182091fe57773f05f1938c89a64f6837600a594fe0f7773a12acb0fe5f2",
+      "snippet": "        def finish(c):\n            c.execute(\"UPDATE activities SET state=?,result=?,ended=? WHERE run_id=? AND name=?\", (state, json.dumps(result), time.monotonic(), run_id, name))",
+      "calls": [
+        "c.execute",
+        "json.dumps",
+        "time.monotonic"
+      ],
+      "guards": [],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "internal.ab9f7d2bb106": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.run_checks.join",
+      "line": 92,
+      "end_line": 101,
+      "signature": "c",
+      "ast_sha256": "76ccd971a1bb0dccd3a5d6221a49491067e70d54ae0e48de529ca2f628e72f22",
+      "snippet": "        def join(c):\n            run = c.execute(\"SELECT * FROM runs WHERE id=?\", (run_id,)).fetchone()\n            activities = [dict(a) for a in c.execute(\"SELECT * FROM activities WHERE run_id=? ORDER BY name\", (run_id,))]\n            if run[\"state\"] != \"checking\":\n                return {\"state\": run[\"state\"], \"passed\": False, \"reason\": \"run_no_longer_current\"}\n            states = [a[\"state\"] for a in activities]\n            trigger = \"checks_error\" if \"error\" in states else \"checks_passed\" if states == [\"passed\", \"passed\"] else \"checks_failed\"\n            state = transition(c, run_id, trigger)\n            c.execute(\"UPDATE runs SET reason=? WHERE id=?\", (\"approval_required\" if trigger == \"checks_passed\" else trigger, run_id))\n            return {\"state\": state, \"passed\": trigger == \"checks_passed\", \"size\": next(a[\"state\"] for a in activities if a[\"name\"] == \"size\"), \"material\": next(a[\"state\"] for a in activities if a[\"name\"] == \"material\")}",
+      "calls": [
+        "c.execute",
+        "c.execute('SELECT * FROM runs WHERE id=?', (run_id,)).fetchone",
+        "dict",
+        "next",
+        "transition"
+      ],
+      "guards": [
+        {
+          "line": 95,
+          "expression": "run['state'] != 'checking'"
+        },
+        {
+          "line": 98,
+          "expression": "'error' in states"
+        },
+        {
+          "line": 98,
+          "expression": "states == ['passed', 'passed']"
+        },
+        {
+          "line": 100,
+          "expression": "trigger == 'checks_passed'"
+        }
+      ],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "internal.3cf2454731d5": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.set_role",
+      "line": 106,
+      "end_line": 109,
+      "signature": "self, actor: str, printer_id: str, active: bool",
+      "ast_sha256": "bcabe444ddd6361a91fdbde7f9811c11f89a5c7e3a6f1379f06dae5826d0d507",
+      "snippet": "    def set_role(self, actor: str, printer_id: str, active: bool):\n        receipt = self.store.change(\"role_change\", lambda c: c.execute(\"INSERT INTO roles VALUES(?,?,?) ON CONFLICT(actor,printer_id) DO UPDATE SET active=excluded.active\", (actor, printer_id, int(active))) and None)\n        self._emit(\"approval-change\", \"change\", receipt, None, lambda: {\"inputs\": {\"actor\": actor, \"printer_id\": printer_id, \"active\": active}, \"outputs\": {}})\n        self.schedule()",
+      "calls": [
+        "c.execute",
+        "int",
+        "self._emit",
+        "self.schedule",
+        "self.store.change"
+      ],
+      "guards": [],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "internal.a790bda440bf": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.approve.add",
+      "line": 115,
+      "end_line": 125,
+      "signature": "c",
+      "ast_sha256": "c954dc098215be6738ba41828ed209f10208a55a129c1368f30a217350ef2e1f",
+      "snippet": "        def add(c):\n            run = c.execute(\"SELECT * FROM runs WHERE id=?\", (run_id,)).fetchone()\n            if run is None:\n                raise ValueError(\"unknown run\")\n            role = c.execute(\"SELECT active FROM roles WHERE actor=? AND printer_id=?\", (approver, run[\"printer_id\"])).fetchone()\n            if approver == run[\"submitter\"] or not role or not role[0]:\n                raise PermissionError(\"self approval or missing printer role\")\n            if expires <= self.clock():\n                raise ValueError(\"approval already expired\")\n            c.execute(\"INSERT INTO approvals VALUES(?,?,?,?,?,?,0)\", (approval_id, run[\"task_id\"], run[\"version\"], run[\"printer_id\"], approver, expires))\n            return {\"approval_id\": approval_id, \"expires\": expires}",
+      "calls": [
+        "PermissionError",
+        "ValueError",
+        "c.execute",
+        "c.execute('SELECT * FROM runs WHERE id=?', (run_id,)).fetchone",
+        "c.execute('SELECT active FROM roles WHERE actor=? AND printer_id=?', (approver, run['printer_id'])).fetchone",
+        "self.clock"
+      ],
+      "guards": [
+        {
+          "line": 117,
+          "expression": "run is None"
+        },
+        {
+          "line": 120,
+          "expression": "approver == run['submitter'] or not role or (not role[0])"
+        },
+        {
+          "line": 122,
+          "expression": "expires <= self.clock()"
+        }
+      ],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "internal.e8370f86a60e": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.revoke",
+      "line": 131,
+      "end_line": 137,
+      "signature": "self, approval_id: str",
+      "ast_sha256": "62d2bfed4153faedf9bc34771df2fdca22411502a4b5342d6c439947a99d03cf",
+      "snippet": "    def revoke(self, approval_id: str):\n        def change(c):\n            if c.execute(\"UPDATE approvals SET revoked=1 WHERE id=?\", (approval_id,)).rowcount != 1:\n                raise ValueError(\"unknown approval\")\n        receipt = self.store.change(\"revoke\", change)\n        self._emit(\"approval-change\", \"change\", receipt, None, lambda: {\"inputs\": {\"approval_id\": approval_id}, \"outputs\": {\"revoked\": True}})\n        self.schedule()",
+      "calls": [
+        "ValueError",
+        "c.execute",
+        "self._emit",
+        "self.schedule",
+        "self.store.change"
+      ],
+      "guards": [
+        {
+          "line": 133,
+          "expression": "c.execute('UPDATE approvals SET revoked=1 WHERE id=?', (approval_id,)).rowcount != 1"
+        }
+      ],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "internal.21cffa8d7809": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.revoke.change",
+      "line": 132,
+      "end_line": 134,
+      "signature": "c",
+      "ast_sha256": "aaba68ab3c8bbcad129870a733b70bca96fdeb59bab76903c2443ba062d8dd06",
+      "snippet": "        def change(c):\n            if c.execute(\"UPDATE approvals SET revoked=1 WHERE id=?\", (approval_id,)).rowcount != 1:\n                raise ValueError(\"unknown approval\")",
+      "calls": [
+        "ValueError",
+        "c.execute"
+      ],
+      "guards": [
+        {
+          "line": 133,
+          "expression": "c.execute('UPDATE approvals SET revoked=1 WHERE id=?', (approval_id,)).rowcount != 1"
+        }
+      ],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "internal.546f79d04863": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.schedule.dispatch",
+      "line": 150,
+      "end_line": 183,
+      "signature": "c",
+      "ast_sha256": "3691dc4219634d21d34488cc8d8d0edd8d7512c5fed916b6fe14ddbff88447d7",
+      "snippet": "        def dispatch(c):\n            decisions, starts = [], []\n            for row in c.execute(\"SELECT * FROM runs WHERE state IN ('awaiting_approval','queued','blocked') ORDER BY rowid\").fetchall():\n                run = dict(row)\n                auth = self._authorization(c, run, self.clock())\n                decisions.append({\"run_id\": run[\"id\"], **auth})\n                if auth[\"allowed\"] and run[\"state\"] == \"awaiting_approval\":\n                    c.execute(\"UPDATE counters SET value=value+1 WHERE name='queue'\")\n                    seq = c.execute(\"SELECT value FROM counters WHERE name='queue'\").fetchone()[0]\n                    transition(c, run[\"id\"], \"admit\")\n                    c.execute(\"UPDATE runs SET queue_seq=?,reason='printer_busy' WHERE id=?\", (seq, run[\"id\"]))\n                elif auth[\"allowed\"] and run[\"state\"] == \"blocked\":\n                    transition(c, run[\"id\"], \"restore_approval\")\n                    c.execute(\"UPDATE runs SET reason='printer_busy' WHERE id=?\", (run[\"id\"],))\n                elif not auth[\"allowed\"] and run[\"state\"] == \"queued\":\n                    transition(c, run[\"id\"], \"lose_approval\")\n                    c.execute(\"UPDATE runs SET reason='no_valid_approval' WHERE id=?\", (run[\"id\"],))\n            for printer in c.execute(\"SELECT * FROM printers WHERE occupant IS NULL ORDER BY id\").fetchall():\n                for row in c.execute(\"SELECT * FROM runs WHERE printer_id=? AND state='queued' ORDER BY queue_seq\", (printer[\"id\"],)).fetchall():\n                    run = dict(row)\n                    # Re-read time and authorization immediately before claiming the device, inside the same writer transaction.\n                    auth = self._authorization(c, run, self.clock())\n                    decisions.append({\"run_id\": run[\"id\"], **auth})\n                    if not auth[\"allowed\"]:\n                        transition(c, run[\"id\"], \"lose_approval\")\n                        c.execute(\"UPDATE runs SET reason='no_valid_approval' WHERE id=?\", (run[\"id\"],))\n                        continue\n                    transition(c, run[\"id\"], \"start\")\n                    c.execute(\"UPDATE printers SET occupant=? WHERE id=?\", (run[\"id\"], printer[\"id\"]))\n                    c.execute(\"UPDATE runs SET reason='' WHERE id=?\", (run[\"id\"],))\n                    effect = c.execute(\"INSERT INTO effects(run_id,kind,printer_id,clock) VALUES(?,'start',?,?)\", (run[\"id\"], printer[\"id\"], auth[\"clock\"])).lastrowid\n                    starts.append({\"run_id\": run[\"id\"], \"printer_id\": printer[\"id\"], \"effect_id\": effect, \"clock\": auth[\"clock\"], \"state\": \"printing\"})\n                    break\n            return {\"decisions\": decisions, \"starts\": starts}",
+      "calls": [
+        "c.execute",
+        "c.execute(\"SELECT * FROM runs WHERE printer_id=? AND state='queued' ORDER BY queue_seq\", (printer['id'],)).fetchall",
+        "c.execute(\"SELECT * FROM runs WHERE state IN ('awaiting_approval','queued','blocked') ORDER BY rowid\").fetchall",
+        "c.execute(\"SELECT value FROM counters WHERE name='queue'\").fetchone",
+        "c.execute('SELECT * FROM printers WHERE occupant IS NULL ORDER BY id').fetchall",
+        "decisions.append",
+        "dict",
+        "self._authorization",
+        "self.clock",
+        "starts.append",
+        "transition"
+      ],
+      "guards": [
+        {
+          "line": 156,
+          "expression": "auth['allowed'] and run['state'] == 'awaiting_approval'"
+        },
+        {
+          "line": 161,
+          "expression": "auth['allowed'] and run['state'] == 'blocked'"
+        },
+        {
+          "line": 173,
+          "expression": "not auth['allowed']"
+        },
+        {
+          "line": 164,
+          "expression": "not auth['allowed'] and run['state'] == 'queued'"
+        }
+      ],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "internal.a1ea134870bb": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.cancel.request",
+      "line": 197,
+      "end_line": 209,
+      "signature": "c",
+      "ast_sha256": "6bcc60ae8cda11ff8e54cb82c3b5d36a86248d5c2067ff6d12c98438803eb1aa",
+      "snippet": "        def request(c):\n            run = c.execute(\"SELECT * FROM runs WHERE id=?\", (run_id,)).fetchone()\n            if not run:\n                raise ValueError(\"unknown run\")\n            if run[\"state\"] == \"printing\":\n                state = transition(c, run_id, \"cancel_print\")\n                c.execute(\"UPDATE runs SET reason='device_stop_confirmation' WHERE id=?\", (run_id,))\n            elif run[\"state\"] in (\"stopping\", \"completed\", \"cancelled\", \"superseded\"):\n                state = run[\"state\"]\n            else:\n                state = transition(c, run_id, \"cancel_pending\")\n                c.execute(\"UPDATE runs SET reason='' WHERE id=?\", (run_id,))\n            return {\"state\": state}",
+      "calls": [
+        "ValueError",
+        "c.execute",
+        "c.execute('SELECT * FROM runs WHERE id=?', (run_id,)).fetchone",
+        "transition"
+      ],
+      "guards": [
+        {
+          "line": 199,
+          "expression": "not run"
+        },
+        {
+          "line": 201,
+          "expression": "run['state'] == 'printing'"
+        },
+        {
+          "line": 204,
+          "expression": "run['state'] in ('stopping', 'completed', 'cancelled', 'superseded')"
+        }
+      ],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "internal.e92f06c3cb44": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.confirm.release",
+      "line": 217,
+      "end_line": 230,
+      "signature": "c",
+      "ast_sha256": "965371af090428248546e299c1f1622f11b0513411c98cdbac20b008f13c5984",
+      "snippet": "        def release(c):\n            run = c.execute(\"SELECT * FROM runs WHERE id=?\", (run_id,)).fetchone()\n            if not run:\n                raise ValueError(\"unknown run\")\n            if run[\"state\"] in (\"completed\", \"cancelled\"):\n                return {\"state\": run[\"state\"], \"duplicate\": True}\n            printer = c.execute(\"SELECT * FROM printers WHERE id=?\", (run[\"printer_id\"],)).fetchone()\n            if printer[\"occupant\"] != run_id:\n                raise ValueError(\"confirmation does not match device occupant\")\n            state = transition(c, run_id, \"complete_confirmed\" if kind == \"complete\" else \"stop_confirmed\")\n            c.execute(\"UPDATE printers SET occupant=NULL WHERE id=? AND occupant=?\", (run[\"printer_id\"], run_id))\n            c.execute(\"UPDATE runs SET reason='' WHERE id=?\", (run_id,))\n            effect = c.execute(\"INSERT INTO effects(run_id,kind,printer_id,clock) VALUES(?,?,?,?)\", (run_id, kind, run[\"printer_id\"], self.clock())).lastrowid\n            return {\"state\": state, \"duplicate\": False, \"effect_id\": effect, \"printer_id\": run[\"printer_id\"], \"released\": True}",
+      "calls": [
+        "ValueError",
+        "c.execute",
+        "c.execute('SELECT * FROM printers WHERE id=?', (run['printer_id'],)).fetchone",
+        "c.execute('SELECT * FROM runs WHERE id=?', (run_id,)).fetchone",
+        "self.clock",
+        "transition"
+      ],
+      "guards": [
+        {
+          "line": 219,
+          "expression": "not run"
+        },
+        {
+          "line": 221,
+          "expression": "run['state'] in ('completed', 'cancelled')"
+        },
+        {
+          "line": 224,
+          "expression": "printer['occupant'] != run_id"
+        },
+        {
+          "line": 226,
+          "expression": "kind == 'complete'"
+        }
+      ],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "internal.a13a218ff282": {
+      "path": "integrations/bo_app.py",
+      "symbol": "BOApplication.__init__",
+      "line": 18,
+      "end_line": 35,
+      "signature": "self, database, mode='on'",
+      "ast_sha256": "22981d7c43b422a1a60ed47326cac0bd32cb620cff56613481727a87f3955778",
+      "snippet": "    def __init__(self, database, mode=\"on\"):\n        self.model = json.loads((ROOT / \"behavior.json\").read_text(encoding=\"utf-8\"))\n        self.manifest = capture(ROOT, self.model)\n        self.sources = {p: (ROOT / p).read_text(encoding=\"utf-8-sig\") for p in self.model[\"source_files\"]}\n        self.store = Store(str(database), json.loads((ROOT / \"config/printers.json\").read_text()))\n        self.collector = BOCapture(self.model, self.manifest[\"build_id\"], mode, path=ROOT / \"data/events.jsonl\")\n        self.port = EventPort(self.collector.bo_record if mode != \"off\" else None)\n        self.workflow = Workflow(self.store, self.port)\n        self.graph = BOStateGraph(self.store)\n        self.lock = threading.RLock()\n        self.recording = None\n        self.recordings_dir = ROOT / \"data/recordings\"\n        self.recordings_dir.mkdir(parents=True, exist_ok=True)\n        self.view_file = ROOT / \"bo_stategraph/config/views/local.json\"\n        if not self.view_file.exists():\n            self.view_file.parent.mkdir(parents=True, exist_ok=True)\n            self.view_file.write_text(json.dumps({\"revision\": 0, \"positions\": {}, \"expanded\": [], \"labels\": {}, \"notes\": {}, \"core\": [], \"type\": \"all\", \"edge_type\": \"all\", \"search\": \"\"}), encoding=\"utf-8\")\n        self.expired_seen = set()",
+      "calls": [
+        "(ROOT / 'behavior.json').read_text",
+        "(ROOT / 'config/printers.json').read_text",
+        "(ROOT / p).read_text",
+        "BOCapture",
+        "BOStateGraph",
+        "EventPort",
+        "Store",
+        "Workflow",
+        "capture",
+        "json.dumps",
+        "json.loads",
+        "self.recordings_dir.mkdir",
+        "self.view_file.exists",
+        "self.view_file.parent.mkdir",
+        "self.view_file.write_text",
+        "set",
+        "str",
+        "threading.RLock"
+      ],
+      "guards": [
+        {
+          "line": 32,
+          "expression": "not self.view_file.exists()"
+        },
+        {
+          "line": 24,
+          "expression": "mode != 'off'"
+        }
+      ],
+      "file_sha256": "61905662894d2255abe44b4025c6ca46da58532c163308870b18bc7a1b54480c"
+    },
+    "internal.46c00e2a6dd9": {
+      "path": "integrations/bo_app.py",
+      "symbol": "BOApplication.bo_view",
+      "line": 37,
+      "end_line": 42,
+      "signature": "self",
+      "ast_sha256": "8ac4124a43006784314ce2fc956233d3084d0829110854e5300a27ce9fceb9d0",
+      "snippet": "    def bo_view(self):\n        with self.lock:\n            history = self.store.history()\n            snap = history[-1][\"snapshot\"] if history else self.store.snapshot()\n            events = copy.deepcopy(self.collector.events)\n            return {\"model\": self.model, \"manifest\": self.manifest, \"binding_status\": check(ROOT, self.model, self.manifest), \"instances\": self.graph.bo_instances(snap), \"snapshot\": snap, \"history\": history, \"events\": events, \"health\": {**self.collector.bo_health(), \"port_errors\": self.port.errors}, \"layout_id\": \"studio-print-trial\", \"recording\": self.recording[\"id\"] if self.recording else None, \"scope\": \"本地模拟设备；只读运行图。选择历史时刻只展示当时已提交事实。\"}",
+      "calls": [
+        "check",
+        "copy.deepcopy",
+        "self.collector.bo_health",
+        "self.graph.bo_instances",
+        "self.store.history",
+        "self.store.snapshot"
+      ],
+      "guards": [
+        {
+          "line": 40,
+          "expression": "history"
+        },
+        {
+          "line": 42,
+          "expression": "self.recording"
+        }
+      ],
+      "file_sha256": "61905662894d2255abe44b4025c6ca46da58532c163308870b18bc7a1b54480c"
+    },
+    "internal.938610ad0915": {
+      "path": "integrations/bo_app.py",
+      "symbol": "BOApplication.bo_preferences",
+      "line": 44,
+      "end_line": 55,
+      "signature": "self, value=None",
+      "ast_sha256": "6a96c0fd4cddcd9bbf50e3d4427046ba081c69b0a9010aa7cc716d9369b5d718",
+      "snippet": "    def bo_preferences(self, value=None):\n        with self.lock:\n            current = json.loads(self.view_file.read_text())\n            if value is None:\n                return current\n            if value.get(\"revision\") != current[\"revision\"]:\n                raise RuntimeError(\"preference_revision_conflict\")\n            updated = {**value, \"revision\": current[\"revision\"] + 1}\n            temporary = self.view_file.with_suffix(\".tmp\")\n            temporary.write_text(json.dumps(updated, ensure_ascii=False), encoding=\"utf-8\")\n            temporary.replace(self.view_file)\n            return updated",
+      "calls": [
+        "RuntimeError",
+        "json.dumps",
+        "json.loads",
+        "self.view_file.read_text",
+        "self.view_file.with_suffix",
+        "temporary.replace",
+        "temporary.write_text",
+        "value.get"
+      ],
+      "guards": [
+        {
+          "line": 47,
+          "expression": "value is None"
+        },
+        {
+          "line": 49,
+          "expression": "value.get('revision') != current['revision']"
+        }
+      ],
+      "file_sha256": "61905662894d2255abe44b4025c6ca46da58532c163308870b18bc7a1b54480c"
+    },
+    "internal.9563f5d10d25": {
+      "path": "integrations/bo_app.py",
+      "symbol": "BOApplication.bo_record",
+      "line": 57,
+      "end_line": 76,
+      "signature": "self, action",
+      "ast_sha256": "fe76192eef758aeca3750cd7c40fa646bd3754cf6f8fec65d7ec2d0b2c71f1f8",
+      "snippet": "    def bo_record(self, action):\n        with self.lock:\n            if action == \"start\":\n                if self.recording:\n                    return {\"id\": self.recording[\"id\"]}\n                view = self.bo_view()\n                self.recording = {\"id\": uuid.uuid4().hex[:12], \"initial\": view, \"start_seq\": self.collector.seq, \"sources\": self.sources, \"status\": \"recording\"}\n                return {\"id\": self.recording[\"id\"]}\n            if not self.recording:\n                raise ValueError(\"no active recording\")\n            record = self.recording\n            final = self.bo_view()\n            events = [e for e in final[\"events\"] if e[\"seq\"] > record[\"start_seq\"]]\n            record.update(final=final, events=events[:20000], status=\"saved\", gap=bool(final[\"health\"][\"gaps\"] or self.port.errors or len(events) > 20000), capture_scope=\"core probes; display filtering does not change capture\")\n            path = self.recordings_dir / (record[\"id\"] + \".json\")\n            temporary = path.with_suffix(\".tmp\")\n            temporary.write_text(json.dumps(record, ensure_ascii=False), encoding=\"utf-8\")\n            temporary.replace(path)\n            self.recording = None\n            return {\"id\": record[\"id\"], \"events\": len(events), \"gap\": record[\"gap\"]}",
+      "calls": [
+        "ValueError",
+        "bool",
+        "json.dumps",
+        "len",
+        "path.with_suffix",
+        "record.update",
+        "self.bo_view",
+        "temporary.replace",
+        "temporary.write_text",
+        "uuid.uuid4"
+      ],
+      "guards": [
+        {
+          "line": 59,
+          "expression": "action == 'start'"
+        },
+        {
+          "line": 65,
+          "expression": "not self.recording"
+        },
+        {
+          "line": 60,
+          "expression": "self.recording"
+        }
+      ],
+      "file_sha256": "61905662894d2255abe44b4025c6ca46da58532c163308870b18bc7a1b54480c"
+    },
+    "internal.fbada283e812": {
+      "path": "integrations/bo_app.py",
+      "symbol": "BOApplication.bo_command",
+      "line": 78,
+      "end_line": 85,
+      "signature": "self, command",
+      "ast_sha256": "a8f4c9894284740fb6d190b158416dd9a31038603a145f1261795b7b5b17de96",
+      "snippet": "    def bo_command(self, command):\n        # Local operator CLI/API; graph view never calls this endpoint.\n        with self.lock:\n            name = command.pop(\"command\")\n            methods = {\"submit\": self.workflow.submit, \"approve\": self.workflow.approve, \"revoke\": self.workflow.revoke, \"role\": self.workflow.set_role, \"cancel\": self.workflow.cancel, \"confirm\": self.workflow.confirm, \"schedule\": self.workflow.schedule}\n            if name not in methods:\n                raise ValueError(\"unknown command\")\n            return {\"result\": methods[name](**command)}",
+      "calls": [
+        "ValueError",
+        "command.pop",
+        "methods[name]"
+      ],
+      "guards": [
+        {
+          "line": 83,
+          "expression": "name not in methods"
+        }
+      ],
+      "file_sha256": "61905662894d2255abe44b4025c6ca46da58532c163308870b18bc7a1b54480c"
+    },
+    "internal.607f404203b2": {
+      "path": "integrations/bo_app.py",
+      "symbol": "BOApplication.bo_tick",
+      "line": 87,
+      "end_line": 93,
+      "signature": "self",
+      "ast_sha256": "760f7e32fe6a108d3add976ef8e208f43d302e2b183520a49b5fbb05c9334df1",
+      "snippet": "    def bo_tick(self):\n        with self.lock:\n            now = time.time()\n            expired = {a[\"id\"] for a in self.store.snapshot()[\"approvals\"] if not a[\"revoked\"] and a[\"expires\"] <= now}\n            if expired - self.expired_seen:\n                self.workflow.schedule()\n            self.expired_seen = expired",
+      "calls": [
+        "self.store.snapshot",
+        "self.workflow.schedule",
+        "time.time"
+      ],
+      "guards": [
+        {
+          "line": 91,
+          "expression": "expired - self.expired_seen"
+        }
+      ],
+      "file_sha256": "61905662894d2255abe44b4025c6ca46da58532c163308870b18bc7a1b54480c"
+    },
+    "internal.84dd13ad3a04": {
+      "path": "integrations/bo_app.py",
+      "symbol": "BOApplication.bo_demo",
+      "line": 95,
+      "end_line": 126,
+      "signature": "self",
+      "ast_sha256": "7100c6dafebc9f75816f05c8df4b3d25c4fdd5420df99db24ca0a0a7cf0ba443",
+      "snippet": "    def bo_demo(self):\n        if self.store.snapshot()[\"runs\"]:\n            return {\"existing\": True}\n        self.bo_record(\"start\")\n        w = self.workflow\n        for actor in (\"bob\", \"carol\"):\n            for printer in (\"P1\", \"P2\"):\n                w.set_role(actor, printer, True)\n        end = time.time() + 7200\n        a = w.submit(\"alice\", \"P1\", [120, 90, 60], \"PLA\", {\"layer_mm\": 0.2}, \"任务-A\")\n        b = w.submit(\"alice\", \"P1\", [80, 70, 50], \"PLA\", {\"layer_mm\": 0.2}, \"任务-B\")\n        c = w.submit(\"dana\", \"P1\", [50, 50, 50], \"PLA\", {}, \"任务-C\")\n        w.approve(a, \"bob\", end)\n        first = w.approve(b, \"bob\", end)\n        w.approve(b, \"carol\", end)\n        w.approve(c, \"bob\", end)\n        w.revoke(first)\n        w.set_role(\"carol\", \"P1\", False)\n        w.confirm(a, \"complete\")\n        w.set_role(\"carol\", \"P1\", True)\n        w.confirm(c, \"complete\")\n        new = w.submit(\"alice\", \"P1\", [90, 70, 50], \"PLA\", {\"layer_mm\": 0.25}, \"任务-B\")\n        w.approve(new, \"bob\", end)\n        w.cancel(b)\n        w.confirm(b, \"stop\")\n        p2 = w.submit(\"dana\", \"P2\", [250, 200, 100], \"ABS\", {}, \"任务-D\")\n        w.approve(p2, \"carol\", end)\n        w.confirm(new, \"complete\")\n        record = self.bo_record(\"stop\")\n        info = {\"runs\": {\"A\": a, \"B1\": b, \"B2\": new, \"C\": c, \"D\": p2}, \"recording\": record[\"id\"], \"meaning\": \"Actual synthetic function calls persisted in SQLite; not fabricated events or real printer execution\"}\n        (ROOT / \"data/demo.json\").write_text(json.dumps(info, ensure_ascii=False, indent=2), encoding=\"utf-8\")\n        return info",
+      "calls": [
+        "(ROOT / 'data/demo.json').write_text",
+        "json.dumps",
+        "self.bo_record",
+        "self.store.snapshot",
+        "time.time",
+        "w.approve",
+        "w.cancel",
+        "w.confirm",
+        "w.revoke",
+        "w.set_role",
+        "w.submit"
+      ],
+      "guards": [
+        {
+          "line": 96,
+          "expression": "self.store.snapshot()['runs']"
+        }
+      ],
+      "file_sha256": "61905662894d2255abe44b4025c6ca46da58532c163308870b18bc7a1b54480c"
+    },
+    "internal.199df18671a0": {
+      "path": "integrations/bo_capture.py",
+      "symbol": "BOCapture.__init__",
+      "line": 10,
+      "end_line": 16,
+      "signature": "self, model, build_id, mode='on', capacity=8000, path=None",
+      "ast_sha256": "ba6c365c61789f4a5d2228f0ecde1b87a7e2522f171e40a701dc84afd30894da",
+      "snippet": "    def __init__(self, model, build_id, mode=\"on\", capacity=8000, path=None):\n        self.model, self.build_id, self.mode = model, build_id, mode\n        self.nodes = {n[\"id\"]: n for n in model[\"nodes\"]}\n        self.capacity, self.path = capacity, Path(path) if path else None\n        self.events, self.errors, self.dropped, self.seq = [], 0, 0, 0\n        self.producer = uuid.uuid4().hex[:12]\n        self.lock = threading.RLock()",
+      "calls": [
+        "Path",
+        "threading.RLock",
+        "uuid.uuid4"
+      ],
+      "guards": [
+        {
+          "line": 13,
+          "expression": "path"
+        }
+      ],
+      "file_sha256": "4e69f3ccf941c910cf9e8cbe101713d102c69796bd84a0cda94059a2e736ead2"
+    },
+    "internal.662d7c5077f0": {
+      "path": "integrations/bo_capture.py",
+      "symbol": "BOCapture.bo_record",
+      "line": 18,
+      "end_line": 37,
+      "signature": "self, node, phase, context, payload",
+      "ast_sha256": "ce44d773873c580cf12afa9dfe98228b0d47b63c8fc4de0ad03dcc4530d3798a",
+      "snippet": "    def bo_record(self, node, phase, context, payload):\n        if self.mode == \"off\":\n            return\n        with self.lock:\n            if self.mode == \"fault\":\n                self.errors += 1\n                raise OSError(\"injected observation sink failure\")\n            spec = self.nodes[node][\"capture\"]\n            self.seq += 1\n            event = {\"schema_version\": 3, \"id\": f\"{self.producer}:{self.seq}\", \"seq\": self.seq, \"run_id\": self.producer, \"attempt\": context[\"attempt\"], \"entity\": context[\"entity\"], \"call_id\": context[\"call_id\"], \"parent_call_id\": None, \"build_id\": self.build_id, \"model_revision\": self.model[\"revision\"], \"node\": node, \"phase\": phase, \"basis\": {\"param_version\": context[\"param_version\"], \"epoch\": context[\"revision\"], \"clock\": payload.get(\"inputs\", {}).get(\"clock\")}, \"revision\": context[\"revision\"], \"inputs\": selected(payload.get(\"inputs\", {}), spec[\"in\"]), \"outputs\": selected(payload.get(\"outputs\", {}), spec[\"out\"]), \"depends\": [], \"observed_at\": datetime.now(timezone.utc).isoformat()}\n            if len(self.events) >= self.capacity:\n                self.events.pop(0)\n                self.dropped += 1\n            self.events.append(event)\n            if self.path:\n                self.path.parent.mkdir(parents=True, exist_ok=True)\n                if self.path.exists() and self.path.stat().st_size > 4 * 1024 * 1024:\n                    self.path.replace(self.path.with_suffix(\".previous.jsonl\"))\n                with self.path.open(\"a\", encoding=\"utf-8\") as stream:\n                    stream.write(json.dumps(event, ensure_ascii=False, allow_nan=False) + \"\\n\")",
+      "calls": [
+        "OSError",
+        "datetime.now",
+        "datetime.now(timezone.utc).isoformat",
+        "json.dumps",
+        "len",
+        "payload.get",
+        "payload.get('inputs', {}).get",
+        "selected",
+        "self.events.append",
+        "self.events.pop",
+        "self.path.exists",
+        "self.path.open",
+        "self.path.parent.mkdir",
+        "self.path.replace",
+        "self.path.stat",
+        "self.path.with_suffix",
+        "stream.write"
+      ],
+      "guards": [
+        {
+          "line": 19,
+          "expression": "self.mode == 'off'"
+        },
+        {
+          "line": 22,
+          "expression": "self.mode == 'fault'"
+        },
+        {
+          "line": 28,
+          "expression": "len(self.events) >= self.capacity"
+        },
+        {
+          "line": 32,
+          "expression": "self.path"
+        },
+        {
+          "line": 34,
+          "expression": "self.path.exists() and self.path.stat().st_size > 4 * 1024 * 1024"
+        }
+      ],
+      "file_sha256": "4e69f3ccf941c910cf9e8cbe101713d102c69796bd84a0cda94059a2e736ead2"
+    },
+    "internal.3be65d679820": {
+      "path": "integrations/bo_capture.py",
+      "symbol": "BOCapture.bo_health",
+      "line": 39,
+      "end_line": 40,
+      "signature": "self",
+      "ast_sha256": "a96c7ea8c7f790de74603c56bb5e6b7df339f49df5c8ebde838ff1623b8c4e40",
+      "snippet": "    def bo_health(self):\n        return {\"enabled\": self.mode != \"off\", \"mode\": self.mode, \"errors\": self.errors, \"dropped\": self.dropped, \"retained\": len(self.events), \"collector\": \"synchronous callback; no separate process\", \"gaps\": bool(self.errors or self.dropped)}",
+      "calls": [
+        "bool",
+        "len"
+      ],
+      "guards": [],
+      "file_sha256": "4e69f3ccf941c910cf9e8cbe101713d102c69796bd84a0cda94059a2e736ead2"
+    },
+    "internal.1c72f90eed1e": {
+      "path": "main.py",
+      "symbol": "main",
+      "line": 7,
+      "end_line": 15,
+      "signature": "",
+      "ast_sha256": "27e75937d6b3887fc16de62e513def666d5a730ed1442bb17e9f532f2a95aa52",
+      "snippet": "def main():\n    p = argparse.ArgumentParser(description=__doc__)\n    p.add_argument(\"action\", choices=[\"demo\", \"show\", \"command\"])\n    p.add_argument(\"payload\", nargs=\"?\")\n    p.add_argument(\"--db\", default=\"data/studio.sqlite\")\n    args = p.parse_args()\n    app = BOApplication(Path(args.db))\n    result = app.bo_demo() if args.action == \"demo\" else app.graph.bo_export() if args.action == \"show\" else app.bo_command(json.loads(args.payload))\n    print(json.dumps(result, ensure_ascii=False, indent=2))",
+      "calls": [
+        "BOApplication",
+        "Path",
+        "app.bo_command",
+        "app.bo_demo",
+        "app.graph.bo_export",
+        "argparse.ArgumentParser",
+        "json.dumps",
+        "json.loads",
+        "p.add_argument",
+        "p.parse_args",
+        "print"
+      ],
+      "guards": [
+        {
+          "line": 14,
+          "expression": "args.action == 'demo'"
+        },
+        {
+          "line": 14,
+          "expression": "args.action == 'show'"
+        }
+      ],
+      "file_sha256": "d6ce91845d015ba244ab4f332d38240ae86245989fcae2ae54938a8f104b85ff"
+    },
+    "internal.b1d0a4c43843": {
+      "path": "server.py",
+      "symbol": "serve",
+      "line": 10,
+      "end_line": 98,
+      "signature": "port=0, database='data/studio.sqlite', demo=False",
+      "ast_sha256": "bbf8ee1e1ebd389805ea5fb853a25447c65e8f5bc5739e91eba7a16a066455bd",
+      "snippet": "def serve(port=0, database=\"data/studio.sqlite\", demo=False):\n    app = BOApplication(ROOT / database)\n    if demo:\n        app.bo_demo()\n\n    class Handler(BaseHTTPRequestHandler):\n        def log_message(self, *args):\n            pass\n\n        def reply(self, value, status=200):\n            body = json.dumps(value, ensure_ascii=False).encode()\n            self.send_response(status)\n            self.send_header(\"Content-Type\", \"application/json; charset=utf-8\")\n            self.send_header(\"Content-Length\", str(len(body)))\n            self.send_header(\"Cache-Control\", \"no-store\")\n            self.end_headers()\n            self.wfile.write(body)\n\n        def do_GET(self):\n            parsed = urlparse(self.path)\n            q = parse_qs(parsed.query)\n            try:\n                if parsed.path == \"/api/view\":\n                    self.reply(app.bo_view())\n                elif parsed.path == \"/api/stategraph\":\n                    self.reply(app.graph.bo_export())\n                elif parsed.path == \"/api/preferences\":\n                    self.reply(app.bo_preferences())\n                elif parsed.path == \"/api/recordings\":\n                    self.reply({\"saved\": [p.stem for p in app.recordings_dir.glob(\"*.json\")], \"active\": app.recording[\"id\"] if app.recording else None})\n                elif parsed.path.startswith(\"/api/recordings/\"):\n                    ident = parsed.path.rsplit(\"/\", 1)[-1]\n                    if len(ident) != 12 or any(ch not in \"0123456789abcdef\" for ch in ident):\n                        raise ValueError(\"invalid recording id\")\n                    self.reply(json.loads((app.recordings_dir / (ident + \".json\")).read_text()))\n                elif parsed.path == \"/api/source\":\n                    path = q.get(\"path\", [\"\"])[0]\n                    self.reply({\"path\": path, \"build_id\": app.manifest[\"build_id\"], \"text\": app.sources[path]})\n                elif parsed.path in (\"/\", \"/index.html\", \"/viewer.js\", \"/viewer.css\"):\n                    name = \"index.html\" if parsed.path == \"/\" else parsed.path[1:]\n                    body = (ROOT / \"static\" / name).read_bytes()\n                    self.send_response(200)\n                    self.send_header(\"Content-Type\", {\".html\": \"text/html\", \".js\": \"text/javascript\", \".css\": \"text/css\"}[Path(name).suffix] + \"; charset=utf-8\")\n                    self.send_header(\"Content-Length\", str(len(body)))\n                    self.end_headers(); self.wfile.write(body)\n                else:\n                    self.reply({\"error\": \"not_found\"}, 404)\n            except (ValueError, KeyError, OSError) as exc:\n                self.reply({\"error\": str(exc)}, 400)\n\n        def do_POST(self):\n            try:\n                # Local tool only. Reject cross-origin browser writes; no CORS allowance.\n                origin = self.headers.get(\"Origin\")\n                if origin and origin != \"http://\" + self.headers.get(\"Host\", \"\"):\n                    self.reply({\"error\": \"cross_origin_denied\"}, 403); return\n                size = int(self.headers.get(\"Content-Length\", \"0\"))\n                if size > 128000:\n                    self.reply({\"error\": \"body_too_large\"}, 413); return\n                data = json.loads(self.rfile.read(size) or b\"{}\")\n                if self.path == \"/api/preferences\":\n                    self.reply(app.bo_preferences(data))\n                elif self.path == \"/api/recordings/start\":\n                    self.reply(app.bo_record(\"start\"))\n                elif self.path == \"/api/recordings/stop\":\n                    self.reply(app.bo_record(\"stop\"))\n                elif self.path == \"/operator/command\":\n                    self.reply(app.bo_command(data))\n                else:\n                    self.reply({\"error\": \"not_found\"}, 404)\n            except RuntimeError as exc:\n                self.reply({\"error\": str(exc)}, 409)\n            except (ValueError, KeyError, TypeError, PermissionError, OSError) as exc:\n                self.reply({\"error\": str(exc), \"type\": type(exc).__name__}, 400)\n\n    httpd = ThreadingHTTPServer((\"127.0.0.1\", port), Handler)\n    url = \"http://127.0.0.1:\" + str(httpd.server_port)\n    (ROOT / \"data/server.json\").write_text(json.dumps({\"url\": url, \"port\": httpd.server_port, \"database\": str(ROOT / database)}))\n    stop = threading.Event()\n    def timer():\n        while not stop.wait(0.25):\n            app.bo_tick()\n    threading.Thread(target=timer, daemon=True, name=\"approval-expiry\").start()\n    print(url, flush=True)\n    try:\n        httpd.serve_forever()\n    finally:\n        stop.set()\n        httpd.server_close()",
+      "calls": [
+        "(ROOT / 'data/server.json').write_text",
+        "(ROOT / 'static' / name).read_bytes",
+        "(app.recordings_dir / (ident + '.json')).read_text",
+        "BOApplication",
+        "Path",
+        "ThreadingHTTPServer",
+        "ValueError",
+        "any",
+        "app.bo_command",
+        "app.bo_demo",
+        "app.bo_preferences",
+        "app.bo_record",
+        "app.bo_tick",
+        "app.bo_view",
+        "app.graph.bo_export",
+        "app.recordings_dir.glob",
+        "httpd.serve_forever",
+        "httpd.server_close",
+        "int",
+        "json.dumps",
+        "json.dumps(value, ensure_ascii=False).encode",
+        "json.loads",
+        "len",
+        "parse_qs",
+        "parsed.path.rsplit",
+        "parsed.path.startswith",
+        "print",
+        "q.get",
+        "self.end_headers",
+        "self.headers.get",
+        "self.reply",
+        "self.rfile.read",
+        "self.send_header",
+        "self.send_response",
+        "self.wfile.write",
+        "stop.set",
+        "stop.wait",
+        "str",
+        "threading.Event",
+        "threading.Thread",
+        "threading.Thread(target=timer, daemon=True, name='approval-expiry').start",
+        "type",
+        "urlparse"
+      ],
+      "guards": [
+        {
+          "line": 12,
+          "expression": "demo"
+        },
+        {
+          "line": 32,
+          "expression": "parsed.path == '/api/view'"
+        },
+        {
+          "line": 64,
+          "expression": "origin and origin != 'http://' + self.headers.get('Host', '')"
+        },
+        {
+          "line": 67,
+          "expression": "size > 128000"
+        },
+        {
+          "line": 70,
+          "expression": "self.path == '/api/preferences'"
+        },
+        {
+          "line": 34,
+          "expression": "parsed.path == '/api/stategraph'"
+        },
+        {
+          "line": 72,
+          "expression": "self.path == '/api/recordings/start'"
+        },
+        {
+          "line": 36,
+          "expression": "parsed.path == '/api/preferences'"
+        },
+        {
+          "line": 74,
+          "expression": "self.path == '/api/recordings/stop'"
+        },
+        {
+          "line": 38,
+          "expression": "parsed.path == '/api/recordings'"
+        },
+        {
+          "line": 76,
+          "expression": "self.path == '/operator/command'"
+        },
+        {
+          "line": 40,
+          "expression": "parsed.path.startswith('/api/recordings/')"
+        },
+        {
+          "line": 42,
+          "expression": "len(ident) != 12 or any((ch not in '0123456789abcdef' for ch in ident))"
+        },
+        {
+          "line": 45,
+          "expression": "parsed.path == '/api/source'"
+        },
+        {
+          "line": 48,
+          "expression": "parsed.path in ('/', '/index.html', '/viewer.js', '/viewer.css')"
+        },
+        {
+          "line": 39,
+          "expression": "app.recording"
+        },
+        {
+          "line": 49,
+          "expression": "parsed.path == '/'"
+        }
+      ],
+      "file_sha256": "a0eb67acec78ae930daa5518cb6afcd406413922a29087d7e8674ecd94c8a247"
+    },
+    "internal.6cdac42e70ab": {
+      "path": "server.py",
+      "symbol": "serve.Handler.log_message",
+      "line": 16,
+      "end_line": 17,
+      "signature": "self, *args",
+      "ast_sha256": "28cd724c32e597c9d660c3105b1d324718397db063ccb043921602de4f22df3f",
+      "snippet": "        def log_message(self, *args):\n            pass",
+      "calls": [],
+      "guards": [],
+      "file_sha256": "a0eb67acec78ae930daa5518cb6afcd406413922a29087d7e8674ecd94c8a247"
+    },
+    "internal.7a8add53f946": {
+      "path": "server.py",
+      "symbol": "serve.Handler.reply",
+      "line": 19,
+      "end_line": 26,
+      "signature": "self, value, status=200",
+      "ast_sha256": "a575a79cdbf3dab2bcd1c633e9853b620a3bad77339f74c90f8f7b2111966b9b",
+      "snippet": "        def reply(self, value, status=200):\n            body = json.dumps(value, ensure_ascii=False).encode()\n            self.send_response(status)\n            self.send_header(\"Content-Type\", \"application/json; charset=utf-8\")\n            self.send_header(\"Content-Length\", str(len(body)))\n            self.send_header(\"Cache-Control\", \"no-store\")\n            self.end_headers()\n            self.wfile.write(body)",
+      "calls": [
+        "json.dumps",
+        "json.dumps(value, ensure_ascii=False).encode",
+        "len",
+        "self.end_headers",
+        "self.send_header",
+        "self.send_response",
+        "self.wfile.write",
+        "str"
+      ],
+      "guards": [],
+      "file_sha256": "a0eb67acec78ae930daa5518cb6afcd406413922a29087d7e8674ecd94c8a247"
+    },
+    "internal.fcc8c75271ce": {
+      "path": "server.py",
+      "symbol": "serve.Handler.do_GET",
+      "line": 28,
+      "end_line": 58,
+      "signature": "self",
+      "ast_sha256": "61bcf12f2b7629e83016cd12aeeaa721f4edf3b76e99b9181f9d7751cd2e2435",
+      "snippet": "        def do_GET(self):\n            parsed = urlparse(self.path)\n            q = parse_qs(parsed.query)\n            try:\n                if parsed.path == \"/api/view\":\n                    self.reply(app.bo_view())\n                elif parsed.path == \"/api/stategraph\":\n                    self.reply(app.graph.bo_export())\n                elif parsed.path == \"/api/preferences\":\n                    self.reply(app.bo_preferences())\n                elif parsed.path == \"/api/recordings\":\n                    self.reply({\"saved\": [p.stem for p in app.recordings_dir.glob(\"*.json\")], \"active\": app.recording[\"id\"] if app.recording else None})\n                elif parsed.path.startswith(\"/api/recordings/\"):\n                    ident = parsed.path.rsplit(\"/\", 1)[-1]\n                    if len(ident) != 12 or any(ch not in \"0123456789abcdef\" for ch in ident):\n                        raise ValueError(\"invalid recording id\")\n                    self.reply(json.loads((app.recordings_dir / (ident + \".json\")).read_text()))\n                elif parsed.path == \"/api/source\":\n                    path = q.get(\"path\", [\"\"])[0]\n                    self.reply({\"path\": path, \"build_id\": app.manifest[\"build_id\"], \"text\": app.sources[path]})\n                elif parsed.path in (\"/\", \"/index.html\", \"/viewer.js\", \"/viewer.css\"):\n                    name = \"index.html\" if parsed.path == \"/\" else parsed.path[1:]\n                    body = (ROOT / \"static\" / name).read_bytes()\n                    self.send_response(200)\n                    self.send_header(\"Content-Type\", {\".html\": \"text/html\", \".js\": \"text/javascript\", \".css\": \"text/css\"}[Path(name).suffix] + \"; charset=utf-8\")\n                    self.send_header(\"Content-Length\", str(len(body)))\n                    self.end_headers(); self.wfile.write(body)\n                else:\n                    self.reply({\"error\": \"not_found\"}, 404)\n            except (ValueError, KeyError, OSError) as exc:\n                self.reply({\"error\": str(exc)}, 400)",
+      "calls": [
+        "(ROOT / 'static' / name).read_bytes",
+        "(app.recordings_dir / (ident + '.json')).read_text",
+        "Path",
+        "ValueError",
+        "any",
+        "app.bo_preferences",
+        "app.bo_view",
+        "app.graph.bo_export",
+        "app.recordings_dir.glob",
+        "json.loads",
+        "len",
+        "parse_qs",
+        "parsed.path.rsplit",
+        "parsed.path.startswith",
+        "q.get",
+        "self.end_headers",
+        "self.reply",
+        "self.send_header",
+        "self.send_response",
+        "self.wfile.write",
+        "str",
+        "urlparse"
+      ],
+      "guards": [
+        {
+          "line": 32,
+          "expression": "parsed.path == '/api/view'"
+        },
+        {
+          "line": 34,
+          "expression": "parsed.path == '/api/stategraph'"
+        },
+        {
+          "line": 36,
+          "expression": "parsed.path == '/api/preferences'"
+        },
+        {
+          "line": 38,
+          "expression": "parsed.path == '/api/recordings'"
+        },
+        {
+          "line": 40,
+          "expression": "parsed.path.startswith('/api/recordings/')"
+        },
+        {
+          "line": 42,
+          "expression": "len(ident) != 12 or any((ch not in '0123456789abcdef' for ch in ident))"
+        },
+        {
+          "line": 45,
+          "expression": "parsed.path == '/api/source'"
+        },
+        {
+          "line": 48,
+          "expression": "parsed.path in ('/', '/index.html', '/viewer.js', '/viewer.css')"
+        },
+        {
+          "line": 39,
+          "expression": "app.recording"
+        },
+        {
+          "line": 49,
+          "expression": "parsed.path == '/'"
+        }
+      ],
+      "file_sha256": "a0eb67acec78ae930daa5518cb6afcd406413922a29087d7e8674ecd94c8a247"
+    },
+    "internal.b51958782a07": {
+      "path": "server.py",
+      "symbol": "serve.Handler.do_POST",
+      "line": 60,
+      "end_line": 83,
+      "signature": "self",
+      "ast_sha256": "0b708ce97f16550d497cffede1faeccefae6578613c35158745d35d00678466b",
+      "snippet": "        def do_POST(self):\n            try:\n                # Local tool only. Reject cross-origin browser writes; no CORS allowance.\n                origin = self.headers.get(\"Origin\")\n                if origin and origin != \"http://\" + self.headers.get(\"Host\", \"\"):\n                    self.reply({\"error\": \"cross_origin_denied\"}, 403); return\n                size = int(self.headers.get(\"Content-Length\", \"0\"))\n                if size > 128000:\n                    self.reply({\"error\": \"body_too_large\"}, 413); return\n                data = json.loads(self.rfile.read(size) or b\"{}\")\n                if self.path == \"/api/preferences\":\n                    self.reply(app.bo_preferences(data))\n                elif self.path == \"/api/recordings/start\":\n                    self.reply(app.bo_record(\"start\"))\n                elif self.path == \"/api/recordings/stop\":\n                    self.reply(app.bo_record(\"stop\"))\n                elif self.path == \"/operator/command\":\n                    self.reply(app.bo_command(data))\n                else:\n                    self.reply({\"error\": \"not_found\"}, 404)\n            except RuntimeError as exc:\n                self.reply({\"error\": str(exc)}, 409)\n            except (ValueError, KeyError, TypeError, PermissionError, OSError) as exc:\n                self.reply({\"error\": str(exc), \"type\": type(exc).__name__}, 400)",
+      "calls": [
+        "app.bo_command",
+        "app.bo_preferences",
+        "app.bo_record",
+        "int",
+        "json.loads",
+        "self.headers.get",
+        "self.reply",
+        "self.rfile.read",
+        "str",
+        "type"
+      ],
+      "guards": [
+        {
+          "line": 64,
+          "expression": "origin and origin != 'http://' + self.headers.get('Host', '')"
+        },
+        {
+          "line": 67,
+          "expression": "size > 128000"
+        },
+        {
+          "line": 70,
+          "expression": "self.path == '/api/preferences'"
+        },
+        {
+          "line": 72,
+          "expression": "self.path == '/api/recordings/start'"
+        },
+        {
+          "line": 74,
+          "expression": "self.path == '/api/recordings/stop'"
+        },
+        {
+          "line": 76,
+          "expression": "self.path == '/operator/command'"
+        }
+      ],
+      "file_sha256": "a0eb67acec78ae930daa5518cb6afcd406413922a29087d7e8674ecd94c8a247"
+    },
+    "internal.d0690e875ad7": {
+      "path": "server.py",
+      "symbol": "serve.timer",
+      "line": 89,
+      "end_line": 91,
+      "signature": "",
+      "ast_sha256": "e973f0fffaaab90399f7d9838dbb3873451c3b48374422b7e5189dc69621ffba",
+      "snippet": "    def timer():\n        while not stop.wait(0.25):\n            app.bo_tick()",
+      "calls": [
+        "app.bo_tick",
+        "stop.wait"
+      ],
+      "guards": [],
+      "file_sha256": "a0eb67acec78ae930daa5518cb6afcd406413922a29087d7e8674ecd94c8a247"
+    },
+    "code.028e67939c6ccf3a": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow._emit",
+      "line": 19,
+      "end_line": 27,
+      "signature": "self, node, phase, receipt, run_id, builder, call_id=None",
+      "ast_sha256": "a5caea6ae11dd24a9d7eecc4191beab784279c7bbec1da4b64de657159c686b8",
+      "snippet": "    def _emit(self, node, phase, receipt, run_id, builder, call_id=None):\n        if self.events.callback is None:\n            return\n        try:\n            run = next((r for r in receipt[2][\"runs\"] if r[\"id\"] == run_id), None)\n            context = {\"revision\": receipt[1], \"attempt\": run_id or \"administration\", \"entity\": run[\"task_id\"] if run else \"studio\", \"param_version\": run[\"version\"] if run else 0, \"call_id\": call_id or uuid.uuid4().hex}\n            self.events.bo_emit(node, phase, context, builder)\n        except Exception:\n            self.events.errors += 1",
+      "calls": [
+        "next",
+        "self.events.bo_emit",
+        "uuid.uuid4"
+      ],
+      "guards": [
+        {
+          "line": 20,
+          "expression": "self.events.callback is None"
+        },
+        {
+          "line": 24,
+          "expression": "run"
+        },
+        {
+          "line": 24,
+          "expression": "run"
+        }
+      ],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "code.19727f35511872bc": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.run_checks",
+      "line": 87,
+      "end_line": 104,
+      "signature": "self, run_id: str",
+      "ast_sha256": "ccdc3df1444305f61b7b1e13aecabe693e775f561303cb76a935ec7235f51c31",
+      "snippet": "    def run_checks(self, run_id: str):\n        with ThreadPoolExecutor(max_workers=2, thread_name_prefix=\"printer-check\") as pool:\n            futures = [pool.submit(self._check, run_id, name) for name in (\"size\", \"material\")]\n            for future in futures:\n                future.result()\n        def join(c):\n            run = c.execute(\"SELECT * FROM runs WHERE id=?\", (run_id,)).fetchone()\n            activities = [dict(a) for a in c.execute(\"SELECT * FROM activities WHERE run_id=? ORDER BY name\", (run_id,))]\n            if run[\"state\"] != \"checking\":\n                return {\"state\": run[\"state\"], \"passed\": False, \"reason\": \"run_no_longer_current\"}\n            states = [a[\"state\"] for a in activities]\n            trigger = \"checks_error\" if \"error\" in states else \"checks_passed\" if states == [\"passed\", \"passed\"] else \"checks_failed\"\n            state = transition(c, run_id, trigger)\n            c.execute(\"UPDATE runs SET reason=? WHERE id=?\", (\"approval_required\" if trigger == \"checks_passed\" else trigger, run_id))\n            return {\"state\": state, \"passed\": trigger == \"checks_passed\", \"size\": next(a[\"state\"] for a in activities if a[\"name\"] == \"size\"), \"material\": next(a[\"state\"] for a in activities if a[\"name\"] == \"material\")}\n        receipt = self.store.change(\"check_join\", join)\n        self._emit(\"checks\", \"decision\", receipt, run_id, lambda: {\"inputs\": {}, \"outputs\": receipt[0]})\n        self.schedule()",
+      "calls": [
+        "ThreadPoolExecutor",
+        "c.execute",
+        "c.execute('SELECT * FROM runs WHERE id=?', (run_id,)).fetchone",
+        "dict",
+        "future.result",
+        "next",
+        "pool.submit",
+        "self._emit",
+        "self.schedule",
+        "self.store.change",
+        "transition"
+      ],
+      "guards": [
+        {
+          "line": 95,
+          "expression": "run['state'] != 'checking'"
+        },
+        {
+          "line": 98,
+          "expression": "'error' in states"
+        },
+        {
+          "line": 98,
+          "expression": "states == ['passed', 'passed']"
+        },
+        {
+          "line": 100,
+          "expression": "trigger == 'checks_passed'"
+        }
+      ],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "code.9d74bd8fdd3c3948": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow._emit",
+      "line": 19,
+      "end_line": 27,
+      "signature": "self, node, phase, receipt, run_id, builder, call_id=None",
+      "ast_sha256": "a5caea6ae11dd24a9d7eecc4191beab784279c7bbec1da4b64de657159c686b8",
+      "snippet": "    def _emit(self, node, phase, receipt, run_id, builder, call_id=None):\n        if self.events.callback is None:\n            return\n        try:\n            run = next((r for r in receipt[2][\"runs\"] if r[\"id\"] == run_id), None)\n            context = {\"revision\": receipt[1], \"attempt\": run_id or \"administration\", \"entity\": run[\"task_id\"] if run else \"studio\", \"param_version\": run[\"version\"] if run else 0, \"call_id\": call_id or uuid.uuid4().hex}\n            self.events.bo_emit(node, phase, context, builder)\n        except Exception:\n            self.events.errors += 1",
+      "calls": [
+        "next",
+        "self.events.bo_emit",
+        "uuid.uuid4"
+      ],
+      "guards": [
+        {
+          "line": 20,
+          "expression": "self.events.callback is None"
+        },
+        {
+          "line": 24,
+          "expression": "run"
+        },
+        {
+          "line": 24,
+          "expression": "run"
+        }
+      ],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "code.e962584e4b0ff0dd": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.schedule",
+      "line": 149,
+      "end_line": 194,
+      "signature": "self",
+      "ast_sha256": "05fa42bfc2d3aa8eefbb77ab14e6cf3da65bfe20ce9cb95b82840af3ae92df5c",
+      "snippet": "    def schedule(self):\n        def dispatch(c):\n            decisions, starts = [], []\n            for row in c.execute(\"SELECT * FROM runs WHERE state IN ('awaiting_approval','queued','blocked') ORDER BY rowid\").fetchall():\n                run = dict(row)\n                auth = self._authorization(c, run, self.clock())\n                decisions.append({\"run_id\": run[\"id\"], **auth})\n                if auth[\"allowed\"] and run[\"state\"] == \"awaiting_approval\":\n                    c.execute(\"UPDATE counters SET value=value+1 WHERE name='queue'\")\n                    seq = c.execute(\"SELECT value FROM counters WHERE name='queue'\").fetchone()[0]\n                    transition(c, run[\"id\"], \"admit\")\n                    c.execute(\"UPDATE runs SET queue_seq=?,reason='printer_busy' WHERE id=?\", (seq, run[\"id\"]))\n                elif auth[\"allowed\"] and run[\"state\"] == \"blocked\":\n                    transition(c, run[\"id\"], \"restore_approval\")\n                    c.execute(\"UPDATE runs SET reason='printer_busy' WHERE id=?\", (run[\"id\"],))\n                elif not auth[\"allowed\"] and run[\"state\"] == \"queued\":\n                    transition(c, run[\"id\"], \"lose_approval\")\n                    c.execute(\"UPDATE runs SET reason='no_valid_approval' WHERE id=?\", (run[\"id\"],))\n            for printer in c.execute(\"SELECT * FROM printers WHERE occupant IS NULL ORDER BY id\").fetchall():\n                for row in c.execute(\"SELECT * FROM runs WHERE printer_id=? AND state='queued' ORDER BY queue_seq\", (printer[\"id\"],)).fetchall():\n                    run = dict(row)\n                    # Re-read time and authorization immediately before claiming the device, inside the same writer transaction.\n                    auth = self._authorization(c, run, self.clock())\n                    decisions.append({\"run_id\": run[\"id\"], **auth})\n                    if not auth[\"allowed\"]:\n                        transition(c, run[\"id\"], \"lose_approval\")\n                        c.execute(\"UPDATE runs SET reason='no_valid_approval' WHERE id=?\", (run[\"id\"],))\n                        continue\n                    transition(c, run[\"id\"], \"start\")\n                    c.execute(\"UPDATE printers SET occupant=? WHERE id=?\", (run[\"id\"], printer[\"id\"]))\n                    c.execute(\"UPDATE runs SET reason='' WHERE id=?\", (run[\"id\"],))\n                    effect = c.execute(\"INSERT INTO effects(run_id,kind,printer_id,clock) VALUES(?,'start',?,?)\", (run[\"id\"], printer[\"id\"], auth[\"clock\"])).lastrowid\n                    starts.append({\"run_id\": run[\"id\"], \"printer_id\": printer[\"id\"], \"effect_id\": effect, \"clock\": auth[\"clock\"], \"state\": \"printing\"})\n                    break\n            return {\"decisions\": decisions, \"starts\": starts}\n        receipt = self.store.change(\"schedule\", dispatch)\n        for decision in receipt[0][\"decisions\"]:\n            self._emit(\"approval\", \"decision\", receipt, decision[\"run_id\"], lambda d=decision: {\"inputs\": {\"clock\": d[\"clock\"], \"version\": d[\"version\"]}, \"outputs\": d})\n            for candidate in decision[\"candidates\"]:\n                self._emit(\"grant-match\", \"decision\", receipt, decision[\"run_id\"], lambda d=decision, g=candidate: {\"inputs\": {\"clock\": d[\"clock\"], \"run_version\": d[\"version\"], \"grant_version\": g[\"version\"], \"expires\": g[\"expires\"], \"printer_id\": g[\"printer_id\"], \"task_id\": g[\"task_id\"], \"approver\": g[\"approver\"]}, \"outputs\": g})\n        for start in receipt[0][\"starts\"]:\n            self._emit(\"printing\", \"commit\", receipt, start[\"run_id\"], lambda s=start: {\"inputs\": {\"clock\": s[\"clock\"]}, \"outputs\": s})\n        for run in receipt[2][\"runs\"]:\n            if run[\"state\"] in (\"awaiting_approval\", \"queued\", \"blocked\"):\n                self._emit(\"queue\", \"wait\", receipt, run[\"id\"], lambda r=run: {\"inputs\": {\"printer_id\": r[\"printer_id\"]}, \"outputs\": {\"state\": r[\"state\"], \"reason\": r[\"reason\"], \"queue_seq\": r[\"queue_seq\"]}})\n        return receipt[0]",
+      "calls": [
+        "c.execute",
+        "c.execute(\"SELECT * FROM runs WHERE printer_id=? AND state='queued' ORDER BY queue_seq\", (printer['id'],)).fetchall",
+        "c.execute(\"SELECT * FROM runs WHERE state IN ('awaiting_approval','queued','blocked') ORDER BY rowid\").fetchall",
+        "c.execute(\"SELECT value FROM counters WHERE name='queue'\").fetchone",
+        "c.execute('SELECT * FROM printers WHERE occupant IS NULL ORDER BY id').fetchall",
+        "decisions.append",
+        "dict",
+        "self._authorization",
+        "self._emit",
+        "self.clock",
+        "self.store.change",
+        "starts.append",
+        "transition"
+      ],
+      "guards": [
+        {
+          "line": 192,
+          "expression": "run['state'] in ('awaiting_approval', 'queued', 'blocked')"
+        },
+        {
+          "line": 156,
+          "expression": "auth['allowed'] and run['state'] == 'awaiting_approval'"
+        },
+        {
+          "line": 161,
+          "expression": "auth['allowed'] and run['state'] == 'blocked'"
+        },
+        {
+          "line": 173,
+          "expression": "not auth['allowed']"
+        },
+        {
+          "line": 164,
+          "expression": "not auth['allowed'] and run['state'] == 'queued'"
+        }
+      ],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "code.d67f37b3573d1508": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow._emit",
+      "line": 19,
+      "end_line": 27,
+      "signature": "self, node, phase, receipt, run_id, builder, call_id=None",
+      "ast_sha256": "a5caea6ae11dd24a9d7eecc4191beab784279c7bbec1da4b64de657159c686b8",
+      "snippet": "    def _emit(self, node, phase, receipt, run_id, builder, call_id=None):\n        if self.events.callback is None:\n            return\n        try:\n            run = next((r for r in receipt[2][\"runs\"] if r[\"id\"] == run_id), None)\n            context = {\"revision\": receipt[1], \"attempt\": run_id or \"administration\", \"entity\": run[\"task_id\"] if run else \"studio\", \"param_version\": run[\"version\"] if run else 0, \"call_id\": call_id or uuid.uuid4().hex}\n            self.events.bo_emit(node, phase, context, builder)\n        except Exception:\n            self.events.errors += 1",
+      "calls": [
+        "next",
+        "self.events.bo_emit",
+        "uuid.uuid4"
+      ],
+      "guards": [
+        {
+          "line": 20,
+          "expression": "self.events.callback is None"
+        },
+        {
+          "line": 24,
+          "expression": "run"
+        },
+        {
+          "line": 24,
+          "expression": "run"
+        }
+      ],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "code.83cc6c8ccf05bcd8": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.schedule",
+      "line": 149,
+      "end_line": 194,
+      "signature": "self",
+      "ast_sha256": "05fa42bfc2d3aa8eefbb77ab14e6cf3da65bfe20ce9cb95b82840af3ae92df5c",
+      "snippet": "    def schedule(self):\n        def dispatch(c):\n            decisions, starts = [], []\n            for row in c.execute(\"SELECT * FROM runs WHERE state IN ('awaiting_approval','queued','blocked') ORDER BY rowid\").fetchall():\n                run = dict(row)\n                auth = self._authorization(c, run, self.clock())\n                decisions.append({\"run_id\": run[\"id\"], **auth})\n                if auth[\"allowed\"] and run[\"state\"] == \"awaiting_approval\":\n                    c.execute(\"UPDATE counters SET value=value+1 WHERE name='queue'\")\n                    seq = c.execute(\"SELECT value FROM counters WHERE name='queue'\").fetchone()[0]\n                    transition(c, run[\"id\"], \"admit\")\n                    c.execute(\"UPDATE runs SET queue_seq=?,reason='printer_busy' WHERE id=?\", (seq, run[\"id\"]))\n                elif auth[\"allowed\"] and run[\"state\"] == \"blocked\":\n                    transition(c, run[\"id\"], \"restore_approval\")\n                    c.execute(\"UPDATE runs SET reason='printer_busy' WHERE id=?\", (run[\"id\"],))\n                elif not auth[\"allowed\"] and run[\"state\"] == \"queued\":\n                    transition(c, run[\"id\"], \"lose_approval\")\n                    c.execute(\"UPDATE runs SET reason='no_valid_approval' WHERE id=?\", (run[\"id\"],))\n            for printer in c.execute(\"SELECT * FROM printers WHERE occupant IS NULL ORDER BY id\").fetchall():\n                for row in c.execute(\"SELECT * FROM runs WHERE printer_id=? AND state='queued' ORDER BY queue_seq\", (printer[\"id\"],)).fetchall():\n                    run = dict(row)\n                    # Re-read time and authorization immediately before claiming the device, inside the same writer transaction.\n                    auth = self._authorization(c, run, self.clock())\n                    decisions.append({\"run_id\": run[\"id\"], **auth})\n                    if not auth[\"allowed\"]:\n                        transition(c, run[\"id\"], \"lose_approval\")\n                        c.execute(\"UPDATE runs SET reason='no_valid_approval' WHERE id=?\", (run[\"id\"],))\n                        continue\n                    transition(c, run[\"id\"], \"start\")\n                    c.execute(\"UPDATE printers SET occupant=? WHERE id=?\", (run[\"id\"], printer[\"id\"]))\n                    c.execute(\"UPDATE runs SET reason='' WHERE id=?\", (run[\"id\"],))\n                    effect = c.execute(\"INSERT INTO effects(run_id,kind,printer_id,clock) VALUES(?,'start',?,?)\", (run[\"id\"], printer[\"id\"], auth[\"clock\"])).lastrowid\n                    starts.append({\"run_id\": run[\"id\"], \"printer_id\": printer[\"id\"], \"effect_id\": effect, \"clock\": auth[\"clock\"], \"state\": \"printing\"})\n                    break\n            return {\"decisions\": decisions, \"starts\": starts}\n        receipt = self.store.change(\"schedule\", dispatch)\n        for decision in receipt[0][\"decisions\"]:\n            self._emit(\"approval\", \"decision\", receipt, decision[\"run_id\"], lambda d=decision: {\"inputs\": {\"clock\": d[\"clock\"], \"version\": d[\"version\"]}, \"outputs\": d})\n            for candidate in decision[\"candidates\"]:\n                self._emit(\"grant-match\", \"decision\", receipt, decision[\"run_id\"], lambda d=decision, g=candidate: {\"inputs\": {\"clock\": d[\"clock\"], \"run_version\": d[\"version\"], \"grant_version\": g[\"version\"], \"expires\": g[\"expires\"], \"printer_id\": g[\"printer_id\"], \"task_id\": g[\"task_id\"], \"approver\": g[\"approver\"]}, \"outputs\": g})\n        for start in receipt[0][\"starts\"]:\n            self._emit(\"printing\", \"commit\", receipt, start[\"run_id\"], lambda s=start: {\"inputs\": {\"clock\": s[\"clock\"]}, \"outputs\": s})\n        for run in receipt[2][\"runs\"]:\n            if run[\"state\"] in (\"awaiting_approval\", \"queued\", \"blocked\"):\n                self._emit(\"queue\", \"wait\", receipt, run[\"id\"], lambda r=run: {\"inputs\": {\"printer_id\": r[\"printer_id\"]}, \"outputs\": {\"state\": r[\"state\"], \"reason\": r[\"reason\"], \"queue_seq\": r[\"queue_seq\"]}})\n        return receipt[0]",
+      "calls": [
+        "c.execute",
+        "c.execute(\"SELECT * FROM runs WHERE printer_id=? AND state='queued' ORDER BY queue_seq\", (printer['id'],)).fetchall",
+        "c.execute(\"SELECT * FROM runs WHERE state IN ('awaiting_approval','queued','blocked') ORDER BY rowid\").fetchall",
+        "c.execute(\"SELECT value FROM counters WHERE name='queue'\").fetchone",
+        "c.execute('SELECT * FROM printers WHERE occupant IS NULL ORDER BY id').fetchall",
+        "decisions.append",
+        "dict",
+        "self._authorization",
+        "self._emit",
+        "self.clock",
+        "self.store.change",
+        "starts.append",
+        "transition"
+      ],
+      "guards": [
+        {
+          "line": 192,
+          "expression": "run['state'] in ('awaiting_approval', 'queued', 'blocked')"
+        },
+        {
+          "line": 156,
+          "expression": "auth['allowed'] and run['state'] == 'awaiting_approval'"
+        },
+        {
+          "line": 161,
+          "expression": "auth['allowed'] and run['state'] == 'blocked'"
+        },
+        {
+          "line": 173,
+          "expression": "not auth['allowed']"
+        },
+        {
+          "line": 164,
+          "expression": "not auth['allowed'] and run['state'] == 'queued'"
+        }
+      ],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "code.8d517f817e3bc6d4": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow._emit",
+      "line": 19,
+      "end_line": 27,
+      "signature": "self, node, phase, receipt, run_id, builder, call_id=None",
+      "ast_sha256": "a5caea6ae11dd24a9d7eecc4191beab784279c7bbec1da4b64de657159c686b8",
+      "snippet": "    def _emit(self, node, phase, receipt, run_id, builder, call_id=None):\n        if self.events.callback is None:\n            return\n        try:\n            run = next((r for r in receipt[2][\"runs\"] if r[\"id\"] == run_id), None)\n            context = {\"revision\": receipt[1], \"attempt\": run_id or \"administration\", \"entity\": run[\"task_id\"] if run else \"studio\", \"param_version\": run[\"version\"] if run else 0, \"call_id\": call_id or uuid.uuid4().hex}\n            self.events.bo_emit(node, phase, context, builder)\n        except Exception:\n            self.events.errors += 1",
+      "calls": [
+        "next",
+        "self.events.bo_emit",
+        "uuid.uuid4"
+      ],
+      "guards": [
+        {
+          "line": 20,
+          "expression": "self.events.callback is None"
+        },
+        {
+          "line": 24,
+          "expression": "run"
+        },
+        {
+          "line": 24,
+          "expression": "run"
+        }
+      ],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "code.39e20632f04c9f13": {
+      "path": "app/store.py",
+      "symbol": "Store.snapshot",
+      "line": 43,
+      "end_line": 57,
+      "signature": "self, connection=None",
+      "ast_sha256": "3847e7a9099dd809812d7cb7bb4399b457df99e2e0271ff37b9f7af22a03fff1",
+      "snippet": "    def snapshot(self, connection=None) -> dict:\n        if connection is None:\n            with closing(self.connect()) as c:\n                c.execute(\"BEGIN\")\n                return self.snapshot(c)\n        result = {table: [dict(row) for row in connection.execute(\"SELECT * FROM \" + table + \" ORDER BY rowid\")] for table in TABLES}\n        for row in result[\"runs\"]:\n            for field in (\"dimensions\", \"parameters\"):\n                row[field] = json.loads(row[field])\n        for row in result[\"printers\"]:\n            for field in (\"limits\", \"materials\"):\n                row[field] = json.loads(row[field])\n        for row in result[\"activities\"]:\n            row[\"result\"] = json.loads(row[\"result\"]) if row[\"result\"] else None\n        return result",
+      "calls": [
+        "c.execute",
+        "closing",
+        "connection.execute",
+        "dict",
+        "json.loads",
+        "self.connect",
+        "self.snapshot"
+      ],
+      "guards": [
+        {
+          "line": 44,
+          "expression": "connection is None"
+        },
+        {
+          "line": 56,
+          "expression": "row['result']"
+        }
+      ],
+      "file_sha256": "cd6c143d0cf46e4a47fcffba643501a82fbe9b05d0d1d0014e6f04c239945382"
+    },
+    "code.a1adffefb6144b23": {
+      "path": "bo_stategraph/declaration.py",
+      "symbol": "transition",
+      "line": 21,
+      "end_line": 28,
+      "signature": "connection, run_id: str, trigger: str",
+      "ast_sha256": "345b4c239c734f0239d1663b57032b8a232f8c6bbbbebe39290af752db4ea321",
+      "snippet": "def transition(connection, run_id: str, trigger: str) -> str:\n    current = connection.execute(\"SELECT state FROM runs WHERE id=?\", (run_id,)).fetchone()[0]\n    for t in TRANSITIONS:\n        sources = t[\"source\"] if isinstance(t[\"source\"], list) else [t[\"source\"]]\n        if t[\"trigger\"] == trigger and current in sources:\n            connection.execute(\"UPDATE runs SET state=? WHERE id=?\", (t[\"dest\"], run_id))\n            return t[\"dest\"]\n    raise ValueError(f\"Invalid transition: {current} / {trigger}\")",
+      "calls": [
+        "ValueError",
+        "connection.execute",
+        "connection.execute('SELECT state FROM runs WHERE id=?', (run_id,)).fetchone",
+        "isinstance"
+      ],
+      "guards": [
+        {
+          "line": 25,
+          "expression": "t['trigger'] == trigger and current in sources"
+        },
+        {
+          "line": 24,
+          "expression": "isinstance(t['source'], list)"
+        }
+      ],
+      "file_sha256": "64683a6dfe19a6dd9bf08e5a6631592b5da33f71e4fec701f9a55b6d1b8fd141"
+    },
+    "code.2d87b12b77940413": {
+      "path": "bo_stategraph/declaration.py",
+      "symbol": "transition",
+      "line": 21,
+      "end_line": 28,
+      "signature": "connection, run_id: str, trigger: str",
+      "ast_sha256": "345b4c239c734f0239d1663b57032b8a232f8c6bbbbebe39290af752db4ea321",
+      "snippet": "def transition(connection, run_id: str, trigger: str) -> str:\n    current = connection.execute(\"SELECT state FROM runs WHERE id=?\", (run_id,)).fetchone()[0]\n    for t in TRANSITIONS:\n        sources = t[\"source\"] if isinstance(t[\"source\"], list) else [t[\"source\"]]\n        if t[\"trigger\"] == trigger and current in sources:\n            connection.execute(\"UPDATE runs SET state=? WHERE id=?\", (t[\"dest\"], run_id))\n            return t[\"dest\"]\n    raise ValueError(f\"Invalid transition: {current} / {trigger}\")",
+      "calls": [
+        "ValueError",
+        "connection.execute",
+        "connection.execute('SELECT state FROM runs WHERE id=?', (run_id,)).fetchone",
+        "isinstance"
+      ],
+      "guards": [
+        {
+          "line": 25,
+          "expression": "t['trigger'] == trigger and current in sources"
+        },
+        {
+          "line": 24,
+          "expression": "isinstance(t['source'], list)"
+        }
+      ],
+      "file_sha256": "64683a6dfe19a6dd9bf08e5a6631592b5da33f71e4fec701f9a55b6d1b8fd141"
+    },
+    "code.1c5d9db4cfeaa237": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow._authorization",
+      "line": 139,
+      "end_line": 147,
+      "signature": "self, c, run: dict, now: float",
+      "ast_sha256": "41946dae392f7fa97600d18dce55f7d989d70251cd067eb8c8145c37d16d47eb",
+      "snippet": "    def _authorization(self, c, run: dict, now: float) -> dict:\n        # Read all task candidates, including mismatching version/printer evidence.\n        candidates = []\n        for row in c.execute(\"SELECT * FROM approvals WHERE task_id=? ORDER BY rowid\", (run[\"task_id\"],)):\n            grant = dict(row)\n            role = c.execute(\"SELECT active FROM roles WHERE actor=? AND printer_id=?\", (grant[\"approver\"], run[\"printer_id\"])).fetchone()\n            flags = grant_matches(grant, run, bool(role and role[0]), now)\n            candidates.append({\"id\": grant[\"id\"], \"version\": grant[\"version\"], \"expires\": grant[\"expires\"], \"printer_id\": grant[\"printer_id\"], \"task_id\": grant[\"task_id\"], \"approver\": grant[\"approver\"], **flags})\n        return {\"allowed\": any(g[\"eligible\"] for g in candidates), \"candidates\": candidates, \"clock\": now, \"version\": run[\"version\"]}",
+      "calls": [
+        "any",
+        "bool",
+        "c.execute",
+        "c.execute('SELECT active FROM roles WHERE actor=? AND printer_id=?', (grant['approver'], run['printer_id'])).fetchone",
+        "candidates.append",
+        "dict",
+        "grant_matches"
+      ],
+      "guards": [],
+      "file_sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    "code.b6717956baef28ba": {
+      "path": "bo_stategraph/declaration.py",
+      "symbol": "transition",
+      "line": 21,
+      "end_line": 28,
+      "signature": "connection, run_id: str, trigger: str",
+      "ast_sha256": "345b4c239c734f0239d1663b57032b8a232f8c6bbbbebe39290af752db4ea321",
+      "snippet": "def transition(connection, run_id: str, trigger: str) -> str:\n    current = connection.execute(\"SELECT state FROM runs WHERE id=?\", (run_id,)).fetchone()[0]\n    for t in TRANSITIONS:\n        sources = t[\"source\"] if isinstance(t[\"source\"], list) else [t[\"source\"]]\n        if t[\"trigger\"] == trigger and current in sources:\n            connection.execute(\"UPDATE runs SET state=? WHERE id=?\", (t[\"dest\"], run_id))\n            return t[\"dest\"]\n    raise ValueError(f\"Invalid transition: {current} / {trigger}\")",
+      "calls": [
+        "ValueError",
+        "connection.execute",
+        "connection.execute('SELECT state FROM runs WHERE id=?', (run_id,)).fetchone",
+        "isinstance"
+      ],
+      "guards": [
+        {
+          "line": 25,
+          "expression": "t['trigger'] == trigger and current in sources"
+        },
+        {
+          "line": 24,
+          "expression": "isinstance(t['source'], list)"
+        }
+      ],
+      "file_sha256": "64683a6dfe19a6dd9bf08e5a6631592b5da33f71e4fec701f9a55b6d1b8fd141"
+    }
+  },
+  "python": "3.13.13",
+  "unknowns": [
+    "静态调用不证明实际调用；外部库内部与动态回调未完整展开",
+    "本地模拟设备，不解析模型文件，不验证真实打印效果",
+    "共享资源由项目 bo_stategraph.validate_instances 检查；冻结 activity-graph/v1 的运行内资源检查不适用",
+    "无多用户身份认证；本地操作者提供合成身份",
+    "事件顺序不是因果证明；本版不构造推测的因果边",
+    "AST evidence does not prove value flow, guard dominance or behavioral equivalence",
+    "External dependencies, interpreter, dynamic patching and omitted files are not attested"
+  ]
+}

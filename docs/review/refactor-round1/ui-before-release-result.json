@@ -1,0 +1,62 @@
+{
+  "scope": "Local synthetic archive; real browser, SQLite, worker and record operations",
+  "checks": [
+    {
+      "name": "Initial view shows three business groups on WebGL",
+      "passed": true
+    },
+    {
+      "name": "Dragging blank region moves parent and its children together",
+      "passed": true,
+      "dx": 110.42967597303641,
+      "dy": -55.214837986518205
+    },
+    {
+      "name": "Group positions, expansion, custom name, note and core mark survive reload",
+      "passed": true,
+      "revision": 2
+    },
+    {
+      "name": "Searching a hidden execution function reveals its hierarchy and source",
+      "passed": true
+    },
+    {
+      "name": "All ten view presets remain selectable",
+      "passed": true
+    },
+    {
+      "name": "Custom view is persisted in the project",
+      "passed": true
+    },
+    {
+      "name": "Circular, layered and force-style layouts complete",
+      "passed": true
+    },
+    {
+      "name": "A real request without approval appears as a waiting instance",
+      "passed": true
+    },
+    {
+      "name": "Recording captures real wait, approval, resume, activities and commit; export shares instances",
+      "passed": true,
+      "events": 85,
+      "commands": 3
+    },
+    {
+      "name": "Replay presents explicit value/state changes",
+      "passed": true,
+      "stepsWithChanges": 83
+    },
+    {
+      "name": "Focused recording keeps an explicit region and boundary",
+      "passed": true
+    },
+    {
+      "name": "Narrow layout has no horizontal page overflow",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "build_id": "3f17f0731cbaf75bf098d91a1fd8c61928c4c0f87111b665dc0e4a6f22f00c09",
+  "passed": true
+}

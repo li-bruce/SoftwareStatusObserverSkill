@@ -1,0 +1,4 @@
+[
+  {"id": "P1", "limits": [200, 200, 200], "materials": ["PLA"]},
+  {"id": "P2", "limits": [300, 250, 250], "materials": ["PLA", "ABS"]}
+]

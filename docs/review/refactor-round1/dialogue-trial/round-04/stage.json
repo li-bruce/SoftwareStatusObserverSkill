@@ -1,0 +1,90 @@
+{
+  "status": "accepted",
+  "recorded_at": "2026-10-22T05:41:53.844316+00:00",
+  "source_candidate": "candidate-7",
+  "candidate_id": "bc453f43a9f1dbdbab723f47ba075677f96111e3ba7da1f070584ac361a88792",
+  "build_id": "fcd4b92e126df7a537f52ed51e41fede833f369a350377d5b5d2e218eaf43148",
+  "verification_hash": "68097c4a917734968df4ef5e64e69b26579be6208af8022bb2f9eb276f63ce50",
+  "development_mode": "observe",
+  "execution_mode": "observe",
+  "previous_candidate_id": "850811ce570b4cd3befa58c8af5e1f79cf1c2a4e00b2e97d8c10454d2e312004",
+  "baseline_files_match_previous_archive": 87,
+  "baseline_model_intent_acceptance_whitebox_match_previous_archive": true,
+  "maintenance_baseline_sha256": "550ff18d41bdea559001d451553aa4c32d167fc9961cb6dd43db26495037b8cf",
+  "original_baseline_sha256": "87679321584fc7df5c5fc70b7965fdd31fce2eb98bc7e1da32c78ec794481b4f",
+  "original_baseline_preserved": true,
+  "previous_accepted_archive_preserved": true,
+  "preserved_acceptance_checks": 76,
+  "preserved_whitebox_checks": 6,
+  "preserved_whitebox_rules_with_source_moves": 6,
+  "preserved_required_probes_with_source_moves": 3,
+  "preserved_required_runtime_probes": 3,
+  "source_moves": 22,
+  "public_files_exact_hash_match": 50,
+  "public_upgrade_plan_empty": true,
+  "business_assertions": {
+    "required": 333,
+    "executed": 333
+  },
+  "mapping_witnesses": 437,
+  "scenario_runs": 69,
+  "transaction_frames": 2013,
+  "browser_checks": 29,
+  "same_build_for_live_browser_and_accepted": true,
+  "live_service": {
+    "url": "http://127.0.0.1:50393",
+    "binding": "current",
+    "build_id": "fcd4b92e126df7a537f52ed51e41fede833f369a350377d5b5d2e218eaf43148",
+    "execution_mode": "observe",
+    "instances": 7,
+    "revision": 93,
+    "event_count": 195,
+    "frame_count": 195,
+    "port_errors": 0,
+    "recording": "83e5b4edc1684f47b5017a09b3873456",
+    "database": "data/studio-maintenance.sqlite",
+    "observed_at": "2026-10-22T13:36:04.1073666+08:00"
+  },
+  "mutations": [
+    {
+      "name": "expiry_inclusive",
+      "stale_gate_rejected": true,
+      "remapped_mapping_valid": true,
+      "unchanged_expectation_failures": 15
+    },
+    {
+      "name": "reject_exact_size",
+      "stale_gate_rejected": true,
+      "remapped_mapping_valid": true,
+      "unchanged_expectation_failures": 3
+    },
+    {
+      "name": "ignore_maintenance",
+      "stale_gate_rejected": true,
+      "remapped_mapping_valid": true,
+      "unchanged_expectation_failures": 32
+    }
+  ],
+  "evidence_sha256": {
+    "accept.json": "6860d31308d635ab503afb6bbfd5bd8ae7f9777eb7555cda38ddc40701b309ac",
+    "check-console.jsonl": "5d8d537f218be1662902833e5c7ac2a99e607ffacbbfe7d0159bf66e4aa37919",
+    "verify-final.json": "d1490620698889358911880deadc8f70bcae7c6dec4a0de424bedd6cab93b5a0",
+    "verification.json": "9002f95f3395f631c9b10d2d588b62a5db843a54d0099d8ee87108dfb4da3db4",
+    "baseline.json": "550ff18d41bdea559001d451553aa4c32d167fc9961cb6dd43db26495037b8cf",
+    "review.json": "d731476952af092848c3a9f7a66f9cc97177aa8ad0ebeec3750c796e62edcf73",
+    "impact.json": "0f0756e9efad87758f924dcda19ff2d19422e7376f3530adb2f51bac31e524b3",
+    "test-project.json": "2ecd05df48e0a126992a6a65ba72e1a5319fac45257ed6bc4568c96855c0ea3e",
+    "browser-report.json": "c8db757c4d29086902083eed248eeee3414fd6e1d8bae0a5cc54a82bc137b299",
+    "browser-1440.png": "50d197f1b7aeaf324d8810b7553aea94dd98633deda1f1992fd9fe6588fa0179",
+    "browser-390.png": "cf066a8f26631db99b758c4ea4997e84ead33839ded78b75633e7441649448de",
+    "browser-320.png": "60134bb16b6dcc31413a94fb0c2aa0f9ed555732609f5813f457ec72a20373b9",
+    "mutations.json": "6b2364d264981402e6c935e40597b8d1d3be74b5321efd85ad6a2b06bb013590",
+    "live-service.json": "0c07c3b07a514cbc90d2bc7224d7813b37ec9b330101891094b6778c9d127f71",
+    "public-upgrade-plan.json": "b24edaa922e5eacda8752ee4a94224070233f2acb43437f61859db771edf0077",
+    "dialogue.md": "4398dfbf017ee6308052959e93bbb429414c7c60c51333e6a10d3abca6b67a57",
+    "failures.md": "70e73f336f3323cfb608e95647646f05658d8bdd2a48af6da323c5fe266d6521"
+  },
+  "accepted_source_zip_sha256": "13c16646075ccdfec53559b976b6aa12388e756f385ab65bfbd4f271f853027a",
+  "archived_files": 137,
+  "boundary": "Simulated stakeholder; synthetic devices and identities; scripted browser acceptance, not human usability or physical printer validation."
+}

@@ -14,6 +14,7 @@ static/graph/layout.js -text
 static/graph/index.html -text
 # Recorded evidence and receipts are preserved byte-for-byte.
 .stategraph/** -text
+.release/** -text
 review/** -text
 # Keep the trial's unchanged package markers byte-identical in Git exports.
 archive_app/__init__.py -text

@@ -2,23 +2,34 @@
 from pathlib import Path
 import hashlib
 import re
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL = ROOT/'skills/business-observer'
 
 
 def check():
+    sys.path.insert(0, str(SKILL/'scripts'))
+    from bo_upgrade import bridge_source, CORE
     text = (SKILL/'SKILL.md').read_text(encoding='utf-8')
     assert text.startswith('---\nname: business-observer\n'), 'Skill identity/frontmatter missing'
     assert re.search(r'^description: .+', text, re.M), 'Skill trigger description missing'
     scripts = list((SKILL/'scripts').glob('*.py'))
+    for project in ('delivery','team-archive','python-modes'):
+        for source, target in [('bo_stategraph.py','__init__.py'),('bo_contracts.py','bo_contracts.py'),('execution_contract.py','execution_contract.py')]:
+            assert (SKILL/'scripts'/source).read_bytes() == (ROOT/'examples'/project/'bo_stategraph'/target).read_bytes(), f'State module copy stale: {project}/{target}'
+    assert (SKILL/'scripts/bo_stategraph.py').read_bytes() == (ROOT/'examples/python-modes/bo_stategraph/__init__.py').read_bytes(), 'Standalone Python module copy is stale'
     for source in scripts:
         copy = ROOT/'examples/delivery/observer_generated/runtime'/source.name
-        assert source.read_bytes() == copy.read_bytes(), f'Runtime copy is stale: {source.name}'
+        expected = bridge_source(source.name) if source.name in CORE else source.read_bytes()
+        assert expected == copy.read_bytes(), f'Runtime copy is stale: {source.name}'
         trial_copy = ROOT/'examples/team-archive/observer_runtime'/source.name
-        assert source.read_bytes() == trial_copy.read_bytes(), f'Archive runtime copy is stale: {source.name}'
+        assert expected == trial_copy.read_bytes(), f'Archive runtime copy is stale: {source.name}'
     assets = SKILL/'assets/stategraph-viewer'
-    for name in ('graph-core.js', 'layout.js', 'viewer.js', 'viewer.css', 'index.html', 'elk.bundled.js', 'elk-worker.min.js', 'ELK-LICENSE.md'):
+    for directory in ('examples/delivery/integrations/bo_view','examples/team-archive/static/graph','examples/delivery/observer_generated/static'):
+        for asset in assets.iterdir():
+            if asset.is_file(): assert asset.read_bytes() == (ROOT/directory/asset.name).read_bytes(), f'Viewer copy stale: {directory}/{asset.name}'
+    for name in ('preferences.js', 'graph-core.js', 'layout.js', 'analysis.js', 'recording.js', 'replay-steps.js', 'glyphs.js', 'viewer.js', 'viewer.css', 'index.html', 'elk.bundled.js', 'elk-worker.min.js', 'ELK-LICENSE.md'):
         assert (assets/name).read_bytes() == (ROOT/'examples/delivery/observer_generated/static'/name).read_bytes(), f'Graph template copy is stale: {name}'
     # Reviewed open-source distributions. Revisit provenance/licenses on upgrades.
     bundles = {

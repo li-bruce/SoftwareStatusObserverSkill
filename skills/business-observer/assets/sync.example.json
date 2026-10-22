@@ -1,8 +1,27 @@
 {
   "model": "behavior.json",
   "manifest": "manifest.json",
-  "code_files": ["domain.py", "workflow.py", "store.py"],
-  "watch_files": ["observe.py", "build_model.py", "test_workflow.py"],
+  "code_files": ["domain.py", "bo_stategraph/workflow.py", "store.py"],
+  "watch_files": ["observe.py", "build_model.py", "test_workflow.py", "bo_stategraph/__init__.py"],
+  "source_scope": {
+    "roots": ["."],
+    "require_symbol_classification": true,
+    "exclude": {
+      "observer_runtime/**": "公共工具副本，由版本散列和工具测试核对。",
+      "bo_stategraph/__init__.py": "公共查询实现，由副本一致性与实例对照核对。",
+      "bo_stategraph/bo_contracts.py": "共同声明校验，由副本一致性及协议反例核对。",
+      "bo_stategraph/execution_contract.py": "公共活动约束，由资源与汇合测试核对。",
+      "observe.py": "实际运行与独立取值检查入口，单独跟踪并执行。",
+      "build_model.py": "模型生成器，单独跟踪并执行。",
+      "test_workflow.py": "独立业务测试，单独跟踪并执行。"
+    }
+  },
+  "stategraph": {
+    "module": "bo_stategraph/__init__.py",
+    "development_mode": "guided",
+    "execution_mode": "drive"
+  },
+  "require_mapping_witnesses": true,
   "acceptance": "acceptance.json",
   "slice_depth": 1,
   "probe_callees": ["trace.record"],
@@ -12,7 +31,7 @@
   ],
   "required_runtime_probes": [{"case": "normal", "node": "commit", "phase": "commit"}],
   "probe_modes": ["on", "off", "fault"],
-  "observations_command": ["python", "-B", "-X", "utf8", "observe.py"],
-  "test_commands": [["python", "-B", "test_workflow.py"]],
+  "observations_command": ["{python}", "-B", "-X", "utf8", "observe.py"],
+  "test_commands": [["{python}", "-B", "test_workflow.py"]],
   "timeout_seconds": 120
 }

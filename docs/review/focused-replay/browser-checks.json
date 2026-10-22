@@ -1,0 +1,55 @@
+{
+  "view_cursor_preserved": {
+    "business": {
+      "eventId": "8573112f32f5:38",
+      "rawCount": "113",
+      "rawIndex": "40",
+      "stepCount": "38"
+    },
+    "functions": {
+      "eventId": "8573112f32f5:38",
+      "rawCount": "113",
+      "rawIndex": "40",
+      "stepCount": "111"
+    }
+  },
+  "final_business_cursor": {
+    "eventId": "8573112f32f5:38",
+    "rawCount": "113",
+    "rawIndex": "40",
+    "stepCount": "38"
+  },
+  "business_changes": "状态\n内容检查\n活动: 正在执行 → 已通过\n资源\n每次运行独享名额\navailable: 0 → 1\n资源\n每次运行独享名额\nholders: [\"content_check\"] → []",
+  "focused_changes": "值\n内容检查\ncontent_length: 未记录 → 14\n值\n内容检查\ncontent_sha256: 未记录 → 887815cf28473b3c522067d044df852fb116ac3d59cdc8451765b8d457c70ba9\n值\n内容检查\nforbidden_marker: 未记录 → SECRET:\n值\n内容检查\npassed: 未记录 → true\n值\n内容检查\nmarker_present: 未记录 → false",
+  "typed_transfers": [
+    {
+      "payload": "输入 content_length: number = 14",
+      "type": "data"
+    },
+    {
+      "payload": "输入 content_sha256: string = 887815cf28473b3c522067d044df852fb116ac3d59cdc8451765b8d457c70ba9",
+      "type": "data"
+    },
+    {
+      "payload": "输入 forbidden_marker: string = SECRET:",
+      "type": "data"
+    },
+    {
+      "payload": "返回 passed: boolean = true",
+      "type": "data"
+    },
+    {
+      "payload": "返回 marker_present: boolean = false",
+      "type": "data"
+    }
+  ],
+  "core_mark_survived_reload": true,
+  "note_survived_reload": "关注两项检查是否都完成，以及名额是否归还。",
+  "play_pause_checked": true,
+  "prior_versions_and_cases_hidden": true,
+  "legend_always_visible": true,
+  "screenshots": [
+    "business-step.png",
+    "focused-call.png"
+  ]
+}

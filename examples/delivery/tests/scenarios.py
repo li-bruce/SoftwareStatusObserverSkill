@@ -15,7 +15,7 @@ from integrations.bo_scenarios import SCENARIOS
 
 def exercise(name, model, build_id, mode='on'):
     store=Store(); observer=BOAdapter(model,build_id,enabled=mode!='off',fault=mode=='fault')
-    events=Events(observer if mode!='off' else None); app=Delivery(store,events)
+    events=Events(observer if mode!='off' else None); app=Delivery(store,events,execution_version=build_id)
     try:
         if name!='no_grant':app.command('grant',id='G1',expires=200)
         if name=='alternative':

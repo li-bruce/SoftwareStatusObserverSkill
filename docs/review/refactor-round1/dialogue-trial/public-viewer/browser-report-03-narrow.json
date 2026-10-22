@@ -1,0 +1,119 @@
+{
+  "checks": [
+    "public instances contain actual runs with complete revision and persisted build provenance",
+    "HTTP view and public bo_export use same instances and global shared printers",
+    "unchanged full Pixi viewer starts with five business nodes",
+    "bound function and complete source snapshot opened from graph",
+    "expansion represents parent as same-type region",
+    "folded function search reveals selected runtime parameters",
+    "name note and core marker persist through native Preferences protocol",
+    "real pointer drag moves expanded region and its visible members together",
+    "state preset reveals all eleven deep lifecycle states",
+    "analysis detail mode is independent of high-level view",
+    "recording starts from actual empty snapshot without future runs",
+    "replay locates actual missing-approval wait",
+    "replay exposes recovery values with original queue sequence",
+    "separate actual cancellation and confirmed release events",
+    "rewind removes later probe events",
+    "recording final boundary preserves exact shared-resource snapshot",
+    "graph navigation source inspection annotations replay do not execute business writes",
+    "stale view save rejected with HTTP 409",
+    "native record controls save and open a recording",
+    "actual full viewer interaction at width 1440"
+  ],
+  "errors": [
+    "AssertionError [ERR_ASSERTION]: horizontal body overflow 390\n    at C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\stategraph-refactor-trial-20261022\\tests\\browser.cjs:48:160"
+  ],
+  "limits": [
+    "Scripted browser acceptance, not human usability.",
+    "Public replay does not reconstruct intermediate global printer snapshots; event fields and interval endpoints are verified."
+  ],
+  "geometry": {
+    "region": {
+      "id": "approval",
+      "root": "approval",
+      "depth": 0,
+      "ids": [
+        "approval",
+        "grant-match",
+        "approval-change",
+        "fn.approval"
+      ],
+      "self": true,
+      "cx": 200.85808461000738,
+      "cy": 303.035201523963,
+      "radius": 511.57425383002214,
+      "x": -310.71616922001476,
+      "y": -208.53905230605915,
+      "w": 1023.1485076600443,
+      "h": 1023.1485076600443
+    },
+    "camera": {
+      "scale": 0.4750357839484859,
+      "pan": {
+        "x": 267.7235999621313,
+        "y": 160.06494355402253
+      }
+    },
+    "boxes": [
+      {
+        "id": "submit",
+        "x": 1441.5161689618237,
+        "y": 169.85808461000738,
+        "w": 190,
+        "h": 135
+      },
+      {
+        "id": "checks",
+        "x": 1006.2962938864446,
+        "y": 391.45761837001885,
+        "w": 190,
+        "h": 135
+      },
+      {
+        "id": "approval",
+        "x": 105.85808461000738,
+        "y": 272.035201523963,
+        "w": 190,
+        "h": 157
+      },
+      {
+        "id": "queue",
+        "x": 668.0482687789647,
+        "y": 674.5533693930935,
+        "w": 190,
+        "h": 135
+      },
+      {
+        "id": "printing",
+        "x": 422.7154152487417,
+        "y": 1081.3464476846016,
+        "w": 190,
+        "h": 135
+      },
+      {
+        "id": "grant-match",
+        "x": -180.5505193767986,
+        "y": 437.3932861339705,
+        "w": 190,
+        "h": 135
+      },
+      {
+        "id": "approval-change",
+        "x": 105.8580846100074,
+        "y": -58.680967696051766,
+        "w": 190,
+        "h": 135
+      },
+      {
+        "id": "fn.approval",
+        "x": 392.2666885968134,
+        "y": 437.3932861339703,
+        "w": 190,
+        "h": 135
+      }
+    ]
+  },
+  "browserErrors": [],
+  "valid": false
+}

@@ -1,0 +1,75 @@
+{
+  "checkedAt": "2026-10-20T11:27:12.504Z",
+  "origin": "http://localhost:8824/graph",
+  "scope": "Controlled browser checks in a separate origin; no human usability or large-graph benchmark claim",
+  "collapsedGroupMove": {
+    "pass": true,
+    "nodes": 18,
+    "delta": {
+      "x": 462.0155011129765,
+      "y": 215.6072338527224
+    }
+  },
+  "expandedGroupMove": {
+    "pass": true,
+    "nodes": 8,
+    "delta": {
+      "x": 206.44570647725527,
+      "y": -86.01904436552263
+    }
+  },
+  "reloadRestoredCoordinatesPinsExpansion": true,
+  "circleBoundaryEndpoints": {
+    "checked": 9,
+    "invalid": []
+  },
+  "annotation": {
+    "name": "内容合格",
+    "note": "检查函数的实际返回值"
+  },
+  "relationKeyboard": {
+    "visible": true,
+    "expansionUnchanged": true,
+    "members": [
+      "是否直接负责所在文件夹 → 保存资料版本快照：仅所在文件夹直接负责人（声明关系）",
+      "审批是否适用 → 保存资料版本快照：任一审批有效，提交时仍需适用（声明关系）",
+      "正文是否在当前上限内 → 当前是否仍有资格：当前正文不超限（声明关系）"
+    ]
+  },
+  "foundAndFixed": [
+    "Enter on a relation button previously bubbled to the node expand shortcut; relation controls now retain their own keyboard action.",
+    "Nested region fills could cover parent titles; all titles now render above fills and avoid each other.",
+    "The live basis includes a clock; each poll rebuilt the view and closed relation details. The open relation is now resolved against the new graph and refreshed in place."
+  ],
+  "pollingPanel": {
+    "openedAt": "2026-10-20T11:30:32.650Z",
+    "checkedAt": "2026-10-20T11:31:13.130Z",
+    "stillVisible": true,
+    "members": [
+      "是否直接负责所在文件夹 → 保存资料版本快照：仅所在文件夹直接负责人（声明关系）",
+      "审批是否适用 → 保存资料版本快照：任一审批有效，提交时仍需适用（声明关系）",
+      "正文是否在当前上限内 → 当前是否仍有资格：当前正文不超限（声明关系）"
+    ]
+  },
+  "versionSwitchClosesDetails": true,
+  "mouseRelation": {
+    "at": "2026-10-20T11:31:22.474Z",
+    "visible": true,
+    "title": "调用 · 1 条关系",
+    "members": [
+      "执行并保存检查结果 → 内容检查：静态调用 check_content（静态调用）"
+    ]
+  },
+  "finalBuild": "代码版本 7fff406e",
+  "finalMouseDetailsRetainedAcrossPolls": true,
+  "liveRun": {
+    "during": "第 8 次 · 版本 1\n检查中\nc2203f83985d · alice\n内容检查\n正在检查\n索引检查\n正在检查\n本次名额：可用 0 / 2\n取消本次运行\n",
+    "after": "第 8 次 · 版本 1\n已归档\nc2203f83985d · alice\n内容检查\n已通过\n索引检查\n已通过\n本次名额：可用 2 / 2 · 使用已有归档记录\n"
+  },
+  "userCore": {
+    "name": "本次双检查",
+    "pinned": "true",
+    "fixedPositionPreserved": null,
+    "positionComparisonNote": "The pre-reload page did not expose x/y geometry, so this main-tab comparison is unavailable. Controlled drag/reload checks above include exact geometry and pin flags."
+  }
+}

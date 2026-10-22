@@ -3,6 +3,7 @@ import json
 import sqlite3
 import threading
 from contextlib import contextmanager
+from bo_stategraph.workflow import recover_records
 
 
 class Store:
@@ -27,13 +28,10 @@ class Store:
         else:
             # This application owns one Store per process. A new process has no old workers.
             with self.transaction():
-                for row in self.db.execute('SELECT document FROM execution_run').fetchall():
-                    run=json.loads(row['document'])
-                    unfinished=any(s in ('running','waiting') for s in run['activities'].values()) or (
-                        run['phase']=='checking' and any(s=='pending' for s in run['activities'].values()))
-                    if unfinished:self.put_execution({**run,'phase':'failed','disposition':'interrupted'})
                 job=self.get()
-                if job['state']=='checking':job.update(state='failed',reason='process_restarted');self.put(job)
+                records=[json.loads(row['document']) for row in self.db.execute('SELECT document FROM execution_run')]
+                for record in recover_records(job, records): self.put_execution(record)
+                self.put(job)
 
     @contextmanager
     def transaction(self):
@@ -57,6 +55,8 @@ class Store:
         return json.loads(row['document']) if row else None
 
     def put_execution(self, value: dict) -> None:
+        previous = self.execution(value['attempt'])
+        value = {**value, 'state_revision': previous.get('state_revision', -1) + 1 if previous else 0}
         self.db.execute('INSERT INTO execution_run VALUES (?,?) ON CONFLICT(attempt) DO UPDATE SET document=excluded.document',
                         (value['attempt'],json.dumps(value)))
 
@@ -66,6 +66,10 @@ class Store:
 
     def artifact(self, version: int, checksum: str) -> None:
         self.db.execute('INSERT INTO artifact VALUES (?, ?)', (version,checksum))
+
+    def record_transition(self, event, source, target, attempt, param_version):
+        self.db.execute('INSERT INTO journal(event,source,target,attempt,param_version) VALUES (?,?,?,?,?)',
+                        (event,source,target,attempt,param_version))
 
     def snapshot(self) -> dict:
         with self.lock:

@@ -1,0 +1,23 @@
+{
+  "candidate_id": "c8a67276f160017cbbdec676519266b1353f99044bf613c28203edf2c85d9fdb",
+  "decisions": {
+    "business": {
+      "action": "unchanged",
+      "reason": "本轮只修改开发者图的显示与交互，审批、版本、提交等业务源码及预期未改。"
+    },
+    "state_machine": {
+      "action": "unchanged",
+      "reason": "实际机器、活动、资源及运行采集不变；状态节点按原 parent 逐层显示，折叠不删除完整状态。"
+    },
+    "abstraction": {
+      "action": "updated",
+      "reason": "仅将分组边界改为连续的闭合贝塞尔曲线，外层包含内层曲线及节点标签，自动布局按实际包围范围留距；个人坐标、标注、原始节点身份及运行事实不变。增加曲线连续性和包含关系校验。"
+    },
+    "probes": {
+      "action": "unchanged",
+      "reason": "探针、事件身份、历史边界及源绑定实现未改；保留已有白盒和运行场景验证。"
+    }
+  },
+  "excluded_symbols": {},
+  "requirement_changes": {}
+}

@@ -12,7 +12,7 @@ sys.path.insert(0,str(ROOT))
 from archive_app.policy import check_index, check_content, candidate_allowed, check_size
 from archive_app.storage import ArchiveStore
 from archive_app.service import ArchiveService
-from archive_app.workflow import Workflow, initial_configuration, activity_step
+from bo_stategraph.workflow import Workflow, initial_configuration, activity_step
 from archive_app.ports import TracePort
 from observer_runtime.semantic_probe import Pins, Trace
 

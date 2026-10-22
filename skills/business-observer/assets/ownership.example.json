@@ -1,16 +1,18 @@
 {
   "schema_version": 1,
-  "scan": ["app", "integrations", "observer_generated", "tooling"],
+  "scan": ["app", "bo_stategraph", "integrations", "observer_generated", "tooling"],
   "layers": {
-    "business": {"paths": ["app"], "allows": ["business"], "reject_dynamic": true},
-    "integration": {"paths": ["integrations"], "allows": ["business", "observer", "integration"]},
-    "observer": {"paths": ["observer_generated"], "allows": ["observer"]},
-    "tooling": {"paths": ["tooling"], "allows": ["business", "observer", "integration", "tooling"]}
+    "business": {"paths": ["app"], "allows": ["business", "stategraph"], "reject_dynamic": true},
+    "stategraph": {"paths": ["bo_stategraph"], "allows": ["stategraph"], "reject_dynamic": true},
+    "integration": {"paths": ["integrations"], "allows": ["business", "stategraph", "observer", "integration"]},
+    "observer": {"paths": ["observer_generated"], "allows": ["observer", "stategraph"]},
+    "tooling": {"paths": ["tooling"], "allows": ["business", "stategraph", "observer", "integration", "tooling"]}
   },
-  "managed_paths": ["observer_generated/runtime", "observer_generated/behavior.json"],
+  "managed_paths": ["observer_generated/runtime", "observer_generated/behavior.json", "bo_stategraph/__init__.py", "bo_stategraph/bo_contracts.py", "bo_stategraph/execution_contract.py"],
   "managed_hashes": {},
   "regenerations": [],
-  "core_layers": ["business"],
+  "core_layers": ["business", "stategraph"],
   "core_resources": ["requirements.txt"],
-  "core_include": ["app", "requirements.txt"]
+  "core_include": ["app", "bo_stategraph", "requirements.txt"],
+  "core_exclude": ["bo_stategraph/config/views/*"]
 }

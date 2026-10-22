@@ -77,6 +77,8 @@ class ArchiveStore:
 
     @staticmethod
     def save_run(db: sqlite3.Connection, run: dict) -> None:
+        previous = db.execute("SELECT payload FROM runs WHERE id=?", (run['id'],)).fetchone()
+        run['state_revision'] = (json.loads(previous['payload']).get('state_revision', -1) + 1) if previous else 0
         db.execute("INSERT INTO runs(id,payload) VALUES(?,?) ON CONFLICT(id) DO UPDATE SET payload=excluded.payload",
                    (run["id"],json.dumps(run,ensure_ascii=False)))
 

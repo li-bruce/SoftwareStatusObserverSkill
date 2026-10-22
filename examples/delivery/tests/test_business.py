@@ -9,7 +9,7 @@ sys.path.insert(0,str(ROOT))
 from app.service import Delivery
 from app.store import Store
 from app.ports import Events
-from app.workflow import advance
+from bo_stategraph.workflow import advance
 from app.checks import run_checks
 
 

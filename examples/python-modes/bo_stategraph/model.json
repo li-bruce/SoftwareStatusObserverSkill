@@ -1,0 +1,309 @@
+{
+  "schema_version": 3,
+  "revision": "1",
+  "machine": {
+    "engine": "adapter-selected",
+    "version": "1",
+    "states": [
+      "pending",
+      "waiting",
+      "running",
+      "done"
+    ],
+    "values": [
+      "pending",
+      "waiting",
+      "running",
+      "done"
+    ],
+    "initial": "pending",
+    "state_type": "str enum",
+    "transitions": [
+      {
+        "trigger": "start",
+        "source": "pending",
+        "dest": "running",
+        "conditions": "available"
+      },
+      {
+        "trigger": "start",
+        "source": "pending",
+        "dest": "waiting",
+        "unless": "available"
+      },
+      {
+        "trigger": "resume",
+        "source": "waiting",
+        "dest": "running",
+        "conditions": "available"
+      },
+      {
+        "trigger": "finish",
+        "source": "running",
+        "dest": "done"
+      }
+    ],
+    "events": {
+      "start": {
+        "payload": {}
+      },
+      "resume": {
+        "payload": {}
+      },
+      "finish": {
+        "payload": {}
+      }
+    },
+    "context": {
+      "slots": {
+        "type": "integer",
+        "min": 0
+      },
+      "effects": {
+        "type": "integer",
+        "min": 0
+      }
+    },
+    "guards": {
+      "available": "可用名额大于零"
+    }
+  },
+  "nodes": [
+    {
+      "id": "job",
+      "kind": "action",
+      "layer": "business",
+      "label": "执行任务",
+      "source": {
+        "path": "app.py",
+        "symbol": "Job.run"
+      },
+      "summary": "实际任务实现：执行任务"
+    },
+    {
+      "id": "slots",
+      "kind": "data",
+      "parent": "job",
+      "label": "可用名额",
+      "value_type": "integer",
+      "summary": "实际任务实现：可用名额"
+    },
+    {
+      "id": "state.pending",
+      "kind": "state",
+      "layer": "state",
+      "parent": "job",
+      "value": "pending",
+      "label": "pending",
+      "summary": "实际任务实现：pending"
+    },
+    {
+      "id": "state.waiting",
+      "kind": "state",
+      "layer": "state",
+      "parent": "job",
+      "value": "waiting",
+      "label": "waiting",
+      "summary": "实际任务实现：waiting"
+    },
+    {
+      "id": "state.running",
+      "kind": "state",
+      "layer": "state",
+      "parent": "job",
+      "value": "running",
+      "label": "running",
+      "summary": "实际任务实现：running"
+    },
+    {
+      "id": "state.done",
+      "kind": "state",
+      "layer": "state",
+      "parent": "job",
+      "value": "done",
+      "label": "done",
+      "summary": "实际任务实现：done"
+    },
+    {
+      "id": "OwnLogic.apply",
+      "kind": "function",
+      "parent": "job",
+      "label": "OwnLogic.apply",
+      "source": {
+        "path": "app.py",
+        "symbol": "OwnLogic.apply",
+        "line": 9
+      },
+      "parameters": [
+        {
+          "name": "event",
+          "type": "str"
+        },
+        {
+          "name": "slots",
+          "type": "int"
+        }
+      ],
+      "summary": "实际任务实现：OwnLogic.apply"
+    },
+    {
+      "id": "Job.snapshot",
+      "kind": "function",
+      "parent": "job",
+      "label": "Job.snapshot",
+      "source": {
+        "path": "app.py",
+        "symbol": "Job.snapshot",
+        "line": 27
+      },
+      "parameters": [],
+      "summary": "实际任务实现：Job.snapshot"
+    },
+    {
+      "id": "Job.run",
+      "kind": "function",
+      "parent": "job",
+      "label": "Job.run",
+      "source": {
+        "path": "app.py",
+        "symbol": "Job.run",
+        "line": 31
+      },
+      "parameters": [
+        {
+          "name": "event",
+          "type": "str"
+        },
+        {
+          "name": "slots",
+          "type": "int"
+        }
+      ],
+      "summary": "实际任务实现：Job.run"
+    }
+  ],
+  "edges": [
+    {
+      "id": "transition:0",
+      "from": "state.pending",
+      "to": "state.running",
+      "type": "flow",
+      "event": "start",
+      "conditions": "available",
+      "unless": null,
+      "evidence": "executable declaration and Python source"
+    },
+    {
+      "id": "transition:1",
+      "from": "state.pending",
+      "to": "state.waiting",
+      "type": "flow",
+      "event": "start",
+      "conditions": null,
+      "unless": "available",
+      "evidence": "executable declaration and Python source"
+    },
+    {
+      "id": "transition:2",
+      "from": "state.waiting",
+      "to": "state.running",
+      "type": "flow",
+      "event": "resume",
+      "conditions": "available",
+      "unless": null,
+      "evidence": "executable declaration and Python source"
+    },
+    {
+      "id": "transition:3",
+      "from": "state.running",
+      "to": "state.done",
+      "type": "flow",
+      "event": "finish",
+      "conditions": null,
+      "unless": null,
+      "evidence": "executable declaration and Python source"
+    },
+    {
+      "id": "contains:slots",
+      "from": "job",
+      "to": "slots",
+      "type": "contains",
+      "evidence": "executable declaration and Python source"
+    },
+    {
+      "id": "contains:state.pending",
+      "from": "job",
+      "to": "state.pending",
+      "type": "contains",
+      "evidence": "executable declaration and Python source"
+    },
+    {
+      "id": "contains:state.waiting",
+      "from": "job",
+      "to": "state.waiting",
+      "type": "contains",
+      "evidence": "executable declaration and Python source"
+    },
+    {
+      "id": "contains:state.running",
+      "from": "job",
+      "to": "state.running",
+      "type": "contains",
+      "evidence": "executable declaration and Python source"
+    },
+    {
+      "id": "contains:state.done",
+      "from": "job",
+      "to": "state.done",
+      "type": "contains",
+      "evidence": "executable declaration and Python source"
+    },
+    {
+      "id": "contains:OwnLogic.apply",
+      "from": "job",
+      "to": "OwnLogic.apply",
+      "type": "contains",
+      "evidence": "executable declaration and Python source"
+    },
+    {
+      "id": "contains:Job.snapshot",
+      "from": "job",
+      "to": "Job.snapshot",
+      "type": "contains",
+      "evidence": "executable declaration and Python source"
+    },
+    {
+      "id": "contains:Job.run",
+      "from": "job",
+      "to": "Job.run",
+      "type": "contains",
+      "evidence": "executable declaration and Python source"
+    }
+  ],
+  "graph_roots": [
+    "job"
+  ],
+  "intent": "intent.json",
+  "overview": [
+    {
+      "node": "job"
+    }
+  ],
+  "source_files": [
+    "intent.json",
+    "bo_stategraph/driver.py",
+    "bo_stategraph/bo_contracts.py",
+    "bo_stategraph/execution_contract.py",
+    "app.py",
+    "run.py",
+    "build_model.py",
+    "test_modes.py",
+    "bo_stategraph/__init__.py",
+    "bo_stategraph/binding.py"
+  ],
+  "scope": {
+    "unknowns": [
+      "只验证本地任务状态、可用名额和提交次数；没有数据库、并发或权限引擎。"
+    ]
+  }
+}

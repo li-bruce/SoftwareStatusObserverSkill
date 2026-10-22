@@ -1,0 +1,707 @@
+{
+  "checks": [
+    {
+      "id": "approval-match",
+      "requirement": "R01",
+      "case": "policy",
+      "path": [
+        "matching"
+      ],
+      "equals": true
+    },
+    {
+      "id": "approval-self-denied",
+      "requirement": "R01",
+      "case": "policy",
+      "path": [
+        "self_approval"
+      ],
+      "equals": false
+    },
+    {
+      "id": "approval-old-version-denied",
+      "requirement": "R03",
+      "case": "policy",
+      "path": [
+        "old_version"
+      ],
+      "equals": false
+    },
+    {
+      "id": "policy:matching",
+      "requirement": "R01",
+      "case": "policy",
+      "path": [
+        "matching"
+      ],
+      "equals": true
+    },
+    {
+      "id": "policy:self_approval",
+      "requirement": "R01",
+      "case": "policy",
+      "path": [
+        "self_approval"
+      ],
+      "equals": false
+    },
+    {
+      "id": "policy:old_version",
+      "requirement": "R01",
+      "case": "policy",
+      "path": [
+        "old_version"
+      ],
+      "equals": false
+    },
+    {
+      "id": "policy:wrong_task",
+      "requirement": "R01",
+      "case": "policy",
+      "path": [
+        "wrong_task"
+      ],
+      "equals": false
+    },
+    {
+      "id": "policy:wrong_printer",
+      "requirement": "R01",
+      "case": "policy",
+      "path": [
+        "wrong_printer"
+      ],
+      "equals": false
+    },
+    {
+      "id": "policy:missing_role",
+      "requirement": "R01",
+      "case": "policy",
+      "path": [
+        "missing_role"
+      ],
+      "equals": false
+    },
+    {
+      "id": "policy:expired",
+      "requirement": "R01",
+      "case": "policy",
+      "path": [
+        "expired"
+      ],
+      "equals": false
+    },
+    {
+      "id": "policy:revoked",
+      "requirement": "R01",
+      "case": "policy",
+      "path": [
+        "revoked"
+      ],
+      "equals": false
+    },
+    {
+      "id": "policy:state_constraints",
+      "requirement": "R11",
+      "case": "policy",
+      "path": [
+        "state_constraints"
+      ],
+      "equals": true
+    },
+    {
+      "id": "happy:waiting",
+      "requirement": "R04",
+      "case": "happy",
+      "path": [
+        "waiting"
+      ],
+      "equals": "queued"
+    },
+    {
+      "id": "happy:resumed",
+      "requirement": "R04",
+      "case": "happy",
+      "path": [
+        "resumed"
+      ],
+      "equals": "printing"
+    },
+    {
+      "id": "happy:finished",
+      "requirement": "R04",
+      "case": "happy",
+      "path": [
+        "finished"
+      ],
+      "equals": "completed"
+    },
+    {
+      "id": "happy:released",
+      "requirement": "R04",
+      "case": "happy",
+      "path": [
+        "released"
+      ],
+      "equals": true
+    },
+    {
+      "id": "happy:duplicate_no_effect",
+      "requirement": "R04",
+      "case": "happy",
+      "path": [
+        "duplicate_no_effect"
+      ],
+      "equals": true
+    },
+    {
+      "id": "happy:same_submitter_two_runs",
+      "requirement": "R04",
+      "case": "happy",
+      "path": [
+        "same_submitter_two_runs"
+      ],
+      "equals": 2
+    },
+    {
+      "id": "happy:state_constraints",
+      "requirement": "R11",
+      "case": "happy",
+      "path": [
+        "state_constraints"
+      ],
+      "equals": true
+    },
+    {
+      "id": "approval_paths:alternative",
+      "requirement": "R05",
+      "case": "approval_paths",
+      "path": [
+        "alternative"
+      ],
+      "equals": "queued"
+    },
+    {
+      "id": "approval_paths:blocked",
+      "requirement": "R05",
+      "case": "approval_paths",
+      "path": [
+        "blocked"
+      ],
+      "equals": "blocked"
+    },
+    {
+      "id": "approval_paths:bypass",
+      "requirement": "R05",
+      "case": "approval_paths",
+      "path": [
+        "bypass"
+      ],
+      "equals": true
+    },
+    {
+      "id": "approval_paths:restored_position",
+      "requirement": "R05",
+      "case": "approval_paths",
+      "path": [
+        "restored_position"
+      ],
+      "equals": true
+    },
+    {
+      "id": "approval_paths:original_priority",
+      "requirement": "R05",
+      "case": "approval_paths",
+      "path": [
+        "original_priority"
+      ],
+      "equals": true
+    },
+    {
+      "id": "approval_paths:printing_survives_revoke",
+      "requirement": "R05",
+      "case": "approval_paths",
+      "path": [
+        "printing_survives_revoke"
+      ],
+      "equals": "printing"
+    },
+    {
+      "id": "approval_paths:state_constraints",
+      "requirement": "R11",
+      "case": "approval_paths",
+      "path": [
+        "state_constraints"
+      ],
+      "equals": true
+    },
+    {
+      "id": "expiry:at_deadline",
+      "requirement": "R01",
+      "case": "expiry",
+      "path": [
+        "at_deadline"
+      ],
+      "equals": "blocked"
+    },
+    {
+      "id": "expiry:no_start",
+      "requirement": "R01",
+      "case": "expiry",
+      "path": [
+        "no_start"
+      ],
+      "equals": true
+    },
+    {
+      "id": "expiry:new_approval_resumes",
+      "requirement": "R01",
+      "case": "expiry",
+      "path": [
+        "new_approval_resumes"
+      ],
+      "equals": "printing"
+    },
+    {
+      "id": "expiry:state_constraints",
+      "requirement": "R11",
+      "case": "expiry",
+      "path": [
+        "state_constraints"
+      ],
+      "equals": true
+    },
+    {
+      "id": "expiry_window:state",
+      "requirement": "R01",
+      "case": "expiry_window",
+      "path": [
+        "state"
+      ],
+      "equals": "blocked"
+    },
+    {
+      "id": "expiry_window:owner_empty",
+      "requirement": "R01",
+      "case": "expiry_window",
+      "path": [
+        "owner_empty"
+      ],
+      "equals": true
+    },
+    {
+      "id": "expiry_window:state_constraints",
+      "requirement": "R11",
+      "case": "expiry_window",
+      "path": [
+        "state_constraints"
+      ],
+      "equals": true
+    },
+    {
+      "id": "version_waiting:old",
+      "requirement": "R03",
+      "case": "version_waiting",
+      "path": [
+        "old"
+      ],
+      "equals": "superseded"
+    },
+    {
+      "id": "version_waiting:new_before_approval",
+      "requirement": "R03",
+      "case": "version_waiting",
+      "path": [
+        "new_before_approval"
+      ],
+      "equals": "awaiting_approval"
+    },
+    {
+      "id": "version_waiting:old_approval_not_reused",
+      "requirement": "R03",
+      "case": "version_waiting",
+      "path": [
+        "old_approval_not_reused"
+      ],
+      "equals": true
+    },
+    {
+      "id": "version_waiting:new_after_approval",
+      "requirement": "R03",
+      "case": "version_waiting",
+      "path": [
+        "new_after_approval"
+      ],
+      "equals": "printing"
+    },
+    {
+      "id": "version_waiting:new_version",
+      "requirement": "R03",
+      "case": "version_waiting",
+      "path": [
+        "new_version"
+      ],
+      "equals": 2
+    },
+    {
+      "id": "version_waiting:state_constraints",
+      "requirement": "R11",
+      "case": "version_waiting",
+      "path": [
+        "state_constraints"
+      ],
+      "equals": true
+    },
+    {
+      "id": "version_printing:old_kept",
+      "requirement": "R06",
+      "case": "version_printing",
+      "path": [
+        "old_kept"
+      ],
+      "equals": "printing"
+    },
+    {
+      "id": "version_printing:waits_for_stop",
+      "requirement": "R06",
+      "case": "version_printing",
+      "path": [
+        "waits_for_stop"
+      ],
+      "equals": true
+    },
+    {
+      "id": "version_printing:old_cancelled",
+      "requirement": "R06",
+      "case": "version_printing",
+      "path": [
+        "old_cancelled"
+      ],
+      "equals": "cancelled"
+    },
+    {
+      "id": "version_printing:new_unaffected",
+      "requirement": "R06",
+      "case": "version_printing",
+      "path": [
+        "new_unaffected"
+      ],
+      "equals": "printing"
+    },
+    {
+      "id": "version_printing:new_owns",
+      "requirement": "R06",
+      "case": "version_printing",
+      "path": [
+        "new_owns"
+      ],
+      "equals": true
+    },
+    {
+      "id": "version_printing:state_constraints",
+      "requirement": "R11",
+      "case": "version_printing",
+      "path": [
+        "state_constraints"
+      ],
+      "equals": true
+    },
+    {
+      "id": "cancel_other_run:new_cancelled",
+      "requirement": "R09",
+      "case": "cancel_other_run",
+      "path": [
+        "new_cancelled"
+      ],
+      "equals": "cancelled"
+    },
+    {
+      "id": "cancel_other_run:old_unaffected",
+      "requirement": "R09",
+      "case": "cancel_other_run",
+      "path": [
+        "old_unaffected"
+      ],
+      "equals": "printing"
+    },
+    {
+      "id": "cancel_other_run:old_owns",
+      "requirement": "R09",
+      "case": "cancel_other_run",
+      "path": [
+        "old_owns"
+      ],
+      "equals": true
+    },
+    {
+      "id": "cancel_other_run:state_constraints",
+      "requirement": "R11",
+      "case": "cancel_other_run",
+      "path": [
+        "state_constraints"
+      ],
+      "equals": true
+    },
+    {
+      "id": "size_boundaries:states",
+      "requirement": "R10",
+      "case": "size_boundaries",
+      "path": [
+        "states"
+      ],
+      "equals": [
+        "awaiting_approval",
+        "check_failed",
+        "check_failed",
+        "check_failed",
+        "check_failed",
+        "check_failed",
+        "check_failed",
+        "check_failed",
+        "check_failed"
+      ]
+    },
+    {
+      "id": "size_boundaries:specific_failures",
+      "requirement": "R10",
+      "case": "size_boundaries",
+      "path": [
+        "specific_failures"
+      ],
+      "equals": true
+    },
+    {
+      "id": "size_boundaries:no_occupancy",
+      "requirement": "R10",
+      "case": "size_boundaries",
+      "path": [
+        "no_occupancy"
+      ],
+      "equals": true
+    },
+    {
+      "id": "size_boundaries:state_constraints",
+      "requirement": "R11",
+      "case": "size_boundaries",
+      "path": [
+        "state_constraints"
+      ],
+      "equals": true
+    },
+    {
+      "id": "materials:states",
+      "requirement": "R10",
+      "case": "materials",
+      "path": [
+        "states"
+      ],
+      "equals": [
+        "check_failed",
+        "awaiting_approval",
+        "check_failed"
+      ]
+    },
+    {
+      "id": "materials:state_constraints",
+      "requirement": "R11",
+      "case": "materials",
+      "path": [
+        "state_constraints"
+      ],
+      "equals": true
+    },
+    {
+      "id": "check_error:state",
+      "requirement": "R08",
+      "case": "check_error",
+      "path": [
+        "state"
+      ],
+      "equals": "check_error"
+    },
+    {
+      "id": "check_error:error_type",
+      "requirement": "R08",
+      "case": "check_error",
+      "path": [
+        "error_type"
+      ],
+      "equals": "RuntimeError"
+    },
+    {
+      "id": "check_error:message",
+      "requirement": "R08",
+      "case": "check_error",
+      "path": [
+        "message"
+      ],
+      "equals": "simulated material checker failure"
+    },
+    {
+      "id": "check_error:owner_empty",
+      "requirement": "R08",
+      "case": "check_error",
+      "path": [
+        "owner_empty"
+      ],
+      "equals": true
+    },
+    {
+      "id": "check_error:state_constraints",
+      "requirement": "R11",
+      "case": "check_error",
+      "path": [
+        "state_constraints"
+      ],
+      "equals": true
+    },
+    {
+      "id": "parallel:state",
+      "requirement": "R02",
+      "case": "parallel",
+      "path": [
+        "state"
+      ],
+      "equals": "awaiting_approval"
+    },
+    {
+      "id": "parallel:overlap",
+      "requirement": "R02",
+      "case": "parallel",
+      "path": [
+        "overlap"
+      ],
+      "equals": true
+    },
+    {
+      "id": "parallel:state_constraints",
+      "requirement": "R11",
+      "case": "parallel",
+      "path": [
+        "state_constraints"
+      ],
+      "equals": true
+    },
+    {
+      "id": "concurrent_dispatch:printing_count",
+      "requirement": "R07",
+      "case": "concurrent_dispatch",
+      "path": [
+        "printing_count"
+      ],
+      "equals": 1
+    },
+    {
+      "id": "concurrent_dispatch:start_effects",
+      "requirement": "R07",
+      "case": "concurrent_dispatch",
+      "path": [
+        "start_effects"
+      ],
+      "equals": 1
+    },
+    {
+      "id": "concurrent_dispatch:waiting_count",
+      "requirement": "R07",
+      "case": "concurrent_dispatch",
+      "path": [
+        "waiting_count"
+      ],
+      "equals": 1
+    },
+    {
+      "id": "concurrent_dispatch:state_constraints",
+      "requirement": "R11",
+      "case": "concurrent_dispatch",
+      "path": [
+        "state_constraints"
+      ],
+      "equals": true
+    },
+    {
+      "id": "two_printers:printing_count",
+      "requirement": "R07",
+      "case": "two_printers",
+      "path": [
+        "printing_count"
+      ],
+      "equals": 2
+    },
+    {
+      "id": "two_printers:distinct_owners",
+      "requirement": "R07",
+      "case": "two_printers",
+      "path": [
+        "distinct_owners"
+      ],
+      "equals": 2
+    },
+    {
+      "id": "two_printers:state_constraints",
+      "requirement": "R11",
+      "case": "two_printers",
+      "path": [
+        "state_constraints"
+      ],
+      "equals": true
+    },
+    {
+      "id": "restart:ownership_persisted",
+      "requirement": "R06",
+      "case": "restart",
+      "path": [
+        "ownership_persisted"
+      ],
+      "equals": true
+    },
+    {
+      "id": "restart:next_started",
+      "requirement": "R06",
+      "case": "restart",
+      "path": [
+        "next_started"
+      ],
+      "equals": "printing"
+    },
+    {
+      "id": "restart:state_constraints",
+      "requirement": "R11",
+      "case": "restart",
+      "path": [
+        "state_constraints"
+      ],
+      "equals": true
+    },
+    {
+      "id": "api_rejections:rejected",
+      "requirement": "R01",
+      "case": "api_rejections",
+      "path": [
+        "rejected"
+      ],
+      "equals": [
+        "alice",
+        "unknown",
+        "unrequested_stop"
+      ]
+    },
+    {
+      "id": "api_rejections:still_printing",
+      "requirement": "R01",
+      "case": "api_rejections",
+      "path": [
+        "still_printing"
+      ],
+      "equals": "printing"
+    },
+    {
+      "id": "api_rejections:state_constraints",
+      "requirement": "R11",
+      "case": "api_rejections",
+      "path": [
+        "state_constraints"
+      ],
+      "equals": true
+    }
+  ],
+  "model_checks": []
+}

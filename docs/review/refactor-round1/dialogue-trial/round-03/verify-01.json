@@ -1,0 +1,53 @@
+{
+  "valid": false,
+  "errors": [
+    {
+      "weakened_verification": "test_commands",
+      "removed": [
+        [
+          "{python}",
+          "-B",
+          "-X",
+          "utf8",
+          "tests/test_policy.py"
+        ]
+      ]
+    }
+  ],
+  "reports": {
+    "mapping": {
+      "status": "failed",
+      "errors": [
+        {
+          "weakened_verification": "test_commands",
+          "removed": [
+            [
+              "{python}",
+              "-B",
+              "-X",
+              "utf8",
+              "tests/test_policy.py"
+            ]
+          ]
+        }
+      ],
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses"
+    },
+    "state_rules": {
+      "status": "not_run",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "not_run",
+      "errors": [],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "not_run",
+      "errors": [],
+      "assertions": {},
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "candidate_id": "3a73410f6fdc361f5bc391fde476143e865b08e0df5624fd7f8bee15470bce7c"
+}

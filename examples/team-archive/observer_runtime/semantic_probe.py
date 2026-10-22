@@ -39,6 +39,8 @@ class Pins:
         self.path = Path(path) if path else None
         self.run_id = uuid.uuid4().hex[:12]
         self.seq = self.written = self.errors = self.dropped = 0
+        self.bo_scope = None
+        self.bo_filtered = 0
         self.queue = queue.Queue(maxsize=max(1, capacity))
         self.lock = threading.Lock()
         self.closed = False
@@ -50,6 +52,14 @@ class Pins:
 
     def attempt(self, entity):
         return Trace(self, entity, uuid.uuid4().hex[:10])
+
+    def bo_set_scope(self, node_ids=None):
+        """Select observations only; never alter the application's execution."""
+        scope = None if node_ids is None else frozenset(node_ids)
+        if scope is not None and not scope <= self.nodes.keys():
+            raise ValueError('Unknown observation node')
+        with self.lock:
+            self.bo_scope = scope
 
     def _write(self, text):
         self.path.parent.mkdir(parents=True, exist_ok=True)
@@ -73,7 +83,8 @@ class Pins:
     def health(self):
         return {"enabled": self.enabled, "run_id": self.run_id, "attempted": self.seq,
                 "written": self.written, "errors": self.errors, "dropped": self.dropped,
-                "queued": self.queue.unfinished_tasks}
+                "queued": self.queue.unfinished_tasks, "filtered": self.bo_filtered,
+                "capture_nodes": sorted(self.bo_scope) if self.bo_scope is not None else None}
 
     def flush(self, timeout=2):
         deadline = time.monotonic() + timeout
@@ -97,6 +108,9 @@ class Trace:
         p = self.pins
         if not p.enabled or p.closed:
             return None
+        if p.bo_scope is not None and node not in p.bo_scope:
+            p.bo_filtered += 1
+            return None  # Skip payload construction as well as the event.
         try:
             spec = p.nodes[node]["capture"]
             values = builder()

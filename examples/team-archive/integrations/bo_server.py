@@ -9,9 +9,13 @@ import time
 from urllib.parse import parse_qs, urlparse
 from archive_app.service import ArchiveService
 from archive_app.storage import ArchiveStore
-from archive_app.workflow import LABELS
+from bo_stategraph.workflow import LABELS
 from integrations.bo_observer import BOObserver
 from observer_runtime.behavior_model import check
+from observer_runtime.recording_session import Recordings
+from observer_runtime.view_preferences import Preferences, PreferenceConflict
+from bo_stategraph import bo_export_view
+from bo_stategraph.query import bo_machine
 
 CASE_NAMES={
     "archive_snapshot":"正常归档 · 固定版本快照","capacity_one":"1 个名额 · 索引排队",
@@ -41,7 +45,9 @@ class LocalApplication:
         self.service=ArchiveService(self.store,self.observer.trace,delay=args.delay,
                                     execution_version=manifest["build_id"])
         self.service.start_scheduler()
+        self.preferences=Preferences(root,"team-archive-example")
         self.case_cache={}
+        self.observer.bo_graph.bo_bind_instances(lambda: self.recording_view()["machine"])
         self.frozen=None
         frozen_root=root/"review/v1"
         if (frozen_root/"manifest.json").exists():
@@ -51,6 +57,19 @@ class LocalApplication:
             frozen_sources={name:(source_root/name).read_text(encoding="utf-8")
                             for name in frozen_manifest["files"]}
             self.frozen=(frozen_model,frozen_manifest,frozen_sources,source_root)
+        self.recordings=Recordings(root/"data/recordings",self.recording_view,sources,scope_setter=self.observer.pins.bo_set_scope,event_source=self.observer.events,
+            action_nodes={"run":"archive_request","approve":"issue_approval","revoke":"approval_revoked",
+                          "resume":"resume_run","cancel":"cancel_run","size-limit":"set_size_limit",
+                          "edit":"content_changed","move":"move_folder"})
+
+    def recording_view(self):
+        with self.service.lock:
+            return self.graph_view()
+
+    def bo_export_graph(self):
+        # Same full model and authoritative configurations as the live graph.
+        # UI filters/expansion have no effect on this endpoint.
+        return bo_export_view(self.recording_view(), graph=self.observer.bo_graph)
 
     def cases(self, version="live"):
         path=self.root/("review/v1/observations.json" if version=="v1" else "review/v2/observations.json")
@@ -86,15 +105,7 @@ class LocalApplication:
             historical=True
         if version=="v1" and not selected:
             raise ValueError("首版没有保存这个运行场景")
-        configurations=[]
-        for run in snapshot["runs"]:
-            config=deepcopy(run["configuration"])
-            config.update(phase=run["phase"],disposition=run["phase"] if run["phase"] in
-                ("superseded","interrupted","cancelled") else "current",qualification=run["qualification"],
-                stop_reason=run["stop_reason"],resume_required=run["resume_required"],
-                run_build_id=run.get("execution_version"),
-                source_status="current" if run.get("execution_version")==build["build_id"] else "unbound")
-            configurations.append(config)
+        machine=bo_machine(snapshot,build["build_id"])
         latest=snapshot["runs"][-1] if snapshot["runs"] else None
         document=snapshot["documents"][0]
         basis={"param_version":document["version"],"epoch":snapshot["epoch"],"clock":time.time()}
@@ -119,8 +130,7 @@ class LocalApplication:
                         **size_parameters},
                     "approvals":snapshot["grants"],"relation":snapshot["assignments"],
                     "effects":snapshot["archives"],"historical":historical,"case_label":CASE_NAMES.get(case,"当前操作")},
-                "machine":{"current":latest["phase"] if latest else "created","configurations":configurations,
-                    "journal":[j for r in snapshot["runs"] for j in r["phase_journal"]]},
+                "machine":machine,"instances":self.observer.bo_graph.bo_instances(machine),
                 "available_cases":allowed_cases,"case_names":CASE_NAMES,"historical":historical}
 
     def state(self):
@@ -159,13 +169,15 @@ def serve(root, args, model, manifest, sources):
         def log_message(self,*args):
             pass
 
-        def reply(self,status,body,content_type="application/json; charset=utf-8"):
+        def reply(self,status,body,content_type="application/json; charset=utf-8",download=False):
             raw=json.dumps(body,ensure_ascii=False).encode() if content_type.startswith("application/json") else body
             self.send_response(status)
             self.send_header("Content-Type",content_type)
             self.send_header("Cache-Control","no-store")
             self.send_header("X-Content-Type-Options","nosniff")
             self.send_header("Content-Length",str(len(raw)))
+            if download:
+                self.send_header("Content-Disposition", 'attachment; filename="stategraph.json"')
             self.end_headers()
             self.wfile.write(raw)
 
@@ -173,15 +185,27 @@ def serve(root, args, model, manifest, sources):
             parsed=urlparse(self.path)
             params=parse_qs(parsed.query)
             try:
+                if parsed.path=="/api/preferences":
+                    return self.reply(200,application.preferences.read())
                 if parsed.path=="/api/state":
                     return self.reply(200,application.state())
+                if parsed.path in ("/api/stategraph", "/api/stategraph/export"):
+                    return self.reply(200,application.bo_export_graph(),download=parsed.path.endswith("/export"))
                 if parsed.path=="/api/view":
                     return self.reply(200,application.graph_view(params.get("case",["live"])[0],params.get("version",["live"])[0]))
                 if parsed.path=="/api/versions":
                     return self.reply(200,{"versions":["live","v1"] if application.frozen else ["live"]})
+                if parsed.path=="/api/recordings":
+                    return self.reply(200,application.recordings.list())
+                if parsed.path.startswith("/api/recordings/"):
+                    return self.reply(200,application.recordings.get(parsed.path.rsplit("/",1)[-1]))
                 if parsed.path=="/api/source":
                     name=params.get("path",[""])[0]
-                    _,source_build,version_sources,_=application.version_sources(params.get("version",["live"])[0])
+                    if params.get("recording"):
+                        saved=application.recordings.get(params["recording"][0])
+                        source_build,version_sources={"build_id":saved["build_id"]},saved["sources"]
+                    else:
+                        _,source_build,version_sources,_=application.version_sources(params.get("version",["live"])[0])
                     if name not in version_sources:
                         return self.reply(404,{"error":"该源码不在已加载版本中"})
                     return self.reply(200,{"source":version_sources[name],"build_id":source_build["build_id"]})
@@ -206,15 +230,30 @@ def serve(root, args, model, manifest, sources):
             origin=self.headers.get("Origin")
             if origin and urlparse(origin).netloc not in (f"127.0.0.1:{args.port}",f"localhost:{args.port}"):
                 return self.reply(403,{"error":"仅接受本地同源操作"})
+            action,values=None,{}
             try:
                 size=int(self.headers.get("Content-Length","0"))
-                if not 0<size<=200000:
+                limit=2*1024*1024 if urlparse(self.path).path=="/api/preferences" else 200000
+                if not 0<size<=limit:
                     raise ValueError("请求大小无效")
                 values=json.loads(self.rfile.read(size).decode("utf-8"))
+                if not isinstance(values,dict):
+                    raise ValueError("请求必须是对象")
                 action=urlparse(self.path).path.removeprefix("/api/")
+                if action=="preferences":
+                    return self.reply(200,application.preferences.save(values))
+                if action=="recordings/start":
+                    return self.reply(200,application.recordings.start(values.get("label",""),values.get("scope")))
+                if action=="recordings/stop":
+                    return self.reply(200,application.recordings.stop())
                 result=application.command(action,values)
+                application.recordings.command(action,values,result)
                 return self.reply(200,result)
+            except PreferenceConflict as error:
+                return self.reply(409,{"error":str(error)})
             except (ValueError,KeyError,TypeError) as error:
+                if action and action!="preferences" and not action.startswith("recordings/"):
+                    application.recordings.command(action,values,error=error)
                 return self.reply(400,{"error":str(error)})
     server=ThreadingHTTPServer(("127.0.0.1",args.port),Handler)
     print(json.dumps({"application":f"http://127.0.0.1:{args.port}/",
@@ -223,6 +262,7 @@ def serve(root, args, model, manifest, sources):
     try:
         server.serve_forever()
     finally:
+        application.recordings.close()
         application.service.close()
         application.observer.close()
         server.server_close()

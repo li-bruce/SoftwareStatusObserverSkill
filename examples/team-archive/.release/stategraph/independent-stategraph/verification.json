@@ -1,0 +1,55 @@
+{
+  "valid": true,
+  "errors": [],
+  "candidate_id": "592a1ea468d69d6531245dbba3edcfc9288cd98a429773aae492ce9a5b318e2d",
+  "review_hash": "f8caebbaf58f32f5afd8cc156d22936648bb6b6ee989de407065fcfe2b24d505",
+  "observations_hash": "2dcc9052cee11d2c333f7bed80fb2ebc6e0952016fb5b1b22fa6ff3bdc669c63",
+  "tests": [
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/tests.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tooling/graph_tests.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/test_recording.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tooling/test_recorded_views.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/test_stategraph_module.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "checked_at": "2026-10-21T08:34:17.167045+00:00",
+  "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+}

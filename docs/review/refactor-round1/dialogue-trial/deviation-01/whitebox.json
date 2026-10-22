@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "rules": [
+    {
+      "id": "grant-version",
+      "requirement": "R03",
+      "node": "grant-match",
+      "source": {
+        "path": "app/policy.py",
+        "symbol": "grant_matches"
+      },
+      "parameters": {
+        "grant": "dict",
+        "run": "dict",
+        "has_role": "bool",
+        "now": "float"
+      },
+      "category": "actual-values",
+      "claim": "grant-version",
+      "basis": "intent.json:R03"
+    },
+    {
+      "id": "expiry-check",
+      "requirement": "R01",
+      "node": "approval",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow._authorization"
+      },
+      "parameters": {
+        "run": "dict",
+        "now": "float"
+      },
+      "category": "actual-values",
+      "claim": "expiry-check",
+      "basis": "intent.json:R01"
+    },
+    {
+      "id": "parallel-result",
+      "requirement": "R02",
+      "node": "check-size",
+      "source": {
+        "path": "app/checks.py",
+        "symbol": "check_size"
+      },
+      "parameters": {
+        "dimensions": "list",
+        "limits": "list"
+      },
+      "category": "actual-values",
+      "claim": "parallel-result",
+      "basis": "intent.json:R02"
+    },
+    {
+      "id": "error-visible",
+      "requirement": "R08",
+      "node": "check-worker",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow._check"
+      },
+      "parameters": {
+        "run_id": "str",
+        "name": "str"
+      },
+      "category": "actual-values",
+      "claim": "error-visible",
+      "basis": "intent.json:R08"
+    },
+    {
+      "id": "cancel-waits",
+      "requirement": "R09",
+      "node": "cancel",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.cancel"
+      },
+      "parameters": {
+        "run_id": "str"
+      },
+      "category": "actual-values",
+      "claim": "cancel-waits",
+      "basis": "intent.json:R09"
+    },
+    {
+      "id": "confirmation-release",
+      "requirement": "R06",
+      "node": "printer-stopped",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "Workflow.confirm"
+      },
+      "parameters": {
+        "run_id": "str",
+        "kind": "str"
+      },
+      "category": "actual-values",
+      "claim": "confirmation-release",
+      "basis": "intent.json:R06"
+    }
+  ],
+  "checks": [
+    {
+      "id": "grant-version",
+      "rule": "grant-version",
+      "case": "happy",
+      "phase": "decision",
+      "count": {
+        "min": 1
+      },
+      "select": [],
+      "fields": [
+        {
+          "path": [
+            "inputs",
+            "grant_version"
+          ],
+          "compare": {
+            "path": [
+              "inputs",
+              "run_version"
+            ],
+            "op": "eq"
+          }
+        },
+        {
+          "path": [
+            "outputs",
+            "eligible"
+          ],
+          "equals": true
+        }
+      ]
+    },
+    {
+      "id": "expiry-check",
+      "rule": "expiry-check",
+      "case": "expiry_window",
+      "phase": "decision",
+      "count": {
+        "min": 1
+      },
+      "select": [
+        {
+          "path": [
+            "inputs",
+            "clock"
+          ],
+          "equals": 110.0
+        }
+      ],
+      "fields": [
+        {
+          "path": [
+            "outputs",
+            "allowed"
+          ],
+          "equals": false
+        }
+      ]
+    },
+    {
+      "id": "parallel-result",
+      "rule": "parallel-result",
+      "case": "happy",
+      "phase": "return",
+      "count": {
+        "min": 1
+      },
+      "select": [],
+      "fields": [
+        {
+          "path": [
+            "outputs",
+            "passed"
+          ],
+          "equals": true
+        },
+        {
+          "path": [
+            "inputs",
+            "value"
+          ],
+          "equals": "[20, 20, 20]"
+        }
+      ]
+    },
+    {
+      "id": "error-visible",
+      "rule": "error-visible",
+      "case": "check_error",
+      "phase": "error",
+      "count": {
+        "min": 1
+      },
+      "select": [],
+      "fields": [
+        {
+          "path": [
+            "outputs",
+            "error_type"
+          ],
+          "equals": "RuntimeError"
+        }
+      ]
+    },
+    {
+      "id": "cancel-waits",
+      "rule": "cancel-waits",
+      "case": "version_printing",
+      "phase": "commit",
+      "count": {
+        "min": 1
+      },
+      "select": [],
+      "fields": [
+        {
+          "path": [
+            "outputs",
+            "state"
+          ],
+          "equals": "stopping"
+        }
+      ]
+    },
+    {
+      "id": "confirmation-release",
+      "rule": "confirmation-release",
+      "case": "version_printing",
+      "phase": "commit",
+      "count": {
+        "min": 1
+      },
+      "select": [],
+      "fields": [
+        {
+          "path": [
+            "outputs",
+            "released"
+          ],
+          "equals": true
+        }
+      ]
+    }
+  ]
+}

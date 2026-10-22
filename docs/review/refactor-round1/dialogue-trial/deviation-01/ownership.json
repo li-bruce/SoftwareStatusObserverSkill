@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "scan": [
+    "app",
+    "bo_stategraph",
+    "integrations",
+    "observer_runtime",
+    "tooling",
+    "tests",
+    "static",
+    "server.py",
+    "main.py"
+  ],
+  "layers": {
+    "core": {
+      "paths": [
+        "app",
+        "bo_stategraph"
+      ],
+      "allows": [
+        "core"
+      ],
+      "reject_dynamic": true
+    },
+    "integration": {
+      "paths": [
+        "integrations"
+      ],
+      "allows": [
+        "core",
+        "observer",
+        "integration"
+      ]
+    },
+    "observer": {
+      "paths": [
+        "observer_runtime"
+      ],
+      "allows": [
+        "observer",
+        "core"
+      ]
+    },
+    "tooling": {
+      "paths": [
+        "tooling",
+        "tests"
+      ],
+      "allows": [
+        "core",
+        "integration",
+        "observer",
+        "tooling"
+      ]
+    },
+    "viewer": {
+      "paths": [
+        "static"
+      ],
+      "allows": [
+        "viewer"
+      ]
+    },
+    "entry": {
+      "paths": [
+        "server.py",
+        "main.py"
+      ],
+      "allows": [
+        "entry",
+        "integration"
+      ]
+    }
+  },
+  "managed_paths": [],
+  "managed_hashes": {},
+  "regenerations": [],
+  "core_layers": [
+    "core"
+  ],
+  "core_resources": [
+    "config/printers.json"
+  ],
+  "core_include": [
+    "app",
+    "bo_stategraph",
+    "config/printers.json"
+  ]
+}

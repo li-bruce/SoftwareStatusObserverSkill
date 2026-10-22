@@ -1,0 +1,287 @@
+{
+  "finding": "Project-specific BOStateGraph and SVG viewer bypassed public Skill protocol and full interaction implementation. Prior checks do not prove public-core integration.",
+  "status": "rejected by independent validation",
+  "source": "parent chat independent review, 2026-10-22; not new business requirements",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "82424f38c92ef5c4fdd54b3e82e6b2e5b3b69835d5e8b6e667a22ae2f37bf4ec"
+    },
+    {
+      "path": "README.md",
+      "sha256": "2c27a448a051a36d41faf0f009a531f0534c7274d7c13bbdc55b57dad2286735"
+    },
+    {
+      "path": "acceptance.json",
+      "sha256": "29a711541b950c4815ae4cbdad2f8326a61e124d4cb50211527ed6b353166f92"
+    },
+    {
+      "path": "app/checks.py",
+      "sha256": "d2fd02f85bab8140d01be0fc7e41950eb784a4474e9ed310a17d7fd51a23aeff"
+    },
+    {
+      "path": "app/policy.py",
+      "sha256": "4cfabd0c0514f0d926be9dd9a4bcd545cbbaf63cdba081c2cbb7a36d48632d47"
+    },
+    {
+      "path": "app/ports.py",
+      "sha256": "f8817e3b2783789f266e8d54051a890d5852cc590ff9e07bbc7d41ebf9afad1d"
+    },
+    {
+      "path": "app/store.py",
+      "sha256": "cd6c143d0cf46e4a47fcffba643501a82fbe9b05d0d1d0014e6f04c239945382"
+    },
+    {
+      "path": "behavior.json",
+      "sha256": "8b8876e36a5a332e22d60cf6c801f2cbc752f11580e50495a6b506699fa53dde"
+    },
+    {
+      "path": "bo_stategraph/__init__.py",
+      "sha256": "fce75fd4b268cd2020989f1a3e83dbbb6c06e35d0f62cd6d59e7b0da8e8725da"
+    },
+    {
+      "path": "bo_stategraph/config/retention.json",
+      "sha256": "45bcb9805ab37e44369fcf1405246cd4187f7b15e0cfc6cc83c88fd15e8c8c34"
+    },
+    {
+      "path": "bo_stategraph/declaration.py",
+      "sha256": "64683a6dfe19a6dd9bf08e5a6631592b5da33f71e4fec701f9a55b6d1b8fd141"
+    },
+    {
+      "path": "bo_stategraph/workflow.py",
+      "sha256": "d74baac35f1d2ca434a1666382fc423de1c3f698556301f396cddd720d4c800b"
+    },
+    {
+      "path": "config/printers.json",
+      "sha256": "ec4b30b1ac80f3180e68c4e6309208ce996a12948e01dceed3d8d76d6ddbccd2"
+    },
+    {
+      "path": "discovery.json",
+      "sha256": "6b9516ae03cb264345ed2f33cf5541f7ab05910d6ec6c007231771246ff7ed6b"
+    },
+    {
+      "path": "integrations/bo_app.py",
+      "sha256": "61905662894d2255abe44b4025c6ca46da58532c163308870b18bc7a1b54480c"
+    },
+    {
+      "path": "integrations/bo_capture.py",
+      "sha256": "4e69f3ccf941c910cf9e8cbe101713d102c69796bd84a0cda94059a2e736ead2"
+    },
+    {
+      "path": "intent.json",
+      "sha256": "9b17c9f8c13b5cb5eb435ead1db64db358b9a417ef261d45bb81ef8fced0b108"
+    },
+    {
+      "path": "main.py",
+      "sha256": "d6ce91845d015ba244ab4f332d38240ae86245989fcae2ae54938a8f104b85ff"
+    },
+    {
+      "path": "manifest.json",
+      "sha256": "cbaff9366ecb0688590ecfa7ab808106665e3bff0b78068d8061bc26fb04fc17"
+    },
+    {
+      "path": "observer_runtime/__init__.py",
+      "sha256": "a77b606a45ae8fa9b04f6bde02430ee4f2c66fdac651ca1b132ccc92810565b4"
+    },
+    {
+      "path": "observer_runtime/architecture_guard.py",
+      "sha256": "09d631a2ff11f32731a25aa21d1382d3a40a824655adabb9dd56d353035367e8"
+    },
+    {
+      "path": "observer_runtime/behavior_model.py",
+      "sha256": "7165f6139fed267dab5b44b64fd7398f1624e0d4bf3c32fdc112fa042aad9a94"
+    },
+    {
+      "path": "observer_runtime/bo_contracts.py",
+      "sha256": "2a5639208ccb10f41c1c013858c1961fc6459b4b094954a0581d17050c471a65"
+    },
+    {
+      "path": "observer_runtime/bo_retention.py",
+      "sha256": "b5a0f17bd789bc3f8d81cf8089f218344040d2ad29577bb5865c7b870bac86e9"
+    },
+    {
+      "path": "observer_runtime/bo_runtime.py",
+      "sha256": "7c16cf2e58971309afb3da9fc41b96cb58b6a48d6113d3fff14e93fb5e7a02c9"
+    },
+    {
+      "path": "observer_runtime/bo_stategraph.py",
+      "sha256": "fcfbd491c6c23ab4c8b30ccd346a96dc56cd27e7c8e8887e1392648a12be5b13"
+    },
+    {
+      "path": "observer_runtime/bo_sync.py",
+      "sha256": "b0e6201c7d49c1efcd36ff75ff98b557dfffec1b848281db9c3620105cb2612d"
+    },
+    {
+      "path": "observer_runtime/bo_upgrade.py",
+      "sha256": "5f5dd26d4c20bcd10894a7339634c75378d01db3c010307c79c59b57db5a7de3"
+    },
+    {
+      "path": "observer_runtime/change_sync.py",
+      "sha256": "ccaf624d0bff8a69cf54d4f2c68ad3482344a256c186087661bf3eb5fe3fa701"
+    },
+    {
+      "path": "observer_runtime/code_structure.py",
+      "sha256": "01dad9cda1d248150301598fea1186e698c2f3ca62026f5735befbcb74c9c681"
+    },
+    {
+      "path": "observer_runtime/execution_contract.py",
+      "sha256": "9502b2d348bb8ee00c05288ca3d064d151365292fdef597c156c178871635b78"
+    },
+    {
+      "path": "observer_runtime/focus_graph.py",
+      "sha256": "ec366eebee41e60dea83f16acd89b334546b58509a174034afa7736b9b31a106"
+    },
+    {
+      "path": "observer_runtime/mapping_contract.py",
+      "sha256": "5c66b054d2a2086861fe63489cf49d4f08909d64424b7dce6407766508213296"
+    },
+    {
+      "path": "observer_runtime/model_tool.py",
+      "sha256": "47b80a2a5d376ef81f34cd91cb050ce58714c3f85ed1212a842c2081bca0d291"
+    },
+    {
+      "path": "observer_runtime/probe.py",
+      "sha256": "6e12b7cb0d89278b9562435e20eefa339993a1114720dd0f8dac15626d011807"
+    },
+    {
+      "path": "observer_runtime/project_bundle.py",
+      "sha256": "2a05e4eda5946b413c4d4a72b8bd29718705706a616d2bb48618205926171f5c"
+    },
+    {
+      "path": "observer_runtime/recording_session.py",
+      "sha256": "81678830bb0d16b58f4ad05a7884d8a6a17eb5740c4cba61d89df0a76cad0418"
+    },
+    {
+      "path": "observer_runtime/requirements_dialogue.py",
+      "sha256": "88a0603db9231a64e73b91db42ea8da2ef42eaffb2b4b309ec86f3b33d627f12"
+    },
+    {
+      "path": "observer_runtime/semantic_probe.py",
+      "sha256": "7a76181cbef2122e6d54105c07bc10e63f81d0d63130c2010fa7c375f09a40e2"
+    },
+    {
+      "path": "observer_runtime/statechart_contract.py",
+      "sha256": "9bb6beb6ed2444e73fc0d601aa45d54401e9b44feb82782fb2fa1cdfa7206d5a"
+    },
+    {
+      "path": "observer_runtime/sync_config.py",
+      "sha256": "cf1b6ac5a9ff7b9a5ad0eb6665b0c227985bd1ddc977682b66a45f5cd819a46e"
+    },
+    {
+      "path": "observer_runtime/sync_io.py",
+      "sha256": "2afd0eac53ed9ae47dd551e04958a33a1935354aa51826cf93b2f4c69416f7df"
+    },
+    {
+      "path": "observer_runtime/sync_verify.py",
+      "sha256": "a6a21ab79007b150e80b65483fbd82d8ead90ccbcfcf342f35b0f7a6c985d190"
+    },
+    {
+      "path": "observer_runtime/view_preferences.py",
+      "sha256": "0e76e2cc5e566f6664fbf154cb431949123f5fe973893ac9fcafb696666eb093"
+    },
+    {
+      "path": "observer_runtime/viewer_server.py",
+      "sha256": "10fa75d9a93662ce07cac457db46d65ecc3fa821a5d4a1a96ec543c7ec862c30"
+    },
+    {
+      "path": "observer_runtime/whitebox_contract.py",
+      "sha256": "ea6f97242402e93776d1958e11da85e1093a667098527818508cba1c09f0c6de"
+    },
+    {
+      "path": "observer_runtime/worknet_contract.py",
+      "sha256": "19a70d82022f2c2af675f64e7d955b13f5f543949b40c7813b657cd96b0e8193"
+    },
+    {
+      "path": "ownership.json",
+      "sha256": "e404fe80b4b7f5c9a5b698b80b7813b21f149b0ea53f00e91bd2af51179215fd"
+    },
+    {
+      "path": "review/README.md",
+      "sha256": "ca22fe19fcf732d80df3c0dd01d15bf6bb3f74a3756d0f64d4143ce9771581e3"
+    },
+    {
+      "path": "review/round-03/browser-report.json",
+      "sha256": "b4e2810290b582f4fc8a42c0799d479b9e4968ed2b249c807443d9bf8123f9e0"
+    },
+    {
+      "path": "review/round-03/prepare.py",
+      "sha256": "a56d1a96a615f539805a951822685e96bee9cb69f547a591bb318718725f51e8"
+    },
+    {
+      "path": "review/round-03/verify-final.json",
+      "sha256": "83845e1c675e12f047773265218e6577c9bd4d45aa68fa4436f49d9acebe9580"
+    },
+    {
+      "path": "server.py",
+      "sha256": "a0eb67acec78ae930daa5518cb6afcd406413922a29087d7e8674ecd94c8a247"
+    },
+    {
+      "path": "static/index.html",
+      "sha256": "1ba9fe53d3cc32a1c7590bbd8a7084d7a278897daf23c6bd59e00a4a56caf656"
+    },
+    {
+      "path": "static/viewer.css",
+      "sha256": "6f88f7da342a94afecd6652d376b84774721adf3e496a9ec34dd252f141e6f35"
+    },
+    {
+      "path": "static/viewer.js",
+      "sha256": "296e0f4e631660de72902e25f2d7b85fe30ce896d1c1ca466efb5e5e021ee33d"
+    },
+    {
+      "path": "sync.json",
+      "sha256": "087f8bbbf9284096403b6c2d445fc400f30626522436c04a01043bc4aa167616"
+    },
+    {
+      "path": "tests/__init__.py",
+      "sha256": "f0e4c724ea338d0f98af8751b5629cc442c71b519fc9c4d594674040595a58da"
+    },
+    {
+      "path": "tests/browser.cjs",
+      "sha256": "b233f72ff250ddca3dd10e658d0e9c27e6b44d535efd73cc4787c255b89f734e"
+    },
+    {
+      "path": "tests/scenarios.py",
+      "sha256": "d143f724fc3a1375ae043d0b39aaf395aae522347cd19ed1962ceb1c86e9ccdb"
+    },
+    {
+      "path": "tests/test_policy.py",
+      "sha256": "05cc4a5285985e9fcaa83687b84af243b3ef9543dda9910b428f61711c871cc0"
+    },
+    {
+      "path": "tests/test_project.py",
+      "sha256": "4e7f9aa2eafdfe8cfa95ba677e191d5cb0a28d622380016ada43099f24e322c3"
+    },
+    {
+      "path": "tooling/browser_check.ps1",
+      "sha256": "57ec78cc6f646a4f3df3b3c0055e60c595e414382132e429c3d07456574d573c"
+    },
+    {
+      "path": "tooling/build_model.py",
+      "sha256": "fa5c84a45e12611af9c77cb0aec2cf06e8d23208c9dbc398c7e5b0531ffafcd4"
+    },
+    {
+      "path": "tooling/contracts.py",
+      "sha256": "c9d393a0b5dae9fec023bc82036678f51f9b756bcdf5ec43fe3ce7b2142753f5"
+    },
+    {
+      "path": "tooling/gate.py",
+      "sha256": "2977c2a972fb4072a85d0cae75d3c42952a5e5d24823fb172fbdef2a336474be"
+    },
+    {
+      "path": "tooling/mutation_check.py",
+      "sha256": "6172245c119116a863a8290de3f5fc88aa75e73743e928b71da37e2681a03ee1"
+    },
+    {
+      "path": "tooling/observe.py",
+      "sha256": "236787742a8325431fbbb80c7ca25cd7655e6223fd789a5af43f8b1ecf2365b8"
+    },
+    {
+      "path": "tooling/review_candidate.py",
+      "sha256": "7e20507ef3ca44b8676bbd66fdc23a35b0f705d81450e22a34dfd67ae24739b7"
+    },
+    {
+      "path": "whitebox.json",
+      "sha256": "cbf53107da96b326201635848176cbf83d79fa840bb9a0e5c7f0eea41bfaaac1"
+    }
+  ]
+}

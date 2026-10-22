@@ -1,0 +1,18 @@
+{
+  "valid": true,
+  "build": "86f8e78a507debcc174a0e66875a4d86fbba6f5ffbdfbecfb0dff84b8962bb4b",
+  "run": "dc5ce4e7f4e3",
+  "phase": "completed",
+  "activities": {
+    "content_check": "succeeded",
+    "index_check": "succeeded"
+  },
+  "events": 67,
+  "observed_wait": true,
+  "documents_unchanged": true,
+  "archives_unchanged": true,
+  "archive_count": 1,
+  "added_synthetic_runs": 2,
+  "added_synthetic_approvals": 1,
+  "source_status": "current"
+}

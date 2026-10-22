@@ -1,0 +1,37 @@
+{
+  "schema": "business-discovery/v1",
+  "goal": "构建工作室 3D 打印任务 Python 工具，并用只读开发者图查看真实函数、参数、等待原因和执行路线。",
+  "sources": [
+    {"id":"U01","kind":"user","text":"我想做一个小型 Python 工具，给工作室安排 3D 打印任务。提交模型后要检查尺寸和材料，再占用打印机开始打印。有人能审批，有人只能提交。机器忙的时候排队，参数改了可能要重来。用这个 Skill 帮我边做边看内部执行情况；我关心实际函数、参数、等待原因和运行路线，页面先简单些。请先帮我厘清必要的规则，展示一个简短的局部关系图。","locator":"2026-10-22 独立对话验收：主会话提供的模拟用户首轮需求；非真人试用"},
+    {"id":"I01","kind":"inference","text":"审批可能是占用打印机前的门槛，但审批范围、自批、队列放行和参数变更效果尚未确定。","locator":"本对话首轮候选理解；非已确认规则"},
+    {"id":"A01","kind":"assistant","text":"1. 审批权是整个工作室通用，还是只对指定打印机有效？有审批权的人能否批准自己提交的任务？\n2. 检查和审批通过后，机器空闲时是否按排队顺序自动开始，还是必须有人再点一次开始？\n3. 改尺寸、材料或打印参数后，旧检查和审批是否全部作废？如果旧版本已在打印，是继续打完，还是停止后重新排队？","locator":"review/round-01/dialogue.md；首轮实际提问，与本轮最终消息一致"}
+  ],
+  "networks": [{
+    "id":"studio-printing","title":"提交到占用打印机的局部关系","actors":["提交人","审批人","调度程序","打印机"],"trigger":"提交模型和打印参数","outcome":"经过约定检查和授权后占用打印机并开始打印；完成与取消的效果待后续澄清",
+    "nodes":[
+      {"id":"submit","label":"提交模型与参数","kind":"action","source_refs":["U01"]},
+      {"id":"checks","label":"尺寸与材料检查","kind":"action","source_refs":["U01"]},
+      {"id":"approval","label":"审批规则待定","kind":"condition","source_refs":["U01","I01"]},
+      {"id":"queue","label":"机器忙则排队","kind":"state","source_refs":["U01"]},
+      {"id":"printer","label":"打印机资源","kind":"resource","source_refs":["U01"]},
+      {"id":"printing","label":"占用打印机并开始打印","kind":"action","source_refs":["U01"]},
+      {"id":"parameter-change","label":"参数修改","kind":"event","source_refs":["U01"]}
+    ],
+    "edges":[
+      {"id":"e-submit-checks","from":"submit","to":"checks","relation":"flow","label":"检查提交的模型与材料","source_refs":["U01"]},
+      {"id":"e-checks-queue","from":"checks","to":"queue","relation":"flow","label":"检查后申请打印机；失败处理待定","source_refs":["U01","I01"]},
+      {"id":"e-approval-queue","from":"approval","to":"queue","relation":"guard","label":"候选：审批约束排队或启动，具体时点待定","source_refs":["I01"],"decision_refs":["D01"]},
+      {"id":"e-queue-printing","from":"queue","to":"printing","relation":"flow","label":"获得可用机器后如何放行待定","source_refs":["U01","I01"],"decision_refs":["D02"]},
+      {"id":"e-printer-printing","from":"printer","to":"printing","relation":"resource","label":"占用打印机","source_refs":["U01"]},
+      {"id":"e-change-checks","from":"parameter-change","to":"checks","relation":"retry","label":"哪些检查要重做待定","source_refs":["U01"],"decision_refs":["D03"]},
+      {"id":"e-change-approval","from":"parameter-change","to":"approval","relation":"event","label":"是否失效待定","source_refs":["I01"],"decision_refs":["D03"]},
+      {"id":"e-change-printing","from":"parameter-change","to":"printing","relation":"event","label":"在途旧版本如何处理待定","source_refs":["I01"],"decision_refs":["D03"]}
+    ]
+  }],
+  "decisions":[
+    {"id":"D01","topic":"authority","question":"审批权是整个工作室通用，还是只对指定打印机有效？有审批权的人能否批准自己提交的任务？","why":"确定授权作用域与是否允许自批，避免把角色名称当作任意打印许可。","affects":["approval","e-approval-queue"],"blocking":true,"status":"open","priority":1,"source_refs":["U01"],"asked_in":["A01"]},
+    {"id":"D02","topic":"resources","question":"检查和审批通过后，机器空闲时是否按排队顺序自动开始，还是必须有人再点一次开始？","why":"确定等待的解除条件和触发者；机器选择与兼容性需要结合回答继续细化。","affects":["queue","printer","printing","e-queue-printing"],"blocking":true,"status":"open","priority":1,"source_refs":["U01"],"asked_in":["A01"]},
+    {"id":"D03","topic":"parameters","question":"改尺寸、材料或打印参数后，旧检查和审批是否全部作废？如果旧版本已在打印，是继续打完，还是停止后重新排队？","why":"确定检查与审批绑定哪个版本，以及新旧运行能否共存。","affects":["parameter-change","checks","approval","printing"],"blocking":true,"status":"open","priority":1,"source_refs":["U01"],"asked_in":["A01"]}
+  ],
+  "changes":[]
+}

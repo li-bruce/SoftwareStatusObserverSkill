@@ -1,0 +1,83 @@
+{
+  "records": [
+    {
+      "id": "814c5a1b15b14280b622d2b9de1bfb0e",
+      "mode": "focused",
+      "events": 7,
+      "commands": 0,
+      "nodes": [
+        "content_check",
+        "flow.checks"
+      ],
+      "filtered": 68,
+      "gaps": [],
+      "capture": {
+        "mode": "focused",
+        "nodes": [
+          "content_check",
+          "flow.checks"
+        ],
+        "roots": [
+          "content_check"
+        ],
+        "boundary_nodes": [
+          "flow.checks"
+        ]
+      },
+      "build_id": "5cda88c60316079113f7600da71c019d159cf8f6726bf91abd1d274719867b0a",
+      "source_verified": true,
+      "attempts": [
+        "1f362434f93a"
+      ]
+    },
+    {
+      "id": "e92026c10d434ff89bbca849d996915b",
+      "mode": "all",
+      "events": 109,
+      "commands": 2,
+      "nodes": [
+        "approval_candidate",
+        "approval_check",
+        "archive_request",
+        "archive_unique",
+        "authority_read",
+        "commit_guard",
+        "content_check",
+        "flow.checks",
+        "index_check",
+        "project_limit",
+        "scope_check",
+        "size_guard"
+      ],
+      "filtered": 0,
+      "gaps": [],
+      "capture": {
+        "mode": "all",
+        "nodes": null,
+        "roots": [],
+        "boundary_nodes": []
+      },
+      "build_id": "6ed1aafdf6c673122aaac695fe187ace695217f7fd1edc00a17c86bcc504c494",
+      "source_verified": true,
+      "attempts": [
+        "1eef185544f9"
+      ]
+    }
+  ],
+  "prior_recordings_unchanged": true,
+  "prior_runs_preserved": true,
+  "documents_unchanged": true,
+  "archives_unchanged": true,
+  "initial_runs": 13,
+  "final_runs": 15,
+  "capture_scope_restored": true,
+  "loaded_build": "45450bbde2ad4341132f9efc646f3e2627d82e6b199993af94ec0108d2f842b0",
+  "binding_status": {
+    "status": "current",
+    "changed_files": [],
+    "model_changed": false,
+    "intent_changed": false,
+    "directly_affected": [],
+    "possibly_affected": []
+  }
+}

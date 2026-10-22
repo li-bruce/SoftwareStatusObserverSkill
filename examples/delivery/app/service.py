@@ -2,7 +2,7 @@
 from app.checks import run_checks
 from app.ports import Events
 from app.store import Store
-from app.workflow import advance, ActivityExecution, completed
+from bo_stategraph.workflow import advance_record, ActivityExecution, completed, execution_record
 import uuid
 
 
@@ -17,7 +17,7 @@ def eligible_grant(grant: dict, job: dict, events=None, parent_call_id=None) -> 
                and remember('not_revoked', not grant['revoked'])
                and remember('not_expired', job['clock'] < grant['expires']))
     if events is not None:
-        events.emit('grant', 'decision', lambda: {
+        events.bo_emit('grant', 'decision', lambda: {
             **observation(job, inputs={'grant_id': grant['id'], 'grant_version': grant['version'],
                           'param_version': job['param_version'], 'clock': job['clock'],
                           'expires': grant['expires']},
@@ -38,7 +38,7 @@ def authorized(job: dict, events=None) -> bool:
                 allowed = True
                 break
     if events is not None:
-        events.emit('authorize', 'decision', lambda: {
+        events.bo_emit('authorize', 'decision', lambda: {
             **observation(job, inputs={'role': job['role'], 'grants': len(job['grants'])},
                           outputs={'allowed': allowed, 'evaluated_grants': evaluated}),
             'call_id': call_id})
@@ -51,15 +51,12 @@ def observation(job: dict, inputs=None, outputs=None, uses=()) -> dict:
 
 
 class Delivery:
-    def __init__(self, store: Store, events: Events | None = None, checker=run_checks):
+    def __init__(self, store: Store, events: Events | None = None, checker=run_checks, *, execution_version=None):
         self.store, self.events, self.checker = store, events or Events(), checker
+        self.execution_version = execution_version
 
     def transition(self, job: dict, event: str):
-        old=job['state']
-        job['state']=advance(old,event,job.get('execution'),attempt=job['attempt'],param_version=job['param_version'])
-        self.store.db.execute('INSERT INTO journal(event,source,target,attempt,param_version) VALUES (?,?,?,?,?)',
-                              (event,old,job['state'],job['attempt'],job['param_version']))
-        if event!='edit':self.store.update_execution(job['attempt'],phase=job['state'])
+        advance_record(job, event, self.store)
 
     def command(self, action: str, **values) -> dict:
         with self.store.transaction():
@@ -99,7 +96,7 @@ class Delivery:
                 self.store.update_execution(job['attempt'],disposition='cancelled')
             else:raise ValueError('不支持这项操作')
             job['epoch']+=1; self.store.put(job)
-        self.events.emit('change','change',lambda:observation(job,outputs={'action':action,'state':job['state']}))
+        self.events.bo_emit('change','change',lambda:observation(job,outputs={'action':action,'state':job['state']}))
         return self.store.snapshot()
 
     def prepare(self, expected_version: int | None = None) -> dict:
@@ -109,16 +106,17 @@ class Delivery:
             if job['state'] in ('checking','completed','cancelled'):return self.store.snapshot()
             job['attempt']=uuid.uuid4().hex[:10]
             job.update(checks={},execution={},prepared_version=None)
-            self.events.emit('read','read',lambda:observation(job,outputs={'param_version':job['param_version'],'length':len(job['content'])}))
+            execution = ActivityExecution(job['capacity'], attempt=job['attempt'], param_version=job['param_version'])
+            job['execution'] = execution.snapshot()
+            self.store.put_execution(execution_record(job['execution'], phase=job['state'], clock=job['clock'], build_id=self.execution_version))
+            self.events.bo_emit('read','read',lambda:observation(job,outputs={'param_version':job['param_version'],'length':len(job['content'])}))
             allowed=authorized(job, self.events)
             if not allowed:
                 self.transition(job,'block');job['reason']='no_current_authorization';self.store.put(job)
-                self.events.emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['authorize']))
+                self.events.bo_emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['authorize']))
                 return self.store.snapshot()
             self.transition(job,'start')
-            execution=ActivityExecution(job['capacity'],attempt=job['attempt'],param_version=job['param_version'])
             job.update(reason='',execution=execution.snapshot())
-            self.store.put_execution({**job['execution'],'phase':'checking','disposition':'current'})
             self.store.put(job)
         # Work runs outside the transaction; edit/revoke/cancel can happen meanwhile.
         try:
@@ -133,13 +131,13 @@ class Delivery:
                 current=self.store.get()
                 if current['state']=='checking' and current['attempt']==job['attempt'] and current['param_version']==job['param_version']:
                     self.transition(current,'fail');current['reason']='worker_error:'+type(exc).__name__;self.store.put(current)
-            self.events.emit('wait','error',lambda:observation(job,outputs={'reason':'worker_error'},uses=['authorize']))
+            self.events.bo_emit('wait','error',lambda:observation(job,outputs={'reason':'worker_error'},uses=['authorize']))
             return self.store.snapshot()
-        self.events.emit('checksum','return',lambda:observation(job,inputs={'length':len(job['content'])},
+        self.events.bo_emit('checksum','return',lambda:observation(job,inputs={'length':len(job['content'])},
             outputs={'checksum':result['checksum']},uses=['authorize','read']))
-        self.events.emit('privacy','return',lambda:observation(job,inputs={'length':len(job['content'])},
+        self.events.bo_emit('privacy','return',lambda:observation(job,inputs={'length':len(job['content'])},
             outputs={'safe':result['safe']},uses=['authorize','read']))
-        self.events.emit('join','decision',lambda:observation(job,
+        self.events.bo_emit('join','decision',lambda:observation(job,
             outputs={'passed':result['passed'],'tasks':list(result['tasks'])},uses=['checksum','privacy']))
         with self.store.transaction():
             current=self.store.get()
@@ -154,22 +152,23 @@ class Delivery:
                 current.update(checks=checks,prepared_version=job['param_version'],reason='')
             self.store.put(current)
         if current['state'] in ('waiting','failed'):
-            self.events.emit('wait','wait',lambda:observation(current,outputs={'reason':current['reason']},uses=['join']))
+            self.events.bo_emit('wait','wait',lambda:observation(current,outputs={'reason':current['reason']},uses=['join']))
         return self.store.snapshot()
 
     def execution_progress(self, job: dict, event: str, state: dict) -> None:
         with self.store.transaction():
             current=self.store.get()
             previous=self.store.execution(job['attempt']) or {'phase':'checking','disposition':'current'}
-            self.store.put_execution({**previous,**state})
+            self.store.put_execution(execution_record(state, phase=previous['phase'], clock=job['clock'],
+                build_id=previous.get('run_build_id'), disposition=previous.get('disposition','current')))
             if current['attempt']==job['attempt'] and current['param_version']==job['param_version']:
                 current['execution']=state;self.store.put(current)
         last=state['journal'][-1];activity=last['activity']
         phase='wait' if event=='wait' else 'enter' if event=='start' else 'return'
-        self.events.emit('flow.checks',phase,lambda:observation(job,
+        self.events.bo_emit('flow.checks',phase,lambda:observation(job,
             outputs={'revision':state['revision'],'activity':activity,'event':event},uses=['authorize']))
         if activity in state['activities']:
-            self.events.emit(activity,phase,lambda:observation(job,
+            self.events.bo_emit(activity,phase,lambda:observation(job,
                 outputs={'state':state['activities'][activity]},uses=['authorize']))
 
     def commit(self, expected_version: int | None = None) -> dict:
@@ -178,16 +177,16 @@ class Delivery:
             if expected_version is not None and job['param_version']!=expected_version:return self.store.snapshot()
             if job['state']!='ready':return self.store.snapshot()
             allowed=authorized(job, self.events);version_ok=job['prepared_version']==job['param_version']
-            self.events.emit('recheck','decision',lambda:observation(job,
+            self.events.bo_emit('recheck','decision',lambda:observation(job,
                 outputs={'allowed':allowed,'version_ok':version_ok},uses=['authorize','join']))
             if not allowed or not version_ok or not job['checks']['passed']:
                 self.transition(job,'block');job['reason']='authorization_or_version_changed';self.store.put(job)
-                self.events.emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['recheck']))
+                self.events.bo_emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['recheck']))
                 return self.store.snapshot()
             self.store.artifact(job['param_version'],job['checks']['checksum'])
             self.transition(job,'publish');self.store.put(job)
         # Commit event is emitted only after the SQLite transaction succeeded.
-        self.events.emit('commit','commit',lambda:observation(job,
+        self.events.bo_emit('commit','commit',lambda:observation(job,
             outputs={'version':job['param_version'],'checksum':job['checks']['checksum']},uses=['recheck','checksum']))
         return self.store.snapshot()
 

@@ -25,3 +25,7 @@ python -X utf8 -B validate.py
 用户只讨论业务含义和查看每轮更新图。AI 自行维护中间材料，只在新的业务歧义或冲突时提问。保留拖动布局、名称、备注、历史版本和已有证据；新的迭代另存记录。业务核心不得导入观测实现，图上的名称与位置不得改变业务授权。
 
 这些约定和检查入口不在后台监控所有编辑器。绕过入口的修改不能声称已同步；启动和图页面必须区分加载版本与磁盘版本。
+
+默认由 AI 内部依据状态网引导开发，不额外暴露维护流程。用户明确不用该方法时，仅切换设计依据；两种方式都必须维护底层监控、按源码调整状态网、函数/参数映射、图和检查。未表态或改用普通代码不算退出。接入选择保存在 sync.json 的 stategraph；完整执行与查询位于 bo_stategraph/，observer_runtime 中的旧入口仅兼容委托。
+
+每批相关修改后运行 `python observer_runtime/bo_sync.py scan --root .` 并处理 `.stategraph/maintenance.json`；独立源码扫描包括未跟踪的新文件。只有 verify → accept 才消除待办。个人视图位于 bo_stategraph/config/views/local.json，不随生成覆盖。阶段结果分别报告实现映射、状态约束和业务规则。

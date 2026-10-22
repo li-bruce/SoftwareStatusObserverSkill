@@ -1,0 +1,144 @@
+{
+  "checks": [
+    "public instances contain actual runs with complete revision and persisted build provenance",
+    "HTTP view and public bo_export use same instances and global shared printers",
+    "candidate-7 public responsive styles served without project CSS injection",
+    "unchanged full Pixi viewer starts with five business nodes",
+    "bound function and complete source snapshot opened from graph",
+    "expansion represents parent as same-type region",
+    "folded function search reveals selected runtime parameters",
+    "name note and core marker persist through native Preferences protocol",
+    "real pointer drag moves expanded region and its visible members together",
+    "state preset reveals all eleven deep lifecycle states",
+    "analysis detail mode is independent of high-level view",
+    "recording contains one verified exact frame per captured event",
+    "recording starts from actual empty snapshot without future runs",
+    "replay locates actual missing-approval wait and exact lifecycle snapshot",
+    "replay exposes recovery values with original queue sequence",
+    "confirmed release replay exposes global printer available and holder before-after",
+    "maintenance starts at exact global-resource revision",
+    "new submission checks approval and queue proceed during maintenance",
+    "ordinary approver denial is visible and leaves maintenance enabled",
+    "manual maintenance exit resumes original first queued run",
+    "rewind removes later probe events",
+    "recording final boundary preserves exact shared-resource snapshot",
+    "graph navigation source inspection annotations replay do not execute business writes",
+    "stale view save rejected with HTTP 409",
+    "native record controls save real denied and allowed maintenance API commands",
+    "actual full viewer interaction at width 1440",
+    "actual full viewer interaction at width 390",
+    "actual full viewer interaction at width 320",
+    "no browser JavaScript errors"
+  ],
+  "errors": [],
+  "limits": [
+    "Scripted browser acceptance, not human usability.",
+    "Synthetic SQLite device confirmations; no physical printer or human usability claims."
+  ],
+  "build_id": "fcd4b92e126df7a537f52ed51e41fede833f369a350377d5b5d2e218eaf43148",
+  "source_candidate": "candidate-7",
+  "geometry": {
+    "region": {
+      "id": "approval",
+      "root": "approval",
+      "depth": 0,
+      "ids": [
+        "approval",
+        "grant-match",
+        "approval-change",
+        "fn.approval"
+      ],
+      "self": true,
+      "cx": 200.85808461000738,
+      "cy": 303.035201523963,
+      "radius": 511.57425383002214,
+      "x": -310.71616922001476,
+      "y": -208.53905230605915,
+      "w": 1023.1485076600443,
+      "h": 1023.1485076600443
+    },
+    "camera": {
+      "scale": 0.4750357839484859,
+      "pan": {
+        "x": 267.7235999621313,
+        "y": 160.06494355402253
+      }
+    },
+    "boxes": [
+      {
+        "id": "submit",
+        "x": 1441.5161689618237,
+        "y": 169.85808461000738,
+        "w": 190,
+        "h": 135
+      },
+      {
+        "id": "checks",
+        "x": 1006.2962938864446,
+        "y": 391.45761837001885,
+        "w": 190,
+        "h": 135
+      },
+      {
+        "id": "approval",
+        "x": 105.85808461000738,
+        "y": 272.035201523963,
+        "w": 190,
+        "h": 157
+      },
+      {
+        "id": "queue",
+        "x": 668.0482687789647,
+        "y": 674.5533693930935,
+        "w": 190,
+        "h": 135
+      },
+      {
+        "id": "printing",
+        "x": 422.7154152487417,
+        "y": 1081.3464476846016,
+        "w": 190,
+        "h": 135
+      },
+      {
+        "id": "grant-match",
+        "x": -180.5505193767986,
+        "y": 437.3932861339705,
+        "w": 190,
+        "h": 135
+      },
+      {
+        "id": "approval-change",
+        "x": 105.8580846100074,
+        "y": -58.680967696051766,
+        "w": 190,
+        "h": 135
+      },
+      {
+        "id": "fn.approval",
+        "x": 392.2666885968134,
+        "y": 437.3932861339703,
+        "w": 190,
+        "h": 135
+      }
+    ]
+  },
+  "widths": [
+    {
+      "width": 1440,
+      "scrollWidth": 1440,
+      "overflow": []
+    },
+    {
+      "width": 390,
+      "scrollWidth": 390,
+      "overflow": []
+    },
+    {
+      "width": 320,
+      "scrollWidth": 320,
+      "overflow": []
+    }
+  ],
+  "valid": true
+}

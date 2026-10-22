@@ -1,0 +1,36 @@
+PASS public instances contain actual runs with complete revision and persisted build provenance
+PASS HTTP view and public bo_export use same instances and global shared printers
+PASS unchanged full Pixi viewer starts with five business nodes
+PASS bound function and complete source snapshot opened from graph
+PASS expansion represents parent as same-type region
+PASS folded function search reveals selected runtime parameters
+PASS name note and core marker persist through native Preferences protocol
+PASS real pointer drag moves expanded region and its visible members together
+PASS state preset reveals all eleven deep lifecycle states
+PASS analysis detail mode is independent of high-level view
+PASS recording contains one verified exact frame per captured event
+PASS recording starts from actual empty snapshot without future runs
+PASS replay locates actual missing-approval wait and exact lifecycle snapshot
+PASS replay exposes recovery values with original queue sequence
+PASS confirmed release replay exposes global printer available and holder before-after
+PASS rewind removes later probe events
+PASS recording final boundary preserves exact shared-resource snapshot
+PASS graph navigation source inspection annotations replay do not execute business writes
+PASS stale view save rejected with HTTP 409
+PASS native record controls save and open a recording
+PASS actual full viewer interaction at width 1440
+PASS actual full viewer interaction at width 390
+PASS actual full viewer interaction at width 320
+PASS no browser JavaScript errors
+{"checks":["public instances contain actual runs with complete revision and persisted build provenance","HTTP view and public bo_export use same instances and global shared printers","unchanged full Pixi viewer starts with five business nodes","bound function and complete source snapshot opened from graph","expansion represents parent as same-type region","folded function search reveals selected runtime parameters","name note and core marker persist through native Preferences protocol","real pointer drag moves expanded region and its visible members together","state preset reveals all eleven deep lifecycle states","analysis detail mode is independent of high-level view","recording contains one verified exact frame per captured event","recording starts from actual empty snapshot without future runs","replay locates actual missing-approval wait and exact lifecycle snapshot","replay exposes recovery values with original queue sequence","confirmed release replay exposes global printer available and holder before-after","rewind removes later probe events","recording final boundary preserves exact shared-resource snapshot","graph navigation source inspection annotations replay do not execute business writes","stale view save rejected with HTTP 409","native record controls save and open a recording","actual full viewer interaction at width 1440","actual full viewer interaction at width 390","actual full viewer interaction at width 320","no browser JavaScript errors"],"errors":[],"limits":["Scripted browser acceptance, not human usability.","Synthetic SQLite device confirmations; no physical printer or human usability claims."],"widths":[{"width":1440,"scrollWidth":1440,"overflow":[]},{"width":390,"scrollWidth":390,"overflow":[]},{"width":320,"scrollWidth":320,"overflow":[]}],"valid":true}
+Starting server 1/1: "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.venv\Scripts\python.exe" -X utf8 -B server.py --demo --port 58920 --db .test-data/browser-563c9853a22e4213bb312c54fa93533a.sqlite
+Waiting for server on port 58920...
+Server ready on port 58920
+
+All 1 server(s) ready
+Running: node tests/browser.cjs http://127.0.0.1:58920
+
+
+Stopping 1 server(s)...
+Server 1 stopped
+All servers stopped

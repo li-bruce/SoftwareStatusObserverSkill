@@ -8,78 +8,53 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
-import subprocess
-import sys
-from datetime import datetime, timezone
 try:
+    from .bo_sync import source_inventory, maintenance_task
     from .behavior_model import capture, check as binding_check, contained, digest, read, validate
     from .code_structure import scan, enrich, key
     from .statechart_contract import validate_chart
     from .worknet_contract import validate_net
     from .execution_contract import validate_execution_graph, validate_configuration
     from .requirements_dialogue import assess as assess_discovery
-    from .whitebox_contract import static_errors as whitebox_static, assess as assess_whitebox, protected_items
+    from .whitebox_contract import static_errors as whitebox_static, protected_items
+    from .source_migration import source_moves, rebind_probe, rebind_whitebox
 except ImportError:
+    from bo_sync import source_inventory, maintenance_task
     from behavior_model import capture, check as binding_check, contained, digest, read, validate
     from code_structure import scan, enrich, key
     from statechart_contract import validate_chart
     from worknet_contract import validate_net
     from execution_contract import validate_execution_graph, validate_configuration
     from requirements_dialogue import assess as assess_discovery
-    from whitebox_contract import static_errors as whitebox_static, assess as assess_whitebox, protected_items
+    from whitebox_contract import static_errors as whitebox_static, protected_items
+    from source_migration import source_moves, rebind_probe, rebind_whitebox
 
 
-def write(path, value):
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
+try:
+    from .sync_config import config, snapshot
+    from .sync_io import write, at_path
+    from .sync_verify import run_command, assess_observations, verify as verify_candidate
+except ImportError:
+    from sync_config import config, snapshot
+    from sync_io import write, at_path
+    from sync_verify import run_command, assess_observations, verify as verify_candidate
 
 
-def config(root, name):
-    result = read(contained(root, name))
-    for field in ("model", "manifest", "code_files", "watch_files", "acceptance", "observations_command"):
-        if not result.get(field): raise ValueError("missing sync config: " + field)
-    for command in [result["observations_command"], *result.get("test_commands", [])]:
-        if not isinstance(command, list) or not command or not all(isinstance(v, str) for v in command):
-            raise ValueError("check commands must be nonempty argv arrays")
-    result["config_path"] = name
-    return result
-
-
-def snapshot(root, cfg, previous=None):
-    model = read(contained(root, cfg["model"]))
-    intent = read(contained(root, model["intent"]))
-    acceptance = read(contained(root, cfg["acceptance"]))
-    paths = sorted(set([cfg["config_path"], cfg["model"], model["intent"], cfg["acceptance"],
-                        *model["source_files"], *cfg["code_files"], *cfg["watch_files"],
-                        *([cfg['discovery']] if cfg.get('discovery') else []),
-                        *([cfg['whitebox']] if cfg.get('whitebox') else [])]) - {cfg["manifest"]})
-    files = {}
-    for name in paths:
-        path = contained(root, name)
-        files[name] = digest(path.read_bytes()) if path.is_file() else None
-    index = scan(root, cfg["code_files"], (previous or {}).get("structure"))
-    tools = {name: digest((Path(__file__).parent/name).read_bytes())
-             for name in ("change_sync.py", "code_structure.py", "behavior_model.py", "statechart_contract.py", "worknet_contract.py", "execution_contract.py", "requirements_dialogue.py", "whitebox_contract.py")}
-    return {"id": digest({"files": files, "tools": tools}), "files": files, "tools": tools, "model": model, "intent": intent,
-            "acceptance": acceptance, "structure": index,
-            "whitebox": read(contained(root,cfg["whitebox"])) if cfg.get("whitebox") else None,
-            "discovery_path":cfg.get('discovery'),
-            "discovery": read(contained(root,cfg['discovery'])) if cfg.get('discovery') else None}
-
-
-def at_path(value, path):
-    for field in path:
-        if isinstance(value, list) and isinstance(field, str):
-            selected = [v for v in value if isinstance(v, dict) and v.get("id") == field]
-            if len(selected) != 1: raise ValueError("missing unique node ID: " + field)
-            value = selected[0]
-        else:
-            value = value[field]
-    return value
+def verify(root, cfg, change):
+    return verify_candidate(root, cfg, change, inspect=inspect, snapshot=snapshot)
 
 
 def structural_errors(root, cfg, snap):
     errors = list(snap["structure"]["errors"])
+    registered = set(cfg['code_files']) if cfg.get('source_scope') or cfg.get('stategraph') else set(cfg['code_files']) | set(cfg['watch_files'])
+    for path in set(snap.get('source_inventory', {}).get('files', {})) - registered:
+        errors.append({'unregistered_source': path, 'action': 'map implementation or record an explicit scope exclusion'})
+    if cfg.get("stategraph"):
+        module = cfg["stategraph"]["module"]
+        if module not in snap["files"] or not snap["files"].get(module):
+            errors.append("independent stategraph module is missing or not watched")
+        if not snap["model"].get("machine"):
+            errors.append("stategraph declaration is required in both development modes")
     errors.extend({"missing_file": p} for p, sha in snap["files"].items() if sha is None)
     if not set(cfg["code_files"]) <= set(snap["model"]["source_files"]):
         errors.append("selected code files must be included in the bound source_files")
@@ -157,6 +132,7 @@ def impact(base, current):
     return {"candidate_id": current["id"], "changed_files": file_changes, "changed_symbols": changed,
             "affected_callers": sorted(affected-set(changed)), "affected_nodes": sorted(affected_nodes),
             "unmapped_changed_symbols": sorted(set(changed)-mapped),
+            "unmapped_implementation_symbols": sorted(set(new)-mapped),
             "changed_requirements": [r for r in current["intent"]["requirements"] if r not in base["intent"]["requirements"]],
             "unresolved_call_count": len(current["structure"]["unresolved"]),
             "meaning": "Potential impact plus authored abstraction mapping; semantic truth still needs contract and runtime checks."}
@@ -168,16 +144,28 @@ def review_errors(change, base, current, changes):
     if not path.exists(): return ["missing review.json for this candidate"]
     review = read(path)
     if review.get("candidate_id") != current["id"]: errors.append("review belongs to an older candidate")
+    moves, move_errors = source_moves(review, base, current)
+    errors.extend(move_errors)
+    previous_checks = base.get('verification_contract') or {}
+    new_checks = current.get('verification_contract') or {}
+    for name, values in previous_checks.items():
+        if isinstance(values, list):
+            expected = [rebind_probe(v, moves) for v in values] if name == 'required_probes' else values
+            removed = [v for v in expected if v not in (new_checks.get(name) or [])]
+            if removed:
+                errors.append({'weakened_verification': name, 'removed': removed})
+        elif values is True and new_checks.get(name) is not True:
+            errors.append({'weakened_verification': name})
     for part in ("business", "state_machine", "abstraction", "probes"):
         item = review.get("decisions", {}).get(part, {})
         if item.get("action") not in {"updated", "unchanged", "not_applicable"} or not item.get("reason", "").strip():
             errors.append("review needs action and reason: " + part)
-    for symbol in changes["unmapped_changed_symbols"]:
+    for symbol in changes.get("required_classification", changes["unmapped_changed_symbols"]):
         if not review.get("excluded_symbols", {}).get(symbol, "").strip():
             errors.append("classify changed symbol outside selected graph: " + symbol)
     old = {c["id"]: c for c in [*base["acceptance"]["checks"], *base["acceptance"].get("model_checks", [])]}
     new = {c["id"]: c for c in [*current["acceptance"]["checks"], *current["acceptance"].get("model_checks", [])]}
-    old.update({"whitebox:" + k: v for k, v in protected_items(base.get("whitebox")).items()})
+    old.update({"whitebox:" + k: rebind_whitebox(v, moves) for k, v in protected_items(base.get("whitebox")).items()})
     new.update({"whitebox:" + k: v for k, v in protected_items(current.get("whitebox")).items()})
     allowed = set(base.get("requested_requirements", []))
     old_intent = {r["id"]: r for r in base["intent"]["requirements"]}
@@ -201,7 +189,17 @@ def inspect(root, cfg, change):
     current = snapshot(root, cfg, base)
     changes = impact(base, current)
     changes["errors"] = structural_errors(root, cfg, current)
+    if cfg.get('source_scope', {}).get('require_symbol_classification'):
+        changes['required_classification'] = changes['unmapped_implementation_symbols']
     changes["review_errors"] = review_errors(change, base, current, changes)
+    task = maintenance_task(root, cfg, base.get('source_inventory'))
+    task.update(affected_nodes=changes['affected_nodes'], unmapped_symbols=changes['unmapped_implementation_symbols'],
+                candidate_id=current['id'])
+    write(contained(root, '.stategraph/maintenance.json'), task)
+    if base.get("stategraph_contract") and not current.get("stategraph_contract"):
+        changes["errors"].append("independent stategraph contract was removed; changing development mode does not disable observation")
+    if current.get("stategraph_contract"):
+        changes["stategraph"] = current["stategraph_contract"]
     if base.get('discovery_path') and not cfg.get('discovery'):
         changes['errors'].append('configured discovery was removed; preserve its questions and decisions')
     if base.get("whitebox") and not current.get("whitebox"):
@@ -215,97 +213,6 @@ def inspect(root, cfg, change):
     write(change / "structure.json", current["structure"])
     write(change / "impact.json", changes)
     return base, current, changes
-
-
-def run_command(root, command, dest, timeout):
-    # Configuration must be reviewed as normal project test commands before use.
-    # Keep sync.json portable while using the active virtual environment.
-    argv = [sys.executable if value == "{python}" else value for value in command]
-    try:
-        result = subprocess.run(argv, cwd=root, capture_output=True, text=True, encoding="utf-8",
-                                errors="replace", timeout=timeout, shell=False)
-        out = {"argv": command, "exit_code": result.returncode, "stdout": result.stdout, "stderr": result.stderr}
-    except (OSError, subprocess.TimeoutExpired) as exc:
-        out = {"argv": command, "exit_code": -1, "stdout": "", "stderr": str(exc)}
-    write(dest, out)
-    return out
-
-
-def assess_observations(model, contract, payload, modes, required_probes=()):
-    errors = []
-    if model.get("machine"):
-        try: validate_chart(model, payload.get("machine")) if payload.get("machine") else errors.append("runtime machine definition missing")
-        except (ValueError, KeyError, TypeError) as exc: errors.append(str(exc))
-    runs = payload.get("runs", [])
-    identities = [(r.get("case"), r.get("mode")) for r in runs]
-    if len(identities) != len(set(identities)): errors.append("duplicate runtime case/mode")
-    for wanted in required_probes:
-        matches = [r for r in runs if r.get("case") == wanted["case"] and r.get("mode") == "on"]
-        if len(matches) != 1 or not any(all(e.get(k) == v for k,v in wanted.items() if k != "case") for e in matches[0].get("events", [])):
-            errors.append({"missing_runtime_probe": wanted})
-    for check in contract["checks"]:
-        for mode in modes:
-            matches = [r for r in runs if r.get("case") == check["case"] and r.get("mode") == mode]
-            try:
-                if len(matches) != 1: raise ValueError("missing unique case/mode")
-                value = at_path(matches[0]["observations"], check["path"])
-                if digest(value) != digest(check["equals"]):
-                    errors.append({"requirement": check["requirement"], "check": check["id"], "mode": mode,
-                                   "expected": check["equals"], "actual": value})
-            except (KeyError, IndexError, TypeError, ValueError) as exc:
-                errors.append({"check": check["id"], "mode": mode, "error": str(exc)})
-    return errors
-
-
-def verify(root, cfg, change):
-    base, current, changes = inspect(root, cfg, change)
-    errors = changes["errors"] + changes["review_errors"]
-    if errors: return {"valid": False, "errors": errors, "candidate_id": current["id"]}
-    results = []
-    observation = run_command(root, cfg["observations_command"], change/"checks"/"observations.json", cfg.get("timeout_seconds", 120))
-    if observation["exit_code"] != 0:
-        errors.append("runtime observation command failed")
-    else:
-        try:
-            payload = json.loads(observation["stdout"])
-            if payload.get("build_id") != capture(root, current["model"])["build_id"]:
-                errors.append("runtime observations belong to another build")
-            if current['model'].get('worknet'):
-                if not payload.get('worknet'):raise ValueError('runtime worknet definition is required')
-                validate_net(current['model']['worknet'],payload['worknet'])
-                for run in payload.get('runs',[]):
-                    if run.get('case') in cfg.get('required_worknet_cases',[]) and not run.get('worknet'):
-                        raise ValueError('missing actual worknet snapshot: '+run['case'])
-                    validate_net(current['model']['worknet'],snapshot=run.get('worknet'))
-            if current['model'].get('machine',{}).get('execution'):
-                for run in payload.get('runs',[]):
-                    configurations=run.get('configurations',[])
-                    if run.get('case') in cfg.get('required_execution_cases',[]) and not configurations:
-                        raise ValueError('missing actual internal states: '+run['case'])
-                    identities=[(c.get('attempt'),c.get('param_version')) for c in configurations]
-                    if len(identities)!=len(set(identities)):raise ValueError('duplicate execution instance')
-                    for state in configurations:validate_configuration(current['model'],state)
-            errors += assess_observations(current["model"], current["acceptance"], payload,
-                cfg.get("probe_modes", ["on", "off", "fault"]), cfg.get("required_runtime_probes", []))
-            if current.get("whitebox"):
-                report = assess_whitebox(current["whitebox"], current["model"], payload,
-                                        capture(root, current["model"])["build_id"])
-                write(change/"checks"/"whitebox.json", report)
-                errors.extend(report["errors"])
-        except (ValueError, TypeError, KeyError) as exc:
-            errors.append("invalid runtime observations: " + str(exc))
-    for i, command in enumerate(cfg.get("test_commands", [])):
-        result = run_command(root, command, change/"checks"/f"test-{i}.json", cfg.get("timeout_seconds", 120))
-        results.append({"argv": command, "exit_code": result["exit_code"]})
-        if result["exit_code"] != 0: errors.append("project test failed: " + str(command))
-    after = snapshot(root, cfg, current)
-    if after["id"] != current["id"]: errors.append("candidate changed while checks were running")
-    receipt = {"valid": not errors, "errors": errors, "candidate_id": current["id"],
-        "review_hash": digest(read(change/"review.json")), "observations_hash": digest(observation),
-        "tests": results, "checked_at": datetime.now(timezone.utc).isoformat(),
-        "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."}
-    write(change/"verification.json", receipt)
-    return receipt
 
 
 def verified_receipt(root, cfg, change):
@@ -365,6 +272,10 @@ def main():
                 accepted = {"candidate_id": current["id"], "build_id": manifest["build_id"],
                             "verification_hash": digest(read(change/"verification.json"))}
                 write(change/"accepted.json", accepted)
+                write(contained(root, '.stategraph/source-baseline.json'), current['source_inventory'])
+                task = maintenance_task(root, cfg, current['source_inventory'])
+                task.update(candidate_id=current['id'], status='current')
+                write(contained(root, '.stategraph/maintenance.json'), task)
             elif a.command == "check":
                 accepted = read(change/"accepted.json") if (change/"accepted.json").exists() else {}
                 if accepted.get("candidate_id") != current["id"]: errors.append("change is not accepted for current inputs")

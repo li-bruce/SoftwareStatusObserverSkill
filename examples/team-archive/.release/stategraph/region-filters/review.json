@@ -1,0 +1,23 @@
+{
+  "candidate_id": "76d174eb8406dc2f9e9d9c3cec70750a5a80fad075b976ea4f6d8d1a39a53751",
+  "decisions": {
+    "business": {
+      "action": "unchanged",
+      "reason": "本轮只修改开发者图的显示与交互，审批、版本、提交等业务源码及预期未改。"
+    },
+    "state_machine": {
+      "action": "unchanged",
+      "reason": "实际机器、活动、资源及运行采集不变；状态节点按原 parent 逐层显示，折叠不删除完整状态。"
+    },
+    "abstraction": {
+      "action": "updated",
+      "reason": "所有类型的展开圈继承类型色并代表原节点；仅真实内部关系需要圆心自身节点。跨圈内部关系保留可见真实端点并在区域上方绘制，折叠投影仍保留原始依据。增加节点、关系、圈类型与层级筛选和偏好保存。复用渲染对象并限制闲置对象，省去仅时钟变化的重建，保留截止时刻更新。校验八种类型、中心关系、跨圈端点、筛选保存、拖动和到期边界；业务及源关系含义不变。"
+    },
+    "probes": {
+      "action": "unchanged",
+      "reason": "探针、事件身份、历史边界及源绑定实现未改；保留已有白盒和运行场景验证。"
+    }
+  },
+  "excluded_symbols": {},
+  "requirement_changes": {}
+}

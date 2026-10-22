@@ -11,3 +11,9 @@ examples/team-archive/observer_runtime/** linguist-generated=true
 examples/team-archive/review/** linguist-generated=true
 examples/team-archive/static/graph/elk.bundled.js -text -whitespace linguist-vendored
 examples/team-archive/static/graph/elk-worker.min.js -text -whitespace linguist-vendored
+# Frozen evidence must retain the bytes that its recorded hashes describe.
+docs/assessment/** -text
+docs/review/** -text
+tests/fixtures/** -text
+examples/team-archive/review/** -text
+examples/*/.release/** -text

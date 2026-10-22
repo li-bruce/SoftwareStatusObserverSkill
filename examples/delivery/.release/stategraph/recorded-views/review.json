@@ -1,0 +1,23 @@
+{
+  "candidate_id": "7ddc8b29c18a4367aeb7c2268f63c6ca1c34d0168b2cc342d360b3cbb7c825e7",
+  "decisions": {
+    "business": {
+      "action": "unchanged",
+      "reason": "业务规则、数据库结构和业务核心源码未变；记录只保存既有探针与操作标记，不执行回放命令。"
+    },
+    "state_machine": {
+      "action": "unchanged",
+      "reason": "仍使用项目的实际状态与活动执行声明。按事件边界回看已有 journal，不从结束状态推测此前状态。"
+    },
+    "abstraction": {
+      "action": "updated",
+      "reason": "圈内空白拖动、类型填色、同源图例、分析视图、自定义组合及共享引用；共享引用保留原节点身份，独立收起。"
+    },
+    "probes": {
+      "action": "updated",
+      "reason": "原核心探针不变。观测 HTTP 层补充安全字段的操作标记，独立模块保存起止区间、事件缺口和已加载源码；回放、丢失和版本边界加入检查。"
+    }
+  },
+  "excluded_symbols": {},
+  "requirement_changes": {}
+}

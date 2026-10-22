@@ -1,0 +1,36 @@
+{
+  "candidate_id": "e74d7a7f5732d1cd61efc60780c1bfce8c6072c1c073fa364ece61e22977cbc1",
+  "decisions": {
+    "business": {
+      "action": "unchanged",
+      "reason": "业务核心仅将探针调用更名为 bo_；AST 还原名称对照通过，权限、状态迁移、数据库操作及独立业务预期未改。"
+    },
+    "state_machine": {
+      "action": "unchanged",
+      "reason": "仍使用原执行状态机和完整活动配置。按精确 revision 呈现变化，关闭或过滤探针不改变状态机。"
+    },
+    "abstraction": {
+      "action": "updated",
+      "reason": "当前层级组织回放步骤，业务/状态/函数仍属于同一图。原始事件不删减，补充 before/after 和有依据的类型传递，清理页面与常驻图例。"
+    },
+    "probes": {
+      "action": "updated",
+      "reason": "采集范围与显示范围分离；区域模式保留选中节点、后代和状态边界，跳过其余载荷。结束或失败恢复默认，测试覆盖空记录、丢事件、来源、范围与未来值隔离。"
+    }
+  },
+  "excluded_symbols": {
+    "archive_app/ports.py::BOTracePort": "中立观测端口更名为 BO 类与 bo_ 方法；旧别名保持兼容，失败隔离不变。交付示例在回调前跳过范围外载荷，区域采集和原有业务隔离测试共同验证。",
+    "archive_app/ports.py::BOTracePort.__init__": "中立观测端口更名为 BO 类与 bo_ 方法；旧别名保持兼容，失败隔离不变。交付示例在回调前跳过范围外载荷，区域采集和原有业务隔离测试共同验证。",
+    "archive_app/ports.py::BOTracePort.bo_record": "中立观测端口更名为 BO 类与 bo_ 方法；旧别名保持兼容，失败隔离不变。交付示例在回调前跳过范围外载荷，区域采集和原有业务隔离测试共同验证。",
+    "archive_app/ports.py::TracePort": "中立观测端口更名为 BO 类与 bo_ 方法；旧别名保持兼容，失败隔离不变。交付示例在回调前跳过范围外载荷，区域采集和原有业务隔离测试共同验证。",
+    "archive_app/ports.py::TracePort.__init__": "中立观测端口更名为 BO 类与 bo_ 方法；旧别名保持兼容，失败隔离不变。交付示例在回调前跳过范围外载荷，区域采集和原有业务隔离测试共同验证。",
+    "archive_app/ports.py::TracePort.record": "中立观测端口更名为 BO 类与 bo_ 方法；旧别名保持兼容，失败隔离不变。交付示例在回调前跳过范围外载荷，区域采集和原有业务隔离测试共同验证。",
+    "archive_app/service.py::ArchiveService": "类容器指纹随内部探针方法更名改变。各业务方法仍有原图映射；AST 还原 bo_ 调用名后与原业务代码一致。",
+    "integrations/bo_server.py::LocalApplication": "独立观测 HTTP 层传入采集范围与恢复回调；不属于业务流程，记录失败不会执行或替代业务操作。",
+    "integrations/bo_server.py::LocalApplication.__init__": "独立观测 HTTP 层传入采集范围与恢复回调；不属于业务流程，记录失败不会执行或替代业务操作。",
+    "integrations/bo_server.py::serve": "独立观测 HTTP 层传入采集范围与恢复回调；不属于业务流程，记录失败不会执行或替代业务操作。",
+    "integrations/bo_server.py::serve.Handler": "独立观测 HTTP 层传入采集范围与恢复回调；不属于业务流程，记录失败不会执行或替代业务操作。",
+    "integrations/bo_server.py::serve.Handler.do_POST": "独立观测 HTTP 层传入采集范围与恢复回调；不属于业务流程，记录失败不会执行或替代业务操作。"
+  },
+  "requirement_changes": {}
+}

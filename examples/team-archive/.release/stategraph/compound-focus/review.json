@@ -1,0 +1,23 @@
+{
+  "candidate_id": "157e91967fc3f4946c028f4cd2d36a0ebb0ed6b5c2b758968cf64524435ac304",
+  "decisions": {
+    "business": {
+      "action": "unchanged",
+      "reason": "本轮只修改开发者图的显示与交互，审批、版本、提交等业务源码及预期未改。"
+    },
+    "state_machine": {
+      "action": "unchanged",
+      "reason": "实际机器、活动、资源及运行采集不变；状态节点按原 parent 逐层显示，折叠不删除完整状态。"
+    },
+    "abstraction": {
+      "action": "updated",
+      "reason": "展开区改为圆形复合节点，按共同祖先投影关系端点到分组边界，保留各条原始关系及证据；圆形打包、整组移动（包含隐藏后代）、节点形状和关系线型均由同一完整图生成。增加类型、端点、包含、保存及折叠移动校验；业务和原始关系含义不变。"
+    },
+    "probes": {
+      "action": "unchanged",
+      "reason": "探针、事件身份、历史边界及源绑定实现未改；保留已有白盒和运行场景验证。"
+    }
+  },
+  "excluded_symbols": {},
+  "requirement_changes": {}
+}
