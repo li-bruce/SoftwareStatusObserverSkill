@@ -1,0 +1,37 @@
+{
+  "valid": false,
+  "errors": [
+    {
+      "unregistered_source": "archive_app/new_unmapped.py",
+      "action": "map implementation or record an explicit scope exclusion"
+    }
+  ],
+  "reports": {
+    "mapping": {
+      "status": "failed",
+      "errors": [
+        {
+          "unregistered_source": "archive_app/new_unmapped.py",
+          "action": "map implementation or record an explicit scope exclusion"
+        }
+      ],
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses"
+    },
+    "state_rules": {
+      "status": "not_run",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "not_run",
+      "errors": [],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "not_run",
+      "errors": [],
+      "assertions": {},
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "candidate_id": "be3bd4303551b742da94c8bca18028b1f8898d81b0acef0879b51d30588bbba6"
+}

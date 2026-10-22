@@ -27,6 +27,7 @@ export function selectedEvents(view,choice,step='latest'){
   return events;
 }
 export function sourceBinding(view,all,id){
+  if(view?.stage==='design')return undefined;
   const direct=view?.manifest.bindings[id];if(direct)return direct;
   const node=all?.get(id);
   if(node?.referenceOf)return view?.manifest.bindings[node.referenceOf]||
@@ -60,6 +61,7 @@ function staleBasis(node,view,last){
   return fields.some(key=>last.basis?.[key]!==view.authority.basis?.[key]);
 }
 export function status(node,view,events,choice,configuration=null){
+  if(view.stage==='design')return 'declared';
   if(node.referenceOf)node={...node,id:node.referenceOf};
   if(configuration?.disposition==='interrupted'&&(node.execution_role||node.id===view.model.machine.execution?.parent))return 'historical';
   if(node.execution_role==='activity')return activityColor(configuration?.activities?.[node.id]);
@@ -78,6 +80,7 @@ export function status(node,view,events,choice,configuration=null){
   return last.phase==='enter'?'active':'ok';
 }
 export function lines(node,view,events,choice,configuration=null){
+  if(view.stage==='design')return node.summary?[{text:node.summary,role:'muted'}]:[];
   if(node.referenceOf)node={...node,id:node.referenceOf};
   if(node.field){const values=callValues(node,events)[node.direction==='in'?'inputs':'outputs'];return [{text:node.field+': '+typeName(node.fieldType),role:'symbol'},{text:node.field in values?compact(values[node.field]):'本次尚未采集',role:node.field in values?'value':'muted'}];}
   const last=nodeEvents(node,events).at(-1),result=[{text:node.signature||node.source?.symbol||node.summary,role:'symbol'}];
@@ -135,7 +138,7 @@ export function lines(node,view,events,choice,configuration=null){
 export function wrapText(text,width=47){const out=[];let row='',units=0;for(const c of text){const size=c.charCodeAt(0)>255?1.8:1;if(c==='\n'||units+size>width){out.push(row);row='';units=0;if(c==='\n')continue;}row+=c;units+=size;}if(row||!out.length)out.push(row);return out;}
 
 export const nodeTypes={business:{label:'业务',glyph:'B',color:0x5075b5},function:{label:'函数',glyph:'ƒ',color:0x387c88},state:{label:'状态',glyph:'S',color:0x9869a0},decision:{label:'判断',glyph:'?',color:0xaf8029},resource:{label:'资源',glyph:'R',color:0x7b8845},data:{label:'参数',glyph:'x',color:0x627f9c},effect:{label:'结果',glyph:'✓',color:0x2d8a70},wait:{label:'等待',glyph:'…',color:0xb38442}};
-export function nodeType(n){return n.layer==='business'?'business':n.kind==='state'?'state':n.execution_role==='resource'?'resource':n.kind==='decision'||n.execution_role==='join'?'decision':n.kind==='data'?'data':n.kind==='effect'?'effect':n.kind==='wait'?'wait':'function';}
+export function nodeType(n){return n.layer==='business'?'business':n.kind==='state'?'state':n.kind==='resource'||n.execution_role==='resource'?'resource':n.kind==='decision'||n.execution_role==='join'?'decision':n.kind==='data'?'data':n.kind==='effect'?'effect':n.kind==='wait'?'wait':'function';}
 
 // One typed graph. Folding changes visible nodes, never their identities or facts.
 // The old layoutGraph name remains for integrations; coordinates are assigned by layout.js.

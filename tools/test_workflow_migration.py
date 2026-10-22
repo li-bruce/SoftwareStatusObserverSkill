@@ -3,11 +3,22 @@ from copy import deepcopy
 import importlib.util
 import json
 from pathlib import Path
+import sys
 import unittest
 
 ROOT=Path(__file__).resolve().parents[1]
 
 def load(name,path):
+    if path.parent.name == 'bo_stategraph':
+        # Load the real package so its shared validators remain active. Each
+        # example gets a separate namespace; the legacy file stays unchanged.
+        package = '_migration_' + name
+        package_spec = importlib.util.spec_from_file_location(package, path.parent/'__init__.py',
+                                                             submodule_search_locations=[str(path.parent)])
+        package_module = importlib.util.module_from_spec(package_spec)
+        sys.modules[package] = package_module
+        package_spec.loader.exec_module(package_module)
+        name = package + '.workflow'
     spec=importlib.util.spec_from_file_location(name,path);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module);return module
 
 def normalize(value):

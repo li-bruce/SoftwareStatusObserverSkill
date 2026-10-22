@@ -51,7 +51,7 @@
 - 在 `sync.json` 配置 `"whitebox": "whitebox.json"`；新的运行必须执行相应场景并提供真实事件。`inspect` 检查符号与签名，`verify` 检查观测值，`accept` 保存对应版本。
 - 更新局部图并说明本轮可见变化。纯重构可保留业务 ID，更新源码映射；业务要求改变才修改相应预期。
 
-完整接入还需 `require_mapping_witnesses: true`。观测命令返回 mapping_checks，每项包含 id、source、projection、actual、mapped；actual 从实际存储或函数输出独立读取。不能把图中的期望再抄作 actual。运行所有约定 probe_modes，至少包含一项实际业务断言和项目测试命令；删除原有模式、探针或检查不能静默通过。
+完整接入还需 `require_mapping_witnesses: true` 和 `mapping_contract` 文件。先确定受保护的场景/字段清单，观测命令交出每个 run 的实际 projection，检查器从投影取值并与公共导出绑定。格式见 [映射清单](mapping-contract.md)。原有对照继续保留：观测命令返回 mapping_checks，每项包含 id、source、projection、actual、mapped；actual 从实际存储或函数输出独立读取。不能把图中的期望再抄作 actual。运行所有约定 probe_modes，至少包含一项实际业务断言和项目测试命令；删除原有模式、探针或检查不能静默通过。
 
 观测输出还须包含一次真实运行的 `stategraph_export`，调用公共 `BOStateGraph.bo_export` 获得。检查其模型、构建和实例投影，不能用同名自定义类、另定 JSON 或只存在一个模块文件代替协议接入。公共查看器复用 Skill 资产；项目通过同源服务提供业务数据，扩展规则不替换公共协议。
 

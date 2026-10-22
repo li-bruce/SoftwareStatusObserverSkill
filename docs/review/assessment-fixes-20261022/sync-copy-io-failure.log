@@ -1,0 +1,12 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\sync_runtime.py", line 46, in <module>
+    sync()
+    ~~~~^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\sync_runtime.py", line 28, in sync
+    shutil.copyfile(ROOT / 'tools' / name, tests / name)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\shutil.py", line 262, in copyfile
+    with open(dst, 'wb') as fdst:
+         ~~~~^^^^^^^^^^^
+OSError: [Errno 22] Invalid argument: 'C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\examples\\team-archive\\tooling\\test_stategraph_module.py'

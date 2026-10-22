@@ -36,9 +36,12 @@ def file_lock(path):
 
 
 class Preferences:
-    def __init__(self, project_root, project_id):
+    def __init__(self, project_root, project_id, *, legacy_project_ids=()):
         self.path = Path(project_root) / 'bo_stategraph/config/views/local.json'
         self.project_id = project_id
+        if not isinstance(legacy_project_ids, (list, tuple)) or any(not isinstance(x, str) for x in legacy_project_ids):
+            raise ValueError('legacy_project_ids must be explicit project identifiers')
+        self.legacy_project_ids = set(legacy_project_ids)
         self.lock = threading.RLock()
 
     def read(self):
@@ -46,6 +49,8 @@ class Preferences:
             if not self.path.exists():
                 return {'schema': 1, 'project_id': self.project_id, 'revision': 0, 'entries': {}}
             value = json.loads(self.path.read_text(encoding='utf-8'))
+            if isinstance(value, dict) and value.get('project_id') in self.legacy_project_ids:
+                value['project_id'] = self.project_id
             self.validate(value)
             return deepcopy(value)
 

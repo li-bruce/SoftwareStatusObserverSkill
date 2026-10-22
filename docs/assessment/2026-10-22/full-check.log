@@ -1,0 +1,101 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Package references and 29 copied runtime modules match.
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+......................
+----------------------------------------------------------------------
+Ran 22 tests in 0.348s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{"step": "\u5f00\u59cb\u65f6\u4fdd\u5b58\u672a\u51b3\u95ee\u9898", "passed": true}
+{"step": "\u5173\u952e\u95ee\u9898\u672a\u56de\u7b54\uff0c\u4e0d\u80fd\u4ea4\u4ed8", "passed": true}
+{"step": "\u56de\u7b54\u5df2\u5173\u8054\u539f\u56fe\u548c\u6743\u9650\u53cd\u4f8b\uff0c\u8fd0\u884c\u68c0\u67e5\u901a\u8fc7", "passed": true}
+{"step": "\u9a8c\u6536\u540c\u4e00\u56de\u7b54\u548c\u5b9e\u73b0", "passed": true}
+{"step": "\u5f53\u524d\u56de\u7b54\u4e0e\u9a8c\u6536\u4e00\u81f4", "passed": true}
+{"step": "\u56de\u7b54\u6539\u53d8\u4f7f\u65e7\u9a8c\u6536\u5931\u6548", "passed": true}
+{"step": "\u5f00\u59cb\u4e0b\u4e00\u6b21\u9700\u6c42\u8c03\u6574", "passed": true}
+{"step": "\u5220\u9664\u5df2\u786e\u8ba4\u95ee\u9898\u4e0d\u80fd\u9690\u85cf\u539f\u51b3\u5b9a", "passed": true}
+{"step": "\u7a7a\u8bb0\u5f55\u4e0d\u80fd\u7ed5\u8fc7\u5df2\u63a5\u5165\u7684\u6f84\u6e05\u68c0\u67e5", "passed": true}
+{"step": "\u5220\u9664\u914d\u7f6e\u4e0d\u80fd\u9759\u9ed8\u53d6\u6d88\u6f84\u6e05\u68c0\u67e5", "passed": true}
+{"step": "\u6062\u590d\u539f\u89c4\u5219\u540e\u901a\u8fc7\u5b9e\u9645\u8fd0\u884c", "passed": true}
+{"step": "\u9a8c\u6536\u6062\u590d\u540e\u7684\u8bb0\u5f55", "passed": true}
+{"step": "\u6700\u7ec8\u68c0\u67e5", "passed": true}
+{"passed": true, "steps": 13, "report": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.validation\\assessment-20261022\\source\\.validation\\gate-20261022-140135-744787\\report.json"}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+........
+----------------------------------------------------------------------
+Ran 8 tests in 0.052s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+........
+----------------------------------------------------------------------
+Ran 8 tests in 0.847s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.046s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+............
+----------------------------------------------------------------------
+Ran 12 tests in 0.314s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+..........................F.
+======================================================================
+FAIL: test_watcher_refreshes_when_registration_or_acceptance_changes (__main__.RefactorTests.test_watcher_refreshes_when_registration_or_acceptance_changes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.validation\assessment-20261022\source\tools\test_refactor.py", line 241, in test_watcher_refreshes_when_registration_or_acceptance_changes
+    wait_for(lambda v:v['status']=='current')
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.validation\assessment-20261022\source\tools\test_refactor.py", line 230, in wait_for
+    self.fail('Watcher did not update: '+log.read_text(encoding='utf-8'))
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Watcher did not update: Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{"schema": "bo-maintenance/v1", "source_id": "9c996a309822083441b51dc0f48ddfee72ff3effdbe33165b791f7b60f24f3e5", "inventory": {"files": {"app.py": "7acc52eddd085f81b74cddf754c5df6b9ba8ab3d758469223d02e0568971d19f", "new_entry.py": "31b1a30e2baa0ea5d74900c003159db3725d7a5929b00e13eabe72ac1ecbac1e"}, "excluded": {}}, "changed_files": ["app.py", "new_entry.py"], "unregistered_files": ["new_entry.py"], "status": "needs_update", "internal_prompt": "核查列出的实现变化；更新受影响业务抽象、状态、函数/参数映射和探针。新增入口不能因不在旧图中而忽略。完成局部投影及实际场景验证后运行项目收尾检查。不要要求用户填写观测文件；仅在新的业务歧义出现时提问。", "ai_invocation": "host_or_coding_agent_required"}
+{"schema": "bo-maintenance/v1", "status": "needs_update", "errors": ["Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"], "inventory": null, "internal_prompt": "修复源码扫描配置后重新扫描；当前不能判定映射完整。", "ai_invocation": "host_or_coding_agent_required"}
+{"schema": "bo-maintenance/v1", "source_id": "9c996a309822083441b51dc0f48ddfee72ff3effdbe33165b791f7b60f24f3e5", "inventory": {"files": {"app.py": "7acc52eddd085f81b74cddf754c5df6b9ba8ab3d758469223d02e0568971d19f", "new_entry.py": "31b1a30e2baa0ea5d74900c003159db3725d7a5929b00e13eabe72ac1ecbac1e"}, "excluded": {}}, "changed_files": ["app.py", "new_entry.py"], "unregistered_files": [], "status": "needs_update", "internal_prompt": "核查列出的实现变化；更新受影响业务抽象、状态、函数/参数映射和探针。新增入口不能因不在旧图中而忽略。完成局部投影及实际场景验证后运行项目收尾检查。不要要求用户填写观测文件；仅在新的业务歧义出现时提问。", "ai_invocation": "host_or_coding_agent_required"}
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.validation\assessment-20261022\source\skills\business-observer\scripts\bo_sync.py", line 107, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.validation\assessment-20261022\source\skills\business-observer\scripts\bo_sync.py", line 99, in main
+    temporary.replace(target)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\pathlib\_local.py", line 780, in replace
+    os.replace(self, target)
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+PermissionError: [WinError 5] 拒绝访问。: 'C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.validation\\assessment-20261022\\source\\.validation\\refactor-tests\\tmpg2pwv3ii\\.stategraph\\maintenance.tmp' -> 'C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.validation\\assessment-20261022\\source\\.validation\\refactor-tests\\tmpg2pwv3ii\\.stategraph\\maintenance.json'
+
+
+----------------------------------------------------------------------
+Ran 28 tests in 25.020s
+
+FAILED (failures=1)
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.validation\assessment-20261022\source\tools\verify.py", line 63, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.validation\assessment-20261022\source\tools\verify.py", line 26, in main
+    run(ROOT, 'tools/test_refactor.py')
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.validation\assessment-20261022\source\tools\verify.py", line 13, in run
+    subprocess.run([sys.executable, '-B', '-X', 'utf8', *map(str, args)], cwd=cwd, check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\subprocess.py", line 577, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe', '-B', '-X', 'utf8', 'tools/test_refactor.py']' returned non-zero exit status 1.

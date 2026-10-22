@@ -1,0 +1,85 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "control": "positive",
+  "verify_exit": 0,
+  "verify_valid": true,
+  "selected_scenario": {
+    "case": "archive_snapshot",
+    "mode": "on",
+    "actual_instances": 1
+  },
+  "exported_instances": 1,
+  "exported_configurations": 1,
+  "mapping_witnesses": 480,
+  "reports": {
+    "mapping": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+      "stategraph_export": "checked",
+      "witnesses": 480
+    },
+    "state_rules": {
+      "status": "passed",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "passed",
+      "errors": [],
+      "assertions": {
+        "required": 189,
+        "executed": 189
+      },
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "accept_exit": 0,
+  "check_exit": 0
+}
+{
+  "control": "negative",
+  "verify_exit": 0,
+  "verify_valid": true,
+  "selected_scenario": {
+    "case": "archive_snapshot",
+    "mode": "on",
+    "actual_instances": 1
+  },
+  "exported_instances": 0,
+  "exported_configurations": 0,
+  "mapping_witnesses": 480,
+  "reports": {
+    "mapping": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+      "stategraph_export": "checked",
+      "witnesses": 480
+    },
+    "state_rules": {
+      "status": "passed",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "passed",
+      "errors": [],
+      "assertions": {
+        "required": 189,
+        "executed": 189
+      },
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "accept_exit": 0,
+  "check_exit": 0
+}

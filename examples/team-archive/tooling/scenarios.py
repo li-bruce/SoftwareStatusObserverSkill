@@ -238,14 +238,14 @@ def execute(case: str, mode: str, model: dict, build_id: str) -> dict:
             observed["archive_count"]=len(f.store.snapshot()["archives"])
         elif case=="restart_interrupted":
             code=("import os,sys; from archive_app.storage import ArchiveStore; from archive_app.service import ArchiveService; "
-                  "s=ArchiveStore(sys.argv[1]); a=ArchiveService(s,delay=60); a.add_approval('DOC-001','alice','bob',9999999999); "
+                  "s=ArchiveStore(sys.argv[1]); a=ArchiveService(s,delay=60,execution_version=sys.argv[2]); a.add_approval('DOC-001','alice','bob',9999999999); "
                   "r=a.create_run('DOC-001','alice',2); print(r,flush=True); os._exit(0)")
-            cp=subprocess.run([sys.executable,"-X","utf8","-B","-c",code,f.store.path],
+            cp=subprocess.run([sys.executable,"-X","utf8","-B","-c",code,f.store.path,build_id],
                               cwd=ROOT,capture_output=True,text=True,encoding="utf-8",timeout=10)
             if cp.returncode:
                 raise AssertionError(cp.stderr)
             rid=cp.stdout.strip()
-            recovered=ArchiveService(f.store,clock=f.clock)
+            recovered=ArchiveService(f.store,clock=f.clock,execution_version=build_id)
             observed["phase"]=f.get(rid)["phase"]
             recovered.close()
         else:

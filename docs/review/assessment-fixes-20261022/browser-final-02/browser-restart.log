@@ -1,0 +1,17 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+PASS Restart and port change restore project labels, notes, core mark and custom view without browser cache
+PASS A pointer selection highlights its related graph context
+PASS Dragging empty canvas pans the camera
+PASS Repeated expansion, fit and collapse retain a live WebGL context
+PASS Saved recording remains readable after restart and displays explicit state changes
+Starting server 1/1: C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.venv\Scripts\python.exe -B -X utf8 run.py --port 8842 --delay 3
+Waiting for server on port 8842...
+Server ready on port 8842
+
+All 1 server(s) ready
+Running: node C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\docs\review\assessment-fixes-20261022\browser-final-02\ui-resume.cjs
+
+
+Stopping 1 server(s)...
+Server 1 stopped
+All servers stopped

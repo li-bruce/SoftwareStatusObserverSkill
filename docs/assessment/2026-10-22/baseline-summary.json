@@ -1,0 +1,74 @@
+{
+  "delivery": {
+    "scenario_names": 16,
+    "runs": 48,
+    "modes": [
+      "fault",
+      "off",
+      "on"
+    ],
+    "reports": {
+      "mapping": {
+        "status": "passed",
+        "errors": [],
+        "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+        "stategraph_export": "checked",
+        "witnesses": 201
+      },
+      "state_rules": {
+        "status": "passed",
+        "errors": []
+      },
+      "project_checks": {
+        "status": "passed",
+        "errors": [],
+        "scope": "Configured project tests, architecture and viewer checks"
+      },
+      "business": {
+        "status": "passed",
+        "errors": [],
+        "assertions": {
+          "required": 96,
+          "executed": 96
+        },
+        "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+      }
+    }
+  },
+  "team-archive": {
+    "scenario_names": 40,
+    "runs": 120,
+    "modes": [
+      "fault",
+      "off",
+      "on"
+    ],
+    "reports": {
+      "mapping": {
+        "status": "passed",
+        "errors": [],
+        "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+        "stategraph_export": "checked",
+        "witnesses": 480
+      },
+      "state_rules": {
+        "status": "passed",
+        "errors": []
+      },
+      "project_checks": {
+        "status": "passed",
+        "errors": [],
+        "scope": "Configured project tests, architecture and viewer checks"
+      },
+      "business": {
+        "status": "passed",
+        "errors": [],
+        "assertions": {
+          "required": 189,
+          "executed": 189
+        },
+        "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+      }
+    }
+  }
+}

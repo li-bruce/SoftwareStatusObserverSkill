@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "full_acceptance": "full-acceptance-final.log",
+  "new_tests": 9,
+  "browser_checks": 32,
+  "installed_matching_files": 93,
+  "installed_mismatches": [],
+  "github_pushed_at_acceptance": false
+}

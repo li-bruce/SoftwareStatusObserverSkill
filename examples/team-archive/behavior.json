@@ -19,8 +19,10 @@
     "integrations/bo_observer.py",
     "integrations/bo_server.py",
     "observer_runtime/behavior_model.py",
+    "observer_runtime/bo_design.py",
     "observer_runtime/bo_retention.py",
     "observer_runtime/bo_stategraph.py",
+    "observer_runtime/bo_web.py",
     "observer_runtime/recording_session.py",
     "observer_runtime/semantic_probe.py",
     "observer_runtime/view_preferences.py",
@@ -29,6 +31,7 @@
     "static/app.html",
     "static/app.js",
     "static/graph/analysis.js",
+    "static/graph/conversation.js",
     "static/graph/glyphs.js",
     "static/graph/graph-core.js",
     "static/graph/index.html",
@@ -3569,7 +3572,7 @@
       }
     },
     {
-      "id": "call.23be5af43dfc1f5a",
+      "id": "call.414374b0fadf50d0",
       "from": "execution.schedule",
       "to": "execution.request_stop",
       "type": "flow",
@@ -3577,7 +3580,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 184,
+        "line": 188,
         "column": 8,
         "args": [
           "run",
@@ -3588,7 +3591,7 @@
       }
     },
     {
-      "id": "call.0e33a1e8546dacb1",
+      "id": "call.980d0e6a8c633567",
       "from": "execution.schedule",
       "to": "execution.settle",
       "type": "flow",
@@ -3596,7 +3599,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 186,
+        "line": 190,
         "column": 8,
         "args": [
           "run",
@@ -3615,7 +3618,7 @@
       "evidence": "business-map anchor + Python AST call"
     },
     {
-      "id": "call.c191d4d629c9eae9",
+      "id": "call.fe5f0bbe10e093f3",
       "from": "execution.schedule",
       "to": "code.a5031696efd68bab",
       "type": "flow",
@@ -3623,7 +3626,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 189,
+        "line": 193,
         "column": 12,
         "args": [
           "run",
@@ -3644,7 +3647,7 @@
       "evidence": "business-map anchor + Python AST call"
     },
     {
-      "id": "call.acafc9a2970c2411",
+      "id": "call.6bc83566f4ccf253",
       "from": "execution.schedule",
       "to": "code.851dade86c48cea0",
       "type": "flow",
@@ -3652,7 +3655,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 191,
+        "line": 195,
         "column": 12,
         "args": [
           "run",
@@ -3664,7 +3667,7 @@
       }
     },
     {
-      "id": "call.3401a37aeb676c62",
+      "id": "call.d4fcfa2e18f96b64",
       "from": "execution.schedule",
       "to": "code.851dade86c48cea0",
       "type": "flow",
@@ -3672,7 +3675,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 195,
+        "line": 199,
         "column": 16,
         "args": [
           "run",
@@ -3684,7 +3687,7 @@
       }
     },
     {
-      "id": "call.eff3c5cb78806e22",
+      "id": "call.039bf7bd26d87685",
       "from": "execution.schedule",
       "to": "code.851dade86c48cea0",
       "type": "flow",
@@ -3692,7 +3695,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 201,
+        "line": 205,
         "column": 16,
         "args": [
           "run",
@@ -3704,7 +3707,7 @@
       }
     },
     {
-      "id": "call.00f073901e8a8a2e",
+      "id": "call.8f29ff7869a2bf65",
       "from": "execution.schedule",
       "to": "code.851dade86c48cea0",
       "type": "flow",
@@ -3712,7 +3715,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 207,
+        "line": 211,
         "column": 16,
         "args": [
           "run",
@@ -3724,7 +3727,7 @@
       }
     },
     {
-      "id": "call.f68c6e8c77f9d34a",
+      "id": "call.37f5526ec17b9f63",
       "from": "execution.schedule",
       "to": "code.851dade86c48cea0",
       "type": "flow",
@@ -3732,7 +3735,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 209,
+        "line": 213,
         "column": 16,
         "args": [
           "run",
@@ -3744,27 +3747,7 @@
       }
     },
     {
-      "id": "call.c2f75f77ba6515e9",
-      "from": "execution.schedule",
-      "to": "code.a5031696efd68bab",
-      "type": "flow",
-      "label": "静态调用 activity_step",
-      "origin": "python-ast",
-      "evidence": "python-ast syntactic reference",
-      "callsite": {
-        "line": 216,
-        "column": 24,
-        "args": [
-          "run",
-          "'start'",
-          "activity",
-          "now"
-        ],
-        "keywords": {}
-      }
-    },
-    {
-      "id": "call.23a1b085d1906e63",
+      "id": "call.922d2b1bedf03161",
       "from": "execution.schedule",
       "to": "code.a5031696efd68bab",
       "type": "flow",
@@ -3776,6 +3759,26 @@
         "column": 24,
         "args": [
           "run",
+          "'start'",
+          "activity",
+          "now"
+        ],
+        "keywords": {}
+      }
+    },
+    {
+      "id": "call.f655738b28631ef6",
+      "from": "execution.schedule",
+      "to": "code.a5031696efd68bab",
+      "type": "flow",
+      "label": "静态调用 activity_step",
+      "origin": "python-ast",
+      "evidence": "python-ast syntactic reference",
+      "callsite": {
+        "line": 224,
+        "column": 24,
+        "args": [
+          "run",
           "'wait'",
           "activity",
           "now"
@@ -3784,7 +3787,7 @@
       }
     },
     {
-      "id": "call.c9500ff75c77f002",
+      "id": "call.0b7fcf96a04f3805",
       "from": "execution.request_stop",
       "to": "code.851dade86c48cea0",
       "type": "flow",
@@ -3792,7 +3795,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 163,
+        "line": 167,
         "column": 8,
         "args": [
           "run",
@@ -3804,7 +3807,7 @@
       }
     },
     {
-      "id": "call.08d6592c4cf90c53",
+      "id": "call.98fcb028cc821d25",
       "from": "execution.settle",
       "to": "code.a5031696efd68bab",
       "type": "flow",
@@ -3812,7 +3815,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 174,
+        "line": 178,
         "column": 8,
         "args": [
           "run",
@@ -3824,7 +3827,7 @@
       }
     },
     {
-      "id": "call.2d3666bb0a7d4a8f",
+      "id": "call.32d7fc3fdd03ccb3",
       "from": "execution.settle",
       "to": "code.851dade86c48cea0",
       "type": "flow",
@@ -3832,7 +3835,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 175,
+        "line": 179,
         "column": 8,
         "args": [
           "run",
@@ -3844,7 +3847,7 @@
       }
     },
     {
-      "id": "call.14af0b51b1b33ee4",
+      "id": "call.4d77db35e41e578d",
       "from": "execution.interrupt",
       "to": "code.a5031696efd68bab",
       "type": "flow",
@@ -3852,7 +3855,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 238,
+        "line": 242,
         "column": 12,
         "args": [
           "run",
@@ -3865,7 +3868,7 @@
       }
     },
     {
-      "id": "call.d41940bc801aa996",
+      "id": "call.0d0a8c65b21ecc0e",
       "from": "execution.interrupt",
       "to": "code.a5031696efd68bab",
       "type": "flow",
@@ -3873,7 +3876,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 239,
+        "line": 243,
         "column": 4,
         "args": [
           "run",
@@ -3885,7 +3888,7 @@
       }
     },
     {
-      "id": "call.d598d481a4335e21",
+      "id": "call.2af6395ced2a3375",
       "from": "execution.interrupt",
       "to": "code.851dade86c48cea0",
       "type": "flow",
@@ -3893,7 +3896,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 240,
+        "line": 244,
         "column": 4,
         "args": [
           "run",
@@ -3905,7 +3908,7 @@
       }
     },
     {
-      "id": "call.c28bb62560d21525",
+      "id": "call.8855b7a076afd59e",
       "from": "execution.finish_activity",
       "to": "code.a5031696efd68bab",
       "type": "flow",
@@ -3913,7 +3916,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 246,
+        "line": 250,
         "column": 4,
         "args": [
           "run",
@@ -3926,7 +3929,7 @@
       }
     },
     {
-      "id": "call.8c9ba5a20cfac2c0",
+      "id": "call.c3091b3da5bda375",
       "from": "execution.finish_activity",
       "to": "execution.settle",
       "type": "flow",
@@ -3934,7 +3937,7 @@
       "origin": "python-ast",
       "evidence": "python-ast syntactic reference",
       "callsite": {
-        "line": 247,
+        "line": 251,
         "column": 4,
         "args": [
           "run",
@@ -4256,13 +4259,13 @@
       "archive_app/ports.py": "b8cde872a84d96008836c06683dccf2d59ceff89c9a7dfe65e3e5f3dd6c3608c",
       "archive_app/service.py": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01",
       "archive_app/storage.py": "5dfd7a4ebcc907921324e26a1f03fc63d8ace83254783a4519e4f86d2b22eabc",
-      "bo_stategraph/workflow.py": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5",
+      "bo_stategraph/workflow.py": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0",
       "integrations/bo_observer.py": "5386e676e44a58e9f89076e0f0040e5918ed2c5f448e0e3e00c7ff39a46ad537",
-      "integrations/bo_server.py": "029b92fc261257f5cf45988285eaab1d61f17a88ebe10534969fc693f15c9e39",
+      "integrations/bo_server.py": "de279d368d128cbf53545cef7100d1322a6a9777833c328f8d21855c7ac427d3",
       "run.py": "88b4cd777fef04e7cb37d009d27dfa814420ba7faf8f6fc9a44555133a050d0e"
     },
-    "resolved_calls": 93,
-    "unresolved_calls": 489,
+    "resolved_calls": 98,
+    "unresolved_calls": 502,
     "depth": 1,
     "limits": [
       "Syntactic call candidates, not executed calls or proven data flow.",

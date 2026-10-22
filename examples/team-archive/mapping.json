@@ -1,0 +1,199 @@
+{
+  "schema": "bo-mapping/v1",
+  "cases": [
+    "scope_direct_manager",
+    "scope_ancestor_only",
+    "scope_child_direct_manager",
+    "approval_target_exact",
+    "approval_target_other_project",
+    "approval_target_other_operator",
+    "approval_target_other_document",
+    "approval_target_other_version",
+    "approval_at_deadline",
+    "approval_self",
+    "approval_not_reviewer",
+    "archive_snapshot",
+    "edit_after_archive",
+    "archive_same_version_twice",
+    "revoke_with_alternative",
+    "no_approval",
+    "secret_content",
+    "missing_index",
+    "capacity_one",
+    "capacity_two",
+    "join_pending",
+    "loss_and_resume",
+    "edit_overlap",
+    "cancel_running",
+    "cancel_one_of_two",
+    "move_before_commit",
+    "expire_before_commit",
+    "edit_before_commit",
+    "concurrent_same_version",
+    "restart_interrupted",
+    "size_default",
+    "size_equal",
+    "size_utf8_over",
+    "size_invalid",
+    "size_project_isolation",
+    "size_running_restore",
+    "size_commit_fresh",
+    "size_resume_over",
+    "size_snapshot_stable",
+    "size_persist"
+  ],
+  "modes": [
+    "on",
+    "off",
+    "fault"
+  ],
+  "source": "archive_app.storage.ArchiveStore.snapshot / SQLite",
+  "actual_collection": [
+    "authority_snapshot",
+    "runs"
+  ],
+  "actual_id": [
+    "id"
+  ],
+  "fields": [
+    {
+      "id": "state",
+      "node": "lifecycle",
+      "actual": [
+        "phase"
+      ],
+      "mapped": [
+        "state"
+      ]
+    },
+    {
+      "id": "revision",
+      "node": "lifecycle",
+      "actual": [
+        "state_revision"
+      ],
+      "mapped": [
+        "revision"
+      ]
+    },
+    {
+      "id": "build",
+      "node": "lifecycle",
+      "actual": [
+        "execution_version"
+      ],
+      "mapped": [
+        "build_id"
+      ]
+    },
+    {
+      "id": "param_version",
+      "node": "lifecycle",
+      "actual": [
+        "input",
+        "content_version"
+      ],
+      "mapped": [
+        "context",
+        "param_version"
+      ]
+    },
+    {
+      "id": "capacity",
+      "node": "lifecycle",
+      "actual": [
+        "configuration",
+        "resources",
+        "processing_slots",
+        "capacity"
+      ],
+      "mapped": [
+        "context",
+        "capacity"
+      ]
+    },
+    {
+      "id": "operator_id",
+      "node": "lifecycle",
+      "actual": [
+        "input",
+        "operator_id"
+      ],
+      "mapped": [
+        "context",
+        "operator_id"
+      ]
+    },
+    {
+      "id": "document_id",
+      "node": "lifecycle",
+      "actual": [
+        "input",
+        "document_id"
+      ],
+      "mapped": [
+        "context",
+        "document_id"
+      ]
+    },
+    {
+      "id": "configuration",
+      "node": "lifecycle",
+      "actual": [
+        "configuration"
+      ],
+      "mapped": [
+        "configuration"
+      ],
+      "keys": [
+        "attempt",
+        "param_version",
+        "revision",
+        "activities",
+        "resources",
+        "join",
+        "journal",
+        "results",
+        "discarded",
+        "wait_reasons"
+      ]
+    },
+    {
+      "id": "qualification",
+      "node": "lifecycle",
+      "actual": [
+        "qualification"
+      ],
+      "mapped": [
+        "configuration",
+        "qualification"
+      ]
+    },
+    {
+      "id": "stop_reason",
+      "node": "lifecycle",
+      "actual": [
+        "stop_reason"
+      ],
+      "mapped": [
+        "configuration",
+        "stop_reason"
+      ]
+    },
+    {
+      "id": "resume_required",
+      "node": "lifecycle",
+      "actual": [
+        "resume_required"
+      ],
+      "mapped": [
+        "configuration",
+        "resume_required"
+      ]
+    }
+  ],
+  "export": {
+    "case": "archive_snapshot",
+    "mode": "on"
+  }
+}

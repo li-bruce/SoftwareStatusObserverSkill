@@ -1,0 +1,17 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+page.waitForLoadState: Timeout 30000ms exceeded.
+    at C:\Users\Lvi_P\Documents\Work\CF\骞冲彴杞憲\SoftwareStatusObserverSkill\docs\review\web-continuity-20261022\design-ui.cjs:12:45 {
+  log: [],
+  name: 'TimeoutError'
+}
+Starting server 1/1: C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.venv\Scripts\python.exe -B -X utf8 C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_web.py serve --root C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.validation\web-design-design-first --port 8843
+Waiting for server on port 8843...
+Server ready on port 8843
+
+All 1 server(s) ready
+Running: node C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\docs\review\web-continuity-20261022\design-ui.cjs
+
+
+Stopping 1 server(s)...
+Server 1 stopped
+All servers stopped

@@ -1,0 +1,11 @@
+{
+  "status": "stale",
+  "changed_files": [
+    "observer_runtime/bo_design.py",
+    "observer_runtime/bo_web.py"
+  ],
+  "model_changed": false,
+  "intent_changed": false,
+  "directly_affected": [],
+  "possibly_affected": []
+}

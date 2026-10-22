@@ -85,7 +85,9 @@ def build():
         if n.get('parent'):edge(n['parent'],n['id'],'contains','查看内部')
     files=sorted(p.relative_to(ROOT).as_posix() for folder in ('app','integrations') for p in (ROOT/folder).glob('*.py'))
     files+=[p.relative_to(ROOT).as_posix() for p in (ROOT/'bo_stategraph').glob('*.py')]
-    files+=['tooling/build_graph.py','requirements.txt','observer_generated/runtime/recording_session.py','observer_generated/runtime/bo_stategraph.py']
+    files+=['tooling/build_graph.py','requirements.txt','observer_generated/runtime/recording_session.py','observer_generated/runtime/bo_stategraph.py',
+            'observer_generated/runtime/bo_design.py','observer_generated/runtime/bo_web.py']
+    files += [p.relative_to(ROOT).as_posix() for p in (ROOT/'integrations/bo_view').glob('*') if p.suffix in ('.js','.html','.css')]
     roots=['flow.input','flow.permission','flow.checks','flow.commit','flow.wait']
     model={'schema_version':3,'revision':revision,'intent':'intent.json','source_files':files,'nodes':nodes,'edges':edges,
            'overview':[{'node':n,'x':i*400,'y':0} for i,n in enumerate(roots)],'graph_roots':roots,'machine':machine,

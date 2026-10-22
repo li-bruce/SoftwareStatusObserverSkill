@@ -5,9 +5,11 @@ The observer does not decide when work starts or when the lifecycle may advance.
 """
 from copy import deepcopy
 from enum import StrEnum
+import importlib.metadata
 import threading
 from types import SimpleNamespace
 from transitions import Machine
+from .bo_contracts import validate_runtime_definition
 
 
 class Phase(StrEnum):
@@ -64,6 +66,8 @@ def completed(execution: dict | None, attempt: str | None, param_version: int | 
 
 
 def advance(state: str,event: str,execution=None,*,attempt=None,param_version=None) -> str:
+    validate_runtime_definition(definition(), loaded_engine='transitions.Machine',
+        loaded_version=importlib.metadata.version('transitions'), guard_names={'execution_complete'})
     holder=SimpleNamespace(execution_complete=lambda:completed(execution,attempt,param_version))
     Machine(holder,states=STATES,transitions=TRANSITIONS,initial=Phase(state).value,
             auto_transitions=False,model_attribute='phase')

@@ -8,6 +8,10 @@ import queue
 import threading
 import time
 import uuid
+try:
+    from .bo_retention import EventHistory
+except ImportError:
+    from bo_retention import EventHistory
 
 
 def selected(value, spec, depth=0):
@@ -33,10 +37,14 @@ def selected(value, spec, depth=0):
 
 
 class Pins:
-    def __init__(self, model, build_id, *, path=None, enabled=True, sink=None, capacity=2048):
+    def __init__(self, model, build_id, *, path=None, enabled=True, sink=None, capacity=2048,
+                 project_root=None, retention=None):
         self.model, self.build_id, self.enabled = model, build_id, enabled
         self.nodes = {n["id"]: n for n in model["nodes"]}
         self.path = Path(path) if path else None
+        # The public path sink is bounded too, not only example adapters. An
+        # explicit project root loads its policy; path-only uses bounded defaults.
+        self.history = EventHistory(project_root=project_root, path=self.path, limits=retention) if sink is None and self.path else None
         self.run_id = uuid.uuid4().hex[:12]
         self.seq = self.written = self.errors = self.dropped = 0
         self.bo_scope = None
@@ -62,9 +70,10 @@ class Pins:
             self.bo_scope = scope
 
     def _write(self, text):
-        self.path.parent.mkdir(parents=True, exist_ok=True)
-        with self.path.open("a", encoding="utf-8") as f:
-            f.write(text + "\n")
+        if self.history is None: raise ValueError('path or bounded sink is required')
+        before = self.history.log_errors
+        self.history.append(json.loads(text))
+        if self.history.log_errors != before: raise OSError('bounded observation log write failed')
 
     def _worker(self):
         while not self.stop.is_set() or not self.queue.empty():
@@ -84,7 +93,8 @@ class Pins:
         return {"enabled": self.enabled, "run_id": self.run_id, "attempted": self.seq,
                 "written": self.written, "errors": self.errors, "dropped": self.dropped,
                 "queued": self.queue.unfinished_tasks, "filtered": self.bo_filtered,
-                "capture_nodes": sorted(self.bo_scope) if self.bo_scope is not None else None}
+                "capture_nodes": sorted(self.bo_scope) if self.bo_scope is not None else None,
+                'retention': self.history.health() if self.history is not None else None}
 
     def flush(self, timeout=2):
         deadline = time.monotonic() + timeout

@@ -1,0 +1,25 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+PASS Initial view shows three business groups on WebGL
+PASS Dragging blank region moves parent and its children together
+PASS Group positions, expansion, custom name, note and core mark survive reload
+PASS Searching a hidden execution function reveals its hierarchy and source
+PASS All ten view presets remain selectable
+AssertionError [ERR_ASSERTION]: 0 == true
+    at main (C:\Users\Lvi_P\Documents\Work\CF\骞冲彴杞憲\SoftwareStatusObserverSkill\docs\review\assessment-fixes-20261022\browser-final\ui-test.cjs:62:80) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 0,
+  expected: true,
+  operator: '=='
+}
+Starting server 1/1: C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.venv\Scripts\python.exe -B -X utf8 run.py --port 8841 --delay 3
+Waiting for server on port 8841...
+Server ready on port 8841
+
+All 1 server(s) ready
+Running: node C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\docs\review\assessment-fixes-20261022\browser-final\ui-test.cjs
+
+
+Stopping 1 server(s)...
+Server 1 stopped
+All servers stopped

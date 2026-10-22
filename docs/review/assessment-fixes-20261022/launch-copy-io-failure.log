@@ -1,0 +1,2 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{"label": "sync-final", "arguments": ["tools/sync_runtime.py"], "exit_code": 1, "seconds": 0.259}

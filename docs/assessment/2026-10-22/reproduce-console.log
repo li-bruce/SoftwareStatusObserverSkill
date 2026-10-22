@@ -1,0 +1,138 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+[
+  {
+    "id": "wildcard_priority",
+    "actual_engine_state": "b",
+    "supplied_state": "c",
+    "observer_status": "observed",
+    "errors": [],
+    "candidates": [
+      {
+        "transition": {
+          "source": "a",
+          "dest": "b",
+          "trigger": "go"
+        },
+        "result": "matched",
+        "missing_guards": [],
+        "rejected_guards": []
+      },
+      {
+        "transition": {
+          "source": "*",
+          "dest": "c",
+          "trigger": "go"
+        },
+        "result": "matched",
+        "missing_guards": [],
+        "rejected_guards": []
+      }
+    ]
+  },
+  {
+    "id": "compound_initial",
+    "actual_engine_state": "active_a",
+    "supplied_state": "active_b",
+    "observer_status": "observed",
+    "errors": [],
+    "candidates": [
+      {
+        "transition": {
+          "source": "idle",
+          "dest": "active",
+          "trigger": "go"
+        },
+        "result": "matched",
+        "missing_guards": [],
+        "rejected_guards": []
+      }
+    ]
+  },
+  {
+    "id": "original_parent_fixed",
+    "actual_engine_state": "done",
+    "supplied_state": "done",
+    "observer_status": "observed",
+    "errors": [],
+    "candidates": [
+      {
+        "transition": {
+          "source": "active",
+          "dest": "done",
+          "trigger": "go"
+        },
+        "result": "matched",
+        "missing_guards": [],
+        "rejected_guards": []
+      }
+    ]
+  },
+  {
+    "id": "strict_enum_fixed",
+    "errors": [
+      "value: expected enum"
+    ]
+  },
+  {
+    "id": "export_drops_runtime_frames",
+    "input_frames": 1,
+    "export_has_frames": false,
+    "export_checks_valid": true
+  },
+  {
+    "id": "missing_mapping_witness",
+    "complete": {
+      "valid": false,
+      "errors": [
+        {
+          "check": "slots",
+          "error": "mapped value differs from implementation",
+          "actual": 1,
+          "mapped": 99
+        }
+      ],
+      "checks": 2,
+      "scope": "Explicit implementation witnesses; unexercised behavior remains unknown."
+    },
+    "dropped_failing_item": {
+      "valid": true,
+      "errors": [],
+      "checks": 1,
+      "scope": "Explicit implementation witnesses; unexercised behavior remains unknown."
+    },
+    "scope": "Checker input test, not a claim that every full application gate passes."
+  },
+  {
+    "id": "witness_not_bound_to_projection",
+    "exported_state": "c",
+    "actual_and_witness_state": "a",
+    "export_checks_valid": true,
+    "mapping_result": {
+      "valid": true,
+      "errors": [],
+      "checks": 1,
+      "scope": "Explicit implementation witnesses; unexercised behavior remains unknown."
+    },
+    "scope": "Public checks accept internally valid export plus disconnected witness values."
+  },
+  {
+    "id": "watch_write_conflict",
+    "exit_while_reader_open": 1,
+    "recovered_after_reader_closed": false,
+    "log": "watch-write-conflict.log",
+    "fixture": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.validation\\assessment-20261022\\watch-conflict-saxogppc"
+  },
+  {
+    "id": "query_view_lock_order",
+    "exit_code": 0,
+    "result": {
+      "view_waiting": true,
+      "query_waiting": true,
+      "service_lock_acquired": true,
+      "graph_lock_acquired": true,
+      "errors": [],
+      "product_methods": "LocalApplication.recording_view / BOStateGraph.bo_instances"
+    },
+    "method": "Actual methods with barriers controlling thread scheduling; disposable process."
+  }
+]

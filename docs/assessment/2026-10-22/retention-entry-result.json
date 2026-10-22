@@ -1,0 +1,40 @@
+[
+  {
+    "entry": "documented Pins(path=...)",
+    "configured_log_bytes": 1024,
+    "primary_file_bytes": 9597,
+    "file_count": 1,
+    "events_written": 25,
+    "health": {
+      "enabled": true,
+      "run_id": "9354fe29f666",
+      "attempted": 25,
+      "written": 25,
+      "errors": 0,
+      "dropped": 0,
+      "queued": 0,
+      "filtered": 0,
+      "capture_nodes": null
+    }
+  },
+  {
+    "entry": "EventHistory sink",
+    "configured_log_bytes": 1024,
+    "primary_file_bytes": 384,
+    "file_count": 2,
+    "events_written": 25,
+    "health": {
+      "retained_events": 2,
+      "evicted_events": 23,
+      "history_start_seq": 24,
+      "log_errors": 0,
+      "listener_errors": 0,
+      "retention": {
+        "memory_events": 2,
+        "memory_seconds": 60,
+        "log_bytes": 1024,
+        "log_backups": 1
+      }
+    }
+  }
+]

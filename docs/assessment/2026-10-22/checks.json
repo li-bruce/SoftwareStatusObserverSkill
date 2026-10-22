@@ -1,0 +1,76 @@
+[
+  {
+    "name": "full regression first run",
+    "command": "python -B -X utf8 tools/verify.py",
+    "cwd": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.validation\\assessment-20261022\\source",
+    "exit_code": 1,
+    "evidence": "full-check.log",
+    "classification": "product failure: watcher file replacement"
+  },
+  {
+    "name": "full regression unchanged-code repeat",
+    "command": "python -B -X utf8 tools/verify.py",
+    "cwd": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.validation\\assessment-20261022\\source",
+    "exit_code": 0,
+    "evidence": "full-check-repeat.log",
+    "classification": "passed; does not erase first failure"
+  },
+  {
+    "name": "previous counterexamples",
+    "command": "python -B -X utf8 docs/assessment/2026-10-21/reproduce.py",
+    "cwd": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.validation\\assessment-20261022\\source",
+    "exit_code": 0,
+    "evidence": "previous-cases.json",
+    "classification": "script completed; legacy service output excluded from current-source claims"
+  },
+  {
+    "name": "independent counterexamples",
+    "command": "python -B -X utf8 docs/assessment/2026-10-22/reproduce.py",
+    "cwd": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill",
+    "exit_code": 0,
+    "evidence": "reproductions.json",
+    "classification": "script completed; includes detected product failures"
+  },
+  {
+    "name": "public export binding positive/negative gate",
+    "command": "python -B -X utf8 docs/assessment/2026-10-22/export_binding_gate.py",
+    "cwd": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill",
+    "exit_code": 0,
+    "evidence": "export-binding-result.json",
+    "classification": "both gates passed; intentional missing public instance not detected"
+  },
+  {
+    "name": "retention entry comparison",
+    "command": "python -B -X utf8 docs/assessment/2026-10-22/retention_entry.py",
+    "cwd": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill",
+    "exit_code": 0,
+    "evidence": "retention-entry-result.json",
+    "classification": "default documented entry bypasses bounded history"
+  },
+  {
+    "name": "browser interaction",
+    "command": "with_server.py --server <isolated run.py --port 8839 --delay 1.5 --db data/audit.sqlite> --port 8839 -- node ui-test.cjs",
+    "cwd": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.validation\\assessment-20261022\\ui-project",
+    "exit_code": 0,
+    "evidence": "ui-result.json",
+    "checks": 14,
+    "classification": "passed"
+  },
+  {
+    "name": "browser restart and new port",
+    "command": "with_server.py --server <isolated run.py --port 8840 --delay 1.5 --db data/audit.sqlite> --port 8840 -- node ui-resume.cjs",
+    "cwd": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.validation\\assessment-20261022\\ui-project",
+    "exit_code": 0,
+    "evidence": "ui-resume-result.json",
+    "checks": 5,
+    "classification": "passed"
+  },
+  {
+    "name": "exact frame recorder/export roundtrip",
+    "command": "python -B -X utf8 docs/assessment/2026-10-22/frame_export.py",
+    "cwd": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill",
+    "exit_code": 0,
+    "evidence": "frame-export-result.json",
+    "classification": "real recorder accepts frame; graph export drops it"
+  }
+]

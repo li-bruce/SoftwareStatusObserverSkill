@@ -1,0 +1,74 @@
+[
+  {
+    "project": "delivery",
+    "argv": [
+      "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "observer_generated/runtime/change_sync.py",
+      "check",
+      "--root",
+      "."
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"valid\": true,\n  \"status\": \"current\",\n  \"errors\": [],\n  \"candidate_id\": \"65c36533eda4ad3e66e25bc3bfc43e0048a8ea696045fb446bbd34be9fdf1566\"\n}\n",
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "project": "delivery",
+    "argv": [
+      "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "observer_generated/runtime/change_sync.py",
+      "begin",
+      "--root",
+      ".",
+      "--change",
+      ".stategraph/assessment-fixes",
+      "--request",
+      "修复复评 R1–R6；严格校验声明和引擎语义，绑定实际投影；保留原业务规则和检查"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"valid\": true,\n  \"status\": \"editing\",\n  \"baseline_id\": \"65c36533eda4ad3e66e25bc3bfc43e0048a8ea696045fb446bbd34be9fdf1566\",\n  \"change\": \".stategraph/assessment-fixes\"\n}\n",
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "project": "team-archive",
+    "argv": [
+      "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "observer_runtime/change_sync.py",
+      "check",
+      "--root",
+      "."
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"valid\": true,\n  \"status\": \"current\",\n  \"errors\": [],\n  \"candidate_id\": \"57ddc58202a94d1a6f6a6450c450e8f1014a66985b670f4e8282ebef8896639d\"\n}\n",
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "project": "team-archive",
+    "argv": [
+      "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "observer_runtime/change_sync.py",
+      "begin",
+      "--root",
+      ".",
+      "--change",
+      ".stategraph/assessment-fixes",
+      "--request",
+      "修复复评 R1–R6；严格校验声明和引擎语义，绑定实际投影；保留原业务规则和检查"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"valid\": true,\n  \"status\": \"editing\",\n  \"baseline_id\": \"57ddc58202a94d1a6f6a6450c450e8f1014a66985b670f4e8282ebef8896639d\",\n  \"change\": \".stategraph/assessment-fixes\"\n}\n",
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  }
+]

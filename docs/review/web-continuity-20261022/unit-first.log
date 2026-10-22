@@ -1,0 +1,13 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+test_conversation_change_updates_graph_and_invalidates_old_focus (__main__.DesignTests.test_conversation_change_updates_graph_and_invalidates_old_focus) ... ok
+test_draft_has_no_runtime_fact_or_fake_state_machine (__main__.DesignTests.test_draft_has_no_runtime_fact_or_fake_state_machine) ... ok
+test_focus_resolves_decision_edges_to_reserved_model_nodes (__main__.DesignTests.test_focus_resolves_decision_edges_to_reserved_model_nodes) ... ok
+test_invalid_mode_fails_and_does_not_replace_policy (__main__.DesignTests.test_invalid_mode_fails_and_does_not_replace_policy) ... ok
+test_missing_node_bad_identity_and_containment_cycle_fail (__main__.DesignTests.test_missing_node_bad_identity_and_containment_cycle_fail) ... ok
+test_real_http_graph_read_only_and_dynamic_closure (__main__.DesignTests.test_real_http_graph_read_only_and_dynamic_closure) ... ok
+test_web_modes_preserve_core_and_personal_files (__main__.DesignTests.test_web_modes_preserve_core_and_personal_files) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.641s
+
+OK

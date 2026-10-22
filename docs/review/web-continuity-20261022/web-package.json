@@ -1,0 +1,1588 @@
+{
+  "command": [
+    "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\skills\\business-observer\\scripts\\bo_web.py",
+    "package",
+    "--root",
+    "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\examples\\delivery",
+    "--out",
+    "dist/web-core-132289b4.zip"
+  ],
+  "exit_code": 0,
+  "output": {
+    "valid": true,
+    "errors": [],
+    "ownership": {
+      "app/__init__.py": "business",
+      "app/checks.py": "business",
+      "app/ports.py": "business",
+      "app/service.py": "business",
+      "app/store.py": "business",
+      "app/workflow.py": "business",
+      "bo_stategraph/__init__.py": "stategraph",
+      "bo_stategraph/bo_contracts.py": "stategraph",
+      "bo_stategraph/config/retention.json": "stategraph",
+      "bo_stategraph/execution_contract.py": "stategraph",
+      "bo_stategraph/query.py": "stategraph",
+      "bo_stategraph/runtime-version.json": "stategraph",
+      "bo_stategraph/workflow.py": "stategraph",
+      "integrations/__init__.py": "integration",
+      "integrations/bo_adapter.py": "integration",
+      "integrations/bo_scenarios.py": "integration",
+      "integrations/bo_server.py": "integration",
+      "integrations/bo_view/ELK-LICENSE.md": "integration",
+      "integrations/bo_view/PIXI-LICENSE.txt": "integration",
+      "integrations/bo_view/analysis.js": "integration",
+      "integrations/bo_view/conversation.js": "integration",
+      "integrations/bo_view/elk-worker.min.js": "integration",
+      "integrations/bo_view/elk.bundled.js": "integration",
+      "integrations/bo_view/glyphs.js": "integration",
+      "integrations/bo_view/graph-core.js": "integration",
+      "integrations/bo_view/index.html": "integration",
+      "integrations/bo_view/layout.js": "integration",
+      "integrations/bo_view/pixi.min.js": "integration",
+      "integrations/bo_view/polling.js": "integration",
+      "integrations/bo_view/preferences.js": "integration",
+      "integrations/bo_view/recording.js": "integration",
+      "integrations/bo_view/renderer.js": "integration",
+      "integrations/bo_view/replay-steps.js": "integration",
+      "integrations/bo_view/runtime-frames.js": "integration",
+      "integrations/bo_view/viewer.css": "integration",
+      "integrations/bo_view/viewer.js": "integration",
+      "integrations/control.html": "integration",
+      "main.py": "business",
+      "observer_generated/GENERATED.md": "observer",
+      "observer_generated/__init__.py": "observer",
+      "observer_generated/behavior.json": "observer",
+      "observer_generated/manifest.json": "observer",
+      "observer_generated/runtime/__init__.py": "observer",
+      "observer_generated/runtime/architecture_guard.py": "observer",
+      "observer_generated/runtime/behavior_model.py": "observer",
+      "observer_generated/runtime/bo_contracts.py": "observer",
+      "observer_generated/runtime/bo_design.py": "observer",
+      "observer_generated/runtime/bo_retention.py": "observer",
+      "observer_generated/runtime/bo_runtime.py": "observer",
+      "observer_generated/runtime/bo_stategraph.py": "observer",
+      "observer_generated/runtime/bo_sync.py": "observer",
+      "observer_generated/runtime/bo_upgrade.py": "observer",
+      "observer_generated/runtime/bo_web.py": "observer",
+      "observer_generated/runtime/change_sync.py": "observer",
+      "observer_generated/runtime/code_structure.py": "observer",
+      "observer_generated/runtime/execution_contract.py": "observer",
+      "observer_generated/runtime/focus_graph.py": "observer",
+      "observer_generated/runtime/mapping_contract.py": "observer",
+      "observer_generated/runtime/model_tool.py": "observer",
+      "observer_generated/runtime/origin.json": "observer",
+      "observer_generated/runtime/probe.py": "observer",
+      "observer_generated/runtime/project_bundle.py": "observer",
+      "observer_generated/runtime/recording_session.py": "observer",
+      "observer_generated/runtime/requirements_dialogue.py": "observer",
+      "observer_generated/runtime/runtime_frames.py": "observer",
+      "observer_generated/runtime/semantic_probe.py": "observer",
+      "observer_generated/runtime/source_migration.py": "observer",
+      "observer_generated/runtime/statechart_contract.py": "observer",
+      "observer_generated/runtime/sync_config.py": "observer",
+      "observer_generated/runtime/sync_io.py": "observer",
+      "observer_generated/runtime/sync_verify.py": "observer",
+      "observer_generated/runtime/view_preferences.py": "observer",
+      "observer_generated/runtime/viewer_server.py": "observer",
+      "observer_generated/runtime/whitebox_contract.py": "observer",
+      "observer_generated/runtime/worknet_contract.py": "observer",
+      "observer_generated/static/ELK-LICENSE.md": "observer",
+      "observer_generated/static/PIXI-LICENSE.txt": "observer",
+      "observer_generated/static/analysis.js": "observer",
+      "observer_generated/static/conversation.js": "observer",
+      "observer_generated/static/elk-worker.min.js": "observer",
+      "observer_generated/static/elk.bundled.js": "observer",
+      "observer_generated/static/glyphs.js": "observer",
+      "observer_generated/static/graph-core.js": "observer",
+      "observer_generated/static/index.html": "observer",
+      "observer_generated/static/layout.js": "observer",
+      "observer_generated/static/pixi.min.js": "observer",
+      "observer_generated/static/polling.js": "observer",
+      "observer_generated/static/preferences.js": "observer",
+      "observer_generated/static/recording.js": "observer",
+      "observer_generated/static/renderer.js": "observer",
+      "observer_generated/static/replay-steps.js": "observer",
+      "observer_generated/static/runtime-frames.js": "observer",
+      "observer_generated/static/viewer.css": "observer",
+      "observer_generated/static/viewer.js": "observer",
+      "tests/__init__.py": "test",
+      "tests/observe.py": "test",
+      "tests/scenarios.py": "test",
+      "tests/test_business.py": "test",
+      "tests/test_execution.py": "test",
+      "tests/test_graph_layout.mjs": "test",
+      "tests/test_graph_projection.mjs": "test",
+      "tests/test_recorded_views.mjs": "test",
+      "tests/test_recording.py": "test",
+      "tests/test_stategraph_module.py": "test",
+      "tooling/__init__.py": "tooling",
+      "tooling/build_graph.py": "tooling",
+      "tooling/dev.py": "tooling",
+      "tooling/graph_fixture.py": "tooling"
+    },
+    "imports": [
+      {
+        "from": "app/checks.py",
+        "to": "bo_stategraph/workflow.py",
+        "line": 4
+      },
+      {
+        "from": "app/checks.py",
+        "to": "bo_stategraph/workflow.py",
+        "line": 4
+      },
+      {
+        "from": "app/service.py",
+        "to": "app/checks.py",
+        "line": 2
+      },
+      {
+        "from": "app/service.py",
+        "to": "app/checks.py",
+        "line": 2
+      },
+      {
+        "from": "app/service.py",
+        "to": "app/ports.py",
+        "line": 3
+      },
+      {
+        "from": "app/service.py",
+        "to": "app/ports.py",
+        "line": 3
+      },
+      {
+        "from": "app/service.py",
+        "to": "app/store.py",
+        "line": 4
+      },
+      {
+        "from": "app/service.py",
+        "to": "app/store.py",
+        "line": 4
+      },
+      {
+        "from": "app/service.py",
+        "to": "bo_stategraph/workflow.py",
+        "line": 5
+      },
+      {
+        "from": "app/service.py",
+        "to": "bo_stategraph/workflow.py",
+        "line": 5
+      },
+      {
+        "from": "app/service.py",
+        "to": "bo_stategraph/workflow.py",
+        "line": 5
+      },
+      {
+        "from": "app/service.py",
+        "to": "bo_stategraph/workflow.py",
+        "line": 5
+      },
+      {
+        "from": "app/service.py",
+        "to": "bo_stategraph/workflow.py",
+        "line": 5
+      },
+      {
+        "from": "app/store.py",
+        "to": "bo_stategraph/workflow.py",
+        "line": 6
+      },
+      {
+        "from": "app/store.py",
+        "to": "bo_stategraph/workflow.py",
+        "line": 6
+      },
+      {
+        "from": "app/workflow.py",
+        "to": "bo_stategraph/workflow.py",
+        "line": 2
+      },
+      {
+        "from": "app/workflow.py",
+        "to": "bo_stategraph/workflow.py",
+        "line": 2
+      },
+      {
+        "from": "bo_stategraph/__init__.py",
+        "to": "bo_stategraph/bo_contracts.py",
+        "line": 17
+      },
+      {
+        "from": "bo_stategraph/__init__.py",
+        "to": "bo_stategraph/bo_contracts.py",
+        "line": 17
+      },
+      {
+        "from": "bo_stategraph/__init__.py",
+        "to": "bo_stategraph/bo_contracts.py",
+        "line": 17
+      },
+      {
+        "from": "bo_stategraph/__init__.py",
+        "to": "bo_stategraph/bo_contracts.py",
+        "line": 17
+      },
+      {
+        "from": "bo_stategraph/__init__.py",
+        "to": "bo_stategraph/bo_contracts.py",
+        "line": 17
+      },
+      {
+        "from": "bo_stategraph/__init__.py",
+        "to": "bo_stategraph/bo_contracts.py",
+        "line": 17
+      },
+      {
+        "from": "bo_stategraph/__init__.py",
+        "to": "bo_stategraph/bo_contracts.py",
+        "line": 17
+      },
+      {
+        "from": "bo_stategraph/__init__.py",
+        "to": "bo_stategraph/execution_contract.py",
+        "line": 18
+      },
+      {
+        "from": "bo_stategraph/__init__.py",
+        "to": "bo_stategraph/execution_contract.py",
+        "line": 18
+      },
+      {
+        "from": "bo_stategraph/__init__.py",
+        "to": "bo_stategraph/execution_contract.py",
+        "line": 18
+      },
+      {
+        "from": "bo_stategraph/bo_contracts.py",
+        "to": "bo_stategraph/execution_contract.py",
+        "line": 296
+      },
+      {
+        "from": "bo_stategraph/bo_contracts.py",
+        "to": "bo_stategraph/execution_contract.py",
+        "line": 296
+      },
+      {
+        "from": "bo_stategraph/workflow.py",
+        "to": "bo_stategraph/bo_contracts.py",
+        "line": 12
+      },
+      {
+        "from": "bo_stategraph/workflow.py",
+        "to": "bo_stategraph/bo_contracts.py",
+        "line": 12
+      },
+      {
+        "from": "integrations/bo_adapter.py",
+        "to": "observer_generated/runtime/bo_retention.py",
+        "line": 6
+      },
+      {
+        "from": "integrations/bo_adapter.py",
+        "to": "observer_generated/runtime/bo_retention.py",
+        "line": 6
+      },
+      {
+        "from": "integrations/bo_adapter.py",
+        "to": "observer_generated/runtime/semantic_probe.py",
+        "line": 7
+      },
+      {
+        "from": "integrations/bo_adapter.py",
+        "to": "observer_generated/runtime/semantic_probe.py",
+        "line": 7
+      },
+      {
+        "from": "integrations/bo_adapter.py",
+        "to": "observer_generated/runtime/semantic_probe.py",
+        "line": 7
+      },
+      {
+        "from": "integrations/bo_adapter.py",
+        "to": "bo_stategraph/__init__.py",
+        "line": 8
+      },
+      {
+        "from": "integrations/bo_adapter.py",
+        "to": "bo_stategraph/__init__.py",
+        "line": 8
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 11
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 11
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 11
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "observer_generated/runtime/recording_session.py",
+        "line": 12
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "observer_generated/runtime/recording_session.py",
+        "line": 12
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "observer_generated/runtime/view_preferences.py",
+        "line": 13
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "observer_generated/runtime/view_preferences.py",
+        "line": 13
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "observer_generated/runtime/view_preferences.py",
+        "line": 13
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "observer_generated/runtime/bo_web.py",
+        "line": 14
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "observer_generated/runtime/bo_web.py",
+        "line": 14
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "bo_stategraph/__init__.py",
+        "line": 15
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "bo_stategraph/__init__.py",
+        "line": 15
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "bo_stategraph/query.py",
+        "line": 16
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "bo_stategraph/query.py",
+        "line": 16
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "integrations/bo_adapter.py",
+        "line": 20
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "integrations/bo_adapter.py",
+        "line": 20
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "app/service.py",
+        "line": 21
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "app/service.py",
+        "line": 21
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "app/store.py",
+        "line": 22
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "app/store.py",
+        "line": 22
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "app/ports.py",
+        "line": 23
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "app/ports.py",
+        "line": 23
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "app/checks.py",
+        "line": 24
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "app/checks.py",
+        "line": 24
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "integrations/bo_scenarios.py",
+        "line": 25
+      },
+      {
+        "from": "integrations/bo_server.py",
+        "to": "integrations/bo_scenarios.py",
+        "line": 25
+      },
+      {
+        "from": "main.py",
+        "to": "app/service.py",
+        "line": 5
+      },
+      {
+        "from": "main.py",
+        "to": "app/service.py",
+        "line": 5
+      },
+      {
+        "from": "main.py",
+        "to": "app/store.py",
+        "line": 6
+      },
+      {
+        "from": "main.py",
+        "to": "app/store.py",
+        "line": 6
+      },
+      {
+        "from": "observer_generated/runtime/behavior_model.py",
+        "to": "observer_generated/runtime/bo_contracts.py",
+        "line": 13
+      },
+      {
+        "from": "observer_generated/runtime/behavior_model.py",
+        "to": "observer_generated/runtime/bo_contracts.py",
+        "line": 13
+      },
+      {
+        "from": "observer_generated/runtime/bo_contracts.py",
+        "to": "observer_generated/runtime/bo_runtime.py",
+        "line": 3
+      },
+      {
+        "from": "observer_generated/runtime/bo_contracts.py",
+        "to": "observer_generated/runtime/bo_runtime.py",
+        "line": 3
+      },
+      {
+        "from": "observer_generated/runtime/bo_design.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 12
+      },
+      {
+        "from": "observer_generated/runtime/bo_design.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 12
+      },
+      {
+        "from": "observer_generated/runtime/bo_design.py",
+        "to": "observer_generated/runtime/requirements_dialogue.py",
+        "line": 13
+      },
+      {
+        "from": "observer_generated/runtime/bo_design.py",
+        "to": "observer_generated/runtime/requirements_dialogue.py",
+        "line": 13
+      },
+      {
+        "from": "observer_generated/runtime/bo_design.py",
+        "to": "observer_generated/runtime/requirements_dialogue.py",
+        "line": 13
+      },
+      {
+        "from": "observer_generated/runtime/bo_design.py",
+        "to": "observer_generated/runtime/sync_io.py",
+        "line": 14
+      },
+      {
+        "from": "observer_generated/runtime/bo_design.py",
+        "to": "observer_generated/runtime/sync_io.py",
+        "line": 14
+      },
+      {
+        "from": "observer_generated/runtime/bo_design.py",
+        "to": "observer_generated/runtime/view_preferences.py",
+        "line": 15
+      },
+      {
+        "from": "observer_generated/runtime/bo_design.py",
+        "to": "observer_generated/runtime/view_preferences.py",
+        "line": 15
+      },
+      {
+        "from": "observer_generated/runtime/bo_stategraph.py",
+        "to": "observer_generated/runtime/bo_runtime.py",
+        "line": 3
+      },
+      {
+        "from": "observer_generated/runtime/bo_stategraph.py",
+        "to": "observer_generated/runtime/bo_runtime.py",
+        "line": 3
+      },
+      {
+        "from": "observer_generated/runtime/bo_sync.py",
+        "to": "observer_generated/runtime/sync_io.py",
+        "line": 98
+      },
+      {
+        "from": "observer_generated/runtime/bo_sync.py",
+        "to": "observer_generated/runtime/sync_io.py",
+        "line": 98
+      },
+      {
+        "from": "observer_generated/runtime/bo_upgrade.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 14
+      },
+      {
+        "from": "observer_generated/runtime/bo_upgrade.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 14
+      },
+      {
+        "from": "observer_generated/runtime/bo_upgrade.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 14
+      },
+      {
+        "from": "observer_generated/runtime/bo_upgrade.py",
+        "to": "observer_generated/runtime/sync_io.py",
+        "line": 15
+      },
+      {
+        "from": "observer_generated/runtime/bo_upgrade.py",
+        "to": "observer_generated/runtime/sync_io.py",
+        "line": 15
+      },
+      {
+        "from": "observer_generated/runtime/bo_web.py",
+        "to": "observer_generated/runtime/bo_design.py",
+        "line": 16
+      },
+      {
+        "from": "observer_generated/runtime/bo_web.py",
+        "to": "observer_generated/runtime/bo_design.py",
+        "line": 16
+      },
+      {
+        "from": "observer_generated/runtime/bo_web.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 17
+      },
+      {
+        "from": "observer_generated/runtime/bo_web.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 17
+      },
+      {
+        "from": "observer_generated/runtime/bo_web.py",
+        "to": "observer_generated/runtime/requirements_dialogue.py",
+        "line": 18
+      },
+      {
+        "from": "observer_generated/runtime/bo_web.py",
+        "to": "observer_generated/runtime/requirements_dialogue.py",
+        "line": 18
+      },
+      {
+        "from": "observer_generated/runtime/bo_web.py",
+        "to": "observer_generated/runtime/sync_io.py",
+        "line": 19
+      },
+      {
+        "from": "observer_generated/runtime/bo_web.py",
+        "to": "observer_generated/runtime/sync_io.py",
+        "line": 19
+      },
+      {
+        "from": "observer_generated/runtime/bo_web.py",
+        "to": "observer_generated/runtime/view_preferences.py",
+        "line": 20
+      },
+      {
+        "from": "observer_generated/runtime/bo_web.py",
+        "to": "observer_generated/runtime/view_preferences.py",
+        "line": 20
+      },
+      {
+        "from": "observer_generated/runtime/bo_web.py",
+        "to": "observer_generated/runtime/view_preferences.py",
+        "line": 20
+      },
+      {
+        "from": "observer_generated/runtime/bo_web.py",
+        "to": "observer_generated/runtime/view_preferences.py",
+        "line": 20
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/bo_sync.py",
+        "line": 12
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/bo_sync.py",
+        "line": 12
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/bo_sync.py",
+        "line": 12
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 13
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 13
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 13
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 13
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 13
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 13
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 13
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/code_structure.py",
+        "line": 14
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/code_structure.py",
+        "line": 14
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/code_structure.py",
+        "line": 14
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/code_structure.py",
+        "line": 14
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/statechart_contract.py",
+        "line": 15
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/statechart_contract.py",
+        "line": 15
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/worknet_contract.py",
+        "line": 16
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/worknet_contract.py",
+        "line": 16
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/execution_contract.py",
+        "line": 17
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/execution_contract.py",
+        "line": 17
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/execution_contract.py",
+        "line": 17
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/requirements_dialogue.py",
+        "line": 18
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/requirements_dialogue.py",
+        "line": 18
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/whitebox_contract.py",
+        "line": 19
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/whitebox_contract.py",
+        "line": 19
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/whitebox_contract.py",
+        "line": 19
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/source_migration.py",
+        "line": 20
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/source_migration.py",
+        "line": 20
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/source_migration.py",
+        "line": 20
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/source_migration.py",
+        "line": 20
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/sync_config.py",
+        "line": 34
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/sync_config.py",
+        "line": 34
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/sync_config.py",
+        "line": 34
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/sync_io.py",
+        "line": 35
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/sync_io.py",
+        "line": 35
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/sync_io.py",
+        "line": 35
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/sync_verify.py",
+        "line": 36
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/sync_verify.py",
+        "line": 36
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/sync_verify.py",
+        "line": 36
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/sync_verify.py",
+        "line": 36
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/mapping_contract.py",
+        "line": 144
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/mapping_contract.py",
+        "line": 144
+      },
+      {
+        "from": "observer_generated/runtime/change_sync.py",
+        "to": "observer_generated/runtime/mapping_contract.py",
+        "line": 144
+      },
+      {
+        "from": "observer_generated/runtime/code_structure.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 13
+      },
+      {
+        "from": "observer_generated/runtime/code_structure.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 13
+      },
+      {
+        "from": "observer_generated/runtime/code_structure.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 13
+      },
+      {
+        "from": "observer_generated/runtime/code_structure.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 13
+      },
+      {
+        "from": "observer_generated/runtime/code_structure.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 13
+      },
+      {
+        "from": "observer_generated/runtime/execution_contract.py",
+        "to": "observer_generated/runtime/bo_runtime.py",
+        "line": 3
+      },
+      {
+        "from": "observer_generated/runtime/execution_contract.py",
+        "to": "observer_generated/runtime/bo_runtime.py",
+        "line": 3
+      },
+      {
+        "from": "observer_generated/runtime/focus_graph.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 10
+      },
+      {
+        "from": "observer_generated/runtime/focus_graph.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 10
+      },
+      {
+        "from": "observer_generated/runtime/focus_graph.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 10
+      },
+      {
+        "from": "observer_generated/runtime/focus_graph.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 10
+      },
+      {
+        "from": "observer_generated/runtime/mapping_contract.py",
+        "to": "observer_generated/runtime/bo_stategraph.py",
+        "line": 9
+      },
+      {
+        "from": "observer_generated/runtime/mapping_contract.py",
+        "to": "observer_generated/runtime/bo_stategraph.py",
+        "line": 9
+      },
+      {
+        "from": "observer_generated/runtime/mapping_contract.py",
+        "to": "observer_generated/runtime/bo_stategraph.py",
+        "line": 9
+      },
+      {
+        "from": "observer_generated/runtime/mapping_contract.py",
+        "to": "bo_stategraph/__init__.py",
+        "line": 11
+      },
+      {
+        "from": "observer_generated/runtime/mapping_contract.py",
+        "to": "bo_stategraph/__init__.py",
+        "line": 11
+      },
+      {
+        "from": "observer_generated/runtime/mapping_contract.py",
+        "to": "bo_stategraph/__init__.py",
+        "line": 11
+      },
+      {
+        "from": "observer_generated/runtime/project_bundle.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 8
+      },
+      {
+        "from": "observer_generated/runtime/project_bundle.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 8
+      },
+      {
+        "from": "observer_generated/runtime/project_bundle.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 8
+      },
+      {
+        "from": "observer_generated/runtime/project_bundle.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 8
+      },
+      {
+        "from": "observer_generated/runtime/recording_session.py",
+        "to": "observer_generated/runtime/runtime_frames.py",
+        "line": 15
+      },
+      {
+        "from": "observer_generated/runtime/recording_session.py",
+        "to": "observer_generated/runtime/runtime_frames.py",
+        "line": 15
+      },
+      {
+        "from": "observer_generated/runtime/semantic_probe.py",
+        "to": "observer_generated/runtime/bo_retention.py",
+        "line": 12
+      },
+      {
+        "from": "observer_generated/runtime/semantic_probe.py",
+        "to": "observer_generated/runtime/bo_retention.py",
+        "line": 12
+      },
+      {
+        "from": "observer_generated/runtime/statechart_contract.py",
+        "to": "observer_generated/runtime/bo_contracts.py",
+        "line": 11
+      },
+      {
+        "from": "observer_generated/runtime/statechart_contract.py",
+        "to": "observer_generated/runtime/bo_contracts.py",
+        "line": 11
+      },
+      {
+        "from": "observer_generated/runtime/sync_config.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 4
+      },
+      {
+        "from": "observer_generated/runtime/sync_config.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 4
+      },
+      {
+        "from": "observer_generated/runtime/sync_config.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 4
+      },
+      {
+        "from": "observer_generated/runtime/sync_config.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 4
+      },
+      {
+        "from": "observer_generated/runtime/sync_config.py",
+        "to": "observer_generated/runtime/code_structure.py",
+        "line": 5
+      },
+      {
+        "from": "observer_generated/runtime/sync_config.py",
+        "to": "observer_generated/runtime/code_structure.py",
+        "line": 5
+      },
+      {
+        "from": "observer_generated/runtime/sync_config.py",
+        "to": "observer_generated/runtime/bo_sync.py",
+        "line": 6
+      },
+      {
+        "from": "observer_generated/runtime/sync_config.py",
+        "to": "observer_generated/runtime/bo_sync.py",
+        "line": 6
+      },
+      {
+        "from": "observer_generated/runtime/sync_verify.py",
+        "to": "observer_generated/runtime/sync_io.py",
+        "line": 7
+      },
+      {
+        "from": "observer_generated/runtime/sync_verify.py",
+        "to": "observer_generated/runtime/sync_io.py",
+        "line": 7
+      },
+      {
+        "from": "observer_generated/runtime/sync_verify.py",
+        "to": "observer_generated/runtime/sync_io.py",
+        "line": 7
+      },
+      {
+        "from": "observer_generated/runtime/sync_verify.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 8
+      },
+      {
+        "from": "observer_generated/runtime/sync_verify.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 8
+      },
+      {
+        "from": "observer_generated/runtime/sync_verify.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 8
+      },
+      {
+        "from": "observer_generated/runtime/sync_verify.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 8
+      },
+      {
+        "from": "observer_generated/runtime/sync_verify.py",
+        "to": "observer_generated/runtime/statechart_contract.py",
+        "line": 9
+      },
+      {
+        "from": "observer_generated/runtime/sync_verify.py",
+        "to": "observer_generated/runtime/statechart_contract.py",
+        "line": 9
+      },
+      {
+        "from": "observer_generated/runtime/sync_verify.py",
+        "to": "observer_generated/runtime/worknet_contract.py",
+        "line": 10
+      },
+      {
+        "from": "observer_generated/runtime/sync_verify.py",
+        "to": "observer_generated/runtime/worknet_contract.py",
+        "line": 10
+      },
+      {
+        "from": "observer_generated/runtime/sync_verify.py",
+        "to": "observer_generated/runtime/execution_contract.py",
+        "line": 11
+      },
+      {
+        "from": "observer_generated/runtime/sync_verify.py",
+        "to": "observer_generated/runtime/execution_contract.py",
+        "line": 11
+      },
+      {
+        "from": "observer_generated/runtime/sync_verify.py",
+        "to": "observer_generated/runtime/whitebox_contract.py",
+        "line": 12
+      },
+      {
+        "from": "observer_generated/runtime/sync_verify.py",
+        "to": "observer_generated/runtime/whitebox_contract.py",
+        "line": 12
+      },
+      {
+        "from": "observer_generated/runtime/sync_verify.py",
+        "to": "observer_generated/runtime/mapping_contract.py",
+        "line": 13
+      },
+      {
+        "from": "observer_generated/runtime/sync_verify.py",
+        "to": "observer_generated/runtime/mapping_contract.py",
+        "line": 13
+      },
+      {
+        "from": "observer_generated/runtime/sync_verify.py",
+        "to": "observer_generated/runtime/bo_stategraph.py",
+        "line": 14
+      },
+      {
+        "from": "observer_generated/runtime/sync_verify.py",
+        "to": "observer_generated/runtime/bo_stategraph.py",
+        "line": 14
+      },
+      {
+        "from": "observer_generated/runtime/sync_verify.py",
+        "to": "bo_stategraph/__init__.py",
+        "line": 23
+      },
+      {
+        "from": "observer_generated/runtime/sync_verify.py",
+        "to": "bo_stategraph/__init__.py",
+        "line": 23
+      },
+      {
+        "from": "observer_generated/runtime/whitebox_contract.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 12
+      },
+      {
+        "from": "observer_generated/runtime/whitebox_contract.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 12
+      },
+      {
+        "from": "observer_generated/runtime/whitebox_contract.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 12
+      },
+      {
+        "from": "observer_generated/runtime/whitebox_contract.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 12
+      },
+      {
+        "from": "observer_generated/runtime/whitebox_contract.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 12
+      },
+      {
+        "from": "observer_generated/runtime/whitebox_contract.py",
+        "to": "observer_generated/runtime/code_structure.py",
+        "line": 13
+      },
+      {
+        "from": "observer_generated/runtime/whitebox_contract.py",
+        "to": "observer_generated/runtime/code_structure.py",
+        "line": 13
+      },
+      {
+        "from": "observer_generated/runtime/whitebox_contract.py",
+        "to": "observer_generated/runtime/code_structure.py",
+        "line": 13
+      },
+      {
+        "from": "tests/observe.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 7
+      },
+      {
+        "from": "tests/observe.py",
+        "to": "observer_generated/runtime/behavior_model.py",
+        "line": 7
+      },
+      {
+        "from": "tests/observe.py",
+        "to": "observer_generated/runtime/mapping_contract.py",
+        "line": 8
+      },
+      {
+        "from": "tests/observe.py",
+        "to": "observer_generated/runtime/mapping_contract.py",
+        "line": 8
+      },
+      {
+        "from": "tests/observe.py",
+        "to": "bo_stategraph/__init__.py",
+        "line": 9
+      },
+      {
+        "from": "tests/observe.py",
+        "to": "bo_stategraph/__init__.py",
+        "line": 9
+      },
+      {
+        "from": "tests/observe.py",
+        "to": "bo_stategraph/query.py",
+        "line": 10
+      },
+      {
+        "from": "tests/observe.py",
+        "to": "bo_stategraph/query.py",
+        "line": 10
+      },
+      {
+        "from": "tests/observe.py",
+        "to": "bo_stategraph/workflow.py",
+        "line": 14
+      },
+      {
+        "from": "tests/observe.py",
+        "to": "bo_stategraph/workflow.py",
+        "line": 14
+      },
+      {
+        "from": "tests/observe.py",
+        "to": "tests/scenarios.py",
+        "line": 15
+      },
+      {
+        "from": "tests/observe.py",
+        "to": "tests/scenarios.py",
+        "line": 15
+      },
+      {
+        "from": "tests/observe.py",
+        "to": "tests/scenarios.py",
+        "line": 15
+      },
+      {
+        "from": "tests/scenarios.py",
+        "to": "app/service.py",
+        "line": 3
+      },
+      {
+        "from": "tests/scenarios.py",
+        "to": "app/service.py",
+        "line": 3
+      },
+      {
+        "from": "tests/scenarios.py",
+        "to": "app/store.py",
+        "line": 4
+      },
+      {
+        "from": "tests/scenarios.py",
+        "to": "app/store.py",
+        "line": 4
+      },
+      {
+        "from": "tests/scenarios.py",
+        "to": "app/ports.py",
+        "line": 5
+      },
+      {
+        "from": "tests/scenarios.py",
+        "to": "app/ports.py",
+        "line": 5
+      },
+      {
+        "from": "tests/scenarios.py",
+        "to": "integrations/bo_adapter.py",
+        "line": 6
+      },
+      {
+        "from": "tests/scenarios.py",
+        "to": "integrations/bo_adapter.py",
+        "line": 6
+      },
+      {
+        "from": "tests/scenarios.py",
+        "to": "app/checks.py",
+        "line": 7
+      },
+      {
+        "from": "tests/scenarios.py",
+        "to": "app/checks.py",
+        "line": 7
+      },
+      {
+        "from": "tests/scenarios.py",
+        "to": "integrations/bo_scenarios.py",
+        "line": 13
+      },
+      {
+        "from": "tests/scenarios.py",
+        "to": "integrations/bo_scenarios.py",
+        "line": 13
+      },
+      {
+        "from": "tests/test_business.py",
+        "to": "app/service.py",
+        "line": 9
+      },
+      {
+        "from": "tests/test_business.py",
+        "to": "app/service.py",
+        "line": 9
+      },
+      {
+        "from": "tests/test_business.py",
+        "to": "app/store.py",
+        "line": 10
+      },
+      {
+        "from": "tests/test_business.py",
+        "to": "app/store.py",
+        "line": 10
+      },
+      {
+        "from": "tests/test_business.py",
+        "to": "app/ports.py",
+        "line": 11
+      },
+      {
+        "from": "tests/test_business.py",
+        "to": "app/ports.py",
+        "line": 11
+      },
+      {
+        "from": "tests/test_business.py",
+        "to": "bo_stategraph/workflow.py",
+        "line": 12
+      },
+      {
+        "from": "tests/test_business.py",
+        "to": "bo_stategraph/workflow.py",
+        "line": 12
+      },
+      {
+        "from": "tests/test_business.py",
+        "to": "app/checks.py",
+        "line": 13
+      },
+      {
+        "from": "tests/test_business.py",
+        "to": "app/checks.py",
+        "line": 13
+      },
+      {
+        "from": "tests/test_execution.py",
+        "to": "bo_stategraph/workflow.py",
+        "line": 10
+      },
+      {
+        "from": "tests/test_execution.py",
+        "to": "bo_stategraph/workflow.py",
+        "line": 10
+      },
+      {
+        "from": "tests/test_execution.py",
+        "to": "bo_stategraph/workflow.py",
+        "line": 10
+      },
+      {
+        "from": "tests/test_execution.py",
+        "to": "app/checks.py",
+        "line": 11
+      },
+      {
+        "from": "tests/test_execution.py",
+        "to": "app/checks.py",
+        "line": 11
+      },
+      {
+        "from": "tests/test_execution.py",
+        "to": "app/service.py",
+        "line": 12
+      },
+      {
+        "from": "tests/test_execution.py",
+        "to": "app/service.py",
+        "line": 12
+      },
+      {
+        "from": "tests/test_execution.py",
+        "to": "app/store.py",
+        "line": 13
+      },
+      {
+        "from": "tests/test_execution.py",
+        "to": "app/store.py",
+        "line": 13
+      },
+      {
+        "from": "tests/test_execution.py",
+        "to": "observer_generated/runtime/execution_contract.py",
+        "line": 14
+      },
+      {
+        "from": "tests/test_execution.py",
+        "to": "observer_generated/runtime/execution_contract.py",
+        "line": 14
+      },
+      {
+        "from": "tests/test_execution.py",
+        "to": "observer_generated/runtime/execution_contract.py",
+        "line": 14
+      },
+      {
+        "from": "tests/test_stategraph_module.py",
+        "to": "bo_stategraph/__init__.py",
+        "line": 12
+      },
+      {
+        "from": "tests/test_stategraph_module.py",
+        "to": "bo_stategraph/__init__.py",
+        "line": 12
+      },
+      {
+        "from": "tests/test_stategraph_module.py",
+        "to": "bo_stategraph/__init__.py",
+        "line": 12
+      },
+      {
+        "from": "tests/test_stategraph_module.py",
+        "to": "bo_stategraph/__init__.py",
+        "line": 12
+      },
+      {
+        "from": "tooling/build_graph.py",
+        "to": "bo_stategraph/workflow.py",
+        "line": 8
+      },
+      {
+        "from": "tooling/build_graph.py",
+        "to": "bo_stategraph/workflow.py",
+        "line": 8
+      },
+      {
+        "from": "tooling/build_graph.py",
+        "to": "observer_generated/runtime/code_structure.py",
+        "line": 9
+      },
+      {
+        "from": "tooling/build_graph.py",
+        "to": "observer_generated/runtime/code_structure.py",
+        "line": 9
+      },
+      {
+        "from": "tooling/build_graph.py",
+        "to": "observer_generated/runtime/code_structure.py",
+        "line": 9
+      },
+      {
+        "from": "tooling/dev.py",
+        "to": "tests/observe.py",
+        "line": 23
+      },
+      {
+        "from": "tooling/dev.py",
+        "to": "tests/observe.py",
+        "line": 23
+      },
+      {
+        "from": "tooling/dev.py",
+        "to": "tests/observe.py",
+        "line": 23
+      },
+      {
+        "from": "tooling/dev.py",
+        "to": "tests/observe.py",
+        "line": 23
+      },
+      {
+        "from": "tooling/dev.py",
+        "to": "tests/scenarios.py",
+        "line": 24
+      },
+      {
+        "from": "tooling/dev.py",
+        "to": "tests/scenarios.py",
+        "line": 24
+      },
+      {
+        "from": "tooling/graph_fixture.py",
+        "to": "tests/observe.py",
+        "line": 8
+      },
+      {
+        "from": "tooling/graph_fixture.py",
+        "to": "tests/observe.py",
+        "line": 8
+      },
+      {
+        "from": "tooling/graph_fixture.py",
+        "to": "tests/observe.py",
+        "line": 8
+      },
+      {
+        "from": "tooling/graph_fixture.py",
+        "to": "tests/scenarios.py",
+        "line": 9
+      },
+      {
+        "from": "tooling/graph_fixture.py",
+        "to": "tests/scenarios.py",
+        "line": 9
+      }
+    ],
+    "managed": [
+      "bo_stategraph/__init__.py",
+      "bo_stategraph/bo_contracts.py",
+      "bo_stategraph/execution_contract.py",
+      "bo_stategraph/runtime-version.json",
+      "observer_generated/behavior.json",
+      "observer_generated/runtime/__init__.py",
+      "observer_generated/runtime/architecture_guard.py",
+      "observer_generated/runtime/behavior_model.py",
+      "observer_generated/runtime/bo_contracts.py",
+      "observer_generated/runtime/bo_design.py",
+      "observer_generated/runtime/bo_retention.py",
+      "observer_generated/runtime/bo_runtime.py",
+      "observer_generated/runtime/bo_stategraph.py",
+      "observer_generated/runtime/bo_sync.py",
+      "observer_generated/runtime/bo_upgrade.py",
+      "observer_generated/runtime/bo_web.py",
+      "observer_generated/runtime/change_sync.py",
+      "observer_generated/runtime/code_structure.py",
+      "observer_generated/runtime/execution_contract.py",
+      "observer_generated/runtime/focus_graph.py",
+      "observer_generated/runtime/mapping_contract.py",
+      "observer_generated/runtime/model_tool.py",
+      "observer_generated/runtime/origin.json",
+      "observer_generated/runtime/probe.py",
+      "observer_generated/runtime/project_bundle.py",
+      "observer_generated/runtime/recording_session.py",
+      "observer_generated/runtime/requirements_dialogue.py",
+      "observer_generated/runtime/runtime_frames.py",
+      "observer_generated/runtime/semantic_probe.py",
+      "observer_generated/runtime/source_migration.py",
+      "observer_generated/runtime/statechart_contract.py",
+      "observer_generated/runtime/sync_config.py",
+      "observer_generated/runtime/sync_io.py",
+      "observer_generated/runtime/sync_verify.py",
+      "observer_generated/runtime/view_preferences.py",
+      "observer_generated/runtime/viewer_server.py",
+      "observer_generated/runtime/whitebox_contract.py",
+      "observer_generated/runtime/worknet_contract.py",
+      "observer_generated/static/ELK-LICENSE.md",
+      "observer_generated/static/PIXI-LICENSE.txt",
+      "observer_generated/static/analysis.js",
+      "observer_generated/static/conversation.js",
+      "observer_generated/static/elk-worker.min.js",
+      "observer_generated/static/elk.bundled.js",
+      "observer_generated/static/glyphs.js",
+      "observer_generated/static/graph-core.js",
+      "observer_generated/static/index.html",
+      "observer_generated/static/layout.js",
+      "observer_generated/static/pixi.min.js",
+      "observer_generated/static/polling.js",
+      "observer_generated/static/preferences.js",
+      "observer_generated/static/recording.js",
+      "observer_generated/static/renderer.js",
+      "observer_generated/static/replay-steps.js",
+      "observer_generated/static/runtime-frames.js",
+      "observer_generated/static/viewer.css",
+      "observer_generated/static/viewer.js"
+    ],
+    "limits": [
+      "Python static imports in configured scan paths",
+      "Dynamic aliases and external package internals need independent review",
+      "Sealing is a recorded regeneration, not business acceptance; run change_sync verify"
+    ],
+    "package": {
+      "path": "dist/web-core-132289b4.zip",
+      "files": 18,
+      "sha256": "2ba892e0ef5840f30616d0a737b35df1b66becdd27ce2f7b5ffd99bb1c8f39de",
+      "retains": "business state machine; neutral observation port has no observer implementation"
+    }
+  },
+  "smoke": {
+    "exit_code": 0,
+    "actual": {
+      "state": "completed",
+      "effects": 1
+    }
+  }
+}

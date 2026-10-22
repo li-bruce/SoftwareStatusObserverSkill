@@ -1,0 +1,1030 @@
+[
+  {
+    "argv": [
+      "observer_runtime/change_sync.py",
+      "check",
+      "--root",
+      "."
+    ],
+    "exit_code": 0,
+    "result": {
+      "valid": true,
+      "status": "current",
+      "errors": [],
+      "candidate_id": "a9ebf570a9fd82b9ea16d1d5f893266a7c75e67c08c3938d673be3343eb405da"
+    },
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "observer_runtime/change_sync.py",
+      "begin",
+      "--root",
+      ".",
+      "--change",
+      ".stategraph/repaired-export-check",
+      "--request",
+      "Inspect mapping omission detection and repair without changing any business expectation"
+    ],
+    "exit_code": 0,
+    "result": {
+      "valid": true,
+      "status": "editing",
+      "baseline_id": "a9ebf570a9fd82b9ea16d1d5f893266a7c75e67c08c3938d673be3343eb405da",
+      "change": ".stategraph/repaired-export-check"
+    },
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "observer_runtime/change_sync.py",
+      "inspect",
+      "--root",
+      "."
+    ],
+    "exit_code": 1,
+    "result": {
+      "candidate_id": "e01c9ce3e5ceb5162eedecf93e9b023fb561a08167545fc8a8e655077ad1309c",
+      "changed_files": [
+        "mapping.json"
+      ],
+      "changed_symbols": [],
+      "affected_callers": [],
+      "affected_nodes": [],
+      "unmapped_changed_symbols": [],
+      "unmapped_implementation_symbols": [
+        "archive_app/ports.py::BOTracePort",
+        "archive_app/ports.py::BOTracePort.__init__",
+        "archive_app/ports.py::BOTracePort.bo_record",
+        "archive_app/ports.py::no_trace",
+        "archive_app/service.py::ArchiveService",
+        "archive_app/service.py::ArchiveService.__init__",
+        "archive_app/service.py::ArchiveService.close",
+        "archive_app/service.py::ArchiveService.start_scheduler",
+        "archive_app/service.py::ArchiveService.start_scheduler.loop",
+        "archive_app/storage.py::ArchiveStore",
+        "archive_app/storage.py::ArchiveStore.__init__",
+        "archive_app/storage.py::ArchiveStore.connect",
+        "archive_app/storage.py::ArchiveStore.seed",
+        "bo_stategraph/workflow.py::Phase",
+        "bo_stategraph/workflow.py::Workflow.__init__",
+        "bo_stategraph/workflow.py::Workflow.all_passed",
+        "bo_stategraph/workflow.py::Workflow.approved",
+        "bo_stategraph/workflow.py::Workflow.checks_failed",
+        "bo_stategraph/workflow.py::Workflow.effect_saved",
+        "bo_stategraph/workflow.py::Workflow.settled",
+        "bo_stategraph/workflow.py::definition",
+        "integrations/bo_observer.py::BOObserver",
+        "integrations/bo_observer.py::BOObserver.__init__",
+        "integrations/bo_observer.py::BOObserver.close",
+        "integrations/bo_observer.py::BOObserver.health",
+        "integrations/bo_observer.py::BOObserver.snapshot",
+        "integrations/bo_observer.py::BOObserver.trace",
+        "integrations/bo_observer.py::BOObserver.write",
+        "integrations/bo_server.py::LocalApplication",
+        "integrations/bo_server.py::LocalApplication.__init__",
+        "integrations/bo_server.py::LocalApplication.bo_export_graph",
+        "integrations/bo_server.py::LocalApplication.cases",
+        "integrations/bo_server.py::LocalApplication.command",
+        "integrations/bo_server.py::LocalApplication.graph_view",
+        "integrations/bo_server.py::LocalApplication.recording_view",
+        "integrations/bo_server.py::LocalApplication.state",
+        "integrations/bo_server.py::LocalApplication.version_sources",
+        "integrations/bo_server.py::serve",
+        "integrations/bo_server.py::serve.Handler",
+        "integrations/bo_server.py::serve.Handler.do_GET",
+        "integrations/bo_server.py::serve.Handler.do_POST",
+        "integrations/bo_server.py::serve.Handler.log_message",
+        "integrations/bo_server.py::serve.Handler.reply",
+        "run.py::main"
+      ],
+      "changed_requirements": [],
+      "unresolved_call_count": 494,
+      "meaning": "Potential impact plus authored abstraction mapping; semantic truth still needs contract and runtime checks.",
+      "errors": [],
+      "required_classification": [
+        "archive_app/ports.py::BOTracePort",
+        "archive_app/ports.py::BOTracePort.__init__",
+        "archive_app/ports.py::BOTracePort.bo_record",
+        "archive_app/ports.py::no_trace",
+        "archive_app/service.py::ArchiveService",
+        "archive_app/service.py::ArchiveService.__init__",
+        "archive_app/service.py::ArchiveService.close",
+        "archive_app/service.py::ArchiveService.start_scheduler",
+        "archive_app/service.py::ArchiveService.start_scheduler.loop",
+        "archive_app/storage.py::ArchiveStore",
+        "archive_app/storage.py::ArchiveStore.__init__",
+        "archive_app/storage.py::ArchiveStore.connect",
+        "archive_app/storage.py::ArchiveStore.seed",
+        "bo_stategraph/workflow.py::Phase",
+        "bo_stategraph/workflow.py::Workflow.__init__",
+        "bo_stategraph/workflow.py::Workflow.all_passed",
+        "bo_stategraph/workflow.py::Workflow.approved",
+        "bo_stategraph/workflow.py::Workflow.checks_failed",
+        "bo_stategraph/workflow.py::Workflow.effect_saved",
+        "bo_stategraph/workflow.py::Workflow.settled",
+        "bo_stategraph/workflow.py::definition",
+        "integrations/bo_observer.py::BOObserver",
+        "integrations/bo_observer.py::BOObserver.__init__",
+        "integrations/bo_observer.py::BOObserver.close",
+        "integrations/bo_observer.py::BOObserver.health",
+        "integrations/bo_observer.py::BOObserver.snapshot",
+        "integrations/bo_observer.py::BOObserver.trace",
+        "integrations/bo_observer.py::BOObserver.write",
+        "integrations/bo_server.py::LocalApplication",
+        "integrations/bo_server.py::LocalApplication.__init__",
+        "integrations/bo_server.py::LocalApplication.bo_export_graph",
+        "integrations/bo_server.py::LocalApplication.cases",
+        "integrations/bo_server.py::LocalApplication.command",
+        "integrations/bo_server.py::LocalApplication.graph_view",
+        "integrations/bo_server.py::LocalApplication.recording_view",
+        "integrations/bo_server.py::LocalApplication.state",
+        "integrations/bo_server.py::LocalApplication.version_sources",
+        "integrations/bo_server.py::serve",
+        "integrations/bo_server.py::serve.Handler",
+        "integrations/bo_server.py::serve.Handler.do_GET",
+        "integrations/bo_server.py::serve.Handler.do_POST",
+        "integrations/bo_server.py::serve.Handler.log_message",
+        "integrations/bo_server.py::serve.Handler.reply",
+        "run.py::main"
+      ],
+      "review_errors": [
+        "missing review.json for this candidate"
+      ],
+      "stategraph": {
+        "module": "bo_stategraph/__init__.py",
+        "development_mode": "guided",
+        "execution_mode": "drive",
+        "decision_source": "default",
+        "decision": "状态机完整位于 bo_stategraph；默认内部引导，监控和映射始终维护。"
+      },
+      "discovery": {
+        "valid": true,
+        "ready": true,
+        "errors": [],
+        "warnings": [],
+        "blocked": [],
+        "questions": [],
+        "awaiting_answers": []
+      },
+      "valid": false
+    },
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "observer_runtime/change_sync.py",
+      "verify",
+      "--root",
+      "."
+    ],
+    "exit_code": 1,
+    "result": {
+      "valid": false,
+      "errors": [
+        "mapping coverage was removed or changed: fields",
+        "mapping plan omits context field: operator_id"
+      ],
+      "reports": {
+        "mapping": {
+          "status": "failed",
+          "errors": [
+            "mapping coverage was removed or changed: fields",
+            "mapping plan omits context field: operator_id"
+          ],
+          "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses"
+        },
+        "state_rules": {
+          "status": "not_run",
+          "errors": []
+        },
+        "project_checks": {
+          "status": "not_run",
+          "errors": [],
+          "scope": "Configured project tests, architecture and viewer checks"
+        },
+        "business": {
+          "status": "not_run",
+          "errors": [],
+          "assertions": {},
+          "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+        }
+      },
+      "candidate_id": "e01c9ce3e5ceb5162eedecf93e9b023fb561a08167545fc8a8e655077ad1309c"
+    },
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "observer_runtime/change_sync.py",
+      "accept",
+      "--root",
+      "."
+    ],
+    "exit_code": 1,
+    "result": {
+      "valid": false,
+      "status": "needs_sync",
+      "errors": [
+        "mapping coverage was removed or changed: fields",
+        "mapping plan omits context field: operator_id",
+        "verification is failed or stale",
+        "review changed after verification"
+      ],
+      "candidate_id": "e01c9ce3e5ceb5162eedecf93e9b023fb561a08167545fc8a8e655077ad1309c"
+    },
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "observer_runtime/change_sync.py",
+      "check",
+      "--root",
+      "."
+    ],
+    "exit_code": 1,
+    "result": {
+      "valid": false,
+      "status": "needs_sync",
+      "errors": [
+        "mapping coverage was removed or changed: fields",
+        "mapping plan omits context field: operator_id",
+        "verification is failed or stale",
+        "review changed after verification",
+        "change is not accepted for current inputs",
+        "accepted verification differs",
+        "manifest differs from accepted build"
+      ],
+      "candidate_id": "e01c9ce3e5ceb5162eedecf93e9b023fb561a08167545fc8a8e655077ad1309c"
+    },
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "observer_runtime/change_sync.py",
+      "inspect",
+      "--root",
+      "."
+    ],
+    "exit_code": 1,
+    "result": {
+      "candidate_id": "5e7dbaea63beee3489141547b8083451e1671b4d532ff47b5538204154754104",
+      "changed_files": [
+        "archive_app/new_unmapped.py"
+      ],
+      "changed_symbols": [],
+      "affected_callers": [],
+      "affected_nodes": [],
+      "unmapped_changed_symbols": [],
+      "unmapped_implementation_symbols": [
+        "archive_app/ports.py::BOTracePort",
+        "archive_app/ports.py::BOTracePort.__init__",
+        "archive_app/ports.py::BOTracePort.bo_record",
+        "archive_app/ports.py::no_trace",
+        "archive_app/service.py::ArchiveService",
+        "archive_app/service.py::ArchiveService.__init__",
+        "archive_app/service.py::ArchiveService.close",
+        "archive_app/service.py::ArchiveService.start_scheduler",
+        "archive_app/service.py::ArchiveService.start_scheduler.loop",
+        "archive_app/storage.py::ArchiveStore",
+        "archive_app/storage.py::ArchiveStore.__init__",
+        "archive_app/storage.py::ArchiveStore.connect",
+        "archive_app/storage.py::ArchiveStore.seed",
+        "bo_stategraph/workflow.py::Phase",
+        "bo_stategraph/workflow.py::Workflow.__init__",
+        "bo_stategraph/workflow.py::Workflow.all_passed",
+        "bo_stategraph/workflow.py::Workflow.approved",
+        "bo_stategraph/workflow.py::Workflow.checks_failed",
+        "bo_stategraph/workflow.py::Workflow.effect_saved",
+        "bo_stategraph/workflow.py::Workflow.settled",
+        "bo_stategraph/workflow.py::definition",
+        "integrations/bo_observer.py::BOObserver",
+        "integrations/bo_observer.py::BOObserver.__init__",
+        "integrations/bo_observer.py::BOObserver.close",
+        "integrations/bo_observer.py::BOObserver.health",
+        "integrations/bo_observer.py::BOObserver.snapshot",
+        "integrations/bo_observer.py::BOObserver.trace",
+        "integrations/bo_observer.py::BOObserver.write",
+        "integrations/bo_server.py::LocalApplication",
+        "integrations/bo_server.py::LocalApplication.__init__",
+        "integrations/bo_server.py::LocalApplication.bo_export_graph",
+        "integrations/bo_server.py::LocalApplication.cases",
+        "integrations/bo_server.py::LocalApplication.command",
+        "integrations/bo_server.py::LocalApplication.graph_view",
+        "integrations/bo_server.py::LocalApplication.recording_view",
+        "integrations/bo_server.py::LocalApplication.state",
+        "integrations/bo_server.py::LocalApplication.version_sources",
+        "integrations/bo_server.py::serve",
+        "integrations/bo_server.py::serve.Handler",
+        "integrations/bo_server.py::serve.Handler.do_GET",
+        "integrations/bo_server.py::serve.Handler.do_POST",
+        "integrations/bo_server.py::serve.Handler.log_message",
+        "integrations/bo_server.py::serve.Handler.reply",
+        "run.py::main"
+      ],
+      "changed_requirements": [],
+      "unresolved_call_count": 494,
+      "meaning": "Potential impact plus authored abstraction mapping; semantic truth still needs contract and runtime checks.",
+      "errors": [
+        {
+          "unregistered_source": "archive_app/new_unmapped.py",
+          "action": "map implementation or record an explicit scope exclusion"
+        }
+      ],
+      "required_classification": [
+        "archive_app/ports.py::BOTracePort",
+        "archive_app/ports.py::BOTracePort.__init__",
+        "archive_app/ports.py::BOTracePort.bo_record",
+        "archive_app/ports.py::no_trace",
+        "archive_app/service.py::ArchiveService",
+        "archive_app/service.py::ArchiveService.__init__",
+        "archive_app/service.py::ArchiveService.close",
+        "archive_app/service.py::ArchiveService.start_scheduler",
+        "archive_app/service.py::ArchiveService.start_scheduler.loop",
+        "archive_app/storage.py::ArchiveStore",
+        "archive_app/storage.py::ArchiveStore.__init__",
+        "archive_app/storage.py::ArchiveStore.connect",
+        "archive_app/storage.py::ArchiveStore.seed",
+        "bo_stategraph/workflow.py::Phase",
+        "bo_stategraph/workflow.py::Workflow.__init__",
+        "bo_stategraph/workflow.py::Workflow.all_passed",
+        "bo_stategraph/workflow.py::Workflow.approved",
+        "bo_stategraph/workflow.py::Workflow.checks_failed",
+        "bo_stategraph/workflow.py::Workflow.effect_saved",
+        "bo_stategraph/workflow.py::Workflow.settled",
+        "bo_stategraph/workflow.py::definition",
+        "integrations/bo_observer.py::BOObserver",
+        "integrations/bo_observer.py::BOObserver.__init__",
+        "integrations/bo_observer.py::BOObserver.close",
+        "integrations/bo_observer.py::BOObserver.health",
+        "integrations/bo_observer.py::BOObserver.snapshot",
+        "integrations/bo_observer.py::BOObserver.trace",
+        "integrations/bo_observer.py::BOObserver.write",
+        "integrations/bo_server.py::LocalApplication",
+        "integrations/bo_server.py::LocalApplication.__init__",
+        "integrations/bo_server.py::LocalApplication.bo_export_graph",
+        "integrations/bo_server.py::LocalApplication.cases",
+        "integrations/bo_server.py::LocalApplication.command",
+        "integrations/bo_server.py::LocalApplication.graph_view",
+        "integrations/bo_server.py::LocalApplication.recording_view",
+        "integrations/bo_server.py::LocalApplication.state",
+        "integrations/bo_server.py::LocalApplication.version_sources",
+        "integrations/bo_server.py::serve",
+        "integrations/bo_server.py::serve.Handler",
+        "integrations/bo_server.py::serve.Handler.do_GET",
+        "integrations/bo_server.py::serve.Handler.do_POST",
+        "integrations/bo_server.py::serve.Handler.log_message",
+        "integrations/bo_server.py::serve.Handler.reply",
+        "run.py::main"
+      ],
+      "review_errors": [
+        "review belongs to an older candidate"
+      ],
+      "stategraph": {
+        "module": "bo_stategraph/__init__.py",
+        "development_mode": "guided",
+        "execution_mode": "drive",
+        "decision_source": "default",
+        "decision": "状态机完整位于 bo_stategraph；默认内部引导，监控和映射始终维护。"
+      },
+      "discovery": {
+        "valid": true,
+        "ready": true,
+        "errors": [],
+        "warnings": [],
+        "blocked": [],
+        "questions": [],
+        "awaiting_answers": []
+      },
+      "valid": false
+    },
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "observer_runtime/change_sync.py",
+      "verify",
+      "--root",
+      "."
+    ],
+    "exit_code": 1,
+    "result": {
+      "valid": false,
+      "errors": [
+        {
+          "unregistered_source": "archive_app/new_unmapped.py",
+          "action": "map implementation or record an explicit scope exclusion"
+        }
+      ],
+      "reports": {
+        "mapping": {
+          "status": "failed",
+          "errors": [
+            {
+              "unregistered_source": "archive_app/new_unmapped.py",
+              "action": "map implementation or record an explicit scope exclusion"
+            }
+          ],
+          "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses"
+        },
+        "state_rules": {
+          "status": "not_run",
+          "errors": []
+        },
+        "project_checks": {
+          "status": "not_run",
+          "errors": [],
+          "scope": "Configured project tests, architecture and viewer checks"
+        },
+        "business": {
+          "status": "not_run",
+          "errors": [],
+          "assertions": {},
+          "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+        }
+      },
+      "candidate_id": "5e7dbaea63beee3489141547b8083451e1671b4d532ff47b5538204154754104"
+    },
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "observer_runtime/change_sync.py",
+      "accept",
+      "--root",
+      "."
+    ],
+    "exit_code": 1,
+    "result": {
+      "valid": false,
+      "status": "needs_sync",
+      "errors": [
+        {
+          "unregistered_source": "archive_app/new_unmapped.py",
+          "action": "map implementation or record an explicit scope exclusion"
+        },
+        "verification is failed or stale",
+        "review changed after verification"
+      ],
+      "candidate_id": "5e7dbaea63beee3489141547b8083451e1671b4d532ff47b5538204154754104"
+    },
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "observer_runtime/change_sync.py",
+      "check",
+      "--root",
+      "."
+    ],
+    "exit_code": 1,
+    "result": {
+      "valid": false,
+      "status": "needs_sync",
+      "errors": [
+        {
+          "unregistered_source": "archive_app/new_unmapped.py",
+          "action": "map implementation or record an explicit scope exclusion"
+        },
+        "verification is failed or stale",
+        "review changed after verification",
+        "change is not accepted for current inputs",
+        "accepted verification differs",
+        "manifest differs from accepted build"
+      ],
+      "candidate_id": "5e7dbaea63beee3489141547b8083451e1671b4d532ff47b5538204154754104"
+    },
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "observer_runtime/change_sync.py",
+      "inspect",
+      "--root",
+      "."
+    ],
+    "exit_code": 1,
+    "result": {
+      "candidate_id": "f9e9fb4df740285c4b5c015b18e8c53070579a7b1e6d834ba1f4f4a0fad98e78",
+      "changed_files": [
+        "tooling/observe.py"
+      ],
+      "changed_symbols": [],
+      "affected_callers": [],
+      "affected_nodes": [],
+      "unmapped_changed_symbols": [],
+      "unmapped_implementation_symbols": [
+        "archive_app/ports.py::BOTracePort",
+        "archive_app/ports.py::BOTracePort.__init__",
+        "archive_app/ports.py::BOTracePort.bo_record",
+        "archive_app/ports.py::no_trace",
+        "archive_app/service.py::ArchiveService",
+        "archive_app/service.py::ArchiveService.__init__",
+        "archive_app/service.py::ArchiveService.close",
+        "archive_app/service.py::ArchiveService.start_scheduler",
+        "archive_app/service.py::ArchiveService.start_scheduler.loop",
+        "archive_app/storage.py::ArchiveStore",
+        "archive_app/storage.py::ArchiveStore.__init__",
+        "archive_app/storage.py::ArchiveStore.connect",
+        "archive_app/storage.py::ArchiveStore.seed",
+        "bo_stategraph/workflow.py::Phase",
+        "bo_stategraph/workflow.py::Workflow.__init__",
+        "bo_stategraph/workflow.py::Workflow.all_passed",
+        "bo_stategraph/workflow.py::Workflow.approved",
+        "bo_stategraph/workflow.py::Workflow.checks_failed",
+        "bo_stategraph/workflow.py::Workflow.effect_saved",
+        "bo_stategraph/workflow.py::Workflow.settled",
+        "bo_stategraph/workflow.py::definition",
+        "integrations/bo_observer.py::BOObserver",
+        "integrations/bo_observer.py::BOObserver.__init__",
+        "integrations/bo_observer.py::BOObserver.close",
+        "integrations/bo_observer.py::BOObserver.health",
+        "integrations/bo_observer.py::BOObserver.snapshot",
+        "integrations/bo_observer.py::BOObserver.trace",
+        "integrations/bo_observer.py::BOObserver.write",
+        "integrations/bo_server.py::LocalApplication",
+        "integrations/bo_server.py::LocalApplication.__init__",
+        "integrations/bo_server.py::LocalApplication.bo_export_graph",
+        "integrations/bo_server.py::LocalApplication.cases",
+        "integrations/bo_server.py::LocalApplication.command",
+        "integrations/bo_server.py::LocalApplication.graph_view",
+        "integrations/bo_server.py::LocalApplication.recording_view",
+        "integrations/bo_server.py::LocalApplication.state",
+        "integrations/bo_server.py::LocalApplication.version_sources",
+        "integrations/bo_server.py::serve",
+        "integrations/bo_server.py::serve.Handler",
+        "integrations/bo_server.py::serve.Handler.do_GET",
+        "integrations/bo_server.py::serve.Handler.do_POST",
+        "integrations/bo_server.py::serve.Handler.log_message",
+        "integrations/bo_server.py::serve.Handler.reply",
+        "run.py::main"
+      ],
+      "changed_requirements": [],
+      "unresolved_call_count": 494,
+      "meaning": "Potential impact plus authored abstraction mapping; semantic truth still needs contract and runtime checks.",
+      "errors": [],
+      "required_classification": [
+        "archive_app/ports.py::BOTracePort",
+        "archive_app/ports.py::BOTracePort.__init__",
+        "archive_app/ports.py::BOTracePort.bo_record",
+        "archive_app/ports.py::no_trace",
+        "archive_app/service.py::ArchiveService",
+        "archive_app/service.py::ArchiveService.__init__",
+        "archive_app/service.py::ArchiveService.close",
+        "archive_app/service.py::ArchiveService.start_scheduler",
+        "archive_app/service.py::ArchiveService.start_scheduler.loop",
+        "archive_app/storage.py::ArchiveStore",
+        "archive_app/storage.py::ArchiveStore.__init__",
+        "archive_app/storage.py::ArchiveStore.connect",
+        "archive_app/storage.py::ArchiveStore.seed",
+        "bo_stategraph/workflow.py::Phase",
+        "bo_stategraph/workflow.py::Workflow.__init__",
+        "bo_stategraph/workflow.py::Workflow.all_passed",
+        "bo_stategraph/workflow.py::Workflow.approved",
+        "bo_stategraph/workflow.py::Workflow.checks_failed",
+        "bo_stategraph/workflow.py::Workflow.effect_saved",
+        "bo_stategraph/workflow.py::Workflow.settled",
+        "bo_stategraph/workflow.py::definition",
+        "integrations/bo_observer.py::BOObserver",
+        "integrations/bo_observer.py::BOObserver.__init__",
+        "integrations/bo_observer.py::BOObserver.close",
+        "integrations/bo_observer.py::BOObserver.health",
+        "integrations/bo_observer.py::BOObserver.snapshot",
+        "integrations/bo_observer.py::BOObserver.trace",
+        "integrations/bo_observer.py::BOObserver.write",
+        "integrations/bo_server.py::LocalApplication",
+        "integrations/bo_server.py::LocalApplication.__init__",
+        "integrations/bo_server.py::LocalApplication.bo_export_graph",
+        "integrations/bo_server.py::LocalApplication.cases",
+        "integrations/bo_server.py::LocalApplication.command",
+        "integrations/bo_server.py::LocalApplication.graph_view",
+        "integrations/bo_server.py::LocalApplication.recording_view",
+        "integrations/bo_server.py::LocalApplication.state",
+        "integrations/bo_server.py::LocalApplication.version_sources",
+        "integrations/bo_server.py::serve",
+        "integrations/bo_server.py::serve.Handler",
+        "integrations/bo_server.py::serve.Handler.do_GET",
+        "integrations/bo_server.py::serve.Handler.do_POST",
+        "integrations/bo_server.py::serve.Handler.log_message",
+        "integrations/bo_server.py::serve.Handler.reply",
+        "run.py::main"
+      ],
+      "review_errors": [
+        "review belongs to an older candidate"
+      ],
+      "stategraph": {
+        "module": "bo_stategraph/__init__.py",
+        "development_mode": "guided",
+        "execution_mode": "drive",
+        "decision_source": "default",
+        "decision": "状态机完整位于 bo_stategraph；默认内部引导，监控和映射始终维护。"
+      },
+      "discovery": {
+        "valid": true,
+        "ready": true,
+        "errors": [],
+        "warnings": [],
+        "blocked": [],
+        "questions": [],
+        "awaiting_answers": []
+      },
+      "valid": false
+    },
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "observer_runtime/change_sync.py",
+      "verify",
+      "--root",
+      "."
+    ],
+    "exit_code": 1,
+    "result": {
+      "valid": false,
+      "errors": [
+        "public export differs from its protected scenario projection"
+      ],
+      "candidate_id": "f9e9fb4df740285c4b5c015b18e8c53070579a7b1e6d834ba1f4f4a0fad98e78",
+      "reports": {
+        "mapping": {
+          "status": "failed",
+          "errors": [
+            "public export differs from its protected scenario projection"
+          ],
+          "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+          "stategraph_export": "checked",
+          "witnesses": 480,
+          "projection_checks": 1110
+        },
+        "state_rules": {
+          "status": "passed",
+          "errors": []
+        },
+        "project_checks": {
+          "status": "passed",
+          "errors": [],
+          "scope": "Configured project tests, architecture and viewer checks"
+        },
+        "business": {
+          "status": "passed",
+          "errors": [],
+          "assertions": {
+            "required": 189,
+            "executed": 189
+          },
+          "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+        }
+      },
+      "review_hash": "53dcd7be9e3d57568673d938108caa235cdee3a8fe7b31ea4f479929cbafeb56",
+      "observations_hash": "ca893b10dc525b6c5fd6c81a59e6dae0e9f7fc29e5b8dd10dcf7e588d662bc3e",
+      "tests": [
+        {
+          "argv": [
+            "{python}",
+            "-X",
+            "utf8",
+            "-B",
+            "tooling/tests.py"
+          ],
+          "exit_code": 0
+        },
+        {
+          "argv": [
+            "node",
+            "tooling/graph_tests.mjs"
+          ],
+          "exit_code": 0
+        },
+        {
+          "argv": [
+            "{python}",
+            "-X",
+            "utf8",
+            "-B",
+            "tooling/test_recording.py"
+          ],
+          "exit_code": 0
+        },
+        {
+          "argv": [
+            "node",
+            "tooling/test_recorded_views.mjs"
+          ],
+          "exit_code": 0
+        },
+        {
+          "argv": [
+            "{python}",
+            "-X",
+            "utf8",
+            "-B",
+            "tooling/test_stategraph_module.py"
+          ],
+          "exit_code": 0
+        }
+      ],
+      "checked_at": "2026-10-22T07:40:59.666672+00:00",
+      "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+    },
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "observer_runtime/change_sync.py",
+      "accept",
+      "--root",
+      "."
+    ],
+    "exit_code": 1,
+    "result": {
+      "valid": false,
+      "status": "needs_sync",
+      "errors": [
+        "verification is failed or stale"
+      ],
+      "candidate_id": "f9e9fb4df740285c4b5c015b18e8c53070579a7b1e6d834ba1f4f4a0fad98e78"
+    },
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "observer_runtime/change_sync.py",
+      "check",
+      "--root",
+      "."
+    ],
+    "exit_code": 1,
+    "result": {
+      "valid": false,
+      "status": "needs_sync",
+      "errors": [
+        "verification is failed or stale",
+        "change is not accepted for current inputs",
+        "accepted verification differs",
+        "manifest differs from accepted build"
+      ],
+      "candidate_id": "f9e9fb4df740285c4b5c015b18e8c53070579a7b1e6d834ba1f4f4a0fad98e78"
+    },
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "observer_runtime/change_sync.py",
+      "inspect",
+      "--root",
+      "."
+    ],
+    "exit_code": 1,
+    "result": {
+      "candidate_id": "a9ebf570a9fd82b9ea16d1d5f893266a7c75e67c08c3938d673be3343eb405da",
+      "changed_files": [],
+      "changed_symbols": [],
+      "affected_callers": [],
+      "affected_nodes": [],
+      "unmapped_changed_symbols": [],
+      "unmapped_implementation_symbols": [
+        "archive_app/ports.py::BOTracePort",
+        "archive_app/ports.py::BOTracePort.__init__",
+        "archive_app/ports.py::BOTracePort.bo_record",
+        "archive_app/ports.py::no_trace",
+        "archive_app/service.py::ArchiveService",
+        "archive_app/service.py::ArchiveService.__init__",
+        "archive_app/service.py::ArchiveService.close",
+        "archive_app/service.py::ArchiveService.start_scheduler",
+        "archive_app/service.py::ArchiveService.start_scheduler.loop",
+        "archive_app/storage.py::ArchiveStore",
+        "archive_app/storage.py::ArchiveStore.__init__",
+        "archive_app/storage.py::ArchiveStore.connect",
+        "archive_app/storage.py::ArchiveStore.seed",
+        "bo_stategraph/workflow.py::Phase",
+        "bo_stategraph/workflow.py::Workflow.__init__",
+        "bo_stategraph/workflow.py::Workflow.all_passed",
+        "bo_stategraph/workflow.py::Workflow.approved",
+        "bo_stategraph/workflow.py::Workflow.checks_failed",
+        "bo_stategraph/workflow.py::Workflow.effect_saved",
+        "bo_stategraph/workflow.py::Workflow.settled",
+        "bo_stategraph/workflow.py::definition",
+        "integrations/bo_observer.py::BOObserver",
+        "integrations/bo_observer.py::BOObserver.__init__",
+        "integrations/bo_observer.py::BOObserver.close",
+        "integrations/bo_observer.py::BOObserver.health",
+        "integrations/bo_observer.py::BOObserver.snapshot",
+        "integrations/bo_observer.py::BOObserver.trace",
+        "integrations/bo_observer.py::BOObserver.write",
+        "integrations/bo_server.py::LocalApplication",
+        "integrations/bo_server.py::LocalApplication.__init__",
+        "integrations/bo_server.py::LocalApplication.bo_export_graph",
+        "integrations/bo_server.py::LocalApplication.cases",
+        "integrations/bo_server.py::LocalApplication.command",
+        "integrations/bo_server.py::LocalApplication.graph_view",
+        "integrations/bo_server.py::LocalApplication.recording_view",
+        "integrations/bo_server.py::LocalApplication.state",
+        "integrations/bo_server.py::LocalApplication.version_sources",
+        "integrations/bo_server.py::serve",
+        "integrations/bo_server.py::serve.Handler",
+        "integrations/bo_server.py::serve.Handler.do_GET",
+        "integrations/bo_server.py::serve.Handler.do_POST",
+        "integrations/bo_server.py::serve.Handler.log_message",
+        "integrations/bo_server.py::serve.Handler.reply",
+        "run.py::main"
+      ],
+      "changed_requirements": [],
+      "unresolved_call_count": 494,
+      "meaning": "Potential impact plus authored abstraction mapping; semantic truth still needs contract and runtime checks.",
+      "errors": [],
+      "required_classification": [
+        "archive_app/ports.py::BOTracePort",
+        "archive_app/ports.py::BOTracePort.__init__",
+        "archive_app/ports.py::BOTracePort.bo_record",
+        "archive_app/ports.py::no_trace",
+        "archive_app/service.py::ArchiveService",
+        "archive_app/service.py::ArchiveService.__init__",
+        "archive_app/service.py::ArchiveService.close",
+        "archive_app/service.py::ArchiveService.start_scheduler",
+        "archive_app/service.py::ArchiveService.start_scheduler.loop",
+        "archive_app/storage.py::ArchiveStore",
+        "archive_app/storage.py::ArchiveStore.__init__",
+        "archive_app/storage.py::ArchiveStore.connect",
+        "archive_app/storage.py::ArchiveStore.seed",
+        "bo_stategraph/workflow.py::Phase",
+        "bo_stategraph/workflow.py::Workflow.__init__",
+        "bo_stategraph/workflow.py::Workflow.all_passed",
+        "bo_stategraph/workflow.py::Workflow.approved",
+        "bo_stategraph/workflow.py::Workflow.checks_failed",
+        "bo_stategraph/workflow.py::Workflow.effect_saved",
+        "bo_stategraph/workflow.py::Workflow.settled",
+        "bo_stategraph/workflow.py::definition",
+        "integrations/bo_observer.py::BOObserver",
+        "integrations/bo_observer.py::BOObserver.__init__",
+        "integrations/bo_observer.py::BOObserver.close",
+        "integrations/bo_observer.py::BOObserver.health",
+        "integrations/bo_observer.py::BOObserver.snapshot",
+        "integrations/bo_observer.py::BOObserver.trace",
+        "integrations/bo_observer.py::BOObserver.write",
+        "integrations/bo_server.py::LocalApplication",
+        "integrations/bo_server.py::LocalApplication.__init__",
+        "integrations/bo_server.py::LocalApplication.bo_export_graph",
+        "integrations/bo_server.py::LocalApplication.cases",
+        "integrations/bo_server.py::LocalApplication.command",
+        "integrations/bo_server.py::LocalApplication.graph_view",
+        "integrations/bo_server.py::LocalApplication.recording_view",
+        "integrations/bo_server.py::LocalApplication.state",
+        "integrations/bo_server.py::LocalApplication.version_sources",
+        "integrations/bo_server.py::serve",
+        "integrations/bo_server.py::serve.Handler",
+        "integrations/bo_server.py::serve.Handler.do_GET",
+        "integrations/bo_server.py::serve.Handler.do_POST",
+        "integrations/bo_server.py::serve.Handler.log_message",
+        "integrations/bo_server.py::serve.Handler.reply",
+        "run.py::main"
+      ],
+      "review_errors": [
+        "review belongs to an older candidate"
+      ],
+      "stategraph": {
+        "module": "bo_stategraph/__init__.py",
+        "development_mode": "guided",
+        "execution_mode": "drive",
+        "decision_source": "default",
+        "decision": "状态机完整位于 bo_stategraph；默认内部引导，监控和映射始终维护。"
+      },
+      "discovery": {
+        "valid": true,
+        "ready": true,
+        "errors": [],
+        "warnings": [],
+        "blocked": [],
+        "questions": [],
+        "awaiting_answers": []
+      },
+      "valid": false
+    },
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "observer_runtime/change_sync.py",
+      "verify",
+      "--root",
+      "."
+    ],
+    "exit_code": 0,
+    "result": {
+      "valid": true,
+      "errors": [],
+      "candidate_id": "a9ebf570a9fd82b9ea16d1d5f893266a7c75e67c08c3938d673be3343eb405da",
+      "reports": {
+        "mapping": {
+          "status": "passed",
+          "errors": [],
+          "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+          "stategraph_export": "checked",
+          "witnesses": 480,
+          "projection_checks": 1110
+        },
+        "state_rules": {
+          "status": "passed",
+          "errors": []
+        },
+        "project_checks": {
+          "status": "passed",
+          "errors": [],
+          "scope": "Configured project tests, architecture and viewer checks"
+        },
+        "business": {
+          "status": "passed",
+          "errors": [],
+          "assertions": {
+            "required": 189,
+            "executed": 189
+          },
+          "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+        }
+      },
+      "review_hash": "d44e6c1228ffebfe2fb197e124393e966b0614c4603c36a24748e2a652a3c63d",
+      "observations_hash": "b49aa4e1ecef05f57cfb02c274b67d7df65aee8b45948301edb296590c2e049c",
+      "tests": [
+        {
+          "argv": [
+            "{python}",
+            "-X",
+            "utf8",
+            "-B",
+            "tooling/tests.py"
+          ],
+          "exit_code": 0
+        },
+        {
+          "argv": [
+            "node",
+            "tooling/graph_tests.mjs"
+          ],
+          "exit_code": 0
+        },
+        {
+          "argv": [
+            "{python}",
+            "-X",
+            "utf8",
+            "-B",
+            "tooling/test_recording.py"
+          ],
+          "exit_code": 0
+        },
+        {
+          "argv": [
+            "node",
+            "tooling/test_recorded_views.mjs"
+          ],
+          "exit_code": 0
+        },
+        {
+          "argv": [
+            "{python}",
+            "-X",
+            "utf8",
+            "-B",
+            "tooling/test_stategraph_module.py"
+          ],
+          "exit_code": 0
+        }
+      ],
+      "checked_at": "2026-10-22T07:41:45.923750+00:00",
+      "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+    },
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "observer_runtime/change_sync.py",
+      "accept",
+      "--root",
+      "."
+    ],
+    "exit_code": 0,
+    "result": {
+      "valid": true,
+      "status": "current",
+      "errors": [],
+      "candidate_id": "a9ebf570a9fd82b9ea16d1d5f893266a7c75e67c08c3938d673be3343eb405da"
+    },
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "observer_runtime/change_sync.py",
+      "check",
+      "--root",
+      "."
+    ],
+    "exit_code": 0,
+    "result": {
+      "valid": true,
+      "status": "current",
+      "errors": [],
+      "candidate_id": "a9ebf570a9fd82b9ea16d1d5f893266a7c75e67c08c3938d673be3343eb405da"
+    },
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  }
+]

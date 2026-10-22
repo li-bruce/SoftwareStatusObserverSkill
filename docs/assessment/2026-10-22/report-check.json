@@ -1,0 +1,16 @@
+{
+  "commit": "f37b5c4c0132f33e148a2878ebc8f3ce835cd3e5",
+  "product_files_rechecked": 573,
+  "source_hash_changes": [],
+  "local_links_checked": 39,
+  "git_status": [
+    "?? docs/assessment/2026-10-22/"
+  ],
+  "browser_checks": 19,
+  "complete_regression_first_exit": 1,
+  "complete_regression_repeat_exit": 0,
+  "new_findings": 6,
+  "errors": [],
+  "valid": true,
+  "meaning": "Report links, evidence consistency and unchanged product files; not product acceptance."
+}

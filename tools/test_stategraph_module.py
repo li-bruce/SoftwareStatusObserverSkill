@@ -130,6 +130,7 @@ class StateGraphTests(unittest.TestCase):
                 return config(root, "sync.json")
             value['source_scope']={'roots':['.'],'require_symbol_classification':True}
             value['require_mapping_witnesses']=True
+            value['mapping_contract']='mapping.json'
             self.assertEqual(load()["stategraph"]["development_mode"], "guided")
             value["stategraph"]["development_mode"] = "observe"
             with self.assertRaisesRegex(ValueError, "silence is not opt-out"): load()

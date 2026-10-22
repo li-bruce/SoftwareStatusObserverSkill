@@ -71,39 +71,41 @@
     "observer_runtime"
   ],
   "managed_hashes": {
-    "bo_stategraph/__init__.py": "577631905e58c6e0700ca225312a0a2fa57bf21e3a631bb4dd3539d6951ff561",
-    "bo_stategraph/bo_contracts.py": "2a5639208ccb10f41c1c013858c1961fc6459b4b094954a0581d17050c471a65",
+    "bo_stategraph/__init__.py": "0571254ae4242ad3f03d8433ff67edf79b46670518492d1a602874a24985cc09",
+    "bo_stategraph/bo_contracts.py": "c2de500b94af9f2fb3549bdbb46a7251dc7e0145f3b0d60896ea99df2f4933e5",
     "bo_stategraph/execution_contract.py": "9502b2d348bb8ee00c05288ca3d064d151365292fdef597c156c178871635b78",
-    "bo_stategraph/runtime-version.json": "e6c2aafebada9166412246cb3de1c11b126166109bbeaaceaacbabe55663540f",
+    "bo_stategraph/runtime-version.json": "873a3cb17f8d42f7f011625bd25c194a609b2a6b937ade5c21ed89d112f7303f",
     "observer_runtime/LICENSE.txt": "41f4bfe9aa8790612dd555d71a9e95fbf12c9f0e84bc6ce232a0aae3af3e2ba3",
     "observer_runtime/__init__.py": "c4cc8d894a9cb6e2da5510317e540d22b50b75b2a187f86675d20e86d967f9bf",
     "observer_runtime/architecture_guard.py": "09d631a2ff11f32731a25aa21d1382d3a40a824655adabb9dd56d353035367e8",
     "observer_runtime/behavior_model.py": "7165f6139fed267dab5b44b64fd7398f1624e0d4bf3c32fdc112fa042aad9a94",
     "observer_runtime/bo_contracts.py": "0d1d70ac496a9d0c84f0e88394b65e72d08f0ceb6dca933bc9da19303dfeea29",
+    "observer_runtime/bo_design.py": "b9688c9c549ad8c33ece12ae324b4edb01d14e35466d449f494e3619cce950bf",
     "observer_runtime/bo_retention.py": "b5a0f17bd789bc3f8d81cf8089f218344040d2ad29577bb5865c7b870bac86e9",
     "observer_runtime/bo_runtime.py": "7c16cf2e58971309afb3da9fc41b96cb58b6a48d6113d3fff14e93fb5e7a02c9",
     "observer_runtime/bo_stategraph.py": "d704fc786b49337ca75d06b8a8ca7b1d6471af9c08c3d02d571b434f664e23b2",
-    "observer_runtime/bo_sync.py": "f3fdb5c555073aa106bc32796fb05046d77f2d58bb417ae24bc3d532a20b9a69",
-    "observer_runtime/bo_upgrade.py": "9d12c0d6fbd02bc6a66858629e31b7a4832dcfc5b030b49a1290e6bb04a1111e",
-    "observer_runtime/change_sync.py": "7308dfd24682fabba7cdca2898297d159629a8e4f5b35cbf2497b881541c19e6",
+    "observer_runtime/bo_sync.py": "2729054465635c493c799d9c2c78a0353adc6e30f4442724e7ba9ea47988d6a6",
+    "observer_runtime/bo_upgrade.py": "0ebd6829655c1d575c5953cd39199dc043f690cd19924aed73e0949d458a19a0",
+    "observer_runtime/bo_web.py": "62471f23212b77d4fa4c78dcf75acd2d7cb7cb398ac814f7cde3c7e859c5170a",
+    "observer_runtime/change_sync.py": "30ef8d67f4a3766fcb34da3dd8f06c1357648ba6a46824943f6e9598036bd4e7",
     "observer_runtime/code_structure.py": "01dad9cda1d248150301598fea1186e698c2f3ca62026f5735befbcb74c9c681",
     "observer_runtime/execution_contract.py": "cf8c1cce153b039883e4f95d9913420e287f2dba4849fa00647b0a05a894fb12",
     "observer_runtime/focus_graph.py": "ec366eebee41e60dea83f16acd89b334546b58509a174034afa7736b9b31a106",
-    "observer_runtime/mapping_contract.py": "5c66b054d2a2086861fe63489cf49d4f08909d64424b7dce6407766508213296",
+    "observer_runtime/mapping_contract.py": "84042869bc1e14e3a0881f102914f52596e4a8e10781e141f0806df155d6669e",
     "observer_runtime/model_tool.py": "47b80a2a5d376ef81f34cd91cb050ce58714c3f85ed1212a842c2081bca0d291",
-    "observer_runtime/origin.json": "1b2d625b1a4b0816cd40f1bf19d6e513b61be16b33eceb875ba6073474e16223",
+    "observer_runtime/origin.json": "49d53cfd9ac3f65ffeee1ad2ac0d8afdfb3a1135beca7293e33998cb29c2d3f5",
     "observer_runtime/probe.py": "6e12b7cb0d89278b9562435e20eefa339993a1114720dd0f8dac15626d011807",
     "observer_runtime/project_bundle.py": "2a05e4eda5946b413c4d4a72b8bd29718705706a616d2bb48618205926171f5c",
     "observer_runtime/recording_session.py": "f65564a2cd0745ad2b1962506286735e177109de0716376c2bb4368db8cd78bb",
     "observer_runtime/requirements_dialogue.py": "88a0603db9231a64e73b91db42ea8da2ef42eaffb2b4b309ec86f3b33d627f12",
     "observer_runtime/runtime_frames.py": "45f36d2e53ec2837d9b4177bbbcfd0d03c009de2b5328eeec1b3158dc6b7a9ba",
-    "observer_runtime/semantic_probe.py": "7a76181cbef2122e6d54105c07bc10e63f81d0d63130c2010fa7c375f09a40e2",
+    "observer_runtime/semantic_probe.py": "0fcd21963a53e898ef9ef2f60959ab0e037a03bae7adc7306c9522b76e6baa9f",
     "observer_runtime/source_migration.py": "874c6c782a82f9ee2886454797338b69f0874245526ea29cb0972a1d8586571f",
     "observer_runtime/statechart_contract.py": "9bb6beb6ed2444e73fc0d601aa45d54401e9b44feb82782fb2fa1cdfa7206d5a",
-    "observer_runtime/sync_config.py": "5384af51fbf089e4902773490fcaf5194c3a5a0c05a02dc4fc745621650ecedc",
-    "observer_runtime/sync_io.py": "2afd0eac53ed9ae47dd551e04958a33a1935354aa51826cf93b2f4c69416f7df",
-    "observer_runtime/sync_verify.py": "8f95683985bf218ab96e3ccfafc624d963df24cefda6a13fba21288619dc3e4b",
-    "observer_runtime/view_preferences.py": "0c03f77ec7a7374480cf232684ea9d8e6f4013dde258dd8b1a5be01772344261",
+    "observer_runtime/sync_config.py": "97d10b3030273440161d85b422b2b9a62193b70d9f9be2c9ae5fb5b91c518966",
+    "observer_runtime/sync_io.py": "80cc18e4283816163a899396401a26a614ec94807cf65021f4b51dedbf923e8f",
+    "observer_runtime/sync_verify.py": "9fa99242cffd708250e72de24dd9e4137583ede79d2beb517faec71084628d74",
+    "observer_runtime/view_preferences.py": "b1e0a45e595184488ba1f8a4a984a8c4dd3184870f9b50a09ea296514faf4ab7",
     "observer_runtime/viewer_server.py": "10fa75d9a93662ce07cac457db46d65ecc3fa821a5d4a1a96ec543c7ec862c30",
     "observer_runtime/whitebox_contract.py": "ea6f97242402e93776d1958e11da85e1093a667098527818508cba1c09f0c6de",
     "observer_runtime/worknet_contract.py": "19a70d82022f2c2af675f64e7d955b13f5f543949b40c7813b657cd96b0e8193"
@@ -309,6 +311,73 @@
         "bo_stategraph/runtime-version.json",
         "observer_runtime/change_sync.py",
         "observer_runtime/source_migration.py"
+      ]
+    },
+    {
+      "reason": "R1-R6: reviewed strict mapping and engine validation; preserve business expectations",
+      "changed": [
+        "bo_stategraph/__init__.py",
+        "bo_stategraph/bo_contracts.py",
+        "bo_stategraph/runtime-version.json",
+        "observer_runtime/bo_sync.py",
+        "observer_runtime/bo_upgrade.py",
+        "observer_runtime/change_sync.py",
+        "observer_runtime/mapping_contract.py",
+        "observer_runtime/origin.json",
+        "observer_runtime/semantic_probe.py",
+        "observer_runtime/sync_config.py",
+        "observer_runtime/sync_io.py",
+        "observer_runtime/sync_verify.py"
+      ]
+    },
+    {
+      "reason": "Strict boundary regression: missing evidence and type-sensitive declaration comparison",
+      "changed": [
+        "bo_stategraph/__init__.py",
+        "bo_stategraph/bo_contracts.py",
+        "bo_stategraph/runtime-version.json",
+        "observer_runtime/mapping_contract.py"
+      ]
+    },
+    {
+      "reason": "R2: complete active child state remains mandatory when a compound initial is declared",
+      "changed": [
+        "bo_stategraph/bo_contracts.py",
+        "bo_stategraph/runtime-version.json"
+      ]
+    },
+    {
+      "reason": "R1-R6 final: reviewed strict frame identity validation",
+      "changed": [
+        "bo_stategraph/__init__.py",
+        "bo_stategraph/runtime-version.json"
+      ]
+    },
+    {
+      "reason": "接入只读对话图、Web 生命周期及类型填充；规范源生成",
+      "changed": [
+        "bo_stategraph/runtime-version.json",
+        "observer_runtime/bo_design.py",
+        "observer_runtime/bo_upgrade.py",
+        "observer_runtime/bo_web.py",
+        "observer_runtime/origin.json"
+      ]
+    },
+    {
+      "reason": "规范源同步：设计只读入口与个人配置兼容",
+      "changed": [
+        "bo_stategraph/runtime-version.json",
+        "observer_runtime/bo_design.py",
+        "observer_runtime/bo_web.py",
+        "observer_runtime/view_preferences.py"
+      ]
+    },
+    {
+      "reason": "最终规范源同步：路径修正与只读设计投影",
+      "changed": [
+        "bo_stategraph/runtime-version.json",
+        "observer_runtime/bo_design.py",
+        "observer_runtime/bo_web.py"
       ]
     }
   ],

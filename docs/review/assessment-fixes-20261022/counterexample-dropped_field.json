@@ -1,0 +1,33 @@
+{
+  "valid": false,
+  "errors": [
+    "mapping coverage was removed or changed: fields",
+    "mapping plan omits context field: operator_id"
+  ],
+  "reports": {
+    "mapping": {
+      "status": "failed",
+      "errors": [
+        "mapping coverage was removed or changed: fields",
+        "mapping plan omits context field: operator_id"
+      ],
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses"
+    },
+    "state_rules": {
+      "status": "not_run",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "not_run",
+      "errors": [],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "not_run",
+      "errors": [],
+      "assertions": {},
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "candidate_id": "e01c9ce3e5ceb5162eedecf93e9b023fb561a08167545fc8a8e655077ad1309c"
+}

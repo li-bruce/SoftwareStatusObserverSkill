@@ -1,0 +1,33 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+FFF
+======================================================================
+FAIL: test_exact_frames_survive_full_graph_export (__main__.RuntimeTests.test_exact_frames_survive_full_graph_export) (key='run_id')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 224, in test_exact_frames_survive_full_graph_export
+    with self.subTest(key=key), self.assertRaises(ValueError): bo_validate_export(broken)
+                                ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_exact_frames_survive_full_graph_export (__main__.RuntimeTests.test_exact_frames_survive_full_graph_export) (key='build_id')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 224, in test_exact_frames_survive_full_graph_export
+    with self.subTest(key=key), self.assertRaises(ValueError): bo_validate_export(broken)
+                                ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_exact_frames_survive_full_graph_export (__main__.RuntimeTests.test_exact_frames_survive_full_graph_export) (key='revision')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 224, in test_exact_frames_survive_full_graph_export
+    with self.subTest(key=key), self.assertRaises(ValueError): bo_validate_export(broken)
+                                ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.006s
+
+FAILED (failures=3)

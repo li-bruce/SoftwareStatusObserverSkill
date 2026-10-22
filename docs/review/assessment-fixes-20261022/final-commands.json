@@ -1,0 +1,83 @@
+[
+  {
+    "label": "sync-final",
+    "arguments": [
+      "tools/sync_runtime.py"
+    ],
+    "exit_code": 0,
+    "seconds": 0.957
+  },
+  {
+    "label": "modes-model-final",
+    "arguments": [
+      "examples/python-modes/build_model.py"
+    ],
+    "exit_code": 0,
+    "seconds": 0.104
+  },
+  {
+    "label": "delivery-model-final",
+    "arguments": [
+      "examples/delivery/tooling/dev.py",
+      "graph",
+      "--reason",
+      "R1-R6 final: reviewed strict frame identity validation"
+    ],
+    "exit_code": 0,
+    "seconds": 1.843
+  },
+  {
+    "label": "archive-model-final",
+    "arguments": [
+      "examples/team-archive/tooling/build_model.py"
+    ],
+    "exit_code": 0,
+    "seconds": 0.405
+  },
+  {
+    "label": "archive-seal-final",
+    "arguments": [
+      "examples/team-archive/observer_runtime/architecture_guard.py",
+      "seal",
+      "--root",
+      "examples/team-archive",
+      "--reason",
+      "R1-R6 final: reviewed strict frame identity validation"
+    ],
+    "exit_code": 0,
+    "seconds": 1.158
+  },
+  {
+    "label": "stage05",
+    "arguments": [
+      "docs/review/assessment-fixes-20261022/verify_examples.py",
+      "stage05"
+    ],
+    "exit_code": 0,
+    "seconds": 83.612
+  },
+  {
+    "label": "full-acceptance-complete",
+    "arguments": [
+      "tools/verify.py"
+    ],
+    "exit_code": 0,
+    "seconds": 221.593
+  },
+  {
+    "label": "freeze-results",
+    "arguments": [
+      "docs/review/assessment-fixes-20261022/freeze_results.py"
+    ],
+    "exit_code": 0,
+    "seconds": 9.294
+  },
+  {
+    "label": "fresh-release",
+    "arguments": [
+      "docs/review/assessment-fixes-20261022/fresh_release.py"
+    ],
+    "exit_code": 1,
+    "seconds": 0.37
+  }
+]

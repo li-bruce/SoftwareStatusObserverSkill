@@ -1,0 +1,12 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "valid": true,
+  "regenerated": [
+    "bo_stategraph/runtime-version.json",
+    "observer_generated/runtime/bo_design.py",
+    "observer_generated/runtime/bo_web.py",
+    "observer_generated/runtime/view_preferences.py",
+    "observer_generated/static/graph-core.js",
+    "observer_generated/static/viewer.js"
+  ]
+}

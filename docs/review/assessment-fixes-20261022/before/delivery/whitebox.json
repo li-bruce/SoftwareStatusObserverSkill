@@ -1,0 +1,322 @@
+{
+  "schema_version": 1,
+  "rules": [
+    {
+      "id": "grant-conditions",
+      "requirement": "R2",
+      "category": "decision",
+      "claim": "每份授权按实际短路次序检查作用范围、参数版本、撤销与有效期",
+      "basis": "REQUIREMENTS.md / 授权条件",
+      "node": "grant",
+      "source": {
+        "path": "app/service.py",
+        "symbol": "eligible_grant"
+      },
+      "parameters": {
+        "grant": "dict",
+        "job": "dict"
+      },
+      "returns": "bool"
+    },
+    {
+      "id": "role-and-any",
+      "requirement": "R2",
+      "category": "decision",
+      "claim": "工程师角色且至少一份有效授权才允许执行",
+      "basis": "REQUIREMENTS.md / 替代授权",
+      "node": "authorize",
+      "source": {
+        "path": "app/service.py",
+        "symbol": "authorized"
+      },
+      "parameters": {
+        "job": "dict"
+      },
+      "returns": "bool"
+    }
+  ],
+  "checks": [
+    {
+      "id": "valid-grant-values",
+      "rule": "grant-conditions",
+      "case": "normal",
+      "phase": "decision",
+      "count": {
+        "min": 1
+      },
+      "select": [],
+      "fields": [
+        {
+          "path": [
+            "inputs",
+            "param_version"
+          ],
+          "type": "integer",
+          "min": 1,
+          "compare": {
+            "path": [
+              "inputs",
+              "grant_version"
+            ],
+            "op": "eq"
+          }
+        },
+        {
+          "path": [
+            "inputs",
+            "clock"
+          ],
+          "type": "integer",
+          "compare": {
+            "path": [
+              "inputs",
+              "expires"
+            ],
+            "op": "lt"
+          }
+        },
+        {
+          "path": [
+            "outputs",
+            "allowed"
+          ],
+          "type": "boolean",
+          "equals": true
+        },
+        {
+          "path": [
+            "outputs",
+            "conditions"
+          ],
+          "equals": {
+            "project": true,
+            "actor": true,
+            "version": true,
+            "not_revoked": true,
+            "not_expired": true
+          }
+        },
+        {
+          "path": [
+            "parent_call_id"
+          ],
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "revoked-alternative",
+      "rule": "grant-conditions",
+      "case": "alternative",
+      "phase": "decision",
+      "count": {
+        "min": 1
+      },
+      "select": [
+        {
+          "path": [
+            "inputs",
+            "grant_id"
+          ],
+          "equals": "G1"
+        }
+      ],
+      "fields": [
+        {
+          "path": [
+            "outputs",
+            "allowed"
+          ],
+          "equals": false
+        },
+        {
+          "path": [
+            "outputs",
+            "evaluated"
+          ],
+          "equals": [
+            "project",
+            "actor",
+            "version",
+            "not_revoked"
+          ]
+        },
+        {
+          "path": [
+            "outputs",
+            "conditions",
+            "not_revoked"
+          ],
+          "equals": false
+        }
+      ]
+    },
+    {
+      "id": "valid-alternative",
+      "rule": "grant-conditions",
+      "case": "alternative",
+      "phase": "decision",
+      "count": {
+        "min": 1
+      },
+      "select": [
+        {
+          "path": [
+            "inputs",
+            "grant_id"
+          ],
+          "equals": "G2"
+        }
+      ],
+      "fields": [
+        {
+          "path": [
+            "outputs",
+            "allowed"
+          ],
+          "equals": true
+        }
+      ]
+    },
+    {
+      "id": "alternative-any",
+      "rule": "role-and-any",
+      "case": "alternative",
+      "phase": "decision",
+      "count": {
+        "min": 1
+      },
+      "select": [],
+      "fields": [
+        {
+          "path": [
+            "outputs",
+            "allowed"
+          ],
+          "equals": true
+        },
+        {
+          "path": [
+            "outputs",
+            "evaluated_grants"
+          ],
+          "equals": [
+            "G1",
+            "G2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scope-short-circuit",
+      "rule": "grant-conditions",
+      "case": "bad_scope",
+      "phase": "decision",
+      "count": {
+        "min": 1
+      },
+      "select": [],
+      "fields": [
+        {
+          "path": [
+            "outputs",
+            "allowed"
+          ],
+          "equals": false
+        },
+        {
+          "path": [
+            "outputs",
+            "evaluated"
+          ],
+          "equals": [
+            "project"
+          ]
+        },
+        {
+          "path": [
+            "outputs",
+            "conditions"
+          ],
+          "equals": {
+            "project": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "role-short-circuit",
+      "rule": "role-and-any",
+      "case": "bad_role",
+      "phase": "decision",
+      "count": {
+        "min": 1
+      },
+      "select": [],
+      "fields": [
+        {
+          "path": [
+            "outputs",
+            "allowed"
+          ],
+          "equals": false
+        },
+        {
+          "path": [
+            "outputs",
+            "evaluated_grants"
+          ],
+          "equals": []
+        }
+      ]
+    },
+    {
+      "id": "expiry-boundary",
+      "rule": "grant-conditions",
+      "case": "expired",
+      "phase": "decision",
+      "count": {
+        "min": 1
+      },
+      "select": [
+        {
+          "path": [
+            "inputs",
+            "clock"
+          ],
+          "equals": 200
+        }
+      ],
+      "fields": [
+        {
+          "path": [
+            "outputs",
+            "allowed"
+          ],
+          "equals": false
+        },
+        {
+          "path": [
+            "outputs",
+            "conditions",
+            "not_expired"
+          ],
+          "equals": false
+        },
+        {
+          "path": [
+            "inputs",
+            "clock"
+          ],
+          "compare": {
+            "path": [
+              "inputs",
+              "expires"
+            ],
+            "op": "eq"
+          }
+        }
+      ]
+    }
+  ]
+}

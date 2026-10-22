@@ -1,0 +1,18 @@
+{
+  "cmd": [
+    "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\examples\\delivery\\observer_generated\\runtime\\change_sync.py",
+    "begin",
+    "--root",
+    "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\examples\\delivery",
+    "--change",
+    ".stategraph/web-continuity",
+    "--request",
+    "在同一 Web 图确认需求并延续到调试；提供 Web 隐藏和关闭方法；类型填充和核心节点突出。保留全部业务规则和原检查。"
+  ],
+  "code": 0,
+  "stdout": "{\n  \"valid\": true,\n  \"status\": \"editing\",\n  \"baseline_id\": \"72940efd88f4c892659481c9455265bdf8175d2778e83ad4c91aba46f1758633\",\n  \"change\": \".stategraph/web-continuity\"\n}\n",
+  "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+}

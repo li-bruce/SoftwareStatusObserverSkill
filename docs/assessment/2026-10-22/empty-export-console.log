@@ -1,0 +1,41 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "verify_exit": 0,
+  "verify_valid": true,
+  "actual_instances_in_first_run": 0,
+  "exported_instances": 0,
+  "exported_configurations": 0,
+  "mapping_witnesses": 480,
+  "reports": {
+    "mapping": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+      "stategraph_export": "checked",
+      "witnesses": 480
+    },
+    "state_rules": {
+      "status": "passed",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "passed",
+      "errors": [],
+      "assertions": {
+        "required": 189,
+        "executed": 189
+      },
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "project": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.validation\\assessment-20261022\\empty-export-project",
+  "only_source_change": "tooling/observe.py: empty public runtime export",
+  "checks_and_business_expectations_changed": false,
+  "accept_exit": 0,
+  "check_exit": 0
+}

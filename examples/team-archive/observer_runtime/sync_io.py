@@ -3,6 +3,7 @@ import json
 import os
 from pathlib import Path
 import uuid
+import time
 
 
 def at_path(value, path):
@@ -27,7 +28,13 @@ def write(path, value):
             stream.write('\n')
             stream.flush()
             os.fsync(stream.fileno())
-        os.replace(temporary, path)
+        for attempt in range(5):
+            try:
+                os.replace(temporary, path)
+                break
+            except PermissionError:
+                if attempt == 4: raise
+                time.sleep(.025 * (2 ** attempt))
     finally:
         if temporary.exists():
             temporary.unlink()

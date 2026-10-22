@@ -25,6 +25,7 @@
     "integrations/bo_scenarios.py",
     "integrations/bo_server.py",
     "integrations/bo_view/analysis.js",
+    "integrations/bo_view/conversation.js",
     "integrations/bo_view/elk-worker.min.js",
     "integrations/bo_view/elk.bundled.js",
     "integrations/bo_view/glyphs.js",
@@ -42,15 +43,18 @@
     "integrations/bo_view/viewer.js",
     "integrations/control.html",
     "main.py",
+    "mapping.json",
     "observer_generated/runtime/__init__.py",
     "observer_generated/runtime/architecture_guard.py",
     "observer_generated/runtime/behavior_model.py",
     "observer_generated/runtime/bo_contracts.py",
+    "observer_generated/runtime/bo_design.py",
     "observer_generated/runtime/bo_retention.py",
     "observer_generated/runtime/bo_runtime.py",
     "observer_generated/runtime/bo_stategraph.py",
     "observer_generated/runtime/bo_sync.py",
     "observer_generated/runtime/bo_upgrade.py",
+    "observer_generated/runtime/bo_web.py",
     "observer_generated/runtime/change_sync.py",
     "observer_generated/runtime/code_structure.py",
     "observer_generated/runtime/execution_contract.py",
@@ -76,6 +80,7 @@
     "observer_generated/static/ELK-LICENSE.md",
     "observer_generated/static/PIXI-LICENSE.txt",
     "observer_generated/static/analysis.js",
+    "observer_generated/static/conversation.js",
     "observer_generated/static/elk-worker.min.js",
     "observer_generated/static/elk.bundled.js",
     "observer_generated/static/glyphs.js",
@@ -242,5 +247,6 @@
       "app/workflow.py": "Compatibility import only; executable definition lives in bo_stategraph/workflow.py."
     }
   },
-  "require_mapping_witnesses": true
+  "require_mapping_witnesses": true,
+  "mapping_contract": "mapping.json"
 }

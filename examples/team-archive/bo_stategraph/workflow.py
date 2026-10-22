@@ -3,6 +3,7 @@ from copy import deepcopy
 from enum import StrEnum
 import importlib.metadata
 from transitions import Machine
+from .bo_contracts import validate_runtime_definition
 
 
 class Phase(StrEnum):
@@ -41,6 +42,9 @@ LABELS = {"created":"准备归档","checking":"检查中","waiting":"等待资�
 
 class Workflow:
     def __init__(self, phase: str, evaluation: dict):
+        validate_runtime_definition(definition(), loaded_engine='transitions.Machine',
+            loaded_version=importlib.metadata.version('transitions'),
+            guard_names={name for name in dir(self) if callable(getattr(self,name))})
         Phase(phase)
         self.evaluation = evaluation
         self.machine = Machine(model=self, states=[p.value for p in Phase],

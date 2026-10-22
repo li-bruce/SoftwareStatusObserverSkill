@@ -1,6 +1,6 @@
 {
   "source": "SoftwareStatusObserverSkill/skills/business-observer",
-  "release": "2026.10-refactor1",
+  "release": "2026.10-web-continuity",
   "protocols": {
     "behavior": 3,
     "event": 3,

@@ -14,6 +14,7 @@ from integrations.bo_observer import BOObserver
 from observer_runtime.behavior_model import check
 from observer_runtime.recording_session import Recordings
 from observer_runtime.view_preferences import Preferences, PreferenceConflict
+from observer_runtime.bo_web import BOWeb
 from bo_stategraph import bo_export_view
 from bo_stategraph.query import bo_machine
 
@@ -36,6 +37,7 @@ CASE_NAMES={
 class LocalApplication:
     def __init__(self, root, args, model, manifest, sources):
         self.root,self.args,self.model,self.manifest,self.sources=root,args,model,manifest,sources
+        self.bo_web=BOWeb(root,assets=root/'static/graph')
         dbpath=Path(args.db)
         if not dbpath.is_absolute():
             dbpath=root/dbpath
@@ -45,7 +47,7 @@ class LocalApplication:
         self.service=ArchiveService(self.store,self.observer.trace,delay=args.delay,
                                     execution_version=manifest["build_id"])
         self.service.start_scheduler()
-        self.preferences=Preferences(root,"team-archive-example")
+        self.preferences=Preferences(root,model['presentation']['layout_id'],legacy_project_ids=['team-archive-example'])
         self.case_cache={}
         self.observer.bo_graph.bo_bind_instances(lambda: self.recording_view()["machine"])
         self.frozen=None
@@ -185,6 +187,10 @@ def serve(root, args, model, manifest, sources):
             parsed=urlparse(self.path)
             params=parse_qs(parsed.query)
             try:
+                if not application.bo_web.allowed(parsed.path):
+                    return self.reply(404,{'error':'调试 Web 已关闭','code':'bo_web_disabled'})
+                bo_value=application.bo_web.get(parsed.path)
+                if bo_value is not None:return self.reply(200,bo_value)
                 if parsed.path=="/api/preferences":
                     return self.reply(200,application.preferences.read())
                 if parsed.path=="/api/state":
@@ -222,11 +228,17 @@ def serve(root, args, model, manifest, sources):
                     path=root/"static/graph"/name
                 if not path.is_file():
                     return self.reply(404,{"error":"找不到页面"})
-                return self.reply(200,path.read_bytes(),(mimetypes.guess_type(path.name)[0] or "application/octet-stream")+"; charset=utf-8")
+                raw=path.read_bytes()
+                if parsed.path in ('/','/control'):raw=application.bo_web.entry_html(raw)
+                return self.reply(200,raw,(mimetypes.guess_type(path.name)[0] or "application/octet-stream")+"; charset=utf-8")
             except Exception as error:
                 self.reply(500,{"error":type(error).__name__,"message":str(error)})
 
         def do_POST(self):
+            if not application.bo_web.allowed(urlparse(self.path).path):
+                return self.reply(404,{'error':'调试 Web 已关闭','code':'bo_web_disabled'})
+            if urlparse(self.path).path.startswith('/api/design'):
+                return self.reply(405,{'error':'图只供查看；请在开发工具的对话中提出修改'})
             origin=self.headers.get("Origin")
             if origin and urlparse(origin).netloc not in (f"127.0.0.1:{args.port}",f"localhost:{args.port}"):
                 return self.reply(403,{"error":"仅接受本地同源操作"})

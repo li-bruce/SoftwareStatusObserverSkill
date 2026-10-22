@@ -1,0 +1,33 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+...F......F....F....
+======================================================================
+FAIL: test_loaded_definition_compares_types_and_rejects_engine_options (__main__.EngineTests.test_loaded_definition_compares_types_and_rejects_engine_options)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\ƽ̨����\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 170, in test_loaded_definition_compares_types_and_rejects_engine_options
+    with self.assertRaises(ValueError): validate_chart(m, loaded)
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_revision_cannot_be_passed_as_two_equal_nulls (__main__.MappingTests.test_missing_revision_cannot_be_passed_as_two_equal_nulls)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\ƽ̨����\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 94, in test_missing_revision_cannot_be_passed_as_two_equal_nulls
+    self.assertFalse(self.check_payload(m, plan, payload)['valid'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_exact_frames_survive_full_graph_export (__main__.RuntimeTests.test_exact_frames_survive_full_graph_export) (mutate=<function RuntimeTests.test_exact_frames_survive_full_graph_export.<locals>.<lambda> at 0x0000027D9EE74900>)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\ƽ̨����\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 212, in test_exact_frames_survive_full_graph_export
+    with self.subTest(mutate=mutate), self.assertRaises(ValueError): bo_validate_export(broken)
+                                      ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 20 tests in 2.605s
+
+FAILED (failures=3)

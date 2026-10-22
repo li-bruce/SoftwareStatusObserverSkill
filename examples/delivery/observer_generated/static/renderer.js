@@ -1,7 +1,7 @@
 // Graph drawing owns Pixi objects and hit geometry, but no fetching, storage or UI commands.
 import {colors as C,nodeTypes} from './graph-core.js';
 import {annotationFor,displayName,edgePorts,relationStyles} from './layout.js';
-import {drawGlyph} from './glyphs.js';
+import {drawGlyph,glyphAppearance} from './glyphs.js';
 import {boKinds} from './replay-steps.js';
 
 export function short(value,count=27){const chars=[...String(value)];return chars.length>count?chars.slice(0,count-1).join('')+'…':String(value);}
@@ -54,8 +54,9 @@ export function createGraphRenderer({PIXI,app,scene,metrics,hits,edgePaths,onMet
       scope('region:'+r.id);
       const owner=graph.byId.get(r.id),color=nodeTypes[owner.type].color;
       const highlighted=focusContext.regions.has(r.id),dim=focusContext.active&&!highlighted;
+      const core=annotationFor(preferences,owner.node.referenceOf||r.id).core;
       const shape=graphic().circle(r.cx,r.cy,r.radius).fill({color:0xffffff,alpha:.88})
-        .circle(r.cx,r.cy,r.radius).fill({color,alpha:dim?.035:.13+Math.min(r.depth,3)*.025})
+        .circle(r.cx,r.cy,r.radius).fill({color,alpha:dim?.045:selected===r.id?.3:core?.26:highlighted?.22:.14+Math.min(r.depth,3)*.02})
         .stroke({color,width:highlighted?2.3:1.3,alpha:dim?.2:highlighted?.8:.45});
       scene.addChild(shape);
       hits.push({cx:r.cx,cy:r.cy,radius:r.radius,region:r.id,border:true});
@@ -147,9 +148,11 @@ export function createGraphRenderer({PIXI,app,scene,metrics,hits,edgePaths,onMet
     const size=Math.max(1,11/(r*scale)),glyphFont=Math.max(b.type==='business'?13:19,10/scale);
     if(focusContext.active&&focusContext.nodes.has(b.id)&&selected!==b.id)g.circle(p.x,p.y,r+5).stroke({color:0x5d87b1,width:1.6,alpha:.65});
     if(selected===b.id)g.circle(p.x,p.y,r+8).stroke({color:0x356ba4,width:3,alpha:1});
-    drawGlyph(g,b.type,p.x,p.y,stroke);
+    const appearance=glyphAppearance(stroke,{core:annotationFor(preferences,b.node.referenceOf||b.id).core,
+      selected:selected===b.id,related:focusContext.nodes.has(b.id)});
+    drawGlyph(g,b.type,p.x,p.y,stroke,appearance);
     g.scale.set(size);g.position.set(p.x*(1-size),p.y*(1-size));scene.addChild(g);
-    text(style.glyph,p.x,p.y-glyphFont*.55,glyphFont,stroke,'center','600');
+    text(style.glyph,p.x,p.y-glyphFont*.55,glyphFont,appearance.ink,'center','600');
     if(b.state!=='declared'){
       const statusColor=({active:0x22876e,ok:0x22876e,blocked:0xbd8237,historical:0x8192a2})[b.state]||0x8192a2;
       const badgeX=p.x+23*size,badgeY=p.y+21*size,font=Math.max(11,8/scale);

@@ -1,6 +1,6 @@
 {
   "schema": "bo-maintenance/v1",
-  "source_id": "a1ed63248fa7de6b1d8b24b1ea65e3b84da334f299dcbedf455ad39d4b18ceb3",
+  "source_id": "6001e29b332ad163b84e096ec856f9af1ec0ca4468035f3f5c91a83d262f790a",
   "inventory": {
     "files": {
       "app/__init__.py": "a829ebb4042211c3a39bf40646855698375b065069bbbd2aa61daba1d8e6a51c",
@@ -8,7 +8,7 @@
       "app/ports.py": "d2ccb5a40786064a590408428268f04668209ba58ccf39625723942f9ef69338",
       "app/service.py": "ea275e01eaeada94640958c5ce8907a8235708498b80abfabd1a562809c3b24a",
       "app/store.py": "cddf3b8a1ca0ce279bdda20861ca6b8c62a21e66f5f0220a8acb219129524823",
-      "bo_stategraph/workflow.py": "bcf35243caa657da203b6acd269c15e8726acd600d8d8dad531fa496d1ce9b54"
+      "bo_stategraph/workflow.py": "b4bc7db195e79405745f0ff8ce69b6aaade31f2f839f5f0f596e3ecb79ec3fd2"
     },
     "excluded": {
       "app/workflow.py": "Compatibility import only; executable definition lives in bo_stategraph/workflow.py.",
@@ -26,11 +26,13 @@
       "observer_generated/runtime/architecture_guard.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/behavior_model.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/bo_contracts.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_design.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/bo_retention.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/bo_runtime.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/bo_stategraph.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/bo_sync.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/bo_upgrade.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_web.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/change_sync.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/code_structure.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/execution_contract.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
@@ -70,5 +72,24 @@
   "status": "current",
   "internal_prompt": "核查列出的实现变化；更新受影响业务抽象、状态、函数/参数映射和探针。新增入口不能因不在旧图中而忽略。完成局部投影及实际场景验证后运行项目收尾检查。不要要求用户填写观测文件；仅在新的业务歧义出现时提问。",
   "ai_invocation": "host_or_coding_agent_required",
-  "candidate_id": "65c36533eda4ad3e66e25bc3bfc43e0048a8ea696045fb446bbd34be9fdf1566"
+  "affected_nodes": [],
+  "unmapped_symbols": [
+    "app/checks.py::run_checks.work",
+    "app/ports.py::BOEvents",
+    "app/ports.py::BOEvents.__init__",
+    "app/ports.py::BOEvents.bo_emit",
+    "app/service.py::Delivery",
+    "app/service.py::Delivery.__init__",
+    "app/service.py::eligible_grant.remember",
+    "app/service.py::observation",
+    "app/store.py::Store",
+    "app/store.py::Store.__init__",
+    "app/store.py::Store.close",
+    "app/store.py::Store.transaction",
+    "bo_stategraph/workflow.py::ActivityExecution",
+    "bo_stategraph/workflow.py::ActivityState",
+    "bo_stategraph/workflow.py::Phase",
+    "bo_stategraph/workflow.py::definition"
+  ],
+  "candidate_id": "a7a57c6378644f0b159a79a071a6f9ccdafd1f8815130de57e84f7645c0402f1"
 }

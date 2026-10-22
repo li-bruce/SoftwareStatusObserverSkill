@@ -1,0 +1,160 @@
+[
+  {
+    "argv": [
+      "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "observer_runtime/change_sync.py",
+      "begin",
+      "--root",
+      ".",
+      "--change",
+      ".stategraph/audit-export-positive",
+      "--request",
+      "Audit public export positive control"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"valid\": true,\n  \"status\": \"editing\",\n  \"baseline_id\": \"57ddc58202a94d1a6f6a6450c450e8f1014a66985b670f4e8282ebef8896639d\",\n  \"change\": \".stategraph/audit-export-positive\"\n}\n",
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "observer_runtime/change_sync.py",
+      "inspect",
+      "--root",
+      "."
+    ],
+    "exit_code": 1,
+    "stdout": "{\n  \"candidate_id\": \"7c29b2d642c1405b0e83675dc3531f38a3dffb070f623b081784cff45578592d\",\n  \"changed_files\": [\n    \"tooling/observe.py\"\n  ],\n  \"changed_symbols\": [],\n  \"affected_callers\": [],\n  \"affected_nodes\": [],\n  \"unmapped_changed_symbols\": [],\n  \"unmapped_implementation_symbols\": [\n    \"archive_app/ports.py::BOTracePort\",\n    \"archive_app/ports.py::BOTracePort.__init__\",\n    \"archive_app/ports.py::BOTracePort.bo_record\",\n    \"archive_app/ports.py::no_trace\",\n    \"archive_app/service.py::ArchiveService\",\n    \"archive_app/service.py::ArchiveService.__init__\",\n    \"archive_app/service.py::ArchiveService.close\",\n    \"archive_app/service.py::ArchiveService.start_scheduler\",\n    \"archive_app/service.py::ArchiveService.start_scheduler.loop\",\n    \"archive_app/storage.py::ArchiveStore\",\n    \"archive_app/storage.py::ArchiveStore.__init__\",\n    \"archive_app/storage.py::ArchiveStore.connect\",\n    \"archive_app/storage.py::ArchiveStore.seed\",\n    \"bo_stategraph/workflow.py::Phase\",\n    \"bo_stategraph/workflow.py::Workflow.__init__\",\n    \"bo_stategraph/workflow.py::Workflow.all_passed\",\n    \"bo_stategraph/workflow.py::Workflow.approved\",\n    \"bo_stategraph/workflow.py::Workflow.checks_failed\",\n    \"bo_stategraph/workflow.py::Workflow.effect_saved\",\n    \"bo_stategraph/workflow.py::Workflow.settled\",\n    \"bo_stategraph/workflow.py::definition\",\n    \"integrations/bo_observer.py::BOObserver\",\n    \"integrations/bo_observer.py::BOObserver.__init__\",\n    \"integrations/bo_observer.py::BOObserver.close\",\n    \"integrations/bo_observer.py::BOObserver.health\",\n    \"integrations/bo_observer.py::BOObserver.snapshot\",\n    \"integrations/bo_observer.py::BOObserver.trace\",\n    \"integrations/bo_observer.py::BOObserver.write\",\n    \"integrations/bo_server.py::LocalApplication\",\n    \"integrations/bo_server.py::LocalApplication.__init__\",\n    \"integrations/bo_server.py::LocalApplication.bo_export_graph\",\n    \"integrations/bo_server.py::LocalApplication.cases\",\n    \"integrations/bo_server.py::LocalApplication.command\",\n    \"integrations/bo_server.py::LocalApplication.graph_view\",\n    \"integrations/bo_server.py::LocalApplication.recording_view\",\n    \"integrations/bo_server.py::LocalApplication.state\",\n    \"integrations/bo_server.py::LocalApplication.version_sources\",\n    \"integrations/bo_server.py::serve\",\n    \"integrations/bo_server.py::serve.Handler\",\n    \"integrations/bo_server.py::serve.Handler.do_GET\",\n    \"integrations/bo_server.py::serve.Handler.do_POST\",\n    \"integrations/bo_server.py::serve.Handler.log_message\",\n    \"integrations/bo_server.py::serve.Handler.reply\",\n    \"run.py::main\"\n  ],\n  \"changed_requirements\": [],\n  \"unresolved_call_count\": 489,\n  \"meaning\": \"Potential impact plus authored abstraction mapping; semantic truth still needs contract and runtime checks.\",\n  \"errors\": [],\n  \"required_classification\": [\n    \"archive_app/ports.py::BOTracePort\",\n    \"archive_app/ports.py::BOTracePort.__init__\",\n    \"archive_app/ports.py::BOTracePort.bo_record\",\n    \"archive_app/ports.py::no_trace\",\n    \"archive_app/service.py::ArchiveService\",\n    \"archive_app/service.py::ArchiveService.__init__\",\n    \"archive_app/service.py::ArchiveService.close\",\n    \"archive_app/service.py::ArchiveService.start_scheduler\",\n    \"archive_app/service.py::ArchiveService.start_scheduler.loop\",\n    \"archive_app/storage.py::ArchiveStore\",\n    \"archive_app/storage.py::ArchiveStore.__init__\",\n    \"archive_app/storage.py::ArchiveStore.connect\",\n    \"archive_app/storage.py::ArchiveStore.seed\",\n    \"bo_stategraph/workflow.py::Phase\",\n    \"bo_stategraph/workflow.py::Workflow.__init__\",\n    \"bo_stategraph/workflow.py::Workflow.all_passed\",\n    \"bo_stategraph/workflow.py::Workflow.approved\",\n    \"bo_stategraph/workflow.py::Workflow.checks_failed\",\n    \"bo_stategraph/workflow.py::Workflow.effect_saved\",\n    \"bo_stategraph/workflow.py::Workflow.settled\",\n    \"bo_stategraph/workflow.py::definition\",\n    \"integrations/bo_observer.py::BOObserver\",\n    \"integrations/bo_observer.py::BOObserver.__init__\",\n    \"integrations/bo_observer.py::BOObserver.close\",\n    \"integrations/bo_observer.py::BOObserver.health\",\n    \"integrations/bo_observer.py::BOObserver.snapshot\",\n    \"integrations/bo_observer.py::BOObserver.trace\",\n    \"integrations/bo_observer.py::BOObserver.write\",\n    \"integrations/bo_server.py::LocalApplication\",\n    \"integrations/bo_server.py::LocalApplication.__init__\",\n    \"integrations/bo_server.py::LocalApplication.bo_export_graph\",\n    \"integrations/bo_server.py::LocalApplication.cases\",\n    \"integrations/bo_server.py::LocalApplication.command\",\n    \"integrations/bo_server.py::LocalApplication.graph_view\",\n    \"integrations/bo_server.py::LocalApplication.recording_view\",\n    \"integrations/bo_server.py::LocalApplication.state\",\n    \"integrations/bo_server.py::LocalApplication.version_sources\",\n    \"integrations/bo_server.py::serve\",\n    \"integrations/bo_server.py::serve.Handler\",\n    \"integrations/bo_server.py::serve.Handler.do_GET\",\n    \"integrations/bo_server.py::serve.Handler.do_POST\",\n    \"integrations/bo_server.py::serve.Handler.log_message\",\n    \"integrations/bo_server.py::serve.Handler.reply\",\n    \"run.py::main\"\n  ],\n  \"review_errors\": [\n    \"missing review.json for this candidate\"\n  ],\n  \"stategraph\": {\n    \"module\": \"bo_stategraph/__init__.py\",\n    \"development_mode\": \"guided\",\n    \"execution_mode\": \"drive\",\n    \"decision_source\": \"default\",\n    \"decision\": \"状态机完整位于 bo_stategraph；默认内部引导，监控和映射始终维护。\"\n  },\n  \"discovery\": {\n    \"valid\": true,\n    \"ready\": true,\n    \"errors\": [],\n    \"warnings\": [],\n    \"blocked\": [],\n    \"questions\": [],\n    \"awaiting_answers\": []\n  },\n  \"valid\": false\n}\n",
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "observer_runtime/change_sync.py",
+      "verify",
+      "--root",
+      "."
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"valid\": true,\n  \"errors\": [],\n  \"candidate_id\": \"7c29b2d642c1405b0e83675dc3531f38a3dffb070f623b081784cff45578592d\",\n  \"reports\": {\n    \"mapping\": {\n      \"status\": \"passed\",\n      \"errors\": [],\n      \"scope\": \"Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses\",\n      \"stategraph_export\": \"checked\",\n      \"witnesses\": 480\n    },\n    \"state_rules\": {\n      \"status\": \"passed\",\n      \"errors\": []\n    },\n    \"project_checks\": {\n      \"status\": \"passed\",\n      \"errors\": [],\n      \"scope\": \"Configured project tests, architecture and viewer checks\"\n    },\n    \"business\": {\n      \"status\": \"passed\",\n      \"errors\": [],\n      \"assertions\": {\n        \"required\": 189,\n        \"executed\": 189\n      },\n      \"scope\": \"Authored business and whitebox expectations; this does not prove all user intent\"\n    }\n  },\n  \"review_hash\": \"85f34618c621a4bf86178ae71f7b1d2fa94e1023bad8f81035f3eda373278501\",\n  \"observations_hash\": \"96f86872ae8f68812651b012193e7d0b58112af2e7415fa8a318f6c7244364c2\",\n  \"tests\": [\n    {\n      \"argv\": [\n        \"{python}\",\n        \"-X\",\n        \"utf8\",\n        \"-B\",\n        \"tooling/tests.py\"\n      ],\n      \"exit_code\": 0\n    },\n    {\n      \"argv\": [\n        \"node\",\n        \"tooling/graph_tests.mjs\"\n      ],\n      \"exit_code\": 0\n    },\n    {\n      \"argv\": [\n        \"{python}\",\n        \"-X\",\n        \"utf8\",\n        \"-B\",\n        \"tooling/test_recording.py\"\n      ],\n      \"exit_code\": 0\n    },\n    {\n      \"argv\": [\n        \"node\",\n        \"tooling/test_recorded_views.mjs\"\n      ],\n      \"exit_code\": 0\n    },\n    {\n      \"argv\": [\n        \"{python}\",\n        \"-X\",\n        \"utf8\",\n        \"-B\",\n        \"tooling/test_stategraph_module.py\"\n      ],\n      \"exit_code\": 0\n    }\n  ],\n  \"checked_at\": \"2026-10-22T06:17:40.348222+00:00\",\n  \"meaning\": \"Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence.\"\n}\n",
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "observer_runtime/change_sync.py",
+      "accept",
+      "--root",
+      "."
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"valid\": true,\n  \"status\": \"current\",\n  \"errors\": [],\n  \"candidate_id\": \"7c29b2d642c1405b0e83675dc3531f38a3dffb070f623b081784cff45578592d\"\n}\n",
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "observer_runtime/change_sync.py",
+      "check",
+      "--root",
+      "."
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"valid\": true,\n  \"status\": \"current\",\n  \"errors\": [],\n  \"candidate_id\": \"7c29b2d642c1405b0e83675dc3531f38a3dffb070f623b081784cff45578592d\"\n}\n",
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "observer_runtime/change_sync.py",
+      "begin",
+      "--root",
+      ".",
+      "--change",
+      ".stategraph/audit-export-negative",
+      "--request",
+      "Audit public export negative control"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"valid\": true,\n  \"status\": \"editing\",\n  \"baseline_id\": \"7c29b2d642c1405b0e83675dc3531f38a3dffb070f623b081784cff45578592d\",\n  \"change\": \".stategraph/audit-export-negative\"\n}\n",
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "observer_runtime/change_sync.py",
+      "inspect",
+      "--root",
+      "."
+    ],
+    "exit_code": 1,
+    "stdout": "{\n  \"candidate_id\": \"e2627061cdd92d6cdc185c84f1cf299869a2226893acd4d5d2aaa9a2e9718803\",\n  \"changed_files\": [\n    \"tooling/observe.py\"\n  ],\n  \"changed_symbols\": [],\n  \"affected_callers\": [],\n  \"affected_nodes\": [],\n  \"unmapped_changed_symbols\": [],\n  \"unmapped_implementation_symbols\": [\n    \"archive_app/ports.py::BOTracePort\",\n    \"archive_app/ports.py::BOTracePort.__init__\",\n    \"archive_app/ports.py::BOTracePort.bo_record\",\n    \"archive_app/ports.py::no_trace\",\n    \"archive_app/service.py::ArchiveService\",\n    \"archive_app/service.py::ArchiveService.__init__\",\n    \"archive_app/service.py::ArchiveService.close\",\n    \"archive_app/service.py::ArchiveService.start_scheduler\",\n    \"archive_app/service.py::ArchiveService.start_scheduler.loop\",\n    \"archive_app/storage.py::ArchiveStore\",\n    \"archive_app/storage.py::ArchiveStore.__init__\",\n    \"archive_app/storage.py::ArchiveStore.connect\",\n    \"archive_app/storage.py::ArchiveStore.seed\",\n    \"bo_stategraph/workflow.py::Phase\",\n    \"bo_stategraph/workflow.py::Workflow.__init__\",\n    \"bo_stategraph/workflow.py::Workflow.all_passed\",\n    \"bo_stategraph/workflow.py::Workflow.approved\",\n    \"bo_stategraph/workflow.py::Workflow.checks_failed\",\n    \"bo_stategraph/workflow.py::Workflow.effect_saved\",\n    \"bo_stategraph/workflow.py::Workflow.settled\",\n    \"bo_stategraph/workflow.py::definition\",\n    \"integrations/bo_observer.py::BOObserver\",\n    \"integrations/bo_observer.py::BOObserver.__init__\",\n    \"integrations/bo_observer.py::BOObserver.close\",\n    \"integrations/bo_observer.py::BOObserver.health\",\n    \"integrations/bo_observer.py::BOObserver.snapshot\",\n    \"integrations/bo_observer.py::BOObserver.trace\",\n    \"integrations/bo_observer.py::BOObserver.write\",\n    \"integrations/bo_server.py::LocalApplication\",\n    \"integrations/bo_server.py::LocalApplication.__init__\",\n    \"integrations/bo_server.py::LocalApplication.bo_export_graph\",\n    \"integrations/bo_server.py::LocalApplication.cases\",\n    \"integrations/bo_server.py::LocalApplication.command\",\n    \"integrations/bo_server.py::LocalApplication.graph_view\",\n    \"integrations/bo_server.py::LocalApplication.recording_view\",\n    \"integrations/bo_server.py::LocalApplication.state\",\n    \"integrations/bo_server.py::LocalApplication.version_sources\",\n    \"integrations/bo_server.py::serve\",\n    \"integrations/bo_server.py::serve.Handler\",\n    \"integrations/bo_server.py::serve.Handler.do_GET\",\n    \"integrations/bo_server.py::serve.Handler.do_POST\",\n    \"integrations/bo_server.py::serve.Handler.log_message\",\n    \"integrations/bo_server.py::serve.Handler.reply\",\n    \"run.py::main\"\n  ],\n  \"changed_requirements\": [],\n  \"unresolved_call_count\": 489,\n  \"meaning\": \"Potential impact plus authored abstraction mapping; semantic truth still needs contract and runtime checks.\",\n  \"errors\": [],\n  \"required_classification\": [\n    \"archive_app/ports.py::BOTracePort\",\n    \"archive_app/ports.py::BOTracePort.__init__\",\n    \"archive_app/ports.py::BOTracePort.bo_record\",\n    \"archive_app/ports.py::no_trace\",\n    \"archive_app/service.py::ArchiveService\",\n    \"archive_app/service.py::ArchiveService.__init__\",\n    \"archive_app/service.py::ArchiveService.close\",\n    \"archive_app/service.py::ArchiveService.start_scheduler\",\n    \"archive_app/service.py::ArchiveService.start_scheduler.loop\",\n    \"archive_app/storage.py::ArchiveStore\",\n    \"archive_app/storage.py::ArchiveStore.__init__\",\n    \"archive_app/storage.py::ArchiveStore.connect\",\n    \"archive_app/storage.py::ArchiveStore.seed\",\n    \"bo_stategraph/workflow.py::Phase\",\n    \"bo_stategraph/workflow.py::Workflow.__init__\",\n    \"bo_stategraph/workflow.py::Workflow.all_passed\",\n    \"bo_stategraph/workflow.py::Workflow.approved\",\n    \"bo_stategraph/workflow.py::Workflow.checks_failed\",\n    \"bo_stategraph/workflow.py::Workflow.effect_saved\",\n    \"bo_stategraph/workflow.py::Workflow.settled\",\n    \"bo_stategraph/workflow.py::definition\",\n    \"integrations/bo_observer.py::BOObserver\",\n    \"integrations/bo_observer.py::BOObserver.__init__\",\n    \"integrations/bo_observer.py::BOObserver.close\",\n    \"integrations/bo_observer.py::BOObserver.health\",\n    \"integrations/bo_observer.py::BOObserver.snapshot\",\n    \"integrations/bo_observer.py::BOObserver.trace\",\n    \"integrations/bo_observer.py::BOObserver.write\",\n    \"integrations/bo_server.py::LocalApplication\",\n    \"integrations/bo_server.py::LocalApplication.__init__\",\n    \"integrations/bo_server.py::LocalApplication.bo_export_graph\",\n    \"integrations/bo_server.py::LocalApplication.cases\",\n    \"integrations/bo_server.py::LocalApplication.command\",\n    \"integrations/bo_server.py::LocalApplication.graph_view\",\n    \"integrations/bo_server.py::LocalApplication.recording_view\",\n    \"integrations/bo_server.py::LocalApplication.state\",\n    \"integrations/bo_server.py::LocalApplication.version_sources\",\n    \"integrations/bo_server.py::serve\",\n    \"integrations/bo_server.py::serve.Handler\",\n    \"integrations/bo_server.py::serve.Handler.do_GET\",\n    \"integrations/bo_server.py::serve.Handler.do_POST\",\n    \"integrations/bo_server.py::serve.Handler.log_message\",\n    \"integrations/bo_server.py::serve.Handler.reply\",\n    \"run.py::main\"\n  ],\n  \"review_errors\": [\n    \"missing review.json for this candidate\"\n  ],\n  \"stategraph\": {\n    \"module\": \"bo_stategraph/__init__.py\",\n    \"development_mode\": \"guided\",\n    \"execution_mode\": \"drive\",\n    \"decision_source\": \"default\",\n    \"decision\": \"状态机完整位于 bo_stategraph；默认内部引导，监控和映射始终维护。\"\n  },\n  \"discovery\": {\n    \"valid\": true,\n    \"ready\": true,\n    \"errors\": [],\n    \"warnings\": [],\n    \"blocked\": [],\n    \"questions\": [],\n    \"awaiting_answers\": []\n  },\n  \"valid\": false\n}\n",
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "observer_runtime/change_sync.py",
+      "verify",
+      "--root",
+      "."
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"valid\": true,\n  \"errors\": [],\n  \"candidate_id\": \"e2627061cdd92d6cdc185c84f1cf299869a2226893acd4d5d2aaa9a2e9718803\",\n  \"reports\": {\n    \"mapping\": {\n      \"status\": \"passed\",\n      \"errors\": [],\n      \"scope\": \"Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses\",\n      \"stategraph_export\": \"checked\",\n      \"witnesses\": 480\n    },\n    \"state_rules\": {\n      \"status\": \"passed\",\n      \"errors\": []\n    },\n    \"project_checks\": {\n      \"status\": \"passed\",\n      \"errors\": [],\n      \"scope\": \"Configured project tests, architecture and viewer checks\"\n    },\n    \"business\": {\n      \"status\": \"passed\",\n      \"errors\": [],\n      \"assertions\": {\n        \"required\": 189,\n        \"executed\": 189\n      },\n      \"scope\": \"Authored business and whitebox expectations; this does not prove all user intent\"\n    }\n  },\n  \"review_hash\": \"bd4c537bed94abf07ca2034ed0b186a5a21ed11b69f73fd051e9dff15f0430d6\",\n  \"observations_hash\": \"249416837beb6b79c193bec7bf501832c79c29c4b1ee7ae90966cb512932dcb1\",\n  \"tests\": [\n    {\n      \"argv\": [\n        \"{python}\",\n        \"-X\",\n        \"utf8\",\n        \"-B\",\n        \"tooling/tests.py\"\n      ],\n      \"exit_code\": 0\n    },\n    {\n      \"argv\": [\n        \"node\",\n        \"tooling/graph_tests.mjs\"\n      ],\n      \"exit_code\": 0\n    },\n    {\n      \"argv\": [\n        \"{python}\",\n        \"-X\",\n        \"utf8\",\n        \"-B\",\n        \"tooling/test_recording.py\"\n      ],\n      \"exit_code\": 0\n    },\n    {\n      \"argv\": [\n        \"node\",\n        \"tooling/test_recorded_views.mjs\"\n      ],\n      \"exit_code\": 0\n    },\n    {\n      \"argv\": [\n        \"{python}\",\n        \"-X\",\n        \"utf8\",\n        \"-B\",\n        \"tooling/test_stategraph_module.py\"\n      ],\n      \"exit_code\": 0\n    }\n  ],\n  \"checked_at\": \"2026-10-22T06:18:23.563410+00:00\",\n  \"meaning\": \"Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence.\"\n}\n",
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "observer_runtime/change_sync.py",
+      "accept",
+      "--root",
+      "."
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"valid\": true,\n  \"status\": \"current\",\n  \"errors\": [],\n  \"candidate_id\": \"e2627061cdd92d6cdc185c84f1cf299869a2226893acd4d5d2aaa9a2e9718803\"\n}\n",
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  },
+  {
+    "argv": [
+      "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "observer_runtime/change_sync.py",
+      "check",
+      "--root",
+      "."
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"valid\": true,\n  \"status\": \"current\",\n  \"errors\": [],\n  \"candidate_id\": \"e2627061cdd92d6cdc185c84f1cf299869a2226893acd4d5d2aaa9a2e9718803\"\n}\n",
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+  }
+]

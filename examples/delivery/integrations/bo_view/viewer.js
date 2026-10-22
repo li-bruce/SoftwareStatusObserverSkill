@@ -1,11 +1,12 @@
 import {createGraphRenderer,nodePoint,bezierAt} from './renderer.js';
+import {createConversationFocus,discussionContext} from './conversation.js';
 import {projectStorage} from './preferences.js';
 import {createPoller} from './polling.js';
 import {migrateNodeIds} from './layout.js';
 import {executionIds,layoutGraph,selectedConfiguration,configurations,stateLabels,nodeTypes,sourceBinding,parameterSummary} from './graph-core.js';
 import {layoutKey,readLayout,writeLayout,placeIncremental,setPosition,togglePin,calculateLayout,applyLayout,topologyKey,GraphGesture,annotationFor,displayName,setAnnotation,pickHit,searchNodes,ancestorsToReveal,selectionContext,refreshHierarchy,compoundEdges,edgePorts,relationStyles,settleExpansion,presentationGraph,filterNode,cleanFilters,emptyFilters,renderRevision} from './layout.js';
 import {presets,profileFor,cleanProfile,matchingNodes,sharedMemberships} from './analysis.js';
-import {legendGlyph,legendRelation,meanings} from './glyphs.js';
+import {legendGlyph,legendRelation,meanings,glyphAppearance} from './glyphs.js';
 import {timeline,frame,eventLabel,transferEdges,recordingRequest} from './recording.js';
 import {boKinds,boValue,boStepPlan,boStepDetail,boTransferLabel} from './replay-steps.js';
 const $=id=>document.getElementById(id),app=new PIXI.Application(),scene=new PIXI.Container();
@@ -42,7 +43,7 @@ function draw(){
   dirty=false;
   drawFrame=null;
   if(!graph||disposed||contextLost||document.hidden)return;
-  focusContext=selectionContext(graph,selected);
+  focusContext=selected?selectionContext(graph,selected):discussionContext(graph,conversation.ids);
   updatePresentation();
   renderer.draw({graph,presentation,focusContext,preferences,selected,scale,pan,
     boDetail,boTransfers,formatChange:boChangeText,formatValue:boText,contextLost});
@@ -94,7 +95,7 @@ async function arrange(initial=false){
     const positions=await calculateLayout(elk,graph,preferences,algorithm);
     if(epoch!==layoutEpoch||scope!==storageKey||!graph||key!==topologyKey(graph))return;
     undo={positions:previous,camera};$('undo-layout').disabled=false;
-    applyLayout(graph,preferences,positions);preferences.algorithm=algorithm;fit();
+    applyLayout(graph,preferences,positions);preferences.algorithm=algorithm;fit();if(conversation.ids.length)frameDiscussion();
   }catch(error){if(epoch===layoutEpoch){console.error(error);layoutError='布局失败，保留原位置';}}
   finally{if(epoch===layoutEpoch){layoutBusy=false;$('arrange').disabled=false;save();updateActions();schedule();}}
 }
@@ -105,6 +106,22 @@ function plotArea(){
 function fit(){if(!graph)return;refreshHierarchy(graph);const area=plotArea();scale=Math.max(.12,Math.min(1.05,area.width/graph.width,area.height/graph.height));pan={x:(app.screen.width-graph.width*scale)/2-graph.minX*scale,y:area.top+(area.height-graph.height*scale)/2-graph.minY*scale};schedule();saveSoon();}
 function zoom(factor,point={x:app.screen.width/2,y:app.screen.height/2}){const next=Math.max(.12,Math.min(3,scale*factor));pan.x=point.x-(point.x-pan.x)*next/scale;pan.y=point.y-(point.y-pan.y)*next/scale;scale=next;schedule();saveSoon();}
 function select(id){selected=id;selectedEdge=null;detailMode=null;$('node-details').hidden=true;$('edge-details').hidden=true;updateActions();schedule();saveSoon();}
+function frameDiscussion(){
+  const boxes=[...discussionContext(graph,conversation.ids).nodes].map(id=>graph?.byId.get(id)).filter(Boolean);
+  if(!boxes.length)return;
+  const bounds=boxes.map(b=>graph.regions.find(r=>r.id===b.id)||b);
+  const left=Math.min(...bounds.map(b=>b.x))-55,top=Math.min(...bounds.map(b=>b.y))-55;
+  const width=Math.max(...bounds.map(b=>b.x+b.w))-left+55,height=Math.max(...bounds.map(b=>b.y+b.h))-top+55;
+  const area=plotArea();scale=Math.max(.12,Math.min(1.1,area.width/width,area.height/height));
+  pan={x:(app.screen.width-width*scale)/2-left*scale,y:area.top+(area.height-height*scale)/2-top*scale};schedule();
+}
+function showDiscussion(ids){
+  if(!graph)return;
+  if(analysisId!=='overview')changeAnalysis('overview');
+  for(const id of ids)for(const parent of ancestorsToReveal(graph.all,id))expanded.add(parent);
+  if(ids.some(id=>graph.all.get(id)?.analysis_level==='advanced'||graph.all.get(id)?.origin==='python-ast'))analysisSettings.advanced=true;
+  selected=null;project();frameDiscussion();
+}
 function toggle(id){
   if(!graph?.children.has(id))return;cancelLayout();selected=id;
   const opening=!expanded.has(id);if(opening)expanded.add(id);else expanded.delete(id);
@@ -168,6 +185,10 @@ function updateSemantic(){
 }
 function updateSemanticGeometry(){
   const r=app.canvas.getBoundingClientRect();
+  for(const el of $('semantic').children){const b=graph.byId.get(el.dataset.nodeId);if(!b)continue;
+    const appearance=glyphAppearance(nodeTypes[b.type].color,{core:annotationFor(preferences,b.node.referenceOf||b.id).core,selected:selected===b.id,related:focusContext.nodes.has(b.id)});
+    el.dataset.fill='#'+appearance.fill.toString(16).padStart(6,'0');el.dataset.fillEmphasis=appearance.emphasis;
+    el.dataset.discussion=String(conversation.ids.includes(b.id));}
   for(const el of $('semantic').children){const b=graph.byId.get(el.dataset.nodeId);if(b){const p=point(b);el.dataset.x=b.x;el.dataset.y=b.y;el.dataset.pinned=String(!!b.pinned);el.dataset.emphasis=focusContext.active?(selected===b.id?'selected':focusContext.nodes.has(b.id)?'related':'dimmed'):'normal';el.setAttribute('aria-pressed',String(selected===b.id));el.dataset.parent=b.node.parent||'';el.dataset.screenX=r.left+p.x*scale+pan.x;el.dataset.screenY=r.top+p.y*scale+pan.y;}}
   for(const el of $('semantic').children){
     const region=presentation.regions.has(el.dataset.nodeId)?graph.regions.find(region=>region.id===el.dataset.nodeId):null;
@@ -365,12 +386,18 @@ function frameLabel(entry){const name=view.model.nodes.find(n=>n.id===entry.acti
 async function poll(){
   const requestedVersion=version,requestedCase=caseChoice;
   try{
-    const r=await fetch('/api/view?version='+encodeURIComponent(version)+'&case='+encodeURIComponent(caseChoice),{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);
+    const r=await fetch('/api/view?version='+encodeURIComponent(version)+'&case='+encodeURIComponent(caseChoice),{cache:'no-store'});
+    if(r.status===404){const error=await r.json();if(error.code==='bo_web_disabled'){
+      stopPlayback();stopAnimation();changeView();$('connection').textContent='调试 Web 已关闭';$('empty').hidden=false;$('empty').textContent='在开发工具中恢复 Web 后可继续查看。';return;
+    }}
+    if(!r.ok)throw Error('HTTP '+r.status);
     const next=await r.json();if(disposed||version!==requestedVersion||caseChoice!==requestedCase)return;
     const key=renderRevision(next,[version,caseChoice,choice,step]);
-    const previousLive=latestLive;latestLive=next;await refreshRecordings(next);
+    const previousLive=latestLive;latestLive=next;
+    document.querySelector('.record-bar').hidden=next.stage==='design';$('program-link').hidden=next.stage==='design';
+    if(next.stage!=='design')await refreshRecordings(next);
     if(recording){$('connection').textContent='已连接 · 回放记录';return;}
-    view=next;$('title').textContent=(view.model.presentation.subject||'程序')+' · 运行图';
+    view=next;$('title').textContent=(view.model.presentation.subject||'程序')+(next.stage==='design'?' · 设计图':' · 运行图');
     const baseKey=layoutKey(next.layout_id?{...view.model,presentation:{...view.model.presentation,layout_id:next.layout_id}}:view.model);loadAnalysis(baseKey);
     const nextStorageKey=baseKey+(analysisId==='overview'?'':':view:'+analysisId);
     if(nextStorageKey!==storageKey){cancelLayout();const restored=readLayout(storage,nextStorageKey);preferences=restored.state;storageKey=nextStorageKey;if(!restored.restored)preferences.filters=cleanFilters(profileFor(analysisId,analysisSettings.custom));if(analysisSettings.annotations)preferences.annotations=analysisSettings.annotations;selected=preferences.focus;expanded=new Set(restored.restored?preferences.expanded:[]);if(preferences.camera){scale=preferences.camera.scale;pan={x:preferences.camera.x,y:preferences.camera.y};}first=true;$('layout').value=preferences.algorithm;}
@@ -378,7 +405,7 @@ async function poll(){
     const gaps=next.health.errors+next.health.dropped+(next.health.parse_errors||0)+(next.health.truncated||0);
     $('connection').textContent=contextLost?'图形连接中断，正在恢复':gaps?'有 '+gaps+' 条记录缺失':next.historical?'保存的运行':'已连接';
     const stale=next.binding_status.status!=='current';$('binding').textContent=stale?'程序尚未加载新代码':'代码版本 '+next.manifest.build_id.slice(0,8);$('binding').classList.toggle('stale',stale);
-    if(stale&&!contextLost)$('connection').textContent='程序尚未加载新代码';
+    if(stale&&!contextLost)$('connection').textContent=next.stage==='design'?'设计声明 · 尚未实现':'程序尚未加载新代码';
     if(key!==lastKey){
       lastKey=key;const run=selectedConfiguration(view,choice);
       $('step').replaceChildren(new Option('最新状态','latest'),...(run?.journal||[]).map(e=>new Option(frameLabel(e),String(e.seq))));if(run?.journal.some(e=>String(e.seq)===step))$('step').value=step;else step='latest';
@@ -387,7 +414,7 @@ async function poll(){
       const hasPositions=Object.keys(preferences.positions).length>0;project();
       if(first){first=false;if(!hasPositions)arrange(true);else if(!preferences.camera)fit();}saveSoon();
     }
-    updateFacts();const newest=next.events.at(-1);if(newest&&newest.id!==lastLiveEvent){if(previousLive&&lastLiveEvent)boUpdateLive(previousLive,next);lastLiveEvent=newest.id;}
+    await conversation.refresh();updateFacts();const newest=next.events.at(-1);if(newest&&newest.id!==lastLiveEvent){if(previousLive&&lastLiveEvent)boUpdateLive(previousLive,next);lastLiveEvent=newest.id;}
   }catch(error){if(disposed)return;console.error(error);$('connection').textContent='暂时无法连接程序';if(!view){$('empty').hidden=false;$('empty').textContent='正在等待程序连接。';}}
 }
 function changeView(){cancelLayout();choice='latest';step='latest';lastKey='';detailMode=null;selectedEdge=null;view=null;graph=null;renderer.clear();presentation=null;app.renderer.render(app.stage);$('node-details').hidden=true;$('edge-details').hidden=true;}
@@ -641,5 +668,6 @@ $('replay-export').onclick=()=>{
 };
 // Read-only debugging data; UI actions use the same pointer/keyboard handlers as users.
 window.graphDebug={get graph(){return graph;},get view(){return view;},get camera(){return {scale,pan:{...pan}};},get metrics(){return {...metrics,drawCount:renderer.frames,webgl:!!app.renderer.gl};},get layoutBusy(){return layoutBusy;}};
+const conversation=createConversationFocus({onFocus:showDiscussion,onClear:()=>schedule()});
 const poller=createPoller(poll,{enabled:()=>!disposed&&!document.hidden});
 poller.run();

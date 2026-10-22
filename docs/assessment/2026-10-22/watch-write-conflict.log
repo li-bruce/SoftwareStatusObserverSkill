@@ -1,0 +1,13 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{"schema": "bo-maintenance/v1", "source_id": "7f2b3eb640ef47f9b719a7ad66a6d2a27a492a4976e7670c0d6d02ef0db130d6", "inventory": {"files": {"app.py": "7acc52eddd085f81b74cddf754c5df6b9ba8ab3d758469223d02e0568971d19f"}, "excluded": {}}, "changed_files": ["app.py"], "unregistered_files": [], "status": "needs_update", "internal_prompt": "核查列出的实现变化；更新受影响业务抽象、状态、函数/参数映射和探针。新增入口不能因不在旧图中而忽略。完成局部投影及实际场景验证后运行项目收尾检查。不要要求用户填写观测文件；仅在新的业务歧义出现时提问。", "ai_invocation": "host_or_coding_agent_required"}
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_sync.py", line 107, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_sync.py", line 99, in main
+    temporary.replace(target)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\pathlib\_local.py", line 780, in replace
+    os.replace(self, target)
+    ~~~~~~~~~~^^^^^^^^^^^^^^
+PermissionError: [WinError 5] 拒绝访问。: 'C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.validation\\assessment-20261022\\watch-conflict-saxogppc\\.stategraph\\maintenance.tmp' -> 'C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.validation\\assessment-20261022\\watch-conflict-saxogppc\\.stategraph\\maintenance.json'

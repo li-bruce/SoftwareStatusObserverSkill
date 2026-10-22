@@ -1,0 +1,9 @@
+{
+  "checks": [
+    {
+      "id": "delivery-control-independent-of-observer-http",
+      "pass": true
+    }
+  ],
+  "errors": []
+}

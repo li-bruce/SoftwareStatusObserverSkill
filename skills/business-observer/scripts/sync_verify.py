@@ -111,9 +111,16 @@ def verify(root, cfg, change, *, inspect, snapshot):
                 runs = [r for r in payload.get('runs', []) if r.get('case') == wanted['case'] and r.get('mode') == 'on']
                 if len(runs) != 1 or not any(all(e.get(k) == v for k, v in wanted.items() if k != 'case') for e in runs[0].get('events', [])):
                     mapping_errors.append({'missing_runtime_probe': wanted})
-            witnesses = assess_mapping(payload, required=cfg.get('require_mapping_witnesses', False))
+            witnesses = assess_mapping(payload, required=cfg.get('require_mapping_witnesses', False),
+                plan=current.get('mapping_contract'), model=current['model'], build_id=payload.get('build_id'))
             mapping_errors.extend(witnesses['errors'])
             reports['mapping']['witnesses'] = witnesses['checks']
+            reports['mapping']['projection_checks'] = witnesses['projection_checks']
+            for run in payload.get('runs', []):
+                for item in run.get('projection', {}).get('instances', []):
+                    if item.get('errors'):
+                        rule_errors.append({'case': run['case'], 'instance': item['observed']['instance_id'],
+                                            'errors': item['errors']})
             if current['model'].get('worknet'):
                 if not payload.get('worknet'):raise ValueError('runtime worknet definition is required')
                 validate_net(current['model']['worknet'],payload['worknet'])

@@ -186,7 +186,7 @@ def build() -> dict:
         "static/graph/index.html","static/graph/viewer.js","static/graph/graph-core.js","static/graph/layout.js","static/graph/viewer.css",
         "static/graph/analysis.js","static/graph/recording.js","static/graph/glyphs.js","static/graph/replay-steps.js"]))
     model.setdefault('presentation', {})['recording']={'parameters': ['param_version', 'attempt', 'capacity', 'content_bytes', 'limit_bytes', 'limit_revision'], 'command_fields': ['document_id', 'operator_id', 'reviewer_id', 'approval_id', 'run_id', 'folder_id', 'project_id', 'capacity', 'seconds', 'limit_bytes', 'param_version', 'expected_version']}
-    model['source_files']=sorted(set(model['source_files']+[p.relative_to(ROOT).as_posix() for p in (ROOT/'bo_stategraph').glob('*.py')]+['static/graph/preferences.js','observer_runtime/view_preferences.py','observer_runtime/bo_retention.py']))
+    model['source_files']=sorted(set(model['source_files']+[p.relative_to(ROOT).as_posix() for p in (ROOT/'bo_stategraph').glob('*.py')]+['static/graph/preferences.js','static/graph/conversation.js','observer_runtime/bo_design.py','observer_runtime/bo_web.py','observer_runtime/view_preferences.py','observer_runtime/bo_retention.py']))
     for node in model['nodes']:
         if node['id'] in ['scope_check','approval_check','approval_candidate','commit_guard','folder_assignments','approval_target','project_limit','size_guard','authority_read']:
             node['basis_fields']=['param_version','epoch','clock']

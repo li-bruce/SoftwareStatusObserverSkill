@@ -1,0 +1,64 @@
+{
+  "before": {
+    "code": 1,
+    "result": {
+      "valid": false,
+      "ready": false,
+      "errors": [
+        {
+          "code": "unanswered_business_questions",
+          "item": "D1"
+        }
+      ],
+      "warnings": [],
+      "blocked": [
+        "D1"
+      ],
+      "questions": [
+        {
+          "id": "D1",
+          "topic": "completion",
+          "blocking": true,
+          "status": "open",
+          "priority": 1,
+          "source_refs": [
+            "U1"
+          ],
+          "affects": [
+            "download",
+            "e4"
+          ],
+          "question": "格式检查通过，但预览还在生成时，能否先下载文件？",
+          "why": "这决定提供下载是否必须等待两个处理分支。",
+          "options": [
+            {
+              "id": "both",
+              "label": "等待预览完成",
+              "effect": "两个分支都成功后才提供下载。"
+            },
+            {
+              "id": "format",
+              "label": "先允许下载",
+              "effect": "格式检查通过即可下载，预览在后台继续。"
+            }
+          ]
+        }
+      ],
+      "awaiting_answers": [],
+      "record_valid": true
+    }
+  },
+  "after": {
+    "code": 0,
+    "result": {
+      "valid": true,
+      "ready": true,
+      "errors": [],
+      "warnings": [],
+      "blocked": [],
+      "questions": [],
+      "awaiting_answers": [],
+      "record_valid": true
+    }
+  }
+}

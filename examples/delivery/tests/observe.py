@@ -23,10 +23,13 @@ def observe():
     witnesses=[]
     for run in runs:
         raw=run['authority']
+        machine=bo_machine(raw)
+        run['projection']={'build_id':loaded['build_id'],'machine':machine,'instances':graph.bo_instances(machine)}
         actual={c['attempt']:{'state':c['phase'],'configuration':c,'revision':c['state_revision']} for c in raw['executions']}
-        witnesses.extend(instance_witnesses(graph.bo_instances(bo_machine(raw)),actual,
+        witnesses.extend(instance_witnesses(run['projection']['instances'],actual,
             case=run['case']+':'+run['mode'],source='app.store.Store.snapshot / SQLite'))
-    exported=graph.bo_export(runtime={'machine':bo_machine(runs[0]['authority'])})
+    selected=next(r for r in runs if r['case']=='normal' and r['mode']=='on')
+    exported=graph.bo_export(runtime={'machine':selected['projection']['machine']})
     return {'build_id':loaded['build_id'],'machine':definition(),'runs':runs,
             'mapping_checks':witnesses,'stategraph_export':exported}
 

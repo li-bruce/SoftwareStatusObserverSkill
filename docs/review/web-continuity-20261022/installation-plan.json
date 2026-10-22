@@ -1,0 +1,71 @@
+{
+  "target": "C:\\Users\\Lvi_P\\.codex\\skills\\business-observer",
+  "applied": false,
+  "changes": [
+    {
+      "file": "assets/stategraph-viewer/conversation.js",
+      "before": null,
+      "after": "84e6dbb0a692c266dcc080a2bd029b354f50a2325e829aaad2d483e39b2ba619"
+    },
+    {
+      "file": "assets/stategraph-viewer/glyphs.js",
+      "before": "bcb44b53b59d0b387a46e13d8f363d775fbbb536442072e69a861f75fb9c7a76",
+      "after": "4616c8689d3fb067f41ab7f408d2def198e807cfd4da70c8fa612245e6dddf87"
+    },
+    {
+      "file": "assets/stategraph-viewer/graph-core.js",
+      "before": "22ecd27b1b1fa30987da60cdf1a7370690e40baecebe51436f40ee80650d532a",
+      "after": "792bad3e481f043ee8326c88c2042f11cd8f38961469826484773b2e1daf1f22"
+    },
+    {
+      "file": "assets/stategraph-viewer/index.html",
+      "before": "6f44c82ae2f4065458f702c03c5087c713ef44ec5fd370d7b265f20006a42379",
+      "after": "4fb14d634ce22691e1f78d58d425e03ed4d70e937b7914902c891a2fc1d36dac"
+    },
+    {
+      "file": "assets/stategraph-viewer/renderer.js",
+      "before": "8a246d7bf2043aa353bc2c836b937fcc0434de87820237005499ed3231a52434",
+      "after": "c146cc220e3ff6e5c7c9d2bd44be50ed5836a86c7fa0db3c9bd7aac1a0d27a5b"
+    },
+    {
+      "file": "assets/stategraph-viewer/viewer.css",
+      "before": "bc116acaa256d80cde1d7b786ef14a4e3b44909ba410eff2eb0afb877963ca0b",
+      "after": "70af32f30415c4256017f80e6d795653c504f9186185e56f08b069dff7a0c49b"
+    },
+    {
+      "file": "assets/stategraph-viewer/viewer.js",
+      "before": "cda8e73e8e951cba41b3242ee5a9c40a9d90f4f004dc2569fb53d9fb521d78ee",
+      "after": "1c95bd8aadedd18934fc73563d014ca672c464e9e769447480a61ed20c7b66df"
+    },
+    {
+      "file": "references/conversation-web.md",
+      "before": null,
+      "after": "e11d63fd941ea49d0e74fd9aacfa3b44bf168065869d28dcc38600c49748afae"
+    },
+    {
+      "file": "scripts/bo_design.py",
+      "before": null,
+      "after": "b9688c9c549ad8c33ece12ae324b4edb01d14e35466d449f494e3619cce950bf"
+    },
+    {
+      "file": "scripts/bo_upgrade.py",
+      "before": "2691ec2cc43cad41b65d4714dfa3fc98846bacda6a201f7bc9403c1a31294bcb",
+      "after": "0ebd6829655c1d575c5953cd39199dc043f690cd19924aed73e0949d458a19a0"
+    },
+    {
+      "file": "scripts/bo_web.py",
+      "before": null,
+      "after": "62471f23212b77d4fa4c78dcf75acd2d7cb7cb398ac814f7cde3c7e859c5170a"
+    },
+    {
+      "file": "scripts/view_preferences.py",
+      "before": "0c03f77ec7a7374480cf232684ea9d8e6f4013dde258dd8b1a5be01772344261",
+      "after": "b1e0a45e595184488ba1f8a4a984a8c4dd3184870f9b50a09ea296514faf4ab7"
+    },
+    {
+      "file": "SKILL.md",
+      "before": "fab67399a98f5229173c15c07c4f50da2a60bd66301972fb704a7b05127d9f4d",
+      "after": "1d5fb1d74edc7d99e07e9ffe10f90765813b6d16760a8c9b4b83bb245526ad11"
+    }
+  ]
+}

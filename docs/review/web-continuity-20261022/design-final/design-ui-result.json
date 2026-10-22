@@ -1,0 +1,32 @@
+{
+  "checks": [
+    {
+      "id": "draft-no-fake-runtime-or-answer-form",
+      "pass": true
+    },
+    {
+      "id": "draft-layout-annotation-core-reload",
+      "pass": true,
+      "x": 757.7877286421456,
+      "y": 541.3893539652746,
+      "fill": "#426399"
+    },
+    {
+      "id": "conversation-focus-read-only",
+      "pass": true
+    },
+    {
+      "id": "chat-change-live-graph-and-existing-gate",
+      "pass": true
+    },
+    {
+      "id": "narrow-layout",
+      "pass": true
+    },
+    {
+      "id": "web-close-restore-with-no-answer-route",
+      "pass": true
+    }
+  ],
+  "errors": []
+}

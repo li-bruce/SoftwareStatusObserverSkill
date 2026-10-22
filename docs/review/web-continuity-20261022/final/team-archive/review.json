@@ -1,0 +1,68 @@
+{
+  "candidate_id": "5c91994ab3b27638a5c0a428f414dff30c09f436d71161811590b6b5f6722585",
+  "decisions": {
+    "business": {
+      "action": "unchanged",
+      "reason": "保留全部已确认需求、业务预期和白盒断言；对话确认仍在开发工具中进行，Web 只读展示。"
+    },
+    "state_machine": {
+      "action": "unchanged",
+      "reason": "保留完整状态声明、执行引擎和严格校验；关闭 Web 不影响业务执行或 Python 查询。"
+    },
+    "abstraction": {
+      "action": "updated",
+      "reason": "保留图节点和源码绑定；从同一需求记录投影设计图，当前对话聚焦只改变展示；类型填充和核心高亮。"
+    },
+    "probes": {
+      "action": "unchanged",
+      "reason": "未修改探针和采集约定；Web 控制与采集独立，原 on/off/fault 和实际值投影检查全部保留。"
+    }
+  },
+  "excluded_symbols": {
+    "archive_app/ports.py::BOTracePort": "观测端口及空实现，屏蔽采集故障；on/off/fault 和端口异常测试覆盖，不作为额外业务动作显示。",
+    "archive_app/ports.py::BOTracePort.__init__": "观测端口及空实现，屏蔽采集故障；on/off/fault 和端口异常测试覆盖，不作为额外业务动作显示。",
+    "archive_app/ports.py::BOTracePort.bo_record": "观测端口及空实现，屏蔽采集故障；on/off/fault 和端口异常测试覆盖，不作为额外业务动作显示。",
+    "archive_app/ports.py::no_trace": "观测端口及空实现，屏蔽采集故障；on/off/fault 和端口异常测试覆盖，不作为额外业务动作显示。",
+    "archive_app/service.py::ArchiveService": "类命名空间或启动/关闭接线，实际领域方法与状态机另有映射；实例身份、核心包启动及关闭由真实场景验证。",
+    "archive_app/service.py::ArchiveService.__init__": "类命名空间或启动/关闭接线，实际领域方法与状态机另有映射；实例身份、核心包启动及关闭由真实场景验证。",
+    "archive_app/service.py::ArchiveService.close": "类命名空间或启动/关闭接线，实际领域方法与状态机另有映射；实例身份、核心包启动及关闭由真实场景验证。",
+    "archive_app/service.py::ArchiveService.start_scheduler": "轮询唤醒接线；实际调度决策、等待/恢复和资源操作位于 bo_stategraph.schedule 并有独立节点。调度器运行由真实场景覆盖。",
+    "archive_app/service.py::ArchiveService.start_scheduler.loop": "轮询唤醒接线；实际调度决策、等待/恢复和资源操作位于 bo_stategraph.schedule 并有独立节点。调度器运行由真实场景覆盖。",
+    "archive_app/storage.py::ArchiveStore": "类命名空间或启动/关闭接线，实际领域方法与状态机另有映射；实例身份、核心包启动及关闭由真实场景验证。",
+    "archive_app/storage.py::ArchiveStore.__init__": "类命名空间或启动/关闭接线，实际领域方法与状态机另有映射；实例身份、核心包启动及关闭由真实场景验证。",
+    "archive_app/storage.py::ArchiveStore.connect": "合成资料初始化/SQLite 连接，开发者可从源码定位；业务权威读取和实际保存另有节点及场景。",
+    "archive_app/storage.py::ArchiveStore.seed": "合成资料初始化/SQLite 连接，开发者可从源码定位；业务权威读取和实际保存另有节点及场景。",
+    "bo_stategraph/workflow.py::Phase": "执行声明/枚举/类型容器；由 machine 状态、事件、上下文及活动声明完整投影，运行时再次比较实际 definition；不重复绘制 Python 类型壳。",
+    "bo_stategraph/workflow.py::Workflow.__init__": "transitions 引擎适配：构造器绑定声明，条件方法只返回同次 evaluation 中对应事实。machine.guards 与实际定义核对；父级 lifecycle 表示该执行器。",
+    "bo_stategraph/workflow.py::Workflow.all_passed": "transitions 引擎适配：构造器绑定声明，条件方法只返回同次 evaluation 中对应事实。machine.guards 与实际定义核对；父级 lifecycle 表示该执行器。",
+    "bo_stategraph/workflow.py::Workflow.approved": "transitions 引擎适配：构造器绑定声明，条件方法只返回同次 evaluation 中对应事实。machine.guards 与实际定义核对；父级 lifecycle 表示该执行器。",
+    "bo_stategraph/workflow.py::Workflow.checks_failed": "transitions 引擎适配：构造器绑定声明，条件方法只返回同次 evaluation 中对应事实。machine.guards 与实际定义核对；父级 lifecycle 表示该执行器。",
+    "bo_stategraph/workflow.py::Workflow.effect_saved": "transitions 引擎适配：构造器绑定声明，条件方法只返回同次 evaluation 中对应事实。machine.guards 与实际定义核对；父级 lifecycle 表示该执行器。",
+    "bo_stategraph/workflow.py::Workflow.settled": "transitions 引擎适配：构造器绑定声明，条件方法只返回同次 evaluation 中对应事实。machine.guards 与实际定义核对；父级 lifecycle 表示该执行器。",
+    "bo_stategraph/workflow.py::definition": "执行声明/枚举/类型容器；由 machine 状态、事件、上下文及活动声明完整投影，运行时再次比较实际 definition；不重复绘制 Python 类型壳。",
+    "integrations/bo_observer.py::BOObserver": "HTTP/采集适配及启动接线，不是领域执行节点；源码被 watch，复制、架构、HTTP、记录和导出测试分别覆盖。实际状态来自 bo_stategraph/query.py 的统一存储投影。",
+    "integrations/bo_observer.py::BOObserver.__init__": "HTTP/采集适配及启动接线，不是领域执行节点；源码被 watch，复制、架构、HTTP、记录和导出测试分别覆盖。实际状态来自 bo_stategraph/query.py 的统一存储投影。",
+    "integrations/bo_observer.py::BOObserver.close": "HTTP/采集适配及启动接线，不是领域执行节点；源码被 watch，复制、架构、HTTP、记录和导出测试分别覆盖。实际状态来自 bo_stategraph/query.py 的统一存储投影。",
+    "integrations/bo_observer.py::BOObserver.health": "HTTP/采集适配及启动接线，不是领域执行节点；源码被 watch，复制、架构、HTTP、记录和导出测试分别覆盖。实际状态来自 bo_stategraph/query.py 的统一存储投影。",
+    "integrations/bo_observer.py::BOObserver.snapshot": "HTTP/采集适配及启动接线，不是领域执行节点；源码被 watch，复制、架构、HTTP、记录和导出测试分别覆盖。实际状态来自 bo_stategraph/query.py 的统一存储投影。",
+    "integrations/bo_observer.py::BOObserver.trace": "HTTP/采集适配及启动接线，不是领域执行节点；源码被 watch，复制、架构、HTTP、记录和导出测试分别覆盖。实际状态来自 bo_stategraph/query.py 的统一存储投影。",
+    "integrations/bo_observer.py::BOObserver.write": "HTTP/采集适配及启动接线，不是领域执行节点；源码被 watch，复制、架构、HTTP、记录和导出测试分别覆盖。实际状态来自 bo_stategraph/query.py 的统一存储投影。",
+    "integrations/bo_server.py::LocalApplication": "HTTP/采集适配及启动接线，不是领域执行节点；源码被 watch，复制、架构、HTTP、记录和导出测试分别覆盖。实际状态来自 bo_stategraph/query.py 的统一存储投影。",
+    "integrations/bo_server.py::LocalApplication.__init__": "HTTP/采集适配及启动接线，不是领域执行节点；源码被 watch，复制、架构、HTTP、记录和导出测试分别覆盖。实际状态来自 bo_stategraph/query.py 的统一存储投影。",
+    "integrations/bo_server.py::LocalApplication.bo_export_graph": "HTTP/采集适配及启动接线，不是领域执行节点；源码被 watch，复制、架构、HTTP、记录和导出测试分别覆盖。实际状态来自 bo_stategraph/query.py 的统一存储投影。",
+    "integrations/bo_server.py::LocalApplication.cases": "HTTP/采集适配及启动接线，不是领域执行节点；源码被 watch，复制、架构、HTTP、记录和导出测试分别覆盖。实际状态来自 bo_stategraph/query.py 的统一存储投影。",
+    "integrations/bo_server.py::LocalApplication.command": "HTTP/采集适配及启动接线，不是领域执行节点；源码被 watch，复制、架构、HTTP、记录和导出测试分别覆盖。实际状态来自 bo_stategraph/query.py 的统一存储投影。",
+    "integrations/bo_server.py::LocalApplication.graph_view": "HTTP/采集适配及启动接线，不是领域执行节点；源码被 watch，复制、架构、HTTP、记录和导出测试分别覆盖。实际状态来自 bo_stategraph/query.py 的统一存储投影。",
+    "integrations/bo_server.py::LocalApplication.recording_view": "HTTP/采集适配及启动接线，不是领域执行节点；源码被 watch，复制、架构、HTTP、记录和导出测试分别覆盖。实际状态来自 bo_stategraph/query.py 的统一存储投影。",
+    "integrations/bo_server.py::LocalApplication.state": "HTTP/采集适配及启动接线，不是领域执行节点；源码被 watch，复制、架构、HTTP、记录和导出测试分别覆盖。实际状态来自 bo_stategraph/query.py 的统一存储投影。",
+    "integrations/bo_server.py::LocalApplication.version_sources": "HTTP/采集适配及启动接线，不是领域执行节点；源码被 watch，复制、架构、HTTP、记录和导出测试分别覆盖。实际状态来自 bo_stategraph/query.py 的统一存储投影。",
+    "integrations/bo_server.py::serve": "HTTP/采集适配及启动接线，不是领域执行节点；源码被 watch，复制、架构、HTTP、记录和导出测试分别覆盖。实际状态来自 bo_stategraph/query.py 的统一存储投影。",
+    "integrations/bo_server.py::serve.Handler": "HTTP/采集适配及启动接线，不是领域执行节点；源码被 watch，复制、架构、HTTP、记录和导出测试分别覆盖。实际状态来自 bo_stategraph/query.py 的统一存储投影。",
+    "integrations/bo_server.py::serve.Handler.do_GET": "HTTP/采集适配及启动接线，不是领域执行节点；源码被 watch，复制、架构、HTTP、记录和导出测试分别覆盖。实际状态来自 bo_stategraph/query.py 的统一存储投影。",
+    "integrations/bo_server.py::serve.Handler.do_POST": "HTTP/采集适配及启动接线，不是领域执行节点；源码被 watch，复制、架构、HTTP、记录和导出测试分别覆盖。实际状态来自 bo_stategraph/query.py 的统一存储投影。",
+    "integrations/bo_server.py::serve.Handler.log_message": "HTTP/采集适配及启动接线，不是领域执行节点；源码被 watch，复制、架构、HTTP、记录和导出测试分别覆盖。实际状态来自 bo_stategraph/query.py 的统一存储投影。",
+    "integrations/bo_server.py::serve.Handler.reply": "HTTP/采集适配及启动接线，不是领域执行节点；源码被 watch，复制、架构、HTTP、记录和导出测试分别覆盖。实际状态来自 bo_stategraph/query.py 的统一存储投影。",
+    "run.py::main": "HTTP/采集适配及启动接线，不是领域执行节点；源码被 watch，复制、架构、HTTP、记录和导出测试分别覆盖。实际状态来自 bo_stategraph/query.py 的统一存储投影。"
+  },
+  "requirement_changes": {}
+}

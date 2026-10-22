@@ -1,0 +1,28 @@
+{
+  "scope": "Fresh browser context; restarted application, same project files, different port",
+  "checks": [
+    {
+      "name": "Restart and port change restore project labels, notes, core mark and custom view without browser cache",
+      "passed": true
+    },
+    {
+      "name": "A pointer selection highlights its related graph context",
+      "passed": true
+    },
+    {
+      "name": "Dragging empty canvas pans the camera",
+      "passed": true
+    },
+    {
+      "name": "Repeated expansion, fit and collapse retain a live WebGL context",
+      "passed": true
+    },
+    {
+      "name": "Saved recording remains readable after restart and displays explicit state changes",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "build_id": "594d4786192d385f1b396d2f6abb78b14d973e8f02937c0541101fd2d8f8bca2",
+  "passed": true
+}

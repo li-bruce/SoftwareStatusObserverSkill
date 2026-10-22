@@ -1,0 +1,20 @@
+{
+  "complete": true,
+  "installed_files_match": 89,
+  "browser_checks": [
+    14,
+    5
+  ],
+  "builds": {
+    "delivery": "35a21cbb99f32616b8852c5e486c53cb232cfd7b70c042c5a525f45036c858f4",
+    "team-archive": "66ca0e8096b53060be761595b99a0ed340c38bb5367ad0c78285fd799fe6f9a6"
+  },
+  "fresh_release_retested": true,
+  "original_expectations_preserved": true,
+  "local_only": true,
+  "remaining_scope": [
+    "incremental event API",
+    "performance baseline",
+    "general Petri analysis"
+  ]
+}

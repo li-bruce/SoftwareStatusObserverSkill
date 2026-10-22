@@ -1,0 +1,199 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+FFFFFFEEEEEEFEEEEE
+======================================================================
+ERROR: test_independent_projection_mismatch_not_hidden_by_witness (__main__.MappingTests.test_independent_projection_mismatch_not_hidden_by_witness)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 73, in test_independent_projection_mismatch_not_hidden_by_witness
+    self.assertFalse(self.check_payload(m, plan, payload)['valid'])
+                     ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 47, in check_payload
+    return assess(payload, required=True, plan=plan, model=m, build_id='b')
+TypeError: assess() got an unexpected keyword argument 'plan'
+
+======================================================================
+ERROR: test_missing_case_instance_field_wrong_revision_and_type_fail (__main__.MappingTests.test_missing_case_instance_field_wrong_revision_and_type_fail) (change=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 64, in test_missing_case_instance_field_wrong_revision_and_type_fail
+    self.assertFalse(self.check_payload(m, plan, payload)['valid'])
+                     ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 47, in check_payload
+    return assess(payload, required=True, plan=plan, model=m, build_id='b')
+TypeError: assess() got an unexpected keyword argument 'plan'
+
+======================================================================
+ERROR: test_missing_case_instance_field_wrong_revision_and_type_fail (__main__.MappingTests.test_missing_case_instance_field_wrong_revision_and_type_fail) (change=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 64, in test_missing_case_instance_field_wrong_revision_and_type_fail
+    self.assertFalse(self.check_payload(m, plan, payload)['valid'])
+                     ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 47, in check_payload
+    return assess(payload, required=True, plan=plan, model=m, build_id='b')
+TypeError: assess() got an unexpected keyword argument 'plan'
+
+======================================================================
+ERROR: test_missing_case_instance_field_wrong_revision_and_type_fail (__main__.MappingTests.test_missing_case_instance_field_wrong_revision_and_type_fail) (change=2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 64, in test_missing_case_instance_field_wrong_revision_and_type_fail
+    self.assertFalse(self.check_payload(m, plan, payload)['valid'])
+                     ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 47, in check_payload
+    return assess(payload, required=True, plan=plan, model=m, build_id='b')
+TypeError: assess() got an unexpected keyword argument 'plan'
+
+======================================================================
+ERROR: test_missing_case_instance_field_wrong_revision_and_type_fail (__main__.MappingTests.test_missing_case_instance_field_wrong_revision_and_type_fail) (change=3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 64, in test_missing_case_instance_field_wrong_revision_and_type_fail
+    self.assertFalse(self.check_payload(m, plan, payload)['valid'])
+                     ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 47, in check_payload
+    return assess(payload, required=True, plan=plan, model=m, build_id='b')
+TypeError: assess() got an unexpected keyword argument 'plan'
+
+======================================================================
+ERROR: test_missing_case_instance_field_wrong_revision_and_type_fail (__main__.MappingTests.test_missing_case_instance_field_wrong_revision_and_type_fail) (change=4)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 64, in test_missing_case_instance_field_wrong_revision_and_type_fail
+    self.assertFalse(self.check_payload(m, plan, payload)['valid'])
+                     ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 47, in check_payload
+    return assess(payload, required=True, plan=plan, model=m, build_id='b')
+TypeError: assess() got an unexpected keyword argument 'plan'
+
+======================================================================
+ERROR: test_real_public_projection_is_checked (__main__.MappingTests.test_real_public_projection_is_checked)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 51, in test_real_public_projection_is_checked
+    self.assertTrue(self.check_payload(m, plan, payload)['valid'])
+                    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 47, in check_payload
+    return assess(payload, required=True, plan=plan, model=m, build_id='b')
+TypeError: assess() got an unexpected keyword argument 'plan'
+
+======================================================================
+ERROR: test_default_path_sink_is_bounded (__main__.RuntimeTests.test_default_path_sink_is_bounded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 152, in test_default_path_sink_is_bounded
+    pins=Pins(m,'b',path=path,retention={'memory_events':2,'memory_seconds':60,'log_bytes':1024,'log_backups':1})
+TypeError: Pins.__init__() got an unexpected keyword argument 'retention'
+
+======================================================================
+ERROR: test_exact_frames_survive_full_graph_export (__main__.RuntimeTests.test_exact_frames_survive_full_graph_export)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 143, in test_exact_frames_survive_full_graph_export
+    self.assertEqual(exported['runtime']['runtime_frames'],view['runtime_frames'])
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+KeyError: 'runtime_frames'
+
+======================================================================
+ERROR: test_provider_does_not_run_under_graph_lock_in_query_or_export (__main__.RuntimeTests.test_provider_does_not_run_under_graph_lock_in_query_or_export) (method='bo_instances')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 133, in test_provider_does_not_run_under_graph_lock_in_query_or_export
+    with self.subTest(method=method): getattr(graph,method)(); self.assertEqual(acquired,[True])
+                                      ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_stategraph.py", line 203, in bo_instances
+    machine = self._provider()
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 130, in provider
+    if worker.is_alive(): raise RuntimeError('external provider called with graph lock held')
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: external provider called with graph lock held
+
+======================================================================
+ERROR: test_provider_does_not_run_under_graph_lock_in_query_or_export (__main__.RuntimeTests.test_provider_does_not_run_under_graph_lock_in_query_or_export) (method='bo_export')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 133, in test_provider_does_not_run_under_graph_lock_in_query_or_export
+    with self.subTest(method=method): getattr(graph,method)(); self.assertEqual(acquired,[True])
+                                      ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_stategraph.py", line 252, in bo_export
+    instances = self.bo_instances(runtime.get('machine') if runtime is not None and 'machine' in runtime else None)
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_stategraph.py", line 203, in bo_instances
+    machine = self._provider()
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 130, in provider
+    if worker.is_alive(): raise RuntimeError('external provider called with graph lock held')
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: external provider called with graph lock held
+
+======================================================================
+FAIL: test_compound_entry_resolves_initial_descendants (__main__.EngineTests.test_compound_entry_resolves_initial_descendants) (state='active_b')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 96, in compare
+    self.assertEqual(value['status'], status)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'observed' != 'mismatch'
+- observed
++ mismatch
+
+
+======================================================================
+FAIL: test_invalid_initial_and_unsupported_engine_fail_at_load (__main__.EngineTests.test_invalid_initial_and_unsupported_engine_fail_at_load) (change=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 119, in test_invalid_initial_and_unsupported_engine_fail_at_load
+    with self.assertRaises(ValueError): entry()
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_initial_and_unsupported_engine_fail_at_load (__main__.EngineTests.test_invalid_initial_and_unsupported_engine_fail_at_load) (change=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 119, in test_invalid_initial_and_unsupported_engine_fail_at_load
+    with self.assertRaises(ValueError): entry()
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_initial_and_unsupported_engine_fail_at_load (__main__.EngineTests.test_invalid_initial_and_unsupported_engine_fail_at_load) (change=2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 119, in test_invalid_initial_and_unsupported_engine_fail_at_load
+    with self.assertRaises(ValueError): entry()
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_initial_and_unsupported_engine_fail_at_load (__main__.EngineTests.test_invalid_initial_and_unsupported_engine_fail_at_load) (change=3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 119, in test_invalid_initial_and_unsupported_engine_fail_at_load
+    with self.assertRaises(ValueError): entry()
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_wildcard_respects_first_matching_handler (__main__.EngineTests.test_wildcard_respects_first_matching_handler) (state='c')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 96, in compare
+    self.assertEqual(value['status'], status)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'observed' != 'mismatch'
+- observed
++ mismatch
+
+
+======================================================================
+FAIL: test_missing_plan_is_not_complete_mapping (__main__.MappingTests.test_missing_plan_is_not_complete_mapping)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 68, in test_missing_plan_is_not_complete_mapping
+    self.assertFalse(assess(payload, required=True)['valid'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.644s
+
+FAILED (failures=7, errors=11)

@@ -1,0 +1,12 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Starting server 1/1: C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.venv\Scripts\python.exe -B -X utf8 run.py --delay 0.05 --port 8854
+Waiting for server on port 8854...
+Server ready on port 8854
+
+All 1 server(s) ready
+Running: node C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\docs\review\web-continuity-20261022\lifecycle-ui.cjs
+
+
+Stopping 1 server(s)...
+Server 1 stopped
+All servers stopped

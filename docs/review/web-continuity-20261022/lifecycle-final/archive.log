@@ -1,0 +1,14 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Starting server 1/1: C:\Users\Lvi_P\Documents\Work\CF\∆ΩÃ®»Ì÷¯\SoftwareStatusObserverSkill\.venv\Scripts\python.exe -B -X utf8 run.py --delay 0.05 --port 8854
+Waiting for server on port 8854...
+
+Stopping 1 server(s)...
+Server 1 stopped
+All servers stopped
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\.codex\skills\webapp-testing\scripts\with_server.py", line 106, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\Lvi_P\.codex\skills\webapp-testing\scripts\with_server.py", line 80, in main
+    raise RuntimeError(f"Server failed to start on port {server['port']} within {args.timeout}s")
+RuntimeError: Server failed to start on port 8854 within 40s

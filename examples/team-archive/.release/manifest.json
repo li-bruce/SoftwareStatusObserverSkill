@@ -1,43 +1,46 @@
 {
   "schema_version": 3,
-  "build_id": "04c30b54d4840253efab715c9dcd6679f050767d30ba89b5dc0f79ef9993038e",
+  "build_id": "bbc04dd4ae7e708ee8db38f7efbe44fa54bc198fe31c6a9b86065486718acf14",
   "files": {
     "archive_app/__init__.py": "c4cc8d894a9cb6e2da5510317e540d22b50b75b2a187f86675d20e86d967f9bf",
     "archive_app/policy.py": "20ed13b26522411afb71a10cb90d58d951882f6075a29a1c8221d72a6fa83a7e",
     "archive_app/ports.py": "b8cde872a84d96008836c06683dccf2d59ceff89c9a7dfe65e3e5f3dd6c3608c",
     "archive_app/service.py": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01",
     "archive_app/storage.py": "5dfd7a4ebcc907921324e26a1f03fc63d8ace83254783a4519e4f86d2b22eabc",
-    "bo_stategraph/__init__.py": "577631905e58c6e0700ca225312a0a2fa57bf21e3a631bb4dd3539d6951ff561",
-    "bo_stategraph/bo_contracts.py": "2a5639208ccb10f41c1c013858c1961fc6459b4b094954a0581d17050c471a65",
+    "bo_stategraph/__init__.py": "0571254ae4242ad3f03d8433ff67edf79b46670518492d1a602874a24985cc09",
+    "bo_stategraph/bo_contracts.py": "c2de500b94af9f2fb3549bdbb46a7251dc7e0145f3b0d60896ea99df2f4933e5",
     "bo_stategraph/execution_contract.py": "9502b2d348bb8ee00c05288ca3d064d151365292fdef597c156c178871635b78",
     "bo_stategraph/query.py": "1221abe81b934d1208a43dabcbc5628e20308a2f4e241788746c5234cb3789d1",
-    "bo_stategraph/workflow.py": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5",
+    "bo_stategraph/workflow.py": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0",
     "integrations/bo_observer.py": "5386e676e44a58e9f89076e0f0040e5918ed2c5f448e0e3e00c7ff39a46ad537",
-    "integrations/bo_server.py": "029b92fc261257f5cf45988285eaab1d61f17a88ebe10534969fc693f15c9e39",
+    "integrations/bo_server.py": "de279d368d128cbf53545cef7100d1322a6a9777833c328f8d21855c7ac427d3",
     "observer_runtime/behavior_model.py": "7165f6139fed267dab5b44b64fd7398f1624e0d4bf3c32fdc112fa042aad9a94",
+    "observer_runtime/bo_design.py": "b9688c9c549ad8c33ece12ae324b4edb01d14e35466d449f494e3619cce950bf",
     "observer_runtime/bo_retention.py": "b5a0f17bd789bc3f8d81cf8089f218344040d2ad29577bb5865c7b870bac86e9",
     "observer_runtime/bo_stategraph.py": "d704fc786b49337ca75d06b8a8ca7b1d6471af9c08c3d02d571b434f664e23b2",
+    "observer_runtime/bo_web.py": "62471f23212b77d4fa4c78dcf75acd2d7cb7cb398ac814f7cde3c7e859c5170a",
     "observer_runtime/recording_session.py": "f65564a2cd0745ad2b1962506286735e177109de0716376c2bb4368db8cd78bb",
-    "observer_runtime/semantic_probe.py": "7a76181cbef2122e6d54105c07bc10e63f81d0d63130c2010fa7c375f09a40e2",
-    "observer_runtime/view_preferences.py": "0c03f77ec7a7374480cf232684ea9d8e6f4013dde258dd8b1a5be01772344261",
+    "observer_runtime/semantic_probe.py": "0fcd21963a53e898ef9ef2f60959ab0e037a03bae7adc7306c9522b76e6baa9f",
+    "observer_runtime/view_preferences.py": "b1e0a45e595184488ba1f8a4a984a8c4dd3184870f9b50a09ea296514faf4ab7",
     "run.py": "88b4cd777fef04e7cb37d009d27dfa814420ba7faf8f6fc9a44555133a050d0e",
     "static/app.css": "2a4fd73b67b18766d7759d3e7d1e06594124f9f367117018efb1f00debf77939",
-    "static/app.html": "db237291be4c81a054f19c096fd69f06fda1794a2addfce89680d407f8175538",
+    "static/app.html": "2ff81921addd89ede8cce19d92ae4a51502d59d88f24dc466c7a5b9c65344319",
     "static/app.js": "a0a994ea4c68c692ada680ea19c691521a858f963bf8bcc144b0ea34cb40c85b",
     "static/graph/analysis.js": "4d3e8e2a5079064228fced0de2f127e9fdb8a2e3a8752439c6579252d92441c2",
-    "static/graph/glyphs.js": "bcb44b53b59d0b387a46e13d8f363d775fbbb536442072e69a861f75fb9c7a76",
-    "static/graph/graph-core.js": "22ecd27b1b1fa30987da60cdf1a7370690e40baecebe51436f40ee80650d532a",
-    "static/graph/index.html": "6f44c82ae2f4065458f702c03c5087c713ef44ec5fd370d7b265f20006a42379",
+    "static/graph/conversation.js": "84e6dbb0a692c266dcc080a2bd029b354f50a2325e829aaad2d483e39b2ba619",
+    "static/graph/glyphs.js": "4616c8689d3fb067f41ab7f408d2def198e807cfd4da70c8fa612245e6dddf87",
+    "static/graph/graph-core.js": "792bad3e481f043ee8326c88c2042f11cd8f38961469826484773b2e1daf1f22",
+    "static/graph/index.html": "4fb14d634ce22691e1f78d58d425e03ed4d70e937b7914902c891a2fc1d36dac",
     "static/graph/layout.js": "76d9d851cec9435e18eec0feddaaf09d1fa089c6229c938279343201f12b3290",
     "static/graph/preferences.js": "999acca5c27f23dc89bdd8496b5e7b792bedd3ec3645f9730d01373bf084929e",
     "static/graph/recording.js": "35531cdadcf6f991449e56d65cc2f795648bd986e527a2aa9df7ab4b6594057e",
     "static/graph/replay-steps.js": "86107c3d772604e4d3ee08650517cbd0352627448e51a4fd079532767e7fedc8",
-    "static/graph/viewer.css": "bc116acaa256d80cde1d7b786ef14a4e3b44909ba410eff2eb0afb877963ca0b",
-    "static/graph/viewer.js": "cda8e73e8e951cba41b3242ee5a9c40a9d90f4f004dc2569fb53d9fb521d78ee",
+    "static/graph/viewer.css": "70af32f30415c4256017f80e6d795653c504f9186185e56f08b069dff7a0c49b",
+    "static/graph/viewer.js": "1c95bd8aadedd18934fc73563d014ca672c464e9e769447480a61ed20c7b66df",
     "tooling/behavior_source.json": "0c9a3ecb0d5d918640dfe7e60e1b83ef83de609ebf773a3deec20eb32bae7ce6",
-    "tooling/build_model.py": "b979ba18665af30bf757f8f0b55aa3d3062c63f06784d762c93d9b485b401ee2"
+    "tooling/build_model.py": "6a77a0407dda9782e0b0899ddb52d39da5bc2e525e87537f57236c59fd67882d"
   },
-  "model_hash": "f6d5f8f3a4837cd2920489fad5c43680d4ff938693d77f2d4407fd3955dd75b1",
+  "model_hash": "a06e2d106b5d786b50c83e0121710cdc70fc897dd87cca70bb5289e68a1e54d1",
   "intent_hash": "168fafc867a98f39917b7bbb8d294e3fa18d71b1fa55d9f18d0507fe01817dd0",
   "model_revision": "1.1.0",
   "bindings": {
@@ -182,8 +185,8 @@
     "processing_slots": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "initial_configuration",
-      "line": 94,
-      "end_line": 103,
+      "line": 98,
+      "end_line": 107,
       "signature": "attempt: str, version: int, capacity: int",
       "ast_sha256": "068eb193f7a25b3326e295ddaa96dafdd5e50bf7dc52e217c80562c351eaea80",
       "snippet": "def initial_configuration(attempt: str, version: int, capacity: int) -> dict:\n    if type(capacity) is not int or capacity not in (1, 2):\n        raise ValueError(\"处理名额只能选择 1 或 2\")\n    if type(version) is not int or version < 1:\n        raise ValueError(\"内容版本必须是正整数\")\n    return {\"attempt\":attempt,\"param_version\":version,\"revision\":0,\n            \"activities\":{a:\"pending\" for a in ACTIVITIES},\n            \"resources\":{\"processing_slots\":{\"capacity\":capacity,\"available\":capacity,\"holders\":[]}},\n            \"join\":{\"state\":\"waiting\",\"pending\":list(ACTIVITIES)},\"journal\":[],\n            \"results\":{},\"discarded\":[],\"wait_reasons\":{}}",
@@ -194,15 +197,15 @@
       ],
       "guards": [
         {
-          "line": 95,
+          "line": 99,
           "expression": "type(capacity) is not int or capacity not in (1, 2)"
         },
         {
-          "line": 97,
+          "line": 101,
           "expression": "type(version) is not int or version < 1"
         }
       ],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
     "archive_commit": {
       "path": "archive_app/service.py",
@@ -428,8 +431,8 @@
     "run_identity": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "initial_configuration",
-      "line": 94,
-      "end_line": 103,
+      "line": 98,
+      "end_line": 107,
       "signature": "attempt: str, version: int, capacity: int",
       "ast_sha256": "068eb193f7a25b3326e295ddaa96dafdd5e50bf7dc52e217c80562c351eaea80",
       "snippet": "def initial_configuration(attempt: str, version: int, capacity: int) -> dict:\n    if type(capacity) is not int or capacity not in (1, 2):\n        raise ValueError(\"处理名额只能选择 1 或 2\")\n    if type(version) is not int or version < 1:\n        raise ValueError(\"内容版本必须是正整数\")\n    return {\"attempt\":attempt,\"param_version\":version,\"revision\":0,\n            \"activities\":{a:\"pending\" for a in ACTIVITIES},\n            \"resources\":{\"processing_slots\":{\"capacity\":capacity,\"available\":capacity,\"holders\":[]}},\n            \"join\":{\"state\":\"waiting\",\"pending\":list(ACTIVITIES)},\"journal\":[],\n            \"results\":{},\"discarded\":[],\"wait_reasons\":{}}",
@@ -440,15 +443,15 @@
       ],
       "guards": [
         {
-          "line": 95,
+          "line": 99,
           "expression": "type(capacity) is not int or capacity not in (1, 2)"
         },
         {
-          "line": 97,
+          "line": 101,
           "expression": "type(version) is not int or version < 1"
         }
       ],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
     "flow.policy": {
       "path": "archive_app/service.py",
@@ -708,8 +711,8 @@
     "checks_join": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "activity_step",
-      "line": 117,
-      "end_line": 156,
+      "line": 121,
+      "end_line": 160,
       "signature": "run: dict, event: str, activity: str, now: float, outcome: str | None=None",
       "ast_sha256": "0471f26a104e3a66685d8e7128a7abd4eef043aa46e4b8900c32a520a19752f0",
       "snippet": "def activity_step(run: dict, event: str, activity: str, now: float,\n                  outcome: str | None = None) -> None:\n    cfg = run[\"configuration\"]\n    before = deepcopy({k:cfg[k] for k in (\"activities\",\"resources\",\"join\")})\n    states, resource = cfg[\"activities\"], cfg[\"resources\"][\"processing_slots\"]\n    if event == \"wait\":\n        if states[activity] != \"pending\" or resource[\"available\"] > 0:\n            raise ValueError(\"等待名额的前提不成立\")\n        states[activity] = \"waiting\"\n    elif event == \"start\":\n        if states[activity] not in (\"pending\",\"waiting\") or resource[\"available\"] < 1 or activity in cfg[\"discarded\"]:\n            raise ValueError(\"检查不能启动\")\n        states[activity] = \"running\"\n        resource[\"available\"] -= 1\n        resource[\"holders\"].append(activity)\n    elif event == \"finish\":\n        if states[activity] != \"running\" or outcome not in (\"succeeded\",\"rejected\",\"failed\"):\n            raise ValueError(\"检查尚未运行或结果无效\")\n        states[activity] = outcome\n        resource[\"available\"] += 1\n        resource[\"holders\"].remove(activity)\n        if all(s in ACTIVITY_TERMINAL for s in states.values()):\n            cfg[\"join\"][\"state\"] = \"enabled\"\n    elif event == \"join\":\n        if cfg[\"join\"][\"state\"] != \"enabled\":\n            raise ValueError(\"检查未结束不能汇合\")\n        cfg[\"join\"][\"state\"] = \"passed\" if all(s==\"succeeded\" for s in states.values()) else \"rejected\"\n    elif event == \"abort\":\n        if \"running\" in states.values():\n            raise ValueError(\"运行中的检查尚未结束\")\n        cfg[\"activities\"] = {a:s if s in ACTIVITY_TERMINAL else \"cancelled\" for a,s in states.items()}\n        cfg[\"join\"][\"state\"] = \"rejected\"\n    else:\n        raise ValueError(\"未知活动事件\")\n    cfg[\"join\"][\"pending\"] = [a for a in ACTIVITIES if cfg[\"activities\"][a] not in ACTIVITY_TERMINAL]\n    cfg[\"revision\"] += 1\n    cfg[\"journal\"].append({\"seq\":cfg[\"revision\"],\"event\":event,\"activity\":activity,\n        \"before\":before,\"after\":deepcopy({k:cfg[k] for k in (\"activities\",\"resources\",\"join\")}),\n        \"clock\":now,\"phase\":run[\"phase\"],\"discarded\":list(cfg[\"discarded\"]),\n        \"wait_reasons\":dict(cfg[\"wait_reasons\"])})",
@@ -727,59 +730,59 @@
       ],
       "guards": [
         {
-          "line": 122,
+          "line": 126,
           "expression": "event == 'wait'"
         },
         {
-          "line": 123,
+          "line": 127,
           "expression": "states[activity] != 'pending' or resource['available'] > 0"
         },
         {
-          "line": 126,
+          "line": 130,
           "expression": "event == 'start'"
         },
         {
-          "line": 127,
+          "line": 131,
           "expression": "states[activity] not in ('pending', 'waiting') or resource['available'] < 1 or activity in cfg['discarded']"
         },
         {
-          "line": 132,
+          "line": 136,
           "expression": "event == 'finish'"
         },
         {
-          "line": 133,
+          "line": 137,
           "expression": "states[activity] != 'running' or outcome not in ('succeeded', 'rejected', 'failed')"
         },
         {
-          "line": 138,
+          "line": 142,
           "expression": "all((s in ACTIVITY_TERMINAL for s in states.values()))"
         },
         {
-          "line": 140,
+          "line": 144,
           "expression": "event == 'join'"
         },
         {
-          "line": 141,
+          "line": 145,
           "expression": "cfg['join']['state'] != 'enabled'"
         },
         {
-          "line": 144,
+          "line": 148,
           "expression": "event == 'abort'"
         },
         {
-          "line": 143,
+          "line": 147,
           "expression": "all((s == 'succeeded' for s in states.values()))"
         },
         {
-          "line": 145,
+          "line": 149,
           "expression": "'running' in states.values()"
         },
         {
-          "line": 147,
+          "line": 151,
           "expression": "s in ACTIVITY_TERMINAL"
         }
       ],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
     "cancel_run": {
       "path": "archive_app/service.py",
@@ -813,18 +816,24 @@
     "lifecycle": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "Workflow",
-      "line": 42,
-      "end_line": 62,
+      "line": 43,
+      "end_line": 66,
       "signature": "Workflow",
-      "ast_sha256": "03bf6e1db2883acf65e8866d81c0228934369052e13ff67e7b251e7119ccd163",
-      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
+      "ast_sha256": "2723f90a64abc27fb6e07d9b2d2507c30bae4795f86fee625f75f0a9657d371b",
+      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        validate_runtime_definition(definition(), loaded_engine='transitions.Machine',\n            loaded_version=importlib.metadata.version('transitions'),\n            guard_names={name for name in dir(self) if callable(getattr(self,name))})\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
       "calls": [
         "Machine",
         "Phase",
-        "self.evaluation.get"
+        "callable",
+        "definition",
+        "dir",
+        "getattr",
+        "importlib.metadata.version",
+        "self.evaluation.get",
+        "validate_runtime_definition"
       ],
       "guards": [],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
     "issue_approval": {
       "path": "archive_app/service.py",
@@ -1118,8 +1127,8 @@
     "execution.schedule": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "schedule",
-      "line": 179,
-      "end_line": 221,
+      "line": 183,
+      "end_line": 225,
       "signature": "run: dict, evaluation: dict, now: float",
       "ast_sha256": "da58b3f84ac427e90f500b8eb5eac5a719fbcd117a5e4897eb163f915462ee6a",
       "snippet": "def schedule(run: dict, evaluation: dict, now: float) -> list:\n    \"\"\"Select actual activities under the caller transaction; never execute domain work.\"\"\"\n    launches = []\n    cfg = run[\"configuration\"]\n    if not evaluation[\"version_current\"]:\n        request_stop(run,\"version_changed\",now)\n    if run[\"phase\"]==\"stopping\":\n        settle(run,now)\n    else:\n        if cfg[\"join\"][\"state\"]==\"enabled\":\n            activity_step(run,\"join\",\"checks_join\",now)\n        if cfg[\"join\"][\"state\"]==\"rejected\":\n            change_phase(run,\"reject\",{\"checks_failed\":True},now)\n        elif not evaluation[\"allowed\"]:\n            run[\"resume_required\"] = True\n            if run[\"phase\"]!=\"waiting\":\n                change_phase(run,\"pause\",{},now)\n            for a,s in cfg[\"activities\"].items():\n                if s in (\"pending\",\"waiting\"):\n                    cfg[\"wait_reasons\"][a] = \"；\".join(evaluation[\"reasons\"])+\"；条件恢复后点击继续\"\n        elif run[\"resume_required\"]:\n            if run[\"phase\"]!=\"waiting\":\n                change_phase(run,\"pause\",{},now)\n            for a,s in cfg[\"activities\"].items():\n                if s in (\"pending\",\"waiting\"):\n                    cfg[\"wait_reasons\"][a] = \"当前条件已恢复，等待点击继续\"\n        else:\n            if run[\"phase\"] in (\"created\",\"waiting\"):\n                change_phase(run,\"begin\",evaluation,now)\n            if cfg[\"join\"][\"state\"]==\"passed\" and run[\"phase\"]!=\"ready\":\n                change_phase(run,\"checked\",{**evaluation,\"all_passed\":True},now)\n            elif cfg[\"join\"][\"state\"]!=\"passed\":\n                for activity in ACTIVITIES:\n                    if cfg[\"activities\"][activity] not in (\"pending\",\"waiting\"):\n                        continue\n                    if cfg[\"resources\"][\"processing_slots\"][\"available\"]:\n                        cfg[\"wait_reasons\"].pop(activity,None)\n                        activity_step(run,\"start\",activity,now)\n                        launches.append((deepcopy(run),activity,dict(evaluation[\"basis\"])))\n                    elif cfg[\"activities\"][activity]==\"pending\":\n                        cfg[\"wait_reasons\"][activity] = \"等待本次运行的可用名额\"\n                        activity_step(run,\"wait\",activity,now)\n    return launches",
@@ -1137,77 +1146,77 @@
       ],
       "guards": [
         {
-          "line": 183,
+          "line": 187,
           "expression": "not evaluation['version_current']"
         },
         {
-          "line": 185,
+          "line": 189,
           "expression": "run['phase'] == 'stopping'"
         },
         {
-          "line": 188,
+          "line": 192,
           "expression": "cfg['join']['state'] == 'enabled'"
         },
         {
-          "line": 190,
+          "line": 194,
           "expression": "cfg['join']['state'] == 'rejected'"
         },
         {
-          "line": 192,
+          "line": 196,
           "expression": "not evaluation['allowed']"
         },
         {
-          "line": 194,
+          "line": 198,
           "expression": "run['phase'] != 'waiting'"
-        },
-        {
-          "line": 199,
-          "expression": "run['resume_required']"
-        },
-        {
-          "line": 197,
-          "expression": "s in ('pending', 'waiting')"
-        },
-        {
-          "line": 200,
-          "expression": "run['phase'] != 'waiting'"
-        },
-        {
-          "line": 206,
-          "expression": "run['phase'] in ('created', 'waiting')"
-        },
-        {
-          "line": 208,
-          "expression": "cfg['join']['state'] == 'passed' and run['phase'] != 'ready'"
         },
         {
           "line": 203,
+          "expression": "run['resume_required']"
+        },
+        {
+          "line": 201,
           "expression": "s in ('pending', 'waiting')"
         },
         {
+          "line": 204,
+          "expression": "run['phase'] != 'waiting'"
+        },
+        {
           "line": 210,
-          "expression": "cfg['join']['state'] != 'passed'"
+          "expression": "run['phase'] in ('created', 'waiting')"
         },
         {
           "line": 212,
-          "expression": "cfg['activities'][activity] not in ('pending', 'waiting')"
+          "expression": "cfg['join']['state'] == 'passed' and run['phase'] != 'ready'"
+        },
+        {
+          "line": 207,
+          "expression": "s in ('pending', 'waiting')"
         },
         {
           "line": 214,
-          "expression": "cfg['resources']['processing_slots']['available']"
+          "expression": "cfg['join']['state'] != 'passed'"
+        },
+        {
+          "line": 216,
+          "expression": "cfg['activities'][activity] not in ('pending', 'waiting')"
         },
         {
           "line": 218,
+          "expression": "cfg['resources']['processing_slots']['available']"
+        },
+        {
+          "line": 222,
           "expression": "cfg['activities'][activity] == 'pending'"
         }
       ],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
     "execution.request_stop": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "request_stop",
-      "line": 159,
-      "end_line": 168,
+      "line": 163,
+      "end_line": 172,
       "signature": "run: dict, reason: str, now: float",
       "ast_sha256": "c2d98e959f4a980fc595d4a89be61738b8b3f6cf51cf06a93d989dba9a25c38d",
       "snippet": "def request_stop(run: dict, reason: str, now: float) -> None:\n    if run[\"phase\"] in TERMINAL:\n        return\n    if run[\"phase\"] != \"stopping\":\n        change_phase(run,\"stop\",{},now)\n    run[\"stop_reason\"] = reason\n    cfg = run[\"configuration\"]\n    cfg[\"discarded\"] = [a for a in ACTIVITIES if cfg[\"activities\"][a] in (\"pending\",\"waiting\")]\n    for a in cfg[\"discarded\"]:\n        cfg[\"wait_reasons\"][a] = \"已作废，不再启动；等待本次其他检查收尾\"",
@@ -1216,21 +1225,21 @@
       ],
       "guards": [
         {
-          "line": 160,
+          "line": 164,
           "expression": "run['phase'] in TERMINAL"
         },
         {
-          "line": 162,
+          "line": 166,
           "expression": "run['phase'] != 'stopping'"
         }
       ],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
     "execution.settle": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "settle",
-      "line": 171,
-      "end_line": 176,
+      "line": 175,
+      "end_line": 180,
       "signature": "run: dict, now: float",
       "ast_sha256": "5e6c7f343e474097116c921b21deae2e6c13b61081cca095f6a84d62dc782635",
       "snippet": "def settle(run: dict, now: float) -> None:\n    cfg = run[\"configuration\"]\n    if run[\"phase\"]==\"stopping\" and \"running\" not in cfg[\"activities\"].values():\n        activity_step(run,\"abort\",\"checks_join\",now)\n        change_phase(run,\"stale_done\" if run[\"stop_reason\"]==\"version_changed\" else \"cancel_done\",\n                     {\"settled\":True},now)",
@@ -1241,21 +1250,21 @@
       ],
       "guards": [
         {
-          "line": 173,
+          "line": 177,
           "expression": "run['phase'] == 'stopping' and 'running' not in cfg['activities'].values()"
         },
         {
-          "line": 175,
+          "line": 179,
           "expression": "run['stop_reason'] == 'version_changed'"
         }
       ],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
     "execution.checks_passed": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "checks_passed",
-      "line": 224,
-      "end_line": 229,
+      "line": 228,
+      "end_line": 233,
       "signature": "run: dict",
       "ast_sha256": "c4cdabe80fb1445f83160c2b3845d7180e999f8f4033c7438f1648a20008ea99",
       "snippet": "def checks_passed(run: dict) -> bool:\n    cfg, request = run[\"configuration\"], run[\"input\"]\n    same_run = cfg[\"attempt\"]==run[\"id\"] and cfg[\"param_version\"]==request[\"content_version\"]\n    return (same_run and cfg[\"join\"][\"state\"]==\"passed\"\n                  and all(cfg[\"activities\"][a]==\"succeeded\" and cfg[\"results\"].get(a,{}).get(\"passed\") is True\n                          for a in ACTIVITIES))",
@@ -1265,13 +1274,13 @@
         "cfg['results'].get(a, {}).get"
       ],
       "guards": [],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
     "execution.interrupt": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "interrupt",
-      "line": 232,
-      "end_line": 241,
+      "line": 236,
+      "end_line": 245,
       "signature": "run: dict, now: float",
       "ast_sha256": "95ea4fd25a39a4ceb8b018f7912c6b609bb0fc50562def5e3043477b60d36900",
       "snippet": "def interrupt(run: dict, now: float) -> None:\n    \"\"\"Mark vanished workers and release their resources; do not restart them.\"\"\"\n    cfg = run[\"configuration\"]\n    for a,s in list(cfg[\"activities\"].items()):\n        if s==\"running\":\n            cfg[\"results\"][a]={\"passed\":False,\"error\":\"进程中断\"}\n            activity_step(run,\"finish\",a,now,\"failed\")\n    activity_step(run,\"abort\",\"checks_join\",now)\n    change_phase(run,\"interrupt\",{\"settled\":True},now)\n    run[\"stop_reason\"]=\"process_interrupted\"",
@@ -1283,17 +1292,17 @@
       ],
       "guards": [
         {
-          "line": 236,
+          "line": 240,
           "expression": "s == 'running'"
         }
       ],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
     "execution.finish_activity": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "finish_activity",
-      "line": 244,
-      "end_line": 247,
+      "line": 248,
+      "end_line": 251,
       "signature": "run, activity, result, outcome, now",
       "ast_sha256": "13254b847888bc1a863cdf67a3cd2c0feb21997e1045c7971ff999f93ce84988",
       "snippet": "def finish_activity(run, activity, result, outcome, now):\n    run[\"configuration\"][\"results\"][activity] = result\n    activity_step(run, \"finish\", activity, now, outcome)\n    settle(run, now)",
@@ -1302,13 +1311,13 @@
         "settle"
       ],
       "guards": [],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
     "execution.resume": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "resume",
-      "line": 250,
-      "end_line": 253,
+      "line": 254,
+      "end_line": 257,
       "signature": "run, evaluation",
       "ast_sha256": "839043370facc17070b45be0c81a1eb85d0903401dcc6b725a86616bc3ef6e4f",
       "snippet": "def resume(run, evaluation):\n    if run[\"phase\"] in TERMINAL or run[\"stop_reason\"]:\n        raise ValueError(\"这次运行已结束或正在停止，请新建运行\")\n    run[\"resume_required\"] = not evaluation[\"allowed\"]",
@@ -1317,177 +1326,237 @@
       ],
       "guards": [
         {
-          "line": 251,
+          "line": 255,
           "expression": "run['phase'] in TERMINAL or run['stop_reason']"
         }
       ],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
     "state.created": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "Workflow",
-      "line": 42,
-      "end_line": 62,
+      "line": 43,
+      "end_line": 66,
       "signature": "Workflow",
-      "ast_sha256": "03bf6e1db2883acf65e8866d81c0228934369052e13ff67e7b251e7119ccd163",
-      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
+      "ast_sha256": "2723f90a64abc27fb6e07d9b2d2507c30bae4795f86fee625f75f0a9657d371b",
+      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        validate_runtime_definition(definition(), loaded_engine='transitions.Machine',\n            loaded_version=importlib.metadata.version('transitions'),\n            guard_names={name for name in dir(self) if callable(getattr(self,name))})\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
       "calls": [
         "Machine",
         "Phase",
-        "self.evaluation.get"
+        "callable",
+        "definition",
+        "dir",
+        "getattr",
+        "importlib.metadata.version",
+        "self.evaluation.get",
+        "validate_runtime_definition"
       ],
       "guards": [],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
     "state.checking": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "Workflow",
-      "line": 42,
-      "end_line": 62,
+      "line": 43,
+      "end_line": 66,
       "signature": "Workflow",
-      "ast_sha256": "03bf6e1db2883acf65e8866d81c0228934369052e13ff67e7b251e7119ccd163",
-      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
+      "ast_sha256": "2723f90a64abc27fb6e07d9b2d2507c30bae4795f86fee625f75f0a9657d371b",
+      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        validate_runtime_definition(definition(), loaded_engine='transitions.Machine',\n            loaded_version=importlib.metadata.version('transitions'),\n            guard_names={name for name in dir(self) if callable(getattr(self,name))})\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
       "calls": [
         "Machine",
         "Phase",
-        "self.evaluation.get"
+        "callable",
+        "definition",
+        "dir",
+        "getattr",
+        "importlib.metadata.version",
+        "self.evaluation.get",
+        "validate_runtime_definition"
       ],
       "guards": [],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
     "state.waiting": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "Workflow",
-      "line": 42,
-      "end_line": 62,
+      "line": 43,
+      "end_line": 66,
       "signature": "Workflow",
-      "ast_sha256": "03bf6e1db2883acf65e8866d81c0228934369052e13ff67e7b251e7119ccd163",
-      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
+      "ast_sha256": "2723f90a64abc27fb6e07d9b2d2507c30bae4795f86fee625f75f0a9657d371b",
+      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        validate_runtime_definition(definition(), loaded_engine='transitions.Machine',\n            loaded_version=importlib.metadata.version('transitions'),\n            guard_names={name for name in dir(self) if callable(getattr(self,name))})\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
       "calls": [
         "Machine",
         "Phase",
-        "self.evaluation.get"
+        "callable",
+        "definition",
+        "dir",
+        "getattr",
+        "importlib.metadata.version",
+        "self.evaluation.get",
+        "validate_runtime_definition"
       ],
       "guards": [],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
     "state.ready": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "Workflow",
-      "line": 42,
-      "end_line": 62,
+      "line": 43,
+      "end_line": 66,
       "signature": "Workflow",
-      "ast_sha256": "03bf6e1db2883acf65e8866d81c0228934369052e13ff67e7b251e7119ccd163",
-      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
+      "ast_sha256": "2723f90a64abc27fb6e07d9b2d2507c30bae4795f86fee625f75f0a9657d371b",
+      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        validate_runtime_definition(definition(), loaded_engine='transitions.Machine',\n            loaded_version=importlib.metadata.version('transitions'),\n            guard_names={name for name in dir(self) if callable(getattr(self,name))})\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
       "calls": [
         "Machine",
         "Phase",
-        "self.evaluation.get"
+        "callable",
+        "definition",
+        "dir",
+        "getattr",
+        "importlib.metadata.version",
+        "self.evaluation.get",
+        "validate_runtime_definition"
       ],
       "guards": [],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
     "state.completed": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "Workflow",
-      "line": 42,
-      "end_line": 62,
+      "line": 43,
+      "end_line": 66,
       "signature": "Workflow",
-      "ast_sha256": "03bf6e1db2883acf65e8866d81c0228934369052e13ff67e7b251e7119ccd163",
-      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
+      "ast_sha256": "2723f90a64abc27fb6e07d9b2d2507c30bae4795f86fee625f75f0a9657d371b",
+      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        validate_runtime_definition(definition(), loaded_engine='transitions.Machine',\n            loaded_version=importlib.metadata.version('transitions'),\n            guard_names={name for name in dir(self) if callable(getattr(self,name))})\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
       "calls": [
         "Machine",
         "Phase",
-        "self.evaluation.get"
+        "callable",
+        "definition",
+        "dir",
+        "getattr",
+        "importlib.metadata.version",
+        "self.evaluation.get",
+        "validate_runtime_definition"
       ],
       "guards": [],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
     "state.failed": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "Workflow",
-      "line": 42,
-      "end_line": 62,
+      "line": 43,
+      "end_line": 66,
       "signature": "Workflow",
-      "ast_sha256": "03bf6e1db2883acf65e8866d81c0228934369052e13ff67e7b251e7119ccd163",
-      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
+      "ast_sha256": "2723f90a64abc27fb6e07d9b2d2507c30bae4795f86fee625f75f0a9657d371b",
+      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        validate_runtime_definition(definition(), loaded_engine='transitions.Machine',\n            loaded_version=importlib.metadata.version('transitions'),\n            guard_names={name for name in dir(self) if callable(getattr(self,name))})\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
       "calls": [
         "Machine",
         "Phase",
-        "self.evaluation.get"
+        "callable",
+        "definition",
+        "dir",
+        "getattr",
+        "importlib.metadata.version",
+        "self.evaluation.get",
+        "validate_runtime_definition"
       ],
       "guards": [],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
     "state.stopping": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "Workflow",
-      "line": 42,
-      "end_line": 62,
+      "line": 43,
+      "end_line": 66,
       "signature": "Workflow",
-      "ast_sha256": "03bf6e1db2883acf65e8866d81c0228934369052e13ff67e7b251e7119ccd163",
-      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
+      "ast_sha256": "2723f90a64abc27fb6e07d9b2d2507c30bae4795f86fee625f75f0a9657d371b",
+      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        validate_runtime_definition(definition(), loaded_engine='transitions.Machine',\n            loaded_version=importlib.metadata.version('transitions'),\n            guard_names={name for name in dir(self) if callable(getattr(self,name))})\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
       "calls": [
         "Machine",
         "Phase",
-        "self.evaluation.get"
+        "callable",
+        "definition",
+        "dir",
+        "getattr",
+        "importlib.metadata.version",
+        "self.evaluation.get",
+        "validate_runtime_definition"
       ],
       "guards": [],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
     "state.cancelled": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "Workflow",
-      "line": 42,
-      "end_line": 62,
+      "line": 43,
+      "end_line": 66,
       "signature": "Workflow",
-      "ast_sha256": "03bf6e1db2883acf65e8866d81c0228934369052e13ff67e7b251e7119ccd163",
-      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
+      "ast_sha256": "2723f90a64abc27fb6e07d9b2d2507c30bae4795f86fee625f75f0a9657d371b",
+      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        validate_runtime_definition(definition(), loaded_engine='transitions.Machine',\n            loaded_version=importlib.metadata.version('transitions'),\n            guard_names={name for name in dir(self) if callable(getattr(self,name))})\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
       "calls": [
         "Machine",
         "Phase",
-        "self.evaluation.get"
+        "callable",
+        "definition",
+        "dir",
+        "getattr",
+        "importlib.metadata.version",
+        "self.evaluation.get",
+        "validate_runtime_definition"
       ],
       "guards": [],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
     "state.superseded": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "Workflow",
-      "line": 42,
-      "end_line": 62,
+      "line": 43,
+      "end_line": 66,
       "signature": "Workflow",
-      "ast_sha256": "03bf6e1db2883acf65e8866d81c0228934369052e13ff67e7b251e7119ccd163",
-      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
+      "ast_sha256": "2723f90a64abc27fb6e07d9b2d2507c30bae4795f86fee625f75f0a9657d371b",
+      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        validate_runtime_definition(definition(), loaded_engine='transitions.Machine',\n            loaded_version=importlib.metadata.version('transitions'),\n            guard_names={name for name in dir(self) if callable(getattr(self,name))})\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
       "calls": [
         "Machine",
         "Phase",
-        "self.evaluation.get"
+        "callable",
+        "definition",
+        "dir",
+        "getattr",
+        "importlib.metadata.version",
+        "self.evaluation.get",
+        "validate_runtime_definition"
       ],
       "guards": [],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
     "state.interrupted": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "Workflow",
-      "line": 42,
-      "end_line": 62,
+      "line": 43,
+      "end_line": 66,
       "signature": "Workflow",
-      "ast_sha256": "03bf6e1db2883acf65e8866d81c0228934369052e13ff67e7b251e7119ccd163",
-      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
+      "ast_sha256": "2723f90a64abc27fb6e07d9b2d2507c30bae4795f86fee625f75f0a9657d371b",
+      "snippet": "class Workflow:\n    def __init__(self, phase: str, evaluation: dict):\n        validate_runtime_definition(definition(), loaded_engine='transitions.Machine',\n            loaded_version=importlib.metadata.version('transitions'),\n            guard_names={name for name in dir(self) if callable(getattr(self,name))})\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)\n\n    def approved(self):\n        return self.evaluation.get(\"allowed\", False)\n\n    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)\n\n    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)\n\n    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)\n\n    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
       "calls": [
         "Machine",
         "Phase",
-        "self.evaluation.get"
+        "callable",
+        "definition",
+        "dir",
+        "getattr",
+        "importlib.metadata.version",
+        "self.evaluation.get",
+        "validate_runtime_definition"
       ],
       "guards": [],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
     "code.d166aaac5bb078be": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "initial_configuration",
-      "line": 94,
-      "end_line": 103,
+      "line": 98,
+      "end_line": 107,
       "signature": "attempt: str, version: int, capacity: int",
       "ast_sha256": "068eb193f7a25b3326e295ddaa96dafdd5e50bf7dc52e217c80562c351eaea80",
       "snippet": "def initial_configuration(attempt: str, version: int, capacity: int) -> dict:\n    if type(capacity) is not int or capacity not in (1, 2):\n        raise ValueError(\"处理名额只能选择 1 或 2\")\n    if type(version) is not int or version < 1:\n        raise ValueError(\"内容版本必须是正整数\")\n    return {\"attempt\":attempt,\"param_version\":version,\"revision\":0,\n            \"activities\":{a:\"pending\" for a in ACTIVITIES},\n            \"resources\":{\"processing_slots\":{\"capacity\":capacity,\"available\":capacity,\"holders\":[]}},\n            \"join\":{\"state\":\"waiting\",\"pending\":list(ACTIVITIES)},\"journal\":[],\n            \"results\":{},\"discarded\":[],\"wait_reasons\":{}}",
@@ -1498,15 +1567,15 @@
       ],
       "guards": [
         {
-          "line": 95,
+          "line": 99,
           "expression": "type(capacity) is not int or capacity not in (1, 2)"
         },
         {
-          "line": 97,
+          "line": 101,
           "expression": "type(version) is not int or version < 1"
         }
       ],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
     "code.0c1ff05551810b89": {
       "path": "archive_app/service.py",
@@ -1582,8 +1651,8 @@
     "code.c270e158bad72e4e": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "checks_passed",
-      "line": 224,
-      "end_line": 229,
+      "line": 228,
+      "end_line": 233,
       "signature": "run: dict",
       "ast_sha256": "c4cdabe80fb1445f83160c2b3845d7180e999f8f4033c7438f1648a20008ea99",
       "snippet": "def checks_passed(run: dict) -> bool:\n    cfg, request = run[\"configuration\"], run[\"input\"]\n    same_run = cfg[\"attempt\"]==run[\"id\"] and cfg[\"param_version\"]==request[\"content_version\"]\n    return (same_run and cfg[\"join\"][\"state\"]==\"passed\"\n                  and all(cfg[\"activities\"][a]==\"succeeded\" and cfg[\"results\"].get(a,{}).get(\"passed\") is True\n                          for a in ACTIVITIES))",
@@ -1593,13 +1662,13 @@
         "cfg['results'].get(a, {}).get"
       ],
       "guards": [],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
     "code.93d5ecfd052b688e": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "change_phase",
-      "line": 106,
-      "end_line": 114,
+      "line": 110,
+      "end_line": 118,
       "signature": "run: dict, event: str, evaluation: dict, now: float",
       "ast_sha256": "95bec27ccb2fc0b382ce354379a39f8b034e4bf78a038f0a8ce565f430097355",
       "snippet": "def change_phase(run: dict, event: str, evaluation: dict, now: float) -> None:\n    workflow = Workflow(run[\"phase\"], evaluation)\n    old = workflow.state\n    if not workflow.trigger(event):\n        raise ValueError(\"状态机拒绝迁移：\" + event)\n    run[\"phase\"] = workflow.state\n    run[\"phase_journal\"].append({\"event\":event,\"source\":old,\"target\":workflow.state,\n                                \"attempt\":run[\"id\"],\"clock\":now,\n                                \"activity_revision\":run[\"configuration\"][\"revision\"]})",
@@ -1611,11 +1680,11 @@
       ],
       "guards": [
         {
-          "line": 109,
+          "line": 113,
           "expression": "not workflow.trigger(event)"
         }
       ],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
     "code.d31899a8ea590c46": {
       "path": "archive_app/service.py",
@@ -1830,8 +1899,8 @@
     "code.a5031696efd68bab": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "activity_step",
-      "line": 117,
-      "end_line": 156,
+      "line": 121,
+      "end_line": 160,
       "signature": "run: dict, event: str, activity: str, now: float, outcome: str | None=None",
       "ast_sha256": "0471f26a104e3a66685d8e7128a7abd4eef043aa46e4b8900c32a520a19752f0",
       "snippet": "def activity_step(run: dict, event: str, activity: str, now: float,\n                  outcome: str | None = None) -> None:\n    cfg = run[\"configuration\"]\n    before = deepcopy({k:cfg[k] for k in (\"activities\",\"resources\",\"join\")})\n    states, resource = cfg[\"activities\"], cfg[\"resources\"][\"processing_slots\"]\n    if event == \"wait\":\n        if states[activity] != \"pending\" or resource[\"available\"] > 0:\n            raise ValueError(\"等待名额的前提不成立\")\n        states[activity] = \"waiting\"\n    elif event == \"start\":\n        if states[activity] not in (\"pending\",\"waiting\") or resource[\"available\"] < 1 or activity in cfg[\"discarded\"]:\n            raise ValueError(\"检查不能启动\")\n        states[activity] = \"running\"\n        resource[\"available\"] -= 1\n        resource[\"holders\"].append(activity)\n    elif event == \"finish\":\n        if states[activity] != \"running\" or outcome not in (\"succeeded\",\"rejected\",\"failed\"):\n            raise ValueError(\"检查尚未运行或结果无效\")\n        states[activity] = outcome\n        resource[\"available\"] += 1\n        resource[\"holders\"].remove(activity)\n        if all(s in ACTIVITY_TERMINAL for s in states.values()):\n            cfg[\"join\"][\"state\"] = \"enabled\"\n    elif event == \"join\":\n        if cfg[\"join\"][\"state\"] != \"enabled\":\n            raise ValueError(\"检查未结束不能汇合\")\n        cfg[\"join\"][\"state\"] = \"passed\" if all(s==\"succeeded\" for s in states.values()) else \"rejected\"\n    elif event == \"abort\":\n        if \"running\" in states.values():\n            raise ValueError(\"运行中的检查尚未结束\")\n        cfg[\"activities\"] = {a:s if s in ACTIVITY_TERMINAL else \"cancelled\" for a,s in states.items()}\n        cfg[\"join\"][\"state\"] = \"rejected\"\n    else:\n        raise ValueError(\"未知活动事件\")\n    cfg[\"join\"][\"pending\"] = [a for a in ACTIVITIES if cfg[\"activities\"][a] not in ACTIVITY_TERMINAL]\n    cfg[\"revision\"] += 1\n    cfg[\"journal\"].append({\"seq\":cfg[\"revision\"],\"event\":event,\"activity\":activity,\n        \"before\":before,\"after\":deepcopy({k:cfg[k] for k in (\"activities\",\"resources\",\"join\")}),\n        \"clock\":now,\"phase\":run[\"phase\"],\"discarded\":list(cfg[\"discarded\"]),\n        \"wait_reasons\":dict(cfg[\"wait_reasons\"])})",
@@ -1849,65 +1918,65 @@
       ],
       "guards": [
         {
-          "line": 122,
+          "line": 126,
           "expression": "event == 'wait'"
         },
         {
-          "line": 123,
+          "line": 127,
           "expression": "states[activity] != 'pending' or resource['available'] > 0"
         },
         {
-          "line": 126,
+          "line": 130,
           "expression": "event == 'start'"
         },
         {
-          "line": 127,
+          "line": 131,
           "expression": "states[activity] not in ('pending', 'waiting') or resource['available'] < 1 or activity in cfg['discarded']"
         },
         {
-          "line": 132,
+          "line": 136,
           "expression": "event == 'finish'"
         },
         {
-          "line": 133,
+          "line": 137,
           "expression": "states[activity] != 'running' or outcome not in ('succeeded', 'rejected', 'failed')"
         },
         {
-          "line": 138,
+          "line": 142,
           "expression": "all((s in ACTIVITY_TERMINAL for s in states.values()))"
         },
         {
-          "line": 140,
+          "line": 144,
           "expression": "event == 'join'"
         },
         {
-          "line": 141,
+          "line": 145,
           "expression": "cfg['join']['state'] != 'enabled'"
         },
         {
-          "line": 144,
+          "line": 148,
           "expression": "event == 'abort'"
         },
         {
-          "line": 143,
+          "line": 147,
           "expression": "all((s == 'succeeded' for s in states.values()))"
         },
         {
-          "line": 145,
+          "line": 149,
           "expression": "'running' in states.values()"
         },
         {
-          "line": 147,
+          "line": 151,
           "expression": "s in ACTIVITY_TERMINAL"
         }
       ],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
     "code.851dade86c48cea0": {
       "path": "bo_stategraph/workflow.py",
       "symbol": "change_phase",
-      "line": 106,
-      "end_line": 114,
+      "line": 110,
+      "end_line": 118,
       "signature": "run: dict, event: str, evaluation: dict, now: float",
       "ast_sha256": "95bec27ccb2fc0b382ce354379a39f8b034e4bf78a038f0a8ce565f430097355",
       "snippet": "def change_phase(run: dict, event: str, evaluation: dict, now: float) -> None:\n    workflow = Workflow(run[\"phase\"], evaluation)\n    old = workflow.state\n    if not workflow.trigger(event):\n        raise ValueError(\"状态机拒绝迁移：\" + event)\n    run[\"phase\"] = workflow.state\n    run[\"phase_journal\"].append({\"event\":event,\"source\":old,\"target\":workflow.state,\n                                \"attempt\":run[\"id\"],\"clock\":now,\n                                \"activity_revision\":run[\"configuration\"][\"revision\"]})",
@@ -1919,11 +1988,11 @@
       ],
       "guards": [
         {
-          "line": 109,
+          "line": 113,
           "expression": "not workflow.trigger(event)"
         }
       ],
-      "file_sha256": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     }
   },
   "python": "3.13.13",

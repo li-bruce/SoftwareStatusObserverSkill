@@ -1,0 +1,10 @@
+[
+  {
+    "label": "sync-final",
+    "arguments": [
+      "tools/sync_runtime.py"
+    ],
+    "exit_code": 1,
+    "seconds": 0.259
+  }
+]

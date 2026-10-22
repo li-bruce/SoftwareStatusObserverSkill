@@ -1,0 +1,88 @@
+{
+  "schema": "bo-mapping/v1",
+  "cases": [
+    "normal",
+    "no_grant",
+    "alternative",
+    "revoked",
+    "expired",
+    "bad_scope",
+    "bad_role",
+    "edit_after_prepare",
+    "cancel",
+    "retry",
+    "duplicate",
+    "worker_failure",
+    "concurrent",
+    "privacy",
+    "resource_wait",
+    "parallel"
+  ],
+  "modes": [
+    "on",
+    "off",
+    "fault"
+  ],
+  "source": "app.store.Store.snapshot / SQLite",
+  "actual_collection": [
+    "authority",
+    "executions"
+  ],
+  "actual_id": [
+    "attempt"
+  ],
+  "fields": [
+    {
+      "id": "state",
+      "node": "flow.checks",
+      "actual": [
+        "phase"
+      ],
+      "mapped": [
+        "state"
+      ]
+    },
+    {
+      "id": "revision",
+      "node": "flow.checks",
+      "actual": [
+        "state_revision"
+      ],
+      "mapped": [
+        "revision"
+      ]
+    },
+    {
+      "id": "build",
+      "node": "flow.checks",
+      "actual": [
+        "run_build_id"
+      ],
+      "mapped": [
+        "build_id"
+      ]
+    },
+    {
+      "id": "context",
+      "node": "flow.checks",
+      "actual": [
+        "context"
+      ],
+      "mapped": [
+        "context"
+      ]
+    },
+    {
+      "id": "configuration",
+      "node": "flow.checks",
+      "actual": [],
+      "mapped": [
+        "configuration"
+      ]
+    }
+  ],
+  "export": {
+    "case": "normal",
+    "mode": "on"
+  }
+}

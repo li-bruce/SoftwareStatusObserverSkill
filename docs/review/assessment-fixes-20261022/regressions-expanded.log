@@ -1,0 +1,29 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+...............F.
+======================================================================
+FAIL: test_real_service_query_and_recording_finish_without_deadlock (__main__.RuntimeTests.test_real_service_query_and_recording_finish_without_deadlock)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 155, in test_real_service_query_and_recording_finish_without_deadlock
+    self.assertEqual(result.returncode,0,result.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 287, in <module>
+    if '--lock-probe' in sys.argv:lock_probe()
+                                  ~~~~~~~~~~^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 259, in lock_probe
+    from integrations.bo_server import LocalApplication
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\examples\team-archive\integrations\bo_server.py", line 10, in <module>
+    from archive_app.service import ArchiveService
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\examples\team-archive\archive_app\service.py", line 12, in <module>
+    from bo_stategraph.workflow import (ACTIVITIES, ACTIVE, TERMINAL, activity_step, change_phase,
+                           initial_configuration, request_stop, settle, schedule, checks_passed, interrupt,
+                           finish_activity, resume)
+ModuleNotFoundError: No module named 'bo_stategraph.workflow'; 'bo_stategraph' is not a package
+
+
+----------------------------------------------------------------------
+Ran 17 tests in 2.275s
+
+FAILED (failures=1)

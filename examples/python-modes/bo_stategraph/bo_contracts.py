@@ -4,6 +4,7 @@ The project checker, standalone module and exports use these same rules.
 Runtime violations are diagnostics; callers must preserve the actual facts.
 """
 import math
+import json
 
 
 def value_errors(value, spec, name):
@@ -41,16 +42,144 @@ def state_tree(chart):
     if separator != '_':
         raise ValueError('unsupported state separator: ' + str(separator))
     def descend(items, parent=None):
+        if not isinstance(items, list) or not items:
+            raise ValueError('states must be a nonempty list')
         for item in items:
             data = {'name': item} if isinstance(item, str) else item
+            if not isinstance(data, dict) or not isinstance(data.get('name'), str) or not data['name']:
+                raise ValueError('state needs a nonempty name')
+            unsupported = set(data) - {'name', 'initial', 'children', 'parallel'}
+            if unsupported:
+                raise ValueError('unsupported state semantics: ' + ', '.join(sorted(unsupported)))
+            if 'parallel' in data and ('children' in data or 'initial' in data):
+                raise ValueError('parallel state cannot also declare children or initial')
             name = (parent + separator if parent else '') + data['name']
             if name in states: raise ValueError('duplicate state name')
             if data.get('history'):
                 raise ValueError('history states require a supported engine adapter')
             states[name], parents[name] = data, parent
-            descend(data.get('parallel') or data.get('children') or [], name)
+            nested = data.get('parallel', data.get('children'))
+            if nested is not None: descend(nested, name)
     descend(chart['states'])
+    for name, data in states.items():
+        if 'initial' in data:
+            initial = data['initial']
+            if not isinstance(initial, str) or name + separator + initial not in states:
+                raise ValueError('unknown compound initial state: ' + name)
     return states, parents
+
+
+def entered_states(chart, target):
+    """Resolve compound initial descendants and every parallel region."""
+    states, parents = state_tree(chart)
+    if target not in states: raise ValueError('unknown transition target')
+    def enter(name):
+        data = states[name]
+        if data.get('parallel'):
+            return [leaf for child, parent in parents.items() if parent == name for leaf in enter(child)]
+        if data.get('initial'):
+            return enter(name + '_' + data['initial'])
+        return [name]
+    return enter(target)
+
+
+def transition_states(chart, previous, transitions):
+    """Expected configuration for the supported declarative subset, never facts.
+
+    This checks only supplied guard results. It does not call business callbacks.
+    Independent parallel region transitions compose; cross-region transitions
+    are rejected when the declaration is loaded.
+    """
+    states, parents = state_tree(chart)
+    before = active_states(chart, previous)
+    leaves = {s for s in before if not any(p == s and child in before for child, p in parents.items())}
+    def chain(name):
+        result = []
+        while name is not None:
+            result.append(name); name = parents[name]
+        return result
+    removed, added = set(), set()
+    for transition in transitions:
+        target = transition['dest']
+        if target is None: continue
+        sources = transition['source']
+        sources = sources if isinstance(sources, list) else [sources]
+        if '*' in sources: sources = [s for s, p in parents.items() if p is None]
+        for source in set(sources) & before:
+            ancestors = chain(source)
+            common = next((p for p in ancestors if p in chain(target)), None)
+            exit_root = source
+            while parents[exit_root] is not None and parents[exit_root] != common:
+                exit_root = parents[exit_root]
+            if common == source: exit_root = source
+            removed.update(s for s in leaves if exit_root in chain(s))
+            added.update(entered_states(chart, target))
+    return active_states(chart, sorted((leaves - removed) | added))
+
+
+def validate_value_spec(spec, name):
+    if not isinstance(spec, dict) or spec.get('type') not in {'integer','number','boolean','string','enum','array','object'}:
+        raise ValueError('unknown value type: ' + name)
+    if spec['type'] == 'enum' and (not isinstance(spec.get('values'), list) or not spec['values']):
+        raise ValueError('enum needs values: ' + name)
+    for bound in ('min', 'max'):
+        if bound in spec and (type(spec[bound]) not in (int,float) or not math.isfinite(spec[bound])):
+            raise ValueError('invalid bound: ' + name)
+    if 'min' in spec and 'max' in spec and spec['min'] > spec['max']: raise ValueError('invalid bounds')
+    if spec.get('items') is not None: validate_value_spec(spec['items'], name + '[]')
+    for key, child in spec.get('properties', {}).items(): validate_value_spec(child, name + '.' + key)
+
+
+def validate_runtime_definition(chart, *, loaded_engine=None, loaded_version=None, guard_names=None):
+    """Fail before creating an executor when its declared semantics are unsupported."""
+    if not isinstance(chart, dict): raise ValueError('statechart must be an object')
+    unsupported = set(chart) & {'queued', 'auto_transitions', 'ignore_invalid_triggers',
+        'send_event', 'ordered_transitions', 'model_override', 'before_state_change',
+        'after_state_change', 'prepare_event', 'finalize_event', 'on_exception'}
+    if unsupported: raise ValueError('unsupported engine options: ' + ', '.join(sorted(unsupported)))
+    engine = chart.get('engine')
+    if engine not in (None, 'transitions.Machine', 'transitions.HierarchicalMachine',
+                      'transitions.extensions.HierarchicalMachine', 'adapter-selected', 'python.explicit'):
+        raise ValueError('unsupported execution engine: ' + str(engine))
+    if loaded_engine is not None and engine not in (None, 'adapter-selected', loaded_engine):
+        raise ValueError('loaded engine differs from declaration')
+    if loaded_version is not None and engine != 'adapter-selected' and chart.get('version') != loaded_version:
+        raise ValueError('loaded engine version differs from declaration')
+    if guard_names is not None and set(chart.get('guards', {})) - set(guard_names):
+        raise ValueError('declared guard is missing from loaded executor')
+    states, parents = state_tree(chart)
+    if chart.get('initial') not in states: raise ValueError('unknown initial state')
+    active_states(chart, entered_states(chart, chart['initial']))
+    if engine == 'transitions.Machine' and any(p is not None for p in parents.values()):
+        raise ValueError('flat engine cannot load hierarchical states')
+    for name, spec in chart.get('context', {}).items(): validate_value_spec(spec, name)
+    for event, data in chart.get('events', {}).items():
+        if not isinstance(data, dict) or not isinstance(data.get('payload'), dict):
+            raise ValueError('event needs payload declaration: ' + event)
+        for name, spec in data['payload'].items(): validate_value_spec(spec, event + '.' + name)
+    for transition in chart['transitions']:
+        if set(transition) - {'source','dest','trigger','conditions','unless'}:
+            raise ValueError('unsupported transition callback or semantics')
+        sources = transition['source']
+        sources = sources if isinstance(sources, list) else [sources]
+        if not sources: raise ValueError('transition needs a source')
+        if any(s != '*' and s not in states for s in sources) or transition['dest'] not in {None, *states}:
+            raise ValueError('dangling transition')
+        if transition['trigger'] not in chart.get('events', {}): raise ValueError('unknown transition event')
+        for field in ('conditions','unless'):
+            refs = transition.get(field, [])
+            refs = refs if isinstance(refs, list) else [refs]
+            if set(refs) - set(chart.get('guards', {})): raise ValueError('undefined guard')
+        # Explicitly bound the supported HSM subset instead of silently applying
+        # sequential rules to cross-region transitions.
+        for source in sources:
+            if source == '*' or transition['dest'] is None: continue
+            branch = source
+            while parents[branch] is not None:
+                parent = parents[branch]
+                if states[parent].get('parallel') and not (transition['dest'] == branch or transition['dest'].startswith(branch + '_')):
+                    raise ValueError('cross-region transition requires a supported engine adapter')
+                branch = parent
 
 
 def active_states(chart, value):
@@ -74,6 +203,8 @@ def active_states(chart, value):
     for parent in [None, *states]:
         children = [s for s, p in parents.items() if p == parent and s in result]
         parallel = parent is not None and bool(states[parent].get('parallel'))
+        if parent in leaves and states[parent].get('initial') and not children:
+            raise ValueError('compound configuration is missing its active descendant')
         if len(children) > 1 and not parallel:
             raise ValueError('exclusive states cannot be active together')
         if parent in result and parallel:
@@ -131,6 +262,7 @@ def validate_chart(model, runtime_definition=None):
         fields += ('engine', 'version', 'state_type')
     for key in fields:
         if key not in chart or chart[key] is None: raise ValueError('missing statechart field: ' + key)
+    validate_runtime_definition(chart)
     states, _ = state_tree(chart)
     values = set(chart['values'])
     if not values or len(values) != len(chart['values']): raise ValueError('duplicate or missing state values')
@@ -156,8 +288,10 @@ def validate_chart(model, runtime_definition=None):
             if set(refs) - set(chart.get('guards', {})): raise ValueError('undefined guard')
     represented = {n['value'] for n in model['nodes'] if n.get('layer') == 'state'}
     if values != represented: raise ValueError('persisted states and graph projection differ')
-    if runtime_definition is not None and chart != runtime_definition:
-        raise ValueError('graph and runtime statechart declarations differ')
+    if runtime_definition is not None:
+        validate_runtime_definition(runtime_definition)
+        if json.dumps(chart, sort_keys=True, allow_nan=False) != json.dumps(runtime_definition, sort_keys=True, allow_nan=False):
+            raise ValueError('graph and runtime statechart declarations differ')
     try:
         from .execution_contract import validate_execution_graph
     except ImportError:

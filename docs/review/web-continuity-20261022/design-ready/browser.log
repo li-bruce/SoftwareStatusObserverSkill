@@ -1,0 +1,23 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+AssertionError [ERR_ASSERTION]: The input did not match the regular expression /设计声明/. Input:
+
+'暂时无法连接程序'
+
+    at C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\docs\review\web-continuity-20261022\design-ui.cjs:15:10 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: '暂时无法连接程序',
+  expected: /设计声明/,
+  operator: 'match'
+}
+Starting server 1/1: C:\Users\Lvi_P\Documents\Work\CF\ƽ̨����\SoftwareStatusObserverSkill\.venv\Scripts\python.exe -B -X utf8 C:\Users\Lvi_P\Documents\Work\CF\ƽ̨����\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_web.py serve --root C:\Users\Lvi_P\Documents\Work\CF\ƽ̨����\SoftwareStatusObserverSkill\.validation\web-design-design-ready --port 8843
+Waiting for server on port 8843...
+Server ready on port 8843
+
+All 1 server(s) ready
+Running: node C:\Users\Lvi_P\Documents\Work\CF\ƽ̨����\SoftwareStatusObserverSkill\docs\review\web-continuity-20261022\design-ui.cjs
+
+
+Stopping 1 server(s)...
+Server 1 stopped
+All servers stopped

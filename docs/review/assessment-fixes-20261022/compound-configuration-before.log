@@ -1,0 +1,18 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+F
+======================================================================
+FAIL: test_compound_entry_resolves_initial_descendants (__main__.EngineTests.test_compound_entry_resolves_initial_descendants)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_assessment_fixes.py", line 133, in test_compound_entry_resolves_initial_descendants
+    self.assertEqual(incomplete['status'], 'mismatch')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'observed' != 'mismatch'
+- observed
++ mismatch
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.021s
+
+FAILED (failures=1)

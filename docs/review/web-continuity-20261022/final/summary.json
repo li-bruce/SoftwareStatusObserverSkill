@@ -1,0 +1,94 @@
+{
+  "delivery": {
+    "check": {
+      "valid": true,
+      "status": "current",
+      "errors": [],
+      "candidate_id": "a7a57c6378644f0b159a79a071a6f9ccdafd1f8815130de57e84f7645c0402f1"
+    },
+    "accepted": {
+      "candidate_id": "a7a57c6378644f0b159a79a071a6f9ccdafd1f8815130de57e84f7645c0402f1",
+      "build_id": "54aacf602e5df7c4704d1e0be007a9e24232c280c02b0a09b086a62ecefd5b45",
+      "verification_hash": "8f645e87940490bedb50590cb192a0d2dab7fed062bfa407dd1bf994bf8a3e5d"
+    },
+    "reports": {
+      "mapping": {
+        "status": "passed",
+        "errors": [],
+        "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+        "stategraph_export": "checked",
+        "witnesses": 201,
+        "projection_checks": 303
+      },
+      "state_rules": {
+        "status": "passed",
+        "errors": []
+      },
+      "project_checks": {
+        "status": "passed",
+        "errors": [],
+        "scope": "Configured project tests, architecture and viewer checks"
+      },
+      "business": {
+        "status": "passed",
+        "errors": [],
+        "assertions": {
+          "required": 96,
+          "executed": 96
+        },
+        "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+      }
+    },
+    "original_expectations_preserved": true,
+    "expectation_hashes": {
+      "acceptance.json": "9243e7ef7a3bd3822fda92e405196a1dc867a078dba818ded6ad3cea0221148f",
+      "whitebox.json": "22de319201fc6711dc9037c6e3db0aee3c618f139a990aae01a194f913e8c035"
+    }
+  },
+  "team-archive": {
+    "check": {
+      "valid": true,
+      "status": "current",
+      "errors": [],
+      "candidate_id": "5c91994ab3b27638a5c0a428f414dff30c09f436d71161811590b6b5f6722585"
+    },
+    "accepted": {
+      "candidate_id": "5c91994ab3b27638a5c0a428f414dff30c09f436d71161811590b6b5f6722585",
+      "build_id": "bbc04dd4ae7e708ee8db38f7efbe44fa54bc198fe31c6a9b86065486718acf14",
+      "verification_hash": "c855012d187eb5db4fc241f2cdddce812e43523f617d348fcd6645e8b9e3e542"
+    },
+    "reports": {
+      "mapping": {
+        "status": "passed",
+        "errors": [],
+        "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+        "stategraph_export": "checked",
+        "witnesses": 480,
+        "projection_checks": 1110
+      },
+      "state_rules": {
+        "status": "passed",
+        "errors": []
+      },
+      "project_checks": {
+        "status": "passed",
+        "errors": [],
+        "scope": "Configured project tests, architecture and viewer checks"
+      },
+      "business": {
+        "status": "passed",
+        "errors": [],
+        "assertions": {
+          "required": 189,
+          "executed": 189
+        },
+        "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+      }
+    },
+    "original_expectations_preserved": true,
+    "expectation_hashes": {
+      "acceptance.json": "6b86130e35acc88c7a48c31e0d5b59bd77e48dd8ed78619450d6536e3b4bf050",
+      "whitebox.json": "9135d9ceee5e4959f35340b803ab577da3c5cac7250b7d4a11e2cd2fdf716940"
+    }
+  }
+}

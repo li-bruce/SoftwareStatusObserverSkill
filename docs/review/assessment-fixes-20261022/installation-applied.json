@@ -1,0 +1,91 @@
+{
+  "target": "C:\\Users\\Lvi_P\\.codex\\skills\\business-observer",
+  "applied": true,
+  "changes": [
+    {
+      "file": "assets/sync.example.json",
+      "before": "34f82d0f9ad011382f5401f2a87ced488e35bcf8acfc829efa8e0ef46161c1c6",
+      "after": "25f69d146dab44fe18a6c0a208af4472e32afbaa820a7067cda1926f530a1d7d"
+    },
+    {
+      "file": "references/continuous-development.md",
+      "before": "638bc72a88ec6d113f0c2220500223961396a3cfbaea57ae10ab39864c5836cf",
+      "after": "7e60ccde8532ac9517b470a21f6592e8c5bafa7a6db9abd27f870f0c5acca30f"
+    },
+    {
+      "file": "references/independent-python.md",
+      "before": "13e27a2117f35ed7aab10afd1918fea5dcf57c6a3ad03c83a89c0b176db5b42d",
+      "after": "2c433cd5877d2e45fc9eb839d0bb578d2461e4973febc579a97a50909a712e0d"
+    },
+    {
+      "file": "references/mapping-contract.md",
+      "before": null,
+      "after": "a030a83b4e622c94c43ae6ae16d3b6d88f67d17cf998584ac47786402594a7c8"
+    },
+    {
+      "file": "references/semantic-pins.md",
+      "before": "42fd03d8ae99ad9e527a5604baf7fd911669bfee928d6601d85289f44a645e71",
+      "after": "7bcbc9cb22e4fbedd354512f532535634ed946ae7d72d511d9dbd2d19208c2f8"
+    },
+    {
+      "file": "references/validation-rules.md",
+      "before": "f8ee05c63fff8fda5959bfff66347fd462512ebb148e98cd1817e6110dd62aa9",
+      "after": "ab56a56e125552d550cf031be117cd80c176d0497c33ac6da7ae6a62f0212566"
+    },
+    {
+      "file": "scripts/bo_contracts.py",
+      "before": "2a5639208ccb10f41c1c013858c1961fc6459b4b094954a0581d17050c471a65",
+      "after": "c2de500b94af9f2fb3549bdbb46a7251dc7e0145f3b0d60896ea99df2f4933e5"
+    },
+    {
+      "file": "scripts/bo_stategraph.py",
+      "before": "577631905e58c6e0700ca225312a0a2fa57bf21e3a631bb4dd3539d6951ff561",
+      "after": "0571254ae4242ad3f03d8433ff67edf79b46670518492d1a602874a24985cc09"
+    },
+    {
+      "file": "scripts/bo_sync.py",
+      "before": "f3fdb5c555073aa106bc32796fb05046d77f2d58bb417ae24bc3d532a20b9a69",
+      "after": "2729054465635c493c799d9c2c78a0353adc6e30f4442724e7ba9ea47988d6a6"
+    },
+    {
+      "file": "scripts/bo_upgrade.py",
+      "before": "9d12c0d6fbd02bc6a66858629e31b7a4832dcfc5b030b49a1290e6bb04a1111e",
+      "after": "2691ec2cc43cad41b65d4714dfa3fc98846bacda6a201f7bc9403c1a31294bcb"
+    },
+    {
+      "file": "scripts/change_sync.py",
+      "before": "7308dfd24682fabba7cdca2898297d159629a8e4f5b35cbf2497b881541c19e6",
+      "after": "30ef8d67f4a3766fcb34da3dd8f06c1357648ba6a46824943f6e9598036bd4e7"
+    },
+    {
+      "file": "scripts/mapping_contract.py",
+      "before": "5c66b054d2a2086861fe63489cf49d4f08909d64424b7dce6407766508213296",
+      "after": "84042869bc1e14e3a0881f102914f52596e4a8e10781e141f0806df155d6669e"
+    },
+    {
+      "file": "scripts/semantic_probe.py",
+      "before": "7a76181cbef2122e6d54105c07bc10e63f81d0d63130c2010fa7c375f09a40e2",
+      "after": "0fcd21963a53e898ef9ef2f60959ab0e037a03bae7adc7306c9522b76e6baa9f"
+    },
+    {
+      "file": "scripts/sync_config.py",
+      "before": "5384af51fbf089e4902773490fcaf5194c3a5a0c05a02dc4fc745621650ecedc",
+      "after": "97d10b3030273440161d85b422b2b9a62193b70d9f9be2c9ae5fb5b91c518966"
+    },
+    {
+      "file": "scripts/sync_io.py",
+      "before": "2afd0eac53ed9ae47dd551e04958a33a1935354aa51826cf93b2f4c69416f7df",
+      "after": "80cc18e4283816163a899396401a26a614ec94807cf65021f4b51dedbf923e8f"
+    },
+    {
+      "file": "scripts/sync_verify.py",
+      "before": "8f95683985bf218ab96e3ccfafc624d963df24cefda6a13fba21288619dc3e4b",
+      "after": "9fa99242cffd708250e72de24dd9e4137583ede79d2beb517faec71084628d74"
+    },
+    {
+      "file": "SKILL.md",
+      "before": "9137bed4a68577480fe6c90251780513986a7efcba5d3ea34957347b8a3cb88d",
+      "after": "fab67399a98f5229173c15c07c4f50da2a60bd66301972fb704a7b05127d9f4d"
+    }
+  ]
+}

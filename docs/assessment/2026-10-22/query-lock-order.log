@@ -1,0 +1,2 @@
+{"view_waiting": true, "query_waiting": true, "service_lock_acquired": true, "graph_lock_acquired": true, "errors": [], "product_methods": "LocalApplication.recording_view / BOStateGraph.bo_instances"}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe

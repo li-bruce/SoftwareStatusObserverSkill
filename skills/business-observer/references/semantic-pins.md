@@ -1,6 +1,8 @@
 # 插入语义探针
 
-把 semantic_probe.py 与 behavior_model.py 固定复制到目标项目，或固定路径引用；记录副本散列。示例构造 `Pins(model, build_id, path=..., enabled=True)`。每次业务尝试由 `pins.attempt(entity)` 创建 Trace；`trace.record(node, phase, basis, builder, depends=..., call_id=..., parent_call_id=...)` 的 builder 返回 `{inputs,outputs}`，并在隔离块内运行。record 返回的 event_id 只供后续观测关联，业务不得依赖它是否存在。
+通过 `bo_upgrade.py` 安装公共运行库并记录散列，包含 `semantic_probe.py` 和 `bo_retention.py`。文件接入使用 `Pins(model, build_id, path=project_root / "data/events.jsonl", project_root=project_root, enabled=True)`，自动加载 `bo_stategraph/config/retention.json`。仅提供 path 时也有默认容量边界，但不会猜测项目根目录。配置错误在构造时抛出；运行中写入失败记录到 health，不改变业务结果。
+
+每次业务尝试由 `pins.attempt(entity)` 创建 Trace；`trace.record(node, phase, basis, builder, depends=..., call_id=..., parent_call_id=...)` 的 builder 返回 `{inputs,outputs}`，并在隔离块内运行。record 返回的 event_id 只供后续观测关联，业务不得依赖它是否存在。自定义 sink 必须连接 `EventHistory` 或项目自己的有界实现，并验证容量与丢失提示；队列有界不等于输出文件有界。
 
 ```python
 result = calculate_price(quantity)  # 原有业务计算

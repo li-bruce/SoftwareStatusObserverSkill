@@ -1,0 +1,654 @@
+[
+  {
+    "file": "skills/business-observer/scripts/architecture_guard.py",
+    "lines": 176,
+    "over_160_chars": 0,
+    "longest_functions": [
+      [
+        54,
+        "inspect",
+        71
+      ],
+      [
+        42,
+        "main",
+        127
+      ],
+      [
+        14,
+        "collect",
+        55
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/behavior_model.py",
+    "lines": 217,
+    "over_160_chars": 0,
+    "longest_functions": [
+      [
+        28,
+        "validate_events",
+        156
+      ],
+      [
+        28,
+        "main",
+        186
+      ],
+      [
+        24,
+        "capture",
+        105
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/bo_contracts.py",
+    "lines": 167,
+    "over_160_chars": 0,
+    "longest_functions": [
+      [
+        43,
+        "validate_chart",
+        125
+      ],
+      [
+        35,
+        "validate_graph",
+        88
+      ],
+      [
+        30,
+        "active_states",
+        56
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/bo_retention.py",
+    "lines": 79,
+    "over_160_chars": 0,
+    "longest_functions": [
+      [
+        13,
+        "_log",
+        47
+      ],
+      [
+        12,
+        "append",
+        34
+      ],
+      [
+        12,
+        "__init__",
+        15
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/bo_runtime.py",
+    "lines": 28,
+    "over_160_chars": 0,
+    "longest_functions": [
+      [
+        21,
+        "resolve",
+        8
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/bo_stategraph.py",
+    "lines": 328,
+    "over_160_chars": 0,
+    "longest_functions": [
+      [
+        69,
+        "bo_observe",
+        125
+      ],
+      [
+        49,
+        "bo_instances",
+        195
+      ],
+      [
+        47,
+        "bo_candidates",
+        77
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/bo_sync.py",
+    "lines": 107,
+    "over_160_chars": 0,
+    "longest_functions": [
+      [
+        39,
+        "main",
+        65
+      ],
+      [
+        28,
+        "source_inventory",
+        17
+      ],
+      [
+        16,
+        "maintenance_task",
+        47
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/bo_upgrade.py",
+    "lines": 131,
+    "over_160_chars": 0,
+    "longest_functions": [
+      [
+        36,
+        "plan",
+        46
+      ],
+      [
+        28,
+        "apply",
+        84
+      ],
+      [
+        14,
+        "main",
+        114
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/change_sync.py",
+    "lines": 298,
+    "over_160_chars": 0,
+    "longest_functions": [
+      [
+        65,
+        "structural_errors",
+        47
+      ],
+      [
+        62,
+        "main",
+        231
+      ],
+      [
+        44,
+        "review_errors",
+        141
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/code_structure.py",
+    "lines": 242,
+    "over_160_chars": 0,
+    "longest_functions": [
+      [
+        80,
+        "parse_unit",
+        27
+      ],
+      [
+        66,
+        "enrich",
+        154
+      ],
+      [
+        57,
+        "walk",
+        47
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/execution_contract.py",
+    "lines": 101,
+    "over_160_chars": 0,
+    "longest_functions": [
+      [
+        52,
+        "validate_configuration",
+        50
+      ],
+      [
+        37,
+        "validate_execution_graph",
+        11
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/focus_graph.py",
+    "lines": 183,
+    "over_160_chars": 0,
+    "longest_functions": [
+      [
+        98,
+        "extract",
+        17
+      ],
+      [
+        36,
+        "markdown",
+        117
+      ],
+      [
+        21,
+        "main",
+        155
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/mapping_contract.py",
+    "lines": 41,
+    "over_160_chars": 0,
+    "longest_functions": [
+      [
+        21,
+        "assess",
+        21
+      ],
+      [
+        10,
+        "instance_witnesses",
+        9
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/model_tool.py",
+    "lines": 303,
+    "over_160_chars": 2,
+    "longest_functions": [
+      [
+        63,
+        "validate_model",
+        70
+      ],
+      [
+        51,
+        "validate_events",
+        214
+      ],
+      [
+        34,
+        "schema_check",
+        34
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/probe.py",
+    "lines": 131,
+    "over_160_chars": 0,
+    "longest_functions": [
+      [
+        37,
+        "emit",
+        43
+      ],
+      [
+        18,
+        "__init__",
+        14
+      ],
+      [
+        13,
+        "_worker",
+        100
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/project_bundle.py",
+    "lines": 107,
+    "over_160_chars": 0,
+    "longest_functions": [
+      [
+        30,
+        "export",
+        28
+      ],
+      [
+        23,
+        "inspect",
+        60
+      ],
+      [
+        15,
+        "main",
+        85
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/recording_session.py",
+    "lines": 386,
+    "over_160_chars": 0,
+    "longest_functions": [
+      [
+        50,
+        "_start",
+        182
+      ],
+      [
+        44,
+        "_capture",
+        234
+      ],
+      [
+        31,
+        "bo_capture_plan",
+        137
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/requirements_dialogue.py",
+    "lines": 198,
+    "over_160_chars": 3,
+    "longest_functions": [
+      [
+        147,
+        "_assess",
+        23
+      ],
+      [
+        17,
+        "main",
+        179
+      ],
+      [
+        8,
+        "records",
+        27
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/runtime_frames.py",
+    "lines": 62,
+    "over_160_chars": 0,
+    "longest_functions": [
+      [
+        49,
+        "merge_frames",
+        13
+      ],
+      [
+        3,
+        "gap",
+        19
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/semantic_probe.py",
+    "lines": 141,
+    "over_160_chars": 0,
+    "longest_functions": [
+      [
+        35,
+        "record",
+        107
+      ],
+      [
+        20,
+        "selected",
+        13
+      ],
+      [
+        16,
+        "__init__",
+        36
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/source_migration.py",
+    "lines": 62,
+    "over_160_chars": 0,
+    "longest_functions": [
+      [
+        31,
+        "source_moves",
+        17
+      ],
+      [
+        6,
+        "source_key",
+        9
+      ],
+      [
+        6,
+        "rebind_whitebox",
+        57
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/statechart_contract.py",
+    "lines": 18,
+    "over_160_chars": 0,
+    "longest_functions": []
+  },
+  {
+    "file": "skills/business-observer/scripts/sync_config.py",
+    "lines": 72,
+    "over_160_chars": 0,
+    "longest_functions": [
+      [
+        32,
+        "config",
+        13
+      ],
+      [
+        24,
+        "snapshot",
+        47
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/sync_io.py",
+    "lines": 33,
+    "over_160_chars": 0,
+    "longest_functions": [
+      [
+        14,
+        "write",
+        20
+      ],
+      [
+        10,
+        "at_path",
+        8
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/sync_verify.py",
+    "lines": 163,
+    "over_160_chars": 0,
+    "longest_functions": [
+      [
+        89,
+        "verify",
+        73
+      ],
+      [
+        31,
+        "assess_observations",
+        40
+      ],
+      [
+        12,
+        "run_command",
+        26
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/viewer_server.py",
+    "lines": 100,
+    "over_160_chars": 1,
+    "longest_functions": [
+      [
+        27,
+        "main",
+        70
+      ],
+      [
+        14,
+        "read_events",
+        12
+      ],
+      [
+        13,
+        "do_GET",
+        52
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/view_preferences.py",
+    "lines": 94,
+    "over_160_chars": 0,
+    "longest_functions": [
+      [
+        23,
+        "validate",
+        52
+      ],
+      [
+        20,
+        "file_lock",
+        16
+      ],
+      [
+        19,
+        "save",
+        76
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/whitebox_contract.py",
+    "lines": 251,
+    "over_160_chars": 0,
+    "longest_functions": [
+      [
+        54,
+        "assess",
+        150
+      ],
+      [
+        45,
+        "schema_errors",
+        80
+      ],
+      [
+        33,
+        "assertion_errors",
+        45
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/scripts/worknet_contract.py",
+    "lines": 63,
+    "over_160_chars": 0,
+    "longest_functions": [
+      [
+        39,
+        "validate_net",
+        5
+      ],
+      [
+        8,
+        "check",
+        19
+      ]
+    ]
+  },
+  {
+    "file": "skills/business-observer/assets/stategraph-viewer/analysis.js",
+    "lines": 61,
+    "over_160_chars": 0
+  },
+  {
+    "file": "skills/business-observer/assets/stategraph-viewer/elk-worker.min.js",
+    "lines": 6317,
+    "over_160_chars": 1534
+  },
+  {
+    "file": "skills/business-observer/assets/stategraph-viewer/elk.bundled.js",
+    "lines": 6605,
+    "over_160_chars": 1551
+  },
+  {
+    "file": "skills/business-observer/assets/stategraph-viewer/glyphs.js",
+    "lines": 50,
+    "over_160_chars": 5
+  },
+  {
+    "file": "skills/business-observer/assets/stategraph-viewer/graph-core.js",
+    "lines": 238,
+    "over_160_chars": 23
+  },
+  {
+    "file": "skills/business-observer/assets/stategraph-viewer/layout.js",
+    "lines": 423,
+    "over_160_chars": 6
+  },
+  {
+    "file": "skills/business-observer/assets/stategraph-viewer/pixi.min.js",
+    "lines": 2375,
+    "over_160_chars": 70
+  },
+  {
+    "file": "skills/business-observer/assets/stategraph-viewer/polling.js",
+    "lines": 16,
+    "over_160_chars": 0
+  },
+  {
+    "file": "skills/business-observer/assets/stategraph-viewer/preferences.js",
+    "lines": 48,
+    "over_160_chars": 2
+  },
+  {
+    "file": "skills/business-observer/assets/stategraph-viewer/recording.js",
+    "lines": 105,
+    "over_160_chars": 0
+  },
+  {
+    "file": "skills/business-observer/assets/stategraph-viewer/renderer.js",
+    "lines": 216,
+    "over_160_chars": 16
+  },
+  {
+    "file": "skills/business-observer/assets/stategraph-viewer/replay-steps.js",
+    "lines": 128,
+    "over_160_chars": 3
+  },
+  {
+    "file": "skills/business-observer/assets/stategraph-viewer/runtime-frames.js",
+    "lines": 35,
+    "over_160_chars": 0
+  },
+  {
+    "file": "skills/business-observer/assets/stategraph-viewer/viewer.js",
+    "lines": 645,
+    "over_160_chars": 57
+  }
+]

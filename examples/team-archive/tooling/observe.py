@@ -35,6 +35,7 @@ def main():
                 'operator_id':r['input']['operator_id'],'document_id':r['input']['document_id']}}
             for r in raw['runs']}
         instances=graph.bo_instances(bo_machine(raw,before['build_id']))
+        run['projection']={'build_id':before['build_id'],'machine':bo_machine(raw,before['build_id']), 'instances':instances}
         witnesses.extend(instance_witnesses(instances,actual,case=run['case']+':'+run['mode'],
             source='archive_app.storage.ArchiveStore.snapshot / SQLite'))
         # Compare all activity/resource/wait/join values, not just the coarse phase.
@@ -43,7 +44,8 @@ def main():
             witnesses.append({'id':run['case']+':'+run['mode']+':'+observed['instance_id']+':activities',
                 'source':'SQLite runs.payload.configuration','projection':'bo_instances.configuration',
                 'actual':original,'mapped':{k:observed['configuration'].get(k) for k in original}})
-    exported=graph.bo_export(runtime={'machine':bo_machine(runs[0]['authority_snapshot'],before['build_id'])})
+    selected=next(r for r in runs if r['case']=='archive_snapshot' and r['mode']=='on')
+    exported=graph.bo_export(runtime={'machine':selected['projection']['machine']})
     print(json.dumps({"build_id":before["build_id"],"machine":definition(),"runs":runs,
         'mapping_checks':witnesses,'stategraph_export':exported},ensure_ascii=False))
 

@@ -1,0 +1,173 @@
+{
+  "checked_at": "2026-10-22T06:10:21.466114+00:00",
+  "python": "3.13.13 | packaged by conda-forge | (main, Apr  8 2026, 01:56:49) [MSC v.1944 64 bit (AMD64)]",
+  "transitions": "0.9.3",
+  "findings": [
+    {
+      "id": "undefined_target",
+      "independent_module": {
+        "accepted": false,
+        "error": "ValueError: dangling transition"
+      },
+      "project_validator": {
+        "accepted": false,
+        "error": "ValueError: dangling transition"
+      }
+    },
+    {
+      "id": "undefined_guard",
+      "independent_module": {
+        "accepted": false,
+        "error": "ValueError: undefined guard"
+      },
+      "project_validator": {
+        "accepted": false,
+        "error": "ValueError: undefined guard"
+      }
+    },
+    {
+      "id": "parent_cycle",
+      "independent_module": {
+        "accepted": false,
+        "error": "ValueError: missing parent or hierarchy cycle"
+      },
+      "project_validator": {
+        "accepted": false,
+        "error": "ValueError: missing parent or hierarchy cycle"
+      }
+    },
+    {
+      "id": "hierarchical_transition",
+      "declaration_check": {
+        "valid": true,
+        "states": 3,
+        "events": 1,
+        "runtime_definition_compared": false
+      },
+      "actual_engine_state": "done",
+      "observer_status": "observed",
+      "observer_errors": [],
+      "observer_candidates": [
+        {
+          "transition": {
+            "source": "active",
+            "dest": "done",
+            "trigger": "finish"
+          },
+          "result": "matched",
+          "missing_guards": [],
+          "rejected_guards": []
+        }
+      ]
+    },
+    {
+      "id": "invalid_activity_configuration",
+      "independent_status": "mismatch",
+      "independent_errors": [
+        "execution: current state differs from actual execution history"
+      ],
+      "project_validator": {
+        "accepted": false,
+        "error": "ValueError: current state differs from actual execution history"
+      }
+    },
+    {
+      "id": "empty_probe_modes",
+      "configuration_accepted": {
+        "accepted": false,
+        "error": "ValueError: probe_modes must be a nonempty unique list of on/off/fault"
+      },
+      "normal_errors": [
+        {
+          "requirement": "R1",
+          "check": "actual_effect",
+          "mode": "on",
+          "expected": 1,
+          "actual": 0
+        },
+        {
+          "requirement": "R1",
+          "check": "actual_effect",
+          "mode": "off",
+          "expected": 1,
+          "actual": 0
+        },
+        {
+          "requirement": "R1",
+          "check": "actual_effect",
+          "mode": "fault",
+          "expected": 1,
+          "actual": 0
+        }
+      ],
+      "empty_modes_errors": [
+        "probe_modes must include actual observation checks"
+      ]
+    },
+    {
+      "id": "unlisted_source",
+      "new_file": "new_entry.py",
+      "binding_check": {
+        "status": "current",
+        "changed_files": [],
+        "model_changed": false,
+        "intent_changed": false,
+        "directly_affected": [],
+        "possibly_affected": []
+      },
+      "scope": "This proves lack of new-file discovery, not that a watched edit is missed."
+    },
+    {
+      "id": "mini_schema_interoperability",
+      "declared_schema": 3,
+      "independent_module": {
+        "accepted": true,
+        "value": "BOStateGraph"
+      },
+      "v3_validator": {
+        "accepted": true,
+        "value": {
+          "requirements": [
+            {
+              "id": "R1",
+              "status": "confirmed",
+              "source": "合成示例：同一任务等待可用名额后执行一次。",
+              "text": "等待、恢复和完成使用同一状态声明与实际结果。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "strict_enum_type",
+      "input": true,
+      "spec": {
+        "type": "enum",
+        "values": [
+          1
+        ]
+      },
+      "errors": [
+        "flag: expected enum"
+      ]
+    }
+  ],
+  "live_read_only": {
+    "endpoint": "http://localhost:8824/api/stategraph",
+    "build_id": "6b9d254e59337efa2e5c72ce0c9df365535692071ee6b769c9c8e2cd9c057f49",
+    "binding": {
+      "status": "current",
+      "changed_files": [],
+      "model_changed": false,
+      "intent_changed": false,
+      "directly_affected": [],
+      "possibly_affected": []
+    },
+    "nodes": 59,
+    "edges": 124,
+    "independent_instances": 0,
+    "runtime_configurations": 15,
+    "runtime_events": 0,
+    "current_state": "completed"
+  }
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "example": "delivery",
+    "exit_code": 0,
+    "stdout": "{\n  \"valid\": true,\n  \"status\": \"current\",\n  \"errors\": [],\n  \"candidate_id\": \"72940efd88f4c892659481c9455265bdf8175d2778e83ad4c91aba46f1758633\"\n}\n",
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n",
+    "result": {
+      "valid": true,
+      "status": "current",
+      "errors": [],
+      "candidate_id": "72940efd88f4c892659481c9455265bdf8175d2778e83ad4c91aba46f1758633"
+    }
+  },
+  {
+    "example": "team-archive",
+    "exit_code": 0,
+    "stdout": "{\n  \"valid\": true,\n  \"status\": \"current\",\n  \"errors\": [],\n  \"candidate_id\": \"a38c9bbec8ca39be189f6d776d17e86fdbf58f1e078816d82381db69867d2aec\"\n}\n",
+    "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n",
+    "result": {
+      "valid": true,
+      "status": "current",
+      "errors": [],
+      "candidate_id": "a38c9bbec8ca39be189f6d776d17e86fdbf58f1e078816d82381db69867d2aec"
+    }
+  }
+]

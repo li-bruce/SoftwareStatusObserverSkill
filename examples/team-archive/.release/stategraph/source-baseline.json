@@ -5,7 +5,7 @@
     "archive_app/ports.py": "b8cde872a84d96008836c06683dccf2d59ceff89c9a7dfe65e3e5f3dd6c3608c",
     "archive_app/service.py": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01",
     "archive_app/storage.py": "5dfd7a4ebcc907921324e26a1f03fc63d8ace83254783a4519e4f86d2b22eabc",
-    "bo_stategraph/workflow.py": "81c1d69e2b5d87e2ae6d7e3daf903fc15556118f60121385b42565ce4e5f11d5"
+    "bo_stategraph/workflow.py": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
   },
   "excluded": {
     "archive_app/workflow.py": "Compatibility import only; executable definition lives in bo_stategraph/workflow.py.",
@@ -20,11 +20,13 @@
     "observer_runtime/architecture_guard.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
     "observer_runtime/behavior_model.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
     "observer_runtime/bo_contracts.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+    "observer_runtime/bo_design.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
     "observer_runtime/bo_retention.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
     "observer_runtime/bo_runtime.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
     "observer_runtime/bo_stategraph.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
     "observer_runtime/bo_sync.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
     "observer_runtime/bo_upgrade.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+    "observer_runtime/bo_web.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
     "observer_runtime/change_sync.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
     "observer_runtime/code_structure.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
     "observer_runtime/execution_contract.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",

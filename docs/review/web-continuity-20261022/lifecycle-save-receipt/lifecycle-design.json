@@ -1,0 +1,9 @@
+{
+  "checks": [
+    {
+      "id": "existing-project-design-annotation",
+      "pass": true
+    }
+  ],
+  "errors": []
+}

@@ -96,6 +96,8 @@ v0.4.0 增加贯穿开发过程的白盒约定、实际参数与判断检查、�
 
 ## 验证与边界
 
+本地修订加入受保护的[映射清单](skills/business-observer/references/mapping-contract.md)：从实际存储取值，逐项核对每个约定场景的实例和公共导出，删除场景或必需字段会使验收失败。既有项目接入本版时需要补齐 `sync.json` 的 `mapping_contract` 和对应观察输出，不能用重新建立基线跳过检查。非法状态定义、未支持的引擎语义和错误 guard 接线在加载前报错；实际运行违规保留原值并报告约束失败。
+
 ```bash
 python tools/verify.py
 ```
@@ -109,3 +111,5 @@ python tools/verify.py
 ## 许可证
 
 [MIT](LICENSE)。依赖与来源见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+
+对话初期可直接打开内置设计图，用户仍在 Codex 中确认和修改；图沿用到运行调试。支持隐藏入口、关闭 Web 和导出无页面核心包，节点按类型填充并突出核心标记。参见[对话与 Web 图](skills/business-observer/references/conversation-web.md)。

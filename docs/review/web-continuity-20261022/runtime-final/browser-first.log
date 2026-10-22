@@ -1,0 +1,26 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+PASS Initial view shows three business groups on WebGL
+PASS Dragging blank region moves parent and its children together
+PASS Group positions, expansion, custom name, note and core mark survive reload
+PASS Searching a hidden execution function reveals its hierarchy and source
+PASS All ten view presets remain selectable
+PASS Custom view is persisted in the project
+PASS Circular, layered and force-style layouts complete
+PASS A real request without approval appears as a waiting instance
+PASS Recording captures real wait, approval, resume, activities and commit; export shares instances
+PASS Replay presents explicit value/state changes
+PASS Focused recording keeps an explicit region and boundary
+PASS Narrow layout has no horizontal page overflow
+PASS Public toolbar has no horizontal overflow at 390px
+PASS Public toolbar has no horizontal overflow at 320px
+Starting server 1/1: C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.venv\Scripts\python.exe -B -X utf8 run.py --port 8841 --delay 3
+Waiting for server on port 8841...
+Server ready on port 8841
+
+All 1 server(s) ready
+Running: node C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\docs\review\web-continuity-20261022\runtime-final\ui-test.cjs
+
+
+Stopping 1 server(s)...
+Server 1 stopped
+All servers stopped

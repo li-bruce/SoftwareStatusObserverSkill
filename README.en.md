@@ -96,6 +96,8 @@ Version 0.4.0 adds source-bound whitebox contracts throughout development, obser
 
 ## Checks and scope
 
+The local revision adds a protected [mapping plan](skills/business-observer/references/mapping-contract.md) (Chinese). It compares actual store values with each required scenario's instances and the public export. Removing required scenarios or fields fails acceptance. Existing projects must add `mapping_contract` to `sync.json` and provide the corresponding observations; recreating a baseline is not a migration. Invalid definitions, unsupported engine semantics and missing guard bindings fail before loading. Runtime violations remain visible as actual facts and fail constraint checks.
+
 ```bash
 python tools/verify.py
 ```
@@ -109,3 +111,5 @@ The graph supports inspection and drill-down. Commands run through the control p
 ## License
 
 [MIT](LICENSE). See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for dependencies and attribution.
+
+The built-in graph can show the initial design and follow the coding conversation into runtime debugging. Answers stay in the coding assistant; the Web is read-only. Hide its entry, disable Web routes, or export the verified core without the viewer. Typed fills emphasize core nodes. See the [conversation and Web guide](skills/business-observer/references/conversation-web.md) (Chinese).

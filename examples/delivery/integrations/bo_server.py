@@ -11,6 +11,7 @@ sys.path.insert(0,str(ROOT))
 from observer_generated.runtime.behavior_model import capture,check
 from observer_generated.runtime.recording_session import Recordings
 from observer_generated.runtime.view_preferences import Preferences, PreferenceConflict
+from observer_generated.runtime.bo_web import BOWeb
 from bo_stategraph import bo_export_view
 from bo_stategraph.query import bo_machine
 MODEL=json.loads((ROOT/'observer_generated/behavior.json').read_text(encoding='utf-8'))
@@ -69,6 +70,7 @@ class Session:
 
 def serve(port=8797):
     session=Session()
+    bo_web=BOWeb(ROOT,assets=ROOT/'observer_generated/static',graph_routes=('/','/graph','/graph/'))
     class Handler(BaseHTTPRequestHandler):
         def log_message(self,*_):pass
         def send(self,data,status=200,kind='application/json; charset=utf-8',download=False):
@@ -81,6 +83,10 @@ def serve(port=8797):
             version=query.get('version',['live'])[0]
             histories={p.stem:p for p in (ROOT/'history').glob('*.json')}
             try:
+                if not bo_web.allowed(request.path):return self.send({'error':'调试 Web 已关闭','code':'bo_web_disabled'},404)
+                bo_value=bo_web.get(request.path)
+                if bo_value is not None:return self.send(bo_value)
+                if request.path=='/api/app-state':return self.send(session.store.snapshot())
                 if request.path=='/api/preferences':return self.send(session.preferences.read())
                 if request.path in ('/api/stategraph','/api/stategraph/export'):
                     return self.send(bo_export_view(session.view(),graph=session.bo_adapter.bo_graph),download=request.path.endswith('/export'))
@@ -102,15 +108,17 @@ def serve(port=8797):
                         sources,manifest=saved['sources'],{'build_id':saved['build_id']}
                     return self.send({'source':sources[query['path'][0]],'build_id':manifest['build_id']})
                 if request.path=='/control':
-                    return self.send((ROOT/'integrations/control.html').read_bytes(),kind='text/html; charset=utf-8')
+                    return self.send(bo_web.entry_html((ROOT/'integrations/control.html').read_bytes()),kind='text/html; charset=utf-8')
                 names={'/':'index.html','/graph':'index.html','/viewer.css':'viewer.css','/viewer.js':'viewer.js','/graph-core.js':'graph-core.js','/layout.js':'layout.js',
-                       '/preferences.js':'preferences.js','/polling.js':'polling.js','/renderer.js':'renderer.js','/analysis.js':'analysis.js','/recording.js':'recording.js','/glyphs.js':'glyphs.js','/replay-steps.js':'replay-steps.js','/runtime-frames.js':'runtime-frames.js',
+                       '/preferences.js':'preferences.js','/polling.js':'polling.js','/renderer.js':'renderer.js','/analysis.js':'analysis.js','/recording.js':'recording.js','/glyphs.js':'glyphs.js','/replay-steps.js':'replay-steps.js','/runtime-frames.js':'runtime-frames.js','/conversation.js':'conversation.js',
                        '/pixi.min.js':'pixi.min.js','/elk.bundled.js':'elk.bundled.js','/elk-worker.min.js':'elk-worker.min.js'}
                 filename=names[request.path]
                 kind='text/html' if filename.endswith('.html') else 'text/css' if filename.endswith('.css') else 'text/javascript'
                 return self.send((ROOT/'observer_generated/static'/filename).read_bytes(),kind=kind+'; charset=utf-8')
             except (KeyError,ValueError) as exc:self.send({'error':str(exc)},404)
         def do_POST(self):
+            if not bo_web.allowed(urlparse(self.path).path):return self.send({'error':'调试 Web 已关闭','code':'bo_web_disabled'},404)
+            if urlparse(self.path).path.startswith('/api/design'):return self.send({'error':'图只供查看；请在开发工具的对话中提出修改'},405)
             if self.path not in ('/api/command','/api/preferences','/api/recordings/start','/api/recordings/stop'):
                 return self.send({'error':'unknown path'},404)
             origin=self.headers.get('Origin')

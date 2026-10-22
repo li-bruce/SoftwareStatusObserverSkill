@@ -1,0 +1,11 @@
+{
+  "command": [
+    "examples\\delivery\\observer_generated\\runtime\\change_sync.py",
+    "accept",
+    "--root",
+    "examples\\delivery"
+  ],
+  "exit_code": 0,
+  "stdout": "{\n  \"valid\": true,\n  \"status\": \"current\",\n  \"errors\": [],\n  \"candidate_id\": \"398426320af1f762dbfc91cffd9b3c5b555867e4faff0b073cbcfab9b72a16a4\"\n}\n",
+  "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+}

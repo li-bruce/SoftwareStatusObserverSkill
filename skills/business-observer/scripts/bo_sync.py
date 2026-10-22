@@ -93,12 +93,21 @@ def main():
         # bytes. Publish those task transitions too, rather than leaving stale work.
         task_id = hashlib.sha256(json.dumps(value, sort_keys=True).encode()).hexdigest()
         if task_id != last:
-            target.parent.mkdir(exist_ok=True)
-            temporary = target.with_suffix('.tmp')
-            temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2), encoding='utf-8')
-            temporary.replace(target)
-            print(json.dumps(value, ensure_ascii=False), flush=True)
-            last = task_id
+            try:
+                try:
+                    from .sync_io import write
+                except ImportError:
+                    from sync_io import write
+                write(target, value)
+            except OSError as error:
+                # Publishing failure does not acknowledge the source or kill a
+                # watcher. A one-shot scan must return a visible failure.
+                print(json.dumps({'status':'needs_update', 'publication_error':str(error),
+                                  'retrying':args.command == 'watch'}, ensure_ascii=False), flush=True)
+                if args.command == 'scan': return 1
+            else:
+                print(json.dumps(value, ensure_ascii=False), flush=True)
+                last = task_id
         if args.command == 'scan': return 1 if value.get('errors') else 0
         time.sleep(max(.1, args.interval))
 

@@ -140,6 +140,14 @@ def impact(base, current):
 
 def review_errors(change, base, current, changes):
     errors = []
+    try:
+        from .mapping_contract import protected_plan_errors, validate_plan
+    except ImportError:
+        from mapping_contract import protected_plan_errors, validate_plan
+    errors.extend(protected_plan_errors(base.get('mapping_contract'), current.get('mapping_contract')))
+    if current.get('stategraph_contract'):
+        try: validate_plan(current.get('mapping_contract'), current['model'])
+        except (ValueError, TypeError, KeyError) as exc: errors.append(str(exc))
     path = change / "review.json"
     if not path.exists(): return ["missing review.json for this candidate"]
     review = read(path)

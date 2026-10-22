@@ -1,0 +1,5 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\.codex\skills\.system\skill-creator\scripts\quick_validate.py", line 10, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'

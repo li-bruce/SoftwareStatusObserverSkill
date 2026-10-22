@@ -14,10 +14,10 @@ from pathlib import Path
 import threading
 
 try:
-    from .bo_contracts import value_errors as bo_value_errors, validate_chart, state_tree, active_states
+    from .bo_contracts import value_errors as bo_value_errors, validate_chart, state_tree, active_states, entered_states, transition_states
     from .execution_contract import validate_execution_graph, validate_configuration
 except ImportError:
-    from bo_contracts import value_errors as bo_value_errors, validate_chart, state_tree, active_states
+    from bo_contracts import value_errors as bo_value_errors, validate_chart, state_tree, active_states, entered_states, transition_states
     from execution_contract import validate_execution_graph, validate_configuration
 
 
@@ -71,8 +71,13 @@ class BOStateGraph:
         return deepcopy(self._model)
 
     def bo_check_definition(self, loaded_definition):
-        return {"valid": loaded_definition == self._chart,
+        return {"valid": bo_digest(loaded_definition) == bo_digest(self._chart),
                 "expected": bo_digest(self._chart), "loaded": bo_digest(loaded_definition)}
+
+    def bo_require_definition(self, loaded_definition):
+        """Startup gate: invalid/drifted executor declarations raise before use."""
+        validate_chart(self._model, loaded_definition)
+        return self.bo_check_definition(loaded_definition)
 
     def bo_candidates(self, state, event, *, guards=None, payload=None):
         """Inspect declared transitions. Unknown guards remain unknown, not allowed.
@@ -107,7 +112,12 @@ class BOStateGraph:
         _, parents = state_tree(self._chart)
         def source_nodes(candidate):
             source = candidate['transition']['source']
-            return set(source if isinstance(source, list) else [source]) & active
+            sources = set(source if isinstance(source, list) else [source])
+            # transitions expands '*' to the states registered at this scope.
+            # At the root this means top-level states, including HSM parents.
+            if '*' in sources:
+                sources = {s for s, parent in parents.items() if parent is None}
+            return sources & active
         def ancestor(a, b):
             while b is not None:
                 if b == a: return True
@@ -175,11 +185,12 @@ class BOStateGraph:
                     try:
                         transition = self.bo_candidates(old["state"], event, guards=guards, payload=payload)
                         errors += transition["errors"]
-                        matches = [c for c in transition["candidates"]
-                                   if c["transition"]["dest"] in active or (c["transition"]["dest"] is None and old["state"] == state)]
-                        if not matches or all(c["result"] in ("rejected", "shadowed") for c in matches):
+                        viable = [c for c in transition['candidates'] if c['result'] in ('matched', 'unknown')]
+                        known = [c['transition'] for c in viable if c['result'] == 'matched']
+                        if any(c['result'] == 'unknown' for c in viable):
+                            missing.append('guard evidence')
+                        elif not known or transition_states(self._chart, old['state'], known) != active:
                             errors.append("actual transition differs from declaration")
-                        elif not any(c["result"] == "matched" for c in matches): missing.append("guard evidence")
                     except ValueError as exc: errors.append(str(exc))
                 elif old["state"] != state:
                     missing.append("transition event")
@@ -198,9 +209,17 @@ class BOStateGraph:
         Existing data without a complete-state revision retains separate component
         revisions. A projection never invents transitions or a global sequence.
         """
+        # Never invoke application code under our lock: providers can acquire a
+        # service lock while a concurrent recording already owns that lock.
+        if machine is None:
+            with self._lock:
+                provider = self._provider
+            if provider is not None:
+                machine = provider()
+                with self._lock:
+                    if provider is not self._provider:
+                        raise ValueError('instance provider changed during snapshot read')
         with self._lock:
-            if machine is None and self._provider is not None:
-                machine = self._provider()
             if machine is not None:
                 result = []
                 identities = set()
@@ -248,8 +267,8 @@ class BOStateGraph:
         Runtime must already be allowlisted by the adapter. Raw application objects
         and arbitrary database contents must not be passed to this method.
         """
+        instances = self.bo_instances(runtime.get('machine') if runtime is not None and 'machine' in runtime else None)
         with self._lock:
-            instances = self.bo_instances(runtime.get('machine') if runtime is not None and 'machine' in runtime else None)
             value = {"schema": BO_SCHEMA, "execution_mode": self.mode,
                 "build_id": self.build_id, "definition_sha256": bo_digest(self._chart),
                 "model": self.bo_structure(), "instances": instances,
@@ -274,7 +293,7 @@ def bo_export_view(view, *, mode="observe", graph=None):
         graph = BOStateGraph(view["model"], build_id=view["manifest"]["build_id"], mode=mode)
     elif graph.build_id != view["manifest"]["build_id"] or graph.bo_structure() != view["model"]:
         raise ValueError("export view differs from loaded graph")
-    keys = ("manifest", "authority", "machine", "events", "health", "historical")
+    keys = ("manifest", "authority", "machine", "events", "health", "historical", "runtime_frames")
     return graph.bo_export(runtime={k: view[k] for k in keys if k in view},
                            binding=view.get("binding_status"))
 
@@ -288,6 +307,28 @@ def bo_validate_export(value):
     if value["definition_sha256"] != bo_digest(graph.bo_definition()): raise ValueError("definition mismatch")
     if not isinstance(value.get('instances'), list): raise ValueError('export instances must be a list')
     runtime = value.get('runtime')
+    if runtime is not None and 'runtime_frames' in runtime:
+        frames = runtime['runtime_frames']
+        if not isinstance(frames, dict) or frames.get('schema') != 'stategraph-runtime-frames/v1' or not isinstance(frames.get('frames'), list):
+            raise ValueError('invalid exact runtime frame protocol')
+        events = {e['id']: e for e in runtime.get('events', [])}
+        seen = set()
+        for frame in frames['frames']:
+            if not isinstance(frame, dict) or any(not isinstance(frame.get(k), str) or not frame[k]
+                    for k in ('event_id', 'run_id', 'build_id')):
+                raise ValueError('runtime frame needs nonempty event/run/build identities')
+            if not isinstance(frame.get('machine'), dict): raise ValueError('runtime frame needs a machine snapshot')
+            event = events.get(frame.get('event_id'))
+            if event is None or frame['event_id'] in seen:
+                raise ValueError('runtime frame needs a unique exported event')
+            seen.add(frame['event_id'])
+            if (type(frame.get('revision')) is not int or type(event.get('revision')) is not int or
+                    frame['revision'] < 0 or
+                    type(frame.get('machine', {}).get('state_revision')) is not int or
+                    any(frame.get(k) != event.get(k) for k in ('revision','run_id','build_id')) or
+                    frame.get('machine', {}).get('state_revision') != frame['revision']):
+                raise ValueError('runtime frame differs from its event identity/revision')
+            if not isinstance(frame.get('authority'), dict): raise ValueError('runtime frame needs selected authority')
     if runtime is not None and 'machine' in runtime:
         if value['instances'] != graph.bo_instances(runtime['machine']):
             raise ValueError('export instances differ from the supplied runtime snapshot')

@@ -22,6 +22,7 @@
     "execution_mode": "drive"
   },
   "require_mapping_witnesses": true,
+  "mapping_contract": "mapping.json",
   "acceptance": "acceptance.json",
   "slice_depth": 1,
   "probe_callees": ["trace.record"],

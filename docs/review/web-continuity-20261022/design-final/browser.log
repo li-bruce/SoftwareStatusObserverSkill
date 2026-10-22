@@ -1,0 +1,15 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+BROWSER Failed to load resource: the server responded with a status of 404 (Not Found)
+BROWSER Failed to load resource: the server responded with a status of 404 (Not Found)
+BROWSER Failed to load resource: the server responded with a status of 404 (Not Found)
+Starting server 1/1: C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.venv\Scripts\python.exe -B -X utf8 C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_web.py serve --root C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.validation\web-design-design-final --port 8843
+Waiting for server on port 8843...
+Server ready on port 8843
+
+All 1 server(s) ready
+Running: node C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\docs\review\web-continuity-20261022\design-ui.cjs
+
+
+Stopping 1 server(s)...
+Server 1 stopped
+All servers stopped

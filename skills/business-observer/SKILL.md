@@ -12,6 +12,8 @@ description: 在 Python 项目的开发和迭代中，引导澄清业务行为�
 
 读取项目约定和已有决定，用简短业务流程或从完整图截取的局部图说明理解。只追问会改变权限、状态、并发、取消、恢复或提交效果的歧义，每轮通常 1–3 问；答案同步进入图和检查场景。不重复已有答案，沉默不算回答，不为常规实现选择要求确认。按需读 [需求提炼](references/requirements-dialogue.md)，使用 `requirements_dialogue.py` 检查已记录的问题与决定。
 
+从立项起复用内置 Web 图：AI 写入设计声明，用 `bo_web.py serve` 展示，用 `bo_design.py focus` 高亮对话当前讨论的节点和关系。用户在 Codex 等工具中回答和修改，页面只查看图，不放答题表单。答案由 AI 同步到需求、图和检查；查看、聚焦或批注不算业务确认。保留节点 ID 和布局标识，运行后沿用同一图。见 [对话与 Web 图](references/conversation-web.md)。
+
 默认在 AI 内部用状态网指导实现。用户明确要求不用这种开发方式时，改为观测跟随；用户始终可选择任意框架、编码 Skill 和开发流程。**两种方式都必须维护状态网、源码映射、实际运行监控和收尾检查。** 这些维护由 AI 执行，用户不用填写配置、审阅表或手动同步图。
 
 ## 2. 建立独立模块和检查
@@ -20,7 +22,9 @@ Python 项目建立 `bo_stategraph/`，保存完整声明、项目执行器或�
 
 采用共同声明和校验器。将业务抽象、局部函数/参数/调用、状态/条件以及实际证据按稳定身份连接；声明、静态推导、运行事实分别标明来源。上层可以概述“检查中”，完整实例仍须可查每项活动、资源和等待条件。折叠不删除事实。层级和 Petri 特性融入原有执行结构，不另建一套权威状态。读 [模型契约](references/behavior-model.md)、[内嵌执行](references/integrated-execution.md)。
 
-实现前定义适用的正常、拒绝、边界、取消、恢复、并发及反例场景。独立读取程序存储或函数结果，比较图中的核心值；业务预期另行定义。读 [验证规则](references/validation-rules.md)，用 `whitebox_contract.py` 约束关键函数和实际参数，用 `mapping_contract.py` 比较投影与实现事实。
+实现前定义适用的正常、拒绝、边界、取消、恢复、并发及反例场景。独立读取程序存储或函数结果，比较图中的核心值；业务预期另行定义。用受保护的 [映射清单](references/mapping-contract.md) 绑定场景、节点、实际字段与交付投影；不能只提交两份相等数值。读 [验证规则](references/validation-rules.md)，用 `whitebox_contract.py` 约束关键函数和实际参数。
+
+定义、类型、引擎/版本和 guard 接线在加载前严格校验；未知语义先报错，不当作普通迁移。真正发生的运行违规保留原值和诊断，并使对应约束检查失败；观察器不能丢掉事实或代替业务修改状态。
 
 ## 3. 随编码自动维护
 
@@ -47,7 +51,9 @@ change_sync.py begin → 编码与局部生成 → bo_sync.py scan → change_sy
 
 布局、展开、筛选、名称、批注和核心标记存入 `bo_stategraph/config/views/local.json`。图更新保留稳定 ID；符号改名时提供明确 ID 迁移，不能猜测合并批注。保存冲突/失败须提示，不能先报成功；共享项目默认排除个人文件。读 [分层交互](references/hierarchical-graph.md)、[记录与分析](references/recorded-analysis.md)、[局部图与共享](references/focus-and-sharing.md)。
 
-采集范围与播放粒度分开。默认记录已接入的核心事件，再按视图播放；局部采集明确边界。限制配置在 `bo_stategraph/config/retention.json`，过期事件显示缺口，用户保存的记录不随 UI 缓存清理。线程式采集不得说成独立进程。
+节点和展开区域使用类型颜色填充，核心与选中节点进一步突出；图例使用相同图形和填充。运行状态用独立角标表达，不能把类型颜色误当执行成功。用户要求隐藏或移除调试 Web 时，使用 `bo_web.py mode` 或已验证的核心包导出，保留状态网定义与执行。具体边界和恢复命令见 [对话与 Web 图](references/conversation-web.md)。
+
+采集范围与播放粒度分开。默认记录已接入的核心事件，再按视图播放；局部采集明确边界。文件探针使用有界输出并传入项目根目录，读取 `bo_stategraph/config/retention.json`；过期事件显示缺口，保存记录不随 UI 缓存清理。全图导出保留事件绑定的运行帧。线程式采集不得说成独立进程。
 
 权限项目先读 [权限情况清单](references/authorization-patterns.md)、[规则图](references/rebac-graph.md)；规则定义、关系实例和一次求值分开。不得将示例的一跳权限当作通用 ReBAC 规则。类/实例和采集证据读 [类型与采集](references/types-rules-capture.md)。
 

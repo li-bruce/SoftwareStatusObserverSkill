@@ -1,0 +1,12 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Starting server 1/1: C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.venv\Scripts\python.exe -B -X utf8 C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_web.py serve --root C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.validation\web-lifecycle-lifecycle-complete\team-archive --port 8853
+Waiting for server on port 8853...
+Server ready on port 8853
+
+All 1 server(s) ready
+Running: node C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\docs\review\web-continuity-20261022\lifecycle-ui.cjs
+
+
+Stopping 1 server(s)...
+Server 1 stopped
+All servers stopped

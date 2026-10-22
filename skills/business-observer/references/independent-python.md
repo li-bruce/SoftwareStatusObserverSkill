@@ -41,6 +41,10 @@ behavior.json               完整关系模型，与执行声明绑定
 
 ## 项目接入
 
+加载前调用 `validate_runtime_definition`，提供实际 loaded_engine、loaded_version 和 guard_names；模型绑定用 `bo_require_definition`，差异抛出 ValueError。`bo_check_definition` 只是诊断接口。支持平面迁移、子状态优先、通配顺序、复合初始状态和独立并行区域。历史状态、跨并行区域迁移、状态/迁移回调及未知引擎需要专门适配，当前加载时拒绝。普通 Python 使用 python.explicit；adapter-selected 仅用于显式选择执行方式的小示例，不代表任意引擎已验证。
+
+提供者在图锁外取得一致快照，再派生实例与导出；不得在图锁内调用业务回调。必须实际测试并发查询、记录、导出和业务推进。
+
 sync.json 的 stategraph.module 指向 `bo_stategraph/__init__.py`，同时配置开发/执行方式、决定来源和静态及运行必需探针。用户明确改为跟随时填写 decision_source: user，并记录原意。执行方式变化不得删除观测契约。
 
 源范围在 source_scope 指定，默认扫描项目 Python 文件；排除项必须注明原因。`bo_sync scan/watch` 发出内部更新任务，AI 消费任务后继续 inspect/verify/accept/check。watch 不自带编辑器大模型唤醒能力；项目 AI 指令和验证入口必须接好。
@@ -49,7 +53,7 @@ sync.json 的 stategraph.module 指向 `bo_stategraph/__init__.py`，同时配�
 
 完整示例提供 GET /api/stategraph 和 /api/stategraph/export。model 包含全部已建模关系，instances 与 runtime.machine 来自同次快照；runtime 只包括实际接入并保留的证据。没有运行时不能虚构初始实例。
 
-收尾观测命令返回 `stategraph_export`，来自同次真实运行的公共 `bo_export`，与当前 model/build 一致。gate 用 `bo_validate_export` 验证协议、内容摘要及同源实例，缺少公共导出或另定简化格式会失败。所有场景的独立实际值对照仍由 mapping_checks 完成，不能只给一个合法空导出。
+收尾观测命令返回公共 `bo_export` 产生的 stategraph_export，与当前 model/build 一致。检查器验证协议与同源实例，再按 [映射清单](mapping-contract.md) 核对每个场景的实际字段与交付投影；保留原 mapping_checks。仅给合法空导出不能通过。有 runtime_frames 的完整视图必须带出运行帧及事件，导入核对身份和修订。
 
 ```text
 python bo_stategraph/__init__.py export --model behavior.json --build-id unbound --out stategraph.json

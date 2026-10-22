@@ -1,0 +1,25 @@
+{
+  "checks": [
+    {
+      "id": "same-id-layout-key-annotation-survives-design-to-runtime",
+      "pass": true
+    },
+    {
+      "id": "conversation-focus-in-live-runtime",
+      "pass": true
+    },
+    {
+      "id": "hide-entry-keeps-direct-graph",
+      "pass": true
+    },
+    {
+      "id": "web-closed-business-query-and-mutation-work",
+      "pass": true
+    },
+    {
+      "id": "restore-web-and-export",
+      "pass": true
+    }
+  ],
+  "errors": []
+}

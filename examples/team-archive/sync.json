@@ -23,15 +23,18 @@
     "bo_stategraph/query.py",
     "bo_stategraph/runtime-version.json",
     "integrations/__init__.py",
+    "mapping.json",
     "observer_runtime/__init__.py",
     "observer_runtime/architecture_guard.py",
     "observer_runtime/behavior_model.py",
     "observer_runtime/bo_contracts.py",
+    "observer_runtime/bo_design.py",
     "observer_runtime/bo_retention.py",
     "observer_runtime/bo_runtime.py",
     "observer_runtime/bo_stategraph.py",
     "observer_runtime/bo_sync.py",
     "observer_runtime/bo_upgrade.py",
+    "observer_runtime/bo_web.py",
     "observer_runtime/change_sync.py",
     "observer_runtime/code_structure.py",
     "observer_runtime/execution_contract.py",
@@ -62,6 +65,7 @@
     "static/graph/ELK-LICENSE.md",
     "static/graph/PIXI-LICENSE.txt",
     "static/graph/analysis.js",
+    "static/graph/conversation.js",
     "static/graph/elk-worker.min.js",
     "static/graph/elk.bundled.js",
     "static/graph/glyphs.js",
@@ -222,5 +226,9 @@
       "archive_app/workflow.py": "Compatibility import only; executable definition lives in bo_stategraph/workflow.py."
     }
   },
-  "require_mapping_witnesses": true
+  "require_mapping_witnesses": true,
+  "mapping_contract": "mapping.json",
+  "view_preferences_legacy_ids": [
+    "team-archive-example"
+  ]
 }

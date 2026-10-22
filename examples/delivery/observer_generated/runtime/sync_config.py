@@ -40,6 +40,8 @@ def config(root, name):
             raise ValueError('stategraph projects require independent source scope and symbol classification')
         if result.get('require_mapping_witnesses') is not True:
             raise ValueError('stategraph projects require implementation mapping witnesses')
+        if not result.get('mapping_contract'):
+            raise ValueError('stategraph projects require a protected mapping_contract file')
     result["config_path"] = name
     return result
 
@@ -51,7 +53,8 @@ def snapshot(root, cfg, previous=None):
     paths = sorted(set([cfg["config_path"], cfg["model"], model["intent"], cfg["acceptance"],
                         *model["source_files"], *cfg["code_files"], *cfg["watch_files"],
                         *([cfg['discovery']] if cfg.get('discovery') else []),
-                        *([cfg['whitebox']] if cfg.get('whitebox') else [])]) - {cfg["manifest"]})
+                        *([cfg['whitebox']] if cfg.get('whitebox') else []),
+                        *([cfg['mapping_contract']] if cfg.get('mapping_contract') else [])]) - {cfg["manifest"]})
     inventory = source_inventory(root, cfg) if cfg.get('source_scope') or cfg.get('stategraph') else {'files': {}, 'excluded': {}}
     paths = sorted(set(paths) | set(inventory['files']))
     files = {}
@@ -65,6 +68,7 @@ def snapshot(root, cfg, previous=None):
             'verification_contract': {name: cfg.get(name, ['on','off','fault'] if name == 'probe_modes' else None) for name in
                 ('probe_modes','test_commands','required_runtime_probes','required_probes','required_execution_cases','require_mapping_witnesses')},
             "whitebox": read(contained(root,cfg["whitebox"])) if cfg.get("whitebox") else None,
+            'mapping_contract': read(contained(root,cfg['mapping_contract'])) if cfg.get('mapping_contract') else None,
             "stategraph_contract":cfg.get('stategraph'),
             "discovery_path":cfg.get('discovery'),
             "discovery": read(contained(root,cfg['discovery'])) if cfg.get('discovery') else None}

@@ -277,13 +277,14 @@ class RefactorTests(unittest.TestCase):
         self.assertTrue(assess_observations({}, {'checks':[]}, {}, ['on']))
 
     def test_mapping_can_pass_while_business_rule_fails(self):
-        payload={'mapping_checks':[{'id':'real','source':'SQLite row','projection':'state', 'actual':'deleted','mapped':'deleted'}],
-                 'runs':[{'case':'no_permission','mode':'on','observations':{'state':'deleted'}}]}
-        contract={'checks':[{'id':'deny','requirement':'R1','case':'no_permission','path':['state'],'equals':'retained'}]}
-        self.assertTrue(assess_mapping(payload,required=True)['valid'])
+        from test_assessment_fixes import mapping_fixture
+        m,plan,payload=mapping_fixture()
+        payload['runs'][0]['observations']={'state':'deleted'}
+        contract={'checks':[{'id':'deny','requirement':'R1','case':'case','path':['state'],'equals':'retained'}]}
+        self.assertTrue(assess_mapping(payload,required=True,plan=plan,model=m,build_id='b')['valid'])
         self.assertTrue(assess_observations({},contract,payload,['on']))
         payload['mapping_checks'][0]['mapped']='retained'
-        self.assertFalse(assess_mapping(payload,required=True)['valid'])
+        self.assertFalse(assess_mapping(payload,required=True,plan=plan,model=m,build_id='b')['valid'])
         self.assertFalse(assess_mapping({},required=True)['valid'])
 
     def test_preferences_persist_revision_conflict_and_atomic_failure(self):

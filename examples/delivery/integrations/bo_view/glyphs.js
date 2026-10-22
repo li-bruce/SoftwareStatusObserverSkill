@@ -15,27 +15,35 @@ export function glyphShapes(type){
   if(type==='wait')return [{kind:'polygon',points:[-22,-24,22,-24,12,0,22,24,-22,24,-12,0]}];
   return [{kind:'polygon',points:[-30,0,-17,-23,17,-23,30,0,17,23,-17,23]}];
 }
-export function drawGlyph(g,type,x,y,color){
+function mix(a,b,amount){return [16,8,0].reduce((value,shift)=>value|(Math.round(((a>>shift)&255)*(1-amount)+((b>>shift)&255)*amount)<<shift),0);}
+export function glyphAppearance(color,{core=false,selected=false,related=false}={}){
+  const strong=core||selected;
+  return {fill:strong?mix(color,0x142a40,.24):mix(0xffffff,color,related?.3:.18),
+    ink:strong?0xffffff:mix(color,0x142a40,.55),border:color,
+    emphasis:selected?'selected':core?'core':related?'related':'normal'};
+}
+export function drawGlyph(g,type,x,y,color,appearance=glyphAppearance(color)){
   for(const s of glyphShapes(type)){
     if(s.kind==='circle')g.circle(x,y,s.r);
     if(s.kind==='rect')g.roundRect(x+s.x,y+s.y,s.w,s.h,s.r);
     if(s.kind==='polygon')g.poly(s.points.map((v,i)=>v+(i%2?y:x)));
-    if(!s.outline)g.fill({color:s.opaque?0xffffff:color,alpha:s.opaque?1:.13});
-    g.stroke({color,width:1.8});
+    if(!s.outline)g.fill({color:appearance.fill,alpha:1});
+    g.stroke({color:s.outline?appearance.ink:color,width:1.8});
   }
 }
-export function legendGlyph(type,style){
+export function legendGlyph(type,style,options={}){
   const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');
   svg.setAttribute('viewBox','-36 -36 72 72');svg.setAttribute('aria-hidden','true');svg.dataset.glyph=type;
-  const color='#'+style.color.toString(16).padStart(6,'0');
+  const appearance=glyphAppearance(style.color,options),hex=value=>'#'+value.toString(16).padStart(6,'0');
+  const color=hex(style.color),ink=hex(appearance.ink);
   for(const s of glyphShapes(type)){
     const el=document.createElementNS(ns,s.kind==='polygon'?'polygon':s.kind);
     if(s.kind==='circle')el.setAttribute('r',s.r);
     if(s.kind==='rect')for(const [k,v] of Object.entries({x:s.x,y:s.y,width:s.w,height:s.h,rx:s.r}))el.setAttribute(k,v);
     if(s.kind==='polygon')el.setAttribute('points',s.points.join(' '));
-    el.setAttribute('stroke',color);el.setAttribute('stroke-width','2');el.setAttribute('fill',s.outline?'none':s.opaque?'white':color);el.setAttribute('fill-opacity',s.opaque?1:.13);svg.append(el);
+    el.setAttribute('stroke',s.outline?ink:color);el.setAttribute('stroke-width','2');el.setAttribute('fill',s.outline?'none':hex(appearance.fill));svg.append(el);
   }
-  const text=document.createElementNS(ns,'text');text.setAttribute('text-anchor','middle');text.setAttribute('y','7');text.setAttribute('font-size','22');text.setAttribute('fill',color);text.textContent=style.glyph;svg.append(text);return svg;
+  const text=document.createElementNS(ns,'text');text.setAttribute('text-anchor','middle');text.setAttribute('y','7');text.setAttribute('font-size','22');text.setAttribute('fill',ink);text.textContent=style.glyph;svg.append(text);return svg;
 }
 export function legendRelation(style){
   const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg'),color='#'+style.color.toString(16).padStart(6,'0');

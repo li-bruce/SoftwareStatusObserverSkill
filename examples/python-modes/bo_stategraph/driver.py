@@ -1,9 +1,11 @@
 """State-machine executor kept outside the application business code."""
 from copy import deepcopy
+from .bo_contracts import validate_runtime_definition
 
 class MachineLogic:
     """Use the declared graph to configure the existing transitions engine."""
     def __init__(self, definition: dict):
+        validate_runtime_definition(definition, loaded_engine='transitions.Machine', guard_names={'available'})
         from transitions import Machine
         self.slots = 0
         self.state = definition["initial"]
