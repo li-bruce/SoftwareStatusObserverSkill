@@ -1,0 +1,29 @@
+2026-10-23T13:57:25.3914361Z ...........F..............
+2026-10-23T13:57:25.3915232Z ======================================================================
+2026-10-23T13:57:25.3916133Z FAIL: test_javascript_real_transport_and_service_failure_do_not_change_execution (__main__.MultiLanguageTests.test_javascript_real_transport_and_service_failure_do_not_change_execution)
+2026-10-23T13:57:25.3917454Z ----------------------------------------------------------------------
+2026-10-23T13:57:25.3917915Z Traceback (most recent call last):
+2026-10-23T13:57:25.3918763Z   File "/home/runner/work/SoftwareStatusObserverSkill/SoftwareStatusObserverSkill/tools/test_multilanguage.py", line 226, in test_javascript_real_transport_and_service_failure_do_not_change_execution
+2026-10-23T13:57:25.3919834Z     self.assertEqual([r['state'] for r in result],['running','running']);self.assertEqual(result[0]['errors'],0);self.assertGreater(result[1]['errors'],0)
+2026-10-23T13:57:25.3920736Z                                                                          ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-23T13:57:25.3921151Z AssertionError: 1 != 0
+2026-10-23T13:57:25.3921303Z 
+2026-10-23T13:57:25.3921543Z ----------------------------------------------------------------------
+2026-10-23T13:57:25.3921836Z Ran 26 tests in 4.223s
+2026-10-23T13:57:25.3922004Z 
+2026-10-23T13:57:25.3922122Z FAILED (failures=1)
+2026-10-23T13:57:25.4600548Z Traceback (most recent call last):
+2026-10-23T13:57:25.4621847Z   File "/home/runner/work/SoftwareStatusObserverSkill/SoftwareStatusObserverSkill/tools/verify.py", line 78, in <module>
+2026-10-23T13:57:25.4623002Z     main()
+2026-10-23T13:57:25.4623417Z     ~~~~^^
+2026-10-23T13:57:25.4624329Z   File "/home/runner/work/SoftwareStatusObserverSkill/SoftwareStatusObserverSkill/tools/verify.py", line 33, in main
+2026-10-23T13:57:25.4624912Z     run(ROOT, 'tools/test_multilanguage.py')
+2026-10-23T13:57:25.4625325Z     ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-23T13:57:25.4626015Z   File "/home/runner/work/SoftwareStatusObserverSkill/SoftwareStatusObserverSkill/tools/verify.py", line 14, in run
+2026-10-23T13:57:25.4626768Z     subprocess.run([sys.executable, '-B', '-X', 'utf8', *map(str, args)], cwd=cwd, check=True)
+2026-10-23T13:57:25.4627286Z     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-23T13:57:25.4627899Z   File "/opt/hostedtoolcache/Python/3.13.16/x64/lib/python3.13/subprocess.py", line 578, in run
+2026-10-23T13:57:25.4628503Z     raise CalledProcessError(retcode, process.args,
+2026-10-23T13:57:25.4628925Z                              output=stdout, stderr=stderr)
+2026-10-23T13:57:25.4629788Z subprocess.CalledProcessError: Command '['/opt/hostedtoolcache/Python/3.13.16/x64/bin/python', '-B', '-X', 'utf8', 'tools/test_multilanguage.py']' returned non-zero exit status 1.
+2026-10-23T13:57:25.4699625Z ##[error]Process completed with exit code 1.

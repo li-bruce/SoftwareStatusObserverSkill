@@ -1,5 +1,6 @@
 """Cross-language contract, scanner, native execution and real collector regression tests."""
 from copy import deepcopy
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
 from pathlib import Path
 import subprocess
@@ -217,14 +218,93 @@ class MultiLanguageTests(unittest.TestCase):
         finally:probe.close();server.shutdown();server.server_close();session.close()
 
     def test_javascript_real_transport_and_service_failure_do_not_change_execution(self):
-        session=GraphSession(self.root);server=make_server(session,0,token='token');threading.Thread(target=server.serve_forever,daemon=True).start()
-        script=f"""import {{BOProbe,BOExecutor}} from {json.dumps(JS.as_uri())};import fs from 'node:fs';
-const x=JSON.parse(fs.readFileSync(0,'utf8'));const result=[];
-for(const endpoint of [x.endpoint,'http://127.0.0.1:1']){{const p=new BOProbe({{project:x.project,buildId:x.build,endpoint,token:'token',timeout:100}});const e=new BOExecutor(x.project.model.machine,{{available:c=>c.slots>0}});const r=e.step('pending','start',{{slots:1}});p.record('advance','return',()=>({{outputs:{{state:r.state}}}}));await p.flush();result.push({{state:r.state,errors:p.bo_errors}})}}console.log(JSON.stringify(result));"""
+        session = GraphSession(self.root)
+        server = make_server(session, 0, token='token')
+        threading.Thread(target=server.serve_forever, daemon=True).start()
+        base = f'http://127.0.0.1:{server.server_port}'
+        # This is a delivery/isolation check, not a latency benchmark. Allow CI
+        # scheduling and Node's first fetch to complete; test timeouts separately.
+        script = f"""
+import {{BOProbe, BOExecutor}} from {json.dumps(JS.as_uri())};
+import fs from 'node:fs';
+const x = JSON.parse(fs.readFileSync(0, 'utf8'));
+const result = [];
+for (const endpoint of [x.endpoint, 'http://127.0.0.1:1']) {{
+  const p = new BOProbe({{project:x.project, buildId:x.build, endpoint, token:'token', timeout:5000}});
+  const e = new BOExecutor(x.project.model.machine, {{available:c=>c.slots>0}});
+  const r = e.step('pending', 'start', {{slots:1}});
+  p.record('advance', 'return', () => ({{outputs:{{state:r.state}}}}));
+  const flushed = await p.flush(15000);
+  result.push({{state:r.state, errors:p.bo_errors, flushed}});
+}}
+console.log(JSON.stringify(result));
+"""
         try:
-            result=self.node(script,{'project':self.project,'build':session.manifest['build_id'],'endpoint':f'http://127.0.0.1:{server.server_port}'})
-            self.assertEqual([r['state'] for r in result],['running','running']);self.assertEqual(result[0]['errors'],0);self.assertGreater(result[1]['errors'],0)
-        finally:server.shutdown();server.server_close();session.close()
+            with urlopen(base + '/api/view', timeout=5) as response:
+                self.assertEqual(response.status, 200)
+            result = self.node(script, {
+                'project': self.project, 'build': session.manifest['build_id'], 'endpoint': base,
+            })
+            self.assertEqual([r['state'] for r in result], ['running', 'running'])
+            self.assertEqual(result[0]['errors'], 0)
+            self.assertGreater(result[1]['errors'], 0)
+            self.assertTrue(all(r['flushed'] for r in result))
+            received = session.history.snapshot()
+            self.assertEqual(len(received), 1)
+            self.assertEqual(received[0]['outputs'], {'state': 'running'})
+        finally:
+            server.shutdown()
+            server.server_close()
+            session.close()
+
+    def test_javascript_transport_timeout_preserves_business_result(self):
+        session = GraphSession(self.root)
+        entered = threading.Event()
+        release = threading.Event()
+
+        class PendingResponse(BaseHTTPRequestHandler):
+            def log_message(self, *_args):
+                pass
+
+            def do_POST(self):
+                self.rfile.read(int(self.headers['Content-Length']))
+                entered.set()
+                # Hold the response until the client finishes. A broken timeout
+                # produces a successful response and fails the error assertion.
+                release.wait(10)
+                try:
+                    self.send_response(204)
+                    self.end_headers()
+                except (BrokenPipeError, ConnectionResetError):
+                    pass
+
+        server = ThreadingHTTPServer(('127.0.0.1', 0), PendingResponse)
+        threading.Thread(target=server.serve_forever, daemon=True).start()
+        script = f"""
+import {{BOProbe, BOExecutor}} from {json.dumps(JS.as_uri())};
+import fs from 'node:fs';
+const x = JSON.parse(fs.readFileSync(0, 'utf8'));
+const p = new BOProbe({{project:x.project, buildId:x.build, endpoint:x.endpoint, timeout:1000}});
+const e = new BOExecutor(x.project.model.machine, {{available:c=>c.slots>0}});
+const r = e.step('pending', 'start', {{slots:1}});
+p.record('advance', 'return', () => ({{outputs:{{state:r.state}}}}));
+const flushed = await p.flush(5000);
+console.log(JSON.stringify({{state:r.state, errors:p.bo_errors, flushed}}));
+"""
+        try:
+            result = self.node(script, {
+                'project': self.project, 'build': session.manifest['build_id'],
+                'endpoint': f'http://127.0.0.1:{server.server_port}',
+            })
+            self.assertTrue(entered.is_set(), 'The test must reach the real HTTP server')
+            self.assertEqual(result['state'], 'running')
+            self.assertEqual(result['errors'], 1)
+            self.assertTrue(result['flushed'], 'An aborted request must leave no queued work')
+        finally:
+            release.set()
+            server.shutdown()
+            server.server_close()
+            session.close()
 
     def test_native_state_snapshots_replay_exact_steps_and_transitions(self):
         session=GraphSession(self.root)
