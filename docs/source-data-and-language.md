@@ -2,6 +2,8 @@
 
 This note separates the current implementation from proposed extensions. The public introduction must use the same distinction.
 
+The [development branch roadmap](development/dev-roadmap.md) tracks source neighborhoods, database schema, and API relationships with their current implementation boundaries and acceptance requirements.
+
 ## Can the lowest layer cover the whole codebase?
 
 Yes, as an **indexed source view**. That does not mean every possible call can be resolved correctly or that every indexed call ran.

@@ -1,6 +1,6 @@
 {
   "schema": "bo-maintenance/v1",
-  "source_id": "bf25a9f339a4450ec9e35d9bce6975c007c01c4ed9c908fefebad46786ec3776",
+  "source_id": "143dea9eeeed5e80e4fe2cb94f97b6866cec055e2e5ec384935acd9c495c2df6",
   "inventory": {
     "files": {
       "archive_app/__init__.py": "c4cc8d894a9cb6e2da5510317e540d22b50b75b2a187f86675d20e86d967f9bf",
@@ -165,6 +165,7 @@
       "static/graph/renderer.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
       "static/graph/replay-steps.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
       "static/graph/runtime-frames.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "static/graph/view-lifecycle.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
       "static/graph/viewer.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
       "tooling/__init__.py": "Project generation and test commands; separately watched and executed.",
       "tooling/build_model.py": "Project generation and test commands; separately watched and executed.",
@@ -2763,5 +2764,5 @@
     "run.py::main",
     "static/app.js::bo_record"
   ],
-  "candidate_id": "efbeee86a28418a619cb4f0d61f9b8a56a55249ce950e23a81762568d5784de8"
+  "candidate_id": "7d94dd811a064bd7e1245085438eb67f018f61bde44251a1e8062c2ac1358149"
 }

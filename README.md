@@ -60,6 +60,7 @@ flowchart LR
 - Replay before/after states, values, decisions, and effects. Animate transfers only when actual call or dependency evidence supports them.
 - Expand typed regions, drag groups, pin nodes, search hidden details, rename display labels, and add notes or core markers.
 - Keep layouts and custom views in `bo_stategraph/config/views/local.json`. Graph regeneration preserves personal annotations by stable ID.
+- Preserve per-node/per-relation exclusions, type filters, and expanded groups across iterations. **All elements** clears exclusions while retaining positions and collapse choices. Recordings in the current list belong to the current code/graph version.
 - Use built-in business, state-machine, function/parameter, authorization, concurrency/resource, data-dependency, observed-execution, waiting/failure, and shared-membership views. Combine node/edge/region types, depth, scope, and text into custom views.
 - Export the complete modeled structure and retained evidence independently of what the current view hides. Hide or remove debug Web components without removing the state declaration or executor.
 
@@ -129,6 +130,8 @@ To read or modify the implementation, start with the [source guide](docs/source-
 | Target project's `bo_stategraph/` | Declarations, native execution, private view preferences |
 
 [JSON protocols and language support](skills/business-observer/references/multilanguage.md) · [Source depth and database relationships](docs/source-data-and-language.md) · [Recording](skills/business-observer/references/recorded-analysis.md) · [Development checks](skills/business-observer/references/continuous-development.md)
+
+The [`dev` roadmap](docs/development/dev-roadmap.md) distinguishes existing AST and route extraction from planned full source neighborhoods, database schema, and API relation views.
 
 Current adapters inventory Python, JS/TS, React, and Vue source. Drilldown covers indexed symbols and selected local relationships, **not a proven complete dynamic call graph**. A complete all-source browser, generic database schema/column-lineage adapters, incremental APIs, and performance baselines remain extensions. The tool does not collect every local variable, prove complete program correctness, or execute business commands through graph edits.
 

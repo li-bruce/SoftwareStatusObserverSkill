@@ -5,6 +5,7 @@ import { createConversationFocus, discussionContext } from "./conversation.js";
 import { projectStorage } from "./preferences.js";
 import { createPoller } from "./polling.js";
 import { migrateNodeIds } from "./layout.js";
+import { projectLayoutKey, graphVersion, recordingMatches } from "./view-lifecycle.js";
 import {
   executionIds,
   layoutGraph,
@@ -44,6 +45,7 @@ import {
   cleanFilters,
   emptyFilters,
   renderRevision,
+  elementCoverage,
 } from "./layout.js";
 import { presets, profileFor, cleanProfile, matchingNodes, sharedMemberships } from "./analysis.js";
 import { legendGlyph, legendRelation, meanings, glyphAppearance } from "./glyphs.js";
@@ -276,11 +278,17 @@ function cancelLayout() {
 }
 function project() {
   if (!view) return;
-  const renamed = migrateNodeIds(preferences, view.model.presentation?.node_aliases);
+  const renamed = migrateNodeIds(
+    preferences,
+    view.model.presentation?.node_aliases,
+    view.model.presentation?.edge_aliases,
+  );
   expanded = new Set([...expanded].map((id) => renamed[id] || id));
   selected = renamed[selected] || selected;
   const profile = currentProfile();
   graph = layoutGraph(view, expanded, new Set(), new Map(), choice, step, {
+    hiddenNodes: preferences.filters.hiddenNodes,
+    hiddenEdges: preferences.filters.hiddenEdges,
     include: (n) =>
       n.filter_context ||
       analysisSettings?.advanced ||
@@ -507,6 +515,7 @@ function updateActions() {
   $("pin").disabled = !b;
   $("pin").textContent = b?.pinned ? boTranslate("Unpin") : boTranslate("Pin node");
   $("annotate").disabled = !b;
+  $("hide-node").disabled = !b;
   $("details").disabled = !b;
   $("source").disabled = !binding;
   $("selection").textContent = b
@@ -655,6 +664,13 @@ function updateEdgeDetail() {
         a = graph.all.get(member.from),
         b = graph.all.get(member.to);
       item.textContent = `${a ? displayName(a, preferences) : member.from} → ${b ? displayName(b, preferences) : member.to}：${member.label || style.label}（${["python-ast", "source-ast"].includes(member.origin) ? boTranslate("Static call") : member.observed ? (member.current ? boTranslate("Observed in this run") : boTranslate("Observed in a previous run")) : boTranslate("Declared relation")}）`;
+      const hide = document.createElement("button");
+      hide.textContent = boTranslate("Hide relation");
+      hide.onclick = () => {
+        preferences.filters.hiddenEdges.push(member.id);
+        applyFilters();
+      };
+      item.append(hide);
       return item;
     }),
   );
@@ -994,16 +1010,69 @@ function updateFilters() {
   const profile = currentProfile();
   $("filter-scope").value = profile.scope;
   $("filter-query").value = profile.query;
-  const active = JSON.stringify(filters) !== JSON.stringify(emptyFilters());
+  const active =
+    JSON.stringify(filters) !== JSON.stringify(emptyFilters()) ||
+    profile.scope !== "all" ||
+    !!profile.query ||
+    !analysisSettings.advanced;
   $("filter-toggle").textContent = active
     ? boTranslate("Filters \u00B7 active")
     : boTranslate("Filters");
+  const coverage = elementCoverage(graph, presentation);
   $("filter-count").textContent = boTranslate(
-    "Showing {0} nodes and {1} relations",
-    new Set([...presentation.glyphs, ...presentation.regions]).size,
-    renderedEdges.length,
+    "Nodes: {0} visible, {1} folded, {2} filtered. Relations: {3} visible, {4} folded, {5} filtered.",
+    coverage.visibleNodes,
+    coverage.foldedNodes,
+    coverage.excludedNodes,
+    coverage.visibleEdges,
+    coverage.foldedEdges,
+    coverage.excludedEdges,
   );
+  Object.assign($("filter-count").dataset, coverage);
+  updateHiddenElements();
 }
+/** Restore individual exclusions without losing the rest of a custom view. */
+function updateHiddenElements() {
+  const entries = [];
+  for (const kind of ["hiddenNodes", "hiddenEdges"])
+    for (const id of preferences.filters[kind]) {
+      const row = document.createElement("div"),
+        button = document.createElement("button");
+      const node = graph.all.get(id),
+        edge = graph.rawEdges.find((item) => item.id === id);
+      const label =
+        kind === "hiddenNodes"
+          ? node
+            ? displayName(node, preferences)
+            : id
+          : edge
+            ? `${graph.all.get(edge.from)?.label || edge.from} → ${graph.all.get(edge.to)?.label || edge.to}`
+            : id;
+      row.append(document.createTextNode(label + " "));
+      button.textContent = boTranslate("Show again");
+      button.onclick = () => {
+        preferences.filters[kind] = preferences.filters[kind].filter((item) => item !== id);
+        applyFilters();
+      };
+      row.append(button);
+      entries.push(row);
+    }
+  $("hidden-elements").replaceChildren(...entries);
+  $("hidden-elements-heading").hidden = !entries.length;
+}
+$("hide-node").onclick = () => {
+  if (!selected) return;
+  preferences.filters.hiddenNodes.push(selected);
+  selected = null;
+  applyFilters();
+};
+$("show-all").onclick = () => {
+  analysisOverride = { ...cleanProfile(), hierarchical: true };
+  analysisSettings.advanced = true;
+  preferences.filters = emptyFilters();
+  updateAnalysisOptions();
+  applyFilters();
+};
 function applyFilters() {
   cancelLayout();
   preferences.filters = cleanFilters(preferences.filters);
@@ -1213,6 +1282,14 @@ async function poll() {
     const key = renderRevision(next, [version, caseChoice, choice, step]);
     const previousLive = latestLive;
     latestLive = next;
+    const graphChanged = previousLive && graphVersion(previousLive) !== graphVersion(next);
+    if (graphChanged) {
+      cancelLayout();
+      fullSources.clear();
+      lastRecordPoll = 0;
+      lastLiveEvent = null;
+    }
+    if (recording && !recordingMatches(recording, next)) leaveRecording();
     document.querySelector(".record-bar").hidden = next.stage === "design";
     $("program-link").hidden = next.stage === "design";
     if (Object.hasOwn(next, "program_url")) {
@@ -1235,11 +1312,7 @@ async function poll() {
       (next.stage === "design"
         ? boTranslate(" \u00B7 design graph")
         : boTranslate(" \u00B7 runtime graph"));
-    const baseKey = layoutKey(
-      next.layout_id
-        ? { ...view.model, presentation: { ...view.model.presentation, layout_id: next.layout_id } }
-        : view.model,
-    );
+    const baseKey = projectLayoutKey(next, storage);
     loadAnalysis(baseKey);
     const nextStorageKey = baseKey + (analysisId === "overview" ? "" : ":view:" + analysisId);
     if (nextStorageKey !== storageKey) {
@@ -1888,6 +1961,8 @@ async function openRecording(id) {
   const saved = await recordingRequest("/" + encodeURIComponent(id));
   if (saved.schema !== "stategraph-recording/v1")
     throw Error(boTranslate("Unsupported recording format"));
+  if (latestLive && !recordingMatches(saved, latestLive))
+    throw Error(boTranslate("This recording belongs to an earlier graph version."));
   recording = saved;
   replayItems = timeline(saved);
   boPlanKey = "";

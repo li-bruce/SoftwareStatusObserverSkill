@@ -595,6 +595,20 @@ export function layoutGraph(
       evidence: m.evidence,
     });
   }
+  const explicitlyHidden = new Set(options.hiddenNodes || []);
+  const excludedIds = new Set();
+  for (const [id, node] of all) {
+    let current = node;
+    const seen = new Set();
+    while (current && !seen.has(current.id)) {
+      seen.add(current.id);
+      if (explicitlyHidden.has(current.id) || explicitlyHidden.has(current.referenceOf)) {
+        excludedIds.add(id);
+        break;
+      }
+      current = all.get(current.parent);
+    }
+  }
   let matched = null;
   if (options.match) {
     for (const [id, n] of all) {
@@ -614,6 +628,7 @@ export function layoutGraph(
       (n) => status(n, view, events, choice, configuration),
       rawEdges,
     );
+    for (const id of excludedIds) matched.delete(id);
     for (const id of matched.contextIds || [])
       all.set(id, { ...all.get(id), filter_context: true, parent: undefined });
     for (const id of matched) {
@@ -638,11 +653,10 @@ export function layoutGraph(
     }
   const visibleIds = matched
     ? new Set([...matched].filter((id) => !all.get(id).parent))
-    : new Set(
-        view.model.graph_roots ||
-          view.model.overview?.map((x) => x.node) ||
-          [...all.values()].filter((n) => !n.parent).map((n) => n.id),
-      );
+    : new Set([
+        ...(view.model.graph_roots || view.model.overview?.map((x) => x.node) || []),
+        ...[...all.values()].filter((n) => !n.parent).map((n) => n.id),
+      ]);
   // State nodes follow the same containment and expansion rules as functions.
   // Folding affects visibility only; all states and facts remain in `all`.
   function reveal(id, seen = new Set()) {
@@ -656,8 +670,16 @@ export function layoutGraph(
         }
   }
   for (const id of [...visibleIds]) reveal(id);
+  const eligibleIds = new Set(
+    [...all.keys()].filter(
+      (id) =>
+        !excludedIds.has(id) &&
+        (!matched || matched.has(id)) &&
+        (!options.include || options.include(all.get(id))),
+    ),
+  );
   const boxes = [...visibleIds]
-    .filter((id) => all.has(id) && (!options.include || options.include(all.get(id))))
+    .filter((id) => eligibleIds.has(id))
     .map((id, i) => {
       const node = all.get(id),
         type = nodeType(node),
@@ -670,10 +692,7 @@ export function layoutGraph(
         open: expanded.has(id) && !node.filter_context,
         kids: node.filter_context
           ? []
-          : (children.get(id) || []).filter(
-              (id) =>
-                (!matched || matched.has(id)) && (!options.include || options.include(all.get(id))),
-            ),
+          : (children.get(id) || []).filter((id) => eligibleIds.has(id)),
         state: status(node, view, events, choice, configuration),
         x: 80 + (i % 5) * 230,
         y: 70 + Math.floor(i / 5) * 180,
@@ -694,19 +713,13 @@ export function layoutGraph(
   }
   const edgeMap = new Map();
   for (const e of rawEdges) {
+    if (!eligibleIds.has(e.from) || !eligibleIds.has(e.to) || options.hiddenEdges?.includes(e.id))
+      continue;
     const from = visible(e.from),
       to = visible(e.to);
     if (!from || !to || (from === to && e.from !== e.to)) continue;
-    // A filtered boundary must stay connected when its selected source is
-    // folded. The member below retains the real endpoints; this is a group
-    // projection of one actual edge, never a shortcut through an omitted node.
-    const boundary = all.get(e.from)?.filter_context || all.get(e.to)?.filter_context;
-    if (
-      ["python-ast", "source-ast", "capture-field"].includes(e.origin) &&
-      (from !== e.from || to !== e.to) &&
-      !boundary
-    )
-      continue;
+    // Project every cross-group relation onto its enclosing groups. Original
+    // endpoints remain in members; folding must not erase static call edges.
     const source = all.get(e.from),
       target = all.get(e.to);
     if (!source || !target) continue;
@@ -784,6 +797,7 @@ export function layoutGraph(
     configuration,
     children,
     all,
+    eligibleIds,
   };
   return graphBounds(graph);
 }

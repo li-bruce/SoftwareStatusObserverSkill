@@ -162,6 +162,7 @@
     "static/graph/renderer.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
     "static/graph/replay-steps.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
     "static/graph/runtime-frames.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+    "static/graph/view-lifecycle.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
     "static/graph/viewer.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
     "tooling/__init__.py": "Project generation and test commands; separately watched and executed.",
     "tooling/build_model.py": "Project generation and test commands; separately watched and executed.",

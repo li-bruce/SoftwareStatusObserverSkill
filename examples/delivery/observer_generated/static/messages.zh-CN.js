@@ -1,5 +1,14 @@
 // Chinese presentation only. IDs, source, and user-authored labels remain unchanged.
 export default {
+  "All elements": "全部元素",
+  "Hide node": "隐藏节点",
+  "Hide relation": "隐藏此连接",
+  "Hidden elements": "单独隐藏的元素",
+  "Show again": "重新显示",
+  "Nodes: {0} visible, {1} folded, {2} filtered. Relations: {3} visible, {4} folded, {5} filtered.":
+    "节点：{0} 显示，{1} 收起，{2} 筛除。连接：{3} 显示，{4} 收起，{5} 筛除。",
+  "This recording belongs to an earlier graph version.": "此记录属于旧版本的图。",
+
   "Layered overview": "分层全图",
   "Business flow": "业务流",
   "State machine": "状态机",

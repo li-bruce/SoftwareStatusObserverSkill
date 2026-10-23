@@ -54,6 +54,7 @@ In drive mode, the application's native BOExecutor.step also reads the agreed de
 | [viewer.js](../skills/business-observer/assets/stategraph-viewer/viewer.js) | Connect controls, graph data, live updates, and recording selection. Start here for UI wiring. |
 | [graph-core.js](../skills/business-observer/assets/stategraph-viewer/graph-core.js) | Resolve node values, source bindings, event selection, and visible graph content. |
 | [layout.js](../skills/business-observer/assets/stategraph-viewer/layout.js) | Expand/collapse regions, position groups, apply filters, and retain annotations. |
+| [view-lifecycle.js](../skills/business-observer/assets/stategraph-viewer/view-lifecycle.js) | Keep project view identity stable across builds; compare recording and live graph versions. |
 | [renderer.js](../skills/business-observer/assets/stategraph-viewer/renderer.js) | Draw nodes, regions, and edges in Pixi; maintain hit regions for interaction. |
 | [recording.js](../skills/business-observer/assets/stategraph-viewer/recording.js) | Construct replay frames and evidence-supported transfers. |
 | [runtime-frames.js](../skills/business-observer/assets/stategraph-viewer/runtime-frames.js) | Locate exact snapshots and compare state/resource changes. |

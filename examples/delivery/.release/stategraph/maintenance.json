@@ -1,6 +1,6 @@
 {
   "schema": "bo-maintenance/v1",
-  "source_id": "8db6475b991db359a0e9dda0197992200a9ce929330b6a7b5efe3aedacee1f29",
+  "source_id": "6a8c02429bae687a44354d6da5fe2bcfac636f069cde3e8d8b23a6affc8ff2c1",
   "inventory": {
     "files": {
       "app/__init__.py": "a829ebb4042211c3a39bf40646855698375b065069bbbd2aa61daba1d8e6a51c",
@@ -37,6 +37,7 @@
       "integrations/bo_view/renderer.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
       "integrations/bo_view/replay-steps.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
       "integrations/bo_view/runtime-frames.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
+      "integrations/bo_view/view-lifecycle.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
       "integrations/bo_view/viewer.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
       "observer_generated/__init__.py": "Package marker only; copied source inventory covers its runtime.",
       "observer_generated/runtime/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
@@ -132,6 +133,7 @@
       "observer_generated/static/renderer.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
       "observer_generated/static/replay-steps.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
       "observer_generated/static/runtime-frames.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "observer_generated/static/view-lifecycle.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
       "observer_generated/static/viewer.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
       "tests/__init__.py": "Scenario runners and assertions, not business implementation.",
       "tests/observe.py": "Scenario runners and assertions, not business implementation.",
@@ -1422,5 +1424,5 @@
     "bo_stategraph/workflow.py::ActivityState",
     "bo_stategraph/workflow.py::Phase"
   ],
-  "candidate_id": "06374be50d56235dba4873efae53ae01460aa8c927b71175be853613e4358241"
+  "candidate_id": "d6139df376899cc9bfea08e6dba1c18c5ae55a61fbb3582c45dc53844a0cf7f8"
 }

@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "node",
+    "tooling/graph_tests.mjs"
+  ],
+  "exit_code": 0,
+  "stdout": "Graph invariants passed: exact boundary, missing boundary, historical phase, no final disposition/results, stable folded IDs.\n",
+  "stderr": ""
+}

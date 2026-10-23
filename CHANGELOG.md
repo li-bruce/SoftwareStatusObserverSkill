@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased — dev, 2026-10-23
+
+- Preserve project-owned layouts, type and individual filters, expansion, pins, annotations and custom views across graph updates. Support explicit project/node/edge identity migration; retain conflicts and dormant settings.
+- Give static calls identities independent of line numbers. Keep repeated calls distinct and preserve their source locations as evidence.
+- Add All elements and visible/folded/filtered counts. Keep cross-group static calls when collapsed and include roots omitted by an outdated hint list.
+- Restrict the current recording list and replay to the current build/model; leave old replay on update. Same-version restarts retain recordings; private originals remain on disk.
+- Synchronize Skill guidance and shipped examples. [Acceptance](docs/review/view-continuity-20261023/README.md) includes browser update/reload evidence, complete regression and staged-byte verification. [Development roadmap](docs/development/dev-roadmap.md) marks full source neighborhoods, database schema and API relationships as future work.
+
 ## 0.6.0 — 2026-10-23
 
 [Release notes](docs/releases/v0.6.0.md) · [Live introduction](https://li-bruce.github.io/SoftwareStatusObserverSkill/)

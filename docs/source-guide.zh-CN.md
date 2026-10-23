@@ -54,6 +54,7 @@ scripts 根目录下多数小文件负责转发导入或命令调用。需要修
 | [viewer.js](../skills/business-observer/assets/stategraph-viewer/viewer.js) | 页面按钮、数据刷新和记录选择的连接入口。 |
 | [graph-core.js](../skills/business-observer/assets/stategraph-viewer/graph-core.js) | 节点值、源码关联、事件筛选与图内容。 |
 | [layout.js](../skills/business-observer/assets/stategraph-viewer/layout.js) | 展开收起、分组位置、筛选和批注。 |
+| [view-lifecycle.js](../skills/business-observer/assets/stategraph-viewer/view-lifecycle.js) | 项目视图的稳定标识，以及录制与当前图版本的匹配。 |
 | [renderer.js](../skills/business-observer/assets/stategraph-viewer/renderer.js) | Pixi 绘制和鼠标可命中的区域。 |
 | [recording.js](../skills/business-observer/assets/stategraph-viewer/recording.js) | 回放步骤及运行证据支持的连线传递。 |
 | [runtime-frames.js](../skills/business-observer/assets/stategraph-viewer/runtime-frames.js) | 查找事件对应的精确快照，比较状态和资源。 |

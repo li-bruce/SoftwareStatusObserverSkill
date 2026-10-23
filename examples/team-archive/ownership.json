@@ -76,7 +76,7 @@
     "bo_stategraph/__init__.py": "56f694a30fa9e2aa6319931b24cb35c52c82ea30b8b4b6f4029df0f838e63e6e",
     "bo_stategraph/bo_contracts.py": "094f5feff89893ee5932eb6a4b6ad4aafc08c7e462d0b9b00c31d50702e6af29",
     "bo_stategraph/execution_contract.py": "0c966fb3549c0219c6a663ddf41c847e71ebf14216b02b725d2465e4bf0c4839",
-    "bo_stategraph/runtime-version.json": "fb9e62c926356564d182ac4b604645ac2cebf06392e89b93ffa8cfa35af761ab",
+    "bo_stategraph/runtime-version.json": "f54c5db44ed543823527f840bf57308362fdd1f2a796ae345496f607e9081524",
     "observer_runtime/LICENSE.txt": "41f4bfe9aa8790612dd555d71a9e95fbf12c9f0e84bc6ce232a0aae3af3e2ba3",
     "observer_runtime/__init__.py": "c4cc8d894a9cb6e2da5510317e540d22b50b75b2a187f86675d20e86d967f9bf",
     "observer_runtime/architecture_guard.py": "b1966fd9fa189df104894e6cf91f1e28a12087d6d525bd5cb8db3c46af9e54b9",
@@ -99,7 +99,7 @@
     "observer_runtime/bo_observer/development.py": "2f5ca6a2b2d962fac476b3dc389e9363ed37dcc975851f09d728422b78cf17a6",
     "observer_runtime/bo_observer/graph/__init__.py": "76c4a5c43cd71a23505d400f742ddd11cb95fff821171002971a186cd7921dd4",
     "observer_runtime/bo_observer/graph/behavior_model.py": "0441d344924be9e7c09fb6be0726e101ecabd8faf17f5b77c7360a7e0fec42e0",
-    "observer_runtime/bo_observer/graph/code_structure.py": "9102baa2c0b92855136adfd583fd27816e0f0c43bd740021a5fb51098c41e310",
+    "observer_runtime/bo_observer/graph/code_structure.py": "84aa8e317a3ffc2cf85ebf061f6059cec727889360e63d8614b681e8567bbd8b",
     "observer_runtime/bo_observer/graph/focus_graph.py": "9b66c17c840626d9806602d8fa56aa304ae924403d6ad3cf6afc80cf55eec95c",
     "observer_runtime/bo_observer/graph/statechart_contract.py": "e0d43786de88de1463837a73481733c2f7c9b0687e0349b0de8835982cf47920",
     "observer_runtime/bo_observer/graph/worknet_contract.py": "c05575ed8286fafd7edec8976d9dd5c28e7567ef07bac2a465e7d59205b8d38c",
@@ -109,7 +109,7 @@
     "observer_runtime/bo_observer/observation/native_ingress.py": "9c26cf0e87a70d3534609288b16fdb986d1c4d32947650f418a76f40db0b1a0d",
     "observer_runtime/bo_observer/observation/observation_scope.py": "8c6e14ce8510dd934331c01337aa680885c078312f3acb101bdb45f2b8badae9",
     "observer_runtime/bo_observer/observation/probe.py": "b8e52f8bb4a27894a1eb21144335db19f753d5c06fd8c047643217de426259a5",
-    "observer_runtime/bo_observer/observation/recording_session.py": "35677ce6f247c63e22f1a74ce4cca779e3e7462d122cb56b7eb2e2c60c01b92f",
+    "observer_runtime/bo_observer/observation/recording_session.py": "3b599493a651cbbbb92933e9fa8f9e3a2531b83c604e4020ed2f301435d2b762",
     "observer_runtime/bo_observer/observation/runtime_frames.py": "1000446fe96cfe3070528a7e454a03942e20f814ebec5f172564e759a6eea16c",
     "observer_runtime/bo_observer/observation/semantic_probe.py": "01df24943bd5159752300e5368331605bf8cbcef6a657da01063a1bf050fe60c",
     "observer_runtime/bo_observer/protocol.py": "06542fce977f339ad31a444242d6c31fb0622541a67690590fd526a50eef7f22",
@@ -804,6 +804,14 @@
     {
       "reason": "Reviewed equivalent source formatting and documentation. Python and JavaScript executable syntax matches the previous release; preserve business semantics, graph IDs, capture fields, and all expectations. Keep historical evidence unchanged.",
       "changed": []
+    },
+    {
+      "reason": "Reviewed observer-only view persistence, graph projection, stable static-call identities, and recording version isolation. Application states, permissions, effects, capture fields and independent expectations are unchanged. New UI functions operate only on personal view data. Preserve historical evidence.",
+      "changed": [
+        "bo_stategraph/runtime-version.json",
+        "observer_runtime/bo_observer/graph/code_structure.py",
+        "observer_runtime/bo_observer/observation/recording_session.py"
+      ]
     }
   ],
   "core_layers": [

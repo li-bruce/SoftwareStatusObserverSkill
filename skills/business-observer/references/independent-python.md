@@ -60,6 +60,12 @@ Offline structure export is not_observed/not_checked. export --view view.json ca
 
 GET/POST /api/preferences uses revision conflicts and atomic writes across windows/processes. Initial migration may read this project's old browser cache. Exclude personal files from sharing/core packages. Stable IDs retain layout; explicit one-to-one presentation.node_aliases migrates IDs. Preserve conflicting material; never guess identity from similar names.
 
+The project identity returned by `/api/preferences` owns every view key, independently of the graph title and build. `presentation.layout_aliases` lists explicit former layout names when migration is needed. `presentation.edge_aliases` migrates individual relation exclusions. Filters include `hiddenNodes` and `hiddenEdges`; hidden groups hide their descendants. Removed IDs remain dormant. A new ID receives an initial position without rearranging existing IDs.
+
+“All elements” resets scope, query, depth, type, individual, and advanced-detail filters. Expansion and coordinates remain personal choices. The coverage readout distinguishes visible, folded, and filtered nodes/relations. A relation within a folded group is counted there; cross-group calls are projected onto regions with the actual endpoints retained in relation details.
+
+Recordings belong to a build and model hash (or a model-content digest for providers without one). The current list and retrieval endpoint exclude older versions; a viewer leaves replay when this identity changes. Original private recording files and exported review evidence are preserved. Restarting the same code/graph does not clear the list.
+
 Count/time retention bounds caches; size rotation bounds JSONL without deleting business storage or saved recordings. Recording subscribes directly to capture events to avoid UI-cache gaps, stops at limits, and reports loss. Runtime incremental APIs and performance baselines remain TODO.
 
 ## Upgrade

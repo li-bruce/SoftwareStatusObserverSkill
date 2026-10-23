@@ -7,6 +7,7 @@ copies its event stream; it does not sample function execution or invent events.
 from copy import deepcopy
 from datetime import datetime, timezone
 import json
+import hashlib
 from pathlib import Path
 import re
 import threading
@@ -25,6 +26,23 @@ SCHEMA = "stategraph-recording/v1"
 
 def timestamp():
     return datetime.now(timezone.utc).isoformat()
+
+
+def graph_version(view):
+    """Identify code and graph content, independently of clocks and runtime state."""
+    manifest = view["manifest"]
+    model_hash = manifest.get("model_hash")
+    if not model_hash:
+        model_hash = hashlib.sha256(
+            json.dumps(
+                view["model"],
+                sort_keys=True,
+                ensure_ascii=False,
+                allow_nan=False,
+                separators=(",", ":"),
+            ).encode("utf-8")
+        ).hexdigest()
+    return [manifest["build_id"], model_hash]
 
 
 def checkpoint(view, *, context=False):
@@ -239,9 +257,12 @@ class Recordings:
 
     def _start(self, label, scope):
         """Begin from a current build snapshot and freeze the requested capture scope."""
+        view = self.provider()
         with self.lock:
             if self.active:
-                return self.summary(self.active)
+                if graph_version(self.active["context"]) == graph_version(view):
+                    return self.summary(self.active)
+                self._capture(self.active["id"], view)
         with self.lock:
             self._stream_events = {}
             self._starting = True
@@ -315,9 +336,8 @@ class Recordings:
             if not value or value["id"] != ident:
                 return
             health = view["health"]
-            if (
-                health.get("run_id") != value["run_id"]
-                or view["manifest"]["build_id"] != value["build_id"]
+            if health.get("run_id") != value["run_id"] or graph_version(view) != graph_version(
+                value["context"]
             ):
                 value.update(status="interrupted", ended_at=timestamp())
                 value["gaps"].append(
@@ -448,9 +468,11 @@ class Recordings:
             "gaps": value["gaps"],
             "capture": value.get("capture", {"mode": "all"}),
             "capture_filtered": value.get("capture_filtered", 0),
+            "graph_version": graph_version(value["context"]),
         }
 
     def get(self, ident):
+        current = graph_version(self.provider())
         with self.lock:
             path = self._path(ident)
             value = self.cached.get(ident)
@@ -458,31 +480,43 @@ class Recordings:
                 if not path.exists():
                     raise ValueError("Recording not found")
                 value = json.loads(path.read_text(encoding="utf-8"))
+            if graph_version(value["context"]) != current:
+                raise ValueError("This recording belongs to an earlier graph version")
             return deepcopy(value)
 
     def list(self):
+        # Read outside the recording lock: a provider may take the application's
+        # lock while business operations deliver events back to this recorder.
+        view = self.provider()
+        current = graph_version(view)
         with self.lock:
+            if self.active and graph_version(self.active["context"]) != current:
+                self._capture(self.active["id"], view)
             entries = {}
             for path in sorted(
                 self.directory.glob("*.json"), key=lambda p: p.stat().st_mtime, reverse=True
-            )[:50]:
+            ):
                 try:
                     if path.stem not in self.catalog:
                         value = json.loads(path.read_text(encoding="utf-8"))
                         if value.get("schema") == SCHEMA:
                             self.catalog[path.stem] = self.summary(value)
-                    if path.stem in self.catalog:
+                    if self.catalog.get(path.stem, {}).get("graph_version") == current:
                         entries[path.stem] = self.catalog[path.stem]
+                        if len(entries) >= 50:
+                            break
                 except (OSError, ValueError, KeyError):
                     continue
             for ident, value in self.cached.items():
-                entries[ident] = self.summary(value)
+                if graph_version(value["context"]) == current:
+                    entries[ident] = self.summary(value)
             return {
                 "active": self.summary(self.active) if self.active else None,
                 "recordings": sorted(entries.values(), key=lambda v: v["started_at"], reverse=True)[
                     :50
                 ],
                 "error": self.last_error,
+                "graph_version": current,
             }
 
     def _worker(self):

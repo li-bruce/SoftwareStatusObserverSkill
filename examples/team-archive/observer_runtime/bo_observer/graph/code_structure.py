@@ -265,6 +265,7 @@ def enrich(authored, index, depth=1):
         if (g, sid, node_id) in seen or level >= depth:
             continue
         seen.add((g, sid, node_id))
+        occurrences = {}
         for call in outgoing.get(sid, []):
             if call["to"] in internal:
                 continue
@@ -307,12 +308,13 @@ def enrich(authored, index, depth=1):
                         "evidence": "business-map anchor + source AST call",
                     }
                 )
-            eid = (
-                "call."
-                + digest(
-                    [node_id, tid, call["expression"], call["args"], call["keywords"], call["line"]]
-                )[:16]
-            )
+            # Source lines locate evidence; they are not relation identity.
+            # A repeated identical call uses its occurrence within this caller.
+            identity = [node_id, tid, call["expression"], call["args"], call["keywords"]]
+            fingerprint = digest(identity)
+            occurrence = occurrences.get(fingerprint, 0)
+            occurrences[fingerprint] = occurrence + 1
+            eid = "call." + digest([identity, occurrence])[:16]
             if eid not in edge_ids:
                 model["edges"].append(
                     {
@@ -388,18 +390,23 @@ def enrich(authored, index, depth=1):
         if n.get("source"):
             by_symbol.setdefault(key(n["source"]["path"], n["source"]["symbol"]), n["id"])
     pairs = {
-        (e["from"], e["to"], e.get("callsite", {}).get("line"))
+        (e["from"], e["to"], e.get("callsite", {}).get("line"), e.get("callsite", {}).get("column"))
         for e in model["edges"]
         if e.get("origin") in {"python-ast", "source-ast"}
     }
+    occurrences = {}
     for call in index["edges"]:
         if call["from"] in internal or call["to"] in internal:
             continue
         a, b = by_symbol.get(call["from"]), by_symbol.get(call["to"])
-        if a and b and (a, b, call["line"]) not in pairs:
+        identity = [a, b, call["expression"], call["args"], call["keywords"]]
+        fingerprint = digest(identity)
+        occurrence = occurrences.get(fingerprint, 0)
+        occurrences[fingerprint] = occurrence + 1
+        if a and b and (a, b, call["line"], call["column"]) not in pairs:
             model["edges"].append(
                 {
-                    "id": "inventory-call." + digest([a, b, call["line"], call["column"]])[:16],
+                    "id": "inventory-call." + digest([identity, occurrence])[:16],
                     "from": a,
                     "to": b,
                     "type": "flow",

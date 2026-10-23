@@ -124,8 +124,8 @@
     "bo_stategraph/__init__.py": "56f694a30fa9e2aa6319931b24cb35c52c82ea30b8b4b6f4029df0f838e63e6e",
     "bo_stategraph/bo_contracts.py": "094f5feff89893ee5932eb6a4b6ad4aafc08c7e462d0b9b00c31d50702e6af29",
     "bo_stategraph/execution_contract.py": "0c966fb3549c0219c6a663ddf41c847e71ebf14216b02b725d2465e4bf0c4839",
-    "bo_stategraph/runtime-version.json": "860f5ad7eacd6001480b5a9ec13d502488b37b94e8bff58dff68554cd91a6398",
-    "observer_generated/behavior.json": "88e3d798ebf6672d8d0378fcdad7731354fde9afddf00261c2150d9ba0895681",
+    "bo_stategraph/runtime-version.json": "0a58ddf4f99fbe53b197008ddd3c808dc46ac23929e08fb1f6984c94d8a0dffd",
+    "observer_generated/behavior.json": "65434406cf5660015fea8cb16ee308782913636176ac294259d740350332ace3",
     "observer_generated/runtime/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "observer_generated/runtime/architecture_guard.py": "b1966fd9fa189df104894e6cf91f1e28a12087d6d525bd5cb8db3c46af9e54b9",
     "observer_generated/runtime/behavior_model.py": "91bd0baa9227e19f51c8195989c0fc4eab4945fdaa752050232b30d319998470",
@@ -147,7 +147,7 @@
     "observer_generated/runtime/bo_observer/development.py": "2f5ca6a2b2d962fac476b3dc389e9363ed37dcc975851f09d728422b78cf17a6",
     "observer_generated/runtime/bo_observer/graph/__init__.py": "76c4a5c43cd71a23505d400f742ddd11cb95fff821171002971a186cd7921dd4",
     "observer_generated/runtime/bo_observer/graph/behavior_model.py": "0441d344924be9e7c09fb6be0726e101ecabd8faf17f5b77c7360a7e0fec42e0",
-    "observer_generated/runtime/bo_observer/graph/code_structure.py": "9102baa2c0b92855136adfd583fd27816e0f0c43bd740021a5fb51098c41e310",
+    "observer_generated/runtime/bo_observer/graph/code_structure.py": "84aa8e317a3ffc2cf85ebf061f6059cec727889360e63d8614b681e8567bbd8b",
     "observer_generated/runtime/bo_observer/graph/focus_graph.py": "9b66c17c840626d9806602d8fa56aa304ae924403d6ad3cf6afc80cf55eec95c",
     "observer_generated/runtime/bo_observer/graph/statechart_contract.py": "e0d43786de88de1463837a73481733c2f7c9b0687e0349b0de8835982cf47920",
     "observer_generated/runtime/bo_observer/graph/worknet_contract.py": "c05575ed8286fafd7edec8976d9dd5c28e7567ef07bac2a465e7d59205b8d38c",
@@ -157,7 +157,7 @@
     "observer_generated/runtime/bo_observer/observation/native_ingress.py": "9c26cf0e87a70d3534609288b16fdb986d1c4d32947650f418a76f40db0b1a0d",
     "observer_generated/runtime/bo_observer/observation/observation_scope.py": "8c6e14ce8510dd934331c01337aa680885c078312f3acb101bdb45f2b8badae9",
     "observer_generated/runtime/bo_observer/observation/probe.py": "b8e52f8bb4a27894a1eb21144335db19f753d5c06fd8c047643217de426259a5",
-    "observer_generated/runtime/bo_observer/observation/recording_session.py": "35677ce6f247c63e22f1a74ce4cca779e3e7462d122cb56b7eb2e2c60c01b92f",
+    "observer_generated/runtime/bo_observer/observation/recording_session.py": "3b599493a651cbbbb92933e9fa8f9e3a2531b83c604e4020ed2f301435d2b762",
     "observer_generated/runtime/bo_observer/observation/runtime_frames.py": "1000446fe96cfe3070528a7e454a03942e20f814ebec5f172564e759a6eea16c",
     "observer_generated/runtime/bo_observer/observation/semantic_probe.py": "01df24943bd5159752300e5368331605bf8cbcef6a657da01063a1bf050fe60c",
     "observer_generated/runtime/bo_observer/protocol.py": "06542fce977f339ad31a444242d6c31fb0622541a67690590fd526a50eef7f22",
@@ -218,20 +218,21 @@
     "observer_generated/static/elk-worker.min.js": "e4f5c51c6f2fd564bb64e52e81c4a85a316ef2f24f8b90e1db5eb886c765b030",
     "observer_generated/static/elk.bundled.js": "1222e44f953ce7746af23801e723708f8e6f436b8b377a6a5fc7552f34a307b3",
     "observer_generated/static/glyphs.js": "0049ce16ecad74e8a9d4cf18f73ada9091fa077cfb70fb0d81ffca0f595cf0f8",
-    "observer_generated/static/graph-core.js": "61822c58f9c6bc0e06eb2e8d0a929080b3ef22a3fe44cc949ab37fcb61536aa7",
+    "observer_generated/static/graph-core.js": "742df9b648d6faaee1ce35413e8d59cb59c64cecbfc867487d9cd9e982a8ca13",
     "observer_generated/static/i18n.js": "884cc013981501f4f1f031f1aee0202d84792010f136641175f34c8d4e370735",
-    "observer_generated/static/index.html": "5557fd28ebfa8df1d72d21a175c9130e64a2e13bb6be544ac14010cf114b29b4",
-    "observer_generated/static/layout.js": "f65dca63fc13dbcf3496f150459701a47154ced2bb00f5cbd94f20db8da07123",
-    "observer_generated/static/messages.zh-CN.js": "d6b484669d96c723cd4b18bc700a9b6c6d89ba5b431afa2c4938200d301643c4",
+    "observer_generated/static/index.html": "2f06bf72293d4bfec4b8e6f427bbd03b9d3d6f96913181c74236c5430cd47966",
+    "observer_generated/static/layout.js": "ca9673661d194d71967811165aa7c5a2c4c4bac36a0ab2752cac33f35b39191f",
+    "observer_generated/static/messages.zh-CN.js": "a990208f4ad61ea44cf9fc6976a6552ff7fdd17b795ece1cea1efccaa401f121",
     "observer_generated/static/pixi.min.js": "06d9ef9823e743518793083c296d801e752db128cb1f519fbabe37e1259567ea",
     "observer_generated/static/polling.js": "b8f451f203af824171043d715fee3b4f2e1f2973e8591cc823a9aa7fccecc152",
-    "observer_generated/static/preferences.js": "e81cc56e44af1aa531310b65258a108b19e54bdaa55373cc367be716fb93dbb6",
+    "observer_generated/static/preferences.js": "30ee119b8480348ce7380220417d118c843f73da11fe6544300b571e91a36e43",
     "observer_generated/static/recording.js": "fb9eb9d02b5c8545b02de2b6eb06dcacc6963b915a28c7033fae17c8b1e3bb8e",
     "observer_generated/static/renderer.js": "c45741b194ef0fa0dc5b0c5fbab10cd871ebe568eae46780cbae3feaed0ea91e",
     "observer_generated/static/replay-steps.js": "c405042ba4067a7f4ac8c5ce77f3ec4db2727b9b7568ffa153b67b7a93c235df",
     "observer_generated/static/runtime-frames.js": "b6b47ea192cfcbb1721827590186aa490a44b25a5dc1ce6bb854ee5703ca483c",
+    "observer_generated/static/view-lifecycle.js": "13bed8b2b27b7fe3fae8ab38f5a465d8cae52302b5f1aa266cf076edd766ff41",
     "observer_generated/static/viewer.css": "70af32f30415c4256017f80e6d795653c504f9186185e56f08b069dff7a0c49b",
-    "observer_generated/static/viewer.js": "c8ccb45f630ffd286ebe0575122d1ba022335a6918d714773faaff850a566e7f"
+    "observer_generated/static/viewer.js": "c64115e05b622bc4b4595c6eaa64270a1df6ae1dce82c7e584c69a40f05cc43c"
   },
   "regenerations": [
     {
@@ -1245,6 +1246,22 @@
     {
       "reason": "Reviewed equivalent source formatting and documentation. Python and JavaScript executable syntax matches the previous release; preserve business semantics, graph IDs, capture fields, and all expectations. Keep historical evidence unchanged.",
       "changed": []
+    },
+    {
+      "reason": "Reviewed observer-only view persistence, graph projection, stable static-call identities, and recording version isolation. Application states, permissions, effects, capture fields and independent expectations are unchanged. New UI functions operate only on personal view data. Preserve historical evidence.",
+      "changed": [
+        "bo_stategraph/runtime-version.json",
+        "observer_generated/behavior.json",
+        "observer_generated/runtime/bo_observer/graph/code_structure.py",
+        "observer_generated/runtime/bo_observer/observation/recording_session.py",
+        "observer_generated/static/graph-core.js",
+        "observer_generated/static/index.html",
+        "observer_generated/static/layout.js",
+        "observer_generated/static/messages.zh-CN.js",
+        "observer_generated/static/preferences.js",
+        "observer_generated/static/view-lifecycle.js",
+        "observer_generated/static/viewer.js"
+      ]
     }
   ],
   "core_exclude": [

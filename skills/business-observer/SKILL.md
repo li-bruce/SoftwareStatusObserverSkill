@@ -57,6 +57,8 @@ Collection, reporting, polling, source viewing, layout, and recording controls m
 
 Track source moves explicitly, preserving node identities, parameters, and assertions. Generate from canonical sources and check installed copies. Do not reset capture baselines, fabricate events, or relax expectations to remove failures. Keep personal layouts in `bo_stategraph/config/views/local.json`; upgrades must preserve them. See [source migration](references/cochange.md).
 
+Keep project, node, and relation IDs stable across iterations. Use explicit `presentation.node_aliases` / `edge_aliases` for one-to-one renames; retain dormant personal settings and migration conflicts. Do not derive identity from labels, source line numbers, or build versions. A changed title is not a new project.
+
 ## 4. Present and inspect
 
 Reuse the complete `assets/stategraph-viewer/` interaction. After each batch, provide the updated graph and a brief explanation of changes. Start at high-level nodes, then expand important functions, states, and values; reveal advanced details on demand. Any expanded node uses a region with its type's color. Preserve group dragging, saved layouts, typed edges, notes, core markers, search, source navigation, and replay.
@@ -64,6 +66,8 @@ Reuse the complete `assets/stategraph-viewer/` interaction. After each batch, pr
 Provide one project development command that launches the application and its observer service together and prints both actual URLs. Keep application execution independent if observation is unavailable. The launcher must track and clean up only processes it started. Connect recording/replay to real runtime events; a design-only server has no business recording and must be labeled accordingly. Verify both URLs, build identity, recording start/stop, and replay against a real user operation before delivery.
 
 Every view must preserve meaningful relations. If the other endpoint is hidden, expose an explicit boundary; never invent a direct call or permission. Capture scope and replay granularity are separate. Show actual state/value changes at each step. Distinguish declarations, static derivation, and observed facts; missing or stale evidence is not current truth. See [hierarchical interaction](references/hierarchical-graph.md), [recording](references/recorded-analysis.md), and [local graphs and sharing](references/focus-and-sharing.md).
+
+Respect explicit individual exclusions, including hidden groups and their descendants. “All elements” clears every exclusion while retaining layout and expansion. Folded elements remain represented by their group and counts; cross-group static relations retain their original endpoints. After a code/graph update, show only current-version recordings and leave an obsolete replay. A same-version process restart may retain recordings. Verify this across an actual reload; never reset personal views to make a new graph fit.
 
 Separate a rule definition, relation data, and one evaluation. Do not generalize one example into all ReBAC. Read [authorization patterns](references/authorization-patterns.md), [rule graphs](references/rebac-graph.md), or [types and instances](references/types-rules-capture.md) when relevant.
 
