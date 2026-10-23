@@ -1,0 +1,56 @@
+{
+  "commit": "c63fbfde302924d03a5faa21f0f9059608e1064a",
+  "runs": [
+    {
+      "id": 40035861032,
+      "name": "Publish introduction",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/li-bruce/SoftwareStatusObserverSkill/actions/runs/40035861032",
+      "head_sha": "c63fbfde302924d03a5faa21f0f9059608e1064a",
+      "jobs": [
+        {
+          "name": "deploy",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 40035861027,
+      "name": "Checks",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/li-bruce/SoftwareStatusObserverSkill/actions/runs/40035861027",
+      "head_sha": "c63fbfde302924d03a5faa21f0f9059608e1064a",
+      "jobs": [
+        {
+          "name": "test (ubuntu-latest, 3.13)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "test (ubuntu-latest, 3.11)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "database-live",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "test (windows-latest, 3.11)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "test (windows-latest, 3.13)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "passed": true
+}

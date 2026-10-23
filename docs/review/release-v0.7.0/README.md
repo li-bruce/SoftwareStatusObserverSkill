@@ -21,6 +21,9 @@ conversation, a simulated user and a running Python/SQLite application.
 7. [Final runtime acceptance](runtime-summary.md): the final four reports,
    source identity, view preservation, retention boundaries and true missing
    events after upgrading the same application to `fa37289`.
+8. [Publication verification](publication/README.md): the fixed `v0.7.0` tag,
+   five main CI jobs, six release attachments, actual GitHub Pages checks and a
+   fresh installation from the public tag.
 
 The requested follow-up adds explicit per-message read state and the recipient's
 unread count. It retains the same project and graph identities. The original v2

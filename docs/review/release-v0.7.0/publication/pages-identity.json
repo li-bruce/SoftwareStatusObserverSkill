@@ -1,0 +1,49 @@
+{
+  "passed": true,
+  "commit": "c63fbfde302924d03a5faa21f0f9059608e1064a",
+  "url": "https://li-bruce.github.io/SoftwareStatusObserverSkill/",
+  "checks": [
+    {
+      "path": "index.html",
+      "source_sha256": "7df14a6b17c3350608884dd56a6f0d87bdf87d433712a6a5f4ffa1c44b99166d",
+      "deployed_sha256": "7df14a6b17c3350608884dd56a6f0d87bdf87d433712a6a5f4ffa1c44b99166d",
+      "matches": true
+    },
+    {
+      "path": "site.js",
+      "source_sha256": "31e6dffa486b967304dfd47ee005cb94dd5e5e564d8072ed2f401852e1970a09",
+      "deployed_sha256": "31e6dffa486b967304dfd47ee005cb94dd5e5e564d8072ed2f401852e1970a09",
+      "matches": true
+    },
+    {
+      "path": "messages.mjs",
+      "source_sha256": "fa0c8a9c027f02288a859f673c22cb1c4502681e4d190c6f40b1d0a2225891bd",
+      "deployed_sha256": "fa0c8a9c027f02288a859f673c22cb1c4502681e4d190c6f40b1d0a2225891bd",
+      "matches": true
+    },
+    {
+      "path": "site-ui.mjs",
+      "source_sha256": "ecccc83064e1780f8133cc4186acfc6755d9839ea534d8a4c3dfd5c74e6f503f",
+      "deployed_sha256": "ecccc83064e1780f8133cc4186acfc6755d9839ea534d8a4c3dfd5c74e6f503f",
+      "matches": true
+    },
+    {
+      "path": "demo.html",
+      "source_sha256": "9f5e2ce9267fbe362be6e4f23ec4cedab41acd56788a1bd838324e7ce8596375",
+      "deployed_sha256": "9f5e2ce9267fbe362be6e4f23ec4cedab41acd56788a1bd838324e7ce8596375",
+      "matches": true
+    },
+    {
+      "path": "demo.mjs",
+      "source_sha256": "ae24483da7c7b0f367973382501d6f9dbec4fe012c8fbdb64a87b31c5e353bd5",
+      "deployed_sha256": "ae24483da7c7b0f367973382501d6f9dbec4fe012c8fbdb64a87b31c5e353bd5",
+      "matches": true
+    },
+    {
+      "path": "demo-messages.mjs",
+      "source_sha256": "c544271ef01ca3c454f4d9914763ffffbd78375892e05e292c7f7905c353780e",
+      "deployed_sha256": "c544271ef01ca3c454f4d9914763ffffbd78375892e05e292c7f7905c353780e",
+      "matches": true
+    }
+  ]
+}

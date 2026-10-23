@@ -1,0 +1,20 @@
+Cloning into 'C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.validation\github-install-0dc87720\checkout'...
+warning: refs/tags/v0.7.0 5fd5c7857f233162328605eec5a192b8a6cc2dd5 is not a commit!
+Note: switching to 'c63fbfde302924d03a5faa21f0f9059608e1064a'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+Updating files:  32% (1129/3518)Updating files:  33% (1161/3518)Updating files:  34% (1197/3518)Updating files:  35% (1232/3518)Updating files:  36% (1267/3518)Updating files:  37% (1302/3518)Updating files:  38% (1337/3518)Updating files:  39% (1373/3518)Updating files:  40% (1408/3518)Updating files:  41% (1443/3518)Updating files:  42% (1478/3518)Updating files:  43% (1513/3518)Updating files:  44% (1548/3518)Updating files:  45% (1584/3518)Updating files:  46% (1619/3518)Updating files:  47% (1654/3518)Updating files:  48% (1689/3518)Updating files:  49% (1724/3518)Updating files:  50% (1759/3518)Updating files:  51% (1795/3518)Updating files:  52% (1830/3518)Updating files:  53% (1865/3518)Updating files:  54% (1900/3518)Updating files:  55% (1935/3518)Updating files:  56% (1971/3518)Updating files:  57% (2006/3518)Updating files:  58% (2041/3518)Updating files:  59% (2076/3518)Updating files:  60% (2111/3518)Updating files:  61% (2146/3518)Updating files:  61% (2179/3518)Updating files:  62% (2182/3518)Updating files:  63% (2217/3518)Updating files:  64% (2252/3518)Updating files:  65% (2287/3518)Updating files:  66% (2322/3518)Updating files:  67% (2358/3518)Updating files:  68% (2393/3518)Updating files:  69% (2428/3518)Updating files:  70% (2463/3518)Updating files:  71% (2498/3518)Updating files:  72% (2533/3518)Updating files:  73% (2569/3518)Updating files:  74% (2604/3518)Updating files:  75% (2639/3518)Updating files:  76% (2674/3518)Updating files:  77% (2709/3518)Updating files:  78% (2745/3518)Updating files:  79% (2780/3518)Updating files:  80% (2815/3518)Updating files:  81% (2850/3518)Updating files:  82% (2885/3518)Updating files:  83% (2920/3518)Updating files:  84% (2956/3518)Updating files:  85% (2991/3518)Updating files:  86% (3026/3518)Updating files:  87% (3061/3518)Updating files:  88% (3096/3518)Updating files:  89% (3132/3518)Updating files:  90% (3167/3518)Updating files:  91% (3202/3518)Updating files:  92% (3237/3518)Updating files:  93% (3272/3518)Updating files:  93% (3294/3518)Updating files:  94% (3307/3518)Updating files:  95% (3343/3518)Updating files:  96% (3378/3518)Updating files:  97% (3413/3518)Updating files:  98% (3448/3518)Updating files:  99% (3483/3518)Updating files: 100% (3518/3518)Updating files: 100% (3518/3518), done.

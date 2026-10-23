@@ -1,0 +1,55 @@
+{
+  "checked_at": "2026-10-23T22:54:54.349658+00:00",
+  "tag": "v0.7.0",
+  "commit": "c63fbfde302924d03a5faa21f0f9059608e1064a",
+  "release_url": "https://github.com/li-bruce/SoftwareStatusObserverSkill/releases/tag/v0.7.0",
+  "published_at": "2026-10-23T22:54:39Z",
+  "draft": false,
+  "prerelease": false,
+  "release_notes_match": true,
+  "assets": [
+    {
+      "name": "team-publishing-final-runtime-source-and-evidence.zip",
+      "size": 12935164,
+      "sha256": "f77d84c6619168678dec07c87d73778ee4088a72d054f459887d7dff45ab0632",
+      "url": "https://github.com/li-bruce/SoftwareStatusObserverSkill/releases/download/v0.7.0/team-publishing-final-runtime-source-and-evidence.zip",
+      "verification": "GitHub upload SHA-256 digest"
+    },
+    {
+      "name": "team-publishing-runtime-1bfeb39-checkpoint.zip",
+      "size": 11455182,
+      "sha256": "b50f73a2992c8509e97a63e5792be7099d7c484538aff287b81ee29f04ef7279",
+      "url": "https://github.com/li-bruce/SoftwareStatusObserverSkill/releases/download/v0.7.0/team-publishing-runtime-1bfeb39-checkpoint.zip",
+      "verification": "GitHub upload SHA-256 digest"
+    },
+    {
+      "name": "team-publishing-runtime-9134c61-source-and-evidence.zip",
+      "size": 7599540,
+      "sha256": "927235cddb5484d03d38af75803861eb3146c9f1308ff7937120e857645e25f6",
+      "url": "https://github.com/li-bruce/SoftwareStatusObserverSkill/releases/download/v0.7.0/team-publishing-runtime-9134c61-source-and-evidence.zip",
+      "verification": "GitHub upload SHA-256 digest"
+    },
+    {
+      "name": "team-publishing-runtime-e8e922-checkpoint.zip",
+      "size": 9140150,
+      "sha256": "100d0c16d1f6a822da7c3ea6cb2bf2ac7e1d4e4153b64790feeee9a348845fc5",
+      "url": "https://github.com/li-bruce/SoftwareStatusObserverSkill/releases/download/v0.7.0/team-publishing-runtime-e8e922-checkpoint.zip",
+      "verification": "GitHub upload SHA-256 digest"
+    },
+    {
+      "name": "team-publishing-v1-source-and-evidence.zip",
+      "size": 4161844,
+      "sha256": "9db5c3ea2041134d8d3e5e1b1ad47350d9c88d13b6d2d3dabc15061b1070941c",
+      "url": "https://github.com/li-bruce/SoftwareStatusObserverSkill/releases/download/v0.7.0/team-publishing-v1-source-and-evidence.zip",
+      "verification": "GitHub upload SHA-256 digest"
+    },
+    {
+      "name": "team-publishing-v2-source-and-evidence.zip",
+      "size": 6608007,
+      "sha256": "b7c54752f8a08ca51f1d234905788facf1ea562a160dd7230bf9c681319fab91",
+      "url": "https://github.com/li-bruce/SoftwareStatusObserverSkill/releases/download/v0.7.0/team-publishing-v2-source-and-evidence.zip",
+      "verification": "GitHub upload SHA-256 digest"
+    }
+  ],
+  "passed": true
+}
