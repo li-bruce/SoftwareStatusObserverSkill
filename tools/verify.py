@@ -35,6 +35,7 @@ def main():
     run(ROOT, 'tests/test_focus_bundle.py')
     run(ROOT, 'tools/test_stategraph_module.py')
     run(ROOT, 'tools/test_recording.py')
+    run(ROOT, 'tests/test_recording_retention.py')
     run(ROOT, 'tools/test_refactor.py')
     run(ROOT, 'tools/test_implementation_coverage.py')
     run(ROOT, 'tools/test_observer_noise.py')

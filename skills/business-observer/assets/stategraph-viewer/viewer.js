@@ -5,7 +5,7 @@ import { createConversationFocus, discussionContext } from "./conversation.js";
 import { projectStorage } from "./preferences.js";
 import { createPoller } from "./polling.js";
 import { migrateNodeIds } from "./layout.js";
-import { projectLayoutKey, graphVersion, recordingMatches } from "./view-lifecycle.js";
+import { projectLayoutKey, graphVersion, recordingMatches, connectionStatus } from "./view-lifecycle.js";
 import { databaseWarning, dataRelationEvidence } from "./data-layer.js";
 import { CodeLayer, withCodeGraph, codeTypes, codeRelations, codeSummary } from "./code-layer.js";
 const codeLayer = new CodeLayer();
@@ -1412,18 +1412,9 @@ async function poll() {
       $("case").dataset.options = JSON.stringify([cases, version]);
       if (cases.includes(caseChoice)) $("case").value = caseChoice;
     }
-    const gaps =
-      next.health.errors +
-      next.health.dropped +
-      (next.health.parse_errors || 0) +
-      (next.health.truncated || 0);
     $("connection").textContent = contextLost
       ? boTranslate("Graphics connection lost; recovering")
-      : gaps
-        ? boTranslate("Missing ") + gaps + boTranslate(" records")
-        : next.historical
-          ? boTranslate("Saved run")
-          : boTranslate("Connected");
+      : connectionStatus(next, boTranslate);
     const stale = next.binding_status.status !== "current";
     $("binding").textContent = stale
       ? boTranslate("Application has not loaded the new code")

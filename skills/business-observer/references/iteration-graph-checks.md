@@ -21,6 +21,7 @@ add cases where a new behavior or captured field has no executed witness.
 | Shared or cross-region relations | Check both ends and direction in the full model, collapsed view, a relevant type filter and local focus. Outside dependencies remain explicit boundaries. Static links alone never count as a runtime transfer. |
 | Graph revision | Reload the actual viewer. Keep stable IDs, the selected perspective, positions, notes and filters. An already-seen discussion must not reset the view; a cleared focus stays cleared. Leave obsolete replay and remove old-version recordings from the current list. |
 | Observation wiring | Compare real effects with observation on, off and failing. Opening code, querying metadata, recording controls and layout changes must add no business events. A slow source query must not serialize event reception. |
+| Retention and recording | Cross the live-history time or count limit during a recording. Saved interval events must remain complete; normal history expiry is distinct from actual missing producer events. A deliberately skipped event must still be reported as a gap. |
 
 Use a relevant isolated negative control: remove a required probe field, change a
 captured value, omit a newly implemented feature, corrupt the source index or use

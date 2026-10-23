@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "build_id": "938a7538af337837116c092a27a3c64cc7c8afe04751e91e9c23eb9557bb36e4",
+  "build_id": "14eb2a0e6c2d5cb2b65221195496e0c2259361c87860109eebf62fc673ad5b8a",
   "files": {
     "app/__init__.py": "a829ebb4042211c3a39bf40646855698375b065069bbbd2aa61daba1d8e6a51c",
     "app/checks.py": "6eaf39d7323ba58135ca1077d0b27d8de313c8cacf9c2d7aeb72ea7741d128bd",
@@ -30,7 +30,7 @@
     "integrations/bo_view/i18n.js": "884cc013981501f4f1f031f1aee0202d84792010f136641175f34c8d4e370735",
     "integrations/bo_view/index.html": "37054555df5a21f1c6778e08595544e5da8d81cf5068649617706a6f088fc3b3",
     "integrations/bo_view/layout.js": "9a8386f568746fce699d1fd73d57231f43a04f738363b491cd4c967f9451a6ea",
-    "integrations/bo_view/messages.zh-CN.js": "17d7df15d59243c2e6582ea9786a4224804a665e07d8c7c693676b02416077de",
+    "integrations/bo_view/messages.zh-CN.js": "2009345e30cfd13e37f6fe6b8aa86791fabc82ea6c7f4ddf637b1a2a2afe0e3e",
     "integrations/bo_view/pixi.min.js": "06d9ef9823e743518793083c296d801e752db128cb1f519fbabe37e1259567ea",
     "integrations/bo_view/polling.js": "b8f451f203af824171043d715fee3b4f2e1f2973e8591cc823a9aa7fccecc152",
     "integrations/bo_view/preferences.js": "30ee119b8480348ce7380220417d118c843f73da11fe6544300b571e91a36e43",
@@ -38,9 +38,9 @@
     "integrations/bo_view/renderer.js": "f2bfcc6aea795b47fba7cc55f8dc4b9422f3c28a4cc3785c1cdeab126b4554a7",
     "integrations/bo_view/replay-steps.js": "ab5a099d9ab0e87da7eb8e2d5ef05bd0359d16088fba1cce0790f28f8d922636",
     "integrations/bo_view/runtime-frames.js": "b6b47ea192cfcbb1721827590186aa490a44b25a5dc1ce6bb854ee5703ca483c",
-    "integrations/bo_view/view-lifecycle.js": "13bed8b2b27b7fe3fae8ab38f5a465d8cae52302b5f1aa266cf076edd766ff41",
+    "integrations/bo_view/view-lifecycle.js": "29a050e10c226b48da7b6c9f84744305953fb51c7fcafb99da061196022ef1b7",
     "integrations/bo_view/viewer.css": "a6cdf50c7c82c623a7186d5589d540bed91d322f722916c279b6464440686f3a",
-    "integrations/bo_view/viewer.js": "22a9a37655e98c5968c7c6ea68f0ef37fbd466d162a94ef5cb62025ca9ed28b4",
+    "integrations/bo_view/viewer.js": "a1a701d12fb6bd10dc6c19f807e01732986ff05028650f169c368e13535270d3",
     "main.py": "3c840ec469108183cb8c9bdd4482ebde8e89c70a1f2f0887ff0b6d0de39307cb",
     "observer_generated/runtime/bo_design.py": "d50b85b8db925d742551b2341ab7508843c47e401aeb28f955c188120911f8dc",
     "observer_generated/runtime/bo_stategraph.py": "d704fc786b49337ca75d06b8a8ca7b1d6471af9c08c3d02d571b434f664e23b2",

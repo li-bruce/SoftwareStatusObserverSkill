@@ -40,3 +40,18 @@ export function graphVersion(view) {
 export function recordingMatches(saved, view) {
   return !!saved?.context && graphVersion(saved.context) === graphVersion(view);
 }
+
+/** Distinguish lost capture from normal expiry of the bounded live history. */
+export function connectionStatus(view, translate) {
+  const health = view.health || {};
+  const missing = ["errors", "dropped", "parse_errors", "truncated"].reduce(
+    (total, key) => total + (health[key] || 0),
+    0,
+  );
+  const status = missing
+    ? translate("Missing ") + missing + translate(" records")
+    : translate(view.historical ? "Saved run" : "Connected");
+  return !view.historical && health.evicted_events
+    ? status + " · " + translate("{0} earlier events expired", health.evicted_events)
+    : status;
+}

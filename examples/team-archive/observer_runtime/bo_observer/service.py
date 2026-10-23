@@ -319,7 +319,9 @@ class GraphSession:
                 },
                 "health": {
                     "errors": self.errors + health["log_errors"],
-                    "dropped": self.gaps + health["evicted_events"],
+                    # Live history expiry is reported separately. Recording listeners
+                    # already received those events, so expiry is not a capture gap.
+                    "dropped": self.gaps,
                     "run_id": self.stream_id,
                     "attempted": self.sequence,
                     "written": self.sequence,

@@ -76,7 +76,7 @@
     "bo_stategraph/__init__.py": "56f694a30fa9e2aa6319931b24cb35c52c82ea30b8b4b6f4029df0f838e63e6e",
     "bo_stategraph/bo_contracts.py": "094f5feff89893ee5932eb6a4b6ad4aafc08c7e462d0b9b00c31d50702e6af29",
     "bo_stategraph/execution_contract.py": "0c966fb3549c0219c6a663ddf41c847e71ebf14216b02b725d2465e4bf0c4839",
-    "bo_stategraph/runtime-version.json": "8e3037bae8c87f662680a8174f6597bf8bb0270dca31ce053e0800f4196ae343",
+    "bo_stategraph/runtime-version.json": "7053d2c94f88e1f221cb220205ea2be8bcb3932aa5af03f30b9ede24fcadc00e",
     "observer_runtime/LICENSE.txt": "41f4bfe9aa8790612dd555d71a9e95fbf12c9f0e84bc6ce232a0aae3af3e2ba3",
     "observer_runtime/__init__.py": "c4cc8d894a9cb6e2da5510317e540d22b50b75b2a187f86675d20e86d967f9bf",
     "observer_runtime/architecture_guard.py": "b1966fd9fa189df104894e6cf91f1e28a12087d6d525bd5cb8db3c46af9e54b9",
@@ -138,7 +138,7 @@
     "observer_runtime/bo_observer/schemas/project.schema.json": "9d7424aab589bc426334c993c4b5f7aaf654a174886a8087d909e979fa2b55c2",
     "observer_runtime/bo_observer/schemas/snapshot.schema.json": "0bd0236ca71516791aff964ddeba428387f21d878fee42eb2092c230ab4c208e",
     "observer_runtime/bo_observer/schemas/source.schema.json": "beea2f9be4fa2f5884d92387de0403d47df1c08497a522d36e3b466fbbabafbf",
-    "observer_runtime/bo_observer/service.py": "89ae59c1545a981c8981339133c4d1604339ecf7f95b6c0778eaf5996620b7e8",
+    "observer_runtime/bo_observer/service.py": "ba5126b457806281dc00445868ed79bdc8b4df597d5eec56b5a4c4c29b51d1d1",
     "observer_runtime/bo_observer/session_lifecycle.py": "325d5d841ffc68f0a5d305d25e6498fa6c5bec1bb14a9f7aa2faa3206e566380",
     "observer_runtime/bo_observer/sources.py": "aafad77385e1ebc2ec681703b51306b173182af866f05440c30f494d4fac0d2f",
     "observer_runtime/bo_observer/web/__init__.py": "e30010b1ba3b74b5561b63146649ccaa753c929169ceacd13fca74f2062ae84b",
@@ -955,6 +955,13 @@
       "reason": "Persist discussion identity so a page reload preserves the saved analysis view, including migration of older preferences. Application logic, probes and independent business assertions are unchanged.",
       "changed": [
         "bo_stategraph/runtime-version.json"
+      ]
+    },
+    {
+      "reason": "Separate normal live-history eviction from actual producer gaps. Streaming recordings retain their events across live retention; viewer health labels report expiration separately. Application logic and independent tests are unchanged.",
+      "changed": [
+        "bo_stategraph/runtime-version.json",
+        "observer_runtime/bo_observer/service.py"
       ]
     }
   ],

@@ -122,6 +122,11 @@ try {
   await page.waitForFunction(()=>document.getElementById("analysis-view").value==="code");
   await page.waitForSelector('#semantic [data-node-type="code-file"]',{state:"attached"});
   checkpoints.liveCodeRestored = true;
+  // The new collector reads a small live-history limit. Recording listeners
+  // must still receive every event from the next real SQLite operation.
+  const retentionPath=path.join(projectPath,"bo_stategraph/config/retention.json");
+  await mkdir(path.dirname(retentionPath),{recursive:true});
+  await writeFile(retentionPath,JSON.stringify({memory_events:2,memory_seconds:1800,log_bytes:8388608,log_backups:2}));
   await api("/demo/upgrade",{});
   await page.waitForFunction(()=>document.getElementById("record-list").options.length===1);
   await page.selectOption("#analysis-view","code");
@@ -138,6 +143,22 @@ try {
   await shot("06-updated-code-zh");
   checkpoints.final=await api("/api/code/graph");
   assert.equal(checkpoints.final.status,"current");
+  await api("/api/recordings/start",{label:"Real SQLite operations across live retention"});
+  await api("/demo/run",{});
+  checkpoints.retentionHealth=(await api("/api/view")).health;
+  assert.ok(checkpoints.retentionHealth.evicted_events>0);
+  assert.equal(checkpoints.retentionHealth.dropped,0);
+  await page.waitForFunction(()=>document.getElementById("connection").textContent.includes("历史事件已过期"));
+  assert.ok(!(await page.locator("#connection").textContent()).includes("缺失"));
+  await shot("08-retention-zh");
+  await page.selectOption("#language","en");
+  await page.waitForFunction(()=>document.getElementById("connection").textContent.includes("earlier events expired"));
+  await shot("09-retention-en");
+  const retainedStop=await api("/api/recordings/stop",{});
+  const retainedRecording=await api("/api/recordings/"+retainedStop.id);
+  assert.equal(retainedRecording.events.length,retainedRecording.end_seq-retainedRecording.start_seq);
+  assert.deepEqual(retainedRecording.gaps,[]);
+  checkpoints.retentionRecording={events:retainedRecording.events.length,gaps:retainedRecording.gaps,start_seq:retainedRecording.start_seq,end_seq:retainedRecording.end_seq};
   assert.deepEqual(errors,[]);
   await writeFile(path.join(output,"browser-result.json"),JSON.stringify({passed:true,errors,checkpoints},null,2));
   console.log("PASS: lazy/focused/full code views, relationships, source, live edits/errors/deletion, persistence, exclusion, real recording and bilingual reload.");

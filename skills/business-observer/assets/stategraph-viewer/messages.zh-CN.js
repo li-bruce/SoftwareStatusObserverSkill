@@ -271,6 +271,7 @@ export default {
   "Current operation": "当前操作",
   "Missing ": "有 ",
   " records": " 条记录缺失",
+  "{0} earlier events expired": "{0} 条历史事件已过期",
   "Saved run": "保存的运行",
   "Connected": "已连接",
   "Application has not loaded the new code": "程序尚未加载新代码",
