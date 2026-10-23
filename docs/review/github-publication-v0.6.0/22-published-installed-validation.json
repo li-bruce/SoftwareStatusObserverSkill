@@ -1,0 +1,7 @@
+{
+  "valid": true,
+  "errors": [],
+  "build_id": "d42d55dcb0aa1eff1549fb0f6707337aee8405cf6117f90e9c07c8c080f849a0",
+  "mode": "drive",
+  "scope": "declaration, source inventory and implementation mapping; runtime acceptance is separate"
+}

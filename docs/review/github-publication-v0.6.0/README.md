@@ -6,7 +6,8 @@ This record supplements the [independent gallery trials](../english-gallery/READ
 
 - The [GitHub Pages introduction](https://li-bruce.github.io/SoftwareStatusObserverSkill/) is live. The account's existing custom domain redirects it to `liblog.vip/SoftwareStatusObserverSkill/`; no domain setting was changed.
 - English/Chinese switching, retained language preference, mixed graph filters and the matching documentation link were tested on the deployed page. The product animation is illustrative, not connected to a user's application.
-- Clean-checkout fixes and their full cross-platform retest are recorded below. Final release and installation receipts are added only after the corresponding operations succeed.
+- [All four GitHub checks passed](23-ci-matrix-pass.json): Windows/Linux with Python 3.11/3.13 and Node 22. [Run 39952910697](https://github.com/li-bruce/SoftwareStatusObserverSkill/actions/runs/39952910697) validates code commit `4659b624e6cf895c52be21ea8d0eb3d2112262c3` from clean checkouts. Subsequent publication commits add receipts and documentation only.
+- The [final local complete suite](26-local-final-suite-pass.log) also exits 0. The exact-byte [GitHub installation](21-published-github-install.json) and [installed project validation](22-published-installed-validation.json) pass.
 
 ![Published introduction in English](pages-en.png)
 ![Published introduction in Chinese](pages-zh.png)
@@ -28,10 +29,24 @@ No mapping, business, state or project assertion was removed to obtain a pass. T
 
 Numbered JSON files contain command receipts and exact identities. Raw logs preserve failures as failures. `17-example-acceptance.json` records the new delivery/archive candidates and four separate reports. Both canonical and copied command entrypoints must accept the same candidate.
 
-Installation is tested in an isolated project folder using the official Skill installer against GitHub. It does not overwrite the maintainer's globally installed Skill. File hashes are compared with the published Git tree; an installed CLI validates the real multilingual example with separately installed parser dependencies.
+Installation is tested in an isolated project folder using the official Skill installer against GitHub. It does not overwrite the maintainer's globally installed Skill. The [published installation receipt](21-published-github-install.json) verifies all 144 Skill files against commit `4659b624e6cf895c52be21ea8d0eb3d2112262c3`. The [installed CLI result](22-published-installed-validation.json) validates the actual multilingual declaration, source inventory and mapping after independently installing parser dependencies. It uses the existing Python environment; this is not a fresh Python installation. Earlier installation receipts identify their own earlier commits and remain unchanged.
+
+The [staged-input comparison](20-staged-input-byte-check.json) covers 404 accepted project inputs and shipped adapter files, with no byte differences. [Linux output](24-linux-full-suite-pass.log) and [Windows output](25-windows-full-suite-pass.log) include the real fragmented-input regression and complete repository verification. Original timestamped logs retain their whitespace; formatting checks apply to authored changes without rewriting these records.
+
+## Commit record
+
+| Commit | Purpose |
+|---|---|
+| `5a51ae9` | Publish the native/shared-service refactor, English maintenance, bilingual introduction and independent trials. |
+| `1b1dc81` | Preserve shared runtime package bytes in clean Git checkouts. |
+| `bafa95e` | Validate portable historical references and update the example's Vue/Vite dependencies. |
+| `5ba0aa0` | Make clean-checkout regression fixtures self-contained and retain underlying command diagnostics. |
+| `4659b62` | Fix fragmented parser input, add its regression and freeze new portable example acceptance with preserved evidence. |
 
 ## 中文说明
 
 本目录补充 GitHub 发布验收，保留云端失败、具体修复和复测记录。原有试用对话与历史证据不改写；映射、状态约束、业务规则和项目测试仍分别验收。
+
+最终 Windows／Linux 与 Python 3.11／3.13 四组云端完整检查均通过，本地完整复测也通过。从 GitHub 新下载的 144 个 Skill 文件与发布提交完全一致，使用该副本校验实际多语言项目成功。
 
 介绍页已发布，支持中英文切换并记住选择。GitHub Pages 会沿用账号已有域名并自动跳转。真实测试请按 [版本说明](../../releases/v0.6.0.md) 安装完整 Skill，在目标项目新建对话使用 `$business-observer`。
