@@ -84,7 +84,7 @@ def serve(port=8797):
             histories={p.stem:p for p in (ROOT/'history').glob('*.json')}
             try:
                 if not bo_web.allowed(request.path):return self.send({'error':"Debug Web is disabled",'code':'bo_web_disabled'},404)
-                bo_value=bo_web.get(request.path)
+                bo_value=bo_web.get(self.path)
                 if bo_value is not None:return self.send(bo_value)
                 if request.path=='/api/app-state':return self.send(session.store.snapshot())
                 if request.path=='/api/preferences':return self.send(session.preferences.read())

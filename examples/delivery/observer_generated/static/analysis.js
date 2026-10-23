@@ -2,6 +2,7 @@ import { t as boTranslate } from "./i18n.js";
 // View selection is a projection. It cannot add permission, call or runtime facts.
 import { viewTypes, relationType, stateNodeId } from "./graph-core.js";
 import { dataRoles, dataRelations, migrateDataFilters } from "./data-layer.js";
+import { codeTypes, codeRelations, migrateCodeFilters } from "./code-layer.js";
 const types = [
   "business",
   "function",
@@ -12,6 +13,7 @@ const types = [
   "effect",
   "wait",
   ...dataRoles,
+  ...codeTypes,
 ];
 const edges = [
   "call",
@@ -24,6 +26,7 @@ const edges = [
   "shared",
   "other",
   ...dataRelations,
+  ...codeRelations,
 ];
 export const presets = [
   {
@@ -38,6 +41,14 @@ export const presets = [
     label: boTranslate("Business flow"),
     nodes: ["business"],
     edges: ["flow", "guard", "data", "join"],
+  },
+  {
+    id: "code",
+    label: boTranslate("Code structure"),
+    hierarchical: true,
+    nodes: codeTypes,
+    edges: codeRelations,
+    codeTypes: 1,
   },
   { id: "states", label: boTranslate("State machine"), nodes: ["state"], edges: ["transition"] },
   {
@@ -101,13 +112,14 @@ export const presets = [
   },
 ];
 export function cleanProfile(value) {
-  value = migrateDataFilters(value);
+  value = migrateCodeFilters(migrateDataFilters(value));
   const strings = (values, allowed) =>
     Array.isArray(values)
       ? [...new Set(values.filter((x) => allowed.includes(x)))]
       : allowed.slice();
   return {
     dataTypes: 1,
+    codeTypes: 1,
     nodes: strings(value?.nodes, types),
     edges: strings(value?.edges, edges),
     regions: strings(value?.regions, types),
@@ -125,7 +137,7 @@ export function profileFor(id, custom = []) {
   const preset = presets.find((p) => p.id === id);
   return cleanProfile(
     preset
-      ? { ...preset, dataTypes: 1 }
+      ? { ...preset, dataTypes: 1, codeTypes: 1 }
       : custom.find((p) => p.id === id) || { ...presets[0], dataTypes: 1 },
   );
 }

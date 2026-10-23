@@ -1,0 +1,58 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Package references and 102 copied runtime modules match.
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "valid": false,
+  "status": "needs_sync",
+  "errors": [
+    {
+      "excluded_application_entrypoint": "tests/test_graph_layout.mjs",
+      "declarations": [
+        {
+          "path": "tests/test_graph_layout.mjs",
+          "error": "JavaScript parser unavailable: run npm ci --prefix \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.validation\\code-vis-export\\examples\\delivery\\observer_generated\\runtime\\bo_observer\\adapters\\javascript\". node:internal/modules/cjs/loader:1207\n  const err = new Error(message);\n              ^\n\nError: Cannot find module 'typescript'\nRequire stack:\n- C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.validation\\code-vis-export\\skills\\business-observer\\scripts\\bo_observer\\adapters\\javascript\\package.json\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)\n    at Module._load (node:internal/modules/cjs/loader:1038:27)\n    at Module.require (node:internal/modules/cjs/loader:1289:19)\n    at require (node:internal/modules/helpers:182:18)\n    at file:///C:/Users/Lvi_P/Documents/Work/CF/%E5%B9%B3%E5%8F%B0%E8%BD%AF%E8%91%97/SoftwareStatusObserverSkill/.validation/code-vis-export/examples/delivery/observer_generated/runtime/bo_observer/adapters/javascript/scan.mjs:11:12\n    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)\n    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: [\n    'C:\\\\Users\\\\Lvi_P\\\\Documents\\\\Work\\\\CF\\\\平台软著\\\\SoftwareStatusObserverSkill\\\\.validation\\\\code-vis-export\\\\skills\\\\business-observer\\\\scripts\\\\bo_observer\\\\adapters\\\\javascript\\\\package.json'\n  ]\n}\n\nNode.js v20.19.6\n"
+        }
+      ]
+    },
+    {
+      "excluded_application_entrypoint": "tests/test_graph_projection.mjs",
+      "declarations": [
+        {
+          "path": "tests/test_graph_projection.mjs",
+
+          "error": "JavaScript parser unavailable: run npm ci --prefix \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.validation\\code-vis-export\\examples\\delivery\\observer_generated\\runtime\\bo_observer\\adapters\\javascript\". node:internal/modules/cjs/loader:1207\n  const err = new Error(message);\n              ^\n\nError: Cannot find module 'typescript'\nRequire stack:\n- C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.validation\\code-vis-export\\skills\\business-observer\\scripts\\bo_observer\\adapters\\javascript\\package.json\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)\n    at Module._load (node:internal/modules/cjs/loader:1038:27)\n    at Module.require (node:internal/modules/cjs/loader:1289:19)\n    at require (node:internal/modules/helpers:182:18)\n    at file:///C:/Users/Lvi_P/Documents/Work/CF/%E5%B9%B3%E5%8F%B0%E8%BD%AF%E8%91%97/SoftwareStatusObserverSkill/.validation/code-vis-export/examples/delivery/observer_generated/runtime/bo_observer/adapters/javascript/scan.mjs:11:12\n    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)\n    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: [\n    'C:\\\\Users\\\\Lvi_P\\\\Documents\\\\Work\\\\CF\\\\平台软著\\\\SoftwareStatusObserverSkill\\\\.validation\\\\code-vis-export\\\\skills\\\\business-observer\\\\scripts\\\\bo_observer\\\\adapters\\\\javascript\\\\package.json'\n  ]\n}\n\nNode.js v20.19.6\n"
+        }
+      ]
+    },
+    {
+      "excluded_application_entrypoint": "tests/test_recorded_views.mjs",
+      "declarations": [
+        {
+          "path": "tests/test_recorded_views.mjs",
+          "error": "JavaScript parser unavailable: run npm ci --prefix \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.validation\\code-vis-export\\examples\\delivery\\observer_generated\\runtime\\bo_observer\\adapters\\javascript\". node:internal/modules/cjs/loader:1207\n  const err = new Error(message);\n              ^\n\nError: Cannot find module 'typescript'\nRequire stack:\n- C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.validation\\code-vis-export\\skills\\business-observer\\scripts\\bo_observer\\adapters\\javascript\\package.json\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)\n    at Module._load (node:internal/modules/cjs/loader:1038:27)\n    at Module.require (node:internal/modules/cjs/loader:1289:19)\n    at require (node:internal/modules/helpers:182:18)\n    at file:///C:/Users/Lvi_P/Documents/Work/CF/%E5%B9%B3%E5%8F%B0%E8%BD%AF%E8%91%97/SoftwareStatusObserverSkill/.validation/code-vis-export/examples/delivery/observer_generated/runtime/bo_observer/adapters/javascript/scan.mjs:11:12\n    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)\n    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: [\n    'C:\\\\Users\\\\Lvi_P\\\\Documents\\\\Work\\\\CF\\\\平台软著\\\\SoftwareStatusObserverSkill\\\\.validation\\\\code-vis-export\\\\skills\\\\business-observer\\\\scripts\\\\bo_observer\\\\adapters\\\\javascript\\\\package.json'\n  ]\n}\n\nNode.js v20.19.6\n"
+        }
+      ]
+    }
+  ],
+  "candidate_id": "e705a0a913281359a6d2e9632fb554f7625264396e7889a72e14647abbbfe069"
+}
+
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.validation\code-vis-export\tools\demo.py", line 48, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.validation\code-vis-export\tools\demo.py", line 39, in main
+    prepare()
+    ~~~~~~~^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.validation\code-vis-export\tools\demo.py", line 29, in prepare
+    run('tooling/dev.py', 'check')
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.validation\code-vis-export\tools\demo.py", line 14, in run
+    subprocess.run([sys.executable, '-B', '-X', 'utf8', *map(str, args)], cwd=EXAMPLE, check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\subprocess.py", line 577, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe', '-B', '-X', 'utf8', 'tooling/dev.py', 'check']' returned non-zero exit status 1.

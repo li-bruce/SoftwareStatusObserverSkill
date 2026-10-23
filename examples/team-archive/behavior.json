@@ -10556,6 +10556,10 @@
       "static/app.js::bo_record": {
         "category": "observer",
         "reason": "有 bo_ 标识的可选观测端口；故障隔离，不执行业务操作"
+      },
+      "integrations/bo_observer.py::BOObserver.trace.broken": {
+        "category": "observer",
+        "reason": "Deliberate exception callback inside the fault-mode observer sink. It tests failure isolation and does not execute application behavior. The conditional declaration is now visible to the source scanner."
       }
     }
   },
@@ -10568,12 +10572,12 @@
       "archive_app/storage.py": "c9821db64c5028350bd9fe580e71e645a9d9ace409a91a8a1367a8a4a58a6aac",
       "bo_stategraph/workflow.py": "77365b6941422f7c7d6e2fb9627b61810935eabb408fbcfa82826885fec8e758",
       "integrations/bo_observer.py": "ae4652e2052855231d440039092ea5e9cd31660cca1cfac1d7993c4be67a115b",
-      "integrations/bo_server.py": "62a3ae13bd5c12ded3202172dc3ee34eccfe2ad6a729720a0796c4c6a7c9b2e1",
+      "integrations/bo_server.py": "2ddd09716c17564b7ffdb5526d988f47db48fffc8492e2e1efab7f900b70d695",
       "run.py": "e8969372f443467b2de250df7a2adbd8b748a90dae58e98d647f9c44417695c0",
       "static/app.js": "cf17b1372b227109904dac1369a2b13eacdd3d85f76171fa9bdd5b6ea58baf82"
     },
     "resolved_calls": 198,
-    "unresolved_calls": 578,
+    "unresolved_calls": 579,
     "depth": 1,
     "limits": [
       "Static call candidates are not runtime calls or proven value flow.",

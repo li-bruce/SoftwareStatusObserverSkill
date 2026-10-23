@@ -68,6 +68,18 @@ The complete model, the selected view, and the captured evidence are separate va
 
 Start at [data/contract.py](../skills/business-observer/scripts/bo_observer/data/contract.py) for strict JSON and identity, then [catalog.py](../skills/business-observer/scripts/bo_observer/data/catalog.py) for native metadata, [projection.py](../skills/business-observer/scripts/bo_observer/data/projection.py) for graph nodes and relations, and [sync.py](../skills/business-observer/scripts/bo_observer/data/sync.py) for refresh and independent verification. [runtime.py](../skills/business-observer/scripts/bo_observer/data/runtime.py) and [bo_data.mjs](../skills/business-observer/scripts/bo_observer/adapters/javascript/bo_data.mjs) observe native calls. [watcher.py](../skills/business-observer/scripts/bo_observer/data/watcher.py) replaces the validated Web build; [data-layer.js](../skills/business-observer/assets/stategraph-viewer/data-layer.js) renders its provenance and values. These modules share the existing event, recording and preference services.
 
+## Optional source structure
+
+[code_graph/index.py](../skills/business-observer/scripts/bo_observer/code_graph/index.py)
+turns parser facts into stable code nodes and typed relations. Its neighboring
+[query.py](../skills/business-observer/scripts/bo_observer/code_graph/query.py)
+extracts bounded regions and exact boundary endpoints.
+[service.py](../skills/business-observer/scripts/bo_observer/code_graph/service.py)
+owns source refresh, revision-bound file access and independent export checks.
+[code-layer.js](../skills/business-observer/assets/stategraph-viewer/code-layer.js)
+loads this optional projection without changing the authored model or claiming
+runtime execution. Read [the design](development/code-vis.md) for scope and limits.
+
 ## Comment and formatting conventions
 
 - Describe purpose at public function boundaries; explain ordering, ownership, and failure handling where they are less obvious.

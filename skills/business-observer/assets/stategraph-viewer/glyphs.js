@@ -1,6 +1,11 @@
 import { t as boTranslate } from "./i18n.js";
 // One geometry source for WebGL nodes and the SVG legend.
 export const meanings = {
+  "code-file": boTranslate("Indexed source file"),
+  "code-class": boTranslate("Declared class and its methods"),
+  "code-function": boTranslate("Function found in source"),
+  "code-parameter": boTranslate("Declared parameter and type"),
+  "code-unresolved": boTranslate("External or dynamically resolved reference"),
   business: boTranslate("Business operation"),
   function: boTranslate("Function or method"),
   state: boTranslate("State in the state machine"),
@@ -16,6 +21,11 @@ export const meanings = {
   transform: boTranslate("Application processing of data"),
 };
 export function glyphShapes(type) {
+  if (type === "code-file")
+    return [{ kind: "polygon", points: [-24, -28, 10, -28, 25, -12, 25, 28, -24, 28] }];
+  if (type === "code-class") return [{ kind: "rect", x: -27, y: -26, w: 54, h: 52, r: 5 }];
+  if (type === "code-parameter") return glyphShapes("data");
+  if (type === "code-unresolved") return glyphShapes("decision");
   if (type === "store")
     return [
       { kind: "rect", x: -28, y: -20, w: 56, h: 42, r: 8 },

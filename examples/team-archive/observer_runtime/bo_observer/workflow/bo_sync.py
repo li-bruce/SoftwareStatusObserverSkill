@@ -188,6 +188,12 @@ def maintenance_task(root, cfg, previous=None):
     from ..data.sync import synchronize
 
     database = synchronize(root, model_path=cfg.get("model", "bo_stategraph/project.json"))
+    # The optional code index follows edits once the developer has enabled it.
+    # Off means no extra index construction during ordinary maintenance.
+    if (Path(root) / ".stategraph/code-graph.json").is_file():
+        from ..code_graph.service import CodeGraph
+
+        CodeGraph(root).refresh()
     current = source_inventory(root, cfg)
     old = (previous or {}).get("files", {})
     changed = sorted(

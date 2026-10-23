@@ -1,6 +1,6 @@
 {
   "schema": "bo-maintenance/v1",
-  "source_id": "ed31f02d84eb81461d09de551e73af791af3ec58f791579ad321a63a31974b9e",
+  "source_id": "ad0ebf2da142952914af788ce4b19fa1fb869b272614dec1dafa408f474918f1",
   "inventory": {
     "files": {
       "app/__init__.py": "a829ebb4042211c3a39bf40646855698375b065069bbbd2aa61daba1d8e6a51c",
@@ -22,6 +22,7 @@
       "integrations/bo_scenarios.py": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
       "integrations/bo_server.py": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
       "integrations/bo_view/analysis.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
+      "integrations/bo_view/code-layer.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
       "integrations/bo_view/conversation.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
       "integrations/bo_view/data-layer.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
       "integrations/bo_view/elk-worker.min.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
@@ -45,6 +46,7 @@
       "observer_generated/runtime/architecture_guard.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/behavior_model.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/bo.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_code.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/bo_contracts.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/bo_db.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/bo_design.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
@@ -56,6 +58,10 @@
       "observer_generated/runtime/bo_observer/adapters/python/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/bo_observer/adapters/python/bo_executor.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/bo_observer/adapters/python/bo_probe.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/code_graph/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/code_graph/index.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/code_graph/query.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/code_graph/service.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/bo_observer/data/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/bo_observer/data/acceptance.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/bo_observer/data/catalog.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
@@ -131,6 +137,7 @@
       "observer_generated/runtime/whitebox_contract.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/worknet_contract.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/static/analysis.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "observer_generated/static/code-layer.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
       "observer_generated/static/conversation.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
       "observer_generated/static/data-layer.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
       "observer_generated/static/elk-worker.min.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
@@ -1444,5 +1451,5 @@
     "bo_stategraph/workflow.py::ActivityState",
     "bo_stategraph/workflow.py::Phase"
   ],
-  "candidate_id": "501a6ec654a0b8476b70200fee75e9ffcd87d1a1a58237d0971693e93146f748"
+  "candidate_id": "e705a0a913281359a6d2e9632fb554f7625264396e7889a72e14647abbbfe069"
 }
