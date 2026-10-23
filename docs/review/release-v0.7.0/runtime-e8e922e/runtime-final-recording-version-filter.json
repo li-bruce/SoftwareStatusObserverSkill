@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "current_build": "5fb8a3e5aa68a759c49bdd3ef2c719b64a575392f5504fa2d152d3370faac737",
+  "listed": [
+    {
+      "id": "761bbb83088b487189ba71ac5f8ed577",
+      "build_id": "5fb8a3e5aa68a759c49bdd3ef2c719b64a575392f5504fa2d152d3370faac737",
+      "events": 307
+    },
+    {
+      "id": "bc08efcc39574643a079ce888850952f",
+      "build_id": "5fb8a3e5aa68a759c49bdd3ef2c719b64a575392f5504fa2d152d3370faac737",
+      "events": 919
+    },
+    {
+      "id": "81d396a92a8e4c44a61fd145c38cb660",
+      "build_id": "5fb8a3e5aa68a759c49bdd3ef2c719b64a575392f5504fa2d152d3370faac737",
+      "events": 922
+    }
+  ],
+  "semantics": "Public-module-only upgrades retain the same application build. Same-build v2 recordings remain valid and visible; old application builds are filtered without deleting their frozen evidence."
+}

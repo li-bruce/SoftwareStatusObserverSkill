@@ -1,6 +1,6 @@
-import { DemoSession } from "./demo-model.mjs?rev=readability-2";
-import { messages } from "./demo-messages.mjs?rev=readability-2";
-import { initialize, t, locale, onLanguageChange } from "./site-ui.mjs?rev=readability-2";
+import { DemoSession } from "./demo-model.mjs?rev=0.7.0";
+import { messages } from "./demo-messages.mjs?rev=0.7.0";
+import { initialize, t, locale, onLanguageChange } from "./site-ui.mjs?rev=0.7.0";
 
 const session = new DemoSession();
 const stages = ["conversation", "inspect", "record", "iterate"];

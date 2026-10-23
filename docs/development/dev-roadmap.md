@@ -1,6 +1,6 @@
 # Development branch: graph continuity and deeper source views
 
-Status: database work is merged into `dev`; optional source neighborhoods are implemented on `code-vis` and undergoing release acceptance. API-specific relationships remain planned. See [database delivery](db-vis.md), [code structure](code-vis.md), and the [ordered release work table](code-vis-release.md).
+Status: database work and optional source neighborhoods are merged into `dev`. The release includes an independent application trial, architecture repairs and repeated acceptance. API-specific relationships remain planned. See [database delivery](db-vis.md), [code structure](code-vis.md), and the [ordered release work table](code-vis-release.md).
 
 ## Implemented in this iteration
 
@@ -15,7 +15,7 @@ Status: database work is merged into `dev`; optional source neighborhoods are im
 | Layer | Present | Remaining work |
 |---|---|---|
 | Source / AST | Independent Python and JS/TS/React/Vue inventory; optional files, classes, functions, parameters, imports, inheritance and call occurrences. Local neighborhoods, whole-code view, bounded queries and automatic refresh. | Type-only references, arbitrary variable flow, additional language adapters and more dynamic/re-export resolution. The index represents supported declarations and relationships, rather than every AST syntax node. |
-| Data / database | On `db-vis`: strict catalogs, SQLAlchemy/Mongoose exports, SQLAlchemy/PyMongo/Redis/Neo4j metadata, native Python/Node query and transformation capture, data views and automatic refresh. Real SQLite and four-server tests. | Additional database adapters, arbitrary DTO/entity mapping, automatic column lineage, and database-internal execution plans. |
+| Data / database | Strict catalogs, SQLAlchemy/Mongoose exports, SQLAlchemy/PyMongo/Redis/Neo4j metadata, native Python/Node query and transformation capture, data views and automatic refresh. Real SQLite and four-server tests. | Additional database adapters, arbitrary DTO/entity mapping, automatic column lineage, and database-internal execution plans. |
 | API | Python route decorators, JS route registrations, DOM/JSX/Vue handlers appear in source inventory and mapping checks. | Typed endpoint nodes, method/path identity, request/response contracts, client-to-endpoint and endpoint-to-handler relations. No general OpenAPI import or verified cross-service request matching exists yet. |
 
 Source pointers: [Python extraction and graph projection](../../skills/business-observer/scripts/bo_observer/graph/code_structure.py), [JS/TS/SFC extraction](../../skills/business-observer/scripts/bo_observer/adapters/javascript/scan.mjs), [current capability boundary](../source-data-and-language.md).

@@ -1,0 +1,203 @@
+{
+  "status": "accepted final delivery",
+  "runtime_commit": "fa372897d69f0b6096392020ed3012284a011b4e",
+  "application_build": "5fb8a3e5aa68a759c49bdd3ef2c719b64a575392f5504fa2d152d3370faac737",
+  "urls": {
+    "application": "http://127.0.0.1:51235",
+    "graph": "http://127.0.0.1:51236/graph?lang=zh-CN"
+  },
+  "source_directory": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-24\\observer-release-demo-20261024\\outputs\\team-publishing-next",
+  "final_archive": {
+    "stage": "FINAL fa37289 accepted",
+    "path": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-24\\observer-release-demo-20261024\\outputs\\team-publishing-final-runtime-source-and-evidence.zip",
+    "relative_path": "team-publishing-final-runtime-source-and-evidence.zip",
+    "sha256": "f77d84c6619168678dec07c87d73778ee4088a72d054f459887d7dff45ab0632",
+    "bytes": 12935164
+  },
+  "archives": [
+    {
+      "stage": "v1",
+      "path": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-24\\observer-release-demo-20261024\\outputs\\team-publishing-v1-source-and-evidence.zip",
+      "relative_path": "team-publishing-v1-source-and-evidence.zip",
+      "sha256": "9db5c3ea2041134d8d3e5e1b1ad47350d9c88d13b6d2d3dabc15061b1070941c",
+      "bytes": 4161844
+    },
+    {
+      "stage": "v2",
+      "path": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-24\\observer-release-demo-20261024\\outputs\\team-publishing-v2-source-and-evidence.zip",
+      "relative_path": "team-publishing-v2-source-and-evidence.zip",
+      "sha256": "b7c54752f8a08ca51f1d234905788facf1ea562a160dd7230bf9c681319fab91",
+      "bytes": 6608007
+    },
+    {
+      "stage": "9134c61 interim",
+      "path": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-24\\observer-release-demo-20261024\\outputs\\team-publishing-runtime-9134c61-source-and-evidence.zip",
+      "relative_path": "team-publishing-runtime-9134c61-source-and-evidence.zip",
+      "sha256": "927235cddb5484d03d38af75803861eb3146c9f1308ff7937120e857645e25f6",
+      "bytes": 7599540
+    },
+    {
+      "stage": "e8e922 checkpoint: reload failure",
+      "path": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-24\\observer-release-demo-20261024\\outputs\\team-publishing-runtime-e8e922-checkpoint.zip",
+      "relative_path": "team-publishing-runtime-e8e922-checkpoint.zip",
+      "sha256": "100d0c16d1f6a822da7c3ea6cb2bf2ac7e1d4e4153b64790feeee9a348845fc5",
+      "bytes": 9140150
+    },
+    {
+      "stage": "1bfeb39 checkpoint: retention distinction pending",
+      "path": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-24\\observer-release-demo-20261024\\outputs\\team-publishing-runtime-1bfeb39-checkpoint.zip",
+      "relative_path": "team-publishing-runtime-1bfeb39-checkpoint.zip",
+      "sha256": "b50f73a2992c8509e97a63e5792be7099d7c484538aff287b81ee29f04ef7279",
+      "bytes": 11455182
+    },
+    {
+      "stage": "FINAL fa37289 accepted",
+      "path": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-24\\observer-release-demo-20261024\\outputs\\team-publishing-final-runtime-source-and-evidence.zip",
+      "relative_path": "team-publishing-final-runtime-source-and-evidence.zip",
+      "sha256": "f77d84c6619168678dec07c87d73778ee4088a72d054f459887d7dff45ab0632",
+      "bytes": 12935164
+    }
+  ],
+  "final_reports": [
+    {
+      "title": "Implementation mapping",
+      "format": "md",
+      "path": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-24\\observer-release-demo-20261024\\outputs\\team-publishing-next\\review\\01-implementation-mapping-final-runtime.md",
+      "relative_path": "team-publishing-next/review/01-implementation-mapping-final-runtime.md",
+      "sha256": "ec15f65abe73ac8183c778486ad64190b681f3b1be0bc33f2d1bec815bcf5710"
+    },
+    {
+      "title": "Implementation mapping",
+      "format": "json",
+      "path": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-24\\observer-release-demo-20261024\\outputs\\team-publishing-next\\review\\01-implementation-mapping-final-runtime.json",
+      "relative_path": "team-publishing-next/review/01-implementation-mapping-final-runtime.json",
+      "sha256": "ed7d8478bb2ebb5e7003507d4219a7814c7c089df1feccaa1a3447fcbfa68c19"
+    },
+    {
+      "title": "State constraints",
+      "format": "md",
+      "path": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-24\\observer-release-demo-20261024\\outputs\\team-publishing-next\\review\\02-state-constraints-final-runtime.md",
+      "relative_path": "team-publishing-next/review/02-state-constraints-final-runtime.md",
+      "sha256": "f937aabc388c4c76af27c10cbb969a695f312d2a5792c263e58341a54f43ab30"
+    },
+    {
+      "title": "State constraints",
+      "format": "json",
+      "path": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-24\\observer-release-demo-20261024\\outputs\\team-publishing-next\\review\\02-state-constraints-final-runtime.json",
+      "relative_path": "team-publishing-next/review/02-state-constraints-final-runtime.json",
+      "sha256": "edbd042d5506276fdf8412834ca20d68e68ecc40c8d86f40573dcbe1e204695a"
+    },
+    {
+      "title": "Business rules",
+      "format": "md",
+      "path": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-24\\observer-release-demo-20261024\\outputs\\team-publishing-next\\review\\03-business-rules-final-runtime.md",
+      "relative_path": "team-publishing-next/review/03-business-rules-final-runtime.md",
+      "sha256": "a98ceadce8266178276b6aa2ba1796ceb5a36607353e4178378c2752257bcde4"
+    },
+    {
+      "title": "Business rules",
+      "format": "json",
+      "path": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-24\\observer-release-demo-20261024\\outputs\\team-publishing-next\\review\\03-business-rules-final-runtime.json",
+      "relative_path": "team-publishing-next/review/03-business-rules-final-runtime.json",
+      "sha256": "61255b5971978984579a9df9717d94b74bcb219dafab1a084ffbc1ceca6b0057"
+    },
+    {
+      "title": "Project checks",
+      "format": "md",
+      "path": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-24\\observer-release-demo-20261024\\outputs\\team-publishing-next\\review\\04-project-checks-final-runtime.md",
+      "relative_path": "team-publishing-next/review/04-project-checks-final-runtime.md",
+      "sha256": "4bc9d40ffda85195fe7bbd3d2038069ee69730ca132b47124e6205f9a50dc7eb"
+    },
+    {
+      "title": "Project checks",
+      "format": "json",
+      "path": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-24\\observer-release-demo-20261024\\outputs\\team-publishing-next\\review\\04-project-checks-final-runtime.json",
+      "relative_path": "team-publishing-next/review/04-project-checks-final-runtime.json",
+      "sha256": "abe24c5c9ae9bae47d1c57d07aeff3dda85ff20a1ccf2e6876928584145d4c2d"
+    },
+    {
+      "title": "Retention and recording boundaries",
+      "format": "md",
+      "path": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-24\\observer-release-demo-20261024\\outputs\\team-publishing-next\\review\\05-retention-recording-boundaries-final.md",
+      "relative_path": "team-publishing-next/review/05-retention-recording-boundaries-final.md",
+      "sha256": "6b256f13348159f68939857d09cbf5ab601565196eb840cdf95c6d29ea7ae934"
+    },
+    {
+      "title": "Retention and recording boundaries",
+      "format": "json",
+      "path": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-24\\observer-release-demo-20261024\\outputs\\team-publishing-next\\review\\05-retention-recording-boundaries-final.json",
+      "relative_path": "team-publishing-next/review/05-retention-recording-boundaries-final.json",
+      "sha256": "0b28c83d247ddc57dc90378e0f28bafdcb6514deda8ce60e1f94433e6f3a9812"
+    },
+    {
+      "title": "runtime-fa37289-verification.json",
+      "format": "json",
+      "path": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-24\\observer-release-demo-20261024\\outputs\\team-publishing-next\\review\\runtime-fa37289-verification.json",
+      "relative_path": "team-publishing-next/review/runtime-fa37289-verification.json",
+      "sha256": "30d37a0cf871e9aa87e2a381ffb8a4f922947cc12a381f42bbee38cec55c39b3"
+    },
+    {
+      "title": "runtime-fa37289-accepted.json",
+      "format": "json",
+      "path": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-24\\observer-release-demo-20261024\\outputs\\team-publishing-next\\review\\runtime-fa37289-accepted.json",
+      "relative_path": "team-publishing-next/review/runtime-fa37289-accepted.json",
+      "sha256": "3c1913d5031064d49b21cecd039b6ff8d0c80010764e745a0ff0612d53c8672e"
+    },
+    {
+      "title": "runtime-fa37289-check.json",
+      "format": "json",
+      "path": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-24\\observer-release-demo-20261024\\outputs\\team-publishing-next\\review\\runtime-fa37289-check.json",
+      "relative_path": "team-publishing-next/review/runtime-fa37289-check.json",
+      "sha256": "3c1913d5031064d49b21cecd039b6ff8d0c80010764e745a0ff0612d53c8672e"
+    },
+    {
+      "title": "runtime-final-release.json",
+      "format": "json",
+      "path": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-24\\observer-release-demo-20261024\\outputs\\team-publishing-next\\evidence\\runtime-final-release.json",
+      "relative_path": "team-publishing-next/evidence/runtime-final-release.json",
+      "sha256": "f798ac32da12b1c6ba678431a17e488a7bc50d709a8f90fcf4bd740c279be098"
+    }
+  ],
+  "verification_summary": {
+    "native_gates": 4,
+    "standalone_business_assertions": 37,
+    "on_off_fault_assertions": 108,
+    "whitebox_checks": 9,
+    "project_checks": 12,
+    "protected_source_expectation_files": 28,
+    "managed_runtime_files": 131,
+    "fresh_isolated_recording_events": 12,
+    "count_boundary_retained": 2,
+    "time_boundary_retained": 0,
+    "positive_recording_gaps": 0,
+    "deliberately_missing_event_detected": 1,
+    "observer_only_business_events": 0,
+    "normal_retention": {
+      "memory_events": 10000,
+      "memory_seconds": 1800
+    }
+  },
+  "live_binding": {
+    "app": {
+      "status": "ok",
+      "project_id": "team-publishing-demo",
+      "build_id": "5fb8a3e5aa68a759c49bdd3ef2c719b64a575392f5504fa2d152d3370faac737"
+    },
+    "graph": {
+      "protocol": "bo-project/v1",
+      "project_id": "team-publishing-demo",
+      "build_id": "5fb8a3e5aa68a759c49bdd3ef2c719b64a575392f5504fa2d152d3370faac737",
+      "binding": {
+        "status": "current",
+        "changed_files": [],
+        "model_changed": false,
+        "intent_changed": false,
+        "directly_affected": [],
+        "possibly_affected": []
+      }
+    }
+  },
+  "frozen_archive_files": 702,
+  "all_archive_member_hashes_verified": true,
+  "all_prior_zip_hashes_unchanged": true
+}

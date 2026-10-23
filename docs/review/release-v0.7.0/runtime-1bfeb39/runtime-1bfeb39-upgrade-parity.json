@@ -1,0 +1,9 @@
+{
+  "commit": "1bfeb39853a88ac5b9d02b675a010486b0832574",
+  "business_source_and_expectations_unchanged": true,
+  "layout_entries_unchanged": true,
+  "changes": [
+    "static/graph/conversation.js",
+    "static/graph/viewer.js"
+  ]
+}

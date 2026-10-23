@@ -85,12 +85,14 @@ python tools/install_skill.py --project /path/to/your-project
 
 ## 当前边界
 
-当前支持 Python、JS/TS、React、Vue 的源码盘点与原生采集。源码层展示已索引符号和选定的局部关系，无法保证解析所有动态调用。完整源码调用图浏览、自动列血缘、更多数据库适配、增量接口和性能基线仍待扩展。不能通过编辑图直接执行业务命令，也不保证整个程序正确。
+当前支持 Python、JS/TS、React、Vue 的源码盘点与原生采集。“局部代码”按选中区域打开关联结构，“代码结构”查看已索引的项目，包含文件、类、函数、参数、导入、继承与调用关系。代码修改后自动刷新，未解析的动态调用保留未知。大图显示数量限制和边界，完整索引可以导出为 JSON。[源码视图和命令](skills/business-observer/references/code-structure.md)。
 
-`db-vis` 分支新增数据库结构与数据操作视图，连接表、文档集合、键模式、图数据库标签、查询目标、选定参数、数据处理和事务结果。SQLite、PostgreSQL、MongoDB、Redis、Neo4j 已有真实运行测试；Python 与 Node.js 使用统一 JSON 协议。模型或数据库结构变化后自动刷新图，并保留个人布局。[运行数据库示例](examples/database-observer/README.md) · [支持范围](skills/business-observer/references/database-observation.md) · [验收材料](docs/review/db-vis/README.md)。
+数据库结构与数据操作视图连接表、文档集合、键模式、图数据库标签、查询目标、选定参数、数据处理和事务结果。SQLite、PostgreSQL、MongoDB、Redis、Neo4j 已有真实运行测试；Python 与 Node.js 使用统一 JSON 协议。模型或数据库结构变化后自动刷新图，并保留个人布局。[运行数据库示例](examples/database-observer/README.md) · [支持范围](skills/business-observer/references/database-observation.md) · [验收材料](docs/review/db-vis/README.md)。
+
+自动列血缘、专门的 API 关系、更多数据库适配、增量接口和性能基线仍待扩展。采集针对选定字段和支持的关系；完整动态调用解析、所有执行情况的正确性、编辑图执行业务命令均不在当前能力范围。
 
 [架构与协议](skills/business-observer/references/multilanguage.md) · [源码及数据层分析](docs/source-data-and-language.md) · [测试证据](docs/review/english-gallery/README.md)
 
 许可证：[MIT](LICENSE)。可视化使用开源 PixiJS、ELK.js，不包含 yFiles 专有代码。见[第三方声明](THIRD_PARTY_NOTICES.md)。
 
-最新版从 `main` 安装；此前的 `v0.6.0` 保留为固定版本，见[版本说明](docs/releases/v0.6.0.md)。
+持续更新版从 `main` 安装；本次固定版本为 `v0.7.0`。见[版本说明](docs/releases/v0.7.0.md)、[独立项目试用](docs/review/release-v0.7.0/README.md)和[实现评估](docs/assessment/2026-10-24/README.md)。

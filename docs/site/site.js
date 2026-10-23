@@ -1,6 +1,6 @@
-import { initialize, t, locale, onLanguageChange } from "./site-ui.mjs?rev=readability-2";
+import { initialize, t, locale, onLanguageChange } from "./site-ui.mjs?rev=0.7.0";
 
-const views = ["business", "state", "decision", "function", "source", "mixed"];
+const views = ["business", "state", "decision", "function", "data", "source", "mixed"];
 let view = "business";
 const colors = {
   business: "#2457db",
@@ -8,6 +8,7 @@ const colors = {
   decision: "#a76b13",
   function: "#087f80",
   source: "#556774",
+  data: "#9b4a82",
 };
 const escapeText = (value) =>
   String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
@@ -21,6 +22,7 @@ function node(id, label, x, y, type = "business") {
     decision: '<path d="M0 -28L28 0L0 28L-28 0Z"/>',
     function: '<path d="M0 -28L25 -14V14L0 28L-25 14V-14Z"/>',
     source: '<rect x="-32" y="-25" width="64" height="50" rx="6"/>',
+    data: '<path d="M-28 -18C-28 -31 28 -31 28 -18V18C28 31 -28 31 -28 18ZM-28 -18C-28 -5 28 -5 28 -18"/>',
   };
   return `<g data-node="${id}" transform="translate(${x} ${y})">
     <g fill="${color}18" stroke="${color}" stroke-width="2">${shapes[type]}</g>
@@ -46,6 +48,7 @@ function diagram() {
     decision: ["node.input", "node.check", "node.allowed", "edge.depends"],
     function: ["node.value", "node.function", "node.output", "edge.data"],
     source: ["entry()", "service()", "store()", "edge.call"],
+    data: ["node.query", "node.store", "node.transform", "edge.read"],
   };
   if (view === "mixed") {
     const selected = [...document.querySelectorAll("#mix-filters input:checked")].map(
@@ -69,7 +72,7 @@ function diagram() {
         view === "source" ? row[index] : t(row[index]),
         100 + index * 200,
         150,
-        view,
+        view === "data" && index !== 1 ? "function" : view,
       );
     }
   }
@@ -98,7 +101,9 @@ function render() {
   document.getElementById("level-title").textContent = t("level." + view + ".title");
   document.getElementById("level-body").textContent = t("level." + view + ".body");
   document.getElementById("level-number").textContent =
-    String(views.indexOf(view) + 1).padStart(2, "0") + " / 06";
+    String(views.indexOf(view) + 1).padStart(2, "0") +
+    " / " +
+    String(views.length).padStart(2, "0");
   document.getElementById("concept-graph").innerHTML = diagram();
   document.getElementById("install-prompt").textContent = t("install.prompt");
 }

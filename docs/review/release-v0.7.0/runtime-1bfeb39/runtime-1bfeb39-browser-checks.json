@@ -1,0 +1,178 @@
+{
+  "runtime_commit": "1bfeb39853a88ac5b9d02b675a010486b0832574",
+  "checks": [
+    {
+      "label": "code-before-reload",
+      "expected": "Value: 代码结构",
+      "passed": true,
+      "at": "2026-10-23T22:06:26.387Z"
+    },
+    {
+      "label": "code-after-reload",
+      "expected": "Value: 代码结构",
+      "passed": true,
+      "at": "2026-10-23T22:06:49.021Z"
+    },
+    {
+      "label": "business-note-saved",
+      "expected": "业务流",
+      "passed": true,
+      "at": "2026-10-23T22:07:28.442Z"
+    },
+    {
+      "label": "business-before-reload",
+      "expected": "视图已保存到项目",
+      "passed": true,
+      "at": "2026-10-23T22:07:33.965Z"
+    },
+    {
+      "label": "business-after-reload",
+      "expected": "Value: 业务流",
+      "passed": true,
+      "at": "2026-10-23T22:07:54.927Z"
+    },
+    {
+      "label": "cleared-code-selected",
+      "expected": "Value: 代码结构",
+      "passed": true,
+      "at": "2026-10-23T22:08:02.246Z"
+    },
+    {
+      "label": "cleared-code-before-reload",
+      "expected": "视图已保存到项目",
+      "passed": true,
+      "at": "2026-10-23T22:08:13.663Z"
+    },
+    {
+      "label": "cleared-code-after-reload",
+      "expected": "Value: 代码结构",
+      "passed": true,
+      "at": "2026-10-23T22:08:30.381Z"
+    },
+    {
+      "label": "recording-started",
+      "expected": "结束记录",
+      "passed": true,
+      "at": "2026-10-23T22:08:40.814Z"
+    },
+    {
+      "label": "full-code-during-recording",
+      "expected": "674 / 674",
+      "passed": true,
+      "at": "2026-10-23T22:09:54.417Z"
+    },
+    {
+      "label": "recording-stopped-replay",
+      "expected": "Value: 分层全图",
+      "passed": true,
+      "at": "2026-10-23T22:09:54.970Z"
+    },
+    {
+      "label": "repeat-replay-values",
+      "expected": "was_read",
+      "passed": true,
+      "at": "2026-10-23T22:10:42.172Z"
+    },
+    {
+      "label": "source-view",
+      "expected": "def mark_message_read",
+      "passed": true,
+      "at": "2026-10-23T22:10:42.619Z"
+    },
+    {
+      "label": "return-to-live",
+      "expected": "Value: 代码结构",
+      "passed": true,
+      "at": "2026-10-23T22:10:53.207Z"
+    },
+    {
+      "label": "replay-return-before-reload",
+      "expected": "视图已保存到项目",
+      "passed": true,
+      "at": "2026-10-23T22:10:59.272Z"
+    },
+    {
+      "label": "replay-return-after-reload",
+      "expected": "Value: 代码结构",
+      "passed": true,
+      "at": "2026-10-23T22:11:20.784Z"
+    },
+    {
+      "label": "overview-with-relations",
+      "expected": "流程：",
+      "passed": true,
+      "at": "2026-10-23T22:11:36.259Z"
+    },
+    {
+      "label": "live-source-view",
+      "expected": "def mark_message_read",
+      "passed": true,
+      "at": "2026-10-23T22:11:41.409Z"
+    },
+    {
+      "label": "local-code-view",
+      "expected": "代码：",
+      "passed": true,
+      "at": "2026-10-23T22:12:06.760Z"
+    },
+    {
+      "label": "database-view",
+      "expected": "数据库结构",
+      "passed": true,
+      "at": "2026-10-23T22:12:07.373Z"
+    },
+    {
+      "label": "database-is-read-detail",
+      "expected": "声明与数据库一致",
+      "passed": true,
+      "at": "2026-10-23T22:12:17.113Z"
+    }
+  ],
+  "message_ui_checks": [
+    {
+      "text": "系统消息 未读 8",
+      "passed": true,
+      "at": "2026-10-23T21:49:09.394Z"
+    },
+    {
+      "text": "视图已保存到项目",
+      "passed": true,
+      "at": "2026-10-23T22:04:33.536Z"
+    },
+    {
+      "text": "登录成功",
+      "passed": true,
+      "at": "2026-10-23T22:08:58.468Z"
+    },
+    {
+      "text": "系统消息 未读 8",
+      "passed": true,
+      "at": "2026-10-23T22:08:58.499Z"
+    },
+    {
+      "text": "系统消息 未读 8",
+      "passed": true,
+      "at": "2026-10-23T22:09:07.448Z"
+    },
+    {
+      "text": "系统消息 未读 8",
+      "passed": true,
+      "at": "2026-10-23T22:09:07.745Z"
+    },
+    {
+      "text": "系统消息 未读 7",
+      "passed": true,
+      "at": "2026-10-23T22:09:08.056Z"
+    },
+    {
+      "text": "这条消息已经是已读状态",
+      "passed": true,
+      "at": "2026-10-23T22:09:08.350Z"
+    },
+    {
+      "text": "系统消息 未读 7",
+      "passed": true,
+      "at": "2026-10-23T22:09:08.384Z"
+    }
+  ]
+}

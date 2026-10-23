@@ -1,0 +1,48 @@
+{
+  "runtime_commit": "fa372897d69f0b6096392020ed3012284a011b4e",
+  "checks": [
+    {
+      "label": "delivery-database-view",
+      "expected": "声明与数据库一致",
+      "passed": true,
+      "at": "2026-10-23T22:35:25.263Z"
+    },
+    {
+      "label": "delivery-code-selected",
+      "expected": "Value: 代码结构",
+      "passed": true,
+      "at": "2026-10-23T22:35:25.645Z"
+    },
+    {
+      "label": "delivery-code-loaded",
+      "expected": "app/service.py",
+      "passed": true,
+      "at": "2026-10-23T22:35:44.427Z"
+    },
+    {
+      "label": "delivery-replay",
+      "expected": "Value: 分层全图",
+      "passed": true,
+      "at": "2026-10-23T22:35:58.300Z"
+    },
+    {
+      "label": "delivery-live-restored",
+      "expected": "Value: 代码结构",
+      "passed": true,
+      "at": "2026-10-23T22:35:58.806Z"
+    },
+    {
+      "label": "delivery-before-reload",
+      "expected": "视图已保存到项目",
+      "passed": true,
+      "at": "2026-10-23T22:36:05.449Z"
+    },
+    {
+      "label": "delivery-after-reload",
+      "expected": "Value: 代码结构",
+      "passed": true,
+      "at": "2026-10-23T22:36:47.184Z"
+    }
+  ],
+  "cleared_discussion_stays_cleared": true
+}

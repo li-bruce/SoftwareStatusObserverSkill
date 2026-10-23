@@ -1,0 +1,117 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Package references and 104 copied runtime modules match.
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+......
+----------------------------------------------------------------------
+Ran 6 tests in 0.074s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.000s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+................
+----------------------------------------------------------------------
+Ran 16 tests in 4.085s
+
+OK
+PASS: optional source projection, typed filters, stable model, no runtime claim and obsolete-request rejection.
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+................
+----------------------------------------------------------------------
+Ran 16 tests in 0.594s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+..................
+----------------------------------------------------------------------
+Ran 18 tests in 1.336s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+...............
+----------------------------------------------------------------------
+Ran 15 tests in 9.022s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.000s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+test_application_relationships_keep_origin_and_each_field_pair (__main__.AcceptanceTests.test_application_relationships_keep_origin_and_each_field_pair) ... ok
+test_browser_demo_satisfies_its_actual_capture_contract (__main__.AcceptanceTests.test_browser_demo_satisfies_its_actual_capture_contract) ... ok
+test_capture_expectations_cannot_be_silently_weakened (__main__.AcceptanceTests.test_capture_expectations_cannot_be_silently_weakened) ... ok
+test_failure_cannot_substitute_for_success (__main__.AcceptanceTests.test_failure_cannot_substitute_for_success) ... ok
+test_insert_select_records_read_source_and_write_destination (__main__.AcceptanceTests.test_insert_select_records_read_source_and_write_destination) ... ok
+test_multi_target_write_requires_complete_explicit_roles (__main__.AcceptanceTests.test_multi_target_write_requires_complete_explicit_roles) ... ok
+test_postgres_suffix_must_be_unambiguous (__main__.AcceptanceTests.test_postgres_suffix_must_be_unambiguous) ... ok
+test_removed_managed_model_file_is_not_retained_forever (__main__.AcceptanceTests.test_removed_managed_model_file_is_not_retained_forever) ... ok
+test_same_table_read_write_has_both_relations (__main__.AcceptanceTests.test_same_table_read_write_has_both_relations) ... ok
+test_selected_values_are_required_beyond_an_event_name (__main__.AcceptanceTests.test_selected_values_are_required_beyond_an_event_name) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 4.614s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+...
+----------------------------------------------------------------------
+Ran 3 tests in 4.635s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+....
+----------------------------------------------------------------------
+Ran 4 tests in 1.036s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.545s
+
+OK
+PASS: database roles, typed edges, structure and operation presets, true boundaries, inline facts, exact target evidence, rollback, replay, folded completeness and Chinese presentation.
+{"status":"passed","checks":33,"events":24,"suppressed":26}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "one_initial_question": true,
+  "confirmed_choice_not_reasked": true,
+  "coding_wiring_requires_choice": true,
+  "unapplied_migration_rejected": true,
+  "migration_retest_passed": true,
+  "existing_mongodb_reused": true,
+  "unsolicited_business_features_added": []
+}
+Database checks passed for the requested scope.
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+......
+----------------------------------------------------------------------
+Ran 6 tests in 0.039s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+......................
+----------------------------------------------------------------------
+Ran 22 tests in 0.277s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{"step": "Record unresolved questions at the start", "passed": true}
+{"step": "Unanswered critical questions block delivery", "passed": true}
+{"step": "Answer is bound to the graph and permission counterexample; checks passed", "passed": true}
+{"step": "Accept the same answer and implementation", "passed": true}
+{"step": "Current answer matches acceptance", "passed": true}
+{"step": "A changed answer invalidates old acceptance", "passed": true}
+{"step": "Begin the next requirement change", "passed": true}
+{"step": "Deleting a confirmed question cannot hide the original decision", "passed": true}
+{"step": "Empty records cannot bypass an established clarification gate", "passed": true}
+{"step": "Removing configuration cannot silently disable clarification checks", "passed": true}

@@ -1,0 +1,5 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{"database": "postgresql", "status": "passed", "events": 14}
+{"database": "mongodb", "status": "passed", "events": 12}
+{"database": "redis", "status": "passed", "events": 8}
+{"database": "neo4j", "status": "passed", "events": 14}

@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "scope": "Confirmed v2 message behavior and real v1 migration only; no graph-based oracle",
+  "checks": [
+    "M01_real_old_schema",
+    "M02_old_message_identity",
+    "M03_existing_messages_unread",
+    "M04_recipient_count",
+    "M05_other_recipient_count",
+    "M06_open_does_not_mark",
+    "M07_denied_404_1_6",
+    "M08_denial_has_no_write_7",
+    "M07_denied_404_999999_8",
+    "M08_denial_has_no_write_9",
+    "M07_denied_401_1_10",
+    "M08_denial_has_no_write_11",
+    "M09_concurrent_single_change",
+    "M10_authoritative_read_value",
+    "M11_count_never_negative",
+    "M12_repeat_is_idempotent",
+    "M13_restart_preserves_read",
+    "M14_new_message_unread",
+    "M15_count_includes_only_unread",
+    "M16_publication_unchanged"
+  ],
+  "source_sha256": {
+    "app/__init__.py": "54f89a214abfed68faab62686a2dad0bde7a54bfad3cf3763d8117b7bb06743a",
+    "app/migrations.py": "c869a52f6129802ff87bbeaef15f12e6f166aac9e3957f76cab75b798d48eedf",
+    "app/models.py": "faacdcd657ccdd73cfb74994557d91372b8a7d66e16c8d3ea2a12e1f83b8cd90",
+    "app/ports.py": "9972bbf2d97ec92059c7ec3b83ac9f144b4ff375a5ef2d44347d23c5295e49c7",
+    "app/service.py": "d44ef9e95c6140afc2ac098d8f439bf6f2f7657f45404666a842305166454015",
+    "app/web.py": "73e8eb833d4d3d0025bd64a357f4d2bf9f3ca996f4cf487a7c911a741d3d9cc1"
+  }
+}

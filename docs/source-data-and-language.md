@@ -8,9 +8,9 @@ The [development branch roadmap](development/dev-roadmap.md) tracks source neigh
 
 Yes, as an **indexed source view**. That does not mean every possible call can be resolved correctly or that every indexed call ran.
 
-The current shared source inventory walks configured project-owned files independently of the existing business graph. Python AST and JS/TS/SFC adapters identify symbols, parameters, imports, calls, and entrypoints. The Python graph enrichment adds selected local relationships and coverage obligations. It is not yet an all-source interactive code browser.
+The current shared source inventory walks configured project-owned files independently of the existing business graph. Python AST and JS/TS/SFC adapters identify symbols, parameters, imports, calls, and entrypoints. The optional code layer now supports interactive local neighborhoods and a whole-index view, with bounded rendering and complete JSON export. Source enrichment also adds selected relationships to the authored graph's coverage obligations.
 
-A practical extension would keep these separate:
+The implementation keeps these sources of evidence separate:
 
 | Information | Source | Meaning |
 |---|---|---|
@@ -39,7 +39,7 @@ No project-size benchmark was measured for this proposal. A file-completeness ch
 
 Yes, where they explain business decisions and effects. Add them to the same typed graph, collapsed by default. Do not load every table or database row into the opening business view.
 
-The `db-vis` branch now implements a versioned database catalog, SQLAlchemy metadata and native model exports, MongoDB/Redis/Neo4j collectors, and selected data-operation capture. It retains the existing typed fields, parameters, class/source relationships, and independently checked authoritative values. Automatic column lineage remains outside the implementation. See [the implemented scope](../skills/business-observer/references/database-observation.md).
+The data layer implements a versioned database catalog, SQLAlchemy metadata and native model exports, MongoDB/Redis/Neo4j collectors, and selected data-operation capture. It retains the existing typed fields, parameters, class/source relationships, and independently checked authoritative values. Automatic column lineage remains outside the implementation. See [the implemented scope](../skills/business-observer/references/database-observation.md).
 
 The data layer distinguishes three kinds of evidence:
 

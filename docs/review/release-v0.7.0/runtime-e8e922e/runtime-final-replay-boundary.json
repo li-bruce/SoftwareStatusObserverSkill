@@ -1,0 +1,12 @@
+{
+  "native_option_disabled": true,
+  "replay_selected_overview": true,
+  "replay_business_nodes_present": true,
+  "live_code_restored_before_this_check": true,
+  "live_source_nodes_verified": [
+    "app/migrations.py",
+    "app/service.py"
+  ],
+  "method": "Native DOM HTMLOptionElement.disabled read via read-only locator evaluation; no option.isDisabled() used.",
+  "live_native_option_enabled": true
+}

@@ -1,0 +1,7 @@
+{
+  "run": "full-interrupted.log",
+  "status": "interrupted",
+  "reason": "A new conditional-source-binding defect was reproduced during the run. Stop this partial run, preserve it, repair the locator, and run the complete suite again on the frozen corrected candidate.",
+  "counts_as_pass": false,
+  "replacement": "full-final.log"
+}

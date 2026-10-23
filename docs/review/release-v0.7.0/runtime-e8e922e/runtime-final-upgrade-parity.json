@@ -1,0 +1,10 @@
+{
+  "source_and_expectations_unchanged": true,
+  "changed_protected_files": [],
+  "layout_entries_unchanged": true,
+  "ui_sha256": {
+    "static/graph/viewer.js": "46921bfaf1b6a0a35fce753ebc621e80ae3ce76ef76e572c5a1cf9154db5172f",
+    "static/graph/messages.zh-CN.js": "17d7df15d59243c2e6582ea9786a4224804a665e07d8c7c693676b02416077de"
+  },
+  "final_commit": "pending upstream commit; canonical working tree explicitly authorized"
+}

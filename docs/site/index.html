@@ -8,9 +8,9 @@
       content="Understand the software you build with AI. Explore its business flows, inspect state and value changes, and follow an operation into the code."
     />
     <title>Business Observer — Understand what you build</title>
-    <link rel="stylesheet" href="site.css?rev=readability-2" />
+    <link rel="stylesheet" href="site.css?rev=0.7.0" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <script type="module" src="site.js?rev=readability-2"></script>
+    <script type="module" src="site.js?rev=0.7.0"></script>
   </head>
   <body>
     <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
@@ -169,6 +169,16 @@
                 Functions & values</button
               ><button
                 role="tab"
+                id="tab-data"
+                aria-controls="view-panel"
+                aria-selected="false"
+                tabindex="-1"
+                data-view="data"
+                data-i18n="view.data"
+              >
+                Data</button
+              ><button
+                role="tab"
                 id="tab-source"
                 aria-controls="view-panel"
                 aria-selected="false"
@@ -201,7 +211,7 @@
                 <div id="concept-graph"></div>
               </div>
               <div class="level-explanation">
-                <span class="level-number" id="level-number">01 / 06</span>
+                <span class="level-number" id="level-number">01 / 07</span>
                 <h3 id="level-title"></h3>
                 <p id="level-body"></p>
                 <fieldset id="mix-filters" hidden>
@@ -308,8 +318,9 @@
             <div>
               <h3 data-i18n="record.keep.title">Make the graph yours</h3>
               <p data-i18n="record.keep.body">
-                Drag groups, pin important nodes, rename labels, and add notes. Keep your layout and
-                saved views with the project.
+                Drag groups, pin important nodes, rename labels, and add notes. Stable nodes keep
+                their layout, filters and notes as code changes. The recording list follows the
+                current version.
               </p>
             </div>
           </div>

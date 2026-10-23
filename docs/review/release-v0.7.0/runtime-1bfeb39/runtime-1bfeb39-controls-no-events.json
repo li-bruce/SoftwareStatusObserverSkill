@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "before": {
+    "event_count": 1533,
+    "last_seq": 1533,
+    "health": {
+      "errors": 0,
+      "dropped": 0,
+      "run_id": "351152d1c47e4cde8bc796aa",
+      "attempted": 1533,
+      "written": 1533,
+      "enabled": true,
+      "runtime_frame_evictions": 0,
+      "retained_events": 1533,
+      "evicted_events": 0,
+      "history_start_seq": 1,
+      "log_errors": 0,
+      "listener_errors": 0,
+      "retention": {
+        "memory_events": 10000,
+        "memory_seconds": 1800,
+        "log_bytes": 8388608,
+        "log_backups": 2
+      }
+    }
+  },
+  "after": {
+    "event_count": 614,
+    "last_seq": 1533,
+    "health": {
+      "errors": 0,
+      "dropped": 919,
+      "run_id": "351152d1c47e4cde8bc796aa",
+      "attempted": 1533,
+      "written": 1533,
+      "enabled": true,
+      "runtime_frame_evictions": 0,
+      "retained_events": 614,
+      "evicted_events": 919,
+      "history_start_seq": 920,
+      "log_errors": 0,
+      "listener_errors": 0,
+      "retention": {
+        "memory_events": 10000,
+        "memory_seconds": 1800,
+        "log_bytes": 8388608,
+        "log_backups": 2
+      }
+    }
+  },
+  "actual_reception_gaps": 0,
+  "source_basis": "observer_runtime/bo_observer/service.py combines gaps + evicted_events into dropped; EventHistory expires entries at 1800 seconds. Written and attempted counters remain 1533.",
+  "initial_harness_correction": "The first comparison incorrectly required dropped to stay constant over elapsed retention time. That raw failure is retained separately. No native expectation or business assertion was changed.",
+  "semantics": "Viewer operations added zero business events; complete stopped recordings remain independent of bounded live history."
+}

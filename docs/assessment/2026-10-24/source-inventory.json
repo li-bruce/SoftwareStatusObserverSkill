@@ -1,0 +1,823 @@
+{
+  "scope": "Canonical maintained Python only; installed copies, tests, vendor bundles and frozen evidence excluded. Function counts include nested functions and methods; length is a review signal, not a quality verdict.",
+  "modules": 92,
+  "lines": 13859,
+  "largest_modules": [
+    {
+      "path": "scripts/bo_observer/data/runtime.py",
+      "lines": 744,
+      "sha256": "3e93f11c077961aa13242d9f19d433b62b245bc4680cd549c4839b4daf05e3c2",
+      "functions": 31,
+      "documented_functions": 15
+    },
+    {
+      "path": "scripts/bo_observer/service.py",
+      "lines": 566,
+      "sha256": "ba5126b457806281dc00445868ed79bdc8b4df597d5eec56b5a4c4c29b51d1d1",
+      "functions": 20,
+      "documented_functions": 12
+    },
+    {
+      "path": "scripts/bo_observer/workflow/implementation_coverage.py",
+      "lines": 565,
+      "sha256": "85fd3f57c52214070096a89ca2c4d391e989f29c4ea2f3670bc9bf5b671a4213",
+      "functions": 10,
+      "documented_functions": 5
+    },
+    {
+      "path": "scripts/bo_observer/data/catalog.py",
+      "lines": 562,
+      "sha256": "584160c51ae7eae4d132d8abace12376c21c4766b291beb680725e4d6f993032",
+      "functions": 16,
+      "documented_functions": 5
+    },
+    {
+      "path": "scripts/bo_observer/workflow/change_sync.py",
+      "lines": 550,
+      "sha256": "edc6714ed37aee343a992f4dbd05dc8febe0fd6418e19a44f4bd98440fd48b20",
+      "functions": 7,
+      "documented_functions": 6
+    },
+    {
+      "path": "scripts/bo_observer/observation/recording_session.py",
+      "lines": 547,
+      "sha256": "3b599493a651cbbbb92933e9fa8f9e3a2531b83c604e4020ed2f301435d2b762",
+      "functions": 22,
+      "documented_functions": 8
+    },
+    {
+      "path": "scripts/bo_stategraph.py",
+      "lines": 544,
+      "sha256": "56f694a30fa9e2aa6319931b24cb35c52c82ea30b8b4b6f4029df0f838e63e6e",
+      "functions": 18,
+      "documented_functions": 13
+    },
+    {
+      "path": "scripts/bo_observer/graph/code_structure.py",
+      "lines": 496,
+      "sha256": "fcfd538058c36c8857a6d948607fc282e4df2f918edd54f913309d37d8c9956a",
+      "functions": 17,
+      "documented_functions": 3
+    },
+    {
+      "path": "scripts/bo_contracts.py",
+      "lines": 454,
+      "sha256": "094f5feff89893ee5932eb6a4b6ad4aafc08c7e462d0b9b00c31d50702e6af29",
+      "functions": 13,
+      "documented_functions": 4
+    },
+    {
+      "path": "scripts/bo_observer/data/projection.py",
+      "lines": 452,
+      "sha256": "15c122fb9895699282571049772bd3f53b7efe615f65269369fe9a5385e52df5",
+      "functions": 9,
+      "documented_functions": 3
+    },
+    {
+      "path": "scripts/bo_observer/data/protocol.py",
+      "lines": 442,
+      "sha256": "691442e42a786a40b87bb7ac3aea32747b3beda1b56fc3858911fe870f1d64d3",
+      "functions": 14,
+      "documented_functions": 3
+    },
+    {
+      "path": "scripts/bo_observer/workflow/requirements_dialogue.py",
+      "lines": 423,
+      "sha256": "4972c12643db2915ba9abc7fcd682ace5ec9f3b45ccadf7fc8a8e1361ae127f0",
+      "functions": 9,
+      "documented_functions": 1
+    }
+  ],
+  "largest_functions": [
+    {
+      "path": "scripts/bo_observer/workflow/requirements_dialogue.py",
+      "name": "_assess",
+      "line": 33,
+      "lines": 338
+    },
+    {
+      "path": "scripts/bo_observer/data/projection.py",
+      "name": "project_model",
+      "line": 158,
+      "lines": 295
+    },
+    {
+      "path": "scripts/bo_observer/graph/code_structure.py",
+      "name": "enrich",
+      "line": 239,
+      "lines": 218
+    },
+    {
+      "path": "scripts/bo_observer/graph/code_structure.py",
+      "name": "parse_unit",
+      "line": 29,
+      "lines": 199
+    },
+    {
+      "path": "scripts/bo_observer/service.py",
+      "name": "make_server",
+      "line": 368,
+      "lines": 199
+    },
+    {
+      "path": "scripts/bo_observer/workflow/sync_verify.py",
+      "name": "verify",
+      "line": 109,
+      "lines": 199
+    },
+    {
+      "path": "scripts/bo_observer/code_graph/index.py",
+      "name": "build",
+      "line": 51,
+      "lines": 193
+    },
+    {
+      "path": "scripts/bo_observer/graph/focus_graph.py",
+      "name": "extract",
+      "line": 19,
+      "lines": 167
+    },
+    {
+      "path": "scripts/bo_observer/data/evidence.py",
+      "name": "validate_runtime",
+      "line": 86,
+      "lines": 164
+    },
+    {
+      "path": "scripts/bo_observer/workflow/implementation_coverage.py",
+      "name": "static_errors",
+      "line": 95,
+      "lines": 164
+    },
+    {
+      "path": "scripts/bo_observer/delivery/architecture_guard.py",
+      "name": "inspect",
+      "line": 82,
+      "lines": 149
+    },
+    {
+      "path": "scripts/bo_observer/sources.py",
+      "name": "scan",
+      "line": 72,
+      "lines": 144
+    },
+    {
+      "path": "scripts/bo_observer/data/projection.py",
+      "name": "structure_differences",
+      "line": 19,
+      "lines": 137
+    },
+    {
+      "path": "scripts/bo_observer/graph/code_structure.py",
+      "name": "walk",
+      "line": 54,
+      "lines": 135
+    }
+  ],
+  "files": [
+    {
+      "path": "scripts/architecture_guard.py",
+      "lines": 18,
+      "sha256": "b1966fd9fa189df104894e6cf91f1e28a12087d6d525bd5cb8db3c46af9e54b9",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/behavior_model.py",
+      "lines": 18,
+      "sha256": "91bd0baa9227e19f51c8195989c0fc4eab4945fdaa752050232b30d319998470",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo.py",
+      "lines": 142,
+      "sha256": "820cf57fbeaec91cdf25492ce809e2323febb5c7eb09489868b4b598d2815411",
+      "functions": 1,
+      "documented_functions": 1
+    },
+    {
+      "path": "scripts/bo_code.py",
+      "lines": 6,
+      "sha256": "27baf69e469d52eec5be82ee7cf6eaac55b2057f56b0d5493dc9184456795aa4",
+      "functions": 0,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_contracts.py",
+      "lines": 454,
+      "sha256": "094f5feff89893ee5932eb6a4b6ad4aafc08c7e462d0b9b00c31d50702e6af29",
+      "functions": 13,
+      "documented_functions": 4
+    },
+    {
+      "path": "scripts/bo_db.py",
+      "lines": 51,
+      "sha256": "89bc39d28f4622e84b175c3d444bd2e1a3469a9a77d4da30b87609804aca3b97",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_design.py",
+      "lines": 18,
+      "sha256": "d50b85b8db925d742551b2341ab7508843c47e401aeb28f955c188120911f8dc",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_observer/__init__.py",
+      "lines": 1,
+      "sha256": "13155505111c5fdb9661c500bb3367aa73b93ad49d3535d6e49164c433f1b18c",
+      "functions": 0,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_observer/adapters/__init__.py",
+      "lines": 1,
+      "sha256": "f0e25199a4ea5a129a934411fe7ff724c051c20b04f193887c7528a3b4873f61",
+      "functions": 0,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_observer/adapters/python/__init__.py",
+      "lines": 1,
+      "sha256": "c6a3ee47a4c505a43adab164e23526237319b43eb0d157479a8cd4166774e831",
+      "functions": 0,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_observer/adapters/python/bo_executor.py",
+      "lines": 79,
+      "sha256": "56ee5f17e8d9d0820f12f4a1b922a750338c3a97887a59f227b45e8f1ee6aab6",
+      "functions": 4,
+      "documented_functions": 2
+    },
+    {
+      "path": "scripts/bo_observer/adapters/python/bo_probe.py",
+      "lines": 275,
+      "sha256": "55f4d9be2b6d7f97fe95bab974b98f2d3448279ca71a10077d0727431fe7ff5b",
+      "functions": 10,
+      "documented_functions": 6
+    },
+    {
+      "path": "scripts/bo_observer/code_graph/__init__.py",
+      "lines": 1,
+      "sha256": "5f69b67916f2fe8f7da0295d8f6824cb8f1626a8570ba44b1a68dee83166e6de",
+      "functions": 0,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_observer/code_graph/index.py",
+      "lines": 243,
+      "sha256": "e8508e1dcb9173070647649d27f21bda4eec992f97b341d37ad27bc22b93a658",
+      "functions": 5,
+      "documented_functions": 3
+    },
+    {
+      "path": "scripts/bo_observer/code_graph/query.py",
+      "lines": 131,
+      "sha256": "7f8d6e784b0df2903d133dd3061073188008988eae72404bce69be232e61ba63",
+      "functions": 2,
+      "documented_functions": 2
+    },
+    {
+      "path": "scripts/bo_observer/code_graph/service.py",
+      "lines": 188,
+      "sha256": "45b7754c70ea9d6879b5ec92943c5ad8f41ebc9c7790c94bf0a6481243958ab1",
+      "functions": 7,
+      "documented_functions": 5
+    },
+    {
+      "path": "scripts/bo_observer/data/__init__.py",
+      "lines": 1,
+      "sha256": "3dc7861217be44088a3475fc158cf990ab2a339650926e71d7b6c861dd094e61",
+      "functions": 0,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_observer/data/acceptance.py",
+      "lines": 49,
+      "sha256": "4c52fda20e10a300dec02659dec576662704ae8bf8e18a880061232c1be601cc",
+      "functions": 2,
+      "documented_functions": 1
+    },
+    {
+      "path": "scripts/bo_observer/data/catalog.py",
+      "lines": 562,
+      "sha256": "584160c51ae7eae4d132d8abace12376c21c4766b291beb680725e4d6f993032",
+      "functions": 16,
+      "documented_functions": 5
+    },
+    {
+      "path": "scripts/bo_observer/data/contract.py",
+      "lines": 193,
+      "sha256": "c0dbe28a9157bb01e2dbaa7ecac00355b64180c8ea02814af41e2239944ec507",
+      "functions": 5,
+      "documented_functions": 5
+    },
+    {
+      "path": "scripts/bo_observer/data/evidence.py",
+      "lines": 249,
+      "sha256": "e954c6056fdafd4752e6060d8870ae5f928c914fa286ed26947847a1268b5cde",
+      "functions": 5,
+      "documented_functions": 4
+    },
+    {
+      "path": "scripts/bo_observer/data/guidance.py",
+      "lines": 69,
+      "sha256": "d9abac570dd55e366eb02cbd6e84fb936ad1a34b5fa52d13f88649ca78dda861",
+      "functions": 1,
+      "documented_functions": 1
+    },
+    {
+      "path": "scripts/bo_observer/data/projection.py",
+      "lines": 452,
+      "sha256": "15c122fb9895699282571049772bd3f53b7efe615f65269369fe9a5385e52df5",
+      "functions": 9,
+      "documented_functions": 3
+    },
+    {
+      "path": "scripts/bo_observer/data/protocol.py",
+      "lines": 442,
+      "sha256": "691442e42a786a40b87bb7ac3aea32747b3beda1b56fc3858911fe870f1d64d3",
+      "functions": 14,
+      "documented_functions": 3
+    },
+    {
+      "path": "scripts/bo_observer/data/runtime.py",
+      "lines": 744,
+      "sha256": "3e93f11c077961aa13242d9f19d433b62b245bc4680cd549c4839b4daf05e3c2",
+      "functions": 31,
+      "documented_functions": 15
+    },
+    {
+      "path": "scripts/bo_observer/data/sync.py",
+      "lines": 194,
+      "sha256": "15194deb7bf0ae08313e989d67ded0e71a0b71eba426ea41d66783bcbb71dde8",
+      "functions": 4,
+      "documented_functions": 4
+    },
+    {
+      "path": "scripts/bo_observer/data/watcher.py",
+      "lines": 58,
+      "sha256": "688c5decd1aeeb8fcfe28f69a73d791f3fec2337b8411dd882048b15cb8096bd",
+      "functions": 6,
+      "documented_functions": 2
+    },
+    {
+      "path": "scripts/bo_observer/delivery/__init__.py",
+      "lines": 1,
+      "sha256": "9caf141625be091786a81a9e4def451cdfce9713ac48e42c5ea5a05024c234d8",
+      "functions": 0,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_observer/delivery/architecture_guard.py",
+      "lines": 301,
+      "sha256": "08d31fd994ac257ca2cac3969e9144f7eaafa5ee957a579426a0dcdcb2728118",
+      "functions": 9,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_observer/delivery/project_bundle.py",
+      "lines": 134,
+      "sha256": "1555a7d202b2893b9a0320c3adfa4bec86d9f167acebe548c24505c3451c01ac",
+      "functions": 4,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_observer/development.py",
+      "lines": 131,
+      "sha256": "2f5ca6a2b2d962fac476b3dc389e9363ed37dcc975851f09d728422b78cf17a6",
+      "functions": 3,
+      "documented_functions": 3
+    },
+    {
+      "path": "scripts/bo_observer/graph/__init__.py",
+      "lines": 1,
+      "sha256": "76c4a5c43cd71a23505d400f742ddd11cb95fff821171002971a186cd7921dd4",
+      "functions": 0,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_observer/graph/behavior_model.py",
+      "lines": 319,
+      "sha256": "e176091dc46fa9776b8142f261ac3c28a62a667f859bdf2a5367a809dd79aef9",
+      "functions": 12,
+      "documented_functions": 2
+    },
+    {
+      "path": "scripts/bo_observer/graph/code_structure.py",
+      "lines": 496,
+      "sha256": "fcfd538058c36c8857a6d948607fc282e4df2f918edd54f913309d37d8c9956a",
+      "functions": 17,
+      "documented_functions": 3
+    },
+    {
+      "path": "scripts/bo_observer/graph/focus_graph.py",
+      "lines": 303,
+      "sha256": "9b66c17c840626d9806602d8fa56aa304ae924403d6ad3cf6afc80cf55eec95c",
+      "functions": 4,
+      "documented_functions": 2
+    },
+    {
+      "path": "scripts/bo_observer/graph/statechart_contract.py",
+      "lines": 21,
+      "sha256": "e0d43786de88de1463837a73481733c2f7c9b0687e0349b0de8835982cf47920",
+      "functions": 0,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_observer/graph/worknet_contract.py",
+      "lines": 100,
+      "sha256": "c05575ed8286fafd7edec8976d9dd5c28e7567ef07bac2a465e7d59205b8d38c",
+      "functions": 2,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_observer/model_io.py",
+      "lines": 13,
+      "sha256": "b9ebfe0ea13259efed286a1aafda6b54a468e06b5b81ffc2bce57b8b5f2414c5",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_observer/observation/__init__.py",
+      "lines": 1,
+      "sha256": "2c26d0b146bbcc7e1dfef52862cc10c1048f36bffc8c139e74cfc07cc2b3f43f",
+      "functions": 0,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_observer/observation/bo_retention.py",
+      "lines": 109,
+      "sha256": "546d12c4f7b54283cc464698723a41fdc04e22a34f442b02f762905eb8c55718",
+      "functions": 9,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_observer/observation/native_ingress.py",
+      "lines": 52,
+      "sha256": "9c26cf0e87a70d3534609288b16fdb986d1c4d32947650f418a76f40db0b1a0d",
+      "functions": 3,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_observer/observation/observation_scope.py",
+      "lines": 115,
+      "sha256": "671d62ec16c997cbafa08461e83a8a60f9291914045091869511ac6cae00d295",
+      "functions": 7,
+      "documented_functions": 1
+    },
+    {
+      "path": "scripts/bo_observer/observation/probe.py",
+      "lines": 175,
+      "sha256": "b8e52f8bb4a27894a1eb21144335db19f753d5c06fd8c047643217de426259a5",
+      "functions": 9,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_observer/observation/recording_session.py",
+      "lines": 547,
+      "sha256": "3b599493a651cbbbb92933e9fa8f9e3a2531b83c604e4020ed2f301435d2b762",
+      "functions": 22,
+      "documented_functions": 8
+    },
+    {
+      "path": "scripts/bo_observer/observation/runtime_frames.py",
+      "lines": 82,
+      "sha256": "1000446fe96cfe3070528a7e454a03942e20f814ebec5f172564e759a6eea16c",
+      "functions": 2,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_observer/observation/semantic_probe.py",
+      "lines": 216,
+      "sha256": "01df24943bd5159752300e5368331605bf8cbcef6a657da01063a1bf050fe60c",
+      "functions": 11,
+      "documented_functions": 1
+    },
+    {
+      "path": "scripts/bo_observer/protocol.py",
+      "lines": 130,
+      "sha256": "9b02b7356d5669096866f6072c465afcda84e4325b8ef4fa2d489fd70c00f80d",
+      "functions": 6,
+      "documented_functions": 4
+    },
+    {
+      "path": "scripts/bo_observer/service.py",
+      "lines": 566,
+      "sha256": "ba5126b457806281dc00445868ed79bdc8b4df597d5eec56b5a4c4c29b51d1d1",
+      "functions": 20,
+      "documented_functions": 12
+    },
+    {
+      "path": "scripts/bo_observer/session_lifecycle.py",
+      "lines": 80,
+      "sha256": "325d5d841ffc68f0a5d305d25e6498fa6c5bec1bb14a9f7aa2faa3206e566380",
+      "functions": 5,
+      "documented_functions": 3
+    },
+    {
+      "path": "scripts/bo_observer/sources.py",
+      "lines": 215,
+      "sha256": "aafad77385e1ebc2ec681703b51306b173182af866f05440c30f494d4fac0d2f",
+      "functions": 5,
+      "documented_functions": 4
+    },
+    {
+      "path": "scripts/bo_observer/web/__init__.py",
+      "lines": 1,
+      "sha256": "e30010b1ba3b74b5561b63146649ccaa753c929169ceacd13fca74f2062ae84b",
+      "functions": 0,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_observer/web/bo_design.py",
+      "lines": 282,
+      "sha256": "4f3e6b3a9933f6f89de7259d006f62d1f088e69f6518c3e74ffe0a4c543919da",
+      "functions": 9,
+      "documented_functions": 2
+    },
+    {
+      "path": "scripts/bo_observer/web/bo_web.py",
+      "lines": 260,
+      "sha256": "e1794983af684ba195ea88542aa9335e80af090004aad23fdce34095f8beb777",
+      "functions": 14,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_observer/web/view_preferences.py",
+      "lines": 119,
+      "sha256": "a5bfc5e12c8c058c8e792262908915b938a1a9356d5fc18541e37d19463638ea",
+      "functions": 5,
+      "documented_functions": 4
+    },
+    {
+      "path": "scripts/bo_observer/workflow/__init__.py",
+      "lines": 1,
+      "sha256": "9373a867af4c7baa99e7ce242c0a2673c65bbc1b90406c655bd29a6056ff0447",
+      "functions": 0,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_observer/workflow/bo_sync.py",
+      "lines": 342,
+      "sha256": "39defe796a71f7935fa9175eafeb5cd4acd289c7e65ee01fe66dadac0bdb00b1",
+      "functions": 4,
+      "documented_functions": 3
+    },
+    {
+      "path": "scripts/bo_observer/workflow/change_sync.py",
+      "lines": 550,
+      "sha256": "edc6714ed37aee343a992f4dbd05dc8febe0fd6418e19a44f4bd98440fd48b20",
+      "functions": 7,
+      "documented_functions": 6
+    },
+    {
+      "path": "scripts/bo_observer/workflow/implementation_coverage.py",
+      "lines": 565,
+      "sha256": "85fd3f57c52214070096a89ca2c4d391e989f29c4ea2f3670bc9bf5b671a4213",
+      "functions": 10,
+      "documented_functions": 5
+    },
+    {
+      "path": "scripts/bo_observer/workflow/mapping_contract.py",
+      "lines": 227,
+      "sha256": "562476f1a528daddddd6e95b7749eab1c4dff4b720561421209df77441c06c01",
+      "functions": 7,
+      "documented_functions": 2
+    },
+    {
+      "path": "scripts/bo_observer/workflow/requirements_dialogue.py",
+      "lines": 423,
+      "sha256": "4972c12643db2915ba9abc7fcd682ace5ec9f3b45ccadf7fc8a8e1361ae127f0",
+      "functions": 9,
+      "documented_functions": 1
+    },
+    {
+      "path": "scripts/bo_observer/workflow/source_migration.py",
+      "lines": 74,
+      "sha256": "28892f2f8a5869ba25c0eb46789915636949c36cdd5b8e04dca31a3e4e1dab54",
+      "functions": 4,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_observer/workflow/sync_config.py",
+      "lines": 194,
+      "sha256": "87aa298a214cebcc1e2f5ac6114d04fc75a306b677778d054c03b50bff71c564",
+      "functions": 3,
+      "documented_functions": 1
+    },
+    {
+      "path": "scripts/bo_observer/workflow/sync_io.py",
+      "lines": 42,
+      "sha256": "8e48b8c71cde20bdf3dfcaec234e713f7ca382be89f1b60264d93cd89f5c8484",
+      "functions": 2,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_observer/workflow/sync_verify.py",
+      "lines": 307,
+      "sha256": "7717631cf6402144dd5d83bf36155d00547499e0ed073500af253be394d9624a",
+      "functions": 3,
+      "documented_functions": 3
+    },
+    {
+      "path": "scripts/bo_observer/workflow/whitebox_contract.py",
+      "lines": 315,
+      "sha256": "b95828be430019fad6253dafbc2eb94d9cc4672eaa28cd9b93738e5292bc21e1",
+      "functions": 8,
+      "documented_functions": 1
+    },
+    {
+      "path": "scripts/bo_retention.py",
+      "lines": 18,
+      "sha256": "e7ac153ad89b252e31f83b40a3e2280fe323036a1d18556cdc9fc19a8e0c7bbc",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_runtime.py",
+      "lines": 33,
+      "sha256": "950464fafb2f11b769be56d2e2c1f73f0aff141b6cdc75a4b26a6a7060ec82af",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_stategraph.py",
+      "lines": 544,
+      "sha256": "56f694a30fa9e2aa6319931b24cb35c52c82ea30b8b4b6f4029df0f838e63e6e",
+      "functions": 18,
+      "documented_functions": 13
+    },
+    {
+      "path": "scripts/bo_sync.py",
+      "lines": 18,
+      "sha256": "e9ee8bd6eaddd07b1c2d2a801dddf9106696aa20d714e739320b2deada68fc96",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/bo_upgrade.py",
+      "lines": 235,
+      "sha256": "11de2e9c5786758830da2a232964b61144f0c0822cf7c4e71fb48bff815b9371",
+      "functions": 7,
+      "documented_functions": 3
+    },
+    {
+      "path": "scripts/bo_web.py",
+      "lines": 18,
+      "sha256": "3cd4d09816aa6f40e8fc07d2e8b82f54ea268a90ed0d37947ce0cf03bef5e484",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/change_sync.py",
+      "lines": 18,
+      "sha256": "8fa4cf28abe49f34e0bb684e137addfee9f397840bca7c552d2e27628f70024c",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/code_structure.py",
+      "lines": 18,
+      "sha256": "a3fc5ea54f613a6e97595e0fc51c61fb3526bb2c50eff49bf16be02b029b4530",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/execution_contract.py",
+      "lines": 183,
+      "sha256": "0c966fb3549c0219c6a663ddf41c847e71ebf14216b02b725d2465e4bf0c4839",
+      "functions": 2,
+      "documented_functions": 2
+    },
+    {
+      "path": "scripts/focus_graph.py",
+      "lines": 18,
+      "sha256": "c78ccf249c2f1b534d8f37f53152052049d1924d3d64f7a6d02239a31980724f",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/implementation_coverage.py",
+      "lines": 18,
+      "sha256": "903a70c9b48d7423a5bd08d055ebed77d948a61027914af4a42d56070cdd5a8e",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/mapping_contract.py",
+      "lines": 18,
+      "sha256": "da74f5b00a82321b151849e3d18ed8ff5d69734a86ed9c3db9d94e2187911377",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/observation_scope.py",
+      "lines": 18,
+      "sha256": "98609fb51a0b6339d77e351b8ac7afadad6349602261c62384fb13540601aa36",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/probe.py",
+      "lines": 18,
+      "sha256": "a8841d77a18fb9394b7b606d85d30d6aa3153b4c3c67844ae1ad5e5732f0a02e",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/project_bundle.py",
+      "lines": 18,
+      "sha256": "2692501b9e3e7a1fc7d56725ac2e58dfe6299146c3a1ddfebb90fd6864361d63",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/recording_session.py",
+      "lines": 18,
+      "sha256": "8ffd6e6d78ca42e1513a7a970a9ffe7f9b660859aa7f996c13175a1d99429a80",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/requirements_dialogue.py",
+      "lines": 18,
+      "sha256": "e9c20117d4c99fc4c65c27fd2c2d1e4b807684d557779dfd572c9fe0169793fb",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/runtime_frames.py",
+      "lines": 18,
+      "sha256": "0da8400430ba848685e2c665a4965f15e168fe33afccfc030a647d8edc82a4c3",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/semantic_probe.py",
+      "lines": 18,
+      "sha256": "194e1bb1938b502c6c42d9072b364d7cb49e3c4dbc77765bf07537ee0d970563",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/source_migration.py",
+      "lines": 18,
+      "sha256": "c24e78c3273921fb0f8a57fdf2f4224aca60f64768751d5fa5be81002d389f23",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/statechart_contract.py",
+      "lines": 18,
+      "sha256": "0c9eedec1348036f56581c27a5f258d91f173a0771fc36d35de837c4ddcdf800",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/sync_config.py",
+      "lines": 18,
+      "sha256": "266be09dc5aad0759d091963b6bac7482fdf44bf13a1e8d7f5b8d07ec65a94a0",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/sync_io.py",
+      "lines": 18,
+      "sha256": "773f2e90cec8d75aeefad28b96e6a97f9a3dc843342b697f31c0458efcb2abcd",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/sync_verify.py",
+      "lines": 18,
+      "sha256": "e675875938570c4aa50a5ea69a44915a9dabff91020577b56f1bbd70926970e6",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/view_preferences.py",
+      "lines": 18,
+      "sha256": "f8d5859b8affc7dee0ab1bf953471b6186173ac9966dde4f651e489c28f948de",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/whitebox_contract.py",
+      "lines": 18,
+      "sha256": "a498340ade31c8266ff91c6fc7a51aaa797d809e3adf66515d2aa4581a57cdb2",
+      "functions": 1,
+      "documented_functions": 0
+    },
+    {
+      "path": "scripts/worknet_contract.py",
+      "lines": 18,
+      "sha256": "0970e146edac99da9bc4bdb8a96329c29bcd8775487d67c5d2e36ec1919dbbc1",
+      "functions": 1,
+      "documented_functions": 0
+    }
+  ]
+}

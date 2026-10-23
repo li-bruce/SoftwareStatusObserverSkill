@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "commit": "1bfeb39853a88ac5b9d02b675a010486b0832574",
+  "canonical_files": {
+    "conversation.js": "120d4cd5781c3bfac1d2d85b4c0241a94a05213473f5cbf160dc40fad30e379c",
+    "viewer.js": "22a9a37655e98c5968c7c6ea68f0ef37fbd466d162a94ef5cb62025ca9ed28b4",
+    "messages.zh-CN.js": "17d7df15d59243c2e6582ea9786a4224804a665e07d8c7c693676b02416077de"
+  },
+  "managed_files": 131,
+  "protected_files": 28,
+  "source_and_expectations_unchanged": true
+}

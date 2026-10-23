@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "purpose": "Final complete regression after replay/source separation",
+  "exit_code": 1,
+  "log": "full-release.log"
+}

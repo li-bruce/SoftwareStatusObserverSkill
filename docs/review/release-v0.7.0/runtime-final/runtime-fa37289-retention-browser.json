@@ -1,0 +1,59 @@
+{
+  "runtime_commit": "fa372897d69f0b6096392020ed3012284a011b4e",
+  "checks": [
+    {
+      "label": "initial-expired-ui",
+      "expected": "历史事件已过期",
+      "passed": true,
+      "at": "2026-10-23T22:30:46.434Z"
+    },
+    {
+      "label": "recording-started",
+      "expected": "结束记录",
+      "passed": true,
+      "at": "2026-10-23T22:30:46.812Z"
+    },
+    {
+      "label": "count-time-recording-ui",
+      "expected": "历史事件已过期",
+      "passed": true,
+      "at": "2026-10-23T22:31:38.340Z"
+    },
+    {
+      "label": "after-time-expiry-zh",
+      "expected": "历史事件已过期",
+      "passed": true,
+      "at": "2026-10-23T22:31:50.622Z"
+    },
+    {
+      "label": "after-time-expiry-en",
+      "expected": "74 earlier events expired",
+      "passed": true,
+      "at": "2026-10-23T22:32:22.174Z"
+    },
+    {
+      "label": "recording-stopped",
+      "expected": "12 events",
+      "passed": true,
+      "at": "2026-10-23T22:32:22.578Z"
+    },
+    {
+      "label": "retained-recording-replay-values",
+      "expected": "count",
+      "passed": true,
+      "at": "2026-10-23T22:33:04.492Z"
+    },
+    {
+      "label": "retained-recording-source",
+      "expected": "def public",
+      "passed": true,
+      "at": "2026-10-23T22:33:04.886Z"
+    },
+    {
+      "label": "return-to-expired-live",
+      "expected": "earlier events expired",
+      "passed": true,
+      "at": "2026-10-23T22:33:05.549Z"
+    }
+  ]
+}

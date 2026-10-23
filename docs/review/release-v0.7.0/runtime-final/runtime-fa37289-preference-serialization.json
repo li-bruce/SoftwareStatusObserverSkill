@@ -1,0 +1,11 @@
+{
+  "raw_entry_strings_equal": false,
+  "only_decoded_difference": {
+    "field": "analysis.codeFocus",
+    "before": null,
+    "after": "absent"
+  },
+  "all_other_values_equal": true,
+  "inactive_local_code_focus_preserved": true,
+  "explanation": "Initial strict pre-upgrade/post-restart comparisons failed. The sole difference is removal of inactive optional codeFocus:null; viewer.js loadAnalysis restores codeFocus only when it is a string, and local-code activation uses its truth value. Both states mean no local-code focus. No position, note, camera, filter, selected analysis or discussion state changed. The subsequent actual before/after reload comparison is strictly equal as raw entries."
+}

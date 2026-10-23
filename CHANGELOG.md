@@ -1,30 +1,43 @@
 # Changelog
 
-## Unreleased — code-vis, 2026-10-24
+## 0.7.0 — 2026-10-24
+
+### Optional code structure
 
 - Add an optional source structure layer to the existing graph: files, classes, functions, parameters, imports, inheritance and individual call occurrences. Reuse the Python, TypeScript/React and Vue parsers.
 - Add **Local code** for a selected region and **Code structure** for the indexed source scope. Preserve node identities, layouts, filters and annotations. Show unresolved targets and explicit retrieval boundaries.
 - Refresh enabled indexes after source edits, including added/deleted files and syntax failures. Independently verify saved graph contents during iteration acceptance; reject stale or altered exports.
+- Keep the current source-only preset out of recorded frames; restore the code perspective when returning to live observation.
+- Preserve the selected perspective and cleared discussion focus on reload, including preferences saved before this update. Add this regression to the full check command.
 - Keep source browsing and indexing outside business capture. Distinguish static source evidence from runtime observations and their build identities.
 - Retain failed attempts and repairs in [code structure acceptance](docs/review/code-vis/README.md), including actual browser recording/replay, source edits, installed examples and cross-language cases.
 
-## Unreleased — db-vis, 2026-10-24
+### Database observation
 
 - Add database structure, native queries, selected data transformations and transaction outcomes to the existing graph. Keep declaration, actual catalog and runtime evidence distinguishable.
 - Support SQLAlchemy metadata, MongoDB/Mongoose documents, Redis key patterns and Neo4j relationships, using optional pinned open-source adapters. Refresh catalogs and graph identities when application models change.
 - Capture Python and Node operations with explicit data targets and field selection. Exclude observer queries and reporting. Redact unselected SQL literals and distinguish statement success from transaction commit.
 - Add bilingual data views, relationship details, selected-value replay and schema-change continuity to the Web viewer. Preserve personal layouts and filters.
 - Guide storage selection in the Skill and require model export, capture, source mapping and actual database cases during each relevant development iteration.
-- [Acceptance](docs/review/db-vis/README.md): full repository regression, 77 data cases, actual PostgreSQL/MongoDB/Redis/Neo4j collectors and Python/Node clients, real SQLite browser recording/replay, both example upgrades and Git-export installation passed locally. Failed attempts and repairs are retained. Remote CI is reported separately after publication.
+- [Acceptance](docs/review/db-vis/README.md): full repository regression, 77 data cases, actual PostgreSQL/MongoDB/Redis/Neo4j collectors and Python/Node clients, real SQLite browser recording/replay, both example upgrades and Git-export installation passed locally. Failed attempts and repairs are retained. The [database branch CI](https://github.com/li-bruce/SoftwareStatusObserverSkill/actions/runs/40013071589) also passed.
 - MySQL live verification, database-internal execution plans and automatic column lineage remain outside this delivery.
 
-## Unreleased — dev, 2026-10-23
+### Acceptance and architecture repairs
+
+- Repair SQLAlchemy default comparison, outcome-specific data evidence, and source/data enrichment ownership, without relaxing ordinary capture requirements.
+- Reject corrupt saved source indexes, include authored state-module files in fallback scans, and bind Python functions declared inside control-flow blocks. Keep ambiguous definitions explicit.
+- Isolate HTTP request session lifetimes so slow source work cannot block independent event ingestion or prematurely close an in-use old build.
+- Separate live-history expiration from actual capture gaps. Recordings retain streamed interval events after live history expires; the viewer labels expiration separately in both languages, while real skipped producer events still fail completeness checks.
+- Add graph-oriented iteration case selection, a component source guide, and a whole-project assessment. Preserve independent mapping, state, business and project reports.
+- Exercise a separate application conversation through graph confirmation, implementation, a requested message-read migration, browser recording and public runtime upgrades. Retain original failures, source archives, screenshots and independent SQL-based checks in the [release evidence](docs/review/release-v0.7.0/README.md).
+
+### View continuity
 
 - Preserve project-owned layouts, type and individual filters, expansion, pins, annotations and custom views across graph updates. Support explicit project/node/edge identity migration; retain conflicts and dormant settings.
 - Give static calls identities independent of line numbers. Keep repeated calls distinct and preserve their source locations as evidence.
 - Add All elements and visible/folded/filtered counts. Keep cross-group static calls when collapsed and include roots omitted by an outdated hint list.
 - Restrict the current recording list and replay to the current build/model; leave old replay on update. Same-version restarts retain recordings; private originals remain on disk.
-- Synchronize Skill guidance and shipped examples. [Acceptance](docs/review/view-continuity-20261023/README.md) includes browser update/reload evidence, complete regression and staged-byte verification. [Development roadmap](docs/development/dev-roadmap.md) marks full source neighborhoods, database schema and API relationships as future work.
+- Synchronize Skill guidance and shipped examples. [Acceptance](docs/review/view-continuity-20261023/README.md) includes browser update/reload evidence, complete regression and staged-byte verification. The [development roadmap](docs/development/dev-roadmap.md) records completed source/data extensions and remaining API work.
 
 ## 0.6.0 — 2026-10-23
 

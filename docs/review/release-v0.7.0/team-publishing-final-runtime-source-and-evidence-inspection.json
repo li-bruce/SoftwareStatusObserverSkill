@@ -1,0 +1,254 @@
+{
+  "archive": "team-publishing-final-runtime-source-and-evidence.zip",
+  "sha256": "f77d84c6619168678dec07c87d73778ee4088a72d054f459887d7dff45ab0632",
+  "bytes": 12935164,
+  "entries": 703,
+  "forbidden_paths": [],
+  "unsafe_paths": [],
+  "primitive_credential_candidates": [],
+  "reviewed_source_expressions": [
+    {
+      "file": ".stategraph/initial-release/structure.json",
+      "field": "/units/integrations/bo_adapter.py/symbols/BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/initial-release/structure.json",
+      "field": "/symbols/integrations/bo_adapter.py::BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/initial-release/structure.json",
+      "field": "/unresolved/207/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/message-read-v2/baseline.json",
+      "field": "/structure/units/integrations/bo_adapter.py/symbols/BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/message-read-v2/baseline.json",
+      "field": "/structure/symbols/integrations/bo_adapter.py::BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/message-read-v2/baseline.json",
+      "field": "/structure/unresolved/207/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/message-read-v2/structure.json",
+      "field": "/units/integrations/bo_adapter.py/symbols/BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/message-read-v2/structure.json",
+      "field": "/symbols/integrations/bo_adapter.py::BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/message-read-v2/structure.json",
+      "field": "/unresolved/245/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/runtime-final-ui/baseline.json",
+      "field": "/structure/units/integrations/bo_adapter.py/symbols/BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/runtime-final-ui/baseline.json",
+      "field": "/structure/symbols/integrations/bo_adapter.py::BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/runtime-final-ui/baseline.json",
+      "field": "/structure/unresolved/245/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/runtime-final-ui/structure.json",
+      "field": "/units/integrations/bo_adapter.py/symbols/BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/runtime-final-ui/structure.json",
+      "field": "/symbols/integrations/bo_adapter.py::BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/runtime-final-ui/structure.json",
+      "field": "/unresolved/245/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/runtime-preference-fix/baseline.json",
+      "field": "/structure/units/integrations/bo_adapter.py/symbols/BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/runtime-preference-fix/baseline.json",
+      "field": "/structure/symbols/integrations/bo_adapter.py::BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/runtime-preference-fix/baseline.json",
+      "field": "/structure/unresolved/245/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/runtime-preference-fix/structure.json",
+      "field": "/units/integrations/bo_adapter.py/symbols/BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/runtime-preference-fix/structure.json",
+      "field": "/symbols/integrations/bo_adapter.py::BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/runtime-preference-fix/structure.json",
+      "field": "/unresolved/245/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/runtime-retention-fix/baseline.json",
+      "field": "/structure/units/integrations/bo_adapter.py/symbols/BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/runtime-retention-fix/baseline.json",
+      "field": "/structure/symbols/integrations/bo_adapter.py::BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/runtime-retention-fix/baseline.json",
+      "field": "/structure/unresolved/245/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/runtime-retention-fix/structure.json",
+      "field": "/units/integrations/bo_adapter.py/symbols/BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/runtime-retention-fix/structure.json",
+      "field": "/symbols/integrations/bo_adapter.py::BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/runtime-retention-fix/structure.json",
+      "field": "/unresolved/245/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/runtime-upgrade-v2/baseline.json",
+      "field": "/structure/units/integrations/bo_adapter.py/symbols/BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/runtime-upgrade-v2/baseline.json",
+      "field": "/structure/symbols/integrations/bo_adapter.py::BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/runtime-upgrade-v2/baseline.json",
+      "field": "/structure/unresolved/245/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/runtime-upgrade-v2/structure.json",
+      "field": "/units/integrations/bo_adapter.py/symbols/BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/runtime-upgrade-v2/structure.json",
+      "field": "/symbols/integrations/bo_adapter.py::BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/runtime-upgrade-v2/structure.json",
+      "field": "/unresolved/245/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": "review/source-inventory-initial.json",
+      "field": "/units/integrations/bo_adapter.py/symbols/BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": "review/source-inventory-initial.json",
+      "field": "/symbols/integrations/bo_adapter.py::BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": "review/source-inventory-initial.json",
+      "field": "/unresolved/181/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": "review/source-inventory.json",
+      "field": "/units/integrations/bo_adapter.py/symbols/BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": "review/source-inventory.json",
+      "field": "/symbols/integrations/bo_adapter.py::BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": "review/source-inventory.json",
+      "field": "/unresolved/245/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    }
+  ],
+  "synthetic_migration_fixtures": [
+    {
+      "path": "evidence/migrations/v1-before.sqlite",
+      "sha256": "de0070e798893843f2f5a6ddeea89565ae25a24444b054c0726ee99368dfcf0a",
+      "purpose": "Frozen synthetic pre-migration application database; no live database files."
+    }
+  ],
+  "passed": true,
+  "scope": "Archive paths and named JSON credential values; synthetic fixture evidence is intentional."
+}

@@ -1,0 +1,7 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{"indexed": ["conditional", "outer", "outer.nested"], "bindable": ["outer"], "missing": ["conditional", "outer.nested"]}
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\docs\assessment\2026-10-24\conditional_binding.py", line 28, in <module>
+    assert not missing, "Indexed declarations must be available to source binding"
+           ^^^^^^^^^^^
+AssertionError: Indexed declarations must be available to source binding

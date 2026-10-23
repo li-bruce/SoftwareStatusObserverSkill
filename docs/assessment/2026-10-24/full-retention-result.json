@@ -1,0 +1,6 @@
+{
+  "commit": "fa372897d69f0b6096392020ed3012284a011b4e",
+  "exit_code": 0,
+  "passed": true,
+  "command": "python tools/verify.py --database"
+}

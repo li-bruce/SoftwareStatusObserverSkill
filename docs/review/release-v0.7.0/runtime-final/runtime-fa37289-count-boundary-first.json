@@ -1,0 +1,23 @@
+{
+  "health": {
+    "errors": 0,
+    "dropped": 0,
+    "run_id": "3907bbf302219a7ad0f4d823",
+    "attempted": 68,
+    "written": 68,
+    "enabled": true,
+    "runtime_frame_evictions": 0,
+    "retained_events": 0,
+    "evicted_events": 68,
+    "history_start_seq": null,
+    "log_errors": 0,
+    "listener_errors": 0,
+    "retention": {
+      "memory_events": 2,
+      "memory_seconds": 3,
+      "log_bytes": 8388608,
+      "log_backups": 2
+    }
+  },
+  "events": []
+}

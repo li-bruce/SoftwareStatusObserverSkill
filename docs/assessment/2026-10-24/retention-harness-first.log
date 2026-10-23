@@ -1,0 +1,24 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+EE
+======================================================================
+ERROR: test_actual_sequence_gap_stays_visible_after_history_expires (__main__.RecordingRetentionTests.test_actual_sequence_gap_stays_visible_after_history_expires)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tests\test_recording_retention.py", line 77, in test_actual_sequence_gap_stays_visible_after_history_expires
+    self.assertEqual([event["source_seq"] for event in saved["events"]], [3])
+                                                       ~~~~~^^^^^^^^^^
+TypeError: 'int' object is not iterable
+
+======================================================================
+ERROR: test_count_and_time_eviction_preserve_recorded_interval (__main__.RecordingRetentionTests.test_count_and_time_eviction_preserve_recorded_interval)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tests\test_recording_retention.py", line 64, in test_count_and_time_eviction_preserve_recorded_interval
+    self.assertEqual([event["source_seq"] for event in saved["events"]], [2, 3, 4, 5])
+                                                       ~~~~~^^^^^^^^^^
+TypeError: 'int' object is not iterable
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.372s
+
+FAILED (errors=2)
