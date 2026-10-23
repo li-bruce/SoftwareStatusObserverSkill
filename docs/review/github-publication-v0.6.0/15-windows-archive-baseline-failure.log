@@ -1,0 +1,563 @@
+﻿2026-10-23T12:04:28.4446191Z Current runner version: '2.338.0'
+2026-10-23T12:04:28.4480995Z ##[group]Runner Image Provisioner
+2026-10-23T12:04:28.4482616Z Hosted Compute Agent
+2026-10-23T12:04:28.4483465Z Version: 20261021.618
+2026-10-23T12:04:28.4484851Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+2026-10-23T12:04:28.4485841Z Build Date: 2026-10-21T00:45:21Z
+2026-10-23T12:04:28.4486752Z Worker ID: {67f269c4-04e6-4a87-b87b-5c380f4e5754}
+2026-10-23T12:04:28.4487681Z Region: centralus
+2026-10-23T12:04:28.4488390Z Cloud: Azure
+2026-10-23T12:04:28.4489093Z ##[endgroup]
+2026-10-23T12:04:28.4491147Z ##[group]Operating System
+2026-10-23T12:04:28.4492004Z Microsoft Windows Server 2025
+2026-10-23T12:04:28.4492871Z 10.0.26100
+2026-10-23T12:04:28.4493618Z Datacenter
+2026-10-23T12:04:28.4494346Z ##[endgroup]
+2026-10-23T12:04:28.4495055Z ##[group]Runner Image
+2026-10-23T12:04:28.4495862Z Image: windows-2025-vs2026
+2026-10-23T12:04:28.4496686Z Version: 20261021.278.1
+2026-10-23T12:04:28.4499054Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20261021.278/images/windows/Windows2025-VS2026-Readme.md
+2026-10-23T12:04:28.4501495Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20261021.278
+2026-10-23T12:04:28.4502629Z ##[endgroup]
+2026-10-23T12:04:28.4503771Z ##[group]GITHUB_TOKEN Permissions
+2026-10-23T12:04:28.4506350Z Contents: read
+2026-10-23T12:04:28.4506877Z Metadata: read
+2026-10-23T12:04:28.4507344Z ##[endgroup]
+2026-10-23T12:04:28.4509487Z Secret source: Actions
+2026-10-23T12:04:28.4510302Z Cache mode: write
+2026-10-23T12:04:28.4511005Z Prepare workflow directory
+2026-10-23T12:04:28.4833881Z Prepare all required actions
+2026-10-23T12:04:28.4891120Z Getting action download info
+2026-10-23T12:04:28.7412550Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-23T12:04:28.8458866Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-10-23T12:04:28.9751114Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-10-23T12:04:29.2286616Z Complete job name: test (windows-latest, 3.13)
+2026-10-23T12:04:29.3769812Z ##[group]Run actions/checkout@v4
+2026-10-23T12:04:29.3771604Z with:
+2026-10-23T12:04:29.3772143Z   repository: li-bruce/SoftwareStatusObserverSkill
+2026-10-23T12:04:29.3776688Z   token: ***
+2026-10-23T12:04:29.3777135Z   ssh-strict: true
+2026-10-23T12:04:29.3777700Z   ssh-user: git
+2026-10-23T12:04:29.3778234Z   persist-credentials: true
+2026-10-23T12:04:29.3778734Z   clean: true
+2026-10-23T12:04:29.3779221Z   sparse-checkout-cone-mode: true
+2026-10-23T12:04:29.3779754Z   fetch-depth: 1
+2026-10-23T12:04:29.3780188Z   fetch-tags: false
+2026-10-23T12:04:29.3780650Z   show-progress: true
+2026-10-23T12:04:29.3781127Z   lfs: false
+2026-10-23T12:04:29.3781973Z   submodules: false
+2026-10-23T12:04:29.3782481Z   set-safe-directory: true
+2026-10-23T12:04:29.3783016Z   allow-unsafe-pr-checkout: false
+2026-10-23T12:04:29.3783971Z ##[endgroup]
+2026-10-23T12:04:29.5333869Z Syncing repository: li-bruce/SoftwareStatusObserverSkill
+2026-10-23T12:04:29.5336404Z ##[group]Getting Git version info
+2026-10-23T12:04:29.5337535Z Working directory is 'D:\a\SoftwareStatusObserverSkill\SoftwareStatusObserverSkill'
+2026-10-23T12:04:29.6082949Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-10-23T12:04:30.0005997Z git version 2.56.0.windows.2
+2026-10-23T12:04:30.0066040Z ##[endgroup]
+2026-10-23T12:04:30.0091753Z Temporarily overriding HOME='D:\a\_temp\bd967536-62f7-417b-9c96-79b6e6c7d02c' before making global git config changes
+2026-10-23T12:04:30.0094073Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-23T12:04:30.0104690Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\SoftwareStatusObserverSkill\SoftwareStatusObserverSkill
+2026-10-23T12:04:30.0767648Z Deleting the contents of 'D:\a\SoftwareStatusObserverSkill\SoftwareStatusObserverSkill'
+2026-10-23T12:04:30.0774223Z ##[group]Initializing the repository
+2026-10-23T12:04:30.0785232Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\SoftwareStatusObserverSkill\SoftwareStatusObserverSkill
+2026-10-23T12:04:30.1800544Z Initialized empty Git repository in D:/a/SoftwareStatusObserverSkill/SoftwareStatusObserverSkill/.git/
+2026-10-23T12:04:30.1857665Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/li-bruce/SoftwareStatusObserverSkill
+2026-10-23T12:04:30.2553560Z ##[endgroup]
+2026-10-23T12:04:30.2555446Z ##[group]Disabling automatic garbage collection
+2026-10-23T12:04:30.2562350Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+2026-10-23T12:04:30.2958573Z ##[endgroup]
+2026-10-23T12:04:30.2960318Z ##[group]Setting up auth
+2026-10-23T12:04:30.2970143Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-10-23T12:04:30.3367661Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-10-23T12:04:31.7641438Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-23T12:04:31.8075904Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-10-23T12:04:32.4091165Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-23T12:04:32.4496594Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-10-23T12:04:33.0220374Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2026-10-23T12:04:33.0641165Z ##[endgroup]
+2026-10-23T12:04:33.0642166Z ##[group]Fetching the repository
+2026-10-23T12:04:33.0656029Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +5ba0aa0507b5b6c3cc4cb15054aa56f52adf3f74:refs/remotes/origin/main
+2026-10-23T12:04:35.4488572Z From https://github.com/li-bruce/SoftwareStatusObserverSkill
+2026-10-23T12:04:35.4489632Z  * [new ref]         5ba0aa0507b5b6c3cc4cb15054aa56f52adf3f74 -> origin/main
+2026-10-23T12:04:35.4539919Z ##[endgroup]
+2026-10-23T12:04:35.4540708Z ##[group]Determining the checkout info
+2026-10-23T12:04:35.4541665Z ##[endgroup]
+2026-10-23T12:04:35.4553487Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+2026-10-23T12:04:35.4987902Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+2026-10-23T12:04:35.5381568Z ##[group]Checking out the ref
+2026-10-23T12:04:35.5390549Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force -B main refs/remotes/origin/main
+2026-10-23T12:04:36.5190063Z Switched to a new branch 'main'
+2026-10-23T12:04:36.5200221Z branch 'main' set up to track 'origin/main'.
+2026-10-23T12:04:36.5358045Z ##[endgroup]
+2026-10-23T12:04:36.5769765Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+2026-10-23T12:04:36.6149627Z 5ba0aa0507b5b6c3cc4cb15054aa56f52adf3f74
+2026-10-23T12:04:36.6721552Z ##[group]Run actions/setup-python@v5
+2026-10-23T12:04:36.6722237Z with:
+2026-10-23T12:04:36.6722545Z   python-version: 3.13
+2026-10-23T12:04:36.6722862Z   check-latest: false
+2026-10-23T12:04:36.6725697Z   token: ***
+2026-10-23T12:04:36.6725982Z   update-environment: true
+2026-10-23T12:04:36.6726346Z   allow-prereleases: false
+2026-10-23T12:04:36.6726660Z   freethreaded: false
+2026-10-23T12:04:36.6726953Z ##[endgroup]
+2026-10-23T12:04:36.8348083Z ##[group]Installed versions
+2026-10-23T12:04:36.8476992Z (node:6656) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-23T12:04:36.8477856Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-23T12:04:36.8478826Z Successfully set up CPython (3.13.16)
+2026-10-23T12:04:36.8480019Z ##[endgroup]
+2026-10-23T12:04:36.8846503Z ##[group]Run actions/setup-node@v4
+2026-10-23T12:04:36.8847140Z with:
+2026-10-23T12:04:36.8847508Z   node-version: 22
+2026-10-23T12:04:36.8848197Z   always-auth: false
+2026-10-23T12:04:36.8848533Z   check-latest: false
+2026-10-23T12:04:36.8851361Z   token: ***
+2026-10-23T12:04:36.8851630Z env:
+2026-10-23T12:04:36.8852082Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-23T12:04:36.8852712Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.13.16\x64/lib/pkgconfig
+2026-10-23T12:04:36.8853257Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-23T12:04:36.8853746Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-23T12:04:36.8854250Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-23T12:04:36.8854670Z ##[endgroup]
+2026-10-23T12:04:37.0670186Z Found in cache @ C:\hostedtoolcache\windows\node\22.23.4\x64
+2026-10-23T12:04:37.0680400Z (node:7092) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-23T12:04:37.0681736Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-23T12:04:37.0683788Z ##[group]Environment details
+2026-10-23T12:04:42.7252509Z node: v22.23.4
+2026-10-23T12:04:42.7253470Z npm: 10.9.9
+2026-10-23T12:04:42.7254786Z yarn: 1.22.22
+2026-10-23T12:04:42.7256053Z ##[endgroup]
+2026-10-23T12:04:42.7603078Z ##[group]Run python -m pip install -r examples/delivery/requirements.txt
+2026-10-23T12:04:42.7604202Z [36;1mpython -m pip install -r examples/delivery/requirements.txt[0m
+2026-10-23T12:04:42.8285216Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-23T12:04:42.8285817Z env:
+2026-10-23T12:04:42.8286254Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-23T12:04:42.8286832Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.13.16\x64/lib/pkgconfig
+2026-10-23T12:04:42.8287339Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-23T12:04:42.8287824Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-23T12:04:42.8288280Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-23T12:04:42.8288678Z ##[endgroup]
+2026-10-23T12:04:47.6107537Z Collecting transitions==0.9.3 (from -r examples/delivery/requirements.txt (line 1))
+2026-10-23T12:04:47.6991728Z   Downloading transitions-0.9.3-py2.py3-none-any.whl.metadata (97 kB)
+2026-10-23T12:04:47.7933202Z Collecting six==1.17.0 (from -r examples/delivery/requirements.txt (line 2))
+2026-10-23T12:04:47.8101393Z   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+2026-10-23T12:04:47.8449201Z Downloading transitions-0.9.3-py2.py3-none-any.whl (112 kB)
+2026-10-23T12:04:47.8811684Z Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+2026-10-23T12:04:48.0732985Z Installing collected packages: six, transitions
+2026-10-23T12:04:48.2269301Z 
+2026-10-23T12:04:48.2286606Z Successfully installed six-1.17.0 transitions-0.9.3
+2026-10-23T12:04:48.4367038Z ##[group]Run python -m pip install -r skills/business-observer/requirements.txt
+2026-10-23T12:04:48.4367771Z [36;1mpython -m pip install -r skills/business-observer/requirements.txt[0m
+2026-10-23T12:04:48.4433712Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-23T12:04:48.4434166Z env:
+2026-10-23T12:04:48.4434631Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-23T12:04:48.4435265Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.13.16\x64/lib/pkgconfig
+2026-10-23T12:04:48.4435822Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-23T12:04:48.4436756Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-23T12:04:48.4437497Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-23T12:04:48.4437946Z ##[endgroup]
+2026-10-23T12:04:49.7979524Z Collecting jsonschema==4.25.1 (from -r skills/business-observer/requirements.txt (line 2))
+2026-10-23T12:04:49.8562355Z   Downloading jsonschema-4.25.1-py3-none-any.whl.metadata (7.6 kB)
+2026-10-23T12:04:49.9226637Z Collecting attrs>=22.2.0 (from jsonschema==4.25.1->-r skills/business-observer/requirements.txt (line 2))
+2026-10-23T12:04:49.9393053Z   Downloading attrs-26.1.0-py3-none-any.whl.metadata (8.8 kB)
+2026-10-23T12:04:49.9904203Z Collecting jsonschema-specifications>=2023.03.6 (from jsonschema==4.25.1->-r skills/business-observer/requirements.txt (line 2))
+2026-10-23T12:04:50.0075544Z   Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl.metadata (2.9 kB)
+2026-10-23T12:04:50.0648662Z Collecting referencing>=0.28.4 (from jsonschema==4.25.1->-r skills/business-observer/requirements.txt (line 2))
+2026-10-23T12:04:50.0838378Z   Downloading referencing-0.37.0-py3-none-any.whl.metadata (2.8 kB)
+2026-10-23T12:04:50.3877697Z Collecting rpds-py>=0.7.1 (from jsonschema==4.25.1->-r skills/business-observer/requirements.txt (line 2))
+2026-10-23T12:04:50.4051229Z   Downloading rpds_py-2026.9.1-cp313-cp313-win_amd64.whl.metadata (4.2 kB)
+2026-10-23T12:04:50.4661074Z Downloading jsonschema-4.25.1-py3-none-any.whl (90 kB)
+2026-10-23T12:04:50.4978575Z Downloading attrs-26.1.0-py3-none-any.whl (67 kB)
+2026-10-23T12:04:50.5299275Z Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl (18 kB)
+2026-10-23T12:04:50.5628918Z Downloading referencing-0.37.0-py3-none-any.whl (26 kB)
+2026-10-23T12:04:50.5935504Z Downloading rpds_py-2026.9.1-cp313-cp313-win_amd64.whl (222 kB)
+2026-10-23T12:04:50.6878953Z Installing collected packages: rpds-py, attrs, referencing, jsonschema-specifications, jsonschema
+2026-10-23T12:04:51.1029666Z 
+2026-10-23T12:04:51.1045483Z Successfully installed attrs-26.1.0 jsonschema-4.25.1 jsonschema-specifications-2025.9.1 referencing-0.37.0 rpds-py-2026.9.1
+2026-10-23T12:04:51.2861051Z ##[group]Run python tools/setup_adapters.py
+2026-10-23T12:04:51.2861530Z [36;1mpython tools/setup_adapters.py[0m
+2026-10-23T12:04:51.2925586Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-23T12:04:51.2926044Z env:
+2026-10-23T12:04:51.2926410Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-23T12:04:51.2926943Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.13.16\x64/lib/pkgconfig
+2026-10-23T12:04:51.2927461Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-23T12:04:51.2927962Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-23T12:04:51.2928448Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-23T12:04:51.2928837Z ##[endgroup]
+2026-10-23T12:04:55.2050037Z 
+2026-10-23T12:04:55.2050611Z added 18 packages in 3s
+2026-10-23T12:04:57.2601690Z Installed locked source adapter: D:\a\SoftwareStatusObserverSkill\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_observer\adapters\javascript
+2026-10-23T12:04:57.2603879Z Repository demos and checks share this parser; no application dependency was changed.
+2026-10-23T12:04:57.4044076Z ##[group]Run npm ci --prefix examples/multilanguage
+2026-10-23T12:04:57.4045229Z [36;1mnpm ci --prefix examples/multilanguage[0m
+2026-10-23T12:04:57.4134341Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-23T12:04:57.4134859Z env:
+2026-10-23T12:04:57.4135270Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-23T12:04:57.4135830Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.13.16\x64/lib/pkgconfig
+2026-10-23T12:04:57.4136364Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-23T12:04:57.4136889Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-23T12:04:57.4137684Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-23T12:04:57.4138102Z ##[endgroup]
+2026-10-23T12:05:00.3335122Z npm warn deprecated whatwg-encoding@3.1.1: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+2026-10-23T12:05:03.3247526Z 
+2026-10-23T12:05:03.3248757Z added 118 packages, and audited 119 packages in 5s
+2026-10-23T12:05:03.3249247Z 
+2026-10-23T12:05:03.3249480Z 17 packages are looking for funding
+2026-10-23T12:05:03.3249930Z   run `npm fund` for details
+2026-10-23T12:05:03.3261217Z 
+2026-10-23T12:05:03.3262167Z found 0 vulnerabilities
+2026-10-23T12:05:03.4190545Z ##[group]Run python tools/verify.py
+2026-10-23T12:05:03.4191131Z [36;1mpython tools/verify.py[0m
+2026-10-23T12:05:03.4259131Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-23T12:05:03.4259562Z env:
+2026-10-23T12:05:03.4260171Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-23T12:05:03.4260728Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.13.16\x64/lib/pkgconfig
+2026-10-23T12:05:03.4261292Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-23T12:05:03.4261765Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-23T12:05:03.4262218Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.16\x64
+2026-10-23T12:05:03.4262693Z ##[endgroup]
+2026-10-23T12:05:04.1333291Z Package references and 83 copied runtime modules match.
+2026-10-23T12:05:04.4109261Z ......
+2026-10-23T12:05:04.4109866Z ----------------------------------------------------------------------
+2026-10-23T12:05:04.4110797Z Ran 6 tests in 0.016s
+2026-10-23T12:05:04.4110993Z 
+2026-10-23T12:05:04.4111153Z OK
+2026-10-23T12:05:04.5553714Z .....
+2026-10-23T12:05:04.5554399Z ----------------------------------------------------------------------
+2026-10-23T12:05:04.5555120Z Ran 5 tests in 0.001s
+2026-10-23T12:05:04.5555399Z 
+2026-10-23T12:05:04.5555602Z OK
+2026-10-23T12:05:04.8969365Z ......................
+2026-10-23T12:05:04.8969964Z ----------------------------------------------------------------------
+2026-10-23T12:05:04.8970523Z Ran 22 tests in 0.204s
+2026-10-23T12:05:04.8970688Z 
+2026-10-23T12:05:04.8970840Z OK
+2026-10-23T12:05:07.1904758Z {"step": "Record unresolved questions at the start", "passed": true}
+2026-10-23T12:05:15.0437248Z {"step": "Unanswered critical questions block delivery", "passed": true}
+2026-10-23T12:05:34.2031417Z {"step": "Answer is bound to the graph and permission counterexample; checks passed", "passed": true}
+2026-10-23T12:05:41.6539375Z {"step": "Accept the same answer and implementation", "passed": true}
+2026-10-23T12:05:45.5456964Z {"step": "Current answer matches acceptance", "passed": true}
+2026-10-23T12:05:49.4683716Z {"step": "A changed answer invalidates old acceptance", "passed": true}
+2026-10-23T12:05:51.4417923Z {"step": "Begin the next requirement change", "passed": true}
+2026-10-23T12:05:59.1234067Z {"step": "Deleting a confirmed question cannot hide the original decision", "passed": true}
+2026-10-23T12:06:07.2649879Z {"step": "Empty records cannot bypass an established clarification gate", "passed": true}
+2026-10-23T12:06:15.5067102Z {"step": "Removing configuration cannot silently disable clarification checks", "passed": true}
+2026-10-23T12:06:35.5844025Z {"step": "Restore the original rule and verify actual execution", "passed": true}
+2026-10-23T12:06:43.1319284Z {"step": "Accept the restored record", "passed": true}
+2026-10-23T12:06:47.0429729Z {"step": "Final check", "passed": true}
+2026-10-23T12:06:47.0439062Z {"passed": true, "steps": 13, "report": "D:\\a\\SoftwareStatusObserverSkill\\SoftwareStatusObserverSkill\\.validation\\gate-20261023-120504-959983\\report.json"}
+2026-10-23T12:06:47.2708077Z ........
+2026-10-23T12:06:47.2708636Z ----------------------------------------------------------------------
+2026-10-23T12:06:47.2709195Z Ran 8 tests in 0.024s
+2026-10-23T12:06:47.2709453Z 
+2026-10-23T12:06:47.2710582Z OK
+2026-10-23T12:06:47.7608580Z ........
+2026-10-23T12:06:47.7609156Z ----------------------------------------------------------------------
+2026-10-23T12:06:47.7609636Z Ran 8 tests in 0.329s
+2026-10-23T12:06:47.7609841Z 
+2026-10-23T12:06:47.7609965Z OK
+2026-10-23T12:06:47.9588537Z ...........
+2026-10-23T12:06:47.9589187Z ----------------------------------------------------------------------
+2026-10-23T12:06:47.9589659Z Ran 11 tests in 0.011s
+2026-10-23T12:06:47.9589857Z 
+2026-10-23T12:06:47.9589969Z OK
+2026-10-23T12:06:48.3555045Z ............
+2026-10-23T12:06:48.3557943Z ----------------------------------------------------------------------
+2026-10-23T12:06:48.3558508Z Ran 12 tests in 0.108s
+2026-10-23T12:06:48.3558708Z 
+2026-10-23T12:06:48.3558832Z OK
+2026-10-23T12:06:58.6694038Z .............................
+2026-10-23T12:06:58.6694865Z ----------------------------------------------------------------------
+2026-10-23T12:06:58.6695535Z Ran 29 tests in 9.967s
+2026-10-23T12:06:58.6695748Z 
+2026-10-23T12:06:58.6695978Z OK
+2026-10-23T12:06:59.2388827Z .................
+2026-10-23T12:06:59.2389607Z ----------------------------------------------------------------------
+2026-10-23T12:06:59.2390284Z Ran 17 tests in 0.395s
+2026-10-23T12:06:59.2390504Z 
+2026-10-23T12:06:59.2390645Z OK
+2026-10-23T12:06:59.8657830Z ............
+2026-10-23T12:06:59.8658364Z ----------------------------------------------------------------------
+2026-10-23T12:06:59.8658897Z Ran 12 tests in 0.332s
+2026-10-23T12:06:59.8659117Z 
+2026-10-23T12:06:59.8659221Z OK
+2026-10-23T12:07:06.4965794Z ..........................
+2026-10-23T12:07:06.4966529Z ----------------------------------------------------------------------
+2026-10-23T12:07:06.4967537Z Ran 26 tests in 6.374s
+2026-10-23T12:07:06.4967753Z 
+2026-10-23T12:07:06.4967911Z OK
+2026-10-23T12:07:12.1202211Z {"valid": true, "development_modes": 2, "cases": 18, "symbols": 11, "build_id": "d42d55dcb0aa1eff1549fb0f6707337aee8405cf6117f90e9c07c8c080f849a0", "evidence": "D:\\a\\SoftwareStatusObserverSkill\\SoftwareStatusObserverSkill\\.validation\\multilanguage-acceptance.json"}
+2026-10-23T12:07:12.4278678Z ..
+2026-10-23T12:07:12.4279602Z ----------------------------------------------------------------------
+2026-10-23T12:07:12.4280361Z Ran 2 tests in 0.010s
+2026-10-23T12:07:12.4280588Z 
+2026-10-23T12:07:12.4280766Z OK
+2026-10-23T12:07:14.9814358Z ....................
+2026-10-23T12:07:14.9815142Z ----------------------------------------------------------------------
+2026-10-23T12:07:14.9815809Z Ran 20 tests in 2.209s
+2026-10-23T12:07:14.9816098Z 
+2026-10-23T12:07:14.9816269Z OK
+2026-10-23T12:07:15.2761195Z test_cli_relative_root_uses_actual_working_directory (__main__.DesignTests.test_cli_relative_root_uses_actual_working_directory) ... ok
+2026-10-23T12:07:15.2843750Z test_conversation_change_updates_graph_and_invalidates_old_focus (__main__.DesignTests.test_conversation_change_updates_graph_and_invalidates_old_focus) ... ok
+2026-10-23T12:07:15.2873386Z test_conversation_preview_matches_web_and_does_not_confirm (__main__.DesignTests.test_conversation_preview_matches_web_and_does_not_confirm) ... ok
+2026-10-23T12:07:15.2889176Z test_draft_has_no_runtime_fact_or_fake_state_machine (__main__.DesignTests.test_draft_has_no_runtime_fact_or_fake_state_machine) ... ok
+2026-10-23T12:07:15.2932951Z test_explicit_preference_identity_migration_keeps_revision_and_entries (__main__.DesignTests.test_explicit_preference_identity_migration_keeps_revision_and_entries) ... ok
+2026-10-23T12:07:15.2977032Z test_focus_resolves_decision_edges_to_reserved_model_nodes (__main__.DesignTests.test_focus_resolves_decision_edges_to_reserved_model_nodes) ... ok
+2026-10-23T12:07:15.3005944Z test_invalid_mode_fails_and_does_not_replace_policy (__main__.DesignTests.test_invalid_mode_fails_and_does_not_replace_policy) ... ok
+2026-10-23T12:07:15.3026659Z test_missing_node_bad_identity_and_containment_cycle_fail (__main__.DesignTests.test_missing_node_bad_identity_and_containment_cycle_fail) ... ok
+2026-10-23T12:07:15.3054784Z test_preview_scope_retains_crossing_relations_and_changes_with_draft (__main__.DesignTests.test_preview_scope_retains_crossing_relations_and_changes_with_draft) ... ok
+2026-10-23T12:07:15.6954775Z test_real_http_graph_read_only_and_dynamic_closure (__main__.DesignTests.test_real_http_graph_read_only_and_dynamic_closure) ... ok
+2026-10-23T12:07:15.7056486Z test_web_modes_preserve_core_and_personal_files (__main__.DesignTests.test_web_modes_preserve_core_and_personal_files) ... ok
+2026-10-23T12:07:15.7057288Z 
+2026-10-23T12:07:15.7067982Z ----------------------------------------------------------------------
+2026-10-23T12:07:15.7076458Z Ran 11 tests in 0.518s
+2026-10-23T12:07:15.7076922Z 
+2026-10-23T12:07:15.7077165Z OK
+2026-10-23T12:07:16.0485013Z ...
+2026-10-23T12:07:16.0485574Z ----------------------------------------------------------------------
+2026-10-23T12:07:16.0486043Z Ran 3 tests in 0.212s
+2026-10-23T12:07:16.0486251Z 
+2026-10-23T12:07:16.0486372Z OK
+2026-10-23T12:07:19.6114019Z PASS: 30 old/new SQLite and worker scenarios; states, activities, resource ownership, effects and observed values match.
+2026-10-23T12:07:19.8811422Z ......
+2026-10-23T12:07:19.8812017Z ----------------------------------------------------------------------
+2026-10-23T12:07:19.8812529Z Ran 6 tests in 0.110s
+2026-10-23T12:07:19.8812712Z 
+2026-10-23T12:07:19.8812886Z OK
+2026-10-23T12:07:19.9886054Z PASS: locale precedence, fallback, interpolation, stable identity, project persistence, concurrent writes, and conflict reporting.
+2026-10-23T12:07:20.0954193Z PASS: direct/advanced projection, full search inventory, explicit permission roles, ID migration, persisted save and conflict status.
+2026-10-23T12:07:20.0957187Z PASS: one in-flight poll and closed viewer never restarts polling.
+2026-10-23T12:07:20.2210021Z PASS: business effects, real boundary endpoints, authored states, business parameters, all presets and explicit empty filters.
+2026-10-23T12:07:20.2939877Z PASS: all 8 node types have distinct fills, core emphasis and legible glyphs in 4 states.
+2026-10-23T12:07:24.3973459Z {
+2026-10-23T12:07:24.3973844Z   "valid": true,
+2026-10-23T12:07:24.3974253Z   "status": "current",
+2026-10-23T12:07:24.3974568Z   "errors": [],
+2026-10-23T12:07:24.3975115Z   "candidate_id": "1198ccdf8440479494bd81a67715ee8a95e836093d2b811fa7a88ec47d997ca7"
+2026-10-23T12:07:24.3975586Z }
+2026-10-23T12:07:39.6621003Z {
+2026-10-23T12:07:39.6621639Z   "valid": true,
+2026-10-23T12:07:39.6622112Z   "errors": [],
+2026-10-23T12:07:39.6622683Z   "candidate_id": "1198ccdf8440479494bd81a67715ee8a95e836093d2b811fa7a88ec47d997ca7",
+2026-10-23T12:07:39.6623171Z   "reports": {
+2026-10-23T12:07:39.6623472Z     "mapping": {
+2026-10-23T12:07:39.6623781Z       "status": "passed",
+2026-10-23T12:07:39.6624150Z       "errors": [],
+2026-10-23T12:07:39.6624849Z       "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+2026-10-23T12:07:39.6625457Z       "stategraph_export": "checked",
+2026-10-23T12:07:39.6625832Z       "witnesses": 201,
+2026-10-23T12:07:39.6626159Z       "projection_checks": 303,
+2026-10-23T12:07:39.6626543Z       "implementation": {
+2026-10-23T12:07:39.6626856Z         "errors": [],
+2026-10-23T12:07:39.6627192Z         "events_checked": 19,
+2026-10-23T12:07:39.6627527Z         "features": 10
+2026-10-23T12:07:39.6627814Z       }
+2026-10-23T12:07:39.6628082Z     },
+2026-10-23T12:07:39.6628399Z     "state_rules": {
+2026-10-23T12:07:39.6628685Z       "status": "passed",
+2026-10-23T12:07:39.6629008Z       "errors": []
+2026-10-23T12:07:39.6629288Z     },
+2026-10-23T12:07:39.6629573Z     "project_checks": {
+2026-10-23T12:07:39.6629876Z       "status": "passed",
+2026-10-23T12:07:39.6630211Z       "errors": [],
+2026-10-23T12:07:39.6630633Z       "scope": "Configured project tests, architecture and viewer checks"
+2026-10-23T12:07:39.6631045Z     },
+2026-10-23T12:07:39.6631314Z     "business": {
+2026-10-23T12:07:39.6631600Z       "status": "passed",
+2026-10-23T12:07:39.6632302Z       "errors": [],
+2026-10-23T12:07:39.6632614Z       "assertions": {
+2026-10-23T12:07:39.6632915Z         "required": 96,
+2026-10-23T12:07:39.6633220Z         "executed": 96
+2026-10-23T12:07:39.6633614Z       },
+2026-10-23T12:07:39.6634160Z       "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+2026-10-23T12:07:39.6634672Z     }
+2026-10-23T12:07:39.6634929Z   },
+2026-10-23T12:07:39.6635380Z   "review_hash": "72127613585bbe0c7c0bb8caf2716a2453936714a13e0c7b4b5bfddf23d227e8",
+2026-10-23T12:07:39.6636198Z   "observations_hash": "9ca036056155ae295bef0ee329f95b69c6e4c4bb0c2132b74a4477a68b88892a",
+2026-10-23T12:07:39.6636734Z   "tests": [
+2026-10-23T12:07:39.6637032Z     {
+2026-10-23T12:07:39.6637431Z       "argv": [
+2026-10-23T12:07:39.6637783Z         "{python}",
+2026-10-23T12:07:39.6638068Z         "-B",
+2026-10-23T12:07:39.6638323Z         "-X",
+2026-10-23T12:07:39.6638668Z         "utf8",
+2026-10-23T12:07:39.6638981Z         "tests/test_business.py"
+2026-10-23T12:07:39.6639359Z       ],
+2026-10-23T12:07:39.6639896Z       "exit_code": 0
+2026-10-23T12:07:39.6640171Z     },
+2026-10-23T12:07:39.6640454Z     {
+2026-10-23T12:07:39.6640768Z       "argv": [
+2026-10-23T12:07:39.6641059Z         "{python}",
+2026-10-23T12:07:39.6641339Z         "-B",
+2026-10-23T12:07:39.6641585Z         "-X",
+2026-10-23T12:07:39.6641877Z         "utf8",
+2026-10-23T12:07:39.6642241Z         "observer_generated/runtime/architecture_guard.py",
+2026-10-23T12:07:39.6642671Z         "check",
+2026-10-23T12:07:39.6642957Z         "--root",
+2026-10-23T12:07:39.6643224Z         "."
+2026-10-23T12:07:39.6643508Z       ],
+2026-10-23T12:07:39.6643777Z       "exit_code": 0
+2026-10-23T12:07:39.6644114Z     },
+2026-10-23T12:07:39.6644362Z     {
+2026-10-23T12:07:39.6644597Z       "argv": [
+2026-10-23T12:07:39.6644897Z         "{python}",
+2026-10-23T12:07:39.6645169Z         "-B",
+2026-10-23T12:07:39.6645419Z         "-X",
+2026-10-23T12:07:39.6645752Z         "utf8",
+2026-10-23T12:07:39.6646037Z         "tests/test_execution.py"
+2026-10-23T12:07:39.6646385Z       ],
+2026-10-23T12:07:39.6646648Z       "exit_code": 0
+2026-10-23T12:07:39.6646914Z     },
+2026-10-23T12:07:39.6647180Z     {
+2026-10-23T12:07:39.6647458Z       "argv": [
+2026-10-23T12:07:39.6647761Z         "{python}",
+2026-10-23T12:07:39.6648036Z         "-B",
+2026-10-23T12:07:39.6648393Z         "-X",
+2026-10-23T12:07:39.6648676Z         "utf8",
+2026-10-23T12:07:39.6648982Z         "tooling/graph_fixture.py"
+2026-10-23T12:07:39.6649358Z       ],
+2026-10-23T12:07:39.6649624Z       "exit_code": 0
+2026-10-23T12:07:39.6649892Z     },
+2026-10-23T12:07:39.6650171Z     {
+2026-10-23T12:07:39.6650429Z       "argv": [
+2026-10-23T12:07:39.6650700Z         "node",
+2026-10-23T12:07:39.6651058Z         "tests/test_graph_projection.mjs"
+2026-10-23T12:07:39.6651388Z       ],
+2026-10-23T12:07:39.6651676Z       "exit_code": 0
+2026-10-23T12:07:39.6651972Z     },
+2026-10-23T12:07:39.6652244Z     {
+2026-10-23T12:07:39.6652516Z       "argv": [
+2026-10-23T12:07:39.6652827Z         "node",
+2026-10-23T12:07:39.6653177Z         "tests/test_graph_layout.mjs"
+2026-10-23T12:07:39.6653503Z       ],
+2026-10-23T12:07:39.6653784Z       "exit_code": 0
+2026-10-23T12:07:39.6654077Z     },
+2026-10-23T12:07:39.6654539Z     {
+2026-10-23T12:07:39.6654831Z       "argv": [
+2026-10-23T12:07:39.6655118Z         "{python}",
+2026-10-23T12:07:39.6655423Z         "-X",
+2026-10-23T12:07:39.6655694Z         "utf8",
+2026-10-23T12:07:39.6656003Z         "-B",
+2026-10-23T12:07:39.6656323Z         "tests/test_recording.py"
+2026-10-23T12:07:39.6656640Z       ],
+2026-10-23T12:07:39.6656918Z       "exit_code": 0
+2026-10-23T12:07:39.6657192Z     },
+2026-10-23T12:07:39.6657552Z     {
+2026-10-23T12:07:39.6657923Z       "argv": [
+2026-10-23T12:07:39.6658186Z         "node",
+2026-10-23T12:07:39.6658494Z         "tests/test_recorded_views.mjs"
+2026-10-23T12:07:39.6658827Z       ],
+2026-10-23T12:07:39.6659072Z       "exit_code": 0
+2026-10-23T12:07:39.6659775Z     },
+2026-10-23T12:07:39.6660096Z     {
+2026-10-23T12:07:39.6660362Z       "argv": [
+2026-10-23T12:07:39.6660636Z         "{python}",
+2026-10-23T12:07:39.6660900Z         "-X",
+2026-10-23T12:07:39.6661189Z         "utf8",
+2026-10-23T12:07:39.6661460Z         "-B",
+2026-10-23T12:07:39.6661827Z         "tests/test_stategraph_module.py"
+2026-10-23T12:07:39.6662158Z       ],
+2026-10-23T12:07:39.6662930Z       "exit_code": 0
+2026-10-23T12:07:39.6663245Z     }
+2026-10-23T12:07:39.6663506Z   ],
+2026-10-23T12:07:39.6663986Z   "checked_at": "2026-10-23T12:07:39.637455+00:00",
+2026-10-23T12:07:39.6664722Z   "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+2026-10-23T12:07:39.6665281Z }
+2026-10-23T12:07:47.3372722Z {
+2026-10-23T12:07:47.3373554Z   "valid": true,
+2026-10-23T12:07:47.3374054Z   "status": "current",
+2026-10-23T12:07:47.3374511Z   "errors": [],
+2026-10-23T12:07:47.3375207Z   "candidate_id": "1198ccdf8440479494bd81a67715ee8a95e836093d2b811fa7a88ec47d997ca7"
+2026-10-23T12:07:47.3376575Z }
+2026-10-23T12:07:51.3633840Z {
+2026-10-23T12:07:51.3634229Z   "valid": true,
+2026-10-23T12:07:51.3634570Z   "status": "current",
+2026-10-23T12:07:51.3634913Z   "errors": [],
+2026-10-23T12:07:51.3635415Z   "candidate_id": "1198ccdf8440479494bd81a67715ee8a95e836093d2b811fa7a88ec47d997ca7"
+2026-10-23T12:07:51.3635956Z }
+2026-10-23T12:07:57.1787720Z {
+2026-10-23T12:07:57.1788407Z   "valid": true,
+2026-10-23T12:07:57.1788729Z   "files": 165,
+2026-10-23T12:07:57.1789030Z   "package": {
+2026-10-23T12:07:57.1789405Z     "path": "dist/core-418f9142.zip",
+2026-10-23T12:07:57.1789748Z     "files": 19,
+2026-10-23T12:07:57.1790283Z     "sha256": "68eee4567f9c7c1d3e1c937ba72179bf1c90d55f42d73b37962e07e80506081c",
+2026-10-23T12:07:57.1790971Z     "retains": "business state machine; neutral observation port has no observer implementation"
+2026-10-23T12:07:57.1791475Z   }
+2026-10-23T12:07:57.1791739Z }
+2026-10-23T12:07:57.7967671Z ..
+2026-10-23T12:07:57.7968300Z ----------------------------------------------------------------------
+2026-10-23T12:07:57.7968842Z Ran 2 tests in 0.324s
+2026-10-23T12:07:57.7969015Z 
+2026-10-23T12:07:57.7969164Z OK
+2026-10-23T12:08:00.9124150Z .
+2026-10-23T12:08:00.9124991Z ----------------------------------------------------------------------
+2026-10-23T12:08:00.9125453Z Ran 1 test in 2.949s
+2026-10-23T12:08:00.9125608Z 
+2026-10-23T12:08:00.9125786Z OK
+2026-10-23T12:08:07.4055915Z {
+2026-10-23T12:08:07.4056534Z   "valid": false,
+2026-10-23T12:08:07.4057178Z   "status": "needs_sync",
+2026-10-23T12:08:07.4057809Z   "errors": [
+2026-10-23T12:08:07.4058329Z     "review belongs to an older candidate",
+2026-10-23T12:08:07.4059250Z     "verification is failed or stale",
+2026-10-23T12:08:07.4060094Z     "change is not accepted for current inputs",
+2026-10-23T12:08:07.4061243Z     "manifest does not match accepted inputs"
+2026-10-23T12:08:07.4061978Z   ],
+2026-10-23T12:08:07.4062682Z   "candidate_id": "6d5d4a823b5b3466f845274cffa80f39d5c972467cf2ac2348e3acdebfad07de"
+2026-10-23T12:08:07.4063459Z }
+2026-10-23T12:08:07.4347221Z Traceback (most recent call last):
+2026-10-23T12:08:07.4386294Z   File "D:\a\SoftwareStatusObserverSkill\SoftwareStatusObserverSkill\tools\archive_demo.py", line 55, in <module>
+2026-10-23T12:08:07.4387234Z     main()
+2026-10-23T12:08:07.4387826Z     ~~~~^^
+2026-10-23T12:08:07.4388854Z   File "D:\a\SoftwareStatusObserverSkill\SoftwareStatusObserverSkill\tools\archive_demo.py", line 42, in main
+2026-10-23T12:08:07.4389476Z     prepare()
+2026-10-23T12:08:07.4389878Z     ~~~~~~~^^
+2026-10-23T12:08:07.4390502Z   File "D:\a\SoftwareStatusObserverSkill\SoftwareStatusObserverSkill\tools\archive_demo.py", line 31, in prepare
+2026-10-23T12:08:07.4391419Z     run("observer_runtime/change_sync.py", "check", "--root", ".")
+2026-10-23T12:08:07.4391951Z     ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-23T12:08:07.4393961Z   File "D:\a\SoftwareStatusObserverSkill\SoftwareStatusObserverSkill\tools\archive_demo.py", line 14, in run
+2026-10-23T12:08:07.4394561Z     subprocess.run(
+2026-10-23T12:08:07.4394928Z     ~~~~~~~~~~~~~~^
+2026-10-23T12:08:07.4395341Z         [sys.executable, "-B", "-X", "utf8", *map(str, args)],
+2026-10-23T12:08:07.4395884Z         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-23T12:08:07.4396306Z         cwd=EXAMPLE, check=True,
+2026-10-23T12:08:07.4396675Z         ^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-23T12:08:07.4397044Z     )
+2026-10-23T12:08:07.4397335Z     ^
+2026-10-23T12:08:07.4398421Z   File "C:\hostedtoolcache\windows\Python\3.13.16\x64\Lib\subprocess.py", line 578, in run
+2026-10-23T12:08:07.4399046Z     raise CalledProcessError(retcode, process.args,
+2026-10-23T12:08:07.4399506Z                              output=stdout, stderr=stderr)
+2026-10-23T12:08:07.4400610Z subprocess.CalledProcessError: Command '['C:\\hostedtoolcache\\windows\\Python\\3.13.16\\x64\\python.exe', '-B', '-X', 'utf8', 'observer_runtime/change_sync.py', 'check', '--root', '.']' returned non-zero exit status 1.
+2026-10-23T12:08:07.4545554Z Traceback (most recent call last):
+2026-10-23T12:08:07.4583492Z   File "D:\a\SoftwareStatusObserverSkill\SoftwareStatusObserverSkill\tools\verify.py", line 76, in <module>
+2026-10-23T12:08:07.4584351Z     main()
+2026-10-23T12:08:07.4584758Z     ~~~~^^
+2026-10-23T12:08:07.4585996Z   File "D:\a\SoftwareStatusObserverSkill\SoftwareStatusObserverSkill\tools\verify.py", line 59, in main
+2026-10-23T12:08:07.4587370Z     run(ROOT, 'tools/archive_demo.py', '--verify')
+2026-10-23T12:08:07.4588290Z     ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-23T12:08:07.4589766Z   File "D:\a\SoftwareStatusObserverSkill\SoftwareStatusObserverSkill\tools\verify.py", line 14, in run
+2026-10-23T12:08:07.4591120Z     subprocess.run([sys.executable, '-B', '-X', 'utf8', *map(str, args)], cwd=cwd, check=True)
+2026-10-23T12:08:07.4592308Z     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-23T12:08:07.4593194Z   File "C:\hostedtoolcache\windows\Python\3.13.16\x64\Lib\subprocess.py", line 578, in run
+2026-10-23T12:08:07.4594133Z     raise CalledProcessError(retcode, process.args,
+2026-10-23T12:08:07.4594750Z                              output=stdout, stderr=stderr)
+2026-10-23T12:08:07.4596214Z subprocess.CalledProcessError: Command '['C:\\hostedtoolcache\\windows\\Python\\3.13.16\\x64\\python.exe', '-B', '-X', 'utf8', 'tools/archive_demo.py', '--verify']' returned non-zero exit status 1.
+2026-10-23T12:08:07.5644319Z ##[error]Process completed with exit code 1.
+2026-10-23T12:08:07.5944586Z Post job cleanup.
+2026-10-23T12:08:07.7802332Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-10-23T12:08:07.8212347Z git version 2.56.0.windows.2
+2026-10-23T12:08:07.8314792Z Temporarily overriding HOME='D:\a\_temp\21e76184-5b8a-44a9-b45e-bd3a4fe1a738' before making global git config changes
+2026-10-23T12:08:07.8316169Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-23T12:08:07.8327362Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\SoftwareStatusObserverSkill\SoftwareStatusObserverSkill
+2026-10-23T12:08:07.8760235Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-10-23T12:08:07.9182199Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-10-23T12:08:08.5320365Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-23T12:08:08.5673301Z http.https://github.com/.extraheader
+2026-10-23T12:08:08.5724774Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+2026-10-23T12:08:08.6127714Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-10-23T12:08:09.2053438Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-23T12:08:09.2475411Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-10-23T12:08:09.8810076Z Cleaning up orphan processes
+2026-10-23T12:08:09.9957054Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+

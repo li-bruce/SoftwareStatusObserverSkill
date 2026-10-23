@@ -124,7 +124,7 @@
     "bo_stategraph/__init__.py": "0571254ae4242ad3f03d8433ff67edf79b46670518492d1a602874a24985cc09",
     "bo_stategraph/bo_contracts.py": "91cc0613351d8496414fdbe23dd1710ca027f83835de3c623fab814749982f34",
     "bo_stategraph/execution_contract.py": "9502b2d348bb8ee00c05288ca3d064d151365292fdef597c156c178871635b78",
-    "bo_stategraph/runtime-version.json": "b849905a3c0c1cef982a2e06b6309270805628816b000937d0adba94d8d1d461",
+    "bo_stategraph/runtime-version.json": "db27e3deda049a283c0c86abeeb38b516dbfa61125e1198e0a794ea2f9d0a732",
     "observer_generated/behavior.json": "88e3d798ebf6672d8d0378fcdad7731354fde9afddf00261c2150d9ba0895681",
     "observer_generated/runtime/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "observer_generated/runtime/architecture_guard.py": "d286426262be62dd86b74f74f71c708a5bb4aedfb7449494f2d9ee1553b72d42",
@@ -137,7 +137,7 @@
     "observer_generated/runtime/bo_observer/adapters/javascript/bo_runtime.mjs": "5b7cf603b68e0f3286df7a233f311fe4db9d8ee4ffa03751e9b22a806b86285b",
     "observer_generated/runtime/bo_observer/adapters/javascript/package-lock.json": "4c2e797d1e8c70fa95ac6b0d4b2b5ec835d2fa12e44a81a93b33448fc33b9150",
     "observer_generated/runtime/bo_observer/adapters/javascript/package.json": "74c6788e15cfb07e70b11d95439a818c4f56fa32f1a6a5baed9fe8d1bf4a0570",
-    "observer_generated/runtime/bo_observer/adapters/javascript/scan.mjs": "286637ed34af12eaecd8a37ae682645621c79409cdee30bdeb2cfd664fe832fa",
+    "observer_generated/runtime/bo_observer/adapters/javascript/scan.mjs": "35d6e6444612503ac27f9edbc2f1381a305f75410a5c70b40b604d871d70a65c",
     "observer_generated/runtime/bo_observer/adapters/python/__init__.py": "c6a3ee47a4c505a43adab164e23526237319b43eb0d157479a8cd4166774e831",
     "observer_generated/runtime/bo_observer/adapters/python/bo_executor.py": "77b31bfbafac4729bf3c743c7e6011180bff84af78d673bf6b3f2fbd08186895",
     "observer_generated/runtime/bo_observer/adapters/python/bo_probe.py": "93a288e944b8e57538986c454877e47d34e6dda3e5bcf50cb908ac756e4a626c",
@@ -1146,6 +1146,13 @@
     {
       "reason": "Reviewed English prose and viewer locale migration, conversation preview, and trial-discovered common fixes; preserve all executable rules and prior assertions.",
       "changed": []
+    },
+    {
+      "reason": "Reviewed source scanner pipe transport fix; preserve business semantics, source bindings and all prior assertions. Align current archive text with committed LF bytes; retain historical evidence unchanged.",
+      "changed": [
+        "bo_stategraph/runtime-version.json",
+        "observer_generated/runtime/bo_observer/adapters/javascript/scan.mjs"
+      ]
     }
   ],
   "core_exclude": [

@@ -50,7 +50,7 @@
     "observer_generated/runtime/bo_observer/adapters/javascript/bo_runtime.mjs": "5b7cf603b68e0f3286df7a233f311fe4db9d8ee4ffa03751e9b22a806b86285b",
     "observer_generated/runtime/bo_observer/adapters/javascript/package-lock.json": "4c2e797d1e8c70fa95ac6b0d4b2b5ec835d2fa12e44a81a93b33448fc33b9150",
     "observer_generated/runtime/bo_observer/adapters/javascript/package.json": "74c6788e15cfb07e70b11d95439a818c4f56fa32f1a6a5baed9fe8d1bf4a0570",
-    "observer_generated/runtime/bo_observer/adapters/javascript/scan.mjs": "286637ed34af12eaecd8a37ae682645621c79409cdee30bdeb2cfd664fe832fa",
+    "observer_generated/runtime/bo_observer/adapters/javascript/scan.mjs": "35d6e6444612503ac27f9edbc2f1381a305f75410a5c70b40b604d871d70a65c",
     "observer_generated/runtime/bo_observer/adapters/python/__init__.py": "c6a3ee47a4c505a43adab164e23526237319b43eb0d157479a8cd4166774e831",
     "observer_generated/runtime/bo_observer/adapters/python/bo_executor.py": "77b31bfbafac4729bf3c743c7e6011180bff84af78d673bf6b3f2fbd08186895",
     "observer_generated/runtime/bo_observer/adapters/python/bo_probe.py": "93a288e944b8e57538986c454877e47d34e6dda3e5bcf50cb908ac756e4a626c",

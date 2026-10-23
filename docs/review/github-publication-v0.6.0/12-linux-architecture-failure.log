@@ -1,0 +1,304 @@
+﻿2026-10-23T11:56:21.5526439Z Current runner version: '2.338.0'
+2026-10-23T11:56:21.5550783Z ##[group]Runner Image Provisioner
+2026-10-23T11:56:21.5551772Z Hosted Compute Agent
+2026-10-23T11:56:21.5552469Z Version: 20261012.601
+2026-10-23T11:56:21.5553076Z Commit: f3dc54e1fb89da6852db922499a0233137369e1d
+2026-10-23T11:56:21.5554276Z Build Date: 2026-10-12T17:48:21Z
+2026-10-23T11:56:21.5554993Z Worker ID: {2fb36012-b47e-426a-bb3a-46de4607af7d}
+2026-10-23T11:56:21.5555827Z Region: westcentralus
+2026-10-23T11:56:21.5556428Z Cloud: Azure
+2026-10-23T11:56:21.5556960Z ##[endgroup]
+2026-10-23T11:56:21.5558558Z ##[group]Operating System
+2026-10-23T11:56:21.5559207Z Ubuntu
+2026-10-23T11:56:21.5559755Z 24.04.5
+2026-10-23T11:56:21.5560400Z LTS
+2026-10-23T11:56:21.5560909Z ##[endgroup]
+2026-10-23T11:56:21.5561515Z ##[group]Runner Image
+2026-10-23T11:56:21.5562122Z Image: ubuntu-24.04
+2026-10-23T11:56:21.5562710Z Version: 20261012.334.1
+2026-10-23T11:56:21.5564324Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-23T11:56:21.5566357Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+2026-10-23T11:56:21.5567350Z ##[endgroup]
+2026-10-23T11:56:21.5568521Z ##[group]GITHUB_TOKEN Permissions
+2026-10-23T11:56:21.5570445Z Contents: read
+2026-10-23T11:56:21.5571036Z Metadata: read
+2026-10-23T11:56:21.5571698Z ##[endgroup]
+2026-10-23T11:56:21.5574400Z Secret source: Actions
+2026-10-23T11:56:21.5575448Z Cache mode: write
+2026-10-23T11:56:21.5576345Z Prepare workflow directory
+2026-10-23T11:56:21.5920016Z Prepare all required actions
+2026-10-23T11:56:21.5967892Z Getting action download info
+2026-10-23T11:56:21.8950913Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-23T11:56:21.9835795Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-10-23T11:56:22.0623920Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-10-23T11:56:22.2595366Z Complete job name: test (ubuntu-latest, 3.13)
+2026-10-23T11:56:22.3456565Z ##[group]Run actions/checkout@v4
+2026-10-23T11:56:22.3457445Z with:
+2026-10-23T11:56:22.3457954Z   repository: li-bruce/SoftwareStatusObserverSkill
+2026-10-23T11:56:22.3461646Z   token: ***
+2026-10-23T11:56:22.3462096Z   ssh-strict: true
+2026-10-23T11:56:22.3462542Z   ssh-user: git
+2026-10-23T11:56:22.3462984Z   persist-credentials: true
+2026-10-23T11:56:22.3463467Z   clean: true
+2026-10-23T11:56:22.3464184Z   sparse-checkout-cone-mode: true
+2026-10-23T11:56:22.3464702Z   fetch-depth: 1
+2026-10-23T11:56:22.3465119Z   fetch-tags: false
+2026-10-23T11:56:22.3465554Z   show-progress: true
+2026-10-23T11:56:22.3465989Z   lfs: false
+2026-10-23T11:56:22.3466391Z   submodules: false
+2026-10-23T11:56:22.3466831Z   set-safe-directory: true
+2026-10-23T11:56:22.3467330Z   allow-unsafe-pr-checkout: false
+2026-10-23T11:56:22.3468112Z ##[endgroup]
+2026-10-23T11:56:22.4501256Z Syncing repository: li-bruce/SoftwareStatusObserverSkill
+2026-10-23T11:56:22.4504534Z ##[group]Getting Git version info
+2026-10-23T11:56:22.4506309Z Working directory is '/home/runner/work/SoftwareStatusObserverSkill/SoftwareStatusObserverSkill'
+2026-10-23T11:56:22.4508629Z [command]/usr/bin/git version
+2026-10-23T11:56:22.4589585Z git version 2.55.0
+2026-10-23T11:56:22.4615776Z ##[endgroup]
+2026-10-23T11:56:22.4630726Z Temporarily overriding HOME='/home/runner/work/_temp/f558d2cc-ca4d-4b79-9ae6-a385e70a232b' before making global git config changes
+2026-10-23T11:56:22.4633138Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-23T11:56:22.4637147Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/SoftwareStatusObserverSkill/SoftwareStatusObserverSkill
+2026-10-23T11:56:22.4691868Z Deleting the contents of '/home/runner/work/SoftwareStatusObserverSkill/SoftwareStatusObserverSkill'
+2026-10-23T11:56:22.4695873Z ##[group]Initializing the repository
+2026-10-23T11:56:22.4699958Z [command]/usr/bin/git init /home/runner/work/SoftwareStatusObserverSkill/SoftwareStatusObserverSkill
+2026-10-23T11:56:22.4848578Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-23T11:56:22.4850273Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-23T11:56:22.4851925Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-23T11:56:22.4853119Z hint: call:
+2026-10-23T11:56:22.4854436Z hint:
+2026-10-23T11:56:22.4855261Z hint: 	git config --global init.defaultBranch <name>
+2026-10-23T11:56:22.4856241Z hint:
+2026-10-23T11:56:22.4857162Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-23T11:56:22.4858662Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-23T11:56:22.4859850Z hint:
+2026-10-23T11:56:22.4860497Z hint: 	git branch -m <name>
+2026-10-23T11:56:22.4861380Z hint:
+2026-10-23T11:56:22.4862823Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-23T11:56:22.4865385Z Initialized empty Git repository in /home/runner/work/SoftwareStatusObserverSkill/SoftwareStatusObserverSkill/.git/
+2026-10-23T11:56:22.4877675Z [command]/usr/bin/git remote add origin https://github.com/li-bruce/SoftwareStatusObserverSkill
+2026-10-23T11:56:22.4919206Z ##[endgroup]
+2026-10-23T11:56:22.4920422Z ##[group]Disabling automatic garbage collection
+2026-10-23T11:56:22.4923254Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-23T11:56:22.4975201Z ##[endgroup]
+2026-10-23T11:56:22.4976427Z ##[group]Setting up auth
+2026-10-23T11:56:22.4977620Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-23T11:56:22.5026318Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-23T11:56:22.5440472Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-23T11:56:22.5477300Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-23T11:56:22.5702432Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-23T11:56:22.5742947Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-23T11:56:22.5992617Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-23T11:56:22.6039832Z ##[endgroup]
+2026-10-23T11:56:22.6054794Z ##[group]Fetching the repository
+2026-10-23T11:56:22.6056388Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +bafa95e9e1f2d8b46005420751fa2bbf5ef1a8d1:refs/remotes/origin/main
+2026-10-23T11:56:24.4234013Z From https://github.com/li-bruce/SoftwareStatusObserverSkill
+2026-10-23T11:56:24.4236571Z  * [new ref]         bafa95e9e1f2d8b46005420751fa2bbf5ef1a8d1 -> origin/main
+2026-10-23T11:56:24.4241899Z ##[endgroup]
+2026-10-23T11:56:24.4244427Z ##[group]Determining the checkout info
+2026-10-23T11:56:24.4246779Z ##[endgroup]
+2026-10-23T11:56:24.4248400Z [command]/usr/bin/git sparse-checkout disable
+2026-10-23T11:56:24.4308743Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-23T11:56:24.4344596Z ##[group]Checking out the ref
+2026-10-23T11:56:24.4359975Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-10-23T11:56:24.8981117Z Switched to a new branch 'main'
+2026-10-23T11:56:24.8985628Z branch 'main' set up to track 'origin/main'.
+2026-10-23T11:56:24.9032292Z ##[endgroup]
+2026-10-23T11:56:24.9080429Z [command]/usr/bin/git log -1 --format=%H
+2026-10-23T11:56:24.9107343Z bafa95e9e1f2d8b46005420751fa2bbf5ef1a8d1
+2026-10-23T11:56:24.9393649Z ##[group]Run actions/setup-python@v5
+2026-10-23T11:56:24.9461153Z with:
+2026-10-23T11:56:24.9461515Z   python-version: 3.13
+2026-10-23T11:56:24.9461861Z   check-latest: false
+2026-10-23T11:56:24.9464745Z   token: ***
+2026-10-23T11:56:24.9465057Z   update-environment: true
+2026-10-23T11:56:24.9465383Z   allow-prereleases: false
+2026-10-23T11:56:24.9465699Z   freethreaded: false
+2026-10-23T11:56:24.9465986Z ##[endgroup]
+2026-10-23T11:56:25.0797007Z ##[group]Installed versions
+2026-10-23T11:56:25.0898757Z (node:2380) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-23T11:56:25.0899699Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-23T11:56:25.0900485Z Successfully set up CPython (3.13.16)
+2026-10-23T11:56:25.0901452Z ##[endgroup]
+2026-10-23T11:56:25.1120747Z ##[group]Run actions/setup-node@v4
+2026-10-23T11:56:25.1121153Z with:
+2026-10-23T11:56:25.1121443Z   node-version: 22
+2026-10-23T11:56:25.1121723Z   always-auth: false
+2026-10-23T11:56:25.1122024Z   check-latest: false
+2026-10-23T11:56:25.1124755Z   token: ***
+2026-10-23T11:56:25.1125071Z env:
+2026-10-23T11:56:25.1125400Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.16/x64
+2026-10-23T11:56:25.1125945Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.16/x64/lib/pkgconfig
+2026-10-23T11:56:25.1126456Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+2026-10-23T11:56:25.1126911Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+2026-10-23T11:56:25.1127368Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+2026-10-23T11:56:25.1127824Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.16/x64/lib
+2026-10-23T11:56:25.1128221Z ##[endgroup]
+2026-10-23T11:56:25.2553002Z Found in cache @ /opt/hostedtoolcache/node/22.23.3/x64
+2026-10-23T11:56:25.2557213Z (node:2388) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-23T11:56:25.2558792Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-23T11:56:25.2560380Z ##[group]Environment details
+2026-10-23T11:56:25.6518227Z node: v22.23.3
+2026-10-23T11:56:25.6518712Z npm: 10.9.9
+2026-10-23T11:56:25.6519010Z yarn: 1.22.22
+2026-10-23T11:56:25.6520128Z ##[endgroup]
+2026-10-23T11:56:25.6661654Z ##[group]Run python -m pip install -r examples/delivery/requirements.txt
+2026-10-23T11:56:25.6662272Z [36;1mpython -m pip install -r examples/delivery/requirements.txt[0m
+2026-10-23T11:56:25.6923920Z shell: /usr/bin/bash -e {0}
+2026-10-23T11:56:25.6924231Z env:
+2026-10-23T11:56:25.6924533Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.16/x64
+2026-10-23T11:56:25.6925040Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.16/x64/lib/pkgconfig
+2026-10-23T11:56:25.6925549Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+2026-10-23T11:56:25.6925995Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+2026-10-23T11:56:25.6926443Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+2026-10-23T11:56:25.6926911Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.16/x64/lib
+2026-10-23T11:56:25.6927277Z ##[endgroup]
+2026-10-23T11:56:26.6913482Z Collecting transitions==0.9.3 (from -r examples/delivery/requirements.txt (line 1))
+2026-10-23T11:56:26.7853329Z   Downloading transitions-0.9.3-py2.py3-none-any.whl.metadata (97 kB)
+2026-10-23T11:56:26.8494782Z Collecting six==1.17.0 (from -r examples/delivery/requirements.txt (line 2))
+2026-10-23T11:56:26.8686958Z   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+2026-10-23T11:56:26.8912431Z Downloading transitions-0.9.3-py2.py3-none-any.whl (112 kB)
+2026-10-23T11:56:26.9306637Z Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+2026-10-23T11:56:26.9795714Z Installing collected packages: six, transitions
+2026-10-23T11:56:27.0558850Z 
+2026-10-23T11:56:27.0570696Z Successfully installed six-1.17.0 transitions-0.9.3
+2026-10-23T11:56:27.0579868Z 
+2026-10-23T11:56:27.0580781Z [notice] A new release of pip is available: 26.2.1 -> 26.2.2
+2026-10-23T11:56:27.0581982Z [notice] To update, run: pip install --upgrade pip
+2026-10-23T11:56:27.1039802Z ##[group]Run python -m pip install -r skills/business-observer/requirements.txt
+2026-10-23T11:56:27.1040439Z [36;1mpython -m pip install -r skills/business-observer/requirements.txt[0m
+2026-10-23T11:56:27.1106230Z shell: /usr/bin/bash -e {0}
+2026-10-23T11:56:27.1106519Z env:
+2026-10-23T11:56:27.1106796Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.16/x64
+2026-10-23T11:56:27.1107251Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.16/x64/lib/pkgconfig
+2026-10-23T11:56:27.1107692Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+2026-10-23T11:56:27.1108103Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+2026-10-23T11:56:27.1108510Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+2026-10-23T11:56:27.1108897Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.16/x64/lib
+2026-10-23T11:56:27.1109229Z ##[endgroup]
+2026-10-23T11:56:27.5548220Z Collecting jsonschema==4.25.1 (from -r skills/business-observer/requirements.txt (line 2))
+2026-10-23T11:56:27.6472790Z   Downloading jsonschema-4.25.1-py3-none-any.whl.metadata (7.6 kB)
+2026-10-23T11:56:27.6806863Z Collecting attrs>=22.2.0 (from jsonschema==4.25.1->-r skills/business-observer/requirements.txt (line 2))
+2026-10-23T11:56:27.6993396Z   Downloading attrs-26.1.0-py3-none-any.whl.metadata (8.8 kB)
+2026-10-23T11:56:27.7299102Z Collecting jsonschema-specifications>=2023.03.6 (from jsonschema==4.25.1->-r skills/business-observer/requirements.txt (line 2))
+2026-10-23T11:56:27.7488003Z   Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl.metadata (2.9 kB)
+2026-10-23T11:56:27.7875166Z Collecting referencing>=0.28.4 (from jsonschema==4.25.1->-r skills/business-observer/requirements.txt (line 2))
+2026-10-23T11:56:27.8060644Z   Downloading referencing-0.37.0-py3-none-any.whl.metadata (2.8 kB)
+2026-10-23T11:56:28.1262903Z Collecting rpds-py>=0.7.1 (from jsonschema==4.25.1->-r skills/business-observer/requirements.txt (line 2))
+2026-10-23T11:56:28.1453292Z   Downloading rpds_py-2026.9.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.1 kB)
+2026-10-23T11:56:28.1714101Z Downloading jsonschema-4.25.1-py3-none-any.whl (90 kB)
+2026-10-23T11:56:28.2181222Z Downloading attrs-26.1.0-py3-none-any.whl (67 kB)
+2026-10-23T11:56:28.2419628Z Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl (18 kB)
+2026-10-23T11:56:28.2623262Z Downloading referencing-0.37.0-py3-none-any.whl (26 kB)
+2026-10-23T11:56:28.2841915Z Downloading rpds_py-2026.9.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (370 kB)
+2026-10-23T11:56:28.3565991Z Installing collected packages: rpds-py, attrs, referencing, jsonschema-specifications, jsonschema
+2026-10-23T11:56:28.5227053Z 
+2026-10-23T11:56:28.5253070Z Successfully installed attrs-26.1.0 jsonschema-4.25.1 jsonschema-specifications-2025.9.1 referencing-0.37.0 rpds-py-2026.9.1
+2026-10-23T11:56:28.5266807Z 
+2026-10-23T11:56:28.5267427Z [notice] A new release of pip is available: 26.2.1 -> 26.2.2
+2026-10-23T11:56:28.5268629Z [notice] To update, run: pip install --upgrade pip
+2026-10-23T11:56:28.5866281Z ##[group]Run python tools/setup_adapters.py
+2026-10-23T11:56:28.5866653Z [36;1mpython tools/setup_adapters.py[0m
+2026-10-23T11:56:28.5931233Z shell: /usr/bin/bash -e {0}
+2026-10-23T11:56:28.5931574Z env:
+2026-10-23T11:56:28.5931854Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.16/x64
+2026-10-23T11:56:28.5932320Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.16/x64/lib/pkgconfig
+2026-10-23T11:56:28.5932755Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+2026-10-23T11:56:28.5933143Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+2026-10-23T11:56:28.5933525Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+2026-10-23T11:56:28.5934187Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.16/x64/lib
+2026-10-23T11:56:28.5934511Z ##[endgroup]
+2026-10-23T11:56:29.8925964Z 
+2026-10-23T11:56:29.8926644Z added 18 packages in 1s
+2026-10-23T11:56:29.9325895Z Installed locked source adapter: /home/runner/work/SoftwareStatusObserverSkill/SoftwareStatusObserverSkill/skills/business-observer/scripts/bo_observer/adapters/javascript
+2026-10-23T11:56:29.9327986Z Repository demos and checks share this parser; no application dependency was changed.
+2026-10-23T11:56:29.9426516Z ##[group]Run npm ci --prefix examples/multilanguage
+2026-10-23T11:56:29.9426923Z [36;1mnpm ci --prefix examples/multilanguage[0m
+2026-10-23T11:56:29.9490018Z shell: /usr/bin/bash -e {0}
+2026-10-23T11:56:29.9490267Z env:
+2026-10-23T11:56:29.9490532Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.16/x64
+2026-10-23T11:56:29.9490974Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.16/x64/lib/pkgconfig
+2026-10-23T11:56:29.9491433Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+2026-10-23T11:56:29.9491819Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+2026-10-23T11:56:29.9492204Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+2026-10-23T11:56:29.9492595Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.16/x64/lib
+2026-10-23T11:56:29.9492909Z ##[endgroup]
+2026-10-23T11:56:30.7439017Z npm warn deprecated whatwg-encoding@3.1.1: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+2026-10-23T11:56:32.3120054Z 
+2026-10-23T11:56:32.3121126Z added 119 packages, and audited 120 packages in 2s
+2026-10-23T11:56:32.3121657Z 
+2026-10-23T11:56:32.3121845Z 17 packages are looking for funding
+2026-10-23T11:56:32.3122241Z   run `npm fund` for details
+2026-10-23T11:56:32.3130039Z 
+2026-10-23T11:56:32.3130304Z found 0 vulnerabilities
+2026-10-23T11:56:32.3325313Z ##[group]Run python tools/verify.py
+2026-10-23T11:56:32.3325647Z [36;1mpython tools/verify.py[0m
+2026-10-23T11:56:32.3387033Z shell: /usr/bin/bash -e {0}
+2026-10-23T11:56:32.3387286Z env:
+2026-10-23T11:56:32.3387561Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.16/x64
+2026-10-23T11:56:32.3388006Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.16/x64/lib/pkgconfig
+2026-10-23T11:56:32.3388468Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+2026-10-23T11:56:32.3388853Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+2026-10-23T11:56:32.3389240Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.16/x64
+2026-10-23T11:56:32.3389627Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.16/x64/lib
+2026-10-23T11:56:32.3389949Z ##[endgroup]
+2026-10-23T11:56:32.5986243Z Package references and 83 copied runtime modules match.
+2026-10-23T11:56:32.7128795Z ......
+2026-10-23T11:56:32.7129620Z ----------------------------------------------------------------------
+2026-10-23T11:56:32.7130152Z Ran 6 tests in 0.008s
+2026-10-23T11:56:32.7130335Z 
+2026-10-23T11:56:32.7130444Z OK
+2026-10-23T11:56:32.8213728Z .....
+2026-10-23T11:56:32.8214454Z ----------------------------------------------------------------------
+2026-10-23T11:56:32.8214876Z Ran 5 tests in 0.003s
+2026-10-23T11:56:32.8215032Z 
+2026-10-23T11:56:32.8215120Z OK
+2026-10-23T11:56:33.0493940Z ......................
+2026-10-23T11:56:33.0494591Z ----------------------------------------------------------------------
+2026-10-23T11:56:33.0494992Z Ran 22 tests in 0.126s
+2026-10-23T11:56:33.0495153Z 
+2026-10-23T11:56:33.0495242Z OK
+2026-10-23T11:56:34.6878105Z {"step": "Record unresolved questions at the start", "passed": true}
+2026-10-23T11:56:40.9419443Z {"step": "Unanswered critical questions block delivery", "passed": true}
+2026-10-23T11:56:56.2020985Z Traceback (most recent call last):
+2026-10-23T11:56:56.2041654Z   File "/home/runner/work/SoftwareStatusObserverSkill/SoftwareStatusObserverSkill/tests/test_clarification_gate.py", line 56, in <module>
+2026-10-23T11:56:56.2042920Z     if __name__=='__main__':main()
+2026-10-23T11:56:56.2043416Z                             ~~~~^^
+2026-10-23T11:56:56.2044649Z   File "/home/runner/work/SoftwareStatusObserverSkill/SoftwareStatusObserverSkill/tests/test_clarification_gate.py", line 37, in main
+2026-10-23T11:56:56.2045629Z     check("Answer is bound to the graph and permission counterexample; checks passed",'verify',True)
+2026-10-23T11:56:56.2046626Z     ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-23T11:56:56.2047493Z   File "/home/runner/work/SoftwareStatusObserverSkill/SoftwareStatusObserverSkill/tests/test_clarification_gate.py", line 14, in check
+2026-10-23T11:56:56.2048218Z     assert (code==0)==success,(name,value)
+2026-10-23T11:56:56.2048518Z            ^^^^^^^^^^^^^^^^^^
+2026-10-23T11:56:56.2062413Z AssertionError: ('Answer is bound to the graph and permission counterexample; checks passed', {'valid': False, 'errors': ["project test failed: ['{python}', '-B', '-X', 'utf8', 'observer_generated/runtime/architecture_guard.py', 'check', '--root', '.']"], 'candidate_id': '4a92a7be14df118a78163f1d0f4d7dc08200dd9134b6c0ca364d877a1541c84b', 'reports': {'mapping': {'status': 'passed', 'errors': [], 'scope': 'Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses', 'stategraph_export': 'checked', 'witnesses': 201, 'projection_checks': 303, 'implementation': {'errors': [], 'events_checked': 19, 'features': 10}}, 'state_rules': {'status': 'passed', 'errors': []}, 'project_checks': {'status': 'failed', 'errors': ["project test failed: ['{python}', '-B', '-X', 'utf8', 'observer_generated/runtime/architecture_guard.py', 'check', '--root', '.']"], 'scope': 'Configured project tests, architecture and viewer checks'}, 'business': {'status': 'passed', 'errors': [], 'assertions': {'required': 96, 'executed': 96}, 'scope': 'Authored business and whitebox expectations; this does not prove all user intent'}}, 'review_hash': '6004d7b44bcbe60106b5752faca75d1dcc65f3b147189327e21d16540353be45', 'observations_hash': 'e259a351f9dae9cd6dcccfcae4a8d7b0f63cefe5997697ca9482637c378dcd53', 'tests': [{'argv': ['{python}', '-B', '-X', 'utf8', 'tests/test_business.py'], 'exit_code': 0}, {'argv': ['{python}', '-B', '-X', 'utf8', 'observer_generated/runtime/architecture_guard.py', 'check', '--root', '.'], 'exit_code': 1}, {'argv': ['{python}', '-B', '-X', 'utf8', 'tests/test_execution.py'], 'exit_code': 0}, {'argv': ['{python}', '-B', '-X', 'utf8', 'tooling/graph_fixture.py'], 'exit_code': 0}, {'argv': ['node', 'tests/test_graph_projection.mjs'], 'exit_code': 0}, {'argv': ['node', 'tests/test_graph_layout.mjs'], 'exit_code': 0}, {'argv': ['{python}', '-X', 'utf8', '-B', 'tests/test_recording.py'], 'exit_code': 0}, {'argv': ['node', 'tests/test_recorded_views.mjs'], 'exit_code': 0}, {'argv': ['{python}', '-X', 'utf8', '-B', 'tests/test_stategraph_module.py'], 'exit_code': 0}], 'checked_at': '2026-10-23T11:56:56.176279+00:00', 'meaning': 'Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence.'})
+2026-10-23T11:56:56.2454162Z Traceback (most recent call last):
+2026-10-23T11:56:56.2478119Z   File "/home/runner/work/SoftwareStatusObserverSkill/SoftwareStatusObserverSkill/tools/verify.py", line 76, in <module>
+2026-10-23T11:56:56.2479124Z     main()
+2026-10-23T11:56:56.2479445Z     ~~~~^^
+2026-10-23T11:56:56.2480349Z   File "/home/runner/work/SoftwareStatusObserverSkill/SoftwareStatusObserverSkill/tools/verify.py", line 24, in main
+2026-10-23T11:56:56.2481417Z     run(ROOT, 'tests/test_clarification_gate.py')
+2026-10-23T11:56:56.2481973Z     ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-23T11:56:56.2483002Z   File "/home/runner/work/SoftwareStatusObserverSkill/SoftwareStatusObserverSkill/tools/verify.py", line 14, in run
+2026-10-23T11:56:56.2484459Z     subprocess.run([sys.executable, '-B', '-X', 'utf8', *map(str, args)], cwd=cwd, check=True)
+2026-10-23T11:56:56.2485325Z     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-23T11:56:56.2486270Z   File "/opt/hostedtoolcache/Python/3.13.16/x64/lib/python3.13/subprocess.py", line 578, in run
+2026-10-23T11:56:56.2487114Z     raise CalledProcessError(retcode, process.args,
+2026-10-23T11:56:56.2487693Z                              output=stdout, stderr=stderr)
+2026-10-23T11:56:56.2489551Z subprocess.CalledProcessError: Command '['/opt/hostedtoolcache/Python/3.13.16/x64/bin/python', '-B', '-X', 'utf8', 'tests/test_clarification_gate.py']' returned non-zero exit status 1.
+2026-10-23T11:56:56.2569108Z ##[error]Process completed with exit code 1.
+2026-10-23T11:56:56.2711274Z Post job cleanup.
+2026-10-23T11:56:56.3564880Z [command]/usr/bin/git version
+2026-10-23T11:56:56.3607709Z git version 2.55.0
+2026-10-23T11:56:56.3651859Z Temporarily overriding HOME='/home/runner/work/_temp/130fe616-37be-4487-b9cf-04223de9e509' before making global git config changes
+2026-10-23T11:56:56.3653978Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-23T11:56:56.3658906Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/SoftwareStatusObserverSkill/SoftwareStatusObserverSkill
+2026-10-23T11:56:56.3700225Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-23T11:56:56.3737359Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-23T11:56:56.3998600Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-23T11:56:56.4027503Z http.https://github.com/.extraheader
+2026-10-23T11:56:56.4045502Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-23T11:56:56.4096851Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-23T11:56:56.4368947Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-23T11:56:56.4411193Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-23T11:56:56.4826892Z Cleaning up orphan processes
+2026-10-23T11:56:56.5189038Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+

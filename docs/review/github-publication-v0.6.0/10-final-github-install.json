@@ -1,0 +1,730 @@
+{
+  "commit": "bafa95e9e1f2d8b46005420751fa2bbf5ef1a8d1",
+  "source": "https://github.com/li-bruce/SoftwareStatusObserverSkill/tree/main/skills/business-observer",
+  "installer": "Codex skill-installer --method download --ref main --path skills/business-observer",
+  "scope": "Fresh isolated project install; every tracked Skill file equals its Git blob. Installed parser dependencies are excluded from the source comparison.",
+  "files": 144,
+  "mismatches": [],
+  "manifest": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "41f4bfe9aa8790612dd555d71a9e95fbf12c9f0e84bc6ce232a0aae3af3e2ba3",
+      "bytes": 1065
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "b090ab6996c893c60f867b3584fbb03979c052a4d433473aa70df85ad1b7e1a4",
+      "bytes": 12022
+    },
+    {
+      "path": "agents/openai.yaml",
+      "sha256": "44cccbc2676e04d68261de9cd7c4bf2f431d1b5dba6ccb6424a8506d77246ade",
+      "bytes": 417
+    },
+    {
+      "path": "assets/acceptance.example.json",
+      "sha256": "6229e102bdd06f35980aebd8495016d744aab3b8cfd01ca4cba99db046d1828d",
+      "bytes": 926
+    },
+    {
+      "path": "assets/behavior.example.json",
+      "sha256": "85f551637d72748d70ec30e7945649e00e5ecab6a13c58c8c0c475ee752e0206",
+      "bytes": 18058
+    },
+    {
+      "path": "assets/discovery.example.json",
+      "sha256": "cd6c38d27f19870ff8b2dd62ef7dd15fc7a2e28683e5b938bbc060fa19618a9d",
+      "bytes": 3474
+    },
+    {
+      "path": "assets/intent.template.json",
+      "sha256": "afd1fec40cd85a4935a091dbb5c4fe9866088c7b5e9a126600529aab1d3511f0",
+      "bytes": 458
+    },
+    {
+      "path": "assets/ownership.example.json",
+      "sha256": "f8840f784ff76fd8ed536ac23a4c9135b04b98154ca3eb3319e4bfae82b51cd7",
+      "bytes": 1080
+    },
+    {
+      "path": "assets/statechart.example.py",
+      "sha256": "e5c567a185970d21ac1cb8ec980f39689cb1072d66f3e81daab350c3df057ef0",
+      "bytes": 7221
+    },
+    {
+      "path": "assets/stategraph-viewer/ELK-LICENSE.md",
+      "sha256": "637e81f4a1b6b4079535c499fca05e238cf7605c1ff5b76d60d7da7ce96700c9",
+      "bytes": 14443
+    },
+    {
+      "path": "assets/stategraph-viewer/PIXI-LICENSE.txt",
+      "sha256": "5ce7447bc57f7349ffc48338782fbcabe613696e00712b20d66bc58e780f9473",
+      "bytes": 1092
+    },
+    {
+      "path": "assets/stategraph-viewer/analysis.js",
+      "sha256": "57730e3511496faef6a37d777f5524983259f4ff4a06f19e8552f1d1b85a73fb",
+      "bytes": 6475
+    },
+    {
+      "path": "assets/stategraph-viewer/conversation.js",
+      "sha256": "58c1f4e2bf1ec38bffe962e88a7f406315f4e5075f8aa0d5a6fc543955afff03",
+      "bytes": 2462
+    },
+    {
+      "path": "assets/stategraph-viewer/elk-worker.min.js",
+      "sha256": "e4f5c51c6f2fd564bb64e52e81c4a85a316ef2f24f8b90e1db5eb886c765b030",
+      "bytes": 1595334
+    },
+    {
+      "path": "assets/stategraph-viewer/elk.bundled.js",
+      "sha256": "1222e44f953ce7746af23801e723708f8e6f436b8b377a6a5fc7552f34a307b3",
+      "bytes": 1609707
+    },
+    {
+      "path": "assets/stategraph-viewer/glyphs.js",
+      "sha256": "2447291d96547e31885e40563992a5763d2da5254b2f99e7c13e58ab5020c131",
+      "bytes": 5067
+    },
+    {
+      "path": "assets/stategraph-viewer/graph-core.js",
+      "sha256": "a9d28f0e5fc4b6ab56cc03c3bac47c0bc56a688e17d8113147dd56ed46dbda0d",
+      "bytes": 27479
+    },
+    {
+      "path": "assets/stategraph-viewer/i18n.js",
+      "sha256": "0882f7489617279c66569245ff93aa20b3637a4068bacfce6a034e2e18dea68c",
+      "bytes": 3035
+    },
+    {
+      "path": "assets/stategraph-viewer/index.html",
+      "sha256": "5557fd28ebfa8df1d72d21a175c9130e64a2e13bb6be544ac14010cf114b29b4",
+      "bytes": 9588
+    },
+    {
+      "path": "assets/stategraph-viewer/layout.js",
+      "sha256": "39a97787004024b06720f44122b96a0bcb0e939b5d46b9a21ad1b1017f2f9154",
+      "bytes": 32511
+    },
+    {
+      "path": "assets/stategraph-viewer/messages.zh-CN.js",
+      "sha256": "46debebc176f426997183fa4540aeb5f99554e2587453c091202e69460826555",
+      "bytes": 14886
+    },
+    {
+      "path": "assets/stategraph-viewer/pixi.min.js",
+      "sha256": "06d9ef9823e743518793083c296d801e752db128cb1f519fbabe37e1259567ea",
+      "bytes": 840663
+    },
+    {
+      "path": "assets/stategraph-viewer/polling.js",
+      "sha256": "4afd72f3ad9368350880da2c92b0b564ca795610c70f3e331d9e8d9f896249f5",
+      "bytes": 619
+    },
+    {
+      "path": "assets/stategraph-viewer/preferences.js",
+      "sha256": "9abb6978c067050d39afc9f76c3b2f49b5cca86e340d99fb5f333924580dce16",
+      "bytes": 4273
+    },
+    {
+      "path": "assets/stategraph-viewer/recording.js",
+      "sha256": "cddfca0db48b18719f90a3b049e4338adf1527c1918a89ab235d8f8b576c7615",
+      "bytes": 8561
+    },
+    {
+      "path": "assets/stategraph-viewer/renderer.js",
+      "sha256": "19ce2ddf8a149e2fde4fbf5bf0b38b709ac2daad682c6105f8bbc48857d36496",
+      "bytes": 20684
+    },
+    {
+      "path": "assets/stategraph-viewer/replay-steps.js",
+      "sha256": "1d2d36a8ff59f8c42bb2c0939f7d96886f8402be50cd8c6f1b99631b9a76ee3a",
+      "bytes": 12074
+    },
+    {
+      "path": "assets/stategraph-viewer/runtime-frames.js",
+      "sha256": "8846ae6fc028d7aecb7359ae77b4773af564d61f1ebb0840316ed859e903b010",
+      "bytes": 2421
+    },
+    {
+      "path": "assets/stategraph-viewer/viewer.css",
+      "sha256": "70af32f30415c4256017f80e6d795653c504f9186185e56f08b069dff7a0c49b",
+      "bytes": 16378
+    },
+    {
+      "path": "assets/stategraph-viewer/viewer.js",
+      "sha256": "025a1bfe54aa0edcb2dc7cb26d56aa6d1e4861fcbcc942df3d47f2adcb6d0e2c",
+      "bytes": 69113
+    },
+    {
+      "path": "assets/sync.example.json",
+      "sha256": "e7a787b9b661c6ddbfb360be96a0ad734ea2e4d0f27456044ba9a0cb16cd13cd",
+      "bytes": 2185
+    },
+    {
+      "path": "assets/whitebox.example.json",
+      "sha256": "ef3404dea7197de98ec59b059f0f9dd013328197889b33593f845029083967be",
+      "bytes": 1152
+    },
+    {
+      "path": "assets/worknet.example.json",
+      "sha256": "0abf49868136a38f9b3a2d0b3ee6ab4143811a9d47176ef9d6c64c12e771e10d",
+      "bytes": 3127
+    },
+    {
+      "path": "references/authorization-patterns.md",
+      "sha256": "61df190f9ccfe24fa4eece3930db7939bfac749289fc8b6291a353333e0df4ca",
+      "bytes": 7430
+    },
+    {
+      "path": "references/behavior-model.md",
+      "sha256": "e3aaa55079c4e8966926b89f042f6884e2880d92333fd067a89246a4cd5165fe",
+      "bytes": 3944
+    },
+    {
+      "path": "references/cochange.md",
+      "sha256": "341124b0a609c8f548be7ce03af0c40e01679f4e9062a0b51acfcee936f09c9b",
+      "bytes": 8639
+    },
+    {
+      "path": "references/continuous-development.md",
+      "sha256": "cf056c9ae0b898f3dbf6543ec74a7ac90ce8bc70396b62846e63c49e650a5762",
+      "bytes": 10454
+    },
+    {
+      "path": "references/conversation-web.md",
+      "sha256": "eca95304f1d96124fa52cb27c04c29513b92baf64f21ad54bb1591f5eb68b8bf",
+      "bytes": 5647
+    },
+    {
+      "path": "references/developer-workflow.md",
+      "sha256": "71cc88051d1b27bce67230e8d8215106a386c516e37774b18de3766a0edb81a7",
+      "bytes": 2872
+    },
+    {
+      "path": "references/focus-and-sharing.md",
+      "sha256": "c7bc486812685592187a1800e5f7e5d35f5a4a78cd0c293614e654d7782e92ec",
+      "bytes": 2833
+    },
+    {
+      "path": "references/hierarchical-graph.md",
+      "sha256": "9efd2276f70bbed6dfa914ae4cd3d6492fb94fbef07bd11ae6adafca478452a2",
+      "bytes": 8592
+    },
+    {
+      "path": "references/implementation-coverage.md",
+      "sha256": "534ea5949641e3e938579e81949f38a3ee23b160b4421504bdc686ce7ec045a9",
+      "bytes": 3666
+    },
+    {
+      "path": "references/independent-python.md",
+      "sha256": "d4e9bb184e7d779f2c838deeff55066b24fce31b2cfaeaabe3ec026178bc7e50",
+      "bytes": 7874
+    },
+    {
+      "path": "references/instrumentation.md",
+      "sha256": "859ecfe535bc8245bea95bbca9db56d75e15d0263873410cd1a5aea41b790fb9",
+      "bytes": 1873
+    },
+    {
+      "path": "references/integrated-execution.md",
+      "sha256": "c91d457dd5a26c3b55c9b4d44169efe4a5c0a020fbc25f85139432e58ad72522",
+      "bytes": 4510
+    },
+    {
+      "path": "references/language-policy.md",
+      "sha256": "957ab3c9b9019d0b10d6e0daade2b501bad2d679b5a03d33cbe369f7647f1d39",
+      "bytes": 1562
+    },
+    {
+      "path": "references/mapping-contract.md",
+      "sha256": "6ded134d2439c6b47cd40aad8ff5f9d739ae93fb2590fac02addfc878936d916",
+      "bytes": 2915
+    },
+    {
+      "path": "references/model.md",
+      "sha256": "a00321c60af767867d555daf6c1806f69ecd851b28287c770cf4363e7b9dabd1",
+      "bytes": 463
+    },
+    {
+      "path": "references/multilanguage.md",
+      "sha256": "20de4c62bf2f9d912f8e3b68266dddabab5c019974b83d4bd8ec41eef48df974",
+      "bytes": 7211
+    },
+    {
+      "path": "references/observer-exclusion.md",
+      "sha256": "4d3b9c8f537c7a1d3c0c755b55dd668525ad455be2bf94dbff6d6cbf2a77fbb7",
+      "bytes": 2992
+    },
+    {
+      "path": "references/rebac-graph.md",
+      "sha256": "e532f7662cc04186b90695bc4be359ccc9573486d8e7cbd76df4273716f930ee",
+      "bytes": 6447
+    },
+    {
+      "path": "references/recorded-analysis.md",
+      "sha256": "855eaf8c9a96e98edb24be2ea8ed67235a350035cc44e056be9b2cdb6f8c0d13",
+      "bytes": 8407
+    },
+    {
+      "path": "references/requirements-dialogue.md",
+      "sha256": "e56389fe9a12fab7ddf114c89d9928e502482d2bd6bb0309fe9fb32e43c0fab8",
+      "bytes": 7167
+    },
+    {
+      "path": "references/runtime-statechart.md",
+      "sha256": "b3d13bbcb6a3ee21112dc2da0180f06aac1f6d4d9b5b83196ca46847a26dbaef",
+      "bytes": 3189
+    },
+    {
+      "path": "references/semantic-pins.md",
+      "sha256": "1a839aee9ebf3c0ac5903261f1f0e449d62ccdc77cd29c9879c85af5f745e9bf",
+      "bytes": 2635
+    },
+    {
+      "path": "references/source-isolation.md",
+      "sha256": "34acb8de424b575f40443836f2a5de9f44df342ec3c36acb59f1161ccb4423ae",
+      "bytes": 3935
+    },
+    {
+      "path": "references/types-rules-capture.md",
+      "sha256": "4f14a6dd890b015771824aed3764787aef7a01b6e1910f7b3cdc548cd3d0ffbc",
+      "bytes": 8024
+    },
+    {
+      "path": "references/validation-rules.md",
+      "sha256": "98e3fe0663191d82545850128d616cb469262b41619088b5003dd505563eaa77",
+      "bytes": 4230
+    },
+    {
+      "path": "references/workflow.md",
+      "sha256": "d75ac6688faa7b380aa09efbd32dac3b2fefe6572889066eaadc1a05593717f1",
+      "bytes": 558
+    },
+    {
+      "path": "references/worknets.md",
+      "sha256": "f2270ace26bfd5fd93f84617153c35689f2d083c59d481d924b8655de7514896",
+      "bytes": 3052
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "ef1d3e295d8e283e321a82a0894cc9737334530120460aae835007b2a79a20bf",
+      "bytes": 101
+    },
+    {
+      "path": "scripts/architecture_guard.py",
+      "sha256": "d286426262be62dd86b74f74f71c708a5bb4aedfb7449494f2d9ee1553b72d42",
+      "bytes": 445
+    },
+    {
+      "path": "scripts/behavior_model.py",
+      "sha256": "58b765d04b49a749aaefe0d769add0e228a5f333d87a7bb3acc54828eabbe213",
+      "bytes": 431
+    },
+    {
+      "path": "scripts/bo.py",
+      "sha256": "da35e40b672549ed3aef93df2e2422dac7f769f144c37450332bac5e23c78876",
+      "bytes": 3413
+    },
+    {
+      "path": "scripts/bo_contracts.py",
+      "sha256": "91cc0613351d8496414fdbe23dd1710ca027f83835de3c623fab814749982f34",
+      "bytes": 17632
+    },
+    {
+      "path": "scripts/bo_design.py",
+      "sha256": "2223740c2e14f2e681032984058976a1dbd6c4054a6907556c7913427fd6a13b",
+      "bytes": 417
+    },
+    {
+      "path": "scripts/bo_observer/__init__.py",
+      "sha256": "13155505111c5fdb9661c500bb3367aa73b93ad49d3535d6e49164c433f1b18c",
+      "bytes": 79
+    },
+    {
+      "path": "scripts/bo_observer/adapters/__init__.py",
+      "sha256": "f0e25199a4ea5a129a934411fe7ff724c051c20b04f193887c7528a3b4873f61",
+      "bytes": 89
+    },
+    {
+      "path": "scripts/bo_observer/adapters/javascript/bo_runtime.mjs",
+      "sha256": "5b7cf603b68e0f3286df7a233f311fe4db9d8ee4ffa03751e9b22a806b86285b",
+      "bytes": 10946
+    },
+    {
+      "path": "scripts/bo_observer/adapters/javascript/package-lock.json",
+      "sha256": "4c2e797d1e8c70fa95ac6b0d4b2b5ec835d2fa12e44a81a93b33448fc33b9150",
+      "bytes": 8355
+    },
+    {
+      "path": "scripts/bo_observer/adapters/javascript/package.json",
+      "sha256": "74c6788e15cfb07e70b11d95439a818c4f56fa32f1a6a5baed9fe8d1bf4a0570",
+      "bytes": 236
+    },
+    {
+      "path": "scripts/bo_observer/adapters/javascript/scan.mjs",
+      "sha256": "286637ed34af12eaecd8a37ae682645621c79409cdee30bdeb2cfd664fe832fa",
+      "bytes": 11127
+    },
+    {
+      "path": "scripts/bo_observer/adapters/python/__init__.py",
+      "sha256": "c6a3ee47a4c505a43adab164e23526237319b43eb0d157479a8cd4166774e831",
+      "bytes": 54
+    },
+    {
+      "path": "scripts/bo_observer/adapters/python/bo_executor.py",
+      "sha256": "77b31bfbafac4729bf3c743c7e6011180bff84af78d673bf6b3f2fbd08186895",
+      "bytes": 2642
+    },
+    {
+      "path": "scripts/bo_observer/adapters/python/bo_probe.py",
+      "sha256": "93a288e944b8e57538986c454877e47d34e6dda3e5bcf50cb908ac756e4a626c",
+      "bytes": 6149
+    },
+    {
+      "path": "scripts/bo_observer/delivery/__init__.py",
+      "sha256": "9caf141625be091786a81a9e4def451cdfce9713ac48e42c5ea5a05024c234d8",
+      "bytes": 26
+    },
+    {
+      "path": "scripts/bo_observer/delivery/architecture_guard.py",
+      "sha256": "be1cf74f4d524ff96fad460b1da57153ce8bb8b0887f07170a3af0bc551e2a9b",
+      "bytes": 10527
+    },
+    {
+      "path": "scripts/bo_observer/delivery/project_bundle.py",
+      "sha256": "61dfeb1dfabf21e23e12b70ef9c7c977b84c5a504f0e6a45a53e2d635fc680f0",
+      "bytes": 5347
+    },
+    {
+      "path": "scripts/bo_observer/development.py",
+      "sha256": "31b0b64ad843ac77b843dbaeff991fb02126673ebcd8ee3f2387af228fdebf78",
+      "bytes": 4732
+    },
+    {
+      "path": "scripts/bo_observer/graph/__init__.py",
+      "sha256": "76c4a5c43cd71a23505d400f742ddd11cb95fff821171002971a186cd7921dd4",
+      "bytes": 23
+    },
+    {
+      "path": "scripts/bo_observer/graph/behavior_model.py",
+      "sha256": "d1dfb832125d386ed3131925eed172998f92487d9bba1c8d507b41c3bf69bde1",
+      "bytes": 10940
+    },
+    {
+      "path": "scripts/bo_observer/graph/code_structure.py",
+      "sha256": "c8378ff421c97093358d6790084acf30f9fcdc03b42a7465a06e9916f865b82d",
+      "bytes": 15127
+    },
+    {
+      "path": "scripts/bo_observer/graph/focus_graph.py",
+      "sha256": "ffe0f438d84ec4db6a57ffd6e1f303693ef43dc09d812542827919cfb8e70c90",
+      "bytes": 10150
+    },
+    {
+      "path": "scripts/bo_observer/graph/statechart_contract.py",
+      "sha256": "3c6861ab08021eaed30153b589d147ad2ded00392bacb48b4767e39303a200ab",
+      "bytes": 584
+    },
+    {
+      "path": "scripts/bo_observer/graph/worknet_contract.py",
+      "sha256": "19a70d82022f2c2af675f64e7d955b13f5f543949b40c7813b657cd96b0e8193",
+      "bytes": 3960
+    },
+    {
+      "path": "scripts/bo_observer/model_io.py",
+      "sha256": "72b6341ed435d1a3048c4bc5ddfb3a51f1b8ad2352c4ffdc1bf64b828470f993",
+      "bytes": 371
+    },
+    {
+      "path": "scripts/bo_observer/observation/__init__.py",
+      "sha256": "2c26d0b146bbcc7e1dfef52862cc10c1048f36bffc8c139e74cfc07cc2b3f43f",
+      "bytes": 29
+    },
+    {
+      "path": "scripts/bo_observer/observation/bo_retention.py",
+      "sha256": "b5a0f17bd789bc3f8d81cf8089f218344040d2ad29577bb5865c7b870bac86e9",
+      "bytes": 3439
+    },
+    {
+      "path": "scripts/bo_observer/observation/native_ingress.py",
+      "sha256": "12031b70dedb6c923c261601315cf2c92cdd3a86a2bb97e54826632aeeef52d9",
+      "bytes": 2231
+    },
+    {
+      "path": "scripts/bo_observer/observation/observation_scope.py",
+      "sha256": "3a54a4cf76a63f65907c09756b4f8fdbe2872abedb1b4eafb792617ea4e0680c",
+      "bytes": 3075
+    },
+    {
+      "path": "scripts/bo_observer/observation/probe.py",
+      "sha256": "d9e00489a609a6ed822e88ca28a5b49d2ef64a3da06e264bacea6b998dfeb54f",
+      "bytes": 5652
+    },
+    {
+      "path": "scripts/bo_observer/observation/recording_session.py",
+      "sha256": "a4a85eb08f39630ccc3d99ddbfcdedb79de0a39ecf6acf99b1f58d046cee71f6",
+      "bytes": 19262
+    },
+    {
+      "path": "scripts/bo_observer/observation/runtime_frames.py",
+      "sha256": "2d18bda000e6715e13cc78ee73ebad9bf30222a88334eea9ec2e64b98d78e53b",
+      "bytes": 3558
+    },
+    {
+      "path": "scripts/bo_observer/observation/semantic_probe.py",
+      "sha256": "8e2ce300f50302f6e2e9c6dff706e26fac8a9394ad74f535624ab2f0d5b82b18",
+      "bytes": 7253
+    },
+    {
+      "path": "scripts/bo_observer/protocol.py",
+      "sha256": "d770d40220727f7326ea9cabd27cf94632b51cb8f5f16d35701e4c39ee1f4dcf",
+      "bytes": 3955
+    },
+    {
+      "path": "scripts/bo_observer/schemas/event.schema.json",
+      "sha256": "20bf9d8d0007909c0b09a48094293a9fa0a0c03c4f8102eed91bcb1ddc9bc8dc",
+      "bytes": 2768
+    },
+    {
+      "path": "scripts/bo_observer/schemas/model.schema.json",
+      "sha256": "22a69770e9e6e6e0253178f89fab8e202afee1fc76facafa3aa01bbbb53de379",
+      "bytes": 3013
+    },
+    {
+      "path": "scripts/bo_observer/schemas/project.schema.json",
+      "sha256": "9d7424aab589bc426334c993c4b5f7aaf654a174886a8087d909e979fa2b55c2",
+      "bytes": 4683
+    },
+    {
+      "path": "scripts/bo_observer/schemas/snapshot.schema.json",
+      "sha256": "0bd0236ca71516791aff964ddeba428387f21d878fee42eb2092c230ab4c208e",
+      "bytes": 1783
+    },
+    {
+      "path": "scripts/bo_observer/schemas/source.schema.json",
+      "sha256": "beea2f9be4fa2f5884d92387de0403d47df1c08497a522d36e3b466fbbabafbf",
+      "bytes": 707
+    },
+    {
+      "path": "scripts/bo_observer/service.py",
+      "sha256": "66de641c596a704b4d9e5145395a33c17ec6559b8895aa136c24a0a82ea40d30",
+      "bytes": 16264
+    },
+    {
+      "path": "scripts/bo_observer/sources.py",
+      "sha256": "ed98471e70d7754075a3a460c3aa395bfce0e5012d6770662836963499c9df85",
+      "bytes": 6675
+    },
+    {
+      "path": "scripts/bo_observer/web/__init__.py",
+      "sha256": "e30010b1ba3b74b5561b63146649ccaa753c929169ceacd13fca74f2062ae84b",
+      "bytes": 21
+    },
+    {
+      "path": "scripts/bo_observer/web/bo_design.py",
+      "sha256": "8584a6afd1e0e84e80c4b8ae72f3205ee013c7669b1f8d1d0c03ee1750c7a7e7",
+      "bytes": 10426
+    },
+    {
+      "path": "scripts/bo_observer/web/bo_web.py",
+      "sha256": "7cf2f9dcf8b6b1ee35683ea5a77cc921414c86189dfd1713b0b71756431a4351",
+      "bytes": 8574
+    },
+    {
+      "path": "scripts/bo_observer/web/view_preferences.py",
+      "sha256": "f62f6cd2de51f51d17f38bc9d15dee4535b2c2344ac7ec1b0f8957ab0796cdd3",
+      "bytes": 4566
+    },
+    {
+      "path": "scripts/bo_observer/workflow/__init__.py",
+      "sha256": "9373a867af4c7baa99e7ce242c0a2673c65bbc1b90406c655bd29a6056ff0447",
+      "bytes": 26
+    },
+    {
+      "path": "scripts/bo_observer/workflow/bo_sync.py",
+      "sha256": "49c51e3256a27b317060c4187d9d637230bf07dc8a735d9ed85d62f1b1468309",
+      "bytes": 11845
+    },
+    {
+      "path": "scripts/bo_observer/workflow/change_sync.py",
+      "sha256": "1b8fe6de90776c05c6fbc32a9537036cb1be6617e4e0cdd0438572d63de886d9",
+      "bytes": 21779
+    },
+    {
+      "path": "scripts/bo_observer/workflow/implementation_coverage.py",
+      "sha256": "e644363a1afee7c64b03eb7223a8a7351ed2adeaf09fd6e3109df442d7c896a5",
+      "bytes": 20205
+    },
+    {
+      "path": "scripts/bo_observer/workflow/mapping_contract.py",
+      "sha256": "be03b46d04ff30c6d8664d987a9b66c2ad907226e26a053318a2f9f2656dc7ab",
+      "bytes": 9018
+    },
+    {
+      "path": "scripts/bo_observer/workflow/requirements_dialogue.py",
+      "sha256": "88a0603db9231a64e73b91db42ea8da2ef42eaffb2b4b309ec86f3b33d627f12",
+      "bytes": 12904
+    },
+    {
+      "path": "scripts/bo_observer/workflow/source_migration.py",
+      "sha256": "3e45a33342e969c36b006c8859c11790b87aaa9f20f226be5f87cbe413151d2b",
+      "bytes": 2609
+    },
+    {
+      "path": "scripts/bo_observer/workflow/sync_config.py",
+      "sha256": "89699fbf10b69cc960f45f21ae1e9274ee8b4efd35e1dd0abef4d641be5e443f",
+      "bytes": 7155
+    },
+    {
+      "path": "scripts/bo_observer/workflow/sync_io.py",
+      "sha256": "80cc18e4283816163a899396401a26a614ec94807cf65021f4b51dedbf923e8f",
+      "bytes": 1297
+    },
+    {
+      "path": "scripts/bo_observer/workflow/sync_verify.py",
+      "sha256": "3a04cea9f882c8170a2ec4a7b5801f3844d8d258944094b8f5cccfe9b1d8b38e",
+      "bytes": 11382
+    },
+    {
+      "path": "scripts/bo_observer/workflow/whitebox_contract.py",
+      "sha256": "3cc0ca98cd3a8b796503e6ec8dbbb0ea03c8220d0c38913e6e4b1247d0304658",
+      "bytes": 13148
+    },
+    {
+      "path": "scripts/bo_retention.py",
+      "sha256": "b5b27e1115167adb81b35b4cf2c61680cd859cae7ef2dd58bf3e2f235785884f",
+      "bytes": 439
+    },
+    {
+      "path": "scripts/bo_runtime.py",
+      "sha256": "7c16cf2e58971309afb3da9fc41b96cb58b6a48d6113d3fff14e93fb5e7a02c9",
+      "bytes": 1216
+    },
+    {
+      "path": "scripts/bo_stategraph.py",
+      "sha256": "0571254ae4242ad3f03d8433ff67edf79b46670518492d1a602874a24985cc09",
+      "bytes": 21154
+    },
+    {
+      "path": "scripts/bo_sync.py",
+      "sha256": "96b9b543f11362895fa413a1ed671016de2d53765cce81069b119dfe79613709",
+      "bytes": 423
+    },
+    {
+      "path": "scripts/bo_upgrade.py",
+      "sha256": "15c149ea5fbaf489d565c5974a2af452d078a55cf68da09050d53ff80ec8691b",
+      "bytes": 7812
+    },
+    {
+      "path": "scripts/bo_web.py",
+      "sha256": "69cfef16323b6290603f14121a508b8eaa370f5e474ce810a42e64863a6be911",
+      "bytes": 411
+    },
+    {
+      "path": "scripts/change_sync.py",
+      "sha256": "3e55130cdc7493c9c82c9330da84da97776d9dcb01f2ef6a949090a207930e51",
+      "bytes": 431
+    },
+    {
+      "path": "scripts/code_structure.py",
+      "sha256": "5b6f2533e039baaf44a3eae8d1e617787c0bfa11a7793b66665385348476b159",
+      "bytes": 431
+    },
+    {
+      "path": "scripts/execution_contract.py",
+      "sha256": "9502b2d348bb8ee00c05288ca3d064d151365292fdef597c156c178871635b78",
+      "bytes": 7703
+    },
+    {
+      "path": "scripts/focus_graph.py",
+      "sha256": "9be6169b13664a366d527e4af23377eaf167287ee496e98c12215e68da43b2ad",
+      "bytes": 425
+    },
+    {
+      "path": "scripts/implementation_coverage.py",
+      "sha256": "2b16734031ecd43563f7d9281f85b4a233138f8f725d045a4b0307111534af3f",
+      "bytes": 455
+    },
+    {
+      "path": "scripts/mapping_contract.py",
+      "sha256": "648fdc21755417bed6641917b57c4cd9766727bf6032c44cae0bcf4f743c643e",
+      "bytes": 441
+    },
+    {
+      "path": "scripts/observation_scope.py",
+      "sha256": "019c72c63fa66d360cfc08eff973351b1d5f6cf28ea8a8ab754beba9d6f67e0f",
+      "bytes": 449
+    },
+    {
+      "path": "scripts/probe.py",
+      "sha256": "972030ee035894aef21c756cda2d269a7a394f79f018ea2d81cd58471e830858",
+      "bytes": 425
+    },
+    {
+      "path": "scripts/project_bundle.py",
+      "sha256": "8865ff80089fb4c2517d27c984cdaa4dcc33a2ca1b7ecf7d1107cda32093c5d7",
+      "bytes": 437
+    },
+    {
+      "path": "scripts/recording_session.py",
+      "sha256": "cb4af8c171062e2d9278c62cec1981de95867351bf088423b169dca949ca1c29",
+      "bytes": 449
+    },
+    {
+      "path": "scripts/requirements_dialogue.py",
+      "sha256": "b23784a46a49b0388b05477cc0107754c2bb6d66621a1f3027ad2d07a656cb8b",
+      "bytes": 451
+    },
+    {
+      "path": "scripts/runtime_frames.py",
+      "sha256": "06e5f532226f3bf67b422207e96c2d2bf3917fa72f05a3d2c969fcff5a6d7ab5",
+      "bytes": 443
+    },
+    {
+      "path": "scripts/semantic_probe.py",
+      "sha256": "0fd0e3fdea1e6f2e02d16efed24b64272deb90fd20394d8952ebaa6eb2935f2e",
+      "bytes": 443
+    },
+    {
+      "path": "scripts/source_migration.py",
+      "sha256": "031707ea46efc7d82c2af60385b09f7882b3b61b65ca12d29972d7a79c9ff9fa",
+      "bytes": 441
+    },
+    {
+      "path": "scripts/statechart_contract.py",
+      "sha256": "ebfa35395c1416d4807dce68e2319a4907bf987e9d0a1858a3a6232a9209e600",
+      "bytes": 441
+    },
+    {
+      "path": "scripts/sync_config.py",
+      "sha256": "c2f76692f8b2d6c38b7f48792b72eb10b58e7e391dd735ddd2a89af3ae60e454",
+      "bytes": 431
+    },
+    {
+      "path": "scripts/sync_io.py",
+      "sha256": "b53eee2eafb180096a9c039f47a2f54680157b4835cef22c55448dd28c28bc31",
+      "bytes": 423
+    },
+    {
+      "path": "scripts/sync_verify.py",
+      "sha256": "1a40d28dec712699e050089f73f239d71a70b4f2f01a330d1d883d528afe897e",
+      "bytes": 431
+    },
+    {
+      "path": "scripts/view_preferences.py",
+      "sha256": "4ccff5eadcde11634ea83c80a2479a68f7f608167544478d31b24eebd38d86ff",
+      "bytes": 431
+    },
+    {
+      "path": "scripts/whitebox_contract.py",
+      "sha256": "de29f37e83125aff84811769295d5b996907600196f020dd7bc778f1820f37fe",
+      "bytes": 443
+    },
+    {
+      "path": "scripts/worknet_contract.py",
+      "sha256": "639aad64da2d7ea84de25931f92e19181230856303d51302b7538f83f9d7b548",
+      "bytes": 435
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "candidate_id": "7a2fed494179675256ff1076b8966d9086e84d02c829ffb2002494821b2241b7",
+  "changed_files": [
+    "bo_stategraph/runtime-version.json",
+    "ownership.json"
+  ],
+  "changed_symbols": [],
+  "affected_callers": [],
+  "affected_nodes": [],
+  "unmapped_changed_symbols": [],
+  "unmapped_implementation_symbols": [
+    "app/ports.py::BOEvents",
+    "app/ports.py::BOEvents.__init__",
+    "app/ports.py::BOEvents.bo_emit",
+    "app/service.py::Delivery",
+    "app/store.py::Store",
+    "bo_stategraph/workflow.py::ActivityExecution",
+    "bo_stategraph/workflow.py::ActivityState",
+    "bo_stategraph/workflow.py::Phase"
+  ],
+  "changed_requirements": [],
+  "unresolved_call_count": 243,
+  "meaning": "Potential impact plus authored abstraction mapping; semantic truth still needs contract and runtime checks.",
+  "errors": [],
+  "required_classification": [
+    "app/ports.py::BOEvents",
+    "app/ports.py::BOEvents.__init__",
+    "app/ports.py::BOEvents.bo_emit",
+    "app/service.py::Delivery",
+    "app/store.py::Store",
+    "bo_stategraph/workflow.py::ActivityExecution",
+    "bo_stategraph/workflow.py::ActivityState",
+    "bo_stategraph/workflow.py::Phase"
+  ],
+  "review_errors": [],
+  "stategraph": {
+    "module": "bo_stategraph/__init__.py",
+    "development_mode": "drive",
+    "execution_mode": "drive",
+    "decision_source": "user",
+    "decision": "合成示例的模拟需求方选择：继续基于状态图驱动开发；两种模式均保留监控及映射检查。"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "tree": "a1533910fe3c4f1a8726b049eb43bb10c9c5b36a",
+  "source": "git archive of staged tree",
+  "command": "python tools/check_package.py",
+  "exit_code": 0,
+  "stdout": "Package references and 83 copied runtime modules match.\n",
+  "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+}

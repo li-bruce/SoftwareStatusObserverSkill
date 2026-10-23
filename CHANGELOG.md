@@ -6,6 +6,9 @@
 
 ### English presentation and independent gallery trials
 
+- Publish the bilingual introduction through GitHub Pages. Preserve exact runtime-copy bytes across clean checkouts; validate historical references by transcript hash and archived members instead of local absolute paths. Add six portability regression cases.
+- Refresh the multilingual example's Vue/Vite lockfile and rerun its 18 native cases; npm reports no known advisories for the updated example at publication.
+- Fix nonblocking JavaScript parser input, a clean-clone regression fixture, and archive source byte consistency. Preserve failure/repair/retest records in the [publication review](docs/review/github-publication-v0.6.0/README.md).
 - Add an illustrated bilingual product introduction with interactive graph layers, mixed views, drive/observe diagrams, iteration checks, and an explicitly illustrative replay.
 - Require a conversation diagram and verified Web graph address before implementing confirmed scope. Generate both from the same discovery model; keep confirmation in conversation.
 - Maintain English source, instructions, and default documentation; preserve original historical evidence and user labels. Persist the viewer's English/Chinese preference in project configuration.

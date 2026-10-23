@@ -1,6 +1,5 @@
 // Parse source only: no import, evaluation, build or execution of application code.
 import {createHash} from 'node:crypto';
-import {readFileSync} from 'node:fs';
 import {createRequire} from 'node:module';
 import {pathToFileURL} from 'node:url';
 import path from 'node:path';
@@ -148,7 +147,11 @@ function parseUnit(path, original) {
   return {imports,symbols,declarations:[],shadowed_globals:[],language:'javascript',adapter:`typescript@${ts.version};vue@3.5.22`};
 }
 
-const request=JSON.parse(readFileSync(0,'utf8'));
+// Pipes can be nonblocking and arrive in several writes. Decode only after EOF
+// so a split UTF-8 character and a temporary lack of data are both handled.
+const input=[];
+for await (const chunk of process.stdin) input.push(chunk);
+const request=JSON.parse(Buffer.concat(input).toString('utf8'));
 const units={},errors=[];
 for(const file of request.files) {
   try { units[file.path]=parseUnit(file.path,file.source); }

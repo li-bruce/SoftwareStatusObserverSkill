@@ -1,0 +1,16 @@
+{
+  "pagesCommit": "5a51ae96c1880168fc4069b7f3f65fe3fa052f01",
+  "githubUrl": "https://li-bruce.github.io/SoftwareStatusObserverSkill/",
+  "englishAndChineseRendered": true,
+  "languageButtonUpdatesDocumentAndGuide": true,
+  "chineseRetainedOnUrlWithoutLanguage": true,
+  "mixedFilter": {
+    "language": "zh-CN",
+    "selectedView": "混合视图",
+    "stateNodes": 0,
+    "url": "https://liblog.vip/SoftwareStatusObserverSkill/",
+    "usageLink": "https://github.com/li-bruce/SoftwareStatusObserverSkill/blob/main/docs/usage.zh-CN.md"
+  },
+  "console": [],
+  "scope": "Desktop in-app browser; concept site, not an application recording."
+}

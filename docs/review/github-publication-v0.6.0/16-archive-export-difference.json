@@ -1,0 +1,42 @@
+[
+  {
+    "path": "implementation.json",
+    "expected": "3c0e5409553fd1d7bd7526a45647dde30b53f2fa95660f146c5b9bc7b9b8d0a0",
+    "actual": "7197a5c1869392e1b63cbdf4deb992352f0e2e7b183291219a6d7114f98f942d",
+    "original_crlf": 1414,
+    "export_crlf": 0,
+    "newline_only": true
+  },
+  {
+    "path": "mapping.json",
+    "expected": "7e94a4eef265760ed5335ba09445622075dbc69657a0762d8ff279a7532af08d",
+    "actual": "a54fd532fc6f56bfd0f28209c02745da27c959ddfef4da0ab3357a10a80967e2",
+    "original_crlf": 199,
+    "export_crlf": 0,
+    "newline_only": true
+  },
+  {
+    "path": "sync.json",
+    "expected": "cec0af675a74d535b8e49c64128ce169ac594c657b8fc2772757b068bf18665e",
+    "actual": "befc4a5c6c79bb8b7989bcb8685ad03fddceeeb8dc6b629e5bdd16494a72617a",
+    "original_crlf": 245,
+    "export_crlf": 0,
+    "newline_only": true
+  },
+  {
+    "path": "tooling/build_model.py",
+    "expected": "099e3665e9162b8869341aab7fd72e6c269106b45e90c191635c3402bc711715",
+    "actual": "45aff3a0751090be96efa92c28c301c9eabebea17fc47756a656fb4a98def457",
+    "original_crlf": 220,
+    "export_crlf": 0,
+    "newline_only": true
+  },
+  {
+    "path": "tooling/frontend_nodes.json",
+    "expected": "719f859d04cfb514ef462606c6755dfd4e114d8433b87f58bd5ba667e7b0a9ad",
+    "actual": "aca155b1e5c382211f81bfc63b20c4ebd66b5b097c1837d92bef8fbae833631f",
+    "original_crlf": 61,
+    "export_crlf": 0,
+    "newline_only": true
+  }
+]

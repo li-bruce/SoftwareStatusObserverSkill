@@ -151,14 +151,10 @@
     "excluded_entrypoints": {},
     "excluded_implementations": []
   },
-  "changed_files": [
-    "app/checks.py",
-    "app/service.py",
-    "bo_stategraph/workflow.py"
-  ],
+  "changed_files": [],
   "unregistered_files": [],
   "implementation_gaps": [],
-  "status": "needs_update",
+  "status": "current",
   "internal_prompt": "Review the listed implementation changes. Update affected business abstractions, states, function/parameter mappings, and probes. Do not omit new entrypoints because the old graph lacks them. Match features, parameters, and runtime cases through the implementation inventory. Exclusions must not bypass business implementation. Check real relations and filter boundaries in every view, then run project acceptance. Do not ask users to maintain observation files. Ask only when new business ambiguity appears.",
   "confirmations": {
     "user": [],
@@ -1415,39 +1411,7 @@
     "instruction": "Ask the user about business ambiguity; reconcile implementation bindings during coding. Do not recommend or expand business scope."
   },
   "ai_invocation": "host_or_coding_agent_required",
-  "affected_nodes": [
-    "change",
-    "code.0fc7de430e9f9b0b",
-    "code.40b4483bb7508823",
-    "code.52990f65c6aa2534",
-    "code.9ab020fa53084121",
-    "code.a583b3ad67e50561",
-    "code.abc699d67116f986",
-    "commit",
-    "execute",
-    "execution.abort",
-    "execution.advance",
-    "execution.finish",
-    "execution.init",
-    "execution.invariant",
-    "flow.checks",
-    "flow.commit",
-    "flow.input",
-    "flow.wait",
-    "implementation.d8b7a3081a2bb767",
-    "join",
-    "read",
-    "recheck",
-    "state.cancelled",
-    "state.checking",
-    "state.completed",
-    "state.draft",
-    "state.failed",
-    "state.ready",
-    "state.waiting",
-    "wait",
-    "workers"
-  ],
+  "affected_nodes": [],
   "unmapped_symbols": [
     "app/ports.py::BOEvents",
     "app/ports.py::BOEvents.__init__",
@@ -1458,5 +1422,5 @@
     "bo_stategraph/workflow.py::ActivityState",
     "bo_stategraph/workflow.py::Phase"
   ],
-  "candidate_id": "1198ccdf8440479494bd81a67715ee8a95e836093d2b811fa7a88ec47d997ca7"
+  "candidate_id": "7a2fed494179675256ff1076b8966d9086e84d02c829ffb2002494821b2241b7"
 }

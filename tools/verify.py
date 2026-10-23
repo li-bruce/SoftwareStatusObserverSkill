@@ -29,6 +29,7 @@ def main():
     run(ROOT, 'tools/test_refactor.py')
     run(ROOT, 'tools/test_implementation_coverage.py')
     run(ROOT, 'tools/test_observer_noise.py')
+    subprocess.run(['node', 'tools/test_source_pipe.mjs'], cwd=ROOT, check=True)
     run(ROOT, 'tools/test_multilanguage.py')
     run(ROOT, 'tools/verify_multilanguage.py')
     run(ROOT, 'tools/test_demo_launcher.py')

@@ -2,7 +2,7 @@
 
 The complete repository acceptance suite and both independent gallery trials passed their declared final scopes on 2026-10-23. Repository checks, application checks, actual browser evidence, and source-package checks are reported separately.
 
-The request combines English maintenance, a bilingual graph viewer, a conversation-first business diagram, an illustrated introduction, and two independent Python/Node gallery development trials. This acceptance record is included in [v0.6.0](../../releases/v0.6.0.md). Publication checks are recorded separately from the original local acceptance results.
+The request combines English maintenance, a bilingual graph viewer, a conversation-first business diagram, an illustrated introduction, and two independent Python/Node gallery development trials. This acceptance record is included in [v0.6.0](../../releases/v0.6.0.md). [Publication checks](../github-publication-v0.6.0/README.md) are recorded separately from the original local acceptance results.
 
 ## Review first
 
