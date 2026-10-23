@@ -54,6 +54,9 @@ def parse_unit(path, source):
     def walk(body, prefix="", class_name=None):
         for node in body:
             if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                # Declarations under if/try/loop/match blocks remain declarations
+                # of this lexical scope. Do not silently drop conditional code.
+                walk(ast.iter_child_nodes(node), prefix, class_name)
                 continue
             name = prefix + node.name
             if name in symbols:
@@ -74,6 +77,7 @@ def parse_unit(path, source):
                 "calls": [],
                 "predicates": [],
                 "fields": [],
+                "bases": [ast.unparse(base) for base in node.bases] if is_class else [],
             }
             item["entrypoints"] = [
                 ast.unparse(d)
@@ -189,11 +193,37 @@ def parse_unit(path, source):
         for n in tree.body
         if isinstance(n, (ast.Assign, ast.AnnAssign))
     ]
+    module_calls = []
+
+    class ModuleCalls(ast.NodeVisitor):
+        # Function bodies are indexed separately. Initializers and top-level
+        # conditionals remain syntactic candidates, regardless of execution.
+        def visit_FunctionDef(self, _):
+            pass
+
+        visit_AsyncFunctionDef = visit_FunctionDef
+        visit_ClassDef = visit_FunctionDef
+        visit_Lambda = visit_FunctionDef
+
+        def visit_Call(self, call):
+            module_calls.append(
+                {
+                    "expression": ast.unparse(call.func),
+                    "line": call.lineno,
+                    "column": call.col_offset,
+                    "args": [ast.unparse(a) for a in call.args],
+                    "keywords": {a.arg or "**": ast.unparse(a.value) for a in call.keywords},
+                }
+            )
+            self.generic_visit(call)
+
+    ModuleCalls().visit(tree)
     return {
         "imports": imports,
         "symbols": symbols,
         "declarations": declarations,
         "shadowed_globals": sorted(shadowed_globals),
+        "module_calls": module_calls,
     }
 
 

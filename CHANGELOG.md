@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased — code-vis, 2026-10-24
+
+- Add an optional source structure layer to the existing graph: files, classes, functions, parameters, imports, inheritance and individual call occurrences. Reuse the Python, TypeScript/React and Vue parsers.
+- Add **Local code** for a selected region and **Code structure** for the indexed source scope. Preserve node identities, layouts, filters and annotations. Show unresolved targets and explicit retrieval boundaries.
+- Refresh enabled indexes after source edits, including added/deleted files and syntax failures. Independently verify saved graph contents during iteration acceptance; reject stale or altered exports.
+- Keep source browsing and indexing outside business capture. Distinguish static source evidence from runtime observations and their build identities.
+- Retain failed attempts and repairs in [code structure acceptance](docs/review/code-vis/README.md), including actual browser recording/replay, source edits, installed examples and cross-language cases.
+
 ## Unreleased — db-vis, 2026-10-24
 
 - Add database structure, native queries, selected data transformations and transaction outcomes to the existing graph. Keep declaration, actual catalog and runtime evidence distinguishable.

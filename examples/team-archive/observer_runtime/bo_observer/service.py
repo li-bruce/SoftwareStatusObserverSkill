@@ -461,6 +461,8 @@ def make_server(session, port=8830, *, token=None, origins=(), assets=ASSETS):
                     )
                 if path == "/api/view":
                     return self.reply(200, session.view())
+                if path.startswith("/api/code/"):
+                    return self.reply(200, session.web.get(self.path))
                 if path in ("/api/stategraph", "/api/stategraph/export"):
                     return self.reply(200, session.export())
                 if path == "/api/preferences":

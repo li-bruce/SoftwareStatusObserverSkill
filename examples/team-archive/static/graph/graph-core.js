@@ -171,6 +171,7 @@ function staleBasis(node, view, last) {
   return fields.some((key) => last.basis?.[key] !== view.authority.basis?.[key]);
 }
 export function status(node, view, events, choice, configuration = null) {
+  if (node.code_role) return "declared";
   if (view.stage === "design") return "declared";
   if (node.referenceOf) node = { ...node, id: node.referenceOf };
   if (["query", "transform"].includes(node.data_role)) {
@@ -247,6 +248,18 @@ export function lines(node, view, events, choice, configuration = null) {
     const values = callValues(node, events);
     return dataLines(node, values.inputs, values.outputs, nodeEvents(node, events).length > 0);
   }
+  if (node.code_role)
+    return [
+      { text: node.summary || node.source?.path || "", role: "symbol" },
+      {
+        text: boTranslate(
+          node.code_boundary
+            ? "Outside loaded code region"
+            : "Static structure; execution unproven",
+        ),
+        role: "muted",
+      },
+    ];
   if (view.stage === "design") return node.summary ? [{ text: node.summary, role: "muted" }] : [];
   if (node.field) {
     const values = callValues(node, events)[node.direction === "in" ? "inputs" : "outputs"];
@@ -439,6 +452,11 @@ export function wrapText(text, width = 47) {
   return out;
 }
 export const nodeTypes = {
+  "code-file": { label: boTranslate("Source file"), glyph: "F", color: 0x657ca5 },
+  "code-class": { label: boTranslate("Class"), glyph: "C", color: 0x9371a6 },
+  "code-function": { label: boTranslate("Code function"), glyph: "ƒ", color: 0x387c88 },
+  "code-parameter": { label: boTranslate("Code parameter"), glyph: "x", color: 0x627f9c },
+  "code-unresolved": { label: boTranslate("Unresolved reference"), glyph: "?", color: 0xb18857 },
   business: { label: boTranslate("Business"), glyph: "B", color: 0x5075b5 },
   function: { label: boTranslate("Function"), glyph: "ƒ", color: 0x387c88 },
   state: { label: boTranslate("State"), glyph: "S", color: 0x9869a0 },
@@ -454,6 +472,7 @@ export const nodeTypes = {
   transform: { label: boTranslate("Data processing"), glyph: "Δ", color: 0x997345 },
 };
 export function nodeType(n) {
+  if (n.code_role) return "code-" + n.code_role;
   if (dataRoles.includes(n.data_role)) return n.data_role;
   return n.layer === "business"
     ? "business"
@@ -474,6 +493,7 @@ export function nodeType(n) {
 // A business action can also implement a function. View membership is not its
 // visual type; selecting a view must not erase that function's values or calls.
 export function viewTypes(n) {
+  if (n.code_role) return ["code-" + n.code_role];
   if (dataRoles.includes(n.data_role)) return [n.data_role];
   return [
     ...new Set([
@@ -487,6 +507,7 @@ export function stateNodeId(model, value) {
   return model.nodes.find((n) => n.kind === "state" && n.value === value)?.id || "state." + value;
 }
 export function relationType(e) {
+  if (e.origin === "code-index" && e.code_relation) return "code-" + e.code_relation;
   if (e.type === "data" && dataRelations.includes(e.data_relation)) return e.data_relation;
   if (dataRelations.includes(e.type)) return e.type;
   return ["python-ast", "source-ast"].includes(e.origin) && e.type === "flow"

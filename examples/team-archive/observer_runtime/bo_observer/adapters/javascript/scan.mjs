@@ -62,6 +62,14 @@ function parseUnit(path, original) {
     entries = new Map(),
     names = new Map();
   const counts = new Map();
+  function bindingNames(name) {
+    if (ts.isIdentifier(name)) return [name.text];
+    if (ts.isObjectBindingPattern(name) || ts.isArrayBindingPattern(name))
+      return name.elements.flatMap((entry) =>
+        ts.isBindingElement(entry) ? bindingNames(entry.name) : [],
+      );
+    return [];
+  }
   function nameOf(n, owner) {
     if (ts.isConstructorDeclaration(n)) return "constructor";
     if (n.name) return text(n.name).replace(/^['"]|['"]$/g, "");
@@ -78,6 +86,24 @@ function parseUnit(path, original) {
     return `<callback:${slot}:${count}>`;
   }
   function register(n, owner = "", className = null) {
+    // CommonJS declarations share import facts with ES modules. Dynamic require
+    // expressions remain unresolved rather than executing a module to discover it.
+    if (
+      !owner &&
+      ts.isVariableDeclaration(n) &&
+      n.initializer &&
+      ts.isCallExpression(n.initializer) &&
+      text(n.initializer.expression) === "require" &&
+      n.initializer.arguments.length === 1 &&
+      ts.isStringLiteral(n.initializer.arguments[0])
+    ) {
+      const module = n.initializer.arguments[0].text;
+      if (ts.isIdentifier(n.name)) imports[n.name.text] = { module, name: "*" };
+      if (ts.isObjectBindingPattern(n.name))
+        for (const entry of n.name.elements)
+          if (ts.isIdentifier(entry.name))
+            imports[entry.name.text] = { module, name: text(entry.propertyName || entry.name) };
+    }
     if (ts.isImportDeclaration(n) && ts.isStringLiteral(n.moduleSpecifier)) {
       const from = n.moduleSpecifier.text,
         clause = n.importClause;
@@ -136,8 +162,11 @@ function parseUnit(path, original) {
         calls: [],
         predicates: [],
         fields: [],
+        bases: isClass
+          ? (n.heritageClauses || []).flatMap((c) => c.types.map((v) => text(v.expression)))
+          : [],
         entrypoints: [],
-        local_names: [],
+        local_names: (n.parameters || []).flatMap((p) => bindingNames(p.name)),
         role:
           !isClass && /^[A-Z]/.test(own) && kind === ts.ScriptKind.TSX ? "component" : undefined,
       };
@@ -176,7 +205,7 @@ function parseUnit(path, original) {
             line: line(part),
             expression: text(part.expression || part.condition),
           });
-        if (ts.isVariableDeclaration(part)) item.local_names.push(text(part.name));
+        if (ts.isVariableDeclaration(part)) item.local_names.push(...bindingNames(part.name));
         ts.forEachChild(part, body);
       }
       if (!isClass) body(n);

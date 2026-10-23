@@ -34,7 +34,12 @@ def supported_path(name):
 
 def adapter_identity():
     """Fingerprint the parser implementation and dependencies used to populate the cache."""
-    files = [Path(__file__), ADAPTER / "scan.mjs", ADAPTER / "package-lock.json"]
+    files = [
+        Path(__file__),
+        Path(__file__).parent / "graph/code_structure.py",
+        ADAPTER / "scan.mjs",
+        ADAPTER / "package-lock.json",
+    ]
     return hashlib.sha256(b"".join(p.read_bytes() for p in files if p.is_file())).hexdigest()
 
 

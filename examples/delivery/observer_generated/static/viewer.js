@@ -7,6 +7,9 @@ import { createPoller } from "./polling.js";
 import { migrateNodeIds } from "./layout.js";
 import { projectLayoutKey, graphVersion, recordingMatches } from "./view-lifecycle.js";
 import { databaseWarning, dataRelationEvidence } from "./data-layer.js";
+import { CodeLayer, withCodeGraph, codeTypes, codeRelations } from "./code-layer.js";
+const codeLayer = new CodeLayer();
+let codeLimit = 400;
 import {
   executionIds,
   layoutGraph,
@@ -170,6 +173,8 @@ function point(box) {
   return nodePoint(graph, presentation, box);
 }
 function updatePresentation() {
+  for (const item of document.querySelectorAll("[data-code-legend]"))
+    item.hidden = !codeLayer.slice;
   presentation = presentationGraph(graph, preferences.filters);
   renderedEdges = presentation.edges;
   $("empty").hidden = !!(presentation.glyphs.size + presentation.regions.size);
@@ -279,6 +284,7 @@ function cancelLayout() {
 }
 function project() {
   if (!view) return;
+  if (!recording && latestLive) view = withCodeGraph(latestLive, codeLayer.slice);
   const renamed = migrateNodeIds(
     preferences,
     view.model.presentation?.node_aliases,
@@ -504,6 +510,11 @@ function focusSelection() {
 function updateActions() {
   const b = graph?.byId.get(selected),
     binding = sourceBinding(view, graph?.all, selected);
+  $("code-local").disabled =
+    view?.stage === "design" ||
+    !!recording ||
+    analysisId === "code" ||
+    (!b && !analysisSettings?.codeFocus);
   $("reference-origin").hidden = !b?.node.referenceOf;
   $("core-toggle").disabled = !b;
   const core = b && annotationFor(preferences, b.node.referenceOf || b.id).core;
@@ -729,10 +740,10 @@ function updateDetail() {
   $("source-code").hidden = !source;
   $("full-source").hidden = !source;
   if (source) {
-    const key = view.manifest.build_id + ":" + binding.path,
+    const key = (binding.code_revision || view.manifest.build_id) + ":" + binding.path,
       full = fullSources.get(key);
     $("detail-title").textContent =
-      `${binding.path}:${binding.line} · ${view.manifest.build_id.slice(0, 8)}`;
+      `${binding.path}:${binding.line} · ${(binding.code_revision || view.manifest.build_id).slice(0, 8)}`;
     $("source-code").textContent = full ?? binding.snippet;
     $("full-source").hidden = !!full;
   }
@@ -820,7 +831,9 @@ $("full-source").onclick = async () => {
     binding = sourceBinding(view, graph.all, id),
     requestedVersion = version;
   const response = await fetch(
-    "/api/source?path=" +
+    (binding.code_revision
+      ? "/api/code/source?revision=" + binding.code_revision + "&path="
+      : "/api/source?path=") +
       encodeURIComponent(binding.path) +
       (recording
         ? "&recording=" + recording.id
@@ -828,9 +841,13 @@ $("full-source").onclick = async () => {
   );
   if (!response.ok) return;
   const data = await response.json();
-  if (view?.manifest.build_id !== build || data.build_id !== build || version !== requestedVersion)
+  if (
+    binding.code_revision
+      ? data.code_revision !== view?.code_structure?.revision
+      : view?.manifest.build_id !== build || data.build_id !== build || version !== requestedVersion
+  )
     return;
-  fullSources.set(build + ":" + binding.path, data.source);
+  fullSources.set((binding.code_revision || build) + ":" + binding.path, data.source);
   if (fullSources.size > 16) fullSources.delete(fullSources.keys().next().value);
   if (selected === id) updateDetail();
 };
@@ -1287,7 +1304,48 @@ async function poll() {
     if (!r.ok) throw Error("HTTP " + r.status);
     const next = await r.json();
     if (disposed || version !== requestedVersion || caseChoice !== requestedCase) return;
-    const key = renderRevision(next, [version, caseChoice, choice, step]);
+    loadAnalysis(projectLayoutKey(next, storage));
+    const codeEnabled =
+      !recording &&
+      next.stage !== "design" &&
+      (analysisId === "code" || !!analysisSettings.codeFocus);
+    let codeSlice = null;
+    try {
+      const previousCodeFocus = codeLayer.slice?.focus;
+      codeSlice = await codeLayer.load({
+        enabled: codeEnabled,
+        focus: analysisId === "code" ? null : analysisSettings.codeFocus,
+        limit: codeLimit,
+      });
+      if (codeSlice?.focus && codeSlice.focus !== previousCodeFocus)
+        for (const node of codeSlice.nodes)
+          if (["file", "class"].includes(node.code_role)) expanded.add(node.id);
+      $("code-status").textContent = codeSlice
+        ? boTranslate("Code: {0} / {1} nodes", codeSlice.loaded_nodes, codeSlice.total_nodes) +
+          (codeSlice.errors.length ? " · " + boTranslate("Source analysis incomplete") : "")
+        : "";
+      $("code-status").title = codeSlice ? JSON.stringify(codeSlice.errors) : "";
+    } catch (error) {
+      $("code-status").textContent = boTranslate("Code structure unavailable");
+      $("code-status").title = error.message;
+    }
+    $("code-more").hidden = !codeSlice?.omitted_nodes || codeLimit >= 5000;
+    $("code-local").setAttribute("aria-pressed", String(!!analysisSettings.codeFocus));
+    $("code-local").disabled =
+      next.stage === "design" ||
+      !!recording ||
+      analysisId === "code" ||
+      (!selected && !analysisSettings.codeFocus);
+    const key = renderRevision(next, [
+      version,
+      caseChoice,
+      choice,
+      step,
+      codeSlice?.revision,
+      codeSlice?.focus,
+      codeSlice?.loaded_nodes,
+      analysisId,
+    ]);
     const previousLive = latestLive;
     latestLive = next;
     const graphChanged = previousLive && graphVersion(previousLive) !== graphVersion(next);
@@ -1315,7 +1373,7 @@ async function poll() {
       showDatabaseWarning(next);
       return;
     }
-    view = next;
+    view = withCodeGraph(next, codeSlice);
     $("title").textContent =
       (view.model.presentation.subject || boTranslate("Application")) +
       (next.stage === "design"
@@ -1473,6 +1531,10 @@ function loadAnalysis(baseKey) {
     annotations: null,
   };
   if (saved) {
+    if (typeof saved.codeFocus === "string") analysisSettings.codeFocus = saved.codeFocus;
+    analysisSettings.codeViews = Array.isArray(saved.codeViews)
+      ? saved.codeViews.filter((id) => typeof id === "string").slice(0, 40)
+      : [];
     analysisSettings.advanced = saved.advanced === true;
     analysisSettings.custom = (Array.isArray(saved.custom) ? saved.custom : [])
       .slice(0, 20)
@@ -1524,6 +1586,7 @@ function changeAnalysis(id) {
   save();
   clearTimeout(saveTimer);
   analysisId = id;
+  codeLayer.clear();
   if (!["overview", "business"].includes(id)) analysisSettings.advanced = true;
   analysisOverride = analysisSettings.overrides[id] || null;
   saveAnalysis();
@@ -1551,7 +1614,33 @@ function changeAnalysis(id) {
     schedule();
   } else arrange();
   saveSoon();
+  lastKey = "";
+  poller.run();
 }
+$("code-local").onclick = () => {
+  if (!analysisSettings) return;
+  analysisSettings.codeFocus = analysisSettings.codeFocus ? null : selected;
+  analysisSettings.codeViews ||= [];
+  if (analysisSettings.codeFocus && !analysisSettings.codeViews.includes(analysisId)) {
+    for (const key of ["nodes", "regions", "edges"])
+      preferences.filters[key] = [
+        ...new Set([...preferences.filters[key], ...(key === "edges" ? codeRelations : codeTypes)]),
+      ];
+    analysisSettings.codeViews.push(analysisId);
+    save();
+  }
+  codeLayer.clear();
+  codeLimit = 400;
+  saveAnalysis();
+  project();
+  lastKey = "";
+  poller.run();
+};
+$("code-more").onclick = () => {
+  codeLimit = Math.min(5000, codeLimit + 400);
+  lastKey = "";
+  poller.run();
+};
 $("analysis-details").onclick = () => {
   if (!analysisSettings) return;
   analysisSettings.advanced = !analysisSettings.advanced;
@@ -1617,6 +1706,7 @@ for (const [type, style] of Object.entries(nodeTypes)) {
   const row = document.createElement("div"),
     label = document.createElement("div"),
     description = document.createElement("span");
+  if (type.startsWith("code-")) row.dataset.codeLegend = type;
   label.textContent = style.label;
   description.textContent = meanings[type];
   label.append(description);
@@ -1628,6 +1718,7 @@ edgeLegend.replaceChildren();
 for (const [type, style] of Object.entries(relationStyles))
   if (!["contains", "other"].includes(type)) {
     const label = document.createElement("span");
+    if (type.startsWith("code-")) label.dataset.codeLegend = type;
     label.append(legendRelation(style), document.createTextNode(style.label));
     edgeLegend.append(label);
   }

@@ -51,6 +51,8 @@ Commands require the project `--root`; `begin` also needs `--change` and the act
 
 `bo_sync scan/watch` discovers new, changed, and deleted files independently of nodes already in the graph. Python, JS/TS, React, and Vue adapters produce common source facts. Missing parsers, syntax errors, and unsupported languages are explicit gaps. Watch produces maintenance tasks; the host or active coding AI must consume them. It cannot wake arbitrary editors or agents by itself.
 
+The optional [code structure](references/code-structure.md) is derived from that independent scope. Once enabled, refresh it during maintenance and verify its saved nodes, relations and file hashes against current source. Keep its source revision distinct from the running application's build. Preserve unresolved calls; never infer runtime execution from static edges.
+
 Configured data projects also refresh their native model exports and database metadata during `bo_sync scan/watch`. `bo.py serve` watches configured data and reloads validated graph builds automatically. The native development launcher must reload its producer with the new build identity; old-build events remain rejected. `bo_db.py check` and `change_sync verify` independently recompute data mappings and require executed cases. A failed collector leaves the previous graph marked stale; never accept it as current.
 
 Read `confirmations.user` and `confirmations.coding`. Ask users only about unresolved business meaning; reconcile unresolved calls and implementation changes within coding. Configure `reconciliation` records when dynamic bindings need protection. Stale source answers, absent targets, and missing verification cases must fail; records do not replace actual value and call checks.
@@ -68,6 +70,8 @@ Keep project, node, and relation IDs stable across iterations. Use explicit `pre
 ## 4. Present and inspect
 
 Reuse the complete `assets/stategraph-viewer/` interaction. After each batch, provide the updated graph and a brief explanation of changes. Start at high-level nodes, then expand important functions, states, and values; reveal advanced details on demand. Any expanded node uses a region with its type's color. Preserve group dragging, saved layouts, typed edges, notes, core markers, search, source navigation, and replay.
+
+Keep the code layer optional. Offer **Local code** for a selected region and **Code structure** for the full indexed source scope. Honor display budgets and show boundary/omission information. The existing state and business graph must work when the code layer is closed.
 
 Provide one project development command that launches the application and its observer service together and prints both actual URLs. Keep application execution independent if observation is unavailable. The launcher must track and clean up only processes it started. Connect recording/replay to real runtime events; a design-only server has no business recording and must be labeled accordingly. Verify both URLs, build identity, recording start/stop, and replay against a real user operation before delivery.
 

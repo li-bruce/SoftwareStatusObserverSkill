@@ -2,6 +2,7 @@ import { t as boTranslate } from "./i18n.js";
 // Layout preferences are local view data. They never change model or runtime facts.
 import { graphBounds, nodeType, nodeTypes, viewTypes, relationType } from "./graph-core.js";
 import { dataRelations, migrateDataFilters } from "./data-layer.js";
+import { codeRelations, migrateCodeFilters } from "./code-layer.js";
 export const layoutKey = (model, projectId) =>
   "business-observer.layout.v2:" +
   (projectId ||
@@ -12,6 +13,7 @@ export const layoutKey = (model, projectId) =>
 export function emptyFilters() {
   return {
     dataTypes: 1,
+    codeTypes: 1,
     nodes: Object.keys(nodeTypes),
     edges: [
       "call",
@@ -24,6 +26,7 @@ export function emptyFilters() {
       "shared",
       "other",
       ...dataRelations,
+      ...codeRelations,
     ],
     regions: Object.keys(nodeTypes),
     depth: "all",
@@ -32,7 +35,7 @@ export function emptyFilters() {
   };
 }
 export function cleanFilters(value) {
-  value = migrateDataFilters(value);
+  value = migrateCodeFilters(migrateDataFilters(value));
   const clean = emptyFilters();
   for (const kind of ["nodes", "edges", "regions"])
     if (Array.isArray(value?.[kind]))
@@ -374,6 +377,17 @@ export function refreshHierarchy(graph) {
 }
 export { relationType };
 export const relationStyles = {
+  "code-defines": { label: boTranslate("Defines"), color: 0x83929e, dash: [2, 5], arrow: "none" },
+  "code-calls": { label: boTranslate("Static call"), color: 0x2476ad, dash: [6, 4], arrow: "open" },
+  "code-imports": { label: boTranslate("Import"), color: 0x8172a3, dash: [3, 4], arrow: "open" },
+  "code-inherits": { label: boTranslate("Inheritance"), color: 0x975b86, dash: [], arrow: "open" },
+  "code-parameter": { label: boTranslate("Parameter"), color: 0x627f9c, dash: [], arrow: "open" },
+  "code-maps": {
+    label: boTranslate("Source binding"),
+    color: 0x638b98,
+    dash: [2, 4],
+    arrow: "open",
+  },
   call: { label: boTranslate("Call"), color: 0x2476ad, dash: [], arrow: "open" },
   flow: { label: boTranslate("Flow"), color: 0x4e647b, dash: [], arrow: "filled" },
   transition: {

@@ -279,7 +279,8 @@ console.log(JSON.stringify({valid:true,coverage:'unified nodes and edges, real E
 // Data roles refine existing protocol kinds rather than introduce new kinds.
 const dataRoleKinds={store:'data',dataset:'data',column:'data',query:'function',transform:'function'};
 for(const type of Object.keys(nodeTypes)){
-  const parent={id:'owner',kind:dataRoleKinds[type]||type,...(dataRoleKinds[type]?{data_role:type}:{}),...(type==='business'?{layer:'business'}:{}),...(type==='resource'?{execution_role:'resource'}:{})};
+  const codeRole=type.startsWith('code-')?type.slice(5):null;
+  const parent={id:'owner',kind:codeRole?(['file','parameter','unresolved'].includes(codeRole)?'data':'function'):dataRoleKinds[type]||type,...(codeRole?{code_role:codeRole}:{}),...(dataRoleKinds[type]?{data_role:type}:{}),...(type==='business'?{layer:'business'}:{}),...(type==='resource'?{execution_role:'resource'}:{})};
   const child={id:'child',parent:'owner',kind:'function'},hidden={id:'hidden',parent:'child',kind:'data'};
   const boxes=[parent,child].map((node,i)=>({id:node.id,node,type:nodeType(node),x:i*300,y:0,w:140,h:100}));
   const subject={all:new Map([parent,child,hidden].map(n=>[n.id,n])),boxes,byId:new Map(boxes.map(b=>[b.id,b])),edges:[{id:'contains',from:'owner',to:'child',type:'contains'}]};

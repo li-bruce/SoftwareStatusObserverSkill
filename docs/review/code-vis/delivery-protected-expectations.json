@@ -1,0 +1,8 @@
+{
+  "intent.json": "1c3e52bed04dfa1bd0fea219dc1191e609e511604199df8a2902082350c4c942",
+  "acceptance.json": "9243e7ef7a3bd3822fda92e405196a1dc867a078dba818ded6ad3cea0221148f",
+  "whitebox.json": "22de319201fc6711dc9037c6e3db0aee3c618f139a990aae01a194f913e8c035",
+  "mapping.json": "62287608736b065578d9ace9179017b24138c0a45ae71e636699a3f835d018ef",
+  "implementation.json": "534cf8856f8d53659937b72a6b79d01765f3dee1fa8f9c1bdec1c1068193bd31",
+  "bo_stategraph/machine.json": "ebb6a692ed0ffb03bc2fab6b2c5afafe200a763f29cbe0f6d17d551b3d01ff31"
+}

@@ -191,7 +191,7 @@ def serve(root, args, model, manifest, sources):
             try:
                 if not application.bo_web.allowed(parsed.path):
                     return self.reply(404,{'error':"Debug Web is disabled",'code':'bo_web_disabled'})
-                bo_value=application.bo_web.get(parsed.path)
+                bo_value=application.bo_web.get(self.path)
                 if bo_value is not None:return self.reply(200,bo_value)
                 if parsed.path=="/api/bo/config":
                     return self.reply(200,{"project":application.observer.bo_project,"build_id":application.manifest["build_id"],"token":application.bo_client_token})

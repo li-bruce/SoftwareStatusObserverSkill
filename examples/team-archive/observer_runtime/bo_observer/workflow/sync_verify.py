@@ -120,12 +120,19 @@ def verify(root, cfg, change, *, inspect, snapshot):
         root, model_path=cfg.get("model", "bo_stategraph/project.json"), update=False
     )
     mapping_errors.extend(database["errors"])
+    code_structure = {"enabled": False, "valid": True, "status": "not_enabled", "errors": []}
+    if (root / ".stategraph/code-graph.json").is_file():
+        from ..code_graph.service import CodeGraph
+
+        code_structure = CodeGraph(root, persist=False).check()
+        mapping_errors.extend(code_structure["errors"])
     rule_errors, business_errors, project_errors = [], [], []
     reports = {
         "mapping": {
             "status": "not_run",
             "errors": mapping_errors,
             "database": database,
+            "code_structure": code_structure,
             "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
         },
         "state_rules": {"status": "not_run", "errors": rule_errors},
