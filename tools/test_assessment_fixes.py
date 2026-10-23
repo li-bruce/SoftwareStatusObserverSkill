@@ -307,7 +307,9 @@ def lock_probe():
     source=ROOT/'examples/team-archive';root=Path(tempfile.mkdtemp(dir=ROOT/'.validation'))
     app=LocalApplication(root,SimpleNamespace(db=str(root/'test.sqlite'),delay=0,candidate=False),
         json.loads((source/'behavior.json').read_text(encoding='utf-8')),
-        json.loads((source/'manifest.json').read_text(encoding='utf-8')), {})
+        # A clean checkout has the accepted release manifest, but no private
+        # manifest from a previous local launch. Do not depend on test order.
+        json.loads((source/'.release/manifest.json').read_text(encoding='utf-8')), {})
     service_held,provider_entered=threading.Event(),threading.Event();errors=[]
     original=app.observer.bo_graph._provider
     def provider():provider_entered.set();return original()

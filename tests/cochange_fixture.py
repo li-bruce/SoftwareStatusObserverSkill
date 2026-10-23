@@ -27,7 +27,23 @@ def sync(root, action, *extra):
                           action, '--root', str(root), *extra], cwd=root,
                          capture_output=True, text=True, encoding='utf-8')
     try:
-        return run.returncode, json.loads(run.stdout)
+        value = json.loads(run.stdout)
+        # Keep the actual failed command visible in clean-run CI logs; the
+        # verification summary intentionally does not inline its full output.
+        if action == 'verify' and run.returncode and value.get('tests'):
+            change = json.loads((root/'.stategraph/active.json').read_text(encoding='utf-8'))['change']
+            for index, result in enumerate(value['tests']):
+                if result['exit_code'] == 0:
+                    continue
+                detail = json.loads((root/change/'checks'/f'test-{index}.json').read_text(encoding='utf-8'))
+                try:
+                    output = json.loads(detail['stdout'])
+                    output = output.get('errors', output)
+                except ValueError:
+                    output = detail['stdout']
+                print(json.dumps({'failed_project_command': result['argv'],
+                                  'output': output, 'stderr': detail['stderr']}, ensure_ascii=True), flush=True)
+        return run.returncode, value
     except ValueError:
         raise AssertionError({'stdout': run.stdout, 'stderr': run.stderr})
 
