@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased — db-vis, 2026-10-24
+
+- Add database structure, native queries, selected data transformations and transaction outcomes to the existing graph. Keep declaration, actual catalog and runtime evidence distinguishable.
+- Support SQLAlchemy metadata, MongoDB/Mongoose documents, Redis key patterns and Neo4j relationships, using optional pinned open-source adapters. Refresh catalogs and graph identities when application models change.
+- Capture Python and Node operations with explicit data targets and field selection. Exclude observer queries and reporting. Redact unselected SQL literals and distinguish statement success from transaction commit.
+- Add bilingual data views, relationship details, selected-value replay and schema-change continuity to the Web viewer. Preserve personal layouts and filters.
+- Guide storage selection in the Skill and require model export, capture, source mapping and actual database cases during each relevant development iteration.
+- [Acceptance](docs/review/db-vis/README.md): full repository regression, 77 data cases, actual PostgreSQL/MongoDB/Redis/Neo4j collectors and Python/Node clients, real SQLite browser recording/replay, both example upgrades and Git-export installation passed locally. Failed attempts and repairs are retained. Remote CI is reported separately after publication.
+- MySQL live verification, database-internal execution plans and automatic column lineage remain outside this delivery.
+
 ## Unreleased — dev, 2026-10-23
 
 - Preserve project-owned layouts, type and individual filters, expansion, pins, annotations and custom views across graph updates. Support explicit project/node/edge identity migration; retain conflicts and dormant settings.
