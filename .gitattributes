@@ -1,6 +1,9 @@
 * text=auto eol=lf
 **/elk.bundled.js -text -whitespace linguist-vendored
 **/elk-worker.min.js -text -whitespace linguist-vendored
+# Shared package markers are copied and fingerprinted as exact bytes.
+# Preserve the original CRLF or LF consistently in the Skill and example copies.
+**/bo_observer/**/__init__.py -text
 *.png binary
 *.zip binary
 **/pixi.min.js -whitespace linguist-vendored=true
