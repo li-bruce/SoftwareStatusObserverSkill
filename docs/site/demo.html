@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Try Business Observer through a sample conversation, an expandable graph, and a local recording walkthrough."
+    />
+    <title>Business Observer — Interactive walkthrough</title>
+    <link rel="stylesheet" href="site.css?rev=readability-2" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <script type="module" src="demo.mjs?rev=readability-2"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+    <header class="wrap nav">
+      <a class="brand" href="index.html" data-local-link
+        ><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>Business
+        Observer<span class="skill-tag">DEMO</span></a
+      >
+      <nav aria-label="Main navigation" data-i18n-aria="navigation">
+        <a href="index.html" data-local-link data-i18n="demo.home">Product overview</a
+        ><a class="github" href="https://github.com/li-bruce/SoftwareStatusObserverSkill"
+          >GitHub ↗</a
+        ><button class="language" id="language" type="button" aria-label="Switch to Chinese">
+          中文
+        </button>
+      </nav>
+    </header>
+    <main id="main" class="wrap walkthrough">
+      <div class="demo-header">
+        <p class="eyebrow" data-i18n="demo.kicker">INTERACTIVE WALKTHROUGH · SAMPLE DATA</p>
+        <h1 data-i18n="demo.title">Follow one idea into the program.</h1>
+        <p class="lead" data-i18n="demo.body">
+          An image review project, from a conversation to a running graph. Move through the four
+          stages, then try recording and replaying an operation in the sample.
+        </p>
+      </div>
+      <div
+        class="walkthrough-tabs"
+        role="tablist"
+        aria-label="Walkthrough stages"
+        data-i18n-aria="demo.tabs"
+      >
+        <button
+          role="tab"
+          id="stage-conversation"
+          data-stage="conversation"
+          aria-controls="demo-panel"
+          aria-selected="true"
+          tabindex="0"
+          data-i18n="demo.stage.conversation"
+        >
+          1. conversation</button
+        ><button
+          role="tab"
+          id="stage-inspect"
+          data-stage="inspect"
+          aria-controls="demo-panel"
+          aria-selected="false"
+          tabindex="-1"
+          data-i18n="demo.stage.inspect"
+        >
+          2. inspect</button
+        ><button
+          role="tab"
+          id="stage-record"
+          data-stage="record"
+          aria-controls="demo-panel"
+          aria-selected="false"
+          tabindex="-1"
+          data-i18n="demo.stage.record"
+        >
+          3. record</button
+        ><button
+          role="tab"
+          id="stage-iterate"
+          data-stage="iterate"
+          aria-controls="demo-panel"
+          aria-selected="false"
+          tabindex="-1"
+          data-i18n="demo.stage.iterate"
+        >
+          4. iterate
+        </button>
+      </div>
+      <div
+        id="demo-panel"
+        class="demo-workspace"
+        role="tabpanel"
+        tabindex="0"
+        aria-labelledby="stage-conversation"
+      >
+        <aside class="demo-aside">
+          <h2 id="demo-heading"></h2>
+          <p id="demo-instruction"></p>
+          <div class="chat" id="conversation"></div>
+          <button class="button primary" id="advance" type="button"></button>
+        </aside>
+        <div class="demo-main">
+          <div class="demo-toolbar">
+            <span class="sample-label" data-i18n="demo.sample">IMAGE REVIEW · LOCAL SAMPLE</span
+            ><button class="small-button" id="reset" data-i18n="demo.reset">Restart demo</button>
+          </div>
+          <div class="demo-canvas">
+            <svg
+              id="demo-graph"
+              viewBox="0 0 740 380"
+              role="group"
+              aria-label="Sample application graph"
+              data-i18n-aria="demo.graph"
+            ></svg>
+          </div>
+          <div class="demo-legend">
+            <span><i class="business"></i><span data-i18n="view.business">Business</span></span
+            ><span><i class="state"></i><span data-i18n="view.state">States</span></span
+            ><span
+              ><i class="function"></i
+              ><span data-i18n="view.function">Functions & values</span></span
+            >
+          </div>
+          <div class="demo-controls">
+            <div id="record-controls" hidden>
+              <div class="controls-row">
+                <label for="capture-scope" data-i18n="demo.scope">Record</label
+                ><select id="capture-scope">
+                  <option value="all" data-i18n="demo.scope.all">Whole flow</option>
+                  <option value="review" data-i18n="demo.scope.review">Review only</option></select
+                ><button class="button primary" id="start" data-i18n="record.start">
+                  Start recording</button
+                ><button class="small-button" id="stop" disabled data-i18n="demo.stop">
+                  Stop recording
+                </button>
+              </div>
+              <div class="controls-row">
+                <button class="small-button" id="new-operation" data-i18n="demo.new">
+                  New operation
+                </button>
+                <span data-i18n="demo.operate">Sample app</span
+                ><button class="small-button" id="upload" data-i18n="demo.upload">
+                  Upload image</button
+                ><button class="small-button" id="approve" disabled data-i18n="demo.approve">
+                  Approve</button
+                ><button class="small-button" id="return" disabled hidden data-i18n="demo.return">
+                  Return for changes
+                </button>
+              </div>
+              <div class="replay-row">
+                <button class="small-button" id="play" disabled data-i18n="demo.play">
+                  Play recording</button
+                ><label for="replay" data-i18n="demo.step">Step</label
+                ><input id="replay" type="range" min="0" max="0" value="0" disabled /><span
+                  id="step-number"
+                  >0 / 0</span
+                ><button class="small-button" id="live" data-i18n="demo.live">Live</button>
+              </div>
+            </div>
+            <p class="demo-status" id="demo-status" role="status"></p>
+            <dl class="change-detail" id="change-detail"></dl>
+            <pre class="source-snippet" id="source-snippet" hidden></pre>
+          </div>
+        </div>
+      </div>
+      <div class="demo-footnote">
+        <p data-i18n="demo.note">
+          This walkthrough runs with sample data in your browser. In your project, the conversation
+          stays in your coding tool and the graph shows its captured activity.
+        </p>
+        <a href="index.html#install" data-local-link data-i18n="demo.install"
+          >Use it in your project ↗</a
+        >
+      </div>
+    </main>
+    <footer class="wrap footer">
+      <span>Business Observer</span
+      ><a href="index.html" data-local-link data-i18n="demo.home">Product overview</a>
+    </footer>
+  </body>
+</html>

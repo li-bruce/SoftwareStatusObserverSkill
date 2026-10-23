@@ -1,0 +1,7 @@
+{
+  "base": "412eb0ad5ab2ea444a06ced3b24a12758cb011cd",
+  "python_modules": 74,
+  "executable_ast_changes": [],
+  "valid": true,
+  "scope": "Python executable AST equality; comments, docstrings, and source locations excluded"
+}

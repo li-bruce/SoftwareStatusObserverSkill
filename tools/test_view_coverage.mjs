@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 // Deliberately retain non-English business labels: relation selection must
 // depend on node identity/types rather than translated presentation strings.
 const folder=new URL('../skills/business-observer/assets/stategraph-viewer/',import.meta.url),urls=new Map();
-function url(name){if(urls.has(name))return urls.get(name);const text=fs.readFileSync(new URL(name,folder),'utf8').replace(/from '\.\/([^']+)'/g,(_,file)=>`from '${url(file)}'`);const result='data:text/javascript;base64,'+Buffer.from(text).toString('base64');urls.set(name,result);return result;}
+function url(name){if(urls.has(name))return urls.get(name);const text=fs.readFileSync(new URL(name,folder),'utf8').replace(/from\s+["']\.\/([^"']+)["']/g,(_,file)=>`from '${url(file)}'`);const result='data:text/javascript;base64,'+Buffer.from(text).toString('base64');urls.set(name,result);return result;}
 const core=await import(url('graph-core.js')),analysis=await import(url('analysis.js')),layout=await import(url('layout.js'));
 const steps=await import(url('replay-steps.js'));
 const nodes=[

@@ -1,4 +1,5 @@
 """Best-effort, bounded, post-commit observer. Python standard library only."""
+
 from __future__ import annotations
 from datetime import datetime, timezone
 import json
@@ -9,6 +10,7 @@ import queue
 import threading
 import time
 import uuid
+
 try:
     from ...observation_scope import bo_internal, bo_is_internal
 except ImportError:
@@ -16,8 +18,19 @@ except ImportError:
 
 
 class Probe:
-    def __init__(self, *, path=None, build_id, model_revision, fields, nodes, enabled=True,
-                 queue_size=1024, sink=None, run_id=None):
+    def __init__(
+        self,
+        *,
+        path=None,
+        build_id,
+        model_revision,
+        fields,
+        nodes,
+        enabled=True,
+        queue_size=1024,
+        sink=None,
+        run_id=None,
+    ):
         self.enabled = enabled
         self.build_id, self.model_revision = build_id, model_revision
         self.fields = {k: set(v) for k, v in fields.items()}
@@ -32,7 +45,9 @@ class Probe:
         self._lock = threading.Lock()
         self._thread = None
         if enabled:
-            self._thread = threading.Thread(target=self._worker, name="business-observer", daemon=True)
+            self._thread = threading.Thread(
+                target=self._worker, name="business-observer", daemon=True
+            )
             self._thread.start()
 
     @staticmethod
@@ -49,7 +64,10 @@ class Probe:
         if not self.enabled or self._closed or bo_is_internal():
             return False
         try:
-            if kind not in {"fact", "decision", "transition", "effect"} or node_id not in self.nodes:
+            if (
+                kind not in {"fact", "decision", "transition", "effect"}
+                or node_id not in self.nodes
+            ):
                 raise ValueError("undeclared event kind/node")
             clean = {}
             for k, value in payload.items():
@@ -67,11 +85,22 @@ class Probe:
             with self._lock:
                 self._seq += 1
                 seq = self._seq
-                event = {"schema_version": 1, "event_id": f"{self.run_id}:{seq}", "run_id": self.run_id,
-                         "seq": seq, "build_id": self.build_id, "model_revision": self.model_revision,
-                         "request_id": request_id, "attempt_id": attempt_id, "tx_id": tx_id,
-                         "entity_id": entity_id, "node_id": node_id,
-                         "observed_at": datetime.now(timezone.utc).isoformat(), "kind": kind, "payload": clean}
+                event = {
+                    "schema_version": 1,
+                    "event_id": f"{self.run_id}:{seq}",
+                    "run_id": self.run_id,
+                    "seq": seq,
+                    "build_id": self.build_id,
+                    "model_revision": self.model_revision,
+                    "request_id": request_id,
+                    "attempt_id": attempt_id,
+                    "tx_id": tx_id,
+                    "entity_id": entity_id,
+                    "node_id": node_id,
+                    "observed_at": datetime.now(timezone.utc).isoformat(),
+                    "kind": kind,
+                    "payload": clean,
+                }
                 encoded = json.dumps(event, ensure_ascii=False, allow_nan=False)
                 if len(encoded.encode()) > 16384:
                     raise ValueError("event too large")
@@ -120,9 +149,16 @@ class Probe:
                 self._queue.task_done()
 
     def health(self):
-        return {"enabled": self.enabled, "run_id": self.run_id, "attempted": self._seq,
-                "written": self._written, "queued": self._queue.unfinished_tasks,
-                "dropped": self._dropped, "errors": self._errors, "closed": self._closed}
+        return {
+            "enabled": self.enabled,
+            "run_id": self.run_id,
+            "attempted": self._seq,
+            "written": self._written,
+            "queued": self._queue.unfinished_tasks,
+            "dropped": self._dropped,
+            "errors": self._errors,
+            "closed": self._closed,
+        }
 
     def flush(self, timeout=2):
         end = time.monotonic() + timeout

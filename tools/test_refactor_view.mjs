@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 process.on('uncaughtException',error=>{console.error(error.message);process.exit(1);});
 const folder=new URL('../skills/business-observer/assets/stategraph-viewer/',import.meta.url),urls=new Map();
-function url(name){if(urls.has(name))return urls.get(name);const text=fs.readFileSync(new URL(name,folder),'utf8').replace(/from '\.\/([^']+)'/g,(_,file)=>`from '${url(file)}'`);const result='data:text/javascript;base64,'+Buffer.from(text).toString('base64');urls.set(name,result);return result;}
+function url(name){if(urls.has(name))return urls.get(name);const text=fs.readFileSync(new URL(name,folder),'utf8').replace(/from\s+["']\.\/([^"']+)["']/g,(_,file)=>`from '${url(file)}'`);const result='data:text/javascript;base64,'+Buffer.from(text).toString('base64');urls.set(name,result);return result;}
 const layout=await import(url('layout.js')),core=await import(url('graph-core.js')),analysis=await import(url('analysis.js'));
 const {projectStorage}=await import(url('preferences.js'));
 const {createPoller}=await import(url('polling.js'));

@@ -1,0 +1,2 @@
+# Development-only source formatting; the Skill runtime does not import Black.
+black==25.1.0

@@ -42,7 +42,8 @@ export default {
   "Still waiting for: ": "仍需等待：",
   "Flow state for this run": "这次运行的流程状态",
   "Reachable flow state": "可到达的流程状态",
-  "This run was interrupted; showing its last recorded state": "这次执行已中断；下方是最后保存的状态",
+  "This run was interrupted; showing its last recorded state":
+    "这次执行已中断；下方是最后保存的状态",
   "Available capacity: {0} / {1}": "本次可用名额：{0} / {1}",
   "Checks have not started": "尚未开始检查",
   "Allowed": "允许执行",
@@ -58,7 +59,8 @@ export default {
   "Process restarted; previous checks were interrupted": "进程重启，原检查已中断",
   "Yes": "是",
   "No": "否",
-  "Historical decision/read: evidence changed; awaiting reevaluation": "历史判断/读取：依据已改变，等待重新求值",
+  "Historical decision/read: evidence changed; awaiting reevaluation":
+    "历史判断/读取：依据已改变，等待重新求值",
   "Parameter": "参数",
   "Return": "返回",
   "No call recorded; expand to inspect source": "没有记录这次调用；可展开查看代码",
@@ -124,8 +126,10 @@ export default {
   "Business flow continues": "业务继续",
   "Data": "数据",
   "No runtime snapshot recorded for this step": "此步骤未记录对应的运行快照",
-  "No runtime snapshot recorded for this step; state has not been inferred.": "此步骤未记录对应的运行快照；状态未作推断。",
-  "No matching nodes. Change the view or filters.": "此视图没有匹配节点。可切换运行、记录或筛选条件。",
+  "No runtime snapshot recorded for this step; state has not been inferred.":
+    "此步骤未记录对应的运行快照；状态未作推断。",
+  "No matching nodes. Change the view or filters.":
+    "此视图没有匹配节点。可切换运行、记录或筛选条件。",
   "This view could not be saved": "本次视图未能保存",
   "Graphics connection lost; recovering": "图形连接中断，正在恢复",
   "Arranging…": "正在布局…",
@@ -138,7 +142,8 @@ export default {
   "Unpin": "取消固定",
   "Pin node": "固定节点",
   " · Drag empty space inside a region to move its group": " · 拖动圈内空白移动整组",
-  "Double-click to expand; drag a node or empty region space to move its group.": "双击展开；拖动节点或圈内空白移动整组。",
+  "Double-click to expand; drag a node or empty region space to move its group.":
+    "双击展开；拖动节点或圈内空白移动整组。",
   "{0}: {1} → {2}, {3} relations": "{0}：{1} → {2}，{3} 条",
   "{0} · {1} relations": "{0} · {1} 条关系",
   "Static call": "静态调用",
@@ -157,7 +162,8 @@ export default {
   "Output": "输出",
   "No nodes found": "没有找到节点",
   "Flow state: ": "流程状态：",
-  "Inspecting internal activity; no flow state recorded at this step": "回看内部活动；该时刻未记录流程状态",
+  "Inspecting internal activity; no flow state recorded at this step":
+    "回看内部活动；该时刻未记录流程状态",
   "No runtime records": "尚无运行记录",
   "Parameter version {0}": "参数版本 {0}",
   " · step {0}": " · 第 {0} 步",
@@ -185,7 +191,8 @@ export default {
   "Run ": "运行 ",
   "Cannot connect to the application": "暂时无法连接程序",
   "Waiting for the application to connect.": "正在等待程序连接。",
-  "Up to 20 custom views can be saved. Delete one first.": "最多保存 20 个自定义视图，请先删除一个。",
+  "Up to 20 custom views can be saved. Delete one first.":
+    "最多保存 20 个自定义视图，请先删除一个。",
   "Saved “": "已保存「",
   "● Runtime evidence": "● 有运行记录",
   "Recording started": "记录开始",
@@ -262,7 +269,8 @@ export default {
   "Parameter values": "参数值",
   "Source": "源码",
   "Original node": "原节点",
-  "Unified graph. Drag a node or empty region space to move the group; drag outside regions to pan. Double-click to expand, scroll to zoom. Select a node and press F to locate, P to pin, arrow keys to move, or Esc to clear focus.": "统一节点连接图。拖动节点或圈内空白移动整组，拖动圈外空白平移；双击展开，滚轮缩放。选中节点后按 F 定位、P 固定，方向键移动；Esc 清除高亮。",
+  "Unified graph. Drag a node or empty region space to move the group; drag outside regions to pan. Double-click to expand, scroll to zoom. Select a node and press F to locate, P to pin, arrow keys to move, or Esc to clear focus.":
+    "统一节点连接图。拖动节点或圈内空白移动整组，拖动圈外空白平移；双击展开，滚轮缩放。选中节点后按 F 定位、P 固定，方向键移动；Esc 清除高亮。",
   "Relations at the current level": "当前层级的关系",
   "Parent hierarchy": "所属层级",
   "Graph filters": "图的筛选条件",
@@ -293,14 +301,16 @@ export default {
   "Display name": "显示名称",
   "Note": "批注",
   "★ Mark as core": "★ 标为核心节点",
-  "Names and notes are saved in this project's personal view settings.": "名称与批注保存在项目的个人视图配置中。",
+  "Names and notes are saved in this project's personal view settings.":
+    "名称与批注保存在项目的个人视图配置中。",
   "Restore name": "恢复原名",
   "Done": "完成",
   "Complete file": "完整文件",
   "Changes in this step": "本步变化",
   "Legend": "图例",
   "Nodes and regions": "节点与区域",
-  "Color identifies type; expanded regions keep that color. Dark fill marks a core or selected node. Badges show runtime status.": "颜色区分类型，展开的圈保持同色。深填充表示核心或选中节点，运行情况看角标。",
+  "Color identifies type; expanded regions keep that color. Dark fill marks a core or selected node. Badges show runtime status.":
+    "颜色区分类型，展开的圈保持同色。深填充表示核心或选中节点，运行情况看角标。",
   "Edge types": "连线类型",
   "Node markers": "节点标记",
   "▶ Running　✓ Finished": "▶ 执行中　✓ 已完成",
@@ -310,6 +320,7 @@ export default {
   "● Pinned　✎ Note　★ Core": "● 固定　✎ 批注　★ 核心",
   "↗ Shared entry for the same node": "↗ 同一节点的共享入口",
   "Filter boundary: the other end of a relation": "筛选边界：关系的另一端",
-  "Drag inside a region to move its group; drag outside to pan.": "圈内空白拖动整组；圈外空白移动画布。",
-  "Interface language": "界面语言"
+  "Drag inside a region to move its group; drag outside to pan.":
+    "圈内空白拖动整组；圈外空白移动画布。",
+  "Interface language": "界面语言",
 };

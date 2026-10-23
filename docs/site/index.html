@@ -1,78 +1,406 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="See, question, and debug what your coding agent builds. Connect business flow, states, decisions, functions, and runtime evidence.">
-<title>Business Observer — See what your code is doing</title>
-<link rel="stylesheet" href="site.css"><script defer src="messages.zh-CN.js"></script><script defer src="site.js"></script>
-</head>
-<body>
-<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
-<header class="nav wrap">
-<a href="#" class="brand" aria-label="Business Observer home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>business observer<span class="skill-tag">SKILL</span></a>
-<nav aria-label="Main navigation"><a href="#explore" data-i18n="nav.explore">Explore the graph</a><a href="#workflow" data-i18n="nav.workflow">How it works</a><a href="https://github.com/li-bruce/SoftwareStatusObserverSkill" class="github">GitHub ↗</a><button id="language" class="language" type="button" aria-label="Switch to Chinese">中文</button></nav>
-</header>
-<main id="main">
-<section class="hero wrap">
-<div class="hero-copy"><p class="eyebrow" data-i18n="hero.eyebrow">A developer's view of AI-built software</p><h1 data-i18n="hero.title">The code changed.<br>See what changed inside.</h1><p class="lead" data-i18n="hero.body">Connect the behavior you asked for to the states, decisions, and functions that actually run. Keep that connection through every coding iteration.</p><div class="actions"><a class="button primary" href="#explore" data-i18n="hero.explore">Explore one operation ↓</a><a class="button quiet" href="#install" data-i18n="hero.install">Use the Skill ↗</a></div><p class="platforms">Python <span>·</span> Node.js <span>·</span> React <span>·</span> Vue</p></div>
-<figure class="hero-figure">
-<svg viewBox="0 0 650 480" role="img" aria-labelledby="hero-graph-title hero-graph-desc">
-<title id="hero-graph-title" data-i18n="hero.graphTitle">One operation, from business intent to observed execution</title><desc id="hero-graph-desc" data-i18n="hero.graphDesc">Upload connects to review and exhibition. The expanded review contains a pending state, a permission decision, an approve function, and a visible value.</desc>
-<defs><marker id="hero-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="none" stroke="#2457db"/></marker></defs>
-<path class="hero-path" d="M90 240H159 M491 240H559"/>
-<circle cx="325" cy="240" r="165" class="business-region"/>
-<text x="325" y="114" class="svg-title" text-anchor="middle" data-i18n="graph.review">Review image</text><text x="325" y="137" class="svg-small" text-anchor="middle" data-i18n="hero.group">Expanded business operation</text>
-<path class="hero-inner" d="M256 207L300 235M350 237L403 210M324 279L324 313"/>
-<g class="svg-business"><circle cx="65" cy="240" r="25"/><text x="65" y="289" text-anchor="middle" data-i18n="graph.upload">Upload</text></g>
-<g class="svg-business"><circle cx="585" cy="240" r="25"/><text x="585" y="289" text-anchor="middle" data-i18n="graph.exhibit">Exhibition</text></g>
-<g class="svg-state"><circle cx="236" cy="189" r="29"/><circle cx="236" cy="189" r="23"/><text x="236" y="238" text-anchor="middle" data-i18n="graph.pending">Pending</text></g>
-<g class="svg-function"><path d="M299 229L324 215L349 229V257L324 271L299 257Z"/><text x="324" y="248" text-anchor="middle">ƒ</text><text x="324" y="296" text-anchor="middle">approve()</text></g>
-<g class="svg-decision"><path d="M416 163L443 190L416 217L389 190Z"/><text x="416" y="195" text-anchor="middle">?</text><text x="416" y="239" text-anchor="middle" data-i18n="graph.allowed">Allowed?</text></g>
-<g class="svg-value"><rect x="276" y="316" width="96" height="30" rx="15"/><text x="324" y="336" text-anchor="middle">visible: true</text></g>
-<circle cx="505" cy="240" r="5" class="event-dot"/>
-<g class="code-anchor"><path d="M325 406V433H457"/><text x="326" y="458" text-anchor="middle">review.py: approve(image_id, actor_id)</text></g>
-</svg>
-<figcaption><span class="live-dot"></span><span data-i18n="hero.caption">Concept illustration · the real viewer uses your project's graph and events.</span></figcaption>
-</figure>
-</section>
-<section class="problem wrap section-rule"><p class="eyebrow" data-i18n="problem.eyebrow">When the application works, but its internals are unclear</p><div class="problem-grid"><h2 data-i18n="problem.title">A successful screen<br>doesn't explain the path.</h2><div><p data-i18n="problem.body">An AI can add a login, change a guard, or move a state update while you focus on the next feature. A working page alone cannot tell you which rule ran, which value changed, or which implementation never reached the graph.</p><p class="emphasis" data-i18n="problem.answer">Business Observer keeps those questions attached to the code, and checks the connection before the iteration is accepted.</p></div></div></section>
-<section id="explore" class="explore section-space"><div class="wrap">
-<div class="section-heading"><div><p class="eyebrow" data-i18n="explore.eyebrow">One graph. Progressive detail.</p><h2 data-i18n="explore.title">Start with the flow.<br>Follow the evidence down.</h2></div><p data-i18n="explore.intro">States, rules, functions, and values are different node types in the same network. Choose the view that answers your question; combine types when you need the connections.</p></div>
-<div class="explorer">
-<div class="view-tabs" role="tablist" aria-label="Graph explanation levels">
-<button role="tab" id="tab-business" aria-selected="true" aria-controls="graph-panel" data-level="business" data-i18n="level.business">Business</button>
-<button role="tab" id="tab-state" aria-selected="false" aria-controls="graph-panel" data-level="state" data-i18n="level.state" tabindex="-1">State</button>
-<button role="tab" id="tab-decision" aria-selected="false" aria-controls="graph-panel" data-level="decision" data-i18n="level.decision" tabindex="-1">Decision</button>
-<button role="tab" id="tab-function" aria-selected="false" aria-controls="graph-panel" data-level="function" data-i18n="level.function" tabindex="-1">Function + value</button>
-<button role="tab" id="tab-source" aria-selected="false" aria-controls="graph-panel" data-level="source" data-i18n="level.source" tabindex="-1">Source</button>
-<button role="tab" id="tab-mixed" aria-selected="false" aria-controls="graph-panel" data-level="mixed" data-i18n="level.mixed" tabindex="-1">Mix a view</button>
-</div>
-<div class="graph-panel" id="graph-panel" role="tabpanel" aria-labelledby="tab-business"><div class="graph-surface"><p class="surface-caption" data-i18n="explore.caption">Interactive explanation · image review</p><div id="concept-graph"></div><div class="evidence-key"><span><i class="line solid"></i><span data-i18n="legend.declared">Declared relation</span></span><span><i class="line dashed"></i><span data-i18n="legend.static">Static source relation</span></span><span><i class="dot"></i><span data-i18n="legend.observed">Observed value</span></span></div></div><aside class="level-explanation"><span id="level-number" class="level-number">01 / 05</span><h3 id="level-title"></h3><p id="level-description"></p><p id="level-evidence" class="evidence-note"></p><div id="mix-controls" hidden><fieldset><legend data-i18n="mix.legend">Show these types together</legend><label><input type="checkbox" value="state" checked><span data-i18n="level.state">State</span></label><label><input type="checkbox" value="decision" checked><span data-i18n="level.decision">Decision</span></label><label><input type="checkbox" value="function" checked><span data-i18n="level.function">Function + value</span></label></fieldset></div></aside></div>
-</div>
-<div class="preset-row"><span data-i18n="presets.label">Available in the real viewer</span><p data-i18n="presets.items">Business flow · State machine · Functions and parameters · Authorization · Concurrency and resources · Data dependencies · Observed execution · Waiting and failures · Shared membership · Custom views</p></div>
-<p class="small-note" data-i18n="explore.boundary">Current source detail covers indexed symbols and selected local relationships. A complete project-wide call browser and automatic database schema/lineage discovery are extension proposals, not current capabilities. Static possibilities never stand in for actual execution.</p>
-</div></section>
-<section id="modes" class="wrap section-space"><div class="section-heading"><div><p class="eyebrow" data-i18n="modes.eyebrow">Choose at the beginning</p><h2 data-i18n="modes.title">Observe the application.<br>Or also drive its state.</h2></div><p data-i18n="modes.intro">Both modes keep the graph, source mappings, and runtime monitoring. The distinction is which mechanism executes the business transition.</p></div>
-<div class="modes-grid"><article class="mode drive"><span class="mode-label">DRIVE</span><h3 data-i18n="drive.title">Develop from the state declaration</h3><div class="mode-flow"><span data-i18n="mode.declaration">State declaration</span><b>→</b><span data-i18n="mode.executor">Native executor</span><b>→</b><span data-i18n="mode.effects">Business effects</span></div><p data-i18n="drive.body">A project-local engine consumes the declaration. Guards, transitions, and actions are explicit and checked. Unsupported semantics fail instead of silently disappearing.</p></article><article class="mode observe"><span class="mode-label">OBSERVE</span><h3 data-i18n="observe.title">Keep the project's own logic</h3><div class="mode-flow"><span data-i18n="mode.own">Your functions</span><b>→</b><span data-i18n="mode.actual">Actual state + effects</span><b>→</b><span data-i18n="mode.evidence">Graph evidence</span></div><p data-i18n="observe.body">The application makes its own decisions. Adapters capture real transitions, inputs, and outcomes. The observer does not run a second, competing business state machine.</p></article></div>
-<div class="shared-service"><span class="service-node">{ JSON }</span><p data-i18n="modes.shared">Python maintains the shared graph, validation, recording, export, and viewer. Python or JavaScript adapters keep execution native. Observation failure must not stop the business operation.</p></div><p class="small-note" data-i18n="modes.limit">The native Python/JS bo.fsm/1 executors support a validated flat state-machine subset. The complete Python examples also cover activities, resources, waiting, joins, and recovery. More complex native engines require an explicit adapter.</p>
-</section>
-<section id="workflow" class="workflow section-space"><div class="wrap"><div class="section-heading"><div><p class="eyebrow" data-i18n="workflow.eyebrow">From the first conversation to the next iteration</p><h2 data-i18n="workflow.title">Make the behavior visible<br>before, during, and after coding.</h2></div><p data-i18n="workflow.intro">You describe the change and inspect the result. The coding agent maintains the declarations, source bindings, probes, and checks alongside its normal development work.</p></div>
-<ol class="workflow-steps"><li><span class="step-index">01</span><h3 data-i18n="workflow.confirm.title">Confirm the intended flow</h3><p data-i18n="workflow.confirm.body">See a small graph in the conversation, with a live Web link. Correct it in conversation. Clarifications and counterexamples resolve ambiguity in what you meant; they do not add recommended features.</p><span class="step-output" data-i18n="workflow.confirm.output">Your intent → a confirmed graph</span></li><li><span class="step-index">02</span><h3 data-i18n="workflow.code.title">Build with the graph attached</h3><p data-i18n="workflow.code.body">The agent uses your chosen coding approach. It binds important functions and parameters, adds identifiable probes, and scans source changes independently of the existing graph.</p><span class="step-output" data-i18n="workflow.code.output">Code changes → updated mappings</span></li><li><span class="step-index">03</span><h3 data-i18n="workflow.verify.title">Check, repair, and inspect</h3><p data-i18n="workflow.verify.body">Run the confirmed scenarios and independent checks. Missing mappings, invalid states, or wrong values block acceptance. Repair code and graph, rerun the checks, then inspect the updated network.</p><span class="step-output" data-i18n="workflow.verify.output">Evidence → an accepted iteration</span></li></ol>
-<div class="iteration-return"><span aria-hidden="true">↶</span><p data-i18n="workflow.repeat">The next request starts another checked iteration on the same graph.</p></div>
-<div class="reports"><h3 data-i18n="checks.title">Four results, kept separate</h3><div><span data-i18n="checks.mapping">Implementation mapping</span><span data-i18n="checks.state">State constraints</span><span data-i18n="checks.business">Business rules</span><span data-i18n="checks.project">Project checks</span></div><p data-i18n="checks.note">A graph can faithfully expose a business bug. A mapping pass does not turn that bug into a business pass. Expectations come from confirmed intent and independent reads, not from the graph checking itself.</p></div>
-<p class="small-note" data-i18n="workflow.limit">Synchronization runs within each agent-managed coding batch. A Skill is not a background daemon for every editor; scan/watch reports drift, and the active coding agent must reconcile it before accepting a change.</p>
-</div></section>
-<section id="record" class="wrap section-space"><div class="section-heading"><div><p class="eyebrow" data-i18n="record.eyebrow">See a real operation unfold</p><h2 data-i18n="record.title">Watch it live.<br>Record it. Inspect each change.</h2></div><p data-i18n="record.intro">Choose all instrumented events or a focused region, start recording, operate the application, and stop. Replay exposes changes to state and values alongside their actual source.</p></div>
-<div class="recording-demo"><div class="record-guide"><span data-i18n="record.scope">Choose scope</span><b>→</b><span data-i18n="record.start">Start recording</span><b>→</b><span data-i18n="record.operate">Use the application</span><b>→</b><span data-i18n="record.stop">Stop and replay</span></div><div class="record-body"><div class="record-steps" role="group" aria-label="Illustrative replay steps"><button data-frame="0" aria-pressed="true" data-i18n="frame.upload">1 · Upload</button><button data-frame="1" aria-pressed="false" data-i18n="frame.validate">2 · Validate</button><button data-frame="2" aria-pressed="false" data-i18n="frame.notify">3 · Notify</button><button data-frame="3" aria-pressed="false" data-i18n="frame.review">4 · Approve</button></div><div id="frame-content" aria-live="polite"></div></div><p class="small-note demo-note" data-i18n="record.caption">Illustrative replay, not a live trace. In your project, only captured facts are shown. Missing events, dropped records, and unknown values stay visible as gaps.</p></div>
-<div class="record-details"><div><h3 data-i18n="record.focus.title">Focus without losing meaning</h3><p data-i18n="record.focus.body">Record a selected region when that is enough. Or record all instrumented events and change the view afterwards. A business view groups meaningful changes; a function view reveals captured calls and values.</p></div><div><h3 data-i18n="record.evidence.title">Show what actually moved</h3><p data-i18n="record.evidence.body">Replay shows before/after values. Flow on an edge needs actual call or dependency evidence; nearby timestamps and a static edge do not prove that information passed between nodes.</p></div><div><h3 data-i18n="record.interact.title">Keep your working view</h3><p data-i18n="record.interact.body">Expand regions, drag groups, pin nodes, add names and notes, and save custom views. The project keeps your layout. These view operations do not create business events or execute business commands.</p></div></div>
-</section>
-<section id="install" class="install section-space"><div class="wrap install-grid"><div><p class="eyebrow" data-i18n="install.eyebrow">Start with one feature</p><h2 data-i18n="install.title">Bring the graph into<br>your next coding conversation.</h2><p data-i18n="install.body">Install the complete Skill folder, start a new conversation in your project, and describe what you want to build. Choose drive or observe, confirm the first graph, and continue coding.</p><a class="button primary" href="https://github.com/li-bruce/SoftwareStatusObserverSkill/blob/main/docs/usage.en.md" id="usage-link" data-i18n="install.guide">Installation and usage ↗</a><a class="text-link" href="https://github.com/li-bruce/SoftwareStatusObserverSkill/blob/main/examples/multilanguage/README.md" data-i18n="install.example">Run the language adapter example ↗</a></div><div class="prompt-panel"><p class="prompt-label" data-i18n="install.promptLabel">Example first message</p><pre id="install-prompt">Use $business-observer to build an image review gallery.
-A person uploads an image. A reviewer decides whether it
-appears in the exhibition. Show the first business graph
-in this conversation and give me its Web address.
-Confirm the unclear details before implementation.</pre><button id="copy-prompt" class="copy-button" type="button" data-i18n="install.copy">Copy prompt</button><span id="copy-status" role="status"></span><p class="small-note" data-i18n="install.dependencies">Python 3.11–3.13 for shared services. Node.js 20.19+ or 22.12+ for JS/TS/React/Vue analysis. A modern WebGL browser for the viewer.</p></div></div></section>
-<section class="wrap technical"><h2 data-i18n="technical.title">Implementation, boundaries, and evidence</h2><div class="technical-links"><a href="https://github.com/li-bruce/SoftwareStatusObserverSkill/blob/main/skills/business-observer/references/multilanguage.md" data-i18n="technical.protocol">Architecture and JSON protocols ↗</a><a href="https://github.com/li-bruce/SoftwareStatusObserverSkill/blob/main/docs/source-data-and-language.md" data-i18n="technical.source">Source depth, data relationships, and language policy ↗</a><a href="https://github.com/li-bruce/SoftwareStatusObserverSkill/blob/main/skills/business-observer/references/recorded-analysis.md" data-i18n="technical.record">Recording and replay contract ↗</a><a href="https://github.com/li-bruce/SoftwareStatusObserverSkill/blob/main/docs/review/english-gallery/README.md" data-i18n="technical.evidence">Independent trials and validation evidence ↗</a></div><p class="small-note" data-i18n="technical.boundary">A developer debugging tool. It does not prove that the entire application is correct, discover every dynamic call, or expose every local variable. Graph editing does not currently control business execution. Performance and generic database adapters require further work.</p></section>
-</main>
-<footer class="wrap footer"><span>Business Observer</span><p data-i18n="footer">Open source · MIT · Designed for developers inspecting AI implementations.</p><a href="https://github.com/li-bruce/SoftwareStatusObserverSkill/blob/main/THIRD_PARTY_NOTICES.md" data-i18n="footer.licenses">Dependencies and licenses ↗</a></footer>
-</body></html>
-
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Understand the software you build with AI. Explore its business flows, inspect state and value changes, and follow an operation into the code."
+    />
+    <title>Business Observer — Understand what you build</title>
+    <link rel="stylesheet" href="site.css?rev=readability-2" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <script type="module" src="site.js?rev=readability-2"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+    <header class="wrap nav">
+      <a class="brand" href="index.html" data-local-link
+        ><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>Business
+        Observer<span class="skill-tag">SKILL</span></a
+      >
+      <nav aria-label="Main navigation" data-i18n-aria="navigation">
+        <a href="#explore" data-i18n="nav.explore">Explore</a
+        ><a href="demo.html" data-local-link data-i18n="nav.demo">Try the demo</a
+        ><a class="github" href="https://github.com/li-bruce/SoftwareStatusObserverSkill"
+          >GitHub ↗</a
+        ><button class="language" id="language" type="button" aria-label="Switch to Chinese">
+          中文
+        </button>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="wrap hero">
+        <div class="hero-copy">
+          <p class="eyebrow" data-i18n="hero.kicker">A graph for your next coding conversation</p>
+          <h1 data-i18n="hero.title">Understand<br />what you build.</h1>
+          <p class="lead" data-i18n="hero.body">
+            See how your program works, from business flows to the functions behind them. Follow
+            state changes as it runs, then return to the exact step you want to understand.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="#install" data-i18n="hero.start">Use the Skill</a
+            ><a class="button quiet" href="demo.html" data-local-link data-i18n="hero.demo"
+              >Explore a short demo ↗</a
+            >
+          </div>
+          <p class="platforms">
+            Python <span>·</span> Node.js <span>·</span> React <span>·</span> Vue
+          </p>
+        </div>
+        <figure class="hero-figure">
+          <svg viewBox="0 0 600 510" role="img" aria-labelledby="hero-caption">
+            <defs>
+              <marker
+                id="hero-arrow"
+                markerWidth="7"
+                markerHeight="7"
+                refX="6"
+                refY="3.5"
+                orient="auto"
+              >
+                <path d="M0 0L7 3.5L0 7" fill="#2457db" />
+              </marker>
+            </defs>
+            <circle cx="318" cy="240" r="192" class="business-region" />
+            <circle cx="318" cy="240" r="139" class="inner-region" />
+            <path d="M88 240H126M510 240H556" class="hero-path" />
+            <g class="svg-business"><circle cx="60" cy="240" r="27" /></g>
+            <text x="60" y="295" text-anchor="middle" data-i18n="diagram.request">Request</text>
+            <text x="318" y="89" text-anchor="middle" class="svg-title" data-i18n="diagram.flow">
+              Business flow
+            </text>
+            <path
+              d="M238 221L315 168L391 221M238 221L268 308M391 221L367 308M268 308H367"
+              class="hero-inner"
+            />
+            <g class="svg-state"><circle cx="238" cy="221" r="24" /></g>
+            <text x="216" y="268" text-anchor="middle" data-i18n="diagram.state">State</text>
+            <g class="svg-decision"><path d="M315 144L339 168L315 192L291 168Z" /></g>
+            <text x="315" y="128" text-anchor="middle" data-i18n="diagram.rule">Decision</text>
+            <g class="svg-function"><path d="M391 196L414 209V235L391 248L368 235V209Z" /></g>
+            <text x="414" y="268" text-anchor="middle" data-i18n="diagram.function">Function</text>
+            <g class="svg-value">
+              <rect x="228" y="291" width="80" height="36" rx="8" />
+              <text x="268" y="314" text-anchor="middle">before</text>
+              <rect x="327" y="291" width="80" height="36" rx="8" />
+              <text x="367" y="314" text-anchor="middle">after</text>
+            </g>
+            <path d="M318 380V437" class="source-path" />
+            <rect x="224" y="437" width="188" height="43" rx="8" class="code-card" />
+            <text x="318" y="464" text-anchor="middle" class="mono" data-i18n="diagram.source">
+              &lt;/&gt; Source code
+            </text>
+          </svg>
+          <figcaption id="hero-caption" data-i18n="hero.caption">
+            One connected view, from intent to execution.
+          </figcaption>
+        </figure>
+      </section>
+      <section class="wrap problem section-rule">
+        <p class="eyebrow" data-i18n="problem.kicker">Keep the program within reach</p>
+        <div class="problem-grid">
+          <h2 data-i18n="problem.title">The screen works.<br />What happens inside?</h2>
+          <p data-i18n="problem.body">
+            During vibe coding, each change can touch several parts of a program. Business Observer
+            helps you follow those connections: what triggered an action, which decision allowed it,
+            and which value changed.
+          </p>
+        </div>
+      </section>
+      <section class="explore section-space" id="explore">
+        <div class="wrap">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow" data-i18n="explore.kicker">Choose your level of detail</p>
+              <h2 data-i18n="explore.title">Start with the flow.<br />Follow the detail.</h2>
+            </div>
+            <p data-i18n="explore.body">
+              Expand a node to see what supports it. Follow a connection to a decision, a value, or
+              its source. Switch views as your question changes.
+            </p>
+          </div>
+          <div class="explorer">
+            <div
+              class="view-tabs"
+              role="tablist"
+              aria-label="Graph views"
+              data-i18n-aria="explore.tabs"
+            >
+              <button
+                role="tab"
+                id="tab-business"
+                aria-controls="view-panel"
+                aria-selected="true"
+                tabindex="0"
+                data-view="business"
+                data-i18n="view.business"
+              >
+                Business</button
+              ><button
+                role="tab"
+                id="tab-state"
+                aria-controls="view-panel"
+                aria-selected="false"
+                tabindex="-1"
+                data-view="state"
+                data-i18n="view.state"
+              >
+                States</button
+              ><button
+                role="tab"
+                id="tab-decision"
+                aria-controls="view-panel"
+                aria-selected="false"
+                tabindex="-1"
+                data-view="decision"
+                data-i18n="view.decision"
+              >
+                Decisions</button
+              ><button
+                role="tab"
+                id="tab-function"
+                aria-controls="view-panel"
+                aria-selected="false"
+                tabindex="-1"
+                data-view="function"
+                data-i18n="view.function"
+              >
+                Functions & values</button
+              ><button
+                role="tab"
+                id="tab-source"
+                aria-controls="view-panel"
+                aria-selected="false"
+                tabindex="-1"
+                data-view="source"
+                data-i18n="view.source"
+              >
+                Source</button
+              ><button
+                role="tab"
+                id="tab-mixed"
+                aria-controls="view-panel"
+                aria-selected="false"
+                tabindex="-1"
+                data-view="mixed"
+                data-i18n="view.mixed"
+              >
+                Your own view
+              </button>
+            </div>
+            <div
+              class="graph-panel"
+              id="view-panel"
+              role="tabpanel"
+              tabindex="0"
+              aria-labelledby="tab-business"
+            >
+              <div class="graph-surface">
+                <span class="surface-caption" data-i18n="explore.caption">CONNECTED VIEWS</span>
+                <div id="concept-graph"></div>
+              </div>
+              <div class="level-explanation">
+                <span class="level-number" id="level-number">01 / 06</span>
+                <h3 id="level-title"></h3>
+                <p id="level-body"></p>
+                <fieldset id="mix-filters" hidden>
+                  <legend data-i18n="mix.legend">Include in this view</legend>
+                  <label
+                    ><input type="checkbox" value="state" checked /><span data-i18n="view.state"
+                      >state</span
+                    ></label
+                  ><label
+                    ><input type="checkbox" value="decision" checked /><span
+                      data-i18n="view.decision"
+                      >decision</span
+                    ></label
+                  ><label
+                    ><input type="checkbox" value="function" checked /><span
+                      data-i18n="view.function"
+                      >function</span
+                    ></label
+                  >
+                </fieldset>
+              </div>
+            </div>
+          </div>
+          <p class="preset-note" data-i18n="explore.presets">
+            Built-in views cover business flows, state machines, functions, permissions, data, and
+            waiting or failed steps. Save a custom view with the types and regions you need.
+          </p>
+        </div>
+      </section>
+      <section class="wrap section-space" id="workflow">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow" data-i18n="workflow.kicker">Part of your development conversation</p>
+            <h2 data-i18n="workflow.title">A graph that follows<br />your project.</h2>
+          </div>
+          <p data-i18n="workflow.body">
+            From the first sketch to your next change, keep a view of what the program is meant to
+            do and what it currently does.
+          </p>
+        </div>
+        <ol class="workflow-steps">
+          <li>
+            <span class="step-index">01</span>
+            <h3 data-i18n="workflow.1.title">Agree on the flow</h3>
+            <p data-i18n="workflow.1.body">
+              Describe your project. See its first graph in the conversation, clarify the details
+              that affect the flow, and adjust it until it matches your intent. Open the linked Web
+              view for a closer look.
+            </p>
+          </li>
+          <li>
+            <span class="step-index">02</span>
+            <h3 data-i18n="workflow.2.title">Develop and inspect</h3>
+            <p data-i18n="workflow.2.body">
+              Continue coding with your preferred tools. At the end of each iteration, explore the
+              updated graph, open a function, or add a note beside something you want to revisit.
+            </p>
+          </li>
+          <li>
+            <span class="step-index">03</span>
+            <h3 data-i18n="workflow.3.title">Review the result</h3>
+            <p data-i18n="workflow.3.body">
+              Check how well the graph covers the implementation and how the program behaves in the
+              agreed test cases. Follow a reported issue back to the affected flow and review it
+              after a fix.
+            </p>
+          </li>
+        </ol>
+      </section>
+      <section class="record-section section-space">
+        <div class="wrap">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow" data-i18n="record.kicker">See an operation unfold</p>
+              <h2 data-i18n="record.title">Watch it live.<br />Replay the changes.</h2>
+            </div>
+            <p data-i18n="record.body">
+              Start a recording, use your application, and stop when you have the sequence you need.
+              Step through the captured states and values to see where the result came from.
+            </p>
+          </div>
+          <div class="record-strip">
+            <span><i class="record-dot"></i><b data-i18n="record.start">Start recording</b></span
+            ><span class="strip-arrow" aria-hidden="true">→</span
+            ><span data-i18n="record.operate">Use your application</span
+            ><span class="strip-arrow" aria-hidden="true">→</span
+            ><span data-i18n="record.stop">Stop & replay</span>
+          </div>
+          <div class="record-details">
+            <div>
+              <h3 data-i18n="record.focus.title">Keep your focus</h3>
+              <p data-i18n="record.focus.body">
+                Record a selected region, or capture the instrumented activity and narrow the view
+                afterwards.
+              </p>
+            </div>
+            <div>
+              <h3 data-i18n="record.values.title">Read each change</h3>
+              <p data-i18n="record.values.body">
+                See values before and after a step, the decision that was made, and the path the
+                operation followed.
+              </p>
+            </div>
+            <div>
+              <h3 data-i18n="record.keep.title">Make the graph yours</h3>
+              <p data-i18n="record.keep.body">
+                Drag groups, pin important nodes, rename labels, and add notes. Keep your layout and
+                saved views with the project.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="wrap section-space">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow" data-i18n="modes.kicker">Your choice at the start</p>
+            <h2 data-i18n="modes.title">Build from the graph.<br />Or use it to observe.</h2>
+          </div>
+          <p data-i18n="modes.body">
+            Choose how the state graph fits your project. Both modes give you a connected view of
+            code and captured behavior.
+          </p>
+        </div>
+        <div class="modes-grid">
+          <article class="mode">
+            <span class="mode-label" data-i18n="modes.drive.label">DRIVE</span>
+            <h3 data-i18n="modes.drive.title">Develop around agreed states</h3>
+            <p data-i18n="modes.drive.body">
+              Use the confirmed states and transitions as the basis for development. Compare the
+              running program with that shared picture as you iterate.
+            </p>
+          </article>
+          <article class="mode observe">
+            <span class="mode-label" data-i18n="modes.observe.label">OBSERVE</span>
+            <h3 data-i18n="modes.observe.title">Keep your development approach</h3>
+            <p data-i18n="modes.observe.body">
+              Choose your own structure and implementation. Use the graph alongside it to inspect
+              the flow, decisions, and important values.
+            </p>
+          </article>
+        </div>
+      </section>
+      <aside class="wrap demo-invitation">
+        <div>
+          <p class="eyebrow" data-i18n="demoLink.kicker">A separate, hands-on walkthrough</p>
+          <h2 data-i18n="demoLink.title">Try one small project.</h2>
+          <p data-i18n="demoLink.body">
+            Follow a sample conversation, expand a graph, and record an operation. The walkthrough
+            uses an image review project and sample data.
+          </p>
+        </div>
+        <a class="button primary" href="demo.html" data-local-link data-i18n="demoLink.button"
+          >Open interactive demo ↗</a
+        >
+      </aside>
+      <section class="install section-space" id="install">
+        <div class="wrap install-grid">
+          <div>
+            <p class="eyebrow" data-i18n="install.kicker">Start with your own project</p>
+            <h2 data-i18n="install.title">Bring the graph into<br />your next conversation.</h2>
+            <p data-i18n="install.body">
+              Install Business Observer from GitHub, then open a new conversation in your project
+              and describe what you want to build.
+            </p>
+            <a
+              class="button primary"
+              id="usage-link"
+              href="https://github.com/li-bruce/SoftwareStatusObserverSkill/blob/main/docs/usage.en.md"
+              data-i18n="install.guide"
+              >Installation & usage ↗</a
+            >
+          </div>
+          <div class="prompt-panel">
+            <p class="prompt-label" data-i18n="install.promptLabel">A starting prompt</p>
+            <pre id="install-prompt"></pre>
+            <button class="copy-button" id="copy-prompt" data-i18n="install.copy">
+              Copy prompt</button
+            ><span id="copy-status" role="status"></span>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="wrap footer">
+      <span>Business Observer</span>
+      <div>
+        <a
+          id="source-link"
+          href="https://github.com/li-bruce/SoftwareStatusObserverSkill/blob/main/docs/source-guide.en.md"
+          data-i18n="footer.source"
+          >Source guide</a
+        ><a
+          href="https://github.com/li-bruce/SoftwareStatusObserverSkill/blob/main/docs/review/english-gallery/README.md"
+          data-i18n="footer.evidence"
+          >Test records</a
+        ><a href="https://github.com/li-bruce/SoftwareStatusObserverSkill/blob/main/LICENSE"
+          >MIT License</a
+        >
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "base": "412eb0ad5ab2ea444a06ced3b24a12758cb011cd",
+  "javascript_modules": 16,
+  "executable_ast_changes": [
+    "skills/business-observer/assets/stategraph-viewer/analysis.js",
+    "skills/business-observer/assets/stategraph-viewer/conversation.js",
+    "skills/business-observer/assets/stategraph-viewer/glyphs.js",
+    "skills/business-observer/assets/stategraph-viewer/graph-core.js",
+    "skills/business-observer/assets/stategraph-viewer/i18n.js",
+    "skills/business-observer/assets/stategraph-viewer/layout.js",
+    "skills/business-observer/assets/stategraph-viewer/messages.zh-CN.js",
+    "skills/business-observer/assets/stategraph-viewer/polling.js",
+    "skills/business-observer/assets/stategraph-viewer/preferences.js",
+    "skills/business-observer/assets/stategraph-viewer/recording.js",
+    "skills/business-observer/assets/stategraph-viewer/renderer.js",
+    "skills/business-observer/assets/stategraph-viewer/replay-steps.js",
+    "skills/business-observer/assets/stategraph-viewer/runtime-frames.js",
+    "skills/business-observer/assets/stategraph-viewer/viewer.js",
+    "skills/business-observer/scripts/bo_observer/adapters/javascript/bo_runtime.mjs",
+    "skills/business-observer/scripts/bo_observer/adapters/javascript/scan.mjs"
+  ],
+  "valid": false,
+  "scope": "TypeScript syntax trees; comments, source locations and redundant parentheses excluded"
+}

@@ -1,0 +1,55 @@
+{
+  "candidate_id": "efbeee86a28418a619cb4f0d61f9b8a56a55249ce950e23a81762568d5784de8",
+  "decisions": {
+    "business": {
+      "action": "unchanged",
+      "reason": "No requirement, authorization, state, effect or expected result changes."
+    },
+    "state_machine": {
+      "action": "unchanged",
+      "reason": "Existing declarations and native execution remain unchanged."
+    },
+    "abstraction": {
+      "action": "updated",
+      "reason": "Regenerate source fingerprints and locations after equivalent formatting and function documentation; preserve graph meaning and IDs."
+    },
+    "probes": {
+      "action": "unchanged",
+      "reason": "Existing capture fields, observer exclusions, runtime witnesses and isolation scenarios remain mandatory."
+    }
+  },
+  "excluded_symbols": {
+    "archive_app/ports.py::BOTracePort": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "archive_app/ports.py::BOTracePort.__init__": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "archive_app/ports.py::BOTracePort.bo_record": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "archive_app/ports.py::bo_record_change": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "archive_app/ports.py::no_trace": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "archive_app/service.py::ArchiveService": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "archive_app/storage.py::ArchiveStore": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "bo_stategraph/workflow.py::Phase": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "integrations/bo_observer.py::BOObserver": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "integrations/bo_observer.py::BOObserver.__init__": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "integrations/bo_observer.py::BOObserver.close": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "integrations/bo_observer.py::BOObserver.health": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "integrations/bo_observer.py::BOObserver.snapshot": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "integrations/bo_observer.py::BOObserver.trace": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "integrations/bo_observer.py::BOObserver.write": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "integrations/bo_server.py::LocalApplication": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "integrations/bo_server.py::LocalApplication.__init__": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "integrations/bo_server.py::LocalApplication.bo_export_graph": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "integrations/bo_server.py::LocalApplication.cases": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "integrations/bo_server.py::LocalApplication.command": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "integrations/bo_server.py::LocalApplication.graph_view": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "integrations/bo_server.py::LocalApplication.recording_view": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "integrations/bo_server.py::LocalApplication.state": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "integrations/bo_server.py::LocalApplication.version_sources": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "integrations/bo_server.py::serve": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "integrations/bo_server.py::serve.Handler": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "integrations/bo_server.py::serve.Handler.do_GET": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "integrations/bo_server.py::serve.Handler.do_POST": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "integrations/bo_server.py::serve.Handler.log_message": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "integrations/bo_server.py::serve.Handler.reply": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "run.py::main": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "static/app.js::bo_record": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests."
+  }
+}

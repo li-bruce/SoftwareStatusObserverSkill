@@ -5,7 +5,7 @@ const moduleUrls=new Map();
 async function moduleUrl(name){
   if(moduleUrls.has(name))return moduleUrls.get(name);
   let source=await readFile(new URL('../static/graph/'+name,import.meta.url),'utf8');
-  for(const match of [...source.matchAll(/from '\.\/([^']+)'/g)])source=source.replace(match[0],`from '${await moduleUrl(match[1])}'`);
+  for(const match of [...source.matchAll(/from\s+["']\.\/([^"']+)["']/g)])source=source.replace(match[0],`from '${await moduleUrl(match[1])}'`);
   const url='data:text/javascript;base64,'+Buffer.from(source).toString('base64');
   moduleUrls.set(name,url);return url;
 }

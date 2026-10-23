@@ -2,7 +2,7 @@
 
 **See what your coding agent built — and what the program actually does.**
 
-[中文](README.zh-CN.md) · [Interactive introduction](https://li-bruce.github.io/SoftwareStatusObserverSkill/?lang=en) · [Installation & usage](docs/usage.en.md) · [Validation evidence](docs/review/english-gallery/README.md)
+[中文](README.zh-CN.md) · [Product introduction](https://li-bruce.github.io/SoftwareStatusObserverSkill/?lang=en) · [Interactive demo](https://li-bruce.github.io/SoftwareStatusObserverSkill/demo.html?lang=en) · [Installation & usage](docs/usage.en.md) · [Source guide](docs/source-guide.en.md)
 
 Vibe coding can produce a working screen while leaving its decisions, state changes, and internal dependencies difficult to inspect. `business-observer` keeps a developer-facing graph connected to the implementation: business flows, state machines, decision dependencies, important functions, parameters, and actual runtime evidence.
 
@@ -86,7 +86,7 @@ Confirm unclear details before implementation, and keep the graph in sync while 
 
 Answer the important business questions, choose drive or observe, and confirm the initial graph. The AI handles the intermediate artifacts and checks.
 
-Alternatively, ask Codex's Skill installer to install from [the Skill directory](https://github.com/li-bruce/SoftwareStatusObserverSkill/tree/main/skills/business-observer). Use `main` for the latest version, or check out `v0.6.0` before installation to reproduce this release. [Release notes](docs/releases/v0.6.0.md) summarize the changes and acceptance evidence.
+Alternatively, ask Codex's Skill installer to install from [the Skill directory](https://github.com/li-bruce/SoftwareStatusObserverSkill/tree/main/skills/business-observer). Use `main` for the latest version. The earlier `v0.6.0` remains available as a fixed release; its [release notes](docs/releases/v0.6.0.md) include the corresponding acceptance evidence.
 
 English is the maintained source/documentation language. Conversation follows the user; the viewer offers English/Chinese and saves the preference in the project. Original answers and historical evidence retain their original language.
 
@@ -112,7 +112,9 @@ To open the illustrated introduction locally:
 python -m http.server 8862 --bind 127.0.0.1
 ```
 
-Visit [the introduction](http://127.0.0.1:8862/docs/site/). This is a static, bilingual explanation with interactive diagrams; its illustrative replay is not a live project recorder.
+Visit [the introduction](http://127.0.0.1:8862/docs/site/) for a bilingual overview of the Skill. The separate [interactive demo](http://127.0.0.1:8862/docs/site/demo.html) walks through a sample conversation, graph exploration, recording, replay, and a requested change using local sample data.
+
+To read or modify the implementation, start with the [source guide](docs/source-guide.en.md). It maps the modules and follows a coding iteration, a runtime event, and a graph interaction through the code. [Readability review](docs/review/readability-20261023/README.md) records the syntax comparison and regression results for this update.
 
 ## Architecture and boundaries
 

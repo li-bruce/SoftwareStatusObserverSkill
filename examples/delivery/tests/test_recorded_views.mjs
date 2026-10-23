@@ -7,7 +7,7 @@ const folder=['skills/business-observer/assets/stategraph-viewer','static/graph'
 const urls=new Map();
 function url(name){
   if(urls.has(name))return urls.get(name);
-  let text=fs.readFileSync(path.join(folder,name),'utf8').replace(/from '\.\/([^']+)'/g,(_,file)=>`from '${url(file)}'`);
+  let text=fs.readFileSync(path.join(folder,name),'utf8').replace(/from\s+["']\.\/([^"']+)["']/g,(_,file)=>`from '${url(file)}'`);
   const value='data:text/javascript;base64,'+Buffer.from(text).toString('base64');urls.set(name,value);return value;
 }
 const core=await import(url('graph-core.js')),layout=await import(url('layout.js')),analysis=await import(url('analysis.js')),replay=await import(url('recording.js'));

@@ -1,0 +1,6 @@
+{
+  "name": "business-observer-source-formatting",
+  "private": true,
+  "description": "Development-only formatting for maintained source files",
+  "devDependencies": { "prettier": "3.5.3" }
+}

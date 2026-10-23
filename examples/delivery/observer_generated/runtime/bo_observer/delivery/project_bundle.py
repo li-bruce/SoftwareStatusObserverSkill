@@ -1,9 +1,11 @@
 """Export explicit, synthetic project/review files; verify without executing them."""
+
 from __future__ import annotations
 import argparse
 import json
 from pathlib import Path, PurePosixPath
 import zipfile
+
 try:
     from ...behavior_model import read, contained, digest
 except ImportError:
@@ -20,7 +22,13 @@ def safe_name(name):
         raise ValueError("invalid bundle path")
     if str(path) != name or name == MANIFEST:
         raise ValueError("noncanonical or reserved bundle path")
-    if path.name.startswith(".env") or path.suffix.lower() in {".db", ".sqlite", ".sqlite3", ".pem", ".key"}:
+    if path.name.startswith(".env") or path.suffix.lower() in {
+        ".db",
+        ".sqlite",
+        ".sqlite3",
+        ".pem",
+        ".key",
+    }:
         raise ValueError("exclude database and credential files; use synthetic fixtures")
     return name
 
@@ -29,7 +37,11 @@ def export(root, config, out):
     names = config.get("files", [])
     if config.get("schema_version") != 1 or config.get("data_policy") != "synthetic-only":
         raise ValueError("bundle requires schema_version 1 and explicit synthetic-only data policy")
-    if not names or len(set(names)) != len(names) or len({n.casefold() for n in names}) != len(names):
+    if (
+        not names
+        or len(set(names)) != len(names)
+        or len({n.casefold() for n in names}) != len(names)
+    ):
         raise ValueError("bundle needs unique files, including on case-insensitive systems")
     if config.get("kind") not in {"project", "review"} or not config.get("project_id"):
         raise ValueError("bundle needs project_id and kind project/review")
@@ -45,10 +57,16 @@ def export(root, config, out):
             raise ValueError("export file missing or is the output")
         contents[name] = source.read_bytes()
         files[name] = {"sha256": digest(contents[name]), "bytes": len(contents[name])}
-    manifest = {"schema_version": 1, "kind": config["kind"], "project_id": config["project_id"],
-                "data_policy": config["data_policy"], "versions": config.get("versions", {}),
-                "files": files, "commands": config.get("commands", []),
-                "meaning": "Integrity and explicit scope; included commands are never automatically executed."}
+    manifest = {
+        "schema_version": 1,
+        "kind": config["kind"],
+        "project_id": config["project_id"],
+        "data_policy": config["data_policy"],
+        "versions": config.get("versions", {}),
+        "files": files,
+        "commands": config.get("commands", []),
+        "meaning": "Integrity and explicit scope; included commands are never automatically executed.",
+    }
     target.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(target, "w", compression=zipfile.ZIP_DEFLATED) as archive:
         for name, content in contents.items():
@@ -59,7 +77,8 @@ def export(root, config, out):
 
 def inspect(archive_path):
     with zipfile.ZipFile(archive_path) as archive:
-        infos = archive.infolist(); names = [i.filename for i in infos]
+        infos = archive.infolist()
+        names = [i.filename for i in infos]
         if len(names) != len(set(names)) or len({n.casefold() for n in names}) != len(names):
             raise ValueError("duplicate archive path")
         if len(infos) > 10000 or sum(i.file_size for i in infos) > 256 * 1024 * 1024:
@@ -78,16 +97,24 @@ def inspect(archive_path):
             data = archive.read(name)
             if len(data) != spec["bytes"] or digest(data) != spec["sha256"]:
                 raise ValueError("file content differs: " + name)
-    return {"valid": True, "files": len(manifest["files"]), "manifest": manifest,
-            "sha256": digest(Path(archive_path).read_bytes()), "executed": False}
+    return {
+        "valid": True,
+        "files": len(manifest["files"]),
+        "manifest": manifest,
+        "sha256": digest(Path(archive_path).read_bytes()),
+        "executed": False,
+    }
 
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("command", choices=["export", "inspect"])
-    p.add_argument("--root", required=True); p.add_argument("--config")
-    p.add_argument("--out"); p.add_argument("--archive")
-    a = p.parse_args(); root = Path(a.root).absolute().resolve()
+    p.add_argument("--root", required=True)
+    p.add_argument("--config")
+    p.add_argument("--out")
+    p.add_argument("--archive")
+    a = p.parse_args()
+    root = Path(a.root).absolute().resolve()
     if a.command == "export":
         if not a.config or not a.out:
             p.error("export requires --config and --out")

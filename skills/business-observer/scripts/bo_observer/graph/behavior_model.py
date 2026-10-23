@@ -2,6 +2,7 @@
 
 This does not prove business semantics or extract complete data flow.
 """
+
 from __future__ import annotations
 import argparse
 import ast
@@ -9,6 +10,7 @@ import hashlib
 import json
 from pathlib import Path
 import sys
+
 try:
     from ...bo_contracts import validate_graph
 except ImportError:
@@ -20,7 +22,11 @@ def read(path):
 
 
 def digest(value):
-    raw = value if isinstance(value, bytes) else json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
+    raw = (
+        value
+        if isinstance(value, bytes)
+        else json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
+    )
     return hashlib.sha256(raw).hexdigest()
 
 
@@ -30,6 +36,7 @@ def ast_fingerprint(node):
     New, empty generic-parameter fields do not change existing Python code.
     Nonempty parameters and defaults remain part of the fingerprint.
     """
+
     def normalize(value):
         if isinstance(value, ast.AST):
             fields = {}
@@ -44,6 +51,7 @@ def ast_fingerprint(node):
             return [normalize(child) for child in value]
         # repr preserves the types of constants, including bytes and complex values.
         return {"value": repr(value)}
+
     return digest(normalize(node))
 
 
@@ -65,7 +73,11 @@ def validate(root, model):
     intent = read(contained(root, model["intent"]))
     requirements = {r["id"] for r in intent["requirements"]}
     for requirement in intent["requirements"]:
-        if requirement.get("status") not in {"confirmed", "assumption", "pending"} or not requirement.get("source"):
+        if requirement.get("status") not in {
+            "confirmed",
+            "assumption",
+            "pending",
+        } or not requirement.get("source"):
             raise ValueError("missing requirement provenance")
     for node in nodes.values():
         if node.get("source"):
@@ -84,6 +96,7 @@ def symbols(path):
     source = path.read_text(encoding="utf-8-sig")
     tree = ast.parse(source)
     result = {}
+
     def walk(body, prefix=""):
         for n in body:
             if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
@@ -91,13 +104,23 @@ def symbols(path):
                 if name in result:
                     raise ValueError(f"ambiguous symbol {name}")
                 line = min([n.lineno] + [d.lineno for d in n.decorator_list])
-                result[name] = {"line": line, "end_line": n.end_lineno,
+                result[name] = {
+                    "line": line,
+                    "end_line": n.end_lineno,
                     "signature": ast.unparse(n.args) if hasattr(n, "args") else name,
                     "ast_sha256": ast_fingerprint(n),
-                    "snippet": "\n".join(source.splitlines()[line-1:n.end_lineno]),
-                    "calls": sorted({ast.unparse(c.func) for c in ast.walk(n) if isinstance(c, ast.Call)}),
-                    "guards": [{"line": c.lineno, "expression": ast.unparse(c.test)} for c in ast.walk(n) if isinstance(c, (ast.If, ast.IfExp))]}
+                    "snippet": "\n".join(source.splitlines()[line - 1 : n.end_lineno]),
+                    "calls": sorted(
+                        {ast.unparse(c.func) for c in ast.walk(n) if isinstance(c, ast.Call)}
+                    ),
+                    "guards": [
+                        {"line": c.lineno, "expression": ast.unparse(c.test)}
+                        for c in ast.walk(n)
+                        if isinstance(c, (ast.If, ast.IfExp))
+                    ],
+                }
                 walk(n.body, name + ".")
+
     walk(tree.body)
     return result
 
@@ -113,23 +136,34 @@ def capture(root, model):
         files[name] = digest(raw)
         if path.suffix == ".py":
             inventories[name] = symbols(path)
-    bound_paths={n['source']['path'] for n in model['nodes'] if n.get('source')}
-    foreign = [n for n in files if n in bound_paths and Path(n).suffix in {'.js','.mjs','.cjs','.jsx','.ts','.tsx','.mts','.cts','.vue'}]
+    bound_paths = {n["source"]["path"] for n in model["nodes"] if n.get("source")}
+    foreign = [
+        n
+        for n in files
+        if n in bound_paths
+        and Path(n).suffix in {".js", ".mjs", ".cjs", ".jsx", ".ts", ".tsx", ".mts", ".cts", ".vue"}
+    ]
     if foreign:
         try:
             from ..sources import scan
         except ImportError:
             from bo_observer.sources import scan
         index = scan(root, foreign)
-        if index['errors']: raise ValueError('source adapter errors: ' + json.dumps(index['errors']))
+        if index["errors"]:
+            raise ValueError("source adapter errors: " + json.dumps(index["errors"]))
         for name in foreign:
             inventories[name] = {}
-            lines = contained(root,name).read_text(encoding='utf-8-sig').splitlines()
-            for symbol, item in index['units'][name]['symbols'].items():
-                inventories[name][symbol] = {'line':item['line'], 'end_line':item['end_line'],
-                    'signature':item['signature'], 'ast_sha256':item['ast_hash'],
-                    'snippet':'\n'.join(lines[item['line']-1:item['end_line']]),
-                    'calls':[c['expression'] for c in item['calls']], 'guards':item['predicates']}
+            lines = contained(root, name).read_text(encoding="utf-8-sig").splitlines()
+            for symbol, item in index["units"][name]["symbols"].items():
+                inventories[name][symbol] = {
+                    "line": item["line"],
+                    "end_line": item["end_line"],
+                    "signature": item["signature"],
+                    "ast_sha256": item["ast_hash"],
+                    "snippet": "\n".join(lines[item["line"] - 1 : item["end_line"]]),
+                    "calls": [c["expression"] for c in item["calls"]],
+                    "guards": item["predicates"],
+                }
     for n in model["nodes"]:
         src = n.get("source")
         if src:
@@ -137,12 +171,21 @@ def capture(root, model):
             if not info:
                 raise ValueError(f"unresolved symbol: {src}")
             bindings[n["id"]] = {**src, **info, "file_sha256": files[src["path"]]}
-    return {"schema_version": 3, "build_id": digest({"files": files, "model": model, "intent": intent}),
-        "files": files, "model_hash": digest(model), "intent_hash": digest(intent),
-        "model_revision": model["revision"], "bindings": bindings,
-        "python": sys.version.split()[0], "unknowns": model["scope"]["unknowns"] + [
+    return {
+        "schema_version": 3,
+        "build_id": digest({"files": files, "model": model, "intent": intent}),
+        "files": files,
+        "model_hash": digest(model),
+        "intent_hash": digest(intent),
+        "model_revision": model["revision"],
+        "bindings": bindings,
+        "python": sys.version.split()[0],
+        "unknowns": model["scope"]["unknowns"]
+        + [
             "AST evidence does not prove value flow, guard dominance or behavioral equivalence",
-            "External dependencies, interpreter, dynamic patching and omitted files are not attested"]}
+            "External dependencies, interpreter, dynamic patching and omitted files are not attested",
+        ],
+    }
 
 
 def check(root, model, baseline):
@@ -165,18 +208,32 @@ def check(root, model, baseline):
         if following <= affected:
             break
         affected |= following
-    return {"status": "stale" if changed or model_changed or intent_changed else "current",
-        "changed_files": sorted(changed), "model_changed": model_changed, "intent_changed": intent_changed,
-        "directly_affected": direct, "possibly_affected": sorted(affected)}
+    return {
+        "status": "stale" if changed or model_changed or intent_changed else "current",
+        "changed_files": sorted(changed),
+        "model_changed": model_changed,
+        "intent_changed": intent_changed,
+        "directly_affected": direct,
+        "possibly_affected": sorted(affected),
+    }
 
 
 def validate_events(events, model, build_id=None):
     nodes = {n["id"]: n for n in model["nodes"]}
     seen, errors, gaps = {}, [], []
     for e in events:
-        if e.get('scope', 'attempt') not in {'attempt', 'entity', 'application'}:
-            errors.append('invalid event scope')
-        if e.get("node") not in nodes or e.get("phase") not in {"enter", "return", "read", "decision", "wait", "commit", "change", "error"}:
+        if e.get("scope", "attempt") not in {"attempt", "entity", "application"}:
+            errors.append("invalid event scope")
+        if e.get("node") not in nodes or e.get("phase") not in {
+            "enter",
+            "return",
+            "read",
+            "decision",
+            "wait",
+            "commit",
+            "change",
+            "error",
+        }:
             errors.append(f"invalid event node/phase: {e.get('id')}")
         if e.get("id") in seen:
             errors.append("duplicate event id")
@@ -189,17 +246,29 @@ def validate_events(events, model, build_id=None):
                 continue
             if ref["type"] not in {"data", "control", "trigger", "recheck"}:
                 errors.append("invalid dependency type")
-            if prior["build_id"] != e["build_id"] or prior["run_id"] != e["run_id"] or prior["seq"] >= e["seq"]:
+            if (
+                prior["build_id"] != e["build_id"]
+                or prior["run_id"] != e["run_id"]
+                or prior["seq"] >= e["seq"]
+            ):
                 errors.append("invalid causal reference context")
             if prior["attempt"] != e["attempt"] and ref["type"] != "trigger":
                 errors.append("cross-attempt reference without explicit trigger")
             if prior["entity"] != e["entity"]:
                 errors.append("cross-entity reference unsupported")
-            if ref["type"] == "data" and prior["basis"]["param_version"] != e["basis"]["param_version"]:
+            if (
+                ref["type"] == "data"
+                and prior["basis"]["param_version"] != e["basis"]["param_version"]
+            ):
                 errors.append("cross-parameter-version data reference")
         seen[e["id"]] = e
-    return {"valid": not errors, "events": len(events), "errors": errors, "gaps": gaps,
-            "meaning": "reference integrity only; leaf truth and dependency semantics require independent checks"}
+    return {
+        "valid": not errors,
+        "events": len(events),
+        "errors": errors,
+        "gaps": gaps,
+        "meaning": "reference integrity only; leaf truth and dependency semantics require independent checks",
+    }
 
 
 def main():
@@ -220,13 +289,21 @@ def main():
     elif a.command == "check":
         result = check(a.root, model, read(contained(a.root, a.baseline)))
     else:
-        events = [json.loads(l) for l in contained(a.root, a.events).read_text(encoding="utf-8").splitlines() if l.strip()]
+        events = [
+            json.loads(l)
+            for l in contained(a.root, a.events).read_text(encoding="utf-8").splitlines()
+            if l.strip()
+        ]
         result = validate_events(events, model)
     if a.out:
         path = contained(a.root, a.out)
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
-        print(json.dumps({"written": a.out, "build_id": result.get("build_id")}, ensure_ascii=False))
+        path.write_text(
+            json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8", newline="\n"
+        )
+        print(
+            json.dumps({"written": a.out, "build_id": result.get("build_id")}, ensure_ascii=False)
+        )
     else:
         print(json.dumps(result, ensure_ascii=False, indent=2))
     return 1 if result.get("status") == "stale" or result.get("valid") is False else 0

@@ -1,0 +1,7 @@
+{
+  "base": "412eb0ad5ab2ea444a06ced3b24a12758cb011cd",
+  "javascript_modules": 16,
+  "executable_ast_changes": [],
+  "valid": true,
+  "scope": "TypeScript syntax trees; comments, source locations and redundant parentheses excluded"
+}

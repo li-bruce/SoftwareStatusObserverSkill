@@ -1,0 +1,6 @@
+PASS: direct/advanced projection, full search inventory, explicit permission roles, ID migration, persisted save and conflict status.
+PASS: one in-flight poll and closed viewer never restarts polling.
+PASS: business effects, real boundary endpoints, authored states, business parameters, all presets and explicit empty filters.
+Recorded-view checks passed: state projection, shared identity, circle picking, replay boundary, evidence-only motion.
+Focused replay checks passed: view granularity, intermediate changes, attempt isolation, baseline values, typed payload and core marks.
+Exact runtime frame checks passed: global resources, ordinary Python states, missing frames and identity.

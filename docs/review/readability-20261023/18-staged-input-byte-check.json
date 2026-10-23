@@ -1,0 +1,16 @@
+{
+  "scope": "Accepted input files and all shipped executable adapter files, exact bytes against staged Git blobs",
+  "checked_files": 404,
+  "projects": {
+    "delivery": {
+      "candidate_id": "06374be50d56235dba4873efae53ae01460aa8c927b71175be853613e4358241",
+      "inputs": 113
+    },
+    "team-archive": {
+      "candidate_id": "efbeee86a28418a619cb4f0d61f9b8a56a55249ce950e23a81762568d5784de8",
+      "inputs": 101
+    }
+  },
+  "differences": [],
+  "passed": true
+}

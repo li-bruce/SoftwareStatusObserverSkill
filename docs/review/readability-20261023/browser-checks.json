@@ -1,0 +1,39 @@
+{
+  "environment": "Codex in-app browser, local static server on port 8863",
+  "asset_revision": "readability-2",
+  "product": {
+    "views_exercised": ["business", "state", "decision", "function", "source", "mixed"],
+    "keyboard_arrow_selection": "passed",
+    "mixed_filter_retained_on_language_change": "passed",
+    "english_and_chinese_copy": "passed",
+    "localized_usage_and_source_links": "passed",
+    "captured_console_warnings_and_errors": []
+  },
+  "walkthrough": {
+    "initial_graph_only_contains_requested_activities": "passed",
+    "confirmation_adds_validation_and_notification": "passed",
+    "expand_review_and_show_sample_source": "passed",
+    "complete_capture_events": 4,
+    "review_only_capture_events": 1,
+    "return_resubmit_capture_events": 8,
+    "replay_state_change": ["pending", "displayed"],
+    "replay_visibility_change": [false, true],
+    "language_change_preserves_capture": "passed",
+    "timed_playback_reaches_last_frame": "passed",
+    "new_operation_retains_iterated_flow": "passed",
+    "controls_are_not_business_events": "passed",
+    "captured_console_warnings_and_errors": []
+  },
+  "visual_review": {
+    "desktop": "product overview, expanded graph, controls and before/after facts",
+    "embedded_viewport_width_px": 390,
+    "locales": ["en", "zh-CN"],
+    "scope": "Visual layout review; not a complete accessibility audit"
+  },
+  "screenshots": [
+    "product-zh.png",
+    "demo-expanded-zh.png",
+    "demo-record-zh.png",
+    "responsive-390.png"
+  ]
+}

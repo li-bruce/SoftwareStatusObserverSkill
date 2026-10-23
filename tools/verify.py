@@ -42,6 +42,7 @@ def main():
     subprocess.run(['node','tools/test_refactor_view.mjs'],cwd=ROOT,check=True)
     subprocess.run(['node','tools/test_view_coverage.mjs'],cwd=ROOT,check=True)
     subprocess.run(['node','tools/test_web_colors.mjs'],cwd=ROOT,check=True)
+    subprocess.run(['node', 'tools/test_product_demo.mjs'], cwd=ROOT, check=True)
     prepare()  # Refuse stale source/review before any re-verification.
     run(EXAMPLE, 'tooling/dev.py', 'verify')
     run(EXAMPLE, 'tooling/dev.py', 'accept')

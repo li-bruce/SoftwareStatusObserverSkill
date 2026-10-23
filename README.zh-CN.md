@@ -2,7 +2,7 @@
 
 **帮助开发者看懂 AI 实现的代码，以及程序真正发生的行为。**
 
-[English](README.md) · [交互式介绍](https://li-bruce.github.io/SoftwareStatusObserverSkill/?lang=zh-CN) · [安装与使用](docs/usage.zh-CN.md) · [验证材料](docs/review/english-gallery/README.md)
+[English](README.md) · [产品介绍](https://li-bruce.github.io/SoftwareStatusObserverSkill/?lang=zh-CN) · [交互演示](https://li-bruce.github.io/SoftwareStatusObserverSkill/demo.html?lang=zh-CN) · [安装与使用](docs/usage.zh-CN.md) · [源码导览](docs/source-guide.zh-CN.md)
 
 Vibe coding 可以很快做出能用的页面，但内部状态、判断和调用关系往往难以掌握。`business-observer` 在开发过程中维护一张面向开发者的状态网，把业务流程、状态、判定依赖、关键函数、参数与实际运行事实联系起来。
 
@@ -67,8 +67,8 @@ python tools/install_skill.py --project /path/to/your-project
 脚本安装完整目录到项目的 `.agents/skills/business-observer`，已有目录会停止，避免覆盖修改。然后在该项目的新对话中输入：
 
 ```text
-使用 $business-observer 开发一个图片审核画展。
-一个人上传图片，另一个人审核是否在展览中展示。
+在这个项目中使用 $business-observer。
+我想开发：[描述你的项目]。
 先在对话中展示业务图，并提供可打开的 Web 地址。
 确认没有理解偏差后，再开始实现，并持续更新图和检查。
 ```
@@ -76,6 +76,8 @@ python tools/install_skill.py --project /path/to/your-project
 你只需要回答重要业务问题、选择模式并查看图；中间文件和验证由 AI 处理。维护中的源码、注释、Skill 与默认文档使用英文；对话跟随用户语言，界面可切换中英文。原始对话与历史证据不改写。
 
 依赖与完整命令见[使用说明](docs/usage.zh-CN.md)和[英文首页](README.md)。本地产品介绍可通过 `python -m http.server 8862 --bind 127.0.0.1` 启动，然后打开[介绍页](http://127.0.0.1:8862/docs/site/?lang=zh-CN)。
+
+[独立交互演示](https://li-bruce.github.io/SoftwareStatusObserverSkill/demo.html?lang=zh-CN)用示例数据展示对话确认、图的展开、记录回放和需求迭代。阅读实现时，可以从[源码导览](docs/source-guide.zh-CN.md)了解模块职责及主要调用路径；本轮改动的比较、失败与复测记录见[验收材料](docs/review/readability-20261023/README.md)。
 
 ## 当前边界
 
@@ -85,4 +87,4 @@ python tools/install_skill.py --project /path/to/your-project
 
 许可证：[MIT](LICENSE)。可视化使用开源 PixiJS、ELK.js，不包含 yFiles 专有代码。见[第三方声明](THIRD_PARTY_NOTICES.md)。
 
-最新版从 `main` 安装；复现本版可先执行 `git checkout v0.6.0`。见[本版更新说明](docs/releases/v0.6.0.md)。
+最新版从 `main` 安装；此前的 `v0.6.0` 保留为固定版本，见[版本说明](docs/releases/v0.6.0.md)。
