@@ -3,6 +3,20 @@
 The project's original code and documentation use the MIT license. Third-party
 components keep their own copyright notices and licenses.
 
+The optional database feature installs SQLAlchemy (MIT), pg8000 (BSD-3-Clause),
+PyMongo (Apache-2.0), redis-py (MIT), the Neo4j Python driver (Apache-2.0 AND Python-2.0), SQLGlot
+(MIT), and Pygments (BSD-2-Clause). Versions are pinned in
+[requirements-database.txt](skills/business-observer/requirements-database.txt).
+Native acceptance uses pg, Mongoose and redis (MIT), mongodb and neo4j-driver
+(Apache-2.0), with versions and transitive dependencies in
+[the native lockfile](tools/database-native/package-lock.json). These packages
+are installed rather than vendored; their distributions retain license notices.
+
+The optional Compose acceptance fixture downloads database server images under
+their own licenses. In particular, MongoDB Community uses SSPL; it is not
+represented here as an OSI-approved open-source license. Server images are test
+dependencies, not bundled with the Skill.
+
 | Component | Version | License | Distribution |
 |---|---|---|---|
 | [PixiJS](https://github.com/pixijs/pixijs/tree/v8.22.0) | 8.22.0 | MIT | Browser bundle included with the Skill and example |

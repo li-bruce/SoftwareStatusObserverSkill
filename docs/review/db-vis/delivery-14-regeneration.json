@@ -1,0 +1,16 @@
+{
+  "command": [
+    "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "tooling/dev.py",
+    "graph",
+    "--reason",
+    "Reviewed final shared data runtime and typed viewer: parsed SQL literal redaction, read/write roles per target, strict protocol and case checks, and source-parser errors before baseline creation. Business code, state declaration, permissions, effects and independent expectations are unchanged. Extend only the layout fixture to construct valid database-role nodes while preserving every existing assertion."
+  ],
+  "cwd": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\examples\\delivery",
+  "exit_code": 0,
+  "stdout": "{\n  \"valid\": true,\n  \"regenerated\": [\n    \"bo_stategraph/runtime-version.json\",\n    \"observer_generated/runtime/bo_observer/data/contract.py\",\n    \"observer_generated/runtime/bo_observer/data/projection.py\",\n    \"observer_generated/runtime/bo_observer/data/protocol.py\",\n    \"observer_generated/runtime/bo_observer/data/runtime.py\",\n    \"observer_generated/runtime/bo_observer/data/sync.py\",\n    \"observer_generated/runtime/bo_observer/protocol.py\",\n    \"observer_generated/runtime/bo_observer/schemas/database-config.schema.json\",\n    \"observer_generated/static/data-layer.js\"\n  ]\n}\n",
+  "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+}

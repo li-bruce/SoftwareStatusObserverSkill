@@ -1,0 +1,14 @@
+{
+  "suite": "database-catalog-live",
+  "tests": 4,
+  "failures": 0,
+  "errors": 1,
+  "skipped": 0,
+  "success": false,
+  "engines": [
+    "postgresql",
+    "mongodb",
+    "redis",
+    "neo4j"
+  ]
+}

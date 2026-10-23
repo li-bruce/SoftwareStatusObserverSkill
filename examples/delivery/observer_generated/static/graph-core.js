@@ -1,4 +1,11 @@
 import { t as boTranslate } from "./i18n.js";
+import {
+  dataRoles,
+  dataRelations,
+  dataLines,
+  observedDataTransfer,
+  dataStatusClass,
+} from "./data-layer.js";
 // Business groups, internal activity states and local source share one graph.
 export const colors = {
   ink: 0x30454d,
@@ -166,6 +173,11 @@ function staleBasis(node, view, last) {
 export function status(node, view, events, choice, configuration = null) {
   if (view.stage === "design") return "declared";
   if (node.referenceOf) node = { ...node, id: node.referenceOf };
+  if (["query", "transform"].includes(node.data_role)) {
+    const last = nodeEvents(node, events).at(-1);
+    const state = dataStatusClass(last?.outputs?.status);
+    if (state) return state;
+  }
   if (
     configuration?.disposition === "interrupted" &&
     (node.execution_role || node.id === view.model.machine.execution?.parent)
@@ -230,8 +242,12 @@ export function lines(node, view, events, choice, configuration = null) {
       },
       { text: node.source?.symbol || node.summary, role: "symbol" },
     ];
-  if (view.stage === "design") return node.summary ? [{ text: node.summary, role: "muted" }] : [];
   if (node.referenceOf) node = { ...node, id: node.referenceOf };
+  if (dataRoles.includes(node.data_role)) {
+    const values = callValues(node, events);
+    return dataLines(node, values.inputs, values.outputs, nodeEvents(node, events).length > 0);
+  }
+  if (view.stage === "design") return node.summary ? [{ text: node.summary, role: "muted" }] : [];
   if (node.field) {
     const values = callValues(node, events)[node.direction === "in" ? "inputs" : "outputs"];
     return [
@@ -431,8 +447,14 @@ export const nodeTypes = {
   data: { label: boTranslate("Parameter"), glyph: "x", color: 0x627f9c },
   effect: { label: boTranslate("Effect"), glyph: "✓", color: 0x2d8a70 },
   wait: { label: boTranslate("Wait"), glyph: "…", color: 0xb38442 },
+  store: { label: boTranslate("Database"), glyph: "DB", color: 0x426b9a },
+  dataset: { label: boTranslate("Table or collection"), glyph: "T", color: 0x3d7e97 },
+  column: { label: boTranslate("Data field"), glyph: ":", color: 0x638b98 },
+  query: { label: boTranslate("Database operation"), glyph: "Q", color: 0x316da4 },
+  transform: { label: boTranslate("Data processing"), glyph: "Δ", color: 0x997345 },
 };
 export function nodeType(n) {
+  if (dataRoles.includes(n.data_role)) return n.data_role;
   return n.layer === "business"
     ? "business"
     : n.kind === "state"
@@ -452,6 +474,7 @@ export function nodeType(n) {
 // A business action can also implement a function. View membership is not its
 // visual type; selecting a view must not erase that function's values or calls.
 export function viewTypes(n) {
+  if (dataRoles.includes(n.data_role)) return [n.data_role];
   return [
     ...new Set([
       nodeType(n),
@@ -464,6 +487,8 @@ export function stateNodeId(model, value) {
   return model.nodes.find((n) => n.kind === "state" && n.value === value)?.id || "state." + value;
 }
 export function relationType(e) {
+  if (e.type === "data" && dataRelations.includes(e.data_relation)) return e.data_relation;
+  if (dataRelations.includes(e.type)) return e.type;
   return ["python-ast", "source-ast"].includes(e.origin) && e.type === "flow"
     ? "call"
     : [
@@ -697,7 +722,7 @@ export function layoutGraph(
         x: 80 + (i % 5) * 230,
         y: 70 + Math.floor(i / 5) * 180,
         w: 190,
-        h: type === "state" ? 105 : 135,
+        h: type === "state" ? 105 : ["query", "transform"].includes(type) ? 172 : 135,
       };
     });
   const byId = new Map(boxes.map((b) => [b.id, b]));
@@ -734,6 +759,8 @@ export function layoutGraph(
           targetEvents.some((x) =>
             (x.depends || []).some((d) => ids.has(d.event) && d.type === e.type),
           );
+    if (["reads", "writes"].includes(e.data_relation))
+      observed = events.some((event) => observedDataTransfer(e, event, all));
     let label =
       e.type === "contains"
         ? target.kind === "state"
@@ -770,7 +797,7 @@ export function layoutGraph(
       (!sourceEvents.length ||
         sourceEvents.at(-1)?.basis.param_version === view.authority.basis.param_version);
     // Different relation types sharing endpoints remain separate edges.
-    const key = from + ">" + to + ":" + e.type + ":" + (e.origin || "model");
+    const key = from + ">" + to + ":" + relationType(e) + ":" + (e.origin || "model");
     const member = { ...e, label, observed, current };
     if (edgeMap.has(key)) {
       const found = edgeMap.get(key);

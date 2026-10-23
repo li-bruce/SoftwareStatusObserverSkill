@@ -276,8 +276,10 @@ console.log(JSON.stringify({valid:true,coverage:'unified nodes and edges, real E
 
 // Every expandable type uses its own circle identity; containment alone does not
 // create a self glyph. A real relation to a hidden descendant still requires it.
+// Data roles refine existing protocol kinds rather than introduce new kinds.
+const dataRoleKinds={store:'data',dataset:'data',column:'data',query:'function',transform:'function'};
 for(const type of Object.keys(nodeTypes)){
-  const parent={id:'owner',kind:type,...(type==='business'?{layer:'business'}:{}),...(type==='resource'?{execution_role:'resource'}:{})};
+  const parent={id:'owner',kind:dataRoleKinds[type]||type,...(dataRoleKinds[type]?{data_role:type}:{}),...(type==='business'?{layer:'business'}:{}),...(type==='resource'?{execution_role:'resource'}:{})};
   const child={id:'child',parent:'owner',kind:'function'},hidden={id:'hidden',parent:'child',kind:'data'};
   const boxes=[parent,child].map((node,i)=>({id:node.id,node,type:nodeType(node),x:i*300,y:0,w:140,h:100}));
   const subject={all:new Map([parent,child,hidden].map(n=>[n.id,n])),boxes,byId:new Map(boxes.map(b=>[b.id,b])),edges:[{id:'contains',from:'owner',to:'child',type:'contains'}]};
@@ -290,6 +292,9 @@ for(const type of Object.keys(nodeTypes)){
   subject.regions=hierarchyRegions(subject);shown=presentationGraph(subject);
   assert.ok(hasSelfRelation(subject,'owner')&&shown.glyphs.has('owner'),type+' retains a real self relation');
   assert.deepEqual({x:subject.regions[0].cx,y:subject.regions[0].cy},nodeCenter(boxes[0]),'self glyph is at the circle center');
+}
+for(const role of Object.keys(dataRoleKinds)){
+  assert.notEqual(nodeType({id:'invalid-kind',kind:role}),role,'a kind alone cannot imply a database role');
 }
 const originalSample=JSON.stringify([...sample.all]),coordinates=JSON.stringify(sample.boxes);
 let filters=emptyFilters();filters.nodes=[];filters.regions=['function'];filters.edges=['flow'];

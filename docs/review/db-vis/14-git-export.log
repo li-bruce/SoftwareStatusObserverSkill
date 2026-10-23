@@ -1,0 +1,35 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{"indexed_bytes_match": true, "files": 337}
+{"command": ["C:\\Users\\Lvi_P\\Documents\\Work\\CF\\\u5e73\u53f0\u8f6f\u8457\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe", "tools/setup_adapters.py"]}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+
+added 18 packages in 13s
+npm notice
+npm notice New major version of npm available! 10.8.2 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice
+Installed locked source adapter: C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.validation\git-release-db-vis-bg2_12_x\checkout\skills\business-observer\scripts\bo_observer\adapters\javascript
+Repository demos and checks share this parser; no application dependency was changed.
+{"command": ["C:\\Users\\Lvi_P\\Documents\\Work\\CF\\\u5e73\u53f0\u8f6f\u8457\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe", "tools/check_package.py"]}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Package references and 97 copied runtime modules match.
+{"command": ["C:\\Users\\Lvi_P\\Documents\\Work\\CF\\\u5e73\u53f0\u8f6f\u8457\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe", "tools/demo.py", "--prepare-only"]}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "valid": true,
+  "status": "current",
+  "errors": [],
+  "candidate_id": "501a6ec654a0b8476b70200fee75e9ffcd87d1a1a58237d0971693e93146f748"
+}
+{"command": ["C:\\Users\\Lvi_P\\Documents\\Work\\CF\\\u5e73\u53f0\u8f6f\u8457\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe", "tools/archive_demo.py", "--prepare-only"]}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "valid": true,
+  "status": "current",
+  "errors": [],
+  "candidate_id": "7d9a4619ee61cb9b38fad0ad1c3fe1f561863b67f5750f4940dc2bcec4c23b09"
+}
+{"passed": true, "git_tree": "7c2b8b53757db1fa0f8a7597815e063ad918ba44", "scope": "Git-exported bytes, installed runtime copies, locked source parser, delivery and archive accepted build restoration"}

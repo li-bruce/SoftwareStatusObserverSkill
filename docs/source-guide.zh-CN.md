@@ -6,6 +6,8 @@
 
 ## 先找到对应目录
 
+数据库部分从 [data/contract.py](../skills/business-observer/scripts/bo_observer/data/contract.py) 的 JSON 校验开始，依次是 `catalog.py` 读取原生元数据、`projection.py` 生成同一张图的节点与关系、`sync.py` 更新与独立核验。`runtime.py` 和原生 `bo_data.mjs` 观察实际调用，`watcher.py` 切换已校验的 Web 图版本。记录、回放及个人配置继续使用现有共用服务。完整接口见[数据库接入说明](../skills/business-observer/references/database-observation.md)。
+
 | 位置 | 负责什么 |
 |---|---|
 | [SKILL.md](../skills/business-observer/SKILL.md) | 开发对话、业务图确认、迭代检查的操作流程。 |

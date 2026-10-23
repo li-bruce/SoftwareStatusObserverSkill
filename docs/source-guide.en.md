@@ -64,6 +64,10 @@ In drive mode, the application's native BOExecutor.step also reads the agreed de
 
 The complete model, the selected view, and the captured evidence are separate values. Filtering a view must preserve the complete model. Moving a node or replaying a step must not execute a business command.
 
+## Database structure and operations
+
+Start at [data/contract.py](../skills/business-observer/scripts/bo_observer/data/contract.py) for strict JSON and identity, then [catalog.py](../skills/business-observer/scripts/bo_observer/data/catalog.py) for native metadata, [projection.py](../skills/business-observer/scripts/bo_observer/data/projection.py) for graph nodes and relations, and [sync.py](../skills/business-observer/scripts/bo_observer/data/sync.py) for refresh and independent verification. [runtime.py](../skills/business-observer/scripts/bo_observer/data/runtime.py) and [bo_data.mjs](../skills/business-observer/scripts/bo_observer/adapters/javascript/bo_data.mjs) observe native calls. [watcher.py](../skills/business-observer/scripts/bo_observer/data/watcher.py) replaces the validated Web build; [data-layer.js](../skills/business-observer/assets/stategraph-viewer/data-layer.js) renders its provenance and values. These modules share the existing event, recording and preference services.
+
 ## Comment and formatting conventions
 
 - Describe purpose at public function boundaries; explain ordering, ownership, and failure handling where they are less obvious.

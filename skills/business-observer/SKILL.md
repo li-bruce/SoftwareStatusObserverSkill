@@ -20,11 +20,13 @@ Before behavior implementation, show a compact business-network diagram directly
 
 Route business ownership, permissions, and state meaning to the user. Reconcile parameter bindings, callback targets, types, and capture locations with the coding process. Implementation answers must reference current source and an actual verification case; prose is not runtime evidence. Keep unresolved dynamic targets unknown.
 
+When the requested software stores data, reuse its database choice or run `bo_db.py guide --root PROJECT` to prepare a short selection question. Recommend a database that fits the stated workload, explain the tradeoff, and record the user's choice. Keep confirmed business scope unchanged. See [database observation](references/database-observation.md) for supported stores and model layers.
+
 ## 2. Establish declarations, adapters, and expectations
 
 Read [multilanguage architecture and protocols](references/multilanguage.md). Python provides shared graph validation, source aggregation, recording, querying, export, and the complete viewer. The application keeps native execution and authoritative state; both sides exchange versioned JSON.
 
-New projects store a `bo-project/v1` document in `bo_stategraph/project.json`, including the mode decision and complete model. `model.machine` is the executable declaration. Bind functions through stable source references; do not embed executable function code in JSON. Existing Python projects may retain a v3 graph and a shared `bo_stategraph/machine.json` consumed by their real executor and graph generator. Never edit generated copies independently.
+New projects store a `bo-project/v1` document in `bo_stategraph/project.json`, including the mode decision and complete model. `model.machine` is the state declaration; drive mode binds it to the selected executor. Bind functions through stable source references; do not embed executable function code in JSON. Existing Python projects may retain a v3 graph and a shared `bo_stategraph/machine.json` consumed by their real executor and graph generator. Never edit generated copies independently.
 
 - **drive:** a project-local executor consumes the declaration. Reject unsupported semantics or connect a suitable native engine; never silently omit behavior.
 - **observe:** the application's own logic runs. Read its actual state without simulating a second authoritative result.
@@ -33,6 +35,8 @@ New projects store a `bo-project/v1` document in `bo_stategraph/project.json`, i
 Existing complete Python examples retain hierarchy validation, concurrent activities, waiting, resources, joins, and recovery. Native JS/Python `bo.fsm/1` executors support a strict flat subset. Complete instance queries must expose active activities and resources; advanced analysis can remain collapsed. See [independent module](references/independent-python.md), [model contract](references/behavior-model.md), and [integrated execution](references/integrated-execution.md).
 
 Before implementation, define independent expectations for confirmed rules: success, rejection, boundaries, and applicable cancellation, recovery, or concurrency cases. Establish the [implementation inventory](references/implementation-coverage.md), [mapping contract](references/mapping-contract.md), and [whitebox expectations](references/validation-rules.md). Link each scenario to actual functions, parameters, reads, effects, and graph fields. Never copy graph values as independent expected results or weaken earlier checks to obtain a pass.
+
+For data access, configure `bo_stategraph/databases.json`, a native ORM/ODM or explicit data model, its JSON exporter, and `BODataRuntime` wiring in an isolated `bo_` module. Map actual reads, writes, commits/rollbacks, and selected data transformations to source and required cases. Distinguish application model rules, database-enforced structure, and observed samples. The observer reads metadata; the application's migration workflow changes the database.
 
 ## 3. Maintain the graph during each coding batch
 
@@ -46,6 +50,8 @@ change_sync begin -> coding and local generation -> bo_sync scan -> change_sync 
 Commands require the project `--root`; `begin` also needs `--change` and the actual request. Continue an active change instead of replacing its baseline to hide drift. See [continuous development](references/continuous-development.md).
 
 `bo_sync scan/watch` discovers new, changed, and deleted files independently of nodes already in the graph. Python, JS/TS, React, and Vue adapters produce common source facts. Missing parsers, syntax errors, and unsupported languages are explicit gaps. Watch produces maintenance tasks; the host or active coding AI must consume them. It cannot wake arbitrary editors or agents by itself.
+
+Configured data projects also refresh their native model exports and database metadata during `bo_sync scan/watch`. `bo.py serve` watches configured data and reloads validated graph builds automatically. The native development launcher must reload its producer with the new build identity; old-build events remain rejected. `bo_db.py check` and `change_sync verify` independently recompute data mappings and require executed cases. A failed collector leaves the previous graph marked stale; never accept it as current.
 
 Read `confirmations.user` and `confirmations.coding`. Ask users only about unresolved business meaning; reconcile unresolved calls and implementation changes within coding. Configure `reconciliation` records when dynamic bindings need protection. Stale source answers, absent targets, and missing verification cases must fail; records do not replace actual value and call checks.
 
@@ -78,5 +84,7 @@ When requested, hide the debug Web UI with `bo_web.py mode` or use the verified 
 Report **implementation mapping**, **state constraints**, **business rules**, and **project checks** separately. A graph may accurately expose a business bug: mapping can pass while business checks fail. Missing evidence and unrun tests are not passes. Reject invalid declarations, types, projections, engines, or guard wiring before loading. Preserve actual invalid runtime values with diagnostics; never correct observations to fit the model.
 
 Verify that unsynchronized source changes fail; every feature and required field has actual evidence; key values match independent reads; business effects agree with observation on, off, failing, and queue-limited; viewer/recording controls create no business events; filtered views retain relations; export and Web removal preserve business execution. Run architecture checks, existing gates, and new language cases without weakening prior checks.
+
+For configured databases, check a real schema change, actual query targets and selected values, a transformation, commit and applicable rollback/error cases, and observer-query exclusion. Verify source links, data relations, replay, saved layout, and obsolete-recording removal after a build change. Missing drivers or services are unrun checks. Keep mapping results separate from business outcomes and unverified schema details.
 
 Keep failures, fixes, retests, and limitations. Deliver an accessible graph, reproducible commands, and usage guidance. Distinguish scripted dialogue, independent AI trials, and human testing. Open or message another conversation only with user authorization.

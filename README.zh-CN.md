@@ -85,7 +85,9 @@ python tools/install_skill.py --project /path/to/your-project
 
 ## 当前边界
 
-当前支持 Python、JS/TS、React、Vue 的源码盘点与原生采集。源码层展示已索引符号和选定的局部关系，无法保证解析所有动态调用。完整源码调用图浏览、通用数据库结构与列血缘、增量接口和性能基线仍待扩展。不能通过编辑图直接执行业务命令，也不保证整个程序正确。
+当前支持 Python、JS/TS、React、Vue 的源码盘点与原生采集。源码层展示已索引符号和选定的局部关系，无法保证解析所有动态调用。完整源码调用图浏览、自动列血缘、更多数据库适配、增量接口和性能基线仍待扩展。不能通过编辑图直接执行业务命令，也不保证整个程序正确。
+
+`db-vis` 分支新增数据库结构与数据操作视图，连接表、文档集合、键模式、图数据库标签、查询目标、选定参数、数据处理和事务结果。SQLite、PostgreSQL、MongoDB、Redis、Neo4j 已有真实运行测试；Python 与 Node.js 使用统一 JSON 协议。模型或数据库结构变化后自动刷新图，并保留个人布局。[运行数据库示例](examples/database-observer/README.md) · [支持范围](skills/business-observer/references/database-observation.md) · [验收材料](docs/review/db-vis/README.md)。
 
 [架构与协议](skills/business-observer/references/multilanguage.md) · [源码及数据层分析](docs/source-data-and-language.md) · [测试证据](docs/review/english-gallery/README.md)
 

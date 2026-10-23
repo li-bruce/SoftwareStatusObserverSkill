@@ -1,4 +1,5 @@
 import { t as boTranslate } from "./i18n.js";
+import { observedDataTransfer } from "./data-layer.js";
 // Read-only replay. This module has no business-command endpoint.
 import { applyRuntimeFrame } from "./runtime-frames.js";
 const copy = (value) => structuredClone(value);
@@ -152,6 +153,7 @@ export function transferEdges(event, events, edges, all, configuration = null) {
       (edge) =>
         edge.type !== "shared" &&
         edge.members?.some((member) => {
+          if (observedDataTransfer(member, event, all)) return true;
           const source = canonical(member.from),
             target = canonical(member.to);
           const transition = configuration?.state_transition;
@@ -197,7 +199,7 @@ export function transferEdges(event, events, edges, all, configuration = null) {
             prior.some(
               (e) =>
                 e.node === source &&
-                (event.depends || []).some((d) => d.event === e.id && d.type === edge.type),
+                (event.depends || []).some((d) => d.event === e.id && d.type === member.type),
             )
           );
         }),

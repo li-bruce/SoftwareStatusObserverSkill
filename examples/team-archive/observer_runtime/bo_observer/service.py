@@ -5,6 +5,7 @@ The service accepts observations only. It cannot execute a business command.
 
 from collections import OrderedDict
 from copy import deepcopy
+from functools import wraps
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
 import mimetypes
@@ -50,6 +51,7 @@ class GraphSession:
         self.identities = {}
         self.current_instance = None
         self.program_url = None
+        self.data_status = None
         self.errors = self.gaps = 0
         self.last_error = ""
         self.stream_id = secrets.token_hex(12)
@@ -288,7 +290,8 @@ class GraphSession:
                 "model": model,
                 "manifest": deepcopy(self.manifest),
                 "binding_status": self.binding(),
-                "events": self.history.snapshot(),
+                "events": self.current_events(),
+                "database_status": self.data_status,
                 "machine": {
                     "current": current.get("state"),
                     "state_revision": current.get("revision"),
@@ -332,7 +335,7 @@ class GraphSession:
     def export(self):
         """Return the complete declared graph with retained events and matching runtime frames."""
         with self.lock:
-            events = self.history.snapshot()
+            events = self.current_events()
             ids = {e["id"] for e in events}
             return self.graph.bo_export(
                 binding=self.binding(),
@@ -347,6 +350,12 @@ class GraphSession:
                     },
                 },
             )
+
+    def current_events(self):
+        """Keep prior build evidence out of the live graph after source or schema changes."""
+        return [
+            e for e in self.history.snapshot() if e.get("build_id") == self.manifest["build_id"]
+        ]
 
     def close(self):
         """Stop the recording worker and its subscriptions during server shutdown."""
@@ -366,6 +375,17 @@ def make_server(session, port=8830, *, token=None, origins=(), assets=ASSETS):
         raise ValueError("collector origins must be explicit local development origins")
     assets = Path(session.web.assets if assets == ASSETS else assets).resolve()
     session.program_url = next(iter(origins)) if len(origins) == 1 else None
+    session_lock = threading.RLock()
+
+    def consistent_request(method):
+        """Finish each request against one session while a watcher may replace the build."""
+
+        @wraps(method)
+        def handle(handler):
+            with session_lock:
+                return method(handler)
+
+        return handle
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *_):
@@ -419,6 +439,7 @@ def make_server(session, port=8830, *, token=None, origins=(), assets=ASSETS):
             self.send_header("Vary", "Origin")
             self.end_headers()
 
+        @consistent_request
         def do_GET(self):
             if not self.permitted():
                 return self.reply(403, {"error": "local same-origin only"})
@@ -479,6 +500,7 @@ def make_server(session, port=8830, *, token=None, origins=(), assets=ASSETS):
             except (OSError, ValueError, KeyError) as exc:
                 return self.reply(400, {"error": str(exc)})
 
+        @consistent_request
         def do_POST(self):
             path = urlsplit(self.path).path
             ingest = path.startswith("/api/bo/")
@@ -516,4 +538,23 @@ def make_server(session, port=8830, *, token=None, origins=(), assets=ASSETS):
 
     server = ThreadingHTTPServer(("127.0.0.1", port), Handler)
     server.bo_token = token
+    server.bo_session = session
+
+    def reload_session():
+        """Load current declarations without transferring obsolete events or machine instances."""
+        nonlocal session
+        with session_lock:
+            if session.binding()["status"] == "current":
+                return False
+            replacement = GraphSession(
+                session.root, session.path.relative_to(session.root).as_posix()
+            )
+            replacement.program_url = session.program_url
+            replacement.data_status = session.data_status
+            session.close()
+            session = replacement
+            server.bo_session = replacement
+            return True
+
+    server.bo_reload = reload_session
     return server

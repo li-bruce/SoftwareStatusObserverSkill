@@ -1,0 +1,110 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "valid": false,
+  "errors": [
+    {
+      "missing_database_values": "parameters",
+      "operation": "load",
+      "case": "commit"
+    },
+    {
+      "missing_database_values": "before",
+      "operation": "load",
+      "case": "commit"
+    },
+    {
+      "missing_database_values": "result",
+      "operation": "load",
+      "case": "commit"
+    },
+    {
+      "missing_database_values": "parameters",
+      "operation": "load",
+      "case": "rollback"
+    },
+    {
+      "missing_database_values": "before",
+      "operation": "load",
+      "case": "rollback"
+    },
+    {
+      "missing_database_values": "result",
+      "operation": "load",
+      "case": "rollback"
+    },
+    {
+      "missing_database_values": "parameters",
+      "operation": "select",
+      "case": "commit"
+    },
+    {
+      "missing_database_values": "parameters",
+      "operation": "select",
+      "case": "rollback"
+    },
+    {
+      "missing_database_values": "parameters",
+      "operation": "save",
+      "case": "commit"
+    },
+    {
+      "missing_database_values": "before",
+      "operation": "save",
+      "case": "commit"
+    },
+    {
+      "missing_database_values": "result",
+      "operation": "save",
+      "case": "commit"
+    },
+    {
+      "missing_database_values": "parameters",
+      "operation": "save",
+      "case": "rollback"
+    },
+    {
+      "missing_database_values": "before",
+      "operation": "save",
+      "case": "rollback"
+    },
+    {
+      "missing_database_values": "result",
+      "operation": "save",
+      "case": "rollback"
+    },
+    {
+      "missing_database_values": "parameters",
+      "operation": "transaction",
+      "case": "commit"
+    },
+    {
+      "missing_database_values": "before",
+      "operation": "transaction",
+      "case": "commit"
+    },
+    {
+      "missing_database_values": "result",
+      "operation": "transaction",
+      "case": "commit"
+    },
+    {
+      "missing_database_runtime_case": "rollback",
+      "operation": "transaction"
+    },
+    {
+      "missing_database_values": "parameters",
+      "operation": "transaction",
+      "case": "rollback"
+    },
+    {
+      "missing_database_values": "before",
+      "operation": "transaction",
+      "case": "rollback"
+    },
+    {
+      "missing_database_values": "result",
+      "operation": "transaction",
+      "case": "rollback"
+    }
+  ]
+}

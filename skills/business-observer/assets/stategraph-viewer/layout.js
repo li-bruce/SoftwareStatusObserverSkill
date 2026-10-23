@@ -1,6 +1,7 @@
 import { t as boTranslate } from "./i18n.js";
 // Layout preferences are local view data. They never change model or runtime facts.
 import { graphBounds, nodeType, nodeTypes, viewTypes, relationType } from "./graph-core.js";
+import { dataRelations, migrateDataFilters } from "./data-layer.js";
 export const layoutKey = (model, projectId) =>
   "business-observer.layout.v2:" +
   (projectId ||
@@ -10,8 +11,20 @@ export const layoutKey = (model, projectId) =>
     model.intent);
 export function emptyFilters() {
   return {
+    dataTypes: 1,
     nodes: Object.keys(nodeTypes),
-    edges: ["call", "flow", "transition", "guard", "data", "resource", "join", "shared", "other"],
+    edges: [
+      "call",
+      "flow",
+      "transition",
+      "guard",
+      "data",
+      "resource",
+      "join",
+      "shared",
+      "other",
+      ...dataRelations,
+    ],
     regions: Object.keys(nodeTypes),
     depth: "all",
     hiddenNodes: [],
@@ -19,6 +32,7 @@ export function emptyFilters() {
   };
 }
 export function cleanFilters(value) {
+  value = migrateDataFilters(value);
   const clean = emptyFilters();
   for (const kind of ["nodes", "edges", "regions"])
     if (Array.isArray(value?.[kind]))
@@ -116,6 +130,10 @@ export function searchNodes(all, state, query, limit = 20) {
           node.kind,
           node.field,
           node.fieldType,
+          node.data_role,
+          node.data_store,
+          node.data_key,
+          node.data_metadata?.native_type,
           node.source?.path,
           node.source?.symbol,
         ].join(" "),
@@ -371,6 +389,11 @@ export const relationStyles = {
     arrow: "diamond",
   },
   data: { label: boTranslate("Value transfer"), color: 0x207e7d, dash: [7, 5], arrow: "open" },
+  reads: { label: boTranslate("Read"), color: 0x316da4, dash: [], arrow: "open" },
+  writes: { label: boTranslate("Write"), color: 0xb16b36, dash: [], arrow: "filled" },
+  references: { label: boTranslate("Reference"), color: 0x716a9c, dash: [3, 4], arrow: "open" },
+  maps: { label: boTranslate("Mapping"), color: 0x677a88, dash: [8, 3, 2, 3], arrow: "diamond" },
+  transforms: { label: boTranslate("Transform"), color: 0x887130, dash: [7, 4], arrow: "filled" },
   resource: { label: boTranslate("Resource"), color: 0x7c7b2d, dash: [10, 3, 2, 3], arrow: "open" },
   join: { label: boTranslate("Join"), color: 0xa36045, dash: [], arrow: "bar" },
   shared: { label: boTranslate("Shared reference"), color: 0x68759e, dash: [2, 6], arrow: "none" },

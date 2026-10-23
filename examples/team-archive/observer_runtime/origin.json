@@ -1,6 +1,6 @@
 {
   "source": "SoftwareStatusObserverSkill/skills/business-observer",
-  "release": "2026.10-multilanguage",
+  "release": "2026.10-db-vis",
   "protocols": {
     "behavior": 3,
     "event": 3,
@@ -13,7 +13,10 @@
     "project": "bo-project/v1",
     "transport": "bo-event/v1",
     "snapshot": "bo-snapshot/v1",
-    "source": "bo-source/v1"
+    "source": "bo-source/v1",
+    "database_config": "bo-databases/v1",
+    "database_catalog": "bo-data-catalog/v1",
+    "database_projection": "bo-database/v1"
   },
   "manifest": "../bo_stategraph/runtime-version.json"
 }

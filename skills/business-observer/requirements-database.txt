@@ -1,0 +1,8 @@
+# Optional data adapters. Shared graph/recording services still need only requirements.txt.
+SQLAlchemy==2.0.55
+pymongo==4.19.0
+neo4j==6.4.1
+redis==7.4.1
+sqlglot==28.10.1
+pg8000==1.31.5
+Pygments==2.21.0

@@ -1,0 +1,22 @@
+{
+  "candidate_id": "7d9a4619ee61cb9b38fad0ad1c3fe1f561863b67f5750f4940dc2bcec4c23b09",
+  "decisions": {
+    "business": {
+      "action": "unchanged",
+      "reason": "Archive application, frontend, confirmed requirements, authoritative SQLite effects and independent business expectations are unchanged; preserved baseline file hashes and preceding accepted frontend structure confirm this."
+    },
+    "state_machine": {
+      "action": "unchanged",
+      "reason": "The same machine.json and bo_stategraph/workflow.py remain authoritative. Concurrency, resource ownership, waiting, cancellation, joins and recovery checks remain required."
+    },
+    "abstraction": {
+      "action": "updated",
+      "reason": "Upgrade the shared viewer and optional database modules from canonical db-vis sources. Existing archive graph IDs and source mappings remain unchanged. This example has no database-observation configuration; separate live-service tests cover new data features. Restoring the repository parser recovers 36 frontend symbols identical to the preceding accepted structure; the original incomplete diagnostic baseline is retained as evidence. The final copied data adapter distinguishes per-target reads and writes, including mixed SQL, with strict static and runtime checks."
+    },
+    "probes": {
+      "action": "unchanged",
+      "reason": "No archive capture, required runtime case or selected parameter was removed or relaxed. The regenerated shared runtime improves observer exclusion and strict data validation; existing on/off/fault business comparisons and whitebox witnesses still run."
+    }
+  },
+  "excluded_symbols": {}
+}

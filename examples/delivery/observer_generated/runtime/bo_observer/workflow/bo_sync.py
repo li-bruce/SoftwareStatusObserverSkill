@@ -185,6 +185,9 @@ def source_inventory(root, cfg):
 
 def maintenance_task(root, cfg, previous=None):
     """Compare source with the accepted baseline and describe the mapping work still needed."""
+    from ..data.sync import synchronize
+
+    database = synchronize(root, model_path=cfg.get("model", "bo_stategraph/project.json"))
     current = source_inventory(root, cfg)
     old = (previous or {}).get("files", {})
     changed = sorted(
@@ -220,11 +223,13 @@ def maintenance_task(root, cfg, previous=None):
         "changed_files": changed,
         "unregistered_files": unregistered,
         "implementation_gaps": gaps,
+        "database": database,
         "status": (
             "needs_update"
             if changed
             or unregistered
             or gaps
+            or not database["valid"]
             or current["excluded_entrypoints"]
             or current["excluded_implementations"]
             else "current"

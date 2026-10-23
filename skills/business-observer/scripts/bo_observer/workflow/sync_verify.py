@@ -114,11 +114,18 @@ def verify(root, cfg, change, *, inspect, snapshot):
     """
     base, current, changes = inspect(root, cfg, change)
     mapping_errors = changes["errors"] + changes["review_errors"]
+    from ..data.sync import synchronize, runtime_errors as database_runtime_errors
+
+    database = synchronize(
+        root, model_path=cfg.get("model", "bo_stategraph/project.json"), update=False
+    )
+    mapping_errors.extend(database["errors"])
     rule_errors, business_errors, project_errors = [], [], []
     reports = {
         "mapping": {
             "status": "not_run",
             "errors": mapping_errors,
+            "database": database,
             "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
         },
         "state_rules": {"status": "not_run", "errors": rule_errors},
@@ -157,6 +164,7 @@ def verify(root, cfg, change, *, inspect, snapshot):
     else:
         try:
             payload = json.loads(observation["stdout"])
+            mapping_errors.extend(database_runtime_errors(root, payload, current["model"]))
             if payload.get("build_id") != capture(root, current["model"])["build_id"]:
                 mapping_errors.append("runtime observations belong to another build")
             # Runtime declarations and probe identity are mapping questions.

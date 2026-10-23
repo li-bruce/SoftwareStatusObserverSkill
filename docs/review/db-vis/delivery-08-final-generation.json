@@ -1,0 +1,16 @@
+{
+  "command": [
+    "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "tooling/dev.py",
+    "graph",
+    "--reason",
+    "Reviewed the final shared database observer runtime and typed data-view assets, including SQL literal redaction and rejecting source parser failures before change baseline creation. Business source, state declaration, authorization, effects, capture contracts and independent expectations are unchanged. Regenerate copied viewer source projection and seal only reviewed generated files."
+  ],
+  "cwd": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\examples\\delivery",
+  "exit_code": 0,
+  "stdout": "{\n  \"valid\": true,\n  \"regenerated\": [\n    \"bo_stategraph/runtime-version.json\",\n    \"observer_generated/runtime/bo_observer/data/runtime.py\",\n    \"observer_generated/runtime/bo_observer/workflow/change_sync.py\"\n  ]\n}\n",
+  "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+}

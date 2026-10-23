@@ -6,6 +6,7 @@ import { projectStorage } from "./preferences.js";
 import { createPoller } from "./polling.js";
 import { migrateNodeIds } from "./layout.js";
 import { projectLayoutKey, graphVersion, recordingMatches } from "./view-lifecycle.js";
+import { databaseWarning, dataRelationEvidence } from "./data-layer.js";
 import {
   executionIds,
   layoutGraph,
@@ -663,7 +664,7 @@ function updateEdgeDetail() {
       const item = document.createElement("li"),
         a = graph.all.get(member.from),
         b = graph.all.get(member.to);
-      item.textContent = `${a ? displayName(a, preferences) : member.from} → ${b ? displayName(b, preferences) : member.to}：${member.label || style.label}（${["python-ast", "source-ast"].includes(member.origin) ? boTranslate("Static call") : member.observed ? (member.current ? boTranslate("Observed in this run") : boTranslate("Observed in a previous run")) : boTranslate("Declared relation")}）`;
+      item.textContent = `${a ? displayName(a, preferences) : member.from} → ${b ? displayName(b, preferences) : member.to}：${member.label || style.label}（${dataRelationEvidence(member) || (["python-ast", "source-ast"].includes(member.origin) ? boTranslate("Static call") : member.observed ? (member.current ? boTranslate("Observed in this run") : boTranslate("Observed in a previous run")) : boTranslate("Declared relation"))}）`;
       const hide = document.createElement("button");
       hide.textContent = boTranslate("Hide relation");
       hide.onclick = () => {
@@ -1253,6 +1254,13 @@ function frameLabel(entry) {
   const name = view.model.nodes.find((n) => n.id === entry.activity)?.label || entry.activity;
   return `${entry.seq} · ${entry.event === "join" ? (entry.after.join.state === "passed" ? boTranslate("All checks passed") : boTranslate("Some checks did not pass")) : entry.event === "abort" ? boTranslate("Checks stopped") : name + "：" + (stateLabels[entry.after.activities[entry.activity]] || entry.event)}`;
 }
+function showDatabaseWarning(next) {
+  const warning = databaseWarning(next.database_status),
+    connection = $("connection");
+  connection.dataset.databaseStale = String(!!warning);
+  connection.title = warning?.details || "";
+  if (warning) connection.textContent += " · " + warning.label;
+}
 async function poll() {
   const requestedVersion = version,
     requestedCase = caseChoice;
@@ -1304,6 +1312,7 @@ async function poll() {
     if (next.stage !== "design") await refreshRecordings(next);
     if (recording) {
       $("connection").textContent = boTranslate("Connected \u00B7 recorded replay");
+      showDatabaseWarning(next);
       return;
     }
     view = next;
@@ -1368,6 +1377,7 @@ async function poll() {
         next.stage === "design"
           ? boTranslate("Design declaration \u00B7 not implemented")
           : boTranslate("Application has not loaded the new code");
+    showDatabaseWarning(next);
     if (key !== lastKey) {
       lastKey = key;
       const run = selectedConfiguration(view, choice);
@@ -1824,7 +1834,7 @@ function animateEvent(event) {
           animationDot
             .poly([p.x, p.y - r, p.x + r, p.y, p.x, p.y + r, p.x - r, p.y])
             .fill(style.color);
-        else if (["data", "resource"].includes(edge?.type))
+        else if (["data", "resource", "reads", "writes", "transforms"].includes(edge?.type))
           animationDot.rect(p.x - r, p.y - r, 2 * r, 2 * r).fill(style.color);
         else animationDot.circle(p.x, p.y, r).fill(style.color);
       }

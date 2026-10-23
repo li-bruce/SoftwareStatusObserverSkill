@@ -1,6 +1,6 @@
 # Development branch: graph continuity and deeper source views
 
-Status: `dev`, 2026-10-23. This branch first improves view continuity. The deeper source, database, and API work below is **planned**, with existing foundations listed separately.
+Status: `dev` foundations, with database work implemented on its `db-vis` branch. Deeper source and API work remain planned. See [database delivery](db-vis.md) for the new scope and evidence.
 
 ## Implemented in this iteration
 
@@ -15,7 +15,7 @@ Status: `dev`, 2026-10-23. This branch first improves view continuity. The deepe
 | Layer | Present | Remaining work |
 |---|---|---|
 | Source / AST | Independent source inventory; definitions, classes, parameters, imports, call sites, unresolved targets; selected implementation nodes and resolved static calls in the graph. Python and JS/TS/React/Vue adapters. | A complete browsable source index with file/class/function neighborhoods, bounded queries, and lazy expansion. The current canvas is a projection of mapped implementations, not every AST syntax node. |
-| Data / database | Typed capture fields, parameters, model data nodes, and source bindings. Examples verify actual SQLite effects. | A generic schema adapter for tables, columns, primary/foreign keys; explicit DTO/entity mappings; source-to-table read/write evidence. Current example tables do not establish a reusable schema graph. |
+| Data / database | On `db-vis`: strict catalogs, SQLAlchemy/Mongoose exports, SQLAlchemy/PyMongo/Redis/Neo4j metadata, native Python/Node query and transformation capture, data views and automatic refresh. Real SQLite and four-server tests. | Additional database adapters, arbitrary DTO/entity mapping, automatic column lineage, and database-internal execution plans. |
 | API | Python route decorators, JS route registrations, DOM/JSX/Vue handlers appear in source inventory and mapping checks. | Typed endpoint nodes, method/path identity, request/response contracts, client-to-endpoint and endpoint-to-handler relations. No general OpenAPI import or verified cross-service request matching exists yet. |
 
 Source pointers: [Python extraction and graph projection](../../skills/business-observer/scripts/bo_observer/graph/code_structure.py), [JS/TS/SFC extraction](../../skills/business-observer/scripts/bo_observer/adapters/javascript/scan.mjs), [current capability boundary](../source-data-and-language.md).
@@ -23,7 +23,7 @@ Source pointers: [Python extraction and graph projection](../../skills/business-
 ## Planned work and acceptance
 
 - [ ] **Source neighborhoods.** Query file → class/function → references/calls against a build-bound index. Keep unresolved targets explicit, exclude observer/vendor code by declared scope, and preserve original source locations. Test newly added/deleted files, imported calls, callbacks, source moves, large neighborhoods, and stale builds. Static candidates remain distinct from executed calls.
-- [ ] **Database schema.** Start with a read-only SQLite schema adapter, then declared ORM adapters. Store schema metadata only; no production row collection by default. Test foreign-key cardinality, optional keys, migrations, missing permissions, unknown read/write targets, and closed connections. Collapse tables beneath relevant data nodes.
+- [x] **Database schema on `db-vis`.** Read metadata and export native declarations; preserve types, nullability, keys, constraints and evidence boundaries. Map actual data access and transformations. Test schema drift, failures, unknown targets, observer exclusion and view continuity. Further adapters remain separate work.
 - [ ] **API relationships.** Normalize supported route definitions and OpenAPI declarations into endpoint identities. Attach handler, parameter/schema, and explicitly resolved client relations. Test path parameters, routers/prefixes, method differences, dynamic URLs, contract drift, and frontend/backend build mismatch. Unresolved requests remain unlinked candidates.
 - [ ] **Shared protocol additions.** Define typed nodes/edges, source provenance, confidence/unknown fields, migration rules, and export fixtures before exposing new layers. Extend strict validation and language adapters together.
 

@@ -1,0 +1,11 @@
+{
+  "candidate_id": "7d9a4619ee61cb9b38fad0ad1c3fe1f561863b67f5750f4940dc2bcec4c23b09",
+  "build_id": "d74f1755a00753e9feadd58a57eb26037adcbe9d4194f89cfdb14535d5237784",
+  "reports": {
+    "mapping": "passed",
+    "state_rules": "passed",
+    "project_checks": "passed",
+    "business": "passed"
+  },
+  "release_snapshot": "examples\\team-archive\\.release\\stategraph\\db-vis-20261024"
+}

@@ -1,0 +1,21 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+F
+======================================================================
+FAIL: test_begin_rejects_incomplete_source_inventory_before_writing_baseline (__main__.RefactorTests.test_begin_rejects_incomplete_source_inventory_before_writing_baseline)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_refactor.py", line 49, in test_begin_rejects_incomplete_source_inventory_before_writing_baseline
+    with self.assertRaisesRegex(ValueError, 'source scan is incomplete'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.040s
+
+FAILED (failures=1)
+{
+  "valid": true,
+  "status": "editing",
+  "baseline_id": "candidate",
+  "change": ".stategraph/new"
+}

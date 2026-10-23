@@ -125,6 +125,7 @@ To read or modify the implementation, start with the [source guide](docs/source-
 | `scripts/bo_observer/graph/` | Graph projection, source relationships, focused extraction |
 | `scripts/bo_observer/workflow/` | Source inventory, mapping and semantic verification |
 | `scripts/bo_observer/observation/` | Bounded capture, recording, replay facts, retention |
+| `scripts/bo_observer/data/` | Database catalogs, native data operations, graph projection and refresh |
 | `scripts/bo_observer/web/` and `assets/stategraph-viewer/` | Shared API and interactive viewer |
 | `scripts/bo_observer/adapters/` | Native Python/JS execution, probes, and source adapters |
 | Target project's `bo_stategraph/` | Declarations, native execution, private view preferences |
@@ -133,12 +134,16 @@ To read or modify the implementation, start with the [source guide](docs/source-
 
 The [`dev` roadmap](docs/development/dev-roadmap.md) distinguishes existing AST and route extraction from planned full source neighborhoods, database schema, and API relation views.
 
-Current adapters inventory Python, JS/TS, React, and Vue source. Drilldown covers indexed symbols and selected local relationships, **not a proven complete dynamic call graph**. A complete all-source browser, generic database schema/column-lineage adapters, incremental APIs, and performance baselines remain extensions. The tool does not collect every local variable, prove complete program correctness, or execute business commands through graph edits.
+Current adapters inventory Python, JS/TS, React, and Vue source. Drilldown covers indexed symbols and selected local relationships, **not a proven complete dynamic call graph**. A complete all-source browser, automatic column lineage, additional database adapters, incremental APIs, and performance baselines remain extensions. The tool does not collect every local variable, prove complete program correctness, or execute business commands through graph edits.
+
+On `db-vis`, **Database structure** and **Data operations** views connect tables, document collections, key patterns, graph labels, query targets, selected values, transformations, and transaction outcomes. SQLite, PostgreSQL, MongoDB, Redis and Neo4j have real-runtime checks; Python and Node.js share the same JSON protocol. The data watcher refreshes the graph after model/schema changes and retains personal view settings. [Run the database example](examples/database-observer/README.md) · [Support and boundaries](skills/business-observer/references/database-observation.md) · [Review evidence](docs/review/db-vis/README.md).
 
 ## Verify
 
 ```bash
 python tools/verify.py
+# With requirements-database.txt installed:
+python tools/verify.py --database
 ```
 
 Checks include strict declarations, source/graph drift, independent mapping evidence, actual state/value/effect scenarios, observer isolation, view relations, recording, localization, installation, and runnable core exports. Read [the current trial record](docs/review/english-gallery/README.md) for failures, fixes, retests, and limits. Historical evidence is retained unchanged.

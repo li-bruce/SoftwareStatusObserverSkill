@@ -1,0 +1,31 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+reformatted C:\Users\Lvi_P\Documents\Work\CF\ƽ̨����\SoftwareStatusObserverSkill\tests\test_database_guidance.py
+reformatted C:\Users\Lvi_P\Documents\Work\CF\ƽ̨����\SoftwareStatusObserverSkill\tools\test_database_native_protocol.py
+reformatted C:\Users\Lvi_P\Documents\Work\CF\ƽ̨����\SoftwareStatusObserverSkill\tests\test_database_acceptance.py
+reformatted tools\verify_databases.py
+reformatted C:\Users\Lvi_P\Documents\Work\CF\ƽ̨����\SoftwareStatusObserverSkill\tests\test_database_protocol.py
+reformatted C:\Users\Lvi_P\Documents\Work\CF\ƽ̨����\SoftwareStatusObserverSkill\tests\test_database_catalog.py
+reformatted C:\Users\Lvi_P\Documents\Work\CF\ƽ̨����\SoftwareStatusObserverSkill\tests\test_database_runtime.py
+reformatted tools\database_demo.py
+reformatted C:\Users\Lvi_P\Documents\Work\CF\ƽ̨����\SoftwareStatusObserverSkill\tools\test_database_runtime_live.py
+
+All done! \u2728 \U0001f370 \u2728
+9 files reformatted, 5 files left unchanged.
+tools/database-native/acceptance.mjs 169ms
+tools/test_database_browser.mjs 59ms
+tools/test_database_runtime.mjs 28ms
+tools/test_database_view.mjs 50ms

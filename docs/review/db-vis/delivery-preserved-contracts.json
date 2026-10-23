@@ -1,0 +1,93 @@
+{
+  "baseline_candidate": "d6139df376899cc9bfea08e6dba1c18c5ae55a61fbb3582c45dc53844a0cf7f8",
+  "scope": "Existing application code, intent, state declaration, mapping, white-box and business expectations",
+  "valid": true,
+  "checks": [
+    {
+      "path": "acceptance.json",
+      "baseline_sha256": "9243e7ef7a3bd3822fda92e405196a1dc867a078dba818ded6ad3cea0221148f",
+      "current_sha256": "9243e7ef7a3bd3822fda92e405196a1dc867a078dba818ded6ad3cea0221148f",
+      "unchanged": true
+    },
+    {
+      "path": "app/__init__.py",
+      "baseline_sha256": "a829ebb4042211c3a39bf40646855698375b065069bbbd2aa61daba1d8e6a51c",
+      "current_sha256": "a829ebb4042211c3a39bf40646855698375b065069bbbd2aa61daba1d8e6a51c",
+      "unchanged": true
+    },
+    {
+      "path": "app/checks.py",
+      "baseline_sha256": "6eaf39d7323ba58135ca1077d0b27d8de313c8cacf9c2d7aeb72ea7741d128bd",
+      "current_sha256": "6eaf39d7323ba58135ca1077d0b27d8de313c8cacf9c2d7aeb72ea7741d128bd",
+      "unchanged": true
+    },
+    {
+      "path": "app/ports.py",
+      "baseline_sha256": "d2ccb5a40786064a590408428268f04668209ba58ccf39625723942f9ef69338",
+      "current_sha256": "d2ccb5a40786064a590408428268f04668209ba58ccf39625723942f9ef69338",
+      "unchanged": true
+    },
+    {
+      "path": "app/service.py",
+      "baseline_sha256": "0141ec2b3f045e4376361b80ee9c352f60a7507c676df010a447729340e4c885",
+      "current_sha256": "0141ec2b3f045e4376361b80ee9c352f60a7507c676df010a447729340e4c885",
+      "unchanged": true
+    },
+    {
+      "path": "app/store.py",
+      "baseline_sha256": "cddf3b8a1ca0ce279bdda20861ca6b8c62a21e66f5f0220a8acb219129524823",
+      "current_sha256": "cddf3b8a1ca0ce279bdda20861ca6b8c62a21e66f5f0220a8acb219129524823",
+      "unchanged": true
+    },
+    {
+      "path": "bo_stategraph/machine.json",
+      "baseline_sha256": "ebb6a692ed0ffb03bc2fab6b2c5afafe200a763f29cbe0f6d17d551b3d01ff31",
+      "current_sha256": "ebb6a692ed0ffb03bc2fab6b2c5afafe200a763f29cbe0f6d17d551b3d01ff31",
+      "unchanged": true
+    },
+    {
+      "path": "bo_stategraph/workflow.py",
+      "baseline_sha256": "1b6029f7876b2d1b3e93ef1c4aee90713065bd1e7769f4df232c72a4c0777ab1",
+      "current_sha256": "1b6029f7876b2d1b3e93ef1c4aee90713065bd1e7769f4df232c72a4c0777ab1",
+      "unchanged": true
+    },
+    {
+      "path": "implementation.json",
+      "baseline_sha256": "534cf8856f8d53659937b72a6b79d01765f3dee1fa8f9c1bdec1c1068193bd31",
+      "current_sha256": "534cf8856f8d53659937b72a6b79d01765f3dee1fa8f9c1bdec1c1068193bd31",
+      "unchanged": true
+    },
+    {
+      "path": "intent.json",
+      "baseline_sha256": "1c3e52bed04dfa1bd0fea219dc1191e609e511604199df8a2902082350c4c942",
+      "current_sha256": "1c3e52bed04dfa1bd0fea219dc1191e609e511604199df8a2902082350c4c942",
+      "unchanged": true
+    },
+    {
+      "path": "main.py",
+      "baseline_sha256": "3c840ec469108183cb8c9bdd4482ebde8e89c70a1f2f0887ff0b6d0de39307cb",
+      "current_sha256": "3c840ec469108183cb8c9bdd4482ebde8e89c70a1f2f0887ff0b6d0de39307cb",
+      "unchanged": true
+    },
+    {
+      "path": "mapping.json",
+      "baseline_sha256": "62287608736b065578d9ace9179017b24138c0a45ae71e636699a3f835d018ef",
+      "current_sha256": "62287608736b065578d9ace9179017b24138c0a45ae71e636699a3f835d018ef",
+      "unchanged": true
+    },
+    {
+      "path": "whitebox.json",
+      "baseline_sha256": "22de319201fc6711dc9037c6e3db0aee3c618f139a990aae01a194f913e8c035",
+      "current_sha256": "22de319201fc6711dc9037c6e3db0aee3c618f139a990aae01a194f913e8c035",
+      "unchanged": true
+    }
+  ],
+  "test_fixture_change": {
+    "path": "tests/test_graph_layout.mjs",
+    "baseline_sha256": "43db876737a972a2e6a556aa8fd8a0153c345938ecf1293b9081024ec167b98c",
+    "current_sha256": "34566acc656d6f20315f1f4e4ee0739f2d1b98fb0c4a5ddb42b6fbd9b1540ae2",
+    "reason": "The type enumeration gained database presentation roles. Construct valid underlying data/function kinds plus data_role instead of treating roles as protocol kinds. All existing expansion, enclosure, self-relation and positioning assertions are preserved; added rejection of role names supplied only as kind.",
+    "first_failure": "delivery-layout-first-failure.json",
+    "retest": "delivery-layout-retest.log"
+  }
+}

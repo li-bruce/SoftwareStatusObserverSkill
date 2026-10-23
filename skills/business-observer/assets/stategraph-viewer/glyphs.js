@@ -9,8 +9,29 @@ export const meanings = {
   data: boTranslate("Input, return value, or data"),
   effect: boTranslate("Committed effect"),
   wait: boTranslate("Waiting for a condition"),
+  store: boTranslate("Configured database or storage"),
+  dataset: boTranslate("Table, collection, key pattern, or graph label"),
+  column: boTranslate("Field type and constraints"),
+  query: boTranslate("Recorded database command or query"),
+  transform: boTranslate("Application processing of data"),
 };
 export function glyphShapes(type) {
+  if (type === "store")
+    return [
+      { kind: "rect", x: -28, y: -20, w: 56, h: 42, r: 8 },
+      { kind: "ellipse", cx: 0, cy: -18, rx: 28, ry: 8 },
+    ];
+  if (type === "dataset") return [{ kind: "rect", x: -29, y: -21, w: 58, h: 42, r: 3 }];
+  if (type === "column") return [{ kind: "rect", x: -25, y: -15, w: 50, h: 30, r: 15 }];
+  if (type === "query")
+    return [{ kind: "polygon", points: [-29, -21, 16, -21, 30, 0, 16, 21, -29, 21, -17, 0] }];
+  if (type === "transform")
+    return [
+      {
+        kind: "polygon",
+        points: [-15, -25, 15, -25, 28, -12, 28, 12, 15, 25, -15, 25, -28, 12, -28, -12],
+      },
+    ];
   if (type === "business") return [{ kind: "circle", r: 29 }];
   if (type === "state")
     return [
@@ -54,6 +75,7 @@ export function glyphAppearance(color, { core = false, selected = false, related
 export function drawGlyph(g, type, x, y, color, appearance = glyphAppearance(color)) {
   for (const s of glyphShapes(type)) {
     if (s.kind === "circle") g.circle(x, y, s.r);
+    if (s.kind === "ellipse") g.ellipse(x + s.cx, y + s.cy, s.rx, s.ry);
     if (s.kind === "rect") g.roundRect(x + s.x, y + s.y, s.w, s.h, s.r);
     if (s.kind === "polygon") g.poly(s.points.map((v, i) => v + (i % 2 ? y : x)));
     if (!s.outline) g.fill({ color: appearance.fill, alpha: 1 });
@@ -73,6 +95,7 @@ export function legendGlyph(type, style, options = {}) {
   for (const s of glyphShapes(type)) {
     const el = document.createElementNS(ns, s.kind === "polygon" ? "polygon" : s.kind);
     if (s.kind === "circle") el.setAttribute("r", s.r);
+    if (s.kind === "ellipse") for (const k of ["cx", "cy", "rx", "ry"]) el.setAttribute(k, s[k]);
     if (s.kind === "rect")
       for (const [k, v] of Object.entries({ x: s.x, y: s.y, width: s.w, height: s.h, rx: s.r }))
         el.setAttribute(k, v);

@@ -1,0 +1,94 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+...............
+----------------------------------------------------------------------
+Ran 15 tests in 0.550s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+..................
+----------------------------------------------------------------------
+Ran 18 tests in 1.363s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+............
+----------------------------------------------------------------------
+Ran 12 tests in 7.890s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.000s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+test_application_relationships_keep_origin_and_each_field_pair (__main__.AcceptanceTests.test_application_relationships_keep_origin_and_each_field_pair) ... ok
+test_browser_demo_satisfies_its_actual_capture_contract (__main__.AcceptanceTests.test_browser_demo_satisfies_its_actual_capture_contract) ... ok
+test_capture_expectations_cannot_be_silently_weakened (__main__.AcceptanceTests.test_capture_expectations_cannot_be_silently_weakened) ... ok
+test_failure_cannot_substitute_for_success (__main__.AcceptanceTests.test_failure_cannot_substitute_for_success) ... ok
+test_insert_select_records_read_source_and_write_destination (__main__.AcceptanceTests.test_insert_select_records_read_source_and_write_destination) ... ok
+test_multi_target_write_requires_complete_explicit_roles (__main__.AcceptanceTests.test_multi_target_write_requires_complete_explicit_roles) ... ok
+test_postgres_suffix_must_be_unambiguous (__main__.AcceptanceTests.test_postgres_suffix_must_be_unambiguous) ... ok
+test_removed_managed_model_file_is_not_retained_forever (__main__.AcceptanceTests.test_removed_managed_model_file_is_not_retained_forever) ... ok
+test_same_table_read_write_has_both_relations (__main__.AcceptanceTests.test_same_table_read_write_has_both_relations) ... ok
+test_selected_values_are_required_beyond_an_event_name (__main__.AcceptanceTests.test_selected_values_are_required_beyond_an_event_name) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 5.953s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+...
+----------------------------------------------------------------------
+Ran 3 tests in 6.155s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+....
+----------------------------------------------------------------------
+Ran 4 tests in 1.694s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.805s
+
+OK
+PASS: database roles, typed edges, structure and operation presets, true boundaries, inline facts, exact target evidence, rollback, replay, folded completeness and Chinese presentation.
+{"status":"passed","checks":33,"events":24,"suppressed":26}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+test_mongodb_live_validator_changes_and_unvalidated_collection (__main__.LiveCatalogTests.test_mongodb_live_validator_changes_and_unvalidated_collection) ... ok
+test_neo4j_live_constraints_property_changes_and_real_label_tokens (__main__.LiveCatalogTests.test_neo4j_live_constraints_property_changes_and_real_label_tokens) ... ok
+test_postgresql_real_constraints_defaults_and_migrations (__main__.LiveCatalogTests.test_postgresql_real_constraints_defaults_and_migrations) ... ok
+test_redis_live_bounded_type_sampling_never_collects_values (__main__.LiveCatalogTests.test_redis_live_bounded_type_sampling_never_collects_values) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 2.422s
+
+OK
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{"database": "postgresql", "status": "passed", "events": 14}
+{"database": "mongodb", "status": "passed", "events": 12}
+{"database": "redis", "status": "passed", "events": 8}
+{"database": "neo4j", "status": "passed", "events": 14}
+{"database":"postgresql","status":"passed","events":14}
+{"database":"mongodb","status":"passed","events":8}
+{"database":"redis","status":"passed","events":8}
+{"database":"neo4j","status":"passed","events":14}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{"status": "passed", "events": 44, "catalogs": 1, "databases": 4}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "one_initial_question": true,
+  "confirmed_choice_not_reasked": true,
+  "coding_wiring_requires_choice": true,
+  "unapplied_migration_rejected": true,
+  "migration_retest_passed": true,
+  "existing_mongodb_reused": true,
+  "unsolicited_business_features_added": []
+}
+PASS: real SQLite query/processing/write, commit/rollback, observer exclusion, replay, schema/source refresh, layout/filter persistence and EN/ZH viewer.
+Database checks passed for the requested scope.

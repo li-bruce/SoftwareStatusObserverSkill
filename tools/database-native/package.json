@@ -1,0 +1,14 @@
+{
+  "name": "bo-database-native-acceptance",
+  "private": true,
+  "type": "module",
+  "description": "Real native database clients for the observer acceptance suite.",
+  "scripts": { "test": "node acceptance.mjs" },
+  "dependencies": {
+    "pg": "8.23.1",
+    "mongodb": "7.7.0",
+    "redis": "6.3.0",
+    "neo4j-driver": "6.2.0",
+    "mongoose": "9.11.3"
+  }
+}

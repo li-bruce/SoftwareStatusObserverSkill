@@ -1,4 +1,5 @@
 import { t as boTranslate } from "./i18n.js";
+import { dataTransferLabel } from "./data-layer.js";
 // Observation facts and display steps are independent. No business commands.
 import { runtimeFrame, runtimeChanges } from "./runtime-frames.js";
 import { phaseLabel, stateLabels } from "./graph-core.js";
@@ -288,6 +289,8 @@ export function boStepDetail(
   };
 }
 export function boTransferLabel(edge, event, configuration) {
+  const dataLabel = dataTransferLabel(edge.data_relation || edge.type, event);
+  if (dataLabel) return dataLabel;
   if (edge.type === "resource") {
     const entry = configuration?.journal?.find((j) => j.seq === event.outputs?.revision);
     const pair = (edge.members || [])

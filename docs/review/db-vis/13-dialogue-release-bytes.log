@@ -1,0 +1,10 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "one_initial_question": true,
+  "confirmed_choice_not_reasked": true,
+  "coding_wiring_requires_choice": true,
+  "unapplied_migration_rejected": true,
+  "migration_retest_passed": true,
+  "existing_mongodb_reused": true,
+  "unsolicited_business_features_added": []
+}

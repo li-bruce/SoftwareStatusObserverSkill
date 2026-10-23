@@ -1,0 +1,15 @@
+{
+  "valid": true,
+  "regenerated": [
+    "bo_stategraph/runtime-version.json",
+    "observer_generated/runtime/bo_observer/data/contract.py",
+    "observer_generated/runtime/bo_observer/data/projection.py",
+    "observer_generated/runtime/bo_observer/data/protocol.py",
+    "observer_generated/runtime/bo_observer/data/runtime.py",
+    "observer_generated/runtime/bo_observer/data/sync.py",
+    "observer_generated/runtime/bo_observer/protocol.py",
+    "observer_generated/runtime/bo_observer/schemas/database-config.schema.json",
+    "observer_generated/static/data-layer.js"
+  ]
+}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe

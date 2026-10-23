@@ -20,6 +20,7 @@
     "integrations/bo_server.py",
     "integrations/bo_view/analysis.js",
     "integrations/bo_view/conversation.js",
+    "integrations/bo_view/data-layer.js",
     "integrations/bo_view/elk-worker.min.js",
     "integrations/bo_view/elk.bundled.js",
     "integrations/bo_view/glyphs.js",

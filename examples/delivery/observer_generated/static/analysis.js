@@ -1,7 +1,18 @@
 import { t as boTranslate } from "./i18n.js";
 // View selection is a projection. It cannot add permission, call or runtime facts.
 import { viewTypes, relationType, stateNodeId } from "./graph-core.js";
-const types = ["business", "function", "state", "decision", "resource", "data", "effect", "wait"];
+import { dataRoles, dataRelations, migrateDataFilters } from "./data-layer.js";
+const types = [
+  "business",
+  "function",
+  "state",
+  "decision",
+  "resource",
+  "data",
+  "effect",
+  "wait",
+  ...dataRoles,
+];
 const edges = [
   "call",
   "flow",
@@ -12,6 +23,7 @@ const edges = [
   "join",
   "shared",
   "other",
+  ...dataRelations,
 ];
 export const presets = [
   {
@@ -31,8 +43,8 @@ export const presets = [
   {
     id: "functions",
     label: boTranslate("Functions and parameters"),
-    nodes: ["function", "decision", "data"],
-    edges: ["call", "data"],
+    nodes: ["function", "decision", "data", "query", "transform"],
+    edges: ["call", "data", ...dataRelations],
   },
   {
     id: "permission",
@@ -51,8 +63,20 @@ export const presets = [
   {
     id: "data",
     label: boTranslate("Data dependencies"),
-    nodes: ["function", "decision", "data", "effect"],
-    edges: ["data", "guard", "call"],
+    nodes: ["function", "decision", "data", "effect", ...dataRoles],
+    edges: ["data", "guard", "call", ...dataRelations],
+  },
+  {
+    id: "database",
+    label: boTranslate("Database structure"),
+    nodes: ["store", "dataset", "column"],
+    edges: ["references", "maps"],
+  },
+  {
+    id: "data-operations",
+    label: boTranslate("Queries and data processing"),
+    nodes: ["query", "transform"],
+    edges: ["call", "data", "reads", "writes", "transforms", "maps"],
   },
   {
     id: "runtime",
@@ -77,11 +101,13 @@ export const presets = [
   },
 ];
 export function cleanProfile(value) {
+  value = migrateDataFilters(value);
   const strings = (values, allowed) =>
     Array.isArray(values)
       ? [...new Set(values.filter((x) => allowed.includes(x)))]
       : allowed.slice();
   return {
+    dataTypes: 1,
     nodes: strings(value?.nodes, types),
     edges: strings(value?.edges, edges),
     regions: strings(value?.regions, types),
@@ -96,8 +122,11 @@ export function cleanProfile(value) {
   };
 }
 export function profileFor(id, custom = []) {
+  const preset = presets.find((p) => p.id === id);
   return cleanProfile(
-    presets.find((p) => p.id === id) || custom.find((p) => p.id === id) || presets[0],
+    preset
+      ? { ...preset, dataTypes: 1 }
+      : custom.find((p) => p.id === id) || { ...presets[0], dataTypes: 1 },
   );
 }
 export function matchingNodes(all, view, events, profile, statusOf, relations = view.model.edges) {
@@ -144,7 +173,18 @@ export function matchingNodes(all, view, events, profile, statusOf, relations = 
     const query = profile.query.toLocaleLowerCase();
     const matches =
       !query ||
-      [n.label, n.id, n.source?.symbol, n.summary].join(" ").toLocaleLowerCase().includes(query);
+      [
+        n.label,
+        n.id,
+        n.source?.symbol,
+        n.summary,
+        n.data_key,
+        n.data_store,
+        n.data_metadata?.native_type,
+      ]
+        .join(" ")
+        .toLocaleLowerCase()
+        .includes(query);
     const depthMatches = profile.depth === "all" || n.projection_depth === profile.depth;
     if (viewTypes(n).some((type) => profileTypes.has(type)) && inScope && matches && depthMatches)
       selected.add(n.id);
