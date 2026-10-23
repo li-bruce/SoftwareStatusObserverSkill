@@ -158,6 +158,9 @@ def structure_differences(actual, declared):
 def project_model(model, config, bundle):
     """Replace only managed data nodes; preserve authored graph, IDs, notes, and layout settings."""
     result = deepcopy(model)
+    previous_nodes = {node["id"]: node for node in result["nodes"]}
+    node_order = {node["id"]: position for position, node in enumerate(result["nodes"])}
+    edge_order = {edge["id"]: position for position, edge in enumerate(result["edges"])}
     previous_sources = set(result.get("database", {}).get("managed_source_files", []))
     authored_sources = set(result["source_files"]) - previous_sources
     result["nodes"] = [n for n in result["nodes"] if n.get("managed_by") != MANAGED]
@@ -174,6 +177,12 @@ def project_model(model, config, bundle):
         if value.get("parent") and value["parent"] not in nodes:
             raise ValueError("database parent does not exist: " + value["parent"])
         value["managed_by"] = MANAGED
+        previous = previous_nodes.get(value["id"], {})
+        if value.get("source") and value["source"] == previous.get("source"):
+            # Source enrichment owns this field. It independently verifies the
+            # AST hash; refreshing database metadata must not erase its output.
+            if "code_evidence" in previous:
+                value["code_evidence"] = deepcopy(previous["code_evidence"])
         result["nodes"].append(value)
         nodes[value["id"]] = value
 
@@ -436,4 +445,8 @@ def project_model(model, config, bundle):
         "stores": [s["id"] for s in config["stores"]],
         "managed_source_files": sorted(required_sources - authored_sources),
     }
+    # Composable projections preserve existing order and append only new IDs.
+    # Otherwise source and database generators continually reorder each other.
+    result["nodes"].sort(key=lambda node: node_order.get(node["id"], len(node_order)))
+    result["edges"].sort(key=lambda edge: edge_order.get(edge["id"], len(edge_order)))
     return result

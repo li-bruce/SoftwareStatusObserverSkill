@@ -257,7 +257,10 @@ class DatabaseSyncTests(unittest.TestCase):
                 {
                     "node": "db.query",
                     "phase": "return",
-                    "outputs": {"status": "succeeded", "targets": ["table:images"]},
+                    "inputs": {"operation": "read", "statement": "SELECT * FROM images", "parameters": {}},
+                    "outputs": {"status": "succeeded", "targets": ["table:images"],
+                                "duration_ms": 1, "unknown_targets": [], "rows_known": False,
+                                "target_source": "parsed_sql", "target_access": [{"target": "table:images", "action": "read"}]},
                 }
             ],
         }
@@ -271,6 +274,106 @@ class DatabaseSyncTests(unittest.TestCase):
         absent = deepcopy(run)
         absent["events"][0]["outputs"].pop("targets")
         self.assertTrue(runtime_errors(self.root, {"runs": [absent]}, model))
+
+    def recorded_data(self):
+        """Run real query, transformation and commit through the public probe API."""
+        import sqlalchemy as sa
+        from bo_observer.adapters.python.bo_probe import BOProbe
+        from bo_observer.data.runtime import BODataRuntime
+
+        query = self.config["operations"][0]
+        query.update(parameters={"limit": "number"}, after={"count": "number"})
+        for name, action in [("transform", "transform"), ("transaction", "transaction")]:
+            operation = {**deepcopy(query), "id": "db." + name, "action": action,
+                         "targets": [], "parameters": {}, "after": {}}
+            if action == "transform":
+                operation.update(before={"count": "number"}, after={"count": "number"})
+            self.config["operations"].append(operation)
+        self.write_config()
+        self.assert_valid(synchronize(self.root))
+        model, events = self.model(), []
+        engine = sa.create_engine("sqlite:///" + str(self.database))
+        probe = BOProbe({"project_id": "data-gate", "model": model}, "build",
+                        sink=lambda body, kind: events.append(body))
+        runtime = BODataRuntime(probe, self.config)
+        try:
+            with engine.connect() as connection:
+                runtime.execute("db.query", lambda: connection.exec_driver_sql("SELECT * FROM images").all(),
+                                statement="SELECT * FROM images", language="sql", parameters={"limit": 2},
+                                summarize=lambda rows: {"rows": len(rows), "result": {"count": len(rows)}})
+            runtime.transform("db.transform", list, [], before=lambda rows: {"count": len(rows)},
+                              after=lambda rows: {"count": len(rows)})
+            with runtime.transaction("db.transaction", engine.begin()):
+                pass
+            self.assertTrue(probe.flush())
+            self.assertEqual(probe.bo_errors + runtime.bo_errors, 0)
+        finally:
+            runtime.close()
+            probe.close()
+            engine.dispose()
+        ids = [operation["id"] for operation in self.config["operations"]]
+        cases = [{"case": "query-success", "node": node,
+                  "phase": {"db.query": "return", "db.transform": "change", "db.transaction": "commit"}[node]}
+                 for node in ids]
+        plan = {"features": [{"id": "data", "nodes": ids, "parameters": [], "cases": cases}]}
+        return plan, model, {"build_id": "build", "runs": [{"case": "query-success", "mode": "on", "events": events}]}
+
+    def test_data_capture_presence_uses_actual_operation_outcomes(self):
+        from bo_observer.workflow.implementation_coverage import runtime_errors as coverage
+        plan, model, payload = self.recorded_data()
+        self.assertEqual(coverage(plan, model, payload, root=self.root)["errors"], [])
+        # A generated marker alone cannot opt a node out of ordinary capture checks.
+        self.assertTrue(coverage(plan, model, payload)["errors"])
+        for node, field in [("db.query", "result"), ("db.query", "rows"),
+                            ("db.transform", "before"), ("db.transaction", "committed")]:
+            with self.subTest(node=node, field=field):
+                changed = deepcopy(payload)
+                for event in changed["runs"][0]["events"]:
+                    if event["node"] == node:
+                        event.get("outputs", {}).pop(field, None)
+                self.assertTrue(coverage(plan, model, changed, root=self.root)["errors"])
+        changed = deepcopy(payload)
+        next(e for e in changed["runs"][0]["events"] if e["phase"] == "return")["outputs"]["rows"] = "bad"
+        self.assertTrue(coverage(plan, model, changed, root=self.root)["errors"])
+        changed_model = deepcopy(model)
+        next(n for n in changed_model["nodes"] if n["id"] == "db.query")["capture"]["out"]["required_extra"] = "string"
+        self.assertTrue(coverage(plan, changed_model, payload, root=self.root)["errors"])
+
+    def test_data_gate_requires_failed_case_error_and_rollback(self):
+        from bo_observer.workflow.implementation_coverage import runtime_errors as coverage
+        plan, model, payload = self.recorded_data()
+        operation = self.config["operations"][2]
+        operation["failure_cases"] = ["query-success"]
+        self.write_config()
+        event = next(e for e in payload["runs"][0]["events"] if e["phase"] == "commit")
+        event.update(phase="error")
+        plan["features"][0]["cases"][2]["phase"] = "error"
+        event["outputs"].update(status="rolled_back", committed=False, error_type="ValueError")
+        self.assertEqual(coverage(plan, model, payload, root=self.root)["errors"], [])
+        for field in ["error_type", "committed"]:
+            changed = deepcopy(payload)
+            next(e for e in changed["runs"][0]["events"] if e["phase"] == "error")["outputs"].pop(field)
+            self.assertTrue(coverage(plan, model, changed, root=self.root)["errors"])
+
+    def test_database_refresh_and_source_enrichment_reach_one_stable_graph(self):
+        from bo_observer.sources import scan
+        from bo_observer.graph.code_structure import enrich
+
+        self.assert_valid(synchronize(self.root))
+        path = self.root / "bo_stategraph/project.json"
+        project = json.loads(path.read_text(encoding="utf-8"))
+        project["model"] = enrich(project["model"], scan(self.root, ["worker.py", "models.py"]))
+        before = deepcopy(project["model"])
+        self.assertIn("code_evidence", next(n for n in before["nodes"] if n["id"] == "db.query"))
+        path.write_text(json.dumps(project), encoding="utf-8")
+        self.assert_valid(synchronize(self.root, update=False))
+        self.assertFalse(synchronize(self.root)["changed"])
+        self.assertEqual(self.model(), before)
+        project["model"]["nodes"][-1]["label"] = "Tampered generated node"
+        data_node = next(n for n in project["model"]["nodes"] if n["id"] == "db.query")
+        data_node["capture"]["out"].pop("status")
+        path.write_text(json.dumps(project), encoding="utf-8")
+        self.assertFalse(synchronize(self.root, update=False)["valid"])
 
     def test_declared_default_mismatch_cannot_pass(self):
         actual = collect(self.config["stores"][0], root=self.root)

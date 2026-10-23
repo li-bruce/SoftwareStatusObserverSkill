@@ -1,0 +1,90 @@
+{
+  "valid": true,
+  "errors": [],
+  "candidate_id": "b444ab1fc0532911fac226c48f76e252781c6a54998188fbd97908a8533158de",
+  "reports": {
+    "mapping": {
+      "status": "passed",
+      "errors": [],
+      "database": {
+        "configured": true,
+        "valid": true,
+        "errors": [],
+        "changed": false,
+        "source_id": "759486aa490196955fe1ce9ddf71b27a6dcc4bd2eba54e77ad5a2e20cd6e8cda",
+        "catalog_id": "2d699a64c362685e63c02925379b0314252368059071a1b5d5a6283f0d61c19e",
+        "stores": [
+          {
+            "id": "team",
+            "coverage": "complete",
+            "limitations": [
+              "Coverage is limited to tables in the configured/default schema and dialect-supported constraints; triggers and stored routines are not inspected."
+            ]
+          }
+        ]
+      },
+      "code_structure": {
+        "enabled": true,
+        "valid": true,
+        "errors": [],
+        "status": "passed",
+        "revision": "10f50540937b0c250e29a92817aaedf228ab875d5cb085437c7156304d3c3f7f",
+        "nodes": 617,
+        "edges": 854
+      },
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+      "stategraph_export": "checked",
+      "witnesses": 54,
+      "projection_checks": 135,
+      "implementation": {
+        "errors": [],
+        "events_checked": 218,
+        "features": 15
+      }
+    },
+    "state_rules": {
+      "status": "passed",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "passed",
+      "errors": [],
+      "assertions": {
+        "required": 57,
+        "executed": 57
+      },
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "review_hash": "d31c0a793c5de2ecfc0bb034e3daf2985ce4f164166296fb661ffd108754c01b",
+  "observations_hash": "e65d6b663db371b7567f55774a9b878df120f6d906a3b4744ad8a0f4dc86ad98",
+  "tests": [
+    {
+      "argv": [
+        "{python}",
+        "-B",
+        "-X",
+        "utf8",
+        "tooling/test_business.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-B",
+        "-X",
+        "utf8",
+        "tooling/check_project.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "checked_at": "2026-10-23T20:57:50.764284+00:00",
+  "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+}

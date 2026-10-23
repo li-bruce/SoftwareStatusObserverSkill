@@ -218,7 +218,7 @@ def _reflect_constraints(inspector, name, schema, resource, catalog):
             resource["constraints"].append(value)
 
 
-def export_sqlalchemy_metadata(metadata, store_id):
+def export_sqlalchemy_metadata(metadata, store_id, *, dialect=None):
     """Export an application's SQLAlchemy MetaData without opening a database."""
     sa = _dependency("sqlalchemy")
     catalog = _catalog({"id": store_id, "engine": "sqlalchemy"}, origin="declaration")
@@ -235,7 +235,14 @@ def export_sqlalchemy_metadata(metadata, store_id):
                 }
                 if column.server_default is not None:
                     if hasattr(column.server_default, "arg"):
-                        value["default"] = str(column.server_default.arg)
+                        default = column.server_default.arg
+                        # A Python string is a SQL literal, while text()/SQL
+                        # expressions are rendered as expressions by SQLAlchemy.
+                        if isinstance(default, str):
+                            default = sa.literal(default)
+                        value["default"] = str(
+                            default.compile(dialect=dialect, compile_kwargs={"literal_binds": True})
+                        )
                 elif not (
                     column.primary_key
                     and column.autoincrement in (True, "auto")

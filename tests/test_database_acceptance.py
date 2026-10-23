@@ -75,8 +75,10 @@ class AcceptanceTests(unittest.TestCase):
                         {
                             "node": "db.query",
                             "phase": "return",
-                            "inputs": {},
-                            "outputs": {"status": "returned", "targets": ["table:images"]},
+                            "inputs": {"operation": "read", "statement": "SELECT * FROM images", "parameters": {}},
+                            "outputs": {"status": "returned", "targets": ["table:images"],
+                                        "duration_ms": 1, "unknown_targets": [], "rows_known": False,
+                                        "target_source": "parsed_sql", "target_access": [{"target": "table:images", "action": "read"}]},
                         }
                     ],
                 }
@@ -87,7 +89,8 @@ class AcceptanceTests(unittest.TestCase):
         self.assertTrue(synchronize(self.root)["valid"])
         payload = self.payload()
         event = payload["runs"][0]["events"][0]
-        event.update(phase="error", outputs={"status": "failed", "error_type": "DatabaseError"})
+        event.update(phase="error")
+        event["outputs"].update(status="failed", error_type="DatabaseError")
         self.assertTrue(runtime_errors(self.root, payload, self.model()))
         self.config["operations"][0]["failure_cases"] = ["query-success"]
         self.write_config()

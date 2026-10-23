@@ -21,6 +21,7 @@ document the relationship types and coverage limits.
 
 | Check | Evidence |
 | --- | --- |
+| Merged dev CI | [`96f28f7`, five jobs passed](https://github.com/li-bruce/SoftwareStatusObserverSkill/actions/runs/40016953997): Windows/Linux with Python 3.11/3.13 and real database services |
 | Full repository regression | [Complete run](full-repository.log), `python tools/verify.py --database`: passed, including clarification, native adapters, strict mapping/state/business/project checks, HTTP, installation and independently executed observer-free exports |
 | Actual browser, source edits and SQLite operation | [Final browser result](final-current/browser-result.json): optional loading, local/full views, source access, new file, parse failure, deletion/recovery, pin coordinates and notes after reload/upgrade, real recording and observer exclusion, EN/ZH |
 | Source/query/HTTP regressions | `tests/test_code_graph.py`: Python/Node/React/Vue, imports/inheritance, repeat-call identity, module initialization, shadowed callbacks, syntax errors, source revision, hidden Web and independent tampering/staleness checks |

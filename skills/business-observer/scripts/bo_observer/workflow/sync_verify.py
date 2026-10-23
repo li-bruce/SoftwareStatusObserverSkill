@@ -171,7 +171,8 @@ def verify(root, cfg, change, *, inspect, snapshot):
     else:
         try:
             payload = json.loads(observation["stdout"])
-            mapping_errors.extend(database_runtime_errors(root, payload, current["model"]))
+            if not cfg.get("stategraph"):
+                mapping_errors.extend(database_runtime_errors(root, payload, current["model"]))
             if payload.get("build_id") != capture(root, current["model"])["build_id"]:
                 mapping_errors.append("runtime observations belong to another build")
             # Runtime declarations and probe identity are mapping questions.
@@ -212,7 +213,7 @@ def verify(root, cfg, change, *, inspect, snapshot):
                 except ImportError:
                     from implementation_coverage import runtime_errors as feature_runtime
                 coverage = feature_runtime(
-                    current["model"]["implementation"], current["model"], payload
+                    current["model"]["implementation"], current["model"], payload, root=root
                 )
                 mapping_errors.extend(coverage["errors"])
                 reports["mapping"]["implementation"] = coverage

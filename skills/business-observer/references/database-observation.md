@@ -98,6 +98,15 @@ transport and graph maintenance operations without guessing from SQL text or
 business names. Review required runtime cases, actual targets, failures,
 transaction outcomes and selected data transformations at each coding checkpoint.
 
+Database capture schemas list allowed fields across several outcomes. Required
+presence is checked by `data/evidence.py`: a successful query has selected results,
+a failed case has an error type, a confirmed transaction has its commit outcome,
+and a transformation has its configured before/after values. Unknown row counts
+remain unknown. Never add fake fields merely to satisfy coverage. The standard
+CLI and change gate load the project database contract automatically; direct calls
+to `implementation_coverage.runtime_errors` must pass `root=project_root` to use
+that contract. Ordinary feature captures retain their required-field checks.
+
 The Web data watcher refreshes valid schema/source changes, replaces the loaded
 build, preserves personal preferences, and excludes older build events and
 recordings from the current view. Failed refreshes keep the previous session

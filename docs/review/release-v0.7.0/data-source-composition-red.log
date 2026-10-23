@@ -1,0 +1,18 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+.....F.........
+======================================================================
+FAIL: test_database_refresh_and_source_enrichment_reach_one_stable_graph (test_database_sync.DatabaseSyncTests.test_database_refresh_and_source_enrichment_reach_one_stable_graph)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tests\test_database_sync.py", line 369, in test_database_refresh_and_source_enrichment_reach_one_stable_graph
+    self.assert_valid(synchronize(self.root, update=False))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tests\test_database_sync.py", line 109, in assert_valid
+    self.assertTrue(result["valid"], result)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : {'configured': True, 'valid': False, 'errors': ['database catalog or graph projection is stale; run bo_db sync'], 'changed': True, 'source_id': 'c5cea6d0db759850c1bd170a1ecd3a728469c056e9de2532a6dc097907d66bbd', 'catalog_id': 'fda2dcc4cfa515acbcaa26d5488705325814806b2220e251d1db5982877dd28f', 'stores': [{'id': 'app', 'coverage': 'complete', 'limitations': ['Coverage is limited to tables in the configured/default schema and dialect-supported constraints; triggers and stored routines are not inspected.']}]}
+
+----------------------------------------------------------------------
+Ran 15 tests in 9.697s
+
+FAILED (failures=1)

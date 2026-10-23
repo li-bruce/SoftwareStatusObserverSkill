@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "checks": [
+    "T02_roles",
+    "T02_wrong_password",
+    "T01_empty_public_page",
+    "T03_pending_version",
+    "T03_recipient",
+    "T11_recipient_privacy",
+    "T11_member_inbox",
+    "T04_member_cannot_review",
+    "T04_no_publication",
+    "T05_rejected",
+    "T06_reviewer_cannot_edit",
+    "T07_identity_and_version",
+    "T07_pending_again",
+    "T08_old_version",
+    "T08_no_write",
+    "T04_current_role",
+    "T09_exact_snapshot",
+    "T10_duplicate_review",
+    "T10_published_readonly",
+    "T09_public_content",
+    "T10_exactly_once",
+    "T10_concurrent_exactly_once",
+    "T10_concurrent_effect_count",
+    "source_unchanged_during_test"
+  ],
+  "source_hashes": {
+    "app\\__init__.py": "54f89a214abfed68faab62686a2dad0bde7a54bfad3cf3763d8117b7bb06743a",
+    "app\\models.py": "df2eeadbc8d8dd3253d3eb6866636f7cfab8281fbb0458623b03516dd4806383",
+    "app\\ports.py": "9972bbf2d97ec92059c7ec3b83ac9f144b4ff375a5ef2d44347d23c5295e49c7",
+    "app\\service.py": "13bf372b1ac1dcce66cf73a7d523ca408e37ec21c103adeac4178ea8783b8927",
+    "app\\web.py": "104dc3b911167126b0435d04a3f7c520176e463e5243a8023d60bb595ecc2724"
+  },
+  "scope": "Independent business rules and SQLite effects with observation off. Runtime mapping and browser behavior require separate evidence."
+}

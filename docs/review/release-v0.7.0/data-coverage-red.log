@@ -1,0 +1,24 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+...EE.........
+======================================================================
+ERROR: test_data_capture_presence_uses_actual_operation_outcomes (test_database_sync.DatabaseSyncTests.test_data_capture_presence_uses_actual_operation_outcomes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tests\test_database_sync.py", line 321, in test_data_capture_presence_uses_actual_operation_outcomes
+    self.assertEqual(coverage(plan, model, payload, root=self.root)["errors"], [])
+                     ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: runtime_errors() got an unexpected keyword argument 'root'
+
+======================================================================
+ERROR: test_data_gate_requires_failed_case_error_and_rollback (test_database_sync.DatabaseSyncTests.test_data_gate_requires_failed_case_error_and_rollback)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tests\test_database_sync.py", line 349, in test_data_gate_requires_failed_case_error_and_rollback
+    self.assertEqual(coverage(plan, model, payload, root=self.root)["errors"], [])
+                     ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: runtime_errors() got an unexpected keyword argument 'root'
+
+----------------------------------------------------------------------
+Ran 14 tests in 7.156s
+
+FAILED (errors=2)

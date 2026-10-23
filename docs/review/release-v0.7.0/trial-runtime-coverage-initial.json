@@ -1,0 +1,462 @@
+{
+  "errors": [
+    {
+      "feature_event_missing": "browser_actions",
+      "case": "browser",
+      "node": "ui.login",
+      "phase": "return"
+    },
+    {
+      "feature_event_missing": "browser_actions",
+      "case": "browser",
+      "node": "ui.logout",
+      "phase": "return"
+    },
+    {
+      "feature_event_missing": "browser_actions",
+      "case": "browser",
+      "node": "ui.submit",
+      "phase": "return"
+    },
+    {
+      "feature_event_missing": "browser_actions",
+      "case": "browser",
+      "node": "ui.edit",
+      "phase": "return"
+    },
+    {
+      "feature_event_missing": "browser_actions",
+      "case": "browser",
+      "node": "ui.edit_select",
+      "phase": "return"
+    },
+    {
+      "feature_event_missing": "browser_actions",
+      "case": "browser",
+      "node": "ui.resubmit",
+      "phase": "return"
+    },
+    {
+      "feature_event_missing": "browser_actions",
+      "case": "browser",
+      "node": "ui.review",
+      "phase": "return"
+    },
+    {
+      "feature_event_missing": "browser_actions",
+      "case": "browser",
+      "node": "ui.public",
+      "phase": "return"
+    },
+    {
+      "feature_event_missing": "browser_actions",
+      "case": "browser",
+      "node": "ui.workspace",
+      "phase": "return"
+    },
+    {
+      "feature_event_missing": "browser_actions",
+      "case": "browser",
+      "node": "ui.cancel_edit",
+      "phase": "return"
+    },
+    {
+      "feature_field_not_observed": "browser_actions",
+      "node": "ui.login",
+      "direction": "out",
+      "field": "ok"
+    },
+    {
+      "feature_field_not_observed": "browser_actions",
+      "node": "ui.logout",
+      "direction": "out",
+      "field": "ok"
+    },
+    {
+      "feature_field_not_observed": "browser_actions",
+      "node": "ui.submit",
+      "direction": "out",
+      "field": "ok"
+    },
+    {
+      "feature_field_not_observed": "browser_actions",
+      "node": "ui.edit",
+      "direction": "out",
+      "field": "ok"
+    },
+    {
+      "feature_field_not_observed": "browser_actions",
+      "node": "ui.edit_select",
+      "direction": "out",
+      "field": "ok"
+    },
+    {
+      "feature_field_not_observed": "browser_actions",
+      "node": "ui.resubmit",
+      "direction": "out",
+      "field": "ok"
+    },
+    {
+      "feature_field_not_observed": "browser_actions",
+      "node": "ui.review",
+      "direction": "out",
+      "field": "ok"
+    },
+    {
+      "feature_field_not_observed": "browser_actions",
+      "node": "ui.public",
+      "direction": "out",
+      "field": "ok"
+    },
+    {
+      "feature_field_not_observed": "browser_actions",
+      "node": "ui.workspace",
+      "direction": "out",
+      "field": "ok"
+    },
+    {
+      "feature_field_not_observed": "browser_actions",
+      "node": "ui.cancel_edit",
+      "direction": "out",
+      "field": "ok"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.accounts.read",
+      "direction": "out",
+      "field": "before"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.accounts.read",
+      "direction": "out",
+      "field": "error_type"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.accounts.read",
+      "direction": "out",
+      "field": "input_count"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.accounts.read",
+      "direction": "out",
+      "field": "output_count"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.accounts.read",
+      "direction": "out",
+      "field": "committed"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.sessions.read",
+      "direction": "out",
+      "field": "before"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.sessions.read",
+      "direction": "out",
+      "field": "error_type"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.sessions.read",
+      "direction": "out",
+      "field": "input_count"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.sessions.read",
+      "direction": "out",
+      "field": "output_count"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.sessions.read",
+      "direction": "out",
+      "field": "committed"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.sessions.write",
+      "direction": "out",
+      "field": "before"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.sessions.write",
+      "direction": "out",
+      "field": "error_type"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.sessions.write",
+      "direction": "out",
+      "field": "input_count"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.sessions.write",
+      "direction": "out",
+      "field": "output_count"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.sessions.write",
+      "direction": "out",
+      "field": "committed"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.materials.read",
+      "direction": "out",
+      "field": "before"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.materials.read",
+      "direction": "out",
+      "field": "error_type"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.materials.read",
+      "direction": "out",
+      "field": "input_count"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.materials.read",
+      "direction": "out",
+      "field": "output_count"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.materials.read",
+      "direction": "out",
+      "field": "committed"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.materials.write",
+      "direction": "out",
+      "field": "before"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.materials.write",
+      "direction": "out",
+      "field": "error_type"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.materials.write",
+      "direction": "out",
+      "field": "input_count"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.materials.write",
+      "direction": "out",
+      "field": "output_count"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.materials.write",
+      "direction": "out",
+      "field": "committed"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.messages.read",
+      "direction": "out",
+      "field": "before"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.messages.read",
+      "direction": "out",
+      "field": "error_type"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.messages.read",
+      "direction": "out",
+      "field": "input_count"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.messages.read",
+      "direction": "out",
+      "field": "output_count"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.messages.read",
+      "direction": "out",
+      "field": "committed"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.messages.write",
+      "direction": "out",
+      "field": "before"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.messages.write",
+      "direction": "out",
+      "field": "error_type"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.messages.write",
+      "direction": "out",
+      "field": "input_count"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.messages.write",
+      "direction": "out",
+      "field": "output_count"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.messages.write",
+      "direction": "out",
+      "field": "committed"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.publications.read",
+      "direction": "out",
+      "field": "before"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.publications.read",
+      "direction": "out",
+      "field": "error_type"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.publications.read",
+      "direction": "out",
+      "field": "input_count"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.publications.read",
+      "direction": "out",
+      "field": "output_count"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.publications.read",
+      "direction": "out",
+      "field": "committed"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.publications.write",
+      "direction": "out",
+      "field": "before"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.publications.write",
+      "direction": "out",
+      "field": "error_type"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.publications.write",
+      "direction": "out",
+      "field": "input_count"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.publications.write",
+      "direction": "out",
+      "field": "output_count"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.publications.write",
+      "direction": "out",
+      "field": "committed"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.transaction",
+      "direction": "out",
+      "field": "rows"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.transaction",
+      "direction": "out",
+      "field": "rows_known"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.transaction",
+      "direction": "out",
+      "field": "result"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.transaction",
+      "direction": "out",
+      "field": "before"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.transaction",
+      "direction": "out",
+      "field": "transaction_id"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.transaction",
+      "direction": "out",
+      "field": "input_count"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.transaction",
+      "direction": "out",
+      "field": "output_count"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.publication_snapshot",
+      "direction": "out",
+      "field": "rows"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.publication_snapshot",
+      "direction": "out",
+      "field": "rows_known"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.publication_snapshot",
+      "direction": "out",
+      "field": "error_type"
+    },
+    {
+      "feature_field_not_observed": "database_access",
+      "node": "db.publication_snapshot",
+      "direction": "out",
+      "field": "committed"
+    }
+  ],
+  "events_checked": 187,
+  "features": 15
+}

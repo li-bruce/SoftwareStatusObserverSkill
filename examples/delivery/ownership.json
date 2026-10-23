@@ -124,7 +124,7 @@
     "bo_stategraph/__init__.py": "56f694a30fa9e2aa6319931b24cb35c52c82ea30b8b4b6f4029df0f838e63e6e",
     "bo_stategraph/bo_contracts.py": "094f5feff89893ee5932eb6a4b6ad4aafc08c7e462d0b9b00c31d50702e6af29",
     "bo_stategraph/execution_contract.py": "0c966fb3549c0219c6a663ddf41c847e71ebf14216b02b725d2465e4bf0c4839",
-    "bo_stategraph/runtime-version.json": "fea57b0b32b28a1ddbabfdcd839eceee5c03c820aeb3dc877ea5df755628da92",
+    "bo_stategraph/runtime-version.json": "e1d2e1e5b6401dc982e028f5cc2f8d03d04f4a1cdd59618786c8d778085d8873",
     "observer_generated/behavior.json": "9ffc0e1f0715a15ae816b531bdae27c41dca08347b7a0587baaf026095948495",
     "observer_generated/runtime/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "observer_generated/runtime/architecture_guard.py": "b1966fd9fa189df104894e6cf91f1e28a12087d6d525bd5cb8db3c46af9e54b9",
@@ -150,13 +150,14 @@
     "observer_generated/runtime/bo_observer/code_graph/service.py": "4593cf91c5a15c5c836fc1471bfc01b288119702533bca118e9831b83def3576",
     "observer_generated/runtime/bo_observer/data/__init__.py": "3dc7861217be44088a3475fc158cf990ab2a339650926e71d7b6c861dd094e61",
     "observer_generated/runtime/bo_observer/data/acceptance.py": "4c52fda20e10a300dec02659dec576662704ae8bf8e18a880061232c1be601cc",
-    "observer_generated/runtime/bo_observer/data/catalog.py": "6b681dfcd8b90312410179448993008e2e4ef34436911bbe8f46622fdd2b31a8",
+    "observer_generated/runtime/bo_observer/data/catalog.py": "584160c51ae7eae4d132d8abace12376c21c4766b291beb680725e4d6f993032",
     "observer_generated/runtime/bo_observer/data/contract.py": "c0dbe28a9157bb01e2dbaa7ecac00355b64180c8ea02814af41e2239944ec507",
+    "observer_generated/runtime/bo_observer/data/evidence.py": "e954c6056fdafd4752e6060d8870ae5f928c914fa286ed26947847a1268b5cde",
     "observer_generated/runtime/bo_observer/data/guidance.py": "d9abac570dd55e366eb02cbd6e84fb936ad1a34b5fa52d13f88649ca78dda861",
-    "observer_generated/runtime/bo_observer/data/projection.py": "bf882990fb9e81026838baf389b98cf15379962017688dc9d990916ae130fae7",
+    "observer_generated/runtime/bo_observer/data/projection.py": "15c122fb9895699282571049772bd3f53b7efe615f65269369fe9a5385e52df5",
     "observer_generated/runtime/bo_observer/data/protocol.py": "691442e42a786a40b87bb7ac3aea32747b3beda1b56fc3858911fe870f1d64d3",
     "observer_generated/runtime/bo_observer/data/runtime.py": "3e93f11c077961aa13242d9f19d433b62b245bc4680cd549c4839b4daf05e3c2",
-    "observer_generated/runtime/bo_observer/data/sync.py": "d8cf4f1e84782ecf4bc535c8b0d41e814b09564c9c90ef7ed25dc4d614a1e16b",
+    "observer_generated/runtime/bo_observer/data/sync.py": "15194deb7bf0ae08313e989d67ded0e71a0b71eba426ea41d66783bcbb71dde8",
     "observer_generated/runtime/bo_observer/data/watcher.py": "688c5decd1aeeb8fcfe28f69a73d791f3fec2337b8411dd882048b15cb8096bd",
     "observer_generated/runtime/bo_observer/delivery/__init__.py": "9caf141625be091786a81a9e4def451cdfce9713ac48e42c5ea5a05024c234d8",
     "observer_generated/runtime/bo_observer/delivery/architecture_guard.py": "08d31fd994ac257ca2cac3969e9144f7eaafa5ee957a579426a0dcdcb2728118",
@@ -194,13 +195,13 @@
     "observer_generated/runtime/bo_observer/workflow/__init__.py": "9373a867af4c7baa99e7ce242c0a2673c65bbc1b90406c655bd29a6056ff0447",
     "observer_generated/runtime/bo_observer/workflow/bo_sync.py": "39defe796a71f7935fa9175eafeb5cd4acd289c7e65ee01fe66dadac0bdb00b1",
     "observer_generated/runtime/bo_observer/workflow/change_sync.py": "edc6714ed37aee343a992f4dbd05dc8febe0fd6418e19a44f4bd98440fd48b20",
-    "observer_generated/runtime/bo_observer/workflow/implementation_coverage.py": "bd1ad5ba7857ab6840eae3f5218678a6324243c2af4152aad8dbefd4160a7c46",
+    "observer_generated/runtime/bo_observer/workflow/implementation_coverage.py": "85fd3f57c52214070096a89ca2c4d391e989f29c4ea2f3670bc9bf5b671a4213",
     "observer_generated/runtime/bo_observer/workflow/mapping_contract.py": "562476f1a528daddddd6e95b7749eab1c4dff4b720561421209df77441c06c01",
     "observer_generated/runtime/bo_observer/workflow/requirements_dialogue.py": "4972c12643db2915ba9abc7fcd682ace5ec9f3b45ccadf7fc8a8e1361ae127f0",
     "observer_generated/runtime/bo_observer/workflow/source_migration.py": "28892f2f8a5869ba25c0eb46789915636949c36cdd5b8e04dca31a3e4e1dab54",
     "observer_generated/runtime/bo_observer/workflow/sync_config.py": "87aa298a214cebcc1e2f5ac6114d04fc75a306b677778d054c03b50bff71c564",
     "observer_generated/runtime/bo_observer/workflow/sync_io.py": "8e48b8c71cde20bdf3dfcaec234e713f7ca382be89f1b60264d93cd89f5c8484",
-    "observer_generated/runtime/bo_observer/workflow/sync_verify.py": "2b5b2bcba2db94f8eede632d232c60a829f99977722086537c767cb4e18a33d9",
+    "observer_generated/runtime/bo_observer/workflow/sync_verify.py": "7717631cf6402144dd5d83bf36155d00547499e0ed073500af253be394d9624a",
     "observer_generated/runtime/bo_observer/workflow/whitebox_contract.py": "b95828be430019fad6253dafbc2eb94d9cc4672eaa28cd9b93738e5292bc21e1",
     "observer_generated/runtime/bo_retention.py": "e7ac153ad89b252e31f83b40a3e2280fe323036a1d18556cdc9fc19a8e0c7bbc",
     "observer_generated/runtime/bo_runtime.py": "950464fafb2f11b769be56d2e2c1f73f0aff141b6cdc75a4b26a6a7060ec82af",
@@ -1391,6 +1392,24 @@
       "changed": [
         "bo_stategraph/runtime-version.json",
         "observer_generated/runtime/bo_observer/adapters/javascript/scan.mjs"
+      ]
+    },
+    {
+      "reason": "Shared database runtime evidence validation and SQLAlchemy default export; original business assertions retained.",
+      "changed": [
+        "bo_stategraph/runtime-version.json",
+        "observer_generated/runtime/bo_observer/data/catalog.py",
+        "observer_generated/runtime/bo_observer/data/evidence.py",
+        "observer_generated/runtime/bo_observer/data/sync.py",
+        "observer_generated/runtime/bo_observer/workflow/implementation_coverage.py",
+        "observer_generated/runtime/bo_observer/workflow/sync_verify.py"
+      ]
+    },
+    {
+      "reason": "Shared database runtime evidence validation and SQLAlchemy default export; original business assertions retained.",
+      "changed": [
+        "bo_stategraph/runtime-version.json",
+        "observer_generated/runtime/bo_observer/data/projection.py"
       ]
     }
   ],

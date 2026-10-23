@@ -179,6 +179,32 @@ class CatalogTests(unittest.TestCase):
         )
         self.assertEqual(foreign["target"], "table:accounts.users")
 
+    def test_string_server_defaults_match_real_sqlite_ddl(self):
+        import sqlalchemy as sa
+        from bo_observer.data.projection import structure_differences
+
+        metadata = sa.MetaData()
+        sa.Table(
+            "defaults", metadata,
+            sa.Column("id", sa.Integer, primary_key=True),
+            sa.Column("active", sa.Integer, server_default="1"),
+            sa.Column("author", sa.String, server_default="O'Reilly"),
+            sa.Column("score", sa.Integer, server_default=sa.text("42")),
+        )
+        engine = sa.create_engine("sqlite:///" + str(self.db))
+        try:
+            metadata.create_all(engine)
+        finally:
+            engine.dispose()
+        declared = catalog.export_sqlalchemy_metadata(metadata, "app")
+        actual = catalog.collect(self.store, root=self.root)
+        self.assertEqual(structure_differences(actual, declared), [])
+        fields = {field["name"]: field for field in declared["resources"][0]["fields"]}
+        self.assertEqual(fields["active"]["default"], "'1'")
+        self.assertEqual(fields["author"]["default"], "'O''Reilly'")
+        fields["active"]["default"] = "'2'"
+        self.assertTrue(structure_differences(actual, declared))
+
     def test_missing_driver_is_actionable_and_error_does_not_leak_url(self):
         with patch.object(
             catalog.importlib, "import_module", side_effect=ImportError("private-secret")
