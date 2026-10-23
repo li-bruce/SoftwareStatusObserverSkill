@@ -1,0 +1,15 @@
+{
+  "delivery_config_never_modified": true,
+  "delivery_effective_defaults": {
+    "memory_events": 10000,
+    "memory_seconds": 1800,
+    "log_bytes": 8388608,
+    "log_backups": 2
+  },
+  "isolated_services_stopped": true,
+  "isolated_configuration_restored_to_defaults": [
+    "retention-browser-fa37289",
+    "retention-negative-fa37289"
+  ],
+  "passed": true
+}

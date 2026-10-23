@@ -1,0 +1,143 @@
+{
+  "passed": true,
+  "runtime_commit": "fa372897d69f0b6096392020ed3012284a011b4e",
+  "method": "Read-only API monitor concurrent with an actual CUA Refresh public page click. Count limit crossed while 2 events were retained; real elapsed time then cleared all live events while the recording stayed active.",
+  "initial_health": {
+    "errors": 0,
+    "dropped": 0,
+    "run_id": "3907bbf302219a7ad0f4d823",
+    "attempted": 68,
+    "written": 68,
+    "enabled": true,
+    "runtime_frame_evictions": 0,
+    "retained_events": 0,
+    "evicted_events": 68,
+    "history_start_seq": null,
+    "log_errors": 0,
+    "listener_errors": 0,
+    "retention": {
+      "memory_events": 2,
+      "memory_seconds": 3,
+      "log_bytes": 8388608,
+      "log_backups": 2
+    }
+  },
+  "count_boundary": {
+    "health": {
+      "errors": 0,
+      "dropped": 0,
+      "run_id": "3907bbf302219a7ad0f4d823",
+      "attempted": 71,
+      "written": 71,
+      "enabled": true,
+      "runtime_frame_evictions": 0,
+      "retained_events": 2,
+      "evicted_events": 69,
+      "history_start_seq": 70,
+      "log_errors": 0,
+      "listener_errors": 0,
+      "retention": {
+        "memory_events": 2,
+        "memory_seconds": 3,
+        "log_bytes": 8388608,
+        "log_backups": 2
+      }
+    },
+    "events": [
+      {
+        "protocol": "bo-event/v1",
+        "schema_version": 3,
+        "project_id": "team-publishing-demo",
+        "model_revision": "2",
+        "build_id": "5ae7f25287227f43e99226fb345d82831d2524e262a6211342b3424338a1866e",
+        "run_id": "9989a3d5-8a31-4038-883c-ce36807f344a",
+        "producer_id": "daefa460-4aa8-4753-9edf-5da4b663c5a6",
+        "seq": 70,
+        "id": "9989a3d5-8a31-4038-883c-ce36807f344a:daefa460-4aa8-4753-9edf-5da4b663c5a6:6",
+        "node": "ui.public",
+        "phase": "return",
+        "entity": "application",
+        "attempt": "application",
+        "scope": "application",
+        "call_id": "9989a3d5-8a31-4038-883c-ce36807f344a:daefa460-4aa8-4753-9edf-5da4b663c5a6:6",
+        "parent_call_id": null,
+        "basis": {},
+        "inputs": {},
+        "outputs": {
+          "ok": true
+        },
+        "depends": [],
+        "observed_at": "2026-10-23T22:31:37.991Z",
+        "source_seq": 6,
+        "stream_id": "3907bbf302219a7ad0f4d823"
+      },
+      {
+        "protocol": "bo-event/v1",
+        "project_id": "team-publishing-demo",
+        "model_revision": "2",
+        "build_id": "5ae7f25287227f43e99226fb345d82831d2524e262a6211342b3424338a1866e",
+        "run_id": "b3f21fda0d5e4810b39827194d45f151",
+        "producer_id": "e0945c1cc26b4876ae89e90dac7764c6",
+        "schema_version": 3,
+        "seq": 71,
+        "id": "b3f21fda0d5e4810b39827194d45f151:e0945c1cc26b4876ae89e90dac7764c6:65",
+        "node": "db.publications.read",
+        "phase": "enter",
+        "entity": "application",
+        "attempt": "application",
+        "scope": "application",
+        "basis": {},
+        "call_id": "704b667cdd484af6b98e045dbb82ab47",
+        "parent_call_id": null,
+        "inputs": {
+          "operation": "read",
+          "statement": "SELECT publications.material_id, publications.content_version, publications.title, publications.body, publications.author_id FROM publications ORDER BY publications.material_id DESC",
+          "parameters": {}
+        },
+        "outputs": {
+          "status": "started",
+          "duration_ms": 0.002,
+          "transaction_id": "841559385103484688609d4a046dc9b5",
+          "targets": [
+            "table:publications"
+          ],
+          "unknown_targets": [],
+          "target_source": "parsed_sql",
+          "target_access": [
+            {
+              "target": "table:publications",
+              "action": "read"
+            }
+          ]
+        },
+        "depends": [],
+        "observed_at": "2026-10-23T22:31:37.987976+00:00",
+        "source_seq": 65,
+        "stream_id": "3907bbf302219a7ad0f4d823"
+      }
+    ]
+  },
+  "time_boundary": {
+    "health": {
+      "errors": 0,
+      "dropped": 0,
+      "run_id": "3907bbf302219a7ad0f4d823",
+      "attempted": 74,
+      "written": 74,
+      "enabled": true,
+      "runtime_frame_evictions": 0,
+      "retained_events": 0,
+      "evicted_events": 74,
+      "history_start_seq": null,
+      "log_errors": 0,
+      "listener_errors": 0,
+      "retention": {
+        "memory_events": 2,
+        "memory_seconds": 3,
+        "log_bytes": 8388608,
+        "log_backups": 2
+      }
+    },
+    "events": []
+  }
+}

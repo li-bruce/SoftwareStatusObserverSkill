@@ -162,7 +162,7 @@ export class BOExecutor {
 }
 
 /** Copy declared capture fields only, with bounded values and JSON-safe numbers. */
-function bo_selected(value, spec, depth = 0) {
+export function bo_selected(value, spec, depth = 0) {
   if (depth > 6) throw Error("Capture depth exceeded");
   if (Array.isArray(spec)) {
     if (!Array.isArray(value) || spec.length !== 1 || value.length > 64)

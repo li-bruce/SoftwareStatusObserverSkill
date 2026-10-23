@@ -1,0 +1,16 @@
+{
+  "command": [
+    "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\examples\\delivery\\observer_generated\\runtime\\change_sync.py",
+    "inspect",
+    "--root",
+    "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\examples\\delivery"
+  ],
+  "cwd": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\examples\\delivery",
+  "exit_code": 1,
+  "stdout": "{\n  \"candidate_id\": \"223b35ffb21384a7ca63c9b456fd94f2878b8cccd88afbe03aa26a0d98ea3d9c\",\n  \"changed_files\": [\n    \"bo_stategraph/runtime-version.json\",\n    \"integrations/bo_view/analysis.js\",\n    \"integrations/bo_view/glyphs.js\",\n    \"integrations/bo_view/graph-core.js\",\n    \"integrations/bo_view/layout.js\",\n    \"integrations/bo_view/messages.zh-CN.js\",\n    \"integrations/bo_view/recording.js\",\n    \"integrations/bo_view/renderer.js\",\n    \"integrations/bo_view/replay-steps.js\",\n    \"integrations/bo_view/viewer.css\",\n    \"integrations/bo_view/viewer.js\",\n    \"observer_generated/runtime/bo_upgrade.py\",\n    \"observer_generated/runtime/origin.json\",\n    \"observer_generated/static/analysis.js\",\n    \"observer_generated/static/glyphs.js\",\n    \"observer_generated/static/graph-core.js\",\n    \"observer_generated/static/layout.js\",\n    \"observer_generated/static/recording.js\",\n    \"observer_generated/static/replay-steps.js\",\n    \"observer_generated/static/viewer.css\",\n    \"observer_generated/static/viewer.js\"\n  ],\n  \"changed_symbols\": [],\n  \"affected_callers\": [],\n  \"affected_nodes\": [],\n  \"unmapped_changed_symbols\": [],\n  \"unmapped_implementation_symbols\": [\n    \"app/ports.py::BOEvents\",\n    \"app/ports.py::BOEvents.__init__\",\n    \"app/ports.py::BOEvents.bo_emit\",\n    \"app/service.py::Delivery\",\n    \"app/store.py::Store\",\n    \"bo_stategraph/workflow.py::ActivityExecution\",\n    \"bo_stategraph/workflow.py::ActivityState\",\n    \"bo_stategraph/workflow.py::Phase\"\n  ],\n  \"changed_requirements\": [],\n  \"unresolved_call_count\": 243,\n  \"meaning\": \"Potential impact plus authored abstraction mapping; semantic truth still needs contract and runtime checks.\",\n  \"errors\": [],\n  \"required_classification\": [\n    \"app/ports.py::BOEvents\",\n    \"app/ports.py::BOEvents.__init__\",\n    \"app/ports.py::BOEvents.bo_emit\",\n    \"app/service.py::Delivery\",\n    \"app/store.py::Store\",\n    \"bo_stategraph/workflow.py::ActivityExecution\",\n    \"bo_stategraph/workflow.py::ActivityState\",\n    \"bo_stategraph/workflow.py::Phase\"\n  ],\n  \"review_errors\": [\n    \"missing review.json for this candidate\"\n  ],\n  \"stategraph\": {\n    \"module\": \"bo_stategraph/__init__.py\",\n    \"development_mode\": \"drive\",\n    \"execution_mode\": \"drive\",\n    \"decision_source\": \"user\",\n    \"decision\": \"合成示例的模拟需求方选择：继续基于状态图驱动开发；两种模式均保留监控及映射检查。\"\n  },\n  \"valid\": false\n}\n",
+  "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+}

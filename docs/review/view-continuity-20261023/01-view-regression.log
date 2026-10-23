@@ -1,0 +1,116 @@
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected ... Lines skipped
+
+  {
+    algorithm: 'cluster',
++   annotations: {
+-   annotations: [Object: null prototype] {
+      a: {
+        core: true,
+...
+    },
+    focus: null,
++   positions: {
+-   positions: [Object: null prototype] {
+      'state.done': {
+...
+    },
+    schema: 2
+  }
+    at file:///C:/Users/Lvi_P/Documents/Work/CF/%E5%B9%B3%E5%8F%B0%E8%BD%AF%E8%91%97/SoftwareStatusObserverSkill/tools/test_view_continuity.mjs:86:8 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: {
+    schema: 2,
+    positions: {
+      a: { x: 450, y: 320, pinned: false },
+      b: { x: 310, y: 70, pinned: false },
+      new: { x: 540, y: 70, pinned: false },
+      'state.ready': { x: 770, y: 70, pinned: false },
+      'state.done': { x: 1000, y: 70, pinned: false },
+      g: { x: 310, y: 70, pinned: false },
+      added: { x: 450, y: -10.716169220014763, pinned: false },
+      renamed: { x: 450, y: -10.716169220014763, pinned: false }
+    },
+    expanded: [ 'a', 'b' ],
+    camera: { x: 10, y: 20, scale: 0.8 },
+    algorithm: 'cluster',
+    annotations: { a: { label: 'My upload', note: 'Keep this', core: true } },
+    focus: null,
+    filters: {
+      nodes: [
+        'business', 'function',
+        'state',    'decision',
+        'resource', 'data',
+        'effect',   'wait'
+      ],
+      edges: [
+        'call',       'flow',
+        'transition', 'guard',
+        'data',       'resource',
+        'join',       'shared',
+        'other'
+      ],
+      regions: [
+        'business', 'function',
+        'state',    'decision',
+        'resource', 'data',
+        'effect',   'wait'
+      ],
+      depth: 'all',
+      hiddenNodes: [ 'renamed' ],
+      hiddenEdges: [ 'renamed-edge' ]
+    }
+  },
+  expected: {
+    schema: 2,
+    positions: [Object: null prototype] {
+      a: { x: 450, y: 320, pinned: false },
+      b: { x: 310, y: 70, pinned: false },
+      new: { x: 540, y: 70, pinned: false },
+      'state.ready': { x: 770, y: 70, pinned: false },
+      'state.done': { x: 1000, y: 70, pinned: false },
+      g: { x: 310, y: 70, pinned: false },
+      added: { x: 450, y: -10.716169220014763, pinned: false },
+      renamed: { x: 450, y: -10.716169220014763, pinned: false }
+    },
+    expanded: [ 'a', 'b' ],
+    camera: { x: 10, y: 20, scale: 0.8 },
+    algorithm: 'cluster',
+    annotations: [Object: null prototype] {
+      a: { label: 'My upload', note: 'Keep this', core: true }
+    },
+    focus: null,
+    filters: {
+      nodes: [
+        'business', 'function',
+        'state',    'decision',
+        'resource', 'data',
+        'effect',   'wait'
+      ],
+      edges: [
+        'call',       'flow',
+        'transition', 'guard',
+        'data',       'resource',
+        'join',       'shared',
+        'other'
+      ],
+      regions: [
+        'business', 'function',
+        'state',    'decision',
+        'resource', 'data',
+        'effect',   'wait'
+      ],
+      depth: 'all',
+      hiddenNodes: [ 'renamed' ],
+      hiddenEdges: [ 'renamed-edge' ]
+    }
+  },
+  operator: 'deepStrictEqual'
+}
+
+Node.js v20.19.6

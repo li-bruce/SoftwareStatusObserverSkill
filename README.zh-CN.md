@@ -54,6 +54,10 @@ Skill 本身不是监听所有编辑器的后台程序。扫描发现变化后�
 
 内置业务流、状态机、函数与参数、权限、并发资源、数据依赖、实际执行、等待失败、共享归属等视图；可自定义节点、边、区域、深度、范围和搜索的组合。支持展开、整体拖动、固定节点、显示名称修改、批注、核心标记与源码定位。个人布局保存在项目的 `bo_stategraph/config/views/local.json`。
 
+迭代后会保留类型筛选、单个节点和连接的隐藏选择、展开状态及位置。“全部元素”清除筛选，保留布局和收起状态，并分别显示已展示、已收起、已筛除的数量。图版本变化后，当前录制列表清空并退出旧回放；同一版本重启仍保留录制。
+
+[`dev` 开发计划](docs/development/dev-roadmap.md)列出了源码下钻、数据库结构和 API 关系层的现有基础、待实现内容与验收要求。
+
 查看、上报、轮询、布局和录制控制本身不会进入业务事件。完整结构导出不受当前筛选影响；可关闭或移除 debug Web，同时保留真实状态声明和执行器。
 
 ## 安装并开始
@@ -81,10 +85,14 @@ python tools/install_skill.py --project /path/to/your-project
 
 ## 当前边界
 
-当前支持 Python、JS/TS、React、Vue 的源码盘点与原生采集。源码层展示已索引符号和选定的局部关系，无法保证解析所有动态调用。完整源码调用图浏览、通用数据库结构与列血缘、增量接口和性能基线仍待扩展。不能通过编辑图直接执行业务命令，也不保证整个程序正确。
+当前支持 Python、JS/TS、React、Vue 的源码盘点与原生采集。“局部代码”按选中区域打开关联结构，“代码结构”查看已索引的项目，包含文件、类、函数、参数、导入、继承与调用关系。代码修改后自动刷新，未解析的动态调用保留未知。大图显示数量限制和边界，完整索引可以导出为 JSON。[源码视图和命令](skills/business-observer/references/code-structure.md)。
+
+数据库结构与数据操作视图连接表、文档集合、键模式、图数据库标签、查询目标、选定参数、数据处理和事务结果。SQLite、PostgreSQL、MongoDB、Redis、Neo4j 已有真实运行测试；Python 与 Node.js 使用统一 JSON 协议。模型或数据库结构变化后自动刷新图，并保留个人布局。[运行数据库示例](examples/database-observer/README.md) · [支持范围](skills/business-observer/references/database-observation.md) · [验收材料](docs/review/db-vis/README.md)。
+
+自动列血缘、专门的 API 关系、更多数据库适配、增量接口和性能基线仍待扩展。采集针对选定字段和支持的关系；完整动态调用解析、所有执行情况的正确性、编辑图执行业务命令均不在当前能力范围。
 
 [架构与协议](skills/business-observer/references/multilanguage.md) · [源码及数据层分析](docs/source-data-and-language.md) · [测试证据](docs/review/english-gallery/README.md)
 
 许可证：[MIT](LICENSE)。可视化使用开源 PixiJS、ELK.js，不包含 yFiles 专有代码。见[第三方声明](THIRD_PARTY_NOTICES.md)。
 
-最新版从 `main` 安装；此前的 `v0.6.0` 保留为固定版本，见[版本说明](docs/releases/v0.6.0.md)。
+持续更新版从 `main` 安装；本次固定版本为 `v0.7.0`。见[版本说明](docs/releases/v0.7.0.md)、[独立项目试用](docs/review/release-v0.7.0/README.md)和[实现评估](docs/assessment/2026-10-24/README.md)。

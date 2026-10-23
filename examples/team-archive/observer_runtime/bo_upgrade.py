@@ -18,7 +18,7 @@ except ImportError:
     from behavior_model import contained, read
     from sync_io import write
 
-RELEASE = "2026.10-multilanguage"
+RELEASE = "2026.10-db-vis"
 PROTOCOLS = {
     "behavior": 3,
     "event": 3,
@@ -32,6 +32,9 @@ PROTOCOLS = {
     "transport": "bo-event/v1",
     "snapshot": "bo-snapshot/v1",
     "source": "bo-source/v1",
+    "database_config": "bo-databases/v1",
+    "database_catalog": "bo-data-catalog/v1",
+    "database_projection": "bo-database/v1",
 }
 CORE = {
     "bo_stategraph.py": "__init__.py",

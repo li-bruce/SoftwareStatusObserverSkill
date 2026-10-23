@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "runtime_commit": "fa372897d69f0b6096392020ed3012284a011b4e",
+  "pre_upgrade_view_values_preserved_except_omitted_inactive_null_codeFocus": true,
+  "before_reload_revision": 101,
+  "after_reload_revision": 101,
+  "all_reload_preference_entries_equal": true,
+  "selected_code_and_cleared_discussion_preserved": true,
+  "notes_positions_camera_filters_preserved": true,
+  "observer_controls_before_written": 0,
+  "observer_controls_after_written": 0,
+  "normal_retention": {
+    "memory_events": 10000,
+    "memory_seconds": 1800,
+    "log_bytes": 8388608,
+    "log_backups": 2
+  },
+  "same_build_recordings_preserved": [
+    "f2e40e3c4bab4998b71397e9e436aa65",
+    "761bbb83088b487189ba71ac5f8ed577",
+    "bc08efcc39574643a079ce888850952f",
+    "81d396a92a8e4c44a61fd145c38cb660"
+  ],
+  "old_application_build_recordings_filtered": true,
+  "no_isolated_negative_record_in_delivery_list": true
+}

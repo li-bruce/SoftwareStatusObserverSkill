@@ -1,0 +1,53 @@
+{
+  "runtime_commit": "fa372897d69f0b6096392020ed3012284a011b4e",
+  "passed": true,
+  "fixture_root": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-24\\observer-release-demo-20261024\\work\\retention-negative-fa37289",
+  "method": "Separate GraphSession using copied Demo source and an isolated SQLite backup. Injected sequences 1 and 3 from one identified test producer; sequence 2 is deliberately absent. These are synthetic negative-control inputs, not application operations.",
+  "count_health": {
+    "errors": 0,
+    "dropped": 1,
+    "run_id": "1c23302a8dcf506589c8dcc9",
+    "attempted": 2,
+    "written": 2,
+    "enabled": true,
+    "runtime_frame_evictions": 0,
+    "retained_events": 1,
+    "evicted_events": 1,
+    "history_start_seq": 2,
+    "log_errors": 0,
+    "listener_errors": 0,
+    "retention": {
+      "memory_events": 1,
+      "memory_seconds": 1,
+      "log_bytes": 8388608,
+      "log_backups": 2
+    }
+  },
+  "after_time_expiry_health": {
+    "errors": 0,
+    "dropped": 1,
+    "run_id": "1c23302a8dcf506589c8dcc9",
+    "attempted": 2,
+    "written": 2,
+    "enabled": true,
+    "runtime_frame_evictions": 0,
+    "retained_events": 0,
+    "evicted_events": 2,
+    "history_start_seq": null,
+    "log_errors": 0,
+    "listener_errors": 0,
+    "retention": {
+      "memory_events": 1,
+      "memory_seconds": 1,
+      "log_bytes": 8388608,
+      "log_backups": 2
+    }
+  },
+  "recording_event_source_sequences": [
+    3
+  ],
+  "recording_gaps": [
+    "Capture failures or lost events occurred in this interval; the path may be incomplete."
+  ],
+  "delivery_demo_untouched": true
+}

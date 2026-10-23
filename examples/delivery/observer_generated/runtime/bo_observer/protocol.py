@@ -59,6 +59,9 @@ def validate_project(project):
     schema_check(project, "project")
     validate_chart, _, _ = _shared()
     validate_chart(project["model"])
+    from .data.protocol import validate_data_projection
+
+    validate_data_projection(project["model"])
     if project["model"].get("project_id", project["project_id"]) != project["project_id"]:
         raise ValueError("project identity differs from graph")
     if (
@@ -86,6 +89,16 @@ def validate_event(event, project, build_id):
     node = next((n for n in project["model"]["nodes"] if n["id"] == event["node"]), None)
     if node is None:
         raise ValueError("unknown event node")
+    if node.get("data_role") in {"query", "transform"} and "target_source" in event["outputs"]:
+        from .data.protocol import TARGET_SOURCES
+
+        provenance = event["outputs"]["target_source"]
+        if not isinstance(provenance, str) or provenance not in TARGET_SOURCES:
+            raise ValueError("invalid database target_source provenance")
+    if node.get("data_role") in {"query", "transform"}:
+        from .data.protocol import validate_target_access
+
+        validate_target_access(event["outputs"])
     try:
         from ..semantic_probe import selected
     except ImportError:

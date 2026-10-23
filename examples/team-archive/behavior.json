@@ -4535,7 +4535,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.e7376352aa8fece4",
+      "id": "call.53bdd2131c06d1a4",
       "from": "archive_request",
       "to": "code.d166aaac5bb078be",
       "type": "flow",
@@ -4563,7 +4563,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.ad417c133c9eccad",
+      "id": "call.389b2dd6d986fb93",
       "from": "archive_request",
       "to": "code.0c1ff05551810b89",
       "type": "flow",
@@ -4589,7 +4589,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.3f915ca37431c3a9",
+      "id": "call.da7b6d1b9b044069",
       "from": "archive_request",
       "to": "code.f3a6c799f69f9f5f",
       "type": "flow",
@@ -4616,7 +4616,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.05e37d4391ee7a63",
+      "id": "call.5d1a6a3b6964d5ac",
       "from": "archive_request",
       "to": "code.bb6f1114d12b1280",
       "type": "flow",
@@ -4633,7 +4633,7 @@
       }
     },
     {
-      "id": "call.8eb8f41640be34fe",
+      "id": "call.83ad22e15bec6436",
       "from": "approval_check",
       "to": "approval_candidate",
       "type": "flow",
@@ -4656,7 +4656,7 @@
       }
     },
     {
-      "id": "call.eea49b97aa1e2105",
+      "id": "call.51898567d297ab01",
       "from": "archive_commit",
       "to": "commit_guard",
       "type": "flow",
@@ -4685,7 +4685,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.7ac008fd585853af",
+      "id": "call.c3be3d9f4f607f65",
       "from": "archive_commit",
       "to": "code.c270e158bad72e4e",
       "type": "flow",
@@ -4711,7 +4711,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.213ecee900e5c7ad",
+      "id": "call.29549b5912ca7fc6",
       "from": "archive_commit",
       "to": "code.93d5ecfd052b688e",
       "type": "flow",
@@ -4731,7 +4731,7 @@
       }
     },
     {
-      "id": "call.f39bddc704770354",
+      "id": "call.0e684b4a2a5808d6",
       "from": "archive_commit",
       "to": "code.93d5ecfd052b688e",
       "type": "flow",
@@ -4760,7 +4760,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.6cd6fbc341e4c44e",
+      "id": "call.a94b1bce376ab720",
       "from": "approval_revoked",
       "to": "code.d31899a8ea590c46",
       "type": "flow",
@@ -4784,7 +4784,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.5f28c2ecabcd210e",
+      "id": "call.25749df400bbc80c",
       "from": "content_changed",
       "to": "code.881d8e61a1974236",
       "type": "flow",
@@ -4799,7 +4799,7 @@
       }
     },
     {
-      "id": "call.670e3f6941f3bb71",
+      "id": "call.464fd91fc79034af",
       "from": "resume_run",
       "to": "code.0c1ff05551810b89",
       "type": "flow",
@@ -4816,7 +4816,7 @@
       }
     },
     {
-      "id": "call.8d01bc64e1fdc902",
+      "id": "call.f45fbc071889a4a9",
       "from": "resume_run",
       "to": "flow.policy",
       "type": "flow",
@@ -4836,7 +4836,7 @@
       }
     },
     {
-      "id": "call.886eb7cc7e994707",
+      "id": "call.4ab7bfd23fe28d29",
       "from": "resume_run",
       "to": "execution.resume",
       "type": "flow",
@@ -4854,7 +4854,7 @@
       }
     },
     {
-      "id": "call.ab36841c33221b55",
+      "id": "call.3b1c5a4a7e512515",
       "from": "resume_run",
       "to": "code.bb6f1114d12b1280",
       "type": "flow",
@@ -4871,7 +4871,7 @@
       }
     },
     {
-      "id": "call.c6b7171c77a973be",
+      "id": "call.7544a43fda1e71bf",
       "from": "flow.policy",
       "to": "code.f3a6c799f69f9f5f",
       "type": "flow",
@@ -4889,7 +4889,7 @@
       }
     },
     {
-      "id": "call.3a8ae386122c707a",
+      "id": "call.50c614267b3f5014",
       "from": "flow.policy",
       "to": "scope_check",
       "type": "flow",
@@ -4912,7 +4912,7 @@
       }
     },
     {
-      "id": "call.8646124c54677b02",
+      "id": "call.931d991353f76e87",
       "from": "flow.policy",
       "to": "approval_check",
       "type": "flow",
@@ -4938,7 +4938,7 @@
       }
     },
     {
-      "id": "call.d7b8e9815c13f4cf",
+      "id": "call.967dd0cfedf15cb1",
       "from": "flow.policy",
       "to": "size_guard",
       "type": "flow",
@@ -4971,7 +4971,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.db78df643bc5a72a",
+      "id": "call.84f367e4228f3a6c",
       "from": "flow.checks",
       "to": "code.c852303e58806ad7",
       "type": "flow",
@@ -4997,7 +4997,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.3fbf4401dcd14eba",
+      "id": "call.4189b9f89189a465",
       "from": "flow.checks",
       "to": "code.4bbd0454175fd162",
       "type": "flow",
@@ -5017,7 +5017,7 @@
       }
     },
     {
-      "id": "call.7e2b1955b0804536",
+      "id": "call.dbd74ad367fdc704",
       "from": "flow.checks",
       "to": "execution.schedule",
       "type": "flow",
@@ -5045,7 +5045,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.d5c865ca14c7de84",
+      "id": "call.ce90481a056bfe49",
       "from": "flow.checks",
       "to": "code.8e899e2884fe31dd",
       "type": "flow",
@@ -5073,7 +5073,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.7e1b6d5c27725800",
+      "id": "call.92fc0163485eefdc",
       "from": "flow.checks",
       "to": "code.a8e6aac669bf72c8",
       "type": "flow",
@@ -5092,7 +5092,7 @@
       }
     },
     {
-      "id": "call.506f9fbd15a84c2d",
+      "id": "call.11868bd1b0257085",
       "from": "flow.archive",
       "to": "commit_guard",
       "type": "flow",
@@ -5112,7 +5112,7 @@
       }
     },
     {
-      "id": "call.8c4f1eb6e2a53a37",
+      "id": "call.e336ea3d2b74f7c6",
       "from": "flow.archive",
       "to": "code.c270e158bad72e4e",
       "type": "flow",
@@ -5129,7 +5129,7 @@
       }
     },
     {
-      "id": "call.02276ca212adff69",
+      "id": "call.db297e93cc71a00b",
       "from": "flow.archive",
       "to": "code.93d5ecfd052b688e",
       "type": "flow",
@@ -5149,7 +5149,7 @@
       }
     },
     {
-      "id": "call.f4366035009ffb25",
+      "id": "call.07a9dc8c53bf1d97",
       "from": "flow.archive",
       "to": "code.93d5ecfd052b688e",
       "type": "flow",
@@ -5169,7 +5169,7 @@
       }
     },
     {
-      "id": "call.17ce04fde8e85862",
+      "id": "call.a101022a1af2245a",
       "from": "authority_read",
       "to": "code.f3a6c799f69f9f5f",
       "type": "flow",
@@ -5187,7 +5187,7 @@
       }
     },
     {
-      "id": "call.70d698bedf052d9d",
+      "id": "call.4556176c5c7338a9",
       "from": "authority_read",
       "to": "scope_check",
       "type": "flow",
@@ -5210,7 +5210,7 @@
       }
     },
     {
-      "id": "call.aff403c9d43b0877",
+      "id": "call.15fcab2c64120ad0",
       "from": "authority_read",
       "to": "approval_check",
       "type": "flow",
@@ -5236,7 +5236,7 @@
       }
     },
     {
-      "id": "call.2cb6b27fae439525",
+      "id": "call.42b0ebbf5e59ea25",
       "from": "authority_read",
       "to": "size_guard",
       "type": "flow",
@@ -5269,7 +5269,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.506d9e2517884132",
+      "id": "call.46bdd752eb236a71",
       "from": "commit_guard",
       "to": "code.06e2186c0030c854",
       "type": "flow",
@@ -5296,7 +5296,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.0320ce41742f2b8d",
+      "id": "call.41b624733bae54c5",
       "from": "commit_guard",
       "to": "code.0c55d9bef8e2c2ec",
       "type": "flow",
@@ -5328,7 +5328,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.5f3840f091ebdb72",
+      "id": "call.55122982d0a09bda",
       "from": "commit_guard",
       "to": "code.fc2bea6773c216f7",
       "type": "flow",
@@ -5363,7 +5363,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.13cf7ff8666cfa7a",
+      "id": "call.edef2d2ccda16814",
       "from": "commit_guard",
       "to": "code.f3f4c403913bddaf",
       "type": "flow",
@@ -5396,7 +5396,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.34fe8d250a017aaf",
+      "id": "call.453439ca914f3998",
       "from": "cancel_run",
       "to": "code.02e9e79362dd7b52",
       "type": "flow",
@@ -5424,7 +5424,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.0c3abff4bc0f7d13",
+      "id": "call.fb3596241ce3c60e",
       "from": "cancel_run",
       "to": "code.46ead1f94e6333dd",
       "type": "flow",
@@ -5442,7 +5442,7 @@
       }
     },
     {
-      "id": "call.99186d9693dc7c7e",
+      "id": "call.9a46e1cb27cd5405",
       "from": "cancel_run",
       "to": "code.c852303e58806ad7",
       "type": "flow",
@@ -5468,7 +5468,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.dcf85e718804b273",
+      "id": "call.5658650a7e4c19b9",
       "from": "cancel_run",
       "to": "code.77eab623e82b416e",
       "type": "flow",
@@ -5486,7 +5486,7 @@
       }
     },
     {
-      "id": "call.021775472577ba6f",
+      "id": "call.1bbd18902ae255d5",
       "from": "move_folder",
       "to": "code.d31899a8ea590c46",
       "type": "flow",
@@ -5501,7 +5501,7 @@
       }
     },
     {
-      "id": "call.5809d4f31a61b677",
+      "id": "call.1424f6cbea07fe28",
       "from": "recover_run",
       "to": "execution.interrupt",
       "type": "flow",
@@ -5519,7 +5519,7 @@
       }
     },
     {
-      "id": "call.16e3f2f58d8cddf3",
+      "id": "call.157a8c9f5e4235fd",
       "from": "worker_call",
       "to": "code.c852303e58806ad7",
       "type": "flow",
@@ -5536,7 +5536,7 @@
       }
     },
     {
-      "id": "call.1e28687296684732",
+      "id": "call.2df631214b537873",
       "from": "worker_call",
       "to": "content_check",
       "type": "flow",
@@ -5556,7 +5556,7 @@
       }
     },
     {
-      "id": "call.0a906fd3d5a64854",
+      "id": "call.1d93bc734ba1aa60",
       "from": "worker_call",
       "to": "index_check",
       "type": "flow",
@@ -5578,7 +5578,7 @@
       }
     },
     {
-      "id": "call.c8c35e08db769e2f",
+      "id": "call.d14604cb94c7ee4e",
       "from": "worker_call",
       "to": "execution.finish_activity",
       "type": "flow",
@@ -5599,7 +5599,7 @@
       }
     },
     {
-      "id": "call.bed39c9b8f21977e",
+      "id": "call.52a9ad3b5d35e41a",
       "from": "worker_call",
       "to": "code.a8e6aac669bf72c8",
       "type": "flow",
@@ -5618,7 +5618,7 @@
       }
     },
     {
-      "id": "call.764eb449e6943ac9",
+      "id": "call.14d6c8d26184e304",
       "from": "worker_call",
       "to": "code.77eab623e82b416e",
       "type": "flow",
@@ -5636,7 +5636,7 @@
       }
     },
     {
-      "id": "call.a56c2c3899e06cd7",
+      "id": "call.ae48f441975ce54e",
       "from": "set_size_limit",
       "to": "code.d31899a8ea590c46",
       "type": "flow",
@@ -5651,7 +5651,7 @@
       }
     },
     {
-      "id": "call.20332012680cbd22",
+      "id": "call.f7e172dede9dd9e6",
       "from": "execution.schedule",
       "to": "execution.request_stop",
       "type": "flow",
@@ -5670,7 +5670,7 @@
       }
     },
     {
-      "id": "call.5ccae9f55aa3cb46",
+      "id": "call.e55c9a735e5cfc78",
       "from": "execution.schedule",
       "to": "execution.settle",
       "type": "flow",
@@ -5697,7 +5697,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.5fe2bb159265d267",
+      "id": "call.313424308bc201d6",
       "from": "execution.schedule",
       "to": "code.a5031696efd68bab",
       "type": "flow",
@@ -5726,7 +5726,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.1b03e783d2622902",
+      "id": "call.f59dca92a3cc2f05",
       "from": "execution.schedule",
       "to": "code.851dade86c48cea0",
       "type": "flow",
@@ -5746,7 +5746,7 @@
       }
     },
     {
-      "id": "call.77648b847e4a6827",
+      "id": "call.af87b82949095e2c",
       "from": "execution.schedule",
       "to": "code.851dade86c48cea0",
       "type": "flow",
@@ -5766,7 +5766,7 @@
       }
     },
     {
-      "id": "call.accc0350ead3aa3c",
+      "id": "call.5dc77d4c455d6d4a",
       "from": "execution.schedule",
       "to": "code.851dade86c48cea0",
       "type": "flow",
@@ -5786,7 +5786,7 @@
       }
     },
     {
-      "id": "call.2fe6f0701a35cd5e",
+      "id": "call.ca7f8a8b8cbd4592",
       "from": "execution.schedule",
       "to": "code.851dade86c48cea0",
       "type": "flow",
@@ -5806,7 +5806,7 @@
       }
     },
     {
-      "id": "call.c51e6eecb64f2ef3",
+      "id": "call.5cecb4f25e65d64e",
       "from": "execution.schedule",
       "to": "code.851dade86c48cea0",
       "type": "flow",
@@ -5826,7 +5826,7 @@
       }
     },
     {
-      "id": "call.8405a89e22264051",
+      "id": "call.6ad742d9de753e43",
       "from": "execution.schedule",
       "to": "code.a5031696efd68bab",
       "type": "flow",
@@ -5846,7 +5846,7 @@
       }
     },
     {
-      "id": "call.578a05ca08177a56",
+      "id": "call.d259d85edf168f23",
       "from": "execution.schedule",
       "to": "code.a5031696efd68bab",
       "type": "flow",
@@ -5866,7 +5866,7 @@
       }
     },
     {
-      "id": "call.626bc8a50c36336a",
+      "id": "call.d2c53e91ca806c2b",
       "from": "execution.request_stop",
       "to": "code.851dade86c48cea0",
       "type": "flow",
@@ -5886,7 +5886,7 @@
       }
     },
     {
-      "id": "call.1d6653cf34baa54f",
+      "id": "call.0051106c7694df3b",
       "from": "execution.settle",
       "to": "code.a5031696efd68bab",
       "type": "flow",
@@ -5906,7 +5906,7 @@
       }
     },
     {
-      "id": "call.c8eb26b53530dac6",
+      "id": "call.017e99da33eedc57",
       "from": "execution.settle",
       "to": "code.851dade86c48cea0",
       "type": "flow",
@@ -5926,7 +5926,7 @@
       }
     },
     {
-      "id": "call.4b65fdcae6b67973",
+      "id": "call.f16f8517dde8d4da",
       "from": "execution.interrupt",
       "to": "code.a5031696efd68bab",
       "type": "flow",
@@ -5947,7 +5947,7 @@
       }
     },
     {
-      "id": "call.558bfd1387491c8b",
+      "id": "call.199ab01027a3b48d",
       "from": "execution.interrupt",
       "to": "code.a5031696efd68bab",
       "type": "flow",
@@ -5967,7 +5967,7 @@
       }
     },
     {
-      "id": "call.4a42d65d17931044",
+      "id": "call.914038e2e3834ff8",
       "from": "execution.interrupt",
       "to": "code.851dade86c48cea0",
       "type": "flow",
@@ -5987,7 +5987,7 @@
       }
     },
     {
-      "id": "call.171519200115abbb",
+      "id": "call.36fbc19f868865fb",
       "from": "execution.finish_activity",
       "to": "code.a5031696efd68bab",
       "type": "flow",
@@ -6008,7 +6008,7 @@
       }
     },
     {
-      "id": "call.8785ab4d2f0e376d",
+      "id": "call.cff807f4d2122c50",
       "from": "execution.finish_activity",
       "to": "execution.settle",
       "type": "flow",
@@ -6035,7 +6035,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.3b3ac4852203cf8a",
+      "id": "call.077b65de21f5ed95",
       "from": "ui.command",
       "to": "code.fccd4321a0fb9ec9",
       "type": "flow",
@@ -6059,7 +6059,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.7873eeddda37723e",
+      "id": "call.81921244ad4a413f",
       "from": "ui.command",
       "to": "code.498def2a5670405c",
       "type": "flow",
@@ -6086,7 +6086,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.8e13f4578100148f",
+      "id": "call.30200de242bc50dc",
       "from": "ui.validate",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -6112,7 +6112,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.fb84c77f574ed46f",
+      "id": "call.abc622773342776e",
       "from": "ui.validate",
       "to": "code.07c4cb4cfcf1b160",
       "type": "flow",
@@ -6139,7 +6139,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.fcc4d01850891b35",
+      "id": "call.51fe9998d45e48c1",
       "from": "ui.validate",
       "to": "code.da4d21429fffb273",
       "type": "flow",
@@ -6166,7 +6166,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.43f0241248d6dc5b",
+      "id": "call.60e9a609ddd57f34",
       "from": "ui.validate",
       "to": "code.dba5c549ac114e60",
       "type": "flow",
@@ -6190,7 +6190,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.2a9b10d3f59f1f38",
+      "id": "call.b0f11dc5e4fa4cc8",
       "from": "ui.validate",
       "to": "code.3182493b15093085",
       "type": "flow",
@@ -6205,7 +6205,7 @@
       }
     },
     {
-      "id": "call.96235ba427290123",
+      "id": "call.14e12bac01f3c705",
       "from": "ui.validate",
       "to": "code.07c4cb4cfcf1b160",
       "type": "flow",
@@ -6600,7 +6600,7 @@
       "evidence": "implementation inventory + source AST"
     },
     {
-      "id": "inventory-call.9d370d112b07a304",
+      "id": "inventory-call.83e1b08ee314183e",
       "from": "approval_check",
       "to": "approval_target",
       "type": "flow",
@@ -6623,7 +6623,7 @@
       }
     },
     {
-      "id": "inventory-call.da04550641baa931",
+      "id": "inventory-call.576403fc0215d852",
       "from": "implementation.96ed4c758c1b5776",
       "to": "recover_run",
       "type": "flow",
@@ -6638,7 +6638,7 @@
       }
     },
     {
-      "id": "inventory-call.b115981d1aa40983",
+      "id": "inventory-call.e9f24388a25f6b46",
       "from": "folder_assignments",
       "to": "code.f3a6c799f69f9f5f",
       "type": "flow",
@@ -6656,7 +6656,7 @@
       }
     },
     {
-      "id": "inventory-call.361981a7ea8727d8",
+      "id": "inventory-call.86810443d439d0fe",
       "from": "folder_assignments",
       "to": "scope_check",
       "type": "flow",
@@ -6679,7 +6679,7 @@
       }
     },
     {
-      "id": "inventory-call.46f0ed8ba6620150",
+      "id": "inventory-call.dd00031f0d56d685",
       "from": "folder_assignments",
       "to": "approval_check",
       "type": "flow",
@@ -6705,7 +6705,7 @@
       }
     },
     {
-      "id": "inventory-call.bfc7adf1539cbba8",
+      "id": "inventory-call.b8781c18d3eddfb1",
       "from": "folder_assignments",
       "to": "size_guard",
       "type": "flow",
@@ -6729,7 +6729,7 @@
       }
     },
     {
-      "id": "inventory-call.29cbe341efe4e7a1",
+      "id": "inventory-call.d0e8f3b85a7c2247",
       "from": "archive_request",
       "to": "processing_slots",
       "type": "flow",
@@ -6748,7 +6748,7 @@
       }
     },
     {
-      "id": "inventory-call.44633e4c9f801fff",
+      "id": "inventory-call.7890b54c08ef27be",
       "from": "archive_request",
       "to": "flow.checks",
       "type": "flow",
@@ -6765,7 +6765,7 @@
       }
     },
     {
-      "id": "inventory-call.18e8628262424816",
+      "id": "inventory-call.f8dbd2df617307ab",
       "from": "code.02e9e79362dd7b52",
       "to": "execution.request_stop",
       "type": "flow",
@@ -6784,7 +6784,7 @@
       }
     },
     {
-      "id": "inventory-call.3b53f9a9f429aac2",
+      "id": "inventory-call.ee65def350d7c5a8",
       "from": "code.46ead1f94e6333dd",
       "to": "execution.settle",
       "type": "flow",
@@ -6802,7 +6802,7 @@
       }
     },
     {
-      "id": "inventory-call.2f43a9f2c81faa93",
+      "id": "inventory-call.cf52297563d7d608",
       "from": "flow.checks",
       "to": "code.0c1ff05551810b89",
       "type": "flow",
@@ -6819,7 +6819,7 @@
       }
     },
     {
-      "id": "inventory-call.7cd1caf34f2b10b2",
+      "id": "inventory-call.9ab3fa4967e5f744",
       "from": "flow.checks",
       "to": "folder_assignments",
       "type": "flow",
@@ -6839,7 +6839,7 @@
       }
     },
     {
-      "id": "inventory-call.feba8335ab1262c6",
+      "id": "inventory-call.6c5900488f4d1374",
       "from": "flow.checks",
       "to": "archive_commit",
       "type": "flow",
@@ -6858,7 +6858,7 @@
       }
     },
     {
-      "id": "inventory-call.94ff2ea2fd142f57",
+      "id": "inventory-call.dd2126b1d9298832",
       "from": "archive_commit",
       "to": "folder_assignments",
       "type": "flow",
@@ -6878,7 +6878,7 @@
       }
     },
     {
-      "id": "inventory-call.21bef819f33e3c1b",
+      "id": "inventory-call.e53c4e8ac0e20efa",
       "from": "archive_commit",
       "to": "execution.checks_passed",
       "type": "flow",
@@ -6895,7 +6895,7 @@
       }
     },
     {
-      "id": "inventory-call.af0d7fde8fece6ab",
+      "id": "inventory-call.6c3e0ebb04b92621",
       "from": "worker_call",
       "to": "code.0c1ff05551810b89",
       "type": "flow",
@@ -6912,7 +6912,7 @@
       }
     },
     {
-      "id": "inventory-call.20005cfcde8be8fd",
+      "id": "inventory-call.a1875b01bc478ca3",
       "from": "worker_call",
       "to": "code.f3a6c799f69f9f5f",
       "type": "flow",
@@ -6930,7 +6930,7 @@
       }
     },
     {
-      "id": "inventory-call.c59acef6dc75bb81",
+      "id": "inventory-call.e224000fd1ec30e6",
       "from": "resume_run",
       "to": "folder_assignments",
       "type": "flow",
@@ -6950,7 +6950,7 @@
       }
     },
     {
-      "id": "inventory-call.65e1e4bc299d0efe",
+      "id": "inventory-call.8a8a2e2b90e11229",
       "from": "resume_run",
       "to": "flow.checks",
       "type": "flow",
@@ -6967,7 +6967,7 @@
       }
     },
     {
-      "id": "inventory-call.3f8dd5a6747ace17",
+      "id": "inventory-call.9e217c29854a100f",
       "from": "cancel_run",
       "to": "code.0c1ff05551810b89",
       "type": "flow",
@@ -6984,7 +6984,7 @@
       }
     },
     {
-      "id": "inventory-call.b496f0a8e32441f6",
+      "id": "inventory-call.a1902b82dd070d53",
       "from": "cancel_run",
       "to": "code.f3a6c799f69f9f5f",
       "type": "flow",
@@ -7002,7 +7002,7 @@
       }
     },
     {
-      "id": "inventory-call.4eeb6f005f9da5ab",
+      "id": "inventory-call.7f48c8def278fce1",
       "from": "content_changed",
       "to": "code.d31899a8ea590c46",
       "type": "flow",
@@ -7017,7 +7017,7 @@
       }
     },
     {
-      "id": "inventory-call.e82475631edfffa7",
+      "id": "inventory-call.bb6934b200dd3f61",
       "from": "code.d31899a8ea590c46",
       "to": "flow.checks",
       "type": "flow",
@@ -7034,7 +7034,7 @@
       }
     },
     {
-      "id": "inventory-call.0cd9e998e6c4d436",
+      "id": "inventory-call.177823ff995e7f61",
       "from": "implementation.f725132792e43064",
       "to": "code.d31899a8ea590c46",
       "type": "flow",
@@ -7049,7 +7049,7 @@
       }
     },
     {
-      "id": "inventory-call.d42606f028f28759",
+      "id": "inventory-call.a27d857cfc3bb369",
       "from": "implementation.9323c025e2023fd1",
       "to": "implementation.6778726498ca6101",
       "type": "flow",
@@ -7064,7 +7064,7 @@
       }
     },
     {
-      "id": "inventory-call.37693c62bbc9ca15",
+      "id": "inventory-call.490aaca3b0faa54e",
       "from": "implementation.feb050524fb394f0",
       "to": "implementation.6778726498ca6101",
       "type": "flow",
@@ -7079,7 +7079,7 @@
       }
     },
     {
-      "id": "inventory-call.6e2cdd17bcb33b78",
+      "id": "inventory-call.1bce95930d45ff44",
       "from": "document",
       "to": "implementation.6778726498ca6101",
       "type": "flow",
@@ -7094,7 +7094,7 @@
       }
     },
     {
-      "id": "inventory-call.65d0b3eeb34d86a6",
+      "id": "inventory-call.a9fb9cf6c4930862",
       "from": "implementation.3b2184a1ea2ee4ff",
       "to": "implementation.336a43a51c24b432",
       "type": "flow",
@@ -7109,7 +7109,7 @@
       }
     },
     {
-      "id": "inventory-call.a4099ba13ed8a38c",
+      "id": "inventory-call.f17ae26cd8298ba0",
       "from": "code.93d5ecfd052b688e",
       "to": "lifecycle",
       "type": "flow",
@@ -7127,7 +7127,7 @@
       }
     },
     {
-      "id": "inventory-call.ad6f64a125c55734",
+      "id": "inventory-call.84266bc659b9c61e",
       "from": "execution.request_stop",
       "to": "code.93d5ecfd052b688e",
       "type": "flow",
@@ -7147,7 +7147,7 @@
       }
     },
     {
-      "id": "inventory-call.37ad958e87bd3aec",
+      "id": "inventory-call.2e7a61d2bb0e7f0c",
       "from": "execution.settle",
       "to": "checks_join",
       "type": "flow",
@@ -7167,7 +7167,7 @@
       }
     },
     {
-      "id": "inventory-call.4cb17db42e670811",
+      "id": "inventory-call.121c7aae1a29d976",
       "from": "execution.settle",
       "to": "code.93d5ecfd052b688e",
       "type": "flow",
@@ -7187,7 +7187,7 @@
       }
     },
     {
-      "id": "inventory-call.625f4d701b769eaf",
+      "id": "inventory-call.e0b4eed5c8b6499e",
       "from": "execution.schedule",
       "to": "checks_join",
       "type": "flow",
@@ -7207,7 +7207,7 @@
       }
     },
     {
-      "id": "inventory-call.c2c48cd51676da15",
+      "id": "inventory-call.2b044a466eaf9027",
       "from": "execution.schedule",
       "to": "code.93d5ecfd052b688e",
       "type": "flow",
@@ -7227,7 +7227,7 @@
       }
     },
     {
-      "id": "inventory-call.9de9cf15ceb9e2a8",
+      "id": "inventory-call.62ffd14e3aede371",
       "from": "execution.schedule",
       "to": "code.93d5ecfd052b688e",
       "type": "flow",
@@ -7247,7 +7247,7 @@
       }
     },
     {
-      "id": "inventory-call.684830b1532a1877",
+      "id": "inventory-call.0d974da8c88bafc2",
       "from": "execution.schedule",
       "to": "code.93d5ecfd052b688e",
       "type": "flow",
@@ -7267,7 +7267,7 @@
       }
     },
     {
-      "id": "inventory-call.5d6cc813e7bed36c",
+      "id": "inventory-call.f6b215a6ed52e9c3",
       "from": "execution.schedule",
       "to": "code.93d5ecfd052b688e",
       "type": "flow",
@@ -7287,7 +7287,7 @@
       }
     },
     {
-      "id": "inventory-call.12d4c5581fba42be",
+      "id": "inventory-call.1a3aa114258fd931",
       "from": "execution.schedule",
       "to": "code.93d5ecfd052b688e",
       "type": "flow",
@@ -7307,7 +7307,7 @@
       }
     },
     {
-      "id": "inventory-call.efee8da4f805189e",
+      "id": "inventory-call.f052819c15406438",
       "from": "execution.schedule",
       "to": "checks_join",
       "type": "flow",
@@ -7327,7 +7327,7 @@
       }
     },
     {
-      "id": "inventory-call.5d6ec4cb2b72d435",
+      "id": "inventory-call.d66d4c0aefd9cef7",
       "from": "execution.schedule",
       "to": "checks_join",
       "type": "flow",
@@ -7347,7 +7347,7 @@
       }
     },
     {
-      "id": "inventory-call.ae282bd0df0641bb",
+      "id": "inventory-call.a7d33abd3d3dfe58",
       "from": "execution.interrupt",
       "to": "checks_join",
       "type": "flow",
@@ -7368,7 +7368,7 @@
       }
     },
     {
-      "id": "inventory-call.ac9b959c595c85e2",
+      "id": "inventory-call.5b2ba63b5c697e0c",
       "from": "execution.interrupt",
       "to": "checks_join",
       "type": "flow",
@@ -7388,7 +7388,7 @@
       }
     },
     {
-      "id": "inventory-call.fd10ffe78b9cc3f8",
+      "id": "inventory-call.245832c0b302935a",
       "from": "execution.interrupt",
       "to": "code.93d5ecfd052b688e",
       "type": "flow",
@@ -7408,7 +7408,7 @@
       }
     },
     {
-      "id": "inventory-call.f3561febd0e4771d",
+      "id": "inventory-call.f1e2b270981ee434",
       "from": "execution.finish_activity",
       "to": "checks_join",
       "type": "flow",
@@ -7429,7 +7429,7 @@
       }
     },
     {
-      "id": "inventory-call.fa2e717f74137c61",
+      "id": "inventory-call.202f32fd96f2f2e8",
       "from": "code.498def2a5670405c",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -7446,7 +7446,7 @@
       }
     },
     {
-      "id": "inventory-call.af91814a09df6fe3",
+      "id": "inventory-call.20277f0d13fb0e1a",
       "from": "code.498def2a5670405c",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -7463,7 +7463,7 @@
       }
     },
     {
-      "id": "inventory-call.b8121f904b429055",
+      "id": "inventory-call.7e94c811956e5e9a",
       "from": "code.498def2a5670405c",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -7480,7 +7480,7 @@
       }
     },
     {
-      "id": "inventory-call.797318a5a19a093e",
+      "id": "inventory-call.e041e3906f2259c2",
       "from": "implementation.b44be8dd816fe035",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -7497,7 +7497,7 @@
       }
     },
     {
-      "id": "inventory-call.924646ec81f3f12d",
+      "id": "inventory-call.360e809624025ba1",
       "from": "implementation.3961fb22f4f04f1c",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -7514,7 +7514,7 @@
       }
     },
     {
-      "id": "inventory-call.2e6655de0bfdd059",
+      "id": "inventory-call.1c0e3591c2f11928",
       "from": "implementation.3961fb22f4f04f1c",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -7531,7 +7531,7 @@
       }
     },
     {
-      "id": "inventory-call.e57368f95ff5f5b0",
+      "id": "inventory-call.b88bdbfa5d71a519",
       "from": "implementation.3961fb22f4f04f1c",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -7548,7 +7548,7 @@
       }
     },
     {
-      "id": "inventory-call.9e0b71608a0d1ca5",
+      "id": "inventory-call.3f19e111d47c15f3",
       "from": "implementation.b74f1badf92372fa",
       "to": "implementation.49f0f175b30075e3",
       "type": "flow",
@@ -7565,7 +7565,7 @@
       }
     },
     {
-      "id": "inventory-call.8282f225b59270e4",
+      "id": "inventory-call.012fcb689aec5dd4",
       "from": "implementation.b74f1badf92372fa",
       "to": "implementation.49f0f175b30075e3",
       "type": "flow",
@@ -7582,7 +7582,7 @@
       }
     },
     {
-      "id": "inventory-call.8238df4b7a7570a4",
+      "id": "inventory-call.1b0f0dbf174b9394",
       "from": "code.fccd4321a0fb9ec9",
       "to": "code.dba5c549ac114e60",
       "type": "flow",
@@ -7597,7 +7597,7 @@
       }
     },
     {
-      "id": "inventory-call.867b81933448177f",
+      "id": "inventory-call.a781a68db2bf0136",
       "from": "code.fccd4321a0fb9ec9",
       "to": "implementation.3961fb22f4f04f1c",
       "type": "flow",
@@ -7616,7 +7616,7 @@
       }
     },
     {
-      "id": "inventory-call.abe0bd6b2d29374d",
+      "id": "inventory-call.9c9f2b29cde9461a",
       "from": "code.fccd4321a0fb9ec9",
       "to": "implementation.3961fb22f4f04f1c",
       "type": "flow",
@@ -7635,7 +7635,7 @@
       }
     },
     {
-      "id": "inventory-call.e662cc5254cd0a3b",
+      "id": "inventory-call.b738ffff422dd550",
       "from": "code.fccd4321a0fb9ec9",
       "to": "implementation.3961fb22f4f04f1c",
       "type": "flow",
@@ -7654,7 +7654,7 @@
       }
     },
     {
-      "id": "inventory-call.0a205cdff1e9e6cb",
+      "id": "inventory-call.aeccd27dc33e6fd5",
       "from": "code.fccd4321a0fb9ec9",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -7671,7 +7671,7 @@
       }
     },
     {
-      "id": "inventory-call.3dc7ff7fd37f57c8",
+      "id": "inventory-call.60224a176b6bf86a",
       "from": "code.fccd4321a0fb9ec9",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -7688,7 +7688,7 @@
       }
     },
     {
-      "id": "inventory-call.0acf9b032def9b7f",
+      "id": "inventory-call.2f28bcaaff43bf06",
       "from": "code.fccd4321a0fb9ec9",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -7705,7 +7705,7 @@
       }
     },
     {
-      "id": "inventory-call.bfec71e02ffba69f",
+      "id": "inventory-call.83c2ac2a9f9d0bcf",
       "from": "code.fccd4321a0fb9ec9",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -7722,7 +7722,7 @@
       }
     },
     {
-      "id": "inventory-call.d3935247893439af",
+      "id": "inventory-call.7369a6637b715f2f",
       "from": "code.fccd4321a0fb9ec9",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -7739,7 +7739,7 @@
       }
     },
     {
-      "id": "inventory-call.dbb09b620f89150c",
+      "id": "inventory-call.ac7102cf0504f342",
       "from": "code.fccd4321a0fb9ec9",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -7756,7 +7756,7 @@
       }
     },
     {
-      "id": "inventory-call.c23c980e9960d6e8",
+      "id": "inventory-call.c0ddd9f6b284f345",
       "from": "code.fccd4321a0fb9ec9",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -7773,7 +7773,7 @@
       }
     },
     {
-      "id": "inventory-call.ce61fa2fbed18ad5",
+      "id": "inventory-call.6002ef0932f20fd4",
       "from": "code.fccd4321a0fb9ec9",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -7790,7 +7790,7 @@
       }
     },
     {
-      "id": "inventory-call.5e62275d12b9ca3e",
+      "id": "inventory-call.4dda4e85a1041efc",
       "from": "code.fccd4321a0fb9ec9",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -7807,7 +7807,7 @@
       }
     },
     {
-      "id": "inventory-call.74b2455a1f0601dc",
+      "id": "inventory-call.36b9077d402a15af",
       "from": "code.fccd4321a0fb9ec9",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -7824,7 +7824,7 @@
       }
     },
     {
-      "id": "inventory-call.d9b4cefb503263db",
+      "id": "inventory-call.250e77d820130232",
       "from": "code.fccd4321a0fb9ec9",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -7841,7 +7841,7 @@
       }
     },
     {
-      "id": "inventory-call.ae02a1380b6566bf",
+      "id": "inventory-call.6960d47050016bd2",
       "from": "code.fccd4321a0fb9ec9",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -7858,7 +7858,7 @@
       }
     },
     {
-      "id": "inventory-call.9eb061840afe71a2",
+      "id": "inventory-call.01fbbcff5aadbd63",
       "from": "code.fccd4321a0fb9ec9",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -7875,7 +7875,7 @@
       }
     },
     {
-      "id": "inventory-call.d680e019dac82114",
+      "id": "inventory-call.72e8888427d617fb",
       "from": "code.fccd4321a0fb9ec9",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -7892,7 +7892,7 @@
       }
     },
     {
-      "id": "inventory-call.65f2fcbdf1d90e19",
+      "id": "inventory-call.303f4567fae3bbba",
       "from": "code.fccd4321a0fb9ec9",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -7909,7 +7909,7 @@
       }
     },
     {
-      "id": "inventory-call.943b657434619cd2",
+      "id": "inventory-call.2d7b5855a318ef36",
       "from": "code.fccd4321a0fb9ec9",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -7926,7 +7926,7 @@
       }
     },
     {
-      "id": "inventory-call.8d476e49e702df2c",
+      "id": "inventory-call.6571e97d8843a45a",
       "from": "code.fccd4321a0fb9ec9",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -7943,7 +7943,7 @@
       }
     },
     {
-      "id": "inventory-call.7a0d2cd823e611ce",
+      "id": "inventory-call.99cbda6b60774300",
       "from": "code.fccd4321a0fb9ec9",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -7960,7 +7960,7 @@
       }
     },
     {
-      "id": "inventory-call.73592c7c107c71d8",
+      "id": "inventory-call.98cfbeecab5df9fb",
       "from": "implementation.8ea9f9c4499ff1a0",
       "to": "implementation.49f0f175b30075e3",
       "type": "flow",
@@ -7977,7 +7977,7 @@
       }
     },
     {
-      "id": "inventory-call.c523199036717c11",
+      "id": "inventory-call.00edb5d9cdd5adc2",
       "from": "implementation.8ea9f9c4499ff1a0",
       "to": "implementation.49f0f175b30075e3",
       "type": "flow",
@@ -7994,7 +7994,7 @@
       }
     },
     {
-      "id": "inventory-call.6fb10f574be21a51",
+      "id": "inventory-call.f3598a161eefb373",
       "from": "implementation.8ea9f9c4499ff1a0",
       "to": "implementation.49f0f175b30075e3",
       "type": "flow",
@@ -8011,7 +8011,7 @@
       }
     },
     {
-      "id": "inventory-call.56800d1b9eab13b5",
+      "id": "inventory-call.f7027bebabd2fb3d",
       "from": "implementation.8ea9f9c4499ff1a0",
       "to": "implementation.49f0f175b30075e3",
       "type": "flow",
@@ -8028,7 +8028,7 @@
       }
     },
     {
-      "id": "inventory-call.64a7d01607198d3f",
+      "id": "inventory-call.ab6efa3d4def62b0",
       "from": "implementation.8ea9f9c4499ff1a0",
       "to": "implementation.49f0f175b30075e3",
       "type": "flow",
@@ -8045,7 +8045,7 @@
       }
     },
     {
-      "id": "inventory-call.5431e9ec0b63ddfa",
+      "id": "inventory-call.a03d322099c4ffdd",
       "from": "implementation.8ea9f9c4499ff1a0",
       "to": "implementation.49f0f175b30075e3",
       "type": "flow",
@@ -8062,7 +8062,7 @@
       }
     },
     {
-      "id": "inventory-call.06f87062e8a1b470",
+      "id": "inventory-call.3ff1aea2ae6c3132",
       "from": "implementation.104e91999caed005",
       "to": "implementation.49f0f175b30075e3",
       "type": "flow",
@@ -8079,7 +8079,7 @@
       }
     },
     {
-      "id": "inventory-call.0b5cc869309f0611",
+      "id": "inventory-call.0c32dbf713c79c5d",
       "from": "implementation.104e91999caed005",
       "to": "implementation.49f0f175b30075e3",
       "type": "flow",
@@ -8096,7 +8096,7 @@
       }
     },
     {
-      "id": "inventory-call.7399361130d6da39",
+      "id": "inventory-call.6cc2a6a729552837",
       "from": "implementation.545369c753408d9d",
       "to": "implementation.49f0f175b30075e3",
       "type": "flow",
@@ -8113,7 +8113,7 @@
       }
     },
     {
-      "id": "inventory-call.33495e485890544a",
+      "id": "inventory-call.507f9287232d6e62",
       "from": "implementation.545369c753408d9d",
       "to": "implementation.49f0f175b30075e3",
       "type": "flow",
@@ -8130,7 +8130,7 @@
       }
     },
     {
-      "id": "inventory-call.7e06b855910af182",
+      "id": "inventory-call.1effcde4883b762f",
       "from": "implementation.545369c753408d9d",
       "to": "implementation.49f0f175b30075e3",
       "type": "flow",
@@ -8147,7 +8147,7 @@
       }
     },
     {
-      "id": "inventory-call.0873243757dd2245",
+      "id": "inventory-call.698f73f57a6782fc",
       "from": "implementation.545369c753408d9d",
       "to": "implementation.49f0f175b30075e3",
       "type": "flow",
@@ -8164,7 +8164,7 @@
       }
     },
     {
-      "id": "inventory-call.3d87cda4f87fbcbb",
+      "id": "inventory-call.67e9aa85bc409bb0",
       "from": "implementation.0462e9a6333ff869",
       "to": "implementation.49f0f175b30075e3",
       "type": "flow",
@@ -8181,7 +8181,7 @@
       }
     },
     {
-      "id": "inventory-call.6f6b04297d813a92",
+      "id": "inventory-call.a4a6474d05437508",
       "from": "implementation.0462e9a6333ff869",
       "to": "implementation.49f0f175b30075e3",
       "type": "flow",
@@ -8198,7 +8198,7 @@
       }
     },
     {
-      "id": "inventory-call.ae63395a717cfb0b",
+      "id": "inventory-call.35c8faa91a58f134",
       "from": "implementation.0462e9a6333ff869",
       "to": "implementation.49f0f175b30075e3",
       "type": "flow",
@@ -8215,7 +8215,7 @@
       }
     },
     {
-      "id": "inventory-call.7e7c865a11c9195a",
+      "id": "inventory-call.7dca3772f86e8374",
       "from": "implementation.0462e9a6333ff869",
       "to": "implementation.49f0f175b30075e3",
       "type": "flow",
@@ -8232,7 +8232,7 @@
       }
     },
     {
-      "id": "inventory-call.354efe4325c6b426",
+      "id": "inventory-call.f258e5c1ccd0a2e1",
       "from": "implementation.0462e9a6333ff869",
       "to": "implementation.49f0f175b30075e3",
       "type": "flow",
@@ -8249,7 +8249,7 @@
       }
     },
     {
-      "id": "inventory-call.b05859a3eedec692",
+      "id": "inventory-call.f44c9f36046f04e9",
       "from": "implementation.4254294345ec94e1",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -8266,7 +8266,7 @@
       }
     },
     {
-      "id": "inventory-call.be88bea5cd3ea1d2",
+      "id": "inventory-call.10e5efde870402ee",
       "from": "ui.validate",
       "to": "code.498def2a5670405c",
       "type": "flow",
@@ -8284,7 +8284,7 @@
       }
     },
     {
-      "id": "inventory-call.c52c77e9a441e55b",
+      "id": "inventory-call.c99efee65c462e04",
       "from": "ui.validate",
       "to": "ui.command",
       "type": "flow",
@@ -8302,7 +8302,7 @@
       }
     },
     {
-      "id": "inventory-call.33cd8212e6061b34",
+      "id": "inventory-call.a8946a25462a1807",
       "from": "ui.validate",
       "to": "code.fccd4321a0fb9ec9",
       "type": "flow",
@@ -8317,7 +8317,7 @@
       }
     },
     {
-      "id": "inventory-call.d13476b48f1134d0",
+      "id": "inventory-call.5443e93bab7972cf",
       "from": "ui.validate",
       "to": "code.498def2a5670405c",
       "type": "flow",
@@ -8334,7 +8334,7 @@
       }
     },
     {
-      "id": "inventory-call.8de91ba5c8e1c9a4",
+      "id": "inventory-call.1732bd2342576bff",
       "from": "implementation.90e9ef6a21bbc4b4",
       "to": "ui.command",
       "type": "flow",
@@ -8352,7 +8352,7 @@
       }
     },
     {
-      "id": "inventory-call.6c85f1e73308a244",
+      "id": "inventory-call.28de33bd6e4932ca",
       "from": "implementation.90e9ef6a21bbc4b4",
       "to": "code.dba5c549ac114e60",
       "type": "flow",
@@ -8367,7 +8367,7 @@
       }
     },
     {
-      "id": "inventory-call.f644d5b99e412ad8",
+      "id": "inventory-call.4a6adc40b3b9daaa",
       "from": "implementation.90e9ef6a21bbc4b4",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -8384,7 +8384,7 @@
       }
     },
     {
-      "id": "inventory-call.e4a9f4be2bacf20e",
+      "id": "inventory-call.e825f4a6c17833ca",
       "from": "implementation.90e9ef6a21bbc4b4",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -8401,7 +8401,7 @@
       }
     },
     {
-      "id": "inventory-call.d7258796ef73b764",
+      "id": "inventory-call.71f927b51fa415cf",
       "from": "implementation.90e9ef6a21bbc4b4",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -8418,7 +8418,7 @@
       }
     },
     {
-      "id": "inventory-call.00eddbd5191eef75",
+      "id": "inventory-call.98d06739e2015ef5",
       "from": "implementation.90e9ef6a21bbc4b4",
       "to": "code.fccd4321a0fb9ec9",
       "type": "flow",
@@ -8433,7 +8433,7 @@
       }
     },
     {
-      "id": "inventory-call.56d494c37b623eb4",
+      "id": "inventory-call.29d6023e84db5cce",
       "from": "implementation.90e9ef6a21bbc4b4",
       "to": "code.498def2a5670405c",
       "type": "flow",
@@ -8450,7 +8450,7 @@
       }
     },
     {
-      "id": "inventory-call.e0c1c64f91fa3834",
+      "id": "inventory-call.ad78b3defb24f40c",
       "from": "implementation.e6af84c7b93acae8",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -8467,7 +8467,7 @@
       }
     },
     {
-      "id": "inventory-call.1e27292f31b69333",
+      "id": "inventory-call.828bda8c5f4d2bd8",
       "from": "implementation.e6af84c7b93acae8",
       "to": "ui.command",
       "type": "flow",
@@ -8485,7 +8485,7 @@
       }
     },
     {
-      "id": "inventory-call.74eef0e46a72c607",
+      "id": "inventory-call.9d9dd361651ea17d",
       "from": "implementation.e6af84c7b93acae8",
       "to": "code.dba5c549ac114e60",
       "type": "flow",
@@ -8500,7 +8500,7 @@
       }
     },
     {
-      "id": "inventory-call.35eaf3ea9e665934",
+      "id": "inventory-call.c5701f1f130da3ca",
       "from": "implementation.e6af84c7b93acae8",
       "to": "code.498def2a5670405c",
       "type": "flow",
@@ -8517,7 +8517,7 @@
       }
     },
     {
-      "id": "inventory-call.0d4667a540c2f92c",
+      "id": "inventory-call.ed97bd59308af8ab",
       "from": "implementation.8f7145aa38e08d17",
       "to": "ui.command",
       "type": "flow",
@@ -8535,7 +8535,7 @@
       }
     },
     {
-      "id": "inventory-call.85f168aca354abd6",
+      "id": "inventory-call.228773cae066c9d4",
       "from": "implementation.8f7145aa38e08d17",
       "to": "code.dba5c549ac114e60",
       "type": "flow",
@@ -8550,7 +8550,7 @@
       }
     },
     {
-      "id": "inventory-call.2ed50ae8bb0297af",
+      "id": "inventory-call.f077c184c8b3f2b3",
       "from": "implementation.8f7145aa38e08d17",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -8567,7 +8567,7 @@
       }
     },
     {
-      "id": "inventory-call.c4d949deb8f877fb",
+      "id": "inventory-call.d4a69704db300e08",
       "from": "implementation.8f7145aa38e08d17",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -8584,7 +8584,7 @@
       }
     },
     {
-      "id": "inventory-call.967caa9006052c2a",
+      "id": "inventory-call.dd02fa469676f882",
       "from": "implementation.8f7145aa38e08d17",
       "to": "code.498def2a5670405c",
       "type": "flow",
@@ -8601,7 +8601,7 @@
       }
     },
     {
-      "id": "inventory-call.4c8eb8c7f89440ca",
+      "id": "inventory-call.933a6de36b3dd153",
       "from": "implementation.98ad76de2cd3bdf4",
       "to": "ui.command",
       "type": "flow",
@@ -8619,7 +8619,7 @@
       }
     },
     {
-      "id": "inventory-call.9bb1dbf5c9f06091",
+      "id": "inventory-call.82d164b592a59f2c",
       "from": "implementation.98ad76de2cd3bdf4",
       "to": "code.dba5c549ac114e60",
       "type": "flow",
@@ -8634,7 +8634,7 @@
       }
     },
     {
-      "id": "inventory-call.884934991764e75c",
+      "id": "inventory-call.671b8aba21a3d844",
       "from": "implementation.98ad76de2cd3bdf4",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -8651,7 +8651,7 @@
       }
     },
     {
-      "id": "inventory-call.8ff925b29c08f2ed",
+      "id": "inventory-call.bfb0efa457a631b9",
       "from": "implementation.98ad76de2cd3bdf4",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -8668,7 +8668,7 @@
       }
     },
     {
-      "id": "inventory-call.a9cb6bdb00a9a226",
+      "id": "inventory-call.67c79b1a6b700696",
       "from": "implementation.98ad76de2cd3bdf4",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -8685,7 +8685,7 @@
       }
     },
     {
-      "id": "inventory-call.2e173efd1cc7ca72",
+      "id": "inventory-call.da9c672376df79e2",
       "from": "implementation.98ad76de2cd3bdf4",
       "to": "code.498def2a5670405c",
       "type": "flow",
@@ -8702,7 +8702,7 @@
       }
     },
     {
-      "id": "inventory-call.4c025e7b204d7463",
+      "id": "inventory-call.8c5e842b59ff0ce7",
       "from": "implementation.838750c5802287e5",
       "to": "ui.command",
       "type": "flow",
@@ -8720,7 +8720,7 @@
       }
     },
     {
-      "id": "inventory-call.6e2bad97ea2948b0",
+      "id": "inventory-call.3ed671ff8b96225d",
       "from": "implementation.56232f17693d7bd4",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -8737,7 +8737,7 @@
       }
     },
     {
-      "id": "inventory-call.a18c73847680a162",
+      "id": "inventory-call.28772783e555f70c",
       "from": "implementation.56232f17693d7bd4",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -8754,7 +8754,7 @@
       }
     },
     {
-      "id": "inventory-call.96c5bde84eb240dc",
+      "id": "inventory-call.0b3aabd14a5d446a",
       "from": "implementation.56232f17693d7bd4",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -8771,7 +8771,7 @@
       }
     },
     {
-      "id": "inventory-call.7ea4fdffbe6cc0a3",
+      "id": "inventory-call.d468b2003a159c9e",
       "from": "implementation.56232f17693d7bd4",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -8788,7 +8788,7 @@
       }
     },
     {
-      "id": "inventory-call.c31c3db6adf98bdc",
+      "id": "inventory-call.0797ac7b8ccc2695",
       "from": "implementation.56232f17693d7bd4",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -8805,7 +8805,7 @@
       }
     },
     {
-      "id": "inventory-call.cec1f260584a0bdb",
+      "id": "inventory-call.6df782c049c9d0d2",
       "from": "implementation.56232f17693d7bd4",
       "to": "code.817bb8243334df3a",
       "type": "flow",
@@ -8822,7 +8822,7 @@
       }
     },
     {
-      "id": "inventory-call.565d1f19a8781691",
+      "id": "inventory-call.c17b0fd1eaa959d9",
       "from": "implementation.56232f17693d7bd4",
       "to": "code.fccd4321a0fb9ec9",
       "type": "flow",
@@ -10556,6 +10556,10 @@
       "static/app.js::bo_record": {
         "category": "observer",
         "reason": "有 bo_ 标识的可选观测端口；故障隔离，不执行业务操作"
+      },
+      "integrations/bo_observer.py::BOObserver.trace.broken": {
+        "category": "observer",
+        "reason": "Deliberate exception callback inside the fault-mode observer sink. It tests failure isolation and does not execute application behavior. The conditional declaration is now visible to the source scanner."
       }
     }
   },
@@ -10568,12 +10572,12 @@
       "archive_app/storage.py": "c9821db64c5028350bd9fe580e71e645a9d9ace409a91a8a1367a8a4a58a6aac",
       "bo_stategraph/workflow.py": "77365b6941422f7c7d6e2fb9627b61810935eabb408fbcfa82826885fec8e758",
       "integrations/bo_observer.py": "ae4652e2052855231d440039092ea5e9cd31660cca1cfac1d7993c4be67a115b",
-      "integrations/bo_server.py": "62a3ae13bd5c12ded3202172dc3ee34eccfe2ad6a729720a0796c4c6a7c9b2e1",
+      "integrations/bo_server.py": "2ddd09716c17564b7ffdb5526d988f47db48fffc8492e2e1efab7f900b70d695",
       "run.py": "e8969372f443467b2de250df7a2adbd8b748a90dae58e98d647f9c44417695c0",
       "static/app.js": "cf17b1372b227109904dac1369a2b13eacdd3d85f76171fa9bdd5b6ea58baf82"
     },
     "resolved_calls": 198,
-    "unresolved_calls": 578,
+    "unresolved_calls": 579,
     "depth": 1,
     "limits": [
       "Static call candidates are not runtime calls or proven value flow.",

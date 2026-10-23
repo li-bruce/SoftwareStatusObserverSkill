@@ -1,0 +1,9 @@
+{
+  "sha256": "9db5c3ea2041134d8d3e5e1b1ad47350d9c88d13b6d2d3dabc15061b1070941c",
+  "entries": 283,
+  "forbidden_paths": [
+    "evidence/browser-runtime.json"
+  ],
+  "absolute_or_parent_paths": [],
+  "scope": "Archive path and exclusion inspection only; final publication also reviews structured evidence."
+}

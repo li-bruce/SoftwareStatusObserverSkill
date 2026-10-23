@@ -1,0 +1,922 @@
+{
+  "passed": false,
+  "failures": [
+    "AssertionError [ERR_ASSERTION]: {\"error\":\"Observation failed\"}\n\nfalse !== true\n\n    at request (file:///C:/Users/Lvi_P/Documents/Work/CF/%E5%B9%B3%E5%8F%B0%E8%BD%AF%E8%91%97/SoftwareStatusObserverSkill/tools/test_database_browser.mjs:28:10)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async file:///C:/Users/Lvi_P/Documents/Work/CF/%E5%B9%B3%E5%8F%B0%E8%BD%AF%E8%91%97/SoftwareStatusObserverSkill/tools/test_database_browser.mjs:74:24"
+  ],
+  "errors": [],
+  "checkpoints": {
+    "initial": {
+      "stage": "runtime",
+      "program_url": null,
+      "layout_id": "database-browser-demo",
+      "model": {
+        "schema_version": 3,
+        "revision": "1",
+        "project_id": "database-browser-demo",
+        "intent": "intent.json",
+        "source_files": [
+          "bo_stategraph/database-catalog.json",
+          "bo_stategraph/databases.json",
+          "bo_stategraph/schema.json",
+          "export_model.py",
+          "gallery.py"
+        ],
+        "nodes": [
+          {
+            "id": "publish",
+            "kind": "action",
+            "layer": "business",
+            "label": "Publish approved pictures",
+            "summary": "Read candidates, keep approved pictures and save the exhibition",
+            "source": {
+              "path": "gallery.py",
+              "symbol": "publish"
+            },
+            "capture": {
+              "in": {
+                "rollback": "boolean"
+              },
+              "out": {
+                "published": "number",
+                "status": "string"
+              }
+            },
+            "requirements": [
+              "R1"
+            ]
+          },
+          {
+            "id": "state.ready",
+            "kind": "state",
+            "layer": "state",
+            "value": "ready",
+            "label": "ready",
+            "summary": "Publication state"
+          },
+          {
+            "id": "state.published",
+            "kind": "state",
+            "layer": "state",
+            "value": "published",
+            "label": "published",
+            "summary": "Publication state"
+          },
+          {
+            "id": "db:gallery:store",
+            "kind": "data",
+            "label": "Gallery database",
+            "summary": "sqlalchemy · complete",
+            "data_role": "store",
+            "data_store": "gallery",
+            "data_key": "store",
+            "data_origin": "database",
+            "data_coverage": "complete",
+            "data_metadata": {
+              "engine": "sqlalchemy",
+              "limitations": [
+                "Coverage is limited to tables in the configured/default schema and dialect-supported constraints; triggers and stored routines are not inspected."
+              ],
+              "model_layer": "SQLAlchemy Core MetaData"
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db:gallery:table%3Aexhibition",
+            "kind": "data",
+            "label": "exhibition",
+            "summary": "table",
+            "parent": "db:gallery:store",
+            "data_role": "dataset",
+            "data_store": "gallery",
+            "data_key": "table:exhibition",
+            "data_origin": "database",
+            "data_coverage": "complete",
+            "data_metadata": {
+              "kind": "table",
+              "status": "matched",
+              "constraints": [
+                {
+                  "kind": "foreign_key",
+                  "name": "",
+                  "fields": [
+                    "picture_id"
+                  ],
+                  "target": "table:pictures",
+                  "target_fields": [
+                    "id"
+                  ],
+                  "description": "{}"
+                },
+                {
+                  "kind": "primary_key",
+                  "name": "",
+                  "fields": [
+                    "id"
+                  ]
+                }
+              ],
+              "declared_constraints": [
+                {
+                  "kind": "foreign_key",
+                  "name": "",
+                  "fields": [
+                    "picture_id"
+                  ],
+                  "target": "table:pictures",
+                  "target_fields": [
+                    "id"
+                  ],
+                  "description": "{}"
+                },
+                {
+                  "kind": "primary_key",
+                  "name": "",
+                  "fields": [
+                    "id"
+                  ]
+                }
+              ]
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db:gallery:table%3Aexhibition:field:id",
+            "kind": "data",
+            "label": "id",
+            "summary": "INTEGER",
+            "parent": "db:gallery:table%3Aexhibition",
+            "data_role": "column",
+            "data_store": "gallery",
+            "data_key": "table:exhibition.id",
+            "data_origin": "database",
+            "data_coverage": "complete",
+            "data_metadata": {
+              "name": "id",
+              "native_type": "INTEGER",
+              "nullable": false,
+              "primary_key": true,
+              "default": null,
+              "generated": false,
+              "status": "matched",
+              "declared": {
+                "name": "id",
+                "native_type": "INTEGER",
+                "nullable": false,
+                "primary_key": true,
+                "default": null,
+                "generated": false
+              }
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db:gallery:table%3Aexhibition:field:picture_id",
+            "kind": "data",
+            "label": "picture_id",
+            "summary": "INTEGER",
+            "parent": "db:gallery:table%3Aexhibition",
+            "data_role": "column",
+            "data_store": "gallery",
+            "data_key": "table:exhibition.picture_id",
+            "data_origin": "database",
+            "data_coverage": "complete",
+            "data_metadata": {
+              "name": "picture_id",
+              "native_type": "INTEGER",
+              "nullable": false,
+              "primary_key": false,
+              "default": null,
+              "generated": false,
+              "status": "matched",
+              "declared": {
+                "name": "picture_id",
+                "native_type": "INTEGER",
+                "nullable": false,
+                "primary_key": false,
+                "default": null,
+                "generated": false
+              }
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db:gallery:table%3Apictures",
+            "kind": "data",
+            "label": "pictures",
+            "summary": "table",
+            "parent": "db:gallery:store",
+            "data_role": "dataset",
+            "data_store": "gallery",
+            "data_key": "table:pictures",
+            "data_origin": "database",
+            "data_coverage": "complete",
+            "data_metadata": {
+              "kind": "table",
+              "status": "matched",
+              "constraints": [
+                {
+                  "kind": "primary_key",
+                  "name": "",
+                  "fields": [
+                    "id"
+                  ]
+                }
+              ],
+              "declared_constraints": [
+                {
+                  "kind": "primary_key",
+                  "name": "",
+                  "fields": [
+                    "id"
+                  ]
+                }
+              ]
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db:gallery:table%3Apictures:field:approved",
+            "kind": "data",
+            "label": "approved",
+            "summary": "INTEGER",
+            "parent": "db:gallery:table%3Apictures",
+            "data_role": "column",
+            "data_store": "gallery",
+            "data_key": "table:pictures.approved",
+            "data_origin": "database",
+            "data_coverage": "complete",
+            "data_metadata": {
+              "name": "approved",
+              "native_type": "INTEGER",
+              "nullable": false,
+              "primary_key": false,
+              "default": null,
+              "generated": false,
+              "status": "matched",
+              "declared": {
+                "name": "approved",
+                "native_type": "INTEGER",
+                "nullable": false,
+                "primary_key": false,
+                "default": null,
+                "generated": false
+              }
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db:gallery:table%3Apictures:field:id",
+            "kind": "data",
+            "label": "id",
+            "summary": "INTEGER",
+            "parent": "db:gallery:table%3Apictures",
+            "data_role": "column",
+            "data_store": "gallery",
+            "data_key": "table:pictures.id",
+            "data_origin": "database",
+            "data_coverage": "complete",
+            "data_metadata": {
+              "name": "id",
+              "native_type": "INTEGER",
+              "nullable": false,
+              "primary_key": true,
+              "default": null,
+              "generated": false,
+              "status": "matched",
+              "declared": {
+                "name": "id",
+                "native_type": "INTEGER",
+                "nullable": false,
+                "primary_key": true,
+                "default": null,
+                "generated": false
+              }
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db:gallery:table%3Apictures:field:title",
+            "kind": "data",
+            "label": "title",
+            "summary": "VARCHAR(80)",
+            "parent": "db:gallery:table%3Apictures",
+            "data_role": "column",
+            "data_store": "gallery",
+            "data_key": "table:pictures.title",
+            "data_origin": "database",
+            "data_coverage": "complete",
+            "data_metadata": {
+              "name": "title",
+              "native_type": "VARCHAR(80)",
+              "nullable": false,
+              "primary_key": false,
+              "default": null,
+              "generated": false,
+              "status": "matched",
+              "declared": {
+                "name": "title",
+                "native_type": "VARCHAR(80)",
+                "nullable": false,
+                "primary_key": false,
+                "default": null,
+                "generated": false
+              }
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "load",
+            "kind": "function",
+            "label": "Load pictures",
+            "summary": "read · gallery",
+            "source": {
+              "path": "gallery.py",
+              "symbol": "load_pictures"
+            },
+            "parent": "publish",
+            "data_role": "query",
+            "data_store": "gallery",
+            "data_origin": "declaration",
+            "data_coverage": "partial",
+            "data_metadata": {
+              "action": "read",
+              "targets": [
+                "table:pictures"
+              ]
+            },
+            "capture": {
+              "in": {
+                "operation": "string",
+                "statement": "string",
+                "parameters": {
+                  "approved": "number",
+                  "count": "number"
+                }
+              },
+              "out": {
+                "status": "string",
+                "duration_ms": "number",
+                "rows": "number",
+                "rows_known": "boolean",
+                "result": {
+                  "count": "number"
+                },
+                "before": {
+                  "count": "number"
+                },
+                "error_type": "string",
+                "transaction_id": "string",
+                "targets": [
+                  "string"
+                ],
+                "unknown_targets": [
+                  "string"
+                ],
+                "input_count": "number",
+                "output_count": "number",
+                "committed": "boolean"
+              }
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "select",
+            "kind": "function",
+            "label": "Select approved pictures",
+            "summary": "transform · gallery",
+            "source": {
+              "path": "gallery.py",
+              "symbol": "select_approved"
+            },
+            "parent": "publish",
+            "data_role": "transform",
+            "data_store": "gallery",
+            "data_origin": "declaration",
+            "data_coverage": "partial",
+            "data_metadata": {
+              "action": "transform",
+              "targets": []
+            },
+            "capture": {
+              "in": {
+                "operation": "string",
+                "statement": "string",
+                "parameters": {
+                  "approved": "number",
+                  "count": "number"
+                }
+              },
+              "out": {
+                "status": "string",
+                "duration_ms": "number",
+                "rows": "number",
+                "rows_known": "boolean",
+                "result": {
+                  "count": "number"
+                },
+                "before": {
+                  "count": "number"
+                },
+                "error_type": "string",
+                "transaction_id": "string",
+                "targets": [
+                  "string"
+                ],
+                "unknown_targets": [
+                  "string"
+                ],
+                "input_count": "number",
+                "output_count": "number",
+                "committed": "boolean"
+              }
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "save",
+            "kind": "function",
+            "label": "Save exhibition",
+            "summary": "write · gallery",
+            "source": {
+              "path": "gallery.py",
+              "symbol": "save_pictures"
+            },
+            "parent": "publish",
+            "data_role": "query",
+            "data_store": "gallery",
+            "data_origin": "declaration",
+            "data_coverage": "partial",
+            "data_metadata": {
+              "action": "write",
+              "targets": [
+                "table:exhibition"
+              ]
+            },
+            "capture": {
+              "in": {
+                "operation": "string",
+                "statement": "string",
+                "parameters": {
+                  "approved": "number",
+                  "count": "number"
+                }
+              },
+              "out": {
+                "status": "string",
+                "duration_ms": "number",
+                "rows": "number",
+                "rows_known": "boolean",
+                "result": {
+                  "count": "number"
+                },
+                "before": {
+                  "count": "number"
+                },
+                "error_type": "string",
+                "transaction_id": "string",
+                "targets": [
+                  "string"
+                ],
+                "unknown_targets": [
+                  "string"
+                ],
+                "input_count": "number",
+                "output_count": "number",
+                "committed": "boolean"
+              }
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "transaction",
+            "kind": "function",
+            "label": "Publication transaction",
+            "summary": "transaction · gallery",
+            "source": {
+              "path": "gallery.py",
+              "symbol": "publish"
+            },
+            "parent": "publish",
+            "data_role": "query",
+            "data_store": "gallery",
+            "data_origin": "declaration",
+            "data_coverage": "partial",
+            "data_metadata": {
+              "action": "transaction",
+              "targets": []
+            },
+            "capture": {
+              "in": {
+                "operation": "string",
+                "statement": "string",
+                "parameters": {
+                  "approved": "number",
+                  "count": "number"
+                }
+              },
+              "out": {
+                "status": "string",
+                "duration_ms": "number",
+                "rows": "number",
+                "rows_known": "boolean",
+                "result": {
+                  "count": "number"
+                },
+                "before": {
+                  "count": "number"
+                },
+                "error_type": "string",
+                "transaction_id": "string",
+                "targets": [
+                  "string"
+                ],
+                "unknown_targets": [
+                  "string"
+                ],
+                "input_count": "number",
+                "output_count": "number",
+                "committed": "boolean"
+              }
+            },
+            "managed_by": "bo-database/v1"
+          }
+        ],
+        "edges": [
+          {
+            "id": "db-edge:db%3Agallery%3Astore:contains:db%3Agallery%3Atable%253Aexhibition",
+            "from": "db:gallery:store",
+            "to": "db:gallery:table%3Aexhibition",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Atable%253Aexhibition:contains:db%3Agallery%3Atable%253Aexhibition%3Afield%3Aid",
+            "from": "db:gallery:table%3Aexhibition",
+            "to": "db:gallery:table%3Aexhibition:field:id",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Atable%253Aexhibition:contains:db%3Agallery%3Atable%253Aexhibition%3Afield%3Apicture_id",
+            "from": "db:gallery:table%3Aexhibition",
+            "to": "db:gallery:table%3Aexhibition:field:picture_id",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Astore:contains:db%3Agallery%3Atable%253Apictures",
+            "from": "db:gallery:store",
+            "to": "db:gallery:table%3Apictures",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Atable%253Apictures:contains:db%3Agallery%3Atable%253Apictures%3Afield%3Aapproved",
+            "from": "db:gallery:table%3Apictures",
+            "to": "db:gallery:table%3Apictures:field:approved",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Atable%253Apictures:contains:db%3Agallery%3Atable%253Apictures%3Afield%3Aid",
+            "from": "db:gallery:table%3Apictures",
+            "to": "db:gallery:table%3Apictures:field:id",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Atable%253Apictures:contains:db%3Agallery%3Atable%253Apictures%3Afield%3Atitle",
+            "from": "db:gallery:table%3Apictures",
+            "to": "db:gallery:table%3Apictures:field:title",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Atable%253Aexhibition:references:db%3Agallery%3Atable%253Apictures",
+            "from": "db:gallery:table%3Aexhibition",
+            "to": "db:gallery:table%3Apictures",
+            "type": "data",
+            "label": "foreign_key",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1",
+            "data_relation": "references"
+          },
+          {
+            "id": "db-edge:publish:contains:load",
+            "from": "publish",
+            "to": "load",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Atable%253Apictures:reads:load",
+            "from": "db:gallery:table%3Apictures",
+            "to": "load",
+            "type": "data",
+            "label": "reads",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1",
+            "data_relation": "reads"
+          },
+          {
+            "id": "db-edge:publish:contains:select",
+            "from": "publish",
+            "to": "select",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:publish:contains:save",
+            "from": "publish",
+            "to": "save",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:save:writes:db%3Agallery%3Atable%253Aexhibition",
+            "from": "save",
+            "to": "db:gallery:table%3Aexhibition",
+            "type": "data",
+            "label": "writes",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1",
+            "data_relation": "writes"
+          },
+          {
+            "id": "db-edge:publish:contains:transaction",
+            "from": "publish",
+            "to": "transaction",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:load:transforms:select",
+            "from": "load",
+            "to": "select",
+            "type": "data",
+            "label": "transforms",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1",
+            "data_relation": "transforms"
+          },
+          {
+            "id": "db-edge:select:transforms:save",
+            "from": "select",
+            "to": "save",
+            "type": "data",
+            "label": "transforms",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1",
+            "data_relation": "transforms"
+          }
+        ],
+        "overview": [
+          {
+            "node": "publish"
+          }
+        ],
+        "scope": {
+          "unknowns": []
+        },
+        "machine": {
+          "engine": "python.explicit",
+          "version": "1",
+          "state_type": "enum",
+          "states": [
+            "ready",
+            "published"
+          ],
+          "values": [
+            "ready",
+            "published"
+          ],
+          "initial": "ready",
+          "transitions": [
+            {
+              "source": "ready",
+              "dest": "published",
+              "trigger": "publish"
+            }
+          ],
+          "events": {
+            "publish": {
+              "payload": {}
+            }
+          },
+          "context": {},
+          "guards": {},
+          "labels": {
+            "ready": "ready",
+            "published": "published"
+          }
+        },
+        "presentation": {
+          "subject": "Picture publication",
+          "layout_id": "database-browser-demo"
+        },
+        "database": {
+          "protocol": "bo-database/v1",
+          "source_id": "9353b21823cd9510f77407099d617e77843a1e4a367ee6379e59a27deb8fc38d",
+          "catalog_id": "4dfbc54b297d57ac36a1fd8d56b4eae01b40d54cbddc651a3ef5764abbf40123",
+          "stores": [
+            "gallery"
+          ]
+        }
+      },
+      "manifest": {
+        "schema_version": 3,
+        "build_id": "179eeb8efe3140c1b22179e1a72e10c14b747001bd0f1cf389781529da4fe9be",
+        "files": {
+          "bo_stategraph/database-catalog.json": "18ffef8f39a40b990510c1d0a3e4a5dd46cd70ab522823411eb586a3588d2059",
+          "bo_stategraph/databases.json": "e6d29d0ee7fed950fb66b866b4f4a7777437e7b9044e5b7ad14804620cd4303d",
+          "bo_stategraph/schema.json": "0d9068a20c1dde757e560175c4dae06c3f560658c4f1687105e5cc3e7a0f4609",
+          "export_model.py": "6be9415575554b566f70aaa265047b065d07db9b271c1788463c7ca8c63fd53b",
+          "gallery.py": "06dfba48744f379d6faa4dc2cc8cf892bba001ee700d362b374d4b9161b97bcf"
+        },
+        "model_hash": "852d3dd53b458bc8127d444a31a06d310886be0b51b31ce93a73bab386130fc9",
+        "intent_hash": "4672ac101a2dbbb7afd9e687c76c2742b5c888c3c3d6f723f565f858a48ac2c3",
+        "model_revision": "1",
+        "bindings": {
+          "publish": {
+            "path": "gallery.py",
+            "symbol": "publish",
+            "line": 28,
+            "end_line": 44,
+            "signature": "engine, observer, rollback=False, **context",
+            "ast_sha256": "5a4d88bc3d7a2020a0d25d993d9c53e07edeea42048945b7ba857c0e8a4556d4",
+            "snippet": "def publish(engine, observer, rollback=False, **context):\n    \"\"\"Query, process and save; a deliberate rejection exercises rollback.\"\"\"\n    with observer.transaction(\"transaction\", engine.begin(), **context) as connection:\n        with observer.operation(\"load\", parameters={\"approved\": 1}, **context):\n            rows = load_pictures(connection)\n        query_event = observer.last_event_id\n        selected = observer.transform(\"select\", select_approved, rows,\n            before=lambda items: {\"count\": len(items)},\n            after=lambda items: {\"count\": len(items)},\n            depends=[query_event], **context)\n        processing_event = observer.last_event_id\n        with observer.operation(\"save\", parameters={\"count\": len(selected)},\n                depends=[processing_event], **context):\n            save_pictures(connection, selected)\n        if rollback:\n            raise ValueError(\"Synthetic publication rejected\")\n        return len(selected)",
+            "calls": [
+              "ValueError",
+              "engine.begin",
+              "len",
+              "load_pictures",
+              "observer.operation",
+              "observer.transaction",
+              "observer.transform",
+              "save_pictures"
+            ],
+            "guards": [
+              {
+                "line": 42,
+                "expression": "rollback"
+              }
+            ],
+            "file_sha256": "06dfba48744f379d6faa4dc2cc8cf892bba001ee700d362b374d4b9161b97bcf"
+          },
+          "load": {
+            "path": "gallery.py",
+            "symbol": "load_pictures",
+            "line": 16,
+            "end_line": 18,
+            "signature": "connection",
+            "ast_sha256": "4c421e29ef4d1efe0356b519748814a56f901ffa068f7d15d1deb23c46884bc5",
+            "snippet": "def load_pictures(connection):\n    \"\"\"Read the current candidates; the caller owns normal result consumption.\"\"\"\n    return list(connection.execute(select(pictures.c.id, pictures.c.approved)).mappings())",
+            "calls": [
+              "connection.execute",
+              "connection.execute(select(pictures.c.id, pictures.c.approved)).mappings",
+              "list",
+              "select"
+            ],
+            "guards": [],
+            "file_sha256": "06dfba48744f379d6faa4dc2cc8cf892bba001ee700d362b374d4b9161b97bcf"
+          },
+          "select": {
+            "path": "gallery.py",
+            "symbol": "select_approved",
+            "line": 20,
+            "end_line": 22,
+            "signature": "rows",
+            "ast_sha256": "fcc07da914b46259bf2714e919cd163c3706427c1800944962ee7f5edb28c34a",
+            "snippet": "def select_approved(rows):\n    \"\"\"Keep pictures that the reviewer approved.\"\"\"\n    return [row for row in rows if row[\"approved\"] == 1]",
+            "calls": [],
+            "guards": [],
+            "file_sha256": "06dfba48744f379d6faa4dc2cc8cf892bba001ee700d362b374d4b9161b97bcf"
+          },
+          "save": {
+            "path": "gallery.py",
+            "symbol": "save_pictures",
+            "line": 24,
+            "end_line": 26,
+            "signature": "connection, rows",
+            "ast_sha256": "9d9294ee5e307d3751647a477f9aab18e4d3d039bb63b7b5b7d579a1cdb9c830",
+            "snippet": "def save_pictures(connection, rows):\n    \"\"\"Write the selected picture identities in the current transaction.\"\"\"\n    return connection.execute(insert(exhibition), [{\"picture_id\": row[\"id\"]} for row in rows])",
+            "calls": [
+              "connection.execute",
+              "insert"
+            ],
+            "guards": [],
+            "file_sha256": "06dfba48744f379d6faa4dc2cc8cf892bba001ee700d362b374d4b9161b97bcf"
+          },
+          "transaction": {
+            "path": "gallery.py",
+            "symbol": "publish",
+            "line": 28,
+            "end_line": 44,
+            "signature": "engine, observer, rollback=False, **context",
+            "ast_sha256": "5a4d88bc3d7a2020a0d25d993d9c53e07edeea42048945b7ba857c0e8a4556d4",
+            "snippet": "def publish(engine, observer, rollback=False, **context):\n    \"\"\"Query, process and save; a deliberate rejection exercises rollback.\"\"\"\n    with observer.transaction(\"transaction\", engine.begin(), **context) as connection:\n        with observer.operation(\"load\", parameters={\"approved\": 1}, **context):\n            rows = load_pictures(connection)\n        query_event = observer.last_event_id\n        selected = observer.transform(\"select\", select_approved, rows,\n            before=lambda items: {\"count\": len(items)},\n            after=lambda items: {\"count\": len(items)},\n            depends=[query_event], **context)\n        processing_event = observer.last_event_id\n        with observer.operation(\"save\", parameters={\"count\": len(selected)},\n                depends=[processing_event], **context):\n            save_pictures(connection, selected)\n        if rollback:\n            raise ValueError(\"Synthetic publication rejected\")\n        return len(selected)",
+            "calls": [
+              "ValueError",
+              "engine.begin",
+              "len",
+              "load_pictures",
+              "observer.operation",
+              "observer.transaction",
+              "observer.transform",
+              "save_pictures"
+            ],
+            "guards": [
+              {
+                "line": 42,
+                "expression": "rollback"
+              }
+            ],
+            "file_sha256": "06dfba48744f379d6faa4dc2cc8cf892bba001ee700d362b374d4b9161b97bcf"
+          }
+        },
+        "python": "3.13.13",
+        "unknowns": [
+          "AST evidence does not prove value flow, guard dominance or behavioral equivalence",
+          "External dependencies, interpreter, dynamic patching and omitted files are not attested"
+        ]
+      },
+      "binding_status": {
+        "status": "current",
+        "changed_files": [],
+        "model_changed": false,
+        "intent_changed": false,
+        "directly_affected": [],
+        "possibly_affected": []
+      },
+      "events": [],
+      "database_status": null,
+      "machine": {
+        "current": null,
+        "state_revision": null,
+        "configurations": [],
+        "journal": []
+      },
+      "runtime_frames": {
+        "schema": "stategraph-runtime-frames/v1",
+        "partial": true,
+        "frames": []
+      },
+      "authority": {
+        "entity": null,
+        "state": null,
+        "basis": {},
+        "parameters": {
+          "attempt": null
+        }
+      },
+      "health": {
+        "errors": 0,
+        "dropped": 0,
+        "run_id": "8ea289821624a5d16f75c846",
+        "attempted": 0,
+        "written": 0,
+        "enabled": true,
+        "runtime_frame_evictions": 0,
+        "retained_events": 0,
+        "evicted_events": 0,
+        "history_start_seq": null,
+        "log_errors": 0,
+        "listener_errors": 0,
+        "retention": {
+          "memory_events": 10000,
+          "memory_seconds": 1800,
+          "log_bytes": 8388608,
+          "log_backups": 2
+        }
+      },
+      "busy": false,
+      "historical": false,
+      "available_cases": [
+        "live"
+      ],
+      "instances": []
+    }
+  }
+}

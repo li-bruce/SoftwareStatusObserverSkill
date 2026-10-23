@@ -2,13 +2,15 @@
 
 This note separates the current implementation from proposed extensions. The public introduction must use the same distinction.
 
+The [development branch roadmap](development/dev-roadmap.md) tracks source neighborhoods, database schema, and API relationships with their current implementation boundaries and acceptance requirements.
+
 ## Can the lowest layer cover the whole codebase?
 
 Yes, as an **indexed source view**. That does not mean every possible call can be resolved correctly or that every indexed call ran.
 
-The current shared source inventory walks configured project-owned files independently of the existing business graph. Python AST and JS/TS/SFC adapters identify symbols, parameters, imports, calls, and entrypoints. The Python graph enrichment adds selected local relationships and coverage obligations. It is not yet an all-source interactive code browser.
+The current shared source inventory walks configured project-owned files independently of the existing business graph. Python AST and JS/TS/SFC adapters identify symbols, parameters, imports, calls, and entrypoints. The optional code layer now supports interactive local neighborhoods and a whole-index view, with bounded rendering and complete JSON export. Source enrichment also adds selected relationships to the authored graph's coverage obligations.
 
-A practical extension would keep these separate:
+The implementation keeps these sources of evidence separate:
 
 | Information | Source | Meaning |
 |---|---|---|
@@ -37,9 +39,9 @@ No project-size benchmark was measured for this proposal. A file-completeness ch
 
 Yes, where they explain business decisions and effects. Add them to the same typed graph, collapsed by default. Do not load every table or database row into the opening business view.
 
-The current model already supports typed fields, parameter nodes, class/source relationships, and independently read authoritative values. It does **not** contain a generic database catalog, ORM reflection adapter, or automatic column-lineage engine.
+The data layer implements a versioned database catalog, SQLAlchemy metadata and native model exports, MongoDB/Redis/Neo4j collectors, and selected data-operation capture. It retains the existing typed fields, parameters, class/source relationships, and independently checked authoritative values. Automatic column lineage remains outside the implementation. See [the implemented scope](../skills/business-observer/references/database-observation.md).
 
-A proposed data extension has three kinds of evidence:
+The data layer distinguishes three kinds of evidence:
 
 1. **Declared structure:** classes, DTOs, fields, types, tables, columns, primary/foreign keys, constraints.
 2. **Implementation use:** functions that read/write/map these structures; queries and transformations supported by source or explicit bindings.
@@ -49,7 +51,7 @@ An ER relation says that a key references another table. It does not establish p
 
 SQLAlchemy reflection demonstrates a useful read-only schema source: table names, columns, keys, indexes, and constraints can be obtained through its Inspector. OpenLineage distinguishes dataset schema from column-level input/output lineage; this is a useful separation to borrow, without requiring this project to adopt its whole platform. [SQLAlchemy reflection](https://docs.sqlalchemy.org/en/20/core/reflection.html), [OpenLineage schema facet](https://openlineage.io/docs/spec/facets/dataset-facets/schema/), [OpenLineage column lineage](https://openlineage.io/docs/spec/facets/dataset-facets/column_lineage_facet/)
 
-Suggested nodes are table, column, DTO, entity type, and selected entity instance; suggested edges include reads, writes, maps-to, references, and instance-of. These are **proposed additions**, not a claim that the current protocol accepts every new node/edge type unchanged. Schema and viewer changes require explicit versioning and regression tests.
+Implemented data roles are store, dataset, column, query, and transformation, carried by existing data/function nodes. Typed data relations express reads, writes, references, field mappings and transformations. DTO/entity-instance projection and automatic column lineage remain future work. Schema and viewer changes require explicit versioning and regression tests.
 
 Start from migrations or an approved read-only catalog connection. Use schema/migration fingerprints to detect drift, independently verify selected effects against storage, and keep runtime capture allowlisted. Secrets, arbitrary records, and complete database contents are unnecessary for explaining a state change.
 

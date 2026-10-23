@@ -1,0 +1,1759 @@
+{
+  "project_id_preserved": true,
+  "nodes": {
+    "added": [
+      {
+        "id": "code.062335503a782f3c",
+        "kind": "function",
+        "layer": "program",
+        "origin": "source-ast",
+        "label": "loadMessages",
+        "summary": "Local static call; execution requires runtime evidence.",
+        "source": {
+          "path": "static/app.js",
+          "symbol": "loadMessages"
+        },
+        "parent": "ui.workspace",
+        "capture": {
+          "in": {},
+          "out": {}
+        },
+        "signature": "",
+        "code_evidence": {
+          "symbol": "static/app.js::loadMessages",
+          "ast_hash": "65f865b86ce61b9e9c7e58723131306b03cfc362e64f686528f47eace3e7449f",
+          "parameters": [],
+          "returns": null,
+          "origin": "source-ast"
+        }
+      },
+      {
+        "id": "code.57c2e4549f14296e",
+        "kind": "function",
+        "layer": "program",
+        "origin": "source-ast",
+        "label": "renderMessages",
+        "summary": "Local static call; execution requires runtime evidence.",
+        "source": {
+          "path": "static/app.js",
+          "symbol": "renderMessages"
+        },
+        "parent": "ui.unread_count",
+        "capture": {
+          "in": {},
+          "out": {}
+        },
+        "signature": "inbox, count",
+        "code_evidence": {
+          "symbol": "static/app.js::renderMessages",
+          "ast_hash": "58b5aa3ab94717c16b38017212ac3c6febbbd3781e1fc993751562e392780573",
+          "parameters": [
+            {
+              "name": "inbox",
+              "annotation": null
+            },
+            {
+              "name": "count",
+              "annotation": null
+            }
+          ],
+          "returns": null,
+          "origin": "source-ast"
+        }
+      },
+      {
+        "id": "code.854bf473abb2f2f5",
+        "kind": "function",
+        "layer": "program",
+        "origin": "source-ast",
+        "label": "action",
+        "summary": "Local static call; execution requires runtime evidence.",
+        "source": {
+          "path": "static/app.js",
+          "symbol": "action"
+        },
+        "parent": "ui.mark_read",
+        "capture": {
+          "in": {},
+          "out": {}
+        },
+        "signature": "node, button, operation",
+        "code_evidence": {
+          "symbol": "static/app.js::action",
+          "ast_hash": "f0f0f543796afa26872e0749947887f2b22c3db1044598009667ac7dfb07e1ac",
+          "parameters": [
+            {
+              "name": "node",
+              "annotation": null
+            },
+            {
+              "name": "button",
+              "annotation": null
+            },
+            {
+              "name": "operation",
+              "annotation": null
+            }
+          ],
+          "returns": null,
+          "origin": "source-ast"
+        }
+      },
+      {
+        "id": "code.90b8a1a862670330",
+        "kind": "function",
+        "layer": "program",
+        "origin": "source-ast",
+        "label": "api",
+        "summary": "Local static call; execution requires runtime evidence.",
+        "source": {
+          "path": "static/app.js",
+          "symbol": "api"
+        },
+        "parent": "ui.unread_count",
+        "capture": {
+          "in": {},
+          "out": {}
+        },
+        "signature": "path, method=\"GET\", data",
+        "code_evidence": {
+          "symbol": "static/app.js::api",
+          "ast_hash": "62c1fb3325af91e307f2e0ccfbcab1db056313efb36fcd5af1407e5e63b52579",
+          "parameters": [
+            {
+              "name": "path",
+              "annotation": null
+            },
+            {
+              "name": "method",
+              "annotation": null
+            },
+            {
+              "name": "data",
+              "annotation": null
+            }
+          ],
+          "returns": null,
+          "origin": "source-ast"
+        }
+      },
+      {
+        "id": "db.messages.migrate",
+        "kind": "function",
+        "label": "新增消息已读字段",
+        "summary": "write · team",
+        "source": {
+          "path": "app/migrations.py",
+          "symbol": "apply_message_column"
+        },
+        "parent": "migrate_messages",
+        "data_role": "query",
+        "data_store": "team",
+        "data_origin": "declaration",
+        "data_coverage": "partial",
+        "data_metadata": {
+          "action": "write",
+          "targets": [
+            "table:messages"
+          ]
+        },
+        "capture": {
+          "in": {
+            "operation": "string",
+            "statement": "string",
+            "parameters": {}
+          },
+          "out": {
+            "status": "string",
+            "duration_ms": "number",
+            "rows": "number",
+            "rows_known": "boolean",
+            "result": {
+              "added": "boolean"
+            },
+            "before": {},
+            "error_type": "string",
+            "transaction_id": "string",
+            "targets": [
+              "string"
+            ],
+            "unknown_targets": [
+              "string"
+            ],
+            "input_count": "number",
+            "output_count": "number",
+            "committed": "boolean",
+            "target_source": "string",
+            "target_access": [
+              {
+                "target": "string",
+                "action": "string"
+              }
+            ]
+          }
+        },
+        "managed_by": "bo-database/v1",
+        "code_evidence": {
+          "symbol": "app/migrations.py::apply_message_column",
+          "ast_hash": "f3c6fe4749e541e1d895edcc99fd6342621ea9666ed50eb28dbfcb82df0b1844",
+          "origin": "source-ast"
+        }
+      },
+      {
+        "id": "db:team:table%3Amessages:field:is_read",
+        "kind": "data",
+        "label": "is_read",
+        "summary": "INTEGER",
+        "parent": "db:team:table%3Amessages",
+        "data_role": "column",
+        "data_store": "team",
+        "data_key": "table:messages.is_read",
+        "data_origin": "database",
+        "data_coverage": "complete",
+        "data_metadata": {
+          "name": "is_read",
+          "native_type": "INTEGER",
+          "nullable": false,
+          "primary_key": false,
+          "default": "'0'",
+          "generated": false,
+          "status": "matched",
+          "declared": {
+            "name": "is_read",
+            "native_type": "INTEGER",
+            "nullable": false,
+            "primary_key": false,
+            "generated": false,
+            "default": "'0'"
+          }
+        },
+        "managed_by": "bo-database/v1"
+      },
+      {
+        "id": "implementation.13cffe6e65f9cb89",
+        "kind": "function",
+        "layer": "program",
+        "origin": "source-ast",
+        "label": "create_app.message_summary",
+        "summary": "Implementation ownership; source and runtime records establish calls",
+        "source": {
+          "path": "app/web.py",
+          "symbol": "create_app.message_summary"
+        },
+        "parent": "unread_count",
+        "capture": {
+          "in": {},
+          "out": {}
+        },
+        "signature": "request: Request",
+        "code_evidence": {
+          "symbol": "app/web.py::create_app.message_summary",
+          "ast_hash": "1d7d7032adf658833d1dc96fd504bef3e1d71aa41dba098f6224ba8a57382f9e",
+          "parameters": [
+            {
+              "name": "request",
+              "annotation": "Request"
+            }
+          ],
+          "returns": null,
+          "origin": "source-ast"
+        }
+      },
+      {
+        "id": "implementation.6b01b01800b150a4",
+        "kind": "function",
+        "layer": "program",
+        "origin": "source-ast",
+        "label": "create_app.mark_message_read",
+        "summary": "Implementation ownership; source and runtime records establish calls",
+        "source": {
+          "path": "app/web.py",
+          "symbol": "create_app.mark_message_read"
+        },
+        "parent": "mark_message_read",
+        "capture": {
+          "in": {},
+          "out": {}
+        },
+        "signature": "message_id: int, request: Request",
+        "code_evidence": {
+          "symbol": "app/web.py::create_app.mark_message_read",
+          "ast_hash": "bea027bee1e5f5b8152c0cd73d5d5affd4c2d8f0e2b60edc876eb5bed1e70618",
+          "parameters": [
+            {
+              "name": "message_id",
+              "annotation": "int"
+            },
+            {
+              "name": "request",
+              "annotation": "Request"
+            }
+          ],
+          "returns": null,
+          "origin": "source-ast"
+        }
+      },
+      {
+        "id": "implementation.c4bdad416176bd02",
+        "kind": "function",
+        "layer": "program",
+        "origin": "source-ast",
+        "label": "renderMessages.<callback:anonymous:1>",
+        "summary": "Implementation ownership; source and runtime records establish calls",
+        "source": {
+          "path": "static/app.js",
+          "symbol": "renderMessages.<callback:anonymous:1>"
+        },
+        "parent": "submit_material",
+        "capture": {
+          "in": {},
+          "out": {}
+        },
+        "signature": "",
+        "code_evidence": {
+          "symbol": "static/app.js::renderMessages.<callback:anonymous:1>",
+          "ast_hash": "7c017e7b29cdb9c19bb807888755b9cbe638e22e3ec797702ac508e5556a49ee",
+          "parameters": [],
+          "returns": null,
+          "origin": "source-ast"
+        }
+      },
+      {
+        "id": "implementation.c7de5cf780e5fa92",
+        "kind": "function",
+        "layer": "program",
+        "origin": "source-ast",
+        "label": "markMessageRead.<callback:action:2:1>",
+        "summary": "Implementation ownership; source and runtime records establish calls",
+        "source": {
+          "path": "static/app.js",
+          "symbol": "markMessageRead.<callback:action:2:1>"
+        },
+        "parent": "submit_material",
+        "capture": {
+          "in": {},
+          "out": {}
+        },
+        "signature": "",
+        "code_evidence": {
+          "symbol": "static/app.js::markMessageRead.<callback:action:2:1>",
+          "ast_hash": "876654a8a57b0149908dbca11cc63aa8b0d26c584055c1609ad280d3c8c918fd",
+          "parameters": [],
+          "returns": null,
+          "origin": "source-ast"
+        }
+      },
+      {
+        "id": "mark_message_read",
+        "kind": "action",
+        "layer": "business",
+        "label": "收件人逐条点击“标记为已读”",
+        "summary": "收件人逐条点击“标记为已读”",
+        "source": {
+          "path": "app/service.py",
+          "symbol": "Service.mark_message_read"
+        },
+        "capture": {
+          "in": {
+            "token_present": "boolean",
+            "actor_id": "number",
+            "message_id": "number",
+            "rule": "string"
+          },
+          "out": {
+            "allowed": "boolean",
+            "message_id": "number",
+            "recipient_id": "number",
+            "was_read": "boolean",
+            "is_read": "boolean",
+            "changed": "boolean",
+            "unread_before": "number",
+            "unread_count": "number"
+          }
+        },
+        "requirements": [
+          "R10"
+        ],
+        "parent": "notify_reviewer",
+        "code_evidence": {
+          "symbol": "app/service.py::Service.mark_message_read",
+          "ast_hash": "425b907b6248afd3f20ecb9a291930e83e454aa9b79eb14dbdb1bfa7bd5e42d4",
+          "origin": "source-ast"
+        },
+        "semantic_roles": [
+          "business"
+        ]
+      },
+      {
+        "id": "message_read",
+        "kind": "state",
+        "layer": "business",
+        "parent": "notify_reviewer",
+        "value": true,
+        "label": "已读",
+        "summary": "Persisted messages.is_read status; actual values are captured in message-specific commit events, separately from the material lifecycle.",
+        "requirements": [
+          "R10"
+        ]
+      },
+      {
+        "id": "message_unread",
+        "kind": "state",
+        "layer": "business",
+        "parent": "notify_reviewer",
+        "value": false,
+        "label": "未读",
+        "summary": "Persisted messages.is_read status; actual values are captured in message-specific commit events, separately from the material lifecycle.",
+        "requirements": [
+          "R10"
+        ]
+      },
+      {
+        "id": "migrate_messages",
+        "kind": "function",
+        "layer": "business",
+        "parent": "notify_reviewer",
+        "label": "已有消息升级为未读",
+        "summary": "Idempotent application migration; adds is_read once and preserves old message facts.",
+        "source": {
+          "path": "app/migrations.py",
+          "symbol": "migrate_messages"
+        },
+        "capture": {
+          "in": {},
+          "out": {
+            "schema_changed": "boolean",
+            "existing_count": "number",
+            "initialized_unread": "number"
+          }
+        },
+        "requirements": [
+          "R11"
+        ],
+        "code_evidence": {
+          "symbol": "app/migrations.py::migrate_messages",
+          "ast_hash": "4960e25608c040a9ac612fbbc4faa199a8a4b6f19be7ec25ed379a47c30f8728",
+          "origin": "source-ast"
+        }
+      },
+      {
+        "id": "ui.mark_read",
+        "kind": "function",
+        "layer": "program",
+        "parent": "mark_message_read",
+        "label": "界面 · markMessageRead",
+        "summary": "Actual browser interaction; static calls do not establish execution.",
+        "source": {
+          "path": "static/app.js",
+          "symbol": "markMessageRead"
+        },
+        "capture": {
+          "in": {},
+          "out": {
+            "ok": "boolean"
+          }
+        },
+        "requirements": [
+          "R9"
+        ],
+        "code_evidence": {
+          "symbol": "static/app.js::markMessageRead",
+          "ast_hash": "b7a7b5405a0efe3bdcf30d0527fc7c11086961f1bf1e38227e85d30bb205b92f",
+          "origin": "source-ast"
+        }
+      },
+      {
+        "id": "ui.unread_count",
+        "kind": "function",
+        "layer": "program",
+        "parent": "unread_count",
+        "label": "界面 · loadMessages",
+        "summary": "Actual browser interaction; static calls do not establish execution.",
+        "source": {
+          "path": "static/app.js",
+          "symbol": "loadMessages"
+        },
+        "capture": {
+          "in": {},
+          "out": {
+            "ok": "boolean"
+          }
+        },
+        "requirements": [
+          "R9"
+        ],
+        "code_evidence": {
+          "symbol": "static/app.js::loadMessages",
+          "ast_hash": "65f865b86ce61b9e9c7e58723131306b03cfc362e64f686528f47eace3e7449f",
+          "origin": "source-ast"
+        }
+      },
+      {
+        "id": "unread_count",
+        "kind": "action",
+        "layer": "business",
+        "label": "列表显示自己的未读数量",
+        "summary": "列表显示自己的未读数量",
+        "source": {
+          "path": "app/service.py",
+          "symbol": "Service.unread_count"
+        },
+        "capture": {
+          "in": {
+            "token_present": "boolean",
+            "actor_id": "number"
+          },
+          "out": {
+            "recipient_id": "number",
+            "unread_count": "number"
+          }
+        },
+        "requirements": [
+          "R10"
+        ],
+        "parent": "notify_reviewer",
+        "code_evidence": {
+          "symbol": "app/service.py::Service.unread_count",
+          "ast_hash": "a19009ca18115f27b91350a258c3bf5f577982483793e173fa6c3e9ca09199a7",
+          "origin": "source-ast"
+        },
+        "semantic_roles": [
+          "business"
+        ]
+      }
+    ],
+    "removed": [
+      {
+        "id": "code.2c605a4a1304f03e",
+        "kind": "function",
+        "layer": "program",
+        "origin": "source-ast",
+        "label": "element",
+        "summary": "Local static call; execution requires runtime evidence.",
+        "source": {
+          "path": "static/app.js",
+          "symbol": "element"
+        },
+        "parent": "ui.workspace",
+        "capture": {
+          "in": {},
+          "out": {}
+        },
+        "signature": "tag, text, className",
+        "code_evidence": {
+          "symbol": "static/app.js::element",
+          "ast_hash": "d2eda7a3d69b6b19c56c2323129e6e7aab0ae34900b82e04e7390d6953b21678",
+          "parameters": [
+            {
+              "name": "tag",
+              "annotation": null
+            },
+            {
+              "name": "text",
+              "annotation": null
+            },
+            {
+              "name": "className",
+              "annotation": null
+            }
+          ],
+          "returns": null,
+          "origin": "source-ast"
+        }
+      }
+    ],
+    "changed_ids": [
+      "db:team:table%3Amessages",
+      "implementation.94decbd1d2413327",
+      "implementation.acc8d3d67a2d2b0f",
+      "notify_reviewer",
+      "read_messages",
+      "ui.workspace"
+    ],
+    "retained_ids": 138
+  },
+  "edges": {
+    "added": [
+      {
+        "id": "call.35691e262e667939",
+        "from": "unread_count",
+        "to": "db.messages.read",
+        "type": "flow",
+        "label": "Static call self.read",
+        "origin": "source-ast",
+        "evidence": "python syntax reference; execution unproven",
+        "callsite": {
+          "line": 223,
+          "column": 17,
+          "args": [
+            "connection",
+            "messages",
+            "select(messages.c.id).where(messages.c.recipient_id == actor['id'], messages.c.is_read == 0)"
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "call.435d8faed81922cd",
+        "from": "unread_count",
+        "to": "code.3aedb3384248f82e",
+        "type": "flow",
+        "label": "Static call self.actor",
+        "origin": "source-ast",
+        "evidence": "python syntax reference; execution unproven",
+        "callsite": {
+          "line": 222,
+          "column": 18,
+          "args": [
+            "connection",
+            "token"
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "call.496dace5267ee40e",
+        "from": "ui.mark_read",
+        "to": "code.854bf473abb2f2f5",
+        "type": "flow",
+        "label": "Static call action",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 28,
+          "column": 62,
+          "args": [
+            "\"ui.mark_read\"",
+            "button",
+            "async()=>{const result=await api(\"/api/messages/\"+messageId+\"/read\",\"POST\",{});await loadMessages();notice(result.changed?\"已标记为已读\":\"这条消息已经是已读状态\");}"
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "call.4c63702e65aaf5ac",
+        "from": "mark_message_read",
+        "to": "code.3aedb3384248f82e",
+        "type": "flow",
+        "label": "Static call self.actor",
+        "origin": "source-ast",
+        "evidence": "python syntax reference; execution unproven",
+        "callsite": {
+          "line": 231,
+          "column": 18,
+          "args": [
+            "connection",
+            "token"
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "call.5ae43275a536b457",
+        "from": "mark_message_read",
+        "to": "db.messages.read",
+        "type": "flow",
+        "label": "Static call self.read",
+        "origin": "source-ast",
+        "evidence": "python syntax reference; execution unproven",
+        "callsite": {
+          "line": 240,
+          "column": 18,
+          "args": [
+            "connection",
+            "messages",
+            "select(messages.c.id).where(messages.c.recipient_id == actor['id'], messages.c.is_read == 0)"
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "call.5f2f47ee5208f437",
+        "from": "ui.unread_count",
+        "to": "code.57c2e4549f14296e",
+        "type": "flow",
+        "label": "Static call renderMessages",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 27,
+          "column": 124,
+          "args": [
+            "inbox",
+            "summary.unread_count"
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "call.adbc80b11d417775",
+        "from": "mark_message_read",
+        "to": "db.messages.read",
+        "type": "flow",
+        "label": "Static call self.read",
+        "origin": "source-ast",
+        "evidence": "python syntax reference; execution unproven",
+        "callsite": {
+          "line": 232,
+          "column": 17,
+          "args": [
+            "connection",
+            "messages",
+            "select(messages).where(messages.c.id == message_id, messages.c.recipient_id == actor['id'])"
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "call.bb1987e75b4c7b8d",
+        "from": "mark_message_read",
+        "to": "db.messages.write",
+        "type": "flow",
+        "label": "Static call self.write",
+        "origin": "source-ast",
+        "evidence": "python syntax reference; execution unproven",
+        "callsite": {
+          "line": 238,
+          "column": 24,
+          "args": [
+            "connection",
+            "messages",
+            "update(messages).where(messages.c.id == message_id, messages.c.recipient_id == actor['id'], messages.c.is_read == 0).values(is_read=1)"
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "call.c8aa3fb82c79a77d",
+        "from": "mark_message_read",
+        "to": "code.4d6cb2dcbc723486",
+        "type": "flow",
+        "label": "Static call self.require",
+        "origin": "source-ast",
+        "evidence": "python syntax reference; execution unproven",
+        "callsite": {
+          "line": 233,
+          "column": 12,
+          "args": [
+            "bool(rows)",
+            "404",
+            "'message_not_found'",
+            "'mark_message_read'"
+          ],
+          "keywords": {
+            "actor_id": "actor['id']",
+            "message_id": "message_id"
+          }
+        }
+      },
+      {
+        "id": "call.e4c99a291dce545d",
+        "from": "ui.unread_count",
+        "to": "code.90b8a1a862670330",
+        "type": "flow",
+        "label": "Static call api",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 27,
+          "column": 55,
+          "args": [
+            "\"/api/messages\""
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "call.e54e72b5a73e71f8",
+        "from": "ui.unread_count",
+        "to": "code.90b8a1a862670330",
+        "type": "flow",
+        "label": "Static call api",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 27,
+          "column": 96,
+          "args": [
+            "\"/api/message-summary\""
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "call.f218ef93e84be435",
+        "from": "ui.workspace",
+        "to": "code.062335503a782f3c",
+        "type": "flow",
+        "label": "Static call loadMessages",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 29,
+          "column": 117,
+          "args": [],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "call.f520548a2cbebd80",
+        "from": "mark_message_read",
+        "to": "db.messages.read",
+        "type": "flow",
+        "label": "Static call self.read",
+        "origin": "source-ast",
+        "evidence": "python syntax reference; execution unproven",
+        "callsite": {
+          "line": 235,
+          "column": 19,
+          "args": [
+            "connection",
+            "messages",
+            "select(messages.c.id).where(messages.c.recipient_id == actor['id'], messages.c.is_read == 0)"
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "contains.code.062335503a782f3c",
+        "from": "ui.workspace",
+        "to": "code.062335503a782f3c",
+        "type": "contains",
+        "label": "Local function",
+        "origin": "source-ast",
+        "evidence": "business-map anchor + source AST call"
+      },
+      {
+        "id": "contains.code.57c2e4549f14296e",
+        "from": "ui.unread_count",
+        "to": "code.57c2e4549f14296e",
+        "type": "contains",
+        "label": "Local function",
+        "origin": "source-ast",
+        "evidence": "business-map anchor + source AST call"
+      },
+      {
+        "id": "contains.code.854bf473abb2f2f5",
+        "from": "ui.mark_read",
+        "to": "code.854bf473abb2f2f5",
+        "type": "contains",
+        "label": "Local function",
+        "origin": "source-ast",
+        "evidence": "business-map anchor + source AST call"
+      },
+      {
+        "id": "contains.code.90b8a1a862670330",
+        "from": "ui.unread_count",
+        "to": "code.90b8a1a862670330",
+        "type": "contains",
+        "label": "Local function",
+        "origin": "source-ast",
+        "evidence": "business-map anchor + source AST call"
+      },
+      {
+        "id": "contains.implementation.13cffe6e65f9cb89",
+        "from": "unread_count",
+        "to": "implementation.13cffe6e65f9cb89",
+        "type": "contains",
+        "label": "Implementation function",
+        "origin": "source-ast",
+        "evidence": "implementation inventory + source AST"
+      },
+      {
+        "id": "contains.implementation.6b01b01800b150a4",
+        "from": "mark_message_read",
+        "to": "implementation.6b01b01800b150a4",
+        "type": "contains",
+        "label": "Implementation function",
+        "origin": "source-ast",
+        "evidence": "implementation inventory + source AST"
+      },
+      {
+        "id": "contains.implementation.c4bdad416176bd02",
+        "from": "submit_material",
+        "to": "implementation.c4bdad416176bd02",
+        "type": "contains",
+        "label": "Implementation function",
+        "origin": "source-ast",
+        "evidence": "implementation inventory + source AST"
+      },
+      {
+        "id": "contains.implementation.c7de5cf780e5fa92",
+        "from": "submit_material",
+        "to": "implementation.c7de5cf780e5fa92",
+        "type": "contains",
+        "label": "Implementation function",
+        "origin": "source-ast",
+        "evidence": "implementation inventory + source AST"
+      },
+      {
+        "id": "contains.mark_message_read",
+        "from": "notify_reviewer",
+        "to": "mark_message_read",
+        "type": "contains",
+        "evidence": "Explicit business ownership"
+      },
+      {
+        "id": "contains.message_read",
+        "from": "notify_reviewer",
+        "to": "message_read",
+        "type": "contains",
+        "evidence": "Explicit business ownership"
+      },
+      {
+        "id": "contains.message_unread",
+        "from": "notify_reviewer",
+        "to": "message_unread",
+        "type": "contains",
+        "evidence": "Explicit business ownership"
+      },
+      {
+        "id": "contains.migrate_messages",
+        "from": "notify_reviewer",
+        "to": "migrate_messages",
+        "type": "contains",
+        "evidence": "Explicit business ownership"
+      },
+      {
+        "id": "contains.ui.mark_read",
+        "from": "mark_message_read",
+        "to": "ui.mark_read",
+        "type": "contains",
+        "evidence": "Explicit business ownership"
+      },
+      {
+        "id": "contains.ui.unread_count",
+        "from": "unread_count",
+        "to": "ui.unread_count",
+        "type": "contains",
+        "evidence": "Explicit business ownership"
+      },
+      {
+        "id": "contains.unread_count",
+        "from": "notify_reviewer",
+        "to": "unread_count",
+        "type": "contains",
+        "evidence": "Explicit business ownership"
+      },
+      {
+        "id": "count_unread",
+        "from": "message_unread",
+        "to": "unread_count",
+        "type": "data",
+        "label": "统计自己的未读消息",
+        "evidence": "discovery U005"
+      },
+      {
+        "id": "db-edge:db%3Ateam%3Atable%253Amessages:contains:db%3Ateam%3Atable%253Amessages%3Afield%3Ais_read",
+        "from": "db:team:table%3Amessages",
+        "to": "db:team:table%3Amessages:field:is_read",
+        "type": "contains",
+        "label": "contains",
+        "evidence": "database catalog and configured source binding",
+        "managed_by": "bo-database/v1"
+      },
+      {
+        "id": "db-edge:db.messages.migrate:writes:db%3Ateam%3Atable%253Amessages",
+        "from": "db.messages.migrate",
+        "to": "db:team:table%3Amessages",
+        "type": "data",
+        "label": "writes",
+        "evidence": "database catalog and configured source binding",
+        "managed_by": "bo-database/v1",
+        "data_relation": "writes"
+      },
+      {
+        "id": "db-edge:migrate_messages:contains:db.messages.migrate",
+        "from": "migrate_messages",
+        "to": "db.messages.migrate",
+        "type": "contains",
+        "label": "contains",
+        "evidence": "database catalog and configured source binding",
+        "managed_by": "bo-database/v1"
+      },
+      {
+        "id": "inventory-call.0285e12958423d8a",
+        "from": "code.57c2e4549f14296e",
+        "to": "code.0a4cdda804db3119",
+        "type": "flow",
+        "label": "Static call element",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 21,
+          "column": 15,
+          "args": [
+            "\"strong\"",
+            "message.is_read?\"已读\":\"未读\""
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "inventory-call.0475a47f0805c77a",
+        "from": "mark_message_read",
+        "to": "db.accounts.read",
+        "type": "flow",
+        "label": "Static call self.read",
+        "origin": "source-ast",
+        "evidence": "python syntax reference; execution unproven",
+        "callsite": {
+          "line": 235,
+          "column": 19,
+          "args": [
+            "connection",
+            "messages",
+            "select(messages.c.id).where(messages.c.recipient_id == actor['id'], messages.c.is_read == 0)"
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "inventory-call.062ec1ca5144d58c",
+        "from": "code.57c2e4549f14296e",
+        "to": "code.0a4cdda804db3119",
+        "type": "flow",
+        "label": "Static call element",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 21,
+          "column": 87,
+          "args": [
+            "\"small\"",
+            "\"消息 #\"+message.id+\" · 资料 #\"+message.material_id+\" · 提交版本 \"+message.content_version"
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "inventory-call.088b96ab3b31946c",
+        "from": "implementation.c7de5cf780e5fa92",
+        "to": "implementation.a1ef85dd5abb6ba4",
+        "type": "flow",
+        "label": "Static call notice",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 28,
+          "column": 191,
+          "args": [
+            "result.changed?\"已标记为已读\":\"这条消息已经是已读状态\""
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "inventory-call.1c4ae67442e518e7",
+        "from": "unread_count",
+        "to": "current_actor",
+        "type": "flow",
+        "label": "Static call self.actor",
+        "origin": "source-ast",
+        "evidence": "python syntax reference; execution unproven",
+        "callsite": {
+          "line": 222,
+          "column": 18,
+          "args": [
+            "connection",
+            "token"
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "inventory-call.2053cb67895bef8c",
+        "from": "code.57c2e4549f14296e",
+        "to": "code.0a4cdda804db3119",
+        "type": "flow",
+        "label": "Static call element",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 25,
+          "column": 33,
+          "args": [
+            "\"p\"",
+            "\"暂无消息\"",
+            "\"muted\""
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "inventory-call.2447d56b3115c512",
+        "from": "mark_message_read",
+        "to": "review_permission",
+        "type": "flow",
+        "label": "Static call self.require",
+        "origin": "source-ast",
+        "evidence": "python syntax reference; execution unproven",
+        "callsite": {
+          "line": 233,
+          "column": 12,
+          "args": [
+            "bool(rows)",
+            "404",
+            "'message_not_found'",
+            "'mark_message_read'"
+          ],
+          "keywords": {
+            "actor_id": "actor['id']",
+            "message_id": "message_id"
+          }
+        }
+      },
+      {
+        "id": "inventory-call.45977001fa8667af",
+        "from": "mark_message_read",
+        "to": "db.accounts.read",
+        "type": "flow",
+        "label": "Static call self.read",
+        "origin": "source-ast",
+        "evidence": "python syntax reference; execution unproven",
+        "callsite": {
+          "line": 240,
+          "column": 18,
+          "args": [
+            "connection",
+            "messages",
+            "select(messages.c.id).where(messages.c.recipient_id == actor['id'], messages.c.is_read == 0)"
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "inventory-call.4b664aafdf846e62",
+        "from": "implementation.94decbd1d2413327",
+        "to": "migrate_messages",
+        "type": "flow",
+        "label": "Static call migrate_messages",
+        "origin": "source-ast",
+        "evidence": "python syntax reference; execution unproven",
+        "callsite": {
+          "line": 44,
+          "column": 18,
+          "args": [
+            "self.engine",
+            "self.bo"
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "inventory-call.5ff24bc5bb85e39f",
+        "from": "unread_count",
+        "to": "db.accounts.read",
+        "type": "flow",
+        "label": "Static call self.read",
+        "origin": "source-ast",
+        "evidence": "python syntax reference; execution unproven",
+        "callsite": {
+          "line": 223,
+          "column": 17,
+          "args": [
+            "connection",
+            "messages",
+            "select(messages.c.id).where(messages.c.recipient_id == actor['id'], messages.c.is_read == 0)"
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "inventory-call.6cccda37184db7b4",
+        "from": "implementation.c4bdad416176bd02",
+        "to": "ui.mark_read",
+        "type": "flow",
+        "label": "Static call markMessageRead",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 22,
+          "column": 153,
+          "args": [
+            "message.id",
+            "button"
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "inventory-call.74eb4e99b6026188",
+        "from": "mark_message_read",
+        "to": "db.accounts.read",
+        "type": "flow",
+        "label": "Static call self.read",
+        "origin": "source-ast",
+        "evidence": "python syntax reference; execution unproven",
+        "callsite": {
+          "line": 232,
+          "column": 17,
+          "args": [
+            "connection",
+            "messages",
+            "select(messages).where(messages.c.id == message_id, messages.c.recipient_id == actor['id'])"
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "inventory-call.b6e3a0fc88c5d667",
+        "from": "mark_message_read",
+        "to": "db.sessions.write",
+        "type": "flow",
+        "label": "Static call self.write",
+        "origin": "source-ast",
+        "evidence": "python syntax reference; execution unproven",
+        "callsite": {
+          "line": 238,
+          "column": 24,
+          "args": [
+            "connection",
+            "messages",
+            "update(messages).where(messages.c.id == message_id, messages.c.recipient_id == actor['id'], messages.c.is_read == 0).values(is_read=1)"
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "inventory-call.b76d8f2dcc5b1dec",
+        "from": "ui.unread_count",
+        "to": "code.3f668ce1b14f58b8",
+        "type": "flow",
+        "label": "Static call api",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 27,
+          "column": 96,
+          "args": [
+            "\"/api/message-summary\""
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "inventory-call.b815ed8e0d7434c6",
+        "from": "mark_message_read",
+        "to": "current_actor",
+        "type": "flow",
+        "label": "Static call self.actor",
+        "origin": "source-ast",
+        "evidence": "python syntax reference; execution unproven",
+        "callsite": {
+          "line": 231,
+          "column": 18,
+          "args": [
+            "connection",
+            "token"
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "inventory-call.b8ffebeaac3f5c84",
+        "from": "code.57c2e4549f14296e",
+        "to": "code.0a4cdda804db3119",
+        "type": "flow",
+        "label": "Static call element",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 20,
+          "column": 14,
+          "args": [
+            "\"div\"",
+            "undefined",
+            "\"message\""
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "inventory-call.c63b34d666bd3bc7",
+        "from": "ui.workspace",
+        "to": "ui.unread_count",
+        "type": "flow",
+        "label": "Static call loadMessages",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 29,
+          "column": 117,
+          "args": [],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "inventory-call.c8e9e11a6c228e5f",
+        "from": "code.57c2e4549f14296e",
+        "to": "code.0a4cdda804db3119",
+        "type": "flow",
+        "label": "Static call element",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 21,
+          "column": 59,
+          "args": [
+            "\"div\"",
+            "message.text"
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "inventory-call.d9a4d950ead8086d",
+        "from": "ui.mark_read",
+        "to": "code.6a5411a7c5064020",
+        "type": "flow",
+        "label": "Static call action",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 28,
+          "column": 62,
+          "args": [
+            "\"ui.mark_read\"",
+            "button",
+            "async()=>{const result=await api(\"/api/messages/\"+messageId+\"/read\",\"POST\",{});await loadMessages();notice(result.changed?\"已标记为已读\":\"这条消息已经是已读状态\");}"
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "inventory-call.df7653992a241e63",
+        "from": "implementation.c7de5cf780e5fa92",
+        "to": "ui.unread_count",
+        "type": "flow",
+        "label": "Static call loadMessages",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 28,
+          "column": 176,
+          "args": [],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "inventory-call.e25ab3feaf3d7198",
+        "from": "implementation.c7de5cf780e5fa92",
+        "to": "code.3f668ce1b14f58b8",
+        "type": "flow",
+        "label": "Static call api",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 28,
+          "column": 120,
+          "args": [
+            "\"/api/messages/\"+messageId+\"/read\"",
+            "\"POST\"",
+            "{}"
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "inventory-call.ef4c37c2237113d8",
+        "from": "ui.unread_count",
+        "to": "code.3f668ce1b14f58b8",
+        "type": "flow",
+        "label": "Static call api",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 27,
+          "column": 55,
+          "args": [
+            "\"/api/messages\""
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "inventory-call.fe4e8456b55c04ed",
+        "from": "code.57c2e4549f14296e",
+        "to": "code.0a4cdda804db3119",
+        "type": "flow",
+        "label": "Static call element",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 22,
+          "column": 38,
+          "args": [
+            "\"button\"",
+            "\"标记为已读\"",
+            "\"quiet\""
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "list_mark_read",
+        "from": "read_messages",
+        "to": "mark_message_read",
+        "type": "flow",
+        "label": "只操作自己收到的这一条",
+        "evidence": "discovery U005"
+      },
+      {
+        "id": "list_read",
+        "from": "message_read",
+        "to": "read_messages",
+        "type": "data",
+        "label": "读取，不再改变状态",
+        "evidence": "discovery U005"
+      },
+      {
+        "id": "list_unread",
+        "from": "message_unread",
+        "to": "read_messages",
+        "type": "data",
+        "label": "读取当前接收人的消息",
+        "evidence": "discovery U005"
+      },
+      {
+        "id": "mark_read_idempotent",
+        "from": "message_read",
+        "to": "mark_message_read",
+        "type": "flow",
+        "label": "重复点击：保持已读",
+        "evidence": "discovery U005"
+      },
+      {
+        "id": "mark_read_transition",
+        "from": "mark_message_read",
+        "to": "message_read",
+        "type": "flow",
+        "label": "未读 → 已读",
+        "evidence": "discovery U005"
+      },
+      {
+        "id": "mark_update_count",
+        "from": "mark_message_read",
+        "to": "unread_count",
+        "type": "data",
+        "label": "首次减少 1；重复不再减少",
+        "evidence": "discovery U005"
+      },
+      {
+        "id": "message_arrival_unread",
+        "from": "notify_reviewer",
+        "to": "message_unread",
+        "type": "flow",
+        "label": "新消息初始未读",
+        "evidence": "discovery U005"
+      }
+    ],
+    "removed": [
+      {
+        "id": "call.5dc622d8cb06eb53",
+        "from": "ui.workspace",
+        "to": "code.3b29cec8011fbb6e",
+        "type": "flow",
+        "label": "Static call api",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 16,
+          "column": 111,
+          "args": [
+            "\"/api/messages\""
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "call.8a6aee986d0dda31",
+        "from": "ui.workspace",
+        "to": "code.2c605a4a1304f03e",
+        "type": "flow",
+        "label": "Static call element",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 16,
+          "column": 315,
+          "args": [
+            "\"small\"",
+            "\"资料 #\"+message.material_id+\" · 提交版本 \"+message.content_version"
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "call.8fb44580d4183baf",
+        "from": "ui.workspace",
+        "to": "code.2c605a4a1304f03e",
+        "type": "flow",
+        "label": "Static call element",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 16,
+          "column": 266,
+          "args": [
+            "\"div\"",
+            "message.text",
+            "\"message\""
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "call.a689e83ca395ceb6",
+        "from": "ui.workspace",
+        "to": "code.2c605a4a1304f03e",
+        "type": "flow",
+        "label": "Static call element",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 16,
+          "column": 446,
+          "args": [
+            "\"p\"",
+            "\"暂无消息\"",
+            "\"muted\""
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "contains.code.2c605a4a1304f03e",
+        "from": "ui.workspace",
+        "to": "code.2c605a4a1304f03e",
+        "type": "contains",
+        "label": "Local function",
+        "origin": "source-ast",
+        "evidence": "business-map anchor + source AST call"
+      },
+      {
+        "id": "inventory-call.1b0b211d2d026fb8",
+        "from": "ui.workspace",
+        "to": "code.0a4cdda804db3119",
+        "type": "flow",
+        "label": "Static call element",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 16,
+          "column": 446,
+          "args": [
+            "\"p\"",
+            "\"暂无消息\"",
+            "\"muted\""
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "inventory-call.5087467cfd01904a",
+        "from": "ui.workspace",
+        "to": "code.0a4cdda804db3119",
+        "type": "flow",
+        "label": "Static call element",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 16,
+          "column": 266,
+          "args": [
+            "\"div\"",
+            "message.text",
+            "\"message\""
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "inventory-call.7c5dbc83c8f024b8",
+        "from": "ui.workspace",
+        "to": "code.0a4cdda804db3119",
+        "type": "flow",
+        "label": "Static call element",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 16,
+          "column": 315,
+          "args": [
+            "\"small\"",
+            "\"资料 #\"+message.material_id+\" · 提交版本 \"+message.content_version"
+          ],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "inventory-call.b381c99b76493441",
+        "from": "ui.workspace",
+        "to": "code.3f668ce1b14f58b8",
+        "type": "flow",
+        "label": "Static call api",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 16,
+          "column": 111,
+          "args": [
+            "\"/api/messages\""
+          ],
+          "keywords": {}
+        }
+      }
+    ],
+    "changed_ids": [
+      "call.005b997b98e14500",
+      "call.0c56eb2191bc5c1a",
+      "call.13a460a1ecbdbab5",
+      "call.1581b8cf867a5296",
+      "call.15e990d261c70ce1",
+      "call.17ad617a06260deb",
+      "call.1c52479abfaface7",
+      "call.2134ad1817248cb9",
+      "call.254314ca3eda2667",
+      "call.2cb1c5a44421ae2c",
+      "call.2d68fb53810a4338",
+      "call.300a3d11b67271d8",
+      "call.30cae74122e60154",
+      "call.31ec26f4538e4784",
+      "call.327cfa2d6dc52fdc",
+      "call.3462157ca32d38af",
+      "call.38d60336ffb7099a",
+      "call.41614e7a3d00c2f2",
+      "call.4556580f58a45815",
+      "call.478df11882b2648d",
+      "call.50223fa167414c87",
+      "call.542594552e024c56",
+      "call.578cfe0107c66c07",
+      "call.60c53aba64f661eb",
+      "call.6c5bbf35003ea0a5",
+      "call.6f06a25ec5222d71",
+      "call.6f386ece4660ac50",
+      "call.6fd13a7109781666",
+      "call.70e2d26aa1038365",
+      "call.739b2ecf4d9a5226",
+      "call.7b5501e0e9467624",
+      "call.7edd9c5b375f6a97",
+      "call.7edf179c94033485",
+      "call.7f716a4db836fd4c",
+      "call.83d233695a7f30a6",
+      "call.85b5ee8b18e13dd6",
+      "call.879024eaf857f809",
+      "call.92c5f92b0b39ea33",
+      "call.941225e24714dd38",
+      "call.975e5dab73584fd1",
+      "call.97f057cbbba58164",
+      "call.980b4507831feafd",
+      "call.9dae81d60d84544a",
+      "call.9ed7abcca8633ff1",
+      "call.9edc595b32e8be75",
+      "call.9f07094dcaeeb0d4",
+      "call.a50d8e2a1457a58b",
+      "call.ac48ca90138c9c42",
+      "call.b125010a032f572e",
+      "call.b930ef6dc1f709d5",
+      "call.c5af79a461372264",
+      "call.cb429fe77db6e8b0",
+      "call.cb9580ee479b5aea",
+      "call.cd2ee2d07829e87e",
+      "call.d39ff7189a7d0ee5",
+      "call.d418302670e6b9b9",
+      "call.dac3abfddaedd262",
+      "call.dbc59e7bf805e61e",
+      "call.dc2a2617cc9c7c62",
+      "call.e393e845567e3d9d",
+      "call.e3b80d4e1fc6c416",
+      "call.e9a02ce453476bdb",
+      "call.ea03d58759f629c6",
+      "call.f25efe687776354e",
+      "call.f33d4b891b8a8161",
+      "call.f5f80c8297c027db",
+      "call.f6d5a84160c35b53",
+      "call.f6d628acb5697b48",
+      "inventory-call.02decb03a834c512",
+      "inventory-call.05dd47794daf332e",
+      "inventory-call.08d758595f59bb14",
+      "inventory-call.09f415d46ee8d9c2",
+      "inventory-call.10d81a2ca1c224d4",
+      "inventory-call.154438befea3e062",
+      "inventory-call.19bf6e2ab9f08d8f",
+      "inventory-call.21eef277db917b22",
+      "inventory-call.2b055b15f628705b",
+      "inventory-call.2b461f551a5cdab4",
+      "inventory-call.3350254843880eab",
+      "inventory-call.33a2dbc56d822569",
+      "inventory-call.362475e2b6788e6b",
+      "inventory-call.376ab41d9fafa582",
+      "inventory-call.37866313458c3164",
+      "inventory-call.3cd3220c33f04d26",
+      "inventory-call.3d9faf9489b91113",
+      "inventory-call.3ee1a48f72b6396b",
+      "inventory-call.41c072b7666855f2",
+      "inventory-call.42737120441808a1",
+      "inventory-call.45aab31df95a4006",
+      "inventory-call.467f352c2bd94904",
+      "inventory-call.470eb648dd07cb8f",
+      "inventory-call.4adfc312588f815b",
+      "inventory-call.4b86cd591a9edb9b",
+      "inventory-call.4d1ab82d99d56c3c",
+      "inventory-call.4f1d8bc25a221402",
+      "inventory-call.54f4cd5ccffe4d0b",
+      "inventory-call.568eadcaa906cfb6",
+      "inventory-call.57576c51cf5fc098",
+      "inventory-call.58ecc100f21ec961",
+      "inventory-call.5af4a42d912a128d",
+      "inventory-call.5dd232f87a72efd5",
+      "inventory-call.60188fa2dae2a164",
+      "inventory-call.603ae36cebb5e6bd",
+      "inventory-call.612c2cdb1a775446",
+      "inventory-call.62647a676458ee59",
+      "inventory-call.64e11b12ee278057",
+      "inventory-call.68761f375d9b678b",
+      "inventory-call.70e319787e6ccd16",
+      "inventory-call.7207a988525dd704",
+      "inventory-call.737b3aac9e56b7eb",
+      "inventory-call.7418cfb1bb728c77",
+      "inventory-call.794f68752f580d52",
+      "inventory-call.795ba8790142f364",
+      "inventory-call.7e804288725b8790",
+      "inventory-call.808ecbf0906d9cb7",
+      "inventory-call.81d91f95741ad66b",
+      "inventory-call.83ad5bd4d56b5e65",
+      "inventory-call.8aade723c74b2829",
+      "inventory-call.8b182fc3e915269e",
+      "inventory-call.93ab069668331cce",
+      "inventory-call.96db51708bf7e8e5",
+      "inventory-call.980985a40d189779",
+      "inventory-call.988935dbeef155cf",
+      "inventory-call.9bc932ad0b29ef0f",
+      "inventory-call.9d74f02a449a8df2",
+      "inventory-call.a12a11cfd20f161e",
+      "inventory-call.a1bcc79245f67a26",
+      "inventory-call.a33507fa3bb1bb91",
+      "inventory-call.a8020e9cf62cc399",
+      "inventory-call.b5d7ae3b68c287a7",
+      "inventory-call.b6913a722c6dcb04",
+      "inventory-call.b97562f697ef1070",
+      "inventory-call.ba468d1f500deca2",
+      "inventory-call.bc1d2b101bf69092",
+      "inventory-call.c37cf0ca15ed877a",
+      "inventory-call.c57a85ce1502a1b0",
+      "inventory-call.c64e2f32b31635aa",
+      "inventory-call.c9dcf93102e44857",
+      "inventory-call.cb524b86c5eb28f8",
+      "inventory-call.d28e3018bc6ab084",
+      "inventory-call.d36a26c0e6a90821",
+      "inventory-call.dc3dfd25f8b88fa6",
+      "inventory-call.ddd0e889d419d061",
+      "inventory-call.e74227a6638b5874",
+      "inventory-call.f5711ec44f2e0e7c",
+      "inventory-call.ffed5a1e3f282bc6"
+    ],
+    "retained_ids": 329
+  },
+  "material_machine_unchanged": true
+}

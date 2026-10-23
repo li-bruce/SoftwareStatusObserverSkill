@@ -86,6 +86,19 @@ export async function projectStorage(legacy, onStatus, request = fetch) {
     timer = setTimeout(flush, 180);
   }
   return {
+    projectId: document?.project_id,
+    migrateLayout(from, to) {
+      if (!from || from === to) return;
+      // Only an explicit old project prefix may seed a new identity. Never
+      // overwrite an existing view or import another project's browser data.
+      this.getItem(from);
+      for (const key of Object.keys(entries)) {
+        if (key !== from && key !== from + ":analysis" && !key.startsWith(from + ":view:"))
+          continue;
+        const target = to + key.slice(from.length);
+        if (!Object.hasOwn(entries, target)) this.setItem(target, entries[key]);
+      }
+    },
     getItem(key) {
       if (Object.hasOwn(entries, key)) return entries[key];
       if (canMigrate) {

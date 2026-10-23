@@ -1,0 +1,11 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+E
+======================================================================
+ERROR: test_native_sql_literal_forms_are_redacted (unittest.loader._FailedTest.test_native_sql_literal_forms_are_redacted)
+----------------------------------------------------------------------
+AttributeError: type object 'DatabaseRuntimeTests' has no attribute 'test_native_sql_literal_forms_are_redacted'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

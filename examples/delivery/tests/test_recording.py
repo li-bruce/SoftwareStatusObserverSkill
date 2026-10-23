@@ -98,6 +98,41 @@ class RecordingTests(unittest.TestCase):
         self.assertTrue(saved["gaps"])
         self.assertIsNone(self.rec.active)
 
+    def test_new_build_clears_current_list_and_rejects_old_replay(self):
+        ident=self.rec.start()['id']; self.rec.stop()
+        original=(Path(self.temp.name)/(ident+'.json')).read_bytes()
+        self.view['manifest']['build_id']='b2'
+        self.assertEqual(self.rec.list()['recordings'],[])
+        with self.assertRaisesRegex(ValueError,'earlier graph version'):self.rec.get(ident)
+        # Private original evidence is not rewritten or recursively deleted.
+        self.assertEqual((Path(self.temp.name)/(ident+'.json')).read_bytes(),original)
+        new=self.rec.start()['id']; self.rec.stop()
+        self.assertEqual([v['id'] for v in self.rec.list()['recordings']],[new])
+
+    def test_graph_only_change_interrupts_capture_and_clears_list(self):
+        ident=self.rec.start()['id']
+        self.view['model']['nodes'].append({'id':'new-feature'})
+        self.assertIsNone(self.rec.list()['active'])
+        self.assertEqual(self.rec.list()['recordings'],[])
+        self.assertEqual(self.rec.cached[ident]['status'],'interrupted')
+        new=self.rec.start()['id']; self.assertNotEqual(new,ident)
+
+    def test_same_graph_restart_retains_current_recordings(self):
+        ident=self.rec.start()['id']; self.rec.stop(); self.rec.close()
+        self.view['health']['run_id']='producer2'
+        self.rec=module.Recordings(self.temp.name,lambda:deepcopy(self.view),{},interval=60)
+        self.assertEqual([v['id'] for v in self.rec.list()['recordings']],[ident])
+        self.assertEqual(self.rec.get(ident)['status'],'stopped')
+
+    def test_old_records_cannot_starve_current_list_limit(self):
+        ident=self.rec.start()['id']; self.rec.stop()
+        value=self.rec.get(ident)
+        for i in range(51):
+            obsolete=deepcopy(value); obsolete['id']=f'{i:032x}'
+            obsolete['build_id']='old'; obsolete['context']['manifest']['build_id']='old'
+            self.rec._write(obsolete)
+        self.assertEqual([v['id'] for v in self.rec.list()['recordings']],[ident])
+
     def test_sequence_and_sink_gaps_visible(self):
         ident=self.rec.start()["id"]
         self.event(2);self.view["health"]["errors"]=1;self.rec.stop()

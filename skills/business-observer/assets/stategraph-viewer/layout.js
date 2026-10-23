@@ -1,24 +1,50 @@
 import { t as boTranslate } from "./i18n.js";
 // Layout preferences are local view data. They never change model or runtime facts.
 import { graphBounds, nodeType, nodeTypes, viewTypes, relationType } from "./graph-core.js";
-export const layoutKey = (model) =>
+import { dataRelations, migrateDataFilters } from "./data-layer.js";
+import { codeRelations, migrateCodeFilters } from "./code-layer.js";
+export const layoutKey = (model, projectId) =>
   "business-observer.layout.v2:" +
-  (model.presentation?.layout_id || model.presentation?.subject || model.intent);
+  (projectId ||
+    model.project_id ||
+    model.presentation?.layout_id ||
+    model.presentation?.subject ||
+    model.intent);
 export function emptyFilters() {
   return {
+    dataTypes: 1,
+    codeTypes: 1,
     nodes: Object.keys(nodeTypes),
-    edges: ["call", "flow", "transition", "guard", "data", "resource", "join", "shared", "other"],
+    edges: [
+      "call",
+      "flow",
+      "transition",
+      "guard",
+      "data",
+      "resource",
+      "join",
+      "shared",
+      "other",
+      ...dataRelations,
+      ...codeRelations,
+    ],
     regions: Object.keys(nodeTypes),
     depth: "all",
+    hiddenNodes: [],
+    hiddenEdges: [],
   };
 }
 export function cleanFilters(value) {
+  value = migrateCodeFilters(migrateDataFilters(value));
   const clean = emptyFilters();
   for (const kind of ["nodes", "edges", "regions"])
     if (Array.isArray(value?.[kind]))
       clean[kind] = [...new Set(value[kind].filter((type) => clean[kind].includes(type)))];
   if (Number.isInteger(value?.depth) && value.depth >= 0 && value.depth < 100)
     clean.depth = value.depth;
+  for (const field of ["hiddenNodes", "hiddenEdges"])
+    if (Array.isArray(value?.[field]))
+      clean[field] = [...new Set(value[field].filter((id) => typeof id === "string" && id.length))];
   return clean;
 }
 export function emptyLayout() {
@@ -34,7 +60,7 @@ export function emptyLayout() {
   };
 }
 /** Carry saved positions and annotations across explicitly declared node ID changes. */
-export function migrateNodeIds(state, aliases = {}) {
+export function migrateNodeIds(state, aliases = {}, edgeAliases = {}) {
   // Explicit one-to-one renames only. Keep both records on a conflict.
   const targets = Object.values(aliases),
     migrated = Object.create(null);
@@ -53,9 +79,21 @@ export function migrateNodeIds(state, aliases = {}) {
         delete state[field][from];
       }
     state.expanded = (state.expanded || []).map((id) => (id === from ? to : id));
+    if (state.filters?.hiddenNodes)
+      state.filters.hiddenNodes = state.filters.hiddenNodes.map((id) => (id === from ? to : id));
     if (state.focus === from) state.focus = to;
     migrated[from] = to;
   }
+  if (state.filters?.hiddenEdges)
+    state.filters.hiddenEdges = state.filters.hiddenEdges.map((id) => {
+      const target = edgeAliases[id];
+      return typeof target === "string" &&
+        target &&
+        !edgeAliases[target] &&
+        Object.values(edgeAliases).filter((value) => value === target).length === 1
+        ? target
+        : id;
+    });
   return migrated;
 }
 const coordinate = (n) => typeof n === "number" && Number.isFinite(n) && Math.abs(n) < 1e7;
@@ -95,6 +133,10 @@ export function searchNodes(all, state, query, limit = 20) {
           node.kind,
           node.field,
           node.fieldType,
+          node.data_role,
+          node.data_store,
+          node.data_key,
+          node.data_metadata?.native_type,
           node.source?.path,
           node.source?.symbol,
         ].join(" "),
@@ -335,6 +377,17 @@ export function refreshHierarchy(graph) {
 }
 export { relationType };
 export const relationStyles = {
+  "code-defines": { label: boTranslate("Defines"), color: 0x83929e, dash: [2, 5], arrow: "none" },
+  "code-calls": { label: boTranslate("Static call"), color: 0x2476ad, dash: [6, 4], arrow: "open" },
+  "code-imports": { label: boTranslate("Import"), color: 0x8172a3, dash: [3, 4], arrow: "open" },
+  "code-inherits": { label: boTranslate("Inheritance"), color: 0x975b86, dash: [], arrow: "open" },
+  "code-parameter": { label: boTranslate("Parameter"), color: 0x627f9c, dash: [], arrow: "open" },
+  "code-maps": {
+    label: boTranslate("Source binding"),
+    color: 0x638b98,
+    dash: [2, 4],
+    arrow: "open",
+  },
   call: { label: boTranslate("Call"), color: 0x2476ad, dash: [], arrow: "open" },
   flow: { label: boTranslate("Flow"), color: 0x4e647b, dash: [], arrow: "filled" },
   transition: {
@@ -350,6 +403,11 @@ export const relationStyles = {
     arrow: "diamond",
   },
   data: { label: boTranslate("Value transfer"), color: 0x207e7d, dash: [7, 5], arrow: "open" },
+  reads: { label: boTranslate("Read"), color: 0x316da4, dash: [], arrow: "open" },
+  writes: { label: boTranslate("Write"), color: 0xb16b36, dash: [], arrow: "filled" },
+  references: { label: boTranslate("Reference"), color: 0x716a9c, dash: [3, 4], arrow: "open" },
+  maps: { label: boTranslate("Mapping"), color: 0x677a88, dash: [8, 3, 2, 3], arrow: "diamond" },
+  transforms: { label: boTranslate("Transform"), color: 0x887130, dash: [7, 4], arrow: "filled" },
   resource: { label: boTranslate("Resource"), color: 0x7c7b2d, dash: [10, 3, 2, 3], arrow: "open" },
   join: { label: boTranslate("Join"), color: 0xa36045, dash: [], arrow: "bar" },
   shared: { label: boTranslate("Shared reference"), color: 0x68759e, dash: [2, 6], arrow: "none" },
@@ -419,6 +477,7 @@ export function compoundEdges(graph) {
   return [...result.values()];
 }
 export function filterNode(node, all, filters, asRegion = false) {
+  if (hiddenByNode(node.id, all, new Set(filters.hiddenNodes || []))) return false;
   if (node.filter_context && !asRegion) return true;
   return (
     ((node.filter_context && !asRegion) ||
@@ -428,6 +487,16 @@ export function filterNode(node, all, filters, asRegion = false) {
     (filters.depth === "all" ||
       (node.projection_depth ?? ancestorsToReveal(all, node.id).length) === filters.depth)
   );
+}
+/** An explicitly hidden group also hides its descendants and shared references. */
+export function hiddenByNode(id, all, hidden) {
+  const seen = new Set();
+  while (id && !seen.has(id)) {
+    if (hidden.has(id) || hidden.has(all.get(id)?.referenceOf)) return true;
+    seen.add(id);
+    id = all.get(id)?.parent;
+  }
+  return false;
 }
 /** Filter the rendered graph by node, edge, and region type; keep the source model intact. */
 export function presentationGraph(graph, value) {
@@ -442,7 +511,19 @@ export function presentationGraph(graph, value) {
     if (filterNode(b.node, graph.all, filters) && (!region || region.self || !regions.has(b.id)))
       glyphs.add(b.id);
   }
+  const hidden = new Set(filters.hiddenNodes),
+    hiddenEdges = new Set(filters.hiddenEdges);
   const edges = compoundEdges(graph)
+    .map((edge) => ({
+      ...edge,
+      members: edge.members.filter(
+        (member) =>
+          !hiddenEdges.has(member.id) &&
+          !hiddenByNode(member.from, graph.all, hidden) &&
+          !hiddenByNode(member.to, graph.all, hidden),
+      ),
+    }))
+    .filter((edge) => edge.members.length)
     .filter((e) => filters.edges.includes(relationStyles[e.type] ? e.type : "other"))
     .flatMap((e) => {
       const edge = {
@@ -457,6 +538,39 @@ export function presentationGraph(graph, value) {
     });
   return { filters, regions, glyphs, edges };
 }
+/** Count folded elements separately from excluded ones, using original identities. */
+export function elementCoverage(graph, presentation) {
+  const visible = new Set([...presentation.glyphs, ...presentation.regions]);
+  const owners = new Map(),
+    hidden = new Set(presentation.filters.hiddenNodes);
+  for (const [id, node] of graph.all) {
+    if (hiddenByNode(id, graph.all, hidden) || !filterNode(node, graph.all, presentation.filters))
+      continue;
+    if (graph.eligibleIds && !graph.eligibleIds.has(id)) continue;
+    const owner = [id, ...ancestorsToReveal(graph.all, id)].find((p) => visible.has(p));
+    if (owner) owners.set(id, owner);
+  }
+  const drawn = new Set(presentation.edges.flatMap((edge) => edge.members.map((m) => m.id)));
+  const foldedEdges = graph.rawEdges.filter(
+    (e) =>
+      !drawn.has(e.id) &&
+      !presentation.filters.hiddenEdges.includes(e.id) &&
+      owners.has(e.from) &&
+      owners.has(e.to) &&
+      (e.type === "contains" || (owners.get(e.from) === owners.get(e.to) && e.from !== e.to)) &&
+      (e.type === "contains" || presentation.filters.edges.includes(relationType(e))),
+  );
+  return {
+    nodes: graph.all.size,
+    edges: graph.rawEdges.length,
+    visibleNodes: visible.size,
+    foldedNodes: [...owners].filter(([id, owner]) => id !== owner).length,
+    excludedNodes: graph.all.size - owners.size,
+    visibleEdges: drawn.size,
+    foldedEdges: foldedEdges.length,
+    excludedEdges: graph.rawEdges.length - drawn.size - foldedEdges.length,
+  };
+}
 export function renderRevision(view, selection = []) {
   const { clock, ...basis } = view.authority.basis || {};
   // Time is not graph content. Keep the exact deadline crossing as a change,
@@ -468,6 +582,7 @@ export function renderRevision(view, selection = []) {
   return JSON.stringify([
     selection,
     view.manifest.build_id,
+    view.manifest.model_hash || view.model,
     view.binding_status,
     view.busy,
     view.events.length,

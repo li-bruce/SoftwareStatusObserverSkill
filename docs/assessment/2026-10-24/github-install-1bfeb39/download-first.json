@@ -1,0 +1,7 @@
+{
+  "commit": "1bfeb39853a88ac5b9d02b675a010486b0832574",
+  "passed": false,
+  "error": "HTTP 404 from codeload",
+  "observation": "The first download preceded push completion. The same archive URL also returned 404 once after the successful push, while GitHub already exposed the commit's CI run. The cache or archive propagation cause is not established.",
+  "repair": "A shallow Git clone succeeded. Its HEAD matched the requested full commit SHA before parser setup, accepted-example recovery and installation. All 172 installed Skill files matched the repository. No installation was attempted from a failed archive response."
+}

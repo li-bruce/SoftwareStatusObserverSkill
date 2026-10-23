@@ -1,0 +1,123 @@
+{
+  "fixture": "tools/view_continuity_demo.py; synthetic graph update, canonical viewer/preferences/recordings",
+  "before": [
+    {
+      "expanded": "true",
+      "id": "upload",
+      "pinned": "true",
+      "x": "1225.310190037738",
+      "y": "509.26093453013505"
+    },
+    {
+      "expanded": "true",
+      "id": "review",
+      "pinned": "false",
+      "x": "690.495783413957",
+      "y": "90.17607015462607"
+    },
+    {
+      "expanded": "false",
+      "id": "store",
+      "pinned": "false",
+      "x": "1420.4093253993608",
+      "y": "420.57950936576106"
+    },
+    {
+      "expanded": "false",
+      "id": "notify",
+      "pinned": "false",
+      "x": "690.495783413957",
+      "y": "420.89223937464084"
+    }
+  ],
+  "after": [
+    {
+      "expanded": "true",
+      "id": "upload",
+      "pinned": "true",
+      "x": "1225.310190037738",
+      "y": "509.26093453013505"
+    },
+    {
+      "expanded": "true",
+      "id": "review",
+      "pinned": "false",
+      "x": "690.495783413957",
+      "y": "90.17607015462607"
+    },
+    {
+      "expanded": "false",
+      "id": "store",
+      "pinned": "false",
+      "x": "1420.4093253993608",
+      "y": "420.57950936576106"
+    },
+    {
+      "expanded": "false",
+      "id": "receipt",
+      "pinned": "false",
+      "x": "1225.310190037738",
+      "y": "509.26093453013505"
+    },
+    {
+      "expanded": "false",
+      "id": "notify",
+      "pinned": "false",
+      "x": "690.495783413957",
+      "y": "420.89223937464084"
+    }
+  ],
+  "reloaded": [
+    {
+      "expanded": "true",
+      "id": "upload",
+      "pinned": "true",
+      "x": "1225.310190037738",
+      "y": "509.26093453013505"
+    },
+    {
+      "expanded": "true",
+      "id": "review",
+      "pinned": "false",
+      "x": "690.495783413957",
+      "y": "90.17607015462607"
+    },
+    {
+      "expanded": "false",
+      "id": "store",
+      "pinned": "false",
+      "x": "1420.4093253993608",
+      "y": "420.57950936576106"
+    },
+    {
+      "expanded": "false",
+      "id": "receipt",
+      "pinned": "false",
+      "x": "1225.310190037738",
+      "y": "509.26093453013505"
+    },
+    {
+      "expanded": "false",
+      "id": "notify",
+      "pinned": "false",
+      "x": "690.495783413957",
+      "y": "420.89223937464084"
+    }
+  ],
+  "filtersAfterUpdate": "Visible content\n×\nNodes\nSelect all\nClear\nBusiness\nFunction\nState\nDecision\nResource\nParameter\nEffect\nWait\nEdges\nSelect all\nClear\nCall\nFlow\nState transition\nDecision dependency\nValue transfer\nResource\nJoin\nShared reference\nRelation\nExpanded regions\nSelect all\nClear\nBusiness\nFunction\nState\nDecision\nResource\nParameter\nEffect\nWait\nScope\nAll\nAuthorization\nExecution configuration\nCaptured events\nWaiting or rejected\nShared members\nContains text\nLevel\nAll levels\nTop level\nLevel 1\n\nNodes: 5 visible, 0 folded, 3 filtered. Relations: 2 visible, 0 folded, 4 filtered.\n\nReset this viewHidden elements\nCheck permission Show again\nStore file → Notify reviewer Show again\nSave view\nDelete this custom view",
+  "allFolded": {
+    "edges": "6",
+    "excludedEdges": "0",
+    "excludedNodes": "0",
+    "foldedEdges": "2",
+    "foldedNodes": "4",
+    "nodes": "8",
+    "text": "Nodes: 4 visible, 4 folded, 0 filtered. Relations: 4 visible, 2 folded, 0 filtered.",
+    "visibleEdges": "4",
+    "visibleNodes": "4"
+  },
+  "recordings": [
+    "Live observation"
+  ],
+  "console": []
+}

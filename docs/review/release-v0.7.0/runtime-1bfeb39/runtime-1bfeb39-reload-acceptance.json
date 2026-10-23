@@ -1,0 +1,47 @@
+{
+  "runtime_commit": "1bfeb39853a88ac5b9d02b675a010486b0832574",
+  "passed": true,
+  "reload_pairs": [
+    {
+      "view": "business",
+      "case": "business",
+      "before_revision": 85,
+      "after_revision": 85,
+      "all_preference_entries_equal": true,
+      "positions_camera_expansion_filters_annotations_preserved": true,
+      "discussion_active": true,
+      "before_file": "runtime-1bfeb39-business-before-reload.json",
+      "after_file": "runtime-1bfeb39-business-after-reload.json"
+    },
+    {
+      "view": "code",
+      "case": "cleared-code",
+      "before_revision": 88,
+      "after_revision": 88,
+      "all_preference_entries_equal": true,
+      "positions_camera_expansion_filters_annotations_preserved": true,
+      "discussion_active": false,
+      "before_file": "runtime-1bfeb39-cleared-code-before-reload.json",
+      "after_file": "runtime-1bfeb39-cleared-code-after-reload.json"
+    },
+    {
+      "view": "code",
+      "case": "replay-return",
+      "before_revision": 92,
+      "after_revision": 92,
+      "all_preference_entries_equal": true,
+      "positions_camera_expansion_filters_annotations_preserved": true,
+      "discussion_active": false,
+      "before_file": "runtime-1bfeb39-replay-return-before-reload.json",
+      "after_file": "runtime-1bfeb39-replay-return-after-reload.json"
+    }
+  ],
+  "method": "Actual CUA full-page reload after observing the explicit saved status. Full preferences read before and after each reload; no UI actions intervened between the reload result and its after snapshot.",
+  "invalid_capture_retained": {
+    "files": [
+      "runtime-1bfeb39-code-before-reload.json",
+      "runtime-1bfeb39-code-after-reload.json"
+    ],
+    "reason": "Initial after snapshot ran behind a long accept/check command; the explicit Current discussion click happened before that delayed snapshot. Its overview value is not a reload failure and the pair is not counted. The visible reload had already shown code. The three isolated snapshot pairs above supersede this harness ordering error."
+  }
+}

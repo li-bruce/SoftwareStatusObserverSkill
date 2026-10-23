@@ -14,6 +14,7 @@ from urllib.parse import urlsplit
 WEB_APIS = (
     "/api/view",
     "/api/source",
+    "/api/code",
     "/api/preferences",
     "/api/recordings",
     "/api/stategraph",

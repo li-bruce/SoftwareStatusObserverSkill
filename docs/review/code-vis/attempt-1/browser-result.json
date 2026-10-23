@@ -1,0 +1,7 @@
+{
+  "passed": false,
+  "error": "page.waitForSelector: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#semantic [data-node-type=\"code-function\"]')\u001b[22m\n\n    at C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\tools\\test_code_browser.mjs:40:14",
+  "errors": [],
+  "checkpoints": {},
+  "logs": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\nDatabase demo: http://127.0.0.1:8871/graph\r\nDisposable application: C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.validation\\bo-database-demo-58tutzyq\r\n"
+}

@@ -1,6 +1,7 @@
 """Bounded, fault-isolated JSON transport. Standard library only."""
 
 from contextvars import ContextVar
+from contextlib import nullcontext
 from datetime import datetime, timezone
 import json
 import math
@@ -9,6 +10,16 @@ import threading
 import time
 from urllib.request import Request, urlopen
 import uuid
+
+try:
+    from ...observation.observation_scope import bo_internal, bo_is_internal
+except ImportError:
+    # This probe is also distributed as a standalone standard-library module.
+    bo_internal = nullcontext
+
+    def bo_is_internal():
+        return False
+
 
 _bo_internal = ContextVar("bo_transport_internal", default=False)
 
@@ -123,7 +134,7 @@ class BOProbe:
         """
         if not self.bo_enabled or self.bo_closed.is_set():
             return None
-        if _bo_internal.get() or node in self.bo_excluded:
+        if _bo_internal.get() or bo_is_internal() or node in self.bo_excluded:
             self.bo_suppressed += 1
             return None
         token = _bo_internal.set(True)
@@ -195,7 +206,7 @@ class BOProbe:
         """Queue a state snapshot associated with an already identified business event."""
         if not self.bo_enabled or self.bo_closed.is_set():
             return False
-        if _bo_internal.get():
+        if _bo_internal.get() or bo_is_internal():
             self.bo_suppressed += 1
             return False
         try:
@@ -229,17 +240,21 @@ class BOProbe:
                 continue
             token = _bo_internal.set(True)
             try:
-                if self.bo_sink:
-                    self.bo_sink(json.loads(raw), kind)
-                else:
-                    req = Request(
-                        self.bo_endpoint + "/api/bo/" + kind,
-                        data=raw,
-                        headers={"Content-Type": "application/json", "X-BO-Token": self.bo_token},
-                        method="POST",
-                    )
-                    with urlopen(req, timeout=self.bo_timeout) as response:
-                        response.read(32768)
+                with bo_internal():
+                    if self.bo_sink:
+                        self.bo_sink(json.loads(raw), kind)
+                    else:
+                        req = Request(
+                            self.bo_endpoint + "/api/bo/" + kind,
+                            data=raw,
+                            headers={
+                                "Content-Type": "application/json",
+                                "X-BO-Token": self.bo_token,
+                            },
+                            method="POST",
+                        )
+                        with urlopen(req, timeout=self.bo_timeout) as response:
+                            response.read(32768)
             except Exception:
                 self.bo_errors += 1
             finally:

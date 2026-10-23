@@ -1409,6 +1409,10 @@
     "static/app.js::bo_record": {
       "category": "observer",
       "reason": "有 bo_ 标识的可选观测端口；故障隔离，不执行业务操作"
+    },
+    "integrations/bo_observer.py::BOObserver.trace.broken": {
+      "category": "observer",
+      "reason": "Deliberate exception callback inside the fault-mode observer sink. It tests failure isolation and does not execute application behavior. The conditional declaration is now visible to the source scanner."
     }
   }
 }

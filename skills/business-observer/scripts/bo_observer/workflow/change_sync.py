@@ -257,6 +257,16 @@ def review_errors(change, base, current, changes):
     if not path.exists():
         return ["missing review.json for this candidate"]
     review = read(path)
+    from ..data.acceptance import protected_errors as protected_data_errors
+
+    errors.extend(
+        protected_data_errors(
+            base.get("database_contract"),
+            current.get("database_contract"),
+            base.get("requested_requirements", []),
+            review.get("requirement_changes"),
+        )
+    )
     if review.get("candidate_id") != current["id"]:
         errors.append("review belongs to an older candidate")
     moves, move_errors = source_moves(review, base, current)
@@ -440,6 +450,13 @@ def main():
         ):
             raise ValueError("finish the active change before beginning another")
         initial = snapshot(root, cfg)
+        # A missing parser or invalid source cannot establish a trustworthy baseline.
+        # Business questions may still be open; only incomplete source scans block begin.
+        if initial["structure"]["errors"]:
+            raise ValueError(
+                "source scan is incomplete; fix parser or source errors before begin: "
+                + json.dumps(initial["structure"]["errors"], ensure_ascii=False)
+            )
         if active.exists():
             previous_change = contained(root, read(active)["change"])
             if read(previous_change / "accepted.json").get("candidate_id") != initial["id"]:

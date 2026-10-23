@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "runtime_commit": "fa372897d69f0b6096392020ed3012284a011b4e",
+  "canonical_skill_subtree_matches_verified_head": true,
+  "untracked_skill_files": 0,
+  "protected_files": 28,
+  "business_source_and_expectations_unchanged": true,
+  "managed_files": 131,
+  "managed_hashes_verified": true,
+  "canonical_file_hashes": {
+    "observer_runtime/bo_observer/service.py": "ba5126b457806281dc00445868ed79bdc8b4df597d5eec56b5a4c4c29b51d1d1",
+    "static/graph/conversation.js": "120d4cd5781c3bfac1d2d85b4c0241a94a05213473f5cbf160dc40fad30e379c",
+    "static/graph/messages.zh-CN.js": "2009345e30cfd13e37f6fe6b8aa86791fabc82ea6c7f4ddf637b1a2a2afe0e3e",
+    "static/graph/view-lifecycle.js": "29a050e10c226b48da7b6c9f84744305953fb51c7fcafb99da061196022ef1b7",
+    "static/graph/viewer.js": "a1a701d12fb6bd10dc6c19f807e01732986ff05028650f169c368e13535270d3"
+  }
+}

@@ -1,0 +1,3070 @@
+{
+  "passed": true,
+  "failures": [],
+  "errors": [],
+  "checkpoints": {
+    "initial": {
+      "stage": "runtime",
+      "program_url": null,
+      "layout_id": "database-browser-demo",
+      "model": {
+        "schema_version": 3,
+        "revision": "1",
+        "project_id": "database-browser-demo",
+        "intent": "intent.json",
+        "source_files": [
+          "bo_stategraph/database-catalog.json",
+          "bo_stategraph/databases.json",
+          "bo_stategraph/schema.json",
+          "export_model.py",
+          "gallery.py"
+        ],
+        "nodes": [
+          {
+            "id": "publish",
+            "kind": "action",
+            "layer": "business",
+            "label": "Publish approved pictures",
+            "summary": "Read candidates, keep approved pictures and save the exhibition",
+            "source": {
+              "path": "gallery.py",
+              "symbol": "publish"
+            },
+            "capture": {
+              "in": {
+                "rollback": "boolean"
+              },
+              "out": {
+                "published": "number",
+                "status": "string"
+              }
+            },
+            "requirements": [
+              "R1"
+            ]
+          },
+          {
+            "id": "state.ready",
+            "kind": "state",
+            "layer": "state",
+            "value": "ready",
+            "label": "ready",
+            "summary": "Publication state"
+          },
+          {
+            "id": "state.published",
+            "kind": "state",
+            "layer": "state",
+            "value": "published",
+            "label": "published",
+            "summary": "Publication state"
+          },
+          {
+            "id": "db:gallery:store",
+            "kind": "data",
+            "label": "Gallery database",
+            "summary": "sqlalchemy · complete",
+            "data_role": "store",
+            "data_store": "gallery",
+            "data_key": "store",
+            "data_origin": "database",
+            "data_coverage": "complete",
+            "data_metadata": {
+              "engine": "sqlalchemy",
+              "limitations": [
+                "Coverage is limited to tables in the configured/default schema and dialect-supported constraints; triggers and stored routines are not inspected."
+              ],
+              "model_layer": "SQLAlchemy Core MetaData"
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db:gallery:table%3Aexhibition",
+            "kind": "data",
+            "label": "exhibition",
+            "summary": "table",
+            "parent": "db:gallery:store",
+            "data_role": "dataset",
+            "data_store": "gallery",
+            "data_key": "table:exhibition",
+            "data_origin": "database",
+            "data_coverage": "complete",
+            "data_metadata": {
+              "kind": "table",
+              "status": "matched",
+              "constraints": [
+                {
+                  "kind": "foreign_key",
+                  "name": "",
+                  "fields": [
+                    "picture_id"
+                  ],
+                  "target": "table:pictures",
+                  "target_fields": [
+                    "id"
+                  ],
+                  "description": "{}"
+                },
+                {
+                  "kind": "primary_key",
+                  "name": "",
+                  "fields": [
+                    "id"
+                  ]
+                }
+              ],
+              "declared_constraints": [
+                {
+                  "kind": "foreign_key",
+                  "name": "",
+                  "fields": [
+                    "picture_id"
+                  ],
+                  "target": "table:pictures",
+                  "target_fields": [
+                    "id"
+                  ],
+                  "description": "{}"
+                },
+                {
+                  "kind": "primary_key",
+                  "name": "",
+                  "fields": [
+                    "id"
+                  ]
+                }
+              ]
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db:gallery:table%3Aexhibition:field:id",
+            "kind": "data",
+            "label": "id",
+            "summary": "INTEGER",
+            "parent": "db:gallery:table%3Aexhibition",
+            "data_role": "column",
+            "data_store": "gallery",
+            "data_key": "table:exhibition.id",
+            "data_origin": "database",
+            "data_coverage": "complete",
+            "data_metadata": {
+              "name": "id",
+              "native_type": "INTEGER",
+              "nullable": false,
+              "primary_key": true,
+              "default": null,
+              "generated": false,
+              "status": "matched",
+              "declared": {
+                "name": "id",
+                "native_type": "INTEGER",
+                "nullable": false,
+                "primary_key": true,
+                "generated": false
+              }
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db:gallery:table%3Aexhibition:field:picture_id",
+            "kind": "data",
+            "label": "picture_id",
+            "summary": "INTEGER",
+            "parent": "db:gallery:table%3Aexhibition",
+            "data_role": "column",
+            "data_store": "gallery",
+            "data_key": "table:exhibition.picture_id",
+            "data_origin": "database",
+            "data_coverage": "complete",
+            "data_metadata": {
+              "name": "picture_id",
+              "native_type": "INTEGER",
+              "nullable": false,
+              "primary_key": false,
+              "default": null,
+              "generated": false,
+              "status": "matched",
+              "declared": {
+                "name": "picture_id",
+                "native_type": "INTEGER",
+                "nullable": false,
+                "primary_key": false,
+                "generated": false,
+                "default": null
+              }
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db:gallery:table%3Apictures",
+            "kind": "data",
+            "label": "pictures",
+            "summary": "table",
+            "parent": "db:gallery:store",
+            "data_role": "dataset",
+            "data_store": "gallery",
+            "data_key": "table:pictures",
+            "data_origin": "database",
+            "data_coverage": "complete",
+            "data_metadata": {
+              "kind": "table",
+              "status": "matched",
+              "constraints": [
+                {
+                  "kind": "primary_key",
+                  "name": "",
+                  "fields": [
+                    "id"
+                  ]
+                }
+              ],
+              "declared_constraints": [
+                {
+                  "kind": "primary_key",
+                  "name": "",
+                  "fields": [
+                    "id"
+                  ]
+                }
+              ]
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db:gallery:table%3Apictures:field:approved",
+            "kind": "data",
+            "label": "approved",
+            "summary": "INTEGER",
+            "parent": "db:gallery:table%3Apictures",
+            "data_role": "column",
+            "data_store": "gallery",
+            "data_key": "table:pictures.approved",
+            "data_origin": "database",
+            "data_coverage": "complete",
+            "data_metadata": {
+              "name": "approved",
+              "native_type": "INTEGER",
+              "nullable": false,
+              "primary_key": false,
+              "default": null,
+              "generated": false,
+              "status": "matched",
+              "declared": {
+                "name": "approved",
+                "native_type": "INTEGER",
+                "nullable": false,
+                "primary_key": false,
+                "generated": false,
+                "default": null
+              }
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db:gallery:table%3Apictures:field:id",
+            "kind": "data",
+            "label": "id",
+            "summary": "INTEGER",
+            "parent": "db:gallery:table%3Apictures",
+            "data_role": "column",
+            "data_store": "gallery",
+            "data_key": "table:pictures.id",
+            "data_origin": "database",
+            "data_coverage": "complete",
+            "data_metadata": {
+              "name": "id",
+              "native_type": "INTEGER",
+              "nullable": false,
+              "primary_key": true,
+              "default": null,
+              "generated": false,
+              "status": "matched",
+              "declared": {
+                "name": "id",
+                "native_type": "INTEGER",
+                "nullable": false,
+                "primary_key": true,
+                "generated": false
+              }
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db:gallery:table%3Apictures:field:title",
+            "kind": "data",
+            "label": "title",
+            "summary": "VARCHAR(80)",
+            "parent": "db:gallery:table%3Apictures",
+            "data_role": "column",
+            "data_store": "gallery",
+            "data_key": "table:pictures.title",
+            "data_origin": "database",
+            "data_coverage": "complete",
+            "data_metadata": {
+              "name": "title",
+              "native_type": "VARCHAR(80)",
+              "nullable": false,
+              "primary_key": false,
+              "default": null,
+              "generated": false,
+              "status": "matched",
+              "declared": {
+                "name": "title",
+                "native_type": "VARCHAR(80)",
+                "nullable": false,
+                "primary_key": false,
+                "generated": false,
+                "default": null
+              }
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "load",
+            "kind": "function",
+            "label": "Load pictures",
+            "summary": "read · gallery",
+            "source": {
+              "path": "gallery.py",
+              "symbol": "load_pictures"
+            },
+            "parent": "publish",
+            "data_role": "query",
+            "data_store": "gallery",
+            "data_origin": "declaration",
+            "data_coverage": "partial",
+            "data_metadata": {
+              "action": "read",
+              "targets": [
+                "table:pictures"
+              ]
+            },
+            "capture": {
+              "in": {
+                "operation": "string",
+                "statement": "string",
+                "parameters": {
+                  "approved": "number"
+                }
+              },
+              "out": {
+                "status": "string",
+                "duration_ms": "number",
+                "rows": "number",
+                "rows_known": "boolean",
+                "result": {},
+                "before": {},
+                "error_type": "string",
+                "transaction_id": "string",
+                "targets": [
+                  "string"
+                ],
+                "unknown_targets": [
+                  "string"
+                ],
+                "input_count": "number",
+                "output_count": "number",
+                "committed": "boolean",
+                "target_source": "string",
+                "target_access": [
+                  {
+                    "target": "string",
+                    "action": "string"
+                  }
+                ]
+              }
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "select",
+            "kind": "function",
+            "label": "Select approved pictures",
+            "summary": "transform · gallery",
+            "source": {
+              "path": "gallery.py",
+              "symbol": "select_approved"
+            },
+            "parent": "publish",
+            "data_role": "transform",
+            "data_store": "gallery",
+            "data_origin": "declaration",
+            "data_coverage": "partial",
+            "data_metadata": {
+              "action": "transform",
+              "targets": []
+            },
+            "capture": {
+              "in": {
+                "operation": "string",
+                "statement": "string",
+                "parameters": {}
+              },
+              "out": {
+                "status": "string",
+                "duration_ms": "number",
+                "rows": "number",
+                "rows_known": "boolean",
+                "result": {
+                  "count": "number"
+                },
+                "before": {
+                  "count": "number"
+                },
+                "error_type": "string",
+                "transaction_id": "string",
+                "targets": [
+                  "string"
+                ],
+                "unknown_targets": [
+                  "string"
+                ],
+                "input_count": "number",
+                "output_count": "number",
+                "committed": "boolean",
+                "target_source": "string",
+                "target_access": [
+                  {
+                    "target": "string",
+                    "action": "string"
+                  }
+                ]
+              }
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "save",
+            "kind": "function",
+            "label": "Save exhibition",
+            "summary": "write · gallery",
+            "source": {
+              "path": "gallery.py",
+              "symbol": "save_pictures"
+            },
+            "parent": "publish",
+            "data_role": "query",
+            "data_store": "gallery",
+            "data_origin": "declaration",
+            "data_coverage": "partial",
+            "data_metadata": {
+              "action": "write",
+              "targets": [
+                "table:exhibition"
+              ]
+            },
+            "capture": {
+              "in": {
+                "operation": "string",
+                "statement": "string",
+                "parameters": {
+                  "count": "number"
+                }
+              },
+              "out": {
+                "status": "string",
+                "duration_ms": "number",
+                "rows": "number",
+                "rows_known": "boolean",
+                "result": {},
+                "before": {},
+                "error_type": "string",
+                "transaction_id": "string",
+                "targets": [
+                  "string"
+                ],
+                "unknown_targets": [
+                  "string"
+                ],
+                "input_count": "number",
+                "output_count": "number",
+                "committed": "boolean",
+                "target_source": "string",
+                "target_access": [
+                  {
+                    "target": "string",
+                    "action": "string"
+                  }
+                ]
+              }
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "transaction",
+            "kind": "function",
+            "label": "Publication transaction",
+            "summary": "transaction · gallery",
+            "source": {
+              "path": "gallery.py",
+              "symbol": "publish"
+            },
+            "parent": "publish",
+            "data_role": "query",
+            "data_store": "gallery",
+            "data_origin": "declaration",
+            "data_coverage": "partial",
+            "data_metadata": {
+              "action": "transaction",
+              "targets": []
+            },
+            "capture": {
+              "in": {
+                "operation": "string",
+                "statement": "string",
+                "parameters": {}
+              },
+              "out": {
+                "status": "string",
+                "duration_ms": "number",
+                "rows": "number",
+                "rows_known": "boolean",
+                "result": {},
+                "before": {},
+                "error_type": "string",
+                "transaction_id": "string",
+                "targets": [
+                  "string"
+                ],
+                "unknown_targets": [
+                  "string"
+                ],
+                "input_count": "number",
+                "output_count": "number",
+                "committed": "boolean",
+                "target_source": "string",
+                "target_access": [
+                  {
+                    "target": "string",
+                    "action": "string"
+                  }
+                ]
+              }
+            },
+            "managed_by": "bo-database/v1"
+          }
+        ],
+        "edges": [
+          {
+            "id": "db-edge:db%3Agallery%3Astore:contains:db%3Agallery%3Atable%253Aexhibition",
+            "from": "db:gallery:store",
+            "to": "db:gallery:table%3Aexhibition",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Atable%253Aexhibition:contains:db%3Agallery%3Atable%253Aexhibition%3Afield%3Aid",
+            "from": "db:gallery:table%3Aexhibition",
+            "to": "db:gallery:table%3Aexhibition:field:id",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Atable%253Aexhibition:contains:db%3Agallery%3Atable%253Aexhibition%3Afield%3Apicture_id",
+            "from": "db:gallery:table%3Aexhibition",
+            "to": "db:gallery:table%3Aexhibition:field:picture_id",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Astore:contains:db%3Agallery%3Atable%253Apictures",
+            "from": "db:gallery:store",
+            "to": "db:gallery:table%3Apictures",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Atable%253Apictures:contains:db%3Agallery%3Atable%253Apictures%3Afield%3Aapproved",
+            "from": "db:gallery:table%3Apictures",
+            "to": "db:gallery:table%3Apictures:field:approved",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Atable%253Apictures:contains:db%3Agallery%3Atable%253Apictures%3Afield%3Aid",
+            "from": "db:gallery:table%3Apictures",
+            "to": "db:gallery:table%3Apictures:field:id",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Atable%253Apictures:contains:db%3Agallery%3Atable%253Apictures%3Afield%3Atitle",
+            "from": "db:gallery:table%3Apictures",
+            "to": "db:gallery:table%3Apictures:field:title",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Atable%253Aexhibition:references:db%3Agallery%3Atable%253Apictures",
+            "from": "db:gallery:table%3Aexhibition",
+            "to": "db:gallery:table%3Apictures",
+            "type": "data",
+            "label": "foreign_key",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1",
+            "data_relation": "references",
+            "data_origin": "database",
+            "data_constraints": [
+              {
+                "origin": "database",
+                "kind": "foreign_key",
+                "name": "",
+                "fields": [
+                  "picture_id"
+                ],
+                "target": "table:pictures",
+                "target_fields": [
+                  "id"
+                ],
+                "description": "{}"
+              },
+              {
+                "origin": "declaration",
+                "kind": "foreign_key",
+                "name": "",
+                "fields": [
+                  "picture_id"
+                ],
+                "target": "table:pictures",
+                "target_fields": [
+                  "id"
+                ],
+                "description": "{}"
+              }
+            ]
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Atable%253Aexhibition%3Afield%3Apicture_id:maps:db%3Agallery%3Atable%253Apictures%3Afield%3Aid",
+            "from": "db:gallery:table%3Aexhibition:field:picture_id",
+            "to": "db:gallery:table%3Apictures:field:id",
+            "type": "data",
+            "label": "foreign_key",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1",
+            "data_relation": "maps",
+            "data_origin": "database",
+            "data_constraints": [
+              {
+                "origin": "database",
+                "kind": "foreign_key",
+                "name": "",
+                "fields": [
+                  "picture_id"
+                ],
+                "target": "table:pictures",
+                "target_fields": [
+                  "id"
+                ],
+                "description": "{}"
+              },
+              {
+                "origin": "declaration",
+                "kind": "foreign_key",
+                "name": "",
+                "fields": [
+                  "picture_id"
+                ],
+                "target": "table:pictures",
+                "target_fields": [
+                  "id"
+                ],
+                "description": "{}"
+              }
+            ]
+          },
+          {
+            "id": "db-edge:publish:contains:load",
+            "from": "publish",
+            "to": "load",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Atable%253Apictures:reads:load",
+            "from": "db:gallery:table%3Apictures",
+            "to": "load",
+            "type": "data",
+            "label": "reads",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1",
+            "data_relation": "reads"
+          },
+          {
+            "id": "db-edge:publish:contains:select",
+            "from": "publish",
+            "to": "select",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:publish:contains:save",
+            "from": "publish",
+            "to": "save",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:save:writes:db%3Agallery%3Atable%253Aexhibition",
+            "from": "save",
+            "to": "db:gallery:table%3Aexhibition",
+            "type": "data",
+            "label": "writes",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1",
+            "data_relation": "writes"
+          },
+          {
+            "id": "db-edge:publish:contains:transaction",
+            "from": "publish",
+            "to": "transaction",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:load:transforms:select",
+            "from": "load",
+            "to": "select",
+            "type": "data",
+            "label": "transforms",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1",
+            "data_relation": "transforms"
+          },
+          {
+            "id": "db-edge:select:transforms:save",
+            "from": "select",
+            "to": "save",
+            "type": "data",
+            "label": "transforms",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1",
+            "data_relation": "transforms"
+          }
+        ],
+        "overview": [
+          {
+            "node": "publish"
+          }
+        ],
+        "scope": {
+          "unknowns": []
+        },
+        "machine": {
+          "engine": "python.explicit",
+          "version": "1",
+          "state_type": "enum",
+          "states": [
+            "ready",
+            "published"
+          ],
+          "values": [
+            "ready",
+            "published"
+          ],
+          "initial": "ready",
+          "transitions": [
+            {
+              "source": "ready",
+              "dest": "published",
+              "trigger": "publish"
+            }
+          ],
+          "events": {
+            "publish": {
+              "payload": {}
+            }
+          },
+          "context": {},
+          "guards": {},
+          "labels": {
+            "ready": "ready",
+            "published": "published"
+          }
+        },
+        "presentation": {
+          "subject": "Picture publication",
+          "layout_id": "database-browser-demo"
+        },
+        "database": {
+          "protocol": "bo-database/v1",
+          "source_id": "b383a65d699288719c01fe874661da6a42310bd714cf89939e82770c86a68bdc",
+          "catalog_id": "4a2f1452c3aa2357f64a02a953a199c3850b224efd1c7630e5bf72a7b741c0da",
+          "stores": [
+            "gallery"
+          ],
+          "managed_source_files": [
+            "bo_stategraph/database-catalog.json",
+            "bo_stategraph/databases.json",
+            "bo_stategraph/schema.json"
+          ]
+        }
+      },
+      "manifest": {
+        "schema_version": 3,
+        "build_id": "115b549dd48bf5eeac5126965bc7b11c44d9c60c34317172ddd2e42fc151b39e",
+        "files": {
+          "bo_stategraph/database-catalog.json": "f20a6e43570432e2bb08fbbc284144888c99ab75d5477a6afff32adb9a41e6d7",
+          "bo_stategraph/databases.json": "772c064efbf9e8c223d7a4026f197f0e1c474b8f755499c344224cdf064d7c32",
+          "bo_stategraph/schema.json": "895e15257b5bef0dccb0e8a95fbd8fae71c72d707aad7d8e6de194434d3de1e0",
+          "export_model.py": "6be9415575554b566f70aaa265047b065d07db9b271c1788463c7ca8c63fd53b",
+          "gallery.py": "539340b8c106d2b657a14f201b42db6cb944f83336502d4f60eb7688dadb1082"
+        },
+        "model_hash": "fec9cab5758e4f962f8d91ab58e1f54847a15c4d678dda70cb1948dde01b730e",
+        "intent_hash": "4672ac101a2dbbb7afd9e687c76c2742b5c888c3c3d6f723f565f858a48ac2c3",
+        "model_revision": "1",
+        "bindings": {
+          "publish": {
+            "path": "gallery.py",
+            "symbol": "publish",
+            "line": 28,
+            "end_line": 44,
+            "signature": "engine, observer, rollback=False, **context",
+            "ast_sha256": "68159677ad16fe1e717f3b7dc052ac6f1c8810aa3fd30b69ec1557e344c86549",
+            "snippet": "def publish(engine, observer, rollback=False, **context):\n    \"\"\"Query, process and save; a deliberate rejection exercises rollback.\"\"\"\n    with observer.transaction(\"transaction\", engine.begin(), **context) as connection:\n        with observer.operation(\"load\", parameters={\"approved\": 1}, **context):\n            rows = load_pictures(connection)\n        query_event = observer.last_event_id\n        selected = observer.transform(\"select\", select_approved, rows,\n            before=lambda items: {\"count\": len(items)},\n            after=lambda items: {\"count\": len(items)},\n            depends=[{\"event\": query_event, \"type\": \"data\"}], **context)\n        processing_event = observer.last_event_id\n        with observer.operation(\"save\", parameters={\"count\": len(selected)},\n                depends=[{\"event\": processing_event, \"type\": \"data\"}], **context):\n            save_pictures(connection, selected)\n        if rollback:\n            raise ValueError(\"Synthetic publication rejected\")\n        return len(selected)",
+            "calls": [
+              "ValueError",
+              "engine.begin",
+              "len",
+              "load_pictures",
+              "observer.operation",
+              "observer.transaction",
+              "observer.transform",
+              "save_pictures"
+            ],
+            "guards": [
+              {
+                "line": 42,
+                "expression": "rollback"
+              }
+            ],
+            "file_sha256": "539340b8c106d2b657a14f201b42db6cb944f83336502d4f60eb7688dadb1082"
+          },
+          "load": {
+            "path": "gallery.py",
+            "symbol": "load_pictures",
+            "line": 16,
+            "end_line": 18,
+            "signature": "connection",
+            "ast_sha256": "4c421e29ef4d1efe0356b519748814a56f901ffa068f7d15d1deb23c46884bc5",
+            "snippet": "def load_pictures(connection):\n    \"\"\"Read the current candidates; the caller owns normal result consumption.\"\"\"\n    return list(connection.execute(select(pictures.c.id, pictures.c.approved)).mappings())",
+            "calls": [
+              "connection.execute",
+              "connection.execute(select(pictures.c.id, pictures.c.approved)).mappings",
+              "list",
+              "select"
+            ],
+            "guards": [],
+            "file_sha256": "539340b8c106d2b657a14f201b42db6cb944f83336502d4f60eb7688dadb1082"
+          },
+          "select": {
+            "path": "gallery.py",
+            "symbol": "select_approved",
+            "line": 20,
+            "end_line": 22,
+            "signature": "rows",
+            "ast_sha256": "fcc07da914b46259bf2714e919cd163c3706427c1800944962ee7f5edb28c34a",
+            "snippet": "def select_approved(rows):\n    \"\"\"Keep pictures that the reviewer approved.\"\"\"\n    return [row for row in rows if row[\"approved\"] == 1]",
+            "calls": [],
+            "guards": [],
+            "file_sha256": "539340b8c106d2b657a14f201b42db6cb944f83336502d4f60eb7688dadb1082"
+          },
+          "save": {
+            "path": "gallery.py",
+            "symbol": "save_pictures",
+            "line": 24,
+            "end_line": 26,
+            "signature": "connection, rows",
+            "ast_sha256": "9d9294ee5e307d3751647a477f9aab18e4d3d039bb63b7b5b7d579a1cdb9c830",
+            "snippet": "def save_pictures(connection, rows):\n    \"\"\"Write the selected picture identities in the current transaction.\"\"\"\n    return connection.execute(insert(exhibition), [{\"picture_id\": row[\"id\"]} for row in rows])",
+            "calls": [
+              "connection.execute",
+              "insert"
+            ],
+            "guards": [],
+            "file_sha256": "539340b8c106d2b657a14f201b42db6cb944f83336502d4f60eb7688dadb1082"
+          },
+          "transaction": {
+            "path": "gallery.py",
+            "symbol": "publish",
+            "line": 28,
+            "end_line": 44,
+            "signature": "engine, observer, rollback=False, **context",
+            "ast_sha256": "68159677ad16fe1e717f3b7dc052ac6f1c8810aa3fd30b69ec1557e344c86549",
+            "snippet": "def publish(engine, observer, rollback=False, **context):\n    \"\"\"Query, process and save; a deliberate rejection exercises rollback.\"\"\"\n    with observer.transaction(\"transaction\", engine.begin(), **context) as connection:\n        with observer.operation(\"load\", parameters={\"approved\": 1}, **context):\n            rows = load_pictures(connection)\n        query_event = observer.last_event_id\n        selected = observer.transform(\"select\", select_approved, rows,\n            before=lambda items: {\"count\": len(items)},\n            after=lambda items: {\"count\": len(items)},\n            depends=[{\"event\": query_event, \"type\": \"data\"}], **context)\n        processing_event = observer.last_event_id\n        with observer.operation(\"save\", parameters={\"count\": len(selected)},\n                depends=[{\"event\": processing_event, \"type\": \"data\"}], **context):\n            save_pictures(connection, selected)\n        if rollback:\n            raise ValueError(\"Synthetic publication rejected\")\n        return len(selected)",
+            "calls": [
+              "ValueError",
+              "engine.begin",
+              "len",
+              "load_pictures",
+              "observer.operation",
+              "observer.transaction",
+              "observer.transform",
+              "save_pictures"
+            ],
+            "guards": [
+              {
+                "line": 42,
+                "expression": "rollback"
+              }
+            ],
+            "file_sha256": "539340b8c106d2b657a14f201b42db6cb944f83336502d4f60eb7688dadb1082"
+          }
+        },
+        "python": "3.13.13",
+        "unknowns": [
+          "AST evidence does not prove value flow, guard dominance or behavioral equivalence",
+          "External dependencies, interpreter, dynamic patching and omitted files are not attested"
+        ]
+      },
+      "binding_status": {
+        "status": "current",
+        "changed_files": [],
+        "model_changed": false,
+        "intent_changed": false,
+        "directly_affected": [],
+        "possibly_affected": []
+      },
+      "events": [],
+      "database_status": null,
+      "machine": {
+        "current": null,
+        "state_revision": null,
+        "configurations": [],
+        "journal": []
+      },
+      "runtime_frames": {
+        "schema": "stategraph-runtime-frames/v1",
+        "partial": true,
+        "frames": []
+      },
+      "authority": {
+        "entity": null,
+        "state": null,
+        "basis": {},
+        "parameters": {
+          "attempt": null
+        }
+      },
+      "health": {
+        "errors": 0,
+        "dropped": 0,
+        "run_id": "c6a2a05c192304c8d3649d5d",
+        "attempted": 0,
+        "written": 0,
+        "enabled": true,
+        "runtime_frame_evictions": 0,
+        "retained_events": 0,
+        "evicted_events": 0,
+        "history_start_seq": null,
+        "log_errors": 0,
+        "listener_errors": 0,
+        "retention": {
+          "memory_events": 10000,
+          "memory_seconds": 1800,
+          "log_bytes": 8388608,
+          "log_backups": 2
+        }
+      },
+      "busy": false,
+      "historical": false,
+      "available_cases": [
+        "live"
+      ],
+      "instances": []
+    },
+    "commit": {
+      "status": "committed",
+      "stored": 7,
+      "events": 10,
+      "observer_events": 0,
+      "version": 1,
+      "mapping_status": "pending"
+    },
+    "rollback": {
+      "status": "rolled_back",
+      "stored": 7,
+      "events": 20,
+      "observer_events": 0,
+      "version": 1,
+      "mapping_status": "passed"
+    },
+    "afterRun": {
+      "stage": "runtime",
+      "program_url": null,
+      "layout_id": "database-browser-demo",
+      "model": {
+        "schema_version": 3,
+        "revision": "1",
+        "project_id": "database-browser-demo",
+        "intent": "intent.json",
+        "source_files": [
+          "bo_stategraph/database-catalog.json",
+          "bo_stategraph/databases.json",
+          "bo_stategraph/schema.json",
+          "export_model.py",
+          "gallery.py"
+        ],
+        "nodes": [
+          {
+            "id": "publish",
+            "kind": "action",
+            "layer": "business",
+            "label": "Publish approved pictures",
+            "summary": "Read candidates, keep approved pictures and save the exhibition",
+            "source": {
+              "path": "gallery.py",
+              "symbol": "publish"
+            },
+            "capture": {
+              "in": {
+                "rollback": "boolean"
+              },
+              "out": {
+                "published": "number",
+                "status": "string"
+              }
+            },
+            "requirements": [
+              "R1"
+            ]
+          },
+          {
+            "id": "state.ready",
+            "kind": "state",
+            "layer": "state",
+            "value": "ready",
+            "label": "ready",
+            "summary": "Publication state"
+          },
+          {
+            "id": "state.published",
+            "kind": "state",
+            "layer": "state",
+            "value": "published",
+            "label": "published",
+            "summary": "Publication state"
+          },
+          {
+            "id": "db:gallery:store",
+            "kind": "data",
+            "label": "Gallery database",
+            "summary": "sqlalchemy · complete",
+            "data_role": "store",
+            "data_store": "gallery",
+            "data_key": "store",
+            "data_origin": "database",
+            "data_coverage": "complete",
+            "data_metadata": {
+              "engine": "sqlalchemy",
+              "limitations": [
+                "Coverage is limited to tables in the configured/default schema and dialect-supported constraints; triggers and stored routines are not inspected."
+              ],
+              "model_layer": "SQLAlchemy Core MetaData"
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db:gallery:table%3Aexhibition",
+            "kind": "data",
+            "label": "exhibition",
+            "summary": "table",
+            "parent": "db:gallery:store",
+            "data_role": "dataset",
+            "data_store": "gallery",
+            "data_key": "table:exhibition",
+            "data_origin": "database",
+            "data_coverage": "complete",
+            "data_metadata": {
+              "kind": "table",
+              "status": "matched",
+              "constraints": [
+                {
+                  "kind": "foreign_key",
+                  "name": "",
+                  "fields": [
+                    "picture_id"
+                  ],
+                  "target": "table:pictures",
+                  "target_fields": [
+                    "id"
+                  ],
+                  "description": "{}"
+                },
+                {
+                  "kind": "primary_key",
+                  "name": "",
+                  "fields": [
+                    "id"
+                  ]
+                }
+              ],
+              "declared_constraints": [
+                {
+                  "kind": "foreign_key",
+                  "name": "",
+                  "fields": [
+                    "picture_id"
+                  ],
+                  "target": "table:pictures",
+                  "target_fields": [
+                    "id"
+                  ],
+                  "description": "{}"
+                },
+                {
+                  "kind": "primary_key",
+                  "name": "",
+                  "fields": [
+                    "id"
+                  ]
+                }
+              ]
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db:gallery:table%3Aexhibition:field:id",
+            "kind": "data",
+            "label": "id",
+            "summary": "INTEGER",
+            "parent": "db:gallery:table%3Aexhibition",
+            "data_role": "column",
+            "data_store": "gallery",
+            "data_key": "table:exhibition.id",
+            "data_origin": "database",
+            "data_coverage": "complete",
+            "data_metadata": {
+              "name": "id",
+              "native_type": "INTEGER",
+              "nullable": false,
+              "primary_key": true,
+              "default": null,
+              "generated": false,
+              "status": "matched",
+              "declared": {
+                "name": "id",
+                "native_type": "INTEGER",
+                "nullable": false,
+                "primary_key": true,
+                "generated": false
+              }
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db:gallery:table%3Aexhibition:field:picture_id",
+            "kind": "data",
+            "label": "picture_id",
+            "summary": "INTEGER",
+            "parent": "db:gallery:table%3Aexhibition",
+            "data_role": "column",
+            "data_store": "gallery",
+            "data_key": "table:exhibition.picture_id",
+            "data_origin": "database",
+            "data_coverage": "complete",
+            "data_metadata": {
+              "name": "picture_id",
+              "native_type": "INTEGER",
+              "nullable": false,
+              "primary_key": false,
+              "default": null,
+              "generated": false,
+              "status": "matched",
+              "declared": {
+                "name": "picture_id",
+                "native_type": "INTEGER",
+                "nullable": false,
+                "primary_key": false,
+                "generated": false,
+                "default": null
+              }
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db:gallery:table%3Apictures",
+            "kind": "data",
+            "label": "pictures",
+            "summary": "table",
+            "parent": "db:gallery:store",
+            "data_role": "dataset",
+            "data_store": "gallery",
+            "data_key": "table:pictures",
+            "data_origin": "database",
+            "data_coverage": "complete",
+            "data_metadata": {
+              "kind": "table",
+              "status": "matched",
+              "constraints": [
+                {
+                  "kind": "primary_key",
+                  "name": "",
+                  "fields": [
+                    "id"
+                  ]
+                }
+              ],
+              "declared_constraints": [
+                {
+                  "kind": "primary_key",
+                  "name": "",
+                  "fields": [
+                    "id"
+                  ]
+                }
+              ]
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db:gallery:table%3Apictures:field:approved",
+            "kind": "data",
+            "label": "approved",
+            "summary": "INTEGER",
+            "parent": "db:gallery:table%3Apictures",
+            "data_role": "column",
+            "data_store": "gallery",
+            "data_key": "table:pictures.approved",
+            "data_origin": "database",
+            "data_coverage": "complete",
+            "data_metadata": {
+              "name": "approved",
+              "native_type": "INTEGER",
+              "nullable": false,
+              "primary_key": false,
+              "default": null,
+              "generated": false,
+              "status": "matched",
+              "declared": {
+                "name": "approved",
+                "native_type": "INTEGER",
+                "nullable": false,
+                "primary_key": false,
+                "generated": false,
+                "default": null
+              }
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db:gallery:table%3Apictures:field:id",
+            "kind": "data",
+            "label": "id",
+            "summary": "INTEGER",
+            "parent": "db:gallery:table%3Apictures",
+            "data_role": "column",
+            "data_store": "gallery",
+            "data_key": "table:pictures.id",
+            "data_origin": "database",
+            "data_coverage": "complete",
+            "data_metadata": {
+              "name": "id",
+              "native_type": "INTEGER",
+              "nullable": false,
+              "primary_key": true,
+              "default": null,
+              "generated": false,
+              "status": "matched",
+              "declared": {
+                "name": "id",
+                "native_type": "INTEGER",
+                "nullable": false,
+                "primary_key": true,
+                "generated": false
+              }
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db:gallery:table%3Apictures:field:title",
+            "kind": "data",
+            "label": "title",
+            "summary": "VARCHAR(80)",
+            "parent": "db:gallery:table%3Apictures",
+            "data_role": "column",
+            "data_store": "gallery",
+            "data_key": "table:pictures.title",
+            "data_origin": "database",
+            "data_coverage": "complete",
+            "data_metadata": {
+              "name": "title",
+              "native_type": "VARCHAR(80)",
+              "nullable": false,
+              "primary_key": false,
+              "default": null,
+              "generated": false,
+              "status": "matched",
+              "declared": {
+                "name": "title",
+                "native_type": "VARCHAR(80)",
+                "nullable": false,
+                "primary_key": false,
+                "generated": false,
+                "default": null
+              }
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "load",
+            "kind": "function",
+            "label": "Load pictures",
+            "summary": "read · gallery",
+            "source": {
+              "path": "gallery.py",
+              "symbol": "load_pictures"
+            },
+            "parent": "publish",
+            "data_role": "query",
+            "data_store": "gallery",
+            "data_origin": "declaration",
+            "data_coverage": "partial",
+            "data_metadata": {
+              "action": "read",
+              "targets": [
+                "table:pictures"
+              ]
+            },
+            "capture": {
+              "in": {
+                "operation": "string",
+                "statement": "string",
+                "parameters": {
+                  "approved": "number"
+                }
+              },
+              "out": {
+                "status": "string",
+                "duration_ms": "number",
+                "rows": "number",
+                "rows_known": "boolean",
+                "result": {},
+                "before": {},
+                "error_type": "string",
+                "transaction_id": "string",
+                "targets": [
+                  "string"
+                ],
+                "unknown_targets": [
+                  "string"
+                ],
+                "input_count": "number",
+                "output_count": "number",
+                "committed": "boolean",
+                "target_source": "string",
+                "target_access": [
+                  {
+                    "target": "string",
+                    "action": "string"
+                  }
+                ]
+              }
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "select",
+            "kind": "function",
+            "label": "Select approved pictures",
+            "summary": "transform · gallery",
+            "source": {
+              "path": "gallery.py",
+              "symbol": "select_approved"
+            },
+            "parent": "publish",
+            "data_role": "transform",
+            "data_store": "gallery",
+            "data_origin": "declaration",
+            "data_coverage": "partial",
+            "data_metadata": {
+              "action": "transform",
+              "targets": []
+            },
+            "capture": {
+              "in": {
+                "operation": "string",
+                "statement": "string",
+                "parameters": {}
+              },
+              "out": {
+                "status": "string",
+                "duration_ms": "number",
+                "rows": "number",
+                "rows_known": "boolean",
+                "result": {
+                  "count": "number"
+                },
+                "before": {
+                  "count": "number"
+                },
+                "error_type": "string",
+                "transaction_id": "string",
+                "targets": [
+                  "string"
+                ],
+                "unknown_targets": [
+                  "string"
+                ],
+                "input_count": "number",
+                "output_count": "number",
+                "committed": "boolean",
+                "target_source": "string",
+                "target_access": [
+                  {
+                    "target": "string",
+                    "action": "string"
+                  }
+                ]
+              }
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "save",
+            "kind": "function",
+            "label": "Save exhibition",
+            "summary": "write · gallery",
+            "source": {
+              "path": "gallery.py",
+              "symbol": "save_pictures"
+            },
+            "parent": "publish",
+            "data_role": "query",
+            "data_store": "gallery",
+            "data_origin": "declaration",
+            "data_coverage": "partial",
+            "data_metadata": {
+              "action": "write",
+              "targets": [
+                "table:exhibition"
+              ]
+            },
+            "capture": {
+              "in": {
+                "operation": "string",
+                "statement": "string",
+                "parameters": {
+                  "count": "number"
+                }
+              },
+              "out": {
+                "status": "string",
+                "duration_ms": "number",
+                "rows": "number",
+                "rows_known": "boolean",
+                "result": {},
+                "before": {},
+                "error_type": "string",
+                "transaction_id": "string",
+                "targets": [
+                  "string"
+                ],
+                "unknown_targets": [
+                  "string"
+                ],
+                "input_count": "number",
+                "output_count": "number",
+                "committed": "boolean",
+                "target_source": "string",
+                "target_access": [
+                  {
+                    "target": "string",
+                    "action": "string"
+                  }
+                ]
+              }
+            },
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "transaction",
+            "kind": "function",
+            "label": "Publication transaction",
+            "summary": "transaction · gallery",
+            "source": {
+              "path": "gallery.py",
+              "symbol": "publish"
+            },
+            "parent": "publish",
+            "data_role": "query",
+            "data_store": "gallery",
+            "data_origin": "declaration",
+            "data_coverage": "partial",
+            "data_metadata": {
+              "action": "transaction",
+              "targets": []
+            },
+            "capture": {
+              "in": {
+                "operation": "string",
+                "statement": "string",
+                "parameters": {}
+              },
+              "out": {
+                "status": "string",
+                "duration_ms": "number",
+                "rows": "number",
+                "rows_known": "boolean",
+                "result": {},
+                "before": {},
+                "error_type": "string",
+                "transaction_id": "string",
+                "targets": [
+                  "string"
+                ],
+                "unknown_targets": [
+                  "string"
+                ],
+                "input_count": "number",
+                "output_count": "number",
+                "committed": "boolean",
+                "target_source": "string",
+                "target_access": [
+                  {
+                    "target": "string",
+                    "action": "string"
+                  }
+                ]
+              }
+            },
+            "managed_by": "bo-database/v1"
+          }
+        ],
+        "edges": [
+          {
+            "id": "db-edge:db%3Agallery%3Astore:contains:db%3Agallery%3Atable%253Aexhibition",
+            "from": "db:gallery:store",
+            "to": "db:gallery:table%3Aexhibition",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Atable%253Aexhibition:contains:db%3Agallery%3Atable%253Aexhibition%3Afield%3Aid",
+            "from": "db:gallery:table%3Aexhibition",
+            "to": "db:gallery:table%3Aexhibition:field:id",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Atable%253Aexhibition:contains:db%3Agallery%3Atable%253Aexhibition%3Afield%3Apicture_id",
+            "from": "db:gallery:table%3Aexhibition",
+            "to": "db:gallery:table%3Aexhibition:field:picture_id",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Astore:contains:db%3Agallery%3Atable%253Apictures",
+            "from": "db:gallery:store",
+            "to": "db:gallery:table%3Apictures",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Atable%253Apictures:contains:db%3Agallery%3Atable%253Apictures%3Afield%3Aapproved",
+            "from": "db:gallery:table%3Apictures",
+            "to": "db:gallery:table%3Apictures:field:approved",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Atable%253Apictures:contains:db%3Agallery%3Atable%253Apictures%3Afield%3Aid",
+            "from": "db:gallery:table%3Apictures",
+            "to": "db:gallery:table%3Apictures:field:id",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Atable%253Apictures:contains:db%3Agallery%3Atable%253Apictures%3Afield%3Atitle",
+            "from": "db:gallery:table%3Apictures",
+            "to": "db:gallery:table%3Apictures:field:title",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Atable%253Aexhibition:references:db%3Agallery%3Atable%253Apictures",
+            "from": "db:gallery:table%3Aexhibition",
+            "to": "db:gallery:table%3Apictures",
+            "type": "data",
+            "label": "foreign_key",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1",
+            "data_relation": "references",
+            "data_origin": "database",
+            "data_constraints": [
+              {
+                "origin": "database",
+                "kind": "foreign_key",
+                "name": "",
+                "fields": [
+                  "picture_id"
+                ],
+                "target": "table:pictures",
+                "target_fields": [
+                  "id"
+                ],
+                "description": "{}"
+              },
+              {
+                "origin": "declaration",
+                "kind": "foreign_key",
+                "name": "",
+                "fields": [
+                  "picture_id"
+                ],
+                "target": "table:pictures",
+                "target_fields": [
+                  "id"
+                ],
+                "description": "{}"
+              }
+            ]
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Atable%253Aexhibition%3Afield%3Apicture_id:maps:db%3Agallery%3Atable%253Apictures%3Afield%3Aid",
+            "from": "db:gallery:table%3Aexhibition:field:picture_id",
+            "to": "db:gallery:table%3Apictures:field:id",
+            "type": "data",
+            "label": "foreign_key",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1",
+            "data_relation": "maps",
+            "data_origin": "database",
+            "data_constraints": [
+              {
+                "origin": "database",
+                "kind": "foreign_key",
+                "name": "",
+                "fields": [
+                  "picture_id"
+                ],
+                "target": "table:pictures",
+                "target_fields": [
+                  "id"
+                ],
+                "description": "{}"
+              },
+              {
+                "origin": "declaration",
+                "kind": "foreign_key",
+                "name": "",
+                "fields": [
+                  "picture_id"
+                ],
+                "target": "table:pictures",
+                "target_fields": [
+                  "id"
+                ],
+                "description": "{}"
+              }
+            ]
+          },
+          {
+            "id": "db-edge:publish:contains:load",
+            "from": "publish",
+            "to": "load",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:db%3Agallery%3Atable%253Apictures:reads:load",
+            "from": "db:gallery:table%3Apictures",
+            "to": "load",
+            "type": "data",
+            "label": "reads",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1",
+            "data_relation": "reads"
+          },
+          {
+            "id": "db-edge:publish:contains:select",
+            "from": "publish",
+            "to": "select",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:publish:contains:save",
+            "from": "publish",
+            "to": "save",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:save:writes:db%3Agallery%3Atable%253Aexhibition",
+            "from": "save",
+            "to": "db:gallery:table%3Aexhibition",
+            "type": "data",
+            "label": "writes",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1",
+            "data_relation": "writes"
+          },
+          {
+            "id": "db-edge:publish:contains:transaction",
+            "from": "publish",
+            "to": "transaction",
+            "type": "contains",
+            "label": "contains",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1"
+          },
+          {
+            "id": "db-edge:load:transforms:select",
+            "from": "load",
+            "to": "select",
+            "type": "data",
+            "label": "transforms",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1",
+            "data_relation": "transforms"
+          },
+          {
+            "id": "db-edge:select:transforms:save",
+            "from": "select",
+            "to": "save",
+            "type": "data",
+            "label": "transforms",
+            "evidence": "database catalog and configured source binding",
+            "managed_by": "bo-database/v1",
+            "data_relation": "transforms"
+          }
+        ],
+        "overview": [
+          {
+            "node": "publish"
+          }
+        ],
+        "scope": {
+          "unknowns": []
+        },
+        "machine": {
+          "engine": "python.explicit",
+          "version": "1",
+          "state_type": "enum",
+          "states": [
+            "ready",
+            "published"
+          ],
+          "values": [
+            "ready",
+            "published"
+          ],
+          "initial": "ready",
+          "transitions": [
+            {
+              "source": "ready",
+              "dest": "published",
+              "trigger": "publish"
+            }
+          ],
+          "events": {
+            "publish": {
+              "payload": {}
+            }
+          },
+          "context": {},
+          "guards": {},
+          "labels": {
+            "ready": "ready",
+            "published": "published"
+          }
+        },
+        "presentation": {
+          "subject": "Picture publication",
+          "layout_id": "database-browser-demo"
+        },
+        "database": {
+          "protocol": "bo-database/v1",
+          "source_id": "b383a65d699288719c01fe874661da6a42310bd714cf89939e82770c86a68bdc",
+          "catalog_id": "4a2f1452c3aa2357f64a02a953a199c3850b224efd1c7630e5bf72a7b741c0da",
+          "stores": [
+            "gallery"
+          ],
+          "managed_source_files": [
+            "bo_stategraph/database-catalog.json",
+            "bo_stategraph/databases.json",
+            "bo_stategraph/schema.json"
+          ]
+        }
+      },
+      "manifest": {
+        "schema_version": 3,
+        "build_id": "115b549dd48bf5eeac5126965bc7b11c44d9c60c34317172ddd2e42fc151b39e",
+        "files": {
+          "bo_stategraph/database-catalog.json": "f20a6e43570432e2bb08fbbc284144888c99ab75d5477a6afff32adb9a41e6d7",
+          "bo_stategraph/databases.json": "772c064efbf9e8c223d7a4026f197f0e1c474b8f755499c344224cdf064d7c32",
+          "bo_stategraph/schema.json": "895e15257b5bef0dccb0e8a95fbd8fae71c72d707aad7d8e6de194434d3de1e0",
+          "export_model.py": "6be9415575554b566f70aaa265047b065d07db9b271c1788463c7ca8c63fd53b",
+          "gallery.py": "539340b8c106d2b657a14f201b42db6cb944f83336502d4f60eb7688dadb1082"
+        },
+        "model_hash": "fec9cab5758e4f962f8d91ab58e1f54847a15c4d678dda70cb1948dde01b730e",
+        "intent_hash": "4672ac101a2dbbb7afd9e687c76c2742b5c888c3c3d6f723f565f858a48ac2c3",
+        "model_revision": "1",
+        "bindings": {
+          "publish": {
+            "path": "gallery.py",
+            "symbol": "publish",
+            "line": 28,
+            "end_line": 44,
+            "signature": "engine, observer, rollback=False, **context",
+            "ast_sha256": "68159677ad16fe1e717f3b7dc052ac6f1c8810aa3fd30b69ec1557e344c86549",
+            "snippet": "def publish(engine, observer, rollback=False, **context):\n    \"\"\"Query, process and save; a deliberate rejection exercises rollback.\"\"\"\n    with observer.transaction(\"transaction\", engine.begin(), **context) as connection:\n        with observer.operation(\"load\", parameters={\"approved\": 1}, **context):\n            rows = load_pictures(connection)\n        query_event = observer.last_event_id\n        selected = observer.transform(\"select\", select_approved, rows,\n            before=lambda items: {\"count\": len(items)},\n            after=lambda items: {\"count\": len(items)},\n            depends=[{\"event\": query_event, \"type\": \"data\"}], **context)\n        processing_event = observer.last_event_id\n        with observer.operation(\"save\", parameters={\"count\": len(selected)},\n                depends=[{\"event\": processing_event, \"type\": \"data\"}], **context):\n            save_pictures(connection, selected)\n        if rollback:\n            raise ValueError(\"Synthetic publication rejected\")\n        return len(selected)",
+            "calls": [
+              "ValueError",
+              "engine.begin",
+              "len",
+              "load_pictures",
+              "observer.operation",
+              "observer.transaction",
+              "observer.transform",
+              "save_pictures"
+            ],
+            "guards": [
+              {
+                "line": 42,
+                "expression": "rollback"
+              }
+            ],
+            "file_sha256": "539340b8c106d2b657a14f201b42db6cb944f83336502d4f60eb7688dadb1082"
+          },
+          "load": {
+            "path": "gallery.py",
+            "symbol": "load_pictures",
+            "line": 16,
+            "end_line": 18,
+            "signature": "connection",
+            "ast_sha256": "4c421e29ef4d1efe0356b519748814a56f901ffa068f7d15d1deb23c46884bc5",
+            "snippet": "def load_pictures(connection):\n    \"\"\"Read the current candidates; the caller owns normal result consumption.\"\"\"\n    return list(connection.execute(select(pictures.c.id, pictures.c.approved)).mappings())",
+            "calls": [
+              "connection.execute",
+              "connection.execute(select(pictures.c.id, pictures.c.approved)).mappings",
+              "list",
+              "select"
+            ],
+            "guards": [],
+            "file_sha256": "539340b8c106d2b657a14f201b42db6cb944f83336502d4f60eb7688dadb1082"
+          },
+          "select": {
+            "path": "gallery.py",
+            "symbol": "select_approved",
+            "line": 20,
+            "end_line": 22,
+            "signature": "rows",
+            "ast_sha256": "fcc07da914b46259bf2714e919cd163c3706427c1800944962ee7f5edb28c34a",
+            "snippet": "def select_approved(rows):\n    \"\"\"Keep pictures that the reviewer approved.\"\"\"\n    return [row for row in rows if row[\"approved\"] == 1]",
+            "calls": [],
+            "guards": [],
+            "file_sha256": "539340b8c106d2b657a14f201b42db6cb944f83336502d4f60eb7688dadb1082"
+          },
+          "save": {
+            "path": "gallery.py",
+            "symbol": "save_pictures",
+            "line": 24,
+            "end_line": 26,
+            "signature": "connection, rows",
+            "ast_sha256": "9d9294ee5e307d3751647a477f9aab18e4d3d039bb63b7b5b7d579a1cdb9c830",
+            "snippet": "def save_pictures(connection, rows):\n    \"\"\"Write the selected picture identities in the current transaction.\"\"\"\n    return connection.execute(insert(exhibition), [{\"picture_id\": row[\"id\"]} for row in rows])",
+            "calls": [
+              "connection.execute",
+              "insert"
+            ],
+            "guards": [],
+            "file_sha256": "539340b8c106d2b657a14f201b42db6cb944f83336502d4f60eb7688dadb1082"
+          },
+          "transaction": {
+            "path": "gallery.py",
+            "symbol": "publish",
+            "line": 28,
+            "end_line": 44,
+            "signature": "engine, observer, rollback=False, **context",
+            "ast_sha256": "68159677ad16fe1e717f3b7dc052ac6f1c8810aa3fd30b69ec1557e344c86549",
+            "snippet": "def publish(engine, observer, rollback=False, **context):\n    \"\"\"Query, process and save; a deliberate rejection exercises rollback.\"\"\"\n    with observer.transaction(\"transaction\", engine.begin(), **context) as connection:\n        with observer.operation(\"load\", parameters={\"approved\": 1}, **context):\n            rows = load_pictures(connection)\n        query_event = observer.last_event_id\n        selected = observer.transform(\"select\", select_approved, rows,\n            before=lambda items: {\"count\": len(items)},\n            after=lambda items: {\"count\": len(items)},\n            depends=[{\"event\": query_event, \"type\": \"data\"}], **context)\n        processing_event = observer.last_event_id\n        with observer.operation(\"save\", parameters={\"count\": len(selected)},\n                depends=[{\"event\": processing_event, \"type\": \"data\"}], **context):\n            save_pictures(connection, selected)\n        if rollback:\n            raise ValueError(\"Synthetic publication rejected\")\n        return len(selected)",
+            "calls": [
+              "ValueError",
+              "engine.begin",
+              "len",
+              "load_pictures",
+              "observer.operation",
+              "observer.transaction",
+              "observer.transform",
+              "save_pictures"
+            ],
+            "guards": [
+              {
+                "line": 42,
+                "expression": "rollback"
+              }
+            ],
+            "file_sha256": "539340b8c106d2b657a14f201b42db6cb944f83336502d4f60eb7688dadb1082"
+          }
+        },
+        "python": "3.13.13",
+        "unknowns": [
+          "AST evidence does not prove value flow, guard dominance or behavioral equivalence",
+          "External dependencies, interpreter, dynamic patching and omitted files are not attested"
+        ]
+      },
+      "binding_status": {
+        "status": "current",
+        "changed_files": [],
+        "model_changed": false,
+        "intent_changed": false,
+        "directly_affected": [],
+        "possibly_affected": []
+      },
+      "events": [
+        {
+          "protocol": "bo-event/v1",
+          "project_id": "database-browser-demo",
+          "model_revision": "1",
+          "build_id": "115b549dd48bf5eeac5126965bc7b11c44d9c60c34317172ddd2e42fc151b39e",
+          "run_id": "7a908b5db117425fa9e25b2b206e25e4",
+          "producer_id": "995c4acf5d2f442c807c3d43f2959676",
+          "schema_version": 3,
+          "seq": 1,
+          "id": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:1",
+          "node": "publish",
+          "phase": "enter",
+          "entity": "application",
+          "attempt": "e9d84027d7274930bbe6ddeff9acd015",
+          "scope": "application",
+          "basis": {},
+          "call_id": "publish-e9d84027d7274930bbe6ddeff9acd015",
+          "parent_call_id": null,
+          "inputs": {
+            "rollback": false
+          },
+          "outputs": {},
+          "depends": [],
+          "observed_at": "2026-10-23T17:17:12.015171+00:00",
+          "source_seq": 1,
+          "stream_id": "c6a2a05c192304c8d3649d5d"
+        },
+        {
+          "protocol": "bo-event/v1",
+          "project_id": "database-browser-demo",
+          "model_revision": "1",
+          "build_id": "115b549dd48bf5eeac5126965bc7b11c44d9c60c34317172ddd2e42fc151b39e",
+          "run_id": "7a908b5db117425fa9e25b2b206e25e4",
+          "producer_id": "995c4acf5d2f442c807c3d43f2959676",
+          "schema_version": 3,
+          "seq": 2,
+          "id": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:2",
+          "node": "transaction",
+          "phase": "enter",
+          "entity": "gallery",
+          "attempt": "e9d84027d7274930bbe6ddeff9acd015",
+          "scope": "application",
+          "basis": {},
+          "call_id": "4c4ac0c97b8e4c87873db54ca09b47a2",
+          "parent_call_id": "publish-e9d84027d7274930bbe6ddeff9acd015",
+          "inputs": {
+            "operation": "transaction",
+            "statement": "transaction",
+            "parameters": {}
+          },
+          "outputs": {
+            "status": "started",
+            "duration_ms": 0.008,
+            "targets": [],
+            "unknown_targets": [],
+            "target_source": "not_applicable",
+            "target_access": []
+          },
+          "depends": [],
+          "observed_at": "2026-10-23T17:17:12.015468+00:00",
+          "source_seq": 2,
+          "stream_id": "c6a2a05c192304c8d3649d5d"
+        },
+        {
+          "protocol": "bo-event/v1",
+          "project_id": "database-browser-demo",
+          "model_revision": "1",
+          "build_id": "115b549dd48bf5eeac5126965bc7b11c44d9c60c34317172ddd2e42fc151b39e",
+          "run_id": "7a908b5db117425fa9e25b2b206e25e4",
+          "producer_id": "995c4acf5d2f442c807c3d43f2959676",
+          "schema_version": 3,
+          "seq": 3,
+          "id": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:3",
+          "node": "load",
+          "phase": "enter",
+          "entity": "gallery",
+          "attempt": "e9d84027d7274930bbe6ddeff9acd015",
+          "scope": "application",
+          "basis": {},
+          "call_id": "fce62af73ee5408199226fbc76720e13",
+          "parent_call_id": "publish-e9d84027d7274930bbe6ddeff9acd015",
+          "inputs": {
+            "operation": "read",
+            "statement": "SELECT pictures.id, pictures.approved FROM pictures",
+            "parameters": {
+              "approved": 1
+            }
+          },
+          "outputs": {
+            "status": "started",
+            "duration_ms": 0.021,
+            "transaction_id": "4c4ac0c97b8e4c87873db54ca09b47a2",
+            "targets": [
+              "table:pictures"
+            ],
+            "unknown_targets": [],
+            "target_source": "parsed_sql",
+            "target_access": [
+              {
+                "target": "table:pictures",
+                "action": "read"
+              }
+            ]
+          },
+          "depends": [],
+          "observed_at": "2026-10-23T17:17:12.100287+00:00",
+          "source_seq": 3,
+          "stream_id": "c6a2a05c192304c8d3649d5d"
+        },
+        {
+          "protocol": "bo-event/v1",
+          "project_id": "database-browser-demo",
+          "model_revision": "1",
+          "build_id": "115b549dd48bf5eeac5126965bc7b11c44d9c60c34317172ddd2e42fc151b39e",
+          "run_id": "7a908b5db117425fa9e25b2b206e25e4",
+          "producer_id": "995c4acf5d2f442c807c3d43f2959676",
+          "schema_version": 3,
+          "seq": 4,
+          "id": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:4",
+          "node": "load",
+          "phase": "return",
+          "entity": "gallery",
+          "attempt": "e9d84027d7274930bbe6ddeff9acd015",
+          "scope": "application",
+          "basis": {},
+          "call_id": "fce62af73ee5408199226fbc76720e13",
+          "parent_call_id": "publish-e9d84027d7274930bbe6ddeff9acd015",
+          "inputs": {
+            "operation": "read",
+            "statement": "SELECT pictures.id, pictures.approved FROM pictures",
+            "parameters": {
+              "approved": 1
+            }
+          },
+          "outputs": {
+            "status": "executed",
+            "duration_ms": 0.746,
+            "rows_known": false,
+            "transaction_id": "4c4ac0c97b8e4c87873db54ca09b47a2",
+            "targets": [
+              "table:pictures"
+            ],
+            "unknown_targets": [],
+            "target_source": "parsed_sql",
+            "target_access": [
+              {
+                "target": "table:pictures",
+                "action": "read"
+              }
+            ]
+          },
+          "depends": [],
+          "observed_at": "2026-10-23T17:17:12.100910+00:00",
+          "source_seq": 4,
+          "stream_id": "c6a2a05c192304c8d3649d5d"
+        },
+        {
+          "protocol": "bo-event/v1",
+          "project_id": "database-browser-demo",
+          "model_revision": "1",
+          "build_id": "115b549dd48bf5eeac5126965bc7b11c44d9c60c34317172ddd2e42fc151b39e",
+          "run_id": "7a908b5db117425fa9e25b2b206e25e4",
+          "producer_id": "995c4acf5d2f442c807c3d43f2959676",
+          "schema_version": 3,
+          "seq": 5,
+          "id": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:5",
+          "node": "select",
+          "phase": "enter",
+          "entity": "gallery",
+          "attempt": "e9d84027d7274930bbe6ddeff9acd015",
+          "scope": "application",
+          "basis": {},
+          "call_id": "65f69f898dce42e4a295b6596b838eae",
+          "parent_call_id": "publish-e9d84027d7274930bbe6ddeff9acd015",
+          "inputs": {
+            "operation": "transform",
+            "statement": "transform",
+            "parameters": {}
+          },
+          "outputs": {
+            "status": "started",
+            "duration_ms": 0.004,
+            "transaction_id": "4c4ac0c97b8e4c87873db54ca09b47a2",
+            "targets": [],
+            "unknown_targets": [],
+            "target_source": "not_applicable",
+            "target_access": []
+          },
+          "depends": [
+            {
+              "event": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:4",
+              "type": "data"
+            }
+          ],
+          "observed_at": "2026-10-23T17:17:12.101676+00:00",
+          "source_seq": 5,
+          "stream_id": "c6a2a05c192304c8d3649d5d"
+        },
+        {
+          "protocol": "bo-event/v1",
+          "project_id": "database-browser-demo",
+          "model_revision": "1",
+          "build_id": "115b549dd48bf5eeac5126965bc7b11c44d9c60c34317172ddd2e42fc151b39e",
+          "run_id": "7a908b5db117425fa9e25b2b206e25e4",
+          "producer_id": "995c4acf5d2f442c807c3d43f2959676",
+          "schema_version": 3,
+          "seq": 6,
+          "id": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:6",
+          "node": "select",
+          "phase": "change",
+          "entity": "gallery",
+          "attempt": "e9d84027d7274930bbe6ddeff9acd015",
+          "scope": "application",
+          "basis": {},
+          "call_id": "65f69f898dce42e4a295b6596b838eae",
+          "parent_call_id": "publish-e9d84027d7274930bbe6ddeff9acd015",
+          "inputs": {
+            "operation": "transform",
+            "statement": "transform",
+            "parameters": {}
+          },
+          "outputs": {
+            "status": "transformed",
+            "duration_ms": 0.163,
+            "result": {
+              "count": 7
+            },
+            "before": {
+              "count": 12
+            },
+            "transaction_id": "4c4ac0c97b8e4c87873db54ca09b47a2",
+            "targets": [],
+            "unknown_targets": [],
+            "input_count": 12,
+            "output_count": 7,
+            "target_source": "not_applicable",
+            "target_access": []
+          },
+          "depends": [
+            {
+              "event": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:4",
+              "type": "data"
+            }
+          ],
+          "observed_at": "2026-10-23T17:17:12.101826+00:00",
+          "source_seq": 6,
+          "stream_id": "c6a2a05c192304c8d3649d5d"
+        },
+        {
+          "protocol": "bo-event/v1",
+          "project_id": "database-browser-demo",
+          "model_revision": "1",
+          "build_id": "115b549dd48bf5eeac5126965bc7b11c44d9c60c34317172ddd2e42fc151b39e",
+          "run_id": "7a908b5db117425fa9e25b2b206e25e4",
+          "producer_id": "995c4acf5d2f442c807c3d43f2959676",
+          "schema_version": 3,
+          "seq": 7,
+          "id": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:7",
+          "node": "save",
+          "phase": "enter",
+          "entity": "gallery",
+          "attempt": "e9d84027d7274930bbe6ddeff9acd015",
+          "scope": "application",
+          "basis": {},
+          "call_id": "bed4ce9a898c4179b6ba6c265e94ceea",
+          "parent_call_id": "publish-e9d84027d7274930bbe6ddeff9acd015",
+          "inputs": {
+            "operation": "write",
+            "statement": "INSERT INTO exhibition (picture_id) VALUES (?)",
+            "parameters": {
+              "count": 7
+            }
+          },
+          "outputs": {
+            "status": "started",
+            "duration_ms": 0.003,
+            "transaction_id": "4c4ac0c97b8e4c87873db54ca09b47a2",
+            "targets": [
+              "table:exhibition"
+            ],
+            "unknown_targets": [],
+            "target_source": "parsed_sql",
+            "target_access": [
+              {
+                "target": "table:exhibition",
+                "action": "write"
+              }
+            ]
+          },
+          "depends": [
+            {
+              "event": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:6",
+              "type": "data"
+            }
+          ],
+          "observed_at": "2026-10-23T17:17:12.103584+00:00",
+          "source_seq": 7,
+          "stream_id": "c6a2a05c192304c8d3649d5d"
+        },
+        {
+          "protocol": "bo-event/v1",
+          "project_id": "database-browser-demo",
+          "model_revision": "1",
+          "build_id": "115b549dd48bf5eeac5126965bc7b11c44d9c60c34317172ddd2e42fc151b39e",
+          "run_id": "7a908b5db117425fa9e25b2b206e25e4",
+          "producer_id": "995c4acf5d2f442c807c3d43f2959676",
+          "schema_version": 3,
+          "seq": 8,
+          "id": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:8",
+          "node": "save",
+          "phase": "return",
+          "entity": "gallery",
+          "attempt": "e9d84027d7274930bbe6ddeff9acd015",
+          "scope": "application",
+          "basis": {},
+          "call_id": "bed4ce9a898c4179b6ba6c265e94ceea",
+          "parent_call_id": "publish-e9d84027d7274930bbe6ddeff9acd015",
+          "inputs": {
+            "operation": "write",
+            "statement": "INSERT INTO exhibition (picture_id) VALUES (?)",
+            "parameters": {
+              "count": 7
+            }
+          },
+          "outputs": {
+            "status": "executed",
+            "duration_ms": 1.468,
+            "rows": 7,
+            "rows_known": true,
+            "transaction_id": "4c4ac0c97b8e4c87873db54ca09b47a2",
+            "targets": [
+              "table:exhibition"
+            ],
+            "unknown_targets": [],
+            "target_source": "parsed_sql",
+            "target_access": [
+              {
+                "target": "table:exhibition",
+                "action": "write"
+              }
+            ]
+          },
+          "depends": [
+            {
+              "event": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:6",
+              "type": "data"
+            }
+          ],
+          "observed_at": "2026-10-23T17:17:12.105068+00:00",
+          "source_seq": 8,
+          "stream_id": "c6a2a05c192304c8d3649d5d"
+        },
+        {
+          "protocol": "bo-event/v1",
+          "project_id": "database-browser-demo",
+          "model_revision": "1",
+          "build_id": "115b549dd48bf5eeac5126965bc7b11c44d9c60c34317172ddd2e42fc151b39e",
+          "run_id": "7a908b5db117425fa9e25b2b206e25e4",
+          "producer_id": "995c4acf5d2f442c807c3d43f2959676",
+          "schema_version": 3,
+          "seq": 9,
+          "id": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:9",
+          "node": "transaction",
+          "phase": "commit",
+          "entity": "gallery",
+          "attempt": "e9d84027d7274930bbe6ddeff9acd015",
+          "scope": "application",
+          "basis": {},
+          "call_id": "4c4ac0c97b8e4c87873db54ca09b47a2",
+          "parent_call_id": "publish-e9d84027d7274930bbe6ddeff9acd015",
+          "inputs": {
+            "operation": "transaction",
+            "statement": "transaction",
+            "parameters": {}
+          },
+          "outputs": {
+            "status": "committed",
+            "duration_ms": 93.695,
+            "targets": [],
+            "unknown_targets": [],
+            "committed": true,
+            "target_source": "not_applicable",
+            "target_access": []
+          },
+          "depends": [],
+          "observed_at": "2026-10-23T17:17:12.109173+00:00",
+          "source_seq": 9,
+          "stream_id": "c6a2a05c192304c8d3649d5d"
+        },
+        {
+          "protocol": "bo-event/v1",
+          "project_id": "database-browser-demo",
+          "model_revision": "1",
+          "build_id": "115b549dd48bf5eeac5126965bc7b11c44d9c60c34317172ddd2e42fc151b39e",
+          "run_id": "7a908b5db117425fa9e25b2b206e25e4",
+          "producer_id": "995c4acf5d2f442c807c3d43f2959676",
+          "schema_version": 3,
+          "seq": 10,
+          "id": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:10",
+          "node": "publish",
+          "phase": "return",
+          "entity": "application",
+          "attempt": "e9d84027d7274930bbe6ddeff9acd015",
+          "scope": "application",
+          "basis": {},
+          "call_id": "publish-e9d84027d7274930bbe6ddeff9acd015",
+          "parent_call_id": null,
+          "inputs": {},
+          "outputs": {
+            "published": 7,
+            "status": "committed"
+          },
+          "depends": [],
+          "observed_at": "2026-10-23T17:17:12.109278+00:00",
+          "source_seq": 10,
+          "stream_id": "c6a2a05c192304c8d3649d5d"
+        },
+        {
+          "protocol": "bo-event/v1",
+          "project_id": "database-browser-demo",
+          "model_revision": "1",
+          "build_id": "115b549dd48bf5eeac5126965bc7b11c44d9c60c34317172ddd2e42fc151b39e",
+          "run_id": "7a908b5db117425fa9e25b2b206e25e4",
+          "producer_id": "995c4acf5d2f442c807c3d43f2959676",
+          "schema_version": 3,
+          "seq": 11,
+          "id": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:11",
+          "node": "publish",
+          "phase": "enter",
+          "entity": "application",
+          "attempt": "ff99189cf13d41919505c177c8462d30",
+          "scope": "application",
+          "basis": {},
+          "call_id": "publish-ff99189cf13d41919505c177c8462d30",
+          "parent_call_id": null,
+          "inputs": {
+            "rollback": true
+          },
+          "outputs": {},
+          "depends": [],
+          "observed_at": "2026-10-23T17:17:13.106799+00:00",
+          "source_seq": 11,
+          "stream_id": "c6a2a05c192304c8d3649d5d"
+        },
+        {
+          "protocol": "bo-event/v1",
+          "project_id": "database-browser-demo",
+          "model_revision": "1",
+          "build_id": "115b549dd48bf5eeac5126965bc7b11c44d9c60c34317172ddd2e42fc151b39e",
+          "run_id": "7a908b5db117425fa9e25b2b206e25e4",
+          "producer_id": "995c4acf5d2f442c807c3d43f2959676",
+          "schema_version": 3,
+          "seq": 12,
+          "id": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:12",
+          "node": "transaction",
+          "phase": "enter",
+          "entity": "gallery",
+          "attempt": "ff99189cf13d41919505c177c8462d30",
+          "scope": "application",
+          "basis": {},
+          "call_id": "4351648ffa574f76beed30b699cf9132",
+          "parent_call_id": "publish-ff99189cf13d41919505c177c8462d30",
+          "inputs": {
+            "operation": "transaction",
+            "statement": "transaction",
+            "parameters": {}
+          },
+          "outputs": {
+            "status": "started",
+            "duration_ms": 0.003,
+            "targets": [],
+            "unknown_targets": [],
+            "target_source": "not_applicable",
+            "target_access": []
+          },
+          "depends": [],
+          "observed_at": "2026-10-23T17:17:13.106935+00:00",
+          "source_seq": 12,
+          "stream_id": "c6a2a05c192304c8d3649d5d"
+        },
+        {
+          "protocol": "bo-event/v1",
+          "project_id": "database-browser-demo",
+          "model_revision": "1",
+          "build_id": "115b549dd48bf5eeac5126965bc7b11c44d9c60c34317172ddd2e42fc151b39e",
+          "run_id": "7a908b5db117425fa9e25b2b206e25e4",
+          "producer_id": "995c4acf5d2f442c807c3d43f2959676",
+          "schema_version": 3,
+          "seq": 13,
+          "id": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:13",
+          "node": "load",
+          "phase": "enter",
+          "entity": "gallery",
+          "attempt": "ff99189cf13d41919505c177c8462d30",
+          "scope": "application",
+          "basis": {},
+          "call_id": "85d58c9b9bd745bf9c915b76f863e438",
+          "parent_call_id": "publish-ff99189cf13d41919505c177c8462d30",
+          "inputs": {
+            "operation": "read",
+            "statement": "SELECT pictures.id, pictures.approved FROM pictures",
+            "parameters": {
+              "approved": 1
+            }
+          },
+          "outputs": {
+            "status": "started",
+            "duration_ms": 0.003,
+            "transaction_id": "4351648ffa574f76beed30b699cf9132",
+            "targets": [
+              "table:pictures"
+            ],
+            "unknown_targets": [],
+            "target_source": "parsed_sql",
+            "target_access": [
+              {
+                "target": "table:pictures",
+                "action": "read"
+              }
+            ]
+          },
+          "depends": [],
+          "observed_at": "2026-10-23T17:17:13.108095+00:00",
+          "source_seq": 13,
+          "stream_id": "c6a2a05c192304c8d3649d5d"
+        },
+        {
+          "protocol": "bo-event/v1",
+          "project_id": "database-browser-demo",
+          "model_revision": "1",
+          "build_id": "115b549dd48bf5eeac5126965bc7b11c44d9c60c34317172ddd2e42fc151b39e",
+          "run_id": "7a908b5db117425fa9e25b2b206e25e4",
+          "producer_id": "995c4acf5d2f442c807c3d43f2959676",
+          "schema_version": 3,
+          "seq": 14,
+          "id": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:14",
+          "node": "load",
+          "phase": "return",
+          "entity": "gallery",
+          "attempt": "ff99189cf13d41919505c177c8462d30",
+          "scope": "application",
+          "basis": {},
+          "call_id": "85d58c9b9bd745bf9c915b76f863e438",
+          "parent_call_id": "publish-ff99189cf13d41919505c177c8462d30",
+          "inputs": {
+            "operation": "read",
+            "statement": "SELECT pictures.id, pictures.approved FROM pictures",
+            "parameters": {
+              "approved": 1
+            }
+          },
+          "outputs": {
+            "status": "executed",
+            "duration_ms": 0.891,
+            "rows_known": false,
+            "transaction_id": "4351648ffa574f76beed30b699cf9132",
+            "targets": [
+              "table:pictures"
+            ],
+            "unknown_targets": [],
+            "target_source": "parsed_sql",
+            "target_access": [
+              {
+                "target": "table:pictures",
+                "action": "read"
+              }
+            ]
+          },
+          "depends": [],
+          "observed_at": "2026-10-23T17:17:13.109001+00:00",
+          "source_seq": 14,
+          "stream_id": "c6a2a05c192304c8d3649d5d"
+        },
+        {
+          "protocol": "bo-event/v1",
+          "project_id": "database-browser-demo",
+          "model_revision": "1",
+          "build_id": "115b549dd48bf5eeac5126965bc7b11c44d9c60c34317172ddd2e42fc151b39e",
+          "run_id": "7a908b5db117425fa9e25b2b206e25e4",
+          "producer_id": "995c4acf5d2f442c807c3d43f2959676",
+          "schema_version": 3,
+          "seq": 15,
+          "id": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:15",
+          "node": "select",
+          "phase": "enter",
+          "entity": "gallery",
+          "attempt": "ff99189cf13d41919505c177c8462d30",
+          "scope": "application",
+          "basis": {},
+          "call_id": "9f5a1eca8c7840a4a3d3ea8dd603c907",
+          "parent_call_id": "publish-ff99189cf13d41919505c177c8462d30",
+          "inputs": {
+            "operation": "transform",
+            "statement": "transform",
+            "parameters": {}
+          },
+          "outputs": {
+            "status": "started",
+            "duration_ms": 0.003,
+            "transaction_id": "4351648ffa574f76beed30b699cf9132",
+            "targets": [],
+            "unknown_targets": [],
+            "target_source": "not_applicable",
+            "target_access": []
+          },
+          "depends": [
+            {
+              "event": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:14",
+              "type": "data"
+            }
+          ],
+          "observed_at": "2026-10-23T17:17:13.109476+00:00",
+          "source_seq": 15,
+          "stream_id": "c6a2a05c192304c8d3649d5d"
+        },
+        {
+          "protocol": "bo-event/v1",
+          "project_id": "database-browser-demo",
+          "model_revision": "1",
+          "build_id": "115b549dd48bf5eeac5126965bc7b11c44d9c60c34317172ddd2e42fc151b39e",
+          "run_id": "7a908b5db117425fa9e25b2b206e25e4",
+          "producer_id": "995c4acf5d2f442c807c3d43f2959676",
+          "schema_version": 3,
+          "seq": 16,
+          "id": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:16",
+          "node": "select",
+          "phase": "change",
+          "entity": "gallery",
+          "attempt": "ff99189cf13d41919505c177c8462d30",
+          "scope": "application",
+          "basis": {},
+          "call_id": "9f5a1eca8c7840a4a3d3ea8dd603c907",
+          "parent_call_id": "publish-ff99189cf13d41919505c177c8462d30",
+          "inputs": {
+            "operation": "transform",
+            "statement": "transform",
+            "parameters": {}
+          },
+          "outputs": {
+            "status": "transformed",
+            "duration_ms": 0.105,
+            "result": {
+              "count": 7
+            },
+            "before": {
+              "count": 12
+            },
+            "transaction_id": "4351648ffa574f76beed30b699cf9132",
+            "targets": [],
+            "unknown_targets": [],
+            "input_count": 12,
+            "output_count": 7,
+            "target_source": "not_applicable",
+            "target_access": []
+          },
+          "depends": [
+            {
+              "event": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:14",
+              "type": "data"
+            }
+          ],
+          "observed_at": "2026-10-23T17:17:13.109569+00:00",
+          "source_seq": 16,
+          "stream_id": "c6a2a05c192304c8d3649d5d"
+        },
+        {
+          "protocol": "bo-event/v1",
+          "project_id": "database-browser-demo",
+          "model_revision": "1",
+          "build_id": "115b549dd48bf5eeac5126965bc7b11c44d9c60c34317172ddd2e42fc151b39e",
+          "run_id": "7a908b5db117425fa9e25b2b206e25e4",
+          "producer_id": "995c4acf5d2f442c807c3d43f2959676",
+          "schema_version": 3,
+          "seq": 17,
+          "id": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:17",
+          "node": "save",
+          "phase": "enter",
+          "entity": "gallery",
+          "attempt": "ff99189cf13d41919505c177c8462d30",
+          "scope": "application",
+          "basis": {},
+          "call_id": "44d36c31b8ac480b856363c7ef50a35f",
+          "parent_call_id": "publish-ff99189cf13d41919505c177c8462d30",
+          "inputs": {
+            "operation": "write",
+            "statement": "INSERT INTO exhibition (picture_id) VALUES (?)",
+            "parameters": {
+              "count": 7
+            }
+          },
+          "outputs": {
+            "status": "started",
+            "duration_ms": 0.004,
+            "transaction_id": "4351648ffa574f76beed30b699cf9132",
+            "targets": [
+              "table:exhibition"
+            ],
+            "unknown_targets": [],
+            "target_source": "parsed_sql",
+            "target_access": [
+              {
+                "target": "table:exhibition",
+                "action": "write"
+              }
+            ]
+          },
+          "depends": [
+            {
+              "event": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:16",
+              "type": "data"
+            }
+          ],
+          "observed_at": "2026-10-23T17:17:13.110672+00:00",
+          "source_seq": 17,
+          "stream_id": "c6a2a05c192304c8d3649d5d"
+        },
+        {
+          "protocol": "bo-event/v1",
+          "project_id": "database-browser-demo",
+          "model_revision": "1",
+          "build_id": "115b549dd48bf5eeac5126965bc7b11c44d9c60c34317172ddd2e42fc151b39e",
+          "run_id": "7a908b5db117425fa9e25b2b206e25e4",
+          "producer_id": "995c4acf5d2f442c807c3d43f2959676",
+          "schema_version": 3,
+          "seq": 18,
+          "id": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:18",
+          "node": "save",
+          "phase": "return",
+          "entity": "gallery",
+          "attempt": "ff99189cf13d41919505c177c8462d30",
+          "scope": "application",
+          "basis": {},
+          "call_id": "44d36c31b8ac480b856363c7ef50a35f",
+          "parent_call_id": "publish-ff99189cf13d41919505c177c8462d30",
+          "inputs": {
+            "operation": "write",
+            "statement": "INSERT INTO exhibition (picture_id) VALUES (?)",
+            "parameters": {
+              "count": 7
+            }
+          },
+          "outputs": {
+            "status": "executed",
+            "duration_ms": 1.868,
+            "rows": 7,
+            "rows_known": true,
+            "transaction_id": "4351648ffa574f76beed30b699cf9132",
+            "targets": [
+              "table:exhibition"
+            ],
+            "unknown_targets": [],
+            "target_source": "parsed_sql",
+            "target_access": [
+              {
+                "target": "table:exhibition",
+                "action": "write"
+              }
+            ]
+          },
+          "depends": [
+            {
+              "event": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:16",
+              "type": "data"
+            }
+          ],
+          "observed_at": "2026-10-23T17:17:13.112556+00:00",
+          "source_seq": 18,
+          "stream_id": "c6a2a05c192304c8d3649d5d"
+        },
+        {
+          "protocol": "bo-event/v1",
+          "project_id": "database-browser-demo",
+          "model_revision": "1",
+          "build_id": "115b549dd48bf5eeac5126965bc7b11c44d9c60c34317172ddd2e42fc151b39e",
+          "run_id": "7a908b5db117425fa9e25b2b206e25e4",
+          "producer_id": "995c4acf5d2f442c807c3d43f2959676",
+          "schema_version": 3,
+          "seq": 19,
+          "id": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:19",
+          "node": "transaction",
+          "phase": "error",
+          "entity": "gallery",
+          "attempt": "ff99189cf13d41919505c177c8462d30",
+          "scope": "application",
+          "basis": {},
+          "call_id": "4351648ffa574f76beed30b699cf9132",
+          "parent_call_id": "publish-ff99189cf13d41919505c177c8462d30",
+          "inputs": {
+            "operation": "transaction",
+            "statement": "transaction",
+            "parameters": {}
+          },
+          "outputs": {
+            "status": "rolled_back",
+            "duration_ms": 6.693,
+            "error_type": "ValueError",
+            "targets": [],
+            "unknown_targets": [],
+            "committed": false,
+            "target_source": "not_applicable",
+            "target_access": []
+          },
+          "depends": [],
+          "observed_at": "2026-10-23T17:17:13.113638+00:00",
+          "source_seq": 19,
+          "stream_id": "c6a2a05c192304c8d3649d5d"
+        },
+        {
+          "protocol": "bo-event/v1",
+          "project_id": "database-browser-demo",
+          "model_revision": "1",
+          "build_id": "115b549dd48bf5eeac5126965bc7b11c44d9c60c34317172ddd2e42fc151b39e",
+          "run_id": "7a908b5db117425fa9e25b2b206e25e4",
+          "producer_id": "995c4acf5d2f442c807c3d43f2959676",
+          "schema_version": 3,
+          "seq": 20,
+          "id": "7a908b5db117425fa9e25b2b206e25e4:995c4acf5d2f442c807c3d43f2959676:20",
+          "node": "publish",
+          "phase": "return",
+          "entity": "application",
+          "attempt": "ff99189cf13d41919505c177c8462d30",
+          "scope": "application",
+          "basis": {},
+          "call_id": "publish-ff99189cf13d41919505c177c8462d30",
+          "parent_call_id": null,
+          "inputs": {},
+          "outputs": {
+            "published": 0,
+            "status": "rolled_back"
+          },
+          "depends": [],
+          "observed_at": "2026-10-23T17:17:13.113720+00:00",
+          "source_seq": 20,
+          "stream_id": "c6a2a05c192304c8d3649d5d"
+        }
+      ],
+      "database_status": null,
+      "machine": {
+        "current": null,
+        "state_revision": null,
+        "configurations": [],
+        "journal": []
+      },
+      "runtime_frames": {
+        "schema": "stategraph-runtime-frames/v1",
+        "partial": true,
+        "frames": []
+      },
+      "authority": {
+        "entity": null,
+        "state": null,
+        "basis": {},
+        "parameters": {
+          "attempt": null
+        }
+      },
+      "health": {
+        "errors": 0,
+        "dropped": 0,
+        "run_id": "c6a2a05c192304c8d3649d5d",
+        "attempted": 20,
+        "written": 20,
+        "enabled": true,
+        "runtime_frame_evictions": 0,
+        "retained_events": 20,
+        "evicted_events": 0,
+        "history_start_seq": 1,
+        "log_errors": 0,
+        "listener_errors": 0,
+        "retention": {
+          "memory_events": 10000,
+          "memory_seconds": 1800,
+          "log_bytes": 8388608,
+          "log_backups": 2
+        }
+      },
+      "busy": false,
+      "historical": false,
+      "available_cases": [
+        "live"
+      ],
+      "instances": []
+    },
+    "replay": "Select approved pictures · State changed6 changesValueSelect approved picturesstatus: started → transformedValueSelect approved picturesduration_ms: 0.004 → 0.163ValueSelect approved picturesresult: Not recorded → {\"count\":7}ValueSelect approved picturesbefore: Not recorded → {\"count\":12}ValueSelect approved picturesinput_count: Not recorded → 12ValueSelect approved picturesoutput_count: Not recorded → 7",
+    "beforeUpgrade": {
+      "load": {
+        "representation": "node",
+        "color": "#316da4",
+        "core": "false",
+        "referenceOf": "",
+        "runState": "ok",
+        "depth": "0",
+        "nodeId": "load",
+        "nodeType": "query",
+        "fill": "#dae5ef",
+        "fillEmphasis": "normal",
+        "discussion": "false",
+        "x": "514.1801212982168",
+        "y": "1069.4637260284787",
+        "pinned": "true",
+        "emphasis": "normal",
+        "parent": "",
+        "screenX": "566.696115522515",
+        "screenY": "885.659428264266",
+        "groupRadius": "",
+        "groupCenterX": "",
+        "groupCenterY": "",
+        "expanded": "false"
+      },
+      "select": {
+        "representation": "node",
+        "color": "#997345",
+        "core": "false",
+        "referenceOf": "",
+        "runState": "ok",
+        "depth": "0",
+        "nodeId": "select",
+        "nodeType": "transform",
+        "fill": "#ede6de",
+        "fillEmphasis": "normal",
+        "discussion": "false",
+        "x": "924.8727893071912",
+        "y": "825.6204893132724",
+        "pinned": "false",
+        "emphasis": "normal",
+        "parent": "",
+        "screenX": "856.5709037880023",
+        "screenY": "713.5501793812376",
+        "groupRadius": "",
+        "groupCenterX": "",
+        "groupCenterY": "",
+        "expanded": "false"
+      },
+      "save": {
+        "representation": "node",
+        "color": "#316da4",
+        "core": "false",
+        "referenceOf": "",
+        "runState": "ok",
+        "depth": "0",
+        "nodeId": "save",
+        "nodeType": "query",
+        "fill": "#dae5ef",
+        "fillEmphasis": "normal",
+        "discussion": "false",
+        "x": "898.7522783778466",
+        "y": "301.81129109083054",
+        "pinned": "false",
+        "emphasis": "normal",
+        "parent": "",
+        "screenX": "838.1345445227215",
+        "screenY": "343.8355673275181",
+        "groupRadius": "",
+        "groupCenterX": "",
+        "groupCenterY": "",
+        "expanded": "false"
+      },
+      "db:gallery:table%3Apictures": {
+        "representation": "node",
+        "color": "#3d7e97",
+        "core": "false",
+        "referenceOf": "",
+        "runState": "declared",
+        "depth": "0",
+        "nodeId": "db:gallery:table%3Apictures",
+        "nodeType": "dataset",
+        "fill": "#dce8ec",
+        "fillEmphasis": "normal",
+        "discussion": "false",
+        "x": "105.85808461000738",
+        "y": "610.8509560604368",
+        "pinned": "false",
+        "emphasis": "normal",
+        "parent": "",
+        "screenX": "278.4945644625851",
+        "screenY": "561.961709883207",
+        "groupRadius": "",
+        "groupCenterX": "",
+        "groupCenterY": "",
+        "expanded": "false"
+      }
+    },
+    "upgrade": {
+      "version": 2,
+      "changed": true,
+      "build_id": "bde125a83c1158652886269a5292ffa71010bf91e61f914486a062542b667ce9"
+    },
+    "afterUpgrade": {
+      "load": {
+        "representation": "node",
+        "color": "#316da4",
+        "core": "false",
+        "referenceOf": "",
+        "runState": "declared",
+        "depth": "0",
+        "nodeId": "load",
+        "nodeType": "query",
+        "fill": "#dae5ef",
+        "fillEmphasis": "normal",
+        "discussion": "false",
+        "x": "514.1801212982168",
+        "y": "1069.4637260284787",
+        "pinned": "true",
+        "emphasis": "normal",
+        "parent": "",
+        "screenX": "566.696115522515",
+        "screenY": "885.659428264266",
+        "groupRadius": "",
+        "groupCenterX": "",
+        "groupCenterY": "",
+        "expanded": "false"
+      },
+      "select": {
+        "representation": "node",
+        "color": "#997345",
+        "core": "false",
+        "referenceOf": "",
+        "runState": "declared",
+        "depth": "0",
+        "nodeId": "select",
+        "nodeType": "transform",
+        "fill": "#ede6de",
+        "fillEmphasis": "normal",
+        "discussion": "false",
+        "x": "924.8727893071912",
+        "y": "825.6204893132724",
+        "pinned": "false",
+        "emphasis": "normal",
+        "parent": "",
+        "screenX": "856.5709037880023",
+        "screenY": "713.5501793812376",
+        "groupRadius": "",
+        "groupCenterX": "",
+        "groupCenterY": "",
+        "expanded": "false"
+      },
+      "save": {
+        "representation": "node",
+        "color": "#316da4",
+        "core": "false",
+        "referenceOf": "",
+        "runState": "declared",
+        "depth": "0",
+        "nodeId": "save",
+        "nodeType": "query",
+        "fill": "#dae5ef",
+        "fillEmphasis": "normal",
+        "discussion": "false",
+        "x": "898.7522783778466",
+        "y": "301.81129109083054",
+        "pinned": "false",
+        "emphasis": "normal",
+        "parent": "",
+        "screenX": "838.1345445227215",
+        "screenY": "343.8355673275181",
+        "groupRadius": "",
+        "groupCenterX": "",
+        "groupCenterY": "",
+        "expanded": "false"
+      },
+      "db:gallery:table%3Apictures": {
+        "representation": "node",
+        "color": "#3d7e97",
+        "core": "false",
+        "referenceOf": "",
+        "runState": "declared",
+        "depth": "0",
+        "nodeId": "db:gallery:table%3Apictures",
+        "nodeType": "dataset",
+        "fill": "#dce8ec",
+        "fillEmphasis": "normal",
+        "discussion": "false",
+        "x": "105.85808461000738",
+        "y": "610.8509560604368",
+        "pinned": "false",
+        "emphasis": "normal",
+        "parent": "",
+        "screenX": "278.4945644625851",
+        "screenY": "561.961709883207",
+        "groupRadius": "",
+        "groupCenterX": "",
+        "groupCenterY": "",
+        "expanded": "false"
+      }
+    },
+    "unavailable": {
+      "configured": true,
+      "valid": false,
+      "changed": false,
+      "errors": [
+        "The configured database URL environment variable is missing."
+      ]
+    },
+    "recovered": {
+      "configured": true,
+      "valid": true,
+      "errors": [],
+      "changed": false,
+      "source_id": "0c1294395ac59759c80c044bf8996fbae1f28e5e25d600f9d60e6a43b9d1d5c4",
+      "catalog_id": "8792c9785d5abcb3b5388ec5e12b5eb12ebb927fd59244c87d1ad4e2641740ab",
+      "stores": [
+        {
+          "id": "gallery",
+          "coverage": "complete",
+          "limitations": [
+            "Coverage is limited to tables in the configured/default schema and dialect-supported constraints; triggers and stored routines are not inspected."
+          ]
+        }
+      ]
+    }
+  }
+}

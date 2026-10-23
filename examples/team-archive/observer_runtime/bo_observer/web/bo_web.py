@@ -11,7 +11,8 @@ import mimetypes
 from pathlib import Path
 import subprocess
 import sys
-from urllib.parse import urlsplit
+from urllib.parse import urlsplit, parse_qs
+from ..code_graph.service import CodeGraph
 
 try:
     from ...bo_design import BODesign
@@ -49,6 +50,7 @@ class BOWeb:
         self.config = contained(self.root, "bo_stategraph/config/web.json")
         self.design = BODesign(self.root, discovery)
         self.graph_routes = set(graph_routes)
+        self.code_graph = CodeGraph(self.root)
 
     def status(self):
         value = read(self.config) if self.config.exists() else {"schema": 1, "mode": "visible"}
@@ -92,7 +94,20 @@ class BOWeb:
         return raw.replace(b"data-bo-entry", b"data-bo-entry hidden")
 
     def get(self, path):
-        if path == "/api/design":
+        parsed = urlsplit(path)
+        if parsed.path == "/api/code/graph":
+            query = parse_qs(parsed.query)
+            return self.code_graph.view(
+                focus=query.get("focus", [None])[0],
+                depth=int(query.get("depth", [1])[0]),
+                limit=int(query.get("limit", [400])[0]),
+            )
+        if parsed.path == "/api/code/source":
+            query = parse_qs(parsed.query)
+            return self.code_graph.source(
+                query.get("path", [""])[0], query.get("revision", [""])[0]
+            )
+        if parsed.path == "/api/design":
             return self.design.snapshot()
         return None
 
@@ -141,7 +156,7 @@ def bo_serve(root, *, port=8830, discovery=None, assets=ASSETS):
                     return self.reply(
                         404, {"error": "Debug Web is disabled", "code": "bo_web_disabled"}
                     )
-                value = web.get(path)
+                value = web.get(self.path)
                 if value is not None:
                     return self.reply(200, value)
                 if path == "/api/view":

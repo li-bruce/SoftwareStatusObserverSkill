@@ -1,0 +1,331 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "candidate_id": "5714b93e21c2473b42103b12a8e8705d4281cb20dd98fc39a5c172b8f8add1d7",
+  "changed_files": [
+    "bo_stategraph/runtime-version.json",
+    "observer_runtime/bo_upgrade.py",
+    "observer_runtime/origin.json",
+    "static/graph/analysis.js",
+    "static/graph/glyphs.js",
+    "static/graph/graph-core.js",
+    "static/graph/layout.js",
+    "static/graph/recording.js",
+    "static/graph/renderer.js",
+    "static/graph/replay-steps.js",
+    "static/graph/viewer.css",
+    "static/graph/viewer.js"
+  ],
+  "changed_symbols": [],
+  "affected_callers": [],
+  "affected_nodes": [],
+  "unmapped_changed_symbols": [],
+  "unmapped_implementation_symbols": [
+    "archive_app/ports.py::BOTracePort",
+    "archive_app/ports.py::BOTracePort.__init__",
+    "archive_app/ports.py::BOTracePort.bo_record",
+    "archive_app/ports.py::bo_record_change",
+    "archive_app/ports.py::no_trace",
+    "archive_app/service.py::ArchiveService",
+    "archive_app/storage.py::ArchiveStore",
+    "bo_stategraph/workflow.py::Phase",
+    "integrations/bo_observer.py::BOObserver",
+    "integrations/bo_observer.py::BOObserver.__init__",
+    "integrations/bo_observer.py::BOObserver.close",
+    "integrations/bo_observer.py::BOObserver.health",
+    "integrations/bo_observer.py::BOObserver.snapshot",
+    "integrations/bo_observer.py::BOObserver.trace",
+    "integrations/bo_observer.py::BOObserver.write",
+    "integrations/bo_server.py::LocalApplication",
+    "integrations/bo_server.py::LocalApplication.__init__",
+    "integrations/bo_server.py::LocalApplication.bo_export_graph",
+    "integrations/bo_server.py::LocalApplication.cases",
+    "integrations/bo_server.py::LocalApplication.command",
+    "integrations/bo_server.py::LocalApplication.graph_view",
+    "integrations/bo_server.py::LocalApplication.recording_view",
+    "integrations/bo_server.py::LocalApplication.state",
+    "integrations/bo_server.py::LocalApplication.version_sources",
+    "integrations/bo_server.py::serve",
+    "integrations/bo_server.py::serve.Handler",
+    "integrations/bo_server.py::serve.Handler.do_GET",
+    "integrations/bo_server.py::serve.Handler.do_POST",
+    "integrations/bo_server.py::serve.Handler.log_message",
+    "integrations/bo_server.py::serve.Handler.reply",
+    "run.py::main"
+  ],
+  "changed_requirements": [],
+  "unresolved_call_count": 516,
+  "meaning": "Potential impact plus authored abstraction mapping; semantic truth still needs contract and runtime checks.",
+  "errors": [
+    {
+      "path": "static/app.js",
+      "error": "JavaScript parser unavailable: run npm ci --prefix \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\examples\\team-archive\\observer_runtime\\bo_observer\\adapters\\javascript\". node:internal/modules/cjs/loader:1207\n  const err = new Error(message);\n              ^\n\nError: Cannot find module 'typescript'\nRequire stack:\n- C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\examples\\team-archive\\observer_runtime\\bo_observer\\adapters\\javascript\\scan.mjs\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)\n    at Module._load (node:internal/modules/cjs/loader:1038:27)\n    at Module.require (node:internal/modules/cjs/loader:1289:19)\n    at require (node:internal/modules/helpers:182:18)\n    at file:///C:/Users/Lvi_P/Documents/Work/CF/%E5%B9%B3%E5%8F%B0%E8%BD%AF%E8%91%97/SoftwareStatusObserverSkill/examples/team-archive/observer_runtime/bo_observer/adapters/javascript/scan.mjs:11:12\n    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)\n    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: [\n    'C:\\\\Users\\\\Lvi_P\\\\Documents\\\\Work\\\\CF\\\\平台软著\\\\SoftwareStatusObserverSkill\\\\examples\\\\team-archive\\\\observer_runtime\\\\bo_observer\\\\adapters\\\\javascript\\\\scan.mjs'\n  ]\n}\n\nNode.js v20.19.6\n"
+    },
+    {
+      "excluded_application_entrypoint": "integrations/bo_client.mjs",
+      "declarations": [
+        {
+          "path": "integrations/bo_client.mjs",
+          "error": "JavaScript parser unavailable: run npm ci --prefix \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\examples\\team-archive\\observer_runtime\\bo_observer\\adapters\\javascript\". node:internal/modules/cjs/loader:1207\n  const err = new Error(message);\n              ^\n\nError: Cannot find module 'typescript'\nRequire stack:\n- C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\examples\\team-archive\\observer_runtime\\bo_observer\\adapters\\javascript\\scan.mjs\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)\n    at Module._load (node:internal/modules/cjs/loader:1038:27)\n    at Module.require (node:internal/modules/cjs/loader:1289:19)\n    at require (node:internal/modules/helpers:182:18)\n    at file:///C:/Users/Lvi_P/Documents/Work/CF/%E5%B9%B3%E5%8F%B0%E8%BD%AF%E8%91%97/SoftwareStatusObserverSkill/examples/team-archive/observer_runtime/bo_observer/adapters/javascript/scan.mjs:11:12\n    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)\n    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: [\n    'C:\\\\Users\\\\Lvi_P\\\\Documents\\\\Work\\\\CF\\\\平台软著\\\\SoftwareStatusObserverSkill\\\\examples\\\\team-archive\\\\observer_runtime\\\\bo_observer\\\\adapters\\\\javascript\\\\scan.mjs'\n  ]\n}\n\nNode.js v20.19.6\n"
+        }
+      ]
+    },
+    {
+      "excluded_application_entrypoint": "tooling/frontend_cases.mjs",
+      "declarations": [
+        {
+          "path": "tooling/frontend_cases.mjs",
+          "error": "JavaScript parser unavailable: run npm ci --prefix \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\examples\\team-archive\\observer_runtime\\bo_observer\\adapters\\javascript\". node:internal/modules/cjs/loader:1207\n  const err = new Error(message);\n              ^\n\nError: Cannot find module 'typescript'\nRequire stack:\n- C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\examples\\team-archive\\observer_runtime\\bo_observer\\adapters\\javascript\\scan.mjs\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)\n    at Module._load (node:internal/modules/cjs/loader:1038:27)\n    at Module.require (node:internal/modules/cjs/loader:1289:19)\n    at require (node:internal/modules/helpers:182:18)\n    at file:///C:/Users/Lvi_P/Documents/Work/CF/%E5%B9%B3%E5%8F%B0%E8%BD%AF%E8%91%97/SoftwareStatusObserverSkill/examples/team-archive/observer_runtime/bo_observer/adapters/javascript/scan.mjs:11:12\n    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)\n    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: [\n    'C:\\\\Users\\\\Lvi_P\\\\Documents\\\\Work\\\\CF\\\\平台软著\\\\SoftwareStatusObserverSkill\\\\examples\\\\team-archive\\\\observer_runtime\\\\bo_observer\\\\adapters\\\\javascript\\\\scan.mjs'\n  ]\n}\n\nNode.js v20.19.6\n"
+        }
+      ]
+    },
+    {
+      "excluded_application_entrypoint": "tooling/graph_tests.mjs",
+      "declarations": [
+        {
+          "path": "tooling/graph_tests.mjs",
+          "error": "JavaScript parser unavailable: run npm ci --prefix \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\examples\\team-archive\\observer_runtime\\bo_observer\\adapters\\javascript\". node:internal/modules/cjs/loader:1207\n  const err = new Error(message);\n              ^\n\nError: Cannot find module 'typescript'\nRequire stack:\n- C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\examples\\team-archive\\observer_runtime\\bo_observer\\adapters\\javascript\\scan.mjs\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)\n    at Module._load (node:internal/modules/cjs/loader:1038:27)\n    at Module.require (node:internal/modules/cjs/loader:1289:19)\n    at require (node:internal/modules/helpers:182:18)\n    at file:///C:/Users/Lvi_P/Documents/Work/CF/%E5%B9%B3%E5%8F%B0%E8%BD%AF%E8%91%97/SoftwareStatusObserverSkill/examples/team-archive/observer_runtime/bo_observer/adapters/javascript/scan.mjs:11:12\n    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)\n    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: [\n    'C:\\\\Users\\\\Lvi_P\\\\Documents\\\\Work\\\\CF\\\\平台软著\\\\SoftwareStatusObserverSkill\\\\examples\\\\team-archive\\\\observer_runtime\\\\bo_observer\\\\adapters\\\\javascript\\\\scan.mjs'\n  ]\n}\n\nNode.js v20.19.6\n"
+        }
+      ]
+    },
+    {
+      "excluded_application_entrypoint": "tooling/test_recorded_views.mjs",
+      "declarations": [
+        {
+          "path": "tooling/test_recorded_views.mjs",
+          "error": "JavaScript parser unavailable: run npm ci --prefix \"C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\examples\\team-archive\\observer_runtime\\bo_observer\\adapters\\javascript\". node:internal/modules/cjs/loader:1207\n  const err = new Error(message);\n              ^\n\nError: Cannot find module 'typescript'\nRequire stack:\n- C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\examples\\team-archive\\observer_runtime\\bo_observer\\adapters\\javascript\\scan.mjs\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)\n    at Module._load (node:internal/modules/cjs/loader:1038:27)\n    at Module.require (node:internal/modules/cjs/loader:1289:19)\n    at require (node:internal/modules/helpers:182:18)\n    at file:///C:/Users/Lvi_P/Documents/Work/CF/%E5%B9%B3%E5%8F%B0%E8%BD%AF%E8%91%97/SoftwareStatusObserverSkill/examples/team-archive/observer_runtime/bo_observer/adapters/javascript/scan.mjs:11:12\n    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)\n    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: [\n    'C:\\\\Users\\\\Lvi_P\\\\Documents\\\\Work\\\\CF\\\\平台软著\\\\SoftwareStatusObserverSkill\\\\examples\\\\team-archive\\\\observer_runtime\\\\bo_observer\\\\adapters\\\\javascript\\\\scan.mjs'\n  ]\n}\n\nNode.js v20.19.6\n"
+        }
+      ]
+    },
+    {
+      "feature_missing_source": "ui.command",
+      "symbol": "static/app.js::command"
+    },
+    {
+      "feature_missing_source": "ui.command",
+      "symbol": "static/app.js::submitEdit"
+    },
+    {
+      "feature_missing_source": "ui.command",
+      "symbol": "static/app.js::moveDocument"
+    },
+    {
+      "feature_missing_source": "ui.command",
+      "symbol": "static/app.js::newRun"
+    },
+    {
+      "feature_missing_source": "ui.command",
+      "symbol": "static/app.js::approveVersion"
+    },
+    {
+      "feature_missing_source": "ui.command",
+      "symbol": "static/app.js::runAction"
+    },
+    {
+      "stale_parameter_disposition": {
+        "source": "static/app.js::command",
+        "name": "action",
+        "policy": "value",
+        "node": "ui.command",
+        "direction": "in",
+        "field": "action",
+        "reason": "记录实际提交动作或字段数量；不记录正文及 DOM 事件对象"
+      },
+      "feature": "ui.command"
+    },
+    {
+      "stale_parameter_disposition": {
+        "source": "static/app.js::command",
+        "name": "data",
+        "policy": "derived",
+        "node": "ui.command",
+        "direction": "in",
+        "field": "field_count",
+        "reason": "记录实际提交动作或字段数量；不记录正文及 DOM 事件对象"
+      },
+      "feature": "ui.command"
+    },
+    {
+      "stale_parameter_disposition": {
+        "source": "static/app.js::submitEdit",
+        "name": "e",
+        "policy": "derived",
+        "node": "ui.command",
+        "direction": "in",
+        "field": "action",
+        "reason": "记录实际提交动作或字段数量；不记录正文及 DOM 事件对象"
+      },
+      "feature": "ui.command"
+    },
+    {
+      "stale_parameter_disposition": {
+        "source": "static/app.js::runAction",
+        "name": "e",
+        "policy": "derived",
+        "node": "ui.command",
+        "direction": "in",
+        "field": "action",
+        "reason": "记录实际提交动作或字段数量；不记录正文及 DOM 事件对象"
+      },
+      "feature": "ui.command"
+    },
+    {
+      "feature_missing_source": "ui.validate",
+      "symbol": "static/app.js::submitLimit"
+    },
+    {
+      "stale_parameter_disposition": {
+        "source": "static/app.js::submitLimit",
+        "name": "e",
+        "policy": "derived",
+        "node": "ui.validate",
+        "direction": "in",
+        "field": "input_length",
+        "reason": "记录实际提交动作或字段数量；不记录正文及 DOM 事件对象"
+      },
+      "feature": "ui.validate"
+    },
+    {
+      "feature_missing_source": "ui.dirty",
+      "symbol": "static/app.js::markDocumentDirty"
+    },
+    {
+      "feature_missing_source": "ui.dirty",
+      "symbol": "static/app.js::markLimitDirty"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::$"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::esc"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::esc.<callback:String(v??'').replace:1:1>"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::notice"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::notice.<callback:setTimeout:0:1>"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::doc"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::options"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::options.<callback:items.map:0:1>"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::options.<callback:items.some:0:1>"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::refresh"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::refresh.<callback:options:2:1>"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::refresh.<callback:state.users.filter:0:1>"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::refresh.<callback:options:2:2>"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::refresh.<callback:options:2:3>"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::refresh.<callback:state.projects.find:0:1>"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::refresh.<callback:state.folders.find:0:1>"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::refresh.<callback:state.assignments.filter:0:1>"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::refresh.<callback:state.assignments.filter(a=>a.folder_id===d.folder_id).map:0:1>"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::refresh.<callback:state.assignments.filter(a=>a.folder_id===d.folder_id).map:0:1>.<callback:state.users.find:0:1>"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::refresh.<callback:state.projects.find:0:2>"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::refresh.<callback:[...state.runs].reverse().map:0:1>"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::refresh.<callback:[...state.runs].reverse().map:0:1>.<callback:Object.entries(c.activities).map:0:1>"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::refresh.<callback:[...state.grants].reverse().map:0:1>"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::refresh.<callback:state.archives.map:0:1>"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::<callback:['title','number','content'].forEach:0:1>"
+    },
+    {
+      "invalid_support_mapping": "static/app.js::<module>"
+    },
+    {
+      "invalid_implementation_exclusion": "static/app.js::bo_record"
+    },
+    "source adapter errors: [{\"path\": \"static/app.js\", \"error\": \"JavaScript parser unavailable: run npm ci --prefix \\\"C:\\\\Users\\\\Lvi_P\\\\Documents\\\\Work\\\\CF\\\\\\u5e73\\u53f0\\u8f6f\\u8457\\\\SoftwareStatusObserverSkill\\\\examples\\\\team-archive\\\\observer_runtime\\\\bo_observer\\\\adapters\\\\javascript\\\". node:internal/modules/cjs/loader:1207\\n  const err = new Error(message);\\n              ^\\n\\nError: Cannot find module 'typescript'\\nRequire stack:\\n- C:\\\\Users\\\\Lvi_P\\\\Documents\\\\Work\\\\CF\\\\\\u5e73\\u53f0\\u8f6f\\u8457\\\\SoftwareStatusObserverSkill\\\\examples\\\\team-archive\\\\observer_runtime\\\\bo_observer\\\\adapters\\\\javascript\\\\scan.mjs\\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)\\n    at Module._load (node:internal/modules/cjs/loader:1038:27)\\n    at Module.require (node:internal/modules/cjs/loader:1289:19)\\n    at require (node:internal/modules/helpers:182:18)\\n    at file:///C:/Users/Lvi_P/Documents/Work/CF/%E5%B9%B3%E5%8F%B0%E8%BD%AF%E8%91%97/SoftwareStatusObserverSkill/examples/team-archive/observer_runtime/bo_observer/adapters/javascript/scan.mjs:11:12\\n    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)\\n    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)\\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {\\n  code: 'MODULE_NOT_FOUND',\\n  requireStack: [\\n    'C:\\\\\\\\Users\\\\\\\\Lvi_P\\\\\\\\Documents\\\\\\\\Work\\\\\\\\CF\\\\\\\\\\u5e73\\u53f0\\u8f6f\\u8457\\\\\\\\SoftwareStatusObserverSkill\\\\\\\\examples\\\\\\\\team-archive\\\\\\\\observer_runtime\\\\\\\\bo_observer\\\\\\\\adapters\\\\\\\\javascript\\\\\\\\scan.mjs'\\n  ]\\n}\\n\\nNode.js v20.19.6\\n\"}]"
+  ],
+  "required_classification": [
+    "archive_app/ports.py::BOTracePort",
+    "archive_app/ports.py::BOTracePort.__init__",
+    "archive_app/ports.py::BOTracePort.bo_record",
+    "archive_app/ports.py::bo_record_change",
+    "archive_app/ports.py::no_trace",
+    "archive_app/service.py::ArchiveService",
+    "archive_app/storage.py::ArchiveStore",
+    "bo_stategraph/workflow.py::Phase",
+    "integrations/bo_observer.py::BOObserver",
+    "integrations/bo_observer.py::BOObserver.__init__",
+    "integrations/bo_observer.py::BOObserver.close",
+    "integrations/bo_observer.py::BOObserver.health",
+    "integrations/bo_observer.py::BOObserver.snapshot",
+    "integrations/bo_observer.py::BOObserver.trace",
+    "integrations/bo_observer.py::BOObserver.write",
+    "integrations/bo_server.py::LocalApplication",
+    "integrations/bo_server.py::LocalApplication.__init__",
+    "integrations/bo_server.py::LocalApplication.bo_export_graph",
+    "integrations/bo_server.py::LocalApplication.cases",
+    "integrations/bo_server.py::LocalApplication.command",
+    "integrations/bo_server.py::LocalApplication.graph_view",
+    "integrations/bo_server.py::LocalApplication.recording_view",
+    "integrations/bo_server.py::LocalApplication.state",
+    "integrations/bo_server.py::LocalApplication.version_sources",
+    "integrations/bo_server.py::serve",
+    "integrations/bo_server.py::serve.Handler",
+    "integrations/bo_server.py::serve.Handler.do_GET",
+    "integrations/bo_server.py::serve.Handler.do_POST",
+    "integrations/bo_server.py::serve.Handler.log_message",
+    "integrations/bo_server.py::serve.Handler.reply",
+    "run.py::main"
+  ],
+  "review_errors": [
+    "missing review.json for this candidate"
+  ],
+  "stategraph": {
+    "module": "bo_stategraph/__init__.py",
+    "development_mode": "drive",
+    "execution_mode": "drive",
+    "decision_source": "user",
+    "decision": "合成示例的模拟需求方选择：继续基于状态图驱动开发；两种模式均保留监控及映射检查。"
+  },
+  "discovery": {
+    "valid": true,
+    "ready": true,
+    "errors": [],
+    "warnings": [],
+    "blocked": [],
+    "questions": [],
+    "awaiting_answers": []
+  },
+  "valid": false
+}

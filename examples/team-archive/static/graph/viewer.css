@@ -32,3 +32,4 @@ footer{min-height:28px;padding:4px 14px;font-size:10px}#replay{padding:6px 16px;
 }
 
 #discussion-bar{display:flex;align-items:center;gap:10px;padding:7px 22px;background:#eef3f9;color:#3b5876;border-bottom:1px solid #dce5ef;font-size:12px}#discussion-bar:has(#discussion-label:empty):has(#discussion-focus[hidden]){display:none}#discussion-label{flex:1;overflow-wrap:anywhere}#discussion-bar button{font-size:12px}#discussion-focus{background:#dce7f5;border-color:#b7cce5}
+#connection[data-database-stale=true]{color:#9d632c}

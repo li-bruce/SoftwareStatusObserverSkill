@@ -1,0 +1,54 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+reformatted C:\Users\Lvi_P\Documents\Work\CF\ƽ̨����\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_observer\data\projection.py
+reformatted C:\Users\Lvi_P\Documents\Work\CF\ƽ̨����\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_observer\data\protocol.py
+reformatted C:\Users\Lvi_P\Documents\Work\CF\ƽ̨����\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_observer\data\runtime.py
+reformatted C:\Users\Lvi_P\Documents\Work\CF\ƽ̨����\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_observer\data\sync.py
+
+All done! \u2728 \U0001f370 \u2728
+4 files reformatted, 81 files left unchanged.
+skills/business-observer/assets/stategraph-viewer/analysis.js 73ms (unchanged)
+skills/business-observer/assets/stategraph-viewer/conversation.js 8ms (unchanged)
+skills/business-observer/assets/stategraph-viewer/data-layer.js 43ms
+skills/business-observer/assets/stategraph-viewer/glyphs.js 16ms (unchanged)
+skills/business-observer/assets/stategraph-viewer/graph-core.js 69ms (unchanged)
+skills/business-observer/assets/stategraph-viewer/i18n.js 6ms (unchanged)
+skills/business-observer/assets/stategraph-viewer/layout.js 72ms (unchanged)
+skills/business-observer/assets/stategraph-viewer/messages.zh-CN.js 16ms (unchanged)
+skills/business-observer/assets/stategraph-viewer/polling.js 3ms (unchanged)
+skills/business-observer/assets/stategraph-viewer/preferences.js 5ms (unchanged)
+skills/business-observer/assets/stategraph-viewer/recording.js 15ms (unchanged)
+skills/business-observer/assets/stategraph-viewer/renderer.js 33ms (unchanged)
+skills/business-observer/assets/stategraph-viewer/replay-steps.js 13ms (unchanged)
+skills/business-observer/assets/stategraph-viewer/runtime-frames.js 4ms (unchanged)
+skills/business-observer/assets/stategraph-viewer/view-lifecycle.js 2ms (unchanged)
+skills/business-observer/assets/stategraph-viewer/viewer.js 99ms (unchanged)
+skills/business-observer/scripts/bo_observer/adapters/javascript/bo_data.mjs 14ms (unchanged)
+skills/business-observer/scripts/bo_observer/adapters/javascript/bo_runtime.mjs 22ms (unchanged)
+skills/business-observer/scripts/bo_observer/adapters/javascript/scan.mjs 20ms (unchanged)
+docs/site/demo-messages.mjs 5ms (unchanged)
+docs/site/demo-model.mjs 5ms (unchanged)
+docs/site/demo.html 34ms (unchanged)
+docs/site/demo.mjs 20ms (unchanged)
+docs/site/index.html 23ms (unchanged)
+docs/site/messages.mjs 3ms (unchanged)
+docs/site/site-ui.mjs 5ms (unchanged)
+docs/site/site.css 65ms (unchanged)
+docs/site/site.js 7ms (unchanged)
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Runtime and viewer sources copied; project definitions and personal files preserved.

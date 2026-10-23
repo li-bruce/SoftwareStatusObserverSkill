@@ -1,0 +1,72 @@
+{
+  "runtime_label": "final-ui",
+  "checks": [
+    {
+      "check": "owned_state_code_in_default_scope",
+      "passed": true
+    },
+    {
+      "check": "conditional_function_binding",
+      "passed": true
+    },
+    {
+      "check": "invalid_json",
+      "passed": true,
+      "errors": [
+        "Invalid saved code structure: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"
+      ],
+      "check_did_not_repair": true
+    },
+    {
+      "check": "array",
+      "passed": true,
+      "errors": [
+        "Invalid saved code structure: expected a nonempty code graph object"
+      ],
+      "check_did_not_repair": true
+    },
+    {
+      "check": "empty_object",
+      "passed": true,
+      "errors": [
+        "Invalid saved code structure: expected a nonempty code graph object",
+        "Saved code structure differs from current source: schema",
+        "Saved code structure differs from current source: nodes",
+        "Saved code structure differs from current source: edges",
+        "Saved code structure differs from current source: bindings",
+        "Saved code structure differs from current source: symbols",
+        "Saved code structure differs from current source: files",
+        "Saved code structure differs from current source: scope",
+        "Saved code structure differs from current source: revision",
+        "Saved code structure differs from current source: errors"
+      ],
+      "check_did_not_repair": true
+    },
+    {
+      "check": "removed_node",
+      "passed": true,
+      "errors": [
+        "Saved code structure differs from current source: nodes"
+      ],
+      "check_did_not_repair": true
+    },
+    {
+      "check": "removed_edge",
+      "passed": true,
+      "errors": [
+        "Saved code structure differs from current source: edges"
+      ],
+      "check_did_not_repair": true
+    },
+    {
+      "check": "wrong_file_hash",
+      "passed": true,
+      "errors": [
+        "Saved code structure differs from current source: files"
+      ],
+      "check_did_not_repair": true
+    }
+  ],
+  "passed": true,
+  "method": "Independent isolated fixture; saved graph corruption, retained revision, non-mutating check and default source ownership. No production or public source modified."
+}

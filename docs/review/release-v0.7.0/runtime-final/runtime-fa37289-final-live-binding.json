@@ -1,0 +1,20 @@
+{
+  "app": {
+    "status": "ok",
+    "project_id": "team-publishing-demo",
+    "build_id": "5fb8a3e5aa68a759c49bdd3ef2c719b64a575392f5504fa2d152d3370faac737"
+  },
+  "graph": {
+    "protocol": "bo-project/v1",
+    "project_id": "team-publishing-demo",
+    "build_id": "5fb8a3e5aa68a759c49bdd3ef2c719b64a575392f5504fa2d152d3370faac737",
+    "binding": {
+      "status": "current",
+      "changed_files": [],
+      "model_changed": false,
+      "intent_changed": false,
+      "directly_affected": [],
+      "possibly_affected": []
+    }
+  }
+}

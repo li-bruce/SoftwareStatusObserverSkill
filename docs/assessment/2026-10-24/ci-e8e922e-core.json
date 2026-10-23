@@ -1,0 +1,37 @@
+{
+  "commit": "e8e922eb4f33fe5b2fe2046975b40fa092935130",
+  "url": "https://github.com/li-bruce/SoftwareStatusObserverSkill/actions/runs/40029285783",
+  "passed": true,
+  "jobs": [
+    {
+      "id": 120673213881,
+      "name": "database-live",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 120673214046,
+      "name": "test (windows-latest, 3.13)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 120673214219,
+      "name": "test (windows-latest, 3.11)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 120673214229,
+      "name": "test (ubuntu-latest, 3.11)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 120673214243,
+      "name": "test (ubuntu-latest, 3.13)",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ]
+}

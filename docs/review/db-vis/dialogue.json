@@ -1,0 +1,469 @@
+{
+  "kind": "scripted-simulated-dialogue",
+  "date": "2026-10-24",
+  "skill_sha256": "b9e3638383cf8ff8b9a31fa71dd1278bcf8f530df580d942022a299641d30d6e",
+  "scope": "Storage selection, native model export, real SQLite schema update, runtime query and observer exclusion. Existing business graph uses the shared integration fixture.",
+  "limitations": [
+    "Scripted human and assistant turns, not an independent LLM or human usability test.",
+    "The existing-MongoDB branch tests decision reuse only; live MongoDB collection is covered by the separate live suite.",
+    "This is not a complete image-review product acceptance."
+  ],
+  "turns": [
+    {
+      "role": "user",
+      "content": "这是一个已有的本地图片审核工程，业务流程保持现状。这次把数据库接入状态图，先只在我自己的电脑使用，数据库还没确定。",
+      "evidence": []
+    },
+    {
+      "role": "assistant",
+      "content": "按目前单机使用的范围，推荐 SQLite，Python 端使用 SQLAlchemy 管理数据模型。如果近期就要作为多人共用的服务部署，可以选 PostgreSQL。你这次希望先用哪一种？",
+      "evidence": [
+        "initial-guide"
+      ]
+    },
+    {
+      "role": "user",
+      "content": "先用 SQLite 和 SQLAlchemy。沿用现在的业务逻辑，不增加其他流程。",
+      "evidence": []
+    },
+    {
+      "role": "assistant",
+      "content": "已按你的选择接入。图中可以看到 images 表、字段以及 list_images 的读取关系；实际查询已采集，观察器自己的统计查询没有进入记录。业务流程保持原样。",
+      "evidence": [
+        "confirmed-guide",
+        "initial-sync",
+        "initial-check",
+        "runtime-query"
+      ]
+    },
+    {
+      "role": "user",
+      "content": "在图片数据中增加一个 reviewed 字段，先保留现有流程。",
+      "evidence": []
+    },
+    {
+      "role": "assistant",
+      "content": "模型已增加 reviewed，图中已标明这个字段还没有出现在实际数据库中；本轮检查暂未通过。我会完成对应迁移后再核对。",
+      "evidence": [
+        "pending-migration-sync",
+        "pending-migration-check"
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": "迁移完成，实际数据库和模型中的 reviewed 已对应，重新检查通过。没有增加审核规则或新的业务步骤。",
+      "evidence": [
+        "migrated-sync",
+        "migrated-check"
+      ]
+    },
+    {
+      "role": "user",
+      "content": "另一个已有工程使用 MongoDB 和 Mongoose，继续沿用即可。",
+      "evidence": []
+    },
+    {
+      "role": "assistant",
+      "content": "沿用 MongoDB 和 Mongoose，并接入相应的模型导出和查询采集。Mongoose 的应用校验与数据库中的验证规则会分别标明。",
+      "evidence": [
+        "existing-mongodb-guide"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "id": "initial-guide",
+      "command": [
+        "python",
+        "skills/business-observer/scripts/bo_db.py",
+        "guide",
+        "--root",
+        "$TRIAL"
+      ],
+      "exit_code": 0,
+      "result": {
+        "user": [
+          {
+            "id": "storage:application",
+            "audience": "user",
+            "question": "Which database should this project use? Reuse an existing choice; select according to the data already described.",
+            "purpose": "confirm_implementation_choice",
+            "options": [
+              {
+                "id": "sqlite",
+                "label": "SQLite + SQLAlchemy",
+                "use": "A local Python application with relational records."
+              },
+              {
+                "id": "postgresql",
+                "label": "PostgreSQL + SQLAlchemy or a native model layer",
+                "use": "A shared service with relational records and transactions."
+              },
+              {
+                "id": "mongodb",
+                "label": "MongoDB + Mongoose or explicit document models",
+                "use": "The existing requirement stores flexible nested documents."
+              },
+              {
+                "id": "neo4j",
+                "label": "Neo4j + explicit node and relationship models",
+                "use": "The existing requirement depends on relationship traversal."
+              },
+              {
+                "id": "redis",
+                "label": "Redis + explicit key patterns",
+                "use": "The existing requirement needs a cache or key-value data."
+              }
+            ],
+            "instruction": "Explain the relevant tradeoff in the user's language. Recommend only options fitting the stated workload. The user may name another database; disclose adapter gaps before implementation."
+          }
+        ],
+        "coding": [
+          {
+            "id": "storage-wiring:application",
+            "audience": "coding",
+            "depends_on": [
+              "storage:application"
+            ],
+            "tasks": [
+              "Record the confirmed choice and locator in bo_stategraph/databases.json.",
+              "Configure the native ORM/ODM or explicit model layer; export its public metadata as bo-data-catalog/v1.",
+              "Bind each read, write, transaction and selected transformation to source, targets, selected fields and real acceptance cases.",
+              "Use bo_ wiring and BO adapters; exclude observer-only connections, metadata reads and transport at capture entry.",
+              "Run bo_db sync, independent check, actual runtime cases and existing change_sync gates after code or migration changes."
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "confirmed-guide",
+      "command": [
+        "python",
+        "skills/business-observer/scripts/bo_db.py",
+        "guide",
+        "--root",
+        "$TRIAL"
+      ],
+      "exit_code": 0,
+      "result": {
+        "user": [],
+        "coding": [
+          {
+            "id": "storage-wiring:app",
+            "audience": "coding",
+            "depends_on": [],
+            "tasks": [
+              "Record the confirmed choice and locator in bo_stategraph/databases.json.",
+              "Configure the native ORM/ODM or explicit model layer; export its public metadata as bo-data-catalog/v1.",
+              "Bind each read, write, transaction and selected transformation to source, targets, selected fields and real acceptance cases.",
+              "Use bo_ wiring and BO adapters; exclude observer-only connections, metadata reads and transport at capture entry.",
+              "Run bo_db sync, independent check, actual runtime cases and existing change_sync gates after code or migration changes."
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "initial-sync",
+      "command": [
+        "python",
+        "skills/business-observer/scripts/bo_db.py",
+        "sync",
+        "--root",
+        "$TRIAL"
+      ],
+      "exit_code": 0,
+      "result": {
+        "configured": true,
+        "valid": true,
+        "errors": [],
+        "changed": true,
+        "source_id": "a1d15a83ac94477942493e0f2fb6ae7ccc05f68d0d36c93d5acc2556af16acff",
+        "catalog_id": "b54e8ab0061abdcf941d9cdd67e7b16b8c7481c14d4adbe8b31e1adf49dbd3d8",
+        "stores": [
+          {
+            "id": "app",
+            "coverage": "complete",
+            "limitations": [
+              "Coverage is limited to tables in the configured/default schema and dialect-supported constraints; triggers and stored routines are not inspected."
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "initial-check",
+      "command": [
+        "python",
+        "skills/business-observer/scripts/bo_db.py",
+        "check",
+        "--root",
+        "$TRIAL"
+      ],
+      "exit_code": 0,
+      "result": {
+        "configured": true,
+        "valid": true,
+        "errors": [],
+        "changed": false,
+        "source_id": "a1d15a83ac94477942493e0f2fb6ae7ccc05f68d0d36c93d5acc2556af16acff",
+        "catalog_id": "b54e8ab0061abdcf941d9cdd67e7b16b8c7481c14d4adbe8b31e1adf49dbd3d8",
+        "stores": [
+          {
+            "id": "app",
+            "coverage": "complete",
+            "limitations": [
+              "Coverage is limited to tables in the configured/default schema and dialect-supported constraints; triggers and stored routines are not inspected."
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "pending-migration-sync",
+      "command": [
+        "python",
+        "skills/business-observer/scripts/bo_db.py",
+        "sync",
+        "--root",
+        "$TRIAL"
+      ],
+      "exit_code": 1,
+      "result": {
+        "configured": true,
+        "valid": false,
+        "errors": [
+          {
+            "schema_difference": {
+              "store": "app",
+              "resource": "table:images",
+              "field": "reviewed",
+              "problem": "declared field absent or unverified"
+            }
+          }
+        ],
+        "changed": true,
+        "source_id": "41b8f4ae95111455b9fe5d72f38673449e6de741a3c47fdc622f34ef694a4954",
+        "catalog_id": "bf8d2ca70ce9c9f6eff2fa984691be107db2f0720b05377c5888fd00ac3ef0b6",
+        "stores": [
+          {
+            "id": "app",
+            "coverage": "complete",
+            "limitations": [
+              "Coverage is limited to tables in the configured/default schema and dialect-supported constraints; triggers and stored routines are not inspected."
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "pending-migration-check",
+      "command": [
+        "python",
+        "skills/business-observer/scripts/bo_db.py",
+        "check",
+        "--root",
+        "$TRIAL"
+      ],
+      "exit_code": 1,
+      "result": {
+        "configured": true,
+        "valid": false,
+        "errors": [
+          {
+            "schema_difference": {
+              "store": "app",
+              "resource": "table:images",
+              "field": "reviewed",
+              "problem": "declared field absent or unverified"
+            }
+          }
+        ],
+        "changed": false,
+        "source_id": "41b8f4ae95111455b9fe5d72f38673449e6de741a3c47fdc622f34ef694a4954",
+        "catalog_id": "bf8d2ca70ce9c9f6eff2fa984691be107db2f0720b05377c5888fd00ac3ef0b6",
+        "stores": [
+          {
+            "id": "app",
+            "coverage": "complete",
+            "limitations": [
+              "Coverage is limited to tables in the configured/default schema and dialect-supported constraints; triggers and stored routines are not inspected."
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "migrated-sync",
+      "command": [
+        "python",
+        "skills/business-observer/scripts/bo_db.py",
+        "sync",
+        "--root",
+        "$TRIAL"
+      ],
+      "exit_code": 0,
+      "result": {
+        "configured": true,
+        "valid": true,
+        "errors": [],
+        "changed": true,
+        "source_id": "41b8f4ae95111455b9fe5d72f38673449e6de741a3c47fdc622f34ef694a4954",
+        "catalog_id": "1a310b39c9e6aec57f43f8818118047c0cb9f943607389f16bc0be35d80f2cfb",
+        "stores": [
+          {
+            "id": "app",
+            "coverage": "complete",
+            "limitations": [
+              "Coverage is limited to tables in the configured/default schema and dialect-supported constraints; triggers and stored routines are not inspected."
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "migrated-check",
+      "command": [
+        "python",
+        "skills/business-observer/scripts/bo_db.py",
+        "check",
+        "--root",
+        "$TRIAL"
+      ],
+      "exit_code": 0,
+      "result": {
+        "configured": true,
+        "valid": true,
+        "errors": [],
+        "changed": false,
+        "source_id": "41b8f4ae95111455b9fe5d72f38673449e6de741a3c47fdc622f34ef694a4954",
+        "catalog_id": "1a310b39c9e6aec57f43f8818118047c0cb9f943607389f16bc0be35d80f2cfb",
+        "stores": [
+          {
+            "id": "app",
+            "coverage": "complete",
+            "limitations": [
+              "Coverage is limited to tables in the configured/default schema and dialect-supported constraints; triggers and stored routines are not inspected."
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "existing-mongodb-guide",
+      "command": [
+        "python",
+        "skills/business-observer/scripts/bo_db.py",
+        "guide",
+        "--root",
+        "$TRIAL"
+      ],
+      "exit_code": 0,
+      "result": {
+        "user": [],
+        "coding": [
+          {
+            "id": "storage-wiring:app",
+            "audience": "coding",
+            "depends_on": [],
+            "tasks": [
+              "Record the confirmed choice and locator in bo_stategraph/databases.json.",
+              "Configure the native ORM/ODM or explicit model layer; export its public metadata as bo-data-catalog/v1.",
+              "Bind each read, write, transaction and selected transformation to source, targets, selected fields and real acceptance cases.",
+              "Use bo_ wiring and BO adapters; exclude observer-only connections, metadata reads and transport at capture entry.",
+              "Run bo_db sync, independent check, actual runtime cases and existing change_sync gates after code or migration changes."
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "runtime": {
+    "events": [
+      {
+        "protocol": "bo-event/v1",
+        "project_id": "fixture",
+        "model_revision": "1",
+        "build_id": "303fc0ceea64df80674c70a3bd1d4d4669f88386cebe63257e5579cc298d89e7",
+        "run_id": "9f92b56c035a4dc39bd87b370acdf1c1",
+        "producer_id": "c138177ec3e54e38be1ec92cd049a57e",
+        "schema_version": 3,
+        "seq": 1,
+        "id": "9f92b56c035a4dc39bd87b370acdf1c1:c138177ec3e54e38be1ec92cd049a57e:1",
+        "node": "db.query",
+        "phase": "enter",
+        "entity": "application",
+        "attempt": "application",
+        "scope": "application",
+        "basis": {},
+        "call_id": "c2d65e0aa3a94748ba6f9f2d40f02ba8",
+        "parent_call_id": null,
+        "inputs": {
+          "operation": "read",
+          "statement": "SELECT id, title FROM images ORDER BY id",
+          "parameters": {}
+        },
+        "outputs": {
+          "status": "started",
+          "duration_ms": 0.008,
+          "targets": [
+            "table:images"
+          ],
+          "unknown_targets": [],
+          "target_source": "parsed_sql"
+        },
+        "depends": [],
+        "observed_at": "2026-10-23T16:42:50.022674+00:00"
+      },
+      {
+        "protocol": "bo-event/v1",
+        "project_id": "fixture",
+        "model_revision": "1",
+        "build_id": "303fc0ceea64df80674c70a3bd1d4d4669f88386cebe63257e5579cc298d89e7",
+        "run_id": "9f92b56c035a4dc39bd87b370acdf1c1",
+        "producer_id": "c138177ec3e54e38be1ec92cd049a57e",
+        "schema_version": 3,
+        "seq": 2,
+        "id": "9f92b56c035a4dc39bd87b370acdf1c1:c138177ec3e54e38be1ec92cd049a57e:2",
+        "node": "db.query",
+        "phase": "return",
+        "entity": "application",
+        "attempt": "application",
+        "scope": "application",
+        "basis": {},
+        "call_id": "c2d65e0aa3a94748ba6f9f2d40f02ba8",
+        "parent_call_id": null,
+        "inputs": {
+          "operation": "read",
+          "statement": "SELECT id, title FROM images ORDER BY id",
+          "parameters": {}
+        },
+        "outputs": {
+          "status": "executed",
+          "duration_ms": 1.112,
+          "rows_known": false,
+          "targets": [
+            "table:images"
+          ],
+          "unknown_targets": [],
+          "target_source": "parsed_sql"
+        },
+        "depends": [],
+        "observed_at": "2026-10-23T16:42:50.023761+00:00"
+      }
+    ],
+    "business_rows": 1,
+    "observer_query_added_events": 0,
+    "required_cases_valid": true
+  },
+  "checks": {
+    "one_initial_question": true,
+    "confirmed_choice_not_reasked": true,
+    "coding_wiring_requires_choice": true,
+    "unapplied_migration_rejected": true,
+    "migration_retest_passed": true,
+    "existing_mongodb_reused": true,
+    "unsolicited_business_features_added": []
+  }
+}

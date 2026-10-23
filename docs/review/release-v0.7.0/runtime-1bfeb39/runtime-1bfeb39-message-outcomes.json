@@ -1,0 +1,86 @@
+{
+  "recording_id": "f2e40e3c4bab4998b71397e9e436aa65",
+  "events": 307,
+  "gaps": [],
+  "material_frames": 0,
+  "marks": [
+    {
+      "protocol": "bo-event/v1",
+      "project_id": "team-publishing-demo",
+      "model_revision": "2",
+      "build_id": "5fb8a3e5aa68a759c49bdd3ef2c719b64a575392f5504fa2d152d3370faac737",
+      "run_id": "608d473fe5664dffb82e472ebbc72b19",
+      "producer_id": "4d41935d81004e00ab4cff8be6676faa",
+      "schema_version": 3,
+      "seq": 1463,
+      "id": "608d473fe5664dffb82e472ebbc72b19:4d41935d81004e00ab4cff8be6676faa:1361",
+      "node": "mark_message_read",
+      "phase": "commit",
+      "entity": "application",
+      "attempt": "application",
+      "scope": "application",
+      "basis": {},
+      "call_id": "608d473fe5664dffb82e472ebbc72b19:4d41935d81004e00ab4cff8be6676faa:1361",
+      "parent_call_id": null,
+      "inputs": {
+        "actor_id": 2,
+        "message_id": 11
+      },
+      "outputs": {
+        "message_id": 11,
+        "recipient_id": 2,
+        "was_read": false,
+        "is_read": true,
+        "changed": true,
+        "unread_before": 8,
+        "unread_count": 7
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T22:09:07.789048+00:00",
+      "source_seq": 1361,
+      "stream_id": "351152d1c47e4cde8bc796aa"
+    },
+    {
+      "protocol": "bo-event/v1",
+      "project_id": "team-publishing-demo",
+      "model_revision": "2",
+      "build_id": "5fb8a3e5aa68a759c49bdd3ef2c719b64a575392f5504fa2d152d3370faac737",
+      "run_id": "608d473fe5664dffb82e472ebbc72b19",
+      "producer_id": "4d41935d81004e00ab4cff8be6676faa",
+      "schema_version": 3,
+      "seq": 1507,
+      "id": "608d473fe5664dffb82e472ebbc72b19:4d41935d81004e00ab4cff8be6676faa:1405",
+      "node": "mark_message_read",
+      "phase": "commit",
+      "entity": "application",
+      "attempt": "application",
+      "scope": "application",
+      "basis": {},
+      "call_id": "608d473fe5664dffb82e472ebbc72b19:4d41935d81004e00ab4cff8be6676faa:1405",
+      "parent_call_id": null,
+      "inputs": {
+        "actor_id": 2,
+        "message_id": 11
+      },
+      "outputs": {
+        "message_id": 11,
+        "recipient_id": 2,
+        "was_read": true,
+        "is_read": true,
+        "changed": false,
+        "unread_before": 7,
+        "unread_count": 7
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T22:09:08.091830+00:00",
+      "source_seq": 1405,
+      "stream_id": "351152d1c47e4cde8bc796aa"
+    }
+  ],
+  "independent_sqlite": {
+    "unread": 7,
+    "message_11_is_read": 1,
+    "materials": 6,
+    "publications": 6
+  }
+}

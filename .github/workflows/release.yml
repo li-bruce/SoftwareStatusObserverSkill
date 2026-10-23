@@ -1,0 +1,46 @@
+name: Publish release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Publish reviewed notes and frozen trial archives
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          notes="docs/releases/$RELEASE_TAG.md"
+          test -s "$notes"
+          shopt -s nullglob
+          assets=("docs/review/release-$RELEASE_TAG/archives/"*.zip)
+          ((${#assets[@]} > 0))
+          if gh release view "$RELEASE_TAG" --json tagName >/dev/null 2>&1; then
+            # Resume a partial draft; a completed release stays unchanged.
+            if test "$(gh release view "$RELEASE_TAG" --json isDraft --jq .isDraft)" = true; then
+              if (("${#assets[@]}")); then
+                gh release upload "$RELEASE_TAG" "${assets[@]}" --clobber
+              fi
+              gh release edit "$RELEASE_TAG" --draft=false
+            fi
+          else
+            gh release create "$RELEASE_TAG" --verify-tag --draft \
+              --title "Business Observer $RELEASE_TAG" \
+              --notes-file "$notes" "${assets[@]}"
+            gh release edit "$RELEASE_TAG" --draft=false
+          fi
+          gh release view "$RELEASE_TAG" --json url

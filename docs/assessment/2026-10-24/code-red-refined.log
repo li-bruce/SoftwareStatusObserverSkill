@@ -1,0 +1,92 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+..FFFFFFE........F.
+======================================================================
+ERROR: test_empty_or_invalid_saved_index_is_a_failure_without_repair (__main__.CodeGraphTests.test_empty_or_invalid_saved_index_is_a_failure_without_repair) (raw='{broken')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tests\test_code_graph.py", line 172, in test_empty_or_invalid_saved_index_is_a_failure_without_repair
+    checked = self.service.check()
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_observer\code_graph\service.py", line 89, in check
+    saved = read(self.cache) if self.cache.is_file() else None
+            ~~~~^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_observer\graph\behavior_model.py", line 21, in read
+    return json.loads(Path(path).read_text(encoding="utf-8-sig"))
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\json\__init__.py", line 352, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\json\decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\json\decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+
+======================================================================
+FAIL: test_default_scope_excludes_only_unchanged_managed_copies (__main__.CodeGraphTests.test_default_scope_excludes_only_unchanged_managed_copies)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tests\test_code_graph.py", line 193, in test_default_scope_excludes_only_unchanged_managed_copies
+    self.assertIn("bo_stategraph/bo_support.py::support", graph["symbols"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'bo_stategraph/bo_support.py::support' not found in {'worker.py::advance': 'code:symbol:d541bdddde058dff56397437'}
+
+======================================================================
+FAIL: test_default_scope_includes_project_owned_state_module_code (__main__.CodeGraphTests.test_default_scope_includes_project_owned_state_module_code)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tests\test_code_graph.py", line 181, in test_default_scope_includes_project_owned_state_module_code
+    self.assertIn("bo_stategraph/workflow.py::execute_business", graph["symbols"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'bo_stategraph/workflow.py::execute_business' not found in {'worker.py::advance': 'code:symbol:d541bdddde058dff56397437'}
+
+======================================================================
+FAIL: test_empty_or_invalid_saved_index_is_a_failure_without_repair (__main__.CodeGraphTests.test_empty_or_invalid_saved_index_is_a_failure_without_repair) (raw='{}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tests\test_code_graph.py", line 174, in test_empty_or_invalid_saved_index_is_a_failure_without_repair
+    self.assertFalse(checked["valid"])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_empty_or_invalid_saved_index_is_a_failure_without_repair (__main__.CodeGraphTests.test_empty_or_invalid_saved_index_is_a_failure_without_repair) (raw='[]')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tests\test_code_graph.py", line 174, in test_empty_or_invalid_saved_index_is_a_failure_without_repair
+    self.assertFalse(checked["valid"])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_empty_or_invalid_saved_index_is_a_failure_without_repair (__main__.CodeGraphTests.test_empty_or_invalid_saved_index_is_a_failure_without_repair) (raw='null')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tests\test_code_graph.py", line 173, in test_empty_or_invalid_saved_index_is_a_failure_without_repair
+    self.assertTrue(checked["enabled"])
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_empty_or_invalid_saved_index_is_a_failure_without_repair (__main__.CodeGraphTests.test_empty_or_invalid_saved_index_is_a_failure_without_repair) (raw='false')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tests\test_code_graph.py", line 174, in test_empty_or_invalid_saved_index_is_a_failure_without_repair
+    self.assertFalse(checked["valid"])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_slow_code_request_does_not_block_actual_event_ingestion (__main__.CodeGraphTests.test_slow_code_request_does_not_block_actual_event_ingestion)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tests\test_code_graph.py", line 235, in test_slow_code_request_does_not_block_actual_event_ingestion
+    self.assertTrue(independent, "Source reading serialized the ingestion request")
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : Source reading serialized the ingestion request
+
+----------------------------------------------------------------------
+Ran 15 tests in 6.216s
+
+FAILED (failures=7, errors=1)

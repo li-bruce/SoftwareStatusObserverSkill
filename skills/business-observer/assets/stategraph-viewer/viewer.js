@@ -5,6 +5,11 @@ import { createConversationFocus, discussionContext } from "./conversation.js";
 import { projectStorage } from "./preferences.js";
 import { createPoller } from "./polling.js";
 import { migrateNodeIds } from "./layout.js";
+import { projectLayoutKey, graphVersion, recordingMatches, connectionStatus } from "./view-lifecycle.js";
+import { databaseWarning, dataRelationEvidence } from "./data-layer.js";
+import { CodeLayer, withCodeGraph, codeTypes, codeRelations, codeSummary } from "./code-layer.js";
+const codeLayer = new CodeLayer();
+let codeLimit = 400;
 import {
   executionIds,
   layoutGraph,
@@ -44,6 +49,7 @@ import {
   cleanFilters,
   emptyFilters,
   renderRevision,
+  elementCoverage,
 } from "./layout.js";
 import { presets, profileFor, cleanProfile, matchingNodes, sharedMemberships } from "./analysis.js";
 import { legendGlyph, legendRelation, meanings, glyphAppearance } from "./glyphs.js";
@@ -88,10 +94,12 @@ let focusContext = { active: false, nodes: new Set(), edges: new Set(), regions:
   renderedEdges = [],
   presentation = null;
 let analysisId = "overview",
+  analysisWasSaved = false,
   analysisSettings = null,
   analysisKey = null,
   analysisOverride = null;
 let recording = null,
+  replayReturnAnalysis = null,
   replayItems = [],
   replayIndex = 0,
   playTimer = null,
@@ -167,6 +175,8 @@ function point(box) {
   return nodePoint(graph, presentation, box);
 }
 function updatePresentation() {
+  for (const item of document.querySelectorAll("[data-code-legend]"))
+    item.hidden = !codeLayer.slice;
   presentation = presentationGraph(graph, preferences.filters);
   renderedEdges = presentation.edges;
   $("empty").hidden = !!(presentation.glyphs.size + presentation.regions.size);
@@ -276,11 +286,18 @@ function cancelLayout() {
 }
 function project() {
   if (!view) return;
-  const renamed = migrateNodeIds(preferences, view.model.presentation?.node_aliases);
+  if (!recording && latestLive) view = withCodeGraph(latestLive, codeLayer.slice);
+  const renamed = migrateNodeIds(
+    preferences,
+    view.model.presentation?.node_aliases,
+    view.model.presentation?.edge_aliases,
+  );
   expanded = new Set([...expanded].map((id) => renamed[id] || id));
   selected = renamed[selected] || selected;
   const profile = currentProfile();
   graph = layoutGraph(view, expanded, new Set(), new Map(), choice, step, {
+    hiddenNodes: preferences.filters.hiddenNodes,
+    hiddenEdges: preferences.filters.hiddenEdges,
     include: (n) =>
       n.filter_context ||
       analysisSettings?.advanced ||
@@ -495,6 +512,11 @@ function focusSelection() {
 function updateActions() {
   const b = graph?.byId.get(selected),
     binding = sourceBinding(view, graph?.all, selected);
+  $("code-local").disabled =
+    view?.stage === "design" ||
+    !!recording ||
+    analysisId === "code" ||
+    (!b && !analysisSettings?.codeFocus);
   $("reference-origin").hidden = !b?.node.referenceOf;
   $("core-toggle").disabled = !b;
   const core = b && annotationFor(preferences, b.node.referenceOf || b.id).core;
@@ -507,6 +529,7 @@ function updateActions() {
   $("pin").disabled = !b;
   $("pin").textContent = b?.pinned ? boTranslate("Unpin") : boTranslate("Pin node");
   $("annotate").disabled = !b;
+  $("hide-node").disabled = !b;
   $("details").disabled = !b;
   $("source").disabled = !binding;
   $("selection").textContent = b
@@ -654,7 +677,14 @@ function updateEdgeDetail() {
       const item = document.createElement("li"),
         a = graph.all.get(member.from),
         b = graph.all.get(member.to);
-      item.textContent = `${a ? displayName(a, preferences) : member.from} → ${b ? displayName(b, preferences) : member.to}：${member.label || style.label}（${["python-ast", "source-ast"].includes(member.origin) ? boTranslate("Static call") : member.observed ? (member.current ? boTranslate("Observed in this run") : boTranslate("Observed in a previous run")) : boTranslate("Declared relation")}）`;
+      item.textContent = `${a ? displayName(a, preferences) : member.from} → ${b ? displayName(b, preferences) : member.to}：${member.label || style.label}（${dataRelationEvidence(member) || (["python-ast", "source-ast"].includes(member.origin) ? boTranslate("Static call") : member.observed ? (member.current ? boTranslate("Observed in this run") : boTranslate("Observed in a previous run")) : boTranslate("Declared relation"))}）`;
+      const hide = document.createElement("button");
+      hide.textContent = boTranslate("Hide relation");
+      hide.onclick = () => {
+        preferences.filters.hiddenEdges.push(member.id);
+        applyFilters();
+      };
+      item.append(hide);
       return item;
     }),
   );
@@ -712,10 +742,10 @@ function updateDetail() {
   $("source-code").hidden = !source;
   $("full-source").hidden = !source;
   if (source) {
-    const key = view.manifest.build_id + ":" + binding.path,
+    const key = (binding.code_revision || view.manifest.build_id) + ":" + binding.path,
       full = fullSources.get(key);
     $("detail-title").textContent =
-      `${binding.path}:${binding.line} · ${view.manifest.build_id.slice(0, 8)}`;
+      `${binding.path}:${binding.line} · ${(binding.code_revision || view.manifest.build_id).slice(0, 8)}`;
     $("source-code").textContent = full ?? binding.snippet;
     $("full-source").hidden = !!full;
   }
@@ -803,7 +833,9 @@ $("full-source").onclick = async () => {
     binding = sourceBinding(view, graph.all, id),
     requestedVersion = version;
   const response = await fetch(
-    "/api/source?path=" +
+    (binding.code_revision
+      ? "/api/code/source?revision=" + binding.code_revision + "&path="
+      : "/api/source?path=") +
       encodeURIComponent(binding.path) +
       (recording
         ? "&recording=" + recording.id
@@ -811,9 +843,13 @@ $("full-source").onclick = async () => {
   );
   if (!response.ok) return;
   const data = await response.json();
-  if (view?.manifest.build_id !== build || data.build_id !== build || version !== requestedVersion)
+  if (
+    binding.code_revision
+      ? data.code_revision !== view?.code_structure?.revision
+      : view?.manifest.build_id !== build || data.build_id !== build || version !== requestedVersion
+  )
     return;
-  fullSources.set(build + ":" + binding.path, data.source);
+  fullSources.set((binding.code_revision || build) + ":" + binding.path, data.source);
   if (fullSources.size > 16) fullSources.delete(fullSources.keys().next().value);
   if (selected === id) updateDetail();
 };
@@ -994,16 +1030,69 @@ function updateFilters() {
   const profile = currentProfile();
   $("filter-scope").value = profile.scope;
   $("filter-query").value = profile.query;
-  const active = JSON.stringify(filters) !== JSON.stringify(emptyFilters());
+  const active =
+    JSON.stringify(filters) !== JSON.stringify(emptyFilters()) ||
+    profile.scope !== "all" ||
+    !!profile.query ||
+    !analysisSettings.advanced;
   $("filter-toggle").textContent = active
     ? boTranslate("Filters \u00B7 active")
     : boTranslate("Filters");
+  const coverage = elementCoverage(graph, presentation);
   $("filter-count").textContent = boTranslate(
-    "Showing {0} nodes and {1} relations",
-    new Set([...presentation.glyphs, ...presentation.regions]).size,
-    renderedEdges.length,
+    "Nodes: {0} visible, {1} folded, {2} filtered. Relations: {3} visible, {4} folded, {5} filtered.",
+    coverage.visibleNodes,
+    coverage.foldedNodes,
+    coverage.excludedNodes,
+    coverage.visibleEdges,
+    coverage.foldedEdges,
+    coverage.excludedEdges,
   );
+  Object.assign($("filter-count").dataset, coverage);
+  updateHiddenElements();
 }
+/** Restore individual exclusions without losing the rest of a custom view. */
+function updateHiddenElements() {
+  const entries = [];
+  for (const kind of ["hiddenNodes", "hiddenEdges"])
+    for (const id of preferences.filters[kind]) {
+      const row = document.createElement("div"),
+        button = document.createElement("button");
+      const node = graph.all.get(id),
+        edge = graph.rawEdges.find((item) => item.id === id);
+      const label =
+        kind === "hiddenNodes"
+          ? node
+            ? displayName(node, preferences)
+            : id
+          : edge
+            ? `${graph.all.get(edge.from)?.label || edge.from} → ${graph.all.get(edge.to)?.label || edge.to}`
+            : id;
+      row.append(document.createTextNode(label + " "));
+      button.textContent = boTranslate("Show again");
+      button.onclick = () => {
+        preferences.filters[kind] = preferences.filters[kind].filter((item) => item !== id);
+        applyFilters();
+      };
+      row.append(button);
+      entries.push(row);
+    }
+  $("hidden-elements").replaceChildren(...entries);
+  $("hidden-elements-heading").hidden = !entries.length;
+}
+$("hide-node").onclick = () => {
+  if (!selected) return;
+  preferences.filters.hiddenNodes.push(selected);
+  selected = null;
+  applyFilters();
+};
+$("show-all").onclick = () => {
+  analysisOverride = { ...cleanProfile(), hierarchical: true };
+  analysisSettings.advanced = true;
+  preferences.filters = emptyFilters();
+  updateAnalysisOptions();
+  applyFilters();
+};
 function applyFilters() {
   cancelLayout();
   preferences.filters = cleanFilters(preferences.filters);
@@ -1184,6 +1273,13 @@ function frameLabel(entry) {
   const name = view.model.nodes.find((n) => n.id === entry.activity)?.label || entry.activity;
   return `${entry.seq} · ${entry.event === "join" ? (entry.after.join.state === "passed" ? boTranslate("All checks passed") : boTranslate("Some checks did not pass")) : entry.event === "abort" ? boTranslate("Checks stopped") : name + "：" + (stateLabels[entry.after.activities[entry.activity]] || entry.event)}`;
 }
+function showDatabaseWarning(next) {
+  const warning = databaseWarning(next.database_status),
+    connection = $("connection");
+  connection.dataset.databaseStale = String(!!warning);
+  connection.title = warning?.details || "";
+  if (warning) connection.textContent += " · " + warning.label;
+}
 async function poll() {
   const requestedVersion = version,
     requestedCase = caseChoice;
@@ -1210,9 +1306,55 @@ async function poll() {
     if (!r.ok) throw Error("HTTP " + r.status);
     const next = await r.json();
     if (disposed || version !== requestedVersion || caseChoice !== requestedCase) return;
-    const key = renderRevision(next, [version, caseChoice, choice, step]);
+    loadAnalysis(projectLayoutKey(next, storage));
+    const codeEnabled =
+      !recording &&
+      next.stage !== "design" &&
+      (analysisId === "code" || !!analysisSettings.codeFocus);
+    let codeSlice = null;
+    try {
+      const previousCodeFocus = codeLayer.slice?.focus;
+      codeSlice = await codeLayer.load({
+        enabled: codeEnabled,
+        focus: analysisId === "code" ? null : analysisSettings.codeFocus,
+        limit: codeLimit,
+      });
+      if (codeSlice?.focus && codeSlice.focus !== previousCodeFocus)
+        for (const node of codeSlice.nodes)
+          if (["file", "class"].includes(node.code_role)) expanded.add(node.id);
+      $("code-status").textContent = codeSummary(codeSlice, boTranslate);
+      $("code-status").title = codeSlice ? JSON.stringify(codeSlice.errors) : "";
+    } catch (error) {
+      $("code-status").textContent = boTranslate("Code structure unavailable");
+      $("code-status").title = error.message;
+    }
+    $("code-more").hidden = !codeSlice?.omitted_nodes || codeLimit >= 5000;
+    $("code-local").setAttribute("aria-pressed", String(!!analysisSettings.codeFocus));
+    $("code-local").disabled =
+      next.stage === "design" ||
+      !!recording ||
+      analysisId === "code" ||
+      (!selected && !analysisSettings.codeFocus);
+    const key = renderRevision(next, [
+      version,
+      caseChoice,
+      choice,
+      step,
+      codeSlice?.revision,
+      codeSlice?.focus,
+      codeSlice?.loaded_nodes,
+      analysisId,
+    ]);
     const previousLive = latestLive;
     latestLive = next;
+    const graphChanged = previousLive && graphVersion(previousLive) !== graphVersion(next);
+    if (graphChanged) {
+      cancelLayout();
+      fullSources.clear();
+      lastRecordPoll = 0;
+      lastLiveEvent = null;
+    }
+    if (recording && !recordingMatches(recording, next)) leaveRecording();
     document.querySelector(".record-bar").hidden = next.stage === "design";
     $("program-link").hidden = next.stage === "design";
     if (Object.hasOwn(next, "program_url")) {
@@ -1227,19 +1369,16 @@ async function poll() {
     if (next.stage !== "design") await refreshRecordings(next);
     if (recording) {
       $("connection").textContent = boTranslate("Connected \u00B7 recorded replay");
+      showDatabaseWarning(next);
       return;
     }
-    view = next;
+    view = withCodeGraph(next, codeSlice);
     $("title").textContent =
       (view.model.presentation.subject || boTranslate("Application")) +
       (next.stage === "design"
         ? boTranslate(" \u00B7 design graph")
         : boTranslate(" \u00B7 runtime graph"));
-    const baseKey = layoutKey(
-      next.layout_id
-        ? { ...view.model, presentation: { ...view.model.presentation, layout_id: next.layout_id } }
-        : view.model,
-    );
+    const baseKey = projectLayoutKey(next, storage);
     loadAnalysis(baseKey);
     const nextStorageKey = baseKey + (analysisId === "overview" ? "" : ":view:" + analysisId);
     if (nextStorageKey !== storageKey) {
@@ -1273,18 +1412,9 @@ async function poll() {
       $("case").dataset.options = JSON.stringify([cases, version]);
       if (cases.includes(caseChoice)) $("case").value = caseChoice;
     }
-    const gaps =
-      next.health.errors +
-      next.health.dropped +
-      (next.health.parse_errors || 0) +
-      (next.health.truncated || 0);
     $("connection").textContent = contextLost
       ? boTranslate("Graphics connection lost; recovering")
-      : gaps
-        ? boTranslate("Missing ") + gaps + boTranslate(" records")
-        : next.historical
-          ? boTranslate("Saved run")
-          : boTranslate("Connected");
+      : connectionStatus(next, boTranslate);
     const stale = next.binding_status.status !== "current";
     $("binding").textContent = stale
       ? boTranslate("Application has not loaded the new code")
@@ -1295,6 +1425,7 @@ async function poll() {
         next.stage === "design"
           ? boTranslate("Design declaration \u00B7 not implemented")
           : boTranslate("Application has not loaded the new code");
+    showDatabaseWarning(next);
     if (key !== lastKey) {
       lastKey = key;
       const run = selectedConfiguration(view, choice);
@@ -1382,6 +1513,7 @@ function loadAnalysis(baseKey) {
   try {
     saved = JSON.parse(storage.getItem(key));
   } catch {}
+  analysisWasSaved = !!saved && typeof saved === "object";
   analysisSettings = {
     advanced: false,
     custom: [],
@@ -1390,6 +1522,15 @@ function loadAnalysis(baseKey) {
     annotations: null,
   };
   if (saved) {
+    if (typeof saved.discussion?.revision === "string")
+      analysisSettings.discussion = {
+        revision: saved.discussion.revision.slice(0, 256),
+        active: saved.discussion.active === true,
+      };
+    if (typeof saved.codeFocus === "string") analysisSettings.codeFocus = saved.codeFocus;
+    analysisSettings.codeViews = Array.isArray(saved.codeViews)
+      ? saved.codeViews.filter((id) => typeof id === "string").slice(0, 40)
+      : [];
     analysisSettings.advanced = saved.advanced === true;
     analysisSettings.custom = (Array.isArray(saved.custom) ? saved.custom : [])
       .slice(0, 20)
@@ -1428,19 +1569,27 @@ function saveAnalysis() {
 }
 function updateAnalysisOptions() {
   $("analysis-view").replaceChildren(
-    ...[...presets, ...analysisSettings.custom].map((p) => new Option(p.label, p.id)),
+    ...[...presets, ...analysisSettings.custom].map((p) => {
+      const option = new Option(p.label, p.id);
+      // The lazy source index is current-source evidence, not a recorded frame.
+      option.disabled = !!recording && p.id === "code";
+      if (option.disabled)
+        option.title = boTranslate("Return to live view to browse code structure");
+      return option;
+    }),
   );
   $("analysis-details").setAttribute("aria-pressed", String(analysisSettings.advanced));
   $("analysis-view").value = analysisId;
   $("delete-view").hidden = !analysisId.startsWith("custom-");
 }
 function changeAnalysis(id) {
-  if (!analysisSettings || id === analysisId) return;
+  if (!analysisSettings || id === analysisId || (recording && id === "code")) return;
   stopPlayback();
   cancelLayout();
   save();
   clearTimeout(saveTimer);
   analysisId = id;
+  codeLayer.clear();
   if (!["overview", "business"].includes(id)) analysisSettings.advanced = true;
   analysisOverride = analysisSettings.overrides[id] || null;
   saveAnalysis();
@@ -1468,7 +1617,33 @@ function changeAnalysis(id) {
     schedule();
   } else arrange();
   saveSoon();
+  lastKey = "";
+  poller.run();
 }
+$("code-local").onclick = () => {
+  if (!analysisSettings) return;
+  analysisSettings.codeFocus = analysisSettings.codeFocus ? null : selected;
+  analysisSettings.codeViews ||= [];
+  if (analysisSettings.codeFocus && !analysisSettings.codeViews.includes(analysisId)) {
+    for (const key of ["nodes", "regions", "edges"])
+      preferences.filters[key] = [
+        ...new Set([...preferences.filters[key], ...(key === "edges" ? codeRelations : codeTypes)]),
+      ];
+    analysisSettings.codeViews.push(analysisId);
+    save();
+  }
+  codeLayer.clear();
+  codeLimit = 400;
+  saveAnalysis();
+  project();
+  lastKey = "";
+  poller.run();
+};
+$("code-more").onclick = () => {
+  codeLimit = Math.min(5000, codeLimit + 400);
+  lastKey = "";
+  poller.run();
+};
 $("analysis-details").onclick = () => {
   if (!analysisSettings) return;
   analysisSettings.advanced = !analysisSettings.advanced;
@@ -1534,6 +1709,7 @@ for (const [type, style] of Object.entries(nodeTypes)) {
   const row = document.createElement("div"),
     label = document.createElement("div"),
     description = document.createElement("span");
+  if (type.startsWith("code-")) row.dataset.codeLegend = type;
   label.textContent = style.label;
   description.textContent = meanings[type];
   label.append(description);
@@ -1545,6 +1721,7 @@ edgeLegend.replaceChildren();
 for (const [type, style] of Object.entries(relationStyles))
   if (!["contains", "other"].includes(type)) {
     const label = document.createElement("span");
+    if (type.startsWith("code-")) label.dataset.codeLegend = type;
     label.append(legendRelation(style), document.createTextNode(style.label));
     edgeLegend.append(label);
   }
@@ -1751,7 +1928,7 @@ function animateEvent(event) {
           animationDot
             .poly([p.x, p.y - r, p.x + r, p.y, p.x, p.y + r, p.x - r, p.y])
             .fill(style.color);
-        else if (["data", "resource"].includes(edge?.type))
+        else if (["data", "resource", "reads", "writes", "transforms"].includes(edge?.type))
           animationDot.rect(p.x - r, p.y - r, 2 * r, 2 * r).fill(style.color);
         else animationDot.circle(p.x, p.y, r).fill(style.color);
       }
@@ -1888,18 +2065,28 @@ async function openRecording(id) {
   const saved = await recordingRequest("/" + encodeURIComponent(id));
   if (saved.schema !== "stategraph-recording/v1")
     throw Error(boTranslate("Unsupported recording format"));
+  if (latestLive && !recordingMatches(saved, latestLive))
+    throw Error(boTranslate("This recording belongs to an earlier graph version."));
+  if (!recording) replayReturnAnalysis = analysisId === "code" ? analysisId : null;
   recording = saved;
   replayItems = timeline(saved);
   boPlanKey = "";
   $("replay").hidden = false;
   document.body.classList.add("is-replay");
   for (const id of ["version", "case", "attempt", "step"]) $(id).disabled = true;
+  if (analysisId === "code") changeAnalysis("overview");
+  updateAnalysisOptions();
+  $("code-local").disabled = true;
+  $("code-more").hidden = true;
   seek(0);
 }
 function leaveRecording() {
   stopPlayback();
   stopAnimation();
   recording = null;
+  updateAnalysisOptions();
+  if (replayReturnAnalysis) changeAnalysis(replayReturnAnalysis);
+  replayReturnAnalysis = null;
   boDetail = null;
   boTransfers.clear();
   $("step-changes").hidden = true;
@@ -1987,6 +2174,13 @@ window.graphDebug = {
 const conversation = createConversationFocus({
   onFocus: showDiscussion,
   onClear: () => schedule(),
+  readState: () => analysisSettings?.discussion,
+  hasSavedView: () => analysisWasSaved,
+  writeState: (state) => {
+    if (!analysisSettings) return;
+    analysisSettings.discussion = state;
+    saveAnalysis();
+  },
 });
 const poller = createPoller(poll, { enabled: () => !disposed && !document.hidden });
 poller.run();

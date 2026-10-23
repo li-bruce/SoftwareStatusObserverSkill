@@ -4,6 +4,7 @@ import { colors as C, nodeTypes } from "./graph-core.js";
 import { annotationFor, displayName, edgePorts, relationStyles } from "./layout.js";
 import { drawGlyph, glyphAppearance } from "./glyphs.js";
 import { boKinds } from "./replay-steps.js";
+import { dataRelationEvidence } from "./data-layer.js";
 export function short(value, count = 27) {
   const chars = [...String(value)];
   return chars.length > count ? chars.slice(0, count - 1).join("") + "…" : String(value);
@@ -358,13 +359,16 @@ export function createGraphRenderer({
         );
       }
       if (!dim && scale > 0.24 && (highlight || scale > 0.38)) {
-        const font = Math.max(11.5 / Math.sqrt(Math.min(1, scale)), 10 / scale),
+        const details =
+            dataRelationEvidence(e) ||
+            [...e.labels].filter((label) => label !== e.type).join(" / "),
+          font = Math.max(11.5 / Math.sqrt(Math.min(1, scale)), 10 / scale),
           description =
             e.members.length > 1
               ? `${style.label} × ${e.members.length}`
               : scale < 0.45
                 ? style.label
-                : style.label + " · " + [...e.labels].join(" / ");
+                : [style.label, details].filter(Boolean).join(" · ");
         const payload = boTransfers.get(e.id);
         const caption = payload
           ? scale < 0.45
@@ -514,6 +518,8 @@ export function createGraphRenderer({
       else if (b.type === "business")
         rows = b.rows.filter((r) => ["value", "good", "bad"].includes(r.role)).slice(0, 2);
       else if (b.node.field) rows = b.rows.slice(0, 2);
+      else if (b.node.data_role)
+        rows = b.rows.slice(0, ["query", "transform"].includes(b.node.data_role) ? 4 : 2);
       else
         rows = [
           b.rows[0],

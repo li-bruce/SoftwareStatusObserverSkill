@@ -1,0 +1,51 @@
+{
+  "candidate_id": "5d22cd4f40a0a49bc9519f6702c444d67737988f8003bb942bbb6d5a73b5791c",
+  "changed_files": [
+    "bo_stategraph/runtime-version.json",
+    "integrations/bo_view/code-layer.js",
+    "integrations/bo_view/messages.zh-CN.js",
+    "integrations/bo_view/viewer.js",
+    "observer_generated/static/viewer.js",
+    "ownership.json"
+  ],
+  "changed_symbols": [],
+  "affected_callers": [],
+  "affected_nodes": [],
+  "unmapped_changed_symbols": [],
+  "unmapped_implementation_symbols": [
+    "app/ports.py::BOEvents",
+    "app/ports.py::BOEvents.__init__",
+    "app/ports.py::BOEvents.bo_emit",
+    "app/service.py::Delivery",
+    "app/store.py::Store",
+    "bo_stategraph/workflow.py::ActivityExecution",
+    "bo_stategraph/workflow.py::ActivityState",
+    "bo_stategraph/workflow.py::Phase"
+  ],
+  "changed_requirements": [],
+  "unresolved_call_count": 243,
+  "meaning": "Potential impact plus authored abstraction mapping; semantic truth still needs contract and runtime checks.",
+  "errors": [],
+  "required_classification": [
+    "app/ports.py::BOEvents",
+    "app/ports.py::BOEvents.__init__",
+    "app/ports.py::BOEvents.bo_emit",
+    "app/service.py::Delivery",
+    "app/store.py::Store",
+    "bo_stategraph/workflow.py::ActivityExecution",
+    "bo_stategraph/workflow.py::ActivityState",
+    "bo_stategraph/workflow.py::Phase"
+  ],
+  "review_errors": [
+    "review belongs to an older candidate"
+  ],
+  "stategraph": {
+    "module": "bo_stategraph/__init__.py",
+    "development_mode": "drive",
+    "execution_mode": "drive",
+    "decision_source": "user",
+    "decision": "合成示例的模拟需求方选择：继续基于状态图驱动开发；两种模式均保留监控及映射检查。"
+  },
+  "valid": false
+}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe

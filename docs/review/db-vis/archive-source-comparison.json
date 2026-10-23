@@ -1,0 +1,20 @@
+{
+  "unchanged_business_files": [
+    "archive_app/__init__.py",
+    "archive_app/policy.py",
+    "archive_app/ports.py",
+    "archive_app/seed_document.json",
+    "archive_app/service.py",
+    "archive_app/storage.py",
+    "archive_app/workflow.py",
+    "bo_stategraph/machine.json",
+    "bo_stategraph/workflow.py",
+    "static/app.css",
+    "static/app.html",
+    "static/app.js"
+  ],
+  "baseline_js_symbols": 0,
+  "previous_accepted_js_symbols": 36,
+  "current_js_symbols": 36,
+  "previous_current_js_equal": true
+}

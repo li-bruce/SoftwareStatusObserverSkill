@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "node",
+    "tests/test_graph_projection.mjs"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"valid\":true,\"checks\":14,\"meaning\":\"Original nodes expose internal state; collapse retains facts and replay does not borrow future results\"}\n",
+  "stderr": ""
+}

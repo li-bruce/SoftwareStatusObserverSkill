@@ -73,6 +73,8 @@ Runtime evidence uses change_sync's `build_id` and `runs`, each with `case/mode/
 
 ## After implementation
 
+Use the [iteration graph checks](iteration-graph-checks.md) to select affected and neighboring cases and verify actual view boundaries. The enabled source index and configured data graph are checked by the existing `change_sync verify` gate; neither can replace independent runtime witnesses or the project tests.
+
 Check static bindings, independent business scenarios, white-box facts, applicable concurrency/wait/resource behavior, observer isolation, graph explanation, and export reproduction. Locate failures by requirement, node, function, and actual value; list missing evidence separately. Select applicable [validation rules](validation-rules.md), retaining unknowns and scope.
 
 Independent trials use a new directory and conversation, initially receiving only the Skill and actual request. Mark simulated answers clearly; never present them as confirmed production requirements. Let the developer ask first, then answer from the trial persona. Preserve questions, failures, fixes, and the final passing sequence.

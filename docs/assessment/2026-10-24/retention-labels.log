@@ -1,0 +1,1 @@
+PASS: locale precedence, fallback, interpolation, stable identity, project persistence, concurrent writes, and conflict reporting.

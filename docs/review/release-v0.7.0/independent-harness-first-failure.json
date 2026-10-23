@@ -1,0 +1,8 @@
+{
+  "passed": false,
+  "stage": "Create isolated test database",
+  "error": "sqlite3.OperationalError: unable to open database file",
+  "cleanup_error": "PermissionError: [WinError 5] Access denied in sandbox redirected temporary directory",
+  "scope": "Test harness environment; business scenario assertions had not started",
+  "repair": "Create and verify the temporary directory under the workspace .validation folder; leave application source and expected rules unchanged"
+}

@@ -1,4 +1,11 @@
 import { t as boTranslate } from "./i18n.js";
+import {
+  dataRoles,
+  dataRelations,
+  dataLines,
+  observedDataTransfer,
+  dataStatusClass,
+} from "./data-layer.js";
 // Business groups, internal activity states and local source share one graph.
 export const colors = {
   ink: 0x30454d,
@@ -164,8 +171,14 @@ function staleBasis(node, view, last) {
   return fields.some((key) => last.basis?.[key] !== view.authority.basis?.[key]);
 }
 export function status(node, view, events, choice, configuration = null) {
+  if (node.code_role) return "declared";
   if (view.stage === "design") return "declared";
   if (node.referenceOf) node = { ...node, id: node.referenceOf };
+  if (["query", "transform"].includes(node.data_role)) {
+    const last = nodeEvents(node, events).at(-1);
+    const state = dataStatusClass(last?.outputs?.status);
+    if (state) return state;
+  }
   if (
     configuration?.disposition === "interrupted" &&
     (node.execution_role || node.id === view.model.machine.execution?.parent)
@@ -230,8 +243,24 @@ export function lines(node, view, events, choice, configuration = null) {
       },
       { text: node.source?.symbol || node.summary, role: "symbol" },
     ];
-  if (view.stage === "design") return node.summary ? [{ text: node.summary, role: "muted" }] : [];
   if (node.referenceOf) node = { ...node, id: node.referenceOf };
+  if (dataRoles.includes(node.data_role)) {
+    const values = callValues(node, events);
+    return dataLines(node, values.inputs, values.outputs, nodeEvents(node, events).length > 0);
+  }
+  if (node.code_role)
+    return [
+      { text: node.summary || node.source?.path || "", role: "symbol" },
+      {
+        text: boTranslate(
+          node.code_boundary
+            ? "Outside loaded code region"
+            : "Static structure; execution unproven",
+        ),
+        role: "muted",
+      },
+    ];
+  if (view.stage === "design") return node.summary ? [{ text: node.summary, role: "muted" }] : [];
   if (node.field) {
     const values = callValues(node, events)[node.direction === "in" ? "inputs" : "outputs"];
     return [
@@ -423,6 +452,11 @@ export function wrapText(text, width = 47) {
   return out;
 }
 export const nodeTypes = {
+  "code-file": { label: boTranslate("Source file"), glyph: "F", color: 0x657ca5 },
+  "code-class": { label: boTranslate("Class"), glyph: "C", color: 0x9371a6 },
+  "code-function": { label: boTranslate("Code function"), glyph: "ƒ", color: 0x387c88 },
+  "code-parameter": { label: boTranslate("Code parameter"), glyph: "x", color: 0x627f9c },
+  "code-unresolved": { label: boTranslate("Unresolved reference"), glyph: "?", color: 0xb18857 },
   business: { label: boTranslate("Business"), glyph: "B", color: 0x5075b5 },
   function: { label: boTranslate("Function"), glyph: "ƒ", color: 0x387c88 },
   state: { label: boTranslate("State"), glyph: "S", color: 0x9869a0 },
@@ -431,8 +465,15 @@ export const nodeTypes = {
   data: { label: boTranslate("Parameter"), glyph: "x", color: 0x627f9c },
   effect: { label: boTranslate("Effect"), glyph: "✓", color: 0x2d8a70 },
   wait: { label: boTranslate("Wait"), glyph: "…", color: 0xb38442 },
+  store: { label: boTranslate("Database"), glyph: "DB", color: 0x426b9a },
+  dataset: { label: boTranslate("Table or collection"), glyph: "T", color: 0x3d7e97 },
+  column: { label: boTranslate("Data field"), glyph: ":", color: 0x638b98 },
+  query: { label: boTranslate("Database operation"), glyph: "Q", color: 0x316da4 },
+  transform: { label: boTranslate("Data processing"), glyph: "Δ", color: 0x997345 },
 };
 export function nodeType(n) {
+  if (n.code_role) return "code-" + n.code_role;
+  if (dataRoles.includes(n.data_role)) return n.data_role;
   return n.layer === "business"
     ? "business"
     : n.kind === "state"
@@ -452,6 +493,8 @@ export function nodeType(n) {
 // A business action can also implement a function. View membership is not its
 // visual type; selecting a view must not erase that function's values or calls.
 export function viewTypes(n) {
+  if (n.code_role) return ["code-" + n.code_role];
+  if (dataRoles.includes(n.data_role)) return [n.data_role];
   return [
     ...new Set([
       nodeType(n),
@@ -464,6 +507,9 @@ export function stateNodeId(model, value) {
   return model.nodes.find((n) => n.kind === "state" && n.value === value)?.id || "state." + value;
 }
 export function relationType(e) {
+  if (e.origin === "code-index" && e.code_relation) return "code-" + e.code_relation;
+  if (e.type === "data" && dataRelations.includes(e.data_relation)) return e.data_relation;
+  if (dataRelations.includes(e.type)) return e.type;
   return ["python-ast", "source-ast"].includes(e.origin) && e.type === "flow"
     ? "call"
     : [
@@ -595,6 +641,20 @@ export function layoutGraph(
       evidence: m.evidence,
     });
   }
+  const explicitlyHidden = new Set(options.hiddenNodes || []);
+  const excludedIds = new Set();
+  for (const [id, node] of all) {
+    let current = node;
+    const seen = new Set();
+    while (current && !seen.has(current.id)) {
+      seen.add(current.id);
+      if (explicitlyHidden.has(current.id) || explicitlyHidden.has(current.referenceOf)) {
+        excludedIds.add(id);
+        break;
+      }
+      current = all.get(current.parent);
+    }
+  }
   let matched = null;
   if (options.match) {
     for (const [id, n] of all) {
@@ -614,6 +674,7 @@ export function layoutGraph(
       (n) => status(n, view, events, choice, configuration),
       rawEdges,
     );
+    for (const id of excludedIds) matched.delete(id);
     for (const id of matched.contextIds || [])
       all.set(id, { ...all.get(id), filter_context: true, parent: undefined });
     for (const id of matched) {
@@ -638,11 +699,10 @@ export function layoutGraph(
     }
   const visibleIds = matched
     ? new Set([...matched].filter((id) => !all.get(id).parent))
-    : new Set(
-        view.model.graph_roots ||
-          view.model.overview?.map((x) => x.node) ||
-          [...all.values()].filter((n) => !n.parent).map((n) => n.id),
-      );
+    : new Set([
+        ...(view.model.graph_roots || view.model.overview?.map((x) => x.node) || []),
+        ...[...all.values()].filter((n) => !n.parent).map((n) => n.id),
+      ]);
   // State nodes follow the same containment and expansion rules as functions.
   // Folding affects visibility only; all states and facts remain in `all`.
   function reveal(id, seen = new Set()) {
@@ -656,8 +716,16 @@ export function layoutGraph(
         }
   }
   for (const id of [...visibleIds]) reveal(id);
+  const eligibleIds = new Set(
+    [...all.keys()].filter(
+      (id) =>
+        !excludedIds.has(id) &&
+        (!matched || matched.has(id)) &&
+        (!options.include || options.include(all.get(id))),
+    ),
+  );
   const boxes = [...visibleIds]
-    .filter((id) => all.has(id) && (!options.include || options.include(all.get(id))))
+    .filter((id) => eligibleIds.has(id))
     .map((id, i) => {
       const node = all.get(id),
         type = nodeType(node),
@@ -670,15 +738,12 @@ export function layoutGraph(
         open: expanded.has(id) && !node.filter_context,
         kids: node.filter_context
           ? []
-          : (children.get(id) || []).filter(
-              (id) =>
-                (!matched || matched.has(id)) && (!options.include || options.include(all.get(id))),
-            ),
+          : (children.get(id) || []).filter((id) => eligibleIds.has(id)),
         state: status(node, view, events, choice, configuration),
         x: 80 + (i % 5) * 230,
         y: 70 + Math.floor(i / 5) * 180,
         w: 190,
-        h: type === "state" ? 105 : 135,
+        h: type === "state" ? 105 : ["query", "transform"].includes(type) ? 172 : 135,
       };
     });
   const byId = new Map(boxes.map((b) => [b.id, b]));
@@ -694,19 +759,13 @@ export function layoutGraph(
   }
   const edgeMap = new Map();
   for (const e of rawEdges) {
+    if (!eligibleIds.has(e.from) || !eligibleIds.has(e.to) || options.hiddenEdges?.includes(e.id))
+      continue;
     const from = visible(e.from),
       to = visible(e.to);
     if (!from || !to || (from === to && e.from !== e.to)) continue;
-    // A filtered boundary must stay connected when its selected source is
-    // folded. The member below retains the real endpoints; this is a group
-    // projection of one actual edge, never a shortcut through an omitted node.
-    const boundary = all.get(e.from)?.filter_context || all.get(e.to)?.filter_context;
-    if (
-      ["python-ast", "source-ast", "capture-field"].includes(e.origin) &&
-      (from !== e.from || to !== e.to) &&
-      !boundary
-    )
-      continue;
+    // Project every cross-group relation onto its enclosing groups. Original
+    // endpoints remain in members; folding must not erase static call edges.
     const source = all.get(e.from),
       target = all.get(e.to);
     if (!source || !target) continue;
@@ -721,6 +780,8 @@ export function layoutGraph(
           targetEvents.some((x) =>
             (x.depends || []).some((d) => ids.has(d.event) && d.type === e.type),
           );
+    if (["reads", "writes"].includes(e.data_relation))
+      observed = events.some((event) => observedDataTransfer(e, event, all));
     let label =
       e.type === "contains"
         ? target.kind === "state"
@@ -757,7 +818,7 @@ export function layoutGraph(
       (!sourceEvents.length ||
         sourceEvents.at(-1)?.basis.param_version === view.authority.basis.param_version);
     // Different relation types sharing endpoints remain separate edges.
-    const key = from + ">" + to + ":" + e.type + ":" + (e.origin || "model");
+    const key = from + ">" + to + ":" + relationType(e) + ":" + (e.origin || "model");
     const member = { ...e, label, observed, current };
     if (edgeMap.has(key)) {
       const found = edgeMap.get(key);
@@ -784,6 +845,7 @@ export function layoutGraph(
     configuration,
     children,
     all,
+    eligibleIds,
   };
   return graphBounds(graph);
 }

@@ -1,0 +1,22 @@
+{
+  "stage": "fixture preparation only",
+  "failure": "The initial copy filter excluded every directory named data and accidentally omitted observer_runtime/bo_observer/data source. Startup failed with ModuleNotFoundError: No module named bo_observer.data. No runtime test pass was counted.",
+  "repair": "Copy the missing unchanged public package and make the fixture filter path-specific. Verify all managed file hashes before retry.",
+  "checks": [
+    {
+      "fixture": "retention-browser-fa37289",
+      "managed_files": 131,
+      "all_bytes_match_delivered_runtime": true
+    },
+    {
+      "fixture": "retention-negative-fa37289",
+      "managed_files": 131,
+      "all_bytes_match_delivered_runtime": true
+    }
+  ],
+  "business_and_public_source_edits": false,
+  "dependency_preparation": {
+    "initial_failure": "JavaScript parser unavailable: Cannot find module typescript",
+    "repair": "Copied the already-installed adapter dependencies into both isolated clones; no change to source, expectations or public runtime bytes."
+  }
+}

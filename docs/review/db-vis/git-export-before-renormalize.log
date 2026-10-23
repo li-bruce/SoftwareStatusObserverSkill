@@ -1,0 +1,4 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Traceback (most recent call last):
+  File "<stdin>", line 14, in <module>
+AssertionError: ['examples/delivery/observer_generated/runtime/bo_observer/schemas/database-catalog.schema.json', 'examples/delivery/observer_generated/runtime/bo_observer/schemas/database-config.schema.json', 'skills/business-observer/scripts/bo_observer/schemas/database-catalog.schema.json', 'skills/business-observer/scripts/bo_observer/schemas/database-config.schema.json']

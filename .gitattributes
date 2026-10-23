@@ -4,6 +4,9 @@
 # Shared package markers are copied and fingerprinted as exact bytes.
 # Preserve the original CRLF or LF consistently in the Skill and example copies.
 **/bo_observer/**/__init__.py -text
+# Protocol schemas participate in the same raw-byte runtime fingerprints.
+# Preserve copied schemas identically in the Skill and both installed examples.
+**/bo_observer/schemas/*.json -text
 *.png binary
 *.zip binary
 **/pixi.min.js -whitespace linguist-vendored=true

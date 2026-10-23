@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "archive": "team-publishing-final-runtime-source-and-evidence.zip",
+  "sha256": "f77d84c6619168678dec07c87d73778ee4088a72d054f459887d7dff45ab0632",
+  "managed_files": 131,
+  "protected_files": 28,
+  "business_checks": 24,
+  "message_migration_checks": 20,
+  "method": "Extract the frozen final and v1 archives into new directories. Verify managed/protected bytes and run independent SQLite application checks without using graph expectations."
+}

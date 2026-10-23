@@ -10,7 +10,13 @@ export function discussionContext(graph, ids) {
   }
   return result;
 }
-export function createConversationFocus({ onFocus, onClear }) {
+export function createConversationFocus({
+  onFocus,
+  onClear,
+  readState = () => null,
+  writeState = () => {},
+  hasSavedView = () => false,
+}) {
   const button = document.getElementById("discussion-focus"),
     clear = document.getElementById("discussion-clear");
   const label = document.getElementById("discussion-label");
@@ -20,11 +26,13 @@ export function createConversationFocus({ onFocus, onClear }) {
     lastPoll = 0;
   button.onclick = () => {
     active = true;
+    writeState({ revision, active });
     onFocus(ids);
     clear.hidden = false;
   };
   clear.onclick = () => {
     active = false;
+    writeState({ revision, active });
     onClear();
     clear.hidden = true;
   };
@@ -41,8 +49,11 @@ export function createConversationFocus({ onFocus, onClear }) {
         if (!response.ok) throw Error(boTranslate("Cannot load the current discussion scope"));
         const value = await response.json();
         if (!value.available) {
+          ids = [];
+          active = false;
           button.hidden = true;
           clear.hidden = true;
+          onClear();
           return;
         }
         if (revision === value.revision + String(value.stale)) return;
@@ -52,9 +63,14 @@ export function createConversationFocus({ onFocus, onClear }) {
         label.textContent = value.stale
           ? boTranslate("Discussion scope needs updating")
           : value.label || "";
-        active = ids.length > 0;
+        const saved = readState();
+        // Reload restores highlights without reframing the developer's saved view.
+        // Older preferences have no discussion state; preserve their existing view too.
+        const restore = saved?.revision === revision || (!saved && hasSavedView());
+        active = ids.length > 0 && (!restore || saved?.active === true);
+        writeState({ revision, active });
         clear.hidden = !active;
-        if (active) onFocus(ids);
+        if (active && !restore) onFocus(ids);
         else onClear();
       } catch (error) {
         label.textContent = error.message;

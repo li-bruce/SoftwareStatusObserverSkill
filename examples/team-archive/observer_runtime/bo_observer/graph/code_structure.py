@@ -54,6 +54,9 @@ def parse_unit(path, source):
     def walk(body, prefix="", class_name=None):
         for node in body:
             if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                # Declarations under if/try/loop/match blocks remain declarations
+                # of this lexical scope. Do not silently drop conditional code.
+                walk(ast.iter_child_nodes(node), prefix, class_name)
                 continue
             name = prefix + node.name
             if name in symbols:
@@ -74,6 +77,7 @@ def parse_unit(path, source):
                 "calls": [],
                 "predicates": [],
                 "fields": [],
+                "bases": [ast.unparse(base) for base in node.bases] if is_class else [],
             }
             item["entrypoints"] = [
                 ast.unparse(d)
@@ -189,11 +193,37 @@ def parse_unit(path, source):
         for n in tree.body
         if isinstance(n, (ast.Assign, ast.AnnAssign))
     ]
+    module_calls = []
+
+    class ModuleCalls(ast.NodeVisitor):
+        # Function bodies are indexed separately. Initializers and top-level
+        # conditionals remain syntactic candidates, regardless of execution.
+        def visit_FunctionDef(self, _):
+            pass
+
+        visit_AsyncFunctionDef = visit_FunctionDef
+        visit_ClassDef = visit_FunctionDef
+        visit_Lambda = visit_FunctionDef
+
+        def visit_Call(self, call):
+            module_calls.append(
+                {
+                    "expression": ast.unparse(call.func),
+                    "line": call.lineno,
+                    "column": call.col_offset,
+                    "args": [ast.unparse(a) for a in call.args],
+                    "keywords": {a.arg or "**": ast.unparse(a.value) for a in call.keywords},
+                }
+            )
+            self.generic_visit(call)
+
+    ModuleCalls().visit(tree)
     return {
         "imports": imports,
         "symbols": symbols,
         "declarations": declarations,
         "shadowed_globals": sorted(shadowed_globals),
+        "module_calls": module_calls,
     }
 
 
@@ -265,6 +295,7 @@ def enrich(authored, index, depth=1):
         if (g, sid, node_id) in seen or level >= depth:
             continue
         seen.add((g, sid, node_id))
+        occurrences = {}
         for call in outgoing.get(sid, []):
             if call["to"] in internal:
                 continue
@@ -307,12 +338,13 @@ def enrich(authored, index, depth=1):
                         "evidence": "business-map anchor + source AST call",
                     }
                 )
-            eid = (
-                "call."
-                + digest(
-                    [node_id, tid, call["expression"], call["args"], call["keywords"], call["line"]]
-                )[:16]
-            )
+            # Source lines locate evidence; they are not relation identity.
+            # A repeated identical call uses its occurrence within this caller.
+            identity = [node_id, tid, call["expression"], call["args"], call["keywords"]]
+            fingerprint = digest(identity)
+            occurrence = occurrences.get(fingerprint, 0)
+            occurrences[fingerprint] = occurrence + 1
+            eid = "call." + digest([identity, occurrence])[:16]
             if eid not in edge_ids:
                 model["edges"].append(
                     {
@@ -388,18 +420,23 @@ def enrich(authored, index, depth=1):
         if n.get("source"):
             by_symbol.setdefault(key(n["source"]["path"], n["source"]["symbol"]), n["id"])
     pairs = {
-        (e["from"], e["to"], e.get("callsite", {}).get("line"))
+        (e["from"], e["to"], e.get("callsite", {}).get("line"), e.get("callsite", {}).get("column"))
         for e in model["edges"]
         if e.get("origin") in {"python-ast", "source-ast"}
     }
+    occurrences = {}
     for call in index["edges"]:
         if call["from"] in internal or call["to"] in internal:
             continue
         a, b = by_symbol.get(call["from"]), by_symbol.get(call["to"])
-        if a and b and (a, b, call["line"]) not in pairs:
+        identity = [a, b, call["expression"], call["args"], call["keywords"]]
+        fingerprint = digest(identity)
+        occurrence = occurrences.get(fingerprint, 0)
+        occurrences[fingerprint] = occurrence + 1
+        if a and b and (a, b, call["line"], call["column"]) not in pairs:
             model["edges"].append(
                 {
-                    "id": "inventory-call." + digest([a, b, call["line"], call["column"]])[:16],
+                    "id": "inventory-call." + digest([identity, occurrence])[:16],
                     "from": a,
                     "to": b,
                     "type": "flow",

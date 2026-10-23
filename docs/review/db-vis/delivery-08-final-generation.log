@@ -1,0 +1,9 @@
+{
+  "valid": true,
+  "regenerated": [
+    "bo_stategraph/runtime-version.json",
+    "observer_generated/runtime/bo_observer/data/runtime.py",
+    "observer_generated/runtime/bo_observer/workflow/change_sync.py"
+  ]
+}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe

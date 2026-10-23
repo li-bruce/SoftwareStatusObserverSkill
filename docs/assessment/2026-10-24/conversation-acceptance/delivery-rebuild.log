@@ -1,0 +1,9 @@
+{
+  "valid": true,
+  "regenerated": [
+    "bo_stategraph/runtime-version.json",
+    "observer_generated/static/conversation.js",
+    "observer_generated/static/viewer.js"
+  ]
+}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe

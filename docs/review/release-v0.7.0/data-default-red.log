@@ -1,0 +1,34 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+.............F..
+======================================================================
+FAIL: test_string_server_defaults_match_real_sqlite_ddl (test_database_catalog.CatalogTests.test_string_server_defaults_match_real_sqlite_ddl)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tests\test_database_catalog.py", line 201, in test_string_server_defaults_match_real_sqlite_ddl
+    self.assertEqual(structure_differences(declared, actual), [])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [{'resource': 'table:defaults', 'field': '[281 chars]ed'}] != []
+
+First list contains 3 additional elements.
+First extra element 0:
+{'resource': 'table:defaults', 'field': 'active', 'problem': 'default differs', 'declared': "'1'", 'actual': '1'}
+
++ []
+- [{'actual': '1',
+-   'declared': "'1'",
+-   'field': 'active',
+-   'problem': 'default differs',
+-   'resource': 'table:defaults'},
+-  {'actual': "O'Reilly",
+-   'declared': "'O''Reilly'",
+-   'field': 'author',
+-   'problem': 'default differs',
+-   'resource': 'table:defaults'},
+-  {'field': 'id',
+-   'problem': 'default is unverified',
+-   'resource': 'table:defaults'}]
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.562s
+
+FAILED (failures=1)

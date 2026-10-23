@@ -5,6 +5,7 @@ The service accepts observations only. It cannot execute a business command.
 
 from collections import OrderedDict
 from copy import deepcopy
+from functools import wraps
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
 import mimetypes
@@ -13,6 +14,7 @@ import secrets
 import threading
 from urllib.parse import urlsplit, parse_qs
 from .protocol import validate_project, validate_event, validate_snapshot
+from .session_lifecycle import SessionHost
 
 try:
     from ..behavior_model import read, capture, check, contained, digest
@@ -50,6 +52,7 @@ class GraphSession:
         self.identities = {}
         self.current_instance = None
         self.program_url = None
+        self.data_status = None
         self.errors = self.gaps = 0
         self.last_error = ""
         self.stream_id = secrets.token_hex(12)
@@ -288,7 +291,8 @@ class GraphSession:
                 "model": model,
                 "manifest": deepcopy(self.manifest),
                 "binding_status": self.binding(),
-                "events": self.history.snapshot(),
+                "events": self.current_events(),
+                "database_status": self.data_status,
                 "machine": {
                     "current": current.get("state"),
                     "state_revision": current.get("revision"),
@@ -315,7 +319,9 @@ class GraphSession:
                 },
                 "health": {
                     "errors": self.errors + health["log_errors"],
-                    "dropped": self.gaps + health["evicted_events"],
+                    # Live history expiry is reported separately. Recording listeners
+                    # already received those events, so expiry is not a capture gap.
+                    "dropped": self.gaps,
                     "run_id": self.stream_id,
                     "attempted": self.sequence,
                     "written": self.sequence,
@@ -332,7 +338,7 @@ class GraphSession:
     def export(self):
         """Return the complete declared graph with retained events and matching runtime frames."""
         with self.lock:
-            events = self.history.snapshot()
+            events = self.current_events()
             ids = {e["id"] for e in events}
             return self.graph.bo_export(
                 binding=self.binding(),
@@ -347,6 +353,12 @@ class GraphSession:
                     },
                 },
             )
+
+    def current_events(self):
+        """Keep prior build evidence out of the live graph after source or schema changes."""
+        return [
+            e for e in self.history.snapshot() if e.get("build_id") == self.manifest["build_id"]
+        ]
 
     def close(self):
         """Stop the recording worker and its subscriptions during server shutdown."""
@@ -366,6 +378,22 @@ def make_server(session, port=8830, *, token=None, origins=(), assets=ASSETS):
         raise ValueError("collector origins must be explicit local development origins")
     assets = Path(session.web.assets if assets == ASSETS else assets).resolve()
     session.program_url = next(iter(origins)) if len(origins) == 1 else None
+    host = SessionHost(
+        session,
+        lambda previous: GraphSession(
+            previous.root, previous.path.relative_to(previous.root).as_posix()
+        ),
+    )
+
+    def consistent_request(method):
+        """Finish each request against one session while a watcher may replace the build."""
+
+        @wraps(method)
+        def handle(handler):
+            with host.borrow() as current:
+                return method(handler, current)
+
+        return handle
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *_):
@@ -419,7 +447,8 @@ def make_server(session, port=8830, *, token=None, origins=(), assets=ASSETS):
             self.send_header("Vary", "Origin")
             self.end_headers()
 
-        def do_GET(self):
+        @consistent_request
+        def do_GET(self, session):
             if not self.permitted():
                 return self.reply(403, {"error": "local same-origin only"})
             path = urlsplit(self.path).path
@@ -440,6 +469,8 @@ def make_server(session, port=8830, *, token=None, origins=(), assets=ASSETS):
                     )
                 if path == "/api/view":
                     return self.reply(200, session.view())
+                if path.startswith("/api/code/"):
+                    return self.reply(200, session.web.get(self.path))
                 if path in ("/api/stategraph", "/api/stategraph/export"):
                     return self.reply(200, session.export())
                 if path == "/api/preferences":
@@ -479,7 +510,8 @@ def make_server(session, port=8830, *, token=None, origins=(), assets=ASSETS):
             except (OSError, ValueError, KeyError) as exc:
                 return self.reply(400, {"error": str(exc)})
 
-        def do_POST(self):
+        @consistent_request
+        def do_POST(self, session):
             path = urlsplit(self.path).path
             ingest = path.startswith("/api/bo/")
             if not self.permitted(ingest):
@@ -510,10 +542,25 @@ def make_server(session, port=8830, *, token=None, origins=(), assets=ASSETS):
                 return self.reply(409, {"error": str(exc)})
             except (OSError, ValueError, KeyError, TypeError) as exc:
                 if ingest:
-                    session.errors += 1
-                    session.last_error = str(exc)
+                    with session.lock:
+                        session.errors += 1
+                        session.last_error = str(exc)
                 return self.reply(400, {"error": str(exc)})
 
-    server = ThreadingHTTPServer(("127.0.0.1", port), Handler)
+    class SessionServer(ThreadingHTTPServer):
+        def server_close(self):
+            super().server_close()
+            host.close()
+
+    server = SessionServer(("127.0.0.1", port), Handler)
     server.bo_token = token
+    server.bo_session = session
+
+    def reload_session():
+        """Load current declarations without transferring obsolete events or machine instances."""
+        changed = host.reload()
+        server.bo_session = host.current
+        return changed
+
+    server.bo_reload = reload_session
     return server

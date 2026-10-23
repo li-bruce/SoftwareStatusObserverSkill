@@ -19,7 +19,9 @@
     "integrations/bo_scenarios.py",
     "integrations/bo_server.py",
     "integrations/bo_view/analysis.js",
+    "integrations/bo_view/code-layer.js",
     "integrations/bo_view/conversation.js",
+    "integrations/bo_view/data-layer.js",
     "integrations/bo_view/elk-worker.min.js",
     "integrations/bo_view/elk.bundled.js",
     "integrations/bo_view/glyphs.js",
@@ -35,6 +37,7 @@
     "integrations/bo_view/renderer.js",
     "integrations/bo_view/replay-steps.js",
     "integrations/bo_view/runtime-frames.js",
+    "integrations/bo_view/view-lifecycle.js",
     "integrations/bo_view/viewer.css",
     "integrations/bo_view/viewer.js",
     "main.py",
@@ -2230,7 +2233,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.30c7de655de57ed1",
+      "id": "call.dc3482a934404a1c",
       "from": "flow.input",
       "to": "code.849866902721a913",
       "type": "flow",
@@ -2260,7 +2263,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.682ff4d701b909e6",
+      "id": "call.f34ad723cf8a7ac5",
       "from": "flow.input",
       "to": "code.8c566caec0ef95e9",
       "type": "flow",
@@ -2287,7 +2290,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.0065fb5df1b5fd0e",
+      "id": "call.633cdb415cc3372d",
       "from": "flow.input",
       "to": "code.9ab020fa53084121",
       "type": "flow",
@@ -2305,7 +2308,7 @@
       }
     },
     {
-      "id": "call.789fd396dc7bc66e",
+      "id": "call.33dcc10326ace712",
       "from": "flow.input",
       "to": "code.9ab020fa53084121",
       "type": "flow",
@@ -2332,7 +2335,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.da08fe56a54ee5ff",
+      "id": "call.ec3ebfbd44d090e3",
       "from": "flow.input",
       "to": "code.9798528e4c59a114",
       "type": "flow",
@@ -2351,7 +2354,7 @@
       }
     },
     {
-      "id": "call.12bb878b077360ab",
+      "id": "call.b3b5d319888177b5",
       "from": "flow.input",
       "to": "code.9ab020fa53084121",
       "type": "flow",
@@ -2369,7 +2372,7 @@
       }
     },
     {
-      "id": "call.50e2b40f2f5e6ccf",
+      "id": "call.e799848997b70b47",
       "from": "flow.input",
       "to": "code.9ab020fa53084121",
       "type": "flow",
@@ -2387,7 +2390,7 @@
       }
     },
     {
-      "id": "call.53784e41dfa622f3",
+      "id": "call.90aa2c58d0cef03b",
       "from": "flow.input",
       "to": "code.9ab020fa53084121",
       "type": "flow",
@@ -2405,7 +2408,7 @@
       }
     },
     {
-      "id": "call.17be26427edd17ff",
+      "id": "call.16a46739027076c6",
       "from": "flow.permission",
       "to": "grant",
       "type": "flow",
@@ -2434,7 +2437,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.0bde5e874705f6da",
+      "id": "call.dbd597ae9ef4d334",
       "from": "flow.commit",
       "to": "code.1bba09184421903e",
       "type": "flow",
@@ -2461,7 +2464,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.7aafa34fc4aee3d9",
+      "id": "call.4d0c6b633d5d3d67",
       "from": "flow.commit",
       "to": "code.abc699d67116f986",
       "type": "flow",
@@ -2479,7 +2482,7 @@
       }
     },
     {
-      "id": "call.eea4d37aad2735f1",
+      "id": "call.e6e289953205036e",
       "from": "flow.commit",
       "to": "code.abc699d67116f986",
       "type": "flow",
@@ -2506,7 +2509,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.10357c64d0808fb0",
+      "id": "call.b3454e4ff1d9156a",
       "from": "flow.wait",
       "to": "code.52990f65c6aa2534",
       "type": "flow",
@@ -2524,7 +2527,7 @@
       }
     },
     {
-      "id": "call.dc4747a80e138313",
+      "id": "call.8d8f397356a760ba",
       "from": "flow.wait",
       "to": "code.52990f65c6aa2534",
       "type": "flow",
@@ -2542,7 +2545,7 @@
       }
     },
     {
-      "id": "call.5255d7afb48541c7",
+      "id": "call.7de620023c881667",
       "from": "read",
       "to": "code.849866902721a913",
       "type": "flow",
@@ -2563,7 +2566,7 @@
       }
     },
     {
-      "id": "call.f854472d446ed6d0",
+      "id": "call.1ba0d874a07cd4ed",
       "from": "read",
       "to": "code.8c566caec0ef95e9",
       "type": "flow",
@@ -2581,7 +2584,7 @@
       }
     },
     {
-      "id": "call.fce4a86aac132754",
+      "id": "call.81c07bb9aecf94e8",
       "from": "read",
       "to": "code.9ab020fa53084121",
       "type": "flow",
@@ -2599,7 +2602,7 @@
       }
     },
     {
-      "id": "call.ede119086dbe34cb",
+      "id": "call.5d8bd0057442ddba",
       "from": "read",
       "to": "code.9ab020fa53084121",
       "type": "flow",
@@ -2617,7 +2620,7 @@
       }
     },
     {
-      "id": "call.5c75eb4344f5bf6f",
+      "id": "call.2ae489eb4027633a",
       "from": "read",
       "to": "code.9798528e4c59a114",
       "type": "flow",
@@ -2636,7 +2639,7 @@
       }
     },
     {
-      "id": "call.f87d8f84d9932f60",
+      "id": "call.0726e3213ae175b7",
       "from": "read",
       "to": "code.9ab020fa53084121",
       "type": "flow",
@@ -2654,7 +2657,7 @@
       }
     },
     {
-      "id": "call.029c3aa8cbf9f643",
+      "id": "call.9238e7d97af63ea9",
       "from": "read",
       "to": "code.9ab020fa53084121",
       "type": "flow",
@@ -2672,7 +2675,7 @@
       }
     },
     {
-      "id": "call.fe835f51ab23f501",
+      "id": "call.caf83c6cd52aa3cd",
       "from": "read",
       "to": "code.9ab020fa53084121",
       "type": "flow",
@@ -2690,7 +2693,7 @@
       }
     },
     {
-      "id": "call.5b1a585a1616ecd9",
+      "id": "call.fad9f721fef59a7f",
       "from": "execute",
       "to": "flow.input",
       "type": "flow",
@@ -2716,7 +2719,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.2dcfb955e3f4f5f7",
+      "id": "call.e1cb49682a94fcb7",
       "from": "execute",
       "to": "code.0fc7de430e9f9b0b",
       "type": "flow",
@@ -2733,7 +2736,7 @@
       }
     },
     {
-      "id": "call.4767738068f3ea78",
+      "id": "call.88896d98e5c2127f",
       "from": "authorize",
       "to": "grant",
       "type": "flow",
@@ -2762,7 +2765,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.0a49ffeca58756de",
+      "id": "call.d6706d3b386b6b21",
       "from": "join",
       "to": "code.8bf1a3eb12254bfb",
       "type": "flow",
@@ -2786,7 +2789,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.00887e6d14077c2f",
+      "id": "call.44d02fb4fd3e4bc8",
       "from": "join",
       "to": "code.40b4483bb7508823",
       "type": "flow",
@@ -2805,7 +2808,7 @@
       }
     },
     {
-      "id": "call.89dea7c26cad3078",
+      "id": "call.7d317e3d2c3f2c37",
       "from": "execution.finish",
       "to": "code.8bf1a3eb12254bfb",
       "type": "flow",
@@ -2820,7 +2823,7 @@
       }
     },
     {
-      "id": "call.2bd6834bf9f3df07",
+      "id": "call.81b7b4c85021885e",
       "from": "execution.finish",
       "to": "code.40b4483bb7508823",
       "type": "flow",
@@ -2839,7 +2842,7 @@
       }
     },
     {
-      "id": "call.e9b8f74e3fa8ab8b",
+      "id": "call.9ebd5824d524578b",
       "from": "execution.snapshot",
       "to": "code.8bf1a3eb12254bfb",
       "type": "flow",
@@ -2854,7 +2857,7 @@
       }
     },
     {
-      "id": "call.eef5f54978afb049",
+      "id": "call.d440cef0031e85fe",
       "from": "execution.progress",
       "to": "execution.record",
       "type": "flow",
@@ -2876,7 +2879,7 @@
       }
     },
     {
-      "id": "call.bbff928f6a7bacba",
+      "id": "call.30f8354f7df2fd27",
       "from": "execution.abort",
       "to": "code.8bf1a3eb12254bfb",
       "type": "flow",
@@ -2891,7 +2894,7 @@
       }
     },
     {
-      "id": "call.3db34f994085b480",
+      "id": "call.ab0cce40a6a77170",
       "from": "execution.abort",
       "to": "code.40b4483bb7508823",
       "type": "flow",
@@ -2910,7 +2913,7 @@
       }
     },
     {
-      "id": "call.721615a43e782979",
+      "id": "call.f89df725c09b8957",
       "from": "execution.save",
       "to": "execution.lookup",
       "type": "flow",
@@ -2927,7 +2930,7 @@
       }
     },
     {
-      "id": "call.892fcebcad28b912",
+      "id": "call.19b4b16d0895ee81",
       "from": "execution.update",
       "to": "execution.lookup",
       "type": "flow",
@@ -2944,7 +2947,7 @@
       }
     },
     {
-      "id": "call.8ba8ffb042c56876",
+      "id": "call.52d47e2f727f7d71",
       "from": "execution.update",
       "to": "execution.save",
       "type": "flow",
@@ -2970,7 +2973,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.501f63b38d0c6d39",
+      "id": "call.b84ef2222ede205c",
       "from": "execution.all",
       "to": "code.137c932e9a5276a2",
       "type": "flow",
@@ -2985,7 +2988,7 @@
       }
     },
     {
-      "id": "call.fecac5055bf5ac61",
+      "id": "call.1eece05ef4bc7caa",
       "from": "recheck",
       "to": "code.1bba09184421903e",
       "type": "flow",
@@ -3003,7 +3006,7 @@
       }
     },
     {
-      "id": "call.915c2be48600c19f",
+      "id": "call.388cb392d1c739a0",
       "from": "recheck",
       "to": "code.abc699d67116f986",
       "type": "flow",
@@ -3021,7 +3024,7 @@
       }
     },
     {
-      "id": "call.108886a0a549c2c3",
+      "id": "call.bcc95442dc5aadfb",
       "from": "recheck",
       "to": "code.abc699d67116f986",
       "type": "flow",
@@ -3039,7 +3042,7 @@
       }
     },
     {
-      "id": "call.f47aa305fa051fe6",
+      "id": "call.67130920078dff47",
       "from": "commit",
       "to": "code.1bba09184421903e",
       "type": "flow",
@@ -3057,7 +3060,7 @@
       }
     },
     {
-      "id": "call.17f4b690b7df4e52",
+      "id": "call.45720de63c7b5ef6",
       "from": "commit",
       "to": "code.abc699d67116f986",
       "type": "flow",
@@ -3075,7 +3078,7 @@
       }
     },
     {
-      "id": "call.f9315f653386a801",
+      "id": "call.bd9d29a5bb49e8f3",
       "from": "commit",
       "to": "code.abc699d67116f986",
       "type": "flow",
@@ -3102,7 +3105,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.136ad652dc0fe67f",
+      "id": "call.5467245cfca8fb18",
       "from": "execution.advance",
       "to": "code.a583b3ad67e50561",
       "type": "flow",
@@ -3133,7 +3136,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.b5aaab4cfebe151d",
+      "id": "call.87713b7b38ef4d38",
       "from": "wait",
       "to": "code.6a061f2f8e811623",
       "type": "flow",
@@ -3163,7 +3166,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.7e2500daf2cd1378",
+      "id": "call.3e0d0127c4ae9d00",
       "from": "wait",
       "to": "code.a91cf5631a56d8f8",
       "type": "flow",
@@ -3181,7 +3184,7 @@
       }
     },
     {
-      "id": "call.06cc9d53874d16c6",
+      "id": "call.948874f58e4c7bd1",
       "from": "wait",
       "to": "code.52990f65c6aa2534",
       "type": "flow",
@@ -3199,7 +3202,7 @@
       }
     },
     {
-      "id": "call.72e385571a65e1fd",
+      "id": "call.b2e30cd223f00f18",
       "from": "wait",
       "to": "code.52990f65c6aa2534",
       "type": "flow",
@@ -3226,7 +3229,7 @@
       "evidence": "business-map anchor + source AST call"
     },
     {
-      "id": "call.1357bc2c2a6913da",
+      "id": "call.7f4fba9eea30d613",
       "from": "wait",
       "to": "code.816d7d5bedb84c56",
       "type": "flow",
@@ -3245,7 +3248,7 @@
       }
     },
     {
-      "id": "call.2b7a64d14967826b",
+      "id": "call.ec9e4c54f40320f0",
       "from": "wait",
       "to": "code.52990f65c6aa2534",
       "type": "flow",
@@ -3263,7 +3266,7 @@
       }
     },
     {
-      "id": "call.083c71dc30a73162",
+      "id": "call.bede0fc53b157f75",
       "from": "wait",
       "to": "code.52990f65c6aa2534",
       "type": "flow",
@@ -3281,7 +3284,7 @@
       }
     },
     {
-      "id": "call.a2300f73f7ba274f",
+      "id": "call.6365cac85162f3f9",
       "from": "wait",
       "to": "code.52990f65c6aa2534",
       "type": "flow",
@@ -3299,7 +3302,7 @@
       }
     },
     {
-      "id": "call.f1e540c2198c7d50",
+      "id": "call.9480cecc6343665a",
       "from": "change",
       "to": "code.52990f65c6aa2534",
       "type": "flow",
@@ -3317,7 +3320,7 @@
       }
     },
     {
-      "id": "call.f996cff4ff209e66",
+      "id": "call.a48f34e0d1b255e9",
       "from": "change",
       "to": "code.52990f65c6aa2534",
       "type": "flow",
@@ -3416,7 +3419,7 @@
       "evidence": "implementation inventory + source AST"
     },
     {
-      "id": "inventory-call.bdf745b0c2f8a43c",
+      "id": "inventory-call.ff5425b43b4f5dc0",
       "from": "code.9ab020fa53084121",
       "to": "execution.advance",
       "type": "flow",
@@ -3435,7 +3438,7 @@
       }
     },
     {
-      "id": "inventory-call.734cf410a19cc499",
+      "id": "inventory-call.3231aefeb0e12825",
       "from": "flow.wait",
       "to": "code.9ab020fa53084121",
       "type": "flow",
@@ -3453,7 +3456,7 @@
       }
     },
     {
-      "id": "inventory-call.38bd885729d7262c",
+      "id": "inventory-call.6d3ed788303083bf",
       "from": "flow.wait",
       "to": "code.9ab020fa53084121",
       "type": "flow",
@@ -3471,7 +3474,7 @@
       }
     },
     {
-      "id": "inventory-call.63b6c786b6ec227f",
+      "id": "inventory-call.a28e1744558bb2c4",
       "from": "flow.input",
       "to": "execution.record",
       "type": "flow",
@@ -3492,7 +3495,7 @@
       }
     },
     {
-      "id": "inventory-call.e7eeb06200309227",
+      "id": "inventory-call.ba13ec2ad7821252",
       "from": "flow.input",
       "to": "flow.permission",
       "type": "flow",
@@ -3510,7 +3513,7 @@
       }
     },
     {
-      "id": "inventory-call.dab972d965495df6",
+      "id": "inventory-call.de313be7406f261c",
       "from": "flow.commit",
       "to": "flow.permission",
       "type": "flow",
@@ -3528,7 +3531,7 @@
       }
     },
     {
-      "id": "inventory-call.12f5f96d757af310",
+      "id": "inventory-call.c322484ec936ff89",
       "from": "flow.commit",
       "to": "code.9ab020fa53084121",
       "type": "flow",
@@ -3546,7 +3549,7 @@
       }
     },
     {
-      "id": "inventory-call.7e4051c08f8d693f",
+      "id": "inventory-call.554e3341be474e72",
       "from": "flow.commit",
       "to": "code.9ab020fa53084121",
       "type": "flow",
@@ -3564,7 +3567,7 @@
       }
     },
     {
-      "id": "inventory-call.3337552cc01e9bea",
+      "id": "inventory-call.94da0ef57f49492c",
       "from": "execute",
       "to": "flow.commit",
       "type": "flow",
@@ -3581,7 +3584,7 @@
       }
     },
     {
-      "id": "inventory-call.5a9758ed998c0e73",
+      "id": "inventory-call.9c8bb51cd02597b0",
       "from": "implementation.34624dec8bdd924f",
       "to": "implementation.ed67c47d295f5b54",
       "type": "flow",
@@ -3596,7 +3599,7 @@
       }
     },
     {
-      "id": "inventory-call.2d69dba947590bcc",
+      "id": "inventory-call.c45e734f4328d659",
       "from": "implementation.34624dec8bdd924f",
       "to": "job.storage",
       "type": "flow",
@@ -3613,7 +3616,7 @@
       }
     },
     {
-      "id": "inventory-call.3636ad18b08cdc9b",
+      "id": "inventory-call.97c29c3f22f79548",
       "from": "implementation.34624dec8bdd924f",
       "to": "implementation.ed67c47d295f5b54",
       "type": "flow",
@@ -3628,7 +3631,7 @@
       }
     },
     {
-      "id": "inventory-call.097dbebd82c000cf",
+      "id": "inventory-call.06b3ce8ca8e44b28",
       "from": "implementation.34624dec8bdd924f",
       "to": "code.137c932e9a5276a2",
       "type": "flow",
@@ -3643,7 +3646,7 @@
       }
     },
     {
-      "id": "inventory-call.875b5f20de324a85",
+      "id": "inventory-call.82d435b433719067",
       "from": "implementation.34624dec8bdd924f",
       "to": "execution.recover",
       "type": "flow",
@@ -3661,7 +3664,7 @@
       }
     },
     {
-      "id": "inventory-call.78cbc10e1e8268aa",
+      "id": "inventory-call.ce8d77e756fcbf15",
       "from": "implementation.34624dec8bdd924f",
       "to": "execution.save",
       "type": "flow",
@@ -3678,7 +3681,7 @@
       }
     },
     {
-      "id": "inventory-call.9e64249796da4965",
+      "id": "inventory-call.d9ef885e5117a9ae",
       "from": "implementation.34624dec8bdd924f",
       "to": "job.storage",
       "type": "flow",
@@ -3695,7 +3698,7 @@
       }
     },
     {
-      "id": "inventory-call.72105401f1814718",
+      "id": "inventory-call.5b91599f11fe8140",
       "from": "state.draft",
       "to": "implementation.336a43a51c24b432",
       "type": "flow",
@@ -3710,7 +3713,7 @@
       }
     },
     {
-      "id": "inventory-call.7eb87bcec35c862a",
+      "id": "inventory-call.5f213c39ed5d2ca7",
       "from": "execution.advance",
       "to": "state.draft",
       "type": "flow",
@@ -3732,7 +3735,7 @@
       }
     },
     {
-      "id": "inventory-call.c0a9315b1bd5a7b3",
+      "id": "inventory-call.ab017b9a7182ab71",
       "from": "code.40b4483bb7508823",
       "to": "execution.invariant",
       "type": "flow",
@@ -3747,7 +3750,7 @@
       }
     },
     {
-      "id": "inventory-call.4ed31e598385d579",
+      "id": "inventory-call.9da5abe0b559deec",
       "from": "code.40b4483bb7508823",
       "to": "code.8bf1a3eb12254bfb",
       "type": "flow",
@@ -3762,7 +3765,7 @@
       }
     },
     {
-      "id": "inventory-call.df0e8e4fd2cbae31",
+      "id": "inventory-call.f32f7baead4c6960",
       "from": "code.40b4483bb7508823",
       "to": "execution.snapshot",
       "type": "flow",
@@ -3777,7 +3780,7 @@
       }
     },
     {
-      "id": "inventory-call.9e5705bd7d5b6afe",
+      "id": "inventory-call.1cb4796530e991dd",
       "from": "workers",
       "to": "code.8bf1a3eb12254bfb",
       "type": "flow",
@@ -3792,7 +3795,7 @@
       }
     },
     {
-      "id": "inventory-call.acd17731bfe0d3d1",
+      "id": "inventory-call.f02884eb1e0ea020",
       "from": "workers",
       "to": "code.40b4483bb7508823",
       "type": "flow",
@@ -3811,7 +3814,7 @@
       }
     },
     {
-      "id": "inventory-call.4c7aff15ba3b57e3",
+      "id": "inventory-call.6bcf6e026aa79249",
       "from": "workers",
       "to": "code.8bf1a3eb12254bfb",
       "type": "flow",
@@ -3826,7 +3829,7 @@
       }
     },
     {
-      "id": "inventory-call.fd935ac3c002b452",
+      "id": "inventory-call.1ec546236575add1",
       "from": "workers",
       "to": "code.40b4483bb7508823",
       "type": "flow",

@@ -1,0 +1,115 @@
+{
+  "optional_fields_runtime": {
+    "errors": [],
+    "events_checked": 218,
+    "features": 15
+  },
+  "database_check_after_enrich": {
+    "configured": true,
+    "valid": false,
+    "errors": [
+      "database catalog or graph projection is stale; run bo_db sync"
+    ],
+    "changed": true,
+    "source_id": "759486aa490196955fe1ce9ddf71b27a6dcc4bd2eba54e77ad5a2e20cd6e8cda",
+    "catalog_id": "2d699a64c362685e63c02925379b0314252368059071a1b5d5a6283f0d61c19e",
+    "stores": [
+      {
+        "id": "team",
+        "coverage": "complete",
+        "limitations": [
+          "Coverage is limited to tables in the configured/default schema and dialect-supported constraints; triggers and stored routines are not inspected."
+        ]
+      }
+    ]
+  },
+  "database_sync": {
+    "configured": true,
+    "valid": true,
+    "errors": [],
+    "changed": true,
+    "source_id": "759486aa490196955fe1ce9ddf71b27a6dcc4bd2eba54e77ad5a2e20cd6e8cda",
+    "catalog_id": "2d699a64c362685e63c02925379b0314252368059071a1b5d5a6283f0d61c19e",
+    "stores": [
+      {
+        "id": "team",
+        "coverage": "complete",
+        "limitations": [
+          "Coverage is limited to tables in the configured/default schema and dialect-supported constraints; triggers and stored routines are not inspected."
+        ]
+      }
+    ]
+  },
+  "re_enrich_diff": [
+    {
+      "node": "db.accounts.read",
+      "changed_keys": [
+        "code_evidence"
+      ]
+    },
+    {
+      "node": "db.sessions.read",
+      "changed_keys": [
+        "code_evidence"
+      ]
+    },
+    {
+      "node": "db.sessions.write",
+      "changed_keys": [
+        "code_evidence"
+      ]
+    },
+    {
+      "node": "db.materials.read",
+      "changed_keys": [
+        "code_evidence"
+      ]
+    },
+    {
+      "node": "db.materials.write",
+      "changed_keys": [
+        "code_evidence"
+      ]
+    },
+    {
+      "node": "db.messages.read",
+      "changed_keys": [
+        "code_evidence"
+      ]
+    },
+    {
+      "node": "db.messages.write",
+      "changed_keys": [
+        "code_evidence"
+      ]
+    },
+    {
+      "node": "db.publications.read",
+      "changed_keys": [
+        "code_evidence"
+      ]
+    },
+    {
+      "node": "db.publications.write",
+      "changed_keys": [
+        "code_evidence"
+      ]
+    },
+    {
+      "node": "db.transaction",
+      "changed_keys": [
+        "code_evidence"
+      ]
+    },
+    {
+      "node": "db.publication_snapshot",
+      "changed_keys": [
+        "code_evidence"
+      ]
+    }
+  ],
+  "edge_counts": [
+    338,
+    338
+  ]
+}

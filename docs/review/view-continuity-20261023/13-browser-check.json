@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "unchanged_nodes": [
+    "notify",
+    "review",
+    "store",
+    "upload"
+  ],
+  "new_node": "receipt",
+  "hidden_node": "guard",
+  "reload_preserved": true,
+  "all_elements_filtered_nodes": 0,
+  "all_elements_filtered_edges": 0,
+  "old_recordings_list_cleared": true,
+  "console_errors": 0,
+  "scope": "Isolated browser fixture; complete application acceptance is reported separately."
+}

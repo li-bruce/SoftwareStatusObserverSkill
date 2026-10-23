@@ -36,7 +36,7 @@ def check():
     for directory in ('examples/delivery/integrations/bo_view','examples/team-archive/static/graph','examples/delivery/observer_generated/static'):
         for asset in assets.iterdir():
             if asset.is_file(): assert asset.read_bytes() == (ROOT/directory/asset.name).read_bytes(), f'Viewer copy stale: {directory}/{asset.name}'
-    for name in ('preferences.js', 'graph-core.js', 'layout.js', 'analysis.js', 'recording.js', 'replay-steps.js', 'glyphs.js', 'viewer.js', 'viewer.css', 'index.html', 'elk.bundled.js', 'elk-worker.min.js', 'ELK-LICENSE.md'):
+    for name in ('preferences.js', 'graph-core.js', 'layout.js', 'analysis.js', 'data-layer.js', 'recording.js', 'replay-steps.js', 'glyphs.js', 'viewer.js', 'viewer.css', 'index.html', 'elk.bundled.js', 'elk-worker.min.js', 'ELK-LICENSE.md'):
         assert (assets/name).read_bytes() == (ROOT/'examples/delivery/observer_generated/static'/name).read_bytes(), f'Graph template copy is stale: {name}'
     # Reviewed open-source distributions. Revisit provenance/licenses on upgrades.
     bundles = {

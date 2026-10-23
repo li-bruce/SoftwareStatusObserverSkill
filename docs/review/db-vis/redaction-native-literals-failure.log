@@ -1,0 +1,69 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+FFFFFFF
+======================================================================
+FAIL: test_native_sql_literal_forms_are_redacted (test_database_runtime.QueryShapeTests.test_native_sql_literal_forms_are_redacted) (dialect='postgres', statement='SELECT $$private_dollar$$ FROM image')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tests\test_database_runtime.py", line 298, in test_native_sql_literal_forms_are_redacted
+    self.assertNotIn(forbidden, shape)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: 'private_dollar' unexpectedly found in "SELECT 'private_dollar' FROM image"
+
+======================================================================
+FAIL: test_native_sql_literal_forms_are_redacted (test_database_runtime.QueryShapeTests.test_native_sql_literal_forms_are_redacted) (dialect='postgres', statement='SELECT $tag$private_tagged$tag$ FROM image')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tests\test_database_runtime.py", line 298, in test_native_sql_literal_forms_are_redacted
+    self.assertNotIn(forbidden, shape)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: 'private_tagged' unexpectedly found in "SELECT 'private_tagged' FROM image"
+
+======================================================================
+FAIL: test_native_sql_literal_forms_are_redacted (test_database_runtime.QueryShapeTests.test_native_sql_literal_forms_are_redacted) (dialect='postgres', statement="SELECT E'private_escape\\n' FROM image")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tests\test_database_runtime.py", line 298, in test_native_sql_literal_forms_are_redacted
+    self.assertNotIn(forbidden, shape)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: 'private_escape' unexpectedly found in "SELECT e'private_escape\\n' FROM image"
+
+======================================================================
+FAIL: test_native_sql_literal_forms_are_redacted (test_database_runtime.QueryShapeTests.test_native_sql_literal_forms_are_redacted) (dialect='postgres', statement="SELECT X'736563726574' FROM image")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tests\test_database_runtime.py", line 298, in test_native_sql_literal_forms_are_redacted
+    self.assertNotIn(forbidden, shape)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: '736563726574' unexpectedly found in "SELECT x'736563726574' FROM image"
+
+======================================================================
+FAIL: test_native_sql_literal_forms_are_redacted (test_database_runtime.QueryShapeTests.test_native_sql_literal_forms_are_redacted) (dialect='postgres', statement="SELECT B'01110011' FROM image")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tests\test_database_runtime.py", line 298, in test_native_sql_literal_forms_are_redacted
+    self.assertNotIn(forbidden, shape)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: '01110011' unexpectedly found in "SELECT b'01110011' FROM image"
+
+======================================================================
+FAIL: test_native_sql_literal_forms_are_redacted (test_database_runtime.QueryShapeTests.test_native_sql_literal_forms_are_redacted) (dialect='mysql', statement='SELECT 0x736563726574 FROM image')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tests\test_database_runtime.py", line 298, in test_native_sql_literal_forms_are_redacted
+    self.assertNotIn(forbidden, shape)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: '736563726574' unexpectedly found in "SELECT x'736563726574' FROM image"
+
+======================================================================
+FAIL: test_native_sql_literal_forms_are_redacted (test_database_runtime.QueryShapeTests.test_native_sql_literal_forms_are_redacted) (dialect='tsql', statement="SELECT N'private_national' FROM image")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tests\test_database_runtime.py", line 298, in test_native_sql_literal_forms_are_redacted
+    self.assertNotIn(forbidden, shape)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: 'private_national' unexpectedly found in "SELECT N'private_national' FROM image"
+
+----------------------------------------------------------------------
+Ran 1 test in 0.092s
+
+FAILED (failures=7)

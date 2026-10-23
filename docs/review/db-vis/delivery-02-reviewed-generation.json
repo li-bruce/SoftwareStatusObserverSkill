@@ -1,0 +1,16 @@
+{
+  "command": [
+    "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "tooling/dev.py",
+    "graph",
+    "--reason",
+    "Reviewed shared database observer runtime and data-view assets. Business state, authorization, effects, source functions and all existing expectations remain unchanged. The generated graph includes the new viewer asset; runtime and schema behavior are independently tested in the repository database suite."
+  ],
+  "cwd": "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\examples\\delivery",
+  "exit_code": 0,
+  "stdout": "{\n  \"valid\": true,\n  \"regenerated\": [\n    \"bo_stategraph/runtime-version.json\",\n    \"observer_generated/behavior.json\",\n    \"observer_generated/runtime/bo.py\",\n    \"observer_generated/runtime/bo_db.py\",\n    \"observer_generated/runtime/bo_observer/adapters/javascript/bo_data.mjs\",\n    \"observer_generated/runtime/bo_observer/adapters/javascript/bo_runtime.mjs\",\n    \"observer_generated/runtime/bo_observer/adapters/python/bo_probe.py\",\n    \"observer_generated/runtime/bo_observer/data/__init__.py\",\n    \"observer_generated/runtime/bo_observer/data/acceptance.py\",\n    \"observer_generated/runtime/bo_observer/data/catalog.py\",\n    \"observer_generated/runtime/bo_observer/data/contract.py\",\n    \"observer_generated/runtime/bo_observer/data/guidance.py\",\n    \"observer_generated/runtime/bo_observer/data/projection.py\",\n    \"observer_generated/runtime/bo_observer/data/protocol.py\",\n    \"observer_generated/runtime/bo_observer/data/runtime.py\",\n    \"observer_generated/runtime/bo_observer/data/sync.py\",\n    \"observer_generated/runtime/bo_observer/data/watcher.py\",\n    \"observer_generated/runtime/bo_observer/protocol.py\",\n    \"observer_generated/runtime/bo_observer/schemas/database-catalog.schema.json\",\n    \"observer_generated/runtime/bo_observer/schemas/database-config.schema.json\",\n    \"observer_generated/runtime/bo_observer/service.py\",\n    \"observer_generated/runtime/bo_observer/workflow/bo_sync.py\",\n    \"observer_generated/runtime/bo_observer/workflow/change_sync.py\",\n    \"observer_generated/runtime/bo_observer/workflow/sync_config.py\",\n    \"observer_generated/runtime/bo_observer/workflow/sync_verify.py\",\n    \"observer_generated/runtime/bo_upgrade.py\",\n    \"observer_generated/runtime/origin.json\",\n    \"observer_generated/static/analysis.js\",\n    \"observer_generated/static/data-layer.js\",\n    \"observer_generated/static/glyphs.js\",\n    \"observer_generated/static/graph-core.js\",\n    \"observer_generated/static/layout.js\",\n    \"observer_generated/static/messages.zh-CN.js\",\n    \"observer_generated/static/recording.js\",\n    \"observer_generated/static/renderer.js\",\n    \"observer_generated/static/replay-steps.js\",\n    \"observer_generated/static/viewer.css\",\n    \"observer_generated/static/viewer.js\"\n  ]\n}\n",
+  "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+}

@@ -11,4 +11,4 @@ for(const [type,{color}] of Object.entries(nodeTypes)){
     assert((Math.max(a,b)+.05)/(Math.min(a,b)+.05)>=4.5,type+' glyph contrast');
   }
 }
-console.log('PASS: all 8 node types have distinct fills, core emphasis and legible glyphs in 4 states.');
+console.log(`PASS: all ${Object.keys(nodeTypes).length} node types have distinct fills, core emphasis and legible glyphs in 4 states.`);

@@ -1,0 +1,14 @@
+{
+  "commit": "e8e922eb4f33fe5b2fe2046975b40fa092935130",
+  "files": {
+    "viewer.js": {
+      "installed": "46921bfaf1b6a0a35fce753ebc621e80ae3ce76ef76e572c5a1cf9154db5172f",
+      "canonical": "46921bfaf1b6a0a35fce753ebc621e80ae3ce76ef76e572c5a1cf9154db5172f"
+    },
+    "messages.zh-CN.js": {
+      "installed": "17d7df15d59243c2e6582ea9786a4224804a665e07d8c7c693676b02416077de",
+      "canonical": "17d7df15d59243c2e6582ea9786a4224804a665e07d8c7c693676b02416077de"
+    }
+  },
+  "passed": true
+}

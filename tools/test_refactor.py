@@ -33,6 +33,24 @@ class RefactorTests(unittest.TestCase):
         self.temp=tempfile.TemporaryDirectory(dir=folder);self.root=Path(self.temp.name)
     def tearDown(self): self.temp.cleanup()
 
+    def test_begin_rejects_incomplete_source_inventory_before_writing_baseline(self):
+        import change_sync
+        from code_structure import scan
+        # A real syntax failure must not become a supposedly complete baseline.
+        (self.root/'broken.py').write_text('def broken(:\n', encoding='utf-8')
+        index = scan(self.root, ['broken.py'])
+        self.assertTrue(index['errors'])
+        initial = {'id':'candidate', 'structure':index, 'model':{}}
+        cfg = {'manifest':'manifest.json'}
+        args = ['change_sync.py', 'begin', '--root', str(self.root),
+                '--change', '.stategraph/new', '--request', 'Repair source mapping']
+        with patch.object(sys, 'argv', args), patch.object(change_sync, 'config', return_value=cfg), \
+             patch.object(change_sync, 'snapshot', return_value=initial):
+            with self.assertRaisesRegex(ValueError, 'source scan is incomplete'):
+                change_sync.main()
+        self.assertFalse((self.root/'.stategraph/active.json').exists())
+        self.assertFalse((self.root/'.stategraph/new/baseline.json').exists())
+
     def test_upgrade_normalizes_windows_keys_and_retains_modified_file_checks(self):
         upgrade_apply(self.root, runtime='tools\\observer', viewers=['static\\graph'])
         metadata = self.root/'bo_stategraph/runtime-version.json'

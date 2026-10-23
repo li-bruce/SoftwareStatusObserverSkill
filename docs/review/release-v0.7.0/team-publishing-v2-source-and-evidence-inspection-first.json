@@ -1,0 +1,105 @@
+{
+  "archive": "team-publishing-v2-source-and-evidence.zip",
+  "sha256": "b7c54752f8a08ca51f1d234905788facf1ea562a160dd7230bf9c681319fab91",
+  "bytes": 6608007,
+  "entries": 378,
+  "forbidden_paths": [
+    "evidence/migrations/v1-before.sqlite"
+  ],
+  "unsafe_paths": [],
+  "primitive_credential_candidates": [],
+  "reviewed_source_expressions": [
+    {
+      "file": ".stategraph/initial-release/structure.json",
+      "field": "/units/integrations/bo_adapter.py/symbols/BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/initial-release/structure.json",
+      "field": "/symbols/integrations/bo_adapter.py::BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/initial-release/structure.json",
+      "field": "/unresolved/207/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/message-read-v2/baseline.json",
+      "field": "/structure/units/integrations/bo_adapter.py/symbols/BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/message-read-v2/baseline.json",
+      "field": "/structure/symbols/integrations/bo_adapter.py::BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/message-read-v2/baseline.json",
+      "field": "/structure/unresolved/207/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/message-read-v2/structure.json",
+      "field": "/units/integrations/bo_adapter.py/symbols/BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/message-read-v2/structure.json",
+      "field": "/symbols/integrations/bo_adapter.py::BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": ".stategraph/message-read-v2/structure.json",
+      "field": "/unresolved/245/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": "review/source-inventory-initial.json",
+      "field": "/units/integrations/bo_adapter.py/symbols/BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": "review/source-inventory-initial.json",
+      "field": "/symbols/integrations/bo_adapter.py::BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": "review/source-inventory-initial.json",
+      "field": "/unresolved/181/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": "review/source-inventory.json",
+      "field": "/units/integrations/bo_adapter.py/symbols/BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": "review/source-inventory.json",
+      "field": "/symbols/integrations/bo_adapter.py::BOAdapter.__init__/calls/0/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    },
+    {
+      "file": "review/source-inventory.json",
+      "field": "/unresolved/245/keywords/token",
+      "type": "string",
+      "sha256": "58dd8e055f4828ab1c82b1ad757a4e67e3ac26df2a3cad5bb16df722e10cd9b6"
+    }
+  ],
+  "passed": false,
+  "scope": "Archive paths and named JSON credential values; synthetic fixture evidence is intentional."
+}

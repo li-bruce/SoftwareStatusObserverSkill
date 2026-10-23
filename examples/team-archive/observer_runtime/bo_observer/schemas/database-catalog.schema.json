@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/li-bruce/SoftwareStatusObserverSkill/protocol/database-catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "protocol": {
+      "const": "bo-data-catalog/v1"
+    },
+    "store_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "engine": {
+      "enum": [
+        "sqlalchemy",
+        "mongodb",
+        "redis",
+        "neo4j"
+      ]
+    },
+    "origin": {
+      "enum": [
+        "database",
+        "declaration"
+      ]
+    },
+    "validation_scope": {
+      "enum": ["application", "database"]
+    },
+    "coverage": {
+      "enum": [
+        "complete",
+        "partial",
+        "sampled"
+      ]
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "resources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "kind": {
+            "enum": [
+              "table",
+              "collection",
+              "key_pattern",
+              "label",
+              "relationship"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024
+                },
+                "native_type": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024
+                },
+                "nullable": {
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "primary_key": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "generated": {
+                  "type": "boolean"
+                },
+                "default": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "name",
+                "native_type",
+                "nullable"
+              ]
+            }
+          },
+          "constraints": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "primary_key",
+                    "foreign_key",
+                    "unique",
+                    "index",
+                    "check",
+                    "validation",
+                    "property",
+                    "type",
+                    "ttl",
+                    "connects"
+                  ]
+                },
+                "name": {
+                  "type": "string"
+                },
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 1024
+                  },
+                  "uniqueItems": true
+                },
+                "target": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024
+                },
+                "target_fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 1024
+                  },
+                  "uniqueItems": true
+                },
+                "description": {
+                  "type": "string",
+                  "maxLength": 8192
+                }
+              },
+              "required": [
+                "kind",
+                "name",
+                "fields"
+              ]
+            }
+          }
+        },
+        "required": [
+          "key",
+          "kind",
+          "name",
+          "fields",
+          "constraints"
+        ]
+      }
+    }
+  },
+  "required": [
+    "protocol",
+    "store_id",
+    "engine",
+    "origin",
+    "coverage",
+    "limitations",
+    "resources"
+  ]
+}

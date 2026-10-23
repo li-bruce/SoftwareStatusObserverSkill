@@ -136,6 +136,11 @@ def snapshot(root, cfg, previous=None):
             read(contained(root, cfg["mapping_contract"])) if cfg.get("mapping_contract") else None
         ),
         "stategraph_contract": cfg.get("stategraph"),
+        "database_contract": (
+            read(contained(root, "bo_stategraph/databases.json"))
+            if contained(root, "bo_stategraph/databases.json").exists()
+            else None
+        ),
         "discovery_path": cfg.get("discovery"),
         "discovery": read(contained(root, cfg["discovery"])) if cfg.get("discovery") else None,
         "reconciliation": (

@@ -297,7 +297,9 @@ def main():
         )
         value = {"valid": not errors, "errors": errors}
         if args.observations and not errors:
-            value["runtime"] = runtime_errors(plan, model, read(contained(root, args.observations)))
+            value["runtime"] = runtime_errors(
+                plan, model, read(contained(root, args.observations)), root=root
+            )
             value["valid"] = not value["runtime"]["errors"]
     text = json.dumps(value, ensure_ascii=False, indent=2)
     if args.out:
@@ -312,10 +314,20 @@ def main():
     return 0 if value.get("valid", not value.get("errors")) else 1
 
 
-def runtime_errors(plan, model, payload):
+def runtime_errors(plan, model, payload, *, root=None):
     """Require actual case evidence for each declared feature and captured parameter."""
     errors, count = [], 0
     nodes = {n["id"]: n for n in model["nodes"]}
+    data_operations = {}
+    if root is not None:
+        from ..data.contract import CONFIG_PATH, load_config
+        from ..data.evidence import projected_operations, validate_runtime
+        from ..graph.behavior_model import contained
+
+        if contained(root, CONFIG_PATH).is_file():
+            config = load_config(root)
+            data_operations, _ = projected_operations(config, model)
+            errors.extend(validate_runtime(config, payload, model))
     for feature in plan.get("features", []):
         seen = set()
         for case in feature.get("cases", []):
@@ -390,6 +402,11 @@ def runtime_errors(plan, model, payload):
                             }
                         )
         for nid in feature.get("nodes", []):
+            # Generated data whitelists include mutually exclusive outcomes.
+            # The shared validator above checks every configured operation/case,
+            # actual outcome, selected value and exact generated capture contract.
+            if nid in data_operations:
+                continue
             for direction, fields in nodes.get(nid, {}).get("capture", {}).items():
                 for field in fields:
                     if (nid, direction, field) not in seen:

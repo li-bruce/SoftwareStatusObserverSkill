@@ -1,5 +1,6 @@
 """Run the release checks, including real effects and the observer-free package."""
 import json
+import argparse
 from pathlib import Path
 import subprocess
 import sys
@@ -15,10 +16,18 @@ def run(cwd, *args):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--database', action='store_true', help='Include optional database-adapter checks')
+    args = parser.parse_args()
     configure()
     (ROOT/'.validation').mkdir(exist_ok=True)
     run(ROOT, 'tools/check_package.py')
     run(ROOT, 'tests/test_document_links.py')
+    run(ROOT, 'tests/test_database_guidance.py')
+    run(ROOT, 'tests/test_code_graph.py')
+    subprocess.run(['node', 'tools/test_code_view.mjs'], cwd=ROOT, check=True)
+    if args.database:
+        run(ROOT, 'tools/verify_databases.py')
     run(ROOT, 'tests/test_ast_fingerprint.py')
     run(ROOT, 'tests/test_requirements_dialogue.py')
     run(ROOT, 'tests/test_clarification_gate.py')
@@ -26,6 +35,7 @@ def main():
     run(ROOT, 'tests/test_focus_bundle.py')
     run(ROOT, 'tools/test_stategraph_module.py')
     run(ROOT, 'tools/test_recording.py')
+    run(ROOT, 'tests/test_recording_retention.py')
     run(ROOT, 'tools/test_refactor.py')
     run(ROOT, 'tools/test_implementation_coverage.py')
     run(ROOT, 'tools/test_observer_noise.py')
@@ -39,8 +49,11 @@ def main():
     run(ROOT, 'tools/test_archive_service_migration.py')
     run(ROOT, 'examples/python-modes/test_modes.py')
     subprocess.run(['node','tools/test_i18n.mjs'],cwd=ROOT,check=True)
+    subprocess.run(['node','tools/test_conversation_focus.mjs'],cwd=ROOT,check=True)
     subprocess.run(['node','tools/test_refactor_view.mjs'],cwd=ROOT,check=True)
     subprocess.run(['node','tools/test_view_coverage.mjs'],cwd=ROOT,check=True)
+    subprocess.run(['node','tools/test_view_continuity.mjs'],cwd=ROOT,check=True)
+    subprocess.run(['node','tools/test_recorded_views.mjs'],cwd=ROOT,check=True)
     subprocess.run(['node','tools/test_web_colors.mjs'],cwd=ROOT,check=True)
     subprocess.run(['node', 'tools/test_product_demo.mjs'], cwd=ROOT, check=True)
     prepare()  # Refuse stale source/review before any re-verification.

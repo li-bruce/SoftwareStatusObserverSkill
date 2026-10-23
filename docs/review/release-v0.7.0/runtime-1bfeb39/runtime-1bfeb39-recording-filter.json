@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "current_build": "5fb8a3e5aa68a759c49bdd3ef2c719b64a575392f5504fa2d152d3370faac737",
+  "current_version": [
+    "5fb8a3e5aa68a759c49bdd3ef2c719b64a575392f5504fa2d152d3370faac737",
+    "271fafd31cccff50dca1ae1f29e6cc11d953824a6dfc6619fd3efbc07cce6b89"
+  ],
+  "listed": [
+    {
+      "id": "f2e40e3c4bab4998b71397e9e436aa65",
+      "events": 307
+    },
+    {
+      "id": "761bbb83088b487189ba71ac5f8ed577",
+      "events": 307
+    },
+    {
+      "id": "bc08efcc39574643a079ce888850952f",
+      "events": 919
+    },
+    {
+      "id": "81d396a92a8e4c44a61fd145c38cb660",
+      "events": 922
+    }
+  ],
+  "obsolete": [
+    {
+      "id": "10cb3d233530425ab237606079850744",
+      "build_id": "80aa1443680c1587320291a6a6449b84e7eca374f3362691e12deb3aca5fb6c8",
+      "historical_file_retained": true,
+      "hidden_after_actual_reload": true
+    },
+    {
+      "id": "d702629ded564e81ba687652b11e1fa9",
+      "build_id": "079b16631385ec5171e51906f3afe28237285760594b5f304c2ab1f07aa4878a",
+      "historical_file_retained": true,
+      "hidden_after_actual_reload": true
+    }
+  ],
+  "reloaded_viewer_matches_api": true,
+  "fresh_recording_still_complete_after_live_history_expiry": true,
+  "scope": "The application build is unchanged by this runtime-only upgrade; same-build recordings are intentionally retained. Earlier changed application builds are filtered from the current list without deleting archived evidence."
+}

@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "node",
+    "tests/test_graph_layout.mjs"
+  ],
+  "exit_code": 1,
+  "stdout": "{\"valid\":true,\"coverage\":\"unified nodes and edges, real ELK layered/stress, drag/pan, pins, persisted annotations and focus, nested expansion, upgrade, source identity and history boundary\"}\n",
+  "stderr": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'function'\n- 'store'\n    at file:///C:/Users/Lvi_P/Documents/Work/CF/%E5%B9%B3%E5%8F%B0%E8%BD%AF%E8%91%97/SoftwareStatusObserverSkill/examples/delivery/tests/test_graph_layout.mjs:286:10 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: 'function',\n  expected: 'store',\n  operator: 'strictEqual'\n}\n\nNode.js v20.19.6\n"
+}

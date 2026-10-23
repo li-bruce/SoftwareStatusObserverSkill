@@ -6,6 +6,8 @@
 
 ## 先找到对应目录
 
+数据库部分从 [data/contract.py](../skills/business-observer/scripts/bo_observer/data/contract.py) 的 JSON 校验开始，依次是 `catalog.py` 读取原生元数据、`projection.py` 生成同一张图的节点与关系、`sync.py` 更新与独立核验。`runtime.py` 和原生 `bo_data.mjs` 观察实际调用，`watcher.py` 切换已校验的 Web 图版本。记录、回放及个人配置继续使用现有共用服务。完整接口见[数据库接入说明](../skills/business-observer/references/database-observation.md)。
+
 | 位置 | 负责什么 |
 |---|---|
 | [SKILL.md](../skills/business-observer/SKILL.md) | 开发对话、业务图确认、迭代检查的操作流程。 |
@@ -54,6 +56,7 @@ scripts 根目录下多数小文件负责转发导入或命令调用。需要修
 | [viewer.js](../skills/business-observer/assets/stategraph-viewer/viewer.js) | 页面按钮、数据刷新和记录选择的连接入口。 |
 | [graph-core.js](../skills/business-observer/assets/stategraph-viewer/graph-core.js) | 节点值、源码关联、事件筛选与图内容。 |
 | [layout.js](../skills/business-observer/assets/stategraph-viewer/layout.js) | 展开收起、分组位置、筛选和批注。 |
+| [view-lifecycle.js](../skills/business-observer/assets/stategraph-viewer/view-lifecycle.js) | 项目视图的稳定标识，以及录制与当前图版本的匹配。 |
 | [renderer.js](../skills/business-observer/assets/stategraph-viewer/renderer.js) | Pixi 绘制和鼠标可命中的区域。 |
 | [recording.js](../skills/business-observer/assets/stategraph-viewer/recording.js) | 回放步骤及运行证据支持的连线传递。 |
 | [runtime-frames.js](../skills/business-observer/assets/stategraph-viewer/runtime-frames.js) | 查找事件对应的精确快照，比较状态和资源。 |
@@ -64,6 +67,12 @@ scripts 根目录下多数小文件负责转发导入或命令调用。需要修
 完整模型、当前视图、运行证据各自保存。筛选视图保留完整模型，移动节点或回放记录仅改变显示。
 
 ## 修改和排版约定
+
+源码关系由 [code_graph/index.py](../skills/business-observer/scripts/bo_observer/code_graph/index.py) 生成，query.py 提取局部和边界，service.py 管理索引刷新、版本校验和源码读取。用户可以按需打开“局部代码”或“代码结构”。静态连线与实际运行记录分别保留。
+
+[session_lifecycle.py](../skills/business-observer/scripts/bo_observer/session_lifecycle.py) 管理每个请求使用的图版本。切换版本后，旧会话在最后一个请求完成时释放；耗时的源码解析和响应写入不占用全局会话锁。
+
+[data/evidence.py](../skills/business-observer/scripts/bo_observer/data/evidence.py) 统一数据操作和功能映射中的证据校验。它按实际结果检查字段，例如失败时的错误类型、已知行数、事务提交或回滚；普通功能的采集字段检查继续保持严格。
 
 主要函数用英文说明用途，在容易误读的位置解释顺序、所有权和失败处理。校验、状态修改等操作分行展开。源码可读性调整保持公开名称、协议字段、图 ID 及受保护的验收要求。
 

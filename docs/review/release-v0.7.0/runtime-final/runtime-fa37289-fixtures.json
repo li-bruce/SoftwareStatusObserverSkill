@@ -1,0 +1,32 @@
+{
+  "runtime_commit": "fa372897d69f0b6096392020ed3012284a011b4e",
+  "fixtures": [
+    {
+      "path": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-24\\observer-release-demo-20261024\\work\\retention-browser-fa37289",
+      "limits": {
+        "memory_events": 2,
+        "memory_seconds": 3,
+        "log_bytes": 8388608,
+        "log_backups": 2
+      },
+      "database": "Independent SQLite backup of Demo; no delivery database writes."
+    },
+    {
+      "path": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-24\\observer-release-demo-20261024\\work\\retention-negative-fa37289",
+      "limits": {
+        "memory_events": 2,
+        "memory_seconds": 3,
+        "log_bytes": 8388608,
+        "log_backups": 2
+      },
+      "database": "Independent SQLite backup of Demo; no delivery database writes."
+    }
+  ],
+  "delivery_retention_config_exists": false,
+  "delivery_retention_config": null,
+  "delivery_defaults": {
+    "memory_events": 10000,
+    "memory_seconds": 1800
+  },
+  "delivery_settings_changed": false
+}

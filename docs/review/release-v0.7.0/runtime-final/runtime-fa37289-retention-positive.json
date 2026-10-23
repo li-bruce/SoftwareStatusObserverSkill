@@ -1,0 +1,490 @@
+{
+  "runtime_commit": "fa372897d69f0b6096392020ed3012284a011b4e",
+  "passed": true,
+  "recording_id": "d00973fea73c4bd0aec67b45b07c827b",
+  "events": 12,
+  "start_seq": 62,
+  "end_seq": 74,
+  "gaps": [],
+  "independent_event_log_interval_matches": true,
+  "event_log_interval": [
+    {
+      "protocol": "bo-event/v1",
+      "project_id": "team-publishing-demo",
+      "model_revision": "2",
+      "build_id": "5ae7f25287227f43e99226fb345d82831d2524e262a6211342b3424338a1866e",
+      "run_id": "b3f21fda0d5e4810b39827194d45f151",
+      "producer_id": "e0945c1cc26b4876ae89e90dac7764c6",
+      "schema_version": 3,
+      "seq": 63,
+      "id": "b3f21fda0d5e4810b39827194d45f151:e0945c1cc26b4876ae89e90dac7764c6:59",
+      "node": "db.transaction",
+      "phase": "enter",
+      "entity": "application",
+      "attempt": "application",
+      "scope": "application",
+      "basis": {},
+      "call_id": "15e463c1ad1e43d29878af480948b098",
+      "parent_call_id": null,
+      "inputs": {
+        "operation": "transaction",
+        "statement": "transaction",
+        "parameters": {}
+      },
+      "outputs": {
+        "status": "started",
+        "duration_ms": 0.004,
+        "targets": [],
+        "unknown_targets": [],
+        "target_source": "not_applicable",
+        "target_access": []
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T22:30:46.856715+00:00",
+      "source_seq": 59,
+      "stream_id": "3907bbf302219a7ad0f4d823"
+    },
+    {
+      "protocol": "bo-event/v1",
+      "schema_version": 3,
+      "project_id": "team-publishing-demo",
+      "model_revision": "2",
+      "build_id": "5ae7f25287227f43e99226fb345d82831d2524e262a6211342b3424338a1866e",
+      "run_id": "9989a3d5-8a31-4038-883c-ce36807f344a",
+      "producer_id": "daefa460-4aa8-4753-9edf-5da4b663c5a6",
+      "seq": 64,
+      "id": "9989a3d5-8a31-4038-883c-ce36807f344a:daefa460-4aa8-4753-9edf-5da4b663c5a6:5",
+      "node": "ui.public",
+      "phase": "return",
+      "entity": "application",
+      "attempt": "application",
+      "scope": "application",
+      "call_id": "9989a3d5-8a31-4038-883c-ce36807f344a:daefa460-4aa8-4753-9edf-5da4b663c5a6:5",
+      "parent_call_id": null,
+      "basis": {},
+      "inputs": {},
+      "outputs": {
+        "ok": true
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T22:30:46.861Z",
+      "source_seq": 5,
+      "stream_id": "3907bbf302219a7ad0f4d823"
+    },
+    {
+      "protocol": "bo-event/v1",
+      "project_id": "team-publishing-demo",
+      "model_revision": "2",
+      "build_id": "5ae7f25287227f43e99226fb345d82831d2524e262a6211342b3424338a1866e",
+      "run_id": "b3f21fda0d5e4810b39827194d45f151",
+      "producer_id": "e0945c1cc26b4876ae89e90dac7764c6",
+      "schema_version": 3,
+      "seq": 65,
+      "id": "b3f21fda0d5e4810b39827194d45f151:e0945c1cc26b4876ae89e90dac7764c6:60",
+      "node": "db.publications.read",
+      "phase": "enter",
+      "entity": "application",
+      "attempt": "application",
+      "scope": "application",
+      "basis": {},
+      "call_id": "168aa228cefe46e1835fdfd40365e342",
+      "parent_call_id": null,
+      "inputs": {
+        "operation": "read",
+        "statement": "SELECT publications.material_id, publications.content_version, publications.title, publications.body, publications.author_id FROM publications ORDER BY publications.material_id DESC",
+        "parameters": {}
+      },
+      "outputs": {
+        "status": "started",
+        "duration_ms": 0.003,
+        "transaction_id": "15e463c1ad1e43d29878af480948b098",
+        "targets": [
+          "table:publications"
+        ],
+        "unknown_targets": [],
+        "target_source": "parsed_sql",
+        "target_access": [
+          {
+            "target": "table:publications",
+            "action": "read"
+          }
+        ]
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T22:30:46.858654+00:00",
+      "source_seq": 60,
+      "stream_id": "3907bbf302219a7ad0f4d823"
+    },
+    {
+      "protocol": "bo-event/v1",
+      "project_id": "team-publishing-demo",
+      "model_revision": "2",
+      "build_id": "5ae7f25287227f43e99226fb345d82831d2524e262a6211342b3424338a1866e",
+      "run_id": "b3f21fda0d5e4810b39827194d45f151",
+      "producer_id": "e0945c1cc26b4876ae89e90dac7764c6",
+      "schema_version": 3,
+      "seq": 66,
+      "id": "b3f21fda0d5e4810b39827194d45f151:e0945c1cc26b4876ae89e90dac7764c6:61",
+      "node": "db.publications.read",
+      "phase": "return",
+      "entity": "application",
+      "attempt": "application",
+      "scope": "application",
+      "basis": {},
+      "call_id": "168aa228cefe46e1835fdfd40365e342",
+      "parent_call_id": null,
+      "inputs": {
+        "operation": "read",
+        "statement": "SELECT publications.material_id, publications.content_version, publications.title, publications.body, publications.author_id FROM publications ORDER BY publications.material_id DESC",
+        "parameters": {}
+      },
+      "outputs": {
+        "status": "returned",
+        "duration_ms": 0.341,
+        "rows": 6,
+        "rows_known": true,
+        "result": {
+          "count": 6
+        },
+        "transaction_id": "15e463c1ad1e43d29878af480948b098",
+        "targets": [
+          "table:publications"
+        ],
+        "unknown_targets": [],
+        "target_source": "parsed_sql",
+        "target_access": [
+          {
+            "target": "table:publications",
+            "action": "read"
+          }
+        ]
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T22:30:46.858980+00:00",
+      "source_seq": 61,
+      "stream_id": "3907bbf302219a7ad0f4d823"
+    },
+    {
+      "protocol": "bo-event/v1",
+      "project_id": "team-publishing-demo",
+      "model_revision": "2",
+      "build_id": "5ae7f25287227f43e99226fb345d82831d2524e262a6211342b3424338a1866e",
+      "run_id": "b3f21fda0d5e4810b39827194d45f151",
+      "producer_id": "e0945c1cc26b4876ae89e90dac7764c6",
+      "schema_version": 3,
+      "seq": 67,
+      "id": "b3f21fda0d5e4810b39827194d45f151:e0945c1cc26b4876ae89e90dac7764c6:62",
+      "node": "db.transaction",
+      "phase": "commit",
+      "entity": "application",
+      "attempt": "application",
+      "scope": "application",
+      "basis": {},
+      "call_id": "15e463c1ad1e43d29878af480948b098",
+      "parent_call_id": null,
+      "inputs": {
+        "operation": "transaction",
+        "statement": "transaction",
+        "parameters": {}
+      },
+      "outputs": {
+        "status": "committed",
+        "duration_ms": 2.404,
+        "targets": [],
+        "unknown_targets": [],
+        "committed": true,
+        "target_source": "not_applicable",
+        "target_access": []
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T22:30:46.859089+00:00",
+      "source_seq": 62,
+      "stream_id": "3907bbf302219a7ad0f4d823"
+    },
+    {
+      "protocol": "bo-event/v1",
+      "project_id": "team-publishing-demo",
+      "model_revision": "2",
+      "build_id": "5ae7f25287227f43e99226fb345d82831d2524e262a6211342b3424338a1866e",
+      "run_id": "b3f21fda0d5e4810b39827194d45f151",
+      "producer_id": "e0945c1cc26b4876ae89e90dac7764c6",
+      "schema_version": 3,
+      "seq": 68,
+      "id": "b3f21fda0d5e4810b39827194d45f151:e0945c1cc26b4876ae89e90dac7764c6:63",
+      "node": "public_materials",
+      "phase": "return",
+      "entity": "application",
+      "attempt": "application",
+      "scope": "application",
+      "basis": {},
+      "call_id": "b3f21fda0d5e4810b39827194d45f151:e0945c1cc26b4876ae89e90dac7764c6:63",
+      "parent_call_id": null,
+      "inputs": {},
+      "outputs": {
+        "count": 6
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T22:30:46.859322+00:00",
+      "source_seq": 63,
+      "stream_id": "3907bbf302219a7ad0f4d823"
+    },
+    {
+      "protocol": "bo-event/v1",
+      "project_id": "team-publishing-demo",
+      "model_revision": "2",
+      "build_id": "5ae7f25287227f43e99226fb345d82831d2524e262a6211342b3424338a1866e",
+      "run_id": "b3f21fda0d5e4810b39827194d45f151",
+      "producer_id": "e0945c1cc26b4876ae89e90dac7764c6",
+      "schema_version": 3,
+      "seq": 69,
+      "id": "b3f21fda0d5e4810b39827194d45f151:e0945c1cc26b4876ae89e90dac7764c6:64",
+      "node": "db.transaction",
+      "phase": "enter",
+      "entity": "application",
+      "attempt": "application",
+      "scope": "application",
+      "basis": {},
+      "call_id": "841559385103484688609d4a046dc9b5",
+      "parent_call_id": null,
+      "inputs": {
+        "operation": "transaction",
+        "statement": "transaction",
+        "parameters": {}
+      },
+      "outputs": {
+        "status": "started",
+        "duration_ms": 0.003,
+        "targets": [],
+        "unknown_targets": [],
+        "target_source": "not_applicable",
+        "target_access": []
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T22:31:37.986486+00:00",
+      "source_seq": 64,
+      "stream_id": "3907bbf302219a7ad0f4d823"
+    },
+    {
+      "protocol": "bo-event/v1",
+      "schema_version": 3,
+      "project_id": "team-publishing-demo",
+      "model_revision": "2",
+      "build_id": "5ae7f25287227f43e99226fb345d82831d2524e262a6211342b3424338a1866e",
+      "run_id": "9989a3d5-8a31-4038-883c-ce36807f344a",
+      "producer_id": "daefa460-4aa8-4753-9edf-5da4b663c5a6",
+      "seq": 70,
+      "id": "9989a3d5-8a31-4038-883c-ce36807f344a:daefa460-4aa8-4753-9edf-5da4b663c5a6:6",
+      "node": "ui.public",
+      "phase": "return",
+      "entity": "application",
+      "attempt": "application",
+      "scope": "application",
+      "call_id": "9989a3d5-8a31-4038-883c-ce36807f344a:daefa460-4aa8-4753-9edf-5da4b663c5a6:6",
+      "parent_call_id": null,
+      "basis": {},
+      "inputs": {},
+      "outputs": {
+        "ok": true
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T22:31:37.991Z",
+      "source_seq": 6,
+      "stream_id": "3907bbf302219a7ad0f4d823"
+    },
+    {
+      "protocol": "bo-event/v1",
+      "project_id": "team-publishing-demo",
+      "model_revision": "2",
+      "build_id": "5ae7f25287227f43e99226fb345d82831d2524e262a6211342b3424338a1866e",
+      "run_id": "b3f21fda0d5e4810b39827194d45f151",
+      "producer_id": "e0945c1cc26b4876ae89e90dac7764c6",
+      "schema_version": 3,
+      "seq": 71,
+      "id": "b3f21fda0d5e4810b39827194d45f151:e0945c1cc26b4876ae89e90dac7764c6:65",
+      "node": "db.publications.read",
+      "phase": "enter",
+      "entity": "application",
+      "attempt": "application",
+      "scope": "application",
+      "basis": {},
+      "call_id": "704b667cdd484af6b98e045dbb82ab47",
+      "parent_call_id": null,
+      "inputs": {
+        "operation": "read",
+        "statement": "SELECT publications.material_id, publications.content_version, publications.title, publications.body, publications.author_id FROM publications ORDER BY publications.material_id DESC",
+        "parameters": {}
+      },
+      "outputs": {
+        "status": "started",
+        "duration_ms": 0.002,
+        "transaction_id": "841559385103484688609d4a046dc9b5",
+        "targets": [
+          "table:publications"
+        ],
+        "unknown_targets": [],
+        "target_source": "parsed_sql",
+        "target_access": [
+          {
+            "target": "table:publications",
+            "action": "read"
+          }
+        ]
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T22:31:37.987976+00:00",
+      "source_seq": 65,
+      "stream_id": "3907bbf302219a7ad0f4d823"
+    },
+    {
+      "protocol": "bo-event/v1",
+      "project_id": "team-publishing-demo",
+      "model_revision": "2",
+      "build_id": "5ae7f25287227f43e99226fb345d82831d2524e262a6211342b3424338a1866e",
+      "run_id": "b3f21fda0d5e4810b39827194d45f151",
+      "producer_id": "e0945c1cc26b4876ae89e90dac7764c6",
+      "schema_version": 3,
+      "seq": 72,
+      "id": "b3f21fda0d5e4810b39827194d45f151:e0945c1cc26b4876ae89e90dac7764c6:66",
+      "node": "db.publications.read",
+      "phase": "return",
+      "entity": "application",
+      "attempt": "application",
+      "scope": "application",
+      "basis": {},
+      "call_id": "704b667cdd484af6b98e045dbb82ab47",
+      "parent_call_id": null,
+      "inputs": {
+        "operation": "read",
+        "statement": "SELECT publications.material_id, publications.content_version, publications.title, publications.body, publications.author_id FROM publications ORDER BY publications.material_id DESC",
+        "parameters": {}
+      },
+      "outputs": {
+        "status": "returned",
+        "duration_ms": 0.335,
+        "rows": 6,
+        "rows_known": true,
+        "result": {
+          "count": 6
+        },
+        "transaction_id": "841559385103484688609d4a046dc9b5",
+        "targets": [
+          "table:publications"
+        ],
+        "unknown_targets": [],
+        "target_source": "parsed_sql",
+        "target_access": [
+          {
+            "target": "table:publications",
+            "action": "read"
+          }
+        ]
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T22:31:37.988304+00:00",
+      "source_seq": 66,
+      "stream_id": "3907bbf302219a7ad0f4d823"
+    },
+    {
+      "protocol": "bo-event/v1",
+      "project_id": "team-publishing-demo",
+      "model_revision": "2",
+      "build_id": "5ae7f25287227f43e99226fb345d82831d2524e262a6211342b3424338a1866e",
+      "run_id": "b3f21fda0d5e4810b39827194d45f151",
+      "producer_id": "e0945c1cc26b4876ae89e90dac7764c6",
+      "schema_version": 3,
+      "seq": 73,
+      "id": "b3f21fda0d5e4810b39827194d45f151:e0945c1cc26b4876ae89e90dac7764c6:67",
+      "node": "db.transaction",
+      "phase": "commit",
+      "entity": "application",
+      "attempt": "application",
+      "scope": "application",
+      "basis": {},
+      "call_id": "841559385103484688609d4a046dc9b5",
+      "parent_call_id": null,
+      "inputs": {
+        "operation": "transaction",
+        "statement": "transaction",
+        "parameters": {}
+      },
+      "outputs": {
+        "status": "committed",
+        "duration_ms": 1.943,
+        "targets": [],
+        "unknown_targets": [],
+        "committed": true,
+        "target_source": "not_applicable",
+        "target_access": []
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T22:31:37.988406+00:00",
+      "source_seq": 67,
+      "stream_id": "3907bbf302219a7ad0f4d823"
+    },
+    {
+      "protocol": "bo-event/v1",
+      "project_id": "team-publishing-demo",
+      "model_revision": "2",
+      "build_id": "5ae7f25287227f43e99226fb345d82831d2524e262a6211342b3424338a1866e",
+      "run_id": "b3f21fda0d5e4810b39827194d45f151",
+      "producer_id": "e0945c1cc26b4876ae89e90dac7764c6",
+      "schema_version": 3,
+      "seq": 74,
+      "id": "b3f21fda0d5e4810b39827194d45f151:e0945c1cc26b4876ae89e90dac7764c6:68",
+      "node": "public_materials",
+      "phase": "return",
+      "entity": "application",
+      "attempt": "application",
+      "scope": "application",
+      "basis": {},
+      "call_id": "b3f21fda0d5e4810b39827194d45f151:e0945c1cc26b4876ae89e90dac7764c6:68",
+      "parent_call_id": null,
+      "inputs": {},
+      "outputs": {
+        "count": 6
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T22:31:37.988435+00:00",
+      "source_seq": 68,
+      "stream_id": "3907bbf302219a7ad0f4d823"
+    }
+  ],
+  "actual_ui_operations": "Two real Refresh public page clicks in the isolated Demo browser. No synthetic events in this recording.",
+  "returned_counts": [
+    {
+      "count": 6
+    },
+    {
+      "count": 6
+    }
+  ],
+  "independent_sqlite_publications": 6,
+  "health_after_recording_and_observer_controls": {
+    "errors": 0,
+    "dropped": 0,
+    "run_id": "3907bbf302219a7ad0f4d823",
+    "attempted": 74,
+    "written": 74,
+    "enabled": true,
+    "runtime_frame_evictions": 0,
+    "retained_events": 0,
+    "evicted_events": 74,
+    "history_start_seq": null,
+    "log_errors": 0,
+    "listener_errors": 0,
+    "retention": {
+      "memory_events": 2,
+      "memory_seconds": 3,
+      "log_bytes": 8388608,
+      "log_backups": 2
+    }
+  },
+  "observer_controls_added_events": false,
+  "source_and_expectation_hashes_match_delivery": true,
+  "delivery_build": "5fb8a3e5aa68a759c49bdd3ef2c719b64a575392f5504fa2d152d3370faac737",
+  "fixture_build": "5ae7f25287227f43e99226fb345d82831d2524e262a6211342b3424338a1866e",
+  "build_identity_boundary": "The clone has its own generated SQLite catalog identity and model hash. All 28 protected business/expectation files match; only database-catalog.json differs in the two source manifests. This recording is explicitly an isolated-fixture recording, not relabeled as a delivery-build recording.",
+  "manifest_file_differences": [
+    "bo_stategraph/database-catalog.json"
+  ]
+}

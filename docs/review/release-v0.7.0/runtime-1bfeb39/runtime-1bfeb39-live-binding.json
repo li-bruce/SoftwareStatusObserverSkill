@@ -1,0 +1,36 @@
+{
+  "graph": {
+    "protocol": "bo-project/v1",
+    "project_id": "team-publishing-demo",
+    "build_id": "5fb8a3e5aa68a759c49bdd3ef2c719b64a575392f5504fa2d152d3370faac737",
+    "binding": {
+      "status": "current",
+      "changed_files": [],
+      "model_changed": false,
+      "intent_changed": false,
+      "directly_affected": [],
+      "possibly_affected": []
+    }
+  },
+  "build_id": "5fb8a3e5aa68a759c49bdd3ef2c719b64a575392f5504fa2d152d3370faac737",
+  "health": {
+    "errors": 0,
+    "dropped": 919,
+    "run_id": "351152d1c47e4cde8bc796aa",
+    "attempted": 1533,
+    "written": 1533,
+    "enabled": true,
+    "runtime_frame_evictions": 0,
+    "retained_events": 614,
+    "evicted_events": 919,
+    "history_start_seq": 920,
+    "log_errors": 0,
+    "listener_errors": 0,
+    "retention": {
+      "memory_events": 10000,
+      "memory_seconds": 1800,
+      "log_bytes": 8388608,
+      "log_backups": 2
+    }
+  }
+}

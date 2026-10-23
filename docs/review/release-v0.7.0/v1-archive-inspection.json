@@ -1,0 +1,20 @@
+{
+  "sha256": "9db5c3ea2041134d8d3e5e1b1ad47350d9c88d13b6d2d3dabc15061b1070941c",
+  "entries": 283,
+  "forbidden_paths": [],
+  "absolute_or_parent_paths": [],
+  "structured_credential_candidates": [
+    ".stategraph/initial-release/structure.json",
+    "review/source-inventory-initial.json",
+    "review/source-inventory.json"
+  ],
+  "correction": "The first suffix-based check incorrectly classified browser-runtime.json, an intended synthetic event export. This check uses exact connection-config basenames.",
+  "scope": "Paths and structured JSON credential candidates; this is release hygiene, not a security audit.",
+  "credential_review": {
+    "unresolved": [],
+    "resolution": "All candidates are parsed source keyword expressions calling configuration.get(...), not stored runtime credentials.",
+    "ast_types": [
+      "Call"
+    ]
+  }
+}

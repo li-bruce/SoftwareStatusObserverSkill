@@ -8,7 +8,7 @@ Vibe coding can produce a working screen while leaving its decisions, state chan
 
 ![Five connected views of one operation: business, state, decisions, functions and values, and source](docs/site/layers.svg)
 
-These are views of **one typed network**, not five separate models or a rigid ownership tree. Expand a region, follow a relation, or combine types to answer the question in front of you.
+These are views of **one typed network** with shared nodes and typed relationships. Expand a region, follow a relation, or combine types to answer the question in front of you.
 
 ## Two development modes
 
@@ -60,6 +60,7 @@ flowchart LR
 - Replay before/after states, values, decisions, and effects. Animate transfers only when actual call or dependency evidence supports them.
 - Expand typed regions, drag groups, pin nodes, search hidden details, rename display labels, and add notes or core markers.
 - Keep layouts and custom views in `bo_stategraph/config/views/local.json`. Graph regeneration preserves personal annotations by stable ID.
+- Preserve per-node/per-relation exclusions, type filters, and expanded groups across iterations. **All elements** clears exclusions while retaining positions and collapse choices. Recordings in the current list belong to the current code/graph version.
 - Use built-in business, state-machine, function/parameter, authorization, concurrency/resource, data-dependency, observed-execution, waiting/failure, and shared-membership views. Combine node/edge/region types, depth, scope, and text into custom views.
 - Export the complete modeled structure and retained evidence independently of what the current view hides. Hide or remove debug Web components without removing the state declaration or executor.
 
@@ -86,7 +87,7 @@ Confirm unclear details before implementation, and keep the graph in sync while 
 
 Answer the important business questions, choose drive or observe, and confirm the initial graph. The AI handles the intermediate artifacts and checks.
 
-Alternatively, ask Codex's Skill installer to install from [the Skill directory](https://github.com/li-bruce/SoftwareStatusObserverSkill/tree/main/skills/business-observer). Use `main` for the latest version. The earlier `v0.6.0` remains available as a fixed release; its [release notes](docs/releases/v0.6.0.md) include the corresponding acceptance evidence.
+Alternatively, ask Codex's Skill installer to install from [the Skill directory](https://github.com/li-bruce/SoftwareStatusObserverSkill/tree/main/skills/business-observer). Use `main` for current updates or `v0.7.0` for this fixed release. See the [release notes](docs/releases/v0.7.0.md), [independent application trial](docs/review/release-v0.7.0/README.md), and [implementation assessment](docs/assessment/2026-10-24/README.md).
 
 English is the maintained source/documentation language. Conversation follows the user; the viewer offers English/Chinese and saves the preference in the project. Original answers and historical evidence retain their original language.
 
@@ -124,18 +125,27 @@ To read or modify the implementation, start with the [source guide](docs/source-
 | `scripts/bo_observer/graph/` | Graph projection, source relationships, focused extraction |
 | `scripts/bo_observer/workflow/` | Source inventory, mapping and semantic verification |
 | `scripts/bo_observer/observation/` | Bounded capture, recording, replay facts, retention |
+| `scripts/bo_observer/data/` | Database catalogs, native data operations, graph projection and refresh |
 | `scripts/bo_observer/web/` and `assets/stategraph-viewer/` | Shared API and interactive viewer |
 | `scripts/bo_observer/adapters/` | Native Python/JS execution, probes, and source adapters |
 | Target project's `bo_stategraph/` | Declarations, native execution, private view preferences |
 
 [JSON protocols and language support](skills/business-observer/references/multilanguage.md) · [Source depth and database relationships](docs/source-data-and-language.md) · [Recording](skills/business-observer/references/recorded-analysis.md) · [Development checks](skills/business-observer/references/continuous-development.md)
 
-Current adapters inventory Python, JS/TS, React, and Vue source. Drilldown covers indexed symbols and selected local relationships, **not a proven complete dynamic call graph**. A complete all-source browser, generic database schema/column-lineage adapters, incremental APIs, and performance baselines remain extensions. The tool does not collect every local variable, prove complete program correctness, or execute business commands through graph edits.
+The [development roadmap](docs/development/dev-roadmap.md) records implemented source and database views and the remaining API relationship work.
+
+Current adapters inventory Python, JS/TS, React, and Vue source. **Local code** opens source relationships around a selected region; **Code structure** explores the indexed project. Files, classes, functions, parameters, imports, inheritance and call occurrences use stable identities and refresh after edits. Large displays show limits and explicit boundaries; CLI export retains the complete indexed structure. Unresolved dynamic calls stay unknown. [Source view and commands](skills/business-observer/references/code-structure.md).
+
+**Database structure** and **Data operations** views connect tables, document collections, key patterns, graph labels, query targets, selected values, transformations, and transaction outcomes. SQLite, PostgreSQL, MongoDB, Redis and Neo4j have real-runtime checks; Python and Node.js share the same JSON protocol. The data watcher refreshes the graph after model/schema changes and retains personal view settings. [Run the database example](examples/database-observer/README.md) · [Support and boundaries](skills/business-observer/references/database-observation.md) · [Review evidence](docs/review/db-vis/README.md).
+
+Automatic column lineage, typed API relationships, additional database adapters, incremental APIs and performance baselines remain extensions. The tool captures selected fields and supported relationships; it does not prove every possible execution or execute business commands through graph edits.
 
 ## Verify
 
 ```bash
 python tools/verify.py
+# With requirements-database.txt installed:
+python tools/verify.py --database
 ```
 
 Checks include strict declarations, source/graph drift, independent mapping evidence, actual state/value/effect scenarios, observer isolation, view relations, recording, localization, installation, and runnable core exports. Read [the current trial record](docs/review/english-gallery/README.md) for failures, fixes, retests, and limits. Historical evidence is retained unchanged.

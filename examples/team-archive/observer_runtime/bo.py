@@ -27,6 +27,12 @@ def main():
     from code_structure import scan
 
     try:
+        from bo_observer.data.sync import synchronize
+
+        if a.command == "serve":
+            database = synchronize(root, model_path=a.project)
+            if not database["valid"]:
+                raise ValueError(database["errors"])
         project = read(contained(root, a.project))
         cfg_path = root / ("sync.json" if (root / "sync.json").exists() else "source-scope.json")
         cfg = read(cfg_path) if cfg_path.exists() else {}
@@ -42,9 +48,12 @@ def main():
                     + index["errors"]
                     + static_errors(project["model"].get("implementation"), project["model"], index)
                 )
+                database = synchronize(root, model_path=a.project, update=False)
+                errors.extend(database["errors"])
                 result = {
                     "valid": not errors,
                     "errors": errors,
+                    "database": database,
                     "build_id": capture(root, project["model"])["build_id"],
                     "mode": project["selection"]["mode"],
                     "scope": "declaration, source inventory and implementation mapping; runtime acceptance is separate",
@@ -68,6 +77,14 @@ def main():
                         **{k: index[k] for k in ("symbols", "edges", "unresolved", "errors")},
                     }
                 )
+                if a.command == "questions":
+                    from bo_observer.data.guidance import storage_questions
+                    from bo_observer.data.contract import CONFIG_PATH
+
+                    path = contained(root, CONFIG_PATH)
+                    storage = storage_questions(read(path) if path.exists() else None)
+                    for audience in ("user", "coding"):
+                        result[audience].extend(storage[audience])
         else:
             validate_project(project)
             if a.command == "export":
@@ -77,6 +94,9 @@ def main():
 
                 session = GraphSession(root, a.project)
                 server = make_server(session, a.port, origins=a.origin)
+                from bo_observer.data.watcher import DataWatch
+
+                watcher = DataWatch(server) if database["configured"] else None
                 settings = root / ".stategraph/collector.json"
                 settings.parent.mkdir(parents=True, exist_ok=True)
                 settings.write_text(
@@ -95,13 +115,17 @@ def main():
                     f"Graph: http://127.0.0.1:{server.server_port}/graph ; local SDK settings: {settings}",
                     flush=True,
                 )
+                if watcher:
+                    watcher.start()
                 try:
                     server.serve_forever()
                 except KeyboardInterrupt:
                     pass
                 finally:
+                    if watcher:
+                        watcher.close()
                     server.server_close()
-                    session.close()
+                    server.bo_session.close()
                 return 0
         if a.out:
             contained(root, a.out).write_text(

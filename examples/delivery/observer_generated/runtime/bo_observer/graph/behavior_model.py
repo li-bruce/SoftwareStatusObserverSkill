@@ -93,6 +93,7 @@ def validate(root, model):
 
 
 def symbols(path):
+    """Locate declarations using the same lexical scope rules as source inventory."""
     source = path.read_text(encoding="utf-8-sig")
     tree = ast.parse(source)
     result = {}
@@ -120,6 +121,11 @@ def symbols(path):
                     ],
                 }
                 walk(n.body, name + ".")
+            else:
+                # Control-flow blocks do not introduce a Python name scope.
+                # Keep conditional/try/match declarations bindable, including
+                # nested callbacks, while retaining ambiguity rejection.
+                walk(ast.iter_child_nodes(n), prefix)
 
     walk(tree.body)
     return result
