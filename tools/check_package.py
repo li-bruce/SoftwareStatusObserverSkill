@@ -3,6 +3,7 @@ from pathlib import Path
 import hashlib
 import re
 import sys
+from document_links import document_link_errors
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL = ROOT/'skills/business-observer'
@@ -50,16 +51,10 @@ def check():
         assert 'The MIT License' in (directory/'PIXI-LICENSE.txt').read_text(encoding='utf-8'), 'PixiJS license missing'
     page = (assets/'index.html').read_text(encoding='utf-8')
     assert set(re.findall(r'<script[^>]+src="([^"]+)"', page)) == {'/pixi.min.js', '/elk.bundled.js', '/viewer.js'}, 'Review new browser scripts and their licenses'
-    missing = []
-    for source in [*ROOT.glob('README*.md'), *(ROOT/'docs').rglob('*.md'), *ROOT.glob('examples/*/README*.md'),
-                   *SKILL.rglob('*.md')]:
-        if set(source.parts)&{'node_modules','__pycache__'}:continue
-        for target in re.findall(r'\]\(([^)]+)\)', source.read_text(encoding='utf-8')):
-            if target.startswith(('http:', 'https:', '#', 'mailto:')) or '<' in target:
-                continue
-            target = target.split('#')[0]
-            if target and not (source.parent/target).exists():
-                missing.append(f'{source.relative_to(ROOT)} -> {target}')
+    sources = [source for source in [*ROOT.glob('README*.md'), *(ROOT/'docs').rglob('*.md'),
+               *ROOT.glob('examples/*/README*.md'), *SKILL.rglob('*.md')]
+               if not set(source.parts)&{'node_modules','__pycache__'}]
+    missing = document_link_errors(ROOT, sources)
     assert not missing, '\n'.join(missing)
     for folder in (SKILL, ROOT/'examples/delivery', ROOT/'examples/team-archive'):
         for license in folder.rglob('PIXI-LICENSE.txt'):

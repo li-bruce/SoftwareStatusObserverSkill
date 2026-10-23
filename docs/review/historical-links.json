@@ -1,0 +1,45 @@
+{
+  "documents": [
+    {
+      "path": "docs/review/intent-confirmation-20261022/dialogue.md",
+      "sha256": "3af2a4ab18a0de88fb88c43f9bebbfbd680f0e3ec889487e72dace900ef58b9c",
+      "references": [
+        {
+          "target": "C:/Users/Lvi_P/.codex/skills/business-observer/SKILL.md",
+          "context": "The original globally installed Skill path is preserved as historical provenance. It is not shipped at this machine-specific location and is not a portable source artifact.",
+          "external_only": true
+        },
+        {
+          "target": "C:/Users/Lvi_P/Documents/Work/CF/平台软著/project-flow-trial-20261022/VERIFICATION.md",
+          "context": "Original absolute location quoted in the frozen conversation; this is provenance, not a current installation path.",
+          "archive": "docs/review/intent-confirmation-20261022/snapshots/03-derive-type-evidence.zip",
+          "member": "project/VERIFICATION.md"
+        },
+        {
+          "target": "C:/Users/Lvi_P/Documents/Work/CF/平台软著/project-flow-trial-20261022/design.md",
+          "context": "Original absolute location quoted in the frozen conversation; this is provenance, not a current installation path.",
+          "archive": "docs/review/intent-confirmation-20261022/snapshots/03-derive-type-evidence.zip",
+          "member": "project/design.md"
+        },
+        {
+          "target": "C:/Users/Lvi_P/Documents/Work/CF/平台软著/project-flow-trial-20261022/dialogue/round-001.md",
+          "context": "Original absolute location quoted in the frozen conversation; this is provenance, not a current installation path.",
+          "archive": "docs/review/intent-confirmation-20261022/snapshots/03-derive-type-evidence.zip",
+          "member": "project/dialogue/round-001.md"
+        },
+        {
+          "target": "C:/Users/Lvi_P/Documents/Work/CF/平台软著/project-flow-trial-20261022/evidence/derive-type/replay-selected-type-source.png",
+          "context": "Original absolute location quoted in the frozen conversation; this is provenance, not a current installation path.",
+          "archive": "docs/review/intent-confirmation-20261022/snapshots/03-derive-type-evidence.zip",
+          "member": "project/evidence/derive-type/replay-selected-type-source.png"
+        },
+        {
+          "target": "C:/Users/Lvi_P/Documents/Work/CF/平台软著/project-flow-trial-20261022/evidence/runtime-frames/replay-committed.png",
+          "context": "Original absolute location quoted in the frozen conversation; this is provenance, not a current installation path.",
+          "archive": "docs/review/intent-confirmation-20261022/snapshots/03-derive-type-evidence.zip",
+          "member": "project/evidence/runtime-frames/replay-committed.png"
+        }
+      ]
+    }
+  ]
+}
