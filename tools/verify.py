@@ -48,6 +48,7 @@ def main():
     run(ROOT, 'tools/test_archive_service_migration.py')
     run(ROOT, 'examples/python-modes/test_modes.py')
     subprocess.run(['node','tools/test_i18n.mjs'],cwd=ROOT,check=True)
+    subprocess.run(['node','tools/test_conversation_focus.mjs'],cwd=ROOT,check=True)
     subprocess.run(['node','tools/test_refactor_view.mjs'],cwd=ROOT,check=True)
     subprocess.run(['node','tools/test_view_coverage.mjs'],cwd=ROOT,check=True)
     subprocess.run(['node','tools/test_view_continuity.mjs'],cwd=ROOT,check=True)

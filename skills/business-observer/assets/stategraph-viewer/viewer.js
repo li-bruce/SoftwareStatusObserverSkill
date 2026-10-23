@@ -94,6 +94,7 @@ let focusContext = { active: false, nodes: new Set(), edges: new Set(), regions:
   renderedEdges = [],
   presentation = null;
 let analysisId = "overview",
+  analysisWasSaved = false,
   analysisSettings = null,
   analysisKey = null,
   analysisOverride = null;
@@ -1521,6 +1522,7 @@ function loadAnalysis(baseKey) {
   try {
     saved = JSON.parse(storage.getItem(key));
   } catch {}
+  analysisWasSaved = !!saved && typeof saved === "object";
   analysisSettings = {
     advanced: false,
     custom: [],
@@ -1529,6 +1531,11 @@ function loadAnalysis(baseKey) {
     annotations: null,
   };
   if (saved) {
+    if (typeof saved.discussion?.revision === "string")
+      analysisSettings.discussion = {
+        revision: saved.discussion.revision.slice(0, 256),
+        active: saved.discussion.active === true,
+      };
     if (typeof saved.codeFocus === "string") analysisSettings.codeFocus = saved.codeFocus;
     analysisSettings.codeViews = Array.isArray(saved.codeViews)
       ? saved.codeViews.filter((id) => typeof id === "string").slice(0, 40)
@@ -2176,6 +2183,13 @@ window.graphDebug = {
 const conversation = createConversationFocus({
   onFocus: showDiscussion,
   onClear: () => schedule(),
+  readState: () => analysisSettings?.discussion,
+  hasSavedView: () => analysisWasSaved,
+  writeState: (state) => {
+    if (!analysisSettings) return;
+    analysisSettings.discussion = state;
+    saveAnalysis();
+  },
 });
 const poller = createPoller(poll, { enabled: () => !disposed && !document.hidden });
 poller.run();

@@ -76,7 +76,7 @@
     "bo_stategraph/__init__.py": "56f694a30fa9e2aa6319931b24cb35c52c82ea30b8b4b6f4029df0f838e63e6e",
     "bo_stategraph/bo_contracts.py": "094f5feff89893ee5932eb6a4b6ad4aafc08c7e462d0b9b00c31d50702e6af29",
     "bo_stategraph/execution_contract.py": "0c966fb3549c0219c6a663ddf41c847e71ebf14216b02b725d2465e4bf0c4839",
-    "bo_stategraph/runtime-version.json": "2f0df7ae0a78d8a88bbe55d306e17646213270ab07d92eb0fbe4981e5953d17e",
+    "bo_stategraph/runtime-version.json": "8e3037bae8c87f662680a8174f6597bf8bb0270dca31ce053e0800f4196ae343",
     "observer_runtime/LICENSE.txt": "41f4bfe9aa8790612dd555d71a9e95fbf12c9f0e84bc6ce232a0aae3af3e2ba3",
     "observer_runtime/__init__.py": "c4cc8d894a9cb6e2da5510317e540d22b50b75b2a187f86675d20e86d967f9bf",
     "observer_runtime/architecture_guard.py": "b1966fd9fa189df104894e6cf91f1e28a12087d6d525bd5cb8db3c46af9e54b9",
@@ -947,6 +947,12 @@
     },
     {
       "reason": "Keep the live-only lazy code index out of recorded frames; restore the selected code view on return to live. Application logic, graph identities, probes and independent business assertions are unchanged.",
+      "changed": [
+        "bo_stategraph/runtime-version.json"
+      ]
+    },
+    {
+      "reason": "Persist discussion identity so a page reload preserves the saved analysis view, including migration of older preferences. Application logic, probes and independent business assertions are unchanged.",
       "changed": [
         "bo_stategraph/runtime-version.json"
       ]

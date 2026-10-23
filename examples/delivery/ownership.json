@@ -124,7 +124,7 @@
     "bo_stategraph/__init__.py": "56f694a30fa9e2aa6319931b24cb35c52c82ea30b8b4b6f4029df0f838e63e6e",
     "bo_stategraph/bo_contracts.py": "094f5feff89893ee5932eb6a4b6ad4aafc08c7e462d0b9b00c31d50702e6af29",
     "bo_stategraph/execution_contract.py": "0c966fb3549c0219c6a663ddf41c847e71ebf14216b02b725d2465e4bf0c4839",
-    "bo_stategraph/runtime-version.json": "f0ebeb606b998443a78e623977a2b28d7350b4a05f0920d8940415b6c3516380",
+    "bo_stategraph/runtime-version.json": "f0d594520df484df41d737bdaa34997d4ef5f5ce92d93e6d0262273dfe78bacc",
     "observer_generated/behavior.json": "9ffc0e1f0715a15ae816b531bdae27c41dca08347b7a0587baaf026095948495",
     "observer_generated/runtime/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "observer_generated/runtime/architecture_guard.py": "b1966fd9fa189df104894e6cf91f1e28a12087d6d525bd5cb8db3c46af9e54b9",
@@ -236,7 +236,7 @@
     "observer_generated/static/PIXI-LICENSE.txt": "5ce7447bc57f7349ffc48338782fbcabe613696e00712b20d66bc58e780f9473",
     "observer_generated/static/analysis.js": "a7493121eb881668a35644a948040bb241695c62c0f3357b4d433a0b53cb8f70",
     "observer_generated/static/code-layer.js": "7424ad7fa5534c0a3bd1c2ab6a2761396a291361954266f9a2fdf54ccd7645bb",
-    "observer_generated/static/conversation.js": "89d7832e65269dfefc8ee5c4c1e25ee35fac403fadc7fafa9c938b8760e81970",
+    "observer_generated/static/conversation.js": "120d4cd5781c3bfac1d2d85b4c0241a94a05213473f5cbf160dc40fad30e379c",
     "observer_generated/static/data-layer.js": "c92f772f0d5d97451fac5b3708cd1dd1c10b49aac3769817c97265d30aef171d",
     "observer_generated/static/elk-worker.min.js": "e4f5c51c6f2fd564bb64e52e81c4a85a316ef2f24f8b90e1db5eb886c765b030",
     "observer_generated/static/elk.bundled.js": "1222e44f953ce7746af23801e723708f8e6f436b8b377a6a5fc7552f34a307b3",
@@ -255,7 +255,7 @@
     "observer_generated/static/runtime-frames.js": "b6b47ea192cfcbb1721827590186aa490a44b25a5dc1ce6bb854ee5703ca483c",
     "observer_generated/static/view-lifecycle.js": "13bed8b2b27b7fe3fae8ab38f5a465d8cae52302b5f1aa266cf076edd766ff41",
     "observer_generated/static/viewer.css": "a6cdf50c7c82c623a7186d5589d540bed91d322f722916c279b6464440686f3a",
-    "observer_generated/static/viewer.js": "46921bfaf1b6a0a35fce753ebc621e80ae3ce76ef76e572c5a1cf9154db5172f"
+    "observer_generated/static/viewer.js": "22a9a37655e98c5968c7c6ea68f0ef37fbd466d162a94ef5cb62025ca9ed28b4"
   },
   "regenerations": [
     {
@@ -1443,6 +1443,14 @@
     {
       "reason": "Keep the live-only lazy code index out of recorded frames; restore the selected code view on return to live. Application logic, graph identities, probes and independent business assertions are unchanged.",
       "changed": []
+    },
+    {
+      "reason": "Persist discussion identity so a page reload preserves the saved analysis view, including migration of older preferences. Application logic, probes and independent business assertions are unchanged.",
+      "changed": [
+        "bo_stategraph/runtime-version.json",
+        "observer_generated/static/conversation.js",
+        "observer_generated/static/viewer.js"
+      ]
     }
   ],
   "core_exclude": [

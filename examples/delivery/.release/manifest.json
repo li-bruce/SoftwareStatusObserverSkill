@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "build_id": "0a0aca7c1d52693a5ca8b93580f280bdb9973b40b79f278492a0fb0c3f04af6f",
+  "build_id": "938a7538af337837116c092a27a3c64cc7c8afe04751e91e9c23eb9557bb36e4",
   "files": {
     "app/__init__.py": "a829ebb4042211c3a39bf40646855698375b065069bbbd2aa61daba1d8e6a51c",
     "app/checks.py": "6eaf39d7323ba58135ca1077d0b27d8de313c8cacf9c2d7aeb72ea7741d128bd",
@@ -21,7 +21,7 @@
     "integrations/bo_server.py": "bfdc122f02a3f58c49145f44b218a0e00b4bda81c885b54cbd1da9dbe99ae37b",
     "integrations/bo_view/analysis.js": "a7493121eb881668a35644a948040bb241695c62c0f3357b4d433a0b53cb8f70",
     "integrations/bo_view/code-layer.js": "7424ad7fa5534c0a3bd1c2ab6a2761396a291361954266f9a2fdf54ccd7645bb",
-    "integrations/bo_view/conversation.js": "89d7832e65269dfefc8ee5c4c1e25ee35fac403fadc7fafa9c938b8760e81970",
+    "integrations/bo_view/conversation.js": "120d4cd5781c3bfac1d2d85b4c0241a94a05213473f5cbf160dc40fad30e379c",
     "integrations/bo_view/data-layer.js": "c92f772f0d5d97451fac5b3708cd1dd1c10b49aac3769817c97265d30aef171d",
     "integrations/bo_view/elk-worker.min.js": "e4f5c51c6f2fd564bb64e52e81c4a85a316ef2f24f8b90e1db5eb886c765b030",
     "integrations/bo_view/elk.bundled.js": "1222e44f953ce7746af23801e723708f8e6f436b8b377a6a5fc7552f34a307b3",
@@ -40,7 +40,7 @@
     "integrations/bo_view/runtime-frames.js": "b6b47ea192cfcbb1721827590186aa490a44b25a5dc1ce6bb854ee5703ca483c",
     "integrations/bo_view/view-lifecycle.js": "13bed8b2b27b7fe3fae8ab38f5a465d8cae52302b5f1aa266cf076edd766ff41",
     "integrations/bo_view/viewer.css": "a6cdf50c7c82c623a7186d5589d540bed91d322f722916c279b6464440686f3a",
-    "integrations/bo_view/viewer.js": "46921bfaf1b6a0a35fce753ebc621e80ae3ce76ef76e572c5a1cf9154db5172f",
+    "integrations/bo_view/viewer.js": "22a9a37655e98c5968c7c6ea68f0ef37fbd466d162a94ef5cb62025ca9ed28b4",
     "main.py": "3c840ec469108183cb8c9bdd4482ebde8e89c70a1f2f0887ff0b6d0de39307cb",
     "observer_generated/runtime/bo_design.py": "d50b85b8db925d742551b2341ab7508843c47e401aeb28f955c188120911f8dc",
     "observer_generated/runtime/bo_stategraph.py": "d704fc786b49337ca75d06b8a8ca7b1d6471af9c08c3d02d571b434f664e23b2",

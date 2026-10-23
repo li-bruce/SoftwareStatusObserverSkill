@@ -29,6 +29,7 @@ try {
   const launch = {headless:true,args:["--enable-unsafe-swiftshader"]};
   if(process.env.BO_BROWSER_EXECUTABLE) launch.executablePath=process.env.BO_BROWSER_EXECUTABLE;
   browser=await chromium.launch(launch); page=await browser.newPage({viewport:{width:1550,height:1040}});
+  await page.route('**/api/design', route => route.fulfill({json:{available:true,revision:"browser-discussion-1",stale:false,nodes:["publish"],label:"Publish pictures"}}));
   page.on("pageerror",(e)=>errors.push(e.message));
   let codeRequests=0; page.on("request",r=>{if(r.url().includes("/api/code/graph"))codeRequests++;});
   await page.goto(base+"/graph?lang=en");
@@ -53,6 +54,19 @@ try {
   await pick(file.id); await page.click("#pin"); await page.click("#annotate");
   await page.fill("#node-note","Review this file after each schema change");
   await page.locator('#annotation-form button[type="submit"]').click();
+  await page.waitForFunction(async()=>Object.entries((await (await fetch('/api/preferences')).json()).entries).some(([key,value])=>key.endsWith(':analysis')&&JSON.parse(value).selected==='code'));
+  await page.reload();
+  await page.waitForSelector('#discussion-clear',{state:'visible'});
+  assert.equal(await page.inputValue('#analysis-view'),'code', 'an existing discussion must not override the saved code view');
+  await page.waitForSelector('#semantic [data-node-type="code-file"]',{state:"attached"});
+  checkpoints.discussionReloadPreservesView = true;
+  await page.click('#discussion-clear');
+  await page.waitForFunction(async()=>Object.entries((await (await fetch('/api/preferences')).json()).entries).some(([key,value])=>key.endsWith(':analysis')&&JSON.parse(value).discussion?.active===false));
+  await page.reload();
+  await page.waitForFunction(()=>document.getElementById('discussion-label').textContent==='Publish pictures');
+  assert.equal(await page.inputValue('#analysis-view'),'code');
+  assert.equal(await page.locator('#discussion-clear').evaluate(n=>n.hidden),true);
+  checkpoints.dismissedDiscussionSurvivesReload = true;
   await page.waitForTimeout(900);
   checkpoints.layoutBefore = await page.locator('#semantic [data-node-id]').evaluateAll((nodes,id)=>({...nodes.find(n=>n.dataset.nodeId===id).dataset}),file.id);
   await shot("03-complete-code-view");

@@ -19,7 +19,7 @@ add cases where a new behavior or captured field has no executed witness.
 | Read, write, transformation or transaction | Refresh the catalog; check real targets and selected values. Require rows when known, errors on failure and commit/rollback outcomes for transactions. A capture allowlist is not a demand to invent every possible field. |
 | Source structure, when enabled | Refresh with `bo_code.py scan`; verify with `bo_code.py check`. Reject stale, empty or damaged indexes. Open a local region and the code view; report unresolved targets and display limits. |
 | Shared or cross-region relations | Check both ends and direction in the full model, collapsed view, a relevant type filter and local focus. Outside dependencies remain explicit boundaries. Static links alone never count as a runtime transfer. |
-| Graph revision | Reload the actual viewer. Keep stable IDs, positions, notes and filters; leave obsolete replay and remove old-version recordings from the current list. |
+| Graph revision | Reload the actual viewer. Keep stable IDs, the selected perspective, positions, notes and filters. An already-seen discussion must not reset the view; a cleared focus stays cleared. Leave obsolete replay and remove old-version recordings from the current list. |
 | Observation wiring | Compare real effects with observation on, off and failing. Opening code, querying metadata, recording controls and layout changes must add no business events. A slow source query must not serialize event reception. |
 
 Use a relevant isolated negative control: remove a required probe field, change a
