@@ -1,37 +1,34 @@
-# 实际实现与交付投影的对应
+# Actual implementation and delivered projection
 
-清单由开发 AI 维护，用户不需要填写。`sync.json` 必须配置 `mapping_contract: "mapping.json"` 和 `require_mapping_witnesses: true`。清单定义本阶段检查哪些实现，业务预期另行保存。
+AI maintains this contract. Configure `mapping_contract: "mapping.json"` and `require_mapping_witnesses: true` in sync.json. It defines the implementation evidence checked this stage; business expectations remain separate.
 
-`mapping.json` 使用 `schema: bo-mapping/v1`：
+`mapping.json` uses `schema: bo-mapping/v1`:
 
-| 字段 | 用途 |
+| Field | Meaning |
 |---|---|
-| cases、modes | 明确场景和 on/off/fault 模式，不从提交的结果倒推应检查范围 |
-| source | 实际存储读取器或函数结果的来源 |
-| actual_collection | 从每项 run 取得实际实例列表的数组路径，如 `["authority_snapshot","runs"]` |
-| actual_id | 实际记录的稳定实例身份路径，如 `["id"]` |
-| fields | 每项有唯一 id、实际图 node、实际字段 actual 路径、observed 中的 mapped 路径 |
-| export | 指定公开导出的 case、mode |
+| cases, modes | Explicit required scenarios and on/off/fault modes, never inferred from submitted results |
+| source | Actual storage reader or function-result source |
+| actual_collection | Array path to each run's actual instances, e.g. `["authority_snapshot","runs"]` |
+| actual_id | Stable actual instance identity path, e.g. `["id"]` |
+| fields | Unique id, real graph node, actual-value path, mapped path under observed projection |
+| export | Required public-export case and mode |
 
-每个实例至少比较 state、完整 revision、build_id 和全部声明的 context 字段。有活动执行时还比较完整 configuration。包装不同时可为 configuration 指定 keys；实际配置必须恰好包含这些已审查键，新增字段也须维护清单。零实例也必须经过实际列表与投影列表的核对。
+Compare at least state, complete revision, build_id, and every declared context field per instance. With activities, compare the complete configuration. A wrapped configuration may specify reviewed keys; the actual configuration must contain exactly those keys, including updates for new fields. Compare actual/projected lists even with zero instances.
 
-字段示意：`{"id":"slots","node":"available_slots","actual":["slots"],"mapped":["context","slots"]}`。node 必须替换为项目真实图节点。actual 必须独立读取，不能复制投影。
+Example: `{"id":"slots","node":"available_slots","actual":["slots"],"mapped":["context","slots"]}`. Use a real project node. Actual values must be independently read, not copied from the projection.
 
-每项 runs 保留原 case、mode、events、业务 observations 和实际存储记录，并增加：
+Preserve every run's case, mode, events, business observations, and storage records; add:
 
 ```python
 machine = bo_machine(actual_snapshot)
-run["projection"] = {
-    "build_id": build_id,
-    "machine": machine,
-    "instances": graph.bo_instances(machine),
-}
+run["projection"] = {"build_id": build_id, "machine": machine,
+                     "instances": graph.bo_instances(machine)}
 ```
 
-顶层 stategraph_export 通过公共 `graph.bo_export(runtime={"machine": selected_run["projection"]["machine"]})` 产生。selected_run 必须是清单指定的那次运行。它使用与页面、Python 查询相同的适配器，不能为检查另造理想投影。
+Produce top-level stategraph_export with public `graph.bo_export(runtime={"machine": selected_run["projection"]["machine"]})`, selecting the contract's run. Use the same adapter as Web/Python queries; do not create an idealized test-only projection.
 
-检查器从实际交付投影读取 mapped，核对场景集合、实例、修订、构建、字段以及公开导出。原 mapping_checks 仍执行，不删除原对照或业务断言；报告分别给出 witnesses 与 projection_checks。
+The checker reads mapped values from the delivered projection and compares required cases, instances, revisions, builds, fields, and public export. Existing mapping_checks and business assertions remain; reports separate witnesses from projection_checks.
 
-清单进入候选指纹和变更基线。新增覆盖可以加入；移除场景/字段或改变原绑定会阻止收尾。技术迁移须保存旧绑定、增加新绑定并验证迁移，不能重新 begin 隐藏退化。当前 source_moves 不自动改写此清单。
+The contract participates in candidate fingerprints and baselines. Add coverage freely; removing cases/fields or changing old bindings blocks delivery. Technical migrations preserve old bindings, add new ones, and verify migration rather than resetting begin. source_moves does not automatically rewrite this contract.
 
-必测反例：缺公开实例、缺字段、错对象/返回值、旧修订、减少场景、公开导出与另交的相等对照脱节。真实业务违规且投影准确时，映射可通过，状态约束或业务规则仍失败。有限清单不证明任意自然语言含义；未执行路径、动态代码和外部服务仍须报告范围。
+Required negative cases: missing exported instance/field, wrong object/return, stale revision, fewer cases, and a public export disconnected from a separately submitted equal-value comparison. Accurate projection of a business violation can pass mapping while state/business checks fail. Finite contracts do not prove arbitrary natural-language meaning; disclose unexecuted paths, dynamic code, and external-service scope.

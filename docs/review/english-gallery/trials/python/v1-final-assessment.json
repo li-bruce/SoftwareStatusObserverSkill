@@ -1,0 +1,96 @@
+{
+  "timestamp_utc": "2026-10-23T10:24:17.131102+00:00",
+  "project_root": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-23\\business-observer-gallery-python",
+  "trial_kind": "Independent AI development trial with explicit simulated-user clarification; not human usability evidence",
+  "candidate_1_frozen_files": 142,
+  "candidate_2_frozen_files": 144,
+  "candidate_3_frozen_files": 144,
+  "frozen_copies_modified": false,
+  "managed_runtime_modified": false,
+  "candidate_id": "db5cf7a42b91c65c78c4f85ffbbcd509243b2853852e60afa2c094f63f799315",
+  "build_id": "a18c1bb36e98d314486e072c0ae90cd147780e4e279fdb3f61af714e8301e057",
+  "urls": {
+    "business": "http://127.0.0.1:8842/",
+    "graph": "http://127.0.0.1:8842/graph"
+  },
+  "automated_reports": {
+    "mapping": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+      "stategraph_export": "checked",
+      "witnesses": 38,
+      "projection_checks": 126,
+      "implementation": {
+        "errors": [],
+        "events_checked": 41,
+        "features": 18
+      }
+    },
+    "state_rules": {
+      "status": "passed",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "passed",
+      "errors": [],
+      "assertions": {
+        "required": 135,
+        "executed": 135
+      },
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "project_test_count": 11,
+  "browser": {
+    "full_business_flow": "passed on final clean attempt",
+    "recording_events": 37,
+    "state_frames": 2,
+    "recording_gaps": [],
+    "playback": "reached final step in real browser",
+    "locale_switch": "English and Chinese verified",
+    "locale_persistence": "English restored after navigating to graph without lang parameter",
+    "layout_positions_and_expanded": "preserved",
+    "notes": "preserved verbatim",
+    "camera_and_focus": "changed during later interaction; not claimed pixel-identical",
+    "semantic_state_label": {
+      "status": "passed",
+      "defect": "D05 resolved by public candidate 3",
+      "actual_enum": "pending",
+      "declared_label": "待审核",
+      "displayed_replay_label": "待审核",
+      "scope": "Business Flow uses declared labels; raw parameters remain pending"
+    },
+    "current_interval_console_errors_or_warnings": 0
+  },
+  "overall_viewer_acceptance": "passed within the recorded gallery trial",
+  "observer_control_event_delta": 0,
+  "complete_public_export_frames": 2,
+  "known_failures_retained": [
+    "Candidate-1 Windows metadata paths",
+    "Candidate-1 chained call IDs",
+    "Candidate-1 project-envelope focus",
+    "Viewer labels contract mismatch",
+    "Project frame-scope and current-summary repairs",
+    "One initial form-token rejection with successful retry",
+    "Pending semantic display defect D05"
+  ],
+  "no_github_submission": true,
+  "optional_label_fixture": {
+    "status": "passed",
+    "kind": "Explicitly derived display fixture, not fabricated runtime evidence",
+    "fallback": "pending"
+  },
+  "preferences_upgrade": {
+    "entries_identical": true,
+    "before_revision": 30,
+    "after_revision": 31,
+    "whole_object_equality": "failed; entry-level retention passed"
+  },
+  "failure_retest_index": "FAILURE-RETEST-INDEX.md"
+}

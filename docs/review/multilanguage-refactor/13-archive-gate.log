@@ -1,0 +1,93 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "valid": false,
+  "errors": [
+    "project test failed: ['{python}', '-X', 'utf8', '-B', 'tooling/test_recording.py']"
+  ],
+  "candidate_id": "a9d1f9e8a1dffdc5762de34987270bbffbaea127baeb2e603640cb3f47da2685",
+  "reports": {
+    "mapping": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+      "stategraph_export": "checked",
+      "witnesses": 480,
+      "projection_checks": 1113,
+      "implementation": {
+        "errors": [],
+        "events_checked": 53,
+        "features": 22
+      }
+    },
+    "state_rules": {
+      "status": "passed",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "failed",
+      "errors": [
+        "project test failed: ['{python}', '-X', 'utf8', '-B', 'tooling/test_recording.py']"
+      ],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "passed",
+      "errors": [],
+      "assertions": {
+        "required": 189,
+        "executed": 189
+      },
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "review_hash": "1bdd334a4f44ba5d5b8326fd2cf71ac7877c25d2ccbd83c2b2d7eaeaba715f03",
+  "observations_hash": "da769d1ec63698a3756ff44b978820adedc0ae4def66ed90edc8a5fb64993051",
+  "tests": [
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/tests.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tooling/graph_tests.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/test_recording.py"
+      ],
+      "exit_code": 1
+    },
+    {
+      "argv": [
+        "node",
+        "tooling/test_recorded_views.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/test_stategraph_module.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "checked_at": "2026-10-23T06:45:45.815516+00:00",
+  "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+}

@@ -1,0 +1,107 @@
+[
+  {
+    "name": "11-core-refactor",
+    "command": [
+      "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\\u5e73\u53f0\u8f6f\u8457\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "tools/test_refactor.py"
+    ],
+    "exit_code": 0,
+    "seconds": 63.08
+  },
+  {
+    "name": "12-source-protocol",
+    "command": [
+      "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\\u5e73\u53f0\u8f6f\u8457\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "tools/test_multilanguage.py"
+    ],
+    "exit_code": 0,
+    "seconds": 8.0
+  },
+  {
+    "name": "13-design-preview",
+    "command": [
+      "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\\u5e73\u53f0\u8f6f\u8457\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "tools/test_web_continuity.py"
+    ],
+    "exit_code": 0,
+    "seconds": 1.14
+  },
+  {
+    "name": "14-workflow-parity",
+    "command": [
+      "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\\u5e73\u53f0\u8f6f\u8457\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "tools/test_workflow_migration.py"
+    ],
+    "exit_code": 0,
+    "seconds": 0.38
+  },
+  {
+    "name": "15-service-parity",
+    "command": [
+      "C:\\Users\\Lvi_P\\Documents\\Work\\CF\\\u5e73\u53f0\u8f6f\u8457\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "tools/test_archive_service_migration.py"
+    ],
+    "exit_code": 1,
+    "seconds": 2.26
+  },
+  {
+    "name": "16-locale",
+    "command": [
+      "node",
+      "tools/test_i18n.mjs"
+    ],
+    "exit_code": 0,
+    "seconds": 0.12
+  },
+  {
+    "name": "17-replay",
+    "command": [
+      "node",
+      "tools/test_recorded_views.mjs"
+    ],
+    "exit_code": 0,
+    "seconds": 0.11
+  },
+  {
+    "name": "18-view-coverage",
+    "command": [
+      "node",
+      "tools/test_view_coverage.mjs"
+    ],
+    "exit_code": 0,
+    "seconds": 0.11
+  },
+  {
+    "name": "19-archive-view",
+    "command": [
+      "node",
+      "examples/team-archive/tooling/graph_tests.mjs"
+    ],
+    "exit_code": 1,
+    "seconds": 0.08
+  },
+  {
+    "name": "20-layout",
+    "command": [
+      "node",
+      "examples/delivery/tests/test_graph_layout.mjs"
+    ],
+    "exit_code": 1,
+    "seconds": 0.12
+  }
+]

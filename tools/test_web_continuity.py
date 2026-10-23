@@ -42,6 +42,30 @@ class DesignTests(unittest.TestCase):
         self.assertEqual(view['model']['machine']['values'], [])
         self.assertFalse(assess(self.doc)['ready'])
 
+    def test_conversation_preview_matches_web_and_does_not_confirm(self):
+        before = (self.root / 'discovery.json').read_bytes()
+        result = self.design.preview('http://127.0.0.1:8830/graph')
+        web = self.design.view()['model']
+        self.assertIn('```mermaid', result['markdown'])
+        self.assertIn('[Open the live graph](http://127.0.0.1:8830/graph)', result['markdown'])
+        self.assertEqual({n['id'] for n in result['focus']['nodes']}, {n['id'] for n in web['nodes']})
+        self.assertEqual(result['focus']['edges'], sorted(web['edges'], key=lambda e: (e['type'] not in {'guard','condition','depends','resource','join','data','reads','writes'}, e['id'])))
+        self.assertIn(self.doc['decisions'][0]['question'], result['markdown'])
+        self.assertEqual(before, (self.root / 'discovery.json').read_bytes())
+        self.assertFalse(assess(self.doc)['ready'])
+        for unsafe in ('javascript:alert(1)', 'https://user:password@example.org/graph', 'https://example.org/graph)\nmalicious'):
+            with self.assertRaises(ValueError): self.design.preview(unsafe)
+
+    def test_preview_scope_retains_crossing_relations_and_changes_with_draft(self):
+        first = self.design.preview('http://localhost:8830/graph', ['upload'], max_nodes=2)
+        self.assertTrue(first['focus']['boundaries'])
+        self.doc['networks'][0]['nodes'][0]['label'] = 'Upload revised'
+        self.save()
+        second = self.design.preview('http://localhost:8830/graph', ['upload'], max_nodes=2)
+        self.assertNotEqual(first['discovery_revision'], second['discovery_revision'])
+        self.assertIn('Upload revised', second['markdown'])
+        self.assertEqual(first['focus']['mapping'], second['focus']['mapping'])
+
     def test_cli_relative_root_uses_actual_working_directory(self):
         run = subprocess.run([sys.executable, '-B', '-X', 'utf8', str(SKILL/'scripts/bo_design.py'),
                               'show', '--root', '.'], cwd=self.root, capture_output=True, text=True, encoding='utf-8')
@@ -51,7 +75,7 @@ class DesignTests(unittest.TestCase):
     def test_focus_resolves_decision_edges_to_reserved_model_nodes(self):
         self.doc['networks'][0]['nodes'][-1]['model_nodes'] = ['publish']
         self.save(); before = (self.root / 'discovery.json').read_bytes()
-        result = self.design.focus([], '核对下载条件', 'D1')
+        result = self.design.focus([], "Check download conditions", 'D1')
         self.assertEqual(result['nodes'], ['preview', 'publish'])
         self.assertFalse(result['stale'])
         self.assertIn('publish', [n['id'] for n in self.design.view()['model']['nodes']])
@@ -60,12 +84,12 @@ class DesignTests(unittest.TestCase):
 
     def test_conversation_change_updates_graph_and_invalidates_old_focus(self):
         self.design.focus(['preview'])
-        self.doc['networks'][0]['edges'][-1]['label'] = '预览不影响下载'
-        self.doc['sources'].append({'id':'U2', 'kind':'user', 'text':'先下载，预览后台继续', 'locator':'合成对话第 2 轮'})
-        self.doc['decisions'][0].update(status='resolved', resolution={'kind':'user_answer','text':'先下载，预览后台继续','source_refs':['U2']})
+        self.doc['networks'][0]['edges'][-1]['label'] = "Preview does not block download"
+        self.doc['sources'].append({'id':'U2', 'kind':'user', 'text':"Download first; preview continues in the background", 'locator':"Synthetic dialogue round 2"})
+        self.doc['decisions'][0].update(status='resolved', resolution={'kind':'user_answer','text':"Download first; preview continues in the background",'source_refs':['U2']})
         self.save()
         self.assertTrue(self.design.snapshot()['stale'])
-        self.assertEqual(self.design.view()['model']['edges'][-1]['label'], '预览不影响下载')
+        self.assertEqual(self.design.view()['model']['edges'][-1]['label'], "Preview does not block download")
         self.assertTrue(assess(self.doc)['ready'])
         self.assertFalse(assess(self.doc, model={'nodes':[{'id':'upload'}]}, intent={'requirements':[]}, acceptance={'checks':[]})['valid'])
         self.assertFalse(self.design.focus(['download'])['stale'])

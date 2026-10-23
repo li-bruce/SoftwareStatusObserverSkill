@@ -1,67 +1,53 @@
-# 统一节点图与布局
+# One typed graph with progressive layout
 
-## 一张图，不同节点
+Business steps, functions, states, values, decisions, resources, and effects share one graph. Contains/call/input/return/decision/resource/join/transition relations stay distinct even with the same endpoints. Evidence types differ without splitting code and state into mutually exclusive graphs.
 
-业务步骤、函数、状态、参数、判断、资源和执行结果共用同一张属性图。包含、调用、输入/返回、判断依赖、资源占用、汇合及状态迁移是不同关系，不能仅因端点相同就合并成一种边。证据来源仍需区分，但不据此拆成互斥的“代码图”和“状态图”。
+Use shape, color, and short labels. Show important function/type/value/result/wait information directly. Expand long values/source beside selection rather than filling every node with prose. Missing capture stays missing; a node executing does not prove every static call occurred.
 
-用形状、颜色、短标签区分节点类型。函数名、关键类型和值、结果与等待原因在图上显示；避免每个节点都成为多段说明文字的卡片。长值与源码在选中节点旁展开。没有采集的值显示未采集；静态调用关系不能因为节点运行过就被标成真实调用。
+New views start at graph_roots. Existing preferences restore expansion. Collapsed states remain in the full graph/search. Expanding any node replaces it with a region of its type color; show a center self-node only when actual internal relations connect to it. Contains alone does not require a center. Capture fields may project typed input/return nodes identified by function/direction/field, displaying only actual corresponding event values.
 
-首次打开只展示 `graph_roots` 指定的高层节点。已有个人视图恢复原展开范围，不因升级清除。状态节点也遵守所属层级的折叠；所有状态仍在完整模型中，搜索和展开可以找到。展开任意类型节点时，将相关内部节点和关系加入原图；圆圈代表原节点身份，沿用该类型颜色。只有实际内部关系连接原节点时，才在圆心保留自身节点。包含关系本身不要求显示自身节点。函数的 capture 字段可投影为带类型的参数/返回节点，身份由函数、输入/输出方向和字段名组成。它们只显示对应事件中的字段，不推断未采集的局部变量。
+## Hierarchy, connections, selection
 
-## 空间层级与选择
+Parent defines spatial hierarchy. Each expanded node is a circular compound with packed child groups; ELK stress arranges top-level groups. Regions contain full labels/children and fit contents. Area means required layout space, not importance/count/business size. This borrows [circle packing](https://d3js.org/d3-hierarchy/pack) without a D3 dependency and [ELK inclusion trees](https://eclipse.dev/elk/documentation/tooldevelopers/graphdatastructure.html).
 
-默认分组布局按 `parent` 组织空间：每个展开节点及其内部内容组成一个圆形复合节点，子组按圆形打包，ELK stress 只安排高层组。包围圆覆盖节点标签及完整子组，按内容收紧范围；圆边与标题是拖动和展开的入口；有自身节点时也可拖动它。圆面积只表示需要的布局空间，不表示重要性、执行次数或业务规模。嵌套圆借鉴 [D3 circle packing](https://d3js.org/d3-hierarchy/pack) 的层级包围方式，当前实现未引入 D3 依赖。
+Spatial grouping does not turn calls/data/permission dependencies into containment or runtime evidence. Manual positions/pins take priority. Overlapping manually moved regions do not establish membership.
 
-这是包含树与节点连接图的共同呈现，参考 [ELK inclusion tree](https://eclipse.dev/elk/documentation/tooldevelopers/graphdatastructure.html)。同级调用、跨层传值、权限依赖不因空间分组变成包含关系。包围区域不是新增业务节点，也不是实际执行的证据。手动坐标和固定位置优先；用户把不同组拖到一起时允许区域重叠，不能靠包围区域推断成员身份。
+Parent-level edges terminate on region boundaries. Cross-region edges with visible internal endpoints connect those actual endpoints and draw above region fills/nodes. Only collapsed endpoints project to visible ancestors. Do not invent a parent-to-parent call from visible child calls. Regions express containment without duplicate interior contains lines. Never merge relation types or static calls with business flow. Aggregate edges show type/count and reveal original endpoints/evidence. One observed member does not imply the whole aggregate executed.
 
-原始上层关系连接对应包围圆的边界。两个圈已经展开时，内部节点之间的连线连接实际端点，并在圈的填色和节点之上绘制，避免被区域遮挡。仅当端点被折叠时，投影到其可见祖先；不能把可见内部节点的调用简化成两个父节点的新调用。包含关系由圆形包围表达，不再重复画穿过内部的包含线。不同类型不能合并，静态调用与业务流程也不能合并。汇总线显示类型与条数，点击可查看真实端点和每条关系的依据；一条成员有运行记录不代表整组都已执行。
+Stable glyphs: business circle, function hexagon, state double circle, decision diamond, parameter capsule, resource stack. Edges use distinct type colors/dashes/arrows for calls/flow/transitions/decisions/values/resources/joins. Keep a concise visible legend. Runtime badges/values are additional evidence, not replacement type colors.
 
-节点形状及类型色保持稳定：业务为圆、函数为六边形、状态为双圆、判断为菱形、参数为胶囊、资源为堆叠形。调用、流程、状态迁移、判断依赖、传值、资源及汇合使用类型色、实虚线和箭头区分，图上保留简短图例。运行事实以附加标记及真实值表示；静态调用仍标明静态来源。
+Dragging a node, region edge/title, or empty region space moves all descendants, including saved hidden ones. Pins constrain automatic layout; explicit group drag moves pinned children with the group while retaining pins. Automatic movement of collapsed groups translates saved internal coordinates. Expansion uses current parent location, restores relative positions and nested expansion, and places new nodes locally. Make room by moving conflicting unpinned neighbors only, never during polling. Fit the expanded region; breadcrumbs return to ancestors.
 
-拖动核心节点、圆边或区域标题，平移其全部后代，包括已有坐标但暂时折叠的节点。固定位置约束自动布局；用户直接拖动整组时，组内固定节点随组平移，固定标志仍保留。自动布局移动折叠节点时，也同步平移已保存的内部坐标。展开使用当前核心位置，恢复相对位置和内部展开状态；新增节点在本组内排布。新展开区域需要空间时，只移动有冲突且未固定的邻组。运行轮询不得调用这个调整过程。展开后定位完整区域，层级路径可回到上层。
+Select a leaf to emphasize it, adjacent nodes/edges, and ancestor regions; select an expanded parent to emphasize its visible interior and external relations. Fade unrelated content. Selection styling is not execution evidence. Blank click/Esc clears. Region titles select; double-click progressively expands/collapses. Parent collapse retains internal expansion. Show breadcrumbs/counts, F to locate, P to pin, overview to collapse without deleting saved state. Search includes collapsed nodes while respecting filters.
 
-点击叶节点突出本节点、直接关联的节点和边、所属祖先及区域；点击展开的父节点突出其可见内部及对外关系，其余内容淡化。选择高亮与“有运行记录”的边样式区分，不把蓝色选择圈当作执行结果。点击空白或 Esc 清除选择。
+State/function identities stay original. Transitions derive from actual declarations, and only matching-run evidence highlights them. Missing historical high-level state remains unknown rather than borrowing final state.
 
-区域标题可选择所属节点，双击标题或节点逐层展开/收起；收起父节点保留内部的展开记录。图上提供所属层级路径、直接子节点数量、“定位选中”（F）与“返回概览”。定位只调整视野；概览收起内部，不清除位置、固定、名称和备注。搜索覆盖完整图中的折叠内容，并遵守当前类型和层级筛选。
+## Persistence and layout
 
-状态节点与函数使用原有模型身份；迁移来自实际执行的状态机声明。只有属于所选运行的迁移记录才能点亮迁移边。若历史帧只记录了内部活动而没有记录当时的主流程状态，应明确缺失，不能借用运行最终状态。
+- Node drag updates coordinates; blank region drag moves the group; outside drag pans. Inner regions/nodes/edge labels take hit priority.
+- Save position/pins/expansion/camera in bo_stategraph/config/views/local.json by stable project/node ID, never attempt/port/build hash.
+- Polling changes values only. Re-expansion restores positions; new nodes use nearby free space.
+- Explicit Arrange triggers layout; a new view may arrange once. Pins stay exact; provide undo.
+- Report failed persistence honestly. Drag, version change, or expansion invalidates outstanding async layout results.
 
-## 拖拽与布局
+Names/notes are personal presentation, shared by canonical ID and displayed beside nodes. Restore name removes only the alias, retaining notes. Original name/source identity remains available. AI regeneration cannot override personal aliases. Preserve hidden/historical IDs; actual ID migration is explicit, never guessed from names. Restore focus/expansion/camera on refresh and save final view on exit.
 
-- 拖动节点改变其坐标；圈内空白拖动整组，圈外空白平移画布。内层圈、节点和连线标签优先命中，避免误拖外层。
-- 在项目的 `bo_stategraph/config/views/local.json` 保存节点坐标、固定标记、展开状态、缩放和平移。按稳定的项目标识与节点 ID 保存，不使用每次运行的 attempt、端口或构建哈希作布局键。
-- 运行数据刷新只更新显示值。折叠后再展开恢复已有位置；新增节点在附近空白处放置，保留原节点坐标。
-- 自动布局由用户明确触发；新视图首次打开可自动计算。固定节点保持精确坐标，其余节点参与重排。提供撤销。
-- 存储不可用或空间已满时说明本次未保存，不能显示“已保存”。异步布局期间发生拖拽、切换版本或展开时，废弃旧布局结果。
+The project file is persistent authority; localStorage is cache. Initial empty-project migration may import only that project's old cache; existing files cannot be overwritten by cache. Revision comparison and atomic replacement protect multiwindow writes. Failed saves stay unsaved. Clearing browser storage does not delete project preferences. No real-time collaboration is claimed. Older layouts remain readable.
 
-## 名称与备注
+ELK.js 0.12.0 runs locally in a Worker. Default deterministic circular packing plus group stress, with layered/stress alternatives, produces fixed positions—not continuous force simulation. Polling cannot drift nodes. Pins outrank compactness. Arrange may reorganize old expanded layouts with undo. These choices borrow [yWorks incremental-layout principles](https://docs.yworks.com/yfiles-html/dguide/layout-incremental_layout/), not proprietary yFiles code. [Hierarchical layout](https://docs.yworks.com/yfiles-html/api/HierarchicalLayout/), [ELK.js](https://github.com/kieler/elkjs), [ELK stress](https://eclipse.dev/elk/reference/algorithms/org-eclipse-elk-stress.html).
 
-选中任意类型节点后点“名称与备注”。显示名称和备注在输入时保存，备注摘要直接显示在节点旁；“恢复原名”仅清除自定义名称，保留备注。详细信息仍给出原始名称，函数和参数的源码身份保持不变。
+## Rendering and integration
 
-个人标注放在视图偏好中，以稳定节点 ID 为键。它们不写回模型、源码、事件或权限规则；AI 重新生成名称时仍优先显示个人名称。按原 ID 保留暂时折叠或旧版本节点的标注，节点 ID 真正迁移时需要显式迁移，不能凭名称相似自动套用。刷新恢复关注节点与多层展开范围，离开页面前保存最后的视野变化。
+Assets include PixiJS 8.22.0, ELK, and licenses. graph-core projects nodes/facts; layout handles geometry/gestures; renderer owns drawing/hits/disposal; viewer coordinates UI; preferences/polling handle persistence/refresh. Serve all resources including the Worker from the same origin. Runtime data never goes to CDN/layout services.
 
-服务端配置是持久来源，浏览器 localStorage 只作缓存。首次接入且项目文件尚无内容时，可迁入当前项目的旧缓存；已有项目文件不能被缓存覆盖。保存采用修订号比较和原子替换，失败时明确提示未保存。清除网站数据不删除项目内配置；不提供多人实时协同。旧版本的坐标和展开记录可直接读取，不因新增标注字段而重置。
+Preserve model/manifest/events/authority/machine APIs. Stable layout_id shares layout across runs/history. graph_roots/parent define hierarchy; personal preferences restore scope. New views do not adopt obsolete default_expanded. States need explicit parentage, not renderer guesses. Do not recreate a separate machine_layout canvas. /api/source returns bound source/build only.
 
-参考实现使用 ELK.js 0.12.0。默认圆形分组使用确定性的圆形打包与组间 stress；另保留层次布局（layered）和关系布局（stress）。ELK 在本地 Web Worker 中执行。算法执行后坐标固定，不持续模拟引力；运行刷新不会让节点漂移。固定位置与紧凑分组冲突时优先固定位置。旧视图保留名称、备注和坐标；使用“圆形分组 → 自动布局”可重新整理已展开内容，并可撤销。
+Test real drag/pan/refresh/pins, all algorithms, incremental expansion, undo, source links, hidden-descendant translation, circle containment/neighbor avoidance, boundary endpoints, aggregate types/endpoints/partial evidence, high-level initial view, highlights/breadcrumbs/history. Test notes across types, collapse/expand, regenerated names, restored original name retaining notes, failed saves, and old layouts. Automated small graphs prove neither human usability nor large-graph performance.
 
-上述交互借鉴 yWorks 的增量布局原则：采用已有坐标，局部变化时保持开发者对图中位置的记忆。这里使用 ELK，并不包含或复现 yFiles 的专有实现。参考：[yWorks Incremental Layout](https://docs.yworks.com/yfiles-html/dguide/layout-incremental_layout/)、[Hierarchical Layout](https://docs.yworks.com/yfiles-html/api/HierarchicalLayout/)、[ELK.js](https://github.com/kieler/elkjs)、[ELK Stress](https://eclipse.dev/elk/reference/algorithms/org-eclipse-elk-stress.html)。
+## Filtering and continuous operation
 
-## 渲染与接入
+Independently filter node/edge/region types and depth. Hidden regions may expose enabled ordinary nodes; region-only views retain actual region relations. Hidden edges do not silently reconnect to unrelated endpoints. Explicit context boundaries preserve selected relations where supported. Filtering does not mutate graph/positions/expansion. Old layouts default to all types.
 
-`assets/stategraph-viewer/` 包含 PixiJS 8.22.0、ELK 浏览器资源和许可证。`graph-core.js` 负责节点与运行事实投影，`layout.js` 负责坐标与手势，`renderer.js` 管理图形绘制、命中区域和对象释放，`viewer.js` 协调界面。存储和刷新分别由 `preferences.js`、`polling.js` 处理。服务需提供这些同源静态资源，包括 ELK worker；运行数据不发送到 CDN 或布局服务。
+Reuse Pixi objects by stable identity, retaining at most 128 unused objects per frame; dispose excess without destroying potentially shared textures. Timestamp-only refreshes do not rebuild graphs, but crossing authorization expiry does. Background tabs pause polls/draw; foreground rereads. Closing releases worker/canvas. Source cache retains at most 16 files.
 
-API 保留原模型、manifest、events、authority 和 machine。建议增加稳定的 `layout_id`，让同一项目的当前运行与历史版本共享布局。模型的 `graph_roots`、`parent` 控制层级，项目个人配置控制恢复范围；新视图不自动采用旧模型的 `presentation.default_expanded`。状态节点也须声明所属节点，不能依靠渲染器猜测其业务归属。不再用 `machine_layout` 另建状态画布。`/api/source?path=` 只返回已绑定源码及 build_id。
-
-验证真实拖拽、空白平移、刷新恢复、固定节点、三种算法、增量展开、撤销以及节点到源码的连接。重点加入：展开整组拖动；收起后移动再展开；跨刷新保留后代相对位置；自动布局同步隐藏后代；圆形包含与邻组避让；上层连线端点在边界；汇总保留原始类型、端点和部分运行依据。另检查首次只有高层节点、关联高亮、祖先路径与历史切换。自动测试不是真人易用性证据；大图性能需单独量测，不能由 WebGL 或一次小图测试推断。
-
-额外验证业务/函数/参数/状态节点的标注保存、多层折叠再展开、生成名称变化后保留个人名称、恢复原名保留备注，以及存储失败和旧布局兼容。ReBAC 的同图表达见 [规则与判定依赖图](rebac-graph.md)。
-
-## 筛选与持续运行
-
-“筛选”可独立选择节点类型、连线类型、展开圈的类型和层级。圈隐藏而原节点类型仍启用时，显示普通节点；只保留圈时，只绘制实际存在的圈间关系。隐藏端点的线一并隐藏，不自动改接其他节点。筛选不改动原始图、位置或内部展开状态，按原项目标识保存；旧布局默认显示全部类型。
-
-参考实现按稳定节点和关系身份复用 Pixi 图形、文字对象，每帧最多保留 128 个未使用对象；超出部分正常释放，不强制销毁仍可能共享的纹理。仅时间戳变化时不重建图；授权有效期跨过截止时刻仍触发更新。后台页暂停轮询和绘制，返回前台重新读取；关闭页面释放布局 worker 和画布资源。源码链接缓存最多保留 16 个文件。
-
-这些做法参考 [PixiJS 官方性能 Skill](https://github.com/pixijs/pixijs/blob/dev/skills/pixijs-performance/SKILL.md)。应分别验证闲置时绘制次数不增长、连续操作对象数有界、截止时刻更新、正常运行事实更新、页面错误和恢复。对象计数不是 GPU 内存测量；有限时间的小图测试也不能证明所有设备不会崩溃。
-
-记录与回放、预设分析视图、共享成员的身份与独立折叠见 [记录、分析视图与共享成员](recorded-analysis.md)。画布节点和 SVG 图例共用 `glyphs.js` 的形状定义；区域使用所属节点的类型填色。右下运行角标不改变类型色。
+See [PixiJS performance Skill](https://github.com/pixijs/pixijs/blob/dev/skills/pixijs-performance/SKILL.md). Verify idle draw stability, bounded objects during repeated operations, expiry/live updates, errors/recovery. Object counts are not GPU measurements and finite small-graph tests do not establish crash immunity. [Recording/shared membership](recorded-analysis.md) uses the same glyph geometry for canvas/SVG legend, region type fills, and independent runtime badges.

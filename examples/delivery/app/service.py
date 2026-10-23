@@ -64,9 +64,9 @@ class Delivery:
             if action == 'edit':
                 content = values['content']
                 if not isinstance(content,str) or not 1 <= len(content) <= 4096:
-                    raise ValueError('内容必须是 1 到 4096 个字符的文本')
+                    raise ValueError("Content must contain 1 to 4096 text characters")
                 capacity=values.get('capacity',job['capacity'])
-                if type(capacity) is not int or capacity not in (1,2):raise ValueError('并发名额必须是 1 或 2')
+                if type(capacity) is not int or capacity not in (1,2):raise ValueError("Capacity must be 1 or 2")
                 self.transition(job,'edit')
                 self.store.update_execution(job['attempt'],phase='cancelled',disposition='superseded')
                 job.update(content=content,capacity=capacity,param_version=job['param_version']+1,
@@ -74,27 +74,27 @@ class Delivery:
             elif action == 'grant':
                 expires = values['expires']; version = values.get('version',job['param_version'])
                 if type(expires) is not int or expires < 0 or type(version) is not int or version < 1:
-                    raise ValueError('授权版本和有效期必须是合法整数')
+                    raise ValueError("Authorization version and expiry must be integers")
                 g = {'id':str(values['id']),'project':values.get('project',job['project']),
                      'actor':values.get('actor',job['actor']),'version':version,'expires':expires,'revoked':False}
                 if not g['id'] or not isinstance(g['project'],str) or not g['project']:
-                    raise ValueError('授权编号和项目名称不能为空')
+                    raise ValueError("Authorization ID and project name must not be empty")
                 job['grants'] = [x for x in job['grants'] if x['id'] != g['id']]+[g]
             elif action == 'revoke':
-                if not any(g['id']==values['id'] for g in job['grants']):raise ValueError('找不到这份授权')
+                if not any(g['id']==values['id'] for g in job['grants']):raise ValueError("Authorization not found")
                 for g in job['grants']:
                     if g['id']==values['id']:g['revoked']=True
             elif action == 'role':
-                if values['role'] not in ('engineer','viewer'):raise ValueError('操作者角色无效')
+                if values['role'] not in ('engineer','viewer'):raise ValueError("Invalid actor role")
                 job['role']=values['role']
             elif action == 'clock':
                 clock=values['clock']
-                if type(clock) is not int or clock < job['clock']:raise ValueError('时钟必须是整数，且只能向前推进')
+                if type(clock) is not int or clock < job['clock']:raise ValueError("Clock must be an integer and may only advance")
                 job['clock']=clock
             elif action == 'cancel':
                 self.transition(job,'cancel')
                 self.store.update_execution(job['attempt'],disposition='cancelled')
-            else:raise ValueError('不支持这项操作')
+            else:raise ValueError("Unsupported operation")
             job['epoch']+=1; self.store.put(job)
         self.events.bo_emit('change','change',lambda:observation(job,
             inputs={'action':action,'values':{**{k:v for k,v in values.items() if k!='content'},
@@ -126,7 +126,7 @@ class Delivery:
             result=self.checker(job['content'],capacity=job['capacity'],execution=execution,
                                 progress=lambda event,state:self.execution_progress(job,event,state))
             if not completed(execution.snapshot(),job['attempt'],job['param_version']) and result['passed']:
-                raise ValueError('检查函数报告通过，但本次运行的活动尚未完成')
+                raise ValueError("The function reported success before this run's activities completed")
         except Exception as exc:
             execution.progress=lambda event,state:self.execution_progress(job,event,state)
             execution.abort()

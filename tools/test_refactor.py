@@ -33,6 +33,23 @@ class RefactorTests(unittest.TestCase):
         self.temp=tempfile.TemporaryDirectory(dir=folder);self.root=Path(self.temp.name)
     def tearDown(self): self.temp.cleanup()
 
+    def test_upgrade_normalizes_windows_keys_and_retains_modified_file_checks(self):
+        upgrade_apply(self.root, runtime='tools\\observer', viewers=['static\\graph'])
+        metadata = self.root/'bo_stategraph/runtime-version.json'
+        doc = json.loads(metadata.read_text(encoding='utf-8'))
+        self.assertIn('static/graph/viewer.js', doc['files'])
+        self.assertFalse(any('\\' in key for key in doc['files']))
+        # An old manifest with mixed separators migrates without retiring live files.
+        doc['files'] = {key.replace('/', '\\', 1): value for key,value in doc['files'].items()}
+        metadata.write_text(json.dumps(doc), encoding='utf-8')
+        proposal = upgrade_plan(self.root, runtime='tools/observer', viewers=['static/graph'])
+        self.assertTrue(proposal['valid'])
+        self.assertEqual(proposal['retired_files'], [])
+        self.assertEqual(proposal['changes'], [])
+        (self.root/'static/graph/viewer.js').write_text('// user modification', encoding='utf-8')
+        self.assertIn('static/graph/viewer.js', upgrade_plan(self.root, runtime='tools/observer', viewers=['static/graph'])['conflicts'])
+        with self.assertRaises(ValueError): upgrade_plan(self.root, runtime='..\\outside')
+
     def test_validator_parity_for_invalid_target_guard_cycle_and_schema(self):
         mutations=[lambda m:m['machine']['transitions'][0].update(dest='missing'),
                    lambda m:m['machine']['transitions'][0].update(conditions='missing'),

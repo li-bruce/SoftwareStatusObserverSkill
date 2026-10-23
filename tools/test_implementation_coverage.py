@@ -63,8 +63,8 @@ def fixture(root):
         for p in index['symbols'][sid]['parameters']:
             name = p['name']
             item = {'source':sid,'name':name}
-            if name == 'trace': item.update(policy='context',reason='可关闭的观测接口')
-            elif name == 'password': item.update(node=n['id'],field='password_present',policy='derived',reason='只记录是否提供，不保存凭据')
+            if name == 'trace': item.update(policy='context',reason="Optional observation interface")
+            elif name == 'password': item.update(node=n['id'],field='password_present',policy='derived',reason="Record presence only; never capture credentials")
             else: item.update(node=n['id'],field=name,policy='value')
             params.append(item)
         case={'case':'review','node':n['id'],'phase':'return' if n['id']=='login' else 'commit'}
@@ -72,7 +72,7 @@ def fixture(root):
         features.append({'id':n['id'],'label':n['id'],'business_node':n['id'],'nodes':[n['id']],
                          'sources':[sid],'parameters':params,'cases':[case]})
     plan = {'schema':'bo-implementation/v1','features':features,'support':{
-        'app.py::Routes.post':{'node':'upload','reason':'测试用的装饰器，保留静态实现归属'}},'excluded':{}}
+        'app.py::Routes.post':{'node':'upload','reason':"Test decorator preserves static implementation ownership"}},'excluded':{}}
     model = {'revision':'test','nodes':nodes,'edges':[], 'graph_roots':list(captures), 'implementation':plan}
     return enrich(model,index), index
 
@@ -93,7 +93,7 @@ class CoverageTests(unittest.TestCase):
         namespace={}
         exec(compile(SOURCE,'app.py','exec'),namespace)
         self.assertTrue(namespace['login']('reviewer','synthetic-only',trace))
-        saved=namespace['upload']('请核对附件',trace)
+        saved=namespace['upload']("Please review the attachment",trace)
         self.assertTrue(namespace['read_message']('message-1',trace))
         pins.close()
         return {'build_id':'build','runs':[{'case':'review','mode':'on','events':events,'observations':{'saved':saved}}]}

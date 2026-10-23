@@ -1,0 +1,24 @@
+{
+  "case": "view_polling_without_business_actions",
+  "before": 0,
+  "after": 4,
+  "events": [
+    {
+      "node": "developer",
+      "phase": "graph_view"
+    },
+    {
+      "node": "developer",
+      "phase": "graph_view"
+    },
+    {
+      "node": "developer",
+      "phase": "graph_view"
+    },
+    {
+      "node": "developer",
+      "phase": "graph_view"
+    }
+  ],
+  "passed": false
+}

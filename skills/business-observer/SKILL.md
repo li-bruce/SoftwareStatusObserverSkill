@@ -1,74 +1,78 @@
 ---
 name: business-observer
 license: MIT
-description: 在 Python 项目的开发和迭代中，根据用户描述和对话确认构建业务与状态网，同步维护源码关联和运行探针，让开发者从交互图调试 AI 实现，并分别检查映射完整性与业务规则。
+description: Maintain a business and state graph while developing or changing Python, Node.js, React, or Vue software. Link confirmed intent to source, selected parameters, and runtime evidence so developers can debug AI implementations and verify mapping separately from business correctness.
 ---
 
-# 开发者状态图
+# Business Observer
 
-帮助开发者看清 AI 实现了什么：关键函数、参数、判断、状态、等待和实际效果在同一张可下钻的图中关联。图服务于调试，不能只做业务演示，也不能把完整 AST 平铺给用户。
+Help developers understand what the AI actually implemented. Business behavior, states, important functions, parameters, and runtime evidence belong to one graph with progressive detail. The user may choose any application architecture, framework, or coding workflow.
 
-## 1. 根据用户意图建图并确认理解
+Keep maintained source, identifiers, comments, and canonical documentation in English. Respond in the user's language; preserve their original answers as evidence. Localize display labels without changing IDs, protocol keys, state values, source bindings, or assertions. English is the UI fallback; allow an explicit language choice. Do not translate historical evidence in place. See [language policy](references/language-policy.md).
 
-读取用户描述、项目约定和已有决定，构建任务网、业务网和状态网，用局部图与用户核对。只有具体表述或图的表达存在歧义时，才用必要的澄清或反例问题确认原意，说明依据和答案对图的影响。反例用于检验当前理解，不主动深入推演、补完业务流程，也不推荐业务规则或方案。当前已给定范围可以准确表达时停止追问；不重复已有答案，沉默不算回答，不额外设置整图审批。按需读 [需求与图的确认](references/requirements-dialogue.md)，使用 `requirements_dialogue.py` 检查已记录的问题与决定。
+## 1. Confirm intent and development mode
 
-用户或其他 Skill 后续补充规则时，保留来源与确认状态，更新同一张图、源码关联和对应检查。未确认的外部建议不能写成用户答案；业务完善不属于本 Skill 的主动职责。
+Read the request, project conventions, and existing decisions. Use task, business, and state graphs to express the user's current intent. Clarifying questions and counterexamples resolve actual ambiguity; they do not recommend additional business rules. Do not repeat settled questions or treat silence as confirmation. Read [requirements dialogue](references/requirements-dialogue.md).
 
-从立项起复用内置 Web 图：AI 写入设计声明，用 `bo_web.py serve` 展示，用 `bo_design.py focus` 高亮对话当前讨论的节点和关系。用户在 Codex 等工具中回答和修改，页面只查看图，不放答题表单。答案由 AI 同步到需求、图和检查；查看、聚焦或批注不算业务确认。保留节点 ID 和布局标识，运行后沿用同一图。见 [对话与 Web 图](references/conversation-web.md)。
+At first adoption, explain and ask: **Should the project run from the state declaration (drive), or keep its own logic and use the graph for observation (observe)? Both maintain the graph and monitoring.** Record the user's answer and conversation location. Until answered, continue only mode-independent preparation. Reuse an existing explicit choice; record the source of later changes.
 
-默认在 AI 内部用状态网指导实现。用户明确要求不用这种开发方式时，改为观测跟随；用户始终可选择任意框架、编码 Skill 和开发流程。**两种方式都必须维护状态网、源码映射、实际运行监控和收尾检查。** 这些维护由 AI 执行，用户不用填写配置、审阅表或手动同步图。
+Before behavior implementation, show a compact business-network diagram directly in the conversation, using the same `discovery.json` and stable IDs as Web. Run `bo_design.py preview --root PROJECT --url ACTUAL_GRAPH_URL --out review/design-preview.md`; present its Mermaid diagram in the user's language and a clickable, verified Web URL. State pending choices on the draft. Do not merely say a server started or expect users to find its address. Ask them to confirm the current understanding or correct it in conversation, update the same diagram, and continue once that scope is confirmed. Explicit earlier confirmation of the same graph scope may be reused; never infer confirmation from silence, page viewing, or notes. Highlight the discussion with `bo_design.py focus`. Web has no answer form. See [conversation and graph](references/conversation-web.md).
 
-## 2. 建立独立模块和检查
+Route business ownership, permissions, and state meaning to the user. Reconcile parameter bindings, callback targets, types, and capture locations with the coding process. Implementation answers must reference current source and an actual verification case; prose is not runtime evidence. Keep unresolved dynamic targets unknown.
 
-Python 项目建立 `bo_stategraph/`，保存完整声明、项目执行器或既有执行器的适配、实例查询、结构导出及配置。用 `bo_upgrade.py` 安装公共核心，不另写同名简化查询类；项目执行器、查询适配和扩展约束单独放置。采用状态机执行时，将原有完整状态机迁入该模块，保留资源、并发、等待、汇合及恢复行为。普通代码执行时，由适配器读取真实状态，不能在观察器里再模拟结果。页面和导出使用同一实例查询；关闭采集不能删除状态网或破坏业务执行。读 [独立 Python 模块](references/independent-python.md)。
+## 2. Establish declarations, adapters, and expectations
 
-采用共同声明和校验器。将业务抽象、局部函数/参数/调用、状态/条件以及实际证据按稳定身份连接；声明、静态推导、运行事实分别标明来源。上层可以概述“检查中”，完整实例仍须可查每项活动、资源和等待条件。折叠不删除事实。层级和 Petri 特性融入原有执行结构，不另建一套权威状态。读 [模型契约](references/behavior-model.md)、[内嵌执行](references/integrated-execution.md)。
+Read [multilanguage architecture and protocols](references/multilanguage.md). Python provides shared graph validation, source aggregation, recording, querying, export, and the complete viewer. The application keeps native execution and authoritative state; both sides exchange versioned JSON.
 
-实现前依据已确认规则定义适用的正常、拒绝、边界、取消、恢复、并发及反例场景。验证反例用于检查已定规则，不据此新增未经确认的业务要求。独立读取程序存储或函数结果，比较图中的核心值；业务预期另行定义。用受保护的 [映射清单](references/mapping-contract.md) 绑定场景、节点、实际字段与交付投影；不能只提交两份相等数值。读 [验证规则](references/validation-rules.md)，用 `whitebox_contract.py` 约束关键函数和实际参数。
+New projects store a `bo-project/v1` document in `bo_stategraph/project.json`, including the mode decision and complete model. `model.machine` is the executable declaration. Bind functions through stable source references; do not embed executable function code in JSON. Existing Python projects may retain a v3 graph and a shared `bo_stategraph/machine.json` consumed by their real executor and graph generator. Never edit generated copies independently.
 
-建立 [实现覆盖清单](references/implementation-coverage.md)，作为模型的 `implementation`。从项目根目录独立扫描函数和入口，逐项关联功能、图节点、参数采集和真实场景。**图要覆盖已经实现的功能，包括开发中加入的登录、通知、查询等辅助功能；不能只覆盖起初讨论的主流程。** 辅助实现归入所属功能并保留源码节点；已实现功能不能用“其他测试覆盖”或一句排除理由跳过。页面折叠只减轻显示负担，不缩小检查范围。
+- **drive:** a project-local executor consumes the declaration. Reject unsupported semantics or connect a suitable native engine; never silently omit behavior.
+- **observe:** the application's own logic runs. Read its actual state without simulating a second authoritative result.
+- **Both:** inventory source independently, retain the state network, capture required parameters, update mappings during development, and verify actual implementation. Business execution must survive the Python observer being unavailable. Hiding the Web UI must not remove the declaration or executor.
 
-定义、类型、引擎/版本和 guard 接线在加载前严格校验；未知语义先报错，不当作普通迁移。真正发生的运行违规保留原值和诊断，并使对应约束检查失败；观察器不能丢掉事实或代替业务修改状态。
+Existing complete Python examples retain hierarchy validation, concurrent activities, waiting, resources, joins, and recovery. Native JS/Python `bo.fsm/1` executors support a strict flat subset. Complete instance queries must expose active activities and resources; advanced analysis can remain collapsed. See [independent module](references/independent-python.md), [model contract](references/behavior-model.md), and [integrated execution](references/integrated-execution.md).
 
-## 3. 随编码自动维护
+Before implementation, define independent expectations for confirmed rules: success, rejection, boundaries, and applicable cancellation, recovery, or concurrency cases. Establish the [implementation inventory](references/implementation-coverage.md), [mapping contract](references/mapping-contract.md), and [whitebox expectations](references/validation-rules.md). Link each scenario to actual functions, parameters, reads, effects, and graph fields. Never copy graph values as independent expected results or weaken earlier checks to obtain a pass.
 
-首次接入时，将实际命令写入项目 AI 指令和已有验证入口。每个阶段执行：
+## 3. Maintain the graph during each coding batch
+
+Connect these commands to the project's AI instructions and verification entrypoint. The AI runs them; the user does not maintain intermediate files:
 
 ```text
-change_sync.py begin → 编码与局部生成 → bo_sync.py scan → change_sync.py inspect
-→ 修复遗漏、完成内部 review → change_sync.py verify → accept → check
+change_sync begin -> coding and local generation -> bo_sync scan -> change_sync inspect
+-> resolve confirmations and implementation review -> change_sync verify -> accept -> check
 ```
 
-这些命令需要项目的 `--root`；`begin` 还需 `--change` 和 `--request`。已有活跃变更时继续它，不重建基线掩盖漂移。接线见 [开发同步](references/continuous-development.md)。
+Commands require the project `--root`; `begin` also needs `--change` and the actual request. Continue an active change instead of replacing its baseline to hide drift. See [continuous development](references/continuous-development.md).
 
-`bo_sync.py scan/watch` 从项目根目录发现新增、修改和删除，生成 `.stategraph/maintenance.json` 内部更新任务。AI 每次编辑后读取并处理；门禁拒绝未登记文件、未归属实现、遗漏的参数和未采集字段。排除只用于有明确身份的观测、构造及工具代码；被排除文件中的应用入口仍会被检查。只有 `accept` 更新基线。没有宿主接线时，watch 不会自行唤醒任意编辑器的大模型，不能声称已全自动。
+`bo_sync scan/watch` discovers new, changed, and deleted files independently of nodes already in the graph. Python, JS/TS, React, and Vue adapters produce common source facts. Missing parsers, syntax errors, and unsupported languages are explicit gaps. Watch produces maintenance tasks; the host or active coding AI must consume them. It cannot wake arbitrary editors or agents by itself.
 
-业务方法保留领域命名；观测文件/方法用 `bo_`，适配类用 `BO`。业务层只依赖中立接口及自身状态模块，不导入采集器或页面。探针显式选字段，在异常隔离内构造载荷，记录函数入/出、实际判断、权威读取、等待及提交后效果。绑定构建、运行、尝试、参数版本和调用身份；先后不是因果。关闭、故障、队列满时仍核对业务结果。读 [源码隔离](references/source-isolation.md)、[语义探针](references/semantic-pins.md)。
+Read `confirmations.user` and `confirmations.coding`. Ask users only about unresolved business meaning; reconcile unresolved calls and implementation changes within coding. Configure `reconciliation` records when dynamic bindings need protection. Stale source answers, absent targets, and missing verification cases must fail; records do not replace actual value and call checks.
 
-逐一核对功能入口的参数：保留值、明确的摘要或脱敏表示，不因可选参数而遗漏。密码和凭据只记录安全摘要。登录、配置等不属于某次任务的操作使用明确的 `application` 或 `entity` 观测范围，不能伪造任务身份，也不能因当前任务筛选而丢失。每个声明采集字段都须有实际事件；关键值再与独立读取的输入、返回值或存储比较。
+Map all implemented features, including later login, messages, queries, configuration, and frontend actions. Give entrypoints, parameters, helpers, and runtime cases a traceable place in the graph. Collapsing a feature is not excluding it. Static edges are candidates; capture actual calls, decisions, state changes, and effects at their execution boundaries. Do not invent results for conditions skipped by short-circuit evaluation. See [source isolation](references/source-isolation.md) and [semantic probes](references/semantic-pins.md).
 
-生成文件从规范源更新；运行项目生成器和复制检查。不要通过重新 capture、修改原预期或补造事件消除失败。需求改变时只更新本次授权范围内的预期。未覆盖的动态调用、外部服务和局部变量如实列出。
+Use `bo_` for observation wiring and `BO` for adapter classes; keep domain names for business methods. Select fields explicitly. Never collect credentials, tokens, or arbitrary bodies. Isolate builder, transport, and storage failures; bound queues. Events identify project, model, build, run, producer, entity, call, and parameter version. Arrival order across processes is not causality. Use application/entity scope for features such as login outside a selected task.
 
-移动已绑定函数时，用内部审阅的 `source_moves` 明确旧/新源码身份，保留图节点、探针和白盒断言；不把技术搬迁当业务规则修改。见 [源码迁移与检查](references/cochange.md)。
+Collection, reporting, polling, source viewing, layout, and recording controls must not produce business events. Exclusions need exact source and identity. Split mixed business/observer handlers rather than exempting them wholesale. Preserve real login, message, and state-change capture. See [observer exclusions](references/observer-exclusion.md).
 
-## 4. 给用户看直接内容
+Track source moves explicitly, preserving node identities, parameters, and assertions. Generate from canonical sources and check installed copies. Do not reset capture baselines, fabricate events, or relax expectations to remove failures. Keep personal layouts in `bo_stategraph/config/views/local.json`; upgrades must preserve them. See [source migration](references/cochange.md).
 
-每阶段结束提供更新图和简短变化说明。默认复用 `assets/stategraph-viewer/` 及其完整协议，项目只提供数据与服务适配；不另建缺少既有交互的简化展示页。首次只显示高层节点；下钻显示核心函数、状态和值，“分析细节”再显示 AST 辅助节点、资源和汇合。所有可展开节点以同类型颜色的区域代表，支持整组拖动；类型、连接、搜索、布局、源码定位和回放属于同一图。参数变化与 before/after 要可见，不能只有流动动画。图操作不执行业务命令。
+## 4. Present and inspect
 
-验证业务流、状态机、函数与参数、权限、数据及自定义筛选的关系是否完整。一个节点可以同时参与业务与函数视图，颜色仍表示其类型。筛选隐藏关系另一端时保留标明“筛选边界”的真实端点，不生成直接授权或调用的假连接；明确清空连线筛选时才全部隐藏。状态迁移复用已有状态节点，业务节点也必须可以下钻参数。
+Reuse the complete `assets/stategraph-viewer/` interaction. After each batch, provide the updated graph and a brief explanation of changes. Start at high-level nodes, then expand important functions, states, and values; reveal advanced details on demand. Any expanded node uses a region with its type's color. Preserve group dragging, saved layouts, typed edges, notes, core markers, search, source navigation, and replay.
 
-布局、展开、筛选、名称、批注和核心标记存入 `bo_stategraph/config/views/local.json`。图更新保留稳定 ID；符号改名时提供明确 ID 迁移，不能猜测合并批注。保存冲突/失败须提示，不能先报成功；共享项目默认排除个人文件。读 [分层交互](references/hierarchical-graph.md)、[记录与分析](references/recorded-analysis.md)、[局部图与共享](references/focus-and-sharing.md)。
+Provide one project development command that launches the application and its observer service together and prints both actual URLs. Keep application execution independent if observation is unavailable. The launcher must track and clean up only processes it started. Connect recording/replay to real runtime events; a design-only server has no business recording and must be labeled accordingly. Verify both URLs, build identity, recording start/stop, and replay against a real user operation before delivery.
 
-节点和展开区域使用类型颜色填充，核心与选中节点进一步突出；图例使用相同图形和填充。运行状态用独立角标表达，不能把类型颜色误当执行成功。用户要求隐藏或移除调试 Web 时，使用 `bo_web.py mode` 或已验证的核心包导出，保留状态网定义与执行。具体边界和恢复命令见 [对话与 Web 图](references/conversation-web.md)。
+Every view must preserve meaningful relations. If the other endpoint is hidden, expose an explicit boundary; never invent a direct call or permission. Capture scope and replay granularity are separate. Show actual state/value changes at each step. Distinguish declarations, static derivation, and observed facts; missing or stale evidence is not current truth. See [hierarchical interaction](references/hierarchical-graph.md), [recording](references/recorded-analysis.md), and [local graphs and sharing](references/focus-and-sharing.md).
 
-采集范围与播放粒度分开。默认记录已接入的核心事件，再按视图播放；局部采集明确边界。文件探针使用有界输出并传入项目根目录，读取 `bo_stategraph/config/retention.json`；过期事件显示缺口，保存记录不随 UI 缓存清理。全图导出保留事件绑定的运行帧。线程式采集不得说成独立进程。
+Separate a rule definition, relation data, and one evaluation. Do not generalize one example into all ReBAC. Read [authorization patterns](references/authorization-patterns.md), [rule graphs](references/rebac-graph.md), or [types and instances](references/types-rules-capture.md) when relevant.
 
-权限项目先读 [权限情况清单](references/authorization-patterns.md)、[规则图](references/rebac-graph.md)；规则定义、关系实例和一次求值分开。不得将示例的一跳权限当作通用 ReBAC 规则。类/实例和采集证据读 [类型与采集](references/types-rules-capture.md)。
+When requested, hide the debug Web UI with `bo_web.py mode` or use the verified core export. Preserve declarations, native execution, and unified queries. Run the exported core; filenames alone do not prove removal. Personal layouts, credentials, and runtime records are private by default. Upgrades may remove unchanged superseded managed files; report conflicts for user-modified files.
 
-## 5. 验证并交付
+## 5. Verify and deliver
 
-收尾分别报告：**实现映射**（源码范围、符号、运行声明、探针和实际值）、**状态约束**（活动/资源/汇合）、**业务规则**（独立预期与白盒场景）。业务有错但图如实显示时，映射可以通过，业务检查仍失败。缺证据、未运行和失败不能写成通过，不能证明任意自然语言含义或未覆盖行为。
+Report **implementation mapping**, **state constraints**, **business rules**, and **project checks** separately. A graph may accurately expose a business bug: mapping can pass while business checks fail. Missing evidence and unrun tests are not passes. Reject invalid declarations, types, projections, engines, or guard wiring before loading. Preserve actual invalid runtime values with diagnostics; never correct observations to fit the model.
 
-运行 `architecture_guard.py check` 和项目 gate。若声称采集器可剔除，须实际运行导出的业务核心包。至少完成从图定位源码、解释分支、定位等待/恢复、回放值变化和发现故意错误的任务。schema、指纹或截图不能代替运行验证。记录适用范围、失败、修复和复测结果。
+Verify that unsynchronized source changes fail; every feature and required field has actual evidence; key values match independent reads; business effects agree with observation on, off, failing, and queue-limited; viewer/recording controls create no business events; filtered views retain relations; export and Web removal preserve business execution. Run architecture checks, existing gates, and new language cases without weakening prior checks.
 
-交付可打开的图、简短使用示例、复现命令和检查结果。独立对话试用仅在已有授权下进行；区分模拟需求方、独立 AI 使用和真人试用，不把脚本通过当作易用性证明。旧 schema/v1 工具只供旧项目复现。
+Keep failures, fixes, retests, and limitations. Deliver an accessible graph, reproducible commands, and usage guidance. Distinguish scripted dialogue, independent AI trials, and human testing. Open or message another conversation only with user authorization.

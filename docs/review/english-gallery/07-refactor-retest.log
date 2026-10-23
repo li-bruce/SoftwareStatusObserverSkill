@@ -1,0 +1,22 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+......F......................
+======================================================================
+FAIL: test_full_project_gate_rejects_an_unregistered_entry (__main__.RefactorTests.test_full_project_gate_rejects_an_unregistered_entry)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_refactor.py", line 271, in test_full_project_gate_rejects_an_unregistered_entry
+    self.assertEqual(structural_errors(project,cfg,snapshot(project,cfg)),[])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['static projection is stale: rebuild model with code_structure.enrich'] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+'static projection is stale: rebuild model with code_structure.enrich'
+
+- ['static projection is stale: rebuild model with code_structure.enrich']
++ []
+
+----------------------------------------------------------------------
+Ran 29 tests in 26.740s
+
+FAILED (failures=1)

@@ -152,8 +152,8 @@ def execute(case: str, mode: str, model: dict, build_id: str) -> dict:
             rid=f.run()
             observed={"phase":f.get(rid)["phase"]}
         elif case in ("secret_content","missing_index"):
-            f.service.edit_document("DOC-001","" if case=="missing_index" else "标题","RD-001",
-                                    "有 SECRET: 标记" if case=="secret_content" else "正常内容")
+            f.service.edit_document("DOC-001","" if case=="missing_index" else "Title","RD-001",
+                                    "Contains SECRET:" if case=="secret_content" else "Normal content")
             f.approve()
             rid=f.run()
             f.finish(rid)
@@ -194,7 +194,7 @@ def execute(case: str, mode: str, model: dict, build_id: str) -> dict:
             f.approve()
             old=f.run(1)
             f.started(old,"content_check")
-            f.service.edit_document("DOC-001","新版标题","RD-001","版本二的内容")
+            f.service.edit_document("DOC-001","New version title","RD-001","Version two content")
             f.approve()
             new=f.run(2)
             f.started(new,"content_check","index_check")
@@ -232,7 +232,7 @@ def execute(case: str, mode: str, model: dict, build_id: str) -> dict:
             elif case=="expire_before_commit":
                 f.clock.value=1010.0
             else:
-                f.service.edit_document("DOC-001","标题","RD-001","changed just before commit")
+                f.service.edit_document("DOC-001","Title","RD-001","changed just before commit")
             f.service.commit_enabled=True
             f.service.tick()
             observed["archive_count"]=len(f.store.snapshot()["archives"])
@@ -266,7 +266,7 @@ def execute(case: str, mode: str, model: dict, build_id: str) -> dict:
                 second=f.run()
                 f.finish(second)
             if case=="edit_after_archive":
-                f.service.edit_document("DOC-001","新标题","RD-001","后来的内容")
+                f.service.edit_document("DOC-001","New title","RD-001","Later content")
             state=f.store.snapshot()
             archive=state["archives"][0] if state["archives"] else {}
             observed={"archive":archive,"archive_count":len(state["archives"]),

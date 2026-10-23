@@ -6,7 +6,7 @@ After upgrading, regenerate the model and run the project's normal verification.
 import argparse
 import hashlib
 import json
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import shutil
 import uuid
 
@@ -17,10 +17,11 @@ except ImportError:
     from behavior_model import contained, read
     from sync_io import write
 
-RELEASE = '2026.10-implementation-coverage'
+RELEASE = '2026.10-multilanguage'
 PROTOCOLS = {'behavior': 3, 'event': 3, 'activity': 'activity-graph/v1',
              'export': 'bo-stategraph/v1', 'recording': 1, 'runtime_frames': 1, 'preferences': 1,
-             'implementation': 'bo-implementation/v1'}
+             'implementation': 'bo-implementation/v1', 'project': 'bo-project/v1',
+             'transport': 'bo-event/v1', 'snapshot': 'bo-snapshot/v1', 'source': 'bo-source/v1'}
 CORE = {'bo_stategraph.py': '__init__.py', 'bo_contracts.py': 'bo_contracts.py',
         'execution_contract.py': 'execution_contract.py'}
 
@@ -44,8 +45,28 @@ def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+def relative_name(value):
+    """Persist one portable spelling, including callers using Windows separators."""
+    name = PurePosixPath(str(value).replace('\\', '/')).as_posix()
+    if name in ('', '.') or name.startswith('/') or ':' in name or '..' in name.split('/'):
+        raise ValueError('managed paths must stay relative to the project')
+    return name
+
+
+def portable_files(files):
+    result = {}
+    for name, digest in files.items():
+        key = relative_name(name)
+        if key in result and result[key] != digest:
+            raise ValueError('conflicting managed path aliases: ' + key)
+        result[key] = digest
+    return result
+
+
 def plan(root, *, runtime, module='bo_stategraph', viewers=(), baseline=None, source=None):
-    root = Path(root).resolve()
+    root = Path(root).absolute().resolve()
+    runtime = relative_name(runtime)
+    viewers = [relative_name(viewer) for viewer in viewers]
     source = Path(source or Path(__file__).resolve().parent)
     if not module.isidentifier():
         raise ValueError('module must be one Python package name')
@@ -57,10 +78,13 @@ def plan(root, *, runtime, module='bo_stategraph', viewers=(), baseline=None, so
         raise ValueError('unsupported runtime manifest; migrate explicitly')
     if any(previous.get('protocols', {}).get(k, v) != v for k, v in PROTOCOLS.items()):
         raise ValueError('protocol version differs; migrate artifacts before copying runtime')
-    known = dict(previous.get('files', {}))
+    previous_files = portable_files(previous.get('files', {}))
+    known = dict(previous_files)
     if baseline:
-        known.update({k: v for k, v in read(contained(root, baseline))['files'].items() if v})
-    sources = {runtime + '/' + path.name: path for path in source.glob('*.py')}
+        known.update(portable_files({k: v for k, v in read(contained(root, baseline))['files'].items() if v}))
+    sources = {runtime + '/' + path.relative_to(source).as_posix(): path for path in source.rglob('*')
+               if path.is_file() and not set(path.parts) & {'__pycache__','node_modules'}
+               and path.suffix in {'.py','.mjs','.json'}}
     sources.update({runtime + '/' + name: bridge_source(name, module) for name in CORE})
     sources.update({module + '/' + target: source / name for name, target in CORE.items()})
     for viewer in viewers:
@@ -76,14 +100,18 @@ def plan(root, *, runtime, module='bo_stategraph', viewers=(), baseline=None, so
                 conflicts.append(name)
             else:
                 changes.append(name)
+    retired = sorted(set(previous_files) - set(files))
+    for name in retired:
+        target = contained(root,name)
+        if target.exists() and sha(target) != known.get(name): conflicts.append(name)
     return {'valid': not conflicts, 'release': RELEASE, 'protocols': PROTOCOLS,
             'files': files, 'changes': changes, 'conflicts': conflicts,
-            'retained_legacy_files': sorted(set(previous.get('files', {})) - set(files)),
+            'retired_files': retired,
             'metadata': metadata, 'sources': sources}
 
 
 def apply(root, **options):
-    root = Path(root).resolve()
+    root = Path(root).absolute().resolve()
     proposed = plan(root, **options)
     if not proposed['valid']:
         raise ValueError('local runtime edits need reconciliation: ' + ', '.join(proposed['conflicts']))
@@ -101,7 +129,12 @@ def apply(root, **options):
             original = proposed['sources'][name]
             if isinstance(original, bytes): target.write_bytes(original)
             else: shutil.copyfile(original, target)
-        value = {key: proposed[key] for key in ('release', 'protocols', 'files', 'retained_legacy_files')}
+        for name in proposed['retired_files']:
+            target=contained(root,name)
+            if target.exists():
+                saved=backup/name; saved.parent.mkdir(parents=True,exist_ok=True)
+                shutil.copyfile(target,saved); written.append(name); target.unlink()
+        value = {key: proposed[key] for key in ('release', 'protocols', 'files', 'retired_files')}
         write(proposed['metadata'], {'schema': 1, **value})
     except Exception:
         for name in reversed(written):
@@ -109,7 +142,7 @@ def apply(root, **options):
             if saved.exists(): shutil.copyfile(saved, target)
             elif target.exists(): target.unlink()
         raise
-    return {key: proposed[key] for key in ('valid', 'release', 'protocols', 'changes', 'conflicts', 'retained_legacy_files')}
+    return {key: proposed[key] for key in ('valid', 'release', 'protocols', 'changes', 'conflicts', 'retired_files')}
 
 
 def main():

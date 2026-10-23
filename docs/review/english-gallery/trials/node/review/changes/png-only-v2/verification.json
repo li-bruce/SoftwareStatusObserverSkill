@@ -1,0 +1,51 @@
+{
+  "valid": true,
+  "errors": [],
+  "candidate_id": "56cf88e8bc27370be0e8725beb975948ee1350e9ecb7b224a832935d2064cffd",
+  "reports": {
+    "mapping": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+      "stategraph_export": "checked",
+      "witnesses": 15,
+      "projection_checks": 63,
+      "implementation": {
+        "errors": [],
+        "events_checked": 75,
+        "features": 11
+      }
+    },
+    "state_rules": {
+      "status": "passed",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "passed",
+      "errors": [],
+      "assertions": {
+        "required": 63,
+        "executed": 63
+      },
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "review_hash": "c813ad67f95a0aa31318db8234227cc68cdce217aecb824d4dbf940f96d5a450",
+  "observations_hash": "5797b43a1f39bd3566ee8be77b61bd634b679833ddf43b4f226a7baab2f3c6d5",
+  "tests": [
+    {
+      "argv": [
+        "{python}",
+        "scripts/project_checks.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "checked_at": "2026-10-23T10:55:51.784074+00:00",
+  "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+}

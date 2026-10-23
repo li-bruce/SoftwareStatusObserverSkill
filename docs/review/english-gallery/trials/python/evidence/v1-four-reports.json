@@ -1,0 +1,63 @@
+{
+  "valid": true,
+  "errors": [],
+  "candidate_id": "db5cf7a42b91c65c78c4f85ffbbcd509243b2853852e60afa2c094f63f799315",
+  "reports": {
+    "mapping": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+      "stategraph_export": "checked",
+      "witnesses": 38,
+      "projection_checks": 126,
+      "implementation": {
+        "errors": [],
+        "events_checked": 41,
+        "features": 18
+      }
+    },
+    "state_rules": {
+      "status": "passed",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "passed",
+      "errors": [],
+      "assertions": {
+        "required": 135,
+        "executed": 135
+      },
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "review_hash": "72a1cc4a4bf8d09e17f723f14ea93da22574682d9d29ea3019b97bedfcb033f1",
+  "observations_hash": "a8738f7ac057fd7b340fb287cfb52f37c3adf42fa4b7c5ed0655a1881e3c505b",
+  "tests": [
+    {
+      "argv": [
+        "{python}",
+        "-B",
+        "test_app.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-B",
+        "observer_runtime/architecture_guard.py",
+        "check",
+        "--root",
+        "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-23\\business-observer-gallery-python"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "checked_at": "2026-10-23T10:18:50.709296+00:00",
+  "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+}

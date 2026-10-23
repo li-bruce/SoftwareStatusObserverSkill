@@ -7,6 +7,24 @@ import sys
 import unittest
 
 ROOT=Path(__file__).resolve().parents[1]
+LANGUAGE_MIGRATION=json.loads((ROOT/'tests/fixtures/language-migration.json').read_text(encoding='utf-8'))
+
+def translated_prose(value):
+    # Only reviewed display/reason text changes language. Retain every field,
+    # type, state, transition, resource count, and actual result in the comparison.
+    if isinstance(value,str):
+        if value in LANGUAGE_MIGRATION:return LANGUAGE_MIGRATION[value]
+        # The legacy workflow composes these exact reviewed reasons. Translate
+        # only a fully recognized composition; unknown text must still differ.
+        suffix='\uFF1B\u6761\u4EF6\u6062\u590D\u540E\u70B9\u51FB\u7EE7\u7EED'
+        if value.endswith(suffix):
+            parts=value[:-len(suffix)].split('\uFF1B')
+            if all(part in LANGUAGE_MIGRATION for part in parts):
+                return '; '.join(LANGUAGE_MIGRATION[part] for part in parts)+LANGUAGE_MIGRATION[suffix]
+        return value
+    if isinstance(value,list):return [translated_prose(item) for item in value]
+    if isinstance(value,dict):return {key:translated_prose(item) for key,item in value.items()}
+    return value
 
 def load(name,path):
     if path.parent.name == 'bo_stategraph':
@@ -22,7 +40,7 @@ def load(name,path):
     spec=importlib.util.spec_from_file_location(name,path);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module);return module
 
 def normalize(value):
-    return json.loads(json.dumps(value).replace('app/workflow.py','bo_stategraph/workflow.py').replace('archive_bo_stategraph','bo_stategraph'))
+    return translated_prose(json.loads(json.dumps(value).replace('app/workflow.py','bo_stategraph/workflow.py').replace('archive_bo_stategraph','bo_stategraph')))
 
 
 class MigrationTests(unittest.TestCase):
@@ -49,7 +67,7 @@ class MigrationTests(unittest.TestCase):
                         joined=execution.join()
                         if joined:states.append(module.advance('checking','checked',execution.snapshot(),attempt='a',param_version=3))
                     results.append({'states':states,'execution':execution.snapshot()})
-                self.assertEqual(*results)
+                self.assertEqual(*[normalize(result) for result in results])
 
     def test_archive_wait_resume_join_and_cancel(self):
         versions=[load('archive_'+name,path) for name,path in [('old',ROOT/'tests/fixtures/pre_refactor/archive_workflow.py'),('new',ROOT/'examples/team-archive/bo_stategraph/workflow.py')]]
@@ -73,7 +91,7 @@ class MigrationTests(unittest.TestCase):
                     module.activity_step(run,'join','checks_join',7)
                     module.change_phase(run,'checked' if outcome=='success' else 'reject',{'allowed':True,'all_passed':outcome=='success','checks_failed':outcome=='reject'},8)
                 results.append(run)
-            self.assertEqual(*results)
+            self.assertEqual(*[normalize(result) for result in results])
 
 
 if __name__=='__main__':unittest.main()

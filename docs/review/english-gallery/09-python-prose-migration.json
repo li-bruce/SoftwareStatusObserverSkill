@@ -1,0 +1,138 @@
+[
+  {
+    "path": "examples/python-modes/app.py",
+    "literals": 2
+  },
+  {
+    "path": "examples/python-modes/build_model.py",
+    "literals": 5
+  },
+  {
+    "path": "examples/python-modes/run.py",
+    "literals": 1
+  },
+  {
+    "path": "examples/team-archive/run.py",
+    "literals": 2
+  },
+  {
+    "path": "examples/team-archive/archive_app/service.py",
+    "literals": 23
+  },
+  {
+    "path": "examples/team-archive/archive_app/storage.py",
+    "literals": 14
+  },
+  {
+    "path": "examples/team-archive/bo_stategraph/workflow.py",
+    "literals": 15
+  },
+  {
+    "path": "examples/team-archive/integrations/bo_observer.py",
+    "literals": 1
+  },
+  {
+    "path": "examples/team-archive/integrations/bo_server.py",
+    "literals": 32
+  },
+  {
+    "path": "examples/team-archive/tooling/build_model.py",
+    "literals": 74
+  },
+  {
+    "path": "examples/team-archive/tooling/observe.py",
+    "literals": 1
+  },
+  {
+    "path": "examples/team-archive/tooling/scenarios.py",
+    "literals": 8
+  },
+  {
+    "path": "examples/team-archive/tooling/size_scenarios.py",
+    "literals": 2
+  },
+  {
+    "path": "examples/team-archive/tooling/test_recording.py",
+    "literals": 2
+  },
+  {
+    "path": "examples/team-archive/tooling/test_stategraph_module.py",
+    "literals": 2
+  },
+  {
+    "path": "examples/python-modes/bo_stategraph/driver.py",
+    "literals": 1
+  },
+  {
+    "path": "examples/delivery/app/checks.py",
+    "literals": 1
+  },
+  {
+    "path": "examples/delivery/app/service.py",
+    "literals": 9
+  },
+  {
+    "path": "examples/delivery/bo_stategraph/workflow.py",
+    "literals": 11
+  },
+  {
+    "path": "examples/delivery/integrations/bo_scenarios.py",
+    "literals": 48
+  },
+  {
+    "path": "examples/delivery/integrations/bo_server.py",
+    "literals": 4
+  },
+  {
+    "path": "examples/delivery/tests/test_execution.py",
+    "literals": 22
+  },
+  {
+    "path": "examples/delivery/tests/test_recording.py",
+    "literals": 2
+  },
+  {
+    "path": "examples/delivery/tests/test_stategraph_module.py",
+    "literals": 2
+  },
+  {
+    "path": "examples/delivery/tooling/build_graph.py",
+    "literals": 54
+  },
+  {
+    "path": "tools/multilanguage_demo.py",
+    "literals": 2
+  },
+  {
+    "path": "tools/test_implementation_coverage.py",
+    "literals": 4
+  },
+  {
+    "path": "tools/test_multilanguage.py",
+    "literals": 10
+  },
+  {
+    "path": "tools/test_observer_noise.py",
+    "literals": 9
+  },
+  {
+    "path": "tools/test_stategraph_module.py",
+    "literals": 2
+  },
+  {
+    "path": "tools/test_web_continuity.py",
+    "literals": 6
+  },
+  {
+    "path": "tests/test_clarification_gate.py",
+    "literals": 30
+  },
+  {
+    "path": "tests/test_focus_bundle.py",
+    "literals": 6
+  },
+  {
+    "path": "tests/test_requirements_dialogue.py",
+    "literals": 16
+  }
+]

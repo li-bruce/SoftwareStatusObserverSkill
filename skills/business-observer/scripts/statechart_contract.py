@@ -1,18 +1,11 @@
-"""Validate an exported statechart contract, optionally against the runtime definition.
+"""Public entry point; implementation: bo_observer.graph.statechart_contract."""
+import importlib as _bo_importlib
+import sys as _bo_sys
+_bo_module = _bo_importlib.import_module((__package__ + '.' if __package__ else '') + 'bo_observer.graph.statechart_contract')
+def __getattr__(name):
+    return getattr(_bo_module, name)
 
-This checks declaration consistency, not guard truth, transactionality or equivalence.
-"""
-import argparse
-import json
-from pathlib import Path
-
-
-try:
-    from .bo_contracts import validate_chart
-except ImportError:
-    from bo_contracts import validate_chart
-
-
-if __name__=='__main__':
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('model');args=parser.parse_args()
-    print(json.dumps(validate_chart(json.loads(Path(args.model).read_text(encoding='utf-8')))))
+if __name__ == '__main__':
+    raise SystemExit(_bo_module.main())
+else:
+    _bo_sys.modules[__name__] = _bo_module

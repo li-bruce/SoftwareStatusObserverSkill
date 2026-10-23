@@ -1,38 +1,83 @@
 {
   "model": "behavior.json",
   "manifest": "manifest.json",
-  "code_files": ["domain.py", "bo_stategraph/workflow.py", "store.py"],
-  "watch_files": ["observe.py", "build_model.py", "test_workflow.py", "bo_stategraph/__init__.py"],
+  "code_files": [
+    "domain.py",
+    "bo_stategraph/workflow.py",
+    "store.py"
+  ],
+  "watch_files": [
+    "observe.py",
+    "build_model.py",
+    "test_workflow.py",
+    "bo_stategraph/__init__.py"
+  ],
   "source_scope": {
-    "roots": ["."],
+    "roots": [
+      "."
+    ],
     "require_symbol_classification": true,
     "exclude": {
-      "observer_runtime/**": "公共工具副本，由版本散列和工具测试核对。",
-      "bo_stategraph/__init__.py": "公共查询实现，由副本一致性与实例对照核对。",
-      "bo_stategraph/bo_contracts.py": "共同声明校验，由副本一致性及协议反例核对。",
-      "bo_stategraph/execution_contract.py": "公共活动约束，由资源与汇合测试核对。",
-      "observe.py": "实际运行与独立取值检查入口，单独跟踪并执行。",
-      "build_model.py": "模型生成器，单独跟踪并执行。",
-      "test_workflow.py": "独立业务测试，单独跟踪并执行。"
+      "observer_runtime/**": "Shared tool copy checked by version hashes and tool tests.",
+      "bo_stategraph/__init__.py": "Shared query implementation checked by copy parity and instance comparison.",
+      "bo_stategraph/bo_contracts.py": "Shared definition validation checked by copy parity and protocol counterexamples.",
+      "bo_stategraph/execution_contract.py": "Shared activity constraints checked by resource and join tests.",
+      "observe.py": "Real execution and independent-value check entrypoint, tracked and executed separately.",
+      "build_model.py": "Model generator, tracked and executed separately.",
+      "test_workflow.py": "Independent business tests, tracked and executed separately."
     }
   },
   "stategraph": {
     "module": "bo_stategraph/__init__.py",
-    "development_mode": "guided",
-    "execution_mode": "drive"
+    "development_mode": "drive",
+    "execution_mode": "drive",
+    "decision_source": "user",
+    "decision": "Replace with the actual user's answer. Do not adopt this selection before an answer."
   },
   "require_mapping_witnesses": true,
   "mapping_contract": "mapping.json",
   "acceptance": "acceptance.json",
   "slice_depth": 1,
-  "probe_callees": ["trace.record"],
-  "required_probes": [
-    {"symbol": "domain.py::Lab.execute", "node": "estimate", "phase": "return"},
-    {"symbol": "domain.py::Lab.commit_result", "node": "commit", "phase": "commit"}
+  "probe_callees": [
+    "trace.record"
   ],
-  "required_runtime_probes": [{"case": "normal", "node": "commit", "phase": "commit"}],
-  "probe_modes": ["on", "off", "fault"],
-  "observations_command": ["{python}", "-B", "-X", "utf8", "observe.py"],
-  "test_commands": [["{python}", "-B", "test_workflow.py"]],
+  "required_probes": [
+    {
+      "symbol": "domain.py::Lab.execute",
+      "node": "estimate",
+      "phase": "return"
+    },
+    {
+      "symbol": "domain.py::Lab.commit_result",
+      "node": "commit",
+      "phase": "commit"
+    }
+  ],
+  "required_runtime_probes": [
+    {
+      "case": "normal",
+      "node": "commit",
+      "phase": "commit"
+    }
+  ],
+  "probe_modes": [
+    "on",
+    "off",
+    "fault"
+  ],
+  "observations_command": [
+    "{python}",
+    "-B",
+    "-X",
+    "utf8",
+    "observe.py"
+  ],
+  "test_commands": [
+    [
+      "{python}",
+      "-B",
+      "test_workflow.py"
+    ]
+  ],
   "timeout_seconds": 120
 }

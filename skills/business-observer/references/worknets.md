@@ -1,35 +1,25 @@
-# 多种软件行为模型与 Petri 工作网
+# Software behavior models and Petri worknets
 
-工作流表达一次过程如何推进，状态图表达对象如何响应事件；软件还可以由数据流、事件协议、数据关系与约束、计算依赖或连续/离散混合状态来描述。可选多种模型，在一个有类型的图中关联到业务函数与实际事实。不同关系不能混作一种可执行边。
+Workflows describe progression; statecharts describe objects responding to events. Software may also use dataflow, event protocols, data relationships/constraints, computation dependencies, or hybrid continuous/discrete models. Link several representations to functions and facts in one typed graph; their edges are not interchangeable executable transitions.
 
-W3C SCXML：https://www.w3.org/TR/scxml/ ，包含嵌套/并行状态；并行状态不等于真实线程。Petri 网参考：https://www.processmining.org/process-discovery.html 。选择表示时先确定要保持的观察量，避免枚举全程序状态造成爆炸。
+[SCXML](https://www.w3.org/TR/scxml/) covers nested/parallel states; parallel state does not imply real threads. See [Petri/process discovery](https://www.processmining.org/process-discovery.html). Choose observable properties before enumerating states to avoid state-space explosion.
 
-## 把并发语义融入原有机器
+## Integrate concurrency semantics
 
-默认按 [完整内部状态与原图表达](integrated-execution.md) 将下面的约束放入现有状态机、活动节点和连接中。这里介绍的是执行语义，不要求另加独立分析层、另一套权威状态或 Petri 页面。以下 worknet 协议也可用于已有 Petri 引擎和旧项目兼容。
+Default to [existing machine/activity graph](integrated-execution.md). The semantics below do not require a separate analysis layer, authority, or Petri page. The worknet contract also supports adapters for existing Petri engines and legacy projects.
 
-存在并发、共享资源、等待与汇合需求时，明确：
+Where relevant, define place/token types, initial marking/capacity (resource tokens differ from data/permission evidence); consumed/produced tokens, arc weights, guards, external completion (reads do not consume); enabling/atomic firing/wait/resume; failure/cancel release; ALL/ANY joins and error completion; invariants/final states. Tokens cannot replace authorization rechecks at commit. Parallel arrows alone do not implement concurrency.
 
-- 库所及令牌的类型、初始标记和容量；资源令牌与数据/权限证据不同。
-- 变迁消耗/产生哪些令牌，弧权重、guard 与外部完成事件。读取不能误写成消耗。
-- 使能条件、原子触发、资源不足的阻塞/恢复；失败和取消释放什么、保留什么。
-- 汇合等待 ALL 完成还是选择 ANY，错误分支如何终结；令牌不能替代提交时的权限重验。
-- 资源不变量及终态；只画两条并行箭头不等于执行层实现了并发。
+Prefer the existing scheduler/worknet engine. A small integer P/T kernel is not a general colored/timed Petri engine. Time windows, priorities, read/inhibitor arcs require matching semantics/checkers. Current worknet_contract checks integer consume/produce arcs and explicit Boolean guards only.
 
-优先接入项目已有工作网/调度引擎；若示例使用小型整数 P/T 内核，明确不是通用有色/定时 Petri 引擎。需要时间窗口、优先级、读弧或抑制弧时，选对应语义及验证器，不用普通输入弧冒充。当前 worknet_contract 仅验证整数消耗/产生弧和显式布尔 guards。
+## Shared definitions and runtime checks
 
-## 同源声明和运行检查
-
-[worknet.example.json](../assets/worknet.example.json) 示意真实声明协议。模型的 `worknet` 来自实际执行层的 definition。观测协议顶层也返回真实 `worknet`；每个执行用例的 `worknet` 返回 capacity/marking/guards/enabled/journal。journal 每项记录 transition、before、after、guards。
+[worknet.example.json](../assets/worknet.example.json) illustrates declarations. Model worknet comes from the actual executor's definition. Observations return that actual top-level worknet; each case returns capacity/marking/guards/enabled/journal, with transition/before/after/guards per journal entry.
 
 ```text
 python SKILL/scripts/worknet_contract.py --model behavior.json --observations observations.json
 ```
 
-change_sync 会比较模型和加载的运行声明、按弧重放日志、核对资源守恒和当前使能列表。`required_worknet_cases` 指定必须有标记的场景；对未启动的用例允许空标记。实际检查还要覆盖资源1时的阻塞、资源2时的真实重叠、失败释放、未完成不能汇合和取消/重试交错。有限状态空间探索需报告边界和标记数，不能推及任意规模网络。
+change_sync compares model/loaded definitions, replays arcs, checks resource conservation and current enabling. required_worknet_cases requires markings; unstarted cases may have empty marking. Test blocking at capacity one, actual overlap at capacity two, failure release, no premature join, and cancel/retry interleavings. Finite exploration states its bounds/marking counts; it does not prove arbitrary networks.
 
-## 视图
-
-默认在原业务组和函数节点内显示执行状态、可用资源、等待原因以及完成条件。若用户明确需要专门的 Petri 投影，再显示库所/变迁和弧权重；不能要求用户切到它才能理解原图。当前状态、历史帧和场景最终结果须分别标明。回放早期帧时不能高亮未来已发生的变迁。
-
-令牌位置应来自当前运行事实。若事件缺失，显示缺口，不从静态连线推演真实执行。失败路径可折叠以控制密度，但仍可展开；代码来源可原位查看。历史图保存对应源码与参数，不能把新版代码当成旧运行的解释。
+Default views show actual execution/resource/wait/join information inside original groups/functions. A requested Petri projection may show places/transitions/weights. Distinguish current state, history, and final scenario outcome; early replay must not highlight future transitions. Missing events remain gaps, not inferred tokens. Failure branches may collapse but remain discoverable. Historical graph/source/parameters stay tied to the original build.

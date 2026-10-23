@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "revision",
+    "intent",
+    "source_files",
+    "nodes",
+    "edges",
+    "overview",
+    "scope",
+    "machine"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 3
+    },
+    "revision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "intent": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "label"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "action",
+              "function",
+              "decision",
+              "wait",
+              "effect",
+              "data",
+              "state"
+            ]
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "parent": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "$id": "https://github.com/li-bruce/SoftwareStatusObserverSkill/protocol/source-ref",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "symbol": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "path",
+              "symbol"
+            ]
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "from",
+          "to",
+          "type",
+          "evidence"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "from": {
+            "type": "string",
+            "minLength": 1
+          },
+          "to": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "enum": [
+              "flow",
+              "data",
+              "guard",
+              "contains",
+              "resource",
+              "join"
+            ]
+          },
+          "evidence": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "machine": {
+      "type": "object",
+      "required": [
+        "engine",
+        "version",
+        "states",
+        "values",
+        "initial",
+        "transitions",
+        "events",
+        "context"
+      ]
+    }
+  }
+}

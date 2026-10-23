@@ -1,0 +1,82 @@
+{
+  "delivery": {
+    "accepted": {
+      "candidate_id": "fd0ad789fce7c32498b08631ce11c243f3798c145ab597888b5cb1540c923dcd",
+      "build_id": "0e73dfee6c28dd0d3b28416e9bb0359f3cf059dbb09fab4701e9c49782c8786a",
+      "verification_hash": "9ab4d473a685f14ee1321a525f04e17a3ba0b818bf8de96fa5c42b9623d6d858"
+    },
+    "reports": {
+      "mapping": {
+        "status": "passed",
+        "errors": [],
+        "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+        "stategraph_export": "checked",
+        "witnesses": 201,
+        "projection_checks": 303,
+        "implementation": {
+          "errors": [],
+          "events_checked": 19,
+          "features": 10
+        }
+      },
+      "state_rules": {
+        "status": "passed",
+        "errors": []
+      },
+      "project_checks": {
+        "status": "passed",
+        "errors": [],
+        "scope": "Configured project tests, architecture and viewer checks"
+      },
+      "business": {
+        "status": "passed",
+        "errors": [],
+        "assertions": {
+          "required": 96,
+          "executed": 96
+        },
+        "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+      }
+    }
+  },
+  "team-archive": {
+    "accepted": {
+      "candidate_id": "2c88b98d7a80b52bd495d17b48094001ae933facdeb627a4167103b4d5812d16",
+      "build_id": "19462be1e2b7d2b6d158a07088e41b534456f3bfcd12480db53f0d2df2ce4ea1",
+      "verification_hash": "5d62578974c4ecc3c71eac5d2c91c9524951ea1ad6c5b4df57675ce345997d0f"
+    },
+    "reports": {
+      "mapping": {
+        "status": "passed",
+        "errors": [],
+        "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+        "stategraph_export": "checked",
+        "witnesses": 480,
+        "projection_checks": 1113,
+        "implementation": {
+          "errors": [],
+          "events_checked": 53,
+          "features": 22
+        }
+      },
+      "state_rules": {
+        "status": "passed",
+        "errors": []
+      },
+      "project_checks": {
+        "status": "passed",
+        "errors": [],
+        "scope": "Configured project tests, architecture and viewer checks"
+      },
+      "business": {
+        "status": "passed",
+        "errors": [],
+        "assertions": {
+          "required": 189,
+          "executed": 189
+        },
+        "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+      }
+    }
+  }
+}

@@ -1,31 +1,31 @@
-# 资料归档示例的开发约定
+# Team archive development rules
 
-这是开发者调试示例，使用合成数据。主线设计、框架和编码方法不限。
+This is a developer-debugging example with synthetic data. The application architecture, framework, and coding method remain open.
 
-每轮相关开发先读取 `../../skills/business-observer/SKILL.md`、`intent.json`、`discovery.json`、`behavior.json` 和当前验证结果。单独复制本示例时，先安装相同版本的 business-observer，并将这里的 Skill 路径改为实际安装位置。保留已确认规则和稳定节点 ID；观测与验证是开发时必须同步维护的部分。
+Before each relevant iteration, read the repository Skill at `../../skills/business-observer/SKILL.md`, intent.json, discovery.json, behavior.json, and the current validation result. When copying this example separately, install the same Skill revision and update that path. Preserve confirmed rules and stable node IDs. Observation and verification must be maintained during development.
 
-首次运行由仓库根目录的 `python tools/archive_demo.py --prepare-only` 恢复已发布的验收记录，不自动接受修改后的内容。已有未完成变更继续原记录，不能新建基线遮掩遗漏。
+First launch uses `python tools/archive_demo.py --prepare-only` from the repository root to restore the published acceptance record. It does not accept edited content. Continue an unfinished change; never replace its baseline to hide omissions.
 
-行为修改前，在本目录记录本轮请求和确实允许修改的需求，例如：
+Before changing behavior, record the actual request and requirement IDs explicitly allowed to change:
 
 ```bash
-python observer_runtime/change_sync.py begin --root . --change .stategraph/my-change --request "本次实际需求" --requirements R14
+python observer_runtime/change_sync.py begin --root . --change .stategraph/my-change --request "Actual request" --requirements R14
 ```
 
-变更目录和需求 ID 按真实范围选择。开发时一起维护业务源码、实际状态机、`tooling/behavior_source.json`、`tooling/build_model.py`、探针与独立预期。生成后执行 `inspect → verify → accept → check`；审阅记录由 AI 填写，不能改写预期迎合实现，也不能只重新采集指纹消除错误。具体命令用工具的 `--help` 与 Skill 说明核对。
+Choose the change directory and IDs from the real scope. Maintain business source, the actual state machine, tooling/behavior_source.json, tooling/build_model.py, probes, and independent expectations together. Generate, then inspect → verify → accept → check. The AI writes the review. Never change expectations to match a faulty implementation or merely recapture fingerprints to remove failures. Consult command --help and the Skill for exact arguments.
 
-日常交付的正常验证入口：
+The normal delivery verification entrypoint is:
 
 ```bash
 python -X utf8 -B validate.py
 ```
 
-它检查已验收的源码与图、层间依赖、规则测试和历史图事实；失败返回非零。它不会自行生成或接受新基线。Node 从 PATH 查找，也可通过 `ARCHIVE_NODE` 指定。
+It checks accepted source/graph identity, architectural dependencies, business tests, and historical facts. Failure returns nonzero. It neither generates nor accepts a new baseline. Node comes from PATH or ARCHIVE_NODE.
 
-用户只讨论业务含义和查看每轮更新图。AI 自行维护中间材料，只在新的业务歧义或冲突时提问。保留拖动布局、名称、备注、历史版本和已有证据；新的迭代另存记录。业务核心不得导入观测实现，图上的名称与位置不得改变业务授权。
+Users discuss business meaning and inspect the updated graph. The AI maintains intermediate artifacts and asks only about new business ambiguities or conflicts. Preserve layouts, names, notes, historical versions, and existing evidence; save each new iteration separately. Business core must not import observation implementations. Graph names and coordinates must not change authorization.
 
-这些约定和检查入口不在后台监控所有编辑器。绕过入口的修改不能声称已同步；启动和图页面必须区分加载版本与磁盘版本。
+These rules and entrypoints do not monitor every editor in the background. Edits bypassing them cannot be claimed synchronized. Startup and Web must distinguish the loaded build from disk source.
 
-默认由 AI 内部依据状态网引导开发，不额外暴露维护流程。用户明确不用该方法时，仅切换设计依据；两种方式都必须维护底层监控、按源码调整状态网、函数/参数映射、图和检查。未表态或改用普通代码不算退出。接入选择保存在 sync.json 的 stategraph；完整执行与查询位于 bo_stategraph/，observer_runtime 中的旧入口仅兼容委托。
+At first adoption, ask the user to choose drive (state-driven development) or observe (follow existing logic), and record their answer and source. Never choose silently. Both require monitoring, source-based graph adaptation, function/parameter mappings, and verification. This synthetic example explicitly uses drive. sync.json records stategraph selection; complete execution and queries live in bo_stategraph/. Old observer_runtime entrypoints delegate for compatibility only.
 
-每批相关修改后运行 `python observer_runtime/bo_sync.py scan --root .` 并处理 `.stategraph/maintenance.json`；独立源码扫描包括未跟踪的新文件。只有 verify → accept 才消除待办。个人视图位于 bo_stategraph/config/views/local.json，不随生成覆盖。阶段结果分别报告实现映射、状态约束和业务规则。
+After each relevant coding batch, run `python observer_runtime/bo_sync.py scan --root .` and reconcile .stategraph/maintenance.json. Independent inventory includes untracked new files. Only verify → accept clears maintenance tasks. Private views live in bo_stategraph/config/views/local.json and are not overwritten by generation. Report mapping, state constraints, business rules, and project checks separately.

@@ -1,0 +1,64 @@
+{
+  "files": [
+    {
+      "path": "gallery-stategraph-v1.json",
+      "origin": "gallery-review-evidence.zip:outputs/gallery-stategraph-v1.json",
+      "sha256": "fc791fefaa005a9ec8ae83a41e8c31057d8dae08af728c26f2e0359976a310e3",
+      "bytes": 244891
+    },
+    {
+      "path": "gallery-stategraph-v2-final.json",
+      "origin": "gallery-review-evidence.zip:outputs/gallery-stategraph-v2-final.json",
+      "sha256": "83c423dbfd8249e2d1272addb25ad6e7d38508a11bfcd9ce936146b30877fe5b",
+      "bytes": 261687
+    },
+    {
+      "path": "gallery-v1-source.zip",
+      "origin": "gallery-review-evidence.zip:outputs/gallery-v1-source.zip",
+      "sha256": "8171f12f5630fac45eb1025bb6b9d0a045b987528ad399afc9618449fcb64c04",
+      "bytes": 3620479
+    },
+    {
+      "path": "gallery-v1-source.zip.manifest.json",
+      "origin": "gallery-review-evidence.zip:outputs/gallery-v1-source.zip.manifest.json",
+      "sha256": "d1c04eed0598ffb92062ef75b5c181fa4e0cd06bb3bbed570221d5af6c8d1e10",
+      "bytes": 81933
+    },
+    {
+      "path": "gallery-v2-source.zip",
+      "origin": "gallery-review-evidence.zip:outputs/gallery-v2-source.zip",
+      "sha256": "b20e9205e312750e31db03562db6de45c425ebe1123848695f69749545220bed",
+      "bytes": 4061127
+    },
+    {
+      "path": "gallery-v2-source.zip.manifest.json",
+      "origin": "gallery-review-evidence.zip:outputs/gallery-v2-source.zip.manifest.json",
+      "sha256": "d7dae6f2ed80cc3fd41021b8fbb078d05b951152a6b830cbbb0ce612cbf36bfb",
+      "bytes": 96072
+    },
+    {
+      "path": "gallery-v1-source.zip",
+      "origin": "trial outputs/gallery-v1-source.zip",
+      "sha256": "8171f12f5630fac45eb1025bb6b9d0a045b987528ad399afc9618449fcb64c04",
+      "bytes": 3620479
+    },
+    {
+      "path": "gallery-v2-source.zip",
+      "origin": "trial outputs/gallery-v2-source.zip",
+      "sha256": "b20e9205e312750e31db03562db6de45c425ebe1123848695f69749545220bed",
+      "bytes": 4061127
+    },
+    {
+      "path": "gallery-v1-source.zip.manifest.json",
+      "origin": "trial outputs/gallery-v1-source.zip.manifest.json",
+      "sha256": "d1c04eed0598ffb92062ef75b5c181fa4e0cd06bb3bbed570221d5af6c8d1e10",
+      "bytes": 81933
+    },
+    {
+      "path": "gallery-v2-source.zip.manifest.json",
+      "origin": "trial outputs/gallery-v2-source.zip.manifest.json",
+      "sha256": "d7dae6f2ed80cc3fd41021b8fbb078d05b951152a6b830cbbb0ce612cbf36bfb",
+      "bytes": 96072
+    }
+  ]
+}

@@ -10,6 +10,7 @@ PROJECT=ROOT/'examples/team-archive'
 sys.path.insert(0,str(PROJECT))
 from archive_app.service import ArchiveService
 from tooling import scenarios
+from test_workflow_migration import translated_prose
 
 spec=importlib.util.spec_from_file_location('archive_app.pre_refactor',ROOT/'tests/fixtures/pre_refactor/archive_service.py')
 legacy=importlib.util.module_from_spec(spec)
@@ -18,8 +19,9 @@ model=json.loads((PROJECT/'behavior.json').read_text(encoding='utf-8'))
 
 
 def canonical(value):
-    # Only generated identity strings are normalized; versions, values and effects remain.
-    return re.sub(r'\b[0-9a-f]{12}\b','<generated-id>',json.dumps(value,sort_keys=True,ensure_ascii=False))
+    # Retain all fields and effects; normalize generated IDs and reviewed
+    # language-only display/reason changes against the unchanged legacy fixture.
+    return re.sub(r'\b[0-9a-f]{12}\b','<generated-id>',json.dumps(translated_prose(value),sort_keys=True,ensure_ascii=False))
 
 
 def signature(result):

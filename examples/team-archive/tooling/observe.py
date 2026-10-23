@@ -1,5 +1,6 @@
 """Run real scenarios in three observation modes, with version binding."""
 import json
+import subprocess
 from pathlib import Path
 import sys
 ROOT=Path(__file__).absolute().parents[1]
@@ -46,6 +47,13 @@ def main():
                 'actual':original,'mapped':{k:observed['configuration'].get(k) for k in original}})
     selected=next(r for r in runs if r['case']=='archive_snapshot' and r['mode']=='on')
     exported=graph.bo_export(runtime={'machine':selected['projection']['machine']})
+    browser_input={'project':{'protocol':'bo-project/v1','project_id':model.get('project_id','team-archive-example'),'selection':{'mode':'drive','source':'user','answer':"Simulated user choice",'locator':'discovery.json'},'model':model},'build_id':before['build_id'],
+        'snapshot':{**selected['authority_snapshot'],'labels':definition()['labels'],'delay':0,'binding':{'status':'current'},'build_id':before['build_id'],'clock':1000}}
+    native=subprocess.run(['node','tooling/frontend_cases.mjs'],input=json.dumps(browser_input),capture_output=True,text=True,encoding='utf-8',cwd=ROOT,check=True,timeout=30)
+    ui_runs=json.loads(native.stdout)
+    for ui_run in ui_runs:
+        ui_run.update(authority_snapshot={'runs':[]},projection={'build_id':before['build_id'],'machine':{'configurations':[],'journal':[]},'instances':[]})
+    runs.extend(ui_runs)
     print(json.dumps({"build_id":before["build_id"],"machine":definition(),"runs":runs,
         'mapping_checks':witnesses,'stategraph_export':exported},ensure_ascii=False))
 

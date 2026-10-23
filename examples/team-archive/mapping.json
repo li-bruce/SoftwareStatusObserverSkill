@@ -40,7 +40,8 @@
     "size_commit_fresh",
     "size_resume_over",
     "size_snapshot_stable",
-    "size_persist"
+    "size_persist",
+    "ui_actions"
   ],
   "modes": [
     "on",

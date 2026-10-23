@@ -1,0 +1,34 @@
+{
+  "images": [
+    {
+      "id": "7bd7f1c07e7945b3adb26f03548268f6",
+      "state": "published",
+      "format": "PNG",
+      "revision": 2,
+      "build_id": "389a6fb6b293dc32cfdde1f39bf71e478f4ec9af9f88b839ac539fe2cfc9db83",
+      "sha256": "a09b9c41e810256a42b58df025f79c179327f1292a8db780bdaa38dc128bd636"
+    }
+  ],
+  "messages": [
+    {
+      "image_id": "7bd7f1c07e7945b3adb26f03548268f6",
+      "recipient": "reviewer"
+    }
+  ],
+  "journal": [
+    {
+      "image_id": "7bd7f1c07e7945b3adb26f03548268f6",
+      "event": "submit",
+      "previous": "unsubmitted",
+      "state": "pending",
+      "revision": 1
+    },
+    {
+      "image_id": "7bd7f1c07e7945b3adb26f03548268f6",
+      "event": "approve",
+      "previous": "pending",
+      "state": "published",
+      "revision": 2
+    }
+  ]
+}

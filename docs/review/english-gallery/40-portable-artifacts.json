@@ -1,0 +1,85 @@
+{
+  "archives": [
+    {
+      "path": "trials/node/gallery-core-candidate-3.zip",
+      "files": 12,
+      "sha256": "08edff5595ae034e27b600badb6fbe8505cf60ace2f6a5e00c62307bbf1f365d",
+      "bytes": 38085,
+      "crc": "passed",
+      "excluded_path_check": "passed"
+    },
+    {
+      "path": "trials/node/gallery-core-v2.zip",
+      "files": 12,
+      "sha256": "b3cb2464776fc6f5d16ef01ba3b3ca753669c2f4c03e41f5cf23a00611799053",
+      "bytes": 38354,
+      "crc": "passed",
+      "excluded_path_check": "passed"
+    },
+    {
+      "path": "trials/node/gallery-trial-evidence.zip",
+      "files": 387,
+      "sha256": "fd2699c98b7286c297d76cce7927c54f52130b9835487d18e34466695d19173e",
+      "bytes": 2290846,
+      "crc": "passed",
+      "excluded_path_check": "passed"
+    },
+    {
+      "path": "trials/node/gallery-v2-source.zip",
+      "files": 330,
+      "sha256": "e77432cf9a7ad8df736f513215a660a990fa0c1d6c8ce6d5f5e0d42a05399970",
+      "bytes": 3605586,
+      "crc": "passed",
+      "excluded_path_check": "passed"
+    },
+    {
+      "path": "trials/python/gallery-core-v1-candidate3.zip",
+      "files": 21,
+      "sha256": "fa87c6e7b0c15bb1f76d0406ddbd8ff315b9f9e2dc33bbdb267c746857b1b33d",
+      "bytes": 37684,
+      "crc": "passed",
+      "excluded_path_check": "passed"
+    },
+    {
+      "path": "trials/python/gallery-core-v2-before-cookie.zip",
+      "files": 21,
+      "sha256": "020d48a46e031419acfde47bd4ce0c2005f990e2b1f782eaf10b25825a0b47fc",
+      "bytes": 37768,
+      "crc": "passed",
+      "excluded_path_check": "passed"
+    },
+    {
+      "path": "trials/python/gallery-core-v2-cookie-fixed-candidate3.zip",
+      "files": 21,
+      "sha256": "cff9dbba7abbc390781f1214d3897cad3f8960001ef2bcca061b6bb8ca45dcd2",
+      "bytes": 37805,
+      "crc": "passed",
+      "excluded_path_check": "passed"
+    },
+    {
+      "path": "trials/python/gallery-review-evidence.zip",
+      "files": 1123,
+      "sha256": "870012b6ff64a0bcb448e6161adc20830612819d88ced3523fc92ad4f1a1b1b1",
+      "bytes": 14941830,
+      "crc": "passed",
+      "excluded_path_check": "passed"
+    },
+    {
+      "path": "trials/python/gallery-v1-source.zip",
+      "files": 412,
+      "sha256": "8171f12f5630fac45eb1025bb6b9d0a045b987528ad399afc9618449fcb64c04",
+      "bytes": 3620479,
+      "crc": "passed",
+      "excluded_path_check": "passed"
+    },
+    {
+      "path": "trials/python/gallery-v2-source.zip",
+      "files": 481,
+      "sha256": "b20e9205e312750e31db03562db6de45c425ebe1123848695f69749545220bed",
+      "bytes": 4061127,
+      "crc": "passed",
+      "excluded_path_check": "passed"
+    }
+  ],
+  "scope": "Integrity and known excluded-file paths; trial-specific manifests record redactions and actual execution scope."
+}

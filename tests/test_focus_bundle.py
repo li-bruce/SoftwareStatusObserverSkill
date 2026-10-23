@@ -17,7 +17,7 @@ from project_bundle import export, inspect, MANIFEST
 class FocusTests(unittest.TestCase):
     def setUp(self):
         self.model = {"revision": "r1", "nodes": [{"id": n, "label": n, "kind": "data"} for n in "ABC"],
-                      "edges": [{"id": a+b, "from": a, "to": b, "type": "parent", "label": "直接父子"}
+                      "edges": [{"id": a+b, "from": a, "to": b, "type": "parent", "label": "Direct parent-child"}
                                 for a, b in [("A", "B"), ("B", "C")]], "scope": {"unknowns": []}}
 
     def test_deterministic_readonly_boundaries_no_shortcut(self):
@@ -28,7 +28,7 @@ class FocusTests(unittest.TestCase):
         self.assertFalse(view["coverage"]["complete"])
         self.assertEqual(self.model, original)
         self.assertEqual(view, extract(self.model, ["C", "A"], depth=0))
-        self.assertIn("范围外", markdown(view))
+        self.assertIn("outside scope", markdown(view))
 
     def test_all_selected_keeps_original_relations(self):
         view = extract(self.model, ["B"])
@@ -61,8 +61,8 @@ class FocusTests(unittest.TestCase):
                 model = {"revision": "policy-1", "nodes": [
                     {"id": "rule", "label": operator, "kind": "decision",
                      "operator": operator, "scope": "tenant-1"},
-                    {"id": "first", "label": "第一项", "kind": "data"},
-                    {"id": "second", "label": "第二项", "kind": "data"}],
+                    {"id": "first", "label": "First item", "kind": "data"},
+                    {"id": "second", "label": "Second item", "kind": "data"}],
                     "edges": [
                         {"id": "one", "from": "first", "to": "rule", "type": "condition",
                          "operand": "base", "rule_ref": "r1"},
@@ -89,8 +89,8 @@ class FocusTests(unittest.TestCase):
         # Shared inputs and parallel edges are distinct; a condition cannot vanish.
         model = deepcopy(self.model)
         model["edges"] += [
-            {"id": "extra", "from": "A", "to": "B", "type": "excludes", "label": "排除"},
-            {"id": "self", "from": "B", "to": "B", "type": "refers", "label": "递归引用"}]
+            {"id": "extra", "from": "A", "to": "B", "type": "excludes", "label": "Exclude"},
+            {"id": "self", "from": "B", "to": "B", "type": "refers", "label": "Recursive reference"}]
         for depth in (0, 1, 2):
             view = extract(model, ["B"], depth=depth, max_edges=10)
             accounted = {e["id"] for e in view["edges"]} | {
@@ -102,7 +102,7 @@ class BundleTests(unittest.TestCase):
     def test_cli_relative_root_in_separate_working_directory(self):
         with tempfile.TemporaryDirectory(dir=ROOT/".validation") as tmp:
             root = Path(tmp)
-            model = {"revision": "r1", "nodes": [{"id": "n", "kind": "data", "label": "资料"}], "edges": []}
+            model = {"revision": "r1", "nodes": [{"id": "n", "kind": "data", "label": "Document"}], "edges": []}
             (root/"model.json").write_text(json.dumps(model), encoding="utf-8")
             (root/"whitebox.json").write_bytes((ROOT/"skills/business-observer/assets/whitebox.example.json").read_bytes())
             (root/"bundle.json").write_text(json.dumps({

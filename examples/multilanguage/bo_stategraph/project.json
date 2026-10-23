@@ -1,0 +1,913 @@
+{
+  "protocol": "bo-project/v1",
+  "project_id": "multilanguage-jobs",
+  "selection": {
+    "mode": "drive",
+    "source": "user",
+    "answer": "演示命令明确选择 drive（合成测试项目）",
+    "locator": "tools/multilanguage_demo.py --mode drive"
+  },
+  "model": {
+    "schema_version": 3,
+    "revision": "1",
+    "project_id": "multilanguage-jobs",
+    "intent": "intent.json",
+    "source_files": [
+      "src/job.py",
+      "src/job.mjs",
+      "src/ReactPanel.tsx",
+      "src/VuePanel.vue",
+      "bo_stategraph/project.json",
+      "integrations/bo_runner.mjs",
+      "integrations/bo_browser.tsx",
+      "bo_stategraph/bo_runtime.mjs",
+      "bo_stategraph/bo_executor.py",
+      "bo_stategraph/bo_probe.py",
+      "bo_stategraph/bo_contracts.py",
+      "bo_stategraph/execution_contract.py"
+    ],
+    "nodes": [
+      {
+        "id": "py.advance",
+        "kind": "action",
+        "layer": "business",
+        "label": "Python 任务",
+        "summary": "实际操作、参数和结果",
+        "source": {
+          "path": "src/job.py",
+          "symbol": "advance"
+        },
+        "capture": {
+          "in": {
+            "state": "string",
+            "event": "string",
+            "slots": "number",
+            "mode": "string"
+          },
+          "out": {
+            "state": "string"
+          }
+        },
+        "requirements": [
+          "R1"
+        ],
+        "code_evidence": {
+          "symbol": "src/job.py::advance",
+          "ast_hash": "491c52dcc8244b778afa60fef14e9c0cd531082f9655dd81a82a3b53b1741cac",
+          "origin": "source-ast"
+        },
+        "semantic_roles": [
+          "business"
+        ]
+      },
+      {
+        "id": "js.advance",
+        "kind": "action",
+        "layer": "business",
+        "label": "Node / 浏览器任务",
+        "summary": "实际操作、参数和结果",
+        "source": {
+          "path": "src/job.mjs",
+          "symbol": "advance"
+        },
+        "capture": {
+          "in": {
+            "state": "string",
+            "event": "string",
+            "slots": "number",
+            "mode": "string"
+          },
+          "out": {
+            "state": "string"
+          }
+        },
+        "requirements": [
+          "R1"
+        ],
+        "code_evidence": {
+          "symbol": "src/job.mjs::advance",
+          "ast_hash": "9e5725c295e76d933bed5248bf325d48b3085aa74c4d8fd85008d2855cebb014",
+          "origin": "source-ast"
+        },
+        "semantic_roles": [
+          "business"
+        ]
+      },
+      {
+        "id": "react.panel",
+        "kind": "action",
+        "layer": "business",
+        "label": "React 操作",
+        "summary": "实际操作、参数和结果",
+        "source": {
+          "path": "src/ReactPanel.tsx",
+          "symbol": "ReactPanel"
+        },
+        "capture": {
+          "in": {
+            "has_handler": "boolean"
+          },
+          "out": {
+            "state": "string"
+          }
+        },
+        "requirements": [
+          "R1"
+        ],
+        "code_evidence": {
+          "symbol": "src/ReactPanel.tsx::ReactPanel",
+          "ast_hash": "2f019b7b6bd210cc8a966ffb06abfb59d38669cc81a98cce56dce6c3547c62bb",
+          "origin": "source-ast"
+        },
+        "semantic_roles": [
+          "business"
+        ]
+      },
+      {
+        "id": "vue.template",
+        "kind": "action",
+        "layer": "business",
+        "label": "Vue 操作",
+        "summary": "实际操作、参数和结果",
+        "source": {
+          "path": "src/VuePanel.vue",
+          "symbol": "<template>"
+        },
+        "capture": {
+          "in": {
+            "has_handler": "boolean"
+          },
+          "out": {
+            "state": "string"
+          }
+        },
+        "requirements": [
+          "R1"
+        ],
+        "code_evidence": {
+          "symbol": "src/VuePanel.vue::<template>",
+          "ast_hash": "ac04705e36c629e6fb61bc88df2b6d5555b93c31bdc47f31ab80ed59cd887543",
+          "origin": "source-ast"
+        },
+        "semantic_roles": [
+          "business"
+        ]
+      },
+      {
+        "id": "react.start",
+        "kind": "function",
+        "layer": "program",
+        "label": "开始任务",
+        "summary": "用户点击后执行处理",
+        "source": {
+          "path": "src/ReactPanel.tsx",
+          "symbol": "ReactPanel.start"
+        },
+        "parent": "react.panel",
+        "capture": {
+          "in": {
+            "event": "string"
+          },
+          "out": {
+            "before": "string",
+            "state": "string"
+          }
+        },
+        "requirements": [
+          "R1"
+        ],
+        "code_evidence": {
+          "symbol": "src/ReactPanel.tsx::ReactPanel.start",
+          "ast_hash": "12b42b80e3c83fe81b86fe093ecc28959e2b0a54366129099723e9d80befd690",
+          "origin": "source-ast"
+        }
+      },
+      {
+        "id": "react.finish",
+        "kind": "function",
+        "layer": "program",
+        "label": "完成任务",
+        "summary": "用户点击后执行处理",
+        "source": {
+          "path": "src/ReactPanel.tsx",
+          "symbol": "ReactPanel.finish"
+        },
+        "parent": "react.panel",
+        "capture": {
+          "in": {
+            "event": "string"
+          },
+          "out": {
+            "before": "string",
+            "state": "string"
+          }
+        },
+        "requirements": [
+          "R1"
+        ],
+        "code_evidence": {
+          "symbol": "src/ReactPanel.tsx::ReactPanel.finish",
+          "ast_hash": "865421a68152540fb9eb61deb8fc7b4b93abc326c1fc44e3539efb7806bfe860",
+          "origin": "source-ast"
+        }
+      },
+      {
+        "id": "vue.start",
+        "kind": "function",
+        "layer": "program",
+        "label": "开始任务",
+        "summary": "用户点击后执行处理",
+        "source": {
+          "path": "src/VuePanel.vue",
+          "symbol": "start"
+        },
+        "parent": "vue.template",
+        "capture": {
+          "in": {
+            "event": "string"
+          },
+          "out": {
+            "before": "string",
+            "state": "string"
+          }
+        },
+        "requirements": [
+          "R1"
+        ],
+        "code_evidence": {
+          "symbol": "src/VuePanel.vue::start",
+          "ast_hash": "ec6d86157a43718496c161fe16bb4ac56ee10f18b275b0d1829e52e70ac46ee3",
+          "origin": "source-ast"
+        }
+      },
+      {
+        "id": "vue.finish",
+        "kind": "function",
+        "layer": "program",
+        "label": "完成任务",
+        "summary": "用户点击后执行处理",
+        "source": {
+          "path": "src/VuePanel.vue",
+          "symbol": "finish"
+        },
+        "parent": "vue.template",
+        "capture": {
+          "in": {
+            "event": "string"
+          },
+          "out": {
+            "before": "string",
+            "state": "string"
+          }
+        },
+        "requirements": [
+          "R1"
+        ],
+        "code_evidence": {
+          "symbol": "src/VuePanel.vue::finish",
+          "ast_hash": "0579d6ffbc090538523764c73f631898d3805bf490d528aa015baa6b2db6e32c",
+          "origin": "source-ast"
+        }
+      },
+      {
+        "id": "state.pending",
+        "kind": "state",
+        "layer": "state",
+        "value": "pending",
+        "label": "待处理",
+        "summary": "实际任务状态"
+      },
+      {
+        "id": "state.waiting",
+        "kind": "state",
+        "layer": "state",
+        "value": "waiting",
+        "label": "等待名额",
+        "summary": "实际任务状态"
+      },
+      {
+        "id": "state.running",
+        "kind": "state",
+        "layer": "state",
+        "value": "running",
+        "label": "处理中",
+        "summary": "实际任务状态"
+      },
+      {
+        "id": "state.done",
+        "kind": "state",
+        "layer": "state",
+        "value": "done",
+        "label": "已完成",
+        "summary": "实际任务状态"
+      },
+      {
+        "id": "implementation.798220b06c77a273",
+        "kind": "function",
+        "layer": "program",
+        "origin": "source-ast",
+        "label": "<callback:watchEffect:0:1>",
+        "summary": "实现归属；调用关系以源码和运行记录为准",
+        "source": {
+          "path": "src/VuePanel.vue",
+          "symbol": "<callback:watchEffect:0:1>"
+        },
+        "parent": "vue.template",
+        "capture": {
+          "in": {},
+          "out": {}
+        },
+        "signature": "",
+        "code_evidence": {
+          "symbol": "src/VuePanel.vue::<callback:watchEffect:0:1>",
+          "ast_hash": "5edda14247fb3a9fb7efece58fbdc3aae5f2750a15f84492d21f9b632a402947",
+          "parameters": [],
+          "returns": null,
+          "origin": "source-ast"
+        }
+      },
+      {
+        "id": "implementation.0041d31aeda41bac",
+        "kind": "function",
+        "layer": "program",
+        "origin": "source-ast",
+        "label": "<module>",
+        "summary": "实现归属；调用关系以源码和运行记录为准",
+        "source": {
+          "path": "src/VuePanel.vue",
+          "symbol": "<module>"
+        },
+        "parent": "vue.template",
+        "capture": {
+          "in": {},
+          "out": {}
+        },
+        "signature": "module",
+        "code_evidence": {
+          "symbol": "src/VuePanel.vue::<module>",
+          "ast_hash": "00e6035044ef983710a4da0827f4f5ba84829ad936533f3e6ff3d8559c24c160",
+          "parameters": [],
+          "returns": null,
+          "origin": "source-ast"
+        }
+      },
+      {
+        "id": "implementation.fdb5a59c3f24a2bb",
+        "kind": "function",
+        "layer": "program",
+        "origin": "source-ast",
+        "label": "available",
+        "summary": "实现归属；调用关系以源码和运行记录为准",
+        "source": {
+          "path": "src/job.mjs",
+          "symbol": "available"
+        },
+        "parent": "js.advance",
+        "capture": {
+          "in": {},
+          "out": {}
+        },
+        "signature": "context",
+        "code_evidence": {
+          "symbol": "src/job.mjs::available",
+          "ast_hash": "ae31ec5387cc33141dcaa0e6ec91327806995c2861aee1769c108c1703442579",
+          "parameters": [
+            {
+              "name": "context",
+              "annotation": null
+            }
+          ],
+          "returns": null,
+          "origin": "source-ast"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "contains.react.start",
+        "from": "react.panel",
+        "to": "react.start",
+        "type": "contains",
+        "label": "操作",
+        "evidence": "confirmed UI action"
+      },
+      {
+        "id": "calls.react.start",
+        "from": "react.start",
+        "to": "js.advance",
+        "type": "flow",
+        "label": "调用任务逻辑",
+        "evidence": "run prop bound by integrations/bo_browser.tsx; runtime case ui"
+      },
+      {
+        "id": "contains.react.finish",
+        "from": "react.panel",
+        "to": "react.finish",
+        "type": "contains",
+        "label": "操作",
+        "evidence": "confirmed UI action"
+      },
+      {
+        "id": "calls.react.finish",
+        "from": "react.finish",
+        "to": "js.advance",
+        "type": "flow",
+        "label": "调用任务逻辑",
+        "evidence": "run prop bound by integrations/bo_browser.tsx; runtime case ui"
+      },
+      {
+        "id": "contains.vue.start",
+        "from": "vue.template",
+        "to": "vue.start",
+        "type": "contains",
+        "label": "操作",
+        "evidence": "confirmed UI action"
+      },
+      {
+        "id": "calls.vue.start",
+        "from": "vue.start",
+        "to": "js.advance",
+        "type": "flow",
+        "label": "调用任务逻辑",
+        "evidence": "run prop bound by integrations/bo_browser.tsx; runtime case ui"
+      },
+      {
+        "id": "contains.vue.finish",
+        "from": "vue.template",
+        "to": "vue.finish",
+        "type": "contains",
+        "label": "操作",
+        "evidence": "confirmed UI action"
+      },
+      {
+        "id": "calls.vue.finish",
+        "from": "vue.finish",
+        "to": "js.advance",
+        "type": "flow",
+        "label": "调用任务逻辑",
+        "evidence": "run prop bound by integrations/bo_browser.tsx; runtime case ui"
+      },
+      {
+        "id": "transition.0",
+        "from": "state.pending",
+        "to": "state.running",
+        "type": "flow",
+        "label": "start",
+        "evidence": "common executable JSON declaration"
+      },
+      {
+        "id": "transition.1",
+        "from": "state.pending",
+        "to": "state.waiting",
+        "type": "flow",
+        "label": "start",
+        "evidence": "common executable JSON declaration"
+      },
+      {
+        "id": "transition.2",
+        "from": "state.waiting",
+        "to": "state.running",
+        "type": "flow",
+        "label": "resume",
+        "evidence": "common executable JSON declaration"
+      },
+      {
+        "id": "transition.3",
+        "from": "state.running",
+        "to": "state.done",
+        "type": "flow",
+        "label": "finish",
+        "evidence": "common executable JSON declaration"
+      },
+      {
+        "id": "state.py",
+        "from": "py.advance",
+        "to": "state.running",
+        "type": "data",
+        "label": "返回实际状态",
+        "evidence": "source return and snapshot; may wait or finish"
+      },
+      {
+        "id": "state.js",
+        "from": "js.advance",
+        "to": "state.running",
+        "type": "data",
+        "label": "返回实际状态",
+        "evidence": "source return and snapshot; may wait or finish"
+      },
+      {
+        "id": "call.8ec30999a8ae1407",
+        "from": "react.panel",
+        "to": "react.start",
+        "type": "flow",
+        "label": "静态调用 start",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 7,
+          "column": 92,
+          "args": [],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "call.6bd6ace1f1e90516",
+        "from": "react.panel",
+        "to": "react.finish",
+        "type": "flow",
+        "label": "静态调用 finish",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 7,
+          "column": 136,
+          "args": [],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "call.2091c222843f6a44",
+        "from": "vue.template",
+        "to": "vue.start",
+        "type": "flow",
+        "label": "静态调用 start",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 9,
+          "column": 82,
+          "args": [],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "call.de8c86e3ca4ae72e",
+        "from": "vue.template",
+        "to": "vue.finish",
+        "type": "flow",
+        "label": "静态调用 finish",
+        "origin": "source-ast",
+        "evidence": "javascript syntax reference; execution unproven",
+        "callsite": {
+          "line": 9,
+          "column": 123,
+          "args": [],
+          "keywords": {}
+        }
+      },
+      {
+        "id": "contains.implementation.798220b06c77a273",
+        "from": "vue.template",
+        "to": "implementation.798220b06c77a273",
+        "type": "contains",
+        "label": "实现函数",
+        "origin": "source-ast",
+        "evidence": "implementation inventory + source AST"
+      },
+      {
+        "id": "contains.implementation.0041d31aeda41bac",
+        "from": "vue.template",
+        "to": "implementation.0041d31aeda41bac",
+        "type": "contains",
+        "label": "实现函数",
+        "origin": "source-ast",
+        "evidence": "implementation inventory + source AST"
+      },
+      {
+        "id": "contains.implementation.fdb5a59c3f24a2bb",
+        "from": "js.advance",
+        "to": "implementation.fdb5a59c3f24a2bb",
+        "type": "contains",
+        "label": "实现函数",
+        "origin": "source-ast",
+        "evidence": "implementation inventory + source AST"
+      }
+    ],
+    "overview": [
+      {
+        "node": "py.advance"
+      },
+      {
+        "node": "js.advance"
+      },
+      {
+        "node": "react.panel"
+      },
+      {
+        "node": "vue.template"
+      }
+    ],
+    "scope": {
+      "unknowns": []
+    },
+    "machine": {
+      "engine": "bo.fsm",
+      "version": "1",
+      "state_type": "enum",
+      "states": [
+        "pending",
+        "waiting",
+        "running",
+        "done"
+      ],
+      "values": [
+        "pending",
+        "waiting",
+        "running",
+        "done"
+      ],
+      "initial": "pending",
+      "transitions": [
+        {
+          "source": "pending",
+          "dest": "running",
+          "trigger": "start",
+          "conditions": "available"
+        },
+        {
+          "source": "pending",
+          "dest": "waiting",
+          "trigger": "start",
+          "unless": "available"
+        },
+        {
+          "source": "waiting",
+          "dest": "running",
+          "trigger": "resume",
+          "conditions": "available"
+        },
+        {
+          "source": "running",
+          "dest": "done",
+          "trigger": "finish"
+        }
+      ],
+      "events": {
+        "start": {
+          "payload": {}
+        },
+        "resume": {
+          "payload": {}
+        },
+        "finish": {
+          "payload": {}
+        }
+      },
+      "context": {
+        "slots": {
+          "type": "integer",
+          "min": 0
+        }
+      },
+      "guards": {
+        "available": "at least one slot"
+      }
+    },
+    "presentation": {
+      "subject": "跨语言任务",
+      "layout_id": "multilanguage-jobs",
+      "default_expanded": []
+    },
+    "implementation": {
+      "schema": "bo-implementation/v1",
+      "features": [
+        {
+          "id": "py.advance",
+          "label": "Python 任务",
+          "business_node": "py.advance",
+          "nodes": [
+            "py.advance"
+          ],
+          "sources": [
+            "src/job.py::advance"
+          ],
+          "parameters": [
+            {
+              "source": "src/job.py::advance",
+              "name": "state",
+              "node": "py.advance",
+              "direction": "in",
+              "field": "state",
+              "policy": "value",
+              "reason": "只记录执行模式或回调是否存在；不序列化函数对象"
+            },
+            {
+              "source": "src/job.py::advance",
+              "name": "event",
+              "node": "py.advance",
+              "direction": "in",
+              "field": "event",
+              "policy": "value",
+              "reason": "只记录执行模式或回调是否存在；不序列化函数对象"
+            },
+            {
+              "source": "src/job.py::advance",
+              "name": "slots",
+              "node": "py.advance",
+              "direction": "in",
+              "field": "slots",
+              "policy": "value",
+              "reason": "只记录执行模式或回调是否存在；不序列化函数对象"
+            },
+            {
+              "source": "src/job.py::advance",
+              "name": "executor",
+              "node": "py.advance",
+              "direction": "in",
+              "field": "mode",
+              "policy": "derived",
+              "reason": "只记录执行模式或回调是否存在；不序列化函数对象"
+            }
+          ],
+          "cases": [
+            {
+              "case": "python",
+              "node": "py.advance",
+              "phase": "change"
+            }
+          ],
+          "requirements": [
+            "R1"
+          ]
+        },
+        {
+          "id": "js.advance",
+          "label": "Node / 浏览器任务",
+          "business_node": "js.advance",
+          "nodes": [
+            "js.advance"
+          ],
+          "sources": [
+            "src/job.mjs::advance",
+            "src/job.mjs::available"
+          ],
+          "parameters": [
+            {
+              "source": "src/job.mjs::advance",
+              "name": "state",
+              "node": "js.advance",
+              "direction": "in",
+              "field": "state",
+              "policy": "value",
+              "reason": "只记录执行模式或回调是否存在；不序列化函数对象"
+            },
+            {
+              "source": "src/job.mjs::advance",
+              "name": "event",
+              "node": "js.advance",
+              "direction": "in",
+              "field": "event",
+              "policy": "value",
+              "reason": "只记录执行模式或回调是否存在；不序列化函数对象"
+            },
+            {
+              "source": "src/job.mjs::advance",
+              "name": "slots",
+              "node": "js.advance",
+              "direction": "in",
+              "field": "slots",
+              "policy": "value",
+              "reason": "只记录执行模式或回调是否存在；不序列化函数对象"
+            },
+            {
+              "source": "src/job.mjs::advance",
+              "name": "executor",
+              "node": "js.advance",
+              "direction": "in",
+              "field": "mode",
+              "policy": "derived",
+              "reason": "只记录执行模式或回调是否存在；不序列化函数对象"
+            },
+            {
+              "source": "src/job.mjs::available",
+              "name": "context",
+              "node": "js.advance",
+              "direction": "in",
+              "field": "slots",
+              "policy": "derived",
+              "reason": "只记录执行模式或回调是否存在；不序列化函数对象"
+            }
+          ],
+          "cases": [
+            {
+              "case": "node",
+              "node": "js.advance",
+              "phase": "change"
+            }
+          ],
+          "requirements": [
+            "R1"
+          ]
+        },
+        {
+          "id": "react.panel",
+          "label": "React 操作",
+          "business_node": "react.panel",
+          "nodes": [
+            "react.panel",
+            "react.start",
+            "react.finish"
+          ],
+          "sources": [
+            "src/ReactPanel.tsx::ReactPanel",
+            "src/ReactPanel.tsx::ReactPanel.start",
+            "src/ReactPanel.tsx::ReactPanel.finish"
+          ],
+          "parameters": [
+            {
+              "source": "src/ReactPanel.tsx::ReactPanel",
+              "name": "{run,bo_observe}",
+              "node": "react.panel",
+              "direction": "in",
+              "field": "has_handler",
+              "policy": "derived",
+              "reason": "只记录执行模式或回调是否存在；不序列化函数对象"
+            }
+          ],
+          "cases": [
+            {
+              "case": "ui",
+              "node": "react.panel",
+              "phase": "read"
+            },
+            {
+              "case": "ui",
+              "node": "react.start",
+              "phase": "return"
+            },
+            {
+              "case": "ui",
+              "node": "react.finish",
+              "phase": "return"
+            }
+          ],
+          "requirements": [
+            "R1"
+          ]
+        },
+        {
+          "id": "vue.template",
+          "label": "Vue 操作",
+          "business_node": "vue.template",
+          "nodes": [
+            "vue.template",
+            "vue.start",
+            "vue.finish"
+          ],
+          "sources": [
+            "src/VuePanel.vue::<template>",
+            "src/VuePanel.vue::start",
+            "src/VuePanel.vue::finish"
+          ],
+          "parameters": [],
+          "cases": [
+            {
+              "case": "ui",
+              "node": "vue.template",
+              "phase": "read"
+            },
+            {
+              "case": "ui",
+              "node": "vue.start",
+              "phase": "return"
+            },
+            {
+              "case": "ui",
+              "node": "vue.finish",
+              "phase": "return"
+            }
+          ],
+          "requirements": [
+            "R1"
+          ]
+        }
+      ],
+      "support": {
+        "src/VuePanel.vue::<callback:watchEffect:0:1>": {
+          "node": "vue.template",
+          "reason": "Vue 组件初始化，关联同一操作功能"
+        },
+        "src/VuePanel.vue::<module>": {
+          "node": "vue.template",
+          "reason": "Vue 组件初始化，关联同一操作功能"
+        }
+      },
+      "excluded": {}
+    },
+    "static_structure": {
+      "files": {
+        "src/job.py": "f0f01de2cbc8dacca3d5f6339e251fcf00e0b9ca3629899b47e25de58247a0dd",
+        "src/ReactPanel.tsx": "2af4280901f24c33fe5fd1c3d7ae1c43883b76f7c66c9307638a5659acca65e4",
+        "src/VuePanel.vue": "f3db3d25f1ef2177787cd3d82403a11631d9e1dad37fb733f3f39d7166efebb7",
+        "src/job.mjs": "d5f1498a4078c772ec34b1d6aaa06570b8a00d8a918982b5254bb4d8c27585fe"
+      },
+      "resolved_calls": 4,
+      "unresolved_calls": 16,
+      "depth": 1,
+      "limits": [
+        "Static call candidates are not runtime calls or proven value flow.",
+        "Dynamic dispatch, callbacks, generated source and framework bindings require coding-side review and runtime evidence."
+      ]
+    }
+  }
+}

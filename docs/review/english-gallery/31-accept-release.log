@@ -1,0 +1,25 @@
+delivery accept {
+  "valid": true,
+  "status": "current",
+  "errors": [],
+  "candidate_id": "1198ccdf8440479494bd81a67715ee8a95e836093d2b811fa7a88ec47d997ca7"
+}
+delivery check {
+  "valid": true,
+  "status": "current",
+  "errors": [],
+  "candidate_id": "1198ccdf8440479494bd81a67715ee8a95e836093d2b811fa7a88ec47d997ca7"
+}
+team-archive accept {
+  "valid": true,
+  "status": "current",
+  "errors": [],
+  "candidate_id": "8a66a93e375dd898050c17ce804f0c043415eb5b4d9d1b1a39d27cc8f744eeb3"
+}
+team-archive check {
+  "valid": true,
+  "status": "current",
+  "errors": [],
+  "candidate_id": "8a66a93e375dd898050c17ce804f0c043415eb5b4d9d1b1a39d27cc8f744eeb3"
+}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe

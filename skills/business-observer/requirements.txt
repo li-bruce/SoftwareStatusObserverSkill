@@ -1,0 +1,2 @@
+# Python common service only; application runtimes do not depend on this service.
+jsonschema==4.25.1

@@ -1,0 +1,8 @@
+{
+  "source_rows": 330,
+  "sha256_all_match": true,
+  "all_watched_model_sources_included": true,
+  "candidate3_vendor_files": 144,
+  "runtime_database_or_collector_token_or_personal_views_included": false,
+  "fresh_dependency_install_from_full_zip": "not run; core-only exports executed separately"
+}

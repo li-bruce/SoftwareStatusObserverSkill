@@ -1,0 +1,60 @@
+{
+  "candidate_id": "31b41a4b53c1e2a47e1bffb6daf1307514c5873d4f4e8fdcac19c844371da2ac",
+  "decisions": {
+    "business": {
+      "action": "unchanged",
+      "reason": "业务规则、登录、消息、权限、状态转换及原验收预期保持不变"
+    },
+    "state_machine": {
+      "action": "unchanged",
+      "reason": "保留实际执行器及权威状态读取；不以图事件代替真实业务状态"
+    },
+    "abstraction": {
+      "action": "updated",
+      "reason": "排除明确登记的观测实现及其调用投影，完整源码清单和业务功能仍受检查"
+    },
+    "probes": {
+      "action": "updated",
+      "reason": "观测内部读写抑制递归采集；图接口及静态资源不进入业务事件；业务采集及值比较保持"
+    }
+  },
+  "excluded_symbols": {
+    "app/ports.py::TracePort": "源码仍纳入归属和版本检查；构造或观测内部实现不构成独立业务步骤",
+    "app/ports.py::TracePort.__init__": "源码仍纳入归属和版本检查；构造或观测内部实现不构成独立业务步骤",
+    "app/ports.py::TracePort.bo_record": "源码仍纳入归属和版本检查；构造或观测内部实现不构成独立业务步骤",
+    "app/service.py::DomainError": "源码仍纳入归属和版本检查；构造或观测内部实现不构成独立业务步骤",
+    "app/service.py::DomainError.__init__": "源码仍纳入归属和版本检查；构造或观测内部实现不构成独立业务步骤",
+    "app/service.py::ReviewService": "源码仍纳入归属和版本检查；构造或观测内部实现不构成独立业务步骤",
+    "app/service.py::ReviewService.__init__": "源码仍纳入归属和版本检查；构造或观测内部实现不构成独立业务步骤",
+    "app/storage.py::Store": "源码仍纳入归属和版本检查；构造或观测内部实现不构成独立业务步骤",
+    "app/storage.py::Store.__init__": "源码仍纳入归属和版本检查；构造或观测内部实现不构成独立业务步骤",
+    "integrations/bo_observer.py::BOObserver": "源码仍纳入归属和版本检查；构造或观测内部实现不构成独立业务步骤",
+    "integrations/bo_observer.py::BOObserver.__init__": "源码仍纳入归属和版本检查；构造或观测内部实现不构成独立业务步骤",
+    "integrations/bo_observer.py::BOObserver.bo_http": "源码仍纳入归属和版本检查；构造或观测内部实现不构成独立业务步骤",
+    "integrations/bo_observer.py::BOObserver.close": "源码仍纳入归属和版本检查；构造或观测内部实现不构成独立业务步骤",
+    "integrations/bo_observer.py::BOObserver.health": "源码仍纳入归属和版本检查；构造或观测内部实现不构成独立业务步骤",
+    "integrations/bo_observer.py::BOObserver.snapshot": "源码仍纳入归属和版本检查；构造或观测内部实现不构成独立业务步骤",
+    "integrations/bo_observer.py::BOObserver.trace": "源码仍纳入归属和版本检查；构造或观测内部实现不构成独立业务步骤",
+    "integrations/bo_observer.py::BOObserver.write": "源码仍纳入归属和版本检查；构造或观测内部实现不构成独立业务步骤"
+  },
+  "requirement_changes": {},
+  "observer_reclassifications": {
+    "http-developer": {
+      "sources": [
+        "integrations/server.py::create_app.design",
+        "integrations/server.py::create_app.graph_view",
+        "integrations/server.py::create_app.instances",
+        "integrations/server.py::create_app.export",
+        "integrations/server.py::create_app.source",
+        "integrations/server.py::create_app.preferences",
+        "integrations/server.py::create_app.save_preferences",
+        "integrations/server.py::create_app.list_recordings",
+        "integrations/server.py::create_app.get_recording",
+        "integrations/server.py::create_app.start_recording",
+        "integrations/server.py::create_app.stop_recording",
+        "integrations/server.py::create_app.graph"
+      ],
+      "reason": "用户要求去掉观测和汇报噪声；12个已有图接口原样转为观测归属，逐项核对AST未改"
+    }
+  }
+}

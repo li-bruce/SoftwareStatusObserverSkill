@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "script": "tools/demo.py",
+      "passed": true,
+      "stdout": "{\n  \"valid\": true,\n  \"status\": \"current\",\n  \"errors\": [],\n  \"candidate_id\": \"8315d05ffe9b1ce5b2dfe07d2f21d6ca62f6ff0dc1b39136a36d3fd3dee9b517\"\n}\n",
+      "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\nFailed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+    },
+    {
+      "script": "tools/archive_demo.py",
+      "passed": true,
+      "stdout": "{\n  \"valid\": true,\n  \"status\": \"current\",\n  \"errors\": [],\n  \"candidate_id\": \"5cf07db4e90e586338105277124c2d052939a215dd17b31f11f6c947d676c7ef\"\n}\n",
+      "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\nFailed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "scan": ["src", "integrations", "bo_stategraph", "tooling"],
+  "layers": {
+    "business": {"paths": ["src"], "allows": ["business"], "reject_dynamic": true},
+    "integration": {"paths": ["integrations"], "allows": ["business", "integration", "stategraph", "local_settings"]},
+    "stategraph": {"paths": ["bo_stategraph"], "allows": ["stategraph"]},
+    "tooling": {"paths": ["tooling"], "allows": ["business", "integration", "stategraph", "tooling"]},
+    "local_settings": {"paths": [".stategraph"], "allows": ["local_settings"]}
+  },
+  "managed_paths": []
+}

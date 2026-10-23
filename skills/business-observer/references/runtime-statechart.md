@@ -1,25 +1,23 @@
-# 把状态机融入程序自身
+# Integrate state execution into the application
 
-适用：新增或重构业务生命周期。默认由 AI 依据状态网引导实现，用户侧无需操作内部流程。用户明确选择自己的开发方式时，状态网仍作为独立模块跟随代码更新并监控运行。开发引导方式与是否使用状态机引擎分别记录，见 [独立状态网](independent-python.md)。已有系统有状态机/工作流时，优先适配它的定义、上下文和运行快照，避免在观察器内建立第二个权威状态机。
+For new/refactored lifecycles, ask the user for drive or observe. Drive uses a suitable native engine consuming the declaration; observe adapts actual application state. Both maintain graph/monitoring. Record choice/provenance as described in [independent state network](independent-python.md). Prefer adapting an existing engine's definition/context/snapshot over creating another authoritative state machine.
 
-## 成熟方案的匹配
+## Engine fit
 
-- Python `transitions.HierarchicalMachine`：嵌套状态、显式事件、guards、callbacks。示例实装 0.9.3；关掉 `auto_transitions`，不要让生成的 `to_*` 跳过业务条件。用 dataclass/Enum 和入口校验补足上下文/事件的类型约束。文档：https://github.com/pytransitions/transitions。
-- Python `python-statemachine`：声明式状态/事件与验证，可作为相同语言下的候选；具体层次、异步与恢复特性以项目锁定版本为准。https://python-statemachine.readthedocs.io/en/latest/。
-- TypeScript `XState`：类型化 context/events、guards、actors 与检查接口；适合 TS 程序自身执行。https://stately.ai/docs/typescript。不要仅为了画图把 Python 业务再实现一次到浏览器。
+- [transitions.HierarchicalMachine](https://github.com/pytransitions/transitions): nested states, explicit events, guards, callbacks. Examples pin 0.9.3. Disable auto_transitions so generated to_* methods cannot bypass conditions. Add dataclass/Enum and executable boundary checks for context/event types.
+- [python-statemachine](https://python-statemachine.readthedocs.io/en/latest/): declarative states/events and validation; verify hierarchy, async, and recovery against the project's locked version.
+- [XState](https://stately.ai/docs/typescript): typed context/events, guards, actors, inspection for native TypeScript execution. Do not reimplement Python business logic in a browser just to visualize it.
 
-按已有语言、同步/异步、嵌套/并行、持久化、恢复和依赖成本选型；不是要求所有项目强制采用示例引擎。
+Choose for language, sync/async behavior, hierarchy/concurrency, persistence, recovery, and dependency cost. The example engine is not mandatory.
 
-## 最小契约
+## Minimum contract
 
-声明持久化状态枚举及父子关系、初始/终止状态、事件及有效载荷类型、context 字段类型/范围/枚举/单位/可写性、guards、actions、错误/取消/重试语义。核心函数的输入输出保留自身类型。校验需要真的执行；Python 类型注解本身不验证输入。
+Declare persisted enums/hierarchy, initial/final states, events/payloads, context types/ranges/enums/units/mutability, guards/actions, errors/cancellation/retry. Keep function input/output types. Execute validation; Python annotations alone do not validate inputs.
 
-使用状态机引擎时，用同一份声明创建执行器并导出图；普通代码执行时，由独立模块加载声明，源码映射及真实变化检查其符合性。图额外添加业务分组、核心函数、读写/判定依赖与源码绑定，这些关系不能全部解释为状态迁移。可用 `scripts/statechart_contract.py <behavior.json>` 检查 Python 参考格式。运行材料说明定义来自执行引擎还是观测模块；前者比较实际引擎声明，后者需独立验证真实状态、条件、内部参数和效果，不能用模块与自身模型相同冒充执行等价。
+With an engine, create executor and graph from the same declaration. With ordinary code, load the declaration in the independent module and verify actual source/state changes against it. Business grouping, functions, reads/writes, and decision dependencies are additional typed relations, not all transitions. `scripts/statechart_contract.py <behavior.json>` checks the Python reference format. State whether definitions come from actual engine or observer declaration. The former needs loaded-engine comparison; the latter needs independent state/condition/value/effect tests. A module agreeing with itself proves no execution equivalence.
 
-业务命令经过类型检查、权威数据读取和状态机 guards 执行。受保护效果与最终状态尽可能位于同一事务；跨外部系统需要项目自己的幂等/恢复设计。采集记录只在真实语义点生成，不反过来决定可执行性。同步迁移与异步工作区分：长任务不要持锁等待完成；提交前重读可能变化的参数和授权。
+Business commands validate inputs, read authority, and execute guards. Keep protected effects/final state transactional where possible; external systems need project-specific idempotency/recovery. Observation records semantic points but does not decide eligibility. Separate sync transitions from async work: do not hold locks through long work, and recheck mutable parameters/authorization before commit.
 
-如果使用事务迁移日志，它属于业务持久化，应与状态/效果一起回滚；best-effort 探针另有丢失/故障窗口，不能混称强一致日志。进入状态机不是外部身份认证的替代。
+A transactional transition log is business persistence and rolls back with state/effects. Best-effort probes have different loss/fault windows. Entering a state machine does not replace authentication.
 
-## 验证
-
-验证非法状态/事件、类型/范围、guard 拒绝、迁移回滚、重复提交、运行中参数改版与授权替换、错误/重试、进程中断后的恢复策略。确认探针关闭/故障时状态机照常工作。至少实际证明图显示的状态来自程序执行，并核对源码版本、类型声明、状态及持久化结果。
+Test invalid states/events/types/ranges, rejected guards, rollback, repeated commit, parameter changes, authorization replacement, error/retry, and restart recovery. Off/fault probes must preserve execution. Prove displayed states come from actual execution and match source version, declarations, and persistence.

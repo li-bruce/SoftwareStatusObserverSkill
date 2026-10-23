@@ -1,0 +1,55 @@
+{
+  "candidate_id": "8315d05ffe9b1ce5b2dfe07d2f21d6ca62f6ff0dc1b39136a36d3fd3dee9b517",
+  "changed_files": [
+    "bo_stategraph/runtime-version.json",
+    "observer_generated/behavior.json",
+    "observer_generated/runtime/bo_upgrade.py",
+    "observer_generated/runtime/bo_web.py",
+    "observer_generated/runtime/change_sync.py",
+    "observer_generated/runtime/code_structure.py",
+    "observer_generated/runtime/observation_scope.py",
+    "observer_generated/runtime/origin.json",
+    "observer_generated/runtime/probe.py",
+    "observer_generated/runtime/recording_session.py",
+    "observer_generated/runtime/semantic_probe.py",
+    "ownership.json",
+    "sync.json",
+    "tooling/build_graph.py"
+  ],
+  "changed_symbols": [],
+  "affected_callers": [],
+  "affected_nodes": [],
+  "unmapped_changed_symbols": [],
+  "unmapped_implementation_symbols": [
+    "app/ports.py::BOEvents",
+    "app/ports.py::BOEvents.__init__",
+    "app/ports.py::BOEvents.bo_emit",
+    "app/service.py::Delivery",
+    "app/store.py::Store",
+    "bo_stategraph/workflow.py::ActivityExecution",
+    "bo_stategraph/workflow.py::ActivityState",
+    "bo_stategraph/workflow.py::Phase"
+  ],
+  "changed_requirements": [],
+  "unresolved_call_count": 248,
+  "meaning": "Potential impact plus authored abstraction mapping; semantic truth still needs contract and runtime checks.",
+  "errors": [],
+  "required_classification": [
+    "app/ports.py::BOEvents",
+    "app/ports.py::BOEvents.__init__",
+    "app/ports.py::BOEvents.bo_emit",
+    "app/service.py::Delivery",
+    "app/store.py::Store",
+    "bo_stategraph/workflow.py::ActivityExecution",
+    "bo_stategraph/workflow.py::ActivityState",
+    "bo_stategraph/workflow.py::Phase"
+  ],
+  "review_errors": [],
+  "stategraph": {
+    "module": "bo_stategraph/__init__.py",
+    "development_mode": "guided",
+    "execution_mode": "drive",
+    "decision_source": "default",
+    "decision": "状态机完整位于 bo_stategraph；默认内部引导，监控和映射始终维护。"
+  }
+}

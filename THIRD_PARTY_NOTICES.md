@@ -10,11 +10,17 @@ components keep their own copyright notices and licenses.
 | [transitions](https://github.com/pytransitions/transitions/tree/0.9.3) | 0.9.3 | MIT | Installed by pip; not vendored |
 | [six](https://github.com/benjaminp/six/tree/1.17.0) | 1.17.0 | MIT | Installed by pip; not vendored |
 
+| [jsonschema](https://github.com/python-jsonschema/jsonschema) | 4.25.1 | MIT | Installed by pip for protocol validation |
+| [TypeScript](https://github.com/microsoft/TypeScript) | 5.9.3 | Apache-2.0 | Locked npm source parser; not vendored |
+| [Vue / compiler-sfc](https://github.com/vuejs/core) | 3.5.22 | MIT | Locked parser and example dependencies |
+| [React / React DOM](https://github.com/facebook/react) | 19.2.0 | MIT | Example dependencies |
+| [Vite](https://github.com/vitejs/vite) | 7.1.12 | MIT | Example development and build tool |
+| [jsdom](https://github.com/jsdom/jsdom) | 26.1.0 | MIT | Real component / DOM handler tests |
+
 PixiJS license text is retained next to each `pixi.min.js` bundle as
 `PIXI-LICENSE.txt`. The installed Python distributions include their license
 texts. Python's standard library supplies SQLite and the local HTTP server.
-There is no npm install step, graph database, cloud service or model API key
-required to run the example.
+The JS/TS/SFC parser and frontend example use locked npm dependencies. No graph database, cloud service or model API key is required.
 
 ELK.js supplies the layered and stress algorithms. Its source and build instructions
 are available in the [upstream project](https://github.com/kieler/elkjs) and its

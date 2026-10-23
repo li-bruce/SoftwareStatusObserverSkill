@@ -1,0 +1,31 @@
+{
+  "candidate_id": "fd0ad789fce7c32498b08631ce11c243f3798c145ab597888b5cb1540c923dcd",
+  "decisions": {
+    "business": {
+      "action": "unchanged",
+      "reason": "Existing authorization, version, state and effect expectations are preserved. The archive UI is inventoried as existing implemented behavior, not a new requested rule."
+    },
+    "state_machine": {
+      "action": "updated",
+      "reason": "The executor and generator now read the same machine JSON. Runtime declaration parity against the previous frozen definitions and real wait/resource/join behavior is tested."
+    },
+    "abstraction": {
+      "action": "updated",
+      "reason": "Common services are grouped under bo_observer; Python and native sources use one inventory. Obsolete viewers and v1 schemas are retired; stable source IDs remain."
+    },
+    "probes": {
+      "action": "updated",
+      "reason": "Versioned native JSON transport joins the same event stream. Observer infrastructure remains excluded. The archive UI adds actual DOM handler tests and request-value checks; previous probes and checks are retained."
+    }
+  },
+  "excluded_symbols": {
+    "app/ports.py::BOEvents": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "app/ports.py::BOEvents.__init__": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "app/ports.py::BOEvents.bo_emit": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "app/service.py::Delivery": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "app/store.py::Store": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "bo_stategraph/workflow.py::ActivityExecution": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "bo_stategraph/workflow.py::ActivityState": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "bo_stategraph/workflow.py::Phase": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests."
+  }
+}

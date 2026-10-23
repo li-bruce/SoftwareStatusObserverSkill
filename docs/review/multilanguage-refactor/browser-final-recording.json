@@ -1,0 +1,2161 @@
+{
+  "schema": "stategraph-recording/v1",
+  "id": "9eccdb2589c44034a126b863703e5bb9",
+  "label": "操作记录",
+  "status": "stopped",
+  "started_at": "2026-10-23T15:24:45.171783+08:00",
+  "ended_at": "2026-10-23T15:26:02.75949+08:00",
+  "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+  "run_id": "f981db66099909b81dfc531c",
+  "start_seq": 8,
+  "end_seq": 20,
+  "context": {
+    "authority": {
+      "entity": "vue",
+      "state": "pending",
+      "basis": {},
+      "parameters": {
+        "slots": 1
+      },
+      "effects": []
+    },
+    "machine": {
+      "current": "pending",
+      "state_revision": 0,
+      "configurations": [
+        {
+          "attempt": "react:89223515-edf8-41b0-af2d-278ed4f0901d",
+          "phase": "pending",
+          "param_version": 0,
+          "activities": {},
+          "resources": {},
+          "journal": []
+        },
+        {
+          "attempt": "vue:862b443d-c778-4107-ba61-f026723c45f4",
+          "phase": "pending",
+          "param_version": 0,
+          "activities": {},
+          "resources": {},
+          "journal": []
+        },
+        {
+          "attempt": "react:2bc1bd07-a785-4f0d-ab3d-cdb57994d307",
+          "phase": "pending",
+          "param_version": 0,
+          "activities": {},
+          "resources": {},
+          "journal": []
+        },
+        {
+          "attempt": "vue:46eed63f-3c1d-4fee-ab5b-4ce3bcefff44",
+          "phase": "pending",
+          "param_version": 0,
+          "activities": {},
+          "resources": {},
+          "journal": []
+        }
+      ],
+      "journal": []
+    },
+    "health": {
+      "errors": 0,
+      "dropped": 0,
+      "run_id": "f981db66099909b81dfc531c",
+      "attempted": 8,
+      "written": 8,
+      "enabled": true,
+      "runtime_frame_evictions": 0,
+      "retained_events": 8,
+      "evicted_events": 0,
+      "history_start_seq": 1,
+      "log_errors": 0,
+      "listener_errors": 0,
+      "retention": {
+        "memory_events": 10000,
+        "memory_seconds": 1800,
+        "log_bytes": 8388608,
+        "log_backups": 2
+      }
+    },
+    "binding_status": {
+      "status": "current",
+      "changed_files": [],
+      "model_changed": false,
+      "intent_changed": false,
+      "directly_affected": [],
+      "possibly_affected": []
+    },
+    "historical": true,
+    "busy": false,
+    "model": {
+      "schema_version": 3,
+      "revision": "1",
+      "project_id": "multilanguage-jobs",
+      "intent": "intent.json",
+      "source_files": [
+        "src/job.py",
+        "src/job.mjs",
+        "src/ReactPanel.tsx",
+        "src/VuePanel.vue",
+        "bo_stategraph/project.json",
+        "integrations/bo_runner.mjs",
+        "integrations/bo_browser.tsx",
+        "bo_stategraph/bo_runtime.mjs",
+        "bo_stategraph/bo_executor.py",
+        "bo_stategraph/bo_probe.py",
+        "bo_stategraph/bo_contracts.py",
+        "bo_stategraph/execution_contract.py"
+      ],
+      "nodes": [
+        {
+          "id": "py.advance",
+          "kind": "action",
+          "layer": "business",
+          "label": "Python 任务",
+          "summary": "实际操作、参数和结果",
+          "source": {
+            "path": "src/job.py",
+            "symbol": "advance"
+          },
+          "capture": {
+            "in": {
+              "state": "string",
+              "event": "string",
+              "slots": "number",
+              "mode": "string"
+            },
+            "out": {
+              "state": "string"
+            }
+          },
+          "requirements": [
+            "R1"
+          ],
+          "code_evidence": {
+            "symbol": "src/job.py::advance",
+            "ast_hash": "491c52dcc8244b778afa60fef14e9c0cd531082f9655dd81a82a3b53b1741cac",
+            "origin": "source-ast"
+          },
+          "semantic_roles": [
+            "business"
+          ]
+        },
+        {
+          "id": "js.advance",
+          "kind": "action",
+          "layer": "business",
+          "label": "Node / 浏览器任务",
+          "summary": "实际操作、参数和结果",
+          "source": {
+            "path": "src/job.mjs",
+            "symbol": "advance"
+          },
+          "capture": {
+            "in": {
+              "state": "string",
+              "event": "string",
+              "slots": "number",
+              "mode": "string"
+            },
+            "out": {
+              "state": "string"
+            }
+          },
+          "requirements": [
+            "R1"
+          ],
+          "code_evidence": {
+            "symbol": "src/job.mjs::advance",
+            "ast_hash": "9e5725c295e76d933bed5248bf325d48b3085aa74c4d8fd85008d2855cebb014",
+            "origin": "source-ast"
+          },
+          "semantic_roles": [
+            "business"
+          ]
+        },
+        {
+          "id": "react.panel",
+          "kind": "action",
+          "layer": "business",
+          "label": "React 操作",
+          "summary": "实际操作、参数和结果",
+          "source": {
+            "path": "src/ReactPanel.tsx",
+            "symbol": "ReactPanel"
+          },
+          "capture": {
+            "in": {
+              "has_handler": "boolean"
+            },
+            "out": {
+              "state": "string"
+            }
+          },
+          "requirements": [
+            "R1"
+          ],
+          "code_evidence": {
+            "symbol": "src/ReactPanel.tsx::ReactPanel",
+            "ast_hash": "2f019b7b6bd210cc8a966ffb06abfb59d38669cc81a98cce56dce6c3547c62bb",
+            "origin": "source-ast"
+          },
+          "semantic_roles": [
+            "business"
+          ]
+        },
+        {
+          "id": "vue.template",
+          "kind": "action",
+          "layer": "business",
+          "label": "Vue 操作",
+          "summary": "实际操作、参数和结果",
+          "source": {
+            "path": "src/VuePanel.vue",
+            "symbol": "<template>"
+          },
+          "capture": {
+            "in": {
+              "has_handler": "boolean"
+            },
+            "out": {
+              "state": "string"
+            }
+          },
+          "requirements": [
+            "R1"
+          ],
+          "code_evidence": {
+            "symbol": "src/VuePanel.vue::<template>",
+            "ast_hash": "ac04705e36c629e6fb61bc88df2b6d5555b93c31bdc47f31ab80ed59cd887543",
+            "origin": "source-ast"
+          },
+          "semantic_roles": [
+            "business"
+          ]
+        },
+        {
+          "id": "react.start",
+          "kind": "function",
+          "layer": "program",
+          "label": "开始任务",
+          "summary": "用户点击后执行处理",
+          "source": {
+            "path": "src/ReactPanel.tsx",
+            "symbol": "ReactPanel.start"
+          },
+          "parent": "react.panel",
+          "capture": {
+            "in": {
+              "event": "string"
+            },
+            "out": {
+              "before": "string",
+              "state": "string"
+            }
+          },
+          "requirements": [
+            "R1"
+          ],
+          "code_evidence": {
+            "symbol": "src/ReactPanel.tsx::ReactPanel.start",
+            "ast_hash": "12b42b80e3c83fe81b86fe093ecc28959e2b0a54366129099723e9d80befd690",
+            "origin": "source-ast"
+          }
+        },
+        {
+          "id": "react.finish",
+          "kind": "function",
+          "layer": "program",
+          "label": "完成任务",
+          "summary": "用户点击后执行处理",
+          "source": {
+            "path": "src/ReactPanel.tsx",
+            "symbol": "ReactPanel.finish"
+          },
+          "parent": "react.panel",
+          "capture": {
+            "in": {
+              "event": "string"
+            },
+            "out": {
+              "before": "string",
+              "state": "string"
+            }
+          },
+          "requirements": [
+            "R1"
+          ],
+          "code_evidence": {
+            "symbol": "src/ReactPanel.tsx::ReactPanel.finish",
+            "ast_hash": "865421a68152540fb9eb61deb8fc7b4b93abc326c1fc44e3539efb7806bfe860",
+            "origin": "source-ast"
+          }
+        },
+        {
+          "id": "vue.start",
+          "kind": "function",
+          "layer": "program",
+          "label": "开始任务",
+          "summary": "用户点击后执行处理",
+          "source": {
+            "path": "src/VuePanel.vue",
+            "symbol": "start"
+          },
+          "parent": "vue.template",
+          "capture": {
+            "in": {
+              "event": "string"
+            },
+            "out": {
+              "before": "string",
+              "state": "string"
+            }
+          },
+          "requirements": [
+            "R1"
+          ],
+          "code_evidence": {
+            "symbol": "src/VuePanel.vue::start",
+            "ast_hash": "ec6d86157a43718496c161fe16bb4ac56ee10f18b275b0d1829e52e70ac46ee3",
+            "origin": "source-ast"
+          }
+        },
+        {
+          "id": "vue.finish",
+          "kind": "function",
+          "layer": "program",
+          "label": "完成任务",
+          "summary": "用户点击后执行处理",
+          "source": {
+            "path": "src/VuePanel.vue",
+            "symbol": "finish"
+          },
+          "parent": "vue.template",
+          "capture": {
+            "in": {
+              "event": "string"
+            },
+            "out": {
+              "before": "string",
+              "state": "string"
+            }
+          },
+          "requirements": [
+            "R1"
+          ],
+          "code_evidence": {
+            "symbol": "src/VuePanel.vue::finish",
+            "ast_hash": "0579d6ffbc090538523764c73f631898d3805bf490d528aa015baa6b2db6e32c",
+            "origin": "source-ast"
+          }
+        },
+        {
+          "id": "state.pending",
+          "kind": "state",
+          "layer": "state",
+          "value": "pending",
+          "label": "待处理",
+          "summary": "实际任务状态"
+        },
+        {
+          "id": "state.waiting",
+          "kind": "state",
+          "layer": "state",
+          "value": "waiting",
+          "label": "等待名额",
+          "summary": "实际任务状态"
+        },
+        {
+          "id": "state.running",
+          "kind": "state",
+          "layer": "state",
+          "value": "running",
+          "label": "处理中",
+          "summary": "实际任务状态"
+        },
+        {
+          "id": "state.done",
+          "kind": "state",
+          "layer": "state",
+          "value": "done",
+          "label": "已完成",
+          "summary": "实际任务状态"
+        },
+        {
+          "id": "implementation.798220b06c77a273",
+          "kind": "function",
+          "layer": "program",
+          "origin": "source-ast",
+          "label": "<callback:watchEffect:0:1>",
+          "summary": "实现归属；调用关系以源码和运行记录为准",
+          "source": {
+            "path": "src/VuePanel.vue",
+            "symbol": "<callback:watchEffect:0:1>"
+          },
+          "parent": "vue.template",
+          "capture": {
+            "in": {},
+            "out": {}
+          },
+          "signature": "",
+          "code_evidence": {
+            "symbol": "src/VuePanel.vue::<callback:watchEffect:0:1>",
+            "ast_hash": "5edda14247fb3a9fb7efece58fbdc3aae5f2750a15f84492d21f9b632a402947",
+            "parameters": [],
+            "returns": null,
+            "origin": "source-ast"
+          }
+        },
+        {
+          "id": "implementation.0041d31aeda41bac",
+          "kind": "function",
+          "layer": "program",
+          "origin": "source-ast",
+          "label": "<module>",
+          "summary": "实现归属；调用关系以源码和运行记录为准",
+          "source": {
+            "path": "src/VuePanel.vue",
+            "symbol": "<module>"
+          },
+          "parent": "vue.template",
+          "capture": {
+            "in": {},
+            "out": {}
+          },
+          "signature": "module",
+          "code_evidence": {
+            "symbol": "src/VuePanel.vue::<module>",
+            "ast_hash": "00e6035044ef983710a4da0827f4f5ba84829ad936533f3e6ff3d8559c24c160",
+            "parameters": [],
+            "returns": null,
+            "origin": "source-ast"
+          }
+        },
+        {
+          "id": "implementation.fdb5a59c3f24a2bb",
+          "kind": "function",
+          "layer": "program",
+          "origin": "source-ast",
+          "label": "available",
+          "summary": "实现归属；调用关系以源码和运行记录为准",
+          "source": {
+            "path": "src/job.mjs",
+            "symbol": "available"
+          },
+          "parent": "js.advance",
+          "capture": {
+            "in": {},
+            "out": {}
+          },
+          "signature": "context",
+          "code_evidence": {
+            "symbol": "src/job.mjs::available",
+            "ast_hash": "ae31ec5387cc33141dcaa0e6ec91327806995c2861aee1769c108c1703442579",
+            "parameters": [
+              {
+                "name": "context",
+                "annotation": null
+              }
+            ],
+            "returns": null,
+            "origin": "source-ast"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "contains.react.start",
+          "from": "react.panel",
+          "to": "react.start",
+          "type": "contains",
+          "label": "操作",
+          "evidence": "confirmed UI action"
+        },
+        {
+          "id": "calls.react.start",
+          "from": "react.start",
+          "to": "js.advance",
+          "type": "flow",
+          "label": "调用任务逻辑",
+          "evidence": "run prop bound by integrations/bo_browser.tsx; runtime case ui"
+        },
+        {
+          "id": "contains.react.finish",
+          "from": "react.panel",
+          "to": "react.finish",
+          "type": "contains",
+          "label": "操作",
+          "evidence": "confirmed UI action"
+        },
+        {
+          "id": "calls.react.finish",
+          "from": "react.finish",
+          "to": "js.advance",
+          "type": "flow",
+          "label": "调用任务逻辑",
+          "evidence": "run prop bound by integrations/bo_browser.tsx; runtime case ui"
+        },
+        {
+          "id": "contains.vue.start",
+          "from": "vue.template",
+          "to": "vue.start",
+          "type": "contains",
+          "label": "操作",
+          "evidence": "confirmed UI action"
+        },
+        {
+          "id": "calls.vue.start",
+          "from": "vue.start",
+          "to": "js.advance",
+          "type": "flow",
+          "label": "调用任务逻辑",
+          "evidence": "run prop bound by integrations/bo_browser.tsx; runtime case ui"
+        },
+        {
+          "id": "contains.vue.finish",
+          "from": "vue.template",
+          "to": "vue.finish",
+          "type": "contains",
+          "label": "操作",
+          "evidence": "confirmed UI action"
+        },
+        {
+          "id": "calls.vue.finish",
+          "from": "vue.finish",
+          "to": "js.advance",
+          "type": "flow",
+          "label": "调用任务逻辑",
+          "evidence": "run prop bound by integrations/bo_browser.tsx; runtime case ui"
+        },
+        {
+          "id": "transition.0",
+          "from": "state.pending",
+          "to": "state.running",
+          "type": "flow",
+          "label": "start",
+          "evidence": "common executable JSON declaration"
+        },
+        {
+          "id": "transition.1",
+          "from": "state.pending",
+          "to": "state.waiting",
+          "type": "flow",
+          "label": "start",
+          "evidence": "common executable JSON declaration"
+        },
+        {
+          "id": "transition.2",
+          "from": "state.waiting",
+          "to": "state.running",
+          "type": "flow",
+          "label": "resume",
+          "evidence": "common executable JSON declaration"
+        },
+        {
+          "id": "transition.3",
+          "from": "state.running",
+          "to": "state.done",
+          "type": "flow",
+          "label": "finish",
+          "evidence": "common executable JSON declaration"
+        },
+        {
+          "id": "state.py",
+          "from": "py.advance",
+          "to": "state.running",
+          "type": "data",
+          "label": "返回实际状态",
+          "evidence": "source return and snapshot; may wait or finish"
+        },
+        {
+          "id": "state.js",
+          "from": "js.advance",
+          "to": "state.running",
+          "type": "data",
+          "label": "返回实际状态",
+          "evidence": "source return and snapshot; may wait or finish"
+        },
+        {
+          "id": "call.8ec30999a8ae1407",
+          "from": "react.panel",
+          "to": "react.start",
+          "type": "flow",
+          "label": "静态调用 start",
+          "origin": "source-ast",
+          "evidence": "javascript syntax reference; execution unproven",
+          "callsite": {
+            "line": 7,
+            "column": 92,
+            "args": [],
+            "keywords": {}
+          }
+        },
+        {
+          "id": "call.6bd6ace1f1e90516",
+          "from": "react.panel",
+          "to": "react.finish",
+          "type": "flow",
+          "label": "静态调用 finish",
+          "origin": "source-ast",
+          "evidence": "javascript syntax reference; execution unproven",
+          "callsite": {
+            "line": 7,
+            "column": 136,
+            "args": [],
+            "keywords": {}
+          }
+        },
+        {
+          "id": "call.2091c222843f6a44",
+          "from": "vue.template",
+          "to": "vue.start",
+          "type": "flow",
+          "label": "静态调用 start",
+          "origin": "source-ast",
+          "evidence": "javascript syntax reference; execution unproven",
+          "callsite": {
+            "line": 9,
+            "column": 82,
+            "args": [],
+            "keywords": {}
+          }
+        },
+        {
+          "id": "call.de8c86e3ca4ae72e",
+          "from": "vue.template",
+          "to": "vue.finish",
+          "type": "flow",
+          "label": "静态调用 finish",
+          "origin": "source-ast",
+          "evidence": "javascript syntax reference; execution unproven",
+          "callsite": {
+            "line": 9,
+            "column": 123,
+            "args": [],
+            "keywords": {}
+          }
+        },
+        {
+          "id": "contains.implementation.798220b06c77a273",
+          "from": "vue.template",
+          "to": "implementation.798220b06c77a273",
+          "type": "contains",
+          "label": "实现函数",
+          "origin": "source-ast",
+          "evidence": "implementation inventory + source AST"
+        },
+        {
+          "id": "contains.implementation.0041d31aeda41bac",
+          "from": "vue.template",
+          "to": "implementation.0041d31aeda41bac",
+          "type": "contains",
+          "label": "实现函数",
+          "origin": "source-ast",
+          "evidence": "implementation inventory + source AST"
+        },
+        {
+          "id": "contains.implementation.fdb5a59c3f24a2bb",
+          "from": "js.advance",
+          "to": "implementation.fdb5a59c3f24a2bb",
+          "type": "contains",
+          "label": "实现函数",
+          "origin": "source-ast",
+          "evidence": "implementation inventory + source AST"
+        }
+      ],
+      "overview": [
+        {
+          "node": "py.advance"
+        },
+        {
+          "node": "js.advance"
+        },
+        {
+          "node": "react.panel"
+        },
+        {
+          "node": "vue.template"
+        }
+      ],
+      "scope": {
+        "unknowns": []
+      },
+      "machine": {
+        "engine": "bo.fsm",
+        "version": "1",
+        "state_type": "enum",
+        "states": [
+          "pending",
+          "waiting",
+          "running",
+          "done"
+        ],
+        "values": [
+          "pending",
+          "waiting",
+          "running",
+          "done"
+        ],
+        "initial": "pending",
+        "transitions": [
+          {
+            "source": "pending",
+            "dest": "running",
+            "trigger": "start",
+            "conditions": "available"
+          },
+          {
+            "source": "pending",
+            "dest": "waiting",
+            "trigger": "start",
+            "unless": "available"
+          },
+          {
+            "source": "waiting",
+            "dest": "running",
+            "trigger": "resume",
+            "conditions": "available"
+          },
+          {
+            "source": "running",
+            "dest": "done",
+            "trigger": "finish"
+          }
+        ],
+        "events": {
+          "start": {
+            "payload": {}
+          },
+          "resume": {
+            "payload": {}
+          },
+          "finish": {
+            "payload": {}
+          }
+        },
+        "context": {
+          "slots": {
+            "type": "integer",
+            "min": 0
+          }
+        },
+        "guards": {
+          "available": "at least one slot"
+        },
+        "labels": {
+          "pending": "pending",
+          "waiting": "waiting",
+          "running": "running",
+          "done": "done"
+        }
+      },
+      "presentation": {
+        "subject": "跨语言任务",
+        "layout_id": "multilanguage-jobs",
+        "default_expanded": []
+      },
+      "implementation": {
+        "schema": "bo-implementation/v1",
+        "features": [
+          {
+            "id": "py.advance",
+            "label": "Python 任务",
+            "business_node": "py.advance",
+            "nodes": [
+              "py.advance"
+            ],
+            "sources": [
+              "src/job.py::advance"
+            ],
+            "parameters": [
+              {
+                "source": "src/job.py::advance",
+                "name": "state",
+                "node": "py.advance",
+                "direction": "in",
+                "field": "state",
+                "policy": "value",
+                "reason": "只记录执行模式或回调是否存在；不序列化函数对象"
+              },
+              {
+                "source": "src/job.py::advance",
+                "name": "event",
+                "node": "py.advance",
+                "direction": "in",
+                "field": "event",
+                "policy": "value",
+                "reason": "只记录执行模式或回调是否存在；不序列化函数对象"
+              },
+              {
+                "source": "src/job.py::advance",
+                "name": "slots",
+                "node": "py.advance",
+                "direction": "in",
+                "field": "slots",
+                "policy": "value",
+                "reason": "只记录执行模式或回调是否存在；不序列化函数对象"
+              },
+              {
+                "source": "src/job.py::advance",
+                "name": "executor",
+                "node": "py.advance",
+                "direction": "in",
+                "field": "mode",
+                "policy": "derived",
+                "reason": "只记录执行模式或回调是否存在；不序列化函数对象"
+              }
+            ],
+            "cases": [
+              {
+                "case": "python",
+                "node": "py.advance",
+                "phase": "change"
+              }
+            ],
+            "requirements": [
+              "R1"
+            ]
+          },
+          {
+            "id": "js.advance",
+            "label": "Node / 浏览器任务",
+            "business_node": "js.advance",
+            "nodes": [
+              "js.advance"
+            ],
+            "sources": [
+              "src/job.mjs::advance",
+              "src/job.mjs::available"
+            ],
+            "parameters": [
+              {
+                "source": "src/job.mjs::advance",
+                "name": "state",
+                "node": "js.advance",
+                "direction": "in",
+                "field": "state",
+                "policy": "value",
+                "reason": "只记录执行模式或回调是否存在；不序列化函数对象"
+              },
+              {
+                "source": "src/job.mjs::advance",
+                "name": "event",
+                "node": "js.advance",
+                "direction": "in",
+                "field": "event",
+                "policy": "value",
+                "reason": "只记录执行模式或回调是否存在；不序列化函数对象"
+              },
+              {
+                "source": "src/job.mjs::advance",
+                "name": "slots",
+                "node": "js.advance",
+                "direction": "in",
+                "field": "slots",
+                "policy": "value",
+                "reason": "只记录执行模式或回调是否存在；不序列化函数对象"
+              },
+              {
+                "source": "src/job.mjs::advance",
+                "name": "executor",
+                "node": "js.advance",
+                "direction": "in",
+                "field": "mode",
+                "policy": "derived",
+                "reason": "只记录执行模式或回调是否存在；不序列化函数对象"
+              },
+              {
+                "source": "src/job.mjs::available",
+                "name": "context",
+                "node": "js.advance",
+                "direction": "in",
+                "field": "slots",
+                "policy": "derived",
+                "reason": "只记录执行模式或回调是否存在；不序列化函数对象"
+              }
+            ],
+            "cases": [
+              {
+                "case": "node",
+                "node": "js.advance",
+                "phase": "change"
+              }
+            ],
+            "requirements": [
+              "R1"
+            ]
+          },
+          {
+            "id": "react.panel",
+            "label": "React 操作",
+            "business_node": "react.panel",
+            "nodes": [
+              "react.panel",
+              "react.start",
+              "react.finish"
+            ],
+            "sources": [
+              "src/ReactPanel.tsx::ReactPanel",
+              "src/ReactPanel.tsx::ReactPanel.start",
+              "src/ReactPanel.tsx::ReactPanel.finish"
+            ],
+            "parameters": [
+              {
+                "source": "src/ReactPanel.tsx::ReactPanel",
+                "name": "{run,bo_observe}",
+                "node": "react.panel",
+                "direction": "in",
+                "field": "has_handler",
+                "policy": "derived",
+                "reason": "只记录执行模式或回调是否存在；不序列化函数对象"
+              }
+            ],
+            "cases": [
+              {
+                "case": "ui",
+                "node": "react.panel",
+                "phase": "read"
+              },
+              {
+                "case": "ui",
+                "node": "react.start",
+                "phase": "return"
+              },
+              {
+                "case": "ui",
+                "node": "react.finish",
+                "phase": "return"
+              }
+            ],
+            "requirements": [
+              "R1"
+            ]
+          },
+          {
+            "id": "vue.template",
+            "label": "Vue 操作",
+            "business_node": "vue.template",
+            "nodes": [
+              "vue.template",
+              "vue.start",
+              "vue.finish"
+            ],
+            "sources": [
+              "src/VuePanel.vue::<template>",
+              "src/VuePanel.vue::start",
+              "src/VuePanel.vue::finish"
+            ],
+            "parameters": [],
+            "cases": [
+              {
+                "case": "ui",
+                "node": "vue.template",
+                "phase": "read"
+              },
+              {
+                "case": "ui",
+                "node": "vue.start",
+                "phase": "return"
+              },
+              {
+                "case": "ui",
+                "node": "vue.finish",
+                "phase": "return"
+              }
+            ],
+            "requirements": [
+              "R1"
+            ]
+          }
+        ],
+        "support": {
+          "src/VuePanel.vue::<callback:watchEffect:0:1>": {
+            "node": "vue.template",
+            "reason": "Vue 组件初始化，关联同一操作功能"
+          },
+          "src/VuePanel.vue::<module>": {
+            "node": "vue.template",
+            "reason": "Vue 组件初始化，关联同一操作功能"
+          }
+        },
+        "excluded": {}
+      },
+      "static_structure": {
+        "files": {
+          "src/job.py": "f0f01de2cbc8dacca3d5f6339e251fcf00e0b9ca3629899b47e25de58247a0dd",
+          "src/ReactPanel.tsx": "2af4280901f24c33fe5fd1c3d7ae1c43883b76f7c66c9307638a5659acca65e4",
+          "src/VuePanel.vue": "f3db3d25f1ef2177787cd3d82403a11631d9e1dad37fb733f3f39d7166efebb7",
+          "src/job.mjs": "d5f1498a4078c772ec34b1d6aaa06570b8a00d8a918982b5254bb4d8c27585fe"
+        },
+        "resolved_calls": 4,
+        "unresolved_calls": 16,
+        "depth": 1,
+        "limits": [
+          "Static call candidates are not runtime calls or proven value flow.",
+          "Dynamic dispatch, callbacks, generated source and framework bindings require coding-side review and runtime evidence."
+        ]
+      }
+    },
+    "manifest": {
+      "schema_version": 3,
+      "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+      "files": {
+        "bo_stategraph/bo_contracts.py": "91cc0613351d8496414fdbe23dd1710ca027f83835de3c623fab814749982f34",
+        "bo_stategraph/bo_executor.py": "77b31bfbafac4729bf3c743c7e6011180bff84af78d673bf6b3f2fbd08186895",
+        "bo_stategraph/bo_probe.py": "93a288e944b8e57538986c454877e47d34e6dda3e5bcf50cb908ac756e4a626c",
+        "bo_stategraph/bo_runtime.mjs": "5b7cf603b68e0f3286df7a233f311fe4db9d8ee4ffa03751e9b22a806b86285b",
+        "bo_stategraph/execution_contract.py": "9502b2d348bb8ee00c05288ca3d064d151365292fdef597c156c178871635b78",
+        "bo_stategraph/project.json": "ace784db1abfcd85d6992a6663bdd1fcfb62d46f9ac441721b8e8bfc5731342d",
+        "integrations/bo_browser.tsx": "c7fe9d544c92d89e4919caaa76e6ae32458cfb8c74cdbb7929ebce335547fe1f",
+        "integrations/bo_runner.mjs": "adeb2b6db07242cfa35da28199f0b717e0879aac5806206924a00d12a9f539b5",
+        "src/ReactPanel.tsx": "2af4280901f24c33fe5fd1c3d7ae1c43883b76f7c66c9307638a5659acca65e4",
+        "src/VuePanel.vue": "f3db3d25f1ef2177787cd3d82403a11631d9e1dad37fb733f3f39d7166efebb7",
+        "src/job.mjs": "d5f1498a4078c772ec34b1d6aaa06570b8a00d8a918982b5254bb4d8c27585fe",
+        "src/job.py": "f0f01de2cbc8dacca3d5f6339e251fcf00e0b9ca3629899b47e25de58247a0dd"
+      },
+      "model_hash": "9f02db172c5abad0f8f388621e64a3cf2dbc41268feedeb29aefa68084481308",
+      "intent_hash": "f680ecbdf6ac7fabdf7b7288f29ded13d6c0f6ec1268a11dbd64bf7d95ab016b",
+      "model_revision": "1",
+      "bindings": {
+        "py.advance": {
+          "path": "src/job.py",
+          "symbol": "advance",
+          "line": 2,
+          "end_line": 11,
+          "signature": "state: str, event: str, slots: int, executor=None",
+          "ast_sha256": "491c52dcc8244b778afa60fef14e9c0cd531082f9655dd81a82a3b53b1741cac",
+          "snippet": "def advance(state: str, event: str, slots: int, executor=None):\n    if executor is not None:\n        return executor.step(state,event,{'slots':slots})\n    if event=='start' and state=='pending':\n        return {'state':'running' if slots>0 else 'waiting','guards':{'available':slots>0},'event':event,'payload':{}}\n    if event=='resume' and state=='waiting' and slots>0:\n        return {'state':'running','guards':{'available':True},'event':event,'payload':{}}\n    if event=='finish' and state=='running':\n        return {'state':'done','guards':{},'event':event,'payload':{}}\n    raise ValueError('no enabled transition')",
+          "calls": [
+            "ValueError",
+            "executor.step"
+          ],
+          "guards": [
+            {
+              "line": 3,
+              "expression": "executor is not None"
+            },
+            {
+              "line": 5,
+              "expression": "event == 'start' and state == 'pending'"
+            },
+            {
+              "line": 7,
+              "expression": "event == 'resume' and state == 'waiting' and (slots > 0)"
+            },
+            {
+              "line": 9,
+              "expression": "event == 'finish' and state == 'running'"
+            },
+            {
+              "line": 6,
+              "expression": "slots > 0"
+            }
+          ],
+          "file_sha256": "f0f01de2cbc8dacca3d5f6339e251fcf00e0b9ca3629899b47e25de58247a0dd"
+        },
+        "js.advance": {
+          "path": "src/job.mjs",
+          "symbol": "advance",
+          "line": 3,
+          "end_line": 9,
+          "signature": "state, event, slots, executor=null",
+          "ast_sha256": "9e5725c295e76d933bed5248bf325d48b3085aa74c4d8fd85008d2855cebb014",
+          "snippet": "export function advance(state,event,slots,executor=null) {\n  if(executor) return executor.step(state,event,{slots});\n  if(event==='start'&&state==='pending')return {state:slots>0?'running':'waiting',guards:{available:slots>0},event,payload:{}};\n  if(event==='resume'&&state==='waiting'&&slots>0)return {state:'running',guards:{available:true},event,payload:{}};\n  if(event==='finish'&&state==='running')return {state:'done',guards:{},event,payload:{}};\n  throw Error('No enabled transition');\n}",
+          "calls": [
+            "executor.step",
+            "Error"
+          ],
+          "guards": [
+            {
+              "line": 4,
+              "expression": "executor"
+            },
+            {
+              "line": 5,
+              "expression": "event==='start'&&state==='pending'"
+            },
+            {
+              "line": 5,
+              "expression": "slots>0"
+            },
+            {
+              "line": 6,
+              "expression": "event==='resume'&&state==='waiting'&&slots>0"
+            },
+            {
+              "line": 7,
+              "expression": "event==='finish'&&state==='running'"
+            }
+          ],
+          "file_sha256": "d5f1498a4078c772ec34b1d6aaa06570b8a00d8a918982b5254bb4d8c27585fe"
+        },
+        "react.panel": {
+          "path": "src/ReactPanel.tsx",
+          "symbol": "ReactPanel",
+          "line": 2,
+          "end_line": 8,
+          "signature": "{run,bo_observe}: {run:(event:string)=>string,bo_observe?:Function}",
+          "ast_sha256": "2f019b7b6bd210cc8a966ffb06abfb59d38669cc81a98cce56dce6c3547c62bb",
+          "snippet": "export function ReactPanel({run,bo_observe}: {run:(event:string)=>string,bo_observe?:Function}) {\n  const [state,setState]=useState('pending');\n  try {bo_observe?.('react.panel','read',{inputs:{has_handler:typeof run==='function'},outputs:{state}});} catch {}\n  function start(){setState(run('start'));}\n  function finish(){setState(run('finish'));}\n  return <section><h2>React 任务</h2><p data-testid=\"react-state\">{state}</p><button onClick={start}>开始 React 任务</button><button onClick={finish}>完成 React 任务</button></section>;\n}",
+          "calls": [
+            "useState",
+            "bo_observe",
+            "start",
+            "finish"
+          ],
+          "guards": [],
+          "file_sha256": "2af4280901f24c33fe5fd1c3d7ae1c43883b76f7c66c9307638a5659acca65e4"
+        },
+        "vue.template": {
+          "path": "src/VuePanel.vue",
+          "symbol": "<template>",
+          "line": 9,
+          "end_line": 9,
+          "signature": "template",
+          "ast_sha256": "ac04705e36c629e6fb61bc88df2b6d5555b93c31bdc47f31ab80ed59cd887543",
+          "snippet": "<template><section><h2>Vue 任务</h2><p data-testid=\"vue-state\">{{state}}</p><button @click=\"start\">开始 Vue 任务</button><button @click=\"finish\">完成 Vue 任务</button></section></template>",
+          "calls": [
+            "start",
+            "finish"
+          ],
+          "guards": [],
+          "file_sha256": "f3db3d25f1ef2177787cd3d82403a11631d9e1dad37fb733f3f39d7166efebb7"
+        },
+        "react.start": {
+          "path": "src/ReactPanel.tsx",
+          "symbol": "ReactPanel.start",
+          "line": 5,
+          "end_line": 5,
+          "signature": "",
+          "ast_sha256": "12b42b80e3c83fe81b86fe093ecc28959e2b0a54366129099723e9d80befd690",
+          "snippet": "  function start(){setState(run('start'));}",
+          "calls": [
+            "setState",
+            "run"
+          ],
+          "guards": [],
+          "file_sha256": "2af4280901f24c33fe5fd1c3d7ae1c43883b76f7c66c9307638a5659acca65e4"
+        },
+        "react.finish": {
+          "path": "src/ReactPanel.tsx",
+          "symbol": "ReactPanel.finish",
+          "line": 6,
+          "end_line": 6,
+          "signature": "",
+          "ast_sha256": "865421a68152540fb9eb61deb8fc7b4b93abc326c1fc44e3539efb7806bfe860",
+          "snippet": "  function finish(){setState(run('finish'));}",
+          "calls": [
+            "setState",
+            "run"
+          ],
+          "guards": [],
+          "file_sha256": "2af4280901f24c33fe5fd1c3d7ae1c43883b76f7c66c9307638a5659acca65e4"
+        },
+        "vue.start": {
+          "path": "src/VuePanel.vue",
+          "symbol": "start",
+          "line": 6,
+          "end_line": 6,
+          "signature": "",
+          "ast_sha256": "ec6d86157a43718496c161fe16bb4ac56ee10f18b275b0d1829e52e70ac46ee3",
+          "snippet": "function start(){state.value=props.run('start');}",
+          "calls": [
+            "props.run"
+          ],
+          "guards": [],
+          "file_sha256": "f3db3d25f1ef2177787cd3d82403a11631d9e1dad37fb733f3f39d7166efebb7"
+        },
+        "vue.finish": {
+          "path": "src/VuePanel.vue",
+          "symbol": "finish",
+          "line": 7,
+          "end_line": 7,
+          "signature": "",
+          "ast_sha256": "0579d6ffbc090538523764c73f631898d3805bf490d528aa015baa6b2db6e32c",
+          "snippet": "function finish(){state.value=props.run('finish');}",
+          "calls": [
+            "props.run"
+          ],
+          "guards": [],
+          "file_sha256": "f3db3d25f1ef2177787cd3d82403a11631d9e1dad37fb733f3f39d7166efebb7"
+        },
+        "implementation.798220b06c77a273": {
+          "path": "src/VuePanel.vue",
+          "symbol": "<callback:watchEffect:0:1>",
+          "line": 5,
+          "end_line": 5,
+          "signature": "",
+          "ast_sha256": "5edda14247fb3a9fb7efece58fbdc3aae5f2750a15f84492d21f9b632a402947",
+          "snippet": "watchEffect(()=>{try {props.bo_observe?.('vue.template','read',{inputs:{has_handler:typeof props.run==='function'},outputs:{state:state.value}});} catch {}});",
+          "calls": [
+            "props.bo_observe"
+          ],
+          "guards": [],
+          "file_sha256": "f3db3d25f1ef2177787cd3d82403a11631d9e1dad37fb733f3f39d7166efebb7"
+        },
+        "implementation.0041d31aeda41bac": {
+          "path": "src/VuePanel.vue",
+          "symbol": "<module>",
+          "line": 1,
+          "end_line": 10,
+          "signature": "module",
+          "ast_sha256": "00e6035044ef983710a4da0827f4f5ba84829ad936533f3e6ff3d8559c24c160",
+          "snippet": "<script setup lang=\"ts\">\nimport {ref,watchEffect} from 'vue';\nconst props=defineProps<{run:(event:string)=>string,bo_observe?:Function}>();\nconst state=ref('pending');\nwatchEffect(()=>{try {props.bo_observe?.('vue.template','read',{inputs:{has_handler:typeof props.run==='function'},outputs:{state:state.value}});} catch {}});\nfunction start(){state.value=props.run('start');}\nfunction finish(){state.value=props.run('finish');}\n</script>\n<template><section><h2>Vue 任务</h2><p data-testid=\"vue-state\">{{state}}</p><button @click=\"start\">开始 Vue 任务</button><button @click=\"finish\">完成 Vue 任务</button></section></template>",
+          "calls": [
+            "defineProps",
+            "ref",
+            "watchEffect"
+          ],
+          "guards": [],
+          "file_sha256": "f3db3d25f1ef2177787cd3d82403a11631d9e1dad37fb733f3f39d7166efebb7"
+        },
+        "implementation.fdb5a59c3f24a2bb": {
+          "path": "src/job.mjs",
+          "symbol": "available",
+          "line": 2,
+          "end_line": 2,
+          "signature": "context",
+          "ast_sha256": "ae31ec5387cc33141dcaa0e6ec91327806995c2861aee1769c108c1703442579",
+          "snippet": "export function available(context) {return context.slots>0;}",
+          "calls": [],
+          "guards": [],
+          "file_sha256": "d5f1498a4078c772ec34b1d6aaa06570b8a00d8a918982b5254bb4d8c27585fe"
+        }
+      },
+      "python": "3.13.13",
+      "unknowns": [
+        "AST evidence does not prove value flow, guard dominance or behavioral equivalence",
+        "External dependencies, interpreter, dynamic patching and omitted files are not attested"
+      ]
+    },
+    "events": [
+      {
+        "protocol": "bo-event/v1",
+        "schema_version": 3,
+        "project_id": "multilanguage-jobs",
+        "model_revision": "1",
+        "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+        "run_id": "715be636-763a-457f-be30-b5fdb090f4ad",
+        "producer_id": "2c963ff7-afc8-4dfe-aef2-b460039c1ed8",
+        "seq": 1,
+        "id": "715be636-763a-457f-be30-b5fdb090f4ad:2c963ff7-afc8-4dfe-aef2-b460039c1ed8:1",
+        "node": "js.advance",
+        "phase": "change",
+        "entity": "react",
+        "attempt": "react:89223515-edf8-41b0-af2d-278ed4f0901d",
+        "scope": "entity",
+        "call_id": "715be636-763a-457f-be30-b5fdb090f4ad:2c963ff7-afc8-4dfe-aef2-b460039c1ed8:1",
+        "parent_call_id": null,
+        "basis": {},
+        "inputs": {
+          "state": "pending",
+          "event": "initial",
+          "slots": 1,
+          "mode": "drive"
+        },
+        "outputs": {
+          "state": "pending"
+        },
+        "depends": [],
+        "observed_at": "2026-10-23T07:24:05.17Z",
+        "revision": 0,
+        "source_seq": 1,
+        "stream_id": "f981db66099909b81dfc531c"
+      },
+      {
+        "protocol": "bo-event/v1",
+        "schema_version": 3,
+        "project_id": "multilanguage-jobs",
+        "model_revision": "1",
+        "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+        "run_id": "715be636-763a-457f-be30-b5fdb090f4ad",
+        "producer_id": "2c963ff7-afc8-4dfe-aef2-b460039c1ed8",
+        "seq": 2,
+        "id": "715be636-763a-457f-be30-b5fdb090f4ad:2c963ff7-afc8-4dfe-aef2-b460039c1ed8:2",
+        "node": "js.advance",
+        "phase": "change",
+        "entity": "vue",
+        "attempt": "vue:862b443d-c778-4107-ba61-f026723c45f4",
+        "scope": "entity",
+        "call_id": "715be636-763a-457f-be30-b5fdb090f4ad:2c963ff7-afc8-4dfe-aef2-b460039c1ed8:2",
+        "parent_call_id": null,
+        "basis": {},
+        "inputs": {
+          "state": "pending",
+          "event": "initial",
+          "slots": 1,
+          "mode": "drive"
+        },
+        "outputs": {
+          "state": "pending"
+        },
+        "depends": [],
+        "observed_at": "2026-10-23T07:24:05.17Z",
+        "revision": 0,
+        "source_seq": 2,
+        "stream_id": "f981db66099909b81dfc531c"
+      },
+      {
+        "protocol": "bo-event/v1",
+        "schema_version": 3,
+        "project_id": "multilanguage-jobs",
+        "model_revision": "1",
+        "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+        "run_id": "715be636-763a-457f-be30-b5fdb090f4ad",
+        "producer_id": "2c963ff7-afc8-4dfe-aef2-b460039c1ed8",
+        "seq": 3,
+        "id": "715be636-763a-457f-be30-b5fdb090f4ad:2c963ff7-afc8-4dfe-aef2-b460039c1ed8:3",
+        "node": "vue.template",
+        "phase": "read",
+        "entity": "application",
+        "attempt": "application",
+        "scope": "application",
+        "call_id": "715be636-763a-457f-be30-b5fdb090f4ad:2c963ff7-afc8-4dfe-aef2-b460039c1ed8:3",
+        "parent_call_id": null,
+        "basis": {},
+        "inputs": {
+          "has_handler": true
+        },
+        "outputs": {
+          "state": "pending"
+        },
+        "depends": [],
+        "observed_at": "2026-10-23T07:24:05.171Z",
+        "source_seq": 3,
+        "stream_id": "f981db66099909b81dfc531c"
+      },
+      {
+        "protocol": "bo-event/v1",
+        "schema_version": 3,
+        "project_id": "multilanguage-jobs",
+        "model_revision": "1",
+        "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+        "run_id": "715be636-763a-457f-be30-b5fdb090f4ad",
+        "producer_id": "2c963ff7-afc8-4dfe-aef2-b460039c1ed8",
+        "seq": 4,
+        "id": "715be636-763a-457f-be30-b5fdb090f4ad:2c963ff7-afc8-4dfe-aef2-b460039c1ed8:4",
+        "node": "react.panel",
+        "phase": "read",
+        "entity": "application",
+        "attempt": "application",
+        "scope": "application",
+        "call_id": "715be636-763a-457f-be30-b5fdb090f4ad:2c963ff7-afc8-4dfe-aef2-b460039c1ed8:4",
+        "parent_call_id": null,
+        "basis": {},
+        "inputs": {
+          "has_handler": true
+        },
+        "outputs": {
+          "state": "pending"
+        },
+        "depends": [],
+        "observed_at": "2026-10-23T07:24:05.176Z",
+        "source_seq": 4,
+        "stream_id": "f981db66099909b81dfc531c"
+      },
+      {
+        "protocol": "bo-event/v1",
+        "schema_version": 3,
+        "project_id": "multilanguage-jobs",
+        "model_revision": "1",
+        "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+        "run_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93",
+        "producer_id": "81b7c678-960b-404b-a08f-58a8f1172f5e",
+        "seq": 5,
+        "id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:1",
+        "node": "js.advance",
+        "phase": "change",
+        "entity": "react",
+        "attempt": "react:2bc1bd07-a785-4f0d-ab3d-cdb57994d307",
+        "scope": "entity",
+        "call_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:1",
+        "parent_call_id": null,
+        "basis": {},
+        "inputs": {
+          "state": "pending",
+          "event": "initial",
+          "slots": 1,
+          "mode": "drive"
+        },
+        "outputs": {
+          "state": "pending"
+        },
+        "depends": [],
+        "observed_at": "2026-10-23T07:24:28.227Z",
+        "revision": 0,
+        "source_seq": 1,
+        "stream_id": "f981db66099909b81dfc531c"
+      },
+      {
+        "protocol": "bo-event/v1",
+        "schema_version": 3,
+        "project_id": "multilanguage-jobs",
+        "model_revision": "1",
+        "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+        "run_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93",
+        "producer_id": "81b7c678-960b-404b-a08f-58a8f1172f5e",
+        "seq": 6,
+        "id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:2",
+        "node": "js.advance",
+        "phase": "change",
+        "entity": "vue",
+        "attempt": "vue:46eed63f-3c1d-4fee-ab5b-4ce3bcefff44",
+        "scope": "entity",
+        "call_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:2",
+        "parent_call_id": null,
+        "basis": {},
+        "inputs": {
+          "state": "pending",
+          "event": "initial",
+          "slots": 1,
+          "mode": "drive"
+        },
+        "outputs": {
+          "state": "pending"
+        },
+        "depends": [],
+        "observed_at": "2026-10-23T07:24:28.227Z",
+        "revision": 0,
+        "source_seq": 2,
+        "stream_id": "f981db66099909b81dfc531c"
+      },
+      {
+        "protocol": "bo-event/v1",
+        "schema_version": 3,
+        "project_id": "multilanguage-jobs",
+        "model_revision": "1",
+        "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+        "run_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93",
+        "producer_id": "81b7c678-960b-404b-a08f-58a8f1172f5e",
+        "seq": 7,
+        "id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:3",
+        "node": "vue.template",
+        "phase": "read",
+        "entity": "application",
+        "attempt": "application",
+        "scope": "application",
+        "call_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:3",
+        "parent_call_id": null,
+        "basis": {},
+        "inputs": {
+          "has_handler": true
+        },
+        "outputs": {
+          "state": "pending"
+        },
+        "depends": [],
+        "observed_at": "2026-10-23T07:24:28.227Z",
+        "source_seq": 3,
+        "stream_id": "f981db66099909b81dfc531c"
+      },
+      {
+        "protocol": "bo-event/v1",
+        "schema_version": 3,
+        "project_id": "multilanguage-jobs",
+        "model_revision": "1",
+        "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+        "run_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93",
+        "producer_id": "81b7c678-960b-404b-a08f-58a8f1172f5e",
+        "seq": 8,
+        "id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:4",
+        "node": "react.panel",
+        "phase": "read",
+        "entity": "application",
+        "attempt": "application",
+        "scope": "application",
+        "call_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:4",
+        "parent_call_id": null,
+        "basis": {},
+        "inputs": {
+          "has_handler": true
+        },
+        "outputs": {
+          "state": "pending"
+        },
+        "depends": [],
+        "observed_at": "2026-10-23T07:24:28.231Z",
+        "source_seq": 4,
+        "stream_id": "f981db66099909b81dfc531c"
+      }
+    ]
+  },
+  "final": {
+    "authority": {
+      "entity": "vue",
+      "state": "done",
+      "basis": {},
+      "parameters": {
+        "slots": 1
+      },
+      "effects": []
+    },
+    "machine": {
+      "current": "done",
+      "state_revision": 2,
+      "configurations": [
+        {
+          "attempt": "react:89223515-edf8-41b0-af2d-278ed4f0901d",
+          "phase": "pending",
+          "param_version": 0,
+          "activities": {},
+          "resources": {},
+          "journal": []
+        },
+        {
+          "attempt": "vue:862b443d-c778-4107-ba61-f026723c45f4",
+          "phase": "pending",
+          "param_version": 0,
+          "activities": {},
+          "resources": {},
+          "journal": []
+        },
+        {
+          "attempt": "react:2bc1bd07-a785-4f0d-ab3d-cdb57994d307",
+          "phase": "done",
+          "param_version": 2,
+          "activities": {},
+          "resources": {},
+          "journal": []
+        },
+        {
+          "attempt": "vue:46eed63f-3c1d-4fee-ab5b-4ce3bcefff44",
+          "phase": "done",
+          "param_version": 2,
+          "activities": {},
+          "resources": {},
+          "journal": []
+        }
+      ],
+      "journal": [
+        {
+          "event": "finish",
+          "source": "running",
+          "target": "done",
+          "attempt": "vue:46eed63f-3c1d-4fee-ab5b-4ce3bcefff44",
+          "evidence_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:15",
+          "revision": 2
+        }
+      ]
+    },
+    "health": {
+      "errors": 0,
+      "dropped": 0,
+      "run_id": "f981db66099909b81dfc531c",
+      "attempted": 20,
+      "written": 20,
+      "enabled": true,
+      "runtime_frame_evictions": 0,
+      "retained_events": 20,
+      "evicted_events": 0,
+      "history_start_seq": 1,
+      "log_errors": 0,
+      "listener_errors": 0,
+      "retention": {
+        "memory_events": 10000,
+        "memory_seconds": 1800,
+        "log_bytes": 8388608,
+        "log_backups": 2
+      }
+    },
+    "binding_status": {
+      "status": "current",
+      "changed_files": [],
+      "model_changed": false,
+      "intent_changed": false,
+      "directly_affected": [],
+      "possibly_affected": []
+    },
+    "historical": true,
+    "busy": false
+  },
+  "sources": {
+    "bo_stategraph/bo_contracts.py": "\"\"\"Shared, application-independent model and value contracts.\n\nThe project checker, standalone module and exports use these same rules.\nRuntime violations are diagnostics; callers must preserve the actual facts.\n\"\"\"\nimport math\nimport json\n\n\ndef value_errors(value, spec, name):\n    kind = spec.get('type')\n    matches = {\n        'integer': type(value) is int,\n        'number': type(value) in (int, float) and math.isfinite(value),\n        'boolean': type(value) is bool,\n        'string': isinstance(value, str),\n        'array': isinstance(value, list),\n        'object': isinstance(value, dict),\n        'enum': any(type(value) is type(item) and value == item for item in spec.get('values', [])),\n    }\n    if not matches.get(kind, False):\n        return [f'{name}: expected {kind}']\n    errors = []\n    if kind in ('integer', 'number'):\n        if 'min' in spec and value < spec['min']: errors.append(f'{name}: below min')\n        if 'max' in spec and value > spec['max']: errors.append(f'{name}: above max')\n    if kind == 'array' and spec.get('items'):\n        for i, item in enumerate(value):\n            errors.extend(value_errors(item, spec['items'], f'{name}[{i}]'))\n    if kind == 'object':\n        for key in spec.get('required', []):\n            if key not in value: errors.append(f'{name}.{key}: missing')\n        for key, item in spec.get('properties', {}).items():\n            if key in value: errors.extend(value_errors(value[key], item, f'{name}.{key}'))\n    return errors\n\n\ndef state_tree(chart):\n    \"\"\"Return actual engine names and ancestry; underscores are not split heuristically.\"\"\"\n    states, parents = {}, {}\n    separator = chart.get('separator', '_')\n    if separator != '_':\n        raise ValueError('unsupported state separator: ' + str(separator))\n    def descend(items, parent=None):\n        if not isinstance(items, list) or not items:\n            raise ValueError('states must be a nonempty list')\n        for item in items:\n            data = {'name': item} if isinstance(item, str) else item\n            if not isinstance(data, dict) or not isinstance(data.get('name'), str) or not data['name']:\n                raise ValueError('state needs a nonempty name')\n            unsupported = set(data) - {'name', 'initial', 'children', 'parallel'}\n            if unsupported:\n                raise ValueError('unsupported state semantics: ' + ', '.join(sorted(unsupported)))\n            if 'parallel' in data and ('children' in data or 'initial' in data):\n                raise ValueError('parallel state cannot also declare children or initial')\n            name = (parent + separator if parent else '') + data['name']\n            if name in states: raise ValueError('duplicate state name')\n            if data.get('history'):\n                raise ValueError('history states require a supported engine adapter')\n            states[name], parents[name] = data, parent\n            nested = data.get('parallel', data.get('children'))\n            if nested is not None: descend(nested, name)\n    descend(chart['states'])\n    for name, data in states.items():\n        if 'initial' in data:\n            initial = data['initial']\n            if not isinstance(initial, str) or name + separator + initial not in states:\n                raise ValueError('unknown compound initial state: ' + name)\n    return states, parents\n\n\ndef entered_states(chart, target):\n    \"\"\"Resolve compound initial descendants and every parallel region.\"\"\"\n    states, parents = state_tree(chart)\n    if target not in states: raise ValueError('unknown transition target')\n    def enter(name):\n        data = states[name]\n        if data.get('parallel'):\n            return [leaf for child, parent in parents.items() if parent == name for leaf in enter(child)]\n        if data.get('initial'):\n            return enter(name + '_' + data['initial'])\n        return [name]\n    return enter(target)\n\n\ndef transition_states(chart, previous, transitions):\n    \"\"\"Expected configuration for the supported declarative subset, never facts.\n\n    This checks only supplied guard results. It does not call business callbacks.\n    Independent parallel region transitions compose; cross-region transitions\n    are rejected when the declaration is loaded.\n    \"\"\"\n    states, parents = state_tree(chart)\n    before = active_states(chart, previous)\n    leaves = {s for s in before if not any(p == s and child in before for child, p in parents.items())}\n    def chain(name):\n        result = []\n        while name is not None:\n            result.append(name); name = parents[name]\n        return result\n    removed, added = set(), set()\n    for transition in transitions:\n        target = transition['dest']\n        if target is None: continue\n        sources = transition['source']\n        sources = sources if isinstance(sources, list) else [sources]\n        if '*' in sources: sources = [s for s, p in parents.items() if p is None]\n        for source in set(sources) & before:\n            ancestors = chain(source)\n            common = next((p for p in ancestors if p in chain(target)), None)\n            exit_root = source\n            while parents[exit_root] is not None and parents[exit_root] != common:\n                exit_root = parents[exit_root]\n            if common == source: exit_root = source\n            removed.update(s for s in leaves if exit_root in chain(s))\n            added.update(entered_states(chart, target))\n    return active_states(chart, sorted((leaves - removed) | added))\n\n\ndef validate_value_spec(spec, name):\n    if not isinstance(spec, dict) or spec.get('type') not in {'integer','number','boolean','string','enum','array','object'}:\n        raise ValueError('unknown value type: ' + name)\n    if spec['type'] == 'enum' and (not isinstance(spec.get('values'), list) or not spec['values']):\n        raise ValueError('enum needs values: ' + name)\n    for bound in ('min', 'max'):\n        if bound in spec and (type(spec[bound]) not in (int,float) or not math.isfinite(spec[bound])):\n            raise ValueError('invalid bound: ' + name)\n    if 'min' in spec and 'max' in spec and spec['min'] > spec['max']: raise ValueError('invalid bounds')\n    if spec.get('items') is not None: validate_value_spec(spec['items'], name + '[]')\n    for key, child in spec.get('properties', {}).items(): validate_value_spec(child, name + '.' + key)\n\n\ndef validate_runtime_definition(chart, *, loaded_engine=None, loaded_version=None, guard_names=None):\n    \"\"\"Fail before creating an executor when its declared semantics are unsupported.\"\"\"\n    if not isinstance(chart, dict): raise ValueError('statechart must be an object')\n    unsupported = set(chart) & {'queued', 'auto_transitions', 'ignore_invalid_triggers',\n        'send_event', 'ordered_transitions', 'model_override', 'before_state_change',\n        'after_state_change', 'prepare_event', 'finalize_event', 'on_exception'}\n    if unsupported: raise ValueError('unsupported engine options: ' + ', '.join(sorted(unsupported)))\n    engine = chart.get('engine')\n    if engine not in (None, 'transitions.Machine', 'transitions.HierarchicalMachine',\n                      'transitions.extensions.HierarchicalMachine', 'adapter-selected', 'python.explicit', 'bo.fsm'):\n        raise ValueError('unsupported execution engine: ' + str(engine))\n    if loaded_engine is not None and engine not in (None, 'adapter-selected', loaded_engine):\n        raise ValueError('loaded engine differs from declaration')\n    if loaded_version is not None and engine != 'adapter-selected' and chart.get('version') != loaded_version:\n        raise ValueError('loaded engine version differs from declaration')\n    if guard_names is not None and set(chart.get('guards', {})) - set(guard_names):\n        raise ValueError('declared guard is missing from loaded executor')\n    states, parents = state_tree(chart)\n    if engine == 'bo.fsm':\n        if chart.get('version') != '1' or any(p is not None for p in parents.values()) or chart.get('execution'):\n            raise ValueError('bo.fsm/1 supports flat states; hierarchy and activities need an explicit engine adapter')\n        if set(chart) - {'engine','version','states','values','initial','state_type','transitions','events','context','guards','labels'}:\n            raise ValueError('unsupported bo.fsm semantics')\n        if chart.get('state_type')!='enum' or not isinstance(chart.get('values'),list) or len(chart['values'])!=len(states) or set(chart['values'])!=set(states):\n            raise ValueError('bo.fsm values must exactly cover its states')\n        if not all(isinstance(chart.get(k),dict) for k in ('context','events','guards')):\n            raise ValueError('bo.fsm requires context, events and guards objects')\n    if chart.get('initial') not in states: raise ValueError('unknown initial state')\n    active_states(chart, entered_states(chart, chart['initial']))\n    if engine == 'transitions.Machine' and any(p is not None for p in parents.values()):\n        raise ValueError('flat engine cannot load hierarchical states')\n    for name, spec in chart.get('context', {}).items(): validate_value_spec(spec, name)\n    for event, data in chart.get('events', {}).items():\n        if not isinstance(data, dict) or not isinstance(data.get('payload'), dict):\n            raise ValueError('event needs payload declaration: ' + event)\n        for name, spec in data['payload'].items(): validate_value_spec(spec, event + '.' + name)\n    for transition in chart['transitions']:\n        if set(transition) - {'source','dest','trigger','conditions','unless'}:\n            raise ValueError('unsupported transition callback or semantics')\n        sources = transition['source']\n        sources = sources if isinstance(sources, list) else [sources]\n        if not sources: raise ValueError('transition needs a source')\n        if any(s != '*' and s not in states for s in sources) or transition['dest'] not in {None, *states}:\n            raise ValueError('dangling transition')\n        if transition['trigger'] not in chart.get('events', {}): raise ValueError('unknown transition event')\n        for field in ('conditions','unless'):\n            refs = transition.get(field, [])\n            refs = refs if isinstance(refs, list) else [refs]\n            if set(refs) - set(chart.get('guards', {})): raise ValueError('undefined guard')\n        # Explicitly bound the supported HSM subset instead of silently applying\n        # sequential rules to cross-region transitions.\n        for source in sources:\n            if source == '*' or transition['dest'] is None: continue\n            branch = source\n            while parents[branch] is not None:\n                parent = parents[branch]\n                if states[parent].get('parallel') and not (transition['dest'] == branch or transition['dest'].startswith(branch + '_')):\n                    raise ValueError('cross-region transition requires a supported engine adapter')\n                branch = parent\n\n\ndef active_states(chart, value):\n    states, parents = state_tree(chart)\n    leaves = []\n    def collect(item):\n        if isinstance(item, list):\n            for child in item: collect(child)\n        else: leaves.append(item)\n    collect(value)\n    if not leaves or len(set(leaves)) != len(leaves) or any(s not in states for s in leaves):\n        raise ValueError('unknown or duplicate active state')\n    result = set(leaves)\n    for leaf in leaves:\n        parent = parents[leaf]\n        while parent:\n            result.add(parent)\n            parent = parents[parent]\n    # Concurrent leaves are legal only in distinct regions of a parallel state.\n    # A parent plus its active child is not a second active leaf.\n    for parent in [None, *states]:\n        children = [s for s, p in parents.items() if p == parent and s in result]\n        parallel = parent is not None and bool(states[parent].get('parallel'))\n        if parent in leaves and states[parent].get('initial') and not children:\n            raise ValueError('compound configuration is missing its active descendant')\n        if len(children) > 1 and not parallel:\n            raise ValueError('exclusive states cannot be active together')\n        if parent in result and parallel:\n            declared = [s for s, p in parents.items() if p == parent]\n            if set(children) != set(declared):\n                raise ValueError('parallel configuration is missing an active region')\n        if parent in leaves and children:\n            raise ValueError('active configuration repeats an ancestor')\n    return result\n\n\ndef validate_graph(model):\n    if model.get('schema_version') == 3:\n        for key in ('revision', 'intent', 'source_files', 'nodes', 'edges', 'overview', 'scope'):\n            if not model.get(key): raise ValueError('missing ' + key)\n    elif model.get('schema_version') not in (None, 'bo-model/v1'):\n        raise ValueError('unsupported model schema')\n    nodes = {n['id']: n for n in model.get('nodes', [])}\n    if not nodes or len(nodes) != len(model['nodes']): raise ValueError('invalid node identities')\n    for node in nodes.values():\n        seen = {node['id']}\n        parent = node.get('parent')\n        while parent:\n            if parent not in nodes or parent in seen: raise ValueError('missing parent or hierarchy cycle')\n            seen.add(parent)\n            parent = nodes[parent].get('parent')\n        if model.get('schema_version') == 3:\n            if node.get('kind') not in {'action', 'function', 'decision', 'wait', 'effect', 'data', 'state'}:\n                raise ValueError('invalid node kind')\n            if not node.get('label') or not node.get('summary'):\n                raise ValueError('node lacks developer explanation')\n            if node['kind'] not in {'data', 'state'} and not node.get('source'):\n                raise ValueError('executable node lacks source: ' + node['id'])\n    edges = set()\n    for edge in model.get('edges', []):\n        if edge['id'] in edges or edge['from'] not in nodes or edge['to'] not in nodes:\n            raise ValueError('duplicate/dangling edge')\n        edges.add(edge['id'])\n        if model.get('schema_version') == 3 and (edge.get('type') not in\n                {'flow', 'data', 'guard', 'contains', 'resource', 'join'} or not edge.get('evidence')):\n            raise ValueError('edge needs type and provenance')\n        if edge.get('type') in ('resource', 'join') and not model.get('machine', {}).get('execution'):\n            raise ValueError('resource and join edges need an executable activity declaration')\n    for item in model.get('overview', []):\n        if item['node'] not in nodes: raise ValueError('unknown overview node')\n    return nodes\n\n\ndef validate_chart(model, runtime_definition=None):\n    validate_graph(model)\n    chart = model['machine']\n    # Compact models are explicit bo-model/v1 or legacy unversioned declarations.\n    fields = ('states', 'values', 'transitions', 'events', 'initial', 'context')\n    if model.get('schema_version') == 3:\n        fields += ('engine', 'version', 'state_type')\n    for key in fields:\n        if key not in chart or chart[key] is None: raise ValueError('missing statechart field: ' + key)\n    validate_runtime_definition(chart)\n    states, _ = state_tree(chart)\n    values = set(chart['values'])\n    if not values or len(values) != len(chart['values']): raise ValueError('duplicate or missing state values')\n    if not values <= states.keys(): raise ValueError('unknown persisted state value')\n    if chart['initial'] not in states: raise ValueError('unknown initial state')\n    for name, spec in chart['context'].items():\n        if spec.get('type') not in {'integer', 'number', 'boolean', 'string', 'enum', 'array', 'object'}:\n            raise ValueError('unknown context type: ' + name)\n        if spec['type'] == 'enum' and not spec.get('values'): raise ValueError('enum needs values')\n        if 'min' in spec and 'max' in spec and spec['min'] > spec['max']: raise ValueError('invalid bounds')\n    for transition in chart['transitions']:\n        event = transition.get('trigger')\n        if event not in chart['events'] or not isinstance(chart['events'][event].get('payload'), dict):\n            raise ValueError('transition event needs payload declaration')\n        sources = transition['source']\n        sources = sources if isinstance(sources, list) else [sources]\n        if any(s != '*' and s not in states for s in sources) or (\n                transition['dest'] is not None and transition['dest'] not in states):\n            raise ValueError('dangling transition')\n        for field in ('conditions', 'unless'):\n            refs = transition.get(field, [])\n            refs = refs if isinstance(refs, list) else [refs]\n            if set(refs) - set(chart.get('guards', {})): raise ValueError('undefined guard')\n    represented = {n['value'] for n in model['nodes'] if n.get('layer') == 'state'}\n    if values != represented: raise ValueError('persisted states and graph projection differ')\n    if runtime_definition is not None:\n        validate_runtime_definition(runtime_definition)\n        if json.dumps(chart, sort_keys=True, allow_nan=False) != json.dumps(runtime_definition, sort_keys=True, allow_nan=False):\n            raise ValueError('graph and runtime statechart declarations differ')\n    try:\n        from .execution_contract import validate_execution_graph\n    except ImportError:\n        from execution_contract import validate_execution_graph\n    validate_execution_graph(model)\n    return {'valid': True, 'states': len(values), 'events': len(chart['events']),\n            'runtime_definition_compared': runtime_definition is not None}\n",
+    "bo_stategraph/bo_executor.py": "\"\"\"Native flat-state executor; the observer process is never required.\"\"\"\nfrom copy import deepcopy\ntry:\n    from .bo_contracts import validate_runtime_definition, value_errors\nexcept ImportError:\n    try:\n        from ....bo_contracts import validate_runtime_definition, value_errors\n    except ImportError:\n        from bo_contracts import validate_runtime_definition, value_errors\n\n\ndef bo_list(value): return value if isinstance(value,list) else [] if value is None else [value]\n\n\nclass BOExecutor:\n    def __init__(self,machine,guards=None):\n        self.bo_guards=guards or {}\n        if machine.get('engine')!='bo.fsm' or machine.get('version')!='1': raise ValueError('unsupported native engine/version')\n        validate_runtime_definition(machine,loaded_engine='bo.fsm',loaded_version='1',guard_names=self.bo_guards)\n        if any(not callable(f) for f in self.bo_guards.values()): raise ValueError('guard implementation must be callable')\n        self.bo_definition=deepcopy(machine)\n\n    def step(self,state,event,context,payload=None):\n        m=self.bo_definition; payload={} if payload is None else payload\n        if state not in m['states'] or event not in m['events']: raise ValueError('unknown state/event')\n        if set(context)-set(m['context']): raise ValueError('unknown context field')\n        for key,spec in m['context'].items():\n            if key not in context: raise ValueError('missing context')\n            errors=value_errors(context[key],spec,key)\n            if errors: raise ValueError('; '.join(errors))\n        fields=m['events'][event]['payload']\n        if set(payload)!=set(fields): raise ValueError('event payload fields differ from declaration')\n        for key,spec in fields.items():\n            errors=value_errors(payload[key],spec,key)\n            if errors: raise ValueError('; '.join(errors))\n        evaluated={}\n        def guard(name):\n            if name not in evaluated:\n                value=self.bo_guards[name](deepcopy(context),deepcopy(payload))\n                if type(value) is not bool: raise ValueError('guard must return boolean synchronously')\n                evaluated[name]=value\n            return evaluated[name]\n        for t in m['transitions']:\n            if t['trigger']==event and (state in bo_list(t['source']) or '*' in bo_list(t['source'])):\n                if all(guard(n) for n in bo_list(t.get('conditions'))) and all(not guard(n) for n in bo_list(t.get('unless'))):\n                    return {'state':state if t['dest'] is None else t['dest'],'guards':evaluated,'event':event,'payload':deepcopy(payload)}\n        raise ValueError('no enabled transition')\n",
+    "bo_stategraph/bo_probe.py": "\"\"\"Bounded, fault-isolated JSON transport. Standard library only.\"\"\"\nfrom contextvars import ContextVar\nfrom datetime import datetime, timezone\nimport json\nimport math\nimport queue\nimport threading\nimport time\nfrom urllib.request import Request,urlopen\nimport uuid\n\n_bo_internal=ContextVar('bo_transport_internal',default=False)\n\n\ndef bo_selected(value,spec,depth=0):\n    if depth>6: raise ValueError('capture depth exceeded')\n    if isinstance(spec,dict):\n        if not isinstance(value,dict): raise ValueError('expected selected object')\n        return {k:bo_selected(value[k],s,depth+1) for k,s in spec.items() if k in value}\n    if isinstance(spec,list):\n        if not isinstance(value,list) or len(spec)!=1 or len(value)>64: raise ValueError('bounded array required')\n        return [bo_selected(v,spec[0],depth+1) for v in value]\n    if value is None: return None\n    if spec in ('number','scalar') and type(value) in (int,float) and math.isfinite(value) and (type(value) is not int or abs(value)<=9007199254740991): return value\n    if spec in ('boolean','scalar') and type(value) is bool: return value\n    if spec in ('string','scalar') and isinstance(value,str) and len(value)<=256: return value\n    raise ValueError('unapproved capture type')\n\n\nclass BOProbe:\n    def __init__(self,project,build_id,*,endpoint='',token='',run_id=None,producer_id=None,enabled=True,capacity=256,timeout=.5,sink=None):\n        self.bo_project,self.bo_build=project,build_id\n        self.bo_endpoint,self.bo_token,self.bo_timeout,self.bo_sink=endpoint,token,timeout,sink\n        self.bo_run,self.bo_producer=run_id or uuid.uuid4().hex,producer_id or uuid.uuid4().hex\n        self.bo_enabled=enabled;self.bo_seq=self.bo_errors=self.bo_dropped=self.bo_suppressed=0\n        self.bo_queue=queue.Queue(maxsize=max(1,capacity));self.bo_lock=threading.Lock();self.bo_closed=threading.Event()\n        self.bo_nodes={n['id']:n for n in project['model']['nodes']}\n        excluded=project['model'].get('implementation',{}).get('excluded',{})\n        self.bo_excluded={n['id'] for n in project['model']['nodes'] if n.get('source') and excluded.get(n['source']['path']+'::'+n['source']['symbol'],{}).get('category')=='observer'}\n        self.bo_worker=threading.Thread(target=self.bo_drain,daemon=True,name='bo-json-transport')\n        if enabled:self.bo_worker.start()\n\n    def bo_base(self,protocol): return {'protocol':protocol,'project_id':self.bo_project['project_id'],'model_revision':self.bo_project['model']['revision'],'build_id':self.bo_build,'run_id':self.bo_run,'producer_id':self.bo_producer}\n\n    def bo_put(self,kind,body):\n        raw=json.dumps(body,ensure_ascii=False,allow_nan=False).encode()\n        if len(raw)>24576: raise ValueError('observation too large')\n        self.bo_queue.put_nowait((kind,raw));return True\n\n    def record(self,node,phase,builder,*,entity='application',attempt='application',scope='application',basis=None,call_id=None,parent_call_id=None,depends=(),revision=None):\n        if not self.bo_enabled or self.bo_closed.is_set():return None\n        if _bo_internal.get() or node in self.bo_excluded:self.bo_suppressed+=1;return None\n        token=_bo_internal.set(True)\n        try:\n            if phase not in {'enter','return','read','decision','wait','commit','change','error'}:raise ValueError('invalid phase')\n            values=builder();spec=self.bo_nodes[node]['capture']\n            with self.bo_lock:\n                self.bo_seq+=1;eid=f'{self.bo_run}:{self.bo_producer}:{self.bo_seq}'\n                body={**self.bo_base('bo-event/v1'),'schema_version':3,'seq':self.bo_seq,'id':eid,'node':node,'phase':phase,'entity':entity,'attempt':attempt,'scope':scope,'basis':bo_selected(basis or {},{'param_version':'number','epoch':'number','clock':'number'}),'call_id':call_id or eid,'parent_call_id':parent_call_id,'inputs':bo_selected(values.get('inputs',{}),spec.get('in',{})),'outputs':bo_selected(values.get('outputs',{}),spec.get('out',{})),'depends':list(depends),'observed_at':datetime.now(timezone.utc).isoformat()}\n                if revision is not None:\n                    if type(revision) is not int or not 0<=revision<=9007199254740991:raise ValueError('invalid state revision')\n                    body['revision']=revision\n                self.bo_put('events',body)\n            return eid\n        except queue.Full:self.bo_dropped+=1\n        except Exception:self.bo_errors+=1\n        finally:_bo_internal.reset(token)\n        return None\n\n    def snapshot(self,instance_id,state,context,revision,evidence_id,*,event=None,guards=None,payload=None,configuration=None):\n        if not self.bo_enabled or self.bo_closed.is_set():return False\n        if _bo_internal.get():self.bo_suppressed+=1;return False\n        try:return self.bo_put('snapshots',{**self.bo_base('bo-snapshot/v1'),'instance_id':instance_id,'state':state,'context':context,'revision':revision,'evidence_id':evidence_id,'event':event,'guards':guards,'payload':payload,'configuration':configuration})\n        except queue.Full:self.bo_dropped+=1\n        except Exception:self.bo_errors+=1\n        return False\n\n    def bo_drain(self):\n        while not self.bo_closed.is_set() or not self.bo_queue.empty():\n            try:kind,raw=self.bo_queue.get(timeout=.05)\n            except queue.Empty:continue\n            token=_bo_internal.set(True)\n            try:\n                if self.bo_sink:self.bo_sink(json.loads(raw),kind)\n                else:\n                    req=Request(self.bo_endpoint+'/api/bo/'+kind,data=raw,headers={'Content-Type':'application/json','X-BO-Token':self.bo_token},method='POST')\n                    with urlopen(req,timeout=self.bo_timeout) as response:response.read(32768)\n            except Exception:self.bo_errors+=1\n            finally:_bo_internal.reset(token);self.bo_queue.task_done()\n\n    def flush(self,timeout=2):\n        deadline=time.monotonic()+timeout\n        while self.bo_queue.unfinished_tasks and time.monotonic()<deadline:time.sleep(.005)\n        return not self.bo_queue.unfinished_tasks\n\n    def close(self):\n        self.bo_closed.set()\n        if self.bo_enabled:self.bo_worker.join(1)\n",
+    "bo_stategraph/bo_runtime.mjs": "// Native application adapter. No Python imports or observer-dependent decisions.\n// Only the declared flat bo.fsm/1 subset executes here; other engines need adapters.\nexport function bo_validateMachine(machine, guards={}) {\n  if(machine.engine!=='bo.fsm' || machine.version!=='1') throw Error('Unsupported native machine engine/version');\n  if(machine.execution || machine.states.some(s=>typeof s!=='string')) throw Error('bo.fsm/1 is flat; hierarchy/activity needs an explicit engine adapter');\n  const allowed=new Set(['engine','version','states','values','initial','state_type','transitions','events','context','guards','labels']);\n  if(Object.keys(machine).some(k=>!allowed.has(k))) throw Error('Unsupported machine semantics');\n  if(!machine.states.length||machine.states.some(s=>!s.trim())||new Set(machine.states).size!==machine.states.length||!machine.states.includes(machine.initial)) throw Error('Invalid initial/states');\n  if(machine.state_type!=='enum'||machine.values?.length!==machine.states.length||new Set(machine.values).size!==machine.values.length||machine.values.some(s=>!machine.states.includes(s))) throw Error('Invalid state values');\n  if(['context','events','guards'].some(k=>machine[k]===null||typeof machine[k]!=='object'||Array.isArray(machine[k])))throw Error('Expected context, events and guards objects');\n  const names=Object.keys(machine.guards||{});\n  if(names.some(n=>!Object.hasOwn(guards,n)||typeof guards[n]!=='function')) throw Error('Missing guard implementation');\n  for(const t of machine.transitions) {\n    if(Object.keys(t).some(k=>!['source','dest','trigger','conditions','unless'].includes(k))) throw Error('Unsupported transition semantics');\n    const sources=Array.isArray(t.source)?t.source:[t.source];\n    if(!sources.length||sources.some(s=>s!=='*'&&!machine.states.includes(s)) || t.dest!==null&&!machine.states.includes(t.dest) || !Object.hasOwn(machine.events,t.trigger)) throw Error('Dangling transition');\n    for(const key of ['conditions','unless']) for(const guard of bo_list(t[key])) if(!names.includes(guard)) throw Error('Undeclared guard');\n  }\n  for(const spec of Object.values(machine.context||{})) bo_spec(spec);\n  for(const event of Object.values(machine.events||{})) {if(!event?.payload || typeof event.payload!=='object') throw Error('Event payload required'); for(const spec of Object.values(event.payload)) bo_spec(spec);}\n}\nconst bo_list=v=>v===undefined?[]:Array.isArray(v)?v:[v];\nfunction bo_spec(spec) {\n  if(!['integer','number','boolean','string','enum','object','array'].includes(spec?.type)) throw Error('Unknown value type');\n  if(spec.type==='enum'&&(!Array.isArray(spec.values)||!spec.values.length)) throw Error('Enum requires values');\n  if(spec.min!==undefined&&!Number.isFinite(spec.min)||spec.max!==undefined&&!Number.isFinite(spec.max)||spec.min>spec.max) throw Error('Invalid value bounds');\n  if(spec.items) bo_spec(spec.items);\n  for(const child of Object.values(spec.properties||{})) bo_spec(child);\n}\nexport function bo_value(value,spec) {\n  bo_spec(spec);\n  const type=spec.type;\n  const valid={integer:Number.isSafeInteger(value),number:typeof value==='number'&&Number.isFinite(value),boolean:typeof value==='boolean',string:typeof value==='string',enum:spec.values?.some(v=>typeof v===typeof value&&JSON.stringify(v)===JSON.stringify(value)),object:value!==null&&typeof value==='object'&&!Array.isArray(value),array:Array.isArray(value)}[type];\n  if(!valid) throw Error(`Expected ${type}`);\n  if(['integer','number'].includes(type)&&(spec.min!==undefined&&value<spec.min||spec.max!==undefined&&value>spec.max)) throw Error('Value outside bounds');\n  if(type==='array'&&spec.items) for(const v of value) bo_value(v,spec.items);\n  if(type==='object') { for(const k of spec.required||[]) if(!Object.hasOwn(value,k)) throw Error('Missing property'); for(const [k,s] of Object.entries(spec.properties||{})) if(Object.hasOwn(value,k)) bo_value(value[k],s); }\n}\nexport class BOExecutor {\n  constructor(machine,guards={}) {bo_validateMachine(machine,guards); this.bo_definition=structuredClone(machine);this.bo_guards=guards;}\n  step(state,event,context,payload={}) {\n    const m=this.bo_definition;\n    if(!m.states.includes(state)||!Object.hasOwn(m.events,event)) throw Error('Unknown state/event');\n    if(Object.keys(context).some(k=>!Object.hasOwn(m.context,k))) throw Error('Unknown context field');\n    for(const [k,s] of Object.entries(m.context)) {if(!Object.hasOwn(context,k)) throw Error('Missing context');bo_value(context[k],s);}\n    const fields=m.events[event].payload;\n    if(Object.keys(payload).some(k=>!Object.hasOwn(fields,k))) throw Error('Unknown payload field');\n    for(const [k,s] of Object.entries(fields)) {if(!Object.hasOwn(payload,k)) throw Error('Missing payload');bo_value(payload[k],s);}\n    const evaluated={};\n    const guard=name=>{if(!Object.hasOwn(evaluated,name)){const v=this.bo_guards[name](structuredClone(context),structuredClone(payload));if(typeof v!=='boolean') throw Error('Guard must return boolean synchronously'); evaluated[name]=v;}return evaluated[name];};\n    for(const t of m.transitions) if(t.trigger===event&&(bo_list(t.source).includes(state)||bo_list(t.source).includes('*'))) {\n      if(bo_list(t.conditions).every(guard)&&bo_list(t.unless).every(n=>!guard(n))) return {state:t.dest??state,guards:evaluated,event,payload:structuredClone(payload)};\n    }\n    throw Error('No enabled transition');\n  }\n}\n\nfunction bo_selected(value,spec,depth=0) {\n  if(depth>6) throw Error('Capture depth exceeded');\n  if(Array.isArray(spec)) {if(!Array.isArray(value)||spec.length!==1||value.length>64)throw Error('Bounded array required');return value.map(v=>bo_selected(v,spec[0],depth+1));}\n  if(spec && typeof spec==='object') {if(value===null||typeof value!=='object'||Array.isArray(value)) throw Error('Expected selected object');return Object.fromEntries(Object.entries(spec).filter(([k])=>Object.hasOwn(value,k)).map(([k,s])=>[k,bo_selected(value[k],s,depth+1)]));}\n  if(value===null)return null;\n  if(['number','scalar'].includes(spec)&&typeof value==='number'&&Number.isFinite(value)&&(!Number.isInteger(value)||Number.isSafeInteger(value)))return value;\n  if(['boolean','scalar'].includes(spec)&&typeof value==='boolean')return value;\n  if(['string','scalar'].includes(spec)&&typeof value==='string'&&value.length<=256)return value;\n  throw Error('Unapproved capture type');\n}\n\nexport class BOProbe {\n  constructor({project,buildId,endpoint,token,runId=globalThis.crypto.randomUUID(),producerId=globalThis.crypto.randomUUID(),enabled=true,capacity=256,timeout=1000,sink=null}) {\n    this.bo_project=project;this.bo_build=buildId;this.bo_endpoint=endpoint;this.bo_token=token;\n    this.bo_run=runId;this.bo_producer=producerId;this.bo_enabled=enabled;this.bo_capacity=capacity;this.bo_timeout=timeout;this.bo_sink=sink;\n    this.bo_queue=[];this.bo_seq=0;this.bo_busy=false;this.bo_internal=false;this.bo_errors=0;this.bo_dropped=0;this.bo_suppressed=0;\n    this.bo_nodes=new Map(project.model.nodes.map(n=>[n.id,n]));\n    const excluded=project.model.implementation?.excluded||{};\n    this.bo_excluded=new Set(project.model.nodes.filter(n=>n.source&&excluded[`${n.source.path}::${n.source.symbol}`]?.category==='observer').map(n=>n.id));\n  }\n  record(node,phase,builder,{entity='application',attempt='application',scope='application',basis={},callId=null,parentCallId=null,depends=[],revision=null}={}) {\n    if(!this.bo_enabled)return null;\n    if(this.bo_internal||this.bo_excluded.has(node)){this.bo_suppressed++;return null;}\n    try {\n      this.bo_internal=true;\n      const spec=this.bo_nodes.get(node)?.capture;if(!spec)throw Error('Unknown capture node');\n      if(!['enter','return','read','decision','wait','commit','change','error'].includes(phase))throw Error('Unknown phase');\n      const values=builder();\n      const seq=++this.bo_seq,id=`${this.bo_run}:${this.bo_producer}:${seq}`;\n      const event={protocol:'bo-event/v1',schema_version:3,project_id:this.bo_project.project_id,model_revision:this.bo_project.model.revision,build_id:this.bo_build,run_id:this.bo_run,producer_id:this.bo_producer,seq,id,node,phase,entity,attempt,scope,call_id:callId||id,parent_call_id:parentCallId,basis:bo_selected(basis,{param_version:'number',epoch:'number',clock:'number'}),inputs:bo_selected(values.inputs||{},spec.in||{}),outputs:bo_selected(values.outputs||{},spec.out||{}),depends,observed_at:new Date().toISOString()};\n      if(revision!==null){if(!Number.isSafeInteger(revision)||revision<0)throw Error('Invalid state revision');event.revision=revision;}\n      if(new TextEncoder().encode(JSON.stringify(event)).length>24576)throw Error('Event too large');\n      if(this.bo_queue.length>=this.bo_capacity){this.bo_dropped++;return null;}\n      this.bo_queue.push({kind:'events',body:event});queueMicrotask(()=>this.bo_drain());return id;\n    } catch {this.bo_errors++;return null;} finally {this.bo_internal=false;}\n  }\n  snapshot(instanceId,state,context,revision,evidenceId,{event=null,guards=null,payload=null,configuration=null}={}) {\n    if(!this.bo_enabled)return false;\n    if(this.bo_internal){this.bo_suppressed++;return false;}\n    try {\n      if(this.bo_queue.length>=this.bo_capacity){this.bo_dropped++;return false;}\n      const body={protocol:'bo-snapshot/v1',project_id:this.bo_project.project_id,model_revision:this.bo_project.model.revision,build_id:this.bo_build,run_id:this.bo_run,producer_id:this.bo_producer,instance_id:instanceId,state,context,revision,evidence_id:evidenceId,event,guards,payload,configuration};\n      const raw=JSON.stringify(body);if(new TextEncoder().encode(raw).length>24576)throw Error('Snapshot too large');\n      this.bo_queue.push({kind:'snapshots',body:JSON.parse(raw)});queueMicrotask(()=>this.bo_drain());return true;\n    }catch{this.bo_errors++;return false;}\n  }\n  async bo_drain() {\n    if(this.bo_busy)return;this.bo_busy=true;\n    try {while(this.bo_queue.length) {\n      const item=this.bo_queue.shift();\n      try {if(this.bo_sink) {\n        let pending;\n        this.bo_internal=true;\n        try {pending=this.bo_sink(item.body,item.kind);} finally {this.bo_internal=false;}\n        await pending;\n      } else {\n        for(let attempt=0;attempt<2;attempt++) {\n          try {const response=await fetch(`${this.bo_endpoint}/api/bo/${item.kind}`,{method:'POST',headers:{'Content-Type':'application/json','X-BO-Token':this.bo_token},body:JSON.stringify(item.body),signal:AbortSignal.timeout(this.bo_timeout)});if(!response.ok)throw Error('Collector rejected observation');break;}\n          catch(error){if(attempt===1)throw error;}\n        }\n      }}\n      catch{this.bo_errors++;}\n    }}finally{this.bo_busy=false;}\n  }\n  async flush(timeout=2000) {const deadline=Date.now()+timeout;while((this.bo_busy||this.bo_queue.length)&&Date.now()<deadline)await new Promise(r=>setTimeout(r,5));return !this.bo_busy&&!this.bo_queue.length;}\n}\n",
+    "bo_stategraph/execution_contract.py": "\"\"\"Check an inline activity configuration against its state graph and actual journal.\n\nThis protocol supports one invocation per declared activity in each run, integer\ncapacity, atomic allocation, completion and ALL join. It does not infer hidden calls.\n\"\"\"\nfrom copy import deepcopy\n\nTERMINAL={'succeeded','rejected','failed','cancelled'}\n\n\ndef validate_execution_graph(model):\n    spec=model.get('machine',{}).get('execution')\n    if not spec:return {'valid':True,'applicable':False}\n    if spec.get('schema')!='activity-graph/v1':raise ValueError('unsupported activity configuration schema')\n    chart=model['machine'];nodes={n['id']:n for n in model['nodes']}\n    if spec['within'] not in chart['values'] or spec['parent'] not in nodes:raise ValueError('execution scope missing')\n    activities={a['id']:a for a in spec['activities']};resources={r['id']:r for r in spec['resources']};join=spec['join']\n    if not activities or len(activities)!=len(spec['activities']) or len(resources)!=len(spec['resources']):\n        raise ValueError('duplicate or missing activity/resource IDs')\n    if set(activities)&set(resources) or join['id'] in {*activities,*resources}:raise ValueError('execution identities overlap')\n    if join['policy']!='all' or len(set(join['requires']))!=len(join['requires']) or set(join['requires'])!=set(activities):\n        raise ValueError('ALL join must include every declared activity')\n    if set(spec['activity_states'])!={'pending','waiting','running',*TERMINAL}:raise ValueError('incomplete activity states')\n    for r in resources.values():\n        if r.get('scope')!='run' or type(r['min']) is not int or type(r['max']) is not int or not 0<r['min']<=r['max']:\n            raise ValueError('unsupported resource scope or capacity bounds')\n    expected=set()\n    for aid,a in activities.items():\n        if not a['requires'] or set(a['requires'])-set(resources):raise ValueError('undefined resource dependency')\n        for rid,units in a['requires'].items():\n            if type(units) is not int or units<=0 or units>resources[rid]['min']:raise ValueError('activity cannot start at minimum capacity')\n            expected.add((rid,aid,'resource',units))\n        expected.add((aid,join['id'],'join',None))\n        if nodes.get(aid,{}).get('source')!=a['source']:raise ValueError('activity source and graph source differ: '+aid)\n    for key,role in [(a,'activity') for a in activities]+[(r,'resource') for r in resources]+[(join['id'],'join')]:\n        n=nodes.get(key,{})\n        if n.get('parent')!=spec['parent'] or n.get('execution_role')!=role:\n            raise ValueError('activity configuration must be represented by the original inline node: '+key)\n    actual={(e['from'],e['to'],e['type'],e.get('units')) for e in model['edges'] if e['type'] in ('resource','join')}\n    if actual!=expected:raise ValueError('inline resource/join edges differ from executable declaration')\n    if model.get('worknet'):raise ValueError('integrated activity model must not add a separate worknet projection')\n    guarded=[t for t in chart['transitions'] if t['dest'] in join['success_states']]\n    if not guarded:raise ValueError('missing lifecycle completion transition')\n    for t in guarded:\n        conditions=t.get('conditions',[]);conditions=[conditions] if isinstance(conditions,str) else conditions\n        if join['guard'] not in conditions:raise ValueError('lifecycle can bypass activity completion')\n    return {'valid':True,'activities':len(activities),'resources':len(resources)}\n\n\ndef validate_configuration(model,snapshot):\n    spec=model['machine']['execution'];activities={a['id']:a for a in spec['activities']}\n    resources={r['id']:r for r in spec['resources']};join=spec['join']\n    if not isinstance(snapshot.get('attempt'),str) or not snapshot['attempt'] or type(snapshot.get('param_version')) is not int or snapshot['param_version']<1:\n        raise ValueError('missing execution instance identity')\n    if set(snapshot.get('activities',{}))!=set(activities) or set(snapshot.get('resources',{}))!=set(resources):\n        raise ValueError('execution instance omits declared internal states')\n    initial_resources={}\n    for rid,r in resources.items():\n        capacity=snapshot['resources'][rid]['capacity']\n        if type(capacity) is not int or not r['min']<=capacity<=r['max']:raise ValueError('invalid capacity')\n        initial_resources[rid]={'capacity':capacity,'available':capacity,'holders':[]}\n    current={'activities':{a:'pending' for a in activities},'resources':initial_resources,\n             'join':{'state':'waiting','pending':list(join['requires'])}}\n    journal=snapshot.get('journal',[])\n    if type(snapshot.get('revision')) is not int or snapshot['revision']!=len(journal):raise ValueError('missing execution updates')\n    for seq,entry in enumerate(journal,1):\n        if entry['seq']!=seq or entry['before']!=current:raise ValueError('execution history is discontinuous')\n        expected=deepcopy(current);event=entry['event'];aid=entry['activity'];states=expected['activities']\n        if event in ('wait','start','finish'):\n            if aid not in activities:raise ValueError('unknown running activity')\n            need=activities[aid]['requires'];can_start=all(expected['resources'][r]['available']>=n for r,n in need.items())\n            if event=='wait':\n                if states[aid]!='pending' or can_start:raise ValueError('resource wait has no missing resource')\n                states[aid]='waiting'\n            elif event=='start':\n                if states[aid] not in ('pending','waiting') or not can_start:raise ValueError('activity started without resource')\n                for rid,n in need.items():\n                    expected['resources'][rid]['available']-=n;expected['resources'][rid]['holders'].append(aid)\n                states[aid]='running'\n            else:\n                outcome=entry['after']['activities'].get(aid)\n                if states[aid]!='running' or outcome not in {'succeeded','rejected','failed'}:raise ValueError('completion without running activity')\n                for rid,n in need.items():\n                    expected['resources'][rid]['available']+=n;expected['resources'][rid]['holders'].remove(aid)\n                states[aid]=outcome\n                if all(states[a] in TERMINAL for a in join['requires']):expected['join']['state']='enabled'\n        elif event=='join':\n            if aid!=join['id'] or expected['join']['state']!='enabled':raise ValueError('join before all activities completed')\n            expected['join']['state']='passed' if all(states[a]=='succeeded' for a in join['requires']) else 'rejected'\n        elif event=='abort':\n            if aid!=join['id'] or 'running' in states.values():raise ValueError('abort leaves running activity/resource')\n            expected['activities']={a:s if s in TERMINAL else 'cancelled' for a,s in states.items()}\n            expected['join']['state']='rejected'\n        else:raise ValueError('unknown internal state event')\n        expected['join']['pending']=[a for a in join['requires'] if expected['activities'][a] not in TERMINAL]\n        if expected!=entry['after']:raise ValueError('internal state update violates declared resource or join rules')\n        current=expected\n    if current!={k:snapshot[k] for k in ('activities','resources','join')}:raise ValueError('current state differs from actual execution history')\n    if snapshot.get('phase') in join['success_states'] and (current['join']['state']!='passed' or any(s!='succeeded' for s in current['activities'].values())):\n        raise ValueError('lifecycle advanced before this execution completed')\n    return {'valid':True,'updates':len(journal)}\n",
+    "bo_stategraph/project.json": "{\n  \"protocol\": \"bo-project/v1\",\n  \"project_id\": \"multilanguage-jobs\",\n  \"selection\": {\n    \"mode\": \"drive\",\n    \"source\": \"user\",\n    \"answer\": \"演示命令明确选择 drive（合成测试项目）\",\n    \"locator\": \"tools/multilanguage_demo.py --mode drive\"\n  },\n  \"model\": {\n    \"schema_version\": 3,\n    \"revision\": \"1\",\n    \"project_id\": \"multilanguage-jobs\",\n    \"intent\": \"intent.json\",\n    \"source_files\": [\n      \"src/job.py\",\n      \"src/job.mjs\",\n      \"src/ReactPanel.tsx\",\n      \"src/VuePanel.vue\",\n      \"bo_stategraph/project.json\",\n      \"integrations/bo_runner.mjs\",\n      \"integrations/bo_browser.tsx\",\n      \"bo_stategraph/bo_runtime.mjs\",\n      \"bo_stategraph/bo_executor.py\",\n      \"bo_stategraph/bo_probe.py\",\n      \"bo_stategraph/bo_contracts.py\",\n      \"bo_stategraph/execution_contract.py\"\n    ],\n    \"nodes\": [\n      {\n        \"id\": \"py.advance\",\n        \"kind\": \"action\",\n        \"layer\": \"business\",\n        \"label\": \"Python 任务\",\n        \"summary\": \"实际操作、参数和结果\",\n        \"source\": {\n          \"path\": \"src/job.py\",\n          \"symbol\": \"advance\"\n        },\n        \"capture\": {\n          \"in\": {\n            \"state\": \"string\",\n            \"event\": \"string\",\n            \"slots\": \"number\",\n            \"mode\": \"string\"\n          },\n          \"out\": {\n            \"state\": \"string\"\n          }\n        },\n        \"requirements\": [\n          \"R1\"\n        ],\n        \"code_evidence\": {\n          \"symbol\": \"src/job.py::advance\",\n          \"ast_hash\": \"491c52dcc8244b778afa60fef14e9c0cd531082f9655dd81a82a3b53b1741cac\",\n          \"origin\": \"source-ast\"\n        },\n        \"semantic_roles\": [\n          \"business\"\n        ]\n      },\n      {\n        \"id\": \"js.advance\",\n        \"kind\": \"action\",\n        \"layer\": \"business\",\n        \"label\": \"Node / 浏览器任务\",\n        \"summary\": \"实际操作、参数和结果\",\n        \"source\": {\n          \"path\": \"src/job.mjs\",\n          \"symbol\": \"advance\"\n        },\n        \"capture\": {\n          \"in\": {\n            \"state\": \"string\",\n            \"event\": \"string\",\n            \"slots\": \"number\",\n            \"mode\": \"string\"\n          },\n          \"out\": {\n            \"state\": \"string\"\n          }\n        },\n        \"requirements\": [\n          \"R1\"\n        ],\n        \"code_evidence\": {\n          \"symbol\": \"src/job.mjs::advance\",\n          \"ast_hash\": \"9e5725c295e76d933bed5248bf325d48b3085aa74c4d8fd85008d2855cebb014\",\n          \"origin\": \"source-ast\"\n        },\n        \"semantic_roles\": [\n          \"business\"\n        ]\n      },\n      {\n        \"id\": \"react.panel\",\n        \"kind\": \"action\",\n        \"layer\": \"business\",\n        \"label\": \"React 操作\",\n        \"summary\": \"实际操作、参数和结果\",\n        \"source\": {\n          \"path\": \"src/ReactPanel.tsx\",\n          \"symbol\": \"ReactPanel\"\n        },\n        \"capture\": {\n          \"in\": {\n            \"has_handler\": \"boolean\"\n          },\n          \"out\": {\n            \"state\": \"string\"\n          }\n        },\n        \"requirements\": [\n          \"R1\"\n        ],\n        \"code_evidence\": {\n          \"symbol\": \"src/ReactPanel.tsx::ReactPanel\",\n          \"ast_hash\": \"2f019b7b6bd210cc8a966ffb06abfb59d38669cc81a98cce56dce6c3547c62bb\",\n          \"origin\": \"source-ast\"\n        },\n        \"semantic_roles\": [\n          \"business\"\n        ]\n      },\n      {\n        \"id\": \"vue.template\",\n        \"kind\": \"action\",\n        \"layer\": \"business\",\n        \"label\": \"Vue 操作\",\n        \"summary\": \"实际操作、参数和结果\",\n        \"source\": {\n          \"path\": \"src/VuePanel.vue\",\n          \"symbol\": \"<template>\"\n        },\n        \"capture\": {\n          \"in\": {\n            \"has_handler\": \"boolean\"\n          },\n          \"out\": {\n            \"state\": \"string\"\n          }\n        },\n        \"requirements\": [\n          \"R1\"\n        ],\n        \"code_evidence\": {\n          \"symbol\": \"src/VuePanel.vue::<template>\",\n          \"ast_hash\": \"ac04705e36c629e6fb61bc88df2b6d5555b93c31bdc47f31ab80ed59cd887543\",\n          \"origin\": \"source-ast\"\n        },\n        \"semantic_roles\": [\n          \"business\"\n        ]\n      },\n      {\n        \"id\": \"react.start\",\n        \"kind\": \"function\",\n        \"layer\": \"program\",\n        \"label\": \"开始任务\",\n        \"summary\": \"用户点击后执行处理\",\n        \"source\": {\n          \"path\": \"src/ReactPanel.tsx\",\n          \"symbol\": \"ReactPanel.start\"\n        },\n        \"parent\": \"react.panel\",\n        \"capture\": {\n          \"in\": {\n            \"event\": \"string\"\n          },\n          \"out\": {\n            \"before\": \"string\",\n            \"state\": \"string\"\n          }\n        },\n        \"requirements\": [\n          \"R1\"\n        ],\n        \"code_evidence\": {\n          \"symbol\": \"src/ReactPanel.tsx::ReactPanel.start\",\n          \"ast_hash\": \"12b42b80e3c83fe81b86fe093ecc28959e2b0a54366129099723e9d80befd690\",\n          \"origin\": \"source-ast\"\n        }\n      },\n      {\n        \"id\": \"react.finish\",\n        \"kind\": \"function\",\n        \"layer\": \"program\",\n        \"label\": \"完成任务\",\n        \"summary\": \"用户点击后执行处理\",\n        \"source\": {\n          \"path\": \"src/ReactPanel.tsx\",\n          \"symbol\": \"ReactPanel.finish\"\n        },\n        \"parent\": \"react.panel\",\n        \"capture\": {\n          \"in\": {\n            \"event\": \"string\"\n          },\n          \"out\": {\n            \"before\": \"string\",\n            \"state\": \"string\"\n          }\n        },\n        \"requirements\": [\n          \"R1\"\n        ],\n        \"code_evidence\": {\n          \"symbol\": \"src/ReactPanel.tsx::ReactPanel.finish\",\n          \"ast_hash\": \"865421a68152540fb9eb61deb8fc7b4b93abc326c1fc44e3539efb7806bfe860\",\n          \"origin\": \"source-ast\"\n        }\n      },\n      {\n        \"id\": \"vue.start\",\n        \"kind\": \"function\",\n        \"layer\": \"program\",\n        \"label\": \"开始任务\",\n        \"summary\": \"用户点击后执行处理\",\n        \"source\": {\n          \"path\": \"src/VuePanel.vue\",\n          \"symbol\": \"start\"\n        },\n        \"parent\": \"vue.template\",\n        \"capture\": {\n          \"in\": {\n            \"event\": \"string\"\n          },\n          \"out\": {\n            \"before\": \"string\",\n            \"state\": \"string\"\n          }\n        },\n        \"requirements\": [\n          \"R1\"\n        ],\n        \"code_evidence\": {\n          \"symbol\": \"src/VuePanel.vue::start\",\n          \"ast_hash\": \"ec6d86157a43718496c161fe16bb4ac56ee10f18b275b0d1829e52e70ac46ee3\",\n          \"origin\": \"source-ast\"\n        }\n      },\n      {\n        \"id\": \"vue.finish\",\n        \"kind\": \"function\",\n        \"layer\": \"program\",\n        \"label\": \"完成任务\",\n        \"summary\": \"用户点击后执行处理\",\n        \"source\": {\n          \"path\": \"src/VuePanel.vue\",\n          \"symbol\": \"finish\"\n        },\n        \"parent\": \"vue.template\",\n        \"capture\": {\n          \"in\": {\n            \"event\": \"string\"\n          },\n          \"out\": {\n            \"before\": \"string\",\n            \"state\": \"string\"\n          }\n        },\n        \"requirements\": [\n          \"R1\"\n        ],\n        \"code_evidence\": {\n          \"symbol\": \"src/VuePanel.vue::finish\",\n          \"ast_hash\": \"0579d6ffbc090538523764c73f631898d3805bf490d528aa015baa6b2db6e32c\",\n          \"origin\": \"source-ast\"\n        }\n      },\n      {\n        \"id\": \"state.pending\",\n        \"kind\": \"state\",\n        \"layer\": \"state\",\n        \"value\": \"pending\",\n        \"label\": \"待处理\",\n        \"summary\": \"实际任务状态\"\n      },\n      {\n        \"id\": \"state.waiting\",\n        \"kind\": \"state\",\n        \"layer\": \"state\",\n        \"value\": \"waiting\",\n        \"label\": \"等待名额\",\n        \"summary\": \"实际任务状态\"\n      },\n      {\n        \"id\": \"state.running\",\n        \"kind\": \"state\",\n        \"layer\": \"state\",\n        \"value\": \"running\",\n        \"label\": \"处理中\",\n        \"summary\": \"实际任务状态\"\n      },\n      {\n        \"id\": \"state.done\",\n        \"kind\": \"state\",\n        \"layer\": \"state\",\n        \"value\": \"done\",\n        \"label\": \"已完成\",\n        \"summary\": \"实际任务状态\"\n      },\n      {\n        \"id\": \"implementation.798220b06c77a273\",\n        \"kind\": \"function\",\n        \"layer\": \"program\",\n        \"origin\": \"source-ast\",\n        \"label\": \"<callback:watchEffect:0:1>\",\n        \"summary\": \"实现归属；调用关系以源码和运行记录为准\",\n        \"source\": {\n          \"path\": \"src/VuePanel.vue\",\n          \"symbol\": \"<callback:watchEffect:0:1>\"\n        },\n        \"parent\": \"vue.template\",\n        \"capture\": {\n          \"in\": {},\n          \"out\": {}\n        },\n        \"signature\": \"\",\n        \"code_evidence\": {\n          \"symbol\": \"src/VuePanel.vue::<callback:watchEffect:0:1>\",\n          \"ast_hash\": \"5edda14247fb3a9fb7efece58fbdc3aae5f2750a15f84492d21f9b632a402947\",\n          \"parameters\": [],\n          \"returns\": null,\n          \"origin\": \"source-ast\"\n        }\n      },\n      {\n        \"id\": \"implementation.0041d31aeda41bac\",\n        \"kind\": \"function\",\n        \"layer\": \"program\",\n        \"origin\": \"source-ast\",\n        \"label\": \"<module>\",\n        \"summary\": \"实现归属；调用关系以源码和运行记录为准\",\n        \"source\": {\n          \"path\": \"src/VuePanel.vue\",\n          \"symbol\": \"<module>\"\n        },\n        \"parent\": \"vue.template\",\n        \"capture\": {\n          \"in\": {},\n          \"out\": {}\n        },\n        \"signature\": \"module\",\n        \"code_evidence\": {\n          \"symbol\": \"src/VuePanel.vue::<module>\",\n          \"ast_hash\": \"00e6035044ef983710a4da0827f4f5ba84829ad936533f3e6ff3d8559c24c160\",\n          \"parameters\": [],\n          \"returns\": null,\n          \"origin\": \"source-ast\"\n        }\n      },\n      {\n        \"id\": \"implementation.fdb5a59c3f24a2bb\",\n        \"kind\": \"function\",\n        \"layer\": \"program\",\n        \"origin\": \"source-ast\",\n        \"label\": \"available\",\n        \"summary\": \"实现归属；调用关系以源码和运行记录为准\",\n        \"source\": {\n          \"path\": \"src/job.mjs\",\n          \"symbol\": \"available\"\n        },\n        \"parent\": \"js.advance\",\n        \"capture\": {\n          \"in\": {},\n          \"out\": {}\n        },\n        \"signature\": \"context\",\n        \"code_evidence\": {\n          \"symbol\": \"src/job.mjs::available\",\n          \"ast_hash\": \"ae31ec5387cc33141dcaa0e6ec91327806995c2861aee1769c108c1703442579\",\n          \"parameters\": [\n            {\n              \"name\": \"context\",\n              \"annotation\": null\n            }\n          ],\n          \"returns\": null,\n          \"origin\": \"source-ast\"\n        }\n      }\n    ],\n    \"edges\": [\n      {\n        \"id\": \"contains.react.start\",\n        \"from\": \"react.panel\",\n        \"to\": \"react.start\",\n        \"type\": \"contains\",\n        \"label\": \"操作\",\n        \"evidence\": \"confirmed UI action\"\n      },\n      {\n        \"id\": \"calls.react.start\",\n        \"from\": \"react.start\",\n        \"to\": \"js.advance\",\n        \"type\": \"flow\",\n        \"label\": \"调用任务逻辑\",\n        \"evidence\": \"run prop bound by integrations/bo_browser.tsx; runtime case ui\"\n      },\n      {\n        \"id\": \"contains.react.finish\",\n        \"from\": \"react.panel\",\n        \"to\": \"react.finish\",\n        \"type\": \"contains\",\n        \"label\": \"操作\",\n        \"evidence\": \"confirmed UI action\"\n      },\n      {\n        \"id\": \"calls.react.finish\",\n        \"from\": \"react.finish\",\n        \"to\": \"js.advance\",\n        \"type\": \"flow\",\n        \"label\": \"调用任务逻辑\",\n        \"evidence\": \"run prop bound by integrations/bo_browser.tsx; runtime case ui\"\n      },\n      {\n        \"id\": \"contains.vue.start\",\n        \"from\": \"vue.template\",\n        \"to\": \"vue.start\",\n        \"type\": \"contains\",\n        \"label\": \"操作\",\n        \"evidence\": \"confirmed UI action\"\n      },\n      {\n        \"id\": \"calls.vue.start\",\n        \"from\": \"vue.start\",\n        \"to\": \"js.advance\",\n        \"type\": \"flow\",\n        \"label\": \"调用任务逻辑\",\n        \"evidence\": \"run prop bound by integrations/bo_browser.tsx; runtime case ui\"\n      },\n      {\n        \"id\": \"contains.vue.finish\",\n        \"from\": \"vue.template\",\n        \"to\": \"vue.finish\",\n        \"type\": \"contains\",\n        \"label\": \"操作\",\n        \"evidence\": \"confirmed UI action\"\n      },\n      {\n        \"id\": \"calls.vue.finish\",\n        \"from\": \"vue.finish\",\n        \"to\": \"js.advance\",\n        \"type\": \"flow\",\n        \"label\": \"调用任务逻辑\",\n        \"evidence\": \"run prop bound by integrations/bo_browser.tsx; runtime case ui\"\n      },\n      {\n        \"id\": \"transition.0\",\n        \"from\": \"state.pending\",\n        \"to\": \"state.running\",\n        \"type\": \"flow\",\n        \"label\": \"start\",\n        \"evidence\": \"common executable JSON declaration\"\n      },\n      {\n        \"id\": \"transition.1\",\n        \"from\": \"state.pending\",\n        \"to\": \"state.waiting\",\n        \"type\": \"flow\",\n        \"label\": \"start\",\n        \"evidence\": \"common executable JSON declaration\"\n      },\n      {\n        \"id\": \"transition.2\",\n        \"from\": \"state.waiting\",\n        \"to\": \"state.running\",\n        \"type\": \"flow\",\n        \"label\": \"resume\",\n        \"evidence\": \"common executable JSON declaration\"\n      },\n      {\n        \"id\": \"transition.3\",\n        \"from\": \"state.running\",\n        \"to\": \"state.done\",\n        \"type\": \"flow\",\n        \"label\": \"finish\",\n        \"evidence\": \"common executable JSON declaration\"\n      },\n      {\n        \"id\": \"state.py\",\n        \"from\": \"py.advance\",\n        \"to\": \"state.running\",\n        \"type\": \"data\",\n        \"label\": \"返回实际状态\",\n        \"evidence\": \"source return and snapshot; may wait or finish\"\n      },\n      {\n        \"id\": \"state.js\",\n        \"from\": \"js.advance\",\n        \"to\": \"state.running\",\n        \"type\": \"data\",\n        \"label\": \"返回实际状态\",\n        \"evidence\": \"source return and snapshot; may wait or finish\"\n      },\n      {\n        \"id\": \"call.8ec30999a8ae1407\",\n        \"from\": \"react.panel\",\n        \"to\": \"react.start\",\n        \"type\": \"flow\",\n        \"label\": \"静态调用 start\",\n        \"origin\": \"source-ast\",\n        \"evidence\": \"javascript syntax reference; execution unproven\",\n        \"callsite\": {\n          \"line\": 7,\n          \"column\": 92,\n          \"args\": [],\n          \"keywords\": {}\n        }\n      },\n      {\n        \"id\": \"call.6bd6ace1f1e90516\",\n        \"from\": \"react.panel\",\n        \"to\": \"react.finish\",\n        \"type\": \"flow\",\n        \"label\": \"静态调用 finish\",\n        \"origin\": \"source-ast\",\n        \"evidence\": \"javascript syntax reference; execution unproven\",\n        \"callsite\": {\n          \"line\": 7,\n          \"column\": 136,\n          \"args\": [],\n          \"keywords\": {}\n        }\n      },\n      {\n        \"id\": \"call.2091c222843f6a44\",\n        \"from\": \"vue.template\",\n        \"to\": \"vue.start\",\n        \"type\": \"flow\",\n        \"label\": \"静态调用 start\",\n        \"origin\": \"source-ast\",\n        \"evidence\": \"javascript syntax reference; execution unproven\",\n        \"callsite\": {\n          \"line\": 9,\n          \"column\": 82,\n          \"args\": [],\n          \"keywords\": {}\n        }\n      },\n      {\n        \"id\": \"call.de8c86e3ca4ae72e\",\n        \"from\": \"vue.template\",\n        \"to\": \"vue.finish\",\n        \"type\": \"flow\",\n        \"label\": \"静态调用 finish\",\n        \"origin\": \"source-ast\",\n        \"evidence\": \"javascript syntax reference; execution unproven\",\n        \"callsite\": {\n          \"line\": 9,\n          \"column\": 123,\n          \"args\": [],\n          \"keywords\": {}\n        }\n      },\n      {\n        \"id\": \"contains.implementation.798220b06c77a273\",\n        \"from\": \"vue.template\",\n        \"to\": \"implementation.798220b06c77a273\",\n        \"type\": \"contains\",\n        \"label\": \"实现函数\",\n        \"origin\": \"source-ast\",\n        \"evidence\": \"implementation inventory + source AST\"\n      },\n      {\n        \"id\": \"contains.implementation.0041d31aeda41bac\",\n        \"from\": \"vue.template\",\n        \"to\": \"implementation.0041d31aeda41bac\",\n        \"type\": \"contains\",\n        \"label\": \"实现函数\",\n        \"origin\": \"source-ast\",\n        \"evidence\": \"implementation inventory + source AST\"\n      },\n      {\n        \"id\": \"contains.implementation.fdb5a59c3f24a2bb\",\n        \"from\": \"js.advance\",\n        \"to\": \"implementation.fdb5a59c3f24a2bb\",\n        \"type\": \"contains\",\n        \"label\": \"实现函数\",\n        \"origin\": \"source-ast\",\n        \"evidence\": \"implementation inventory + source AST\"\n      }\n    ],\n    \"overview\": [\n      {\n        \"node\": \"py.advance\"\n      },\n      {\n        \"node\": \"js.advance\"\n      },\n      {\n        \"node\": \"react.panel\"\n      },\n      {\n        \"node\": \"vue.template\"\n      }\n    ],\n    \"scope\": {\n      \"unknowns\": []\n    },\n    \"machine\": {\n      \"engine\": \"bo.fsm\",\n      \"version\": \"1\",\n      \"state_type\": \"enum\",\n      \"states\": [\n        \"pending\",\n        \"waiting\",\n        \"running\",\n        \"done\"\n      ],\n      \"values\": [\n        \"pending\",\n        \"waiting\",\n        \"running\",\n        \"done\"\n      ],\n      \"initial\": \"pending\",\n      \"transitions\": [\n        {\n          \"source\": \"pending\",\n          \"dest\": \"running\",\n          \"trigger\": \"start\",\n          \"conditions\": \"available\"\n        },\n        {\n          \"source\": \"pending\",\n          \"dest\": \"waiting\",\n          \"trigger\": \"start\",\n          \"unless\": \"available\"\n        },\n        {\n          \"source\": \"waiting\",\n          \"dest\": \"running\",\n          \"trigger\": \"resume\",\n          \"conditions\": \"available\"\n        },\n        {\n          \"source\": \"running\",\n          \"dest\": \"done\",\n          \"trigger\": \"finish\"\n        }\n      ],\n      \"events\": {\n        \"start\": {\n          \"payload\": {}\n        },\n        \"resume\": {\n          \"payload\": {}\n        },\n        \"finish\": {\n          \"payload\": {}\n        }\n      },\n      \"context\": {\n        \"slots\": {\n          \"type\": \"integer\",\n          \"min\": 0\n        }\n      },\n      \"guards\": {\n        \"available\": \"at least one slot\"\n      }\n    },\n    \"presentation\": {\n      \"subject\": \"跨语言任务\",\n      \"layout_id\": \"multilanguage-jobs\",\n      \"default_expanded\": []\n    },\n    \"implementation\": {\n      \"schema\": \"bo-implementation/v1\",\n      \"features\": [\n        {\n          \"id\": \"py.advance\",\n          \"label\": \"Python 任务\",\n          \"business_node\": \"py.advance\",\n          \"nodes\": [\n            \"py.advance\"\n          ],\n          \"sources\": [\n            \"src/job.py::advance\"\n          ],\n          \"parameters\": [\n            {\n              \"source\": \"src/job.py::advance\",\n              \"name\": \"state\",\n              \"node\": \"py.advance\",\n              \"direction\": \"in\",\n              \"field\": \"state\",\n              \"policy\": \"value\",\n              \"reason\": \"只记录执行模式或回调是否存在；不序列化函数对象\"\n            },\n            {\n              \"source\": \"src/job.py::advance\",\n              \"name\": \"event\",\n              \"node\": \"py.advance\",\n              \"direction\": \"in\",\n              \"field\": \"event\",\n              \"policy\": \"value\",\n              \"reason\": \"只记录执行模式或回调是否存在；不序列化函数对象\"\n            },\n            {\n              \"source\": \"src/job.py::advance\",\n              \"name\": \"slots\",\n              \"node\": \"py.advance\",\n              \"direction\": \"in\",\n              \"field\": \"slots\",\n              \"policy\": \"value\",\n              \"reason\": \"只记录执行模式或回调是否存在；不序列化函数对象\"\n            },\n            {\n              \"source\": \"src/job.py::advance\",\n              \"name\": \"executor\",\n              \"node\": \"py.advance\",\n              \"direction\": \"in\",\n              \"field\": \"mode\",\n              \"policy\": \"derived\",\n              \"reason\": \"只记录执行模式或回调是否存在；不序列化函数对象\"\n            }\n          ],\n          \"cases\": [\n            {\n              \"case\": \"python\",\n              \"node\": \"py.advance\",\n              \"phase\": \"change\"\n            }\n          ],\n          \"requirements\": [\n            \"R1\"\n          ]\n        },\n        {\n          \"id\": \"js.advance\",\n          \"label\": \"Node / 浏览器任务\",\n          \"business_node\": \"js.advance\",\n          \"nodes\": [\n            \"js.advance\"\n          ],\n          \"sources\": [\n            \"src/job.mjs::advance\",\n            \"src/job.mjs::available\"\n          ],\n          \"parameters\": [\n            {\n              \"source\": \"src/job.mjs::advance\",\n              \"name\": \"state\",\n              \"node\": \"js.advance\",\n              \"direction\": \"in\",\n              \"field\": \"state\",\n              \"policy\": \"value\",\n              \"reason\": \"只记录执行模式或回调是否存在；不序列化函数对象\"\n            },\n            {\n              \"source\": \"src/job.mjs::advance\",\n              \"name\": \"event\",\n              \"node\": \"js.advance\",\n              \"direction\": \"in\",\n              \"field\": \"event\",\n              \"policy\": \"value\",\n              \"reason\": \"只记录执行模式或回调是否存在；不序列化函数对象\"\n            },\n            {\n              \"source\": \"src/job.mjs::advance\",\n              \"name\": \"slots\",\n              \"node\": \"js.advance\",\n              \"direction\": \"in\",\n              \"field\": \"slots\",\n              \"policy\": \"value\",\n              \"reason\": \"只记录执行模式或回调是否存在；不序列化函数对象\"\n            },\n            {\n              \"source\": \"src/job.mjs::advance\",\n              \"name\": \"executor\",\n              \"node\": \"js.advance\",\n              \"direction\": \"in\",\n              \"field\": \"mode\",\n              \"policy\": \"derived\",\n              \"reason\": \"只记录执行模式或回调是否存在；不序列化函数对象\"\n            },\n            {\n              \"source\": \"src/job.mjs::available\",\n              \"name\": \"context\",\n              \"node\": \"js.advance\",\n              \"direction\": \"in\",\n              \"field\": \"slots\",\n              \"policy\": \"derived\",\n              \"reason\": \"只记录执行模式或回调是否存在；不序列化函数对象\"\n            }\n          ],\n          \"cases\": [\n            {\n              \"case\": \"node\",\n              \"node\": \"js.advance\",\n              \"phase\": \"change\"\n            }\n          ],\n          \"requirements\": [\n            \"R1\"\n          ]\n        },\n        {\n          \"id\": \"react.panel\",\n          \"label\": \"React 操作\",\n          \"business_node\": \"react.panel\",\n          \"nodes\": [\n            \"react.panel\",\n            \"react.start\",\n            \"react.finish\"\n          ],\n          \"sources\": [\n            \"src/ReactPanel.tsx::ReactPanel\",\n            \"src/ReactPanel.tsx::ReactPanel.start\",\n            \"src/ReactPanel.tsx::ReactPanel.finish\"\n          ],\n          \"parameters\": [\n            {\n              \"source\": \"src/ReactPanel.tsx::ReactPanel\",\n              \"name\": \"{run,bo_observe}\",\n              \"node\": \"react.panel\",\n              \"direction\": \"in\",\n              \"field\": \"has_handler\",\n              \"policy\": \"derived\",\n              \"reason\": \"只记录执行模式或回调是否存在；不序列化函数对象\"\n            }\n          ],\n          \"cases\": [\n            {\n              \"case\": \"ui\",\n              \"node\": \"react.panel\",\n              \"phase\": \"read\"\n            },\n            {\n              \"case\": \"ui\",\n              \"node\": \"react.start\",\n              \"phase\": \"return\"\n            },\n            {\n              \"case\": \"ui\",\n              \"node\": \"react.finish\",\n              \"phase\": \"return\"\n            }\n          ],\n          \"requirements\": [\n            \"R1\"\n          ]\n        },\n        {\n          \"id\": \"vue.template\",\n          \"label\": \"Vue 操作\",\n          \"business_node\": \"vue.template\",\n          \"nodes\": [\n            \"vue.template\",\n            \"vue.start\",\n            \"vue.finish\"\n          ],\n          \"sources\": [\n            \"src/VuePanel.vue::<template>\",\n            \"src/VuePanel.vue::start\",\n            \"src/VuePanel.vue::finish\"\n          ],\n          \"parameters\": [],\n          \"cases\": [\n            {\n              \"case\": \"ui\",\n              \"node\": \"vue.template\",\n              \"phase\": \"read\"\n            },\n            {\n              \"case\": \"ui\",\n              \"node\": \"vue.start\",\n              \"phase\": \"return\"\n            },\n            {\n              \"case\": \"ui\",\n              \"node\": \"vue.finish\",\n              \"phase\": \"return\"\n            }\n          ],\n          \"requirements\": [\n            \"R1\"\n          ]\n        }\n      ],\n      \"support\": {\n        \"src/VuePanel.vue::<callback:watchEffect:0:1>\": {\n          \"node\": \"vue.template\",\n          \"reason\": \"Vue 组件初始化，关联同一操作功能\"\n        },\n        \"src/VuePanel.vue::<module>\": {\n          \"node\": \"vue.template\",\n          \"reason\": \"Vue 组件初始化，关联同一操作功能\"\n        }\n      },\n      \"excluded\": {}\n    },\n    \"static_structure\": {\n      \"files\": {\n        \"src/job.py\": \"f0f01de2cbc8dacca3d5f6339e251fcf00e0b9ca3629899b47e25de58247a0dd\",\n        \"src/ReactPanel.tsx\": \"2af4280901f24c33fe5fd1c3d7ae1c43883b76f7c66c9307638a5659acca65e4\",\n        \"src/VuePanel.vue\": \"f3db3d25f1ef2177787cd3d82403a11631d9e1dad37fb733f3f39d7166efebb7\",\n        \"src/job.mjs\": \"d5f1498a4078c772ec34b1d6aaa06570b8a00d8a918982b5254bb4d8c27585fe\"\n      },\n      \"resolved_calls\": 4,\n      \"unresolved_calls\": 16,\n      \"depth\": 1,\n      \"limits\": [\n        \"Static call candidates are not runtime calls or proven value flow.\",\n        \"Dynamic dispatch, callbacks, generated source and framework bindings require coding-side review and runtime evidence.\"\n      ]\n    }\n  }\n}\n",
+    "integrations/bo_browser.tsx": "import React from 'react';\nimport {createRoot} from 'react-dom/client';\nimport {createApp} from 'vue';\nimport {ReactPanel} from '../src/ReactPanel';\nimport VuePanel from '../src/VuePanel.vue';\nimport {BOProbe} from '../bo_stategraph/bo_runtime.mjs';\nimport {bo_runner} from './bo_runner.mjs';\nimport project from '../bo_stategraph/project.json';\nimport settings from '../.stategraph/collector.json';\n\nconst bo_probe=new BOProbe({project,buildId:settings.build_id,endpoint:settings.endpoint,token:settings.token});\ndocument.getElementById('mode')!.textContent='当前模式：'+(project.selection.mode==='drive'?'基于状态图执行':'跟随项目实现');\nfunction bo_observe(node:string,phase:string,values:object){bo_probe.record(node,phase,()=>values);}\ncreateRoot(document.getElementById('react')!).render(<ReactPanel run={bo_runner(project,bo_probe,'react')} bo_observe={bo_observe}/>);\ncreateApp(VuePanel,{run:bo_runner(project,bo_probe,'vue'),bo_observe}).mount('#vue');\n",
+    "integrations/bo_runner.mjs": "// Observation and native driver wiring. Actual decisions live in src/job.mjs.\nimport {advance,available} from '../src/job.mjs';\nimport {BOExecutor} from '../bo_stategraph/bo_runtime.mjs';\nexport function bo_runner(project,probe,framework=null,slots=1) {\n  const executor=project.selection.mode==='drive'?new BOExecutor(project.model.machine,{available}):null;\n  let state='pending',revision=0;\n  const attempt=(framework||'node')+':'+crypto.randomUUID();\n  function bo_report(event,guards=null,before=state) {\n    const id=probe.record('js.advance','change',()=>({inputs:{state:before,event:event||'initial',slots,mode:project.selection.mode},outputs:{state}}),{entity:framework||'node',attempt,scope:'entity',revision});\n    probe.snapshot(attempt,state,{slots},revision,id,{event,guards,payload:event?{}:null});\n  }\n  bo_report(null);\n  return function bo_run(event) {\n    const before=state,result=advance(state,event,slots,executor);state=result.state;revision++;\n    if(framework)probe.record(framework+'.'+event,'return',()=>({inputs:{event},outputs:{state,before}}),{entity:framework,attempt,scope:'entity'});\n    bo_report(event,result.guards,before);return state;\n  };\n}\n",
+    "src/ReactPanel.tsx": "import React, {useState} from 'react';\nexport function ReactPanel({run,bo_observe}: {run:(event:string)=>string,bo_observe?:Function}) {\n  const [state,setState]=useState('pending');\n  try {bo_observe?.('react.panel','read',{inputs:{has_handler:typeof run==='function'},outputs:{state}});} catch {}\n  function start(){setState(run('start'));}\n  function finish(){setState(run('finish'));}\n  return <section><h2>React 任务</h2><p data-testid=\"react-state\">{state}</p><button onClick={start}>开始 React 任务</button><button onClick={finish}>完成 React 任务</button></section>;\n}\n",
+    "src/VuePanel.vue": "<script setup lang=\"ts\">\nimport {ref,watchEffect} from 'vue';\nconst props=defineProps<{run:(event:string)=>string,bo_observe?:Function}>();\nconst state=ref('pending');\nwatchEffect(()=>{try {props.bo_observe?.('vue.template','read',{inputs:{has_handler:typeof props.run==='function'},outputs:{state:state.value}});} catch {}});\nfunction start(){state.value=props.run('start');}\nfunction finish(){state.value=props.run('finish');}\n</script>\n<template><section><h2>Vue 任务</h2><p data-testid=\"vue-state\">{{state}}</p><button @click=\"start\">开始 Vue 任务</button><button @click=\"finish\">完成 Vue 任务</button></section></template>\n",
+    "src/job.mjs": "// Application logic is independent of the collector, viewer and transport.\nexport function available(context) {return context.slots>0;}\nexport function advance(state,event,slots,executor=null) {\n  if(executor) return executor.step(state,event,{slots});\n  if(event==='start'&&state==='pending')return {state:slots>0?'running':'waiting',guards:{available:slots>0},event,payload:{}};\n  if(event==='resume'&&state==='waiting'&&slots>0)return {state:'running',guards:{available:true},event,payload:{}};\n  if(event==='finish'&&state==='running')return {state:'done',guards:{},event,payload:{}};\n  throw Error('No enabled transition');\n}\n",
+    "src/job.py": "\"\"\"Application logic: native execution or the application's own implementation.\"\"\"\ndef advance(state: str, event: str, slots: int, executor=None):\n    if executor is not None:\n        return executor.step(state,event,{'slots':slots})\n    if event=='start' and state=='pending':\n        return {'state':'running' if slots>0 else 'waiting','guards':{'available':slots>0},'event':event,'payload':{}}\n    if event=='resume' and state=='waiting' and slots>0:\n        return {'state':'running','guards':{'available':True},'event':event,'payload':{}}\n    if event=='finish' and state=='running':\n        return {'state':'done','guards':{},'event':event,'payload':{}}\n    raise ValueError('no enabled transition')\n"
+  },
+  "events": [
+    {
+      "protocol": "bo-event/v1",
+      "schema_version": 3,
+      "project_id": "multilanguage-jobs",
+      "model_revision": "1",
+      "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+      "run_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93",
+      "producer_id": "81b7c678-960b-404b-a08f-58a8f1172f5e",
+      "seq": 9,
+      "id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:5",
+      "node": "react.start",
+      "phase": "return",
+      "entity": "react",
+      "attempt": "react:2bc1bd07-a785-4f0d-ab3d-cdb57994d307",
+      "scope": "entity",
+      "call_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:5",
+      "parent_call_id": null,
+      "basis": {},
+      "inputs": {
+        "event": "start"
+      },
+      "outputs": {
+        "before": "pending",
+        "state": "running"
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T07:24:45.443Z",
+      "source_seq": 5,
+      "stream_id": "f981db66099909b81dfc531c"
+    },
+    {
+      "protocol": "bo-event/v1",
+      "schema_version": 3,
+      "project_id": "multilanguage-jobs",
+      "model_revision": "1",
+      "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+      "run_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93",
+      "producer_id": "81b7c678-960b-404b-a08f-58a8f1172f5e",
+      "seq": 10,
+      "id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:6",
+      "node": "js.advance",
+      "phase": "change",
+      "entity": "react",
+      "attempt": "react:2bc1bd07-a785-4f0d-ab3d-cdb57994d307",
+      "scope": "entity",
+      "call_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:6",
+      "parent_call_id": null,
+      "basis": {},
+      "inputs": {
+        "state": "pending",
+        "event": "start",
+        "slots": 1,
+        "mode": "drive"
+      },
+      "outputs": {
+        "state": "running"
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T07:24:45.443Z",
+      "revision": 1,
+      "source_seq": 6,
+      "stream_id": "f981db66099909b81dfc531c"
+    },
+    {
+      "protocol": "bo-event/v1",
+      "schema_version": 3,
+      "project_id": "multilanguage-jobs",
+      "model_revision": "1",
+      "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+      "run_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93",
+      "producer_id": "81b7c678-960b-404b-a08f-58a8f1172f5e",
+      "seq": 11,
+      "id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:7",
+      "node": "react.panel",
+      "phase": "read",
+      "entity": "application",
+      "attempt": "application",
+      "scope": "application",
+      "call_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:7",
+      "parent_call_id": null,
+      "basis": {},
+      "inputs": {
+        "has_handler": true
+      },
+      "outputs": {
+        "state": "running"
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T07:24:45.444Z",
+      "source_seq": 7,
+      "stream_id": "f981db66099909b81dfc531c"
+    },
+    {
+      "protocol": "bo-event/v1",
+      "schema_version": 3,
+      "project_id": "multilanguage-jobs",
+      "model_revision": "1",
+      "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+      "run_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93",
+      "producer_id": "81b7c678-960b-404b-a08f-58a8f1172f5e",
+      "seq": 12,
+      "id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:8",
+      "node": "react.finish",
+      "phase": "return",
+      "entity": "react",
+      "attempt": "react:2bc1bd07-a785-4f0d-ab3d-cdb57994d307",
+      "scope": "entity",
+      "call_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:8",
+      "parent_call_id": null,
+      "basis": {},
+      "inputs": {
+        "event": "finish"
+      },
+      "outputs": {
+        "before": "running",
+        "state": "done"
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T07:24:45.707Z",
+      "source_seq": 8,
+      "stream_id": "f981db66099909b81dfc531c"
+    },
+    {
+      "protocol": "bo-event/v1",
+      "schema_version": 3,
+      "project_id": "multilanguage-jobs",
+      "model_revision": "1",
+      "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+      "run_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93",
+      "producer_id": "81b7c678-960b-404b-a08f-58a8f1172f5e",
+      "seq": 13,
+      "id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:9",
+      "node": "js.advance",
+      "phase": "change",
+      "entity": "react",
+      "attempt": "react:2bc1bd07-a785-4f0d-ab3d-cdb57994d307",
+      "scope": "entity",
+      "call_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:9",
+      "parent_call_id": null,
+      "basis": {},
+      "inputs": {
+        "state": "running",
+        "event": "finish",
+        "slots": 1,
+        "mode": "drive"
+      },
+      "outputs": {
+        "state": "done"
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T07:24:45.707Z",
+      "revision": 2,
+      "source_seq": 9,
+      "stream_id": "f981db66099909b81dfc531c"
+    },
+    {
+      "protocol": "bo-event/v1",
+      "schema_version": 3,
+      "project_id": "multilanguage-jobs",
+      "model_revision": "1",
+      "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+      "run_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93",
+      "producer_id": "81b7c678-960b-404b-a08f-58a8f1172f5e",
+      "seq": 14,
+      "id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:10",
+      "node": "react.panel",
+      "phase": "read",
+      "entity": "application",
+      "attempt": "application",
+      "scope": "application",
+      "call_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:10",
+      "parent_call_id": null,
+      "basis": {},
+      "inputs": {
+        "has_handler": true
+      },
+      "outputs": {
+        "state": "done"
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T07:24:45.708Z",
+      "source_seq": 10,
+      "stream_id": "f981db66099909b81dfc531c"
+    },
+    {
+      "protocol": "bo-event/v1",
+      "schema_version": 3,
+      "project_id": "multilanguage-jobs",
+      "model_revision": "1",
+      "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+      "run_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93",
+      "producer_id": "81b7c678-960b-404b-a08f-58a8f1172f5e",
+      "seq": 15,
+      "id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:11",
+      "node": "vue.start",
+      "phase": "return",
+      "entity": "vue",
+      "attempt": "vue:46eed63f-3c1d-4fee-ab5b-4ce3bcefff44",
+      "scope": "entity",
+      "call_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:11",
+      "parent_call_id": null,
+      "basis": {},
+      "inputs": {
+        "event": "start"
+      },
+      "outputs": {
+        "before": "pending",
+        "state": "running"
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T07:24:45.972Z",
+      "source_seq": 11,
+      "stream_id": "f981db66099909b81dfc531c"
+    },
+    {
+      "protocol": "bo-event/v1",
+      "schema_version": 3,
+      "project_id": "multilanguage-jobs",
+      "model_revision": "1",
+      "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+      "run_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93",
+      "producer_id": "81b7c678-960b-404b-a08f-58a8f1172f5e",
+      "seq": 16,
+      "id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:12",
+      "node": "js.advance",
+      "phase": "change",
+      "entity": "vue",
+      "attempt": "vue:46eed63f-3c1d-4fee-ab5b-4ce3bcefff44",
+      "scope": "entity",
+      "call_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:12",
+      "parent_call_id": null,
+      "basis": {},
+      "inputs": {
+        "state": "pending",
+        "event": "start",
+        "slots": 1,
+        "mode": "drive"
+      },
+      "outputs": {
+        "state": "running"
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T07:24:45.972Z",
+      "revision": 1,
+      "source_seq": 12,
+      "stream_id": "f981db66099909b81dfc531c"
+    },
+    {
+      "protocol": "bo-event/v1",
+      "schema_version": 3,
+      "project_id": "multilanguage-jobs",
+      "model_revision": "1",
+      "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+      "run_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93",
+      "producer_id": "81b7c678-960b-404b-a08f-58a8f1172f5e",
+      "seq": 17,
+      "id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:13",
+      "node": "vue.template",
+      "phase": "read",
+      "entity": "application",
+      "attempt": "application",
+      "scope": "application",
+      "call_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:13",
+      "parent_call_id": null,
+      "basis": {},
+      "inputs": {
+        "has_handler": true
+      },
+      "outputs": {
+        "state": "running"
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T07:24:45.973Z",
+      "source_seq": 13,
+      "stream_id": "f981db66099909b81dfc531c"
+    },
+    {
+      "protocol": "bo-event/v1",
+      "schema_version": 3,
+      "project_id": "multilanguage-jobs",
+      "model_revision": "1",
+      "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+      "run_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93",
+      "producer_id": "81b7c678-960b-404b-a08f-58a8f1172f5e",
+      "seq": 18,
+      "id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:14",
+      "node": "vue.finish",
+      "phase": "return",
+      "entity": "vue",
+      "attempt": "vue:46eed63f-3c1d-4fee-ab5b-4ce3bcefff44",
+      "scope": "entity",
+      "call_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:14",
+      "parent_call_id": null,
+      "basis": {},
+      "inputs": {
+        "event": "finish"
+      },
+      "outputs": {
+        "before": "running",
+        "state": "done"
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T07:24:46.257Z",
+      "source_seq": 14,
+      "stream_id": "f981db66099909b81dfc531c"
+    },
+    {
+      "protocol": "bo-event/v1",
+      "schema_version": 3,
+      "project_id": "multilanguage-jobs",
+      "model_revision": "1",
+      "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+      "run_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93",
+      "producer_id": "81b7c678-960b-404b-a08f-58a8f1172f5e",
+      "seq": 19,
+      "id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:15",
+      "node": "js.advance",
+      "phase": "change",
+      "entity": "vue",
+      "attempt": "vue:46eed63f-3c1d-4fee-ab5b-4ce3bcefff44",
+      "scope": "entity",
+      "call_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:15",
+      "parent_call_id": null,
+      "basis": {},
+      "inputs": {
+        "state": "running",
+        "event": "finish",
+        "slots": 1,
+        "mode": "drive"
+      },
+      "outputs": {
+        "state": "done"
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T07:24:46.257Z",
+      "revision": 2,
+      "source_seq": 15,
+      "stream_id": "f981db66099909b81dfc531c"
+    },
+    {
+      "protocol": "bo-event/v1",
+      "schema_version": 3,
+      "project_id": "multilanguage-jobs",
+      "model_revision": "1",
+      "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+      "run_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93",
+      "producer_id": "81b7c678-960b-404b-a08f-58a8f1172f5e",
+      "seq": 20,
+      "id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:16",
+      "node": "vue.template",
+      "phase": "read",
+      "entity": "application",
+      "attempt": "application",
+      "scope": "application",
+      "call_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:16",
+      "parent_call_id": null,
+      "basis": {},
+      "inputs": {
+        "has_handler": true
+      },
+      "outputs": {
+        "state": "done"
+      },
+      "depends": [],
+      "observed_at": "2026-10-23T07:24:46.257Z",
+      "source_seq": 16,
+      "stream_id": "f981db66099909b81dfc531c"
+    }
+  ],
+  "commands": [],
+  "gaps": [],
+  "capture": {
+    "mode": "all",
+    "nodes": null,
+    "roots": [],
+    "boundary_nodes": []
+  },
+  "command_fields": [],
+  "runtime_frames": {
+    "schema": "stategraph-runtime-frames/v1",
+    "frames": [
+      {
+        "event_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:6",
+        "run_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93",
+        "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+        "revision": 1,
+        "machine": {
+          "current": "running",
+          "state_revision": 1,
+          "configurations": [
+            {
+              "attempt": "react:2bc1bd07-a785-4f0d-ab3d-cdb57994d307",
+              "phase": "running",
+              "param_version": 1,
+              "activities": {},
+              "resources": {},
+              "journal": [],
+              "state_transition": {
+                "event": "start",
+                "source": "pending",
+                "target": "running",
+                "attempt": "react:2bc1bd07-a785-4f0d-ab3d-cdb57994d307",
+                "evidence_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:6",
+                "revision": 1
+              }
+            }
+          ],
+          "journal": [
+            {
+              "event": "start",
+              "source": "pending",
+              "target": "running",
+              "attempt": "react:2bc1bd07-a785-4f0d-ab3d-cdb57994d307",
+              "evidence_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:6",
+              "revision": 1
+            }
+          ]
+        },
+        "authority": {
+          "entity": "react",
+          "state": "running",
+          "basis": {},
+          "parameters": {
+            "slots": 1
+          },
+          "effects": []
+        }
+      },
+      {
+        "event_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:9",
+        "run_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93",
+        "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+        "revision": 2,
+        "machine": {
+          "current": "done",
+          "state_revision": 2,
+          "configurations": [
+            {
+              "attempt": "react:2bc1bd07-a785-4f0d-ab3d-cdb57994d307",
+              "phase": "done",
+              "param_version": 2,
+              "activities": {},
+              "resources": {},
+              "journal": [],
+              "state_transition": {
+                "event": "finish",
+                "source": "running",
+                "target": "done",
+                "attempt": "react:2bc1bd07-a785-4f0d-ab3d-cdb57994d307",
+                "evidence_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:9",
+                "revision": 2
+              }
+            }
+          ],
+          "journal": [
+            {
+              "event": "finish",
+              "source": "running",
+              "target": "done",
+              "attempt": "react:2bc1bd07-a785-4f0d-ab3d-cdb57994d307",
+              "evidence_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:9",
+              "revision": 2
+            }
+          ]
+        },
+        "authority": {
+          "entity": "react",
+          "state": "done",
+          "basis": {},
+          "parameters": {
+            "slots": 1
+          },
+          "effects": []
+        }
+      },
+      {
+        "event_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:12",
+        "run_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93",
+        "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+        "revision": 1,
+        "machine": {
+          "current": "running",
+          "state_revision": 1,
+          "configurations": [
+            {
+              "attempt": "vue:46eed63f-3c1d-4fee-ab5b-4ce3bcefff44",
+              "phase": "running",
+              "param_version": 1,
+              "activities": {},
+              "resources": {},
+              "journal": [],
+              "state_transition": {
+                "event": "start",
+                "source": "pending",
+                "target": "running",
+                "attempt": "vue:46eed63f-3c1d-4fee-ab5b-4ce3bcefff44",
+                "evidence_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:12",
+                "revision": 1
+              }
+            }
+          ],
+          "journal": [
+            {
+              "event": "start",
+              "source": "pending",
+              "target": "running",
+              "attempt": "vue:46eed63f-3c1d-4fee-ab5b-4ce3bcefff44",
+              "evidence_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:12",
+              "revision": 1
+            }
+          ]
+        },
+        "authority": {
+          "entity": "vue",
+          "state": "running",
+          "basis": {},
+          "parameters": {
+            "slots": 1
+          },
+          "effects": []
+        }
+      },
+      {
+        "event_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:15",
+        "run_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93",
+        "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+        "revision": 2,
+        "machine": {
+          "current": "done",
+          "state_revision": 2,
+          "configurations": [
+            {
+              "attempt": "vue:46eed63f-3c1d-4fee-ab5b-4ce3bcefff44",
+              "phase": "done",
+              "param_version": 2,
+              "activities": {},
+              "resources": {},
+              "journal": [],
+              "state_transition": {
+                "event": "finish",
+                "source": "running",
+                "target": "done",
+                "attempt": "vue:46eed63f-3c1d-4fee-ab5b-4ce3bcefff44",
+                "evidence_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:15",
+                "revision": 2
+              }
+            }
+          ],
+          "journal": [
+            {
+              "event": "finish",
+              "source": "running",
+              "target": "done",
+              "attempt": "vue:46eed63f-3c1d-4fee-ab5b-4ce3bcefff44",
+              "evidence_id": "a25472db-c4a3-4bd0-a9a1-e854a262ea93:81b7c678-960b-404b-a08f-58a8f1172f5e:15",
+              "revision": 2
+            }
+          ]
+        },
+        "authority": {
+          "entity": "vue",
+          "state": "done",
+          "basis": {},
+          "parameters": {
+            "slots": 1
+          },
+          "effects": []
+        }
+      }
+    ],
+    "partial": true
+  },
+  "scope_excluded": 0,
+  "capture_filtered": 0
+}

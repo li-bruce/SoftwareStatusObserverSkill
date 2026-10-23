@@ -1,0 +1,49 @@
+{
+  "stable_node_ids": 60,
+  "all_capture_schemas_unchanged": true,
+  "state_transition_declaration_unchanged": true,
+  "original_assertions_preserved": 45,
+  "current_assertions": 54,
+  "source_files": [
+    {
+      "path": "app/service.py",
+      "symbol": "Gallery.inspect_image",
+      "line": 63
+    },
+    {
+      "path": "app/service.py",
+      "symbol": "Gallery.upload",
+      "line": 83
+    },
+    {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "GalleryMachine.valid_content",
+      "line": 21
+    }
+  ],
+  "affected_nodes": [
+    "image_check",
+    "invalid_file",
+    "upload"
+  ],
+  "unchanged_meanings": [
+    "login",
+    "authorize",
+    "review",
+    "message",
+    "messages",
+    "exhibition",
+    "unsubmitted",
+    "pending",
+    "published",
+    "rejected"
+  ],
+  "model_revision_before": "gallery-2",
+  "model_revision_after": "gallery-v2-png-only",
+  "skill_candidate": "candidate-3; all frozen copies unchanged",
+  "legacy_case": "reject_jpeg retains its ID and four original review assertions, using valid PNG in v2",
+  "new_cases": [
+    "jpeg_upload_denied",
+    "jpeg_spoof_png"
+  ]
+}

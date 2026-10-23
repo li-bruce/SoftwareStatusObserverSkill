@@ -139,7 +139,7 @@ def validate_runtime_definition(chart, *, loaded_engine=None, loaded_version=Non
     if unsupported: raise ValueError('unsupported engine options: ' + ', '.join(sorted(unsupported)))
     engine = chart.get('engine')
     if engine not in (None, 'transitions.Machine', 'transitions.HierarchicalMachine',
-                      'transitions.extensions.HierarchicalMachine', 'adapter-selected', 'python.explicit'):
+                      'transitions.extensions.HierarchicalMachine', 'adapter-selected', 'python.explicit', 'bo.fsm'):
         raise ValueError('unsupported execution engine: ' + str(engine))
     if loaded_engine is not None and engine not in (None, 'adapter-selected', loaded_engine):
         raise ValueError('loaded engine differs from declaration')
@@ -148,6 +148,15 @@ def validate_runtime_definition(chart, *, loaded_engine=None, loaded_version=Non
     if guard_names is not None and set(chart.get('guards', {})) - set(guard_names):
         raise ValueError('declared guard is missing from loaded executor')
     states, parents = state_tree(chart)
+    if engine == 'bo.fsm':
+        if chart.get('version') != '1' or any(p is not None for p in parents.values()) or chart.get('execution'):
+            raise ValueError('bo.fsm/1 supports flat states; hierarchy and activities need an explicit engine adapter')
+        if set(chart) - {'engine','version','states','values','initial','state_type','transitions','events','context','guards','labels'}:
+            raise ValueError('unsupported bo.fsm semantics')
+        if chart.get('state_type')!='enum' or not isinstance(chart.get('values'),list) or len(chart['values'])!=len(states) or set(chart['values'])!=set(states):
+            raise ValueError('bo.fsm values must exactly cover its states')
+        if not all(isinstance(chart.get(k),dict) for k in ('context','events','guards')):
+            raise ValueError('bo.fsm requires context, events and guards objects')
     if chart.get('initial') not in states: raise ValueError('unknown initial state')
     active_states(chart, entered_states(chart, chart['initial']))
     if engine == 'transitions.Machine' and any(p is not None for p in parents.values()):

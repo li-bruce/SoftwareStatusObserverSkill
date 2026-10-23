@@ -1,0 +1,47 @@
+{
+  "url": "http://127.0.0.1:8862/docs/site/",
+  "checks": [
+    {
+      "view": "state",
+      "title": "What state is it in?",
+      "selected": "true"
+    },
+    {
+      "view": "decision",
+      "title": "Why was the action allowed?",
+      "selected": "true"
+    },
+    {
+      "view": "function",
+      "title": "Which function and which values?",
+      "selected": "true"
+    },
+    {
+      "view": "source",
+      "title": "Where is the implementation?",
+      "selected": "true"
+    },
+    {
+      "view": "mixed",
+      "title": "Combine the parts you need",
+      "selected": "true"
+    }
+  ],
+  "confirmed": [
+    "All six concept tabs selectable",
+    "Mixed type checkbox removes and restores decision nodes",
+    "Keyboard Home returns to business tab",
+    "Approval replay shows pending to approved and false to true",
+    "Copy prompt shows success",
+    "Chinese persists when navigating without a language query",
+    "No warning or error console entries in inspected session"
+  ],
+  "scope": "Desktop in-app browser, illustrative product page; actual application and graph recording covered by separate gallery trials",
+  "screenshots": [
+    "product-en.png",
+    "product-zh.png",
+    "product-mixed.png",
+    "product-source.png",
+    "product-replay.png"
+  ]
+}

@@ -1,4 +1,4 @@
 interface:
-  display_name: "开发者业务行为图"
-  short_description: "根据用户描述建图，通过对话确认理解，开发中维护运行图、参数和源码关联"
-  default_prompt: "使用 $business-observer 开发这个功能：根据我的描述建图并确认理解一致，开发过程自行维护图与检查，完成后让我查看变化和运行结果。"
+  display_name: "Business Observer"
+  short_description: "Debug AI implementations through business, source, and runtime graphs"
+  default_prompt: "Use $business-observer for this feature. Confirm my business intent and whether I want drive or observe mode. Maintain source mappings, runtime capture, and checks during development, then show the updated graph and actual results. Converse in my language."

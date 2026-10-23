@@ -1,14 +1,15 @@
 {
   "schema": "bo-maintenance/v1",
-  "source_id": "f3bce96c18ee58e4a681f7a04e2c7f8c3ca75941cb2a0616c593d8cf40dbf07e",
+  "source_id": "bf25a9f339a4450ec9e35d9bce6975c007c01c4ed9c908fefebad46786ec3776",
   "inventory": {
     "files": {
       "archive_app/__init__.py": "c4cc8d894a9cb6e2da5510317e540d22b50b75b2a187f86675d20e86d967f9bf",
       "archive_app/policy.py": "20ed13b26522411afb71a10cb90d58d951882f6075a29a1c8221d72a6fa83a7e",
-      "archive_app/ports.py": "b8cde872a84d96008836c06683dccf2d59ceff89c9a7dfe65e3e5f3dd6c3608c",
-      "archive_app/service.py": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01",
-      "archive_app/storage.py": "5dfd7a4ebcc907921324e26a1f03fc63d8ace83254783a4519e4f86d2b22eabc",
-      "bo_stategraph/workflow.py": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
+      "archive_app/ports.py": "567f81c0c042de164f345562bf46c06cc2668ce52a22a11aa4be5e42d580d8f5",
+      "archive_app/service.py": "e15107fb02bd8ba3b3ccdd26357a434c17b4145de8ed19406c06c6809c56a06b",
+      "archive_app/storage.py": "c9821db64c5028350bd9fe580e71e645a9d9ace409a91a8a1367a8a4a58a6aac",
+      "bo_stategraph/workflow.py": "77365b6941422f7c7d6e2fb9627b61810935eabb408fbcfa82826885fec8e758",
+      "static/app.js": "cf17b1372b227109904dac1369a2b13eacdd3d85f76171fa9bdd5b6ea58baf82"
     },
     "excluded": {
       "archive_app/workflow.py": "Compatibility import only; executable definition lives in bo_stategraph/workflow.py.",
@@ -17,13 +18,59 @@
       "bo_stategraph/execution_contract.py": "Shared activity contract; resource and concurrency tests cover it.",
       "bo_stategraph/query.py": "Projection adapter; actual SQLite-to-instance witnesses cover it.",
       "integrations/__init__.py": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
+      "integrations/bo_client.mjs": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
       "integrations/bo_observer.py": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
       "integrations/bo_server.py": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
       "observer_runtime/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/architecture_guard.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/behavior_model.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/bo_contracts.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/bo_design.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/adapters/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/adapters/javascript/bo_runtime.mjs": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/adapters/javascript/scan.mjs": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/adapters/python/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/adapters/python/bo_executor.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/adapters/python/bo_probe.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/delivery/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/delivery/architecture_guard.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/delivery/project_bundle.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/development.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/graph/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/graph/behavior_model.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/graph/code_structure.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/graph/focus_graph.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/graph/statechart_contract.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/graph/worknet_contract.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/model_io.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/observation/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/observation/bo_retention.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/observation/native_ingress.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/observation/observation_scope.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/observation/probe.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/observation/recording_session.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/observation/runtime_frames.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/observation/semantic_probe.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/protocol.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/service.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/sources.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/web/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/web/bo_design.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/web/bo_web.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/web/view_preferences.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/workflow/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/workflow/bo_sync.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/workflow/change_sync.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/workflow/implementation_coverage.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/workflow/mapping_contract.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/workflow/requirements_dialogue.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/workflow/source_migration.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/workflow/sync_config.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/workflow/sync_io.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/workflow/sync_verify.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/workflow/whitebox_contract.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/bo_retention.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/bo_runtime.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/bo_stategraph.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
@@ -34,8 +81,9 @@
       "observer_runtime/code_structure.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/execution_contract.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/focus_graph.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/implementation_coverage.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/mapping_contract.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
-      "observer_runtime/model_tool.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/observation_scope.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/probe.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/project_bundle.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/recording_session.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
@@ -48,7 +96,6 @@
       "observer_runtime/sync_io.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/sync_verify.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/view_preferences.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
-      "observer_runtime/viewer_server.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/whitebox_contract.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/worknet_contract.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "review/round-01/path_repro.py": "Frozen test evidence from earlier versions; not loaded by the program.",
@@ -80,6 +127,10 @@
       "review/v1/source-snapshot/observer_runtime/behavior_model.py": "Frozen test evidence from earlier versions; not loaded by the program.",
       "review/v1/source-snapshot/observer_runtime/semantic_probe.py": "Frozen test evidence from earlier versions; not loaded by the program.",
       "review/v1/source-snapshot/run.py": "Frozen test evidence from earlier versions; not loaded by the program.",
+      "review/v1/source-snapshot/static/app.js": "Frozen test evidence from earlier versions; not loaded by the program.",
+      "review/v1/source-snapshot/static/graph/graph-core.js": "Frozen test evidence from earlier versions; not loaded by the program.",
+      "review/v1/source-snapshot/static/graph/layout.js": "Frozen test evidence from earlier versions; not loaded by the program.",
+      "review/v1/source-snapshot/static/graph/viewer.js": "Frozen test evidence from earlier versions; not loaded by the program.",
       "review/v1/source-snapshot/tooling/build_model.py": "Frozen test evidence from earlier versions; not loaded by the program.",
       "review/v2/source-snapshot/archive_app/__init__.py": "Frozen test evidence from earlier versions; not loaded by the program.",
       "review/v2/source-snapshot/archive_app/policy.py": "Frozen test evidence from earlier versions; not loaded by the program.",
@@ -92,48 +143,2665 @@
       "review/v2/source-snapshot/observer_runtime/behavior_model.py": "Frozen test evidence from earlier versions; not loaded by the program.",
       "review/v2/source-snapshot/observer_runtime/semantic_probe.py": "Frozen test evidence from earlier versions; not loaded by the program.",
       "review/v2/source-snapshot/run.py": "Frozen test evidence from earlier versions; not loaded by the program.",
+      "review/v2/source-snapshot/static/app.js": "Frozen test evidence from earlier versions; not loaded by the program.",
+      "review/v2/source-snapshot/static/graph/graph-core.js": "Frozen test evidence from earlier versions; not loaded by the program.",
+      "review/v2/source-snapshot/static/graph/layout.js": "Frozen test evidence from earlier versions; not loaded by the program.",
+      "review/v2/source-snapshot/static/graph/viewer.js": "Frozen test evidence from earlier versions; not loaded by the program.",
       "review/v2/source-snapshot/tooling/build_model.py": "Frozen test evidence from earlier versions; not loaded by the program.",
       "run.py": "Server startup; watched and exercised by HTTP tests.",
+      "static/graph/analysis.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "static/graph/conversation.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "static/graph/elk-worker.min.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "static/graph/elk.bundled.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "static/graph/glyphs.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "static/graph/graph-core.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "static/graph/i18n.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "static/graph/layout.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "static/graph/messages.zh-CN.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "static/graph/pixi.min.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "static/graph/polling.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "static/graph/preferences.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "static/graph/recording.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "static/graph/renderer.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "static/graph/replay-steps.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "static/graph/runtime-frames.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "static/graph/viewer.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
       "tooling/__init__.py": "Project generation and test commands; separately watched and executed.",
       "tooling/build_model.py": "Project generation and test commands; separately watched and executed.",
+      "tooling/frontend_cases.mjs": "Project generation and test commands; separately watched and executed.",
+      "tooling/graph_tests.mjs": "Project generation and test commands; separately watched and executed.",
       "tooling/mutations.py": "Project generation and test commands; separately watched and executed.",
       "tooling/observe.py": "Project generation and test commands; separately watched and executed.",
       "tooling/scenarios.py": "Project generation and test commands; separately watched and executed.",
       "tooling/size_scenarios.py": "Project generation and test commands; separately watched and executed.",
+      "tooling/test_recorded_views.mjs": "Project generation and test commands; separately watched and executed.",
       "tooling/test_recording.py": "Project generation and test commands; separately watched and executed.",
       "tooling/test_stategraph_module.py": "Project generation and test commands; separately watched and executed.",
       "tooling/tests.py": "Project generation and test commands; separately watched and executed.",
       "validate.py": "Validation entry point; runs the project gate."
-    }
+    },
+    "excluded_entrypoints": {},
+    "excluded_implementations": []
   },
-  "changed_files": [],
+  "changed_files": [
+    "archive_app/service.py",
+    "archive_app/storage.py",
+    "bo_stategraph/workflow.py",
+    "static/app.js"
+  ],
   "unregistered_files": [],
-  "status": "current",
-  "internal_prompt": "核查列出的实现变化；更新受影响业务抽象、状态、函数/参数映射和探针。新增入口不能因不在旧图中而忽略。完成局部投影及实际场景验证后运行项目收尾检查。不要要求用户填写观测文件；仅在新的业务歧义出现时提问。",
+  "implementation_gaps": [
+    {
+      "invalid_implementation_exclusion": "integrations/bo_observer.py::BOObserver.__init__"
+    },
+    {
+      "invalid_implementation_exclusion": "integrations/bo_observer.py::BOObserver.write"
+    },
+    {
+      "invalid_implementation_exclusion": "integrations/bo_observer.py::BOObserver.trace"
+    },
+    {
+      "invalid_implementation_exclusion": "integrations/bo_observer.py::BOObserver.snapshot"
+    },
+    {
+      "invalid_implementation_exclusion": "integrations/bo_observer.py::BOObserver.health"
+    },
+    {
+      "invalid_implementation_exclusion": "integrations/bo_observer.py::BOObserver.close"
+    },
+    {
+      "invalid_implementation_exclusion": "integrations/bo_server.py::LocalApplication.__init__"
+    },
+    {
+      "invalid_implementation_exclusion": "integrations/bo_server.py::LocalApplication.recording_view"
+    },
+    {
+      "invalid_implementation_exclusion": "integrations/bo_server.py::LocalApplication.bo_export_graph"
+    },
+    {
+      "invalid_implementation_exclusion": "integrations/bo_server.py::LocalApplication.cases"
+    },
+    {
+      "invalid_implementation_exclusion": "integrations/bo_server.py::LocalApplication.version_sources"
+    },
+    {
+      "invalid_implementation_exclusion": "integrations/bo_server.py::LocalApplication.graph_view"
+    },
+    {
+      "invalid_implementation_exclusion": "integrations/bo_server.py::LocalApplication.state"
+    },
+    {
+      "invalid_implementation_exclusion": "integrations/bo_server.py::LocalApplication.command"
+    },
+    {
+      "invalid_implementation_exclusion": "integrations/bo_server.py::serve"
+    },
+    {
+      "invalid_implementation_exclusion": "integrations/bo_server.py::serve.Handler.log_message"
+    },
+    {
+      "invalid_implementation_exclusion": "integrations/bo_server.py::serve.Handler.reply"
+    },
+    {
+      "invalid_implementation_exclusion": "integrations/bo_server.py::serve.Handler.do_GET"
+    },
+    {
+      "invalid_implementation_exclusion": "integrations/bo_server.py::serve.Handler.do_POST"
+    },
+    {
+      "invalid_implementation_exclusion": "run.py::main"
+    }
+  ],
+  "status": "needs_update",
+  "internal_prompt": "Review the listed implementation changes. Update affected business abstractions, states, function/parameter mappings, and probes. Do not omit new entrypoints because the old graph lacks them. Match features, parameters, and runtime cases through the implementation inventory. Exclusions must not bypass business implementation. Check real relations and filter boundaries in every view, then run project acceptance. Do not ask users to maintain observation files. Ask only when new business ambiguity appears.",
+  "confirmations": {
+    "user": [],
+    "coding": [
+      {
+        "id": "archive_app/policy.py::is_direct_manager:10:21",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::is_direct_manager",
+        "expression": "TracePort",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::is_direct_manager:11:14",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::is_direct_manager",
+        "expression": "any",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::is_direct_manager:13:4",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::is_direct_manager",
+        "expression": "trace.bo_record",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::is_direct_manager:17:16",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::is_direct_manager",
+        "expression": "uuid.uuid4",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::candidate_allowed:24:21",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::candidate_allowed",
+        "expression": "TracePort",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::candidate_allowed:33:27",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::candidate_allowed",
+        "expression": "bool",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::candidate_allowed:36:31",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::candidate_allowed",
+        "expression": "all",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::candidate_allowed:38:24",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::candidate_allowed",
+        "expression": "all",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::candidate_allowed:38:28",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::candidate_allowed",
+        "expression": "result.values",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::candidate_allowed:39:4",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::candidate_allowed",
+        "expression": "trace.bo_record",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::candidate_allowed:44:36",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::candidate_allowed",
+        "expression": "uuid.uuid4",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::evaluate_approvals:51:11",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::evaluate_approvals",
+        "expression": "uuid.uuid4",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::evaluate_approvals:52:14",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::evaluate_approvals",
+        "expression": "dict",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::evaluate_approvals:56:14",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::evaluate_approvals",
+        "expression": "any",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::evaluate_approvals:57:4",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::evaluate_approvals",
+        "expression": "trace.bo_record",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::check_size:67:21",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::check_size",
+        "expression": "TracePort",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::check_size:68:20",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::check_size",
+        "expression": "len",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::check_size:68:24",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::check_size",
+        "expression": "content.encode",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::check_size:71:29",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::check_size",
+        "expression": "max",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::check_size:72:4",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::check_size",
+        "expression": "trace.bo_record",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::check_size:75:34",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::check_size",
+        "expression": "uuid.uuid4",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::check_content:82:21",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::check_content",
+        "expression": "TracePort",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::check_content:84:4",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::check_content",
+        "expression": "trace.bo_record",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::check_content:88:47",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::check_content",
+        "expression": "uuid.uuid4",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::check_index:95:21",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::check_index",
+        "expression": "TracePort",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::check_index:96:31",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::check_index",
+        "expression": "bool",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::check_index:96:36",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::check_index",
+        "expression": "title.strip",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::check_index:97:33",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::check_index",
+        "expression": "bool",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::check_index:97:38",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::check_index",
+        "expression": "project_id.strip",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::check_index:98:32",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::check_index",
+        "expression": "bool",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::check_index:98:37",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::check_index",
+        "expression": "document_number.strip",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::check_index:99:23",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::check_index",
+        "expression": "all",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::check_index:99:27",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::check_index",
+        "expression": "result.values",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::check_index:100:4",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::check_index",
+        "expression": "trace.bo_record",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/policy.py::check_index:103:27",
+        "audience": "coding",
+        "symbol": "archive_app/policy.py::check_index",
+        "expression": "uuid.uuid4",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.evaluate:46:17:2b78ff353af5f9b2",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.evaluate",
+        "expression": "db.execute('SELECT * FROM documents WHERE id=?', (request['document_id'],)).fetchone",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.evaluate:46:17:8063597692d9c087",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.evaluate",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.evaluate:48:18",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.evaluate",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.evaluate:49:19",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.evaluate",
+        "expression": "dict",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.evaluate:50:23",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.evaluate",
+        "expression": "dict",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.evaluate:50:40",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.evaluate",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.evaluate:54:21",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.evaluate",
+        "expression": "dict",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.evaluate:54:38",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.evaluate",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.evaluate:56:38",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.evaluate",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.evaluate:57:42",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.evaluate",
+        "expression": "uuid.uuid4",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.evaluate:58:16",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.evaluate",
+        "expression": "self.store.project_limit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.evaluate:59:22",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.evaluate",
+        "expression": "trace.bo_record",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.evaluate:61:20",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.evaluate",
+        "expression": "uuid.uuid4",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.evaluate:62:21",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.evaluate",
+        "expression": "trace.bo_record",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.evaluate:77:24",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.evaluate",
+        "expression": "reasons.append",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.evaluate:78:22",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.evaluate",
+        "expression": "reasons.append",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.evaluate:79:36",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.evaluate",
+        "expression": "reasons.append",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.evaluate:81:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.evaluate",
+        "expression": "reasons.append",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.evaluate:82:31",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.evaluate",
+        "expression": "reasons.append",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.evaluate:88:34",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.evaluate",
+        "expression": "min",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.evaluate:89:8",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.evaluate",
+        "expression": "trace.bo_record",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.evaluate:98:50",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.evaluate",
+        "expression": "uuid.uuid4",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.create_run:103:11",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.create_run",
+        "expression": "type",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.create_run:104:18",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.create_run",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.create_run:105:24",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.create_run",
+        "expression": "closing",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.create_run:105:32",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.create_run",
+        "expression": "self.store.connect",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.create_run:106:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.create_run",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.create_run:107:18:8ea65ca20970f4b7",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.create_run",
+        "expression": "db.execute('SELECT * FROM documents WHERE id=?', (document_id,)).fetchone",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.create_run:107:18:8063597692d9c087",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.create_run",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.create_run:108:34:99c123c22eb4460c",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.create_run",
+        "expression": "db.execute('SELECT 1 FROM users WHERE id=?', (operator_id,)).fetchone",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.create_run:108:34:8063597692d9c087",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.create_run",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.create_run:109:22",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.create_run",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.create_run:110:25",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.create_run",
+        "expression": "dict",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.create_run:110:36",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.create_run",
+        "expression": "uuid.uuid4",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.create_run:116:29",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.create_run",
+        "expression": "float",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.create_run:116:35",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.create_run",
+        "expression": "self.clock",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.create_run:119:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.create_run",
+        "expression": "self.store.save_run",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.create_run:120:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.create_run",
+        "expression": "db.commit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.create_run:122:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.create_run",
+        "expression": "trace.bo_record",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.create_run:125:24",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.create_run",
+        "expression": "uuid.uuid4",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.advance:145:24",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.advance",
+        "expression": "closing",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.advance:145:32",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.advance",
+        "expression": "self.store.connect",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.advance:146:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.advance",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.advance:147:18",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.advance",
+        "expression": "self.store.get_run",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.advance:149:16",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.advance",
+        "expression": "db.commit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.advance:151:42",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.advance",
+        "expression": "float",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.advance:151:48",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.advance",
+        "expression": "self.clock",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.advance:157:16",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.advance",
+        "expression": "self.store.save_run",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.advance:158:16",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.advance",
+        "expression": "db.commit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.advance:161:21",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.advance",
+        "expression": "threading.Thread",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.advance:164:69",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.advance",
+        "expression": "thread.is_alive",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.advance:165:16",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.advance",
+        "expression": "self.threads.append",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.advance:166:16",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.advance",
+        "expression": "worker.start",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.try_commit:174:40",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.try_commit",
+        "expression": "float",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.try_commit:174:46",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.try_commit",
+        "expression": "self.clock",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.try_commit:176:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.try_commit",
+        "expression": "self.store.save_run",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.try_commit:177:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.try_commit",
+        "expression": "db.commit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.try_commit:179:19",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.try_commit",
+        "expression": "self.store.find_archive",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.try_commit:180:48",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.try_commit",
+        "expression": "uuid.uuid4",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.try_commit:182:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.try_commit",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.try_commit:184:93",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.try_commit",
+        "expression": "float",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.try_commit:184:99",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.try_commit",
+        "expression": "self.clock",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.try_commit:187:94",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.try_commit",
+        "expression": "float",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.try_commit:187:100",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.try_commit",
+        "expression": "self.clock",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.try_commit:188:8",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.try_commit",
+        "expression": "self.store.save_run",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.try_commit:189:8",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.try_commit",
+        "expression": "db.commit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.try_commit:192:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.try_commit",
+        "expression": "trace.bo_record",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.try_commit:195:72",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.try_commit",
+        "expression": "uuid.uuid4",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.try_commit:197:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.try_commit",
+        "expression": "trace.bo_record",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.try_commit:199:69",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.try_commit",
+        "expression": "uuid.uuid4",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.resume_run:231:24",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.resume_run",
+        "expression": "closing",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.resume_run:231:32",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.resume_run",
+        "expression": "self.store.connect",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.resume_run:232:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.resume_run",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.resume_run:233:18",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.resume_run",
+        "expression": "self.store.get_run",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.resume_run:235:22",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.resume_run",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.resume_run:239:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.resume_run",
+        "expression": "self.store.save_run",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.resume_run:240:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.resume_run",
+        "expression": "db.commit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.resume_run:241:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.resume_run",
+        "expression": "trace.bo_record",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.resume_run:243:24",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.resume_run",
+        "expression": "uuid.uuid4",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.cancel_run:247:24",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.cancel_run",
+        "expression": "closing",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.cancel_run:247:32",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.cancel_run",
+        "expression": "self.store.connect",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.cancel_run:248:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.cancel_run",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.cancel_run:249:18",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.cancel_run",
+        "expression": "self.store.get_run",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.cancel_run:250:51",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.cancel_run",
+        "expression": "float",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.cancel_run:250:57",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.cancel_run",
+        "expression": "self.clock",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.cancel_run:251:28",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.cancel_run",
+        "expression": "float",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.cancel_run:251:34",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.cancel_run",
+        "expression": "self.clock",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.cancel_run:252:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.cancel_run",
+        "expression": "self.store.save_run",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.cancel_run:253:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.cancel_run",
+        "expression": "db.commit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.cancel_run:255:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.cancel_run",
+        "expression": "trace.bo_record",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.cancel_run:258:24",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.cancel_run",
+        "expression": "uuid.uuid4",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.add_approval:263:11",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.add_approval",
+        "expression": "type",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.add_approval:263:52",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.add_approval",
+        "expression": "math.isfinite",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.add_approval:264:18",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.add_approval",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.add_approval:265:24",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.add_approval",
+        "expression": "closing",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.add_approval:265:32",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.add_approval",
+        "expression": "self.store.connect",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.add_approval:266:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.add_approval",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.add_approval:267:18:8ea65ca20970f4b7",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.add_approval",
+        "expression": "db.execute('SELECT * FROM documents WHERE id=?', (document_id,)).fetchone",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.add_approval:267:18:8063597692d9c087",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.add_approval",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.add_approval:268:23:dabc81b96435cbba",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.add_approval",
+        "expression": "db.execute('SELECT role FROM users WHERE id=?', (reviewer_id,)).fetchone",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.add_approval:268:23:8063597692d9c087",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.add_approval",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.add_approval:270:22",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.add_approval",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.add_approval:271:19:99c123c22eb4460c",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.add_approval",
+        "expression": "db.execute('SELECT 1 FROM users WHERE id=?', (operator_id,)).fetchone",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.add_approval:271:19:8063597692d9c087",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.add_approval",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.add_approval:272:22",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.add_approval",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.add_approval:273:20",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.add_approval",
+        "expression": "uuid.uuid4",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.add_approval:274:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.add_approval",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.add_approval:275:92",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.add_approval",
+        "expression": "float",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.add_approval:276:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.add_approval",
+        "expression": "self.store.bump",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.add_approval:277:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.add_approval",
+        "expression": "db.commit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.revoke_approval:284:24",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.revoke_approval",
+        "expression": "closing",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.revoke_approval:284:32",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.revoke_approval",
+        "expression": "self.store.connect",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.revoke_approval:285:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.revoke_approval",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.revoke_approval:286:15",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.revoke_approval",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.revoke_approval:287:22",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.revoke_approval",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.revoke_approval:288:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.revoke_approval",
+        "expression": "self.store.bump",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.revoke_approval:289:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.revoke_approval",
+        "expression": "db.commit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.set_archive_limit:295:11",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.set_archive_limit",
+        "expression": "type",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.set_archive_limit:296:18",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.set_archive_limit",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.set_archive_limit:298:18",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.set_archive_limit",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.set_archive_limit:299:24",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.set_archive_limit",
+        "expression": "closing",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.set_archive_limit:299:32",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.set_archive_limit",
+        "expression": "self.store.connect",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.set_archive_limit:300:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.set_archive_limit",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.set_archive_limit:301:23",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.set_archive_limit",
+        "expression": "self.store.project_limit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.set_archive_limit:303:16",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.set_archive_limit",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.set_archive_limit:305:16",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.set_archive_limit",
+        "expression": "self.store.bump",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.set_archive_limit:306:21",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.set_archive_limit",
+        "expression": "self.store.project_limit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.set_archive_limit:307:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.set_archive_limit",
+        "expression": "db.commit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.edit_document:315:15",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.edit_document",
+        "expression": "all",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.edit_document:315:19",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.edit_document",
+        "expression": "isinstance",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.edit_document:315:73",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.edit_document",
+        "expression": "len",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.edit_document:316:18",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.edit_document",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.edit_document:317:24",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.edit_document",
+        "expression": "closing",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.edit_document:317:32",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.edit_document",
+        "expression": "self.store.connect",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.edit_document:318:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.edit_document",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.edit_document:319:15",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.edit_document",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.edit_document:321:22",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.edit_document",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.edit_document:322:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.edit_document",
+        "expression": "self.store.bump",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.edit_document:323:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.edit_document",
+        "expression": "db.commit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.move_document:330:24",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.move_document",
+        "expression": "closing",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.move_document:330:32",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.move_document",
+        "expression": "self.store.connect",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.move_document:331:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.move_document",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.move_document:332:21:e44a5a403b3496e9",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.move_document",
+        "expression": "db.execute('SELECT * FROM folders WHERE id=?', (folder_id,)).fetchone",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.move_document:332:21:8063597692d9c087",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.move_document",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.move_document:334:22",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.move_document",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.move_document:335:15",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.move_document",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.move_document:337:22",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.move_document",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.move_document:338:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.move_document",
+        "expression": "self.store.bump",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/service.py::ArchiveService.move_document:339:12",
+        "audience": "coding",
+        "symbol": "archive_app/service.py::ArchiveService.move_document",
+        "expression": "db.commit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/storage.py::ArchiveStore.project_limit:66:14:15d54ea2aaed70f5",
+        "audience": "coding",
+        "symbol": "archive_app/storage.py::ArchiveStore.project_limit",
+        "expression": "db.execute('SELECT archive_limit_bytes,limit_revision FROM projects WHERE id=?', (project_id,)).fetchone",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/storage.py::ArchiveStore.project_limit:66:14:8063597692d9c087",
+        "audience": "coding",
+        "symbol": "archive_app/storage.py::ArchiveStore.project_limit",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/storage.py::ArchiveStore.project_limit:69:18",
+        "audience": "coding",
+        "symbol": "archive_app/storage.py::ArchiveStore.project_limit",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/storage.py::ArchiveStore.find_archive:89:14:afd9aa93de696c3f",
+        "audience": "coding",
+        "symbol": "archive_app/storage.py::ArchiveStore.find_archive",
+        "expression": "db.execute('SELECT * FROM archives WHERE document_id=? AND content_version=?', (document_id, content_version)).fetchone",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/storage.py::ArchiveStore.find_archive:89:14:8063597692d9c087",
+        "audience": "coding",
+        "symbol": "archive_app/storage.py::ArchiveStore.find_archive",
+        "expression": "db.execute",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "archive_app/storage.py::ArchiveStore.find_archive:91:15",
+        "audience": "coding",
+        "symbol": "archive_app/storage.py::ArchiveStore.find_archive",
+        "expression": "dict",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "static/app.js::command:7:54",
+        "audience": "coding",
+        "symbol": "static/app.js::command",
+        "expression": "fetch",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "static/app.js::command:7:139",
+        "audience": "coding",
+        "symbol": "static/app.js::command",
+        "expression": "JSON.stringify",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "static/app.js::command:7:170",
+        "audience": "coding",
+        "symbol": "static/app.js::command",
+        "expression": "r.json",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "static/app.js::command:7:194",
+        "audience": "coding",
+        "symbol": "static/app.js::command",
+        "expression": "Error",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "static/app.js::command:7:285",
+        "audience": "coding",
+        "symbol": "static/app.js::command",
+        "expression": "Object.keys",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "static/app.js::command:7:408",
+        "audience": "coding",
+        "symbol": "static/app.js::command",
+        "expression": "Object.keys",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "static/app.js::submitLimit:32:55",
+        "audience": "coding",
+        "symbol": "static/app.js::submitLimit",
+        "expression": "e.preventDefault",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "static/app.js::submitLimit:32:84",
+        "audience": "coding",
+        "symbol": "static/app.js::submitLimit",
+        "expression": "$('size-limit').value.trim",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "static/app.js::submitLimit:32:119",
+        "audience": "coding",
+        "symbol": "static/app.js::submitLimit",
+        "expression": "Number",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "static/app.js::submitLimit:32:143",
+        "audience": "coding",
+        "symbol": "static/app.js::submitLimit",
+        "expression": "/^[0-9]+$/.test",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "static/app.js::submitLimit:32:165",
+        "audience": "coding",
+        "symbol": "static/app.js::submitLimit",
+        "expression": "Number.isSafeInteger",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "static/app.js::submitLimit:32:276",
+        "audience": "coding",
+        "symbol": "static/app.js::submitLimit",
+        "expression": "Number.isFinite",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "static/app.js::submitEdit:33:53",
+        "audience": "coding",
+        "symbol": "static/app.js::submitEdit",
+        "expression": "e.preventDefault",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "static/app.js::newRun:35:128",
+        "audience": "coding",
+        "symbol": "static/app.js::newRun",
+        "expression": "Number",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "static/app.js::approveVersion:36:171",
+        "audience": "coding",
+        "symbol": "static/app.js::approveVersion",
+        "expression": "Number",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "static/app.js::runAction:37:75",
+        "audience": "coding",
+        "symbol": "static/app.js::runAction",
+        "expression": "e.target.closest",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      }
+    ],
+    "instruction": "Ask the user about business ambiguity; reconcile implementation bindings during coding. Do not recommend or expand business scope."
+  },
   "ai_invocation": "host_or_coding_agent_required",
-  "affected_nodes": [],
+  "affected_nodes": [
+    "approval_check",
+    "approval_revoked",
+    "archive_commit",
+    "archive_request",
+    "authority_read",
+    "cancel_run",
+    "checks_join",
+    "code.02e9e79362dd7b52",
+    "code.3182493b15093085",
+    "code.46ead1f94e6333dd",
+    "code.4bbd0454175fd162",
+    "code.851dade86c48cea0",
+    "code.881d8e61a1974236",
+    "code.8e899e2884fe31dd",
+    "code.93d5ecfd052b688e",
+    "code.a5031696efd68bab",
+    "code.bb6f1114d12b1280",
+    "code.d166aaac5bb078be",
+    "code.d31899a8ea590c46",
+    "code.da4d21429fffb273",
+    "code.fccd4321a0fb9ec9",
+    "commit_guard",
+    "content_changed",
+    "execution.finish_activity",
+    "execution.interrupt",
+    "execution.request_stop",
+    "execution.resume",
+    "execution.schedule",
+    "execution.settle",
+    "flow.archive",
+    "flow.checks",
+    "flow.policy",
+    "folder_assignments",
+    "implementation.0462e9a6333ff869",
+    "implementation.104e91999caed005",
+    "implementation.545369c753408d9d",
+    "implementation.56232f17693d7bd4",
+    "implementation.838750c5802287e5",
+    "implementation.8ea9f9c4499ff1a0",
+    "implementation.8f7145aa38e08d17",
+    "implementation.90e9ef6a21bbc4b4",
+    "implementation.96ed4c758c1b5776",
+    "implementation.98ad76de2cd3bdf4",
+    "implementation.e6af84c7b93acae8",
+    "implementation.f725132792e43064",
+    "implementation.feb050524fb394f0",
+    "issue_approval",
+    "move_folder",
+    "processing_slots",
+    "project_limit",
+    "recover_run",
+    "resume_run",
+    "run.lookup",
+    "run_identity",
+    "set_size_limit",
+    "ui.command",
+    "ui.validate",
+    "worker_call"
+  ],
   "unmapped_symbols": [
     "archive_app/ports.py::BOTracePort",
     "archive_app/ports.py::BOTracePort.__init__",
     "archive_app/ports.py::BOTracePort.bo_record",
+    "archive_app/ports.py::bo_record_change",
     "archive_app/ports.py::no_trace",
     "archive_app/service.py::ArchiveService",
-    "archive_app/service.py::ArchiveService.__init__",
-    "archive_app/service.py::ArchiveService.close",
-    "archive_app/service.py::ArchiveService.start_scheduler",
-    "archive_app/service.py::ArchiveService.start_scheduler.loop",
     "archive_app/storage.py::ArchiveStore",
-    "archive_app/storage.py::ArchiveStore.__init__",
-    "archive_app/storage.py::ArchiveStore.connect",
-    "archive_app/storage.py::ArchiveStore.seed",
     "bo_stategraph/workflow.py::Phase",
-    "bo_stategraph/workflow.py::Workflow.__init__",
-    "bo_stategraph/workflow.py::Workflow.all_passed",
-    "bo_stategraph/workflow.py::Workflow.approved",
-    "bo_stategraph/workflow.py::Workflow.checks_failed",
-    "bo_stategraph/workflow.py::Workflow.effect_saved",
-    "bo_stategraph/workflow.py::Workflow.settled",
-    "bo_stategraph/workflow.py::definition",
     "integrations/bo_observer.py::BOObserver",
     "integrations/bo_observer.py::BOObserver.__init__",
     "integrations/bo_observer.py::BOObserver.close",
@@ -156,7 +2824,8 @@
     "integrations/bo_server.py::serve.Handler.do_POST",
     "integrations/bo_server.py::serve.Handler.log_message",
     "integrations/bo_server.py::serve.Handler.reply",
-    "run.py::main"
+    "run.py::main",
+    "static/app.js::bo_record"
   ],
-  "candidate_id": "5c91994ab3b27638a5c0a428f414dff30c09f436d71161811590b6b5f6722585"
+  "candidate_id": "8a66a93e375dd898050c17ce804f0c043415eb5b4d9d1b1a39d27cc8f744eeb3"
 }

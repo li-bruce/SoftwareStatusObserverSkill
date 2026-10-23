@@ -1,0 +1,31 @@
+{
+  "candidate_id": "1198ccdf8440479494bd81a67715ee8a95e836093d2b811fa7a88ec47d997ca7",
+  "decisions": {
+    "business": {
+      "action": "unchanged",
+      "reason": "Preserve existing authorization, versions, states, and effects. Translate presentation and reason strings only; original user answers and historical evidence stay unchanged."
+    },
+    "state_machine": {
+      "action": "updated",
+      "reason": "State declarations, transitions, resource semantics, and native execution remain unchanged; retained legacy parity checks normalize only reviewed language strings, not values or structure."
+    },
+    "abstraction": {
+      "action": "updated",
+      "reason": "English maintained source and graph labels; English/Chinese controls and saved project locale. Conversation previews use the same discovery IDs and Web graph; source bindings are regenerated."
+    },
+    "probes": {
+      "action": "updated",
+      "reason": "Keep capture fields, actual DOM-handler cases, observer exclusion, and all previous checks. Replay uses project state labels only for business phases, activity labels only for activities, and preserves raw parameter values."
+    }
+  },
+  "excluded_symbols": {
+    "app/ports.py::BOEvents": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "app/ports.py::BOEvents.__init__": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "app/ports.py::BOEvents.bo_emit": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "app/service.py::Delivery": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "app/store.py::Store": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "bo_stategraph/workflow.py::ActivityExecution": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "bo_stategraph/workflow.py::ActivityState": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests.",
+    "bo_stategraph/workflow.py::Phase": "Source remains explicitly classified in the implementation plan; infrastructure and core behavior are checked by the existing project tests."
+  }
+}

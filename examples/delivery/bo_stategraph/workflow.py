@@ -4,12 +4,17 @@ The graph uses the same activity IDs, resource requirements and join as executio
 The observer does not decide when work starts or when the lifecycle may advance.
 """
 from copy import deepcopy
+import json
+from pathlib import Path
 from enum import StrEnum
 import importlib.metadata
 import threading
 from types import SimpleNamespace
 from transitions import Machine
 from .bo_contracts import validate_runtime_definition
+
+BO_DEFINITION=json.loads(Path(__file__).with_name('machine.json').read_text(encoding='utf-8'))
+validate_runtime_definition(BO_DEFINITION)
 
 
 class Phase(StrEnum):
@@ -32,27 +37,9 @@ class ActivityState(StrEnum):
     CANCELLED='cancelled'
 
 
-STATES=[p.value for p in Phase]
-EXECUTION={
-    'schema':'activity-graph/v1','within':'checking','parent':'flow.checks',
-    'activity_state_type':'ActivityState','activity_states':[s.value for s in ActivityState],
-    'activities':[
-        {'id':'checksum','label':'计算内容摘要','source':{'path':'app/checks.py','symbol':'checksum'},'requires':{'workers':1}},
-        {'id':'privacy','label':'检查敏感标记','source':{'path':'app/checks.py','symbol':'privacy_check'},'requires':{'workers':1}}],
-    'resources':[{'id':'workers','label':'本次并发名额','scope':'run','capacity_field':'capacity','min':1,'max':2}],
-    'join':{'id':'join','label':'确认检查结果','policy':'all','requires':['checksum','privacy'],
-            'success_event':'checked','success_states':['ready','completed'],'guard':'execution_complete'},
-    'source':{'path':'bo_stategraph/workflow.py','symbol':'ActivityExecution'},
-}
-TRANSITIONS=[
-    {'trigger':'start','source':['draft','waiting','failed','ready'],'dest':'checking'},
-    {'trigger':'block','source':['draft','waiting','failed','ready','checking'],'dest':'waiting'},
-    {'trigger':'checked','source':'checking','dest':'ready','conditions':'execution_complete'},
-    {'trigger':'fail','source':'checking','dest':'failed'},
-    {'trigger':'publish','source':'ready','dest':'completed','conditions':'execution_complete'},
-    {'trigger':'cancel','source':['draft','waiting','checking','ready','failed'],'dest':'cancelled'},
-    {'trigger':'edit','source':['draft','waiting','checking','ready','failed','completed'],'dest':'draft'},
-]
+STATES = BO_DEFINITION['states']
+EXECUTION = BO_DEFINITION['execution']
+TRANSITIONS = BO_DEFINITION['transitions']
 TERMINAL={'succeeded','rejected','failed','cancelled'}
 
 
@@ -71,22 +58,12 @@ def advance(state: str,event: str,execution=None,*,attempt=None,param_version=No
     holder=SimpleNamespace(execution_complete=lambda:completed(execution,attempt,param_version))
     Machine(holder,states=STATES,transitions=TRANSITIONS,initial=Phase(state).value,
             auto_transitions=False,model_attribute='phase')
-    if not holder.trigger(event):raise ValueError('两项检查尚未在本次运行中通过，不能继续提交')
+    if not holder.trigger(event):raise ValueError("Both checks must pass in this run before committing")
     return holder.phase
 
 
 def definition() -> dict:
-    return {'engine':'transitions.Machine','version':'0.9.3','initial':'draft',
-            'state_type':'Phase','states':STATES,'values':STATES,'transitions':deepcopy(TRANSITIONS),
-            'events':{t['trigger']:{'payload':{}} for t in TRANSITIONS},
-            'event_labels':dict(zip(['start','block','checked','fail','publish','cancel','edit'],
-                                   ['开始检查','等待有效授权','两项检查通过','检查失败','提交成功','取消','修改内容'])),
-            'context':{'param_version':{'type':'integer','min':1},'clock':{'type':'integer','min':0},
-                       'capacity':{'type':'integer','min':1,'max':2},'execution':{'type':'object','schema':'activity-graph/v1'}},
-            'guards':{'execution_complete':{'description':'本次运行的两项检查均已通过，且占用的名额已经归还',
-                                            'source':{'path':'bo_stategraph/workflow.py','symbol':'completed'}}},
-            'labels':dict(zip(STATES,['待检查','等待执行授权','正在检查','可以提交','检查失败','已取消','已交付'])),
-            'source':{'path':'bo_stategraph/workflow.py','symbol':'advance'},'execution':deepcopy(EXECUTION)}
+    return deepcopy(BO_DEFINITION)
 
 
 def execution_record(state, *, phase, clock, build_id=None, disposition='current'):
@@ -128,9 +105,9 @@ class ActivityExecution:
     def __init__(self,capacity: int=2,*,attempt='direct',param_version=1,progress=None):
         resource=EXECUTION['resources'][0]
         if type(capacity) is not int or not resource['min']<=capacity<=resource['max']:
-            raise ValueError('并发名额必须是 1 或 2')
+            raise ValueError("Capacity must be 1 or 2")
         if not isinstance(attempt,str) or not attempt or type(param_version) is not int or param_version<1:
-            raise ValueError('运行编号和参数版本无效')
+            raise ValueError("Invalid run ID or parameter version")
         self.spec=deepcopy(EXECUTION)
         self.attempt,self.param_version,self.progress=attempt,param_version,progress
         self.activities: dict[str,ActivityState]={a['id']:ActivityState.PENDING for a in self.spec['activities']}
@@ -158,15 +135,15 @@ class ActivityExecution:
             rid=resource['id'];r=self.resources[rid]
             held={a['id']:a['requires'].get(rid,0) for a in self.spec['activities'] if self.activities[a['id']]=='running'}
             if set(r['holders'])!={a for a,n in held.items() if n} or len(set(r['holders']))!=len(r['holders']):
-                raise RuntimeError('占用名额与运行中的检查不一致')
+                raise RuntimeError("Occupied slots do not match running checks")
             if type(r['available']) is not int or r['available']<0 or r['available']+sum(held.values())!=r['capacity']:
-                raise RuntimeError('可用名额与占用名额之和不等于总数')
+                raise RuntimeError("Free and occupied slots do not add up to capacity")
 
     def start(self,activity):
         spec=next((a for a in self.spec['activities'] if a['id']==activity),None)
-        if spec is None:raise ValueError('未知检查项目')
+        if spec is None:raise ValueError("Unknown check")
         with self.changed:
-            if self.activities[activity]!='pending':raise ValueError('这项检查已开始，不能重复启动')
+            if self.activities[activity]!='pending':raise ValueError("This check has already started")
             while any(self.resources[r]['available']<n for r,n in spec['requires'].items()):
                 if self.activities[activity]!='waiting':
                     before=self.body();self.activities[activity]=ActivityState.WAITING;self.record('wait',activity,before)
@@ -178,8 +155,8 @@ class ActivityExecution:
 
     def finish(self,activity,passed: bool,*,error=False):
         with self.changed:
-            if self.activities.get(activity)!='running':raise ValueError('检查尚未开始，不能报告完成')
-            if type(passed) is not bool or type(error) is not bool:raise ValueError('检查结果必须是布尔值')
+            if self.activities.get(activity)!='running':raise ValueError("Cannot finish a check that has not started")
+            if type(passed) is not bool or type(error) is not bool:raise ValueError("Check result must be Boolean")
             before=self.body();spec=next(a for a in self.spec['activities'] if a['id']==activity)
             for rid,n in spec['requires'].items():
                 self.resources[rid]['available']+=n;self.resources[rid]['holders'].remove(activity)
@@ -189,7 +166,7 @@ class ActivityExecution:
 
     def join(self) -> bool:
         with self.changed:
-            if self.join_state!='enabled':raise ValueError('还有检查未完成，不能汇总结果')
+            if self.join_state!='enabled':raise ValueError("Cannot join before all checks complete")
             before=self.body()
             passed=all(self.activities[a]=='succeeded' for a in self.spec['join']['requires'])
             self.join_state='passed' if passed else 'rejected';self.record('join',self.spec['join']['id'],before)
@@ -197,7 +174,7 @@ class ActivityExecution:
 
     def abort(self):
         with self.changed:
-            if any(s=='running' for s in self.activities.values()):raise ValueError('正在执行的检查需要先结束并归还名额')
+            if any(s=='running' for s in self.activities.values()):raise ValueError("Running checks must finish and release their slots first")
             before=self.body()
             for a,s in self.activities.items():
                 if s not in TERMINAL:self.activities[a]=ActivityState.CANCELLED

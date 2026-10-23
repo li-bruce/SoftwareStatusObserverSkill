@@ -1,0 +1,228 @@
+{
+  "engine": "transitions.Machine",
+  "version": "0.9.3",
+  "initial": "draft",
+  "state_type": "Phase",
+  "states": [
+    "draft",
+    "waiting",
+    "checking",
+    "ready",
+    "failed",
+    "cancelled",
+    "completed"
+  ],
+  "values": [
+    "draft",
+    "waiting",
+    "checking",
+    "ready",
+    "failed",
+    "cancelled",
+    "completed"
+  ],
+  "transitions": [
+    {
+      "trigger": "start",
+      "source": [
+        "draft",
+        "waiting",
+        "failed",
+        "ready"
+      ],
+      "dest": "checking"
+    },
+    {
+      "trigger": "block",
+      "source": [
+        "draft",
+        "waiting",
+        "failed",
+        "ready",
+        "checking"
+      ],
+      "dest": "waiting"
+    },
+    {
+      "trigger": "checked",
+      "source": "checking",
+      "dest": "ready",
+      "conditions": "execution_complete"
+    },
+    {
+      "trigger": "fail",
+      "source": "checking",
+      "dest": "failed"
+    },
+    {
+      "trigger": "publish",
+      "source": "ready",
+      "dest": "completed",
+      "conditions": "execution_complete"
+    },
+    {
+      "trigger": "cancel",
+      "source": [
+        "draft",
+        "waiting",
+        "checking",
+        "ready",
+        "failed"
+      ],
+      "dest": "cancelled"
+    },
+    {
+      "trigger": "edit",
+      "source": [
+        "draft",
+        "waiting",
+        "checking",
+        "ready",
+        "failed",
+        "completed"
+      ],
+      "dest": "draft"
+    }
+  ],
+  "events": {
+    "start": {
+      "payload": {}
+    },
+    "block": {
+      "payload": {}
+    },
+    "checked": {
+      "payload": {}
+    },
+    "fail": {
+      "payload": {}
+    },
+    "publish": {
+      "payload": {}
+    },
+    "cancel": {
+      "payload": {}
+    },
+    "edit": {
+      "payload": {}
+    }
+  },
+  "event_labels": {
+    "start": "开始检查",
+    "block": "等待有效授权",
+    "checked": "两项检查通过",
+    "fail": "检查失败",
+    "publish": "提交成功",
+    "cancel": "取消",
+    "edit": "修改内容"
+  },
+  "context": {
+    "param_version": {
+      "type": "integer",
+      "min": 1
+    },
+    "clock": {
+      "type": "integer",
+      "min": 0
+    },
+    "capacity": {
+      "type": "integer",
+      "min": 1,
+      "max": 2
+    },
+    "execution": {
+      "type": "object",
+      "schema": "activity-graph/v1"
+    }
+  },
+  "guards": {
+    "execution_complete": {
+      "description": "本次运行的两项检查均已通过，且占用的名额已经归还",
+      "source": {
+        "path": "bo_stategraph/workflow.py",
+        "symbol": "completed"
+      }
+    }
+  },
+  "labels": {
+    "draft": "待检查",
+    "waiting": "等待执行授权",
+    "checking": "正在检查",
+    "ready": "可以提交",
+    "failed": "检查失败",
+    "cancelled": "已取消",
+    "completed": "已交付"
+  },
+  "source": {
+    "path": "bo_stategraph/workflow.py",
+    "symbol": "advance"
+  },
+  "execution": {
+    "schema": "activity-graph/v1",
+    "within": "checking",
+    "parent": "flow.checks",
+    "activity_state_type": "ActivityState",
+    "activity_states": [
+      "pending",
+      "waiting",
+      "running",
+      "succeeded",
+      "rejected",
+      "failed",
+      "cancelled"
+    ],
+    "activities": [
+      {
+        "id": "checksum",
+        "label": "计算内容摘要",
+        "source": {
+          "path": "app/checks.py",
+          "symbol": "checksum"
+        },
+        "requires": {
+          "workers": 1
+        }
+      },
+      {
+        "id": "privacy",
+        "label": "检查敏感标记",
+        "source": {
+          "path": "app/checks.py",
+          "symbol": "privacy_check"
+        },
+        "requires": {
+          "workers": 1
+        }
+      }
+    ],
+    "resources": [
+      {
+        "id": "workers",
+        "label": "本次并发名额",
+        "scope": "run",
+        "capacity_field": "capacity",
+        "min": 1,
+        "max": 2
+      }
+    ],
+    "join": {
+      "id": "join",
+      "label": "确认检查结果",
+      "policy": "all",
+      "requires": [
+        "checksum",
+        "privacy"
+      ],
+      "success_event": "checked",
+      "success_states": [
+        "ready",
+        "completed"
+      ],
+      "guard": "execution_complete"
+    },
+    "source": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "ActivityExecution"
+    }
+  }
+}

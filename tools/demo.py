@@ -4,6 +4,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
+from setup_adapters import configure
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLE = ROOT/'examples/delivery'
@@ -14,6 +15,7 @@ def run(*args):
 
 
 def prepare():
+    configure()
     (EXAMPLE/'scratch').mkdir(exist_ok=True)
     state = EXAMPLE/'.stategraph'
     if not (state/'active.json').exists():

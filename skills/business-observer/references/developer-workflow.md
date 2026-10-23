@@ -1,13 +1,13 @@
-# 伴随开发的最小闭环
+# Minimum development loop
 
-1. 先按 [需求提炼与反问](requirements-dialogue.md) 从用户描述形成顶层业务链/网，说明当前理解，再分轮澄清真正改变行为的模糊点。在 discovery.json 保存问题与答案来源，答案落实到 intent、状态条件和反例；已确认规则不重问，未答关键项不能冒充已确定。普通无行为变化的修改核对已有记录即可。
-2. 先选一条可验证业务流；为概览动作列出核心函数、inputs/outputs、条件读取、效果提交点和源码绑定。辅助格式化/框架代码可以折叠，影响观察量的逻辑不可省略。
-3. 编码时在真实语义位置插钉子：读到的值、函数返回、实际判断，而非事后重新算一遍“看起来合理”的结果。函数输出不是提交；效果事件必须 commit 成功后发。检查缓存命中、幂等复用、提前返回等短路路径；已有产物读取要显示效果标识，不能伪装为本次新提交。
-4. 为每条静态依赖标来源/映射，运行用具体 event_id 关联；历史和当前用 entity/attempt/run/param_version/basis_epoch/build_id 分隔。按领域选择版本向量，不能只用参数版本忽略关系或时钟改变。
-5. 实现权威快照适配、只读观测接口和调试页。显示观测健康/源码失配；按节点下钻到数据和代码。时间线可重放已有事实，但不把重放动画声称正在运行。
-6. 独立写业务断言；正常、等待、恢复、到期、撤销替代、参数改版、关系改变、计算期间变化和重复提交。探针三模式对比权威状态及效果；补采集错误、超量和敏感字段测试。
-7. 完成开发者任务并保存输入、操作、观察、源码位置和权威效果。异步执行须等待新 attempt 的终态事件与权威状态一致，不能只读可能属于上一轮的 last_result；持续轮询页面按已渲染节点等待，不等待 networkidle。定位问题时先看图，再核对源码和需求；保留初次失败，修复后复测。测试数量不是理解效果指标。
+1. Follow [intent confirmation](requirements-dialogue.md): derive the top-level network from supplied descriptions, express current understanding, then clarify only ambiguities that change behavior. Save questions and answer sources in discovery.json and map answers to intent, conditions, and cases. Do not re-ask resolved rules or treat unanswered questions as decisions. Behavior-preserving changes reuse existing records.
+2. Choose a testable business path. For each overview action identify core functions, inputs/outputs, condition reads, effect commits, and source bindings. Collapse formatting/framework details, but retain logic affecting observed values.
+3. Instrument actual reads, returns, and decisions; never recompute plausible explanations later. A function return is not a commit. Emit effects only after successful commit. Check cache hits, idempotent reuse, and early returns. Existing artifacts retain their effect identity and must not appear as newly committed.
+4. Attribute each static dependency to source/mapping and runtime dependencies to concrete event IDs. Separate history using entity/attempt/run/param_version/basis_epoch/build_id. Use domain-appropriate versions; parameter version alone does not cover relationship or clock changes.
+5. Adapt authoritative snapshots, read-only observation APIs, and the graph. Show capture health/source mismatch; drill down to data/source. Replay shows recorded facts, not currently running execution.
+6. Write independent business assertions for applicable normal/wait/recovery/expiry/revocation/replacement/parameter/relation/during-computation/repeated-commit paths. Compare authoritative state/effects in all three probe modes. Include capture errors, overload, and sensitive fields.
+7. Preserve developer task input, actions, observation, source location, and authoritative effects. Await the new attempt's terminal event and matching state, not a possibly previous `last_result`. On polling pages wait for rendered nodes instead of networkidle. Investigate from graph to source and requirement; retain first failures and retests. Test count is not evidence of human understanding.
 
-变更循环采用 [伴随修改检查](cochange.md)：先 begin 保存请求和旧基线，随后每个编码小步同步需求/图/探针、生成局部静态结构并 inspect；独立需求预期和运行检查通过后 accept，再重启核对实际图。不能只是重新 capture 把错误“同步成正确”。若仅有文档抽取/静态结构，应明确尚无运行事实。
+Use [cochange](cochange.md): begin before editing, maintain requirements/graph/probes with each coding step, generate local structure, inspect, verify independent expectations/runtime, accept, then restart and check the live graph. Recapturing an incorrect model does not make it correct. Static-only output must disclose missing runtime evidence.
 
-“等价概述”约定 O（关心的可观察量）和 alpha（从内部执行到图的投影）。针对样例比较真实程序、事件和独立需求在 O 上的结果。局部函数测试和 schema 不构成所有路径的双模拟或完整授权证明；外部系统、动态调用及遗漏源码单列 unknown。
+An equivalent summary defines observable values O and projection alpha from internal execution to the graph. Compare application, events, and independent requirements on O. Local tests and schema checks do not prove all-path bisimulation or authorization completeness. List external systems, dynamic calls, and omitted source as unknowns.

@@ -84,9 +84,9 @@ TRANSITIONS = [
     {"trigger":"edit", "source":"running", "dest":None},
     {"trigger":"fail", "source":"running", "dest":"failed"},
 ]
-LABELS = {"draft":"待执行", "running":"执行中", "running_authorizing":"校验许可", "running_solving":"计算",
-    "running_rechecking":"重新校验", "running_committing":"写入结果", "waiting":"等待", "waiting_approval":"等待有效授权",
-    "waiting_parameters":"等待新版参数重算", "completed":"已提交", "failed":"执行失败"}
+LABELS = {"draft":"Ready", "running":"Running", "running_authorizing":"Check authorization", "running_solving":"Compute",
+    "running_rechecking":"Recheck", "running_committing":"Persist result", "waiting":"Waiting", "waiting_approval":"Wait for valid authorization",
+    "waiting_parameters":"Wait for recomputation with new parameters", "completed":"Committed", "failed":"Failed"}
 
 
 class Workflow:

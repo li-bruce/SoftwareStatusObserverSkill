@@ -18,7 +18,7 @@ class MachineLogic:
     def apply(self, event: str, slots: int) -> str:
         self.slots = slots
         if not self.trigger(event):
-            raise ValueError("当前状态不能执行这个操作")
+            raise ValueError("The current state does not allow this operation")
         return self.state
 
 

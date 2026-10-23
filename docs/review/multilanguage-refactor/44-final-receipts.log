@@ -1,0 +1,25 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+delivery accept {
+  "valid": true,
+  "status": "current",
+  "errors": [],
+  "candidate_id": "fd0ad789fce7c32498b08631ce11c243f3798c145ab597888b5cb1540c923dcd"
+}
+delivery check {
+  "valid": true,
+  "status": "current",
+  "errors": [],
+  "candidate_id": "fd0ad789fce7c32498b08631ce11c243f3798c145ab597888b5cb1540c923dcd"
+}
+team-archive accept {
+  "valid": true,
+  "status": "current",
+  "errors": [],
+  "candidate_id": "2c88b98d7a80b52bd495d17b48094001ae933facdeb627a4167103b4d5812d16"
+}
+team-archive check {
+  "valid": true,
+  "status": "current",
+  "errors": [],
+  "candidate_id": "2c88b98d7a80b52bd495d17b48094001ae933facdeb627a4167103b4d5812d16"
+}

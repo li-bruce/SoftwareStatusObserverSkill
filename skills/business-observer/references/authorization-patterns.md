@@ -1,59 +1,55 @@
-# 权限情况：先识别规则，再选问题和测试
+# Authorization patterns: identify rules before selecting questions and tests
 
-本清单用于需求讨论、源码接入和测试选择，不是通用鉴权引擎，也不是项目必须实现的功能表。先记录实际使用的规则、引擎和适用范围；一跳父子权限只是其中一个例子。规则允许继承时要保留继承，规则只允许直接关系时不能扩张为继承。
+This checklist supports intent confirmation, source integration, and test selection. It is neither an authorization engine nor a mandatory feature list. Record actual rules, engine, and scope. Direct parent-child permission is only one example: preserve valid inheritance, but never invent inheritance for a direct-only rule.
 
-## 规则、事实和本次检查
+## Rule, facts, evaluation
 
-规则定义一次，可用于很多主体和对象；数据库元组和请求上下文给出本次输入。求值实例引用规则、输入及源码，按需要展开。不要预先物化全部“谁可以操作谁”的组合。
+Define rules once for many subjects/objects. Database tuples and request context provide particular inputs. Evaluation instances reference rules, inputs, and source and expand on demand. Do not materialize every subject-operation-object combination.
 
-基本构件包括直接关系、同对象关系引用、关联对象上的关系引用、集合并集/交集/差集和条件。它们可组合成业务权限方案。实现时保留运算符、方向和作用范围，不能只保存无类型连线。[OpenFGA 规则语言](https://openfga.dev/docs/configuration-language)
+Basic constructs include direct relations, same-object relation references, related-object references, unions, intersections, differences, and conditions. Preserve operators, direction, and scope, not untyped edges. [OpenFGA language](https://openfga.dev/docs/configuration-language)
 
-## 按业务情况选择
+Use the following only for behavior already in scope. Questions/counterexamples confirm meaning; they do not recommend mechanisms or complete the user's business process. Neither probes nor tests inherit example rules by default.
 
-以下内容用于表达和验证项目已经涉及的权限行为。提问与反例仅用于确认当前理解，不能将清单变成补完业务或推荐权限机制的问卷。探针与测试按已确认规则选取，不把示例当成业务默认值。
-
-| 情况 | 需要明确什么 | 图与真实采集保留什么 | 应选的测试 |
+| Pattern | Clarify if ambiguous | Graph/runtime evidence | Applicable tests |
 |---|---|---|---|
-| 直接授权与所有者 | 谁对哪类对象拥有什么操作；授权是否绑定版本 | 主体、对象、动作、授权记录及读取来源 | 正确授权、错主体/对象/动作、无关系、撤销 |
-| 群组与嵌套成员 | 组成员是否有权限；是否允许嵌套、服务账号 | 成员关系、被授权的成员集合、实际访问路径 | 入组/退组、嵌套成员、相似组名、类型不符 |
-| 角色与自定义角色 | 角色属于全局、租户还是某个资源；哪些操作共用权限 | 角色赋予、角色到权限的映射及范围 | 相同角色不同范围、角色调整、越权操作 |
-| 直接范围与层级继承 | 哪种关系可以向哪个方向、哪些层级传播；是否有阻断点 | 直接事实与规则推导分别标注，保留路径和规则引用 | 直接允许、有效继承、未声明继承拒绝、改父对象、跨边界 |
-| 多条替代路径（OR） | 任一满足是否足够；撤销一条后的行为 | 分支身份、已求值/短路、最终结果 | 仅第一条、仅第二条、均无效、撤销后仍有替代 |
-| 多个必要条件（AND） | 哪些资格需同时满足 | 每个必要输入及组合节点；折叠仍显示缺少条件 | 每次只缺一个必要条件、全部满足、缺证据 |
-| 排除/黑名单 | 排除作用于哪个表达式；是否覆盖其他路径 | 被排除集合、查询范围/完整性、排除操作数 | 禁止新增/移除、允许与禁止同在、括号作用域、查询失败 |
-| 公开访问与主体类型 | “所有人”指已认证用户、某类主体还是匿名访问 | 类型化通配符、入口身份条件 | 正确类型、其他类型、匿名、恢复私有 |
-| 租户、组织与共享 | 当前组织、所属组织和共享组织如何共同限制操作 | 资源归属、成员关系、当前组织上下文及其来源 | 双组织用户切换、同 ID 跨租户、只读共享不能管理 |
-| 时间、属性与请求条件 | 时钟、有效期、IP/设备/参数的来源及边界 | 实际输入、类型、时间、缺失字段与计算结果 | 阈值前/等于/后、类型错误、缺字段、参数更新 |
-| 临时关系、委托与审批 | 谁能提供临时资格、能否转授、范围和期限；是否可自批 | 持久关系与本请求关系分开；授予人、受托人、版本 | 请求结束不沿用、转授越界、撤销、本人审批限制 |
-| 资源生命周期限制 | 已归档/锁定/删除状态如何参与许可 | 授权条件与实际状态转换/提交分别关联 | 有权限但状态禁止、重复提交、检查后状态变化 |
+| Direct grants/ownership | Subject, object type, action, version binding | Actor/object/action/grant/read source | Valid grant, wrong actor/object/action, absent/revoked grant |
+| Groups/nested membership | Membership rights, nesting, service accounts | Membership, authorized userset, actual path | Join/leave, nesting, similar group names, wrong type |
+| Roles/custom roles | Global/tenant/resource scope and operations | Assignment, role-permission map, scope | Same role/different scope, changed role, unauthorized action |
+| Direct scope/inheritance | Direction, levels, stopping boundaries | Direct facts vs derivation, path/rule identity | Direct allow, valid inheritance, undeclared inheritance denied, reparent, boundary crossing |
+| Alternative paths OR | Whether any branch suffices after revocation | Branch identity, evaluated/short-circuited, aggregate | First only, second only, none, remaining alternative after revoke |
+| Required conditions AND | Which qualifications are jointly required | Every operand/combination; omitted prerequisites remain boundaries | Each condition missing alone, all true, missing evidence |
+| Exclusions/blocklists | Expression scope and precedence | Excluded set, query scope/completeness, operand | Add/remove deny, allow+deny, parentheses, query failure |
+| Public access/subject types | Authenticated/type-specific/anonymous | Typed wildcard, identity condition | Matching/wrong type, anonymous, return to private |
+| Tenant/organization/sharing | Current/owning/shared organization constraints | Ownership, memberships, current context/source | Organization switch, same ID across tenants, read sharing cannot manage |
+| Time/attributes/request conditions | Clock/expiry/IP/device/parameter sources and bounds | Typed actual values/time/missing fields/result | Before/equal/after threshold, wrong type, missing field, parameter change |
+| Temporary relations/delegation/approval | Grantor, redelegation, scope/expiry, self-approval | Persistent vs request-local facts, grantor/delegate/version | No reuse after request, overbroad delegation, revoke, self-approval restriction |
+| Resource lifecycle | Archived/locked/deleted state restrictions | Authorization linked separately to state transition/commit | Authorized but wrong state, repeat commit, state changes after check |
 
-群组成员可作为被授权集合；角色可以绑定具体对象。公开关系通常有主体类型限制；不能自动解释成绕过认证。[群组](https://openfga.dev/docs/modeling/user-groups)、[角色](https://openfga.dev/docs/modeling/roles-and-permissions)、[公开访问](https://openfga.dev/docs/modeling/public-access)
+Group members may be granted as a userset and roles may be object-scoped. Public relations often restrict subject type; they do not automatically bypass authentication. [Groups](https://openfga.dev/docs/modeling/user-groups), [roles](https://openfga.dev/docs/modeling/roles-and-permissions), [public access](https://openfga.dev/docs/modeling/public-access).
 
-组织上下文可以限制同一用户在不同组织中的权限。请求携带的关系不必持久存储；从令牌提取关系时，还需考虑令牌未过期但成员关系已变化的情况。[组织上下文](https://openfga.dev/docs/modeling/organization-context-authorization)、[请求关系](https://openfga.dev/docs/modeling/token-claims-contextual-tuples)
+Organization context may constrain the same user's access differently. Contextual tuples need not be persisted. Token validity does not establish unchanged membership. [Organization context](https://openfga.dev/docs/modeling/organization-context-authorization), [token claims/contextual tuples](https://openfga.dev/docs/modeling/token-claims-contextual-tuples).
 
-“排除优先”只在模型明确表达该范围时成立，不是所有 ReBAC 引擎共有的全局优先级。审批、职责分离、委托和生命周期是应用组合规则，需要项目声明；不要假设引擎自动实现它们。[排除规则](https://openfga.dev/docs/modeling/blocklists)
+Exclusion precedence applies only where the model expresses it, not as a universal ReBAC priority. Approval, separation of duties, delegation, and lifecycle restrictions are application compositions, not implicit engine features. [Blocklists](https://openfga.dev/docs/modeling/blocklists).
 
-## 每种情况还要检查的运行问题
+## Runtime concerns for applicable patterns
 
-| 问题 | 处理要求 |
+| Concern | Required distinction |
 |---|---|
-| 规则版本、关系版本、参数版本 | 分别记录；规则未改不代表旧结果仍适用。适配器只能记录引擎确实返回的依据。 |
-| 撤销与新增 | 既关注已命中的授权，也关注查询范围；新增禁止关系或替代路径可能改变结果。 |
-| 缺上下文、超时、循环、深度限制 | 区分拒绝、待补输入、出错、未求值和观察缺口。显示回边或截断，不自行补成允许/拒绝。 |
-| 缓存与一致性 | 保存请求的一致性要求及实际响应依据；旧快照不能冒充当前事实。 |
-| 检查到提交之间的变化 | 测试应用实际的事务、版本比较或其他提交保护；一次远程鉴权成功不等于另一个数据库的写入已受原子保护。 |
-| 查询与解释 | Check、列表、关系读取和规则展开分别记来源；列表分页不完整不证明没有权限，规则展开不证明分支实际执行。 |
+| Rule/relation/parameter versions | Record separately; unchanged rules do not keep old results valid. Only record versions actually supplied. |
+| Revocation/addition | Track query scope as well as matching grants; new denials/alternatives may change the answer. |
+| Missing context/timeouts/cycles/depth | Separate deny, pending input, error, not evaluated, and capture gap. Show cycles/truncation without invented conclusions. |
+| Cache/consistency | Preserve requested consistency and actual response basis; old snapshots are not current facts. |
+| Check-to-commit changes | Test real transaction/version/atomicity protection. Remote authorization does not atomically protect another database's write. |
+| Query/explanation | Label Check, list, read, and expansion separately. Incomplete pagination proves no absence; expansion proves no execution. |
 
-SpiceDB 在条件上下文缺失时可返回条件性结果及缺失字段；循环关系和遍历上限有引擎自身的限制，应读取实际错误。[条件结果](https://authzed.com/docs/spicedb/concepts/caveats)、[循环与上限](https://authzed.com/docs/spicedb/modeling/recursion-and-max-depth)
+[SpiceDB caveats](https://authzed.com/docs/spicedb/concepts/caveats) may return conditional results/missing context. Respect actual [recursion/depth limits](https://authzed.com/docs/spicedb/modeling/recursion-and-max-depth). [SpiceDB consistency tokens](https://authzed.com/docs/spicedb/concepts/consistency) and [OpenFGA consistency options](https://openfga.dev/docs/interacting/consistency) are not interchangeable database versions. Cross-service commit protection belongs to application design/tests.
 
-一致性要求决定读取哪一时点的数据；SpiceDB 的一致性令牌与 OpenFGA 的选项并非同一个协议，不能伪造统一数据库版本。跨服务提交保护由应用设计和验证。[SpiceDB 一致性](https://authzed.com/docs/spicedb/concepts/consistency)、[OpenFGA 一致性](https://openfga.dev/docs/interacting/consistency)
+## Development integration
 
-## 如何进入开发支线
+1. Record applicable patterns/sources in discovery.json; clarify only unresolved behavioral ambiguity. Do not require groups/inheritance/delegation when absent from the request.
+2. Build confirmed allow/deny/boundary/change/unknown/error scenarios. Separate types, tuples, requests, and expectations. Reuse native engine tests where suitable; [OpenFGA tests](https://openfga.dev/docs/modeling/testing) support Check/ListObjects/ListUsers assertions.
+3. Bind rule definitions, database reads, functions, inputs, and effects. Capture actual boundaries, never reevaluate permission in the observer. whitebox.json checks key values/results/call identities.
+4. Use meaningful mutations: AND→OR, removed exclusion, reversed inheritance, missing tenant/version, incorrect expiry boundary. Failure must come from business assertions, not just a hash change.
+5. Preserve operators/rule/instance identity in focused views; unexpanded required operands remain boundaries. Test valid inheritance and forbidden inheritance.
 
-1. 在 `discovery.json` 记录本项目适用的情况和来源，仅询问未决且影响行为的部分。没有群组、继承或委托需求时不强制添加。
-2. 用已确认规则构造允许、拒绝、边界、变化序列和未知/错误场景。类型、元组、请求和预期分别保存；可复用引擎原生测试文件。OpenFGA 的模型测试支持 Check、ListObjects 和 ListUsers 断言。[模型测试](https://openfga.dev/docs/modeling/testing)
-3. 映射到规则定义、数据库读取、函数、输入和效果；在真实边界采集，不在观察器重算权限。`whitebox.json` 约束其中关键值、实际结果和调用身份。
-4. 选择有效的定向改错：AND 改 OR、删除排除项、调换继承方向、漏租户/版本条件、把到期边界改错。验证应因业务断言失败，不能只因源码哈希变了而失败。
-5. 提取局部图时保持原运算符、规则和实例身份；没有被展开的必要条件保留边界。允许继承和禁止继承都应有相应视图测试。
-
-性质测试也有前提：在纯正向关系组合中增加授权通常不会减少权限；包含排除、上限或职责冲突时不成立。无关数据不改变结果这一性质，必须先界定“无关”的作用域。覆盖上述情况不等于证明任意权限规则正确。
+Properties need assumptions: adding grants is generally monotone only for positive relation compositions, not exclusions, upper bounds, or conflicting duties. Define the scope of “irrelevant data” before testing invariance. Covering these patterns does not prove arbitrary policies correct.

@@ -83,7 +83,7 @@ def serve(port=8797):
             version=query.get('version',['live'])[0]
             histories={p.stem:p for p in (ROOT/'history').glob('*.json')}
             try:
-                if not bo_web.allowed(request.path):return self.send({'error':'调试 Web 已关闭','code':'bo_web_disabled'},404)
+                if not bo_web.allowed(request.path):return self.send({'error':"Debug Web is disabled",'code':'bo_web_disabled'},404)
                 bo_value=bo_web.get(request.path)
                 if bo_value is not None:return self.send(bo_value)
                 if request.path=='/api/app-state':return self.send(session.store.snapshot())
@@ -99,7 +99,7 @@ def serve(port=8797):
                     if version!='live' and not historical:raise ValueError('unknown version')
                     value=session.view() if not historical else historical['views'][query.get('case',['normal'])[0]]
                     return self.send({**value,'layout_id':'delivery-example','available_cases':list(historical['views']) if historical else ['live'],
-                                      'case_names':{k:v[0] for k,v in SCENARIOS.items()},'case_label':value.get('case_label','当前程序')})
+                                      'case_names':{k:v[0] for k,v in SCENARIOS.items()},'case_label':value.get('case_label',"Current application")})
                 if request.path=='/api/source':
                     sources=historical['sources'] if historical else SOURCES
                     manifest=next(iter(historical['views'].values()))['manifest'] if historical else LOADED
@@ -117,8 +117,8 @@ def serve(port=8797):
                 return self.send((ROOT/'observer_generated/static'/filename).read_bytes(),kind=kind+'; charset=utf-8')
             except (KeyError,ValueError) as exc:self.send({'error':str(exc)},404)
         def do_POST(self):
-            if not bo_web.allowed(urlparse(self.path).path):return self.send({'error':'调试 Web 已关闭','code':'bo_web_disabled'},404)
-            if urlparse(self.path).path.startswith('/api/design'):return self.send({'error':'图只供查看；请在开发工具的对话中提出修改'},405)
+            if not bo_web.allowed(urlparse(self.path).path):return self.send({'error':"Debug Web is disabled",'code':'bo_web_disabled'},404)
+            if urlparse(self.path).path.startswith('/api/design'):return self.send({'error':"The graph is read-only; request changes in the development conversation"},405)
             if self.path not in ('/api/command','/api/preferences','/api/recordings/start','/api/recordings/stop'):
                 return self.send({'error':'unknown path'},404)
             origin=self.headers.get('Origin')

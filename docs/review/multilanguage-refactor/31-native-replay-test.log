@@ -1,0 +1,15 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+...............F........
+======================================================================
+FAIL: test_native_state_snapshots_replay_exact_steps_and_transitions (__main__.MultiLanguageTests.test_native_state_snapshots_replay_exact_steps_and_transitions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_multilanguage.py", line 231, in test_native_state_snapshots_replay_exact_steps_and_transitions
+    self.assertTrue(result['animation'])
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+AssertionError: [] is not true
+
+----------------------------------------------------------------------
+Ran 24 tests in 7.292s
+
+FAILED (failures=1)

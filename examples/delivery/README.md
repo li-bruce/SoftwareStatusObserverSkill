@@ -1,60 +1,49 @@
-# 数据交付示例
+# Reviewed delivery example
 
-[English](README.en.md) · [项目首页](../../README.md)
+[中文](README.zh-CN.md) · [Project home](../../README.md)
 
-这个小程序将合成文本变成交付物。开发者通过运行图检查权限判断、内容检查、并发等待和实际提交。
+Turn synthetic text into a delivery artifact while inspecting authorization, checks, concurrent waiting, and committed effects.
 
-在仓库根目录安装 `examples/delivery/requirements.txt` 中的依赖，然后运行：
+From the repository root, install the [dependencies](../../README.md#run-locally), then run:
 
 ```bash
 python tools/demo.py
 ```
 
-默认地址：[运行图](http://127.0.0.1:8797/) · [操作页](http://127.0.0.1:8797/control)。端口占用时加 `--port 8801`。按 Ctrl+C 停止。数据保存在本例的 `scratch/live.sqlite`。
+Open the [graph](http://127.0.0.1:8797/) and [control page](http://127.0.0.1:8797/control). Use --port to select another port. Ctrl+C stops the server.
 
-## 看一次真实运行
+## Follow an operation
 
-1. 在操作页填写公开的示例文本，将并发名额设为 1，点击“保存内容和名额”。
-2. 点击“批准当前版本”，再点击“检查并提交”。
-3. 在运行图展开“检查内容”。一个检查占用名额，另一个等待；两项都通过后才继续提交。
-4. 选择“时刻”，回看等待状态；双击函数展开参数和调用关系，选中节点后点“源码”查看实现。
+1. Save public sample text with capacity 1.
+2. Approve the current version, then choose **Check and commit**.
+3. Expand **Check content**. One check occupies the slot while the other waits.
+4. In the graph, start recording before operating the application, then stop and replay. Inspect the actual state/value changes and corresponding source.
 
-业务、函数和状态共用一张节点图。拖动节点后位置会保存在当前浏览器；选中后可固定位置。选择层次或关系布局，再点“自动布局”；固定节点不会移动。双击节点展开，拖动空白平移，滚轮缩放。
+With capacity 2, both checks may overlap. Each run retains its own activity and resource state. Drag regions, pin nodes, use automatic layout, and add display names or notes. Preferences persist in the project at bo_stategraph/config/views/local.json, independently of the browser port.
 
-选中节点后点“名称与备注”，输入显示名称或备注即自动保存；原始名称和源码关联仍保留。刷新恢复关注节点，折叠父节点再展开会恢复内部展开层次。偏好保存在当前浏览器的同一网站地址下，清除网站数据后不会保留。
-
-名额改为 2 时，两项检查可以同时运行。每项活动的状态都属于具体运行；“运行”选择器保留旧版本的记录。
-
-## 尝试几个问题
-
-| 操作 | 应观察到的结果 |
+| Action | Expected behavior |
 |---|---|
-| 保存新版文本后直接执行 | 旧授权不适用于新版，程序等待授权 |
-| 分别批准 G1 和 G2，再撤销 G1 | G2 有效时仍能继续 |
-| 只做检查，然后撤销唯一授权，再提交 | 提交前重新判断权限，进入等待 |
-| 补充授权后重新执行 | 使用当前授权重新检查并提交 |
-| 文本含 `SECRET:` | 敏感标记检查拒绝，交付物未保存 |
-| 重复提交同一版本 | SQLite 中只有一份交付物 |
+| Edit text and execute without new approval | Old approval cannot authorize the new version. |
+| Approve G1 and G2, then revoke G1 | Reevaluation may use valid G2. |
+| Check only, revoke the sole approval, then commit | Commit rechecks authorization and waits. |
+| Restore approval and execute again | Recheck using current authorization. |
+| Include SECRET: in the text | The synthetic marker check rejects delivery. |
+| Submit the same version repeatedly or concurrently | SQLite retains one artifact for that version. |
 
-`SECRET:` 是合成测试规则，不是实际的数据安全检测。示例时钟使用整数，测试可显式推进它；不是生产到期时间实现。
+SECRET: is a synthetic test rule, not a data-security scanner. The explicit integer clock is for deterministic expiry tests.
 
-## 回看可重复场景
+## Source and verification
 
-在本目录运行：
+- app/: business functions, authoritative storage, and neutral observation ports.
+- bo_stategraph/: executable machine declaration, activities/resources, and unified queries.
+- tooling/build_graph.py: confirmed business grouping and source-based enrichment.
+- integrations/: optional capture and control/view wiring.
+- observer_generated/: generated graph, viewer, and managed runtime copies.
 
 ```bash
-python tooling/dev.py archive --label sample
+python tools/verify.py
 ```
 
-刷新运行图，在“版本”选择 `sample`，再选择场景。归档来自重新执行的程序，包含当时的源码、事件和各活动状态。它与“当前程序”的实时状态分开。
+The graph is read-only. Use the control page for actual business commands. Restart marks unfinished persisted runs as interrupted; it does not revive lost worker threads. Historical acceptance snapshots remain original evidence.
 
-## 代码入口
-
-- `app/workflow.py`：状态类型、并行活动、名额约束、汇合条件。
-- `app/service.py`：读取输入、权限判断、检查和提交。
-- `app/store.py`：运行记录和 SQLite 实际效果。
-- `tooling/build_graph.py`：业务分组与静态代码结构的对应。
-- `integrations/bo_view/`：可编辑的图页面源文件。
-- `observer_generated/`：生成输出，修改源文件后重新生成。
-
-修改与检查流程见[使用说明](../../docs/usage.zh-CN.md)。图只读，操作页通过真实业务命令执行。资源名额属于本次运行；进程重启保留最后状态并标记中断，不恢复原线程。
+See [usage](../../docs/usage.en.md) for the required change/verification workflow.

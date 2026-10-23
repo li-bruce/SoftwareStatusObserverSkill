@@ -1,0 +1,130 @@
+{
+  "scope": "Maintained source, excluding managed copies, dependencies, history, data, and explicit locale catalogs",
+  "remaining": [
+    {
+      "path": "examples/team-archive/tooling/size_scenarios.py",
+      "line": 17,
+      "text": "            body = \"中\"*2730+\"ab\" if case==\"size_equal\" else \"中\"*2731"
+    },
+    {
+      "path": "examples/team-archive/tooling/size_scenarios.py",
+      "line": 42,
+      "text": "                           (\"DOC-002\",\"P2\",\"F4\",\"Another project\",\"P2-001\",\"中\"*100,1))"
+    },
+    {
+      "path": "examples/team-archive/tooling/tests.py",
+      "line": 22,
+      "text": "        self.assertEqual(check_size(\"中🙂\",7,\"P\",1)[\"content_bytes\"],7)"
+    },
+    {
+      "path": "examples/team-archive/tooling/tests.py",
+      "line": 23,
+      "text": "        self.assertTrue(check_size(\"中🙂\",7,\"P\",1)[\"allowed\"])"
+    },
+    {
+      "path": "examples/team-archive/tooling/tests.py",
+      "line": 24,
+      "text": "        self.assertFalse(check_size(\"中🙂\",6,\"P\",1)[\"allowed\"])"
+    },
+    {
+      "path": "tools/test_i18n.mjs",
+      "line": 13,
+      "text": "assert.equal(t('Showing {0} nodes and {1} relations',3,2),'显示 3 个节点、2 条关系');"
+    },
+    {
+      "path": "tools/test_refactor_view.mjs",
+      "line": 19,
+      "text": "const all=new Map([{id:'unrelated_approval',kind:'function',label:'formatter'},{id:'x42',kind:'decision',label:'可操作',semantic_roles:['permission']}].map(n=>[n.id,n]));"
+    },
+    {
+      "path": "tools/test_view_coverage.mjs",
+      "line": 8,
+      "text": "  {id:'upload',label:'提交文件',kind:'action',layer:'business',source:{path:'service.py',symbol:'upload'},capture:{in:{note:'string'},out:{state:'string'}}},"
+    },
+    {
+      "path": "tools/test_view_coverage.mjs",
+      "line": 9,
+      "text": "  {id:'notify',label:'通知审核人',kind:'effect',layer:'program',semantic_roles:['business'],source:{path:'service.py',symbol:'notify'},capture:{out:{count:'number'}}},"
+    },
+    {
+      "path": "tools/test_view_coverage.mjs",
+      "line": 10,
+      "text": "  {id:'review',label:'审核文件',kind:'action',layer:'business',source:{path:'service.py',symbol:'review'}},"
+    },
+    {
+      "path": "tools/test_view_coverage.mjs",
+      "line": 11,
+      "text": "  {id:'pending',kind:'state',layer:'state',value:'pending',label:'待审核'},"
+    },
+    {
+      "path": "tools/test_view_coverage.mjs",
+      "line": 13,
+      "text": "  {id:'guard',kind:'decision',semantic_roles:['permission'],label:'核对审核人'},"
+    },
+    {
+      "path": "tools/test_view_coverage.mjs",
+      "line": 14,
+      "text": "  {id:'slot',kind:'resource',execution_role:'resource',label:'处理名额'},"
+    },
+    {
+      "path": "tools/test_view_coverage.mjs",
+      "line": 15,
+      "text": "  {id:'helper',kind:'function',origin:'python-ast',label:'保存消息'},"
+    },
+    {
+      "path": "tools/test_view_coverage.mjs",
+      "line": 18,
+      "text": "  {id:'send',from:'upload',to:'notify',type:'flow',label:'提交后通知'},"
+    },
+    {
+      "path": "tools/test_view_coverage.mjs",
+      "line": 19,
+      "text": "  {id:'await',from:'notify',to:'pending',type:'flow',label:'等待审核'},"
+    },
+    {
+      "path": "tools/test_view_coverage.mjs",
+      "line": 20,
+      "text": "  {id:'resume',from:'pending',to:'review',type:'flow',label:'开始审核'},"
+    },
+    {
+      "path": "tools/test_view_coverage.mjs",
+      "line": 21,
+      "text": "  {id:'permission',from:'guard',to:'review',type:'guard',label:'核对身份'},"
+    },
+    {
+      "path": "tools/test_view_coverage.mjs",
+      "line": 22,
+      "text": "  {id:'call',from:'notify',to:'helper',type:'flow',origin:'python-ast',label:'保存消息'},"
+    },
+    {
+      "path": "tools/test_view_coverage.mjs",
+      "line": 23,
+      "text": "  {id:'acquire',from:'slot',to:'helper',type:'resource',label:'占用名额'},"
+    },
+    {
+      "path": "tools/test_view_coverage.mjs",
+      "line": 26,
+      "text": "const view={model:{nodes,edges,machine:{values:['pending','approved'],labels:{pending:'待审核',approved:'通过'},transitions:[{trigger:'approve',source:'pending',dest:'approved'}]},graph_roots:nodes.map(n=>n.id)},machine:{conf"
+    },
+    {
+      "path": "tools/test_view_coverage.mjs",
+      "line": 67,
+      "text": "  {id:'group',kind:'action',layer:'business',label:'审核'},"
+    },
+    {
+      "path": "tools/test_view_coverage.mjs",
+      "line": 68,
+      "text": "  {id:'inner',kind:'function',parent:'group',label:'等待审核'},"
+    },
+    {
+      "path": "tools/test_view_coverage.mjs",
+      "line": 69,
+      "text": "  {id:'external',kind:'function',label:'读取审核人'}],edges:["
+    },
+    {
+      "path": "tools/test_view_coverage.mjs",
+      "line": 70,
+      "text": "  {id:'inner-call',from:'inner',to:'external',type:'flow',origin:'python-ast',label:'读取审核人'}],graph_roots:['group','external']},"
+    }
+  ]
+}

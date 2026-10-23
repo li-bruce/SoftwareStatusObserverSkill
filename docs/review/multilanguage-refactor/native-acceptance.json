@@ -1,0 +1,1969 @@
+{
+  "valid": true,
+  "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+  "source_symbols": 11,
+  "reports": [
+    {
+      "development": "drive",
+      "runs": [
+        {
+          "case": "node",
+          "mode": "on",
+          "events": [
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "seq": 1,
+              "id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:1",
+              "node": "js.advance",
+              "phase": "change",
+              "entity": "node",
+              "attempt": "node:d18b4fef-02d0-4c44-9599-94f9c6511050",
+              "scope": "entity",
+              "call_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:1",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "state": "pending",
+                "event": "initial",
+                "slots": 1,
+                "mode": "drive"
+              },
+              "outputs": {
+                "state": "pending"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.758Z",
+              "revision": 0
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "seq": 2,
+              "id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:2",
+              "node": "js.advance",
+              "phase": "change",
+              "entity": "node",
+              "attempt": "node:d18b4fef-02d0-4c44-9599-94f9c6511050",
+              "scope": "entity",
+              "call_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:2",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "state": "pending",
+                "event": "start",
+                "slots": 1,
+                "mode": "drive"
+              },
+              "outputs": {
+                "state": "running"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.759Z",
+              "revision": 1
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "seq": 3,
+              "id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:3",
+              "node": "js.advance",
+              "phase": "change",
+              "entity": "node",
+              "attempt": "node:d18b4fef-02d0-4c44-9599-94f9c6511050",
+              "scope": "entity",
+              "call_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:3",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "state": "running",
+                "event": "finish",
+                "slots": 1,
+                "mode": "drive"
+              },
+              "outputs": {
+                "state": "done"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.759Z",
+              "revision": 2
+            }
+          ],
+          "snapshots": [
+            {
+              "protocol": "bo-snapshot/v1",
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "instance_id": "node:d18b4fef-02d0-4c44-9599-94f9c6511050",
+              "state": "pending",
+              "context": {
+                "slots": 1
+              },
+              "revision": 0,
+              "evidence_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:1",
+              "event": null,
+              "guards": null,
+              "payload": null,
+              "configuration": null
+            },
+            {
+              "protocol": "bo-snapshot/v1",
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "instance_id": "node:d18b4fef-02d0-4c44-9599-94f9c6511050",
+              "state": "running",
+              "context": {
+                "slots": 1
+              },
+              "revision": 1,
+              "evidence_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:2",
+              "event": "start",
+              "guards": {
+                "available": true
+              },
+              "payload": {},
+              "configuration": null
+            },
+            {
+              "protocol": "bo-snapshot/v1",
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "instance_id": "node:d18b4fef-02d0-4c44-9599-94f9c6511050",
+              "state": "done",
+              "context": {
+                "slots": 1
+              },
+              "revision": 2,
+              "evidence_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:3",
+              "event": "finish",
+              "guards": {},
+              "payload": {},
+              "configuration": null
+            }
+          ],
+          "observations": {
+            "state": "done"
+          }
+        },
+        {
+          "case": "ui",
+          "mode": "on",
+          "events": [
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "seq": 4,
+              "id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:4",
+              "node": "js.advance",
+              "phase": "change",
+              "entity": "react",
+              "attempt": "react:b171d945-0b6d-4533-8f6c-f32a572c9adf",
+              "scope": "entity",
+              "call_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:4",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "state": "pending",
+                "event": "initial",
+                "slots": 1,
+                "mode": "drive"
+              },
+              "outputs": {
+                "state": "pending"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.772Z",
+              "revision": 0
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "seq": 5,
+              "id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:5",
+              "node": "react.panel",
+              "phase": "read",
+              "entity": "application",
+              "attempt": "application",
+              "scope": "application",
+              "call_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:5",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "has_handler": true
+              },
+              "outputs": {
+                "state": "pending"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.778Z"
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "seq": 6,
+              "id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:6",
+              "node": "js.advance",
+              "phase": "change",
+              "entity": "vue",
+              "attempt": "vue:dba14384-4324-4912-9c68-ee57b6524750",
+              "scope": "entity",
+              "call_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:6",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "state": "pending",
+                "event": "initial",
+                "slots": 1,
+                "mode": "drive"
+              },
+              "outputs": {
+                "state": "pending"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.789Z",
+              "revision": 0
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "seq": 7,
+              "id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:7",
+              "node": "vue.template",
+              "phase": "read",
+              "entity": "application",
+              "attempt": "application",
+              "scope": "application",
+              "call_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:7",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "has_handler": true
+              },
+              "outputs": {
+                "state": "pending"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.802Z"
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "seq": 8,
+              "id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:8",
+              "node": "react.start",
+              "phase": "return",
+              "entity": "react",
+              "attempt": "react:b171d945-0b6d-4533-8f6c-f32a572c9adf",
+              "scope": "entity",
+              "call_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:8",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "event": "start"
+              },
+              "outputs": {
+                "before": "pending",
+                "state": "running"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.812Z"
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "seq": 9,
+              "id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:9",
+              "node": "js.advance",
+              "phase": "change",
+              "entity": "react",
+              "attempt": "react:b171d945-0b6d-4533-8f6c-f32a572c9adf",
+              "scope": "entity",
+              "call_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:9",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "state": "pending",
+                "event": "start",
+                "slots": 1,
+                "mode": "drive"
+              },
+              "outputs": {
+                "state": "running"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.812Z",
+              "revision": 1
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "seq": 10,
+              "id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:10",
+              "node": "react.panel",
+              "phase": "read",
+              "entity": "application",
+              "attempt": "application",
+              "scope": "application",
+              "call_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:10",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "has_handler": true
+              },
+              "outputs": {
+                "state": "running"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.813Z"
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "seq": 11,
+              "id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:11",
+              "node": "react.finish",
+              "phase": "return",
+              "entity": "react",
+              "attempt": "react:b171d945-0b6d-4533-8f6c-f32a572c9adf",
+              "scope": "entity",
+              "call_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:11",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "event": "finish"
+              },
+              "outputs": {
+                "before": "running",
+                "state": "done"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.816Z"
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "seq": 12,
+              "id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:12",
+              "node": "js.advance",
+              "phase": "change",
+              "entity": "react",
+              "attempt": "react:b171d945-0b6d-4533-8f6c-f32a572c9adf",
+              "scope": "entity",
+              "call_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:12",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "state": "running",
+                "event": "finish",
+                "slots": 1,
+                "mode": "drive"
+              },
+              "outputs": {
+                "state": "done"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.816Z",
+              "revision": 2
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "seq": 13,
+              "id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:13",
+              "node": "react.panel",
+              "phase": "read",
+              "entity": "application",
+              "attempt": "application",
+              "scope": "application",
+              "call_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:13",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "has_handler": true
+              },
+              "outputs": {
+                "state": "done"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.817Z"
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "seq": 14,
+              "id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:14",
+              "node": "vue.start",
+              "phase": "return",
+              "entity": "vue",
+              "attempt": "vue:dba14384-4324-4912-9c68-ee57b6524750",
+              "scope": "entity",
+              "call_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:14",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "event": "start"
+              },
+              "outputs": {
+                "before": "pending",
+                "state": "running"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.819Z"
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "seq": 15,
+              "id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:15",
+              "node": "js.advance",
+              "phase": "change",
+              "entity": "vue",
+              "attempt": "vue:dba14384-4324-4912-9c68-ee57b6524750",
+              "scope": "entity",
+              "call_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:15",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "state": "pending",
+                "event": "start",
+                "slots": 1,
+                "mode": "drive"
+              },
+              "outputs": {
+                "state": "running"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.819Z",
+              "revision": 1
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "seq": 16,
+              "id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:16",
+              "node": "vue.template",
+              "phase": "read",
+              "entity": "application",
+              "attempt": "application",
+              "scope": "application",
+              "call_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:16",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "has_handler": true
+              },
+              "outputs": {
+                "state": "running"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.819Z"
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "seq": 17,
+              "id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:17",
+              "node": "vue.finish",
+              "phase": "return",
+              "entity": "vue",
+              "attempt": "vue:dba14384-4324-4912-9c68-ee57b6524750",
+              "scope": "entity",
+              "call_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:17",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "event": "finish"
+              },
+              "outputs": {
+                "before": "running",
+                "state": "done"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.822Z"
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "seq": 18,
+              "id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:18",
+              "node": "js.advance",
+              "phase": "change",
+              "entity": "vue",
+              "attempt": "vue:dba14384-4324-4912-9c68-ee57b6524750",
+              "scope": "entity",
+              "call_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:18",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "state": "running",
+                "event": "finish",
+                "slots": 1,
+                "mode": "drive"
+              },
+              "outputs": {
+                "state": "done"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.822Z",
+              "revision": 2
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "seq": 19,
+              "id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:19",
+              "node": "vue.template",
+              "phase": "read",
+              "entity": "application",
+              "attempt": "application",
+              "scope": "application",
+              "call_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:19",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "has_handler": true
+              },
+              "outputs": {
+                "state": "done"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.822Z"
+            }
+          ],
+          "observations": {
+            "react": "done",
+            "vue": "done"
+          },
+          "snapshots": [
+            {
+              "protocol": "bo-snapshot/v1",
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "instance_id": "react:b171d945-0b6d-4533-8f6c-f32a572c9adf",
+              "state": "pending",
+              "context": {
+                "slots": 1
+              },
+              "revision": 0,
+              "evidence_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:4",
+              "event": null,
+              "guards": null,
+              "payload": null,
+              "configuration": null
+            },
+            {
+              "protocol": "bo-snapshot/v1",
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "instance_id": "vue:dba14384-4324-4912-9c68-ee57b6524750",
+              "state": "pending",
+              "context": {
+                "slots": 1
+              },
+              "revision": 0,
+              "evidence_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:6",
+              "event": null,
+              "guards": null,
+              "payload": null,
+              "configuration": null
+            },
+            {
+              "protocol": "bo-snapshot/v1",
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "instance_id": "react:b171d945-0b6d-4533-8f6c-f32a572c9adf",
+              "state": "running",
+              "context": {
+                "slots": 1
+              },
+              "revision": 1,
+              "evidence_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:9",
+              "event": "start",
+              "guards": {
+                "available": true
+              },
+              "payload": {},
+              "configuration": null
+            },
+            {
+              "protocol": "bo-snapshot/v1",
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "instance_id": "react:b171d945-0b6d-4533-8f6c-f32a572c9adf",
+              "state": "done",
+              "context": {
+                "slots": 1
+              },
+              "revision": 2,
+              "evidence_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:12",
+              "event": "finish",
+              "guards": {},
+              "payload": {},
+              "configuration": null
+            },
+            {
+              "protocol": "bo-snapshot/v1",
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "instance_id": "vue:dba14384-4324-4912-9c68-ee57b6524750",
+              "state": "running",
+              "context": {
+                "slots": 1
+              },
+              "revision": 1,
+              "evidence_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:15",
+              "event": "start",
+              "guards": {
+                "available": true
+              },
+              "payload": {},
+              "configuration": null
+            },
+            {
+              "protocol": "bo-snapshot/v1",
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138",
+              "producer_id": "2cbf912b-f995-4ebc-8a15-4de98bf116c7",
+              "instance_id": "vue:dba14384-4324-4912-9c68-ee57b6524750",
+              "state": "done",
+              "context": {
+                "slots": 1
+              },
+              "revision": 2,
+              "evidence_id": "d09ab285-0aa7-4e0b-9a36-9004b4f77138:2cbf912b-f995-4ebc-8a15-4de98bf116c7:18",
+              "event": "finish",
+              "guards": {},
+              "payload": {},
+              "configuration": null
+            }
+          ]
+        },
+        {
+          "case": "node",
+          "mode": "off",
+          "events": [],
+          "snapshots": [],
+          "observations": {
+            "state": "done"
+          }
+        },
+        {
+          "case": "ui",
+          "mode": "off",
+          "events": [],
+          "observations": {
+            "react": "done",
+            "vue": "done"
+          },
+          "snapshots": []
+        },
+        {
+          "case": "node",
+          "mode": "fault",
+          "events": [],
+          "snapshots": [],
+          "observations": {
+            "state": "done"
+          }
+        },
+        {
+          "case": "ui",
+          "mode": "fault",
+          "events": [],
+          "observations": {
+            "react": "done",
+            "vue": "done"
+          },
+          "snapshots": []
+        },
+        {
+          "case": "python",
+          "mode": "on",
+          "events": [
+            {
+              "protocol": "bo-event/v1",
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "e24ac3f11b394b0a9f15fcf4879a1479",
+              "producer_id": "8edc3c985ee64b2a8b92c4ccd76cda8e",
+              "schema_version": 3,
+              "seq": 1,
+              "id": "e24ac3f11b394b0a9f15fcf4879a1479:8edc3c985ee64b2a8b92c4ccd76cda8e:1",
+              "node": "py.advance",
+              "phase": "change",
+              "entity": "application",
+              "attempt": "application",
+              "scope": "application",
+              "basis": {},
+              "call_id": "e24ac3f11b394b0a9f15fcf4879a1479:8edc3c985ee64b2a8b92c4ccd76cda8e:1",
+              "parent_call_id": null,
+              "inputs": {
+                "state": "pending",
+                "event": "start",
+                "slots": 0,
+                "mode": "drive"
+              },
+              "outputs": {
+                "state": "waiting"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.952373+00:00"
+            },
+            {
+              "protocol": "bo-event/v1",
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "e24ac3f11b394b0a9f15fcf4879a1479",
+              "producer_id": "8edc3c985ee64b2a8b92c4ccd76cda8e",
+              "schema_version": 3,
+              "seq": 2,
+              "id": "e24ac3f11b394b0a9f15fcf4879a1479:8edc3c985ee64b2a8b92c4ccd76cda8e:2",
+              "node": "py.advance",
+              "phase": "change",
+              "entity": "application",
+              "attempt": "application",
+              "scope": "application",
+              "basis": {},
+              "call_id": "e24ac3f11b394b0a9f15fcf4879a1479:8edc3c985ee64b2a8b92c4ccd76cda8e:2",
+              "parent_call_id": null,
+              "inputs": {
+                "state": "waiting",
+                "event": "resume",
+                "slots": 1,
+                "mode": "drive"
+              },
+              "outputs": {
+                "state": "running"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.952520+00:00"
+            },
+            {
+              "protocol": "bo-event/v1",
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "e24ac3f11b394b0a9f15fcf4879a1479",
+              "producer_id": "8edc3c985ee64b2a8b92c4ccd76cda8e",
+              "schema_version": 3,
+              "seq": 3,
+              "id": "e24ac3f11b394b0a9f15fcf4879a1479:8edc3c985ee64b2a8b92c4ccd76cda8e:3",
+              "node": "py.advance",
+              "phase": "change",
+              "entity": "application",
+              "attempt": "application",
+              "scope": "application",
+              "basis": {},
+              "call_id": "e24ac3f11b394b0a9f15fcf4879a1479:8edc3c985ee64b2a8b92c4ccd76cda8e:3",
+              "parent_call_id": null,
+              "inputs": {
+                "state": "running",
+                "event": "finish",
+                "slots": 1,
+                "mode": "drive"
+              },
+              "outputs": {
+                "state": "done"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.952602+00:00"
+            }
+          ],
+          "observations": {
+            "states": [
+              "waiting",
+              "running",
+              "done"
+            ]
+          }
+        },
+        {
+          "case": "python",
+          "mode": "off",
+          "events": [],
+          "observations": {
+            "states": [
+              "waiting",
+              "running",
+              "done"
+            ]
+          }
+        },
+        {
+          "case": "python",
+          "mode": "fault",
+          "events": [],
+          "observations": {
+            "states": [
+              "waiting",
+              "running",
+              "done"
+            ]
+          }
+        }
+      ],
+      "mapping": {
+        "errors": [],
+        "events_checked": 16,
+        "features": 4
+      }
+    },
+    {
+      "development": "observe",
+      "runs": [
+        {
+          "case": "node",
+          "mode": "on",
+          "events": [
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "seq": 1,
+              "id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:1",
+              "node": "js.advance",
+              "phase": "change",
+              "entity": "node",
+              "attempt": "node:cddc3e57-33a0-4438-b45b-41faf61747a6",
+              "scope": "entity",
+              "call_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:1",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "state": "pending",
+                "event": "initial",
+                "slots": 1,
+                "mode": "observe"
+              },
+              "outputs": {
+                "state": "pending"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.872Z",
+              "revision": 0
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "seq": 2,
+              "id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:2",
+              "node": "js.advance",
+              "phase": "change",
+              "entity": "node",
+              "attempt": "node:cddc3e57-33a0-4438-b45b-41faf61747a6",
+              "scope": "entity",
+              "call_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:2",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "state": "pending",
+                "event": "start",
+                "slots": 1,
+                "mode": "observe"
+              },
+              "outputs": {
+                "state": "running"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.872Z",
+              "revision": 1
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "seq": 3,
+              "id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:3",
+              "node": "js.advance",
+              "phase": "change",
+              "entity": "node",
+              "attempt": "node:cddc3e57-33a0-4438-b45b-41faf61747a6",
+              "scope": "entity",
+              "call_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:3",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "state": "running",
+                "event": "finish",
+                "slots": 1,
+                "mode": "observe"
+              },
+              "outputs": {
+                "state": "done"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.872Z",
+              "revision": 2
+            }
+          ],
+          "snapshots": [
+            {
+              "protocol": "bo-snapshot/v1",
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "instance_id": "node:cddc3e57-33a0-4438-b45b-41faf61747a6",
+              "state": "pending",
+              "context": {
+                "slots": 1
+              },
+              "revision": 0,
+              "evidence_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:1",
+              "event": null,
+              "guards": null,
+              "payload": null,
+              "configuration": null
+            },
+            {
+              "protocol": "bo-snapshot/v1",
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "instance_id": "node:cddc3e57-33a0-4438-b45b-41faf61747a6",
+              "state": "running",
+              "context": {
+                "slots": 1
+              },
+              "revision": 1,
+              "evidence_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:2",
+              "event": "start",
+              "guards": {
+                "available": true
+              },
+              "payload": {},
+              "configuration": null
+            },
+            {
+              "protocol": "bo-snapshot/v1",
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "instance_id": "node:cddc3e57-33a0-4438-b45b-41faf61747a6",
+              "state": "done",
+              "context": {
+                "slots": 1
+              },
+              "revision": 2,
+              "evidence_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:3",
+              "event": "finish",
+              "guards": {},
+              "payload": {},
+              "configuration": null
+            }
+          ],
+          "observations": {
+            "state": "done"
+          }
+        },
+        {
+          "case": "ui",
+          "mode": "on",
+          "events": [
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "seq": 4,
+              "id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:4",
+              "node": "js.advance",
+              "phase": "change",
+              "entity": "react",
+              "attempt": "react:e584b0c4-dcf4-44e4-b160-d4039d5a0c4d",
+              "scope": "entity",
+              "call_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:4",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "state": "pending",
+                "event": "initial",
+                "slots": 1,
+                "mode": "observe"
+              },
+              "outputs": {
+                "state": "pending"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.892Z",
+              "revision": 0
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "seq": 5,
+              "id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:5",
+              "node": "react.panel",
+              "phase": "read",
+              "entity": "application",
+              "attempt": "application",
+              "scope": "application",
+              "call_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:5",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "has_handler": true
+              },
+              "outputs": {
+                "state": "pending"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.892Z"
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "seq": 6,
+              "id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:6",
+              "node": "js.advance",
+              "phase": "change",
+              "entity": "vue",
+              "attempt": "vue:7af4c8f7-85bb-4743-b48a-a635369fe850",
+              "scope": "entity",
+              "call_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:6",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "state": "pending",
+                "event": "initial",
+                "slots": 1,
+                "mode": "observe"
+              },
+              "outputs": {
+                "state": "pending"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.894Z",
+              "revision": 0
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "seq": 7,
+              "id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:7",
+              "node": "vue.template",
+              "phase": "read",
+              "entity": "application",
+              "attempt": "application",
+              "scope": "application",
+              "call_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:7",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "has_handler": true
+              },
+              "outputs": {
+                "state": "pending"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.894Z"
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "seq": 8,
+              "id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:8",
+              "node": "react.start",
+              "phase": "return",
+              "entity": "react",
+              "attempt": "react:e584b0c4-dcf4-44e4-b160-d4039d5a0c4d",
+              "scope": "entity",
+              "call_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:8",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "event": "start"
+              },
+              "outputs": {
+                "before": "pending",
+                "state": "running"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.896Z"
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "seq": 9,
+              "id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:9",
+              "node": "js.advance",
+              "phase": "change",
+              "entity": "react",
+              "attempt": "react:e584b0c4-dcf4-44e4-b160-d4039d5a0c4d",
+              "scope": "entity",
+              "call_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:9",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "state": "pending",
+                "event": "start",
+                "slots": 1,
+                "mode": "observe"
+              },
+              "outputs": {
+                "state": "running"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.896Z",
+              "revision": 1
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "seq": 10,
+              "id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:10",
+              "node": "react.panel",
+              "phase": "read",
+              "entity": "application",
+              "attempt": "application",
+              "scope": "application",
+              "call_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:10",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "has_handler": true
+              },
+              "outputs": {
+                "state": "running"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.897Z"
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "seq": 11,
+              "id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:11",
+              "node": "react.finish",
+              "phase": "return",
+              "entity": "react",
+              "attempt": "react:e584b0c4-dcf4-44e4-b160-d4039d5a0c4d",
+              "scope": "entity",
+              "call_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:11",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "event": "finish"
+              },
+              "outputs": {
+                "before": "running",
+                "state": "done"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.898Z"
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "seq": 12,
+              "id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:12",
+              "node": "js.advance",
+              "phase": "change",
+              "entity": "react",
+              "attempt": "react:e584b0c4-dcf4-44e4-b160-d4039d5a0c4d",
+              "scope": "entity",
+              "call_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:12",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "state": "running",
+                "event": "finish",
+                "slots": 1,
+                "mode": "observe"
+              },
+              "outputs": {
+                "state": "done"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.898Z",
+              "revision": 2
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "seq": 13,
+              "id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:13",
+              "node": "react.panel",
+              "phase": "read",
+              "entity": "application",
+              "attempt": "application",
+              "scope": "application",
+              "call_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:13",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "has_handler": true
+              },
+              "outputs": {
+                "state": "done"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.898Z"
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "seq": 14,
+              "id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:14",
+              "node": "vue.start",
+              "phase": "return",
+              "entity": "vue",
+              "attempt": "vue:7af4c8f7-85bb-4743-b48a-a635369fe850",
+              "scope": "entity",
+              "call_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:14",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "event": "start"
+              },
+              "outputs": {
+                "before": "pending",
+                "state": "running"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.899Z"
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "seq": 15,
+              "id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:15",
+              "node": "js.advance",
+              "phase": "change",
+              "entity": "vue",
+              "attempt": "vue:7af4c8f7-85bb-4743-b48a-a635369fe850",
+              "scope": "entity",
+              "call_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:15",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "state": "pending",
+                "event": "start",
+                "slots": 1,
+                "mode": "observe"
+              },
+              "outputs": {
+                "state": "running"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.899Z",
+              "revision": 1
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "seq": 16,
+              "id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:16",
+              "node": "vue.template",
+              "phase": "read",
+              "entity": "application",
+              "attempt": "application",
+              "scope": "application",
+              "call_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:16",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "has_handler": true
+              },
+              "outputs": {
+                "state": "running"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.899Z"
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "seq": 17,
+              "id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:17",
+              "node": "vue.finish",
+              "phase": "return",
+              "entity": "vue",
+              "attempt": "vue:7af4c8f7-85bb-4743-b48a-a635369fe850",
+              "scope": "entity",
+              "call_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:17",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "event": "finish"
+              },
+              "outputs": {
+                "before": "running",
+                "state": "done"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.900Z"
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "seq": 18,
+              "id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:18",
+              "node": "js.advance",
+              "phase": "change",
+              "entity": "vue",
+              "attempt": "vue:7af4c8f7-85bb-4743-b48a-a635369fe850",
+              "scope": "entity",
+              "call_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:18",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "state": "running",
+                "event": "finish",
+                "slots": 1,
+                "mode": "observe"
+              },
+              "outputs": {
+                "state": "done"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.900Z",
+              "revision": 2
+            },
+            {
+              "protocol": "bo-event/v1",
+              "schema_version": 3,
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "seq": 19,
+              "id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:19",
+              "node": "vue.template",
+              "phase": "read",
+              "entity": "application",
+              "attempt": "application",
+              "scope": "application",
+              "call_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:19",
+              "parent_call_id": null,
+              "basis": {},
+              "inputs": {
+                "has_handler": true
+              },
+              "outputs": {
+                "state": "done"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:05.900Z"
+            }
+          ],
+          "observations": {
+            "react": "done",
+            "vue": "done"
+          },
+          "snapshots": [
+            {
+              "protocol": "bo-snapshot/v1",
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "instance_id": "react:e584b0c4-dcf4-44e4-b160-d4039d5a0c4d",
+              "state": "pending",
+              "context": {
+                "slots": 1
+              },
+              "revision": 0,
+              "evidence_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:4",
+              "event": null,
+              "guards": null,
+              "payload": null,
+              "configuration": null
+            },
+            {
+              "protocol": "bo-snapshot/v1",
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "instance_id": "vue:7af4c8f7-85bb-4743-b48a-a635369fe850",
+              "state": "pending",
+              "context": {
+                "slots": 1
+              },
+              "revision": 0,
+              "evidence_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:6",
+              "event": null,
+              "guards": null,
+              "payload": null,
+              "configuration": null
+            },
+            {
+              "protocol": "bo-snapshot/v1",
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "instance_id": "react:e584b0c4-dcf4-44e4-b160-d4039d5a0c4d",
+              "state": "running",
+              "context": {
+                "slots": 1
+              },
+              "revision": 1,
+              "evidence_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:9",
+              "event": "start",
+              "guards": {
+                "available": true
+              },
+              "payload": {},
+              "configuration": null
+            },
+            {
+              "protocol": "bo-snapshot/v1",
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "instance_id": "react:e584b0c4-dcf4-44e4-b160-d4039d5a0c4d",
+              "state": "done",
+              "context": {
+                "slots": 1
+              },
+              "revision": 2,
+              "evidence_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:12",
+              "event": "finish",
+              "guards": {},
+              "payload": {},
+              "configuration": null
+            },
+            {
+              "protocol": "bo-snapshot/v1",
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "instance_id": "vue:7af4c8f7-85bb-4743-b48a-a635369fe850",
+              "state": "running",
+              "context": {
+                "slots": 1
+              },
+              "revision": 1,
+              "evidence_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:15",
+              "event": "start",
+              "guards": {
+                "available": true
+              },
+              "payload": {},
+              "configuration": null
+            },
+            {
+              "protocol": "bo-snapshot/v1",
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53",
+              "producer_id": "02af73f6-1113-446b-82f5-74eb32d4b55c",
+              "instance_id": "vue:7af4c8f7-85bb-4743-b48a-a635369fe850",
+              "state": "done",
+              "context": {
+                "slots": 1
+              },
+              "revision": 2,
+              "evidence_id": "1867376c-c3ae-4eba-a044-1d99a3e0db53:02af73f6-1113-446b-82f5-74eb32d4b55c:18",
+              "event": "finish",
+              "guards": {},
+              "payload": {},
+              "configuration": null
+            }
+          ]
+        },
+        {
+          "case": "node",
+          "mode": "off",
+          "events": [],
+          "snapshots": [],
+          "observations": {
+            "state": "done"
+          }
+        },
+        {
+          "case": "ui",
+          "mode": "off",
+          "events": [],
+          "observations": {
+            "react": "done",
+            "vue": "done"
+          },
+          "snapshots": []
+        },
+        {
+          "case": "node",
+          "mode": "fault",
+          "events": [],
+          "snapshots": [],
+          "observations": {
+            "state": "done"
+          }
+        },
+        {
+          "case": "ui",
+          "mode": "fault",
+          "events": [],
+          "observations": {
+            "react": "done",
+            "vue": "done"
+          },
+          "snapshots": []
+        },
+        {
+          "case": "python",
+          "mode": "on",
+          "events": [
+            {
+              "protocol": "bo-event/v1",
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "dbc3fad7119948a292bcef4422398bd2",
+              "producer_id": "8d374e04076c4bb6a8793999af4ece7d",
+              "schema_version": 3,
+              "seq": 1,
+              "id": "dbc3fad7119948a292bcef4422398bd2:8d374e04076c4bb6a8793999af4ece7d:1",
+              "node": "py.advance",
+              "phase": "change",
+              "entity": "application",
+              "attempt": "application",
+              "scope": "application",
+              "basis": {},
+              "call_id": "dbc3fad7119948a292bcef4422398bd2:8d374e04076c4bb6a8793999af4ece7d:1",
+              "parent_call_id": null,
+              "inputs": {
+                "state": "pending",
+                "event": "start",
+                "slots": 0,
+                "mode": "observe"
+              },
+              "outputs": {
+                "state": "waiting"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:06.120572+00:00"
+            },
+            {
+              "protocol": "bo-event/v1",
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "dbc3fad7119948a292bcef4422398bd2",
+              "producer_id": "8d374e04076c4bb6a8793999af4ece7d",
+              "schema_version": 3,
+              "seq": 2,
+              "id": "dbc3fad7119948a292bcef4422398bd2:8d374e04076c4bb6a8793999af4ece7d:2",
+              "node": "py.advance",
+              "phase": "change",
+              "entity": "application",
+              "attempt": "application",
+              "scope": "application",
+              "basis": {},
+              "call_id": "dbc3fad7119948a292bcef4422398bd2:8d374e04076c4bb6a8793999af4ece7d:2",
+              "parent_call_id": null,
+              "inputs": {
+                "state": "waiting",
+                "event": "resume",
+                "slots": 1,
+                "mode": "observe"
+              },
+              "outputs": {
+                "state": "running"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:06.120666+00:00"
+            },
+            {
+              "protocol": "bo-event/v1",
+              "project_id": "multilanguage-jobs",
+              "model_revision": "1",
+              "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+              "run_id": "dbc3fad7119948a292bcef4422398bd2",
+              "producer_id": "8d374e04076c4bb6a8793999af4ece7d",
+              "schema_version": 3,
+              "seq": 3,
+              "id": "dbc3fad7119948a292bcef4422398bd2:8d374e04076c4bb6a8793999af4ece7d:3",
+              "node": "py.advance",
+              "phase": "change",
+              "entity": "application",
+              "attempt": "application",
+              "scope": "application",
+              "basis": {},
+              "call_id": "dbc3fad7119948a292bcef4422398bd2:8d374e04076c4bb6a8793999af4ece7d:3",
+              "parent_call_id": null,
+              "inputs": {
+                "state": "running",
+                "event": "finish",
+                "slots": 1,
+                "mode": "observe"
+              },
+              "outputs": {
+                "state": "done"
+              },
+              "depends": [],
+              "observed_at": "2026-10-23T07:48:06.120708+00:00"
+            }
+          ],
+          "observations": {
+            "states": [
+              "waiting",
+              "running",
+              "done"
+            ]
+          }
+        },
+        {
+          "case": "python",
+          "mode": "off",
+          "events": [],
+          "observations": {
+            "states": [
+              "waiting",
+              "running",
+              "done"
+            ]
+          }
+        },
+        {
+          "case": "python",
+          "mode": "fault",
+          "events": [],
+          "observations": {
+            "states": [
+              "waiting",
+              "running",
+              "done"
+            ]
+          }
+        }
+      ],
+      "mapping": {
+        "errors": [],
+        "events_checked": 16,
+        "features": 4
+      }
+    }
+  ],
+  "architecture": {
+    "valid": true,
+    "errors": [],
+    "ownership": {
+      "bo_stategraph/__init__.py": "stategraph",
+      "bo_stategraph/bo_contracts.py": "stategraph",
+      "bo_stategraph/bo_executor.py": "stategraph",
+      "bo_stategraph/bo_probe.py": "stategraph",
+      "bo_stategraph/bo_runtime.mjs": "stategraph",
+      "bo_stategraph/config/views/local.json": "stategraph",
+      "bo_stategraph/config/views/local.lock": "stategraph",
+      "bo_stategraph/data/events.jsonl": "stategraph",
+      "bo_stategraph/data/recordings/6ece51f865114268ab26d4dd987c5655.json": "stategraph",
+      "bo_stategraph/data/recordings/9eccdb2589c44034a126b863703e5bb9.json": "stategraph",
+      "bo_stategraph/data/recordings/c1df7a21a71f4f48a1e9d299e96fee29.json": "stategraph",
+      "bo_stategraph/data/recordings/d8450af76f6948abaeb023e7ebd29184.json": "stategraph",
+      "bo_stategraph/execution_contract.py": "stategraph",
+      "bo_stategraph/project.json": "stategraph",
+      "integrations/bo_browser.tsx": "integration",
+      "integrations/bo_runner.mjs": "integration",
+      "src/ReactPanel.tsx": "business",
+      "src/VuePanel.vue": "business",
+      "src/job.mjs": "business",
+      "src/job.py": "business",
+      "tooling/test.mjs": "tooling",
+      "tooling/vite.config.mjs": "tooling"
+    },
+    "imports": [
+      {
+        "from": "bo_stategraph/bo_contracts.py",
+        "to": "bo_stategraph/execution_contract.py",
+        "line": 305
+      },
+      {
+        "from": "bo_stategraph/bo_contracts.py",
+        "to": "bo_stategraph/execution_contract.py",
+        "line": 305
+      },
+      {
+        "from": "bo_stategraph/bo_executor.py",
+        "to": "bo_stategraph/bo_contracts.py",
+        "line": 4
+      },
+      {
+        "from": "bo_stategraph/bo_executor.py",
+        "to": "bo_stategraph/bo_contracts.py",
+        "line": 4
+      },
+      {
+        "from": "bo_stategraph/bo_executor.py",
+        "to": "bo_stategraph/bo_contracts.py",
+        "line": 4
+      },
+      {
+        "from": "integrations/bo_browser.tsx",
+        "to": "src/ReactPanel.tsx"
+      },
+      {
+        "from": "integrations/bo_browser.tsx",
+        "to": "integrations/bo_runner.mjs"
+      },
+      {
+        "from": "integrations/bo_browser.tsx",
+        "to": ".stategraph/collector.json"
+      },
+      {
+        "from": "integrations/bo_browser.tsx",
+        "to": "src/VuePanel.vue"
+      },
+      {
+        "from": "integrations/bo_browser.tsx",
+        "to": "bo_stategraph/bo_runtime.mjs"
+      },
+      {
+        "from": "integrations/bo_browser.tsx",
+        "to": "bo_stategraph/project.json"
+      },
+      {
+        "from": "integrations/bo_runner.mjs",
+        "to": "bo_stategraph/bo_runtime.mjs"
+      },
+      {
+        "from": "integrations/bo_runner.mjs",
+        "to": "src/job.mjs"
+      },
+      {
+        "from": "tooling/test.mjs",
+        "to": "bo_stategraph/bo_runtime.mjs"
+      },
+      {
+        "from": "tooling/test.mjs",
+        "to": "integrations/bo_runner.mjs"
+      },
+      {
+        "from": "tooling/test.mjs",
+        "to": "src/job.mjs"
+      }
+    ],
+    "managed": [],
+    "limits": [
+      "Python and JS/TS/SFC static imports in configured scan paths",
+      "Dynamic aliases and external package internals need independent review",
+      "Sealing is a recorded regeneration, not business acceptance; run change_sync verify"
+    ]
+  },
+  "scope": "Real native Python/JS execution and compiled React/Vue DOM handlers. HTTP transport has separate integration tests. Finite scenarios do not establish all program behavior."
+}

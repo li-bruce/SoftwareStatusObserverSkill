@@ -1,0 +1,7 @@
+Source: actual delegated user message from Codex thread 01a1439a-dceb-7ba2-bada-546619caf220. Verbatim content follows; not a reconstructed earlier conversation.
+
+继续执行最初委托中的一次后续迭代测试。下面是明确标注的模拟测试用户需求，不代表真实用户另行提出了产品要求：『本轮改成只接受 PNG 图片；JPEG 与其他非 PNG 上传都拒绝且不发送审核通知。账号权限、审核规则、站内消息和展览规则全部保持此前已确认的含义。』这份具体变更已由模拟测试角色确认，不必重复询问同一结论。先在对话展示局部变化图和当前已验证的 Web 地址，保留 v1 完整通过记录；在新变更中明确记录格式要求的变更，再修改代码、状态/规则图、采集与独立预期。不能重置旧基线或把改动藏成翻译。复用 PNG 成功/JPEG 拒绝/无通知/原权限的案例验证 v2，报告对应节点、源码和参数如何变化以及哪些稳定 ID 保留。完成一次真实浏览器 JPEG 拒绝和 PNG 正常流程，保留失败/修复/复测和四类结果、截图及对话材料。不要引入其他功能。最终报告须区分 v1、v2 与被测试 Skill candidate-3。
+
+Source: subsequent actual delegated user message from the same thread. Verbatim content follows.
+
+最终材料请提供清晰的 v1/v2 审查入口、实际对话记录、四类检查结果、失败/修复/复测索引和截图。另给出可复现的项目源码包或精确文件清单（排除 node_modules、真实运行数据库、会话/collector token 和个人配置；保留合成测试图片与依赖锁文件）。将所用 Skill candidate-3 来源和摘要写清楚，避免把后来重述的对话当作原始对话。不要发布 GitHub。若正等待自动或人工审批，请准确报告待批准动作和原因，继续无需该审批的材料整理；不要绕过审批。

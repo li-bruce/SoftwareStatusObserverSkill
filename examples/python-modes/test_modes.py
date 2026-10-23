@@ -3,6 +3,8 @@ import ast
 import json
 from pathlib import Path
 import shutil
+import subprocess
+import sys
 import tempfile
 import unittest
 from app import Job, OwnLogic
@@ -11,6 +13,13 @@ from bo_stategraph.binding import bo_check_sources
 
 
 class ModeTests(unittest.TestCase):
+    def test_command_requires_an_explicit_mode_choice(self):
+        result = subprocess.run([sys.executable, "-B", str(ROOT / "run.py")],
+                                capture_output=True, text=True, encoding="utf-8")
+        self.assertEqual(result.returncode, 2)
+        self.assertIn("--mode", result.stderr)
+        self.assertEqual(result.stdout, "")
+
     def test_both_modes_run_same_wait_resume_commit_and_export(self):
         exports = []
         for mode in ("observe", "drive"):

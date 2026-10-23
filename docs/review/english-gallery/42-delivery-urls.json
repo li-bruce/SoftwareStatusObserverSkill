@@ -1,0 +1,35 @@
+{
+  "scope": "Read-only endpoint availability at delivery; application/build evidence is in the trial reports.",
+  "endpoints": [
+    {
+      "name": "introduction",
+      "url": "http://127.0.0.1:8862/docs/site/?lang=zh-CN",
+      "status": 200,
+      "html": true
+    },
+    {
+      "name": "python_application",
+      "url": "http://127.0.0.1:8842/",
+      "status": 200,
+      "html": true
+    },
+    {
+      "name": "python_graph",
+      "url": "http://127.0.0.1:8842/graph",
+      "status": 200,
+      "html": true
+    },
+    {
+      "name": "node_application",
+      "url": "http://127.0.0.1:53700/",
+      "status": 200,
+      "html": true
+    },
+    {
+      "name": "node_graph",
+      "url": "http://127.0.0.1:57136/graph",
+      "status": 200,
+      "html": true
+    }
+  ]
+}

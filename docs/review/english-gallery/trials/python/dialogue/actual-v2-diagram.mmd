@@ -1,0 +1,9 @@
+%% Original Chinese diagram displayed in the actual coding conversation.
+flowchart LR
+  upload["upload · 提交图片"] --> image_check["image_check · 解码实际内容，仅接受 PNG"]
+  image_check -->|PNG| pending["pending · 待审核"]
+  image_check -->|JPEG / 其他非 PNG| invalid_file["invalid_file · 拒绝，不入库、不发通知"]
+  pending --> message["message · 审核者站内消息"]
+  message --> review["review · 通过 / 驳回"]
+  review -->|通过| published["published · 公开展示"]
+  published --> exhibition["exhibition · 公开画展"]

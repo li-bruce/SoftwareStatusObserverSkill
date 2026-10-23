@@ -1,0 +1,15 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+....................E
+======================================================================
+ERROR: test_view_source_and_saved_recording_use_build_source (__main__.MultiLanguageTests.test_view_source_and_saved_recording_use_build_source)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_multilanguage.py", line 237, in test_view_source_and_saved_recording_use_build_source
+    self.assertIsInstance(saved['sources']['worker.py'],str)
+                          ~~~~~^^^^^^^^^^^
+KeyError: 'sources'
+
+----------------------------------------------------------------------
+Ran 21 tests in 7.784s
+
+FAILED (errors=1)

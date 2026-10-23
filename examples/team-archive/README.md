@@ -1,55 +1,40 @@
-# 资料柜：独立开发演练
+# Team archive: independent development trial
 
-[English](README.en.md) · [完整审查记录](../../docs/review/v0.4.0/README.md)
+[中文](README.zh-CN.md) · [Original review record](../../docs/review/v0.4.0/README.md)
 
-这个程序在新会话中使用 business-observer 开发：先询问归档规则，再实现和验证，之后增加运行中可调整的大小上限。需求方由 AI 模拟，所有数据均为合成数据。
+An earlier independent conversation used the Skill from clarification through implementation, failure repair, and a size-limit iteration. The requester was simulated by AI and all data is synthetic. Original dialogues and evidence remain unchanged.
 
-## 运行
+## Run
 
-在仓库根目录安装依赖并启动：
+From the repository root:
 
 ```bash
-python -m pip install -r examples/delivery/requirements.txt
 python tools/archive_demo.py --port 8824
 ```
 
-打开[操作台](http://127.0.0.1:8824/)和[开发者图](http://127.0.0.1:8824/graph)。需要 Python 3.11–3.13；运行验证另需 Node.js 20+。
+Install [repository dependencies](../../README.md#run-locally) first. Open the [application](http://127.0.0.1:8824/) and [graph](http://127.0.0.1:8824/graph).
 
-1. 选择操作人，由另一位审核员“为当前操作人审批当前版本”。
-2. 选择 1 或 2 个检查名额，点“新建一次归档运行”。
-3. 两项检查通过后保存固定快照。默认每项延时 4 秒，便于观察执行和等待。
-4. 要观察动态规则，检查开始后把项目上限设为 1 字节：已启动检查自然结束，待启动检查等待。恢复到 8192 后仍要点该运行的“继续”。
+Choose an operator and have another reviewer approve the current document version. Start a run with one or two slots. Both checks must pass before an immutable SQLite snapshot is saved. Deliberate delays make concurrency, waiting, and cancellation observable.
 
-在图中展开节点、搜索参数、查看判断值和源码。拖动、固定、显示名称、备注和展开状态保存在当前浏览器。版本选择可比较首版与当前版；历史判断不会冒充当前项目配置。图上改名只改变显示。
+While checks run, lower the project's limit to one byte. Started work finishes; pending work waits. Restore 8192 and manually continue. Inspect body size, current limit, waiting reason, functions, and actual values. Recording begins and ends in the graph; application controls perform the operation.
 
-## 已确认的业务规则
+## Rules
 
-只认当前文件夹的直接负责人，这是本演练的规则。审批必须匹配项目、操作人、资料和内容版本；任意一条当前有效即可，截止时刻本身已失效，操作人不能审批自己。
+The actor must directly manage the current folder. Approvals bind project, actor, document, and content version. Any currently valid approval suffices; self-approval and the expiry instant are rejected.
 
-两项检查和名额属于每次运行。正文含区分大小写的 `SECRET:`，或标题、项目、资料编号缺失时不能归档。提交前在同一 SQLite 事务中重新核对资格。快照不可变，每个资料版本最多归档一次，不移动或删除原资料。
+Each run owns its checks and capacity. A SECRET: marker or missing title/project/document number rejects archiving. Commit rechecks eligibility in the same transaction. Snapshots are immutable and unique per version.
 
-项目大小上限默认 8192 字节，仅计算已保存正文的 UTF-8 字节；等于上限允许，上限必须为正整数。修改上限不改变内容版本、不废除原审批；继续和提交时重新读取当前上限。
+The project limit defaults to 8192 UTF-8 body bytes, includes equality, and accepts only positive integers. Updating the limit does not change content version or approvals. Resume and commit read the current limit.
 
-失去资格后等待，恢复后手动继续。内容改版使旧运行不能提交；已启动检查自然收尾。取消只影响选中的运行，容量在实际活动结束后释放。
-
-## 验证与代码归属
+## Development and verification
 
 ```bash
 python tools/archive_demo.py --verify
 python tools/verify.py
 ```
 
-第一条重新执行本例已审阅版本的运行检查；第二条验证整个仓库。改动后按 [AGENTS.md](AGENTS.md) 维护；这些步骤由 AI 执行，无需日常用户操作中间文件。
+Follow [AGENTS.md](AGENTS.md). The AI maintains intermediate synchronization artifacts. archive_app/ owns business logic; bo_stategraph/ owns the actual state module; integrations/ connects optional observation; observer_runtime/ contains managed Skill copies. Personal layouts and notes persist in bo_stategraph/config/views/local.json.
 
-| 路径 | 作用 |
-|---|---|
-| `archive_app/` | 业务、实际状态机、SQLite 和中立观测接口 |
-| `integrations/bo_*.py` | 可移除的观测接入与本地服务 |
-| `observer_runtime/` | 固定版本的 Skill 工具，带来源和哈希 |
-| `tooling/`、`behavior.json` | 图生成、源码映射、测试与场景 |
-| `review/` | 对话、实现前预期、失败与修复、两版证据和截图 |
-| `.release/` | 从新目录启动时恢复的已审阅记录 |
+Original accepted intent, discovery answers, and historical recordings retain their original language. Current common viewer controls support English and Chinese.
 
-原始候选来源路径属于演练记录；最终发布的工具与 candidate-8 文件清单一致。公开副本省略数据库、临时运行目录、重复解压目录和完整项目 ZIP，保留源码、审查材料及核心 ZIP；文件复制清单见 [publication-copy.json](review/publication-copy.json)。
-
-这是本地开发示例，没有生产身份认证或崩溃后线程恢复。验证覆盖列出的场景，不证明全部并发交错；浏览器任务也不代替真人试用。
+This is a local development example without production authentication or worker crash recovery. Finite scenarios do not prove every interleaving or human usability.

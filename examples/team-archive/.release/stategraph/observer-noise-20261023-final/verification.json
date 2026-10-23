@@ -1,0 +1,88 @@
+{
+  "valid": true,
+  "errors": [],
+  "candidate_id": "5cf07db4e90e586338105277124c2d052939a215dd17b31f11f6c947d676c7ef",
+  "reports": {
+    "mapping": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+      "stategraph_export": "checked",
+      "witnesses": 480,
+      "projection_checks": 1110,
+      "implementation": {
+        "errors": [],
+        "events_checked": 41,
+        "features": 19
+      }
+    },
+    "state_rules": {
+      "status": "passed",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "passed",
+      "errors": [],
+      "assertions": {
+        "required": 189,
+        "executed": 189
+      },
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "review_hash": "d4b805c38b1c5ef76d5203a90ecdb5dfc15eda49559c25588384c346487351f8",
+  "observations_hash": "cf8fb51f7684caf2e9672df7c3aa024a6f419cd35116f6656abf6b0031ff250c",
+  "tests": [
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/tests.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tooling/graph_tests.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/test_recording.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tooling/test_recorded_views.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/test_stategraph_module.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "checked_at": "2026-10-23T03:56:31.560943+00:00",
+  "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+}

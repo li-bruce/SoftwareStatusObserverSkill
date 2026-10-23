@@ -1,0 +1,74 @@
+{
+  "valid": true,
+  "errors": [],
+  "candidate_id": "31b41a4b53c1e2a47e1bffb6daf1307514c5873d4f4e8fdcac19c844371da2ac",
+  "reports": {
+    "mapping": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+      "stategraph_export": "checked",
+      "witnesses": 102,
+      "projection_checks": 198,
+      "implementation": {
+        "errors": [],
+        "events_checked": 22,
+        "features": 6
+      }
+    },
+    "state_rules": {
+      "status": "passed",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "passed",
+      "errors": [],
+      "assertions": {
+        "required": 30,
+        "executed": 30
+      },
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "review_hash": "ef092dcd506406efc6e55af1251727f70a4812e2fa324b95de21b57813b3be32",
+  "observations_hash": "07967175ab0de0830d7bcc0cca98ed84e36e4e1312df2ec31945792be20da5f1",
+  "tests": [
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/tests.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/fault_check.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/test_observer_noise.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "checked_at": "2026-10-23T03:52:16.196670+00:00",
+  "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+}

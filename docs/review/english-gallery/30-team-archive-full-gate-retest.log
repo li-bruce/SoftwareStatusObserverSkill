@@ -1,0 +1,89 @@
+{
+  "valid": true,
+  "errors": [],
+  "candidate_id": "8a66a93e375dd898050c17ce804f0c043415eb5b4d9d1b1a39d27cc8f744eeb3",
+  "reports": {
+    "mapping": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+      "stategraph_export": "checked",
+      "witnesses": 480,
+      "projection_checks": 1113,
+      "implementation": {
+        "errors": [],
+        "events_checked": 53,
+        "features": 22
+      }
+    },
+    "state_rules": {
+      "status": "passed",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "passed",
+      "errors": [],
+      "assertions": {
+        "required": 189,
+        "executed": 189
+      },
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "review_hash": "6bd4a7175a10f99d2e948c9daa6d2bdf043d65c321a3145558d97061d9b8c716",
+  "observations_hash": "e67cb1cf60048196e2e182b5ff429c57ec70f029ffdef733ae4aa2c436446819",
+  "tests": [
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/tests.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tooling/graph_tests.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/test_recording.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tooling/test_recorded_views.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/test_stategraph_module.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "checked_at": "2026-10-23T10:33:07.919841+00:00",
+  "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe

@@ -1,0 +1,46 @@
+{
+  "observation_only_requests": 5,
+  "events": 12,
+  "binding": "current",
+  "event_count_after": 20,
+  "recording_id": "9eccdb2589c44034a126b863703e5bb9",
+  "instance_states": [
+    {
+      "status": "observed",
+      "state": "pending"
+    },
+    {
+      "status": "observed",
+      "state": "pending"
+    },
+    {
+      "status": "observed",
+      "state": "done"
+    },
+    {
+      "status": "observed",
+      "state": "done"
+    }
+  ],
+  "state_frames": 4,
+  "event_count_before": 20,
+  "states": [
+    "running",
+    "done",
+    "running",
+    "done"
+  ],
+  "build_id": "ce47b83feaf79f48c5cc2c48f3e794b261c6a8358374f5491245831adec6f940",
+  "runtime_nodes": [
+    "react.start",
+    "js.advance",
+    "react.panel",
+    "react.finish",
+    "vue.start",
+    "vue.template",
+    "vue.finish"
+  ],
+  "gaps": [],
+  "errors": 0,
+  "valid": true
+}

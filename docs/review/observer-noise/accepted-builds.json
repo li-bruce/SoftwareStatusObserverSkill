@@ -1,0 +1,17 @@
+{
+  "delivery": {
+    "candidate_id": "8315d05ffe9b1ce5b2dfe07d2f21d6ca62f6ff0dc1b39136a36d3fd3dee9b517",
+    "build_id": "f810ddad26cba6ecd385fff3dea644465e5b1e6f70e1963153d5f7b915439c01",
+    "verification_hash": "0fdefdaab4b44c264d23ab7e671f6e9116fb272470d87e1b24147e81ed9d1094"
+  },
+  "team-archive": {
+    "candidate_id": "5cf07db4e90e586338105277124c2d052939a215dd17b31f11f6c947d676c7ef",
+    "build_id": "93f20084eaa622f4116591cfa79ee647a9fc22da3518edac1965bdcd9d617546",
+    "verification_hash": "b41e4bba950fa54c66323faf9de6cdb0e449fe638ecd47671477880d3f883d4a"
+  },
+  "upload-review": {
+    "candidate_id": "2791287679978be62521798d7ef5a6aefce03ddc7a98a50912d35f7cb44e42e9",
+    "build_id": "d132ecf70730b9564e2dc5f7b3541c381754a5352c2899204fb08676d6ce55ed",
+    "verification_hash": "ed810f5a62253036be997ee59f501f55f906fe454c262445c188be141e74c366"
+  }
+}

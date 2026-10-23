@@ -16,13 +16,14 @@ view.model.machine={values:[],transitions:[]};view.model.graph_roots=['root'];vi
 const direct=core.layoutGraph(view,expanded,new Set(),new Map(),'latest','latest',{include:n=>n.origin!=='python-ast'&&n.analysis_level!=='advanced'});
 assert.ok(direct.byId.has('fun'));assert.ok(!direct.byId.has('helper'));assert.ok(!direct.byId.has('capacity'));assert.ok(direct.all.has('helper'));
 assert.ok(core.layoutGraph(view,expanded,new Set(),new Map()).byId.has('helper'));
+// Permission selection must work independently of the business label's locale.
 const all=new Map([{id:'unrelated_approval',kind:'function',label:'formatter'},{id:'x42',kind:'decision',label:'可操作',semantic_roles:['permission']}].map(n=>[n.id,n]));
 assert.deepEqual([...analysis.matchingNodes(all,view,[],analysis.profileFor('permission'),()=>null)],['x42']);
 const legacy={length:0,setItem(){},getItem(){return null;}},statuses=[];let document={schema:1,project_id:'test',revision:0,entries:{}};
 const api=async (_,options)=>options?.method==='POST'?{ok:true,json:async()=>document={...JSON.parse(options.body),revision:document.revision+1}}:{ok:true,json:async()=>document};
-const storage=await projectStorage(legacy,s=>statuses.push(s),api);storage.setItem('business-observer.layout.v2:test','{"focus":"new"}');assert.equal(storage.status(),'视图待保存');await storage.flush();assert.equal(document.revision,1);assert.equal(storage.status(),'视图已保存到项目');
+const storage=await projectStorage(legacy,s=>statuses.push(s),api);storage.setItem('business-observer.layout.v2:test','{"focus":"new"}');assert.equal(storage.status(),'View has unsaved changes');await storage.flush();assert.equal(document.revision,1);assert.equal(storage.status(),'View saved to project');
 const conflict=await projectStorage(legacy,()=>{},async(_,o)=>o?.method==='POST'?{ok:false,status:409,json:async()=>({error:'conflict'})}:{ok:true,json:async()=>document});
-conflict.setItem('business-observer.layout.v2:test','{"focus":"old"}');await conflict.flush();assert.match(conflict.status(),/未保存/);
+conflict.setItem('business-observer.layout.v2:test','{"focus":"old"}');await conflict.flush();assert.match(conflict.status(),/Not saved/);
 console.log('PASS: direct/advanced projection, full search inventory, explicit permission roles, ID migration, persisted save and conflict status.');
 let finish,calls=0;const poller=createPoller(()=>{calls++;return new Promise(resolve=>finish=resolve);},{interval:60000});
 const pending=poller.run();await poller.run();assert.equal(calls,1);poller.close();finish();await pending;await poller.run();assert.equal(calls,1);

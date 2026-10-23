@@ -1,0 +1,19 @@
+{
+  "source_thread": "01a1439a-dceb-7ba2-bada-546619caf220",
+  "source": "Additional exact main-chat send_message_to_thread arguments; retrieved after browser completion; not retrospective dialogue",
+  "items": [
+    {
+      "type": "mcpToolCall",
+      "id": "exec-e69b0cb2-fe6b-485b-80b8-39d411fa2640",
+      "server": "codex_app",
+      "tool": "send_message_to_thread",
+      "arguments": {
+        "threadId": "01a167ea-616e-7311-b0e1-67d027f14263",
+        "hostId": "local",
+        "prompt": "用户已处理这次新的待审批项，并明确回复“已处理，继续测试”。请继续 v2 最后的真实浏览器操作、回放和证据归档。若源码未变，不重复已通过的整套门禁；完成 JPEG 拒绝无消息、PNG 互审展览及录制证据，并交付实际对话导出、失败修复索引和脱敏复现包。不要推送 GitHub。"
+      },
+      "status": "completed",
+      "durationMs": 100
+    }
+  ]
+}

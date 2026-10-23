@@ -1,0 +1,5 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_multilanguage.py", line 199
+    result=inspect(self.root,{'scan':['page.js','observer.js'],'layers':{'business':{'paths':['page.js'],'allows':['business']},'observer':{'paths':['observer.js'],'allows':['observer']}})
+                                                                                                                                                                                           ^
+SyntaxError: closing parenthesis ')' does not match opening parenthesis '{'

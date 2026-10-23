@@ -1,84 +1,60 @@
-# 伴随修改与检查机制
+# Maintain and verify while changing code
 
-本流程用于正在开发或持续修改的程序。业务抽象由需求约束，局部结构由静态证据生成，独立状态声明与程序的真实执行关联，运行事实由实际探针/存储读取。默认 AI 在内部按状态网引导开发；用户明确拒绝这种方法时，跟随其实现维护模型。两种方式都必须在每个小变更中维护底层监控、源码适配、图和验证，不在最终写完代码后才补图。配置见 [独立状态网](independent-python.md)。
+Business abstractions follow requirements; local structure follows static evidence; declarations bind actual execution; runtime facts come from probes/storage. The initial user chooses drive/observe. Both require monitoring, source adaptation, graph, and checks during each coding step—not a graph added after implementation. See [independent module](independent-python.md).
 
-## 项目接入
+## Integration
 
-移动或重命名已绑定函数时，在本轮 `review.json` 写 `source_moves`，例如：
+For moved/renamed bound functions record review.json source_moves:
 
 ```json
-{"source_moves":[{"from":{"path":"old.py","symbol":"commit"},"to":{"path":"app/service.py","symbol":"commit"},"reason":"移动原实现，保留原图节点、探针和检查要求"}]}
+{"source_moves":[{"from":{"path":"old.py","symbol":"commit"},"to":{"path":"app/service.py","symbol":"commit"},"reason":"Move the implementation while retaining node, probe, and check identities"}]}
 ```
 
-旧/新符号必须分别存在于本轮基线和当前 AST 清单中，映射必须一对一，原有人工图节点 ID 要指向新符号。此记录只允许 `required_probes.symbol` 和白盒规则的 `source` 换位置，不允许删除探针、改变 node/phase、删参数检查或改业务预期。实际源码、必需探针和白盒运行仍由原检查执行；迁移表本身不证明语义等价。它由 AI 在内部维护，不为技术搬迁追加业务确认。测试命令保持稳定入口；该表不改写任意命令或数据字段。
+Old/new symbols must exist in baseline/current AST inventories with one-to-one mapping; authored node IDs must bind the new symbol. This permits required_probes.symbol and white-box source relocation only—not removing probes, changing node/phase, deleting parameter checks, or changing expectations. Existing source/probe/runtime checks still apply. Migration records do not prove equivalence. AI handles technical moves without new business approval. Keep stable test entrypoints; this table does not rewrite arbitrary commands/data.
 
-沿用 `intent.json`、`behavior.json`、`manifest.json`，增加项目自己的 `sync.json` 和 `acceptance.json`。参考 [配置示例](../assets/sync.example.json) 和 [验收约束示例](../assets/acceptance.example.json)，按本项目的领域和路径修改，不继承示例审批规则作为通用要求。
+Alongside intent/behavior/manifest, add project sync.json and acceptance.json using the [sync](../assets/sync.example.json) and [acceptance](../assets/acceptance.example.json) examples. Adapt domain/paths; do not inherit approval rules. Asset examples describe fields and are not a mutually runnable scaffold. Complete matched projects are examples/delivery and examples/team-archive.
 
-assets 中各示例说明字段，并非可拼接运行的整套脚手架。完整、相互匹配的源码/模型/检查配置以仓库 `examples/delivery` 和 `examples/team-archive` 为准；接入时使用实际项目路径和业务定义。
+Important sync.json fields:
 
-`sync.json` 的关键字段：
+- code_files: supported-language source indexed and included in model source_files. Assess every new file/entrypoint; unscanned content is not covered.
+- source_scope: roots includes `.`, justified tool excludes, require_symbol_classification=true. Do not exclude business or put it only in watch_files. Add the [implementation inventory](implementation-coverage.md) linking features/source/capture/cases.
+- require_mapping_witnesses=true: independent-state projects must compare actual values to projections; do not disable it.
+- watch_files: generators/checks and extra inputs. Track project Python scripts in observation/test commands; tool contents also bind versions.
+- discovery: project-relative confirmation record, version-bound automatically. Blocking questions, unsupported answers, missing graph/requirement/case links fail verify/check. Legacy omission is compatible but must be disclosed. See [dialogue](requirements-dialogue.md).
+- required_probes: literal node/phase plus optional path::symbol. probe_callees names real interfaces such as trace.record.
+- required_runtime_probes: events that must actually occur in enabled cases. Static presence alone cannot pass.
+- observations_command: reviewed argv array for the real observation adapter, no shell concatenation or unchecked arbitrary command.
+- test_commands: relevant existing project commands; graph-generator self-checks cannot replace business assertions.
 
-- `code_files`：选入静态索引的 Python 文件，同时列入行为模型的 `source_files`。新入口/新文件必须判断是否加入，未扫描内容不在覆盖声明内。
-- `source_scope`：根目录包含 `.`，明确排除工具代码，并配置 `require_symbol_classification: true`。业务实现不能排除或只加入 watch。模型还必须包含 [implementation 清单](implementation-coverage.md)，关联功能、源码、采集字段与实际场景。
-- `require_mapping_witnesses: true`：独立状态网项目必须用真实实现值对照观测投影，不能关闭。
-- `watch_files`：模型生成器、业务验证脚本等额外输入。观测/测试命令中的项目 `.py` 脚本必须被跟踪；工具自身内容也参与版本绑定。
-- `discovery`：需求澄清记录的项目相对路径，如 `discovery.json`。新接入项目添加此项；文件自动纳入版本绑定。关键问题未解决、答案来源不符、业务网未映射或决定缺少需求/验收项，会使 verify/check 失败。旧项目未配置时保持兼容，不声称已启用澄清检查。流程见 [需求提炼与反问](requirements-dialogue.md)。
-- `required_probes`：必需的字面量探针点，包含 node、phase 和可选 `path::symbol`。`probe_callees` 指定真实调用形式，例如 `trace.record`。
-- `required_runtime_probes`：指定用例开启采集时必须真正出现的事件。静态存在但执行不到的探针不会因此通过。
-- `observations_command`：一个经过审阅的参数数组；运行项目自己的观测适配器，不能指向未经检查的任意命令。没有 shell 字符串拼接。
-- `test_commands`：项目已有的相关测试命令数组；根据改动选必要回归，不能用图生成器的自检代替业务断言。
-
-模型生成器在保留人工/AI 编写的业务分组之后调用：
+After preserving authored grouping, a generator calls:
 
 ```python
 from vendor.code_structure import scan, enrich
-
 index = scan(root, ["domain.py", "bo_stategraph/workflow.py", "store.py"])
 model = enrich(authored_model, index, depth=1)
 ```
 
-`authored_model` 来自业务需求与同源状态机声明。`enrich` 保留其业务 ID、分组和规则，从这些节点的源码锚点生成局部函数及静态调用边；函数参数、返回类型和调用实参均有源码依据。静态辅助节点默认没有运行事件，不会被标成“已执行”。不同业务调用上下文可以映射到同一函数。
+The authored model comes from intent and shared execution declarations. enrich preserves business IDs/groups/rules and adds local source-backed functions, parameter/return types, actual argument expressions, and possible-call edges. Static helpers have no fabricated runtime events. Several business contexts may use one function.
 
-独立 CLI 也支持 `code_structure.py scan` 和 `project`；后者要求业务映射输入与生成图输出为不同文件。未改文件复用之前的解析结果；提取器内容改变会使缓存失效。Python 动态分派、反射、回调和未解析对象保持 unresolved，不把普通 AST 当完整 CFG/数据流分析。
+The code_structure scan/project CLI is available; project requires distinct authored input/generated output paths. Unchanged units may reuse parsing; extractor changes invalidate cache. Dynamic dispatch/reflection/callbacks remain unresolved. Ordinary AST is not a complete CFG/dataflow analysis.
 
-## 需求约束与真实观测
+## Expectations and actual observation
 
-验收文件由已确认需求及明确标记的工程假设导出；在实现前记录正常和反例的可观察结果。它与业务实现、图生成器及运行取值脚本分开维护。
+Record normal/counterexample observable outcomes before implementation, derived from confirmed requirements and labeled engineering assumptions. Maintain them separately from implementation, graph generator, and observation readers.
 
-`checks` 每项包含 `id`、`requirement`、`case`、`path`、`equals`，约束实际返回值、权威状态、效果数量或关键值。当前工具使用精确 JSON 值比较，不支持任意表达式求值。为每个被检查用例运行 on/off/fault 模式；若另有模式，配置 `probe_modes`。
+Each acceptance checks entry has id/requirement/case/path/equals and compares exact JSON values from actual return/state/effect/key values, without arbitrary expression evaluation. Execute each referenced case in on/off/fault, or all configured probe_modes. model_checks constrains meaningful higher-level declarations/mappings such as ANY aggregation, guards, parentage, context type. Paths traverse JSON; a string selects nodes by ID in arrays. Avoid fixing every display label/layout. Unconstrained prose still needs source/intent review.
 
-`model_checks` 约束上层关键声明及映射，例如审批聚合 ANY、关键 guard 表达式、业务父子关系或上下文类型。`path` 遍历 JSON；在节点数组上使用字符串时，按节点 `id` 选择。优先约束有业务意义的结构，不锁定所有措辞和布局。没有被这些约束覆盖的自然语言说明，仍需对照需求和源码审阅。
+The observation adapter runs the application and reads real storage/results. It must not read acceptance values to manufacture answers or infer application state from the graph. Standard output is one JSON object with build_id, full actual loaded machine definition, and runs. Each run contains case/mode/observations/events. The machine must cover the real states/events/context/guards/transitions contract. Return every required case/mode. Probe build identity comes from the same loaded build; the reference uses read-only behavior_model.capture with load-time file checks.
 
-观测适配器**调用真实程序并读实际存储/结果**，不能读验收文件生成“正确答案”，也不能从图上反推程序状态。它的标准输出是一份 JSON：
+## Each change
 
-```json
-{
-  "build_id": "本次实际源码和模型对应的构建标识",
-  "machine": {"这里由实际加载的状态机 definition() 导出": true},
-  "runs": [
-    {
-      "case": "no_approval",
-      "mode": "on",
-      "observations": {"state": "waiting_approval", "effects": 0},
-      "events": [{"node": "authorize", "phase": "decision"}]
-    }
-  ]
-}
-```
-
-以上只展示协议形状。`machine` 必须是完整运行声明，覆盖 states/events/context/guards/transitions 等现有 statechart 契约；不能照抄此示意对象。所有被验收约束引用的用例和配置模式都须实际返回。运行探针支持 build_id 时，从同一加载构建取得；参考程序用 `behavior_model.capture` 只读计算当前构建标识，并在加载前后核对文件。
-
-## 每次变更
-
-1. **修改前 begin**：保存用户请求、旧源码结构、业务图、需求及验收预期。仅把本次确实允许改变的需求 ID 列入 `--requirements`；纯重构可以不列，新需求可先分配新 ID。旧 manifest 或上一已验收输入已经失配时，先查明并保留差异，不用新基线隐藏它。
-2. **编码时同步并 inspect**：按小步骤修改真实代码/状态机、探针及抽象映射，重新生成局部结构和候选图。`impact.json` 列变化函数、可能受影响的调用者、业务父节点、未映射符号及错误；`structure.json` 保存确定性证据。更新 review，继续下一个编码小步。
-3. **verify**：先检查结构、源绑定、上层声明和必需探针，再运行真实观测及项目测试；比较实际机器定义、业务预期、运行探针及构建标识。运行中又改了输入，结果立即作废。
-4. **accept / check**：只有同一候选的检查通过后才能 accept 更新 manifest。交付入口再次 check。之后改源码、图、需求、配置、检查脚本或工具版本，旧验证不再适用。
-
-命令例，工作目录为项目根；将 `SKILL_DIR` 换成实际安装目录：
+1. begin before editing preserves request/source/model/requirements/expectations. --requirements lists only authorized changed requirement IDs; pure refactors may list none. Investigate/preserve preexisting stale evidence rather than hiding it under a new baseline.
+2. During small coding steps update real code/state/probes/mapping, regenerate structure/candidate, and inspect. impact.json lists changed functions, possible callers, business parents, unclassified symbols, and errors. structure.json retains deterministic source evidence. Review each candidate.
+3. verify checks structure/bindings/declarations/probes, then actual observations/tests, comparing machine definition, independent expectations, runtime probes, and build identity. Input changes during verification invalidate results immediately.
+4. accept only a passing current candidate; delivery check rechecks it. Later code/model/intent/config/check/tool changes invalidate the receipt.
 
 ```text
-python SKILL_DIR/scripts/change_sync.py begin --root . --change .stategraph/change-001 --request "本次明确的业务改动" --requirements R4
+python SKILL_DIR/scripts/change_sync.py begin --root . --change .stategraph/change-001 --request "Confirmed change" --requirements R4
 python build_model.py
 python SKILL_DIR/scripts/change_sync.py inspect --root .
 python SKILL_DIR/scripts/change_sync.py verify --root .
@@ -86,24 +62,14 @@ python SKILL_DIR/scripts/change_sync.py accept --root .
 python SKILL_DIR/scripts/change_sync.py check --root .
 ```
 
-`begin` 保存活动变更指针，后续命令可省略 `--change`。`inspect` 在编辑中返回非零很正常，表示尚未可交付。生成器必须保留业务语义来源，不从静态调用顺序自动发明业务流程或因果关系。
+begin stores the active pointer, so subsequent commands may omit --change. Nonzero inspect during work means not yet deliverable. Never derive business sequence/causality from static call ordering.
 
-`review.json` 与 baseline/impact 放在同一变更目录。必需结构：当前 `candidate_id`；`decisions.business/state_machine/abstraction/probes` 各有 `action`（updated/unchanged/not_applicable）和具体 `reason`；修改已有预期时，以 `requirement_changes` 说明对应的本次需求依据。功能与辅助实现归属由模型的 implementation 检查，`excluded_symbols` 只保留旧项目兼容用途，不能覆盖新门禁的失败。候选改变后 review 必须重新核对。
+review.json shares the baseline/impact directory and includes current candidate_id; decisions.business/state_machine/abstraction/probes each have action updated/unchanged/not_applicable and concrete reason. requirement_changes ties altered expectations to authorized requirement changes. Implementation ownership is validated by the inventory; legacy excluded_symbols cannot bypass new gates. Review becomes stale when the candidate changes.
 
-review 是语义审阅记录，**不是自动通过证据**。即使全部写 updated，结构、运行状态机、探针、实际返回及效果不一致仍失败。已有预期/关键模型声明的删除或改写必须属于 begin 时记录的需求范围；增加反例可以直接进行。不要把“实现变了”当作改写需求的理由。
+Review is semantic rationale, not a passing test. Writing updated everywhere cannot override inconsistent source/state/probes/results/effects. Deleting/changing protected expectations/declarations requires the begin-recorded requirement scope. Adding counterexamples is allowed; implementation changes alone do not justify rewriting requirements.
 
-## 接入验收入口
+## Delivery gate and limits
 
-把以下命令加入项目已有验证脚本或 CI：
+Connect `python SKILL_DIR/scripts/change_sync.py check --root .` to normal tests/CI. Success is exit 0; stale/failed is nonzero. Initial adoption only establishes comparison from that time. Do not install global Git/editor hooks. Old processes retain old build identity; only verified, loaded new programs bind new graphs to new facts.
 
-```text
-python SKILL_DIR/scripts/change_sync.py check --root .
-```
-
-成功返回 0；未同步或检查失败返回非零。首次接入没有历史基线时，明确只能从接入时刻起建立对照，不能宣称此前所有变更已验证。不要安装全局 Git/editor hooks。运行中的旧进程继续绑定旧构建，候选图标明待验证；通过检查并加载新程序后，才把新图与新运行事实关联。
-
-## 能确保什么
-
-已接入并实际执行的检查可以拒绝：缺失源码绑定、陈旧局部投影、上层已约束规则偏离、图与实际状态机声明不同、必需探针缺失/不执行、业务反例结果不符、未经本次需求允许改写旧预期、旧构建或旧检查冒充当前结果。
-
-它不证明所有未覆盖路径、自由文本解释、动态调用或外部系统语义正确，也不是防恶意篡改的签名审计系统。AI/人工仍须维护有代表性的需求约束及独立观测适配器；仅写出一个永远返回成功的测试不能成为可信验收。没有接入检查命令时，只能声称采用了 Skill 的开发流程，不能声称工具已强制拦截。
+Connected, executed checks reject missing bindings, stale projections, constrained rule drift, differing runtime declarations, missing/unexecuted probes, failed business counterexamples, unauthorized expectation weakening, and old evidence presented as current. They do not prove uncovered paths, arbitrary prose, dynamic calls, external semantics, or tamper-proof audit. Maintain independent meaningful expectations/readers; an always-success test is not acceptance. Without a connected gate, claim workflow adoption only, not enforced interception.

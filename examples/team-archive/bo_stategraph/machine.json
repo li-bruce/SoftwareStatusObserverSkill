@@ -1,0 +1,261 @@
+{
+  "engine": "transitions.Machine",
+  "version": "0.9.3",
+  "states": [
+    "created",
+    "checking",
+    "waiting",
+    "ready",
+    "completed",
+    "failed",
+    "stopping",
+    "cancelled",
+    "superseded",
+    "interrupted"
+  ],
+  "values": [
+    "created",
+    "checking",
+    "waiting",
+    "ready",
+    "completed",
+    "failed",
+    "stopping",
+    "cancelled",
+    "superseded",
+    "interrupted"
+  ],
+  "initial": "created",
+  "state_type": "Phase (str enum)",
+  "transitions": [
+    {
+      "trigger": "begin",
+      "source": [
+        "created",
+        "waiting"
+      ],
+      "dest": "checking",
+      "conditions": "approved"
+    },
+    {
+      "trigger": "pause",
+      "source": [
+        "created",
+        "checking",
+        "waiting",
+        "ready"
+      ],
+      "dest": "waiting"
+    },
+    {
+      "trigger": "checked",
+      "source": [
+        "checking",
+        "waiting"
+      ],
+      "dest": "ready",
+      "conditions": [
+        "all_passed",
+        "approved"
+      ]
+    },
+    {
+      "trigger": "publish",
+      "source": "ready",
+      "dest": "completed",
+      "conditions": [
+        "all_passed",
+        "approved",
+        "effect_saved"
+      ]
+    },
+    {
+      "trigger": "reject",
+      "source": [
+        "created",
+        "checking",
+        "waiting",
+        "ready"
+      ],
+      "dest": "failed",
+      "conditions": "checks_failed"
+    },
+    {
+      "trigger": "stop",
+      "source": [
+        "created",
+        "checking",
+        "waiting",
+        "ready"
+      ],
+      "dest": "stopping"
+    },
+    {
+      "trigger": "cancel_done",
+      "source": "stopping",
+      "dest": "cancelled",
+      "conditions": "settled"
+    },
+    {
+      "trigger": "stale_done",
+      "source": "stopping",
+      "dest": "superseded",
+      "conditions": "settled"
+    },
+    {
+      "trigger": "interrupt",
+      "source": [
+        "created",
+        "checking",
+        "waiting",
+        "ready",
+        "stopping"
+      ],
+      "dest": "interrupted",
+      "conditions": "settled"
+    }
+  ],
+  "events": {
+    "begin": {
+      "payload": {}
+    },
+    "pause": {
+      "payload": {}
+    },
+    "checked": {
+      "payload": {}
+    },
+    "publish": {
+      "payload": {}
+    },
+    "reject": {
+      "payload": {}
+    },
+    "stop": {
+      "payload": {}
+    },
+    "cancel_done": {
+      "payload": {}
+    },
+    "stale_done": {
+      "payload": {}
+    },
+    "interrupt": {
+      "payload": {}
+    }
+  },
+  "labels": {
+    "created": "准备归档",
+    "checking": "检查中",
+    "waiting": "等待资格 · 点击继续",
+    "ready": "检查通过，复核提交",
+    "completed": "已归档",
+    "failed": "检查未通过",
+    "stopping": "等待已启动检查结束",
+    "cancelled": "本次运行已取消",
+    "superseded": "内容已改版，本次不可提交",
+    "interrupted": "进程中断，需新建运行"
+  },
+  "event_labels": {
+    "begin": "开始检查",
+    "pause": "等待",
+    "checked": "两项通过",
+    "publish": "提交归档",
+    "stop": "停止新检查",
+    "cancel_done": "取消完成",
+    "stale_done": "旧版本收尾",
+    "reject": "检查失败",
+    "interrupt": "记录中断"
+  },
+  "context": {
+    "param_version": {
+      "type": "integer",
+      "min": 1,
+      "readonly": true
+    },
+    "capacity": {
+      "type": "integer",
+      "min": 1,
+      "max": 2,
+      "readonly": true
+    },
+    "operator_id": {
+      "type": "string",
+      "readonly": true
+    },
+    "document_id": {
+      "type": "string",
+      "readonly": true
+    }
+  },
+  "guards": {
+    "approved": "Authoritative evaluation.approved",
+    "all_passed": "Authoritative evaluation.all_passed",
+    "effect_saved": "Authoritative evaluation.effect_saved",
+    "checks_failed": "Authoritative evaluation.checks_failed",
+    "settled": "Authoritative evaluation.settled"
+  },
+  "source": {
+    "path": "bo_stategraph/workflow.py",
+    "symbol": "Workflow"
+  },
+  "persistence": "SQLite runs.payload: phase, phase_journal and activity configuration in one transaction",
+  "execution": {
+    "schema": "activity-graph/v1",
+    "within": "checking",
+    "parent": "flow.checks",
+    "activity_state_type": "ActivityState (str)",
+    "activity_states": [
+      "pending",
+      "waiting",
+      "running",
+      "succeeded",
+      "rejected",
+      "failed",
+      "cancelled"
+    ],
+    "activities": [
+      {
+        "id": "content_check",
+        "source": {
+          "path": "archive_app/policy.py",
+          "symbol": "check_content"
+        },
+        "requires": {
+          "processing_slots": 1
+        }
+      },
+      {
+        "id": "index_check",
+        "source": {
+          "path": "archive_app/policy.py",
+          "symbol": "check_index"
+        },
+        "requires": {
+          "processing_slots": 1
+        }
+      }
+    ],
+    "resources": [
+      {
+        "id": "processing_slots",
+        "scope": "run",
+        "min": 1,
+        "max": 2
+      }
+    ],
+    "join": {
+      "id": "checks_join",
+      "policy": "all",
+      "requires": [
+        "content_check",
+        "index_check"
+      ],
+      "success_states": [
+        "ready",
+        "completed"
+      ],
+      "guard": "all_passed"
+    }
+  }
+}

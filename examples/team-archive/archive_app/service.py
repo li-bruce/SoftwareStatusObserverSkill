@@ -45,7 +45,7 @@ class ArchiveService:
         request = run["input"]
         docrow = db.execute("SELECT * FROM documents WHERE id=?",(request["document_id"],)).fetchone()
         if docrow is None:
-            raise ValueError("原资料不存在")
+            raise ValueError("Original document does not exist")
         document = dict(docrow)
         assignments = [dict(r) for r in db.execute(
             "SELECT * FROM assignments WHERE project_id=? AND folder_id=?",
@@ -74,12 +74,12 @@ class ArchiveService:
                    and document["project_id"] == request["project_id"])
         allowed = scope and approval["allowed"] and size["allowed"] and current and not run["stop_reason"]
         reasons = []
-        if not current: reasons.append("资料内容版本或所属项目已变化")
-        if not scope: reasons.append("当前不是所在文件夹的直接负责人")
-        if not approval["allowed"]: reasons.append("没有仍有效的审批")
+        if not current: reasons.append("Document version or project changed")
+        if not scope: reasons.append("Actor is not the current folder's direct owner")
+        if not approval["allowed"]: reasons.append("No valid approval remains")
         if not size["allowed"]:
-            reasons.append(f"正文 {size['content_bytes']} 字节，当前上限 {size['limit_bytes']} 字节，超出 {size['excess_bytes']} 字节")
-        if run["stop_reason"]: reasons.append("本次运行已停止接收新工作")
+            reasons.append(f"Body: {size['content_bytes']} bytes; current limit: {size['limit_bytes']} bytes; excess: {size['excess_bytes']} bytes")
+        if run["stop_reason"]: reasons.append("This run no longer accepts new work")
         evaluation = {"allowed":allowed,"scope_allowed":scope,"approval_allowed":approval["allowed"],
             "version_current":current,"size_allowed":size["allowed"],"size":size,
             "reasons":reasons,"candidates":approval["candidates"],
@@ -101,12 +101,12 @@ class ArchiveService:
 
     def create_run(self, document_id: str, operator_id: str, capacity: int = 2) -> str:
         if type(capacity) is not int or capacity not in (1,2):
-            raise ValueError("名额只能是 1 或 2")
+            raise ValueError("Capacity must be 1 or 2")
         with self.lock, closing(self.store.connect()) as db:
             db.execute("BEGIN IMMEDIATE")
             row = db.execute("SELECT * FROM documents WHERE id=?",(document_id,)).fetchone()
             if row is None or not db.execute("SELECT 1 FROM users WHERE id=?",(operator_id,)).fetchone():
-                raise ValueError("资料或操作人不存在")
+                raise ValueError("Document or actor does not exist")
             doc, ident = dict(row), uuid.uuid4().hex[:12]
             request = {"document_id":doc["id"],"project_id":doc["project_id"],
                        "operator_id":operator_id,"content_version":doc["version"],
@@ -214,7 +214,7 @@ class ArchiveService:
                       else check_index(params["title"],params["project_id"],params["document_number"],trace,basis,call))
             outcome = "succeeded" if result["passed"] else "rejected"
         except Exception:
-            result, outcome = {"passed":False,"error":"检查执行出错"}, "failed"
+            result, outcome = {"passed":False,"error":"Check execution failed"}, "failed"
         with self.lock, closing(self.store.connect()) as db:
             db.execute("BEGIN IMMEDIATE")
             current = self.store.get_run(db,run["id"])
@@ -232,7 +232,7 @@ class ArchiveService:
             db.execute("BEGIN IMMEDIATE")
             run = self.store.get_run(db,run_id)
             if run["phase"] in TERMINAL or run["stop_reason"]:
-                raise ValueError("这次运行已结束或正在停止，请新建运行")
+                raise ValueError("This run is finished or stopping; start a new run")
             trace = self.trace(run)
             evaluation = self.evaluate(db,run,trace,"resume")
             resume(run, evaluation)
@@ -261,15 +261,15 @@ class ArchiveService:
     def add_approval(self, document_id: str, operator_id: str, reviewer_id: str,
                      deadline: float) -> str:
         if type(deadline) not in (int,float) or not math.isfinite(deadline):
-            raise ValueError("截止时间无效")
+            raise ValueError("Invalid expiry")
         with self.lock, closing(self.store.connect()) as db:
             db.execute("BEGIN IMMEDIATE")
             doc = db.execute("SELECT * FROM documents WHERE id=?",(document_id,)).fetchone()
             reviewer = db.execute("SELECT role FROM users WHERE id=?",(reviewer_id,)).fetchone()
             if doc is None or reviewer is None or reviewer["role"]!="reviewer" or reviewer_id==operator_id:
-                raise ValueError("须由另一名审核员审批")
+                raise ValueError("Another reviewer must approve")
             if not db.execute("SELECT 1 FROM users WHERE id=?",(operator_id,)).fetchone():
-                raise ValueError("操作人不存在")
+                raise ValueError("Actor does not exist")
             ident = uuid.uuid4().hex[:12]
             db.execute("INSERT INTO grants VALUES(?,?,?,?,?,?,?,0)",
                 (ident,doc["project_id"],operator_id,document_id,doc["version"],reviewer_id,float(deadline)))
@@ -284,7 +284,7 @@ class ArchiveService:
         with self.lock, closing(self.store.connect()) as db:
             db.execute("BEGIN IMMEDIATE")
             if db.execute("UPDATE grants SET revoked=1 WHERE id=?",(approval_id,)).rowcount!=1:
-                raise ValueError("审批不存在")
+                raise ValueError("Approval does not exist")
             self.store.bump(db)
             db.commit()
         bo_record_change(self.trace_factory,self.store,self.clock,'approval_revoked',lambda:{
@@ -293,9 +293,9 @@ class ArchiveService:
 
     def set_archive_limit(self, project_id: str, limit_bytes: int) -> dict:
         if type(limit_bytes) is not int or limit_bytes <= 0:
-            raise ValueError("归档大小上限必须是正整数（字节），不能使用小数、零或负数")
+            raise ValueError("Archive size limit must be a positive integer number of bytes")
         if limit_bytes > 9223372036854775807:
-            raise ValueError("归档大小上限超过可保存的整数范围")
+            raise ValueError("Archive size limit exceeds the storable integer range")
         with self.lock, closing(self.store.connect()) as db:
             db.execute("BEGIN IMMEDIATE")
             previous = self.store.project_limit(db,project_id)
@@ -313,12 +313,12 @@ class ArchiveService:
 
     def edit_document(self, document_id: str, title: str, number: str, content: str) -> None:
         if not all(isinstance(x,str) for x in (title,number,content)) or len(content)>100000:
-            raise ValueError("资料字段类型无效或内容过长")
+            raise ValueError("Invalid document fields or content too long")
         with self.lock, closing(self.store.connect()) as db:
             db.execute("BEGIN IMMEDIATE")
             if db.execute("UPDATE documents SET title=?,number=?,content=?,version=version+1 WHERE id=?",
                           (title,number,content,document_id)).rowcount!=1:
-                raise ValueError("资料不存在")
+                raise ValueError("Document does not exist")
             self.store.bump(db)
             db.commit()
         bo_record_change(self.trace_factory,self.store,self.clock,'content_changed',lambda:{
@@ -331,10 +331,10 @@ class ArchiveService:
             db.execute("BEGIN IMMEDIATE")
             folder = db.execute("SELECT * FROM folders WHERE id=?",(folder_id,)).fetchone()
             if folder is None:
-                raise ValueError("目标文件夹不存在")
+                raise ValueError("Target folder does not exist")
             if db.execute("UPDATE documents SET folder_id=?,project_id=? WHERE id=?",
                           (folder_id,folder["project_id"],document_id)).rowcount!=1:
-                raise ValueError("资料不存在")
+                raise ValueError("Document does not exist")
             self.store.bump(db)
             db.commit()
         bo_record_change(self.trace_factory,self.store,self.clock,'move_folder',lambda:{

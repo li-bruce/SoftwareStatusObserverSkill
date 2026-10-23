@@ -51,9 +51,9 @@ const state=emptyLayout();placeIncremental(graph,state);
 const collapsedSearch=layoutGraph(view,new Set());
 assert.deepEqual(collapsedSearch.boxes.map(b=>b.id),view.model.graph_roots,'overview contains only explicitly declared top-level nodes');
 assert.ok(collapsedSearch.all.has('state.checking'),'folding does not remove state data');
-setAnnotation(state,'checksum',{label:'核对文件内容',note:'归档前的内容检查'});
-assert.equal(searchNodes(collapsedSearch.all,state,'归档前')[0].node.id,'checksum');
-assert.equal(searchNodes(collapsedSearch.all,state,'核对文件')[0].node.id,'checksum');
+setAnnotation(state,'checksum',{label:"Check file content",note:"Content check before archiving"});
+assert.equal(searchNodes(collapsedSearch.all,state,"before archiving")[0].node.id,'checksum');
+assert.equal(searchNodes(collapsedSearch.all,state,"Check file")[0].node.id,'checksum');
 assert.ok(searchNodes(collapsedSearch.all,state,'checksum').some(r=>r.node.id==='field:checksum:out:checksum'));
 assert.deepEqual(searchNodes(collapsedSearch.all,state,'   '),[]);
 const reveal=new Set(['workers']),savedSearchPositions=JSON.stringify(state.positions);
@@ -104,7 +104,7 @@ assert.equal(writeLayout({setItem(){throw Error('quota');}},'full',state),false)
 // Personal wording stays separate from source IDs, runtime facts and generated labels.
 const originalModel=JSON.stringify(view.model),originalEvents=JSON.stringify(view.events);
 for(const id of ['flow.checks','checksum','field:checksum:out:checksum','state.checking']){
-  setAnnotation(state,id,{label:'我理解的 '+id,note:'核对输入版本\n保留原始结果'});
+  setAnnotation(state,id,{label:"My label for "+id,note:"Check input version\nRetain original result"});
 }
 state.expanded=['flow.checks','checksum','workers'];state.focus='field:checksum:out:checksum';
 const annotatedPositions=JSON.stringify(state.positions);
@@ -118,17 +118,17 @@ const hiddenBranch=layoutGraph(view,new Set(['checksum','workers']));placeIncrem
 assert.ok(!hiddenBranch.byId.has('checksum'),'folding a parent hides its expanded descendants');
 const reopenedBranch=layoutGraph(view,new Set(personal.expanded));placeIncremental(reopenedBranch,personal);
 assert.ok(reopenedBranch.byId.has('field:checksum:out:checksum'),'reopening the parent restores deeper expansion');
-assert.equal(displayName(reopenedBranch.byId.get('checksum').node,personal),'我理解的 checksum');
-assert.equal(displayName({...reopenedBranch.byId.get('checksum').node,label:'生成器的新名称'},personal),'我理解的 checksum','regeneration cannot overwrite a user label');
+assert.equal(displayName(reopenedBranch.byId.get('checksum').node,personal),'My label for checksum');
+assert.equal(displayName({...reopenedBranch.byId.get('checksum').node,label:"New generated label"},personal),'My label for checksum','regeneration cannot overwrite a user label');
 setAnnotation(personal,'checksum',{...annotationFor(personal,'checksum'),label:''});
-assert.equal(displayName({...reopenedBranch.byId.get('checksum').node,label:'生成器的新名称'},personal),'生成器的新名称');
-assert.equal(annotationFor(personal,'checksum').note,'核对输入版本\n保留原始结果','restore original name keeps the note');
+assert.equal(displayName({...reopenedBranch.byId.get('checksum').node,label:"New generated label"},personal),"New generated label");
+assert.equal(annotationFor(personal,'checksum').note,"Check input version\nRetain original result",'restore original name keeps the note');
 setAnnotation(personal,'checksum',{label:'',note:''});
 assert.ok(!personal.annotations.checksum);
-setAnnotation(personal,'__proto__',{label:'安全的 ID',note:'<script>text only</script>'});
+setAnnotation(personal,'__proto__',{label:"Safe ID",note:'<script>text only</script>'});
 assert.equal(Object.getPrototypeOf(personal.annotations),null);
-assert.equal(annotationFor(personal,'__proto__').label,'安全的 ID');
-setAnnotation(personal,'limits',{label:'长'.repeat(100),note:'注'.repeat(600)});
+assert.equal(annotationFor(personal,'__proto__').label,"Safe ID");
+setAnnotation(personal,'limits',{label:"x".repeat(100),note:"n".repeat(600)});
 assert.equal(annotationFor(personal,'limits').label.length,80);assert.equal(annotationFor(personal,'limits').note.length,500);
 memory.set('old',JSON.stringify({schema:2,positions:{checksum:pinned},expanded:['flow.checks'],camera:state.camera}));
 const old=readLayout(storage,'old').state;
@@ -236,16 +236,16 @@ const sampleNodes=[
 ];
 const sampleBoxes=sampleNodes.map((node,i)=>({id:node.id,node,x:[0,2200,0,0,800,2200][i],y:[0,0,-600,-900,0,400][i],w:140,h:100}));
 const sampleEdges=[
-  {id:'outside-one',from:'x',to:'y',type:'guard',label:'权限',observed:true,current:true},
-  {id:'outside-two',from:'g',to:'y',type:'guard',label:'版本',observed:false,current:true},
-  {id:'inside-call',from:'f',to:'g',type:'flow',origin:'python-ast',callsite:{line:9},label:'调用 g',observed:false},
-  {id:'inside-flow',from:'f',to:'g',type:'flow',label:'下一步'},
-  {id:'parameter',from:'x',to:'f',type:'data',label:'输入'},
-  {id:'containment',from:'a',to:'f',type:'contains',label:'包含'}
+  {id:'outside-one',from:'x',to:'y',type:'guard',label:"Permission",observed:true,current:true},
+  {id:'outside-two',from:'g',to:'y',type:'guard',label:"Version",observed:false,current:true},
+  {id:'inside-call',from:'f',to:'g',type:'flow',origin:'python-ast',callsite:{line:9},label:"Call g",observed:false},
+  {id:'inside-flow',from:'f',to:'g',type:'flow',label:"Next step"},
+  {id:'parameter',from:'x',to:'f',type:'data',label:"Input"},
+  {id:'containment',from:'a',to:'f',type:'contains',label:"Contains"}
 ];
 const sample={boxes:sampleBoxes,byId:new Map(sampleBoxes.map(b=>[b.id,b])),all:new Map(sampleNodes.map(n=>[n.id,n])),edges:sampleEdges};
 sample.regions=hierarchyRegions(sample);
-sample.edges.push({id:'upper-flow',from:'a',to:'b',type:'flow',label:'顶层流程'});
+sample.edges.push({id:'upper-flow',from:'a',to:'b',type:'flow',label:"Top-level flow"});
 const summary=compoundEdges(sample),external=summary.find(e=>e.members.some(m=>m.id==='upper-flow'));
 const innerCross=summary.filter(e=>e.type==='guard');
 assert.deepEqual(innerCross.map(e=>[e.from,e.to]),[['x','y'],['g','y']],'expanded cross-circle edges keep exact inner endpoints');

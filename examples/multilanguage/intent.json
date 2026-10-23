@@ -1,0 +1,11 @@
+{
+  "project_id": "multilanguage-jobs",
+  "requirements": [
+    {
+      "id": "R1",
+      "text": "任务在有名额时开始，无名额则等待，恢复后可完成；不同技术实现的图和实际结果保持一致。",
+      "status": "confirmed",
+      "source": "合成演示需求，见本轮模拟对话"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "packages": [
+    {
+      "version": "v1",
+      "archive": "gallery-v1-source.zip",
+      "sha256": "8171f12f5630fac45eb1025bb6b9d0a045b987528ad399afc9618449fcb64c04",
+      "byte_identical_accepted_inputs_and_runtime": 284,
+      "reference": "Already executed isolated source extraction",
+      "method": "Byte comparison only; no business test re-execution"
+    },
+    {
+      "version": "v2",
+      "archive": "gallery-v2-source.zip",
+      "sha256": "b20e9205e312750e31db03562db6de45c425ebe1123848695f69749545220bed",
+      "byte_identical_accepted_inputs_and_runtime": 287,
+      "reference": "Already executed isolated source extraction",
+      "method": "Byte comparison only; no business test re-execution"
+    }
+  ],
+  "documentation_only_correction": true
+}

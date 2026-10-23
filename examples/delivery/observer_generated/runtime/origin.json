@@ -1,6 +1,6 @@
 {
   "source": "SoftwareStatusObserverSkill/skills/business-observer",
-  "release": "2026.10-implementation-coverage",
+  "release": "2026.10-multilanguage",
   "protocols": {
     "behavior": 3,
     "event": 3,
@@ -9,7 +9,11 @@
     "recording": 1,
     "runtime_frames": 1,
     "preferences": 1,
-    "implementation": "bo-implementation/v1"
+    "implementation": "bo-implementation/v1",
+    "project": "bo-project/v1",
+    "transport": "bo-event/v1",
+    "snapshot": "bo-snapshot/v1",
+    "source": "bo-source/v1"
   },
   "manifest": "../../bo_stategraph/runtime-version.json"
 }

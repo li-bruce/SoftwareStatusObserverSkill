@@ -1,0 +1,9 @@
+{
+  "candidate": "candidate-3",
+  "files": 144,
+  "changed_from_frozen": [
+    "SKILL.md"
+  ],
+  "same_executable_and_viewer_assets": true,
+  "explanation": "SKILL.md has only a trailing blank line removed after freezing."
+}

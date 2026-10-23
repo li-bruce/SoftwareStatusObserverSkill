@@ -14,13 +14,13 @@ sys.path.insert(0,str(SKILL/'scripts'))
 from requirements_dialogue import assess
 
 def draft():return json.loads((SKILL/'assets/discovery.example.json').read_text(encoding='utf-8'))
-def resolve(doc,did='D1',text='格式合格即可下载，预览在后台继续。',sid='U2'):
-    if not any(s['id']==sid for s in doc['sources']):doc['sources'].append({'id':sid,'kind':'user','text':text,'locator':'合成用户回答，测试夹具'})
+def resolve(doc,did='D1',text="Allow download after format checks; preview continues in the background.",sid='U2'):
+    if not any(s['id']==sid for s in doc['sources']):doc['sources'].append({'id':sid,'kind':'user','text':text,'locator':"Synthetic user answer, test fixture"})
     d=next(d for d in doc['decisions'] if d['id']==did)
     d.update(status='resolved',resolution={'kind':'user_answer','text':text,'source_refs':[sid]})
     return d
 def extra(doc,did='D2',**kw):
-    d=deepcopy(doc['decisions'][0]);d.update(id=did,status='open',question='重试后能否产生第二份交付物？',topic='retry',**kw)
+    d=deepcopy(doc['decisions'][0]);d.update(id=did,status='open',question="Can retry create a second delivery?",topic='retry',**kw)
     d.pop('resolution',None);doc['decisions'].append(d);return d
 def codes(result):return {e['code'] for e in result['errors']}
 
@@ -46,13 +46,13 @@ class DialogueTests(unittest.TestCase):
         self.assertTrue(assess(doc)['ready']);self.assertEqual(assess(doc)['questions'],[])
 
     def test_delegated_choice_records_authorization_and_reason(self):
-        doc=draft();d=resolve(doc,text='下载是否等预览由你决定，优先让下载尽快可用。')
-        d['resolution'].update(kind='delegated_choice',text='格式检查通过即可下载。',rationale='按用户指定的及时下载目标，让预览后台继续。')
+        doc=draft();d=resolve(doc,text="You decide whether download waits for preview; prioritize prompt download availability.")
+        d['resolution'].update(kind='delegated_choice',text="Allow download after format checks.",rationale="Follow the user's timely-download goal and let preview continue in the background.")
         self.assertTrue(assess(doc)['ready'])
         d['resolution'].pop('rationale');self.assertFalse(assess(doc)['ready'])
 
     def test_silence_does_not_resolve_or_resend_a_question(self):
-        doc=draft();doc['sources'].append({'id':'Q1','kind':'assistant','text':doc['decisions'][0]['question'],'locator':'模拟第1轮已发送'})
+        doc=draft();doc['sources'].append({'id':'Q1','kind':'assistant','text':doc['decisions'][0]['question'],'locator':"Simulated round 1 sent"})
         doc['decisions'][0]['asked_in']=['Q1'];r=assess(doc)
         self.assertFalse(r['ready']);self.assertEqual(r['questions'],[]);self.assertEqual(r['awaiting_answers'],['D1'])
 
@@ -71,19 +71,19 @@ class DialogueTests(unittest.TestCase):
         resolve(doc);self.assertEqual([q['id'] for q in assess(doc)['questions']],['D2'])
 
     def test_business_loop_is_allowed_but_question_deadlock_is_not(self):
-        doc=draft();doc['networks'][0]['edges'].append({'id':'retry','from':'validate','to':'upload','relation':'retry','label':'修正后重新上传','source_refs':['U1']})
+        doc=draft();doc['networks'][0]['edges'].append({'id':'retry','from':'validate','to':'upload','relation':'retry','label':"Correct and upload again",'source_refs':['U1']})
         self.assertTrue(assess(doc)['valid'])
         extra(doc,depends_on=['D1']);doc['decisions'][0]['depends_on']=['D2']
         self.assertIn('question_dependency_cycle',codes(assess(doc)))
 
     def test_connected_networks_can_share_dependencies_without_duplicate_nodes(self):
         doc=draft();n=doc['networks'][0];node=n['nodes'].pop()
-        doc['networks'].append({'id':'delivery','title':'提供文件','actors':['下载者'],'trigger':'文件可用','outcome':'取得文件','nodes':[node],'edges':[]})
+        doc['networks'].append({'id':'delivery','title':"Provide file",'actors':["Downloader"],'trigger':"File available",'outcome':"Obtain file",'nodes':[node],'edges':[]})
         self.assertTrue(assess(doc)['valid'])
 
     def test_critical_assumption_or_defer_does_not_pass(self):
         for status in ('assumed','deferred'):
-            doc=draft();doc['decisions'][0].update(status=status,note='尚未得到用户答复')
+            doc=draft();doc['decisions'][0].update(status=status,note="No user answer yet")
             self.assertFalse(assess(doc)['ready'])
 
     def test_unanswered_behavior_cannot_be_relabelled_optional(self):
@@ -91,13 +91,13 @@ class DialogueTests(unittest.TestCase):
         self.assertIn('behavior_question_cannot_be_optional',codes(assess(doc)))
 
     def test_reversible_presentation_assumption_is_visible_and_not_blocking(self):
-        doc=draft();doc['decisions'][0].update(topic='presentation',blocking=False,status='assumed',note='按钮暂用项目已有用词')
+        doc=draft();doc['decisions'][0].update(topic='presentation',blocking=False,status='assumed',note="Keep the project's existing button wording for now")
         r=assess(doc);self.assertTrue(r['ready']);self.assertEqual(r['warnings'][0]['code'],'explicit_assumption')
 
     def test_rule_change_needs_previous_answer_and_real_change_source(self):
-        old=draft();resolve(old);doc=deepcopy(old);resolve(doc,text='改为必须等预览完成才能下载。',sid='U3')
+        old=draft();resolve(old);doc=deepcopy(old);resolve(doc,text="Change download to require completed preview.",sid='U3')
         self.assertIn('decision_changed_without_history',codes(assess(doc,previous=old)))
-        doc['changes']=[{'id':'C1','decision':'D1','previous':old['decisions'][0],'source_refs':['U3'],'reason':'用户明确修改了提供下载的条件'}]
+        doc['changes']=[{'id':'C1','decision':'D1','previous':old['decisions'][0],'source_refs':['U3'],'reason':"The user explicitly changed the download condition"}]
         self.assertTrue(assess(doc,previous=old)['ready'])
         doc['changes'][0]['source_refs']=['A1'];self.assertFalse(assess(doc,previous=old)['ready'])
 

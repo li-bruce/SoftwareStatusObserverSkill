@@ -44,19 +44,21 @@ class ArchiveStore:
         return db.execute("SELECT epoch FROM meta WHERE id=1").fetchone()[0]
 
     def seed(self) -> None:
+        # This accepted sample document is data, not translatable UI prose.
+        document = json.loads(Path(__file__).with_name('seed_document.json').read_text(encoding='utf-8'))
         with closing(self.connect()) as db:
             db.execute("BEGIN IMMEDIATE")
             db.executemany("INSERT OR IGNORE INTO users VALUES(?,?,?)",[
-                ("alice","林晓 · 文件夹负责人","manager"),("bob","周宁 · 审核员","reviewer"),
-                ("carol","陈青 · 审核员","reviewer"),("dana","杜然 · 子目录负责人","manager")])
-            db.executemany("INSERT OR IGNORE INTO projects(id,title) VALUES(?,?)",[("P1","研发资料"),("P2","共享资料")])
+                ("alice","Lin Xiao · folder owner","manager"),("bob","Zhou Ning · reviewer","reviewer"),
+                ("carol","Chen Qing · reviewer","reviewer"),("dana","Du Ran · child-folder owner","manager")])
+            db.executemany("INSERT OR IGNORE INTO projects(id,title) VALUES(?,?)",[("P1","Research documents"),("P2","Shared documents")])
             db.executemany("INSERT OR IGNORE INTO folders VALUES(?,?,?,?)",[
-                ("F1","P1",None,"项目资料"),("F2","P1","F1","设计记录"),
-                ("F3","P1","F2","历史草稿"),("F4","P2",None,"其他项目")])
+                ("F1","P1",None,"Project documents"),("F2","P1","F1","Design records"),
+                ("F3","P1","F2","Old drafts"),("F4","P2",None,"Other project")])
             db.executemany("INSERT OR IGNORE INTO assignments VALUES(?,?,?)",[
                 ("P1","F1","alice"),("P1","F2","alice"),("P1","F3","dana"),("P2","F4","dana")])
             db.execute("INSERT OR IGNORE INTO documents VALUES(?,?,?,?,?,?,?)",
-                       ("DOC-001","P1","F2","接口设计说明","RD-001","模拟资料：版本一的固定内容。",1))
+                       ("DOC-001","P1","F2","Interface design notes","RD-001",document['content'],1))
             db.commit()
 
     @staticmethod
@@ -64,7 +66,7 @@ class ArchiveStore:
         row = db.execute("SELECT archive_limit_bytes,limit_revision FROM projects WHERE id=?",
                          (project_id,)).fetchone()
         if row is None:
-            raise ValueError("项目不存在")
+            raise ValueError("Project does not exist")
         return {"project_id":project_id,"limit_bytes":row["archive_limit_bytes"],
                 "limit_revision":row["limit_revision"]}
 
@@ -72,7 +74,7 @@ class ArchiveStore:
     def get_run(db: sqlite3.Connection, run_id: str) -> dict:
         row = db.execute("SELECT payload FROM runs WHERE id=?",(run_id,)).fetchone()
         if row is None:
-            raise ValueError("找不到这次运行")
+            raise ValueError("Run not found")
         return json.loads(row["payload"])
 
     @staticmethod

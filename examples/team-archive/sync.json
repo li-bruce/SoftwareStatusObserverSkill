@@ -10,19 +10,23 @@
     "bo_stategraph/workflow.py",
     "integrations/bo_observer.py",
     "integrations/bo_server.py",
-    "run.py"
+    "run.py",
+    "static/app.js"
   ],
   "watch_files": [
     ".gitattributes",
     "AGENTS.md",
+    "archive_app/seed_document.json",
     "archive_app/workflow.py",
     "bo_stategraph/__init__.py",
     "bo_stategraph/bo_contracts.py",
     "bo_stategraph/config/retention.json",
     "bo_stategraph/execution_contract.py",
+    "bo_stategraph/machine.json",
     "bo_stategraph/query.py",
     "bo_stategraph/runtime-version.json",
     "integrations/__init__.py",
+    "integrations/bo_client.mjs",
     "mapping.json",
     "observer_runtime/__init__.py",
     "observer_runtime/architecture_guard.py",
@@ -40,7 +44,7 @@
     "observer_runtime/execution_contract.py",
     "observer_runtime/focus_graph.py",
     "observer_runtime/mapping_contract.py",
-    "observer_runtime/model_tool.py",
+    "observer_runtime/observation_scope.py",
     "observer_runtime/origin.json",
     "observer_runtime/probe.py",
     "observer_runtime/project_bundle.py",
@@ -54,7 +58,6 @@
     "observer_runtime/sync_io.py",
     "observer_runtime/sync_verify.py",
     "observer_runtime/view_preferences.py",
-    "observer_runtime/viewer_server.py",
     "observer_runtime/whitebox_contract.py",
     "observer_runtime/worknet_contract.py",
     "ownership.json",
@@ -84,6 +87,8 @@
     "tooling/__init__.py",
     "tooling/behavior_source.json",
     "tooling/build_model.py",
+    "tooling/frontend_cases.mjs",
+    "tooling/frontend_nodes.json",
     "tooling/graph_tests.mjs",
     "tooling/mutations.py",
     "tooling/observe.py",
@@ -197,10 +202,10 @@
   "timeout_seconds": 120,
   "stategraph": {
     "module": "bo_stategraph/__init__.py",
-    "development_mode": "guided",
+    "development_mode": "drive",
     "execution_mode": "drive",
-    "decision_source": "default",
-    "decision": "状态机完整位于 bo_stategraph；默认内部引导，监控和映射始终维护。"
+    "decision_source": "user",
+    "decision": "\u5408\u6210\u793a\u4f8b\u7684\u6a21\u62df\u9700\u6c42\u65b9\u9009\u62e9\uff1a\u7ee7\u7eed\u57fa\u4e8e\u72b6\u6001\u56fe\u9a71\u52a8\u5f00\u53d1\uff1b\u4e24\u79cd\u6a21\u5f0f\u5747\u4fdd\u7559\u76d1\u63a7\u53ca\u6620\u5c04\u68c0\u67e5\u3002"
   },
   "source_scope": {
     "roots": [
@@ -223,7 +228,13 @@
       "bo_stategraph/bo_contracts.py": "Shared contract implementation; parity regression tests cover it.",
       "bo_stategraph/execution_contract.py": "Shared activity contract; resource and concurrency tests cover it.",
       "bo_stategraph/query.py": "Projection adapter; actual SQLite-to-instance witnesses cover it.",
-      "archive_app/workflow.py": "Compatibility import only; executable definition lives in bo_stategraph/workflow.py."
+      "archive_app/workflow.py": "Compatibility import only; executable definition lives in bo_stategraph/workflow.py.",
+      "observer_generated/static/**": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "static/graph/**": "Reviewed graph viewer assets; runtime manifest checks their exact bytes."
+    },
+    "frozen_sources": {
+      "review/v1/source-snapshot": "review/v1/manifest.json",
+      "review/v2/source-snapshot": "review/v2/manifest.json"
     }
   },
   "require_mapping_witnesses": true,

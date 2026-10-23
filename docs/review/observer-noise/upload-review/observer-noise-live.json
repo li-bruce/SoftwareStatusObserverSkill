@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "build_id": "d132ecf70730b9564e2dc5f7b3541c381754a5352c2899204fb08676d6ce55ed",
+  "binding": {
+    "status": "current",
+    "changed_files": [],
+    "model_changed": false,
+    "intent_changed": false,
+    "directly_affected": [],
+    "possibly_affected": []
+  },
+  "graph_reads": 11,
+  "events_before": 15,
+  "events_after": 15,
+  "nodes": 39,
+  "observer_nodes": 0,
+  "observer_events": 0
+}

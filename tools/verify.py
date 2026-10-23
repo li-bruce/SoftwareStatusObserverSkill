@@ -7,6 +7,7 @@ import tempfile
 import uuid
 import zipfile
 from demo import EXAMPLE, ROOT, prepare
+from setup_adapters import configure
 
 
 def run(cwd, *args):
@@ -14,6 +15,7 @@ def run(cwd, *args):
 
 
 def main():
+    configure()
     (ROOT/'.validation').mkdir(exist_ok=True)
     run(ROOT, 'tools/check_package.py')
     run(ROOT, 'tests/test_ast_fingerprint.py')
@@ -25,11 +27,16 @@ def main():
     run(ROOT, 'tools/test_recording.py')
     run(ROOT, 'tools/test_refactor.py')
     run(ROOT, 'tools/test_implementation_coverage.py')
+    run(ROOT, 'tools/test_observer_noise.py')
+    run(ROOT, 'tools/test_multilanguage.py')
+    run(ROOT, 'tools/verify_multilanguage.py')
+    run(ROOT, 'tools/test_demo_launcher.py')
     run(ROOT, 'tools/test_assessment_fixes.py')
     run(ROOT, 'tools/test_web_continuity.py')
     run(ROOT, 'tools/test_workflow_migration.py')
     run(ROOT, 'tools/test_archive_service_migration.py')
     run(ROOT, 'examples/python-modes/test_modes.py')
+    subprocess.run(['node','tools/test_i18n.mjs'],cwd=ROOT,check=True)
     subprocess.run(['node','tools/test_refactor_view.mjs'],cwd=ROOT,check=True)
     subprocess.run(['node','tools/test_view_coverage.mjs'],cwd=ROOT,check=True)
     subprocess.run(['node','tools/test_web_colors.mjs'],cwd=ROOT,check=True)

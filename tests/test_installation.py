@@ -24,7 +24,7 @@ class InstallationTests(unittest.TestCase):
             source = ROOT/'skills/business-observer'
             target = Path(folder)/'.agents/skills/business-observer'
             expected = {p.relative_to(source): p.read_bytes() for p in source.rglob('*')
-                        if p.is_file() and '__pycache__' not in p.parts}
+                        if p.is_file() and '__pycache__' not in p.parts and 'node_modules' not in p.parts}
             actual = {p.relative_to(target): p.read_bytes() for p in target.rglob('*') if p.is_file()}
             self.assertEqual(expected, actual)
             (target/'SKILL.md').write_text('local edit', encoding='utf-8')

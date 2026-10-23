@@ -1,21 +1,5 @@
-# 开发与变更流程
+# Development workflow
 
-新项目的最小产物：意图记录、业务模型 JSON、源码、证据快照、运行事件和真实结果验证。不要要求用户先懂图数据库。
+Start with [continuous development](continuous-development.md) and [multilanguage integration](multilanguage.md). Confirm current intent and drive/observe choice, maintain declarations, source bindings, and probes while coding, then run the complete gate. Users do not operate the intermediate artifacts.
 
-提问例子：
-- “批准任务”是否批准了特定参数版本？若参数改动，旧批准是否仍有效？
-- “负责人可执行”对应哪种关系、哪个对象范围？多条授权中一条失效是否还有替代？
-- 等待的是审批、材料还是权限？条件恢复后只提示可执行还是允许自动恢复？
-- 什么数据库效果或外部回执才算完成？提交结果未知能否重试？
-
-将回答写入意图的 requirements，标明 status 和 source；假设不冒充用户确认。可以先用项目边界内的保守假设推进独立工作。
-
-建模从一条业务目标开始。画对象、动作、效果和必要状态，补条件与事实，不将每个辅助函数提升为业务节点。事实保留权威来源、主体/对象及版本。映射可多对多，每个绑定用相对源码路径和限定函数名。
-
-`model_tool.py capture` 不执行源码。它读取 source_roots 内 Python 文件，识别函数、调用和 if 条件，记录未映射函数及动态语义风险。目标不存在、路径越界或类型不符时拒绝；不能将不存在的声明降级为成功。
-
-开发变更例子：由“参数存在”改为“参数存在且质量检查通过”。先保存旧源码/模型证据，修改代码后 check 应报告失效；变更意图、条件、事实探针和映射，再运行旧正常场景及新增失败/恢复场景。不能仅重新散列就称为验收通过。
-
-独立核对要有不同证据入口：直接 SQL/业务 API 效果、从实际 AST 抽取的实现片段、来自探针的事件。三者一致仍不等于全程序证明。用覆盖清单记录还未经过的入口、后台任务、框架动态调用和外部服务。
-
-可选图工具：既有 Understand Anything 图可辅助确定业务候选与导航；状态机技能可帮助列 guard/等待/恢复；OpenTelemetry 可承载跨服务 trace。它们都不能省略当前项目的业务字段和提交语义核对。
+Source inventory uses `code_structure.py` and `bo_sync.py` with actual language adapters, without executing scanned code. The obsolete `model_tool.py` was removed. Old snapshots cannot substitute for current-build verification.

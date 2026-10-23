@@ -1,0 +1,85 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+{
+  "valid": false,
+  "errors": [
+    "runtime observation command failed",
+    "project test failed: ['{python}', '-X', 'utf8', '-B', 'tooling/tests.py']"
+  ],
+  "candidate_id": "d9ad5fe468a6337588e5fb80a4e38a079e7a42d326d843d7295c40e27aa1b200",
+  "reports": {
+    "mapping": {
+      "status": "failed",
+      "errors": [
+        "runtime observation command failed"
+      ],
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses"
+    },
+    "state_rules": {
+      "status": "not_run",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "failed",
+      "errors": [
+        "project test failed: ['{python}', '-X', 'utf8', '-B', 'tooling/tests.py']"
+      ],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "not_run",
+      "errors": [],
+      "assertions": {},
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "review_hash": "7017ea209ffc983ef8debc556e769ac8738db4c72d54772fa46abe04b5e7ebc8",
+  "observations_hash": "a3d30d4071278ff7772f4b4c0ca5f491c2e453ba529ef02143ba2b1029539af5",
+  "tests": [
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/tests.py"
+      ],
+      "exit_code": 1
+    },
+    {
+      "argv": [
+        "node",
+        "tooling/graph_tests.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/test_recording.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tooling/test_recorded_views.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/test_stategraph_module.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "checked_at": "2026-10-23T07:03:44.082581+00:00",
+  "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+}

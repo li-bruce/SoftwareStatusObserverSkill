@@ -1,0 +1,51 @@
+{
+  "kind": "Actual HTTP requests against two independent loopback servers on different random ports",
+  "control_status": 200,
+  "control_final_path": "/upload",
+  "after_other_app_status": 200,
+  "after_other_app_final_path": "/upload",
+  "same_cookie_namespace": false,
+  "independent_sql_counts": {
+    "images": 0,
+    "messages": 0
+  },
+  "requests": [
+    {
+      "application": "gallery",
+      "method": "GET",
+      "path": "/login",
+      "final_path": "/login",
+      "status": 200
+    },
+    {
+      "application": "gallery",
+      "method": "POST",
+      "path": "/login",
+      "final_path": "/upload",
+      "status": 200
+    },
+    {
+      "application": "gallery",
+      "method": "GET",
+      "path": "/login",
+      "final_path": "/login",
+      "status": 200
+    },
+    {
+      "application": "other",
+      "method": "GET",
+      "path": "/seed",
+      "final_path": "/seed",
+      "status": 200
+    },
+    {
+      "application": "gallery",
+      "method": "POST",
+      "path": "/login",
+      "final_path": "/upload",
+      "status": 200
+    }
+  ],
+  "secrets_emitted": false,
+  "historical_F06_root_cause": "Not established by this bounded mechanism probe"
+}

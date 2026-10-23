@@ -13,15 +13,15 @@ function url(name){
 const core=await import(url('graph-core.js')),layout=await import(url('layout.js')),analysis=await import(url('analysis.js')),replay=await import(url('recording.js'));
 const view={
   model:{nodes:[
-    {id:'flow',label:'检查',layer:'business',kind:'action'},
-    {id:'check',label:'校验',kind:'function',parent:'flow',capture:{in:{length:'number'},out:{passed:'boolean'}},source:{symbol:'check'}},
-    {id:'lifecycle',kind:'function',label:'阶段',parent:'flow'},
-    {id:'state.checking',kind:'state',layer:'state',value:'checking',label:'检查中',parent:'lifecycle'},
-    {id:'state.done',kind:'state',layer:'state',value:'done',label:'完成',parent:'lifecycle'},
+    {id:'flow',label:"Check",layer:'business',kind:'action'},
+    {id:'check',label:"Validate",kind:'function',parent:'flow',capture:{in:{length:'number'},out:{passed:'boolean'}},source:{symbol:'check'}},
+    {id:'lifecycle',kind:'function',label:"Phase",parent:'flow'},
+    {id:'state.checking',kind:'state',layer:'state',value:'checking',label:"Checking",parent:'lifecycle'},
+    {id:'state.done',kind:'state',layer:'state',value:'done',label:"Complete",parent:'lifecycle'},
   ],edges:[{id:'f',from:'flow',to:'check',type:'contains'}],graph_roots:['flow'],
-  machine:{values:['checking','done'],labels:{checking:'检查中',done:'完成'},transitions:[{source:'checking',dest:'done',trigger:'finish'}],
+  machine:{values:['checking','done'],labels:{checking:"Checking",done:"Complete"},transitions:[{source:'checking',dest:'done',trigger:'finish'}],
     execution:{parent:'flow',within:'checking',activities:[{id:'check'}],resources:[]}},
-  presentation:{memberships:[{group:'flow',member:'state.checking',reason:'该流程使用的状态',evidence:'test declaration'}]}},
+  presentation:{memberships:[{group:'flow',member:'state.checking',reason:"State used by this flow",evidence:'test declaration'}]}},
   manifest:{build_id:'b',bindings:{check:{path:'core.py',line:3,snippet:'def check():'}}},
   binding_status:{status:'current'},authority:{parameters:{attempt:'a',param_version:1},basis:{param_version:1}},machine:{current:'checking',configurations:[],journal:[]},
   health:{run_id:'p',attempted:0},events:[],historical:false
@@ -35,8 +35,8 @@ assert.deepEqual(core.sourceBinding(view,g.all,ref.id),view.manifest.bindings.ch
 assert.equal(g.boxes.filter(b=>b.id==='check').length,1,'one canonical node');
 let folded=core.layoutGraph(view,new Set(['flow','lifecycle']),new Set(),new Map(),'latest','latest',options);
 assert.ok(!folded.byId.has(ref.id)&&folded.byId.has('check'),'folding reference group leaves canonical member');
-const settings=layout.emptyLayout();layout.setAnnotation(settings,'check',{label:'自定义校验'});
-assert.equal(layout.displayName(ref.node,settings),'自定义校验','reference shares canonical annotation');
+const settings=layout.emptyLayout();layout.setAnnotation(settings,'check',{label:"Custom check"});
+assert.equal(layout.displayName(ref.node,settings),"Custom check",'reference shares canonical annotation');
 const states=analysis.profileFor('states');
 g=core.layoutGraph(view,new Set(),new Set(),new Map(),'latest','latest',{
   ...options,match:(all,events,status)=>analysis.matchingNodes(all,view,events,states,status)});
@@ -77,6 +77,14 @@ changedParameter.events=[event(1,'limit',{limit_bytes:64}),event(2,'unrelated',{
 assert.equal(replay.frame(changedParameter,2).authority.parameters.limit_bytes,64,'only explicit parameter binding updates the replay header');
 console.log('Recorded-view checks passed: state projection, shared identity, circle picking, replay boundary, evidence-only motion.');
 const steps=await import(url('replay-steps.js'));
+const projectStates={machine:{values:['pending','approved'],labels:{pending:'Awaiting review',approved:'Published'}}};
+assert.equal(core.phaseLabel(projectStates,'pending'),'Awaiting review');
+assert.equal(core.phaseLabel({machine:{values:['pending']}},'pending'),'pending','optional labels cannot crash live state display');
+assert.equal(steps.boDisplayValue('pending',projectStates,{kind:'business',field:'Flow'}),'Awaiting review','business phase keeps project semantics');
+assert.equal(steps.boDisplayValue('pending',projectStates,{kind:'state',field:'Activity'}),'Not started','activity uses activity semantics even with a colliding project state');
+assert.equal(steps.boDisplayValue('pending',projectStates,{kind:'value',field:'state'}),'pending','raw captured values are not relabeled by enum coincidence');
+assert.equal(steps.boDisplayValue('pending',projectStates,{kind:'value',field:'note'}),'pending');
+assert.equal(steps.boDisplayValue(undefined,projectStates,{kind:'business'}),'Not recorded');
 const detailed=structuredClone(record);
 detailed.events=[event(1,'flow',{revision:1,phase:'checking'}),event(2,'check',{passed:false}),event(3,'check',{passed:true}),event(4,'check',{passed:false}),event(5,'check',{passed:true},{attempt:'b'})];
 const raw=replay.timeline(detailed),all=new Map(view.model.nodes.map(n=>[n.id,n]));
@@ -93,13 +101,13 @@ assert.equal(steps.boStepDetail(baseline,replay.timeline(baseline),2,1,all,funct
 const separateCalls=structuredClone(detailed);separateCalls.events[1].call_id='call-1';separateCalls.events[2].call_id='call-2';
 assert.equal(steps.boStepDetail(separateCalls,replay.timeline(separateCalls),3,2,all,functions).rows[0].before,undefined,'different invocations cannot share a local variable history');
 assert.ok(!steps.boStepDetail(detailed,raw,4,1,all,business).rows.some(r=>r.field==='passed'),'business steps do not expose unrelated hidden-function parameter churn');
-assert.equal(steps.boTransferLabel({type:'resource',members:[{from:'slots'}]},event(1,'flow',{revision:1}),{journal:[{seq:1,before:{resources:{slots:{available:2}}},after:{resources:{slots:{available:1}}}}]}),'占用 · 名额 2 → 1');
+assert.equal(steps.boTransferLabel({type:'resource',members:[{from:'slots'}]},event(1,'flow',{revision:1}),{journal:[{seq:1,before:{resources:{slots:{available:2}}},after:{resources:{slots:{available:1}}}}]}),'Acquire · capacity 2 → 1');
 assert.deepEqual(replay.transferEdges(event(3,'flow',{revision:2}),[],[{id:'allocation',type:'resource',members:[{from:'slots',to:'check'}]}],new Map(),{journal:[{seq:2,event:'finish',activity:'check',before:{resources:{slots:{holders:['check']}}},after:{resources:{slots:{holders:[]}}}}]}),['allocation'],'resource return has actual holder evidence');
-layout.setAnnotation(settings,'check',{core:true,note:'复核提交条件'});
+layout.setAnnotation(settings,'check',{core:true,note:"Recheck commit conditions"});
 const storage={getItem:()=>JSON.stringify(settings)};
 const restored=layout.readLayout(storage,'key');
 assert.equal(layout.annotationFor(restored.state,'check').core,true);
-assert.equal(layout.annotationFor(restored.state,'check').note,'复核提交条件');
+assert.equal(layout.annotationFor(restored.state,'check').note,"Recheck commit conditions");
 console.log('Focused replay checks passed: view granularity, intermediate changes, attempt isolation, baseline values, typed payload and core marks.');
 
 // A plain Python project can bind transaction snapshots without activity journals.

@@ -1,7 +1,7 @@
 {
   "schema_version": 3,
   "revision": "3.1",
-  "title": "仿真任务 · 行为调试",
+  "title": "Simulation task · behavior debugging",
   "intent": "intent.json",
   "source_files": [
     "domain.py",
@@ -19,8 +19,8 @@
     {
       "id": "read",
       "kind": "action",
-      "label": "读取任务",
-      "summary": "读取同一 SQLite 快照中的任务和产物。同版本产物已存在时返回 already_committed；后续计算不再执行，也不产生新提交。",
+      "label": "Read task",
+      "summary": "Read task and artifact from the same SQLite snapshot. An existing same-version artifact returns already_committed; subsequent computation and new commit are skipped.",
       "source": {
         "path": "domain.py",
         "symbol": "Lab.read_job"
@@ -48,8 +48,8 @@
     {
       "id": "estimate",
       "kind": "function",
-      "label": "计算预算",
-      "summary": "cells × steps × priority 权重传播为所需额度。",
+      "label": "Calculate budget",
+      "summary": "Propagate cells × steps × priority weight into required quota.",
       "source": {
         "path": "domain.py",
         "symbol": "estimate_cost"
@@ -74,8 +74,8 @@
     {
       "id": "authorize",
       "kind": "decision",
-      "label": "判断执行许可",
-      "summary": "同项目工程师，并且至少一条审批同时满足全部条件。每次重新求值全部候选。",
+      "label": "Check execution permission",
+      "summary": "The actor is an engineer in the project, and at least one approval meets every condition. Reevaluate candidates on each check.",
       "source": {
         "path": "domain.py",
         "symbol": "Lab.authorize"
@@ -105,32 +105,32 @@
       "predicate": "member_allowed AND any(grant_matches)",
       "candidate_table": {
         "node": "match",
-        "title": "逐条审批 · 同一条内全部满足，候选之间任一有效",
+        "title": "Per approval: all conditions; across candidates: any valid approval",
         "id_field": "id",
         "columns": [
           {
             "field": "scope_ok",
-            "label": "范围"
+            "label": "Scope"
           },
           {
             "field": "version_ok",
-            "label": "版本"
+            "label": "Version"
           },
           {
             "field": "time_ok",
-            "label": "期限"
+            "label": "Expiry"
           },
           {
             "field": "budget_ok",
-            "label": "额度"
+            "label": "Quota"
           },
           {
             "field": "active_ok",
-            "label": "未撤销"
+            "label": "Not revoked"
           },
           {
             "field": "eligible",
-            "label": "有效"
+            "label": "Valid"
           }
         ]
       }
@@ -138,8 +138,8 @@
     {
       "id": "access",
       "kind": "function",
-      "label": "读取关系与审批",
-      "summary": "权威关系和候选审批读取；不使用历史批准缓存。",
+      "label": "Read relations and approvals",
+      "summary": "Read authoritative relations and candidate approvals, without reusing historical allow results.",
       "source": {
         "path": "domain.py",
         "symbol": "Lab.read_access"
@@ -170,8 +170,8 @@
     {
       "id": "member",
       "kind": "decision",
-      "label": "项目成员条件",
-      "summary": "成员必须属于任务项目，且角色为 engineer。",
+      "label": "Project membership",
+      "summary": "The actor belongs to the task project and has the engineer role.",
       "source": {
         "path": "domain.py",
         "symbol": "member_allowed"
@@ -192,8 +192,8 @@
     {
       "id": "match",
       "kind": "decision",
-      "label": "逐条审批匹配",
-      "summary": "同一条审批需同时满足范围、版本、有效期、额度和未撤销。",
+      "label": "Match each approval",
+      "summary": "One approval must satisfy scope, version, expiry, quota, and nonrevocation together.",
       "source": {
         "path": "domain.py",
         "symbol": "grant_matches"
@@ -239,8 +239,8 @@
     {
       "id": "wait",
       "kind": "wait",
-      "label": "等待 / 可重试",
-      "summary": "保存本次失败原因；补齐条件后执行会从参数读取开始重新求值。",
+      "label": "Wait / retry",
+      "summary": "Save the failure reason. After conditions change, execution rereads parameters and reevaluates.",
       "source": {
         "path": "domain.py",
         "symbol": "Lab.wait"
@@ -257,19 +257,19 @@
           "resume": "string"
         }
       },
-      "resume": "更新参数对应审批 / 成员关系后，重新执行；不会自动开跑。",
+      "resume": "Update approval or membership for the parameters, then explicitly rerun. No automatic execution.",
       "inspect_target": "authorize",
       "reason_labels": {
-        "member_required": "成员须属于当前项目，且角色为 engineer",
-        "no_matching_approval": "没有同时满足范围、版本、有效期、额度且未撤销的审批",
-        "parameters_changed_during_compute": "计算期间参数已修改，需匹配新版审批后重新计算"
+        "member_required": "The actor must belong to the current project and be an engineer",
+        "no_matching_approval": "No nonrevoked approval satisfies scope, version, expiry, and quota together",
+        "parameters_changed_during_compute": "Parameters changed during computation; obtain matching approval and recompute"
       }
     },
     {
       "id": "solve",
       "kind": "action",
-      "label": "执行计算",
-      "summary": "使用已求值参数运行演示数值计算，返回值尚未提交。",
+      "label": "Run computation",
+      "summary": "Run the sample calculation with evaluated parameters. Its returned value is not yet committed.",
       "source": {
         "path": "domain.py",
         "symbol": "run_solver"
@@ -293,8 +293,8 @@
     {
       "id": "commit",
       "kind": "effect",
-      "label": "重验并提交产物",
-      "summary": "事务内重新求值审批和参数版本，幂等提交；commit 事件在事务成功后发送。",
+      "label": "Recheck and commit artifact",
+      "summary": "Reevaluate approvals and parameter version inside the transaction and commit idempotently. Emit commit after transaction success.",
       "source": {
         "path": "domain.py",
         "symbol": "Lab.commit_result"
@@ -325,8 +325,8 @@
     {
       "id": "barrier",
       "kind": "decision",
-      "label": "计算版本屏障",
-      "summary": "防止计算期间参数改版后提交旧计算。",
+      "label": "Computation version barrier",
+      "summary": "Prevent committing a computation after its parameters change.",
       "source": {
         "path": "domain.py",
         "symbol": "same_version"
@@ -349,8 +349,8 @@
     {
       "id": "change",
       "kind": "action",
-      "label": "参数 / 关系变更",
-      "summary": "通过演示业务命令修改事实版本，旧判断立即失效；不从图执行。",
+      "label": "Parameter / relation changes",
+      "summary": "Business commands change fact versions and invalidate old decisions. The graph does not execute commands.",
       "source": {
         "path": "domain.py",
         "symbol": "Lab.change"
@@ -372,8 +372,8 @@
     {
       "id": "parameters",
       "kind": "data",
-      "label": "当前任务参数",
-      "summary": "cells、steps、priority 与 param_version。",
+      "label": "Current task parameters",
+      "summary": "cells, steps, priority, and param_version.",
       "source": {
         "path": "domain.py",
         "symbol": "Lab.read_job"
@@ -395,9 +395,9 @@
       "from": "read",
       "to": "estimate",
       "type": "flow",
-      "label": "参数",
+      "label": "Parameters",
       "evidence": "declared; check source binding and explicit event dependencies",
-      "short_label": "参数"
+      "short_label": "Parameters"
     },
     {
       "id": "flow:estimate:authorize",
@@ -415,16 +415,16 @@
       "type": "flow",
       "label": "allowed",
       "evidence": "declared; check source binding and explicit event dependencies",
-      "short_label": "允许"
+      "short_label": "Allow"
     },
     {
       "id": "flow:authorize:wait",
       "from": "authorize",
       "to": "wait",
       "type": "flow",
-      "label": "拒绝",
+      "label": "Deny",
       "evidence": "declared; check source binding and explicit event dependencies",
-      "short_label": "拒绝",
+      "short_label": "Deny",
       "overview_route": {
         "path": "M 565 116 L 548 116 L 548 226 L 142 226 L 142 260",
         "x": 330,
@@ -445,18 +445,18 @@
       "from": "commit",
       "to": "wait",
       "type": "flow",
-      "label": "失败",
+      "label": "Failure",
       "evidence": "declared; check source binding and explicit event dependencies",
-      "short_label": "失败"
+      "short_label": "Failure"
     },
     {
       "id": "flow:wait:read",
       "from": "wait",
       "to": "read",
       "type": "flow",
-      "label": "重新执行",
+      "label": "Run again",
       "evidence": "declared; check source binding and explicit event dependencies",
-      "short_label": "重新执行",
+      "short_label": "Run again",
       "overview_route": {
         "path": "M 25 332 L 10 332 L 10 116 L 25 116",
         "x": 47,
@@ -488,7 +488,7 @@
       "type": "data",
       "label": "role / project",
       "evidence": "declared; check source binding and explicit event dependencies",
-      "short_label": "角色"
+      "short_label": "Role"
     },
     {
       "id": "data:access:match",
@@ -497,7 +497,7 @@
       "type": "data",
       "label": "grants[]",
       "evidence": "declared; check source binding and explicit event dependencies",
-      "short_label": "审批"
+      "short_label": "Approval"
     },
     {
       "id": "data:read:match",
@@ -506,7 +506,7 @@
       "type": "data",
       "label": "param_version / actor",
       "evidence": "declared; check source binding and explicit event dependencies",
-      "short_label": "版本"
+      "short_label": "Version"
     },
     {
       "id": "data:solve:barrier",
@@ -549,64 +549,64 @@
       "from": "authorize",
       "to": "commit",
       "type": "guard",
-      "label": "重新求值",
+      "label": "Reevaluate",
       "evidence": "declared; check source binding and explicit event dependencies",
-      "short_label": "重新求值"
+      "short_label": "Reevaluate"
     },
     {
       "id": "guard:barrier:commit",
       "from": "barrier",
       "to": "commit",
       "type": "guard",
-      "label": "版本一致",
+      "label": "Matching version",
       "evidence": "declared; check source binding and explicit event dependencies",
-      "short_label": "版本一致"
+      "short_label": "Matching version"
     },
     {
       "id": "contains:authorize:access",
       "from": "authorize",
       "to": "access",
       "type": "contains",
-      "label": "展开",
+      "label": "Expand",
       "evidence": "declared; check source binding and explicit event dependencies",
-      "short_label": "展开"
+      "short_label": "Expand"
     },
     {
       "id": "contains:authorize:member",
       "from": "authorize",
       "to": "member",
       "type": "contains",
-      "label": "展开",
+      "label": "Expand",
       "evidence": "declared; check source binding and explicit event dependencies",
-      "short_label": "展开"
+      "short_label": "Expand"
     },
     {
       "id": "contains:authorize:match",
       "from": "authorize",
       "to": "match",
       "type": "contains",
-      "label": "展开",
+      "label": "Expand",
       "evidence": "declared; check source binding and explicit event dependencies",
-      "short_label": "展开"
+      "short_label": "Expand"
     },
     {
       "id": "contains:commit:barrier",
       "from": "commit",
       "to": "barrier",
       "type": "contains",
-      "label": "展开",
+      "label": "Expand",
       "evidence": "declared; check source binding and explicit event dependencies",
-      "short_label": "展开"
+      "short_label": "Expand"
     }
   ],
   "default_node": "authorize",
   "presentation": {
-    "subject": "仿真任务",
+    "subject": "Simulation task",
     "states": {
-      "draft": "待执行",
-      "waiting": "等待",
-      "running": "计算中",
-      "completed": "已提交"
+      "draft": "Pending",
+      "waiting": "Waiting",
+      "running": "Computing",
+      "completed": "Committed"
     },
     "command_panel_url": "/control"
   },

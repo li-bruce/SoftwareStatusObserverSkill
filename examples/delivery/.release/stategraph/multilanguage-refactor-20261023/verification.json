@@ -1,0 +1,128 @@
+{
+  "valid": true,
+  "errors": [],
+  "candidate_id": "fd0ad789fce7c32498b08631ce11c243f3798c145ab597888b5cb1540c923dcd",
+  "reports": {
+    "mapping": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+      "stategraph_export": "checked",
+      "witnesses": 201,
+      "projection_checks": 303,
+      "implementation": {
+        "errors": [],
+        "events_checked": 19,
+        "features": 10
+      }
+    },
+    "state_rules": {
+      "status": "passed",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "passed",
+      "errors": [],
+      "assertions": {
+        "required": 96,
+        "executed": 96
+      },
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "review_hash": "8abd2cbbc4a71b53d6072b1143ebea4b3e4b60093372cd433ca549d8b5c64730",
+  "observations_hash": "b7105f7b71d3e55da450a8ceac905b9844295fd53268cd1aff94d544919476fd",
+  "tests": [
+    {
+      "argv": [
+        "{python}",
+        "-B",
+        "-X",
+        "utf8",
+        "tests/test_business.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-B",
+        "-X",
+        "utf8",
+        "observer_generated/runtime/architecture_guard.py",
+        "check",
+        "--root",
+        "."
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-B",
+        "-X",
+        "utf8",
+        "tests/test_execution.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-B",
+        "-X",
+        "utf8",
+        "tooling/graph_fixture.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tests/test_graph_projection.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tests/test_graph_layout.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tests/test_recording.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tests/test_recorded_views.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tests/test_stategraph_module.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "checked_at": "2026-10-23T07:49:13.233785+00:00",
+  "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+}

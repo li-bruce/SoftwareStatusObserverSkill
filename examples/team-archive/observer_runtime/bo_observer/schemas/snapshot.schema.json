@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/li-bruce/SoftwareStatusObserverSkill/protocol/snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "protocol": {
+      "const": "bo-snapshot/v1"
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model_revision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "build_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "producer_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "instance_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "state": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      ]
+    },
+    "context": {
+      "type": "object"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "evidence_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "event": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "guards": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "payload": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "configuration": {
+      "type": [
+        "object",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "protocol",
+    "project_id",
+    "model_revision",
+    "build_id",
+    "run_id",
+    "producer_id",
+    "instance_id",
+    "state",
+    "context",
+    "revision",
+    "evidence_id",
+    "event",
+    "guards",
+    "payload",
+    "configuration"
+  ]
+}

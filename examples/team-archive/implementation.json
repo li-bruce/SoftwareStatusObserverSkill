@@ -947,6 +947,116 @@
           "phase": "change"
         }
       ]
+    },
+    {
+      "id": "ui.command",
+      "label": "页面提交操作",
+      "business_node": "ui.command",
+      "nodes": [
+        "ui.command"
+      ],
+      "sources": [
+        "static/app.js::command",
+        "static/app.js::submitEdit",
+        "static/app.js::moveDocument",
+        "static/app.js::newRun",
+        "static/app.js::approveVersion",
+        "static/app.js::runAction"
+      ],
+      "parameters": [
+        {
+          "source": "static/app.js::command",
+          "name": "action",
+          "policy": "value",
+          "node": "ui.command",
+          "direction": "in",
+          "field": "action",
+          "reason": "记录实际提交动作或字段数量；不记录正文及 DOM 事件对象"
+        },
+        {
+          "source": "static/app.js::command",
+          "name": "data",
+          "policy": "derived",
+          "node": "ui.command",
+          "direction": "in",
+          "field": "field_count",
+          "reason": "记录实际提交动作或字段数量；不记录正文及 DOM 事件对象"
+        },
+        {
+          "source": "static/app.js::submitEdit",
+          "name": "e",
+          "policy": "derived",
+          "node": "ui.command",
+          "direction": "in",
+          "field": "action",
+          "reason": "记录实际提交动作或字段数量；不记录正文及 DOM 事件对象"
+        },
+        {
+          "source": "static/app.js::runAction",
+          "name": "e",
+          "policy": "derived",
+          "node": "ui.command",
+          "direction": "in",
+          "field": "action",
+          "reason": "记录实际提交动作或字段数量；不记录正文及 DOM 事件对象"
+        }
+      ],
+      "cases": [
+        {
+          "case": "ui_actions",
+          "node": "ui.command",
+          "phase": "return"
+        }
+      ]
+    },
+    {
+      "id": "ui.validate",
+      "label": "页面校验大小上限",
+      "business_node": "ui.validate",
+      "nodes": [
+        "ui.validate"
+      ],
+      "sources": [
+        "static/app.js::submitLimit"
+      ],
+      "parameters": [
+        {
+          "source": "static/app.js::submitLimit",
+          "name": "e",
+          "policy": "derived",
+          "node": "ui.validate",
+          "direction": "in",
+          "field": "input_length",
+          "reason": "记录实际提交动作或字段数量；不记录正文及 DOM 事件对象"
+        }
+      ],
+      "cases": [
+        {
+          "case": "ui_actions",
+          "node": "ui.validate",
+          "phase": "decision"
+        }
+      ]
+    },
+    {
+      "id": "ui.dirty",
+      "label": "标记未保存修改",
+      "business_node": "ui.dirty",
+      "nodes": [
+        "ui.dirty"
+      ],
+      "sources": [
+        "static/app.js::markDocumentDirty",
+        "static/app.js::markLimitDirty"
+      ],
+      "parameters": [],
+      "cases": [
+        {
+          "case": "ui_actions",
+          "node": "ui.dirty",
+          "phase": "change"
+        }
+      ]
     }
   ],
   "support": {
@@ -1093,6 +1203,110 @@
     "bo_stategraph/workflow.py::resume": {
       "node": "flow.policy",
       "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "static/app.js::$": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
+    },
+    "static/app.js::esc": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
+    },
+    "static/app.js::esc.<callback:String(v??'').replace:1:1>": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
+    },
+    "static/app.js::notice": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
+    },
+    "static/app.js::notice.<callback:setTimeout:0:1>": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
+    },
+    "static/app.js::doc": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
+    },
+    "static/app.js::options": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
+    },
+    "static/app.js::options.<callback:items.map:0:1>": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
+    },
+    "static/app.js::options.<callback:items.some:0:1>": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
+    },
+    "static/app.js::refresh": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
+    },
+    "static/app.js::refresh.<callback:options:2:1>": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
+    },
+    "static/app.js::refresh.<callback:state.users.filter:0:1>": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
+    },
+    "static/app.js::refresh.<callback:options:2:2>": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
+    },
+    "static/app.js::refresh.<callback:options:2:3>": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
+    },
+    "static/app.js::refresh.<callback:state.projects.find:0:1>": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
+    },
+    "static/app.js::refresh.<callback:state.folders.find:0:1>": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
+    },
+    "static/app.js::refresh.<callback:state.assignments.filter:0:1>": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
+    },
+    "static/app.js::refresh.<callback:state.assignments.filter(a=>a.folder_id===d.folder_id).map:0:1>": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
+    },
+    "static/app.js::refresh.<callback:state.assignments.filter(a=>a.folder_id===d.folder_id).map:0:1>.<callback:state.users.find:0:1>": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
+    },
+    "static/app.js::refresh.<callback:state.projects.find:0:2>": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
+    },
+    "static/app.js::refresh.<callback:[...state.runs].reverse().map:0:1>": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
+    },
+    "static/app.js::refresh.<callback:[...state.runs].reverse().map:0:1>.<callback:Object.entries(c.activities).map:0:1>": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
+    },
+    "static/app.js::refresh.<callback:[...state.grants].reverse().map:0:1>": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
+    },
+    "static/app.js::refresh.<callback:state.archives.map:0:1>": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
+    },
+    "static/app.js::<callback:['title','number','content'].forEach:0:1>": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
+    },
+    "static/app.js::<module>": {
+      "node": "ui.command",
+      "reason": "页面数据渲染或 DOM 帮助函数；所属实际操作由 ui_actions 事件和请求参数对照验证"
     }
   },
   "excluded": {
@@ -1191,6 +1405,10 @@
     "run.py::main": {
       "category": "observer",
       "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    },
+    "static/app.js::bo_record": {
+      "category": "observer",
+      "reason": "有 bo_ 标识的可选观测端口；故障隔离，不执行业务操作"
     }
   }
 }

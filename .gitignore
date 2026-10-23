@@ -9,6 +9,9 @@ scratch/
 history/
 *.sqlite*
 node_modules/
+examples/multilanguage/.stategraph/
+examples/multilanguage/bo_stategraph/data/
+examples/multilanguage/bo_stategraph/config/views/
 examples/delivery/.stategraph/
 examples/delivery/observer_generated/manifest.json
 examples/team-archive/.stategraph/

@@ -1,72 +1,67 @@
-# 从需求到真实运行
+# From requirements to actual execution
 
-本 Skill 是项目开发的一条必需支线。默认在 AI 工作过程中用状态网指导实现，主线仍可采用用户指定的任何方案、框架、编码 Skill。用户明确拒绝这种引导时，尊重其实现方式，但底层监控、按源码调整状态网、函数/参数映射、图和验证始终必需。不要把内部引导变成用户侧需要操作的流程。开发方式和业务执行方式的区分见 [独立状态网](independent-python.md)。
+This Skill is a required companion to development. The user initially chooses `drive` (execute from a state declaration) or `observe` (follow existing logic). The main workflow may use any user-selected architecture, framework, or coding Skill. Both modes always require monitoring, source-driven state-network updates, function/parameter mappings, the graph, and validation. Internal maintenance is not a user-operated workflow. See [independent state module](independent-python.md).
 
-本文的文件与命令是给 AI 和接入维护者使用的。日常用户只需先讨论图中业务含义，随后正常提出开发需求，每轮完成后查看更新图和相关结果。AI 自行维护材料并执行检查，不将内部构建步骤转交给用户；无业务含义变化时不反复要求确认图。
+The files and commands below are for AI and integration maintainers. Users discuss graph meaning, request ordinary development changes, and inspect the updated graph and results. AI maintains artifacts and runs checks. Do not repeatedly request graph confirmation when business meaning is unchanged.
 
-## 与任意开发流程配合
-
-| 主线正在做什么 | 支线同时完成什么 | 留下的依据 |
+| Main workflow | Companion work | Evidence |
 |---|---|---|
-| 讨论需求、选择方案 | 表达用户已描述的业务链；用局部图及必要澄清确认理解；据已定规则维护状态、参数、函数接口和独立预期 | 需求来源、未决问题、模型和用例 |
-| 设计、编码、重构 | 默认根据状态网设计，明确退出引导时适配用户实现；两者都维护独立状态模块、实际源码映射、核心采集、图和检查 | 修改范围、源码位置、类型、探针及模型版本 |
-| 调试和交付 | 核对真实运行、内部参数、权威效果和观察隔离；定位并修复偏差 | 同一构建的检查结果与局部图 |
+| Requirements and design | Express supplied business chains; clarify meaning with focused graphs; define states, parameters, interfaces, independent expectations | Sources, questions, model, cases |
+| Coding and refactoring | Follow recorded drive/observe choice; maintain isolated state module, source bindings, core capture, graph, checks | Change scope, locations, types, probes, model revision |
+| Debugging and delivery | Compare actual execution, internal values, authoritative effects, observer isolation | Results and focus graph for the same build |
 
-交接时带上需求、模型、源码映射、探针约定、独立预期和检查入口，不能仅传需求摘要。已有项目可以用自己的文件名、目录和测试入口，通过配置映射到检查工具。成熟状态机、事件处理器或领域对象已有明确生命周期时复用其真实声明；不为观察器再建一套控制状态，也不强制引入本示例使用的框架。
+Hand off requirements, model, bindings, probe contract, independent expectations, and check entrypoints—not just a requirements summary. Existing projects map their own names and test commands through configuration. Reuse real lifecycle declarations from mature engines, handlers, or domain objects. Do not create a second controlling state machine or require the example's framework.
 
-这条支线覆盖项目已实现的功能：漏状态、漏源码映射、漏探针或漏验证时不能报告完成。折叠和局部分析不缩小底层清单；不支持的语言或动态机制明确列为缺口。一般技术选择无需本 Skill 审批；只有会改变已确认行为的选择需要回到相应业务问题。小修改只更新受影响的材料。
+Cover all implemented features. Missing state, source mapping, capture, or verification prevents completion claims. Collapse and focus do not shrink the source inventory. Report unsupported languages and dynamic mechanisms as gaps. Ordinary implementation choices need no Skill approval; choices changing confirmed behavior return to the relevant question. Small changes update only affected artifacts.
 
-## 后续会话约定
+## Persist the development contract
 
-首次接入时，AI 在项目已有指令文件中合并一小段要求，保留其他开发规范。以下为内容示意；写入时必须换成项目的真实相对路径和可运行入口，不留下占位符。
+At first integration, merge a short contract into the project's existing instruction file, preserving other rules. Replace every placeholder with real relative paths and runnable commands:
 
 ```text
-本项目使用 business-observer 维护指定业务范围的运行图。
-默认由 AI 内部依据已确认状态网指导实现；用户明确不用该开发方式时，仅切换设计依据。
-两种方式都必须维护底层监控、随源码调整状态网、参数/函数映射、图和验证，不因沉默或框架选择停用。
-先读取本项目的业务约定、当前图及 Skill；遵守项目原有设计与编码规范。
-修改相关行为前保留变更基线。开发时同步状态机、源码映射、参数探针及独立预期。
-交付前运行项目验证入口（其中包含 change_sync check），失败先修复，不重建基线掩盖差异。
-这些维护由 AI 完成；只在业务含义不明时询问用户，结束时提供更新图和相关运行结果。
+This project uses business-observer for its developer runtime graph.
+Ask for drive or observe at first setup, record the answer and source; reuse an existing choice.
+Both modes require monitoring, source-driven state updates, parameter/function mappings, graph, and checks.
+Read the project rules, current graph, and Skill; preserve the existing design/coding workflow.
+Before related behavior changes, preserve a change baseline. Update state, bindings, probes, and independent expectations while coding.
+Run the project validation entrypoint, including change_sync check, before delivery. Fix failures; never reset the baseline to hide them.
+AI performs this maintenance. Ask the user only about unclear business meaning and present the updated graph and relevant results.
 ```
 
-项目的正常验证入口应调用同步检查并传播失败退出码。一次完整演练至少包括“只改核心源码，遗漏图或探针”的反例：确认正常入口拒绝交付，补齐对应更新并重新验证后才通过。这样既能让下一会话读到约定，也能在执行检查时发现遗漏；它不保证绕过项目入口的外部编辑会被自动拦截。
+The normal validation command must call synchronization checks and propagate failure exits. Rehearse a source-only change that omits graph/probe maintenance: the normal gate must reject it, then pass only after the missing updates and revalidation. This persists instructions across conversations and catches omissions at the gate; it cannot intercept every external edit that bypasses that gate.
 
-## 开发前
+## Before implementation
 
-1. 从需求选取业务链，形成 `intent.json`、`discovery.json` 与候选图。按 `requirements-dialogue.md` 提问。需要用户决定的行为保持未决；普通技术选择自行推进。
-2. 定义类型、状态、事件、关系规则和成功效果。已有项目复用真实声明，新增项目先约定最小执行接口和验收场景；脚手架按项目选用的方法建立，不要求整份模型完成后才能编码。
-3. 保存独立业务预期 `acceptance.json`。同时定义 `whitebox.json`：关键规则对应哪个节点、哪个函数、哪些参数，以及哪些实际事件必须满足哪些值或关系。
-4. 用 `whitebox_contract.py plan` 检查计划格式。此阶段输出 `planned`，不声称程序或测试已经通过。
-5. 用 `focus_graph.py` 输出当前局部图 JSON 和 Markdown，向用户解释相关节点及范围外条件。源码未建立时，候选图可先使用稳定身份与待绑定说明；实际验证时所有声明的关键函数必须可解析。
+1. Derive the business chain from supplied requirements into `intent.json`, `discovery.json`, and a candidate graph. Follow [dialogue rules](requirements-dialogue.md). Keep user-owned ambiguity pending; proceed with ordinary technical choices.
+2. Define types, states, events, relation rules, and success effects. Reuse actual declarations in existing projects. In new projects agree a minimal execution interface and scenarios; the entire model need not be finished before coding starts.
+3. Save independent expectations in `acceptance.json`. Define `whitebox.json`: each key rule's node, function, parameters, and required runtime values/relations.
+4. Run `whitebox_contract.py plan`. Its result is `planned`, not a passed application test.
+5. Export focused JSON/Markdown with `focus_graph.py`, explaining shown nodes and outside conditions. Design graphs may use stable IDs and pending bindings; acceptance requires every declared key function to resolve.
 
-## 每个功能修改期间
+## During each behavior change
 
-- 修改前 `change_sync begin` 保存原需求和预期；记录此次允许改变的需求。已经开始的修改继续原记录，不能用新基线掩盖陈旧证据。
-- 在 sync.json 配置 `source_scope`（roots、带理由的 exclude、require_symbol_classification）。每批编辑后运行 `python observer_runtime/bo_sync.py scan --root .`，读取 maintenance.json 并更新受影响节点、声明、源码绑定和探针。watch 命令可持续生成同一任务，但需要宿主或正在编码的 AI 消费，不能自行唤醒所有编辑器。
-- 独立源码清单包括未跟踪的新文件；业务实现必须登记进 code_files，不能只列入 watch_files。使用模型的 [implementation 清单](implementation-coverage.md)维护功能、辅助实现、参数与实际事件的对应；收尾不能用 excluded_symbols 的自由文字跳过功能。重复 scan 不会清除待办；仅当前候选通过并 accept 后更新源码基线。
-- 默认依据模型实现状态、规则和效果；用户明确不用该方式时，适配用户选择的实现。两者都用静态解析建立函数/参数/调用候选，把真实状态和关键判断与业务节点绑定，持续维护探针与检查。
-- 在真实读取、条件计算、关键函数结果、状态迁移和提交后接入中立观测接口。参数捕获与判断在同一调用中；不能重查数据或重新计算结果来拼解释。
-- 只捕获必要字段。短路未执行的条件不补造结果；同函数多次调用使用独立 call_id；运行/对象/参数版本分别关联。
-- 在 `sync.json` 配置 `"whitebox": "whitebox.json"`；新的运行必须执行相应场景并提供真实事件。`inspect` 检查符号与签名，`verify` 检查观测值，`accept` 保存对应版本。
-- 更新局部图并说明本轮可见变化。纯重构可保留业务 ID，更新源码映射；业务要求改变才修改相应预期。
+- Run `change_sync begin` before editing, preserving old requirements and expectations and declaring allowed requirement changes. Continue an existing change record; do not reset its baseline.
+- Configure `source_scope` in `sync.json`: roots, justified excludes, and `require_symbol_classification`. After editing, run `python observer_runtime/bo_sync.py scan --root .`, read `maintenance.json`, and reconcile nodes, declarations, bindings, probes. `watch` produces the same work request; a host or coding AI must consume it. It cannot wake every editor by itself.
+- Source inventory includes untracked files. Business code belongs in `code_files`, not merely `watch_files`. Maintain the [implementation inventory](implementation-coverage.md) linking features, support symbols, parameters, and actual events. Free-text `excluded_symbols` cannot bypass a feature. Repeated scans retain pending work; only accepted current candidates advance the source baseline.
+- In drive mode implement rules/states/effects from the declaration; in observe mode adapt actual application behavior. Both modes use static analysis for function/parameter/call candidates, bind actual states and key decisions to business nodes, and maintain probes and checks.
+- Capture at actual reads, condition evaluation, function results, state transitions, and after successful commits. Capture inputs and decisions from the same call. Do not query or recompute to fabricate an explanation.
+- Select necessary fields only. Do not fabricate short-circuited condition results. Repeated calls need distinct `call_id`; preserve run, object, and parameter-version identity.
+- Add `"whitebox": "whitebox.json"` to `sync.json`. Execute real scenarios and provide real events. `inspect` checks symbols/signatures, `verify` checks values, `accept` records that version.
+- Refresh the focused graph and explain visible changes. Refactors may retain business IDs while updating source mappings. Change expectations only for confirmed requirement changes.
 
-完整接入还需 `require_mapping_witnesses: true` 和 `mapping_contract` 文件。先确定受保护的场景/字段清单，观测命令交出每个 run 的实际 projection，检查器从投影取值并与公共导出绑定。格式见 [映射清单](mapping-contract.md)。原有对照继续保留：观测命令返回 mapping_checks，每项包含 id、source、projection、actual、mapped；actual 从实际存储或函数输出独立读取。不能把图中的期望再抄作 actual。运行所有约定 probe_modes，至少包含一项实际业务断言和项目测试命令；删除原有模式、探针或检查不能静默通过。
+Complete integration also requires `require_mapping_witnesses: true` and a `mapping_contract` file. Define protected scenarios/fields first. Observation commands provide each run's actual `projection`; the checker reads it and binds it to the public export. See [mapping contract](mapping-contract.md). Retain existing `mapping_checks` containing `id/source/projection/actual/mapped`. Read `actual` independently from storage or function output, never from graph expectations. Run every agreed `probe_mode`, at least one real business assertion, and the project test command. Removing an existing mode, probe, or check must not silently pass.
 
-观测输出还须包含一次真实运行的 `stategraph_export`，调用公共 `BOStateGraph.bo_export` 获得。检查其模型、构建和实例投影，不能用同名自定义类、另定 JSON 或只存在一个模块文件代替协议接入。公共查看器复用 Skill 资产；项目通过同源服务提供业务数据，扩展规则不替换公共协议。
+Observation output must contain a real run's `stategraph_export` from public `BOStateGraph.bo_export`. Check its model, build, and instance projection. A same-named custom class, alternative JSON, or merely present module file does not establish integration. Reuse shared viewer assets; supply application data through the same-origin service. Project extensions must not replace the public protocol.
 
-verify 报告分别保留 mapping、state_rules、business、project_checks。业务规则来自独立预期；项目测试可包括页面和架构，不一律称为业务错误。无法执行和缺证据保留 not_run/失败，不报通过。实际 bug 被图准确呈现时，映射仍可通过，业务规则失败。
-- 把 `check` 接入项目测试或 CI。提示词没有强制编辑能力，未接入时明确说明。
+Keep four result categories: `mapping`, `state_rules`, `business`, `project_checks`. Business rules come from independent expectations. Architecture/UI checks are not automatically business failures. Missing evidence and unexecuted checks stay failed or `not_run`. A faithfully displayed bug can pass mapping and fail business rules. Connect `check` to project tests or CI; prompts alone cannot enforce edits, and an unconnected gate must be disclosed.
 
-## 白盒契约格式
+## White-box contract
 
-参考 [最小白盒契约](../assets/whitebox.example.json)。项目要替换示例规则、源码与场景，不复制示例领域规定。
+Adapt the [minimal contract](../assets/whitebox.example.json); do not inherit its domain rules. Each `rules` entry has `id/requirement/claim/basis/category/node/source`, with optional parameter names/types and return constraints. `basis` references a confirmed requirement or explicitly marked assumption. `checks` reference rules and cases, specify `phase`, optional `select`, event `count`, and `fields`.
 
-`rules` 的每条规则包含 `id / requirement / claim / basis / category / node / source`，可约束 `parameters` 名称及类型注解、`returns`。`basis` 指向已确认需求或明确标记的假设。`checks` 引用规则与场景，指定 `phase`、可选 `select`、事件数量 `count` 及 `fields`。
+Field assertions use array paths such as `["inputs","param_version"]`. Supported checks include `type`, `equals`, numeric `min/max`, and `compare: {"path":[...],"op":"eq"}`. Operators: `eq/ne/lt/le/gt/ge/in`; no eval or executable expressions. Selectors narrow scope but must not hide required failure events. Cover each required branch.
 
-字段断言使用数组路径，例如 `["inputs","param_version"]`。可检查 `type`、`equals`、数值 `min/max`，或者与另一个字段 `compare: {"path":[...],"op":"eq"}`。支持 eq/ne/lt/le/gt/ge/in，没有 eval 或可执行表达式。选择器只缩小事件范围，不能把应检查的失败事件滤掉；规则测试须覆盖各个需要的分支。
-
-每个被检查事件须包含 id、run_id、attempt、call_id、entity、build_id、model_revision。白盒检查只在观测开启模式执行；关闭与故障模式继续核对业务约束与权威效果。
+Checked events require `id/run_id/attempt/call_id/entity/build_id/model_revision`. White-box checks run with observation enabled; off/fault modes still verify business rules and authoritative effects.
 
 ```text
 python <skill>/scripts/whitebox_contract.py plan --root . --contract whitebox.json
@@ -74,10 +69,10 @@ python <skill>/scripts/whitebox_contract.py check --root . --model behavior.json
 python <skill>/scripts/focus_graph.py --root . --model behavior.json --nodes permission --depth 1 --out review/focus.json --markdown review/focus.md
 ```
 
-运行材料采用 change_sync 的格式：`build_id` 与 `runs`；每项 run 有 `case`、`mode`、`events`、业务 `observations`。手写一组符合预期的事件只适合检查器单元测试，不能用作应用验收。
+Runtime evidence uses change_sync's `build_id` and `runs`, each with `case/mode/events/observations`. Handwritten expected events are suitable only for checker unit tests, never application acceptance.
 
-## 开发后
+## After implementation
 
-依次检查静态关联、独立业务场景、白盒事实、并发/等待/资源、观测隔离、图的解释和导出复现。失败定位到需求、节点、函数、实际值；证据缺失单独列出。使用 [验证规则](validation-rules.md) 选择适用检查，保留范围和未知项。
+Check static bindings, independent business scenarios, white-box facts, applicable concurrency/wait/resource behavior, observer isolation, graph explanation, and export reproduction. Locate failures by requirement, node, function, and actual value; list missing evidence separately. Select applicable [validation rules](validation-rules.md), retaining unknowns and scope.
 
-独立测试用新目录和新对话，输入仅包含 Skill 与真实需求。模拟用户的回答明确标注，不冒充用户已确认的生产需求。先让开发者提出问题，再按固定的模拟用户设定回答；保留追问、错误、修复和最后通过的全部过程。
+Independent trials use a new directory and conversation, initially receiving only the Skill and actual request. Mark simulated answers clearly; never present them as confirmed production requirements. Let the developer ask first, then answer from the trial persona. Preserve questions, failures, fixes, and the final passing sequence.

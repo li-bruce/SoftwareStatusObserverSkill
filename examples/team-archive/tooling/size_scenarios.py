@@ -15,7 +15,7 @@ def execute(case: str, mode: str, model: dict, build_id: str) -> dict:
             observed["limit_bytes"] = f.store.snapshot()["projects"][0]["archive_limit_bytes"]
         elif case in ("size_equal","size_utf8_over"):
             body = "中"*2730+"ab" if case=="size_equal" else "中"*2731
-            f.service.edit_document("DOC-001","边界资料","BYTES-001",body)
+            f.service.edit_document("DOC-001","Boundary document","BYTES-001",body)
             f.approve()
             rid = f.run()
             if case=="size_equal":
@@ -39,7 +39,7 @@ def execute(case: str, mode: str, model: dict, build_id: str) -> dict:
             f.service.set_archive_limit("P1",1)
             with f.store.connect() as db:
                 db.execute("INSERT INTO documents VALUES(?,?,?,?,?,?,?)",
-                           ("DOC-002","P2","F4","另一项目","P2-001","中"*100,1))
+                           ("DOC-002","P2","F4","Another project","P2-001","中"*100,1))
             f.service.add_approval("DOC-002","dana","bob",2000.)
             rid = f.service.create_run("DOC-002","dana",2)
             f.finish(rid)

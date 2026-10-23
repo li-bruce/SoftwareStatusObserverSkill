@@ -1,6 +1,6 @@
 # Installation and usage
 
-[中文](usage.zh-CN.md) · [Home](../README.en.md)
+[中文](usage.zh-CN.md) · [Home](../README.md)
 
 ## Use it in your project
 
@@ -13,7 +13,9 @@ description and confirm that it reflects my intent before implementation.
 Let me inspect decisions, key parameters and functions in the runtime graph.
 ```
 
-The Skill first builds a focused graph from your description, then uses necessary clarifications or counterexamples to confirm its interpretation. It does not proactively expand the workflow or recommend business rules. Later additions from you or another Skill update the same graph and its checks. Once that is clear, continue with your project's development approach. The agent maintains state definitions, mappings, probes and checks internally. At the end of each iteration, open the updated graph, expand details, search for key parameters and functions, and request further changes. You do not need to fill in review files or run synchronization commands yourself.
+The Skill first posts a concise business graph directly in the conversation and provides its verified live Web address. You confirm or correct it in the conversation before behavior implementation. It builds that focused graph from your description, then uses necessary clarifications or counterexamples to confirm its interpretation. It does not proactively expand the workflow or recommend business rules. Later additions from you or another Skill update the same graph and its checks. Once that is clear, continue with your project's development approach. The agent maintains state definitions, mappings, probes and checks internally. At the end of each iteration, open the updated graph, expand details, search for key parameters and functions, and request further changes. You do not need to fill in review files or run synchronization commands yourself.
+
+At first use, explicitly choose **drive** or **observe**. Both maintain observation and mapping checks. Business ambiguities come to you; the coding agent resolves implementation bindings against source and tests. See the [Python/Node/React/Vue example](../examples/multilanguage/README.md) and [protocol reference](../skills/business-observer/references/multilanguage.md).
 
 ## Read the graph
 
@@ -25,19 +27,19 @@ The Skill first builds a focused graph from your description, then uses necessar
 
 The top-level “checking” state is a summary. Each run retains the waiting, running and completion state of every declared activity. Folding nodes only changes presentation. Run identity, parameter version and build version keep records distinct; missing observations are not inferred as success.
 
-Business, function, state, parameter and resource nodes share one canvas, with different shapes and colors. Double-click a node, or select it and click “展开” (expand). Select “源码” (source) to open code beside it.
+Business, function, state, parameter and resource nodes share one canvas, with different shapes and colors. Double-click a node, or select it and click “Expand”. Select “Source” to open code beside it.
 
-Drag nodes to position them, empty group interiors to move the group, and the canvas background to pan. Positions, expansion and camera settings are saved in the project. Runtime updates only change displayed facts. Select “固定节点” (pin, shortcut P) to preserve a position during automatic layout. Choose circular grouping, layered or stress layout, click “自动布局”, and undo if needed. Layout preferences do not change application state or authorization.
+Drag nodes to position them, empty group interiors to move the group, and the canvas background to pan. Positions, expansion and camera settings are saved in the project. Runtime updates only change displayed facts. Select “Pin” (shortcut P) to preserve a position during automatic layout. Choose circular grouping, layered or stress layout, click “Arrange”, and undo if needed. Layout preferences do not change application state or authorization.
 
-Select any node and choose “名称与备注” (name and note), edit its label, note or core marker, then save. Business, function, parameter and state nodes are supported. “恢复原名” restores the generated name while keeping the note. Source identities and runtime facts stay unchanged. Stable node IDs preserve personal labels across regeneration. Folding a parent retains its children's expansion choices.
+Select any node and choose “Name and note”, edit its label, note or core marker, then save. Business, function, parameter and state nodes are supported. “Restore original name” restores the generated name while keeping the note. Source identities and runtime facts stay unchanged. Stable node IDs preserve personal labels across regeneration. Folding a parent retains its children's expansion choices.
 
 Preferences live in `bo_stategraph/config/views/local.json`. They survive a server restart, port change or cleared browser cache. Git and core exports exclude this personal file. Conflicting or failed saves are reported; runtime upgrades do not overwrite it. Real-time collaborative editing is not provided.
 
-The initial view shows high-level nodes. Expand for key functions, state and values; “分析细节” reveals auxiliary code, resources and joins. To replay operations, select all instrumented events or a focused region, start recording, operate the application, then stop. Steps follow the current view and show before/after values. Uncaptured behavior remains unknown.
+The initial view shows high-level nodes. Expand for key functions, state and values; “Analysis details” reveals auxiliary code, resources and joins. To replay operations, select all instrumented events or a focused region, start recording, operate the application, then stop. Steps follow the current view and show before/after values. Uncaptured behavior remains unknown.
 
 Search by name, function, parameter or note. Results identify the owning function and input/output type. Selecting a result reveals its parents and centers the node, preserving other expanded regions and positions. A captured parameter's source link opens its owning function.
 
-All active layout and styling components are open source: PixiJS (MIT), ELK.js (EPL-2.0), and original JS/CSS (MIT). No yFiles code is included. See [third-party notices](../THIRD_PARTY_NOTICES.md) and the [ReBAC graph design](../skills/business-observer/references/rebac-graph.md) (Chinese; the example captures real conditions, while general engine integration remains pending).
+All active layout and styling components are open source: PixiJS (MIT), ELK.js (EPL-2.0), and original JS/CSS (MIT). No yFiles code is included. See [third-party notices](../THIRD_PARTY_NOTICES.md) and the [ReBAC graph design](../skills/business-observer/references/rebac-graph.md) (the example captures real conditions; general engine integration remains pending).
 
 ## Integration maintainers: internal synchronization
 
@@ -70,7 +72,7 @@ python tooling/dev.py archive --label my-change
 
 `verify` executes the program and counterexamples. `accept` accepts only that verified candidate. `check` compares the current inputs before delivery. Later edits to code, graph, rules, tools or tests invalidate the old acceptance. Do not rewrite expected outcomes to hide a bug.
 
-Inventory Python source from the project root and maintain the model's `implementation` contract linking features, supporting functions, parameters and real scenarios. An exclusion sentence cannot replace a feature mapping; missing fields or events fail verification. Existing projects must add the [coverage inventory](../skills/business-observer/references/implementation-coverage.md) after upgrading and continue the existing change. Reports still separate mapping fidelity, state constraints, business expectations and project checks.
+Inventory project-owned source through the Python, JS/TS, React, and Vue adapters and maintain the model's `implementation` contract linking features, supporting functions, parameters and real scenarios. An exclusion sentence cannot replace a feature mapping; missing fields or events fail verification. Existing projects must add the [coverage inventory](../skills/business-observer/references/implementation-coverage.md) after upgrading and continue the existing change. Reports still separate mapping fidelity, state constraints, business expectations and project checks.
 
 Commands in `sync.json` are argument arrays, never shell strings. `{python}` resolves to the current interpreter. First launch restores a fixed, reviewed release baseline; edited code is not automatically approved.
 

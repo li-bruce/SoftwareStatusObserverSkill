@@ -4,6 +4,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
+from setup_adapters import configure
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLE = ROOT / "examples/team-archive"
@@ -17,6 +18,7 @@ def run(*args):
 
 
 def prepare():
+    configure()
     state = EXAMPLE / ".stategraph"
     if not (state / "active.json").exists():
         if state.exists() and any(state.iterdir()):

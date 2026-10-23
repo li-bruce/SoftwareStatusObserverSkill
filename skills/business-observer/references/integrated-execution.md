@@ -1,39 +1,39 @@
-# 在现有状态机和图中表达并发
+# Concurrency inside the existing state machine and graph
 
-优先扩展项目已有的执行机制。Petri 的贡献是令牌/容量、使能、原子占用与归还、等待和汇合语义；开发者通常关心哪项工作正在执行、为何等待、什么完成后可以继续。用原有业务和函数节点表达这些关系。单独的 Petri 调试投影只在用户需要它时增加，不能成为理解原图的必经页面。
+Extend the application's actual execution mechanism. Petri-style ideas contribute capacity/tokens, enabling, atomic acquire/release, waiting, and joins. Developers need to see what runs, why it waits, and what enables progress through existing business/function nodes. A separate Petri projection is optional only when requested, never a mandatory extra authority or page.
 
-## 完整状态与显示摘要
+## Complete state and visible summary
 
-主状态“检查中”包含摘要计算、内容检查等活动。每次运行应保存完整内部配置：运行 ID、参数版本、各活动实例的状态、资源范围/容量/占用者、等待对象、汇合条件与已完成项。一个函数多次并行调用时，需要独立调用身份；不能只按函数名覆盖最后结果。
+A high-level checking state summarizes digest/content activities. Retain complete per-run configuration: run ID, parameter version, activity-instance states, resource scope/capacity/holders, waiting targets, join condition, and completed work. Repeated concurrent calls require distinct identities, not a last-result slot keyed by function name.
 
-把这些活动与资源放进原图声明，执行器和生成器读取同一份定义。上层节点汇总内部状态；下钻后仍是同一组身份，不创建另一套名称相似的活动。实例查询与视图折叠无关。修改参数后，旧运行即使不再允许提交，其仍在执行的活动也须可查询，直到确实结束。
+Activities/resources belong in the original declaration read by executor and generator. Summary and drilldown use the same IDs. Instance queries are independent of collapse. After parameter changes, an old run's still-running activities remain queryable until they actually stop, even if commit is no longer permitted.
 
-状态完整性以声明的业务执行范围为边界。未监控的普通调用、外部服务、动态生成活动要明确列出。遇到未声明活动，显示未知或报告契约错误，不归入一个看似完整的“运行中”。不能从静态调用关系猜实际运行状态。
+Completeness is bounded by declared business execution scope. Report ordinary unmonitored calls, external services, and dynamic activities. Undeclared work is unknown or a contract error, not hidden under a seemingly complete running label. Static calls do not reveal actual state.
 
-## 执行约束
+## Execution constraints
 
-- 占用资源和进入 running 原子完成。资源不足则 waiting，并记录等待哪种资源。
-- 完成或失败时归还实际占用资源。取消需说明是终止未开始工作、合作取消，还是等待已运行工作结束；不能将“请求取消”显示成“所有工作已停止”。
-- ALL 汇合要求全部前置活动结束且满足成功条件。主状态进入 ready/完成时检查同一次运行、同一参数版本的内部配置，不能只相信函数返回 passed=true。
-- 资源有实例范围：本次运行、进程共享或外部全局。每次运行各有一个容量为 1 的池，不能宣称它们共同受一个全局名额约束。
-- 同一个模型允许多个活动同时运行。不要为了让主状态枚举保持单值而丢掉并行配置。
+- Acquire capacity and enter running atomically. Insufficient capacity enters waiting with the resource identified.
+- Release actual holdings on completion/failure. Distinguish cancelling queued work, cooperative cancellation, and waiting for running work to finish; a cancellation request is not proof all work stopped.
+- ALL joins require every prerequisite in the same run/version to finish successfully. Check internal configuration before ready/completed, not merely a passed=true return.
+- Resource scope is explicit: run-local, process-shared, or external/global. Separate capacity-one pools do not enforce one global slot.
+- Multiple activities may run simultaneously. A single high-level enum must not discard the parallel configuration.
 
-项目可用层次/并行状态机，或主状态加有类型的活动配置；按现有架构选型。没有必要把所有软件重新实现为通用 Petri 引擎。
+Use a hierarchical/parallel engine or a high-level state plus typed activities as appropriate. Do not rewrite every application as a generic Petri engine.
 
-## Python 参考协议
+## Python reference contract
 
-`machine.execution` 声明 `schema=activity-graph/v1`、`within`、`parent`、活动、资源、汇合和相应主状态 guard。活动与资源 ID 直接引用原图节点；节点有 execution_role=activity/resource/join。资源边携带正整数 units，汇合边连接每个前置活动；生成器从机器声明生成这些边。
+machine.execution declares schema=activity-graph/v1, within, parent, activities/resources/join and corresponding guards. IDs reference original graph nodes with execution_role activity/resource/join. Resource edges carry positive integer units; join edges cover every prerequisite. Generate them from the machine declaration.
 
-每次执行配置包含 attempt、param_version、revision、activities、resources、join、journal。journal 每条有 seq/event/activity/before/after；权威查询返回所有执行实例，不能仅返回最近的一次。声明节点和静态函数节点仍各自保留源码来源。
+Configurations contain attempt/param_version/revision/activities/resources/join/journal. Journal entries contain seq/event/activity/before/after. Authoritative queries return all execution instances, not only the latest. Declared activities and static functions retain their own source attribution.
 
-当前检查器支持每次运行每个声明活动执行一次、运行内整数资源、wait/start/finish/join/abort 与 ALL 汇合。它不支持动态活动数量、多次同名调用、进程级资源池或任意循环。需要这些行为时扩展实例标识、引擎和检查器，不能复用本协议结果声称已覆盖。
+The checker supports one execution per declared activity per run, run-local integer resources, wait/start/finish/join/abort, and ALL joins. It does not support dynamic activity counts, repeated same-name instances, process-wide pools, or arbitrary loops. Extend identity/engine/checker before claiming those semantics.
 
-change_sync verify 自动比较运行机器声明，检查节点与关系一致性并重放内部状态；required_execution_cases 指定必须返回 configurations 的场景。关闭观测时仍应从应用自己的状态存储取到配置。仅凭 JSON 结构合法不能证明完成真实检查；另外测试实际函数结果与业务效果。
+change_sync verify compares loaded declarations, node/edge consistency, and journal replay. required_execution_cases require configurations. Even with capture off, read configurations from application storage. Legal JSON does not establish actual work completion; independently test function results/effects.
 
-## 原图中的显示
+## Presentation
 
-业务组可以显示“摘要正在执行；标记检查等待名额；可用 0/1”。展开后，每个原节点显示状态、函数、关键参数和源码。资源边说明“正在占用”“名额已用完”“名额已归还”；汇合边说明哪项已完成、哪项还需等待。
+A business group can summarize “Digest running; content check waiting; available 0/1.” Expand original nodes for state, function, parameters, and source. Resource edges indicate acquired/exhausted/released capacity; join edges identify finished/pending prerequisites.
 
-运行选择使用清晰标题，例如“第 2 次运行，参数版本 3”。回看某一步时，节点值和边状态都使用那一步的数据；流程最终结果需单独标明。切换版本时先清除旧画面再加载，避免新版标题配上旧数据。研究术语、测试数量和冗长解释放在文档，不占图的操作空间。
+Use readable run/version labels. Every historical frame uses that frame's values/edges; final outcome is separate. Clear old content on version switches. Keep research terminology/test counts out of the operating canvas.
 
-通用 stategraph-viewer 模板提供分层图与源码展开，不会自动理解任意项目的内部配置。接入本协议时，应在项目页面源中实现按 attempt 选择配置、按 journal 时刻读取状态、把 activities/resources/join 映射到原节点，并进行浏览器验证。不要只复制模板就声称完整状态已经可见。类型名称使用真实源码或明确的模型类型；普通辅助调用在下钻后展示，不能聚合成似乎决定业务执行的资源边。
+The shared viewer cannot understand arbitrary project configuration automatically. Adapt attempt selection, exact journal frames, and activity/resource/join node bindings and verify in a browser. Copying a template proves no complete visibility. Use real source/model types. Ordinary helper calls remain drilldown nodes, not fabricated resource dependencies.

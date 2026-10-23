@@ -14,7 +14,7 @@ class OwnLogic:
         elif event == "finish" and self.state == "running":
             self.state = "done"
         else:
-            raise ValueError("当前状态不能执行这个操作")
+            raise ValueError("The current state does not allow this operation")
         return self.state
 
 
@@ -30,7 +30,7 @@ class Job:
 
     def run(self, event: str, slots: int = 0):
         if type(slots) is not int or slots < 0:
-            raise ValueError("可用名额必须是非负整数")
+            raise ValueError("Available slots must be a nonnegative integer")
         self.logic.apply(event, slots)
         self.slots = slots
         if event == "finish": self.effects += 1

@@ -39,6 +39,10 @@ def sync():
                 'release':result['release'],'protocols':result['protocols'],
                 'manifest':('../../' if project=='delivery' else '../')+'bo_stategraph/runtime-version.json'}
         (root/runtime/'origin.json').write_text(json.dumps(origin,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
+    for source,target in [('bo_observer/adapters/javascript/bo_runtime.mjs','bo_runtime.mjs'),
+        ('bo_observer/adapters/python/bo_probe.py','bo_probe.py'),('bo_observer/adapters/python/bo_executor.py','bo_executor.py'),
+        ('bo_contracts.py','bo_contracts.py'),('execution_contract.py','execution_contract.py')]:
+        shutil.copyfile(SKILL/'scripts'/source,ROOT/'examples/multilanguage/bo_stategraph'/target)
     print('Runtime and viewer sources copied; project definitions and personal files preserved.')
 
 

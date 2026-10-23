@@ -22,11 +22,11 @@ def main():
     if not args.candidate:
         manifest=json.loads((ROOT/"manifest.json").read_text(encoding="utf-8"))
         if check(ROOT,model,manifest)["status"]!="current" or manifest["build_id"]!=loaded["build_id"]:
-            raise RuntimeError("源码与已验收版本不一致，请先完成项目检查。")
+            raise RuntimeError("Source differs from the accepted build; complete project checks first.")
     sources={p:(ROOT/p).read_text(encoding="utf-8-sig") for p in loaded["files"] if p.endswith((".py",".json",".js",".html",".css"))}
     from integrations.bo_server import serve
     if capture(ROOT,model)["build_id"]!=loaded["build_id"]:
-        raise RuntimeError("源码在加载时发生变化")
+        raise RuntimeError("Source changed during loading")
     serve(ROOT,args,model,loaded,sources)
 
 

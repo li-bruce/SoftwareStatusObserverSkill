@@ -1,0 +1,86 @@
+{
+  "archive": "gallery-trial-evidence.zip",
+  "sha256": "fd2699c98b7286c297d76cce7927c54f52130b9835487d18e34466695d19173e",
+  "files": 386,
+  "raw_command_logs_exact": true,
+  "source_zip_sha256_unchanged": "e77432cf9a7ad8df736f513215a660a990fa0c1d6c8ce6d5f5e0d42a05399970",
+  "redacted_copies": [
+    {
+      "path": "outputs/REVIEW.md",
+      "credential_occurrences": 1,
+      "original_preserved_locally": true
+    },
+    {
+      "path": "review/browser-operation-recording.json",
+      "credential_occurrences": 7,
+      "original_preserved_locally": true
+    },
+    {
+      "path": "review/changes/causal-capture-iteration/baseline.json",
+      "credential_occurrences": 12,
+      "original_preserved_locally": true
+    },
+    {
+      "path": "review/changes/causal-capture-iteration/structure.json",
+      "credential_occurrences": 9,
+      "original_preserved_locally": true
+    },
+    {
+      "path": "review/changes/initial-implementation/structure.json",
+      "credential_occurrences": 9,
+      "original_preserved_locally": true
+    },
+    {
+      "path": "review/changes/png-only-v2/baseline.json",
+      "credential_occurrences": 12,
+      "original_preserved_locally": true
+    },
+    {
+      "path": "review/changes/png-only-v2/structure.json",
+      "credential_occurrences": 9,
+      "original_preserved_locally": true
+    },
+    {
+      "path": "review/runtime-recording.json",
+      "credential_occurrences": 7,
+      "original_preserved_locally": true
+    },
+    {
+      "path": "review/source-index.json",
+      "credential_occurrences": 9,
+      "original_preserved_locally": true
+    },
+    {
+      "path": "review/v1/browser-recording.json",
+      "credential_occurrences": 7,
+      "original_preserved_locally": true
+    },
+    {
+      "path": "review/v1/c3-baseline.json",
+      "credential_occurrences": 12,
+      "original_preserved_locally": true
+    },
+    {
+      "path": "review/v1/manifest.json",
+      "credential_occurrences": 3,
+      "original_preserved_locally": true
+    },
+    {
+      "path": "review/v2/baseline.json",
+      "credential_occurrences": 12,
+      "original_preserved_locally": true
+    },
+    {
+      "path": "review/v2/browser-recording.json",
+      "credential_occurrences": 7,
+      "original_preserved_locally": true
+    },
+    {
+      "path": "review/v2/manifest.json",
+      "credential_occurrences": 3,
+      "original_preserved_locally": true
+    }
+  ],
+  "files_manifest": "EVIDENCE-MANIFEST.json inside archive",
+  "excluded": "scenarios, runtime libraries/databases, tokens, sessions, personal config"
+}

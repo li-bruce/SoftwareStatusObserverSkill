@@ -16,82 +16,83 @@ def build():
         nodes.append({'id':id,'label':label,'summary':extras.pop('summary',label),'kind':kind,
             'layer':'program' if parent else 'business','source':{'path':path,'symbol':symbol},
             'capture':{'in':inputs or {},'out':outputs or {}},**({'parent':parent} if parent else {}),**extras})
-    node('flow.input','读取本次内容','Delivery.prepare',summary='读取文本和参数版本')
-    node('flow.permission','检查执行权限','authorized',summary='操作者有执行角色，且至少一份授权有效')
-    node('flow.checks','检查内容','run_checks',path='app/checks.py',summary='两项检查都通过后，才能提交',
+    node('flow.input',"Read the current content",'Delivery.prepare',summary="Read text and parameter version")
+    node('flow.permission',"Check execution permission",'authorized',summary="The actor has an execution role and at least one valid authorization")
+    node('flow.checks',"Check content",'run_checks',path='app/checks.py',summary="Both checks must pass before committing",
          outputs={'revision':'number','activity':'string','event':'string'})
-    node('flow.commit','提交交付物','Delivery.commit',summary='提交前再次检查权限和参数版本')
-    node('flow.wait','等待或重新执行','Delivery.command',summary='补充授权或修改内容后，可以重新检查')
-    node('read','读取输入','Delivery.prepare','flow.input',kind='action',outputs={'param_version':'number','length':'number'})
-    node('execute','检查并提交指定版本','Delivery.execute','flow.input',kind='action',
-         inputs={'expected_version':'number'},summary='这条命令只提交启动时指定的内容版本')
-    node('authorize','判断授权是否有效','authorized','flow.permission',kind='decision',
+    node('flow.commit',"Commit delivery",'Delivery.commit',summary="Recheck authorization and parameter version before commit")
+    node('flow.wait',"Wait or retry",'Delivery.command',summary="Retry checks after authorization or content changes")
+    node('read',"Read input",'Delivery.prepare','flow.input',kind='action',outputs={'param_version':'number','length':'number'})
+    node('execute',"Check and commit the requested version",'Delivery.execute','flow.input',kind='action',
+         inputs={'expected_version':'number'},summary="This command commits only the content version selected at start")
+    node('authorize',"Evaluate authorization",'authorized','flow.permission',kind='decision',
          inputs={'role':'string','grants':'number'},outputs={'allowed':'boolean','evaluated_grants':['string']},predicate='engineer AND ANY eligible grant')
-    node('grant','检查一份授权','eligible_grant','flow.permission',kind='decision',
+    node('grant',"Evaluate one authorization",'eligible_grant','flow.permission',kind='decision',
          inputs={'grant_id':'string','grant_version':'number','param_version':'number','clock':'number','expires':'number'},
          outputs={'allowed':'boolean','evaluated':['string'],
                   'conditions':{k:'boolean' for k in ('project','actor','version','not_revoked','not_expired')}},
-         summary='保留实际执行的条件；短路跳过的条件没有结果')
+         summary="Keep actual evaluated conditions; skipped short-circuit conditions have no result")
     for resource in execution['resources']:
         node(resource['id'],resource['label'],'ActivityExecution.start',execution['parent'],path='bo_stategraph/workflow.py',
-             kind='data',execution_role='resource',summary='每项检查占用一个名额，结束后归还')
+             kind='data',execution_role='resource',summary="Each check acquires one slot and releases it on completion")
     for activity in execution['activities']:
         checksum=activity['id']=='checksum'
         node(activity['id'],activity['label'],activity['source']['symbol'],execution['parent'],
              path=activity['source']['path'],execution_role='activity',inputs={'length':'number'},
              outputs={'state':'string',**({'checksum':'string'} if checksum else {'safe':'boolean'})},
-             summary='计算文本的 SHA-256 摘要' if checksum else '检查文本是否包含 SECRET: 标记')
+             summary="Compute the text SHA-256 digest" if checksum else "Check for the SECRET: marker")
     join=execution['join']
     node(join['id'],join['label'],'ActivityExecution.join',execution['parent'],kind='decision',path='bo_stategraph/workflow.py',
          execution_role='join',outputs={'passed':'boolean','tasks':['string']},predicate='ALL checks passed',
-         summary='等待两项检查结束；只有全部通过才继续')
+         summary="Wait for both checks; continue only if both pass")
     for id,label,symbol,parent,path in [
-        ('execution.init','建立本次活动状态','ActivityExecution.__init__','workers','bo_stategraph/workflow.py'),
-        ('execution.finish','记录结果并归还名额','ActivityExecution.finish','workers','bo_stategraph/workflow.py'),
-        ('execution.invariant','核对可用和占用的名额','ActivityExecution.invariant','workers','bo_stategraph/workflow.py'),
-        ('execution.snapshot','读取全部内部状态','ActivityExecution.snapshot','workers','bo_stategraph/workflow.py'),
-        ('execution.progress','保存这次运行的状态','Delivery.execution_progress','workers','app/service.py'),
-        ('execution.abort','取消未开始的检查','ActivityExecution.abort','join','bo_stategraph/workflow.py'),
-        ('execution.lookup','查找指定运行','Store.execution','execution.progress','app/store.py'),
-        ('execution.save','保存指定运行','Store.put_execution','execution.progress','app/store.py'),
-        ('execution.update','更新指定运行的流程状态','Store.update_execution','execution.progress','app/store.py'),
-        ('execution.all','查询全部运行','Store.snapshot','execution.progress','app/store.py')]:
+        ('execution.init',"Create this run's activity configuration",'ActivityExecution.__init__','workers','bo_stategraph/workflow.py'),
+        ('execution.finish',"Record result and release the slot",'ActivityExecution.finish','workers','bo_stategraph/workflow.py'),
+        ('execution.invariant',"Verify available and occupied slots",'ActivityExecution.invariant','workers','bo_stategraph/workflow.py'),
+        ('execution.snapshot',"Read complete internal state",'ActivityExecution.snapshot','workers','bo_stategraph/workflow.py'),
+        ('execution.progress',"Persist this run's state",'Delivery.execution_progress','workers','app/service.py'),
+        ('execution.abort',"Cancel checks that have not started",'ActivityExecution.abort','join','bo_stategraph/workflow.py'),
+        ('execution.lookup',"Find a specific run",'Store.execution','execution.progress','app/store.py'),
+        ('execution.save',"Persist a specific run",'Store.put_execution','execution.progress','app/store.py'),
+        ('execution.update',"Update a specific run's phase",'Store.update_execution','execution.progress','app/store.py'),
+        ('execution.all',"Query all runs",'Store.snapshot','execution.progress','app/store.py')]:
         node(id,label,symbol,parent,path=path)
-    node('recheck','提交前再次检查','Delivery.commit','flow.commit',kind='decision',outputs={'allowed':'boolean','version_ok':'boolean'})
-    node('commit','保存交付物','Delivery.commit','flow.commit',kind='effect',outputs={'version':'number','checksum':'string'})
-    node('effect.storage','写入交付物记录','Store.artifact','commit',path='app/store.py',analysis_level='advanced')
-    node('job.storage','保存任务参数','Store.put','flow.input',path='app/store.py',analysis_level='advanced')
-    for ident,label,symbol in [('execution.record','保存完整实例','execution_record'),
-            ('execution.advance','推进并保存流程状态','advance_record'),
-            ('execution.recover','标记中断实例','recover_records')]:
+    node('recheck',"Recheck before commit",'Delivery.commit','flow.commit',kind='decision',outputs={'allowed':'boolean','version_ok':'boolean'})
+    node('commit',"Persist delivery",'Delivery.commit','flow.commit',kind='effect',outputs={'version':'number','checksum':'string'})
+    node('effect.storage',"Insert delivery record",'Store.artifact','commit',path='app/store.py',analysis_level='advanced')
+    node('job.storage',"Save task parameters",'Store.put','flow.input',path='app/store.py',analysis_level='advanced')
+    for ident,label,symbol in [('execution.record',"Persist the complete instance",'execution_record'),
+            ('execution.advance',"Advance and persist the phase",'advance_record'),
+            ('execution.recover',"Mark interrupted instances",'recover_records')]:
         node(ident,label,symbol,'flow.checks',path='bo_stategraph/workflow.py',analysis_level='advanced')
-    node('transition.storage','保存实际迁移','Store.record_transition','execution.advance',path='app/store.py',analysis_level='advanced')
-    node('wait','说明不能继续的原因','Delivery.prepare','flow.wait',kind='wait',outputs={'reason':'string'})
-    node('change','修改、取消或补充授权','Delivery.command','flow.wait',kind='action',outputs={'action':'string','state':'string'})
+    node('transition.storage',"Record actual transition",'Store.record_transition','execution.advance',path='app/store.py',analysis_level='advanced')
+    node('wait',"Explain why execution cannot continue",'Delivery.prepare','flow.wait',kind='wait',outputs={'reason':'string'})
+    node('change',"Edit, cancel, or restore authorization",'Delivery.command','flow.wait',kind='action',outputs={'action':'string','state':'string'})
     for state in machine['values']:
         group='input' if state=='draft' else 'checks' if state=='checking' else 'commit' if state in ('ready','completed') else 'wait'
         node('state.'+state,machine['labels'][state],'advance','flow.'+group,kind='state',path='bo_stategraph/workflow.py',layer='state',value=state)
     def edge(a,b,type,label,**extra):
         edges.append({'id':a+'>'+b+':'+type,'from':a,'to':b,'type':type,'label':label,
                       'evidence':'executable declaration' if type in ('resource','join') else 'business mapping and source binding',**extra})
-    for a,b,type,label in [('read','authorize','data','使用本次参数'),('grant','authorize','data','任一有效授权可通过'),('authorize','checksum','guard','有执行权限'),
-        ('authorize','privacy','guard','有执行权限'),('join','recheck','guard','两项检查通过'),
-        ('recheck','commit','guard','当前权限和版本仍有效'),('authorize','wait','flow','缺少有效授权'),
-        ('recheck','wait','flow','权限或版本已改变'),('change','read','flow','重新读取内容')]:edge(a,b,type,label)
+    for a,b,type,label in [('read','authorize','data',"Use this run's parameters"),('grant','authorize','data',"Any valid authorization permits execution"),('authorize','checksum','guard',"Execution permission granted"),
+        ('authorize','privacy','guard',"Execution permission granted"),('join','recheck','guard',"Both checks passed"),
+        ('recheck','commit','guard',"Current permission and version remain valid"),('authorize','wait','flow',"No valid authorization"),
+        ('recheck','wait','flow',"Permission or version changed"),('change','read','flow',"Read content again")]:edge(a,b,type,label)
     for a in execution['activities']:
-        for rid,units in a['requires'].items():edge(rid,a['id'],'resource',f'占用 {units} 个名额；结束后归还',units=units)
-        edge(a['id'],join['id'],'join','等待这项检查完成')
+        for rid,units in a['requires'].items():edge(rid,a['id'],'resource',f'Acquire {units} slots; release on completion',units=units)
+        edge(a['id'],join['id'],'join',"Wait for this check to finish")
     for n in nodes:
-        if n.get('parent'):edge(n['parent'],n['id'],'contains','查看内部')
+        if n.get('parent'):edge(n['parent'],n['id'],'contains',"Inspect internals")
     files=sorted(p.relative_to(ROOT).as_posix() for folder in ('app','integrations') for p in (ROOT/folder).glob('*.py'))
     files+=[p.relative_to(ROOT).as_posix() for p in (ROOT/'bo_stategraph').glob('*.py')]
     files+=['tooling/build_graph.py','requirements.txt','observer_generated/runtime/recording_session.py','observer_generated/runtime/bo_stategraph.py',
-            'observer_generated/runtime/bo_design.py','observer_generated/runtime/bo_web.py']
+            'observer_generated/runtime/bo_design.py','observer_generated/runtime/bo_web.py',
+            'observer_generated/runtime/observation_scope.py']
     files += [p.relative_to(ROOT).as_posix() for p in (ROOT/'integrations/bo_view').glob('*') if p.suffix in ('.js','.html','.css')]
     roots=['flow.input','flow.permission','flow.checks','flow.commit','flow.wait']
     model={'schema_version':3,'revision':revision,'intent':'intent.json','source_files':files,'nodes':nodes,'edges':edges,
            'overview':[{'node':n,'x':i*400,'y':0} for i,n in enumerate(roots)],'graph_roots':roots,'machine':machine,
-           'presentation':{'subject':'数据交付','layout_id':'delivery-example','execution_projection':'inline',
+           'presentation':{'subject':"Data delivery",'layout_id':'delivery-example','execution_projection':'inline',
                            'default_expanded':['flow.checks']},
            'scope':{'observable':['declared activity instances, capacity and waiting','authorization and parameter versions','committed SQLite effects'],
                     'unknowns':['unselected ordinary function locals','external services','process-crash worker restoration']}}
@@ -102,7 +103,7 @@ def build():
     cfg=json.loads((ROOT/'sync.json').read_text(encoding='utf-8'))
     model['source_files']=sorted(set(model['source_files']+cfg['code_files']))
     model['implementation']=json.loads((ROOT/'implementation.json').read_text(encoding='utf-8'))
-    model['source_files'].append('implementation.json')
+    model['source_files'] += ['implementation.json','bo_stategraph/machine.json']
     by_id={n['id']:n for n in model['nodes']}
     by_id['read']['capture']['in']={'expected_version':'number'}
     by_id['recheck']['capture']['in']={'expected_version':'number'}

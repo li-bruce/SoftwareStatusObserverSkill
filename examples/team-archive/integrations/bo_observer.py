@@ -6,6 +6,7 @@ from archive_app.ports import TracePort
 from observer_runtime.semantic_probe import Pins, Trace
 from observer_runtime.bo_retention import EventHistory
 from bo_stategraph import BOStateGraph
+from observer_runtime.bo_observer.observation.native_ingress import NativeIngress
 
 
 class BOObserver:
@@ -17,6 +18,9 @@ class BOObserver:
         self.lock = threading.Lock()
         self.events = EventHistory(project_root=Path(__file__).resolve().parents[1],path=self.path)
         self.pins = Pins(model,build_id,enabled=mode=="on",sink=self.write,capacity=capacity)
+        self.bo_project={"protocol":"bo-project/v1","project_id":model.get("project_id","team-archive-example"),
+            "selection":{"mode":"drive","source":"user","answer":"Synthetic example explicitly chooses drive","locator":"discovery.json"},"model":model}
+        self.bo_ingress=NativeIngress(self.pins,self.bo_project)
 
     def write(self, text: str) -> None:
         event = json.loads(text)

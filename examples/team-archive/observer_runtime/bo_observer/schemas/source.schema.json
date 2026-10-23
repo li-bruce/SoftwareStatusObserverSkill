@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/li-bruce/SoftwareStatusObserverSkill/protocol/source",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "protocol": {
+      "const": "bo-source/v1"
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "files": {
+      "type": "object"
+    },
+    "symbols": {
+      "type": "object"
+    },
+    "edges": {
+      "type": "array"
+    },
+    "unresolved": {
+      "type": "array"
+    },
+    "errors": {
+      "type": "array"
+    }
+  },
+  "required": [
+    "protocol",
+    "project_id",
+    "files",
+    "symbols",
+    "edges",
+    "unresolved",
+    "errors"
+  ]
+}

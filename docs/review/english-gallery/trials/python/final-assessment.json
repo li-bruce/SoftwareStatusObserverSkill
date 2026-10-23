@@ -1,0 +1,224 @@
+{
+  "v1": {
+    "timestamp_utc": "2026-10-23T10:24:17.131102+00:00",
+    "project_root": "C:\\Users\\Lvi_P\\Documents\\Codex\\2026-10-23\\business-observer-gallery-python",
+    "trial_kind": "Independent AI development trial with explicit simulated-user clarification; not human usability evidence",
+    "candidate_1_frozen_files": 142,
+    "candidate_2_frozen_files": 144,
+    "candidate_3_frozen_files": 144,
+    "frozen_copies_modified": false,
+    "managed_runtime_modified": false,
+    "candidate_id": "db5cf7a42b91c65c78c4f85ffbbcd509243b2853852e60afa2c094f63f799315",
+    "build_id": "a18c1bb36e98d314486e072c0ae90cd147780e4e279fdb3f61af714e8301e057",
+    "urls": {
+      "business": "http://127.0.0.1:8842/",
+      "graph": "http://127.0.0.1:8842/graph"
+    },
+    "automated_reports": {
+      "mapping": {
+        "status": "passed",
+        "errors": [],
+        "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+        "stategraph_export": "checked",
+        "witnesses": 38,
+        "projection_checks": 126,
+        "implementation": {
+          "errors": [],
+          "events_checked": 41,
+          "features": 18
+        }
+      },
+      "state_rules": {
+        "status": "passed",
+        "errors": []
+      },
+      "project_checks": {
+        "status": "passed",
+        "errors": [],
+        "scope": "Configured project tests, architecture and viewer checks"
+      },
+      "business": {
+        "status": "passed",
+        "errors": [],
+        "assertions": {
+          "required": 135,
+          "executed": 135
+        },
+        "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+      }
+    },
+    "project_test_count": 11,
+    "browser": {
+      "full_business_flow": "passed on final clean attempt",
+      "recording_events": 37,
+      "state_frames": 2,
+      "recording_gaps": [],
+      "playback": "reached final step in real browser",
+      "locale_switch": "English and Chinese verified",
+      "locale_persistence": "English restored after navigating to graph without lang parameter",
+      "layout_positions_and_expanded": "preserved",
+      "notes": "preserved verbatim",
+      "camera_and_focus": "changed during later interaction; not claimed pixel-identical",
+      "semantic_state_label": {
+        "status": "passed",
+        "defect": "D05 resolved by public candidate 3",
+        "actual_enum": "pending",
+        "declared_label": "待审核",
+        "displayed_replay_label": "待审核",
+        "scope": "Business Flow uses declared labels; raw parameters remain pending"
+      },
+      "current_interval_console_errors_or_warnings": 0
+    },
+    "overall_viewer_acceptance": "passed within the recorded gallery trial",
+    "observer_control_event_delta": 0,
+    "complete_public_export_frames": 2,
+    "known_failures_retained": [
+      "Candidate-1 Windows metadata paths",
+      "Candidate-1 chained call IDs",
+      "Candidate-1 project-envelope focus",
+      "Viewer labels contract mismatch",
+      "Project frame-scope and current-summary repairs",
+      "One initial form-token rejection with successful retry",
+      "Pending semantic display defect D05"
+    ],
+    "no_github_submission": true,
+    "optional_label_fixture": {
+      "status": "passed",
+      "kind": "Explicitly derived display fixture, not fabricated runtime evidence",
+      "fallback": "pending"
+    },
+    "preferences_upgrade": {
+      "entries_identical": true,
+      "before_revision": 30,
+      "after_revision": 31,
+      "whole_object_equality": "failed; entry-level retention passed"
+    },
+    "failure_retest_index": "FAILURE-RETEST-INDEX.md"
+  },
+  "v2_final": {
+    "timestamp_utc": "2026-10-23T11:05:15.758266+00:00",
+    "business_version": "v2 PNG-only",
+    "skill_candidate": "candidate-3 unchanged",
+    "simulated_requirement": true,
+    "human_usability_evidence": false,
+    "candidate_id": "7d7e36bedaa3212ae9f10558420b76f1a2d813a62f0bf5b031cdbd15a3d8c9a0",
+    "build_id": "389a6fb6b293dc32cfdde1f39bf71e478f4ec9af9f88b839ac539fe2cfc9db83",
+    "reports": {
+      "mapping": {
+        "status": "passed",
+        "errors": [],
+        "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+        "stategraph_export": "checked",
+        "witnesses": 44,
+        "projection_checks": 132,
+        "implementation": {
+          "errors": [],
+          "events_checked": 44,
+          "features": 18
+        }
+      },
+      "state_rules": {
+        "status": "passed",
+        "errors": []
+      },
+      "project_checks": {
+        "status": "passed",
+        "errors": [],
+        "scope": "Configured project tests, architecture and viewer checks"
+      },
+      "business": {
+        "status": "passed",
+        "errors": [],
+        "assertions": {
+          "required": 162,
+          "executed": 162
+        },
+        "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+      }
+    },
+    "project_tests": 13,
+    "browser": {
+      "record_id": "9f56823e95ba425c81af5b795ff55b8b",
+      "events": 58,
+      "frames": 2,
+      "gaps": [],
+      "format_decisions": [
+        {
+          "format": "JPEG",
+          "height": 600,
+          "valid": false,
+          "width": 800
+        },
+        {
+          "format": "PNG",
+          "height": 600,
+          "valid": true,
+          "width": 800
+        }
+      ],
+      "expected_http_rejection": [
+        [
+          "http_upload",
+          415
+        ]
+      ],
+      "JPEG_images_messages_journal_before_PNG": [
+        0,
+        0,
+        0
+      ],
+      "PNG_final": {
+        "state": "published",
+        "format": "PNG",
+        "messages": 1,
+        "revision": 2
+      },
+      "observer_control_event_delta": 0
+    },
+    "urls": {
+      "application": "http://127.0.0.1:8842/",
+      "graph": "http://127.0.0.1:8842/graph"
+    },
+    "remaining": "Finite project evidence, not the full Skill repository suite or human usability study. Earlier v1 token failure cause unresolved; final v2 flow has no unexpected HTTP error.",
+    "pending_approval": null,
+    "github_published": false
+  },
+  "cookie_mechanism": {
+    "before_status": 400,
+    "after_status": 200,
+    "historical_F06_root_cause": "not established"
+  },
+  "source_reproduction": [
+    {
+      "version": "v1",
+      "source_archive": "gallery-v1-source.zip",
+      "actual_execution": {
+        "version": "v1",
+        "application_and_observer_started": true,
+        "actual_gallery_effects": true,
+        "source_binding": "current",
+        "JPEG_policy": "accepted",
+        "PNG_approval_public": true
+      },
+      "normal_gate_exit_code": 0,
+      "normal_gate_passed": true
+    },
+    {
+      "version": "v2",
+      "source_archive": "gallery-v2-source.zip",
+      "actual_execution": {
+        "version": "v2",
+        "application_and_observer_started": true,
+        "actual_gallery_effects": true,
+        "source_binding": "current",
+        "JPEG_policy": "rejected without image or notification",
+        "PNG_approval_public": true
+      },
+      "normal_gate_exit_code": 0,
+      "normal_gate_passed": true
+    }
+  ],
+  "entrypoint": "REVIEW-INDEX.md",
+  "no_pending_approval": true,
+  "no_github_publication": true
+}

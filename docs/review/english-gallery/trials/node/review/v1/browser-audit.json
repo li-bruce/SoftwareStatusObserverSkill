@@ -1,0 +1,15 @@
+{
+  "build_id": "3f170a4c9c8ba6e60e62d154724a72d707407022c746073e470d94bd517b899e",
+  "recording_id": "135acb7323ec42c3b5cc0ec6f3278740",
+  "recorded_events": 36,
+  "state_frames": [
+    "received",
+    "pending_review",
+    "published"
+  ],
+  "store_matches": true,
+  "errors": 0,
+  "dropped": 0,
+  "credentials_recorded": false,
+  "event_count_before_controls": 56
+}

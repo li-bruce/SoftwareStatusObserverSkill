@@ -61,7 +61,7 @@
     "observer_generated/runtime/execution_contract.py",
     "observer_generated/runtime/focus_graph.py",
     "observer_generated/runtime/mapping_contract.py",
-    "observer_generated/runtime/model_tool.py",
+    "observer_generated/runtime/observation_scope.py",
     "observer_generated/runtime/origin.json",
     "observer_generated/runtime/probe.py",
     "observer_generated/runtime/project_bundle.py",
@@ -75,7 +75,6 @@
     "observer_generated/runtime/sync_io.py",
     "observer_generated/runtime/sync_verify.py",
     "observer_generated/runtime/view_preferences.py",
-    "observer_generated/runtime/viewer_server.py",
     "observer_generated/runtime/whitebox_contract.py",
     "observer_generated/runtime/worknet_contract.py",
     "observer_generated/static/ELK-LICENSE.md",
@@ -108,7 +107,8 @@
     "tooling/__init__.py",
     "tooling/build_graph.py",
     "tooling/dev.py",
-    "tooling/graph_fixture.py"
+    "tooling/graph_fixture.py",
+    "bo_stategraph/machine.json"
   ],
   "acceptance": "acceptance.json",
   "slice_depth": 1,
@@ -219,10 +219,10 @@
   "whitebox": "whitebox.json",
   "stategraph": {
     "module": "bo_stategraph/__init__.py",
-    "development_mode": "guided",
+    "development_mode": "drive",
     "execution_mode": "drive",
-    "decision_source": "default",
-    "decision": "状态机完整位于 bo_stategraph；默认内部引导，监控和映射始终维护。"
+    "decision_source": "user",
+    "decision": "合成示例的模拟需求方选择：继续基于状态图驱动开发；两种模式均保留监控及映射检查。"
   },
   "source_scope": {
     "roots": [
@@ -244,7 +244,9 @@
       "bo_stategraph/bo_contracts.py": "Shared contract implementation; parity regression tests cover it.",
       "bo_stategraph/execution_contract.py": "Shared activity contract; resource and concurrency tests cover it.",
       "bo_stategraph/query.py": "Projection adapter; actual SQLite-to-instance witnesses cover it.",
-      "app/workflow.py": "Compatibility import only; executable definition lives in bo_stategraph/workflow.py."
+      "app/workflow.py": "Compatibility import only; executable definition lives in bo_stategraph/workflow.py.",
+      "observer_generated/static/**": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "static/graph/**": "Reviewed graph viewer assets; runtime manifest checks their exact bytes."
     }
   },
   "require_mapping_witnesses": true,

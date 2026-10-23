@@ -1,0 +1,13 @@
+[
+  "examples\\delivery\\integrations\\control.html",
+  "examples\\delivery\\tests\\test_graph_layout.mjs",
+  "examples\\delivery\\tests\\test_graph_projection.mjs",
+  "examples\\delivery\\tests\\test_recorded_views.mjs",
+  "examples\\multilanguage\\index.html",
+  "examples\\team-archive\\static\\app.html",
+  "examples\\team-archive\\static\\app.js",
+  "examples\\team-archive\\tooling\\graph_tests.mjs",
+  "examples\\team-archive\\tooling\\test_recorded_views.mjs",
+  "tools\\test_recorded_views.mjs",
+  "tools\\test_view_coverage.mjs"
+]

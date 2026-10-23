@@ -1,0 +1,32 @@
+{
+  "candidate_id": "8315d05ffe9b1ce5b2dfe07d2f21d6ca62f6ff0dc1b39136a36d3fd3dee9b517",
+  "decisions": {
+    "business": {
+      "action": "unchanged",
+      "reason": "业务规则、登录、消息、权限、状态转换及原验收预期保持不变"
+    },
+    "state_machine": {
+      "action": "unchanged",
+      "reason": "保留实际执行器及权威状态读取；不以图事件代替真实业务状态"
+    },
+    "abstraction": {
+      "action": "updated",
+      "reason": "排除明确登记的观测实现及其调用投影，完整源码清单和业务功能仍受检查"
+    },
+    "probes": {
+      "action": "updated",
+      "reason": "观测内部读写抑制递归采集；图接口及静态资源不进入业务事件；业务采集及值比较保持"
+    }
+  },
+  "excluded_symbols": {
+    "app/ports.py::BOEvents": "源码仍纳入归属和版本检查；构造或观测内部实现不构成独立业务步骤",
+    "app/ports.py::BOEvents.__init__": "源码仍纳入归属和版本检查；构造或观测内部实现不构成独立业务步骤",
+    "app/ports.py::BOEvents.bo_emit": "源码仍纳入归属和版本检查；构造或观测内部实现不构成独立业务步骤",
+    "app/service.py::Delivery": "源码仍纳入归属和版本检查；构造或观测内部实现不构成独立业务步骤",
+    "app/store.py::Store": "源码仍纳入归属和版本检查；构造或观测内部实现不构成独立业务步骤",
+    "bo_stategraph/workflow.py::ActivityExecution": "源码仍纳入归属和版本检查；构造或观测内部实现不构成独立业务步骤",
+    "bo_stategraph/workflow.py::ActivityState": "源码仍纳入归属和版本检查；构造或观测内部实现不构成独立业务步骤",
+    "bo_stategraph/workflow.py::Phase": "源码仍纳入归属和版本检查；构造或观测内部实现不构成独立业务步骤"
+  },
+  "requirement_changes": {}
+}

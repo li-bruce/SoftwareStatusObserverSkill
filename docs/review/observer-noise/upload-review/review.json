@@ -1,0 +1,56 @@
+{
+  "candidate_id": "2791287679978be62521798d7ef5a6aefce03ddc7a98a50912d35f7cb44e42e9",
+  "decisions": {
+    "business": {
+      "action": "unchanged",
+      "reason": "原业务参数、权限、存储、消息和审核结果未改"
+    },
+    "state_machine": {
+      "action": "unchanged",
+      "reason": "状态定义和实际迁移函数未改"
+    },
+    "abstraction": {
+      "action": "updated",
+      "reason": "两个纯观测辅助函数改用 bo_ 名称并从程序图投影排除，源码清单保留"
+    },
+    "probes": {
+      "action": "updated",
+      "reason": "只调整采集句柄方法与图读取函数的名称及引用；业务节点和所有原采集断言保留"
+    }
+  },
+  "excluded_symbols": {
+    "app/ports.py::TracePort": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "app/ports.py::TracePort.__init__": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "app/ports.py::TracePort.bo_record": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "app/service.py::DomainError": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "app/service.py::DomainError.__init__": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "app/service.py::ReviewService": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "app/service.py::ReviewService.__init__": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "app/service.py::ReviewService.bo_trace": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "app/storage.py::Store": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "app/storage.py::Store.__init__": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "bo_stategraph/query.py::bo_machine": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "integrations/bo_observer.py::BOObserver": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "integrations/bo_observer.py::BOObserver.__init__": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "integrations/bo_observer.py::BOObserver.bo_http": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "integrations/bo_observer.py::BOObserver.close": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "integrations/bo_observer.py::BOObserver.health": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "integrations/bo_observer.py::BOObserver.snapshot": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "integrations/bo_observer.py::BOObserver.trace": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "integrations/bo_observer.py::BOObserver.write": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "integrations/server.py::create_app.bo_view": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "integrations/server.py::create_app.design": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "integrations/server.py::create_app.export": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "integrations/server.py::create_app.get_recording": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "integrations/server.py::create_app.graph": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "integrations/server.py::create_app.graph_view": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "integrations/server.py::create_app.instances": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "integrations/server.py::create_app.list_recordings": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "integrations/server.py::create_app.preferences": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "integrations/server.py::create_app.save_preferences": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "integrations/server.py::create_app.source": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "integrations/server.py::create_app.start_recording": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射",
+    "integrations/server.py::create_app.stop_recording": "类、构造或显式观测辅助实现，完整源码仍参与检查；其实际业务实现单独映射"
+  },
+  "requirement_changes": {}
+}

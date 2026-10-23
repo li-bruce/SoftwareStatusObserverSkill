@@ -1,14 +1,15 @@
 {
   "schema": "bo-maintenance/v1",
-  "source_id": "6001e29b332ad163b84e096ec856f9af1ec0ca4468035f3f5c91a83d262f790a",
+  "source_id": "8db6475b991db359a0e9dda0197992200a9ce929330b6a7b5efe3aedacee1f29",
   "inventory": {
     "files": {
       "app/__init__.py": "a829ebb4042211c3a39bf40646855698375b065069bbbd2aa61daba1d8e6a51c",
-      "app/checks.py": "0613d5550ce99422cc620933e7a912661b7ad45add03b228ceb0778ff3b3113c",
+      "app/checks.py": "6eaf39d7323ba58135ca1077d0b27d8de313c8cacf9c2d7aeb72ea7741d128bd",
       "app/ports.py": "d2ccb5a40786064a590408428268f04668209ba58ccf39625723942f9ef69338",
-      "app/service.py": "ea275e01eaeada94640958c5ce8907a8235708498b80abfabd1a562809c3b24a",
+      "app/service.py": "0141ec2b3f045e4376361b80ee9c352f60a7507c676df010a447729340e4c885",
       "app/store.py": "cddf3b8a1ca0ce279bdda20861ca6b8c62a21e66f5f0220a8acb219129524823",
-      "bo_stategraph/workflow.py": "b4bc7db195e79405745f0ff8ce69b6aaade31f2f839f5f0f596e3ecb79ec3fd2"
+      "bo_stategraph/workflow.py": "1b6029f7876b2d1b3e93ef1c4aee90713065bd1e7769f4df232c72a4c0777ab1",
+      "main.py": "3c840ec469108183cb8c9bdd4482ebde8e89c70a1f2f0887ff0b6d0de39307cb"
     },
     "excluded": {
       "app/workflow.py": "Compatibility import only; executable definition lives in bo_stategraph/workflow.py.",
@@ -20,13 +21,74 @@
       "integrations/bo_adapter.py": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
       "integrations/bo_scenarios.py": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
       "integrations/bo_server.py": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
-      "main.py": "Business core startup; exercised from the exported package.",
+      "integrations/bo_view/analysis.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
+      "integrations/bo_view/conversation.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
+      "integrations/bo_view/elk-worker.min.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
+      "integrations/bo_view/elk.bundled.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
+      "integrations/bo_view/glyphs.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
+      "integrations/bo_view/graph-core.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
+      "integrations/bo_view/i18n.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
+      "integrations/bo_view/layout.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
+      "integrations/bo_view/messages.zh-CN.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
+      "integrations/bo_view/pixi.min.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
+      "integrations/bo_view/polling.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
+      "integrations/bo_view/preferences.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
+      "integrations/bo_view/recording.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
+      "integrations/bo_view/renderer.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
+      "integrations/bo_view/replay-steps.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
+      "integrations/bo_view/runtime-frames.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
+      "integrations/bo_view/viewer.js": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
       "observer_generated/__init__.py": "Package marker only; copied source inventory covers its runtime.",
       "observer_generated/runtime/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/architecture_guard.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/behavior_model.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/bo_contracts.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/bo_design.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/adapters/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/adapters/javascript/bo_runtime.mjs": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/adapters/javascript/scan.mjs": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/adapters/python/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/adapters/python/bo_executor.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/adapters/python/bo_probe.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/delivery/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/delivery/architecture_guard.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/delivery/project_bundle.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/development.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/graph/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/graph/behavior_model.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/graph/code_structure.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/graph/focus_graph.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/graph/statechart_contract.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/graph/worknet_contract.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/model_io.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/observation/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/observation/bo_retention.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/observation/native_ingress.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/observation/observation_scope.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/observation/probe.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/observation/recording_session.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/observation/runtime_frames.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/observation/semantic_probe.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/protocol.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/service.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/sources.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/web/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/web/bo_design.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/web/bo_web.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/web/view_preferences.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/workflow/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/workflow/bo_sync.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/workflow/change_sync.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/workflow/implementation_coverage.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/workflow/mapping_contract.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/workflow/requirements_dialogue.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/workflow/source_migration.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/workflow/sync_config.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/workflow/sync_io.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/workflow/sync_verify.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/workflow/whitebox_contract.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/bo_retention.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/bo_runtime.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/bo_stategraph.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
@@ -37,8 +99,9 @@
       "observer_generated/runtime/code_structure.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/execution_contract.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/focus_graph.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/implementation_coverage.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/mapping_contract.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
-      "observer_generated/runtime/model_tool.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/observation_scope.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/probe.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/project_bundle.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/recording_session.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
@@ -51,45 +114,1349 @@
       "observer_generated/runtime/sync_io.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/sync_verify.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/view_preferences.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
-      "observer_generated/runtime/viewer_server.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/whitebox_contract.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/worknet_contract.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/static/analysis.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "observer_generated/static/conversation.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "observer_generated/static/elk-worker.min.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "observer_generated/static/elk.bundled.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "observer_generated/static/glyphs.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "observer_generated/static/graph-core.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "observer_generated/static/i18n.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "observer_generated/static/layout.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "observer_generated/static/messages.zh-CN.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "observer_generated/static/pixi.min.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "observer_generated/static/polling.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "observer_generated/static/preferences.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "observer_generated/static/recording.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "observer_generated/static/renderer.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "observer_generated/static/replay-steps.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "observer_generated/static/runtime-frames.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "observer_generated/static/viewer.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
       "tests/__init__.py": "Scenario runners and assertions, not business implementation.",
       "tests/observe.py": "Scenario runners and assertions, not business implementation.",
       "tests/scenarios.py": "Scenario runners and assertions, not business implementation.",
       "tests/test_business.py": "Scenario runners and assertions, not business implementation.",
       "tests/test_execution.py": "Scenario runners and assertions, not business implementation.",
+      "tests/test_graph_layout.mjs": "Scenario runners and assertions, not business implementation.",
+      "tests/test_graph_projection.mjs": "Scenario runners and assertions, not business implementation.",
+      "tests/test_recorded_views.mjs": "Scenario runners and assertions, not business implementation.",
       "tests/test_recording.py": "Scenario runners and assertions, not business implementation.",
       "tests/test_stategraph_module.py": "Scenario runners and assertions, not business implementation.",
       "tooling/__init__.py": "Project generation and test commands; separately watched and executed.",
       "tooling/build_graph.py": "Project generation and test commands; separately watched and executed.",
       "tooling/dev.py": "Project generation and test commands; separately watched and executed.",
       "tooling/graph_fixture.py": "Project generation and test commands; separately watched and executed."
-    }
+    },
+    "excluded_entrypoints": {},
+    "excluded_implementations": []
   },
-  "changed_files": [],
+  "changed_files": [
+    "app/checks.py",
+    "app/service.py",
+    "bo_stategraph/workflow.py"
+  ],
   "unregistered_files": [],
-  "status": "current",
-  "internal_prompt": "核查列出的实现变化；更新受影响业务抽象、状态、函数/参数映射和探针。新增入口不能因不在旧图中而忽略。完成局部投影及实际场景验证后运行项目收尾检查。不要要求用户填写观测文件；仅在新的业务歧义出现时提问。",
+  "implementation_gaps": [],
+  "status": "needs_update",
+  "internal_prompt": "Review the listed implementation changes. Update affected business abstractions, states, function/parameter mappings, and probes. Do not omit new entrypoints because the old graph lacks them. Match features, parameters, and runtime cases through the implementation inventory. Exclusions must not bypass business implementation. Check real relations and filter boundaries in every view, then run project acceptance. Do not ask users to maintain observation files. Ask only when new business ambiguity appears.",
+  "confirmations": {
+    "user": [],
+    "coding": [
+      {
+        "id": "app/checks.py::checksum:8:11:79701699dc887f9c",
+        "audience": "coding",
+        "symbol": "app/checks.py::checksum",
+        "expression": "hashlib.sha256(content.encode('utf-8')).hexdigest",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/checks.py::checksum:8:11:c79769d749f01ed5",
+        "audience": "coding",
+        "symbol": "app/checks.py::checksum",
+        "expression": "hashlib.sha256",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/checks.py::checksum:8:26",
+        "audience": "coding",
+        "symbol": "app/checks.py::checksum",
+        "expression": "content.encode",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/checks.py::run_checks:19:7",
+        "audience": "coding",
+        "symbol": "app/checks.py::run_checks",
+        "expression": "set",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/checks.py::run_checks:20:14",
+        "audience": "coding",
+        "symbol": "app/checks.py::run_checks",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/checks.py::run_checks:31:9",
+        "audience": "coding",
+        "symbol": "app/checks.py::run_checks",
+        "expression": "ThreadPoolExecutor",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/checks.py::run_checks:31:40",
+        "audience": "coding",
+        "symbol": "app/checks.py::run_checks",
+        "expression": "len",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/checks.py::run_checks:32:22",
+        "audience": "coding",
+        "symbol": "app/checks.py::run_checks",
+        "expression": "pool.submit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/checks.py::run_checks:33:22",
+        "audience": "coding",
+        "symbol": "app/checks.py::run_checks",
+        "expression": "future.result",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/checks.py::run_checks:33:57",
+        "audience": "coding",
+        "symbol": "app/checks.py::run_checks",
+        "expression": "jobs.items",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/checks.py::run_checks:34:11",
+        "audience": "coding",
+        "symbol": "app/checks.py::run_checks",
+        "expression": "execution.join",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/checks.py::run_checks:36:74",
+        "audience": "coding",
+        "symbol": "app/checks.py::run_checks",
+        "expression": "results.items",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/checks.py::run_checks:37:24",
+        "audience": "coding",
+        "symbol": "app/checks.py::run_checks",
+        "expression": "execution.snapshot",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::eligible_grant:14:15",
+        "audience": "coding",
+        "symbol": "app/service.py::eligible_grant",
+        "expression": "remember",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::eligible_grant:15:19",
+        "audience": "coding",
+        "symbol": "app/service.py::eligible_grant",
+        "expression": "remember",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::eligible_grant:16:19",
+        "audience": "coding",
+        "symbol": "app/service.py::eligible_grant",
+        "expression": "remember",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::eligible_grant:17:19",
+        "audience": "coding",
+        "symbol": "app/service.py::eligible_grant",
+        "expression": "remember",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::eligible_grant:18:19",
+        "audience": "coding",
+        "symbol": "app/service.py::eligible_grant",
+        "expression": "remember",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::eligible_grant:20:8",
+        "audience": "coding",
+        "symbol": "app/service.py::eligible_grant",
+        "expression": "events.bo_emit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::authorized:31:14",
+        "audience": "coding",
+        "symbol": "app/service.py::authorized",
+        "expression": "uuid.uuid4",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::authorized:36:12",
+        "audience": "coding",
+        "symbol": "app/service.py::authorized",
+        "expression": "evaluated.append",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::authorized:41:8",
+        "audience": "coding",
+        "symbol": "app/service.py::authorized",
+        "expression": "events.bo_emit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:62:13",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "self.store.transaction",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:63:18",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "self.store.get",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:66:23",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "isinstance",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:66:59",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "len",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:67:26",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:68:25",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "values.get",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:69:19",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "type",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:69:76",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:71:16",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "self.store.update_execution",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:72:16",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "job.update",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:75:55",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "values.get",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:76:19",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "type",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:76:62",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "type",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:77:26",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:78:26",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "str",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:78:54",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "values.get",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:79:29",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "values.get",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:80:38",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "isinstance",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:81:26",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:84:23",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "any",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:84:79",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:88:69",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:92:19",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "type",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:92:72",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:96:16",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "self.store.update_execution",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:97:23",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:98:29",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "self.store.put",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:99:8",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "self.events.bo_emit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.command:103:15",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.command",
+        "expression": "self.store.snapshot",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:106:13",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.store.transaction",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:107:16",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.store.get",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:108:94",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.store.snapshot",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:109:75",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.store.snapshot",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:110:27",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "uuid.uuid4",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:111:12",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "job.update",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:113:31",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "execution.snapshot",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:114:12",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.store.put_execution",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:115:12",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.events.bo_emit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:118:86",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.store.put",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:119:16",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.events.bo_emit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:120:23",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.store.snapshot",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:122:12",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "job.update",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:122:43",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "execution.snapshot",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:123:12",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.store.put",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:126:19",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.checker",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:128:29",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "execution.snapshot",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:129:22",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:132:12",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "execution.abort",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:133:17",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.store.transaction",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:134:24",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.store.get",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:136:86",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "type",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:136:105",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.store.put",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:137:12",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.events.bo_emit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:138:19",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.store.snapshot",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:139:8",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.events.bo_emit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:141:8",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.events.bo_emit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:143:8",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.events.bo_emit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:145:13",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.store.transaction",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:146:20",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.store.get",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:148:23",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.store.snapshot",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:149:52",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.store.snapshot",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:150:35",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "result.items",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:155:16",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "current.update",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:156:12",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.store.put",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:158:12",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.events.bo_emit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.prepare:159:15",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.prepare",
+        "expression": "self.store.snapshot",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.commit:178:13",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.commit",
+        "expression": "self.store.transaction",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.commit:179:16",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.commit",
+        "expression": "self.store.get",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.commit:180:94",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.commit",
+        "expression": "self.store.snapshot",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.commit:181:44",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.commit",
+        "expression": "self.store.snapshot",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.commit:183:12",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.commit",
+        "expression": "self.events.bo_emit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.commit:186:94",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.commit",
+        "expression": "self.store.put",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.commit:187:16",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.commit",
+        "expression": "self.events.bo_emit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.commit:188:23",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.commit",
+        "expression": "self.store.snapshot",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.commit:189:12",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.commit",
+        "expression": "self.store.artifact",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.commit:190:43",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.commit",
+        "expression": "self.store.put",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.commit:192:8",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.commit",
+        "expression": "self.events.bo_emit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.commit:194:15",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.commit",
+        "expression": "self.store.snapshot",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.execute:197:16",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.execute",
+        "expression": "self.store.snapshot",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "app/service.py::Delivery.execute:198:8",
+        "audience": "coding",
+        "symbol": "app/service.py::Delivery.execute",
+        "expression": "self.events.bo_emit",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "bo_stategraph/workflow.py::ActivityExecution.join:169:48",
+        "audience": "coding",
+        "symbol": "bo_stategraph/workflow.py::ActivityExecution.join",
+        "expression": "ValueError",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      },
+      {
+        "id": "bo_stategraph/workflow.py::ActivityExecution.join:171:19",
+        "audience": "coding",
+        "symbol": "bo_stategraph/workflow.py::ActivityExecution.join",
+        "expression": "all",
+        "question": "Verify the actual call target and project ownership. For dynamic calls, provide target and parameter evidence from a real scenario.",
+        "accepted_evidence": [
+          "source binding",
+          "external dependency with explicit boundary",
+          "runtime case and target"
+        ]
+      }
+    ],
+    "instruction": "Ask the user about business ambiguity; reconcile implementation bindings during coding. Do not recommend or expand business scope."
+  },
   "ai_invocation": "host_or_coding_agent_required",
-  "affected_nodes": [],
+  "affected_nodes": [
+    "change",
+    "code.0fc7de430e9f9b0b",
+    "code.40b4483bb7508823",
+    "code.52990f65c6aa2534",
+    "code.9ab020fa53084121",
+    "code.a583b3ad67e50561",
+    "code.abc699d67116f986",
+    "commit",
+    "execute",
+    "execution.abort",
+    "execution.advance",
+    "execution.finish",
+    "execution.init",
+    "execution.invariant",
+    "flow.checks",
+    "flow.commit",
+    "flow.input",
+    "flow.wait",
+    "implementation.d8b7a3081a2bb767",
+    "join",
+    "read",
+    "recheck",
+    "state.cancelled",
+    "state.checking",
+    "state.completed",
+    "state.draft",
+    "state.failed",
+    "state.ready",
+    "state.waiting",
+    "wait",
+    "workers"
+  ],
   "unmapped_symbols": [
-    "app/checks.py::run_checks.work",
     "app/ports.py::BOEvents",
     "app/ports.py::BOEvents.__init__",
     "app/ports.py::BOEvents.bo_emit",
     "app/service.py::Delivery",
-    "app/service.py::Delivery.__init__",
-    "app/service.py::eligible_grant.remember",
-    "app/service.py::observation",
     "app/store.py::Store",
-    "app/store.py::Store.__init__",
-    "app/store.py::Store.close",
-    "app/store.py::Store.transaction",
     "bo_stategraph/workflow.py::ActivityExecution",
     "bo_stategraph/workflow.py::ActivityState",
-    "bo_stategraph/workflow.py::Phase",
-    "bo_stategraph/workflow.py::definition"
+    "bo_stategraph/workflow.py::Phase"
   ],
-  "candidate_id": "a7a57c6378644f0b159a79a071a6f9ccdafd1f8815130de57e84f7645c0402f1"
+  "candidate_id": "1198ccdf8440479494bd81a67715ee8a95e836093d2b811fa7a88ec47d997ca7"
 }

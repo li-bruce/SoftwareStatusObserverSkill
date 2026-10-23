@@ -1,0 +1,19 @@
+{
+  "source_scope": {
+    "roots": [
+      "."
+    ],
+    "require_symbol_classification": true,
+    "exclude": {
+      "bo_stategraph/**": "Explicit native adapter module; copied-source tests cover it.",
+      "integrations/**": "Named bo_ observer and bootstrap wiring; exercised by browser tests.",
+      "tooling/**": "Independent acceptance commands."
+    }
+  },
+  "code_files": [
+    "src/job.py",
+    "src/job.mjs",
+    "src/ReactPanel.tsx",
+    "src/VuePanel.vue"
+  ]
+}

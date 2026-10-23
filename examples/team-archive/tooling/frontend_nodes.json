@@ -1,0 +1,61 @@
+[
+  {
+    "id": "ui.command",
+    "kind": "action",
+    "layer": "business",
+    "label": "页面提交操作",
+    "summary": "页面提交操作",
+    "source": {
+      "path": "static/app.js",
+      "symbol": "command"
+    },
+    "capture": {
+      "in": {
+        "action": "string",
+        "field_count": "number"
+      },
+      "out": {
+        "ok": "boolean"
+      }
+    }
+  },
+  {
+    "id": "ui.validate",
+    "kind": "decision",
+    "layer": "business",
+    "label": "页面校验大小上限",
+    "summary": "页面校验大小上限",
+    "source": {
+      "path": "static/app.js",
+      "symbol": "submitLimit"
+    },
+    "capture": {
+      "in": {
+        "input_length": "number",
+        "value": "number"
+      },
+      "out": {
+        "valid": "boolean"
+      }
+    }
+  },
+  {
+    "id": "ui.dirty",
+    "kind": "data",
+    "layer": "business",
+    "label": "标记未保存修改",
+    "summary": "标记未保存修改",
+    "source": {
+      "path": "static/app.js",
+      "symbol": "markDocumentDirty"
+    },
+    "capture": {
+      "in": {
+        "field": "string"
+      },
+      "out": {
+        "dirty": "boolean"
+      }
+    }
+  }
+]

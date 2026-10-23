@@ -1,97 +1,70 @@
-# 记录、分析视图与共享成员
+# Recording, analysis views, and shared membership
 
-这些功能服务于开发者理解程序。视图操作不改变业务状态，回放不发送业务命令。
+These features help developers understand implementation. View controls never change business state; replay sends no business commands. See [types, rules, capture](types-rules-capture.md) for scope/step granularity. Main controls are view/search/recording, with canvas tools and a persistent legend on the sides. Version/test-case/historical-time controls are not primary selectors; records still retain exact source identity. Notes and core markers use stable IDs.
 
-记录范围、显示步骤、class/实例与规则求值见 [类型、规则和运行记录](types-rules-capture.md)。当前页面主区只显示视图、搜索与记录；画布工具和常驻图例位于两侧。版本、测试场景与历史时刻不作为主页面选择器，记录内部仍保留正确的源码身份。节点支持批注与 ★ 核心标记，按稳定 ID 保存。
+## Record actual operations
 
-## 操作记录
+Follow the [DevTools recording pattern](https://developer.chrome.com/docs/devtools/performance/reference): start, operate the application, stop, locate events, inspect values, replay.
 
-参考 [Chrome DevTools 的录制流程](https://developer.chrome.com/docs/devtools/performance/reference)：开始记录，在程序中操作，结束记录，再定位事件、查看参数和回放。
+recording_session.py saves intervals, source, and gaps using the Python standard library. recording.js projects read-only event-boundary views. The service adapter supplies actual snapshots/loaded source and optional operation markers after real commands return. Business functions/authorization stay independent.
 
-参考模块：
+| API | Purpose |
+|---|---|
+| POST /api/recordings/start | Start interval; repeated start returns current recording |
+| POST /api/recordings/stop | Capture final boundary and stop appending |
+| GET /api/recordings | Status and saved list |
+| GET /api/recordings/{id} | Events, initial/final state, model, source |
+| GET /api/source?recording={id}&path={path} | Source bound to that recording |
 
-- `scripts/recording_session.py`：记录区间、保存源码、标明缺口；仅使用 Python 标准库。
-- `assets/stategraph-viewer/recording.js`：按事件边界生成只读视图。
-- 服务适配器：提供当前图快照和已加载源码；在原业务命令返回后补充操作标记。原有业务函数和权限检查保持独立。
+Preserve producer/run/attempt/event/call/build identities. Pre-start context is separate from interval events. Several runs may appear in one operation recording, but values/evaluations remain assigned to their attempts.
 
-接入时实现以下接口，路径由项目按需适配：
+The provider must read consistent state/events at the project's state boundary. Background persistence runs each second; stop resamples and writes. Normal stop saves the complete interval; abnormal exit may lose the last unsaved segment and marks interruption. Limits: 20,000 probe events, 2,000 operation markers, 32 MiB. Overflow, capture failure, and save failure expose gaps. Record only chosen fields, never arbitrary locals/bodies/credentials. Disabled capture cannot be presented as recording real events.
 
-| 接口 | 内容 |
-| --- | --- |
-| `POST /api/recordings/start` | 开始区间；重复点击返回当前区间 |
-| `POST /api/recordings/stop` | 保存结束边界，停止加入事件 |
-| `GET /api/recordings` | 当前记录状态与已保存列表 |
-| `GET /api/recordings/{id}` | 事件、起止状态、模型和源码 |
-| `GET /api/source?recording={id}&path={path}` | 返回该次记录绑定的源码 |
+Saved records bind loaded model/source. Do not display new code as old implementation. Replay includes only prior events and exact journal revisions. Never copy final check/approval/commit outcomes into early frames. Missing boundaries are unknown; final snapshot is used only at the end. Header replay values require explicit presentation.replay_parameters node/direction/field bindings, e.g. limit_bytes from project_limit out.limit_bytes; matching field names alone are insufficient.
 
-记录保留独立的 producer/run、attempt、event、call 和 build 身份。开始前的上下文单独保存，不计入区间事件。不同运行可以出现在同一次操作记录中，求值与参数仍按各自 attempt 归属。
+Edge animation requires real dependency references, same-call parent identity, captured input/return, or exact activity resource/join evidence. Static calls/shared references/temporal adjacency are not transfers. Use a separate animation layer, stop when done, and handle background tabs, reduced motion, and disposal.
 
-快照提供器应在项目的状态读取边界下取得一致的状态与事件。后台每秒保存一次，结束时重新采样并写入；正常结束完整保存，异常退出最多丢失最后一次未保存的区间，并标为中断。单份记录上限为 20,000 个探针事件、2,000 个操作标记、32 MiB；超过上限或采集、保存失败必须显示缺口。仅记录已选定的参数与结果，不默认记录正文、任意局部变量或凭据。探针开关关闭时不能假称在采集。
+## Exact frames and shared resources
 
-已保存的记录绑定当时加载的模型与源码。不能把新源码展示成旧事件的实现。回放时，只合并游标之前的事件；内部活动配置使用探针标明的精确 journal revision。不能把最终检查结果、审批结论或最终提交状态复制到早期帧。没有边界证据时显示未知，结束快照只在最后显示。
+Projects without machine.execution journals may supply runtime_frames with schema stategraph-runtime-frames/v1. Each frame contains event_id/run_id/build_id/integer revision and actual post-transaction machine/authority. Event revision and machine.state_revision must match. Validate identity and parameter allowlists; do not save out-of-scope frames or overwrite an old event with later values. Do not pass raw databases/arbitrary objects as projections.
 
-若页头需要回放某个参数，使用 `presentation.replay_parameters` 明确配置其节点、输入/输出方向和字段，如 `limit_bytes: {node: "project_limit", direction: "out", field: "limit_bytes"}`。不能凭同名字段猜测业务含义，也不能将当前值带入旧事件。
+Set `runtime_frames.partial: true` when snapshots accompany only state-change events rather than every ordinary function call. Every event carrying an integer state revision still requires its matching frame; partial mode does not excuse a missing state boundary. A function-call step without a frame has unknown state, not an invented copy of the last snapshot. Include the actual phase in each complete configuration and current-state summary at the same transaction boundary.
 
-连线动画需要具体依据：事件依赖引用、同次调用的父 call 身份、已采集字段的输入/返回，或精确活动记录中的资源领取与汇合。静态调用边、共享引用和仅时间相邻的事件不能冒充实际传递。动画使用独立绘制层，结束后停止；后台标签页、减少动画偏好和资源释放均应处理。
+Project phase labels take precedence for business-phase changes. Activity enums use activity meanings. Raw captured strings remain raw; the value `pending` in a parameter must not automatically become the activity label "Not started". Missing optional display labels fall back to the original state ID.
 
-## 普通项目与跨运行共享资源的精确回放
+Obtain frames from transactional snapshots/version history; periodic sampling cannot reconstruct intervening changes. Missing frames stay unknown; start/end snapshots prove only endpoints. Frame count/bytes share recording limits.
 
-不使用 `machine.execution` 日志的项目可在视图中提供 `runtime_frames: {schema: "stategraph-runtime-frames/v1", frames: [...]}`。每帧包含 `event_id`、`run_id`、`build_id`、整数 `revision`，以及该次实际事务后的 `machine` 和 `authority` 投影。事件也必须带同一 `revision`，`machine.state_revision` 必须相等。记录器验证身份并沿用参数白名单；选区外帧不保存，同一事件的历史帧不可被后来的值覆盖。不能将原始数据库或任意对象当投影。
+machine.configurations retains existing run structure. machine.shared_resources stores one global entry per actual resource-node ID with selected fields. presentation.runtime_owner identifies the abstract node showing flow changes. Viewer shows before/after flow/activity/resource values without fabricating per-run pools. Project scenarios still verify global mutual exclusion/capacity/fairness. Snapshot differences alone do not prove calls or causality.
 
-适配器从事务快照或版本历史获取帧，后台采样本身无法还原两次采样之间的变化。缺少精确帧时回放显示未知。开始与结束快照只证明两端。帧仍受记录事件数和总文件大小上限约束。
+## Analysis views
 
-`machine.configurations` 使用现有运行结构；`machine.shared_resources` 用实际资源图节点 ID 作键、所选资源字段作值，在全局只存一份。`presentation.runtime_owner` 指向显示流程变化的抽象节点。查看器据此显示流程、内部活动和共享资源的前后值，不要求项目伪造运行内资源池。全局资源的互斥、容量和公平性仍由项目独立场景校验；快照协议不代替这些业务约束。运行连线仍需要真实依赖，不能凭快照变化推导调用或因果。
+All views filter the same graph. Users need not manually expand every parent before finding states/functions.
 
-## 分析视图
+| Preset | Purpose |
+|---|---|
+| Layered overview | Progressive detail with context |
+| Business flow | Business operations and relations |
+| State machine | Declared states and transitions |
+| Functions and parameters | Functions, inputs, returns, static calls |
+| Authorization | Explicitly mapped decisions/dependencies |
+| Concurrency and resources | Activities, capacity, waiting, joins |
+| Data dependencies | Values/functions/decisions and transfers |
+| Observed execution | Nodes with selected-run evidence |
+| Waiting and failures | Waiting/rejected/error nodes |
+| Shared membership | Original nodes and other-group entries |
 
-始终是同一张图的不同显示组合。类型筛选不应要求用户先手动展开所有业务节点，才能找到深层状态或函数。
+Authorization uses explicit semantic mapping, not name-based proof of coverage. A ! badge can mean wait/reject/error; inspect the reason. Static function edges still do not prove execution.
 
-| 预设 | 主要用途 |
-| --- | --- |
-| 分层全图 | 从高层逐步展开，保留完整上下文 |
-| 业务流 | 业务步骤及其关系 |
-| 状态机 | 实际声明的状态与迁移 |
-| 函数与参数 | 执行与判断函数、输入、返回及静态调用结构 |
-| 权限判断 | 已映射的授权判断及依赖 |
-| 并发与资源 | 当前活动、名额、等待与汇合 |
-| 数据依赖 | 数据、函数、判断及传值关系 |
-| 实际运行 | 所选运行中已有采集事件的节点 |
-| 等待与异常 | 当前等待、拒绝或错误节点 |
-| 共享关系 | 原节点与其他分组中的引用入口 |
+Combine node/edge/region types, depth, scope, and text; save up to 20 custom views. Each has separate coordinates/expansion/camera, with aliases/notes shared by canonical node ID. New presets do not overwrite old views. Persist in bo_stategraph/config/views/local.json, with browser cache only. Ports/restarts preserve the project file; concurrent-save conflicts prompt refresh rather than silent overwrite.
 
-权限预设只是参考筛选；项目应根据明确规则映射调整，不能凭名称匹配证明权限覆盖。等待视图中的 `!` 同时用于等待、未通过或出错，具体原因要读节点值。函数视图中的静态连线也不代表一定执行过。
+## Shared abstraction membership
 
-允许组合节点类型、边类型、圈类型、层级、范围和文字条件，最多保存 20 个自定义视图。每个视图单独保存坐标、展开范围和视野；名称和备注按原节点 ID 共用。旧默认视图不被新预设覆盖。配置写入项目的 `bo_stategraph/config/views/local.json`，浏览器只作缓存；换端口或重启服务后仍从同一个项目文件恢复。不同窗口保存冲突时提示刷新，不静默覆盖。
+parent is the primary layout/expansion/drag hierarchy. presentation.memberships contains explicit `{group,member,reason,evidence}` shared relations, not calls/causality/authorization. The reference also derives membership from machine.execution.within and declared activities/resources/joins.
 
-## 一个节点属于多个抽象
+Keep one canonical node. Other groups show a referenceOf entry marked ↗, sharing value/source/notes but with local coordinates and independent collapse. Shared edges have a distinct style and no execution animation. References do not recursively expand by default, preventing endless duplication/cycles. Cross-group navigation returns to the original.
 
-先区分两种关系：
+This does not force shared meanings into exclusive groups or treat geometric overlap as membership. A matrix may help large-set intersections but does not replace the execution graph. Alternatives: [Bubble Sets](https://vialab.science.uoit.ca/wp-content/publication_media/pdf/col2009c.pdf) smooth envelopes, [LineSets](https://www.microsoft.com/en-us/research/publication/design-study-of-linesets-a-novel-set-visualization-technique/) curved membership paths, [KelpFusion](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/12/kelpfusion_tvcg2013.pdf) mixed areas/links, [UpSet](https://upset.app/) set intersections. Primary hierarchy plus references is a design choice for circular expansion, independent collapse, and source navigation, not a claim of superiority or proven usability.
 
-- `parent` 是用于排布、展开和拖动的主要层级。
-- `presentation.memberships` 是带理由和依据的共享关系，如 `{group, member, reason, evidence}`。它不等于调用、因果或授权。
+## Required verification
 
-参考实现还从 `machine.execution.within` 和实际活动/资源/汇合声明导出共享关系：例如“检查中”状态依赖已有的内容检查和名额节点。
-
-保留一个真实节点身份，在另一个分组内显示 `referenceOf` 指向它的入口。入口带 ↗，值、源码、标注使用原身份；坐标属于所在分组，独立收起。共享线采用独立线型，不播放执行动画。引用默认不递归展开，避免多父关系形成无限复制或循环。
-
-这种方法不要求开发者把本来存在的共享关系改成互斥关系，也不把两个圆几何重叠当作共享证据。跨组定位可回到原节点。共享视图用于审查这些关系；大规模集合交集数量分析可另用矩阵，但不能替代程序图。
-
-参考与取舍：
-
-- [Bubble Sets 原论文](https://vialab.science.uoit.ca/wp-content/publication_media/pdf/col2009c.pdf)：在已有布局外绘制平滑包围区，适合空间关系稳定的集合；交集密集时区域辨识会变困难。
-- [LineSets](https://www.microsoft.com/en-us/research/publication/design-study-of-linesets-a-novel-set-visualization-technique/)：用曲线串联集合成员，能减少交叠区域造成的混淆。
-- [KelpFusion](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/12/kelpfusion_tvcg2013.pdf)：混合区域与连接线表达集合。
-- [UpSet](https://upset.app/)：适合比较集合交集，不能直接表达完整调用与状态迁移。
-
-这里采用“主要层级＋共享入口”是针对圆形展开、独立收起和源码定位的设计选择，不声称优于上述方法；需要真实使用继续验证。
-
-## 必须验证
-
-1. 圈内空白移动整组，圈外空白平移；内层圈、节点和连线优先命中。
-2. 图例和节点共用几何定义，填色一致；说明运行角标、展开数量、固定与标注。
-3. 开始/结束边界、空记录、重复开始、跨运行、丢事件、保存失败、进程更换和容量上限。
-4. 回放早期帧不出现未来参数、结果或状态，回放不增加业务运行和写入。
-5. 旧记录读取原源码；改变分析视图不改变记录的游标、事件和身份。
-6. 自定义视图与布局刷新后可恢复，隐藏不删除节点事实。
-7. 共享组单独收起，原节点仍在；标注与源码共用，执行计数不重复。
-8. 真实浏览器验证按钮、事件定位、播放/暂停和动画。小图有限时长的自动检查不构成所有设备的性能或真人易用性证明。
+Test region/group dragging vs canvas pan and inner hit priority; shared glyph/fill/legend badges; start/stop/empty/repeated-start/cross-run/loss/save-failure/restart/limit behavior; no future values in replay; replay without business writes; original recorded source; view changes preserving raw event/cursor identity; custom layout restoration; hidden facts retained; independently collapsible shared groups with no duplicate execution counts; real browser locate/play/pause/animation. Finite small-graph automation is not universal performance or human-usability proof.

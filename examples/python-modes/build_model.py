@@ -24,9 +24,9 @@ def build():
         "initial": "pending", "state_type": "str enum", "transitions": transitions,
         "events": {name: {"payload": {}} for name in ("start", "resume", "finish")},
         "context": {"slots": {"type": "integer", "min": 0}, "effects": {"type": "integer", "min": 0}},
-        "guards": {"available": "可用名额大于零"}}
-    nodes = [{"id": "job", "kind": "action", "layer": "business", "label": "执行任务", "source": {"path":"app.py", "symbol":"Job.run"}},
-             {"id": "slots", "kind": "data", "parent": "job", "label": "可用名额", "value_type": "integer"}]
+        "guards": {"available": "An available slot exists"}}
+    nodes = [{"id": "job", "kind": "action", "layer": "business", "label": "Execute task", "source": {"path":"app.py", "symbol":"Job.run"}},
+             {"id": "slots", "kind": "data", "parent": "job", "label": "Available slots", "value_type": "integer"}]
     nodes += [{"id": "state." + s, "kind": "state", "layer": "state", "parent": "job", "value": s, "label": s} for s in STATES]
     edges = [{"id": "transition:" + str(i), "from": "state." + t["source"], "to": "state." + t["dest"],
               "type": "flow", "event": t["trigger"], "conditions": t.get("conditions"), "unless": t.get("unless")} for i, t in enumerate(transitions)]
@@ -43,13 +43,13 @@ def build():
                                for arg in fn.args.args if arg.arg != "self"]})
     edges += [{"id": "contains:" + n["id"], "from": n["parent"], "to": n["id"], "type": "contains"} for n in nodes if n.get("parent")]
     for node in nodes:
-        node['summary'] = '实际任务实现：' + node['label']
+        node['summary'] = "Actual task implementation: " + node['label']
     for edge in edges:
         edge['evidence'] = 'executable declaration and Python source'
     files = ["intent.json", "bo_stategraph/driver.py", "bo_stategraph/bo_contracts.py", "bo_stategraph/execution_contract.py", "app.py", "run.py", "build_model.py", "test_modes.py", "bo_stategraph/__init__.py", "bo_stategraph/binding.py"]
     model = {"schema_version": 3, "revision": "1", "machine": machine, "nodes": nodes, "edges": edges,
         "graph_roots": ["job"], "intent":"intent.json", "overview":[{"node":"job"}], "source_files": files,
-        "scope": {"unknowns": ["只验证本地任务状态、可用名额和提交次数；没有数据库、并发或权限引擎。"]}}
+        "scope": {"unknowns": ["Validates local task state, available slots, and commit count; no database, concurrency, or authorization engine."]}}
     (ROOT / "bo_stategraph/model.json").write_text(json.dumps(model, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     hashes = {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest() for name in files + ["bo_stategraph/model.json"]}
     manifest = {"files": hashes, "build_id": hashlib.sha256(json.dumps(hashes, sort_keys=True).encode()).hexdigest()}

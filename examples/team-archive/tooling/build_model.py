@@ -45,22 +45,22 @@ def build() -> dict:
         "set_size_limit":("service","ArchiveService.set_archive_limit"),
     }
     for ident,kind,label,summary in [
-        ("flow.policy","action","核对归档资格","直接负责、有效审批和正文大小均满足当前条件。"),
-        ("flow.checks","action","完成本次两项检查","每次运行独享名额；保留各活动实例与资源状态。"),
-        ("flow.archive","action","复核并保存快照","同一事务核对当前关系、版本、审批、项目大小上限及本次检查结果。"),
-        ("authority_read","function","读取当前权威关系","同一 SQLite 事务读取资料、直接负责人和完整审批候选。"),
-        ("approval_candidate","decision","逐条判断审批","每条审批独立计算全部目标、身份、撤销与期限条件。"),
-        ("commit_guard","decision","当前是否仍有资格","提交前重读当前版本与关系，不能沿用历史绿色结果。"),
-        ("checks_join","data","本次两项均通过","ALL 汇合只使用同次运行同一内容版本的结果。"),
-        ("cancel_run","action","取消本次运行","阻止尚未开始的检查，等待已启动检查实际结束再归还名额。"),
-        ("lifecycle","data","本次流程状态","展开查看实际状态迁移；历史时刻使用该帧记录的状态。"),
-        ("issue_approval","function","为当前版本审批","记录另一名审核员的版本绑定审批；既有等待运行仍需手动继续。"),
-        ("move_folder","function","调整分类文件夹","更新当前目录及关系版本，当前直接负责人关系随之重查。"),
-        ("recover_run","function","恢复中断记录","重启不复活已失去的工作线程；保留记录并释放其容量。"),
-        ("worker_call","function","执行并保存检查结果","真实工作线程结束后更新同次运行，随后归还所占名额。"),
-        ("project_limit","data","项目归档大小上限","每项目独立持久化，默认 8192 字节；改变上限不修改内容版本或审批。"),
-        ("size_guard","decision","正文是否在当前上限内","只计算正文 UTF-8 字节数，等于上限允许；开始、继续、提交时重新读取当前上限。"),
-        ("set_size_limit","function","调整项目大小上限","只接受正整数；超限等待，已开始检查自然结束，条件恢复仍需手动继续。"),
+        ("flow.policy","action","Check archive eligibility","Current direct ownership, valid approval, and body size conditions hold."),
+        ("flow.checks","action","Complete both checks for this run","Each run owns its slots; retain individual activities and resource state."),
+        ("flow.archive","action","Recheck and persist snapshot","In one transaction, verify current relationships, version, approvals, size limit, and this run's checks."),
+        ("authority_read","function","Read current authoritative relationships","Read the document, direct owner, and full approval candidates in one SQLite transaction."),
+        ("approval_candidate","decision","Evaluate each approval","Independently evaluate each approval's target, identity, revocation, and expiry conditions."),
+        ("commit_guard","decision","Is the actor still eligible?","Reread current version and relationships before commit; do not reuse an earlier success."),
+        ("checks_join","data","Both checks passed for this run","The ALL join uses results from the same run and content version only."),
+        ("cancel_run","action","Cancel this run","Prevent pending checks from starting; active checks release slots only after actual completion."),
+        ("lifecycle","data","This run's phase","Expand actual state transitions; historical frames use their recorded state."),
+        ("issue_approval","function","Approve the current version","Record another reviewer's version-bound approval; existing waiting runs still need manual continuation."),
+        ("move_folder","function","Change classification folder","Update the folder and relationship revision, then recheck direct ownership."),
+        ("recover_run","function","Recover interrupted records","Restart does not revive lost workers; preserve records and release their capacity."),
+        ("worker_call","function","Execute and persist check results","Update the same run after the real worker finishes, then release its slot."),
+        ("project_limit","data","Project archive size limit","Persist per project, default 8192 bytes; changing it does not change content versions or approvals."),
+        ("size_guard","decision","Is the body within the current limit?","Count body UTF-8 bytes only; equality is allowed; reread the limit at start, resume, and commit."),
+        ("set_size_limit","function","Change project size limit","Accept positive integers only; oversized runs wait, active checks finish, and recovery requires manual continuation."),
     ]:
         nodes[ident]={"id":ident,"kind":kind,"label":label,"summary":summary,"capture":{"in":{},"out":{}}}
     groups = {
@@ -82,24 +82,24 @@ def build() -> dict:
         nodes[ident].pop("binding_status",None)
     for ident in ("content_check","index_check"):
         nodes[ident]["execution_role"]="activity"
-    for ident,label,symbol,parent in [('run.storage','保存运行状态','ArchiveStore.save_run','flow.checks'),
-            ('run.lookup','读取指定运行','ArchiveStore.get_run','flow.checks'),
-            ('relations.revision','更新关系修订号','ArchiveStore.bump','flow.policy')]:
+    for ident,label,symbol,parent in [('run.storage',"Persist run state",'ArchiveStore.save_run','flow.checks'),
+            ('run.lookup',"Read a specific run",'ArchiveStore.get_run','flow.checks'),
+            ('relations.revision',"Increment relationship revision",'ArchiveStore.bump','flow.policy')]:
         nodes[ident]={'id':ident,'label':label,'summary':label,'kind':'function','layer':'program',
             'parent':parent,'analysis_level':'advanced','source':{'path':'archive_app/storage.py','symbol':symbol}}
     nodes["processing_slots"]["execution_role"]="resource"
-    for symbol,label,parent in [('schedule','安排等待、启动与汇合','flow.checks'),
-            ('request_stop','停止启动新检查','cancel_run'),('settle','等待运行检查收尾','cancel_run'),
-            ('checks_passed','核对同次检查结果','checks_join'),('interrupt','标记中断并归还名额','recover_run'),
-            ('finish_activity','完成活动并记录结果','worker_call'),('resume','恢复本次运行','resume_run')]:
+    for symbol,label,parent in [('schedule',"Schedule waiting, starts, and joins",'flow.checks'),
+            ('request_stop',"Stop starting new checks",'cancel_run'),('settle',"Wait for active checks to finish",'cancel_run'),
+            ('checks_passed',"Verify same-run check results",'checks_join'),('interrupt',"Mark interruption and release slots",'recover_run'),
+            ('finish_activity',"Finish an activity and record its result",'worker_call'),('resume',"Resume this run",'resume_run')]:
         ident='execution.'+symbol
         nodes[ident]={'id':ident,'label':label,'summary':label,'kind':'function','layer':'program',
             'parent':parent,'analysis_level':'advanced','source':{'path':'bo_stategraph/workflow.py','symbol':symbol}}
     nodes["checks_join"]["execution_role"]="join"
-    nodes["processing_slots"]["summary"]="本次运行独享容量，创建时选 1 或 2；检查实际结束后归还。"
-    nodes["content_changed"]["summary"]="旧运行不再提交；未开始检查作废，已开始自然结束，新版本另建独立运行。"
-    nodes["content_check"]["summary"]="对本次固定输入检查 SECRET: 标记；不记录正文，只观察长度、摘要和实际判断。"
-    nodes["index_check"]["summary"]="检查本次标题、项目和资料编号是否齐全。"
+    nodes["processing_slots"]["summary"]="Each run owns its capacity, chosen as 1 or 2; checks release slots after finishing."
+    nodes["content_changed"]["summary"]="Old runs cannot commit; pending checks are discarded, active checks finish, and the new version has a separate run."
+    nodes["content_check"]["summary"]="Check SECRET: against this run's fixed input; capture length, digest, and actual decisions, never body text."
+    nodes["index_check"]["summary"]="Verify this run's title, project, and document ID."
     b,n,s="boolean","number","string"
     candidate_flags={k:b for k in ("project_ok","operator_ok","document_ok","version_ok","reviewer_ok",
                                    "different_actor","not_revoked","time_ok","target_matches","allowed")}
@@ -138,50 +138,50 @@ def build() -> dict:
         ident="state."+value
         parent="flow.archive" if value in ("ready","completed") else "flow.policy" if value=="created" else "flow.checks"
         nodes[ident]={"id":ident,"kind":"state","layer":"state","value":value,
-            "label":model["machine"]["labels"][value],"summary":"程序持久化状态 "+value,
+            "label":model["machine"]["labels"][value],"summary":"Persisted application state "+value,
             "parent":"lifecycle","source":model["machine"]["source"]}
     edges=[e for e in model["edges"] if e["id"] not in ("slots_content","slots_index","content_archive","index_archive")]
     for ident,node in nodes.items():
         if node.get("parent"):
             edges.append({"id":"contains:"+ident,"from":node["parent"],"to":ident,
-                "type":"contains","label":"包含","evidence":"项目业务分组"})
+                "type":"contains","label":"Contains","evidence":"Project business grouping"})
     for activity in model["machine"]["execution"]["activities"]:
         for rid,units in activity["requires"].items():
             edges.append({"id":"resource:"+activity["id"],"from":rid,"to":activity["id"],
-                "type":"resource","units":units,"label":"占用 1 个本运行名额","evidence":"实际执行声明 machine.execution"})
+                "type":"resource","units":units,"label":"Acquire one slot owned by this run","evidence":"Actual machine.execution declaration"})
         edges.append({"id":"join:"+activity["id"],"from":activity["id"],"to":"checks_join",
-            "type":"join","label":"本次检查结束","evidence":"实际 ALL 汇合声明"})
+            "type":"join","label":"This run's check finished","evidence":"Actual ALL join declaration"})
     edges += [
-        {"id":"all-to-commit","from":"checks_join","to":"archive_commit","type":"guard","label":"同次两项通过","evidence":"U03-U04"},
-        {"id":"policy-to-checks","from":"flow.policy","to":"flow.checks","type":"flow","label":"当前资格满足后开始","evidence":"U04"},
-        {"id":"checks-to-archive","from":"flow.checks","to":"flow.archive","type":"flow","label":"两项通过再复核","evidence":"U03-U04"},
-        {"id":"candidate-to-aggregate","from":"approval_candidate","to":"approval_check","type":"guard","label":"至少一条有效","evidence":"U03"},
-        {"id":"limit-to-size","from":"project_limit","to":"size_guard","type":"data","label":"读取当前字节上限","evidence":"U05-U06"},
-        {"id":"set-to-limit","from":"set_size_limit","to":"project_limit","type":"data","label":"保存项目配置","evidence":"U06"},
-        {"id":"size-to-commit","from":"size_guard","to":"commit_guard","type":"guard","label":"当前正文不超限","evidence":"U05-U06"},
+        {"id":"all-to-commit","from":"checks_join","to":"archive_commit","type":"guard","label":"Both passed in this run","evidence":"U03-U04"},
+        {"id":"policy-to-checks","from":"flow.policy","to":"flow.checks","type":"flow","label":"Start when current eligibility holds","evidence":"U04"},
+        {"id":"checks-to-archive","from":"flow.checks","to":"flow.archive","type":"flow","label":"Recheck after both pass","evidence":"U03-U04"},
+        {"id":"candidate-to-aggregate","from":"approval_candidate","to":"approval_check","type":"guard","label":"At least one valid approval","evidence":"U03"},
+        {"id":"limit-to-size","from":"project_limit","to":"size_guard","type":"data","label":"Read the current byte limit","evidence":"U05-U06"},
+        {"id":"set-to-limit","from":"set_size_limit","to":"project_limit","type":"data","label":"Persist project configuration","evidence":"U06"},
+        {"id":"size-to-commit","from":"size_guard","to":"commit_guard","type":"guard","label":"Current body is within the limit","evidence":"U05-U06"},
     ]
     model["nodes"],model["edges"]=list(nodes.values()),edges
     model["graph_roots"]=["flow.policy","flow.checks","flow.archive"]
     model["overview"]=[{"node":n,"x":80+i*400,"y":120} for i,n in enumerate(model["graph_roots"])]
     model["presentation"].update(default_expanded=[],
-                                 title="团队资料归档 · 开发者运行图")
+                                 title="Team archive · developer runtime graph")
     model["presentation"]["replay_parameters"]={
         "content_bytes":{"node":"size_guard","direction":"in","field":"content_bytes"},
         "limit_bytes":{"node":"project_limit","direction":"out","field":"limit_bytes"},
         "limit_revision":{"node":"project_limit","direction":"out","field":"limit_revision"},
     }
-    model['presentation']['context_fields']=[{'key':'content_bytes','label':'本次正文','unit':'字节'},
-        {'key':'limit_bytes','label':'当前项目上限','saved_label':'保存时上限','unit':'字节'}]
+    model['presentation']['context_fields']=[{'key':'content_bytes','label':"Current body",'unit':"bytes"},
+        {'key':'limit_bytes','label':"Current project limit",'saved_label':"Limit at save",'unit':"bytes"}]
     model["scope"]["unknowns"]=[
-        "只覆盖本地合成资料、直接负责关系和内嵌审批规则，不是通用 ReBAC 引擎。",
-        "正文不进入探针，仅记录内容摘要和长度；外部身份认证、文件系统归档及外部服务不在首版范围。",
-        "未启动且已作废的活动保留 discarded 标识，直到已启动活动结束后执行 abort；该标识由项目测试检查。",
-        "AST 不能证明动态调用完整性；图和有限场景不构成所有调度或真人易用性证明。"]
+        "Covers local synthetic documents, direct ownership, and embedded approval rules; not a generic ReBAC engine.",
+        "Capture body digest and length only; external authentication, filesystem archives, and external services are outside the first version.",
+        "Unstarted discarded activities retain their flag until active activities finish and abort runs; project tests check this flag.",
+        "AST cannot prove dynamic call completeness; finite cases do not prove all schedules or human usability."]
     model["questions"]=[]
     cfg=json.loads((ROOT/"sync.json").read_text(encoding="utf-8"))
     model["source_files"]=sorted(set(cfg["code_files"]+[
         "tooling/build_model.py","tooling/behavior_source.json","archive_app/__init__.py",
-        "observer_runtime/semantic_probe.py","observer_runtime/behavior_model.py","observer_runtime/recording_session.py","observer_runtime/bo_stategraph.py",
+        "observer_runtime/semantic_probe.py","observer_runtime/behavior_model.py","observer_runtime/recording_session.py","observer_runtime/bo_stategraph.py","observer_runtime/observation_scope.py",
         "run.py","static/app.html","static/app.css","static/app.js",
         "static/graph/index.html","static/graph/viewer.js","static/graph/graph-core.js","static/graph/layout.js","static/graph/viewer.css",
         "static/graph/analysis.js","static/graph/recording.js","static/graph/glyphs.js","static/graph/replay-steps.js"]))
@@ -193,7 +193,7 @@ def build() -> dict:
         if node['id'] in ['scope_check', 'approval_check', 'approval_candidate', 'commit_guard', 'folder_assignments', 'approval_target']: node['semantic_roles']=['permission']
         if node.get('execution_role') in ('resource','join'): node['analysis_level']='advanced'
     model['implementation']=json.loads((ROOT/'implementation.json').read_text(encoding='utf-8'))
-    model['source_files'].append('implementation.json')
+    model['source_files'] += ['implementation.json','bo_stategraph/machine.json']
     captures={
         'issue_approval':({'document_id':'string','operator_id':'string','reviewer_id':'string','deadline':'number'},{'approval_id':'string'}),
         'approval_revoked':({'approval_id':'string'},{'revoked':'boolean'}),
@@ -203,6 +203,13 @@ def build() -> dict:
     for n in model['nodes']:
         if n['id'] in captures:
             inputs,outputs=captures[n['id']];n['capture']={'in':inputs,'out':outputs};n['basis_fields']=['epoch']
+    model['nodes'].extend(json.loads((ROOT/'tooling/frontend_nodes.json').read_text(encoding='utf-8')))
+    model['graph_roots']+=['ui.command','ui.validate','ui.dirty']
+    for target in ['archive_request','content_changed','move_folder','issue_approval','approval_revoked','resume_run','cancel_run','set_size_limit']:
+        model['edges'].append({'id':'ui-to-'+target,'from':'ui.command','to':target,'type':'flow','label':"Submit the corresponding operation",'evidence':"Actual static/app.js request → LocalApplication.command dispatch"})
+    model['edges'] += [{'id':'ui-validation','from':'ui.validate','to':'ui.command','type':'guard','label':"Submit positive integers only",'evidence':'submitLimit'},
+                       {'id':'ui-dirty','from':'ui.dirty','to':'ui.command','type':'data','label':"Submit page input",'evidence':'DOM handlers'}]
+    model['source_files'].extend(['tooling/frontend_nodes.json','integrations/bo_client.mjs'])
     model=enrich(model,scan(ROOT,cfg["code_files"]),depth=cfg.get("slice_depth",1))
     (ROOT/"behavior.json").write_text(json.dumps(model,ensure_ascii=False,indent=2),encoding="utf-8",newline="\n")
     return model

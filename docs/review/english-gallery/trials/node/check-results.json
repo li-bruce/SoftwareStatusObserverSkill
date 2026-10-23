@@ -1,0 +1,135 @@
+{
+  "skill": "candidate-3",
+  "application_v1": {
+    "mapping": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+      "stategraph_export": "checked",
+      "witnesses": 12,
+      "projection_checks": 51,
+      "implementation": {
+        "errors": [],
+        "events_checked": 68,
+        "features": 11
+      }
+    },
+    "state_rules": {
+      "status": "passed",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "passed",
+      "errors": [],
+      "assertions": {
+        "required": 48,
+        "executed": 48
+      },
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "application_v2": {
+    "mapping": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+      "stategraph_export": "checked",
+      "witnesses": 15,
+      "projection_checks": 63,
+      "implementation": {
+        "errors": [],
+        "events_checked": 75,
+        "features": 11
+      }
+    },
+    "state_rules": {
+      "status": "passed",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "passed",
+      "errors": [],
+      "assertions": {
+        "required": 63,
+        "executed": 63
+      },
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "v1_browser": {
+    "build_id": "3f170a4c9c8ba6e60e62d154724a72d707407022c746073e470d94bd517b899e",
+    "recording_id": "135acb7323ec42c3b5cc0ec6f3278740",
+    "recorded_events": 36,
+    "state_frames": [
+      "received",
+      "pending_review",
+      "published"
+    ],
+    "store_matches": true,
+    "errors": 0,
+    "dropped": 0,
+    "credentials_recorded": false,
+    "event_count_before_controls": 56
+  },
+  "v2_browser": {
+    "build_id": "1311bfdbaf3c39dd1b3e61713ae0eedf2b9dd26ce1040fb7c858566fa441fdbc",
+    "recording_id": "a05325bf62504bbb8fab37bb190385e2",
+    "recorded_events": 41,
+    "state_frames": [
+      "received",
+      "invalid_file",
+      "received",
+      "pending_review",
+      "published"
+    ],
+    "store_matches": true,
+    "errors": 0,
+    "dropped": 0,
+    "credentials_recorded": false,
+    "event_count_before_controls": 65
+  },
+  "v2_live": {
+    "build_matches_accepted": true,
+    "build_id": "1311bfdbaf3c39dd1b3e61713ae0eedf2b9dd26ce1040fb7c858566fa441fdbc",
+    "binding": "current",
+    "viewer_events_before": 65,
+    "viewer_events_after": 65,
+    "viewer_events_added": 0,
+    "actual_gui_jpeg_no_notification": true,
+    "actual_gui_jpeg_no_saved_image": true,
+    "health": {
+      "errors": 0,
+      "dropped": 0,
+      "run_id": "6c072814ca7cb6ed8888c5a8",
+      "attempted": 65,
+      "written": 65,
+      "enabled": true,
+      "runtime_frame_evictions": 0,
+      "retained_events": 65,
+      "evicted_events": 0,
+      "history_start_seq": 1,
+      "log_errors": 0,
+      "listener_errors": 0,
+      "retention": {
+        "memory_events": 10000,
+        "memory_seconds": 1800,
+        "log_bytes": 8388608,
+        "log_backups": 2
+      }
+    },
+    "urls": {
+      "application": "http://127.0.0.1:53700",
+      "graph": "http://127.0.0.1:57136/graph"
+    }
+  }
+}

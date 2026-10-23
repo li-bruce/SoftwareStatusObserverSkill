@@ -1,0 +1,72 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+..E...E.E.....E.
+======================================================================
+ERROR: test_duplicate_stale_and_foreign_build_cannot_overwrite (__main__.MultiLanguageTests.test_duplicate_stale_and_foreign_build_cannot_overwrite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_multilanguage.py", line 181, in test_duplicate_stale_and_foreign_build_cannot_overwrite
+    session=GraphSession(self.root);events=[];probe=BOProbe(self.project,session.manifest['build_id'],sink=lambda e,k:events.append(e))
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_observer\service.py", line 35, in __init__
+    self.project=validate_project(read(self.path)); self.project_hash=digest(self.project)
+                 ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_observer\protocol.py", line 48, in validate_project
+    validate_chart(project['model'])
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_contracts.py", line 295, in validate_chart
+    if values != represented: raise ValueError('persisted states and graph projection differ')
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: persisted states and graph projection differ
+
+======================================================================
+ERROR: test_javascript_real_transport_and_service_failure_do_not_change_execution (__main__.MultiLanguageTests.test_javascript_real_transport_and_service_failure_do_not_change_execution)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_multilanguage.py", line 161, in test_javascript_real_transport_and_service_failure_do_not_change_execution
+    session=GraphSession(self.root);server=make_server(session,0,token='token');threading.Thread(target=server.serve_forever,daemon=True).start()
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_observer\service.py", line 35, in __init__
+    self.project=validate_project(read(self.path)); self.project_hash=digest(self.project)
+                 ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_observer\protocol.py", line 48, in validate_project
+    validate_chart(project['model'])
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_contracts.py", line 295, in validate_chart
+    if values != represented: raise ValueError('persisted states and graph projection differ')
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: persisted states and graph projection differ
+
+======================================================================
+ERROR: test_mode_choice_is_required_for_both_modes (__main__.MultiLanguageTests.test_mode_choice_is_required_for_both_modes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_multilanguage.py", line 102, in test_mode_choice_is_required_for_both_modes
+    p=deepcopy(self.project);p['selection']['mode']=mode;validate_project(p)
+                                                         ~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_observer\protocol.py", line 48, in validate_project
+    validate_chart(project['model'])
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_contracts.py", line 295, in validate_chart
+    if values != represented: raise ValueError('persisted states and graph projection differ')
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: persisted states and graph projection differ
+
+======================================================================
+ERROR: test_real_http_events_snapshots_recording_noise_and_invalid_facts (__main__.MultiLanguageTests.test_real_http_events_snapshots_recording_noise_and_invalid_facts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_multilanguage.py", line 137, in test_real_http_events_snapshots_recording_noise_and_invalid_facts
+    session=GraphSession(self.root);server=make_server(session,0,token='test-token')
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_observer\service.py", line 35, in __init__
+    self.project=validate_project(read(self.path)); self.project_hash=digest(self.project)
+                 ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_observer\protocol.py", line 48, in validate_project
+    validate_chart(project['model'])
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_contracts.py", line 295, in validate_chart
+    if values != represented: raise ValueError('persisted states and graph projection differ')
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: persisted states and graph projection differ
+
+----------------------------------------------------------------------
+Ran 16 tests in 15.389s
+
+FAILED (errors=4)

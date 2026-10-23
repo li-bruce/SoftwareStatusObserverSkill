@@ -1,22 +1,23 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>资料柜 · 团队归档</title><link rel="stylesheet" href="/app.css"></head>
-<body><header><div><span class="eyebrow">LOCAL TEAM ARCHIVE · 模拟演练</span><h1>资料柜</h1></div><nav><span id="connection" role="status">连接中</span><a data-bo-entry href="/graph" target="_blank" rel="noopener">打开开发者图 ↗</a></nav></header>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Team archive</title><link rel="stylesheet" href="/app.css"></head>
+<body><header><div><span class="eyebrow">LOCAL TEAM ARCHIVE · SYNTHETIC DEMO</span><h1>Document archive</h1></div><nav><span id="connection" role="status">Connecting</span><a data-bo-entry href="/graph" target="_blank" rel="noopener">Open developer graph ↗</a></nav></header>
 <main><section class="workspace">
-<div class="section-title"><h2>当前资料</h2><span id="version" class="tag"></span></div>
+<div class="section-title"><h2>Current document</h2><span id="version" class="tag"></span></div>
 <p class="muted" id="location"></p>
-<form id="edit-form"><label>标题<input id="title" autocomplete="off"></label><label>资料编号<input id="number" autocomplete="off"></label><label>内容<textarea id="content" rows="7"></textarea></label><div class="form-actions"><span class="muted">修改后生成新内容版本；已归档快照保持不变。</span><button type="submit" class="secondary">保存新版本</button></div></form>
-<details><summary>调整分类文件夹</summary><div class="inline"><select id="folder" aria-label="分类文件夹"></select><button id="move" class="secondary">变更归属</button></div><p class="muted">直接负责人按新目录判断，上级目录不继承权限。</p></details>
-<div class="section-title spaced"><h2>项目归档大小上限</h2></div>
-<form id="limit-form"><div class="inline"><label>上限（字节）<input id="size-limit" inputmode="numeric" autocomplete="off" aria-describedby="size-status"></label><button type="submit" class="secondary">保存项目上限</button></div><p id="size-status" class="muted"></p><p class="muted">项目内共用，只计算已保存正文的 UTF-8 字节数。默认 8 KiB = 8192 字节，等于上限允许。超限时等待；调大后仍需点击继续。</p></form>
-<div class="section-title spaced"><h2>发起归档</h2></div>
-<div class="row"><label>操作人<select id="operator"></select></label><label>本次检查名额<select id="capacity"><option value="2">2 个 · 可同时检查</option><option value="1">1 个 · 依次检查</option></select></label></div>
-<p class="muted" id="delay-note"></p><button id="new-run" class="primary full">新建一次归档运行</button>
-<div class="section-title spaced"><h2>审批</h2><span class="muted">任一条仍有效即可</span></div>
-<div class="row"><label>审核员<select id="reviewer"></select></label><label>有效时长<select id="expires"><option value="600">10 分钟</option><option value="15">15 秒 · 观察到期</option><option value="0">立即到期 · 反例</option></select></label></div>
-<button id="approve" class="secondary full">为当前操作人审批当前版本</button><div id="approvals" class="approval-list"></div>
+<form id="edit-form"><label>Title<input id="title" autocomplete="off"></label><label>Document number<input id="number" autocomplete="off"></label><label>Content<textarea id="content" rows="7"></textarea></label><div class="form-actions"><span class="muted">Saving creates a new content version; archived snapshots remain unchanged.</span><button type="submit" class="secondary">Save new version</button></div></form>
+<details><summary>Change classification folder</summary><div class="inline"><select id="folder" aria-label="Classification folder"></select><button id="move" class="secondary">Move document</button></div><p class="muted">Direct ownership uses the new folder. Parent ownership does not inherit.</p></details>
+<div class="section-title spaced"><h2>Project archive size limit</h2></div>
+<form id="limit-form"><div class="inline"><label>Limit (bytes)<input id="size-limit" inputmode="numeric" autocomplete="off" aria-describedby="size-status"></label><button type="submit" class="secondary">Save project limit</button></div><p id="size-status" class="muted"></p><p class="muted">Shared within this project. Count saved body UTF-8 bytes only. Default: 8192 bytes; equality is allowed. Oversized runs wait and require manual continuation after recovery.</p></form>
+<div class="section-title spaced"><h2>Start an archive</h2></div>
+<div class="row"><label>Operator<select id="operator"></select></label><label>Checking slots for this run<select id="capacity"><option value="2">2 · concurrent checks</option><option value="1">1 · sequential checks</option></select></label></div>
+<p class="muted" id="delay-note"></p><button id="new-run" class="primary full">Start a new archive run</button>
+<div class="section-title spaced"><h2>Approval</h2><span class="muted">Any currently valid approval suffices</span></div>
+<div class="row"><label>Reviewer<select id="reviewer"></select></label><label>Valid for<select id="expires"><option value="600">10 minutes</option><option value="15">15 seconds · observe expiry</option><option value="0">Immediate expiry · rejection case</option></select></label></div>
+<button id="approve" class="secondary full">Approve this version for this operator</button><div id="approvals" class="approval-list"></div>
 </section>
-<section class="activity"><div class="section-title"><h2>归档运行</h2><span id="run-count" class="muted"></span></div><p class="muted">每次运行保留自己的输入、检查结果与名额。继续会重新核对当前资格。</p><div id="runs"></div>
-<div class="section-title spaced"><h2>固定快照</h2><span id="archive-count" class="muted"></span></div><div id="archives"></div>
+<section class="activity"><div class="section-title"><h2>Archive runs</h2><span id="run-count" class="muted"></span></div><p class="muted">Each run retains its input, results, and slots. Continuing rechecks current eligibility.</p><div id="runs"></div>
+<div class="section-title spaced"><h2>Immutable snapshots</h2><span id="archive-count" class="muted"></span></div><div id="archives"></div>
 </section></main>
-<div id="notice" role="status" hidden></div><footer>仅本地合成数据 · 文件夹用于分类，归档不移动或删除原资料。<span id="build"></span></footer>
-<script src="/app.js"></script></body></html>
+<div id="notice" role="status" hidden></div><footer>Local synthetic data. Folders classify documents; archiving does not move or delete the original.<span id="build"></span></footer>
+<script src="/app.js"></script><script type="module" src="/bo_client.mjs"></script>
+</body></html>

@@ -1,0 +1,2 @@
+PASS: 30 old/new SQLite and worker scenarios; states, activities, resource ownership, effects and observed values match.
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe

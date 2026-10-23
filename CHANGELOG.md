@@ -1,7 +1,29 @@
 # Changelog
 
+## 0.6.0 — 2026-10-23
+
+[Release notes](docs/releases/v0.6.0.md) · [Live introduction](https://li-bruce.github.io/SoftwareStatusObserverSkill/)
+
+### English presentation and independent gallery trials
+
+- Add an illustrated bilingual product introduction with interactive graph layers, mixed views, drive/observe diagrams, iteration checks, and an explicitly illustrative replay.
+- Require a conversation diagram and verified Web graph address before implementing confirmed scope. Generate both from the same discovery model; keep confirmation in conversation.
+- Maintain English source, instructions, and default documentation; preserve original historical evidence and user labels. Persist the viewer's English/Chinese preference in project configuration.
+- Fix portable upgrade metadata, chained-call source IDs, native project design views, optional state labels, and business-state versus activity-state replay wording.
+- Retain strict mapping, business, state, and project checks. Record independent Python and Node gallery failures, repairs, and retests in the review materials.
+
+### Multilanguage architecture
+
+- Separate shared graph, workflow, observation, web, delivery and language adapters under `bo_observer`. Keep thin compatibility entrypoints; retire obsolete viewers and v1 schemas with safe managed-file migration.
+- Add versioned project/source/event/snapshot JSON protocols, strict engine and value checks, bounded native transport, one authoritative producer per observed instance, and isolated Python collection.
+- Inventory Python, JS/TS, React and Vue independently of existing graph nodes. Check native imports and DOM handlers; retain explicitly hashed historical sources and third-party bundles as evidence/dependencies.
+- Ask the user to choose drive or observe at initial discovery. Route business confirmation to the user and implementation questions to coding-side evidence.
+- Migrate the existing Python examples to JSON execution definitions and add actual frontend coverage. Add a native Python/Node and real React/Vue component example, keeping all existing gates.
+
 ## 2026-10-23 (main)
 
+- Exclude graph polling, source/preferences/recording controls and observer reporting from business nodes and events. Retain their source inventory, validate exact observer-route exclusions, and suppress recursive collection in payload builders, sinks and recording snapshots.
+- Add a reviewed migration for unchanged observer routes previously classified as business features, preserving business capture and assertion protections. Verify the independent upload-review application with repeated observer requests and real login/upload/review/message actions in on/off/fault modes.
 - Require a source-first implementation inventory linking features, functions, parameters, graph nodes and actual observation cases. Reject omitted routes, business-source exclusions, missing fields and weakened coverage obligations.
 - Preserve business actions in function views, business parameters on expansion, authored state identities and real relation endpoints at filter boundaries. Apply the same relation classification in selection and rendering.
 - Support explicitly scoped application/entity events so login and configuration activity remains visible alongside a selected task.

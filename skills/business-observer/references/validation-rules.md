@@ -1,29 +1,29 @@
-# 可执行验证规则
+# Executable validation rules
 
-规则集由通用检查、领域规则和项目场景组成。以下是选取依据，不要求无关项目执行全部种类。
+Combine general checks, domain rules, and project scenarios. Select applicable dimensions; unrelated projects need not implement every category.
 
-| 方面 | 必须确定的规则 | 执行与证据 |
+| Dimension | Define | Execution and evidence |
 |---|---|---|
-| 类型与函数 | 关键参数的类型、范围、单位、身份；输入与返回值关系 | 静态签名 + whitebox 字段断言 |
-| 判定 | AND/OR/排除、规则传播范围、未知处理、短路语义 | 许可/拒绝正反例；逐条件改变其余保持；实际求值事件 |
-| 数据关系 | 方向、直接/传递、作用范围、读取完整性、数据版本 | 合成关系集合 + 独立预期 + 真实读取和存储检查 |
-| 状态与序列 | 合法迁移、等待、恢复、取消、重试、幂等 | 模型与真实程序比较；操作序列及每步不变量 |
-| 并发与资源 | 同一运行的汇合要求、容量、占用/归还、旧新运行隔离 | 实际并发的屏障/调度控制、完整活动配置、权威效果 |
-| 提交 | 判定依据的有效范围与事务保护、失败无效果 | 提交窗口的可控交错、版本冲突或项目选定的原子性机制 |
-| 观测 | 关闭/故障不改变业务；身份和版本准确；丢失不补造 | on/off/fault 场景；探针缺失和字段错误注入 |
-| 图与修改 | 类型/方向不改变；边界可追溯；旧证据不用于新构建 | focus_graph 单元检查、change_sync、真实图下钻 |
-| 测试有效性 | 关键规则被破坏时，测试能按业务原因发现 | 隔离副本定向改错；保持测试预期；记录预期失败的断言 |
+| Types and functions | Parameter type/range/unit/identity; input-to-return relations | Static signatures and white-box fields |
+| Decisions | AND/OR/exclusion, propagation scope, unknowns, short circuiting | Allow/deny cases; independently varied conditions; actual evaluation events |
+| Data relations | Direction, direct/transitive scope, read completeness, data version | Synthetic relationships, independent expectations, actual reads/storage |
+| States and sequences | Legal transitions, waiting, recovery, cancel, retry, idempotency | Compare model and application; operation sequences and invariants |
+| Concurrency/resources | Same-run join, capacity, acquire/release, run isolation | Real barriers/scheduling, complete configurations, authoritative effects |
+| Commit | Validity of evidence, transaction protection, failure without effects | Controlled commit-window interleavings, conflicts, chosen atomicity mechanism |
+| Observation | Off/fault preserve behavior; correct identities; no invented missing data | On/off/fault cases, missing-probe and incorrect-field injection |
+| Graph and changes | Types/directions preserved, traceable boundaries, no stale evidence | Focus graph checks, change_sync, actual drilldown |
+| Test sensitivity | Broken rules fail for the relevant business reason | Isolated mutations, unchanged expectations, expected-failure assertions |
 
-每个领域规则记录：来源、适用条件、输入/操作、预期性质、取证位置、执行检查器与版本。图、测试和实现可以共同使用枚举和身份；测试预期不能直接调用被测判定来计算。
+Record each rule's source, applicability, input/operations, expected property, evidence location, checker, and version. Graph, tests, and implementation may share enums/IDs. Expectations must not call the decision under test to calculate the answer.
 
-加载前先校验声明、类型、支持的迁移语义和实际引擎接线；无效定义抛出错误。运行事实违规时保留真实值，并使状态或业务检查失败。映射按 [受保护清单](mapping-contract.md) 从交付投影取值，原 mapping_checks 不删除。
+Before loading, validate definitions, types, supported transition semantics, and actual engine wiring. Invalid definitions raise errors. Invalid runtime facts retain actual values and fail state/business checks. Mapping reads delivered projections through the [protected contract](mapping-contract.md); retain original `mapping_checks`.
 
-阶段报告分别列出 `mapping`、`state_rules`、`business` 和 `project_checks`。`mapping_contract.py` 将实际存储、函数输入/输出或接收者身份，与统一实例查询和探针中的对应值比较；数据必须来自独立读取，不能把同一投影复制两份充当对照。`business` 使用事先写定的预期，`project_checks` 记录架构、页面等项目测试。实际程序违规且图准确反映时，映射可通过，状态或业务规则仍失败；把错误程序显示成正常流程则映射也必须失败。
+Report `mapping`, `state_rules`, `business`, `project_checks` separately. Compare independent storage values, function inputs/outputs, or recipient identities against unified instance queries and probes. Duplicating the same projection is not independent evidence. Business tests use predetermined expectations; project checks include architecture/UI. A correctly mapped program bug may pass mapping but fail rules. Showing an invalid program as normal must also fail mapping.
 
-复杂条件可借鉴 [MC/DC](https://swehb.nasa.gov/plugins/viewsource/viewpagesrc.action?pageId=180584662)：在可行条件下，让每个条件独立影响判定。说明耦合条件和未覆盖组合；不要把普通分支测试称为已达到 MC/DC。参数组合参考 [NIST](https://csrc.nist.gov/pubs/ir/7878/final)，操作序列可使用 [Hypothesis](https://hypothesis.readthedocs.io/en/latest/stateful.html)。这些是覆盖方法，不能替用户确定规则。
+For complex conditions, borrow [MC/DC](https://swehb.nasa.gov/plugins/viewsource/viewpagesrc.action?pageId=180584662): where feasible, vary each condition independently to change the decision. State coupling and uncovered combinations; ordinary branch tests are not automatically MC/DC. Consider [NIST combinatorial testing](https://csrc.nist.gov/pubs/ir/7878/final) and [Hypothesis stateful testing](https://hypothesis.readthedocs.io/en/latest/stateful.html). These coverage methods do not choose business rules for the user.
 
-并发性质先区分“不能发生错误”与“在什么前提下一定能继续”。保留公平调度、超时和外部服务假设。有限场景通过不证明全部调度成立。Petri 的资源、等待与汇合语义仍进入应用原状态配置，不另建权威分析层。
+Distinguish concurrency safety from progress under stated assumptions. Retain fairness, timeout, and external-service assumptions. Finite tests do not prove all schedules. Petri-style resource, wait, and join semantics belong in the application's existing state configuration, not a separate authoritative analysis layer.
 
-定向改错按本次涉及的规则选择：改变已声明的传播范围、漏掉租户或版本条件、有效期 `<` 改为 `<=`、AND 改 OR、删除排除项、提前汇合、漏还资源、移除探针或填错输入、混用旧运行。权限情况与适用前提见 [权限清单](authorization-patterns.md)；有效继承也要测，不能把所有多跳关系当错误。只因语法错误、哈希变化或程序未启动而失败，不算业务反例有效。修改在隔离副本执行，保留最后干净运行。
+Choose mutations relevant to the changed rules: wrong propagation scope; missing tenant/version; `<` changed to `<=`; AND changed to OR; removed exclusion; early join; leaked resource; missing probe; wrong input; mixed runs. See [authorization patterns](authorization-patterns.md). Test valid inheritance too; multi-hop is not inherently wrong. Syntax errors, hash changes, or startup failures do not establish semantic test sensitivity. Mutate isolated copies and preserve the final clean run.
 
-现有 `whitebox_contract.py` 不自动证明完整数据流，也不自动生成全部 MC/DC、组合或并发调度。领域测试由项目实际实现，验证报告记录选择了哪些规则、哪些情况仍未覆盖。
+`whitebox_contract.py` does not prove complete data flow or generate exhaustive MC/DC, combinations, or schedules. Implement real domain tests and disclose selected coverage and remaining gaps.

@@ -1,0 +1,88 @@
+{
+  "timestamp_utc": "2026-10-23T11:05:15.758266+00:00",
+  "business_version": "v2 PNG-only",
+  "skill_candidate": "candidate-3 unchanged",
+  "simulated_requirement": true,
+  "human_usability_evidence": false,
+  "candidate_id": "7d7e36bedaa3212ae9f10558420b76f1a2d813a62f0bf5b031cdbd15a3d8c9a0",
+  "build_id": "389a6fb6b293dc32cfdde1f39bf71e478f4ec9af9f88b839ac539fe2cfc9db83",
+  "reports": {
+    "mapping": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+      "stategraph_export": "checked",
+      "witnesses": 44,
+      "projection_checks": 132,
+      "implementation": {
+        "errors": [],
+        "events_checked": 44,
+        "features": 18
+      }
+    },
+    "state_rules": {
+      "status": "passed",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "passed",
+      "errors": [],
+      "assertions": {
+        "required": 162,
+        "executed": 162
+      },
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "project_tests": 13,
+  "browser": {
+    "record_id": "9f56823e95ba425c81af5b795ff55b8b",
+    "events": 58,
+    "frames": 2,
+    "gaps": [],
+    "format_decisions": [
+      {
+        "format": "JPEG",
+        "height": 600,
+        "valid": false,
+        "width": 800
+      },
+      {
+        "format": "PNG",
+        "height": 600,
+        "valid": true,
+        "width": 800
+      }
+    ],
+    "expected_http_rejection": [
+      [
+        "http_upload",
+        415
+      ]
+    ],
+    "JPEG_images_messages_journal_before_PNG": [
+      0,
+      0,
+      0
+    ],
+    "PNG_final": {
+      "state": "published",
+      "format": "PNG",
+      "messages": 1,
+      "revision": 2
+    },
+    "observer_control_event_delta": 0
+  },
+  "urls": {
+    "application": "http://127.0.0.1:8842/",
+    "graph": "http://127.0.0.1:8842/graph"
+  },
+  "remaining": "Finite project evidence, not the full Skill repository suite or human usability study. Earlier v1 token failure cause unresolved; final v2 flow has no unexpected HTTP error.",
+  "pending_approval": null,
+  "github_published": false
+}

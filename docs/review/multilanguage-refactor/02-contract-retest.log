@@ -1,0 +1,21 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+..............E.
+======================================================================
+ERROR: test_real_http_events_snapshots_recording_noise_and_invalid_facts (__main__.MultiLanguageTests.test_real_http_events_snapshots_recording_noise_and_invalid_facts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\test_multilanguage.py", line 143, in test_real_http_events_snapshots_recording_noise_and_invalid_facts
+    session.recordings.start('real HTTP')
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_observer\observation\recording_session.py", line 181, in start
+    return self._start(label, scope)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\business-observer\scripts\bo_observer\observation\recording_session.py", line 213, in _start
+    "build_id": view["manifest"]["build_id"], "run_id": health["run_id"],
+                                                        ~~~~~~^^^^^^^^^^
+KeyError: 'run_id'
+
+----------------------------------------------------------------------
+Ran 16 tests in 6.672s
+
+FAILED (errors=1)

@@ -1,0 +1,9 @@
+{
+  "name": "@business-observer/source-adapter",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "license": "MIT",
+  "engines": {"node": ">=20"},
+  "dependencies": {"typescript": "5.9.3", "@vue/compiler-sfc": "3.5.22"}
+}

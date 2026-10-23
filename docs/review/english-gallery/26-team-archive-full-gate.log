@@ -1,0 +1,175 @@
+{
+  "valid": false,
+  "errors": [
+    {
+      "requirement": "R08",
+      "check": "snapshot-content",
+      "mode": "on",
+      "expected": "模拟资料：版本一的固定内容。",
+      "actual": "Synthetic document: fixed version-one content."
+    },
+    {
+      "requirement": "R08",
+      "check": "snapshot-content",
+      "mode": "off",
+      "expected": "模拟资料：版本一的固定内容。",
+      "actual": "Synthetic document: fixed version-one content."
+    },
+    {
+      "requirement": "R08",
+      "check": "snapshot-content",
+      "mode": "fault",
+      "expected": "模拟资料：版本一的固定内容。",
+      "actual": "Synthetic document: fixed version-one content."
+    },
+    {
+      "requirement": "R08",
+      "check": "snapshot-stays-fixed",
+      "mode": "on",
+      "expected": "模拟资料：版本一的固定内容。",
+      "actual": "Synthetic document: fixed version-one content."
+    },
+    {
+      "requirement": "R08",
+      "check": "snapshot-stays-fixed",
+      "mode": "off",
+      "expected": "模拟资料：版本一的固定内容。",
+      "actual": "Synthetic document: fixed version-one content."
+    },
+    {
+      "requirement": "R08",
+      "check": "snapshot-stays-fixed",
+      "mode": "fault",
+      "expected": "模拟资料：版本一的固定内容。",
+      "actual": "Synthetic document: fixed version-one content."
+    }
+  ],
+  "candidate_id": "b3485775012662da2c7bf2efc06a0057fc95e0d8a7fc4f9503ac7b84da208aa7",
+  "reports": {
+    "mapping": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+      "stategraph_export": "checked",
+      "witnesses": 480,
+      "projection_checks": 1113,
+      "implementation": {
+        "errors": [],
+        "events_checked": 53,
+        "features": 22
+      }
+    },
+    "state_rules": {
+      "status": "passed",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "failed",
+      "errors": [
+        {
+          "requirement": "R08",
+          "check": "snapshot-content",
+          "mode": "on",
+          "expected": "模拟资料：版本一的固定内容。",
+          "actual": "Synthetic document: fixed version-one content."
+        },
+        {
+          "requirement": "R08",
+          "check": "snapshot-content",
+          "mode": "off",
+          "expected": "模拟资料：版本一的固定内容。",
+          "actual": "Synthetic document: fixed version-one content."
+        },
+        {
+          "requirement": "R08",
+          "check": "snapshot-content",
+          "mode": "fault",
+          "expected": "模拟资料：版本一的固定内容。",
+          "actual": "Synthetic document: fixed version-one content."
+        },
+        {
+          "requirement": "R08",
+          "check": "snapshot-stays-fixed",
+          "mode": "on",
+          "expected": "模拟资料：版本一的固定内容。",
+          "actual": "Synthetic document: fixed version-one content."
+        },
+        {
+          "requirement": "R08",
+          "check": "snapshot-stays-fixed",
+          "mode": "off",
+          "expected": "模拟资料：版本一的固定内容。",
+          "actual": "Synthetic document: fixed version-one content."
+        },
+        {
+          "requirement": "R08",
+          "check": "snapshot-stays-fixed",
+          "mode": "fault",
+          "expected": "模拟资料：版本一的固定内容。",
+          "actual": "Synthetic document: fixed version-one content."
+        }
+      ],
+      "assertions": {
+        "required": 189,
+        "executed": 189
+      },
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "review_hash": "cfc0b48e0bb841984772da4bf3329b27cb8614c7ca1e1a1c1d5040bbd995e700",
+  "observations_hash": "325f6a71bf9063517bc590ae3e7cf7a9882912ccd034cbfe197a42a5b6689803",
+  "tests": [
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/tests.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tooling/graph_tests.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/test_recording.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tooling/test_recorded_views.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/test_stategraph_module.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "checked_at": "2026-10-23T10:26:55.552359+00:00",
+  "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe

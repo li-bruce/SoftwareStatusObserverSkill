@@ -1,0 +1,129 @@
+{
+  "valid": true,
+  "errors": [],
+  "candidate_id": "896cffdd3f3f543202e2defc9336c444f4c531e10136402716a308951e96c2ed",
+  "reports": {
+    "mapping": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+      "stategraph_export": "checked",
+      "witnesses": 201,
+      "projection_checks": 303,
+      "implementation": {
+        "errors": [],
+        "events_checked": 19,
+        "features": 10
+      }
+    },
+    "state_rules": {
+      "status": "passed",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "passed",
+      "errors": [],
+      "assertions": {
+        "required": 96,
+        "executed": 96
+      },
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "review_hash": "39dd6fa3a3a80bbf3306b299def4686aa52fea78f725d690bff225986cdb3ecf",
+  "observations_hash": "d6569542e7b67c17ef7b29b5ed45e60d3f28d91e7c2af2c5d63a27095f28dbec",
+  "tests": [
+    {
+      "argv": [
+        "{python}",
+        "-B",
+        "-X",
+        "utf8",
+        "tests/test_business.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-B",
+        "-X",
+        "utf8",
+        "observer_generated/runtime/architecture_guard.py",
+        "check",
+        "--root",
+        "."
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-B",
+        "-X",
+        "utf8",
+        "tests/test_execution.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-B",
+        "-X",
+        "utf8",
+        "tooling/graph_fixture.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tests/test_graph_projection.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tests/test_graph_layout.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tests/test_recording.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tests/test_recorded_views.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tests/test_stategraph_module.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "checked_at": "2026-10-23T10:25:40.244590+00:00",
+  "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe

@@ -65,7 +65,7 @@
       }
     },
     "guards": {
-      "available": "可用名额大于零"
+      "available": "An available slot exists"
     }
   },
   "nodes": [
@@ -73,20 +73,20 @@
       "id": "job",
       "kind": "action",
       "layer": "business",
-      "label": "执行任务",
+      "label": "Execute task",
       "source": {
         "path": "app.py",
         "symbol": "Job.run"
       },
-      "summary": "实际任务实现：执行任务"
+      "summary": "Actual task implementation: Execute task"
     },
     {
       "id": "slots",
       "kind": "data",
       "parent": "job",
-      "label": "可用名额",
+      "label": "Available slots",
       "value_type": "integer",
-      "summary": "实际任务实现：可用名额"
+      "summary": "Actual task implementation: Available slots"
     },
     {
       "id": "state.pending",
@@ -95,7 +95,7 @@
       "parent": "job",
       "value": "pending",
       "label": "pending",
-      "summary": "实际任务实现：pending"
+      "summary": "Actual task implementation: pending"
     },
     {
       "id": "state.waiting",
@@ -104,7 +104,7 @@
       "parent": "job",
       "value": "waiting",
       "label": "waiting",
-      "summary": "实际任务实现：waiting"
+      "summary": "Actual task implementation: waiting"
     },
     {
       "id": "state.running",
@@ -113,7 +113,7 @@
       "parent": "job",
       "value": "running",
       "label": "running",
-      "summary": "实际任务实现：running"
+      "summary": "Actual task implementation: running"
     },
     {
       "id": "state.done",
@@ -122,7 +122,7 @@
       "parent": "job",
       "value": "done",
       "label": "done",
-      "summary": "实际任务实现：done"
+      "summary": "Actual task implementation: done"
     },
     {
       "id": "OwnLogic.apply",
@@ -144,7 +144,7 @@
           "type": "int"
         }
       ],
-      "summary": "实际任务实现：OwnLogic.apply"
+      "summary": "Actual task implementation: OwnLogic.apply"
     },
     {
       "id": "Job.snapshot",
@@ -157,7 +157,7 @@
         "line": 27
       },
       "parameters": [],
-      "summary": "实际任务实现：Job.snapshot"
+      "summary": "Actual task implementation: Job.snapshot"
     },
     {
       "id": "Job.run",
@@ -179,7 +179,7 @@
           "type": "int"
         }
       ],
-      "summary": "实际任务实现：Job.run"
+      "summary": "Actual task implementation: Job.run"
     }
   ],
   "edges": [
@@ -303,7 +303,7 @@
   ],
   "scope": {
     "unknowns": [
-      "只验证本地任务状态、可用名额和提交次数；没有数据库、并发或权限引擎。"
+      "Validates local task state, available slots, and commit count; no database, concurrency, or authorization engine."
     ]
   }
 }

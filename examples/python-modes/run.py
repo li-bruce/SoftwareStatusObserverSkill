@@ -14,7 +14,7 @@ def bo_session(mode):
     from bo_stategraph.binding import bo_check_sources
     binding = bo_check_sources(ROOT)
     if binding["status"] != "current":
-        raise ValueError("源码已改变，请更新模型和测试后运行 build_model.py")
+        raise ValueError("Source changed; update the model and tests, then run build_model.py")
     graph = BOStateGraph(model, build_id=binding["build_id"], mode=mode)
     def bo_notify(snapshot, event=None, guards=None):
         return graph.bo_observe("job:1", **snapshot, event=event, guards=guards,
@@ -27,7 +27,7 @@ def bo_session(mode):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--mode", choices=("observe", "drive"), default="observe")
+    parser.add_argument("--mode", choices=("observe", "drive"), required=True)
     parser.add_argument("--out")
     args = parser.parse_args()
     job, graph, binding = bo_session(args.mode)

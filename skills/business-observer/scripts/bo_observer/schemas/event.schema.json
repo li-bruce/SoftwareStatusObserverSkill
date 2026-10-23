@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/li-bruce/SoftwareStatusObserverSkill/protocol/event",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "protocol": {
+      "const": "bo-event/v1"
+    },
+    "schema_version": {
+      "const": 3
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model_revision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "build_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "producer_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "node": {
+      "type": "string",
+      "minLength": 1
+    },
+    "phase": {
+      "enum": [
+        "enter",
+        "return",
+        "read",
+        "decision",
+        "wait",
+        "commit",
+        "change",
+        "error"
+      ]
+    },
+    "entity": {
+      "type": "string",
+      "minLength": 1
+    },
+    "attempt": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "enum": [
+        "application",
+        "entity",
+        "attempt"
+      ]
+    },
+    "call_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "parent_call_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "basis": {
+      "type": "object"
+    },
+    "inputs": {
+      "type": "object"
+    },
+    "outputs": {
+      "type": "object"
+    },
+    "depends": {
+      "type": "array",
+      "maxItems": 128,
+      "items": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://github.com/li-bruce/SoftwareStatusObserverSkill/protocol/dependency",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "event": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "enum": [
+              "data",
+              "control",
+              "trigger",
+              "recheck"
+            ]
+          }
+        },
+        "required": [
+          "event",
+          "type"
+        ]
+      }
+    },
+    "observed_at": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "protocol",
+    "schema_version",
+    "project_id",
+    "model_revision",
+    "build_id",
+    "run_id",
+    "producer_id",
+    "id",
+    "seq",
+    "node",
+    "phase",
+    "entity",
+    "attempt",
+    "scope",
+    "call_id",
+    "parent_call_id",
+    "basis",
+    "inputs",
+    "outputs",
+    "depends",
+    "observed_at"
+  ]
+}

@@ -17,7 +17,7 @@ def run_checks(content: str,*,capacity: int=2,execution=None,progress=None,task_
     execution.progress=progress
     handlers={'checksum':checksum,'privacy':privacy_check}
     if set(handlers)!={a['id'] for a in execution.spec['activities']}:
-        raise ValueError('声明的检查项目与实际函数不一致')
+        raise ValueError("Declared checks do not match the actual functions")
     def work(activity):
         execution.start(activity)
         try:

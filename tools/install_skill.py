@@ -17,7 +17,7 @@ def main():
     if target.exists():
         parser.error('Skill already exists. Review the installed version before replacing it.')
     shutil.copytree(ROOT/'skills/business-observer', target,
-                    ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
+                    ignore=shutil.ignore_patterns('__pycache__', '*.pyc', 'node_modules'))
     print(f'Installed: {target}')
     print('Open a new conversation in the target project and use $business-observer.')
 

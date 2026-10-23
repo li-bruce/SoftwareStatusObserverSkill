@@ -1,0 +1,30 @@
+[
+  {
+    "version": "v1",
+    "source_archive": "gallery-v1-source.zip",
+    "actual_execution": {
+      "version": "v1",
+      "application_and_observer_started": true,
+      "actual_gallery_effects": true,
+      "source_binding": "current",
+      "JPEG_policy": "accepted",
+      "PNG_approval_public": true
+    },
+    "normal_gate_exit_code": 0,
+    "normal_gate_passed": true
+  },
+  {
+    "version": "v2",
+    "source_archive": "gallery-v2-source.zip",
+    "actual_execution": {
+      "version": "v2",
+      "application_and_observer_started": true,
+      "actual_gallery_effects": true,
+      "source_binding": "current",
+      "JPEG_policy": "rejected without image or notification",
+      "PNG_approval_public": true
+    },
+    "normal_gate_exit_code": 0,
+    "normal_gate_passed": true
+  }
+]

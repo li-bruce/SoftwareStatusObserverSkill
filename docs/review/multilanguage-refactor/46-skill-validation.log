@@ -1,0 +1,14 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\.codex\skills\.system\skill-creator\scripts\quick_validate.py", line 125, in <module>
+    valid, message = validate_skill(sys.argv[1])
+                     ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\.codex\skills\.system\skill-creator\scripts\quick_validate.py", line 23, in validate_skill
+    content = skill_md.read_text()
+  File "C:\Users\Lvi_P\miniforge3\Lib\pathlib\_local.py", line 546, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\pathlib\_abc.py", line 633, in read_text
+    return f.read()
+           ~~~~~~^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0xa8 in position 56: illegal multibyte sequence

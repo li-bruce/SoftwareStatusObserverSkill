@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "mode": "on",
+      "observer_reads": 50,
+      "observer_events": 0,
+      "business_events": 12,
+      "state": "approved",
+      "passed": true
+    },
+    {
+      "mode": "off",
+      "observer_reads": 45,
+      "observer_events": 0,
+      "business_events": 0,
+      "state": "approved",
+      "passed": true
+    },
+    {
+      "mode": "fault",
+      "observer_reads": 45,
+      "observer_events": 0,
+      "business_events": 0,
+      "state": "approved",
+      "passed": true
+    }
+  ]
+}

@@ -121,8 +121,8 @@ class StateGraphTests(unittest.TestCase):
             "observations_command": ["python", "observe.py"],
             "test_commands": [["python", "test.py"]],
             "required_probes": [{"node": "start"}], "required_runtime_probes": [{"node": "start"}],
-            "stategraph": {"module": "bo_stategraph.py", "execution_mode": "observe",
-                           "development_mode": "guided", "decision_source": "default"}}
+            "stategraph": {"module": "bo_stategraph.py", "execution_mode": "drive",
+                           "development_mode": "drive", "decision_source": "default"}}
         with tempfile.TemporaryDirectory(dir=ROOT) as directory:
             root = Path(directory)
             def load():
@@ -131,10 +131,14 @@ class StateGraphTests(unittest.TestCase):
             value['source_scope']={'roots':['.'],'require_symbol_classification':True}
             value['require_mapping_witnesses']=True
             value['mapping_contract']='mapping.json'
-            self.assertEqual(load()["stategraph"]["development_mode"], "guided")
+            with self.assertRaisesRegex(ValueError, "silence is not a choice"): load()
+            value['stategraph'].update(decision_source='user',decision="Develop from the state graph and keep observation.")
+            self.assertEqual(load()["stategraph"]["development_mode"], "drive")
             value["stategraph"]["development_mode"] = "observe"
-            with self.assertRaisesRegex(ValueError, "silence is not opt-out"): load()
-            value["stategraph"].update(decision_source="user", decision="使用我的实现方式，继续维护监控和状态网。")
+            with self.assertRaisesRegex(ValueError, "must agree"): load()
+            value['stategraph'].update(execution_mode='observe',decision_source='default')
+            with self.assertRaisesRegex(ValueError, "silence is not a choice"): load()
+            value["stategraph"].update(decision_source="user", decision="Keep my implementation approach and maintain observation and the state graph.")
             self.assertEqual(load()["stategraph"]["development_mode"], "observe")
             value["required_runtime_probes"] = []
             with self.assertRaisesRegex(ValueError, "both development modes"): load()

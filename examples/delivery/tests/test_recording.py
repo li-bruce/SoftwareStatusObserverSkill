@@ -86,8 +86,8 @@ class RecordingTests(unittest.TestCase):
         self.assertEqual(len(saved['runtime_frames']['frames']),1)
         self.assertEqual(saved['runtime_frames']['frames'][0]['machine']['current'],'printing')
         self.assertNotIn('PRIVATE',json.dumps(saved['runtime_frames']))
-        self.assertTrue(any('修订不符' in gap for gap in saved['gaps']))
-        self.assertTrue(any('不同的运行快照' in gap for gap in saved['gaps']))
+        self.assertTrue(any('different process, build, or revision' in gap for gap in saved['gaps']))
+        self.assertTrue(any('Conflicting runtime snapshots' in gap for gap in saved['gaps']))
 
     def test_process_change_interrupts_without_joining_events(self):
         ident=self.rec.start()["id"]

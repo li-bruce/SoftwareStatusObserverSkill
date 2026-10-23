@@ -1,0 +1,23 @@
+[
+  {
+    "candidate": "candidate-1",
+    "files": 142,
+    "zip": "candidate-1.zip",
+    "bytes": 1476509,
+    "sha256": "245a8c1e8df461b43e30096edfe42649bc55165236dff1d376187aa2ef292dca"
+  },
+  {
+    "candidate": "candidate-2",
+    "files": 144,
+    "zip": "candidate-2.zip",
+    "bytes": 1468786,
+    "sha256": "78513b8c6147777f9e7c63686ab23fbc92191c3ff43f48007e775cee3d58bca6"
+  },
+  {
+    "candidate": "candidate-3",
+    "files": 144,
+    "zip": "candidate-3.zip",
+    "bytes": 1469212,
+    "sha256": "bd1707f1ae4257dc920e9de8686ee1909633b2b2dc7109f9179519fb911331d8"
+  }
+]

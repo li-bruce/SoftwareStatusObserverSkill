@@ -1,0 +1,2 @@
+PASS: direct/advanced projection, full search inventory, explicit permission roles, ID migration, persisted save and conflict status.
+PASS: one in-flight poll and closed viewer never restarts polling.

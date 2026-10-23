@@ -4,6 +4,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
 import mimetypes
 from pathlib import Path
+import secrets
 import threading
 import time
 from urllib.parse import parse_qs, urlparse
@@ -19,18 +20,18 @@ from bo_stategraph import bo_export_view
 from bo_stategraph.query import bo_machine
 
 CASE_NAMES={
-    "archive_snapshot":"正常归档 · 固定版本快照","capacity_one":"1 个名额 · 索引排队",
-    "capacity_two":"2 个名额 · 两项实际重叠","loss_and_resume":"审批失效 · 保留结果后手动继续",
-    "edit_overlap":"内容改版 · 旧新运行同时可查","cancel_running":"取消本次 · 实际结束后归还名额",
-    "revoke_with_alternative":"撤销一条 · 另一条仍有效","move_before_commit":"提交前目录变化",
-    "expire_before_commit":"提交时恰好到期","edit_before_commit":"提交前内容改版",
-    "secret_content":"内容包含禁用标记","missing_index":"索引缺少标题",
-    "concurrent_same_version":"同版本并发 · 只有一条归档","join_pending":"一项未完成 · 不能提交",
-    "size_equal":"正文恰好 8192 字节 · 允许归档",
-    "size_utf8_over":"UTF-8 正文 8193 字节 · 等待",
-    "size_running_restore":"运行中调小上限 · 恢复后手动继续",
-    "size_commit_fresh":"检查通过后调小上限 · 提交重新判断",
-    "size_resume_over":"仍超限时继续 · 不启动检查",
+    "archive_snapshot":"Normal archive · fixed-version snapshot","capacity_one":"One slot · index check queues",
+    "capacity_two":"Two slots · checks actually overlap","loss_and_resume":"Approval invalid · retain results and continue manually",
+    "edit_overlap":"Content changed · old and new runs remain queryable","cancel_running":"Cancel run · release slots after actual completion",
+    "revoke_with_alternative":"Revoke one approval · another remains valid","move_before_commit":"Folder changed before commit",
+    "expire_before_commit":"Approval expires exactly at commit","edit_before_commit":"Content changed before commit",
+    "secret_content":"Content contains a forbidden marker","missing_index":"Index requires a title",
+    "concurrent_same_version":"Concurrent same-version runs · one archive","join_pending":"One check unfinished · cannot commit",
+    "size_equal":"Body exactly 8192 bytes · archive allowed",
+    "size_utf8_over":"UTF-8 body 8193 bytes · wait",
+    "size_running_restore":"Lower limit while running · continue manually after recovery",
+    "size_commit_fresh":"Lower limit after checks · recheck before commit",
+    "size_resume_over":"Continue while still oversized · do not start checks",
 }
 
 
@@ -44,6 +45,7 @@ class LocalApplication:
         self.store=ArchiveStore(str(dbpath))
         self.store.seed()
         self.observer=BOObserver(model,manifest["build_id"],path=str(root/"data/events.jsonl"))
+        self.bo_client_token=secrets.token_urlsafe(24)
         self.service=ArchiveService(self.store,self.observer.trace,delay=args.delay,
                                     execution_version=manifest["build_id"])
         self.service.start_scheduler()
@@ -88,7 +90,7 @@ class LocalApplication:
             return self.model,self.manifest,self.sources,self.root
         if version=="v1" and self.frozen:
             return self.frozen
-        raise ValueError("没有这个已保存版本")
+        raise ValueError("Saved version not found")
 
     def graph_view(self, case="live", version="live"):
         snapshot=self.store.snapshot()
@@ -106,7 +108,7 @@ class LocalApplication:
             events=selected["events"]
             historical=True
         if version=="v1" and not selected:
-            raise ValueError("首版没有保存这个运行场景")
+            raise ValueError("The first version did not record this scenario")
         machine=bo_machine(snapshot,build["build_id"])
         latest=snapshot["runs"][-1] if snapshot["runs"] else None
         document=snapshot["documents"][0]
@@ -131,7 +133,7 @@ class LocalApplication:
                         "capacity":latest["configuration"]["resources"]["processing_slots"]["capacity"] if latest else 2,
                         **size_parameters},
                     "approvals":snapshot["grants"],"relation":snapshot["assignments"],
-                    "effects":snapshot["archives"],"historical":historical,"case_label":CASE_NAMES.get(case,"当前操作")},
+                    "effects":snapshot["archives"],"historical":historical,"case_label":CASE_NAMES.get(case,"Current operation")},
                 "machine":machine,"instances":self.observer.bo_graph.bo_instances(machine),
                 "available_cases":allowed_cases,"case_names":CASE_NAMES,"historical":historical}
 
@@ -161,7 +163,7 @@ class LocalApplication:
             return service.set_archive_limit(values["project_id"],values["limit_bytes"])
         else:
             if action not in ("run","approve"):
-                raise ValueError("未知操作")
+                raise ValueError("Unknown operation")
         return {"ok":True}
 
 
@@ -188,9 +190,11 @@ def serve(root, args, model, manifest, sources):
             params=parse_qs(parsed.query)
             try:
                 if not application.bo_web.allowed(parsed.path):
-                    return self.reply(404,{'error':'调试 Web 已关闭','code':'bo_web_disabled'})
+                    return self.reply(404,{'error':"Debug Web is disabled",'code':'bo_web_disabled'})
                 bo_value=application.bo_web.get(parsed.path)
                 if bo_value is not None:return self.reply(200,bo_value)
+                if parsed.path=="/api/bo/config":
+                    return self.reply(200,{"project":application.observer.bo_project,"build_id":application.manifest["build_id"],"token":application.bo_client_token})
                 if parsed.path=="/api/preferences":
                     return self.reply(200,application.preferences.read())
                 if parsed.path=="/api/state":
@@ -213,21 +217,25 @@ def serve(root, args, model, manifest, sources):
                     else:
                         _,source_build,version_sources,_=application.version_sources(params.get("version",["live"])[0])
                     if name not in version_sources:
-                        return self.reply(404,{"error":"该源码不在已加载版本中"})
+                        return self.reply(404,{"error":"Source is not in the loaded build"})
                     return self.reply(200,{"source":version_sources[name],"build_id":source_build["build_id"]})
                 if parsed.path in ("/","/control"):
                     path=root/"static/app.html"
                 elif parsed.path in ("/graph","/graph/"):
                     path=root/"static/graph/index.html"
+                elif parsed.path=="/bo_client.mjs":
+                    path=root/"integrations/bo_client.mjs"
+                elif parsed.path=="/bo_runtime.mjs":
+                    path=root/"observer_runtime/bo_observer/adapters/javascript/bo_runtime.mjs"
                 elif parsed.path in ("/app.js","/app.css"):
                     path=root/"static"/parsed.path.lstrip("/")
                 else:
                     name=parsed.path.lstrip("/")
                     if "/" in name or "\\" in name or name.startswith("."):
-                        return self.reply(404,{"error":"找不到页面"})
+                        return self.reply(404,{"error":"Page not found"})
                     path=root/"static/graph"/name
                 if not path.is_file():
-                    return self.reply(404,{"error":"找不到页面"})
+                    return self.reply(404,{"error":"Page not found"})
                 raw=path.read_bytes()
                 if parsed.path in ('/','/control'):raw=application.bo_web.entry_html(raw)
                 return self.reply(200,raw,(mimetypes.guess_type(path.name)[0] or "application/octet-stream")+"; charset=utf-8")
@@ -236,22 +244,26 @@ def serve(root, args, model, manifest, sources):
 
         def do_POST(self):
             if not application.bo_web.allowed(urlparse(self.path).path):
-                return self.reply(404,{'error':'调试 Web 已关闭','code':'bo_web_disabled'})
+                return self.reply(404,{'error':"Debug Web is disabled",'code':'bo_web_disabled'})
             if urlparse(self.path).path.startswith('/api/design'):
-                return self.reply(405,{'error':'图只供查看；请在开发工具的对话中提出修改'})
+                return self.reply(405,{'error':"The graph is read-only; request changes in the development conversation"})
             origin=self.headers.get("Origin")
             if origin and urlparse(origin).netloc not in (f"127.0.0.1:{args.port}",f"localhost:{args.port}"):
-                return self.reply(403,{"error":"仅接受本地同源操作"})
+                return self.reply(403,{"error":"Only local same-origin operations are accepted"})
             action,values=None,{}
             try:
                 size=int(self.headers.get("Content-Length","0"))
                 limit=2*1024*1024 if urlparse(self.path).path=="/api/preferences" else 200000
                 if not 0<size<=limit:
-                    raise ValueError("请求大小无效")
+                    raise ValueError("Invalid request size")
                 values=json.loads(self.rfile.read(size).decode("utf-8"))
                 if not isinstance(values,dict):
-                    raise ValueError("请求必须是对象")
+                    raise ValueError("Request must be an object")
                 action=urlparse(self.path).path.removeprefix("/api/")
+                if action=="bo/events":
+                    if not secrets.compare_digest(self.headers.get("X-BO-Token",""),application.bo_client_token):
+                        return self.reply(403,{"error":"Invalid observation token"})
+                    return self.reply(200,application.observer.bo_ingress.accept(values))
                 if action=="preferences":
                     return self.reply(200,application.preferences.save(values))
                 if action=="recordings/start":
@@ -264,7 +276,7 @@ def serve(root, args, model, manifest, sources):
             except PreferenceConflict as error:
                 return self.reply(409,{"error":str(error)})
             except (ValueError,KeyError,TypeError) as error:
-                if action and action!="preferences" and not action.startswith("recordings/"):
+                if action and action!="preferences" and not action.startswith(("recordings/","bo/")):
                     application.recordings.command(action,values,error=error)
                 return self.reply(400,{"error":str(error)})
     server=ThreadingHTTPServer(("127.0.0.1",args.port),Handler)

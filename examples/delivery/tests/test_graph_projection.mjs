@@ -1,25 +1,25 @@
-// 在原业务节点中核对真实的等待、运行和完成状态。
+// Verify actual waiting, running, and completed states in the original business nodes.
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {layoutGraph,selectedConfiguration,lines} from '../integrations/bo_view/graph-core.js';
 const view=JSON.parse(fs.readFileSync(new URL('../scratch/graph-fixture.json',import.meta.url),'utf8'));
 const run=view.machine.configurations[0];
 const waiting=run.journal.find(e=>e.event==='wait');
-assert.ok(waiting,'实际执行应包含资源等待记录');
+assert.ok(waiting,"Actual execution must include resource-wait evidence");
 const current=selectedConfiguration(view,'latest',String(waiting.seq));
 assert.deepEqual(new Set(Object.values(current.activities)),new Set(['running','waiting']));
 const graph=layoutGraph(view,new Set(['flow.checks']),new Set(),new Map(),'latest',String(waiting.seq));
-for(const id of ['checksum','privacy','workers','join'])assert.ok(graph.byId.has(id),`${id} 必须在原业务组中出现`);
-assert.ok(!graph.boxes.some(b=>b.id.startsWith('net.')),'不应另外生成一套分析节点');
-assert.ok(graph.edges.some(e=>[...e.labels].includes('名额已用完，正在等待')));
-assert.ok(graph.edges.some(e=>[...e.labels].includes('等待这项检查结束')));
-assert.ok(graph.byId.get('join').rows.some(r=>r.text==='还有活动未完成'));
-assert.ok(!graph.byId.get('join').rows.some(r=>r.text==='全部活动已通过'),'回看等待时不能显示未来完成结果');
+for(const id of ['checksum','privacy','workers','join'])assert.ok(graph.byId.has(id),`${id} must remain in the original business group`);
+assert.ok(!graph.boxes.some(b=>b.id.startsWith('net.')),"Do not create a separate analysis-node layer");
+assert.ok(graph.edges.some(e=>[...e.labels].includes("Capacity exhausted; waiting")));
+assert.ok(graph.edges.some(e=>[...e.labels].includes("Waiting for this check")));
+assert.ok(graph.byId.get('join').rows.some(r=>r.text==="Some activities are unfinished"));
+assert.ok(!graph.byId.get('join').rows.some(r=>r.text==="All activities passed"),"Waiting frames cannot show future completion");
 const summary=lines(view.model.nodes.find(n=>n.id==='flow.checks'),view,[],'latest',current);
-assert.ok(summary.some(r=>r.text.includes('正在执行')));
-assert.ok(summary.some(r=>r.text.includes('等待可用名额')));
+assert.ok(summary.some(r=>r.text.includes("Running")));
+assert.ok(summary.some(r=>r.text.includes("Waiting for capacity")));
 const full=selectedConfiguration(view);
 assert.equal(full.join.state,'passed');
-assert.equal(selectedConfiguration(view,'不存在的运行'),null,'不能将另一运行的状态作为替代');
-assert.equal(selectedConfiguration(view,'latest','999'),null,'不存在的时刻不能用最终状态替代');
-console.log(JSON.stringify({valid:true,checks:14,meaning:'原节点展示实际内部状态；折叠不丢失状态，回看不借用未来结果'}));
+assert.equal(selectedConfiguration(view,"nonexistent-run"),null,"Do not substitute another run's state");
+assert.equal(selectedConfiguration(view,'latest','999'),null,"Do not replace missing history with final state");
+console.log(JSON.stringify({valid:true,checks:14,meaning:"Original nodes expose internal state; collapse retains facts and replay does not borrow future results"}));
