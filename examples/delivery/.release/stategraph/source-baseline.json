@@ -3,9 +3,10 @@
     "app/__init__.py": "a829ebb4042211c3a39bf40646855698375b065069bbbd2aa61daba1d8e6a51c",
     "app/checks.py": "0613d5550ce99422cc620933e7a912661b7ad45add03b228ceb0778ff3b3113c",
     "app/ports.py": "d2ccb5a40786064a590408428268f04668209ba58ccf39625723942f9ef69338",
-    "app/service.py": "ea275e01eaeada94640958c5ce8907a8235708498b80abfabd1a562809c3b24a",
+    "app/service.py": "b62b8f844899b3270a2e04092739750da994ae21980944e3d3be3f9e14a7b197",
     "app/store.py": "cddf3b8a1ca0ce279bdda20861ca6b8c62a21e66f5f0220a8acb219129524823",
-    "bo_stategraph/workflow.py": "b4bc7db195e79405745f0ff8ce69b6aaade31f2f839f5f0f596e3ecb79ec3fd2"
+    "bo_stategraph/workflow.py": "b4bc7db195e79405745f0ff8ce69b6aaade31f2f839f5f0f596e3ecb79ec3fd2",
+    "main.py": "3c840ec469108183cb8c9bdd4482ebde8e89c70a1f2f0887ff0b6d0de39307cb"
   },
   "excluded": {
     "app/workflow.py": "Compatibility import only; executable definition lives in bo_stategraph/workflow.py.",
@@ -17,7 +18,6 @@
     "integrations/bo_adapter.py": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
     "integrations/bo_scenarios.py": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
     "integrations/bo_server.py": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
-    "main.py": "Business core startup; exercised from the exported package.",
     "observer_generated/__init__.py": "Package marker only; copied source inventory covers its runtime.",
     "observer_generated/runtime/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
     "observer_generated/runtime/architecture_guard.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
@@ -34,6 +34,7 @@
     "observer_generated/runtime/code_structure.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
     "observer_generated/runtime/execution_contract.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
     "observer_generated/runtime/focus_graph.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+    "observer_generated/runtime/implementation_coverage.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
     "observer_generated/runtime/mapping_contract.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
     "observer_generated/runtime/model_tool.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
     "observer_generated/runtime/probe.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
@@ -62,5 +63,7 @@
     "tooling/build_graph.py": "Project generation and test commands; separately watched and executed.",
     "tooling/dev.py": "Project generation and test commands; separately watched and executed.",
     "tooling/graph_fixture.py": "Project generation and test commands; separately watched and executed."
-  }
+  },
+  "excluded_entrypoints": {},
+  "excluded_implementations": []
 }

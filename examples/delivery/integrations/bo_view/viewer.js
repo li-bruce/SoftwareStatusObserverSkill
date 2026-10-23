@@ -78,9 +78,9 @@ function project(){
   expanded=new Set([...expanded].map(id=>renamed[id]||id));selected=renamed[selected]||selected;
   const profile=currentProfile();
   graph=layoutGraph(view,expanded,new Set(),new Map(),choice,step,{
-    include:n=>analysisSettings?.advanced||n.origin!=='python-ast'&&n.analysis_level!=='advanced'||annotationFor(preferences,n.id).core,
+    include:n=>n.filter_context||analysisSettings?.advanced||n.origin!=='python-ast'&&n.analysis_level!=='advanced'||annotationFor(preferences,n.id).core,
     memberships:sharedMemberships(view.model),
-    ...(!profile.hierarchical||profile.scope!=='all'||profile.query?{match:(all,events,status)=>matchingNodes(all,view,events,profile,status)}:{})
+    ...(!profile.hierarchical||profile.scope!=='all'||profile.query||profile.nodes.length<8||profile.depth!=='all'?{match:(all,events,status,relations)=>matchingNodes(all,view,events,profile,status,relations)}:{})
   });
   for(const b of graph.boxes){b.baseHeight=b.h;b.h+=annotationFor(preferences,b.node.referenceOf||b.id).note?22:0;}
   placeIncremental(graph,preferences);updatePresentation();

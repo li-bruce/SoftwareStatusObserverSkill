@@ -16,7 +16,7 @@ export function selectedConfiguration(view,choice='latest',step='latest'){
     phase:entry.after.phase??entry.phase??null,revision:entry.seq,selectedFrame:entry}:null;
 }
 export function selectedEvents(view,choice,step='latest'){
-  const id=currentAttempt(view,choice);let events=view.events.filter(e=>e.attempt===id);
+  const id=currentAttempt(view,choice);let events=view.events.filter(e=>e.attempt===id||e.scope==='application'||e.scope==='entity'&&e.entity===view.authority.entity);
   if(step!=='latest'){
     // A later reevaluation may reuse an activity revision. Only its first exact
     // recorded boundary belongs to this frame; absent boundaries stay unknown.
@@ -72,7 +72,7 @@ export function status(node,view,events,choice,configuration=null){
   if(node.field){const values=callValues(node,events)[node.direction==='in'?'inputs':'outputs'];if(!(node.field in values))return 'declared';}
   if(node.layer==='business'){
     const states=view.model.nodes.filter(n=>n.parent===node.id&&n.layer!=='state').map(n=>status(n,view,events,choice,configuration));
-    return ['active','blocked','ok','historical'].find(s=>states.includes(s))||'declared';
+    if(!nodeEvents(node,events).length)return ['active','blocked','ok','historical'].find(s=>states.includes(s))||'declared';
   }
   const last=nodeEvents(node,events).at(-1);if(!last)return 'declared';
   if(view.binding_status.status!=='current'||choice!=='latest'||staleBasis(node,view,last))return 'historical';
@@ -80,6 +80,7 @@ export function status(node,view,events,choice,configuration=null){
   return last.phase==='enter'?'active':'ok';
 }
 export function lines(node,view,events,choice,configuration=null){
+  if(node.filter_context)return [{text:'筛选边界 · '+nodeTypes[nodeType(node)].label,role:'muted'},{text:node.source?.symbol||node.summary,role:'symbol'}];
   if(view.stage==='design')return node.summary?[{text:node.summary,role:'muted'}]:[];
   if(node.referenceOf)node={...node,id:node.referenceOf};
   if(node.field){const values=callValues(node,events)[node.direction==='in'?'inputs':'outputs'];return [{text:node.field+': '+typeName(node.fieldType),role:'symbol'},{text:node.field in values?compact(values[node.field]):'本次尚未采集',role:node.field in values?'value':'muted'}];}
@@ -122,7 +123,7 @@ export function lines(node,view,events,choice,configuration=null){
       const ids=view.model.nodes.filter(n=>n.parent===node.id&&n.layer!=='state').map(n=>n.id);
       for(const id of ids){const e=events.filter(e=>e.node===id).at(-1),child=view.model.nodes.find(n=>n.id===id);if(e)for(const [k,v] of Object.entries(e.outputs).slice(0,2))result.push({text:`${child?.field_labels?.[k]||names[k]||k}：${v===true?'是':v===false?'否':k==='reason'?(reasons[v]||v):compact(v)}`,role:v===false?'bad':'value'});}
     }
-    return result;
+    if(!Object.keys(node.capture||{}).length)return result;
   }
   if(last&&staleBasis(node,view,last))result.push({text:'历史判断/读取：依据已改变，等待重新求值',role:'muted'});
   for(const [direction,spec] of Object.entries(node.capture||{})){
@@ -139,6 +140,11 @@ export function wrapText(text,width=47){const out=[];let row='',units=0;for(cons
 
 export const nodeTypes={business:{label:'业务',glyph:'B',color:0x5075b5},function:{label:'函数',glyph:'ƒ',color:0x387c88},state:{label:'状态',glyph:'S',color:0x9869a0},decision:{label:'判断',glyph:'?',color:0xaf8029},resource:{label:'资源',glyph:'R',color:0x7b8845},data:{label:'参数',glyph:'x',color:0x627f9c},effect:{label:'结果',glyph:'✓',color:0x2d8a70},wait:{label:'等待',glyph:'…',color:0xb38442}};
 export function nodeType(n){return n.layer==='business'?'business':n.kind==='state'?'state':n.kind==='resource'||n.execution_role==='resource'?'resource':n.kind==='decision'||n.execution_role==='join'?'decision':n.kind==='data'?'data':n.kind==='effect'?'effect':n.kind==='wait'?'wait':'function';}
+// A business action can also implement a function. View membership is not its
+// visual type; selecting a view must not erase that function's values or calls.
+export function viewTypes(n){return [...new Set([nodeType(n),...(n.semantic_roles?.includes('business')?['business']:[]),...(n.source&&n.kind!=='state'&&!n.field?['function']:[])])];}
+export function stateNodeId(model,value){return model.nodes.find(n=>n.kind==='state'&&n.value===value)?.id||'state.'+value;}
+export function relationType(e){return e.origin==='python-ast'&&e.type==='flow'?'call':['call','flow','transition','guard','data','resource','join','shared','contains'].includes(e.type)?e.type:'other';}
 
 // One typed graph. Folding changes visible nodes, never their identities or facts.
 // The old layoutGraph name remains for integrations; coordinates are assigned by layout.js.
@@ -146,7 +152,7 @@ export function layoutGraph(view,expanded=new Set(),_sourceOpen=new Set(),_fullS
   const configuration=selectedConfiguration(view,choice,step),events=selectedEvents(view,choice,step);
   const all=new Map(view.model.nodes.map(n=>[n.id,n])),children=new Map(),rawEdges=[...view.model.edges];
   for(const n of view.model.nodes){
-    if(n.layer==='business'||n.kind==='state')continue;
+    if(n.kind==='state')continue;
     for(const [direction,fields] of Object.entries(n.capture||{}))for(const [field,fieldType] of Object.entries(fields)){
       const id=`field:${n.id}:${direction}:${field}`;
       all.set(id,{id,label:field,summary:(direction==='in'?'输入参数':'返回值'),kind:'data',layer:'parameter',parent:n.id,
@@ -154,8 +160,20 @@ export function layoutGraph(view,expanded=new Set(),_sourceOpen=new Set(),_fullS
       rawEdges.push({id:`capture:${id}`,from:direction==='in'?id:n.id,to:direction==='in'?n.id:id,type:'data',label:direction==='in'?'输入':'返回',origin:'capture-field'});
     }
   }
-  for(const value of view.model.machine.values)if(!all.has('state.'+value)){
-    all.set('state.'+value,{id:'state.'+value,label:view.model.machine.labels[value],kind:'state',layer:'state',value,source:view.model.machine.source});
+  const stateIds=new Map();
+  for(const value of view.model.machine.values){
+    const authored=[...all.values()].find(n=>n.kind==='state'&&n.value===value);
+    const id=stateNodeId(view.model,value);stateIds.set(value,id);
+    if(!authored)all.set(id,{id,label:view.model.machine.labels?.[value]||value,kind:'state',layer:'state',value,source:view.model.machine.source});
+  }
+  const attempt=currentAttempt(view,choice);
+  for(const t of view.model.machine.transitions){
+    const sources=Array.isArray(t.source)?t.source:[t.source];
+    for(const source of view.model.machine.values.filter(v=>sources.some(s=>s==='*'||s===v||v.startsWith(s+'_')))){
+      const target=t.dest||source,from=stateIds.get(source),to=stateIds.get(target);
+      const observed=step==='latest'&&(view.machine.journal||[]).some(j=>j.event===t.trigger&&j.source===source&&j.target===target&&j.attempt===attempt);
+      rawEdges.push({id:'transition:'+t.trigger+':'+source,from,to,type:'transition',event:t.trigger,label:view.model.machine.event_labels?.[t.trigger]||t.trigger,observed,current:choice==='latest'});
+    }
   }
   // Membership is a view reference to one canonical identity, not another call.
   for(const m of options.memberships||[]){
@@ -168,10 +186,12 @@ export function layoutGraph(view,expanded=new Set(),_sourceOpen=new Set(),_fullS
   }
   let matched=null;
   if(options.match){
-    matched=options.match(all,events,n=>status(n,view,events,choice,configuration));
+    for(const [id,n] of all){let depth=0,p=n.parent;const seen=new Set([id]);while(p&&!seen.has(p)){seen.add(p);depth++;p=all.get(p)?.parent;}all.set(id,{...n,projection_depth:depth});}
+    matched=options.match(all,events,n=>status(n,view,events,choice,configuration),rawEdges);
+    for(const id of matched.contextIds||[])all.set(id,{...all.get(id),filter_context:true,parent:undefined});
     for(const id of matched){
       const node=all.get(id),seen=new Set([id]);let parent=node.parent;
-      while(parent&&!matched.has(parent)&&!seen.has(parent)){seen.add(parent);parent=all.get(parent)?.parent;}
+      while(parent&&(!matched.has(parent)||matched.contextIds?.has(parent))&&!seen.has(parent)){seen.add(parent);parent=all.get(parent)?.parent;}
       all.set(id,{...node,parent:parent&&matched.has(parent)?parent:undefined});
     }
   }
@@ -181,12 +201,12 @@ export function layoutGraph(view,expanded=new Set(),_sourceOpen=new Set(),_fullS
   // Folding affects visibility only; all states and facts remain in `all`.
   function reveal(id,seen=new Set()){
     if(seen.has(id))return;seen.add(id);
-    if(expanded.has(id))for(const child of children.get(id)||[])if(!matched||matched.has(child)){visibleIds.add(child);reveal(child,seen);}
+    if(expanded.has(id)&&!all.get(id)?.filter_context)for(const child of children.get(id)||[])if(!matched||matched.has(child)){visibleIds.add(child);reveal(child,seen);}
   }
   for(const id of [...visibleIds])reveal(id);
   const boxes=[...visibleIds].filter(id=>all.has(id)&&(!options.include||options.include(all.get(id)))).map((id,i)=>{
     const node=all.get(id),type=nodeType(node),rows=lines(node,view,events,choice,configuration);
-    return {id,node,type,rows,open:expanded.has(id),kids:(children.get(id)||[]).filter(id=>(!matched||matched.has(id))&&(!options.include||options.include(all.get(id)))),state:status(node,view,events,choice,configuration),
+    return {id,node,type,rows,open:expanded.has(id)&&!node.filter_context,kids:node.filter_context?[]:(children.get(id)||[]).filter(id=>(!matched||matched.has(id))&&(!options.include||options.include(all.get(id)))),state:status(node,view,events,choice,configuration),
       x:80+(i%5)*230,y:70+Math.floor(i/5)*180,w:190,h:type==='state'?105:135};
   });
   const byId=new Map(boxes.map(b=>[b.id,b]));
@@ -195,11 +215,15 @@ export function layoutGraph(view,expanded=new Set(),_sourceOpen=new Set(),_fullS
   for(const e of rawEdges){
     const from=visible(e.from),to=visible(e.to);
     if(!from||!to||(from===to&&e.from!==e.to))continue;
-    if(['python-ast','capture-field'].includes(e.origin)&&(from!==e.from||to!==e.to))continue;
+    // A filtered boundary must stay connected when its selected source is
+    // folded. The member below retains the real endpoints; this is a group
+    // projection of one actual edge, never a shortcut through an omitted node.
+    const boundary=all.get(e.from)?.filter_context||all.get(e.to)?.filter_context;
+    if(['python-ast','capture-field'].includes(e.origin)&&(from!==e.from||to!==e.to)&&!boundary)continue;
     const source=all.get(e.from),target=all.get(e.to);
     if(!source||!target)continue;
     const sourceEvents=nodeEvents(source,events),targetEvents=nodeEvents(target,events),ids=new Set(sourceEvents.map(x=>x.id));
-    let observed=!['python-ast','capture-field'].includes(e.origin)&&!['contains','shared'].includes(e.type)&&targetEvents.some(x=>(x.depends||[]).some(d=>ids.has(d.event)&&d.type===e.type));
+    let observed=e.type==='transition'?e.observed:!['python-ast','capture-field'].includes(e.origin)&&!['contains','shared'].includes(e.type)&&targetEvents.some(x=>(x.depends||[]).some(d=>ids.has(d.event)&&d.type===e.type));
     let label=e.type==='contains'?(target.kind==='state'?'涉及状态':'包含'):e.label;
     if(configuration&&e.type==='resource'){
       const state=configuration.activities?.[e.to];observed=!!state&&state!=='pending';
@@ -215,18 +239,6 @@ export function layoutGraph(view,expanded=new Set(),_sourceOpen=new Set(),_fullS
     const member={...e,label,observed,current};
     if(edgeMap.has(key)){const found=edgeMap.get(key);found.labels.add(label);found.observed ||= observed;found.members.push(member);}
     else edgeMap.set(key,{...e,from,to,labels:new Set([label]),members:[member],observed,current});
-  }
-  const attempt=currentAttempt(view,choice);
-  for(const t of view.model.machine.transitions){
-    const sources=Array.isArray(t.source)?t.source:[t.source];
-    for(const source of view.model.machine.values.filter(v=>sources.some(s=>s===v||v.startsWith(s+'_')))){
-      const target=t.dest||source,from='state.'+source,to='state.'+target;
-      if(!byId.has(from)||!byId.has(to))continue;
-      // Activity-only frames do not attest lifecycle transitions at that time.
-      const observed=step==='latest'&&(view.machine.journal||[]).some(j=>j.event===t.trigger&&j.source===source&&j.target===target&&j.attempt===attempt);
-      const id='transition:'+t.trigger+':'+source;
-      edgeMap.set(id,{id,from,to,type:'transition',event:t.trigger,labels:new Set([view.model.machine.event_labels?.[t.trigger]||t.trigger]),observed,current:choice==='latest'});
-    }
   }
   const graph={boxes,byId,edges:[...edgeMap.values()],rawEdges,events,configuration,children,all};
   return graphBounds(graph);

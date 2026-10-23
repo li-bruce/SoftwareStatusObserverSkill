@@ -1,46 +1,47 @@
 {
   "schema_version": 3,
-  "build_id": "bbc04dd4ae7e708ee8db38f7efbe44fa54bc198fe31c6a9b86065486718acf14",
+  "build_id": "d555f1b4faeaed921896dcab1653927214088042caccf0b8271a0c7e404d24b2",
   "files": {
     "archive_app/__init__.py": "c4cc8d894a9cb6e2da5510317e540d22b50b75b2a187f86675d20e86d967f9bf",
     "archive_app/policy.py": "20ed13b26522411afb71a10cb90d58d951882f6075a29a1c8221d72a6fa83a7e",
-    "archive_app/ports.py": "b8cde872a84d96008836c06683dccf2d59ceff89c9a7dfe65e3e5f3dd6c3608c",
-    "archive_app/service.py": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01",
+    "archive_app/ports.py": "567f81c0c042de164f345562bf46c06cc2668ce52a22a11aa4be5e42d580d8f5",
+    "archive_app/service.py": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa",
     "archive_app/storage.py": "5dfd7a4ebcc907921324e26a1f03fc63d8ace83254783a4519e4f86d2b22eabc",
     "bo_stategraph/__init__.py": "0571254ae4242ad3f03d8433ff67edf79b46670518492d1a602874a24985cc09",
     "bo_stategraph/bo_contracts.py": "c2de500b94af9f2fb3549bdbb46a7251dc7e0145f3b0d60896ea99df2f4933e5",
     "bo_stategraph/execution_contract.py": "9502b2d348bb8ee00c05288ca3d064d151365292fdef597c156c178871635b78",
     "bo_stategraph/query.py": "1221abe81b934d1208a43dabcbc5628e20308a2f4e241788746c5234cb3789d1",
     "bo_stategraph/workflow.py": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0",
+    "implementation.json": "21e69b5b19cfcf6480b8cf2291879ceb866f2b8ad3f0b5f1ceb4e3e85fe2825e",
     "integrations/bo_observer.py": "5386e676e44a58e9f89076e0f0040e5918ed2c5f448e0e3e00c7ff39a46ad537",
     "integrations/bo_server.py": "de279d368d128cbf53545cef7100d1322a6a9777833c328f8d21855c7ac427d3",
-    "observer_runtime/behavior_model.py": "7165f6139fed267dab5b44b64fd7398f1624e0d4bf3c32fdc112fa042aad9a94",
+    "observer_runtime/behavior_model.py": "66b3441acdf98b35674850d61f46ebac8b6b624d298387f83235f8c16816d7af",
     "observer_runtime/bo_design.py": "b9688c9c549ad8c33ece12ae324b4edb01d14e35466d449f494e3619cce950bf",
     "observer_runtime/bo_retention.py": "b5a0f17bd789bc3f8d81cf8089f218344040d2ad29577bb5865c7b870bac86e9",
     "observer_runtime/bo_stategraph.py": "d704fc786b49337ca75d06b8a8ca7b1d6471af9c08c3d02d571b434f664e23b2",
     "observer_runtime/bo_web.py": "62471f23212b77d4fa4c78dcf75acd2d7cb7cb398ac814f7cde3c7e859c5170a",
     "observer_runtime/recording_session.py": "f65564a2cd0745ad2b1962506286735e177109de0716376c2bb4368db8cd78bb",
-    "observer_runtime/semantic_probe.py": "0fcd21963a53e898ef9ef2f60959ab0e037a03bae7adc7306c9522b76e6baa9f",
+    "observer_runtime/semantic_probe.py": "5501e098477312e8a256bd8f22460f662051bd67c152ad4817e487c59f54d89d",
     "observer_runtime/view_preferences.py": "b1e0a45e595184488ba1f8a4a984a8c4dd3184870f9b50a09ea296514faf4ab7",
     "run.py": "88b4cd777fef04e7cb37d009d27dfa814420ba7faf8f6fc9a44555133a050d0e",
     "static/app.css": "2a4fd73b67b18766d7759d3e7d1e06594124f9f367117018efb1f00debf77939",
     "static/app.html": "2ff81921addd89ede8cce19d92ae4a51502d59d88f24dc466c7a5b9c65344319",
     "static/app.js": "a0a994ea4c68c692ada680ea19c691521a858f963bf8bcc144b0ea34cb40c85b",
-    "static/graph/analysis.js": "4d3e8e2a5079064228fced0de2f127e9fdb8a2e3a8752439c6579252d92441c2",
+    "static/graph/analysis.js": "f5e91bda7b5b57e4f673f008e532c0d5b567d854e0fbfcecd93f534f2739fe07",
     "static/graph/conversation.js": "84e6dbb0a692c266dcc080a2bd029b354f50a2325e829aaad2d483e39b2ba619",
     "static/graph/glyphs.js": "4616c8689d3fb067f41ab7f408d2def198e807cfd4da70c8fa612245e6dddf87",
-    "static/graph/graph-core.js": "792bad3e481f043ee8326c88c2042f11cd8f38961469826484773b2e1daf1f22",
-    "static/graph/index.html": "4fb14d634ce22691e1f78d58d425e03ed4d70e937b7914902c891a2fc1d36dac",
-    "static/graph/layout.js": "76d9d851cec9435e18eec0feddaaf09d1fa089c6229c938279343201f12b3290",
+    "static/graph/graph-core.js": "35740cab096380e9c347f2667b565431ad6536e1f891bb4cbc923cd34ed26669",
+    "static/graph/index.html": "c5239d8c1680eadaf851ef87c067f3bb13081acc46d323be1f26cc6d05bfe834",
+    "static/graph/layout.js": "5b2f7abf822139f779e0ecc03d165ceb47aa4c83adb54f459436a863ec07f39f",
     "static/graph/preferences.js": "999acca5c27f23dc89bdd8496b5e7b792bedd3ec3645f9730d01373bf084929e",
     "static/graph/recording.js": "35531cdadcf6f991449e56d65cc2f795648bd986e527a2aa9df7ab4b6594057e",
-    "static/graph/replay-steps.js": "86107c3d772604e4d3ee08650517cbd0352627448e51a4fd079532767e7fedc8",
+    "static/graph/replay-steps.js": "98ffe04c62c4a387179a274cf5585f0d85d1d54943cdf2747385f67488e13fab",
     "static/graph/viewer.css": "70af32f30415c4256017f80e6d795653c504f9186185e56f08b069dff7a0c49b",
-    "static/graph/viewer.js": "1c95bd8aadedd18934fc73563d014ca672c464e9e769447480a61ed20c7b66df",
+    "static/graph/viewer.js": "6500344a94ca99f1047e6ef4ba19d711c224953eddccd6d4da52ebf07d0a31c2",
     "tooling/behavior_source.json": "0c9a3ecb0d5d918640dfe7e60e1b83ef83de609ebf773a3deec20eb32bae7ce6",
-    "tooling/build_model.py": "6a77a0407dda9782e0b0899ddb52d39da5bc2e525e87537f57236c59fd67882d"
+    "tooling/build_model.py": "d276455af36f153e2fdc402492fe029213b6252658ce1c3b5f09e6a7285aee81"
   },
-  "model_hash": "a06e2d106b5d786b50c83e0121710cdc70fc897dd87cca70bb5289e68a1e54d1",
+  "model_hash": "95abdc5af6342742d67d7136bbc5e119ce5a7a6bd1b610c37a635ee8c7ae761f",
   "intent_hash": "168fafc867a98f39917b7bbb8d294e3fa18d71b1fa55d9f18d0507fe01817dd0",
   "model_revision": "1.1.0",
   "bindings": {
@@ -82,7 +83,7 @@
           "expression": "row is None or not db.execute('SELECT 1 FROM users WHERE id=?', (operator_id,)).fetchone()"
         }
       ],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
     },
     "document": {
       "path": "archive_app/storage.py",
@@ -246,18 +247,19 @@
           "expression": "existing"
         }
       ],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
     },
     "approval_revoked": {
       "path": "archive_app/service.py",
       "symbol": "ArchiveService.revoke_approval",
-      "line": 280,
-      "end_line": 287,
+      "line": 283,
+      "end_line": 292,
       "signature": "self, approval_id: str",
-      "ast_sha256": "9ed4f4b6c9803cd1befc069cb5c228b56336cfb2cfe63858d5c5926e6faf7272",
-      "snippet": "    def revoke_approval(self, approval_id: str) -> None:\n        with self.lock, closing(self.store.connect()) as db:\n            db.execute(\"BEGIN IMMEDIATE\")\n            if db.execute(\"UPDATE grants SET revoked=1 WHERE id=?\",(approval_id,)).rowcount!=1:\n                raise ValueError(\"审批不存在\")\n            self.store.bump(db)\n            db.commit()\n        self.tick()",
+      "ast_sha256": "f94c151dfc7e8b489068efc8383e02ae2db38550d539d898a0a622c97e9001c3",
+      "snippet": "    def revoke_approval(self, approval_id: str) -> None:\n        with self.lock, closing(self.store.connect()) as db:\n            db.execute(\"BEGIN IMMEDIATE\")\n            if db.execute(\"UPDATE grants SET revoked=1 WHERE id=?\",(approval_id,)).rowcount!=1:\n                raise ValueError(\"审批不存在\")\n            self.store.bump(db)\n            db.commit()\n        bo_record_change(self.trace_factory,self.store,self.clock,'approval_revoked',lambda:{\n            'inputs':{'approval_id':approval_id},'outputs':{'revoked':True}})\n        self.tick()",
       "calls": [
         "ValueError",
+        "bo_record_change",
         "closing",
         "db.commit",
         "db.execute",
@@ -267,24 +269,26 @@
       ],
       "guards": [
         {
-          "line": 283,
+          "line": 286,
           "expression": "db.execute('UPDATE grants SET revoked=1 WHERE id=?', (approval_id,)).rowcount != 1"
         }
       ],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
     },
     "content_changed": {
       "path": "archive_app/service.py",
       "symbol": "ArchiveService.edit_document",
-      "line": 307,
-      "end_line": 317,
+      "line": 314,
+      "end_line": 327,
       "signature": "self, document_id: str, title: str, number: str, content: str",
-      "ast_sha256": "9f3c94a888877610935773a891ce1fff5f914cf54e832f3d2603ceb9b4f9cdfb",
-      "snippet": "    def edit_document(self, document_id: str, title: str, number: str, content: str) -> None:\n        if not all(isinstance(x,str) for x in (title,number,content)) or len(content)>100000:\n            raise ValueError(\"资料字段类型无效或内容过长\")\n        with self.lock, closing(self.store.connect()) as db:\n            db.execute(\"BEGIN IMMEDIATE\")\n            if db.execute(\"UPDATE documents SET title=?,number=?,content=?,version=version+1 WHERE id=?\",\n                          (title,number,content,document_id)).rowcount!=1:\n                raise ValueError(\"资料不存在\")\n            self.store.bump(db)\n            db.commit()\n        self.tick()",
+      "ast_sha256": "a7658af504302aea52e744703c09c4f49438cbee36e5738e7a3693c104bba966",
+      "snippet": "    def edit_document(self, document_id: str, title: str, number: str, content: str) -> None:\n        if not all(isinstance(x,str) for x in (title,number,content)) or len(content)>100000:\n            raise ValueError(\"资料字段类型无效或内容过长\")\n        with self.lock, closing(self.store.connect()) as db:\n            db.execute(\"BEGIN IMMEDIATE\")\n            if db.execute(\"UPDATE documents SET title=?,number=?,content=?,version=version+1 WHERE id=?\",\n                          (title,number,content,document_id)).rowcount!=1:\n                raise ValueError(\"资料不存在\")\n            self.store.bump(db)\n            db.commit()\n        bo_record_change(self.trace_factory,self.store,self.clock,'content_changed',lambda:{\n            'inputs':{'document_id':document_id,'title_length':len(title),'number':number,'content_bytes':len(content.encode('utf-8'))},\n            'outputs':{'saved':True}})\n        self.tick()",
       "calls": [
         "ValueError",
         "all",
+        "bo_record_change",
         "closing",
+        "content.encode",
         "db.commit",
         "db.execute",
         "isinstance",
@@ -295,15 +299,15 @@
       ],
       "guards": [
         {
-          "line": 308,
+          "line": 315,
           "expression": "not all((isinstance(x, str) for x in (title, number, content))) or len(content) > 100000"
         },
         {
-          "line": 312,
+          "line": 319,
           "expression": "db.execute('UPDATE documents SET title=?,number=?,content=?,version=version+1 WHERE id=?', (title, number, content, document_id)).rowcount != 1"
         }
       ],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
     },
     "folder_assignments": {
       "path": "archive_app/service.py",
@@ -355,7 +359,7 @@
           "expression": "run['stop_reason']"
         }
       ],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
     },
     "approval_target": {
       "path": "archive_app/policy.py",
@@ -426,7 +430,7 @@
           "expression": "run['phase'] in TERMINAL or run['stop_reason']"
         }
       ],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
     },
     "run_identity": {
       "path": "bo_stategraph/workflow.py",
@@ -503,7 +507,7 @@
           "expression": "run['stop_reason']"
         }
       ],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
     },
     "flow.checks": {
       "path": "archive_app/service.py",
@@ -542,7 +546,7 @@
           "expression": "run['phase'] == 'ready' and self.commit_enabled"
         }
       ],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
     },
     "flow.archive": {
       "path": "archive_app/service.py",
@@ -583,7 +587,7 @@
           "expression": "existing"
         }
       ],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
     },
     "authority_read": {
       "path": "archive_app/service.py",
@@ -635,7 +639,7 @@
           "expression": "run['stop_reason']"
         }
       ],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
     },
     "approval_candidate": {
       "path": "archive_app/policy.py",
@@ -706,7 +710,7 @@
           "expression": "run['stop_reason']"
         }
       ],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
     },
     "checks_join": {
       "path": "bo_stategraph/workflow.py",
@@ -811,7 +815,7 @@
         "uuid.uuid4"
       ],
       "guards": [],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
     },
     "lifecycle": {
       "path": "bo_stategraph/workflow.py",
@@ -839,12 +843,13 @@
       "path": "archive_app/service.py",
       "symbol": "ArchiveService.add_approval",
       "line": 261,
-      "end_line": 278,
+      "end_line": 281,
       "signature": "self, document_id: str, operator_id: str, reviewer_id: str, deadline: float",
-      "ast_sha256": "994e11925cbeffdf600d9a570708803965dcd5e9455ad02a3c1dbfd985f99e58",
-      "snippet": "    def add_approval(self, document_id: str, operator_id: str, reviewer_id: str,\n                     deadline: float) -> str:\n        if type(deadline) not in (int,float) or not math.isfinite(deadline):\n            raise ValueError(\"截止时间无效\")\n        with self.lock, closing(self.store.connect()) as db:\n            db.execute(\"BEGIN IMMEDIATE\")\n            doc = db.execute(\"SELECT * FROM documents WHERE id=?\",(document_id,)).fetchone()\n            reviewer = db.execute(\"SELECT role FROM users WHERE id=?\",(reviewer_id,)).fetchone()\n            if doc is None or reviewer is None or reviewer[\"role\"]!=\"reviewer\" or reviewer_id==operator_id:\n                raise ValueError(\"须由另一名审核员审批\")\n            if not db.execute(\"SELECT 1 FROM users WHERE id=?\",(operator_id,)).fetchone():\n                raise ValueError(\"操作人不存在\")\n            ident = uuid.uuid4().hex[:12]\n            db.execute(\"INSERT INTO grants VALUES(?,?,?,?,?,?,?,0)\",\n                (ident,doc[\"project_id\"],operator_id,document_id,doc[\"version\"],reviewer_id,float(deadline)))\n            self.store.bump(db)\n            db.commit()\n        return ident",
+      "ast_sha256": "d1187cfeb7985898bc6a197a7da87d9496c6d1138ded1a92c6defcb88b4d893f",
+      "snippet": "    def add_approval(self, document_id: str, operator_id: str, reviewer_id: str,\n                     deadline: float) -> str:\n        if type(deadline) not in (int,float) or not math.isfinite(deadline):\n            raise ValueError(\"截止时间无效\")\n        with self.lock, closing(self.store.connect()) as db:\n            db.execute(\"BEGIN IMMEDIATE\")\n            doc = db.execute(\"SELECT * FROM documents WHERE id=?\",(document_id,)).fetchone()\n            reviewer = db.execute(\"SELECT role FROM users WHERE id=?\",(reviewer_id,)).fetchone()\n            if doc is None or reviewer is None or reviewer[\"role\"]!=\"reviewer\" or reviewer_id==operator_id:\n                raise ValueError(\"须由另一名审核员审批\")\n            if not db.execute(\"SELECT 1 FROM users WHERE id=?\",(operator_id,)).fetchone():\n                raise ValueError(\"操作人不存在\")\n            ident = uuid.uuid4().hex[:12]\n            db.execute(\"INSERT INTO grants VALUES(?,?,?,?,?,?,?,0)\",\n                (ident,doc[\"project_id\"],operator_id,document_id,doc[\"version\"],reviewer_id,float(deadline)))\n            self.store.bump(db)\n            db.commit()\n        bo_record_change(self.trace_factory,self.store,self.clock,'issue_approval',lambda:{\n            'inputs':{'document_id':document_id,'operator_id':operator_id,'reviewer_id':reviewer_id,'deadline':deadline},\n            'outputs':{'approval_id':ident}})\n        return ident",
       "calls": [
         "ValueError",
+        "bo_record_change",
         "closing",
         "db.commit",
         "db.execute",
@@ -872,18 +877,19 @@
           "expression": "not db.execute('SELECT 1 FROM users WHERE id=?', (operator_id,)).fetchone()"
         }
       ],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
     },
     "move_folder": {
       "path": "archive_app/service.py",
       "symbol": "ArchiveService.move_document",
-      "line": 319,
-      "end_line": 330,
+      "line": 329,
+      "end_line": 342,
       "signature": "self, document_id: str, folder_id: str",
-      "ast_sha256": "cfbe26dcb3a71d7f5420c0b376f0b6ca9a8f93cd96b02ef18777385a22951589",
-      "snippet": "    def move_document(self, document_id: str, folder_id: str) -> None:\n        with self.lock, closing(self.store.connect()) as db:\n            db.execute(\"BEGIN IMMEDIATE\")\n            folder = db.execute(\"SELECT * FROM folders WHERE id=?\",(folder_id,)).fetchone()\n            if folder is None:\n                raise ValueError(\"目标文件夹不存在\")\n            if db.execute(\"UPDATE documents SET folder_id=?,project_id=? WHERE id=?\",\n                          (folder_id,folder[\"project_id\"],document_id)).rowcount!=1:\n                raise ValueError(\"资料不存在\")\n            self.store.bump(db)\n            db.commit()\n        self.tick()",
+      "ast_sha256": "e12c841ac390d806a8f143ffc35b25f1ecafe01ce2c5e60e11c53a219e7e9cd4",
+      "snippet": "    def move_document(self, document_id: str, folder_id: str) -> None:\n        with self.lock, closing(self.store.connect()) as db:\n            db.execute(\"BEGIN IMMEDIATE\")\n            folder = db.execute(\"SELECT * FROM folders WHERE id=?\",(folder_id,)).fetchone()\n            if folder is None:\n                raise ValueError(\"目标文件夹不存在\")\n            if db.execute(\"UPDATE documents SET folder_id=?,project_id=? WHERE id=?\",\n                          (folder_id,folder[\"project_id\"],document_id)).rowcount!=1:\n                raise ValueError(\"资料不存在\")\n            self.store.bump(db)\n            db.commit()\n        bo_record_change(self.trace_factory,self.store,self.clock,'move_folder',lambda:{\n            'inputs':{'document_id':document_id,'folder_id':folder_id},'outputs':{'moved':True}})\n        self.tick()",
       "calls": [
         "ValueError",
+        "bo_record_change",
         "closing",
         "db.commit",
         "db.execute",
@@ -894,21 +900,21 @@
       ],
       "guards": [
         {
-          "line": 323,
+          "line": 333,
           "expression": "folder is None"
         },
         {
-          "line": 325,
+          "line": 335,
           "expression": "db.execute('UPDATE documents SET folder_id=?,project_id=? WHERE id=?', (folder_id, folder['project_id'], document_id)).rowcount != 1"
         }
       ],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
     },
     "recover_run": {
       "path": "archive_app/service.py",
       "symbol": "ArchiveService.recover_interrupted",
-      "line": 354,
-      "end_line": 365,
+      "line": 366,
+      "end_line": 377,
       "signature": "self",
       "ast_sha256": "9b3df259430a04f20316384ec795a2c9939ef9527b60348fab0ae5ef10ac6134",
       "snippet": "    def recover_interrupted(self) -> None:\n        with self.lock, closing(self.store.connect()) as db:\n            db.execute(\"BEGIN IMMEDIATE\")\n            rows = list(db.execute(\"SELECT payload FROM runs\"))\n            import json\n            for row in rows:\n                run = json.loads(row[\"payload\"])\n                if run[\"phase\"] in TERMINAL:\n                    continue\n                interrupt(run, float(self.clock()))\n                self.store.save_run(db,run)\n            db.commit()",
@@ -926,11 +932,11 @@
       ],
       "guards": [
         {
-          "line": 361,
+          "line": 373,
           "expression": "run['phase'] in TERMINAL"
         }
       ],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
     },
     "worker_call": {
       "path": "archive_app/service.py",
@@ -982,7 +988,7 @@
           "expression": "result['passed']"
         }
       ],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
     },
     "project_limit": {
       "path": "archive_app/storage.py",
@@ -1032,16 +1038,18 @@
     "set_size_limit": {
       "path": "archive_app/service.py",
       "symbol": "ArchiveService.set_archive_limit",
-      "line": 289,
-      "end_line": 305,
+      "line": 294,
+      "end_line": 312,
       "signature": "self, project_id: str, limit_bytes: int",
-      "ast_sha256": "20bd795b1d58935fb18d238ea9e17432f02ec93edbd28699c3d37d292060889e",
-      "snippet": "    def set_archive_limit(self, project_id: str, limit_bytes: int) -> dict:\n        if type(limit_bytes) is not int or limit_bytes <= 0:\n            raise ValueError(\"归档大小上限必须是正整数（字节），不能使用小数、零或负数\")\n        if limit_bytes > 9223372036854775807:\n            raise ValueError(\"归档大小上限超过可保存的整数范围\")\n        with self.lock, closing(self.store.connect()) as db:\n            db.execute(\"BEGIN IMMEDIATE\")\n            previous = self.store.project_limit(db,project_id)\n            if previous[\"limit_bytes\"] != limit_bytes:\n                db.execute(\"UPDATE projects SET archive_limit_bytes=?,limit_revision=limit_revision+1 WHERE id=?\",\n                           (limit_bytes,project_id))\n                self.store.bump(db)\n            result = self.store.project_limit(db,project_id)\n            db.commit()\n        # Every active run re-reads the project setting; completed snapshots stay fixed.\n        self.tick()\n        return result",
+      "ast_sha256": "3b5a48f6a1e56dddb13fd88be9454c014e553b8b27ff6be947368a775d5a82b7",
+      "snippet": "    def set_archive_limit(self, project_id: str, limit_bytes: int) -> dict:\n        if type(limit_bytes) is not int or limit_bytes <= 0:\n            raise ValueError(\"归档大小上限必须是正整数（字节），不能使用小数、零或负数\")\n        if limit_bytes > 9223372036854775807:\n            raise ValueError(\"归档大小上限超过可保存的整数范围\")\n        with self.lock, closing(self.store.connect()) as db:\n            db.execute(\"BEGIN IMMEDIATE\")\n            previous = self.store.project_limit(db,project_id)\n            if previous[\"limit_bytes\"] != limit_bytes:\n                db.execute(\"UPDATE projects SET archive_limit_bytes=?,limit_revision=limit_revision+1 WHERE id=?\",\n                           (limit_bytes,project_id))\n                self.store.bump(db)\n            result = self.store.project_limit(db,project_id)\n            db.commit()\n        # Every active run re-reads the project setting; completed snapshots stay fixed.\n        bo_record_change(self.trace_factory,self.store,self.clock,'set_size_limit',lambda:{\n            'inputs':{'project_id':project_id,'limit_bytes':limit_bytes},'outputs':dict(result)})\n        self.tick()\n        return result",
       "calls": [
         "ValueError",
+        "bo_record_change",
         "closing",
         "db.commit",
         "db.execute",
+        "dict",
         "self.store.bump",
         "self.store.connect",
         "self.store.project_limit",
@@ -1050,19 +1058,19 @@
       ],
       "guards": [
         {
-          "line": 290,
+          "line": 295,
           "expression": "type(limit_bytes) is not int or limit_bytes <= 0"
         },
         {
-          "line": 292,
+          "line": 297,
           "expression": "limit_bytes > 9223372036854775807"
         },
         {
-          "line": 297,
+          "line": 302,
           "expression": "previous['limit_bytes'] != limit_bytes"
         }
       ],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
     },
     "run.storage": {
       "path": "archive_app/storage.py",
@@ -1590,7 +1598,7 @@
         "self.trace_factory"
       ],
       "guards": [],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
     },
     "code.f3a6c799f69f9f5f": {
       "path": "archive_app/service.py",
@@ -1607,7 +1615,7 @@
         "self.clock"
       ],
       "guards": [],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
     },
     "code.bb6f1114d12b1280": {
       "path": "archive_app/service.py",
@@ -1646,7 +1654,7 @@
           "expression": "run['phase'] == 'ready' and self.commit_enabled"
         }
       ],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
     },
     "code.c270e158bad72e4e": {
       "path": "bo_stategraph/workflow.py",
@@ -1686,11 +1694,29 @@
       ],
       "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
     },
+    "code.4b3b701f987de333": {
+      "path": "archive_app/ports.py",
+      "symbol": "bo_record_change",
+      "line": 28,
+      "end_line": 36,
+      "signature": "factory, store, clock, node, builder",
+      "ast_sha256": "d0cb0258ee716eaff0c29f783819debf80d97d37d3289cb652fd21fb7518a428",
+      "snippet": "def bo_record_change(factory, store, clock, node, builder):\n    \"\"\"Optional observation after a committed command; payload work is isolated.\"\"\"\n    try:\n        snapshot = store.snapshot()\n        trace = factory('application', 'commands')\n        trace.bo_record(node, 'change', {'param_version':0, 'epoch':snapshot['epoch'], 'clock':float(clock())},\n                        builder, scope='application')\n    except Exception:\n        pass  # Collection must not turn a successful business commit into failure.",
+      "calls": [
+        "clock",
+        "factory",
+        "float",
+        "store.snapshot",
+        "trace.bo_record"
+      ],
+      "guards": [],
+      "file_sha256": "567f81c0c042de164f345562bf46c06cc2668ce52a22a11aa4be5e42d580d8f5"
+    },
     "code.d31899a8ea590c46": {
       "path": "archive_app/service.py",
       "symbol": "ArchiveService.tick",
-      "line": 332,
-      "end_line": 345,
+      "line": 344,
+      "end_line": 357,
       "signature": "self",
       "ast_sha256": "67253b35d8314f1ed7031a07c5d4c875e54606c671d557c7c384d14c83139091",
       "snippet": "    def tick(self) -> None:\n        snapshot=self.store.snapshot()\n        active_ids = {run['id'] for run in snapshot['runs'] if run['phase'] not in TERMINAL}\n        self.tick_keys = {key:value for key,value in self.tick_keys.items() if key in active_ids}\n        now=float(self.clock())\n        for run in snapshot[\"runs\"]:\n            if run[\"phase\"] not in TERMINAL:\n                expiry=tuple((g[\"id\"],now>=g[\"deadline\"]) for g in snapshot[\"grants\"]\n                             if g[\"document_id\"]==run[\"input\"][\"document_id\"])\n                key=(snapshot[\"epoch\"],run[\"configuration\"][\"revision\"],run[\"phase\"],\n                     run[\"resume_required\"],run[\"stop_reason\"],self.commit_enabled,expiry)\n                if self.tick_keys.get(run[\"id\"])!=key:\n                    self.advance(run[\"id\"])\n                    self.tick_keys[run[\"id\"]]=key",
@@ -1705,21 +1731,39 @@
       ],
       "guards": [
         {
-          "line": 338,
+          "line": 350,
           "expression": "run['phase'] not in TERMINAL"
         },
         {
-          "line": 343,
+          "line": 355,
           "expression": "self.tick_keys.get(run['id']) != key"
         }
       ],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
+    },
+    "code.8e1bbb1b5a63d3e5": {
+      "path": "archive_app/ports.py",
+      "symbol": "bo_record_change",
+      "line": 28,
+      "end_line": 36,
+      "signature": "factory, store, clock, node, builder",
+      "ast_sha256": "d0cb0258ee716eaff0c29f783819debf80d97d37d3289cb652fd21fb7518a428",
+      "snippet": "def bo_record_change(factory, store, clock, node, builder):\n    \"\"\"Optional observation after a committed command; payload work is isolated.\"\"\"\n    try:\n        snapshot = store.snapshot()\n        trace = factory('application', 'commands')\n        trace.bo_record(node, 'change', {'param_version':0, 'epoch':snapshot['epoch'], 'clock':float(clock())},\n                        builder, scope='application')\n    except Exception:\n        pass  # Collection must not turn a successful business commit into failure.",
+      "calls": [
+        "clock",
+        "factory",
+        "float",
+        "store.snapshot",
+        "trace.bo_record"
+      ],
+      "guards": [],
+      "file_sha256": "567f81c0c042de164f345562bf46c06cc2668ce52a22a11aa4be5e42d580d8f5"
     },
     "code.881d8e61a1974236": {
       "path": "archive_app/service.py",
       "symbol": "ArchiveService.tick",
-      "line": 332,
-      "end_line": 345,
+      "line": 344,
+      "end_line": 357,
       "signature": "self",
       "ast_sha256": "67253b35d8314f1ed7031a07c5d4c875e54606c671d557c7c384d14c83139091",
       "snippet": "    def tick(self) -> None:\n        snapshot=self.store.snapshot()\n        active_ids = {run['id'] for run in snapshot['runs'] if run['phase'] not in TERMINAL}\n        self.tick_keys = {key:value for key,value in self.tick_keys.items() if key in active_ids}\n        now=float(self.clock())\n        for run in snapshot[\"runs\"]:\n            if run[\"phase\"] not in TERMINAL:\n                expiry=tuple((g[\"id\"],now>=g[\"deadline\"]) for g in snapshot[\"grants\"]\n                             if g[\"document_id\"]==run[\"input\"][\"document_id\"])\n                key=(snapshot[\"epoch\"],run[\"configuration\"][\"revision\"],run[\"phase\"],\n                     run[\"resume_required\"],run[\"stop_reason\"],self.commit_enabled,expiry)\n                if self.tick_keys.get(run[\"id\"])!=key:\n                    self.advance(run[\"id\"])\n                    self.tick_keys[run[\"id\"]]=key",
@@ -1734,15 +1778,138 @@
       ],
       "guards": [
         {
-          "line": 338,
+          "line": 350,
           "expression": "run['phase'] not in TERMINAL"
         },
         {
-          "line": 343,
+          "line": 355,
           "expression": "self.tick_keys.get(run['id']) != key"
         }
       ],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
+    },
+    "code.c852303e58806ad7": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.trace",
+      "line": 33,
+      "end_line": 37,
+      "signature": "self, run: dict",
+      "ast_sha256": "02b5be8dc957b92bf7df1cd0b31d49966a8d59afb4742656b5b727eebce96d1e",
+      "snippet": "    def trace(self, run: dict) -> TracePort:\n        try:\n            return self.trace_factory(run[\"input\"][\"document_id\"], run[\"id\"])\n        except Exception:\n            return TracePort()",
+      "calls": [
+        "TracePort",
+        "self.trace_factory"
+      ],
+      "guards": [],
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
+    },
+    "code.4bbd0454175fd162": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.evaluate",
+      "line": 44,
+      "end_line": 100,
+      "signature": "self, db: sqlite3.Connection, run: dict, trace: TracePort, stage: str",
+      "ast_sha256": "71846b86d92a3125567698e3b9b10b8b4d3f0ce34e4f9a247bfce5e08c59037f",
+      "snippet": "    def evaluate(self, db: sqlite3.Connection, run: dict, trace: TracePort, stage: str) -> dict:\n        request = run[\"input\"]\n        docrow = db.execute(\"SELECT * FROM documents WHERE id=?\",(request[\"document_id\"],)).fetchone()\n        if docrow is None:\n            raise ValueError(\"原资料不存在\")\n        document = dict(docrow)\n        assignments = [dict(r) for r in db.execute(\n            \"SELECT * FROM assignments WHERE project_id=? AND folder_id=?\",\n            (document[\"project_id\"], document[\"folder_id\"]))]\n        # Complete candidate set for this document, including invalid alternatives.\n        approvals = [dict(r) for r in db.execute(\n            \"SELECT * FROM grants WHERE document_id=? ORDER BY id\",(document[\"id\"],))]\n        reviewers = [r[\"id\"] for r in db.execute(\"SELECT id FROM users WHERE role='reviewer'\")]\n        basis, call = self.basis(db,run), uuid.uuid4().hex\n        limit = self.store.project_limit(db,document[\"project_id\"])\n        limit_event = trace.bo_record(\"project_limit\",\"read\",basis,lambda:{\n            \"inputs\":{\"project_id\":document[\"project_id\"]},\"outputs\":limit},\n            call_id=uuid.uuid4().hex,parent_call_id=call)\n        read_event = trace.bo_record(\"authority_read\", \"read\", basis, lambda: {\n            \"inputs\":{\"document_id\":document[\"id\"]},\n            \"outputs\":{\"project_id\":document[\"project_id\"],\"folder_id\":document[\"folder_id\"],\n                       \"content_version\":document[\"version\"],\"relation_epoch\":basis[\"epoch\"],\n                       \"approval_count\":len(approvals)}}, call_id=call)\n        scope = is_direct_manager(document[\"project_id\"],request[\"operator_id\"],\n                                   document[\"folder_id\"],assignments,trace,basis,call)\n        approval = evaluate_approvals(document[\"project_id\"],request[\"operator_id\"],\n            document[\"id\"],request[\"content_version\"],approvals,reviewers,basis[\"clock\"],trace,basis,call)\n        size = check_size(request[\"content\"],limit[\"limit_bytes\"],document[\"project_id\"],\n                          limit[\"limit_revision\"],trace,basis,call,limit_event)\n        current = (document[\"version\"] == request[\"content_version\"]\n                   and document[\"project_id\"] == request[\"project_id\"])\n        allowed = scope and approval[\"allowed\"] and size[\"allowed\"] and current and not run[\"stop_reason\"]\n        reasons = []\n        if not current: reasons.append(\"资料内容版本或所属项目已变化\")\n        if not scope: reasons.append(\"当前不是所在文件夹的直接负责人\")\n        if not approval[\"allowed\"]: reasons.append(\"没有仍有效的审批\")\n        if not size[\"allowed\"]:\n            reasons.append(f\"正文 {size['content_bytes']} 字节，当前上限 {size['limit_bytes']} 字节，超出 {size['excess_bytes']} 字节\")\n        if run[\"stop_reason\"]: reasons.append(\"本次运行已停止接收新工作\")\n        evaluation = {\"allowed\":allowed,\"scope_allowed\":scope,\"approval_allowed\":approval[\"allowed\"],\n            \"version_current\":current,\"size_allowed\":size[\"allowed\"],\"size\":size,\n            \"reasons\":reasons,\"candidates\":approval[\"candidates\"],\n            \"basis\":basis,\"all_passed\":run[\"configuration\"][\"join\"][\"state\"]==\"passed\"}\n        allowed_ids={c[\"id\"] for c in approval[\"candidates\"] if c[\"allowed\"]}\n        evaluation[\"valid_until\"]=min((g[\"deadline\"] for g in approvals if g[\"id\"] in allowed_ids),default=None)\n        trace.bo_record(\"commit_guard\", \"decision\", basis, lambda: {\n            \"inputs\":{\"stage\":stage,\"project_id\":document[\"project_id\"],\n                \"folder_id\":document[\"folder_id\"],\"operator_id\":request[\"operator_id\"],\n                \"run_version\":request[\"content_version\"],\"current_version\":document[\"version\"],\n                \"all_passed\":evaluation[\"all_passed\"],\"content_bytes\":size[\"content_bytes\"],\n                \"limit_bytes\":size[\"limit_bytes\"],\"limit_revision\":size[\"limit_revision\"]},\n            \"outputs\":{\"allowed\":allowed,\"scope_allowed\":scope,\n                \"approval_allowed\":approval[\"allowed\"],\"size_allowed\":size[\"allowed\"],\n                \"version_current\":current,\"reasons\":reasons}},\n            depends=[(read_event,\"data\")],call_id=uuid.uuid4().hex,parent_call_id=call)\n        run[\"qualification\"] = evaluation\n        return evaluation",
+      "calls": [
+        "ValueError",
+        "check_size",
+        "db.execute",
+        "db.execute('SELECT * FROM documents WHERE id=?', (request['document_id'],)).fetchone",
+        "dict",
+        "evaluate_approvals",
+        "is_direct_manager",
+        "len",
+        "min",
+        "reasons.append",
+        "self.basis",
+        "self.store.project_limit",
+        "trace.bo_record",
+        "uuid.uuid4"
+      ],
+      "guards": [
+        {
+          "line": 47,
+          "expression": "docrow is None"
+        },
+        {
+          "line": 77,
+          "expression": "not current"
+        },
+        {
+          "line": 78,
+          "expression": "not scope"
+        },
+        {
+          "line": 79,
+          "expression": "not approval['allowed']"
+        },
+        {
+          "line": 80,
+          "expression": "not size['allowed']"
+        },
+        {
+          "line": 82,
+          "expression": "run['stop_reason']"
+        }
+      ],
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
+    },
+    "code.8e899e2884fe31dd": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.try_commit",
+      "line": 169,
+      "end_line": 200,
+      "signature": "self, db: sqlite3.Connection, run: dict, trace: TracePort",
+      "ast_sha256": "c662c3ca6b1bc0e57466b1d0ee1ab03f1c3924f6d8deef09c130746d43675284",
+      "snippet": "    def try_commit(self, db: sqlite3.Connection, run: dict, trace: TracePort) -> str | None:\n        evaluation = self.evaluate(db,run,trace,\"commit\")\n        cfg, request = run[\"configuration\"], run[\"input\"]\n        all_passed = checks_passed(run)\n        if not evaluation[\"allowed\"] or not all_passed or run[\"resume_required\"]:\n            change_phase(run,\"pause\",{},float(self.clock()))\n            run[\"resume_required\"] = True\n            self.store.save_run(db,run)\n            db.commit()\n            return None\n        existing = self.store.find_archive(db,request[\"document_id\"],request[\"content_version\"])\n        ident = existing[\"id\"] if existing else uuid.uuid4().hex[:12]\n        if existing is None:\n            db.execute(\"INSERT INTO archives VALUES(?,?,?,?,?,?,?,?,?)\",\n                (ident,request[\"document_id\"],request[\"content_version\"],request[\"content\"],\n                 request[\"title\"],request[\"project_id\"],request[\"document_number\"],run[\"id\"],float(self.clock())))\n        run[\"effect_id\"] = ident\n        run[\"reused_archive\"] = existing is not None\n        change_phase(run,\"publish\",{**evaluation,\"all_passed\":all_passed,\"effect_saved\":True},float(self.clock()))\n        self.store.save_run(db,run)\n        db.commit()\n        # Only after the effect and completed state have committed.\n        if existing is None:\n            trace.bo_record(\"archive_commit\",\"commit\",evaluation[\"basis\"],lambda:{\n                \"inputs\":{\"attempt\":run[\"id\"],\"document_id\":request[\"document_id\"],\n                          \"content_version\":request[\"content_version\"]},\n                \"outputs\":{\"effect_id\":ident,\"persisted\":True}},call_id=uuid.uuid4().hex)\n        else:\n            trace.bo_record(\"archive_unique\",\"read\",evaluation[\"basis\"],lambda:{\n                \"inputs\":{\"document_id\":request[\"document_id\"],\"content_version\":request[\"content_version\"]},\n                \"outputs\":{\"effect_id\":ident,\"reused\":True}},call_id=uuid.uuid4().hex)\n        return ident",
+      "calls": [
+        "change_phase",
+        "checks_passed",
+        "db.commit",
+        "db.execute",
+        "float",
+        "self.clock",
+        "self.evaluate",
+        "self.store.find_archive",
+        "self.store.save_run",
+        "trace.bo_record",
+        "uuid.uuid4"
+      ],
+      "guards": [
+        {
+          "line": 173,
+          "expression": "not evaluation['allowed'] or not all_passed or run['resume_required']"
+        },
+        {
+          "line": 181,
+          "expression": "existing is None"
+        },
+        {
+          "line": 191,
+          "expression": "existing is None"
+        },
+        {
+          "line": 180,
+          "expression": "existing"
+        }
+      ],
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
+    },
+    "code.a8e6aac669bf72c8": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.emit_configuration",
+      "line": 135,
+      "end_line": 141,
+      "signature": "self, run: dict, trace: TracePort, basis: dict",
+      "ast_sha256": "34f74f230b2acf3e80e4c6b5ce803f527ea4395c58405c27125f8aca6244cb33",
+      "snippet": "    def emit_configuration(self, run: dict, trace: TracePort, basis: dict) -> None:\n        cfg = run[\"configuration\"]\n        trace.bo_record(\"flow.checks\",\"change\",basis,lambda:{\n            \"inputs\":{\"attempt\":run[\"id\"],\"content_version\":run[\"input\"][\"content_version\"]},\n            \"outputs\":{\"revision\":cfg[\"revision\"],\"phase\":run[\"phase\"],\n                       \"available\":cfg[\"resources\"][\"processing_slots\"][\"available\"],\n                       \"join_state\":cfg[\"join\"][\"state\"]}},call_id=uuid.uuid4().hex)",
+      "calls": [
+        "trace.bo_record",
+        "uuid.uuid4"
+      ],
+      "guards": [],
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
     },
     "code.06e2186c0030c854": {
       "path": "archive_app/service.py",
@@ -1759,7 +1926,7 @@
         "self.clock"
       ],
       "guards": [],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
     },
     "code.0c55d9bef8e2c2ec": {
       "path": "archive_app/policy.py",
@@ -1833,7 +2000,7 @@
         "request_stop"
       ],
       "guards": [],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
     },
     "code.46ead1f94e6333dd": {
       "path": "archive_app/service.py",
@@ -1847,22 +2014,7 @@
         "settle"
       ],
       "guards": [],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
-    },
-    "code.c852303e58806ad7": {
-      "path": "archive_app/service.py",
-      "symbol": "ArchiveService.trace",
-      "line": 33,
-      "end_line": 37,
-      "signature": "self, run: dict",
-      "ast_sha256": "02b5be8dc957b92bf7df1cd0b31d49966a8d59afb4742656b5b727eebce96d1e",
-      "snippet": "    def trace(self, run: dict) -> TracePort:\n        try:\n            return self.trace_factory(run[\"input\"][\"document_id\"], run[\"id\"])\n        except Exception:\n            return TracePort()",
-      "calls": [
-        "TracePort",
-        "self.trace_factory"
-      ],
-      "guards": [],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
     },
     "code.77eab623e82b416e": {
       "path": "archive_app/service.py",
@@ -1879,22 +2031,7 @@
         "self.clock"
       ],
       "guards": [],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
-    },
-    "code.a8e6aac669bf72c8": {
-      "path": "archive_app/service.py",
-      "symbol": "ArchiveService.emit_configuration",
-      "line": 135,
-      "end_line": 141,
-      "signature": "self, run: dict, trace: TracePort, basis: dict",
-      "ast_sha256": "34f74f230b2acf3e80e4c6b5ce803f527ea4395c58405c27125f8aca6244cb33",
-      "snippet": "    def emit_configuration(self, run: dict, trace: TracePort, basis: dict) -> None:\n        cfg = run[\"configuration\"]\n        trace.bo_record(\"flow.checks\",\"change\",basis,lambda:{\n            \"inputs\":{\"attempt\":run[\"id\"],\"content_version\":run[\"input\"][\"content_version\"]},\n            \"outputs\":{\"revision\":cfg[\"revision\"],\"phase\":run[\"phase\"],\n                       \"available\":cfg[\"resources\"][\"processing_slots\"][\"available\"],\n                       \"join_state\":cfg[\"join\"][\"state\"]}},call_id=uuid.uuid4().hex)",
-      "calls": [
-        "trace.bo_record",
-        "uuid.uuid4"
-      ],
-      "guards": [],
-      "file_sha256": "4d3f6e746fc009a3fee2392ddde760447c324dbdd3fcb655c5f3de602b4b7e01"
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
     },
     "code.a5031696efd68bab": {
       "path": "bo_stategraph/workflow.py",
@@ -1990,6 +2127,255 @@
         {
           "line": 113,
           "expression": "not workflow.trigger(event)"
+        }
+      ],
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
+    },
+    "implementation.96ed4c758c1b5776": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.__init__",
+      "line": 18,
+      "end_line": 31,
+      "signature": "self, store: ArchiveStore, trace_factory=no_trace, clock=time.time, worker_hook=None, delay: float=0.0, recover: bool=True, execution_version: str | None=None",
+      "ast_sha256": "86a4df8bf360f5190dd180a28e566bc026521c130d1892611692fa6da3f8910c",
+      "snippet": "    def __init__(self, store: ArchiveStore, trace_factory=no_trace, clock=time.time,\n                 worker_hook=None, delay: float = 0.0, recover: bool = True,\n                 execution_version: str | None = None):\n        self.store, self.trace_factory, self.clock = store, trace_factory, clock\n        self.worker_hook, self.delay = worker_hook, delay\n        self.execution_version = execution_version\n        self.lock = threading.RLock()\n        self.threads = []\n        self.tick_keys = {}\n        self.commit_enabled = True\n        self.stop_event = threading.Event()\n        self.scheduler = None\n        if recover:\n            self.recover_interrupted()",
+      "calls": [
+        "self.recover_interrupted",
+        "threading.Event",
+        "threading.RLock"
+      ],
+      "guards": [
+        {
+          "line": 30,
+          "expression": "recover"
+        }
+      ],
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
+    },
+    "implementation.93d1577a74ec7b7a": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.close",
+      "line": 379,
+      "end_line": 384,
+      "signature": "self",
+      "ast_sha256": "df0d305e1be3ac1df5a6c71fff2e0e20a84560a28b1503b7b4d1edafdee0e6c4",
+      "snippet": "    def close(self) -> None:\n        self.stop_event.set()\n        if self.scheduler:\n            self.scheduler.join(2)\n        for worker in self.threads:\n            worker.join(3)",
+      "calls": [
+        "self.scheduler.join",
+        "self.stop_event.set",
+        "worker.join"
+      ],
+      "guards": [
+        {
+          "line": 381,
+          "expression": "self.scheduler"
+        }
+      ],
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
+    },
+    "implementation.9d295b681eb7e4dc": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.start_scheduler",
+      "line": 359,
+      "end_line": 364,
+      "signature": "self",
+      "ast_sha256": "08c8eefb9d43eb7fe12be7fbd8845ce50faa2d62f5754abbd4198580b47f0a58",
+      "snippet": "    def start_scheduler(self) -> None:\n        def loop():\n            while not self.stop_event.wait(.12):\n                self.tick()\n        self.scheduler = threading.Thread(target=loop,daemon=True,name=\"archive-scheduler\")\n        self.scheduler.start()",
+      "calls": [
+        "self.scheduler.start",
+        "self.stop_event.wait",
+        "self.tick",
+        "threading.Thread"
+      ],
+      "guards": [],
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
+    },
+    "implementation.f725132792e43064": {
+      "path": "archive_app/service.py",
+      "symbol": "ArchiveService.start_scheduler.loop",
+      "line": 360,
+      "end_line": 362,
+      "signature": "",
+      "ast_sha256": "51b43e867fd41024910e1588294c9560896ea727f452a8fae290b8cd1f150dd6",
+      "snippet": "        def loop():\n            while not self.stop_event.wait(.12):\n                self.tick()",
+      "calls": [
+        "self.stop_event.wait",
+        "self.tick"
+      ],
+      "guards": [],
+      "file_sha256": "426c77c6b8e5cd7c6c6757d56be02894cc92664dcd35fb5524a7b20005228bfa"
+    },
+    "implementation.9323c025e2023fd1": {
+      "path": "archive_app/storage.py",
+      "symbol": "ArchiveStore.__init__",
+      "line": 9,
+      "end_line": 33,
+      "signature": "self, path: str",
+      "ast_sha256": "591d98eede6e5738eee76907a1c588944039829cd88b426104e18aeb68366d3f",
+      "snippet": "    def __init__(self, path: str):\n        self.path = str(Path(path).absolute())\n        Path(self.path).parent.mkdir(parents=True, exist_ok=True)\n        with closing(self.connect()) as db:\n            db.executescript(\"\"\"\n            PRAGMA journal_mode=WAL;\n            CREATE TABLE IF NOT EXISTS meta(id INTEGER PRIMARY KEY CHECK(id=1),epoch INTEGER NOT NULL);\n            INSERT OR IGNORE INTO meta VALUES(1,1);\n            CREATE TABLE IF NOT EXISTS users(id TEXT PRIMARY KEY,name TEXT NOT NULL,role TEXT NOT NULL);\n            CREATE TABLE IF NOT EXISTS projects(id TEXT PRIMARY KEY,title TEXT NOT NULL);\n            CREATE TABLE IF NOT EXISTS folders(id TEXT PRIMARY KEY,project_id TEXT NOT NULL,parent_id TEXT,title TEXT NOT NULL);\n            CREATE TABLE IF NOT EXISTS assignments(project_id TEXT,folder_id TEXT,operator_id TEXT,PRIMARY KEY(project_id,folder_id,operator_id));\n            CREATE TABLE IF NOT EXISTS documents(id TEXT PRIMARY KEY,project_id TEXT,folder_id TEXT,title TEXT,number TEXT,content TEXT,version INTEGER NOT NULL);\n            CREATE TABLE IF NOT EXISTS grants(id TEXT PRIMARY KEY,project_id TEXT,operator_id TEXT,document_id TEXT,content_version INTEGER,reviewer_id TEXT,deadline REAL,revoked INTEGER NOT NULL DEFAULT 0);\n            CREATE TABLE IF NOT EXISTS runs(sequence INTEGER PRIMARY KEY AUTOINCREMENT,id TEXT UNIQUE NOT NULL,payload TEXT NOT NULL);\n            CREATE TABLE IF NOT EXISTS archives(id TEXT PRIMARY KEY,document_id TEXT NOT NULL,content_version INTEGER NOT NULL,content TEXT NOT NULL,title TEXT,project_id TEXT,number TEXT,run_id TEXT NOT NULL,created REAL NOT NULL,UNIQUE(document_id,content_version));\n            \"\"\")\n            # Additive migration keeps existing projects, approvals and snapshots.\n            db.execute(\"BEGIN IMMEDIATE\")\n            columns = {r[\"name\"] for r in db.execute(\"PRAGMA table_info(projects)\")}\n            if \"archive_limit_bytes\" not in columns:\n                db.execute(\"ALTER TABLE projects ADD COLUMN archive_limit_bytes INTEGER NOT NULL DEFAULT 8192 CHECK(archive_limit_bytes>0)\")\n            if \"limit_revision\" not in columns:\n                db.execute(\"ALTER TABLE projects ADD COLUMN limit_revision INTEGER NOT NULL DEFAULT 1\")\n            db.commit()",
+      "calls": [
+        "Path",
+        "Path(path).absolute",
+        "Path(self.path).parent.mkdir",
+        "closing",
+        "db.commit",
+        "db.execute",
+        "db.executescript",
+        "self.connect",
+        "str"
+      ],
+      "guards": [
+        {
+          "line": 29,
+          "expression": "'archive_limit_bytes' not in columns"
+        },
+        {
+          "line": 31,
+          "expression": "'limit_revision' not in columns"
+        }
+      ],
+      "file_sha256": "5dfd7a4ebcc907921324e26a1f03fc63d8ace83254783a4519e4f86d2b22eabc"
+    },
+    "implementation.6778726498ca6101": {
+      "path": "archive_app/storage.py",
+      "symbol": "ArchiveStore.connect",
+      "line": 35,
+      "end_line": 39,
+      "signature": "self",
+      "ast_sha256": "7d7d42d8f961ed9ed34b27b3f49dbac9bdc18b82d950fccb964f8c7a82a48dbc",
+      "snippet": "    def connect(self) -> sqlite3.Connection:\n        db = sqlite3.connect(self.path, timeout=10, isolation_level=None)\n        db.row_factory = sqlite3.Row\n        db.execute(\"PRAGMA foreign_keys=ON\")\n        return db",
+      "calls": [
+        "db.execute",
+        "sqlite3.connect"
+      ],
+      "guards": [],
+      "file_sha256": "5dfd7a4ebcc907921324e26a1f03fc63d8ace83254783a4519e4f86d2b22eabc"
+    },
+    "implementation.feb050524fb394f0": {
+      "path": "archive_app/storage.py",
+      "symbol": "ArchiveStore.seed",
+      "line": 46,
+      "end_line": 60,
+      "signature": "self",
+      "ast_sha256": "ecf66a168ec63289d9817758261f630b95e52ed1edec22f7855d2a2a02888a1c",
+      "snippet": "    def seed(self) -> None:\n        with closing(self.connect()) as db:\n            db.execute(\"BEGIN IMMEDIATE\")\n            db.executemany(\"INSERT OR IGNORE INTO users VALUES(?,?,?)\",[\n                (\"alice\",\"林晓 · 文件夹负责人\",\"manager\"),(\"bob\",\"周宁 · 审核员\",\"reviewer\"),\n                (\"carol\",\"陈青 · 审核员\",\"reviewer\"),(\"dana\",\"杜然 · 子目录负责人\",\"manager\")])\n            db.executemany(\"INSERT OR IGNORE INTO projects(id,title) VALUES(?,?)\",[(\"P1\",\"研发资料\"),(\"P2\",\"共享资料\")])\n            db.executemany(\"INSERT OR IGNORE INTO folders VALUES(?,?,?,?)\",[\n                (\"F1\",\"P1\",None,\"项目资料\"),(\"F2\",\"P1\",\"F1\",\"设计记录\"),\n                (\"F3\",\"P1\",\"F2\",\"历史草稿\"),(\"F4\",\"P2\",None,\"其他项目\")])\n            db.executemany(\"INSERT OR IGNORE INTO assignments VALUES(?,?,?)\",[\n                (\"P1\",\"F1\",\"alice\"),(\"P1\",\"F2\",\"alice\"),(\"P1\",\"F3\",\"dana\"),(\"P2\",\"F4\",\"dana\")])\n            db.execute(\"INSERT OR IGNORE INTO documents VALUES(?,?,?,?,?,?,?)\",\n                       (\"DOC-001\",\"P1\",\"F2\",\"接口设计说明\",\"RD-001\",\"模拟资料：版本一的固定内容。\",1))\n            db.commit()",
+      "calls": [
+        "closing",
+        "db.commit",
+        "db.execute",
+        "db.executemany",
+        "self.connect"
+      ],
+      "guards": [],
+      "file_sha256": "5dfd7a4ebcc907921324e26a1f03fc63d8ace83254783a4519e4f86d2b22eabc"
+    },
+    "implementation.3b2184a1ea2ee4ff": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.__init__",
+      "line": 44,
+      "end_line": 51,
+      "signature": "self, phase: str, evaluation: dict",
+      "ast_sha256": "866f348ffc32329486db4f70dad5d4d16aae5b6ee6c00caf0b0b70efa658bd06",
+      "snippet": "    def __init__(self, phase: str, evaluation: dict):\n        validate_runtime_definition(definition(), loaded_engine='transitions.Machine',\n            loaded_version=importlib.metadata.version('transitions'),\n            guard_names={name for name in dir(self) if callable(getattr(self,name))})\n        Phase(phase)\n        self.evaluation = evaluation\n        self.machine = Machine(model=self, states=[p.value for p in Phase],\n            transitions=TRANSITIONS, initial=phase, auto_transitions=False)",
+      "calls": [
+        "Machine",
+        "Phase",
+        "callable",
+        "definition",
+        "dir",
+        "getattr",
+        "importlib.metadata.version",
+        "validate_runtime_definition"
+      ],
+      "guards": [],
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
+    },
+    "implementation.bafc75e56e8b50ad": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.all_passed",
+      "line": 56,
+      "end_line": 57,
+      "signature": "self",
+      "ast_sha256": "4b6b04f7dd5f993d4484b50ecb9a42cb77b70e3c0c7bb1ee00c4518ff6d0b810",
+      "snippet": "    def all_passed(self):\n        return self.evaluation.get(\"all_passed\", False)",
+      "calls": [
+        "self.evaluation.get"
+      ],
+      "guards": [],
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
+    },
+    "implementation.8f3a6f70072c186c": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.approved",
+      "line": 53,
+      "end_line": 54,
+      "signature": "self",
+      "ast_sha256": "660171007e32152eef8890b10ffd1754ecc0442cfb7b6c91fdc7a47d246e6bb4",
+      "snippet": "    def approved(self):\n        return self.evaluation.get(\"allowed\", False)",
+      "calls": [
+        "self.evaluation.get"
+      ],
+      "guards": [],
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
+    },
+    "implementation.e78a88f79c823fb2": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.checks_failed",
+      "line": 62,
+      "end_line": 63,
+      "signature": "self",
+      "ast_sha256": "558dc15ee9022882ad982b73a888fd4be0ddf339ece336a5a79976e344e755a4",
+      "snippet": "    def checks_failed(self):\n        return self.evaluation.get(\"checks_failed\", False)",
+      "calls": [
+        "self.evaluation.get"
+      ],
+      "guards": [],
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
+    },
+    "implementation.af3edf6db73fd258": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.effect_saved",
+      "line": 59,
+      "end_line": 60,
+      "signature": "self",
+      "ast_sha256": "4b216592bdd03d54e683b9f2e8079b2bf57d96c132e09f2c00bc7e6e2b46878a",
+      "snippet": "    def effect_saved(self):\n        return self.evaluation.get(\"effect_saved\", False)",
+      "calls": [
+        "self.evaluation.get"
+      ],
+      "guards": [],
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
+    },
+    "implementation.0c282dd6e75df07d": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "Workflow.settled",
+      "line": 65,
+      "end_line": 66,
+      "signature": "self",
+      "ast_sha256": "71666f24ab80f8a4e8b21403ff16a6f607b39328e66561545ecbd98024f8bd9f",
+      "snippet": "    def settled(self):\n        return self.evaluation.get(\"settled\", False)",
+      "calls": [
+        "self.evaluation.get"
+      ],
+      "guards": [],
+      "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"
+    },
+    "implementation.336a43a51c24b432": {
+      "path": "bo_stategraph/workflow.py",
+      "symbol": "definition",
+      "line": 69,
+      "end_line": 95,
+      "signature": "",
+      "ast_sha256": "7a7809070ebd4dd148ae3f71511fe3ef3cadf59a575081273fcef7bd3cda9fcc",
+      "snippet": "def definition() -> dict:\n    return {\n        \"engine\":\"transitions.Machine\",\"version\":importlib.metadata.version(\"transitions\"),\n        \"states\":[p.value for p in Phase],\"values\":[p.value for p in Phase],\n        \"initial\":\"created\",\"state_type\":\"Phase (str enum)\",\"transitions\":deepcopy(TRANSITIONS),\n        \"events\":{t[\"trigger\"]:{\"payload\":{}} for t in TRANSITIONS},\n        \"labels\":LABELS,\"event_labels\":{\"begin\":\"开始检查\",\"pause\":\"等待\",\"checked\":\"两项通过\",\n        \"publish\":\"提交归档\",\"stop\":\"停止新检查\",\"cancel_done\":\"取消完成\",\"stale_done\":\"旧版本收尾\",\n        \"reject\":\"检查失败\",\"interrupt\":\"记录中断\"},\n        \"context\":{\"param_version\":{\"type\":\"integer\",\"min\":1,\"readonly\":True},\n                   \"capacity\":{\"type\":\"integer\",\"min\":1,\"max\":2,\"readonly\":True},\n                   \"operator_id\":{\"type\":\"string\",\"readonly\":True},\n                   \"document_id\":{\"type\":\"string\",\"readonly\":True}},\n        \"guards\":{k:\"Authoritative evaluation.\"+k for k in\n                  (\"approved\",\"all_passed\",\"effect_saved\",\"checks_failed\",\"settled\")},\n        \"source\":{\"path\":\"bo_stategraph/workflow.py\",\"symbol\":\"Workflow\"},\n        \"persistence\":\"SQLite runs.payload: phase, phase_journal and activity configuration in one transaction\",\n        \"execution\":{\"schema\":\"activity-graph/v1\",\"within\":\"checking\",\"parent\":\"flow.checks\",\n            \"activity_state_type\":\"ActivityState (str)\",\n            \"activity_states\":[\"pending\",\"waiting\",\"running\",\"succeeded\",\"rejected\",\"failed\",\"cancelled\"],\n            \"activities\":[{\"id\":a,\"source\":{\"path\":\"archive_app/policy.py\",\n                \"symbol\":\"check_content\" if a==\"content_check\" else \"check_index\"},\n                \"requires\":{\"processing_slots\":1}} for a in ACTIVITIES],\n            \"resources\":[{\"id\":\"processing_slots\",\"scope\":\"run\",\"min\":1,\"max\":2}],\n            \"join\":{\"id\":\"checks_join\",\"policy\":\"all\",\"requires\":ACTIVITIES,\n                    \"success_states\":[\"ready\",\"completed\"],\"guard\":\"all_passed\"}},\n    }",
+      "calls": [
+        "deepcopy",
+        "importlib.metadata.version"
+      ],
+      "guards": [
+        {
+          "line": 90,
+          "expression": "a == 'content_check'"
         }
       ],
       "file_sha256": "1f27754237c185769244268110a3ebff49ef41a65a708c4bdae5960b949e38a0"

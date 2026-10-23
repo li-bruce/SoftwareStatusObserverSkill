@@ -1,5 +1,5 @@
 // Layout preferences are local view data. They never change model or runtime facts.
-import {graphBounds,nodeType,nodeTypes} from './graph-core.js';
+import {graphBounds,nodeType,nodeTypes,viewTypes,relationType} from './graph-core.js';
 export const layoutKey = model => 'business-observer.layout.v2:'+(model.presentation?.layout_id||model.presentation?.subject||model.intent);
 export function emptyFilters(){return {nodes:Object.keys(nodeTypes),edges:['call','flow','transition','guard','data','resource','join','shared','other'],regions:Object.keys(nodeTypes),depth:'all'};}
 export function cleanFilters(value){
@@ -155,7 +155,7 @@ export function refreshHierarchy(graph){
   }
   return graph;
 }
-export const relationType=edge=>edge.type==='flow'&&edge.origin==='python-ast'&&edge.callsite?'call':edge.type;
+export {relationType};
 export const relationStyles={
   call:{label:'调用',color:0x2476ad,dash:[],arrow:'open'},
   flow:{label:'流程',color:0x4e647b,dash:[],arrow:'filled'},
@@ -192,8 +192,9 @@ export function compoundEdges(graph){
   return [...result.values()];
 }
 export function filterNode(node,all,filters,asRegion=false){
-  return (asRegion?filters.regions:filters.nodes).includes(nodeType(node))&&
-    (filters.depth==='all'||ancestorsToReveal(all,node.id).length===filters.depth);
+  if(node.filter_context&&!asRegion)return true;
+  return (node.filter_context&&!asRegion||viewTypes(node).some(type=>(asRegion?filters.regions:filters.nodes).includes(type)))&&
+    (filters.depth==='all'||(node.projection_depth??ancestorsToReveal(all,node.id).length)===filters.depth);
 }
 export function presentationGraph(graph,value){
   const filters=cleanFilters(value),regions=new Set(),glyphs=new Set();

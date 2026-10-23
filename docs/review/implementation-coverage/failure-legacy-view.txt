@@ -1,0 +1,16 @@
+Baseline: 72164b9290f80d8a65d7b6508ea6fe5e8248ab5f
+Expected failing regression; exit=1
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: effect with business membership stays visible
+    at file:///C:/Users/Lvi_P/Documents/Work/CF/%E5%B9%B3%E5%8F%B0%E8%BD%AF%E8%91%97/SoftwareStatusObserverSkill/.validation/legacy-view-case.mjs:34:8 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '=='
+}
+
+Node.js v20.19.6

@@ -116,6 +116,14 @@ def verify(root, cfg, change, *, inspect, snapshot):
             mapping_errors.extend(witnesses['errors'])
             reports['mapping']['witnesses'] = witnesses['checks']
             reports['mapping']['projection_checks'] = witnesses['projection_checks']
+            if cfg.get('stategraph'):
+                try:
+                    from .implementation_coverage import runtime_errors as feature_runtime
+                except ImportError:
+                    from implementation_coverage import runtime_errors as feature_runtime
+                coverage = feature_runtime(current['model']['implementation'], current['model'], payload)
+                mapping_errors.extend(coverage['errors'])
+                reports['mapping']['implementation'] = coverage
             for run in payload.get('runs', []):
                 for item in run.get('projection', {}).get('instances', []):
                     if item.get('errors'):

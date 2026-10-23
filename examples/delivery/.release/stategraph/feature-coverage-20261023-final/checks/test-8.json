@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "{python}",
+    "-X",
+    "utf8",
+    "-B",
+    "tests/test_stategraph_module.py"
+  ],
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n...........\n----------------------------------------------------------------------\nRan 11 tests in 0.040s\n\nOK\n"
+}

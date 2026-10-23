@@ -1,0 +1,20 @@
+[
+  {
+    "project": "delivery",
+    "restored_only_from_repository_files": true,
+    "exit_code": 0,
+    "valid": true,
+    "status": "current",
+    "errors": [],
+    "candidate_id": "bb799b8a9050f3f8585919e8c3c1abc3b72c78773b0b4da81cf541219f9a7a8b"
+  },
+  {
+    "project": "team-archive",
+    "restored_only_from_repository_files": true,
+    "exit_code": 0,
+    "valid": true,
+    "status": "current",
+    "errors": [],
+    "candidate_id": "cd07018c258d8fce096780741e1d3408673044aeba1301c4a51ae631452013f4"
+  }
+]

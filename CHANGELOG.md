@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-10-23 (main)
+
+- Require a source-first implementation inventory linking features, functions, parameters, graph nodes and actual observation cases. Reject omitted routes, business-source exclusions, missing fields and weakened coverage obligations.
+- Preserve business actions in function views, business parameters on expansion, authored state identities and real relation endpoints at filter boundaries. Apply the same relation classification in selection and rendering.
+- Support explicitly scoped application/entity events so login and configuration activity remains visible alongside a selected task.
+- Migrate both runnable examples, adding previously absent command observations while retaining existing business, state, mapping and observer-removal checks.
+
 ## 2026-10-22 (main)
 
 - Limit discovery to confirming the user's current intent. Retain clarifications and counterexamples that resolve actual ambiguity, without recommending additional business rules or workflows.

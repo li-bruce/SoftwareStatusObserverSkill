@@ -114,7 +114,7 @@ class Trace:
     def __init__(self, pins, entity, attempt):
         self.pins, self.entity, self.attempt_id = pins, entity, attempt
 
-    def record(self, node, phase, basis, builder, *, depends=(), call_id=None, parent_call_id=None):
+    def record(self, node, phase, basis, builder, *, depends=(), call_id=None, parent_call_id=None, scope='attempt'):
         p = self.pins
         if not p.enabled or p.closed:
             return None
@@ -122,6 +122,8 @@ class Trace:
             p.bo_filtered += 1
             return None  # Skip payload construction as well as the event.
         try:
+            if scope not in {'attempt', 'entity', 'application'}:
+                raise ValueError('unknown observation scope')
             spec = p.nodes[node]["capture"]
             values = builder()
             inputs = selected(values.get("inputs", {}), spec.get("in", {}))
@@ -139,6 +141,7 @@ class Trace:
                     "call_id": call_id or f"{self.attempt_id}:{node}", "parent_call_id": parent_call_id,
                     "basis": clean_basis, "inputs": inputs, "outputs": outputs, "depends": refs,
                     "observed_at": datetime.now(timezone.utc).isoformat()}
+                if scope != 'attempt': event['scope'] = scope
                 text = json.dumps(event, ensure_ascii=False, allow_nan=False)
                 if len(text.encode()) > 24576:
                     raise ValueError("event too large")

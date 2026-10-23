@@ -19,7 +19,7 @@ assets 中各示例说明字段，并非可拼接运行的整套脚手架。完�
 `sync.json` 的关键字段：
 
 - `code_files`：选入静态索引的 Python 文件，同时列入行为模型的 `source_files`。新入口/新文件必须判断是否加入，未扫描内容不在覆盖声明内。
-- `source_scope`：非空源码根目录、带理由的排除项及 `require_symbol_classification: true`。独立状态网项目必须配置；范围内实现不能只加入 watch 来绕过映射。
+- `source_scope`：根目录包含 `.`，明确排除工具代码，并配置 `require_symbol_classification: true`。业务实现不能排除或只加入 watch。模型还必须包含 [implementation 清单](implementation-coverage.md)，关联功能、源码、采集字段与实际场景。
 - `require_mapping_witnesses: true`：独立状态网项目必须用真实实现值对照观测投影，不能关闭。
 - `watch_files`：模型生成器、业务验证脚本等额外输入。观测/测试命令中的项目 `.py` 脚本必须被跟踪；工具自身内容也参与版本绑定。
 - `discovery`：需求澄清记录的项目相对路径，如 `discovery.json`。新接入项目添加此项；文件自动纳入版本绑定。关键问题未解决、答案来源不符、业务网未映射或决定缺少需求/验收项，会使 verify/check 失败。旧项目未配置时保持兼容，不声称已启用澄清检查。流程见 [需求提炼与反问](requirements-dialogue.md)。
@@ -88,7 +88,7 @@ python SKILL_DIR/scripts/change_sync.py check --root .
 
 `begin` 保存活动变更指针，后续命令可省略 `--change`。`inspect` 在编辑中返回非零很正常，表示尚未可交付。生成器必须保留业务语义来源，不从静态调用顺序自动发明业务流程或因果关系。
 
-`review.json` 与 baseline/impact 放在同一变更目录。必需结构：当前 `candidate_id`；`decisions.business/state_machine/abstraction/probes` 各有 `action`（updated/unchanged/not_applicable）和具体 `reason`；`excluded_symbols` 为每个未映射变化符号说明为何属于折叠范围及影响；修改已有预期时，以 `requirement_changes` 说明对应的本次需求依据。候选改变后 review 必须重新核对。
+`review.json` 与 baseline/impact 放在同一变更目录。必需结构：当前 `candidate_id`；`decisions.business/state_machine/abstraction/probes` 各有 `action`（updated/unchanged/not_applicable）和具体 `reason`；修改已有预期时，以 `requirement_changes` 说明对应的本次需求依据。功能与辅助实现归属由模型的 implementation 检查，`excluded_symbols` 只保留旧项目兼容用途，不能覆盖新门禁的失败。候选改变后 review 必须重新核对。
 
 review 是语义审阅记录，**不是自动通过证据**。即使全部写 updated，结构、运行状态机、探针、实际返回及效果不一致仍失败。已有预期/关键模型声明的删除或改写必须属于 begin 时记录的需求范围；增加反例可以直接进行。不要把“实现变了”当作改写需求的理由。
 

@@ -4,14 +4,24 @@ Call `scan` after edits, or `watch` from a project-local editor integration.
 This discovers work; it does not claim to invoke an arbitrary editor's AI.
 """
 import argparse
+import ast
 import fnmatch
 import hashlib
 import json
 from pathlib import Path
 import time
 
-IGNORED = {'.git', '.venv', 'node_modules', '__pycache__', '.stategraph',
+IGNORED = {'.git', '.venv', '.agents', '.codex', 'node_modules', '__pycache__', '.stategraph',
            '.validation', '.planning', '.release', '.pytest_cache', 'dist'}
+
+
+def infrastructure_path(name):
+    path = Path(name)
+    return (bool(set(path.parts) & {'tests','tooling','observer_generated','observer_runtime','review','history','scratch'})
+            or path.stem.startswith(('bo_', 'test_', 'observer_'))
+            or path.name in {'run.py','validate.py'}
+            or path.parent.as_posix() == 'bo_stategraph' and path.name in
+               {'__init__.py','execution_contract.py','query.py'})
 
 
 def source_inventory(root, cfg):
@@ -25,7 +35,7 @@ def source_inventory(root, cfg):
     roots = scope.get('roots', ['.'])
     if not isinstance(roots, list) or not roots or any(not isinstance(p, str) or not p.strip() for p in roots):
         raise ValueError('source scope needs nonempty project-relative roots')
-    files, excluded = {}, {}
+    files, excluded, hidden_entrypoints, hidden_implementations = {}, {}, {}, []
     for prefix in roots:
         start = (root / prefix).resolve()
         if not start.is_relative_to(root): raise ValueError('source scope escapes project')
@@ -39,9 +49,23 @@ def source_inventory(root, cfg):
             reason = next((v for pattern, v in exclusions.items() if fnmatch.fnmatchcase(name, pattern)), None)
             if reason:
                 excluded[name] = reason
+                # An exclusion is not a way to hide an application endpoint.
+                # Inspect declarations without importing or executing the file.
+                try:
+                    tree = ast.parse(path.read_text(encoding='utf-8-sig'), filename=name)
+                    if not infrastructure_path(name) and any(isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef)) for n in ast.walk(tree)):
+                        hidden_implementations.append(name)
+                    routes = [ast.unparse(d) for n in ast.walk(tree)
+                              if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef)) for d in n.decorator_list
+                              if isinstance(d, ast.Call) and isinstance(d.func, ast.Attribute)
+                              and d.func.attr in {'route','get','post','put','patch','delete','websocket','command','task'}]
+                    if routes: hidden_entrypoints[name] = routes
+                except (SyntaxError, UnicodeError) as exc:
+                    hidden_entrypoints[name] = ['cannot inspect excluded Python: '+str(exc)]
             else:
                 files[name] = hashlib.sha256(path.read_bytes()).hexdigest()
-    return {'files': dict(sorted(files.items())), 'excluded': dict(sorted(excluded.items()))}
+    return {'files': dict(sorted(files.items())), 'excluded': dict(sorted(excluded.items())),
+            'excluded_entrypoints': hidden_entrypoints, 'excluded_implementations': sorted(hidden_implementations)}
 
 
 def maintenance_task(root, cfg, previous=None):
@@ -52,12 +76,27 @@ def maintenance_task(root, cfg, previous=None):
     if not cfg.get('source_scope') and not cfg.get('stategraph'):
         registered |= set(cfg.get('watch_files', []))
     unregistered = sorted(set(current['files']) - registered)
+    gaps = []
+    if cfg.get('stategraph'):
+        try:
+            from .code_structure import scan
+            from .implementation_coverage import static_errors, inventory_errors
+        except ImportError:
+            from code_structure import scan
+            from implementation_coverage import static_errors, inventory_errors
+        path=(Path(root)/cfg['model']).resolve()
+        if not path.is_relative_to(Path(root).resolve()): raise ValueError('model escapes project')
+        model=json.loads(path.read_text(encoding='utf-8-sig'))
+        index=scan(root,current['files'])
+        gaps=index['errors']+inventory_errors(cfg,current)+static_errors(model.get('implementation'),model,index)
     digest = hashlib.sha256(json.dumps(current, sort_keys=True).encode()).hexdigest()
     return {'schema': 'bo-maintenance/v1', 'source_id': digest, 'inventory': current,
             'changed_files': changed, 'unregistered_files': unregistered,
-            'status': 'needs_update' if changed or unregistered else 'current',
+            'implementation_gaps': gaps,
+            'status': 'needs_update' if changed or unregistered or gaps or current['excluded_entrypoints'] or current['excluded_implementations'] else 'current',
             'internal_prompt': '核查列出的实现变化；更新受影响业务抽象、状态、函数/参数映射和探针。'
-                '新增入口不能因不在旧图中而忽略。完成局部投影及实际场景验证后运行项目收尾检查。'
+                '新增入口不能因不在旧图中而忽略。用 implementation 清单逐项对应功能、参数和运行场景；'
+                '不得以排除理由跳过业务实现。核对各视图保留真实关系和筛选边界，再运行项目收尾检查。'
                 '不要要求用户填写观测文件；仅在新的业务歧义出现时提问。',
             'ai_invocation': 'host_or_coding_agent_required'}
 

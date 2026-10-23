@@ -157,6 +157,8 @@ def validate_events(events, model, build_id=None):
     nodes = {n["id"]: n for n in model["nodes"]}
     seen, errors, gaps = {}, [], []
     for e in events:
+        if e.get('scope', 'attempt') not in {'attempt', 'entity', 'application'}:
+            errors.append('invalid event scope')
         if e.get("node") not in nodes or e.get("phase") not in {"enter", "return", "read", "decision", "wait", "commit", "change", "error"}:
             errors.append(f"invalid event node/phase: {e.get('id')}")
         if e.get("id") in seen:

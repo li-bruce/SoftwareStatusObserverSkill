@@ -100,6 +100,16 @@ def build():
         if node['id'] in ['authorize', 'recheck', 'grant']: node['semantic_roles']=['permission']
         if node.get('execution_role') in ('resource','join'): node['analysis_level']='advanced'
     cfg=json.loads((ROOT/'sync.json').read_text(encoding='utf-8'))
+    model['source_files']=sorted(set(model['source_files']+cfg['code_files']))
+    model['implementation']=json.loads((ROOT/'implementation.json').read_text(encoding='utf-8'))
+    model['source_files'].append('implementation.json')
+    by_id={n['id']:n for n in model['nodes']}
+    by_id['read']['capture']['in']={'expected_version':'number'}
+    by_id['recheck']['capture']['in']={'expected_version':'number'}
+    by_id['flow.checks']['capture']['in']={'capacity':'number','content_length':'number'}
+    by_id['change']['capture']['in']={'action':'string','values':{k:t for k,t in [
+        ('id','string'),('project','string'),('actor','string'),('version','number'),('expires','number'),
+        ('role','string'),('clock','number'),('capacity','number'),('content_length','number')]}}
     model=enrich(model,scan(ROOT,cfg['code_files']),depth=1)
     (ROOT/'observer_generated/behavior.json').write_text(json.dumps(model,ensure_ascii=False,indent=2),encoding='utf-8',newline='\n')
     for source in (ROOT/'integrations/bo_view').glob('*'):shutil.copyfile(source,ROOT/'observer_generated/static'/source.name)

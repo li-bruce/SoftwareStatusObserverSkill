@@ -1,0 +1,201 @@
+{
+  "read_only": true,
+  "project": "file-review",
+  "scope": "当前磁盘源码与模型；没有修改原试用项目",
+  "route_inventory": [
+    {
+      "source": "integrations/server.py::create_app.index",
+      "declarations": [
+        "app.get('/')",
+        "app.get('/control')"
+      ],
+      "has_source_node": false
+    },
+    {
+      "source": "integrations/server.py::create_app.favicon",
+      "declarations": [
+        "app.get('/favicon.ico')"
+      ],
+      "has_source_node": false
+    },
+    {
+      "source": "integrations/server.py::create_app.health",
+      "declarations": [
+        "app.get('/health')"
+      ],
+      "has_source_node": false
+    },
+    {
+      "source": "integrations/server.py::create_app.session",
+      "declarations": [
+        "app.get('/api/session')"
+      ],
+      "has_source_node": false
+    },
+    {
+      "source": "integrations/server.py::create_app.login",
+      "declarations": [
+        "app.post('/api/login')"
+      ],
+      "has_source_node": false
+    },
+    {
+      "source": "integrations/server.py::create_app.logout",
+      "declarations": [
+        "app.post('/api/logout')"
+      ],
+      "has_source_node": false
+    },
+    {
+      "source": "integrations/server.py::create_app.files",
+      "declarations": [
+        "app.get('/api/files')"
+      ],
+      "has_source_node": false
+    },
+    {
+      "source": "integrations/server.py::create_app.upload",
+      "declarations": [
+        "app.post('/api/files')"
+      ],
+      "has_source_node": false
+    },
+    {
+      "source": "integrations/server.py::create_app.download",
+      "declarations": [
+        "app.get('/api/files/{ident}/download')"
+      ],
+      "has_source_node": false
+    },
+    {
+      "source": "integrations/server.py::create_app.review",
+      "declarations": [
+        "app.post('/api/files/{ident}/review')"
+      ],
+      "has_source_node": false
+    },
+    {
+      "source": "integrations/server.py::create_app.messages",
+      "declarations": [
+        "app.get('/api/messages')"
+      ],
+      "has_source_node": false
+    },
+    {
+      "source": "integrations/server.py::create_app.read_message",
+      "declarations": [
+        "app.post('/api/messages/{ident}/read')"
+      ],
+      "has_source_node": false
+    },
+    {
+      "source": "integrations/server.py::create_app.design",
+      "declarations": [
+        "app.get('/api/design')"
+      ],
+      "has_source_node": false
+    },
+    {
+      "source": "integrations/server.py::create_app.graph_view",
+      "declarations": [
+        "app.get('/api/view')"
+      ],
+      "has_source_node": false
+    },
+    {
+      "source": "integrations/server.py::create_app.instances",
+      "declarations": [
+        "app.get('/api/stategraph')"
+      ],
+      "has_source_node": false
+    },
+    {
+      "source": "integrations/server.py::create_app.export",
+      "declarations": [
+        "app.get('/api/stategraph/export')"
+      ],
+      "has_source_node": false
+    },
+    {
+      "source": "integrations/server.py::create_app.source",
+      "declarations": [
+        "app.get('/api/source')"
+      ],
+      "has_source_node": false
+    },
+    {
+      "source": "integrations/server.py::create_app.preferences",
+      "declarations": [
+        "app.get('/api/preferences')"
+      ],
+      "has_source_node": false
+    },
+    {
+      "source": "integrations/server.py::create_app.save_preferences",
+      "declarations": [
+        "app.post('/api/preferences')"
+      ],
+      "has_source_node": false
+    },
+    {
+      "source": "integrations/server.py::create_app.list_recordings",
+      "declarations": [
+        "app.get('/api/recordings')"
+      ],
+      "has_source_node": false
+    },
+    {
+      "source": "integrations/server.py::create_app.get_recording",
+      "declarations": [
+        "app.get('/api/recordings/{ident}')"
+      ],
+      "has_source_node": false
+    },
+    {
+      "source": "integrations/server.py::create_app.start_recording",
+      "declarations": [
+        "app.post('/api/recordings/start')"
+      ],
+      "has_source_node": false
+    },
+    {
+      "source": "integrations/server.py::create_app.stop_recording",
+      "declarations": [
+        "app.post('/api/recordings/stop')"
+      ],
+      "has_source_node": false
+    },
+    {
+      "source": "integrations/server.py::create_app.graph",
+      "declarations": [
+        "app.get('/graph')"
+      ],
+      "has_source_node": false
+    },
+    {
+      "source": "integrations/server.py::create_app.asset",
+      "declarations": [
+        "app.get('/{name}')"
+      ],
+      "has_source_node": false
+    }
+  ],
+  "coverage_errors": [
+    "implementation coverage requires a bo-implementation/v1 inventory; existing graph nodes are not an inventory"
+  ],
+  "note_parameters": [
+    {
+      "source": "app/service.py::ReviewService.upload",
+      "parameter": "note"
+    },
+    {
+      "source": "app/service.py::ReviewService.review",
+      "parameter": "note"
+    },
+    {
+      "source": "integrations/server.py::create_app.upload",
+      "parameter": "note"
+    }
+  ],
+  "captured_note_nodes": []
+}

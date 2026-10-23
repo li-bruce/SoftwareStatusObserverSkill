@@ -1,6 +1,6 @@
 {
   "source": "SoftwareStatusObserverSkill/skills/business-observer",
-  "release": "2026.10-web-continuity",
+  "release": "2026.10-implementation-coverage",
   "protocols": {
     "behavior": 3,
     "event": 3,
@@ -8,7 +8,8 @@
     "export": "bo-stategraph/v1",
     "recording": 1,
     "runtime_frames": 1,
-    "preferences": 1
+    "preferences": 1,
+    "implementation": "bo-implementation/v1"
   },
   "manifest": "../bo_stategraph/runtime-version.json"
 }

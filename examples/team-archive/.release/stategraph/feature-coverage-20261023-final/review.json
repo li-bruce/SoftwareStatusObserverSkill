@@ -1,0 +1,23 @@
+{
+  "candidate_id": "cd07018c258d8fce096780741e1d3408673044aeba1301c4a51ae631452013f4",
+  "decisions": {
+    "business": {
+      "action": "unchanged",
+      "reason": "保留已有业务规则和验收预期；补全已经实现的操作的观测"
+    },
+    "state_machine": {
+      "action": "unchanged",
+      "reason": "状态执行规则不变，严格定义校验和实际实例比较继续运行"
+    },
+    "abstraction": {
+      "action": "updated",
+      "reason": "增加独立实现清单和完整源码归属；统一状态及筛选；边界节点在来源折叠时保留原关系与源码端点"
+    },
+    "probes": {
+      "action": "updated",
+      "reason": "补充命令输入和提交后效果，应用级事件保留明确范围并与任务事件隔离"
+    }
+  },
+  "excluded_symbols": {},
+  "requirement_changes": {}
+}

@@ -5,6 +5,7 @@ const cached=new WeakMap();
 const boFieldKey=(event,direction,field)=>[event.run_id,event.entity,event.attempt,event.node,event.call_id||'unidentified',direction,field].join('|');
 function boVisibleChange(change,owner,all){
   if(owner.type!=='business')return true;
+  if(change.node===(owner.node.referenceOf||owner.node.event_node||owner.id))return true;
   if(['state','resource','business'].includes(change.kind))return true;
   const source=all.get(change.node);
   return source?.parent===owner.id&&((change.kind==='decision'&&['allowed','passed','reason','reasons'].includes(change.field))||source.kind==='effect');

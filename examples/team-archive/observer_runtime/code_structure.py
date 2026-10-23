@@ -58,6 +58,9 @@ def parse_unit(path, source):
                     "ast_hash": ast_fingerprint(node),
                     "signature": name if is_class else ast.unparse(node.args),
                     "parameters": [], "returns": None, "calls": [], "predicates": [], "fields": []}
+            item['entrypoints'] = [ast.unparse(d) for d in node.decorator_list
+                if isinstance(d, ast.Call) and isinstance(d.func, ast.Attribute)
+                and d.func.attr in {'route', 'get', 'post', 'put', 'patch', 'delete', 'websocket', 'command', 'task'}]
             if not is_class:
                 arguments = [*node.args.posonlyargs, *node.args.args, *node.args.kwonlyargs]
                 arguments += [v for v in (node.args.vararg, node.args.kwarg) if v]
@@ -177,7 +180,7 @@ def enrich(authored, index, depth=1):
     mapped, queue = {}, []
     for n in list(model["nodes"]):
         src = n.get("source")
-        if not src or n.get("layer") in {"business", "state", "predicate"} or n["kind"] in {"data", "state"}:
+        if not src or n.get("layer") in {"state", "predicate"} or n["kind"] in {"data", "state"}:
             continue
         sid = key(src["path"], src["symbol"])
         if sid not in index["symbols"]: continue
@@ -213,6 +216,42 @@ def enrich(authored, index, depth=1):
                     "callsite": {k: call[k] for k in ("line", "column", "args", "keywords")}})
                 edge_ids.add(eid)
             queue.append((g, target["id"], tid, level+1))
+    # Inventory obligations add missing implementations below their authored
+    # feature. The semantic owner is explicit; AST never guesses it from names.
+    plan = model.get('implementation') or {}
+    owners = {sid: item.get('node') for sid, item in plan.get('support', {}).items()}
+    for feature in plan.get('features', []):
+        owner = feature.get('business_node')
+        if owner in by_id:
+            roles = by_id[owner].setdefault('semantic_roles', [])
+            if 'business' not in roles: roles.append('business')
+        owners.update({sid: owner for sid in feature.get('sources', [])})
+    bound = {key(n['source']['path'], n['source']['symbol']) for n in model['nodes'] if n.get('source')}
+    for sid, parent in sorted(owners.items()):
+        target = index['symbols'].get(sid)
+        if sid in bound or not target or parent not in by_id: continue
+        tid = 'implementation.' + digest(sid)[:16]
+        helper = {'id': tid, 'kind': 'function', 'layer': 'program', 'origin': 'python-ast',
+            'label': target['symbol'], 'summary': '实现归属；调用关系以源码和运行记录为准',
+            'source': {'path': target['path'], 'symbol': target['symbol']}, 'parent': parent,
+            'capture': {'in': {}, 'out': {}}, 'signature': target['signature'],
+            'code_evidence': {'symbol': sid, 'ast_hash': target['ast_hash'], 'parameters': target['parameters'],
+                              'returns': target['returns'], 'origin': 'python-ast'}}
+        model['nodes'].append(helper); by_id[tid] = helper
+        model['edges'].append({'id': 'contains.'+tid, 'from': parent, 'to': tid, 'type': 'contains',
+            'label': '实现函数', 'origin': 'python-ast', 'evidence': 'implementation inventory + Python AST'})
+    # Preserve calls between inventoried implementations, including helpers that
+    # are beyond the default displayed slice. No runtime execution is inferred.
+    by_symbol = {}
+    for n in model['nodes']:
+        if n.get('source'): by_symbol.setdefault(key(n['source']['path'], n['source']['symbol']), n['id'])
+    pairs = {(e['from'], e['to'], e.get('callsite', {}).get('line')) for e in model['edges'] if e.get('origin') == 'python-ast'}
+    for call in index['edges']:
+        a, b = by_symbol.get(call['from']), by_symbol.get(call['to'])
+        if a and b and (a,b,call['line']) not in pairs:
+            model['edges'].append({'id': 'inventory-call.'+digest([a,b,call['line'],call['column']])[:16],
+                'from':a, 'to':b, 'type':'flow', 'label':'静态调用 '+call['expression'], 'origin':'python-ast',
+                'evidence':call['evidence'], 'callsite':{k:call[k] for k in ('line','column','args','keywords')}})
     model["static_structure"] = {"files": {p: u["file_hash"] for p, u in index["units"].items()},
         "resolved_calls": len(index["edges"]), "unresolved_calls": len(index["unresolved"]),
         "depth": depth, "limits": index["limits"]}

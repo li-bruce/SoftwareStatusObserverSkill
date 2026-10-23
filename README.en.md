@@ -24,6 +24,8 @@ The Python state network lives in an independent module. Business code may use a
 
 The Skill builds the graph from the user's current description and uses necessary clarifications or counterexamples to confirm that it reflects their intent. It does not proactively develop missing business workflows or recommend business rules. When the user or another Skill supplies further rules, it updates the same graph and its checks. During edits it checks whether the graph, state machine, probes and tests remain consistent. Business abstractions come from requirements; local code relationships come from Python AST analysis; runtime facts come from execution.
 
+Coverage includes implemented supporting features such as login, messages and configuration. A source inventory independent of the graph checks feature, parameter and runtime-event obligations. Filtered views retain labelled real boundary endpoints, and business actions expose their parameters. Existing projects must add the [implementation coverage inventory](skills/business-observer/references/implementation-coverage.md) (Chinese) and pass their existing gates after upgrading.
+
 ## Install the Skill
 
 In Codex with `$skill-installer`, enter:

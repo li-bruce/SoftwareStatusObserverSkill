@@ -192,6 +192,17 @@ def build() -> dict:
             node['basis_fields']=['param_version','epoch','clock']
         if node['id'] in ['scope_check', 'approval_check', 'approval_candidate', 'commit_guard', 'folder_assignments', 'approval_target']: node['semantic_roles']=['permission']
         if node.get('execution_role') in ('resource','join'): node['analysis_level']='advanced'
+    model['implementation']=json.loads((ROOT/'implementation.json').read_text(encoding='utf-8'))
+    model['source_files'].append('implementation.json')
+    captures={
+        'issue_approval':({'document_id':'string','operator_id':'string','reviewer_id':'string','deadline':'number'},{'approval_id':'string'}),
+        'approval_revoked':({'approval_id':'string'},{'revoked':'boolean'}),
+        'set_size_limit':({'project_id':'string','limit_bytes':'number'},{'project_id':'string','limit_bytes':'number','limit_revision':'number'}),
+        'content_changed':({'document_id':'string','title_length':'number','number':'string','content_bytes':'number'},{'saved':'boolean'}),
+        'move_folder':({'document_id':'string','folder_id':'string'},{'moved':'boolean'})}
+    for n in model['nodes']:
+        if n['id'] in captures:
+            inputs,outputs=captures[n['id']];n['capture']={'in':inputs,'out':outputs};n['basis_fields']=['epoch']
     model=enrich(model,scan(ROOT,cfg["code_files"]),depth=cfg.get("slice_depth",1))
     (ROOT/"behavior.json").write_text(json.dumps(model,ensure_ascii=False,indent=2),encoding="utf-8",newline="\n")
     return model

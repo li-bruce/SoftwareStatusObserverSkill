@@ -17,9 +17,10 @@ except ImportError:
     from behavior_model import contained, read
     from sync_io import write
 
-RELEASE = '2026.10-web-continuity'
+RELEASE = '2026.10-implementation-coverage'
 PROTOCOLS = {'behavior': 3, 'event': 3, 'activity': 'activity-graph/v1',
-             'export': 'bo-stategraph/v1', 'recording': 1, 'runtime_frames': 1, 'preferences': 1}
+             'export': 'bo-stategraph/v1', 'recording': 1, 'runtime_frames': 1, 'preferences': 1,
+             'implementation': 'bo-implementation/v1'}
 CORE = {'bo_stategraph.py': '__init__.py', 'bo_contracts.py': 'bo_contracts.py',
         'execution_contract.py': 'execution_contract.py'}
 

@@ -1,0 +1,507 @@
+{
+  "schema": "bo-implementation/v1",
+  "features": [
+    {
+      "id": "flow.checks",
+      "label": "检查内容",
+      "business_node": "flow.checks",
+      "nodes": [
+        "flow.checks"
+      ],
+      "sources": [
+        "app/checks.py::run_checks"
+      ],
+      "parameters": [
+        {
+          "source": "app/checks.py::run_checks",
+          "name": "content",
+          "node": "flow.checks",
+          "direction": "in",
+          "field": "content_length",
+          "policy": "derived",
+          "reason": "通过 flow.checks.in.content_length 展示该参数参与的实际判断或摘要；完整运行状态由实例映射核对"
+        },
+        {
+          "source": "app/checks.py::run_checks",
+          "name": "capacity",
+          "node": "flow.checks",
+          "direction": "in",
+          "field": "capacity",
+          "policy": "value"
+        },
+        {
+          "source": "app/checks.py::run_checks",
+          "name": "execution",
+          "node": "flow.checks",
+          "direction": "out",
+          "field": "revision",
+          "policy": "derived",
+          "reason": "通过 flow.checks.out.revision 展示该参数参与的实际判断或摘要；完整运行状态由实例映射核对"
+        },
+        {
+          "source": "app/checks.py::run_checks",
+          "name": "progress",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        },
+        {
+          "source": "app/checks.py::run_checks",
+          "name": "task_hook",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        }
+      ],
+      "cases": [
+        {
+          "case": "normal",
+          "node": "flow.checks",
+          "phase": "enter"
+        }
+      ]
+    },
+    {
+      "id": "read",
+      "label": "读取输入",
+      "business_node": "flow.input",
+      "nodes": [
+        "read",
+        "wait"
+      ],
+      "sources": [
+        "app/service.py::Delivery.prepare"
+      ],
+      "parameters": [
+        {
+          "source": "app/service.py::Delivery.prepare",
+          "name": "expected_version",
+          "node": "read",
+          "direction": "in",
+          "field": "expected_version",
+          "policy": "value"
+        }
+      ],
+      "cases": [
+        {
+          "case": "normal",
+          "node": "read",
+          "phase": "read"
+        },
+        {
+          "case": "no_grant",
+          "node": "wait",
+          "phase": "wait"
+        }
+      ]
+    },
+    {
+      "id": "execute",
+      "label": "检查并提交指定版本",
+      "business_node": "flow.input",
+      "nodes": [
+        "execute"
+      ],
+      "sources": [
+        "app/service.py::Delivery.execute"
+      ],
+      "parameters": [
+        {
+          "source": "app/service.py::Delivery.execute",
+          "name": "expected_version",
+          "node": "execute",
+          "direction": "in",
+          "field": "expected_version",
+          "policy": "value"
+        }
+      ],
+      "cases": [
+        {
+          "case": "normal",
+          "node": "execute",
+          "phase": "enter"
+        }
+      ]
+    },
+    {
+      "id": "authorize",
+      "label": "判断授权是否有效",
+      "business_node": "flow.permission",
+      "nodes": [
+        "authorize"
+      ],
+      "sources": [
+        "app/service.py::authorized"
+      ],
+      "parameters": [
+        {
+          "source": "app/service.py::authorized",
+          "name": "job",
+          "node": "authorize",
+          "direction": "in",
+          "field": "role",
+          "policy": "derived",
+          "reason": "通过 authorize.in.role 展示该参数参与的实际判断或摘要；完整运行状态由实例映射核对"
+        },
+        {
+          "source": "app/service.py::authorized",
+          "name": "events",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        }
+      ],
+      "cases": [
+        {
+          "case": "normal",
+          "node": "authorize",
+          "phase": "decision"
+        }
+      ]
+    },
+    {
+      "id": "grant",
+      "label": "检查一份授权",
+      "business_node": "flow.permission",
+      "nodes": [
+        "grant"
+      ],
+      "sources": [
+        "app/service.py::eligible_grant"
+      ],
+      "parameters": [
+        {
+          "source": "app/service.py::eligible_grant",
+          "name": "grant",
+          "node": "grant",
+          "direction": "in",
+          "field": "grant_id",
+          "policy": "derived",
+          "reason": "通过 grant.in.grant_id 展示该参数参与的实际判断或摘要；完整运行状态由实例映射核对"
+        },
+        {
+          "source": "app/service.py::eligible_grant",
+          "name": "job",
+          "node": "grant",
+          "direction": "in",
+          "field": "param_version",
+          "policy": "derived",
+          "reason": "通过 grant.in.param_version 展示该参数参与的实际判断或摘要；完整运行状态由实例映射核对"
+        },
+        {
+          "source": "app/service.py::eligible_grant",
+          "name": "events",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        },
+        {
+          "source": "app/service.py::eligible_grant",
+          "name": "parent_call_id",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        }
+      ],
+      "cases": [
+        {
+          "case": "normal",
+          "node": "grant",
+          "phase": "decision"
+        }
+      ]
+    },
+    {
+      "id": "checksum",
+      "label": "计算内容摘要",
+      "business_node": "flow.checks",
+      "nodes": [
+        "checksum"
+      ],
+      "sources": [
+        "app/checks.py::checksum"
+      ],
+      "parameters": [
+        {
+          "source": "app/checks.py::checksum",
+          "name": "content",
+          "node": "checksum",
+          "direction": "in",
+          "field": "length",
+          "policy": "derived",
+          "reason": "通过 checksum.in.length 展示该参数参与的实际判断或摘要；完整运行状态由实例映射核对"
+        }
+      ],
+      "cases": [
+        {
+          "case": "normal",
+          "node": "checksum",
+          "phase": "enter"
+        },
+        {
+          "case": "normal",
+          "node": "checksum",
+          "phase": "return"
+        }
+      ]
+    },
+    {
+      "id": "privacy",
+      "label": "检查敏感标记",
+      "business_node": "flow.checks",
+      "nodes": [
+        "privacy"
+      ],
+      "sources": [
+        "app/checks.py::privacy_check"
+      ],
+      "parameters": [
+        {
+          "source": "app/checks.py::privacy_check",
+          "name": "content",
+          "node": "privacy",
+          "direction": "in",
+          "field": "length",
+          "policy": "derived",
+          "reason": "通过 privacy.in.length 展示该参数参与的实际判断或摘要；完整运行状态由实例映射核对"
+        }
+      ],
+      "cases": [
+        {
+          "case": "normal",
+          "node": "privacy",
+          "phase": "enter"
+        },
+        {
+          "case": "normal",
+          "node": "privacy",
+          "phase": "return"
+        }
+      ]
+    },
+    {
+      "id": "join",
+      "label": "确认检查结果",
+      "business_node": "flow.checks",
+      "nodes": [
+        "join"
+      ],
+      "sources": [
+        "bo_stategraph/workflow.py::ActivityExecution.join"
+      ],
+      "parameters": [],
+      "cases": [
+        {
+          "case": "normal",
+          "node": "join",
+          "phase": "decision"
+        }
+      ]
+    },
+    {
+      "id": "recheck",
+      "label": "提交前再次检查",
+      "business_node": "flow.commit",
+      "nodes": [
+        "recheck",
+        "commit"
+      ],
+      "sources": [
+        "app/service.py::Delivery.commit"
+      ],
+      "parameters": [
+        {
+          "source": "app/service.py::Delivery.commit",
+          "name": "expected_version",
+          "node": "recheck",
+          "direction": "in",
+          "field": "expected_version",
+          "policy": "value"
+        }
+      ],
+      "cases": [
+        {
+          "case": "normal",
+          "node": "recheck",
+          "phase": "decision"
+        },
+        {
+          "case": "normal",
+          "node": "commit",
+          "phase": "commit"
+        }
+      ]
+    },
+    {
+      "id": "change",
+      "label": "修改、取消或补充授权",
+      "business_node": "flow.wait",
+      "nodes": [
+        "change"
+      ],
+      "sources": [
+        "app/service.py::Delivery.command"
+      ],
+      "parameters": [
+        {
+          "source": "app/service.py::Delivery.command",
+          "name": "action",
+          "node": "change",
+          "direction": "in",
+          "field": "action",
+          "policy": "value"
+        },
+        {
+          "source": "app/service.py::Delivery.command",
+          "name": "values",
+          "node": "change",
+          "direction": "in",
+          "field": "values",
+          "policy": "value"
+        }
+      ],
+      "cases": [
+        {
+          "case": "normal",
+          "node": "change",
+          "phase": "change"
+        }
+      ]
+    }
+  ],
+  "support": {
+    "app/checks.py::run_checks.work": {
+      "node": "flow.input",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "app/service.py::eligible_grant.remember": {
+      "node": "flow.input",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "app/service.py::observation": {
+      "node": "flow.input",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "app/service.py::Delivery.__init__": {
+      "node": "flow.input",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "app/service.py::Delivery.transition": {
+      "node": "flow.input",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "app/service.py::Delivery.execution_progress": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "app/store.py::Store.__init__": {
+      "node": "flow.input",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "app/store.py::Store.transaction": {
+      "node": "flow.input",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "app/store.py::Store.get": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "app/store.py::Store.put": {
+      "node": "flow.input",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "app/store.py::Store.execution": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "app/store.py::Store.put_execution": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "app/store.py::Store.update_execution": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "app/store.py::Store.artifact": {
+      "node": "flow.commit",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "app/store.py::Store.record_transition": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "app/store.py::Store.snapshot": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "app/store.py::Store.close": {
+      "node": "flow.input",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::completed": {
+      "node": "flow.input",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::advance": {
+      "node": "flow.input",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::definition": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::execution_record": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::advance_record": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::recover_records": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::ActivityExecution.__init__": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::ActivityExecution.body": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::ActivityExecution.snapshot": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::ActivityExecution.record": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::ActivityExecution.invariant": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::ActivityExecution.start": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::ActivityExecution.finish": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::ActivityExecution.abort": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "main.py::main": {
+      "node": "flow.input",
+      "reason": "可剔除观测器的命令行启动示例；调用相同的授权和交付功能，完整保留源码和调用关系"
+    }
+  },
+  "excluded": {
+    "app/ports.py::BOEvents.__init__": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    },
+    "app/ports.py::BOEvents.bo_emit": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    }
+  }
+}

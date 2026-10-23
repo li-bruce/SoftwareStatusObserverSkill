@@ -7,7 +7,8 @@
     "app/ports.py",
     "app/service.py",
     "app/store.py",
-    "bo_stategraph/workflow.py"
+    "bo_stategraph/workflow.py",
+    "main.py"
   ],
   "watch_files": [
     "LICENSE",
@@ -238,7 +239,6 @@
       "tests/**": "Scenario runners and assertions, not business implementation.",
       "integrations/**": "Observation and HTTP wiring; architecture/import and HTTP checks cover it.",
       "run.py": "Server startup; watched and exercised by HTTP tests.",
-      "main.py": "Business core startup; exercised from the exported package.",
       "validate.py": "Validation entry point; runs the project gate.",
       "bo_stategraph/__init__.py": "Shared query implementation; copy integrity and module tests cover it.",
       "bo_stategraph/bo_contracts.py": "Shared contract implementation; parity regression tests cover it.",

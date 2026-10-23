@@ -1,0 +1,1196 @@
+{
+  "schema": "bo-implementation/v1",
+  "features": [
+    {
+      "id": "archive_request",
+      "label": "负责人发起归档",
+      "business_node": "flow.policy",
+      "nodes": [
+        "archive_request"
+      ],
+      "sources": [
+        "archive_app/service.py::ArchiveService.create_run"
+      ],
+      "parameters": [
+        {
+          "source": "archive_app/service.py::ArchiveService.create_run",
+          "name": "document_id",
+          "node": "archive_request",
+          "direction": "in",
+          "field": "document_id",
+          "policy": "value"
+        },
+        {
+          "source": "archive_app/service.py::ArchiveService.create_run",
+          "name": "operator_id",
+          "node": "archive_request",
+          "direction": "in",
+          "field": "operator_id",
+          "policy": "value"
+        },
+        {
+          "source": "archive_app/service.py::ArchiveService.create_run",
+          "name": "capacity",
+          "node": "archive_request",
+          "direction": "in",
+          "field": "capacity",
+          "policy": "value"
+        }
+      ],
+      "cases": [
+        {
+          "case": "archive_snapshot",
+          "node": "archive_request",
+          "phase": "enter"
+        }
+      ]
+    },
+    {
+      "id": "scope_check",
+      "label": "是否直接负责所在文件夹",
+      "business_node": "flow.policy",
+      "nodes": [
+        "scope_check"
+      ],
+      "sources": [
+        "archive_app/policy.py::is_direct_manager"
+      ],
+      "parameters": [
+        {
+          "source": "archive_app/policy.py::is_direct_manager",
+          "name": "project_id",
+          "node": "scope_check",
+          "direction": "in",
+          "field": "project_id",
+          "policy": "value"
+        },
+        {
+          "source": "archive_app/policy.py::is_direct_manager",
+          "name": "operator_id",
+          "node": "scope_check",
+          "direction": "in",
+          "field": "operator_id",
+          "policy": "value"
+        },
+        {
+          "source": "archive_app/policy.py::is_direct_manager",
+          "name": "folder_id",
+          "node": "scope_check",
+          "direction": "in",
+          "field": "folder_id",
+          "policy": "value"
+        },
+        {
+          "source": "archive_app/policy.py::is_direct_manager",
+          "name": "assignments",
+          "node": "scope_check",
+          "direction": "in",
+          "field": "assignments",
+          "policy": "value"
+        },
+        {
+          "source": "archive_app/policy.py::is_direct_manager",
+          "name": "trace",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        },
+        {
+          "source": "archive_app/policy.py::is_direct_manager",
+          "name": "basis",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        },
+        {
+          "source": "archive_app/policy.py::is_direct_manager",
+          "name": "parent",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        }
+      ],
+      "cases": [
+        {
+          "case": "scope_direct_manager",
+          "node": "scope_check",
+          "phase": "decision"
+        }
+      ]
+    },
+    {
+      "id": "approval_check",
+      "label": "审批是否适用",
+      "business_node": "flow.policy",
+      "nodes": [
+        "approval_check"
+      ],
+      "sources": [
+        "archive_app/policy.py::evaluate_approvals"
+      ],
+      "parameters": [
+        {
+          "source": "archive_app/policy.py::evaluate_approvals",
+          "name": "project_id",
+          "node": "approval_check",
+          "direction": "in",
+          "field": "project_id",
+          "policy": "value"
+        },
+        {
+          "source": "archive_app/policy.py::evaluate_approvals",
+          "name": "operator_id",
+          "node": "approval_check",
+          "direction": "in",
+          "field": "operator_id",
+          "policy": "value"
+        },
+        {
+          "source": "archive_app/policy.py::evaluate_approvals",
+          "name": "document_id",
+          "node": "approval_check",
+          "direction": "in",
+          "field": "document_id",
+          "policy": "value"
+        },
+        {
+          "source": "archive_app/policy.py::evaluate_approvals",
+          "name": "content_version",
+          "node": "approval_check",
+          "direction": "in",
+          "field": "content_version",
+          "policy": "value"
+        },
+        {
+          "source": "archive_app/policy.py::evaluate_approvals",
+          "name": "approvals",
+          "node": "approval_check",
+          "direction": "out",
+          "field": "candidates",
+          "policy": "derived",
+          "reason": "通过 approval_check.out.candidates 展示该参数参与的实际判断或摘要；完整运行状态由实例映射核对"
+        },
+        {
+          "source": "archive_app/policy.py::evaluate_approvals",
+          "name": "reviewers",
+          "node": "approval_check",
+          "direction": "out",
+          "field": "candidates",
+          "policy": "derived",
+          "reason": "通过 approval_check.out.candidates 展示该参数参与的实际判断或摘要；完整运行状态由实例映射核对"
+        },
+        {
+          "source": "archive_app/policy.py::evaluate_approvals",
+          "name": "now",
+          "node": "approval_check",
+          "direction": "in",
+          "field": "clock",
+          "policy": "derived",
+          "reason": "通过 approval_check.in.clock 展示该参数参与的实际判断或摘要；完整运行状态由实例映射核对"
+        },
+        {
+          "source": "archive_app/policy.py::evaluate_approvals",
+          "name": "trace",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        },
+        {
+          "source": "archive_app/policy.py::evaluate_approvals",
+          "name": "basis",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        },
+        {
+          "source": "archive_app/policy.py::evaluate_approvals",
+          "name": "parent",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        }
+      ],
+      "cases": [
+        {
+          "case": "archive_snapshot",
+          "node": "approval_check",
+          "phase": "decision"
+        }
+      ]
+    },
+    {
+      "id": "content_check",
+      "label": "内容检查",
+      "business_node": "flow.checks",
+      "nodes": [
+        "content_check"
+      ],
+      "sources": [
+        "archive_app/policy.py::check_content"
+      ],
+      "parameters": [
+        {
+          "source": "archive_app/policy.py::check_content",
+          "name": "content",
+          "node": "content_check",
+          "direction": "in",
+          "field": "content_length",
+          "policy": "derived",
+          "reason": "通过 content_check.in.content_length 展示该参数参与的实际判断或摘要；完整运行状态由实例映射核对"
+        },
+        {
+          "source": "archive_app/policy.py::check_content",
+          "name": "trace",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        },
+        {
+          "source": "archive_app/policy.py::check_content",
+          "name": "basis",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        },
+        {
+          "source": "archive_app/policy.py::check_content",
+          "name": "call_id",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        }
+      ],
+      "cases": [
+        {
+          "case": "archive_snapshot",
+          "node": "content_check",
+          "phase": "enter"
+        },
+        {
+          "case": "archive_snapshot",
+          "node": "content_check",
+          "phase": "return"
+        }
+      ]
+    },
+    {
+      "id": "index_check",
+      "label": "索引检查",
+      "business_node": "flow.checks",
+      "nodes": [
+        "index_check"
+      ],
+      "sources": [
+        "archive_app/policy.py::check_index"
+      ],
+      "parameters": [
+        {
+          "source": "archive_app/policy.py::check_index",
+          "name": "title",
+          "node": "index_check",
+          "direction": "in",
+          "field": "title_length",
+          "policy": "derived",
+          "reason": "通过 index_check.in.title_length 展示该参数参与的实际判断或摘要；完整运行状态由实例映射核对"
+        },
+        {
+          "source": "archive_app/policy.py::check_index",
+          "name": "project_id",
+          "node": "index_check",
+          "direction": "in",
+          "field": "project_id",
+          "policy": "value"
+        },
+        {
+          "source": "archive_app/policy.py::check_index",
+          "name": "document_number",
+          "node": "index_check",
+          "direction": "in",
+          "field": "document_number",
+          "policy": "value"
+        },
+        {
+          "source": "archive_app/policy.py::check_index",
+          "name": "trace",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        },
+        {
+          "source": "archive_app/policy.py::check_index",
+          "name": "basis",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        },
+        {
+          "source": "archive_app/policy.py::check_index",
+          "name": "call_id",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        }
+      ],
+      "cases": [
+        {
+          "case": "archive_snapshot",
+          "node": "index_check",
+          "phase": "enter"
+        },
+        {
+          "case": "archive_snapshot",
+          "node": "index_check",
+          "phase": "return"
+        }
+      ]
+    },
+    {
+      "id": "archive_commit",
+      "label": "保存资料版本快照",
+      "business_node": "flow.archive",
+      "nodes": [
+        "archive_commit"
+      ],
+      "sources": [
+        "archive_app/service.py::ArchiveService.try_commit"
+      ],
+      "parameters": [
+        {
+          "source": "archive_app/service.py::ArchiveService.try_commit",
+          "name": "db",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        },
+        {
+          "source": "archive_app/service.py::ArchiveService.try_commit",
+          "name": "run",
+          "node": "archive_commit",
+          "direction": "in",
+          "field": "attempt",
+          "policy": "derived",
+          "reason": "通过 archive_commit.in.attempt 展示该参数参与的实际判断或摘要；完整运行状态由实例映射核对"
+        },
+        {
+          "source": "archive_app/service.py::ArchiveService.try_commit",
+          "name": "trace",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        }
+      ],
+      "cases": [
+        {
+          "case": "archive_snapshot",
+          "node": "archive_commit",
+          "phase": "commit"
+        }
+      ]
+    },
+    {
+      "id": "approval_revoked",
+      "label": "撤销审批",
+      "business_node": "flow.policy",
+      "nodes": [
+        "approval_revoked"
+      ],
+      "sources": [
+        "archive_app/service.py::ArchiveService.revoke_approval"
+      ],
+      "parameters": [
+        {
+          "source": "archive_app/service.py::ArchiveService.revoke_approval",
+          "name": "approval_id",
+          "node": "approval_revoked",
+          "direction": "in",
+          "field": "approval_id",
+          "policy": "value"
+        }
+      ],
+      "cases": [
+        {
+          "case": "revoke_with_alternative",
+          "node": "approval_revoked",
+          "phase": "change"
+        }
+      ]
+    },
+    {
+      "id": "content_changed",
+      "label": "修改资料内容",
+      "business_node": "flow.checks",
+      "nodes": [
+        "content_changed"
+      ],
+      "sources": [
+        "archive_app/service.py::ArchiveService.edit_document"
+      ],
+      "parameters": [
+        {
+          "source": "archive_app/service.py::ArchiveService.edit_document",
+          "name": "document_id",
+          "node": "content_changed",
+          "direction": "in",
+          "field": "document_id",
+          "policy": "value"
+        },
+        {
+          "source": "archive_app/service.py::ArchiveService.edit_document",
+          "name": "title",
+          "node": "content_changed",
+          "direction": "in",
+          "field": "title_length",
+          "policy": "derived",
+          "reason": "通过 content_changed.in.title_length 展示该参数参与的实际判断或摘要；完整运行状态由实例映射核对"
+        },
+        {
+          "source": "archive_app/service.py::ArchiveService.edit_document",
+          "name": "number",
+          "node": "content_changed",
+          "direction": "in",
+          "field": "number",
+          "policy": "value"
+        },
+        {
+          "source": "archive_app/service.py::ArchiveService.edit_document",
+          "name": "content",
+          "node": "content_changed",
+          "direction": "in",
+          "field": "content_bytes",
+          "policy": "derived",
+          "reason": "通过 content_changed.in.content_bytes 展示该参数参与的实际判断或摘要；完整运行状态由实例映射核对"
+        }
+      ],
+      "cases": [
+        {
+          "case": "edit_after_archive",
+          "node": "content_changed",
+          "phase": "change"
+        }
+      ]
+    },
+    {
+      "id": "archive_unique",
+      "label": "该资料版本是否已有归档",
+      "business_node": "flow.archive",
+      "nodes": [
+        "archive_unique"
+      ],
+      "sources": [
+        "archive_app/storage.py::ArchiveStore.find_archive"
+      ],
+      "parameters": [
+        {
+          "source": "archive_app/storage.py::ArchiveStore.find_archive",
+          "name": "db",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        },
+        {
+          "source": "archive_app/storage.py::ArchiveStore.find_archive",
+          "name": "document_id",
+          "node": "archive_unique",
+          "direction": "in",
+          "field": "document_id",
+          "policy": "value"
+        },
+        {
+          "source": "archive_app/storage.py::ArchiveStore.find_archive",
+          "name": "content_version",
+          "node": "archive_unique",
+          "direction": "in",
+          "field": "content_version",
+          "policy": "value"
+        }
+      ],
+      "cases": [
+        {
+          "case": "archive_same_version_twice",
+          "node": "archive_unique",
+          "phase": "read"
+        }
+      ]
+    },
+    {
+      "id": "resume_run",
+      "label": "点击继续并重查资格",
+      "business_node": "flow.policy",
+      "nodes": [
+        "resume_run"
+      ],
+      "sources": [
+        "archive_app/service.py::ArchiveService.resume_run"
+      ],
+      "parameters": [
+        {
+          "source": "archive_app/service.py::ArchiveService.resume_run",
+          "name": "run_id",
+          "node": "resume_run",
+          "direction": "in",
+          "field": "attempt",
+          "policy": "derived",
+          "reason": "通过 resume_run.in.attempt 展示该参数参与的实际判断或摘要；完整运行状态由实例映射核对"
+        }
+      ],
+      "cases": [
+        {
+          "case": "loss_and_resume",
+          "node": "resume_run",
+          "phase": "change"
+        }
+      ]
+    },
+    {
+      "id": "flow.checks",
+      "label": "完成本次两项检查",
+      "business_node": "flow.checks",
+      "nodes": [
+        "flow.checks"
+      ],
+      "sources": [
+        "archive_app/service.py::ArchiveService.advance"
+      ],
+      "parameters": [
+        {
+          "source": "archive_app/service.py::ArchiveService.advance",
+          "name": "run_id",
+          "node": "flow.checks",
+          "direction": "in",
+          "field": "attempt",
+          "policy": "derived",
+          "reason": "通过 flow.checks.in.attempt 展示该参数参与的实际判断或摘要；完整运行状态由实例映射核对"
+        }
+      ],
+      "cases": [
+        {
+          "case": "archive_snapshot",
+          "node": "flow.checks",
+          "phase": "change"
+        }
+      ]
+    },
+    {
+      "id": "authority_read",
+      "label": "读取当前权威关系",
+      "business_node": "flow.policy",
+      "nodes": [
+        "authority_read",
+        "commit_guard"
+      ],
+      "sources": [
+        "archive_app/service.py::ArchiveService.evaluate"
+      ],
+      "parameters": [
+        {
+          "source": "archive_app/service.py::ArchiveService.evaluate",
+          "name": "db",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        },
+        {
+          "source": "archive_app/service.py::ArchiveService.evaluate",
+          "name": "run",
+          "node": "commit_guard",
+          "direction": "in",
+          "field": "run_version",
+          "policy": "derived",
+          "reason": "通过 commit_guard.in.run_version 展示该参数参与的实际判断或摘要；完整运行状态由实例映射核对"
+        },
+        {
+          "source": "archive_app/service.py::ArchiveService.evaluate",
+          "name": "trace",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        },
+        {
+          "source": "archive_app/service.py::ArchiveService.evaluate",
+          "name": "stage",
+          "node": "commit_guard",
+          "direction": "in",
+          "field": "stage",
+          "policy": "value"
+        }
+      ],
+      "cases": [
+        {
+          "case": "archive_snapshot",
+          "node": "authority_read",
+          "phase": "read"
+        },
+        {
+          "case": "archive_snapshot",
+          "node": "commit_guard",
+          "phase": "decision"
+        }
+      ]
+    },
+    {
+      "id": "approval_candidate",
+      "label": "逐条判断审批",
+      "business_node": "flow.policy",
+      "nodes": [
+        "approval_candidate"
+      ],
+      "sources": [
+        "archive_app/policy.py::candidate_allowed"
+      ],
+      "parameters": [
+        {
+          "source": "archive_app/policy.py::candidate_allowed",
+          "name": "grant",
+          "node": "approval_candidate",
+          "direction": "in",
+          "field": "id",
+          "policy": "derived",
+          "reason": "通过 approval_candidate.in.id 展示该参数参与的实际判断或摘要；完整运行状态由实例映射核对"
+        },
+        {
+          "source": "archive_app/policy.py::candidate_allowed",
+          "name": "request",
+          "node": "approval_candidate",
+          "direction": "in",
+          "field": "request_version",
+          "policy": "derived",
+          "reason": "通过 approval_candidate.in.request_version 展示该参数参与的实际判断或摘要；完整运行状态由实例映射核对"
+        },
+        {
+          "source": "archive_app/policy.py::candidate_allowed",
+          "name": "now",
+          "node": "approval_candidate",
+          "direction": "in",
+          "field": "clock",
+          "policy": "derived",
+          "reason": "通过 approval_candidate.in.clock 展示该参数参与的实际判断或摘要；完整运行状态由实例映射核对"
+        },
+        {
+          "source": "archive_app/policy.py::candidate_allowed",
+          "name": "reviewers",
+          "node": "approval_candidate",
+          "direction": "out",
+          "field": "reviewer_ok",
+          "policy": "derived",
+          "reason": "通过 approval_candidate.out.reviewer_ok 展示该参数参与的实际判断或摘要；完整运行状态由实例映射核对"
+        },
+        {
+          "source": "archive_app/policy.py::candidate_allowed",
+          "name": "trace",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        },
+        {
+          "source": "archive_app/policy.py::candidate_allowed",
+          "name": "basis",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        },
+        {
+          "source": "archive_app/policy.py::candidate_allowed",
+          "name": "parent",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        }
+      ],
+      "cases": [
+        {
+          "case": "approval_target_exact",
+          "node": "approval_candidate",
+          "phase": "decision"
+        }
+      ]
+    },
+    {
+      "id": "cancel_run",
+      "label": "取消本次运行",
+      "business_node": "flow.checks",
+      "nodes": [
+        "cancel_run"
+      ],
+      "sources": [
+        "archive_app/service.py::ArchiveService.cancel_run"
+      ],
+      "parameters": [
+        {
+          "source": "archive_app/service.py::ArchiveService.cancel_run",
+          "name": "run_id",
+          "node": "cancel_run",
+          "direction": "in",
+          "field": "attempt",
+          "policy": "derived",
+          "reason": "通过 cancel_run.in.attempt 展示该参数参与的实际判断或摘要；完整运行状态由实例映射核对"
+        }
+      ],
+      "cases": [
+        {
+          "case": "cancel_running",
+          "node": "cancel_run",
+          "phase": "change"
+        }
+      ]
+    },
+    {
+      "id": "issue_approval",
+      "label": "为当前版本审批",
+      "business_node": "flow.policy",
+      "nodes": [
+        "issue_approval"
+      ],
+      "sources": [
+        "archive_app/service.py::ArchiveService.add_approval"
+      ],
+      "parameters": [
+        {
+          "source": "archive_app/service.py::ArchiveService.add_approval",
+          "name": "document_id",
+          "node": "issue_approval",
+          "direction": "in",
+          "field": "document_id",
+          "policy": "value"
+        },
+        {
+          "source": "archive_app/service.py::ArchiveService.add_approval",
+          "name": "operator_id",
+          "node": "issue_approval",
+          "direction": "in",
+          "field": "operator_id",
+          "policy": "value"
+        },
+        {
+          "source": "archive_app/service.py::ArchiveService.add_approval",
+          "name": "reviewer_id",
+          "node": "issue_approval",
+          "direction": "in",
+          "field": "reviewer_id",
+          "policy": "value"
+        },
+        {
+          "source": "archive_app/service.py::ArchiveService.add_approval",
+          "name": "deadline",
+          "node": "issue_approval",
+          "direction": "in",
+          "field": "deadline",
+          "policy": "value"
+        }
+      ],
+      "cases": [
+        {
+          "case": "archive_snapshot",
+          "node": "issue_approval",
+          "phase": "change"
+        }
+      ]
+    },
+    {
+      "id": "move_folder",
+      "label": "调整分类文件夹",
+      "business_node": "flow.policy",
+      "nodes": [
+        "move_folder"
+      ],
+      "sources": [
+        "archive_app/service.py::ArchiveService.move_document"
+      ],
+      "parameters": [
+        {
+          "source": "archive_app/service.py::ArchiveService.move_document",
+          "name": "document_id",
+          "node": "move_folder",
+          "direction": "in",
+          "field": "document_id",
+          "policy": "value"
+        },
+        {
+          "source": "archive_app/service.py::ArchiveService.move_document",
+          "name": "folder_id",
+          "node": "move_folder",
+          "direction": "in",
+          "field": "folder_id",
+          "policy": "value"
+        }
+      ],
+      "cases": [
+        {
+          "case": "move_before_commit",
+          "node": "move_folder",
+          "phase": "change"
+        }
+      ]
+    },
+    {
+      "id": "project_limit",
+      "label": "项目归档大小上限",
+      "business_node": "flow.policy",
+      "nodes": [
+        "project_limit"
+      ],
+      "sources": [
+        "archive_app/storage.py::ArchiveStore.project_limit"
+      ],
+      "parameters": [
+        {
+          "source": "archive_app/storage.py::ArchiveStore.project_limit",
+          "name": "db",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        },
+        {
+          "source": "archive_app/storage.py::ArchiveStore.project_limit",
+          "name": "project_id",
+          "node": "project_limit",
+          "direction": "in",
+          "field": "project_id",
+          "policy": "value"
+        }
+      ],
+      "cases": [
+        {
+          "case": "archive_snapshot",
+          "node": "project_limit",
+          "phase": "read"
+        }
+      ]
+    },
+    {
+      "id": "size_guard",
+      "label": "正文是否在当前上限内",
+      "business_node": "flow.policy",
+      "nodes": [
+        "size_guard"
+      ],
+      "sources": [
+        "archive_app/policy.py::check_size"
+      ],
+      "parameters": [
+        {
+          "source": "archive_app/policy.py::check_size",
+          "name": "content",
+          "node": "size_guard",
+          "direction": "in",
+          "field": "content_bytes",
+          "policy": "derived",
+          "reason": "通过 size_guard.in.content_bytes 展示该参数参与的实际判断或摘要；完整运行状态由实例映射核对"
+        },
+        {
+          "source": "archive_app/policy.py::check_size",
+          "name": "limit_bytes",
+          "node": "size_guard",
+          "direction": "in",
+          "field": "limit_bytes",
+          "policy": "value"
+        },
+        {
+          "source": "archive_app/policy.py::check_size",
+          "name": "project_id",
+          "node": "size_guard",
+          "direction": "in",
+          "field": "project_id",
+          "policy": "value"
+        },
+        {
+          "source": "archive_app/policy.py::check_size",
+          "name": "limit_revision",
+          "node": "size_guard",
+          "direction": "in",
+          "field": "limit_revision",
+          "policy": "value"
+        },
+        {
+          "source": "archive_app/policy.py::check_size",
+          "name": "trace",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        },
+        {
+          "source": "archive_app/policy.py::check_size",
+          "name": "basis",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        },
+        {
+          "source": "archive_app/policy.py::check_size",
+          "name": "parent",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        },
+        {
+          "source": "archive_app/policy.py::check_size",
+          "name": "source_event",
+          "policy": "context",
+          "reason": "观测上下文、数据库连接或执行回调；不采集对象内容"
+        }
+      ],
+      "cases": [
+        {
+          "case": "archive_snapshot",
+          "node": "size_guard",
+          "phase": "decision"
+        }
+      ]
+    },
+    {
+      "id": "set_size_limit",
+      "label": "调整项目大小上限",
+      "business_node": "flow.policy",
+      "nodes": [
+        "set_size_limit"
+      ],
+      "sources": [
+        "archive_app/service.py::ArchiveService.set_archive_limit"
+      ],
+      "parameters": [
+        {
+          "source": "archive_app/service.py::ArchiveService.set_archive_limit",
+          "name": "project_id",
+          "node": "set_size_limit",
+          "direction": "in",
+          "field": "project_id",
+          "policy": "value"
+        },
+        {
+          "source": "archive_app/service.py::ArchiveService.set_archive_limit",
+          "name": "limit_bytes",
+          "node": "set_size_limit",
+          "direction": "in",
+          "field": "limit_bytes",
+          "policy": "value"
+        }
+      ],
+      "cases": [
+        {
+          "case": "size_project_isolation",
+          "node": "set_size_limit",
+          "phase": "change"
+        }
+      ]
+    }
+  ],
+  "support": {
+    "archive_app/service.py::ArchiveService.__init__": {
+      "node": "flow.policy",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "archive_app/service.py::ArchiveService.trace": {
+      "node": "flow.policy",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "archive_app/service.py::ArchiveService.basis": {
+      "node": "flow.policy",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "archive_app/service.py::ArchiveService.request_stop": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "archive_app/service.py::ArchiveService.settle": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "archive_app/service.py::ArchiveService.emit_configuration": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "archive_app/service.py::ArchiveService.worker": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "archive_app/service.py::ArchiveService.tick": {
+      "node": "flow.policy",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "archive_app/service.py::ArchiveService.start_scheduler": {
+      "node": "flow.policy",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "archive_app/service.py::ArchiveService.start_scheduler.loop": {
+      "node": "flow.policy",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "archive_app/service.py::ArchiveService.recover_interrupted": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "archive_app/service.py::ArchiveService.close": {
+      "node": "flow.policy",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "archive_app/storage.py::ArchiveStore.__init__": {
+      "node": "flow.policy",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "archive_app/storage.py::ArchiveStore.connect": {
+      "node": "flow.policy",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "archive_app/storage.py::ArchiveStore.bump": {
+      "node": "flow.policy",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "archive_app/storage.py::ArchiveStore.seed": {
+      "node": "flow.policy",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "archive_app/storage.py::ArchiveStore.get_run": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "archive_app/storage.py::ArchiveStore.save_run": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "archive_app/storage.py::ArchiveStore.snapshot": {
+      "node": "flow.policy",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::Workflow.__init__": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::Workflow.approved": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::Workflow.all_passed": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::Workflow.effect_saved": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::Workflow.checks_failed": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::Workflow.settled": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::definition": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::initial_configuration": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::change_phase": {
+      "node": "flow.archive",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::activity_step": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::request_stop": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::settle": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::schedule": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::checks_passed": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::interrupt": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::finish_activity": {
+      "node": "flow.checks",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    },
+    "bo_stategraph/workflow.py::resume": {
+      "node": "flow.policy",
+      "reason": "该功能的实际实现辅助函数；保留源码节点与可解析调用，不把未观测的调用写成已执行"
+    }
+  },
+  "excluded": {
+    "archive_app/ports.py::BOTracePort.__init__": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    },
+    "archive_app/ports.py::BOTracePort.bo_record": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    },
+    "archive_app/ports.py::no_trace": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    },
+    "archive_app/ports.py::bo_record_change": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    },
+    "integrations/bo_observer.py::BOObserver.__init__": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    },
+    "integrations/bo_observer.py::BOObserver.write": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    },
+    "integrations/bo_observer.py::BOObserver.trace": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    },
+    "integrations/bo_observer.py::BOObserver.snapshot": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    },
+    "integrations/bo_observer.py::BOObserver.health": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    },
+    "integrations/bo_observer.py::BOObserver.close": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    },
+    "integrations/bo_server.py::LocalApplication.__init__": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    },
+    "integrations/bo_server.py::LocalApplication.recording_view": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    },
+    "integrations/bo_server.py::LocalApplication.bo_export_graph": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    },
+    "integrations/bo_server.py::LocalApplication.cases": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    },
+    "integrations/bo_server.py::LocalApplication.version_sources": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    },
+    "integrations/bo_server.py::LocalApplication.graph_view": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    },
+    "integrations/bo_server.py::LocalApplication.state": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    },
+    "integrations/bo_server.py::LocalApplication.command": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    },
+    "integrations/bo_server.py::serve": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    },
+    "integrations/bo_server.py::serve.Handler.log_message": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    },
+    "integrations/bo_server.py::serve.Handler.reply": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    },
+    "integrations/bo_server.py::serve.Handler.do_GET": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    },
+    "integrations/bo_server.py::serve.Handler.do_POST": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    },
+    "run.py::main": {
+      "category": "observer",
+      "reason": "示例的观测、HTTP 接线或启动；业务操作委托 app 服务，端点声明仍受独立扫描检查"
+    }
+  }
+}

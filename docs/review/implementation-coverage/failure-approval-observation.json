@@ -1,0 +1,44 @@
+{
+  "errors": [
+    {
+      "feature_event_missing": "issue_approval",
+      "case": "archive_snapshot",
+      "node": "issue_approval",
+      "phase": "change"
+    },
+    {
+      "feature_field_not_observed": "issue_approval",
+      "node": "issue_approval",
+      "direction": "in",
+      "field": "document_id"
+    },
+    {
+      "feature_field_not_observed": "issue_approval",
+      "node": "issue_approval",
+      "direction": "in",
+      "field": "operator_id"
+    },
+    {
+      "feature_field_not_observed": "issue_approval",
+      "node": "issue_approval",
+      "direction": "in",
+      "field": "reviewer_id"
+    },
+    {
+      "feature_field_not_observed": "issue_approval",
+      "node": "issue_approval",
+      "direction": "in",
+      "field": "deadline"
+    },
+    {
+      "feature_field_not_observed": "issue_approval",
+      "node": "issue_approval",
+      "direction": "out",
+      "field": "approval_id"
+    }
+  ],
+  "events_checked": 40,
+  "features": 19,
+  "build_id": "7c6bc43cae563285e5c1e902634b3e631fe443cb0700d79e1e25e6bd465febcf",
+  "context": "第一次归档示例迁移；审批事件缺失被检查拦截，随后修复采集位置"
+}

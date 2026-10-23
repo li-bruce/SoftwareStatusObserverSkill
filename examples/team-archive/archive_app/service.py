@@ -6,7 +6,7 @@ import sqlite3
 import threading
 import time
 import uuid
-from .ports import TracePort, no_trace
+from .ports import TracePort, no_trace, bo_record_change
 from .policy import is_direct_manager, evaluate_approvals, check_content, check_index, check_size
 from .storage import ArchiveStore
 from bo_stategraph.workflow import (ACTIVITIES, ACTIVE, TERMINAL, activity_step, change_phase,
@@ -275,6 +275,9 @@ class ArchiveService:
                 (ident,doc["project_id"],operator_id,document_id,doc["version"],reviewer_id,float(deadline)))
             self.store.bump(db)
             db.commit()
+        bo_record_change(self.trace_factory,self.store,self.clock,'issue_approval',lambda:{
+            'inputs':{'document_id':document_id,'operator_id':operator_id,'reviewer_id':reviewer_id,'deadline':deadline},
+            'outputs':{'approval_id':ident}})
         return ident
 
     def revoke_approval(self, approval_id: str) -> None:
@@ -284,6 +287,8 @@ class ArchiveService:
                 raise ValueError("审批不存在")
             self.store.bump(db)
             db.commit()
+        bo_record_change(self.trace_factory,self.store,self.clock,'approval_revoked',lambda:{
+            'inputs':{'approval_id':approval_id},'outputs':{'revoked':True}})
         self.tick()
 
     def set_archive_limit(self, project_id: str, limit_bytes: int) -> dict:
@@ -301,6 +306,8 @@ class ArchiveService:
             result = self.store.project_limit(db,project_id)
             db.commit()
         # Every active run re-reads the project setting; completed snapshots stay fixed.
+        bo_record_change(self.trace_factory,self.store,self.clock,'set_size_limit',lambda:{
+            'inputs':{'project_id':project_id,'limit_bytes':limit_bytes},'outputs':dict(result)})
         self.tick()
         return result
 
@@ -314,6 +321,9 @@ class ArchiveService:
                 raise ValueError("资料不存在")
             self.store.bump(db)
             db.commit()
+        bo_record_change(self.trace_factory,self.store,self.clock,'content_changed',lambda:{
+            'inputs':{'document_id':document_id,'title_length':len(title),'number':number,'content_bytes':len(content.encode('utf-8'))},
+            'outputs':{'saved':True}})
         self.tick()
 
     def move_document(self, document_id: str, folder_id: str) -> None:
@@ -327,6 +337,8 @@ class ArchiveService:
                 raise ValueError("资料不存在")
             self.store.bump(db)
             db.commit()
+        bo_record_change(self.trace_factory,self.store,self.clock,'move_folder',lambda:{
+            'inputs':{'document_id':document_id,'folder_id':folder_id},'outputs':{'moved':True}})
         self.tick()
 
     def tick(self) -> None:

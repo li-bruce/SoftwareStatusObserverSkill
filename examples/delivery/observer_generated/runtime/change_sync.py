@@ -47,9 +47,16 @@ def verify(root, cfg, change):
 def structural_errors(root, cfg, snap):
     errors = list(snap["structure"]["errors"])
     registered = set(cfg['code_files']) if cfg.get('source_scope') or cfg.get('stategraph') else set(cfg['code_files']) | set(cfg['watch_files'])
-    for path in set(snap.get('source_inventory', {}).get('files', {})) - registered:
-        errors.append({'unregistered_source': path, 'action': 'map implementation or record an explicit scope exclusion'})
+    if not cfg.get('stategraph'):
+        for path in set(snap.get('source_inventory', {}).get('files', {})) - registered:
+            errors.append({'unregistered_source': path, 'action': 'map implementation or record an explicit scope exclusion'})
     if cfg.get("stategraph"):
+        try:
+            from .implementation_coverage import static_errors as implementation_errors, inventory_errors
+        except ImportError:
+            from implementation_coverage import static_errors as implementation_errors, inventory_errors
+        errors.extend(inventory_errors(cfg,snap.get('source_inventory',{})))
+        errors.extend(implementation_errors(snap['model'].get('implementation'), snap['model'], snap['structure']))
         module = cfg["stategraph"]["module"]
         if module not in snap["files"] or not snap["files"].get(module):
             errors.append("independent stategraph module is missing or not watched")
@@ -145,6 +152,10 @@ def review_errors(change, base, current, changes):
     except ImportError:
         from mapping_contract import protected_plan_errors, validate_plan
     errors.extend(protected_plan_errors(base.get('mapping_contract'), current.get('mapping_contract')))
+    try:
+        from .implementation_coverage import protected_errors, protected_captures
+    except ImportError:
+        from implementation_coverage import protected_errors, protected_captures
     if current.get('stategraph_contract'):
         try: validate_plan(current.get('mapping_contract'), current['model'])
         except (ValueError, TypeError, KeyError) as exc: errors.append(str(exc))
@@ -154,6 +165,10 @@ def review_errors(change, base, current, changes):
     if review.get("candidate_id") != current["id"]: errors.append("review belongs to an older candidate")
     moves, move_errors = source_moves(review, base, current)
     errors.extend(move_errors)
+    errors.extend(protected_errors(base.get('model', {}).get('implementation'), current.get('model', {}).get('implementation'),
+        moves, base.get('requested_requirements', []), review.get('requirement_changes')))
+    errors.extend(protected_captures(base.get('model', {}), current.get('model', {}),
+        base.get('requested_requirements', []), review.get('requirement_changes')))
     previous_checks = base.get('verification_contract') or {}
     new_checks = current.get('verification_contract') or {}
     for name, values in previous_checks.items():
@@ -169,6 +184,9 @@ def review_errors(change, base, current, changes):
         if item.get("action") not in {"updated", "unchanged", "not_applicable"} or not item.get("reason", "").strip():
             errors.append("review needs action and reason: " + part)
     for symbol in changes.get("required_classification", changes["unmapped_changed_symbols"]):
+        plan = current['model'].get('implementation') or {}
+        if symbol in plan.get('excluded', {}) or current['structure']['symbols'].get(symbol, {}).get('kind') == 'class':
+            continue
         if not review.get("excluded_symbols", {}).get(symbol, "").strip():
             errors.append("classify changed symbol outside selected graph: " + symbol)
     old = {c["id"]: c for c in [*base["acceptance"]["checks"], *base["acceptance"].get("model_checks", [])]}

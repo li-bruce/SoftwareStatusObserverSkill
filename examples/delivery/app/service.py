@@ -96,7 +96,10 @@ class Delivery:
                 self.store.update_execution(job['attempt'],disposition='cancelled')
             else:raise ValueError('不支持这项操作')
             job['epoch']+=1; self.store.put(job)
-        self.events.bo_emit('change','change',lambda:observation(job,outputs={'action':action,'state':job['state']}))
+        self.events.bo_emit('change','change',lambda:observation(job,
+            inputs={'action':action,'values':{**{k:v for k,v in values.items() if k!='content'},
+                                            **({'content_length':len(values['content'])} if 'content' in values else {})}},
+            outputs={'action':action,'state':job['state']}))
         return self.store.snapshot()
 
     def prepare(self, expected_version: int | None = None) -> dict:
@@ -109,7 +112,7 @@ class Delivery:
             execution = ActivityExecution(job['capacity'], attempt=job['attempt'], param_version=job['param_version'])
             job['execution'] = execution.snapshot()
             self.store.put_execution(execution_record(job['execution'], phase=job['state'], clock=job['clock'], build_id=self.execution_version))
-            self.events.bo_emit('read','read',lambda:observation(job,outputs={'param_version':job['param_version'],'length':len(job['content'])}))
+            self.events.bo_emit('read','read',lambda:observation(job,inputs={'expected_version':expected_version},outputs={'param_version':job['param_version'],'length':len(job['content'])}))
             allowed=authorized(job, self.events)
             if not allowed:
                 self.transition(job,'block');job['reason']='no_current_authorization';self.store.put(job)
@@ -166,7 +169,7 @@ class Delivery:
         last=state['journal'][-1];activity=last['activity']
         phase='wait' if event=='wait' else 'enter' if event=='start' else 'return'
         self.events.bo_emit('flow.checks',phase,lambda:observation(job,
-            outputs={'revision':state['revision'],'activity':activity,'event':event},uses=['authorize']))
+            inputs={'capacity':job['capacity'],'content_length':len(job['content'])},outputs={'revision':state['revision'],'activity':activity,'event':event},uses=['authorize']))
         if activity in state['activities']:
             self.events.bo_emit(activity,phase,lambda:observation(job,
                 outputs={'state':state['activities'][activity]},uses=['authorize']))
@@ -178,7 +181,7 @@ class Delivery:
             if job['state']!='ready':return self.store.snapshot()
             allowed=authorized(job, self.events);version_ok=job['prepared_version']==job['param_version']
             self.events.bo_emit('recheck','decision',lambda:observation(job,
-                outputs={'allowed':allowed,'version_ok':version_ok},uses=['authorize','join']))
+                inputs={'expected_version':expected_version},outputs={'allowed':allowed,'version_ok':version_ok},uses=['authorize','join']))
             if not allowed or not version_ok or not job['checks']['passed']:
                 self.transition(job,'block');job['reason']='authorization_or_version_changed';self.store.put(job)
                 self.events.bo_emit('wait','wait',lambda:observation(job,outputs={'reason':job['reason']},uses=['recheck']))
@@ -192,5 +195,6 @@ class Delivery:
 
     def execute(self, expected_version: int | None = None) -> dict:
         version=self.store.snapshot()['param_version'] if expected_version is None else expected_version
+        self.events.bo_emit('execute','enter',lambda:observation(self.store.get(),inputs={'expected_version':version}))
         self.prepare(expected_version=version)
         return self.commit(expected_version=version)

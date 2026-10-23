@@ -70,7 +70,7 @@ python tooling/dev.py archive --label my-change
 
 `verify` executes the program and counterexamples. `accept` accepts only that verified candidate. `check` compares the current inputs before delivery. Later edits to code, graph, rules, tools or tests invalidate the old acceptance. Do not rewrite expected outcomes to hide a bug.
 
-Source inventory discovers new files independently of the existing graph. Unmapped symbols require a reasoned classification. Reports separate mapping fidelity, state/resource constraints, business expectations and project checks. A faithfully displayed bug can pass mapping while failing business validation. Continue an active change rather than hiding drift in a new baseline.
+Inventory Python source from the project root and maintain the model's `implementation` contract linking features, supporting functions, parameters and real scenarios. An exclusion sentence cannot replace a feature mapping; missing fields or events fail verification. Existing projects must add the [coverage inventory](../skills/business-observer/references/implementation-coverage.md) after upgrading and continue the existing change. Reports still separate mapping fidelity, state constraints, business expectations and project checks.
 
 Commands in `sync.json` are argument arrays, never shell strings. `{python}` resolves to the current interpreter. First launch restores a fixed, reviewed release baseline; edited code is not automatically approved.
 

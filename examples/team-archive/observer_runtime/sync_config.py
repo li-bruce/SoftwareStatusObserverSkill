@@ -1,5 +1,6 @@
 """Project configuration and independently inventoried candidate snapshots."""
 from pathlib import Path
+import ast
 try:
     from .behavior_model import read, contained, digest
     from .code_structure import scan
@@ -62,7 +63,7 @@ def snapshot(root, cfg, previous=None):
         path = contained(root, name)
         files[name] = digest(path.read_bytes()) if path.is_file() else None
     index = scan(root, cfg["code_files"], (previous or {}).get("structure"))
-    tools = {path.name: digest(path.read_bytes()) for path in sorted(Path(__file__).parent.glob('*.py'))}
+    tools = tool_fingerprints(root,cfg)
     return {"id": digest({"files": files, "tools": tools}), "files": files, "tools": tools, "model": model, "intent": intent,
             "acceptance": acceptance, "structure": index, "source_inventory": inventory,
             'verification_contract': {name: cfg.get(name, ['on','off','fault'] if name == 'probe_modes' else None) for name in
@@ -72,5 +73,32 @@ def snapshot(root, cfg, previous=None):
             "stategraph_contract":cfg.get('stategraph'),
             "discovery_path":cfg.get('discovery'),
             "discovery": read(contained(root,cfg['discovery'])) if cfg.get('discovery') else None}
+
+
+def tool_fingerprints(root,cfg,scripts=None):
+    """Hash executed shared cores identically through canonical or bridge entrypoints.
+
+    Only the exact generated bridge is normalized. Edited wrappers keep their
+    own identity; project core files remain independently watched as source.
+    """
+    try:
+        from .bo_upgrade import CORE, bridge_source
+    except ImportError:
+        from bo_upgrade import CORE, bridge_source
+    module=Path(cfg.get('stategraph',{}).get('module','bo_stategraph/__init__.py')).parent
+    # Installed script folders are packages; the canonical folder can be a
+    # namespace package. An empty marker has no implementation to version.
+    result={'__init__.py':digest(b'')}
+    for path in sorted(Path(scripts or Path(__file__).parent).glob('*.py')):
+        raw=path.read_bytes()
+        if path.name=='__init__.py':
+            try:
+                body=ast.parse(raw.decode('utf-8-sig')).body
+                if all(isinstance(n,ast.Expr) and isinstance(n.value,ast.Constant) and isinstance(n.value.value,str) for n in body):raw=b''
+            except (SyntaxError,UnicodeError):pass
+        if path.name in CORE and raw==bridge_source(path.name,module.name):
+            raw=contained(root,(module/CORE[path.name]).as_posix()).read_bytes()
+        result[path.name]=digest(raw)
+    return result
 
 
