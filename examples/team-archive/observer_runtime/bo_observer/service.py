@@ -14,6 +14,7 @@ import secrets
 import threading
 from urllib.parse import urlsplit, parse_qs
 from .protocol import validate_project, validate_event, validate_snapshot
+from .session_lifecycle import SessionHost
 
 try:
     from ..behavior_model import read, capture, check, contained, digest
@@ -375,15 +376,20 @@ def make_server(session, port=8830, *, token=None, origins=(), assets=ASSETS):
         raise ValueError("collector origins must be explicit local development origins")
     assets = Path(session.web.assets if assets == ASSETS else assets).resolve()
     session.program_url = next(iter(origins)) if len(origins) == 1 else None
-    session_lock = threading.RLock()
+    host = SessionHost(
+        session,
+        lambda previous: GraphSession(
+            previous.root, previous.path.relative_to(previous.root).as_posix()
+        ),
+    )
 
     def consistent_request(method):
         """Finish each request against one session while a watcher may replace the build."""
 
         @wraps(method)
         def handle(handler):
-            with session_lock:
-                return method(handler)
+            with host.borrow() as current:
+                return method(handler, current)
 
         return handle
 
@@ -440,7 +446,7 @@ def make_server(session, port=8830, *, token=None, origins=(), assets=ASSETS):
             self.end_headers()
 
         @consistent_request
-        def do_GET(self):
+        def do_GET(self, session):
             if not self.permitted():
                 return self.reply(403, {"error": "local same-origin only"})
             path = urlsplit(self.path).path
@@ -503,7 +509,7 @@ def make_server(session, port=8830, *, token=None, origins=(), assets=ASSETS):
                 return self.reply(400, {"error": str(exc)})
 
         @consistent_request
-        def do_POST(self):
+        def do_POST(self, session):
             path = urlsplit(self.path).path
             ingest = path.startswith("/api/bo/")
             if not self.permitted(ingest):
@@ -534,29 +540,25 @@ def make_server(session, port=8830, *, token=None, origins=(), assets=ASSETS):
                 return self.reply(409, {"error": str(exc)})
             except (OSError, ValueError, KeyError, TypeError) as exc:
                 if ingest:
-                    session.errors += 1
-                    session.last_error = str(exc)
+                    with session.lock:
+                        session.errors += 1
+                        session.last_error = str(exc)
                 return self.reply(400, {"error": str(exc)})
 
-    server = ThreadingHTTPServer(("127.0.0.1", port), Handler)
+    class SessionServer(ThreadingHTTPServer):
+        def server_close(self):
+            super().server_close()
+            host.close()
+
+    server = SessionServer(("127.0.0.1", port), Handler)
     server.bo_token = token
     server.bo_session = session
 
     def reload_session():
         """Load current declarations without transferring obsolete events or machine instances."""
-        nonlocal session
-        with session_lock:
-            if session.binding()["status"] == "current":
-                return False
-            replacement = GraphSession(
-                session.root, session.path.relative_to(session.root).as_posix()
-            )
-            replacement.program_url = session.program_url
-            replacement.data_status = session.data_status
-            session.close()
-            session = replacement
-            server.bo_session = replacement
-            return True
+        changed = host.reload()
+        server.bo_session = host.current
+        return changed
 
     server.bo_reload = reload_session
     return server

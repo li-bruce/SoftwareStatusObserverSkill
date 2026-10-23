@@ -1,6 +1,6 @@
 {
   "schema": "bo-maintenance/v1",
-  "source_id": "2164ffa3741ea6336be961c5473b4cd41e43466402d200a05cef3831a45f85df",
+  "source_id": "467d33a73e77c177b5be87303e9793f1a5f2f2ab8ffb265b05efe23ed79d4748",
   "inventory": {
     "files": {
       "archive_app/__init__.py": "c4cc8d894a9cb6e2da5510317e540d22b50b75b2a187f86675d20e86d967f9bf",
@@ -73,6 +73,7 @@
       "observer_runtime/bo_observer/observation/semantic_probe.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/bo_observer/protocol.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/bo_observer/service.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/session_lifecycle.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/bo_observer/sources.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/bo_observer/web/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/bo_observer/web/bo_design.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
@@ -2794,5 +2795,5 @@
     "run.py::main",
     "static/app.js::bo_record"
   ],
-  "candidate_id": "4c6d5d80c35690c9bcc4e7e23055f3325aa2711c4586feb5801b274fef6e8106"
+  "candidate_id": "c9b0f6fba9bcd37e1e4acbbe6c57b11a5eab17b7eadbeca793535b52e86c84ab"
 }

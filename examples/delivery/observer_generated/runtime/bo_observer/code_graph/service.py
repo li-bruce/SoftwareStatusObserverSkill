@@ -24,21 +24,29 @@ class CodeGraph:
     def inputs(self):
         """Use the same independently declared source scope as iteration checks."""
         config = self.root / "sync.json"
-        cfg = (
-            read(config)
-            if config.is_file()
-            else {
+        if config.is_file():
+            cfg = read(config)
+        else:
+            excluded = {"tests/*": "Project tests", "test_*": "Project tests"}
+            metadata = self.root / "bo_stategraph/runtime-version.json"
+            if metadata.is_file():
+                # Exclude only exact installed copies. A project-owned executor
+                # or an edited support module remains visible to source analysis.
+                try:
+                    from ...bo_upgrade import portable_files
+                except ImportError:
+                    from bo_upgrade import portable_files
+                for name, expected in portable_files(read(metadata).get("files", {})).items():
+                    path = contained(self.root, name)
+                    if path.is_file() and digest(path.read_bytes()) == expected:
+                        excluded[name] = "Unchanged managed observer support"
+            cfg = {
                 "model": "bo_stategraph/project.json",
                 "source_scope": {
                     "roots": ["."],
-                    "exclude": {
-                        "bo_stategraph/*": "Observer and shared executor support",
-                        "tests/*": "Project tests",
-                        "test_*": "Project tests",
-                    },
+                    "exclude": excluded,
                 },
             }
-        )
         model_path = contained(self.root, cfg.get("model", "bo_stategraph/project.json"))
         model = (
             read_model(model_path) if model_path.is_file() else {"nodes": [], "source_files": []}
@@ -86,10 +94,18 @@ class CodeGraph:
 
     def check(self):
         """Verify a saved index independently; never repair evidence during a check."""
-        saved = read(self.cache) if self.cache.is_file() else None
+        enabled = self.cache.is_file()
+        saved, errors = None, []
+        if enabled:
+            try:
+                saved = read(self.cache)
+                if not isinstance(saved, dict) or not saved:
+                    raise ValueError("expected a nonempty code graph object")
+            except (OSError, ValueError) as exc:
+                errors.append("Invalid saved code structure: " + str(exc))
         fresh, _ = CodeGraph(self.root, persist=False).refresh()
-        errors = list(fresh["errors"])
-        if saved:
+        errors.extend(fresh["errors"])
+        if isinstance(saved, dict):
             # Compare content as well as its claimed revision; reject tampering
             # that keeps the old fingerprint while removing a node or relation.
             for key in (
@@ -106,10 +122,10 @@ class CodeGraph:
                 if saved.get(key) != fresh.get(key):
                     errors.append("Saved code structure differs from current source: " + key)
         return {
-            "enabled": saved is not None,
+            "enabled": enabled,
             "valid": not errors,
             "errors": errors,
-            "status": "failed" if errors else "passed" if saved else "not_enabled",
+            "status": "failed" if errors else "passed" if enabled else "not_enabled",
             "revision": fresh["revision"],
             "nodes": len(fresh["nodes"]),
             "edges": len(fresh["edges"]),

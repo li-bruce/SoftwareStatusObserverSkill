@@ -68,6 +68,12 @@ scripts 根目录下多数小文件负责转发导入或命令调用。需要修
 
 ## 修改和排版约定
 
+源码关系由 [code_graph/index.py](../skills/business-observer/scripts/bo_observer/code_graph/index.py) 生成，query.py 提取局部和边界，service.py 管理索引刷新、版本校验和源码读取。用户可以按需打开“局部代码”或“代码结构”。静态连线与实际运行记录分别保留。
+
+[session_lifecycle.py](../skills/business-observer/scripts/bo_observer/session_lifecycle.py) 管理每个请求使用的图版本。切换版本后，旧会话在最后一个请求完成时释放；耗时的源码解析和响应写入不占用全局会话锁。
+
+[data/evidence.py](../skills/business-observer/scripts/bo_observer/data/evidence.py) 统一数据操作和功能映射中的证据校验。它按实际结果检查字段，例如失败时的错误类型、已知行数、事务提交或回滚；普通功能的采集字段检查继续保持严格。
+
 主要函数用英文说明用途，在容易误读的位置解释顺序、所有权和失败处理。校验、状态修改等操作分行展开。源码可读性调整保持公开名称、协议字段、图 ID 及受保护的验收要求。
 
 先修改主 Skill 的源码，再用 tools/sync_runtime.py 更新示例中的安装副本；项目自身的定义、数据和个人配置保留。第三方资源与历史验收材料保持原样。

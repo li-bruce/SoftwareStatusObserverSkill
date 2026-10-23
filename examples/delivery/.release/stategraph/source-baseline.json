@@ -91,6 +91,7 @@
     "observer_generated/runtime/bo_observer/observation/semantic_probe.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
     "observer_generated/runtime/bo_observer/protocol.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
     "observer_generated/runtime/bo_observer/service.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+    "observer_generated/runtime/bo_observer/session_lifecycle.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
     "observer_generated/runtime/bo_observer/sources.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
     "observer_generated/runtime/bo_observer/web/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
     "observer_generated/runtime/bo_observer/web/bo_design.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",

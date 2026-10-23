@@ -76,7 +76,7 @@
     "bo_stategraph/__init__.py": "56f694a30fa9e2aa6319931b24cb35c52c82ea30b8b4b6f4029df0f838e63e6e",
     "bo_stategraph/bo_contracts.py": "094f5feff89893ee5932eb6a4b6ad4aafc08c7e462d0b9b00c31d50702e6af29",
     "bo_stategraph/execution_contract.py": "0c966fb3549c0219c6a663ddf41c847e71ebf14216b02b725d2465e4bf0c4839",
-    "bo_stategraph/runtime-version.json": "b690dfbe5e1c6377b84e3e051917486e091dc15ea38b54b48b0ad12ebd8bf892",
+    "bo_stategraph/runtime-version.json": "56f60d15adf1e402aedcaef3c337a1fdb72e2c707cc13e5caa1b5244c0287c1c",
     "observer_runtime/LICENSE.txt": "41f4bfe9aa8790612dd555d71a9e95fbf12c9f0e84bc6ce232a0aae3af3e2ba3",
     "observer_runtime/__init__.py": "c4cc8d894a9cb6e2da5510317e540d22b50b75b2a187f86675d20e86d967f9bf",
     "observer_runtime/architecture_guard.py": "b1966fd9fa189df104894e6cf91f1e28a12087d6d525bd5cb8db3c46af9e54b9",
@@ -99,7 +99,7 @@
     "observer_runtime/bo_observer/code_graph/__init__.py": "5f69b67916f2fe8f7da0295d8f6824cb8f1626a8570ba44b1a68dee83166e6de",
     "observer_runtime/bo_observer/code_graph/index.py": "e8508e1dcb9173070647649d27f21bda4eec992f97b341d37ad27bc22b93a658",
     "observer_runtime/bo_observer/code_graph/query.py": "7f8d6e784b0df2903d133dd3061073188008988eae72404bce69be232e61ba63",
-    "observer_runtime/bo_observer/code_graph/service.py": "4593cf91c5a15c5c836fc1471bfc01b288119702533bca118e9831b83def3576",
+    "observer_runtime/bo_observer/code_graph/service.py": "45b7754c70ea9d6879b5ec92943c5ad8f41ebc9c7790c94bf0a6481243958ab1",
     "observer_runtime/bo_observer/data/__init__.py": "3dc7861217be44088a3475fc158cf990ab2a339650926e71d7b6c861dd094e61",
     "observer_runtime/bo_observer/data/acceptance.py": "4c52fda20e10a300dec02659dec576662704ae8bf8e18a880061232c1be601cc",
     "observer_runtime/bo_observer/data/catalog.py": "584160c51ae7eae4d132d8abace12376c21c4766b291beb680725e4d6f993032",
@@ -116,7 +116,7 @@
     "observer_runtime/bo_observer/delivery/project_bundle.py": "1555a7d202b2893b9a0320c3adfa4bec86d9f167acebe548c24505c3451c01ac",
     "observer_runtime/bo_observer/development.py": "2f5ca6a2b2d962fac476b3dc389e9363ed37dcc975851f09d728422b78cf17a6",
     "observer_runtime/bo_observer/graph/__init__.py": "76c4a5c43cd71a23505d400f742ddd11cb95fff821171002971a186cd7921dd4",
-    "observer_runtime/bo_observer/graph/behavior_model.py": "0441d344924be9e7c09fb6be0726e101ecabd8faf17f5b77c7360a7e0fec42e0",
+    "observer_runtime/bo_observer/graph/behavior_model.py": "e176091dc46fa9776b8142f261ac3c28a62a667f859bdf2a5367a809dd79aef9",
     "observer_runtime/bo_observer/graph/code_structure.py": "fcfd538058c36c8857a6d948607fc282e4df2f918edd54f913309d37d8c9956a",
     "observer_runtime/bo_observer/graph/focus_graph.py": "9b66c17c840626d9806602d8fa56aa304ae924403d6ad3cf6afc80cf55eec95c",
     "observer_runtime/bo_observer/graph/statechart_contract.py": "e0d43786de88de1463837a73481733c2f7c9b0687e0349b0de8835982cf47920",
@@ -138,7 +138,8 @@
     "observer_runtime/bo_observer/schemas/project.schema.json": "9d7424aab589bc426334c993c4b5f7aaf654a174886a8087d909e979fa2b55c2",
     "observer_runtime/bo_observer/schemas/snapshot.schema.json": "0bd0236ca71516791aff964ddeba428387f21d878fee42eb2092c230ab4c208e",
     "observer_runtime/bo_observer/schemas/source.schema.json": "beea2f9be4fa2f5884d92387de0403d47df1c08497a522d36e3b466fbbabafbf",
-    "observer_runtime/bo_observer/service.py": "7c50179c0b4523199be531532c25e0f2b537c92aaf104b5060bae52264ff9ada",
+    "observer_runtime/bo_observer/service.py": "89ae59c1545a981c8981339133c4d1604339ecf7f95b6c0778eaf5996620b7e8",
+    "observer_runtime/bo_observer/session_lifecycle.py": "325d5d841ffc68f0a5d305d25e6498fa6c5bec1bb14a9f7aa2faa3206e566380",
     "observer_runtime/bo_observer/sources.py": "aafad77385e1ebc2ec681703b51306b173182af866f05440c30f494d4fac0d2f",
     "observer_runtime/bo_observer/web/__init__.py": "e30010b1ba3b74b5561b63146649ccaa753c929169ceacd13fca74f2062ae84b",
     "observer_runtime/bo_observer/web/bo_design.py": "4f3e6b3a9933f6f89de7259d006f62d1f088e69f6518c3e74ffe0a4c543919da",
@@ -926,6 +927,22 @@
       "changed": [
         "bo_stategraph/runtime-version.json",
         "observer_runtime/bo_observer/data/projection.py"
+      ]
+    },
+    {
+      "reason": "Reviewed source-index validation, request lifecycle and managed runtime copies; business logic and authored graph unchanged.",
+      "changed": [
+        "bo_stategraph/runtime-version.json",
+        "observer_runtime/bo_observer/code_graph/service.py",
+        "observer_runtime/bo_observer/service.py",
+        "observer_runtime/bo_observer/session_lifecycle.py"
+      ]
+    },
+    {
+      "reason": "Reviewed source-index validation, request lifecycle and managed runtime copies; business logic and authored graph unchanged.",
+      "changed": [
+        "bo_stategraph/runtime-version.json",
+        "observer_runtime/bo_observer/graph/behavior_model.py"
       ]
     }
   ],

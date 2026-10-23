@@ -47,6 +47,12 @@ An inspection does not advance the accepted baseline. Acceptance is the explicit
 
 In drive mode, the application's native BOExecutor.step also reads the agreed definition. In observe mode, the application implements the decisions itself. Both paths use the same observation contract.
 
+[session_lifecycle.py](../skills/business-observer/scripts/bo_observer/session_lifecycle.py)
+pins one graph session for each request and retires replaced sessions after their
+last request. The short host lock protects ownership only. Parsing source and
+writing an HTTP response do not hold it, so a slow code view can coexist with
+event ingestion and a build reload.
+
 ### 3. A click changes the view
 
 | Viewer module | Responsibility |
@@ -69,6 +75,13 @@ The complete model, the selected view, and the captured evidence are separate va
 Start at [data/contract.py](../skills/business-observer/scripts/bo_observer/data/contract.py) for strict JSON and identity, then [catalog.py](../skills/business-observer/scripts/bo_observer/data/catalog.py) for native metadata, [projection.py](../skills/business-observer/scripts/bo_observer/data/projection.py) for graph nodes and relations, and [sync.py](../skills/business-observer/scripts/bo_observer/data/sync.py) for refresh and independent verification. [runtime.py](../skills/business-observer/scripts/bo_observer/data/runtime.py) and [bo_data.mjs](../skills/business-observer/scripts/bo_observer/adapters/javascript/bo_data.mjs) observe native calls. [watcher.py](../skills/business-observer/scripts/bo_observer/data/watcher.py) replaces the validated Web build; [data-layer.js](../skills/business-observer/assets/stategraph-viewer/data-layer.js) renders its provenance and values. These modules share the existing event, recording and preference services.
 
 ## Optional source structure
+
+Database feature coverage and database-specific checks both use
+[data/evidence.py](../skills/business-observer/scripts/bo_observer/data/evidence.py).
+It requires fields according to the real outcome: an error type on failure,
+row counts when known, and a committed/rolled-back result for transactions.
+Configuration, generated capture and source identity must all match before this
+specialized contract applies. Ordinary feature capture checks remain strict.
 
 [code_graph/index.py](../skills/business-observer/scripts/bo_observer/code_graph/index.py)
 turns parser facts into stable code nodes and typed relations. Its neighboring

@@ -85,6 +85,8 @@ When requested, hide the debug Web UI with `bo_web.py mode` or use the verified 
 
 ## 5. Verify and deliver
 
+For each batch, use the changed graph region and its incoming/outgoing dependencies to select regression cases. Follow the [iteration graph checks](references/iteration-graph-checks.md): retain independent expectations, run affected and neighboring feature cases, and test one relevant omission or incorrect value in an isolated copy. A static relation selects a case; actual execution establishes its evidence. Preserve the existing project-wide checks.
+
 Report **implementation mapping**, **state constraints**, **business rules**, and **project checks** separately. A graph may accurately expose a business bug: mapping can pass while business checks fail. Missing evidence and unrun tests are not passes. Reject invalid declarations, types, projections, engines, or guard wiring before loading. Preserve actual invalid runtime values with diagnostics; never correct observations to fit the model.
 
 Verify that unsynchronized source changes fail; every feature and required field has actual evidence; key values match independent reads; business effects agree with observation on, off, failing, and queue-limited; viewer/recording controls create no business events; filtered views retain relations; export and Web removal preserve business execution. Run architecture checks, existing gates, and new language cases without weakening prior checks.

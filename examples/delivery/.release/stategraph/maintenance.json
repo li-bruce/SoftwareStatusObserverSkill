@@ -1,6 +1,6 @@
 {
   "schema": "bo-maintenance/v1",
-  "source_id": "bf6ac7a049a1ee525e989467992120278d6402fc9b369692ae061f7cdbaef5f3",
+  "source_id": "6747fd88f009cd59fa9c5584b6c38f7f2b8fa8e2f2673f0b0087f2866e5a646e",
   "inventory": {
     "files": {
       "app/__init__.py": "a829ebb4042211c3a39bf40646855698375b065069bbbd2aa61daba1d8e6a51c",
@@ -94,6 +94,7 @@
       "observer_generated/runtime/bo_observer/observation/semantic_probe.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/bo_observer/protocol.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/bo_observer/service.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_generated/runtime/bo_observer/session_lifecycle.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/bo_observer/sources.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/bo_observer/web/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_generated/runtime/bo_observer/web/bo_design.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
@@ -1452,5 +1453,5 @@
     "bo_stategraph/workflow.py::ActivityState",
     "bo_stategraph/workflow.py::Phase"
   ],
-  "candidate_id": "a059290261b7f5f2fdee8f406d57e4d3a1b5b82042211c8b370d206c11128e15"
+  "candidate_id": "df055ba46e55a2002f07609cf1220f0ce7320d05c25986787e98a5d17885dd47"
 }

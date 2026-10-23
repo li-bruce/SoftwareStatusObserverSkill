@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { CodeLayer, withCodeGraph, codeTypes, codeRelations } from "../skills/business-observer/assets/stategraph-viewer/code-layer.js";
+import { CodeLayer, withCodeGraph, codeTypes, codeRelations, codeSummary } from "../skills/business-observer/assets/stategraph-viewer/code-layer.js";
 import { profileFor } from "../skills/business-observer/assets/stategraph-viewer/analysis.js";
 import { nodeType, relationType, status } from "../skills/business-observer/assets/stategraph-viewer/graph-core.js";
 import { emptyFilters, cleanFilters, relationStyles } from "../skills/business-observer/assets/stategraph-viewer/layout.js";
@@ -43,4 +43,13 @@ delayed.clear();
 resolve({ok: true, json: async () => slice});
 assert.equal(await pending, null);
 assert.equal(delayed.slice, null);
+// Failed refreshes remove earlier source results rather than display stale facts.
+layer.fetcher = async () => ({ok: false, json: async () => ({error: "Parser unavailable"})});
+layer.slice = slice;
+await assert.rejects(layer.load({enabled: true}), /Parser unavailable/);
+assert.equal(layer.slice, null);
+const text = (key, ...values) => key.replace(/\{(\d+)\}/g, (_, index) => values[index]);
+assert.equal(codeSummary(null, text), "");
+assert.equal(codeSummary({loaded_nodes: 400, total_nodes: 900, loaded_edges: 600, boundary_nodes: 80, omitted_edges: 12, errors: []}, text),
+  "Code: 400 / 900 nodes · 600 relations · 80 boundary nodes · 12 related links omitted");
 console.log("PASS: optional source projection, typed filters, stable model, no runtime claim and obsolete-request rejection.");

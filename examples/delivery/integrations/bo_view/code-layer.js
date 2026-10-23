@@ -15,6 +15,19 @@ export const codeRelations = [
   "code-maps",
 ];
 
+/** Show display limits so a bounded slice cannot be mistaken for complete coverage. */
+export function codeSummary(slice, translate) {
+  if (!slice) return "";
+  const parts = [
+    translate("Code: {0} / {1} nodes", slice.loaded_nodes, slice.total_nodes),
+    translate("{0} relations", slice.loaded_edges),
+  ];
+  if (slice.boundary_nodes) parts.push(translate("{0} boundary nodes", slice.boundary_nodes));
+  if (slice.omitted_edges) parts.push(translate("{0} related links omitted", slice.omitted_edges));
+  if (slice.errors.length) parts.push(translate("Source analysis incomplete"));
+  return parts.join(" · ");
+}
+
 export function migrateCodeFilters(value) {
   if (!value || value.codeTypes === 1) return value;
   // Opt-in source detail must not turn an old empty or specific filter into

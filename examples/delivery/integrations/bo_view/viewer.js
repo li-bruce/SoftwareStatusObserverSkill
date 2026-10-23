@@ -7,7 +7,7 @@ import { createPoller } from "./polling.js";
 import { migrateNodeIds } from "./layout.js";
 import { projectLayoutKey, graphVersion, recordingMatches } from "./view-lifecycle.js";
 import { databaseWarning, dataRelationEvidence } from "./data-layer.js";
-import { CodeLayer, withCodeGraph, codeTypes, codeRelations } from "./code-layer.js";
+import { CodeLayer, withCodeGraph, codeTypes, codeRelations, codeSummary } from "./code-layer.js";
 const codeLayer = new CodeLayer();
 let codeLimit = 400;
 import {
@@ -1320,10 +1320,7 @@ async function poll() {
       if (codeSlice?.focus && codeSlice.focus !== previousCodeFocus)
         for (const node of codeSlice.nodes)
           if (["file", "class"].includes(node.code_role)) expanded.add(node.id);
-      $("code-status").textContent = codeSlice
-        ? boTranslate("Code: {0} / {1} nodes", codeSlice.loaded_nodes, codeSlice.total_nodes) +
-          (codeSlice.errors.length ? " · " + boTranslate("Source analysis incomplete") : "")
-        : "";
+      $("code-status").textContent = codeSummary(codeSlice, boTranslate);
       $("code-status").title = codeSlice ? JSON.stringify(codeSlice.errors) : "";
     } catch (error) {
       $("code-status").textContent = boTranslate("Code structure unavailable");
