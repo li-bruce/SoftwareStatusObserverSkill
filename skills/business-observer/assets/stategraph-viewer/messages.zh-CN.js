@@ -307,6 +307,7 @@ export default {
   "Only connected core events are captured": "仅采集已接入的核心事件",
   "Play": "播放",
   "Unsupported recording format": "不支持这份记录格式",
+  "Return to live view to browse code structure": "返回实时视图后查看代码结构",
   "Pause": "暂停",
   "Developer runtime graph": "开发者运行图",
   "Runtime graph": "运行图",

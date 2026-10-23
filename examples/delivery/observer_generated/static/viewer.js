@@ -98,6 +98,7 @@ let analysisId = "overview",
   analysisKey = null,
   analysisOverride = null;
 let recording = null,
+  replayReturnAnalysis = null,
   replayItems = [],
   replayIndex = 0,
   playTimer = null,
@@ -1570,14 +1571,21 @@ function saveAnalysis() {
 }
 function updateAnalysisOptions() {
   $("analysis-view").replaceChildren(
-    ...[...presets, ...analysisSettings.custom].map((p) => new Option(p.label, p.id)),
+    ...[...presets, ...analysisSettings.custom].map((p) => {
+      const option = new Option(p.label, p.id);
+      // The lazy source index is current-source evidence, not a recorded frame.
+      option.disabled = !!recording && p.id === "code";
+      if (option.disabled)
+        option.title = boTranslate("Return to live view to browse code structure");
+      return option;
+    }),
   );
   $("analysis-details").setAttribute("aria-pressed", String(analysisSettings.advanced));
   $("analysis-view").value = analysisId;
   $("delete-view").hidden = !analysisId.startsWith("custom-");
 }
 function changeAnalysis(id) {
-  if (!analysisSettings || id === analysisId) return;
+  if (!analysisSettings || id === analysisId || (recording && id === "code")) return;
   stopPlayback();
   cancelLayout();
   save();
@@ -2061,18 +2069,26 @@ async function openRecording(id) {
     throw Error(boTranslate("Unsupported recording format"));
   if (latestLive && !recordingMatches(saved, latestLive))
     throw Error(boTranslate("This recording belongs to an earlier graph version."));
+  if (!recording) replayReturnAnalysis = analysisId === "code" ? analysisId : null;
   recording = saved;
   replayItems = timeline(saved);
   boPlanKey = "";
   $("replay").hidden = false;
   document.body.classList.add("is-replay");
   for (const id of ["version", "case", "attempt", "step"]) $(id).disabled = true;
+  if (analysisId === "code") changeAnalysis("overview");
+  updateAnalysisOptions();
+  $("code-local").disabled = true;
+  $("code-more").hidden = true;
   seek(0);
 }
 function leaveRecording() {
   stopPlayback();
   stopAnimation();
   recording = null;
+  updateAnalysisOptions();
+  if (replayReturnAnalysis) changeAnalysis(replayReturnAnalysis);
+  replayReturnAnalysis = null;
   boDetail = null;
   boTransfers.clear();
   $("step-changes").hidden = true;

@@ -88,7 +88,26 @@ try {
   assert.equal(checkpoints.run.stored,7);
   await page.click("#record-stop");
   await page.waitForFunction(()=>!document.getElementById("replay").hidden);
+  checkpoints.replaySourceOption = await page.locator('#analysis-view option[value="code"]').evaluate(n=>({disabled:n.disabled,html:n.outerHTML}));
+  checkpoints.servedReplayGuard = (await (await fetch(base+'/viewer.js')).text()).includes('replayReturnAnalysis');
+  assert.equal(checkpoints.replaySourceOption.disabled, true,
+    "recorded frames must not offer a current-source-only view");
+  checkpoints.recordedCodeUnavailable = true;
   await page.click("#replay-live");
+  await page.waitForFunction(()=>!document.querySelector('#analysis-view option[value="code"]').disabled);
+  await page.selectOption("#analysis-view","code");
+  await page.waitForSelector('#semantic [data-node-type="code-file"]',{state:"attached"});
+  const savedRecording = await page.locator('#record-list option').nth(1).getAttribute('value');
+  await page.selectOption("#record-list",savedRecording);
+  await page.waitForFunction(()=>!document.getElementById("replay").hidden);
+  assert.equal(await page.inputValue("#analysis-view"),"overview");
+  assert.equal(await page.locator('#semantic [data-node-type="code-file"]').count(),0);
+  assert.ok(await page.locator('#semantic [data-node-id]').count());
+  await shot("07-recorded-overview");
+  await page.click("#replay-live");
+  await page.waitForFunction(()=>document.getElementById("analysis-view").value==="code");
+  await page.waitForSelector('#semantic [data-node-type="code-file"]',{state:"attached"});
+  checkpoints.liveCodeRestored = true;
   await api("/demo/upgrade",{});
   await page.waitForFunction(()=>document.getElementById("record-list").options.length===1);
   await page.selectOption("#analysis-view","code");

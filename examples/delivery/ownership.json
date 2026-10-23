@@ -124,7 +124,7 @@
     "bo_stategraph/__init__.py": "56f694a30fa9e2aa6319931b24cb35c52c82ea30b8b4b6f4029df0f838e63e6e",
     "bo_stategraph/bo_contracts.py": "094f5feff89893ee5932eb6a4b6ad4aafc08c7e462d0b9b00c31d50702e6af29",
     "bo_stategraph/execution_contract.py": "0c966fb3549c0219c6a663ddf41c847e71ebf14216b02b725d2465e4bf0c4839",
-    "bo_stategraph/runtime-version.json": "9c6f56ba5b89aada95ee2b669b88337a6521dda853b5554c72bf5026d9be5599",
+    "bo_stategraph/runtime-version.json": "f0ebeb606b998443a78e623977a2b28d7350b4a05f0920d8940415b6c3516380",
     "observer_generated/behavior.json": "9ffc0e1f0715a15ae816b531bdae27c41dca08347b7a0587baaf026095948495",
     "observer_generated/runtime/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "observer_generated/runtime/architecture_guard.py": "b1966fd9fa189df104894e6cf91f1e28a12087d6d525bd5cb8db3c46af9e54b9",
@@ -245,7 +245,7 @@
     "observer_generated/static/i18n.js": "884cc013981501f4f1f031f1aee0202d84792010f136641175f34c8d4e370735",
     "observer_generated/static/index.html": "37054555df5a21f1c6778e08595544e5da8d81cf5068649617706a6f088fc3b3",
     "observer_generated/static/layout.js": "9a8386f568746fce699d1fd73d57231f43a04f738363b491cd4c967f9451a6ea",
-    "observer_generated/static/messages.zh-CN.js": "7354c179194e30d8274cb0ba648577e1ee27594cc18e3ed71392551ef33c7474",
+    "observer_generated/static/messages.zh-CN.js": "17d7df15d59243c2e6582ea9786a4224804a665e07d8c7c693676b02416077de",
     "observer_generated/static/pixi.min.js": "06d9ef9823e743518793083c296d801e752db128cb1f519fbabe37e1259567ea",
     "observer_generated/static/polling.js": "b8f451f203af824171043d715fee3b4f2e1f2973e8591cc823a9aa7fccecc152",
     "observer_generated/static/preferences.js": "30ee119b8480348ce7380220417d118c843f73da11fe6544300b571e91a36e43",
@@ -255,7 +255,7 @@
     "observer_generated/static/runtime-frames.js": "b6b47ea192cfcbb1721827590186aa490a44b25a5dc1ce6bb854ee5703ca483c",
     "observer_generated/static/view-lifecycle.js": "13bed8b2b27b7fe3fae8ab38f5a465d8cae52302b5f1aa266cf076edd766ff41",
     "observer_generated/static/viewer.css": "a6cdf50c7c82c623a7186d5589d540bed91d322f722916c279b6464440686f3a",
-    "observer_generated/static/viewer.js": "9b4a22f1b0ccfc13282c3c7a2a33107c37e84ad00e0ac858c83341189b233914"
+    "observer_generated/static/viewer.js": "46921bfaf1b6a0a35fce753ebc621e80ae3ce76ef76e572c5a1cf9154db5172f"
   },
   "regenerations": [
     {
@@ -1431,6 +1431,18 @@
         "bo_stategraph/runtime-version.json",
         "observer_generated/runtime/bo_observer/graph/behavior_model.py"
       ]
+    },
+    {
+      "reason": "Keep the live-only lazy code index out of recorded frames; restore the selected code view on return to live. Application logic, graph identities, probes and independent business assertions are unchanged.",
+      "changed": [
+        "bo_stategraph/runtime-version.json",
+        "observer_generated/static/messages.zh-CN.js",
+        "observer_generated/static/viewer.js"
+      ]
+    },
+    {
+      "reason": "Keep the live-only lazy code index out of recorded frames; restore the selected code view on return to live. Application logic, graph identities, probes and independent business assertions are unchanged.",
+      "changed": []
     }
   ],
   "core_exclude": [
