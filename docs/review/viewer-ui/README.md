@@ -76,3 +76,28 @@ directory. This run used Chrome. These are development-test dependencies.
 The Pages animation is an illustration. The runtime browser checks above operate
 an actual local application and its canonical graph service. This change does not
 claim a new independent human trial or a performance benchmark.
+
+## Publication
+
+The tested code is commit `03bad7facd42868c9c8553948475447ab91618fa`, published on
+`main`, `dev` and [v0.7.2](https://github.com/li-bruce/VibeLens/releases/tag/v0.7.2).
+The `main` and `dev` [CI runs](publication/ci.json) pass on Windows and Linux with
+Python 3.11/3.13, including the separate live-database job. The tag also triggers a
+repeat of those checks against the same commit; the receipt records its status at
+the stated observation time.
+
+- [Release receipt](publication/release.json): tag target, notes and ZIP digest match.
+- [Public installation](publication/installation.json): all 175 Skill files match
+  GitHub, a fresh project installation and the updated local VibeLens installation.
+- [Pages asset comparison](publication/pages.json): all nine deployed assets match.
+- [Deployed browser checks](site-deployed/result.json): language switching, seven
+  views, 390px layout, viewer tour, reduced motion and the separate walkthrough pass.
+- [Local upgrade](publication/local-installation.json): the previous installation
+  is retained as a complete backup.
+
+The first public-install check also asserted that the old global Skill name was
+absent. A separate `business-observer` directory had appeared after the earlier
+rename, so that [namespace assertion failed](publication/install-first-attempt.json)
+after file verification had passed. Its origin was not established; it was preserved.
+The final receipt reports this finding separately. Invoke `$vibelens` to select the
+verified version. No product acceptance tests were relaxed.

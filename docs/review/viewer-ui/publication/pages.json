@@ -1,0 +1,61 @@
+{
+  "passed": true,
+  "url": "https://li-bruce.github.io/VibeLens/",
+  "commit": "03bad7facd42868c9c8553948475447ab91618fa",
+  "checks": [
+    {
+      "path": "index.html",
+      "source_sha256": "34e4c95be0675b41a114dc364ac9253b9a293695990943564df26002196270b9",
+      "deployed_sha256": "34e4c95be0675b41a114dc364ac9253b9a293695990943564df26002196270b9",
+      "matches": true
+    },
+    {
+      "path": "site.js",
+      "source_sha256": "ae54f5689088b92adb8d6410aaf451a2d1309380a4eb57ccc0e8a8fa098b7ccb",
+      "deployed_sha256": "ae54f5689088b92adb8d6410aaf451a2d1309380a4eb57ccc0e8a8fa098b7ccb",
+      "matches": true
+    },
+    {
+      "path": "messages.mjs",
+      "source_sha256": "d21042d33a8d2d57d0e5076d311a5ba816804629ff55792a3be4350ba366c819",
+      "deployed_sha256": "d21042d33a8d2d57d0e5076d311a5ba816804629ff55792a3be4350ba366c819",
+      "matches": true
+    },
+    {
+      "path": "site-ui.mjs",
+      "source_sha256": "f021364bd571100393f49694bddce8ce9e985871a9c5c711fc4a7c6da2c8826a",
+      "deployed_sha256": "f021364bd571100393f49694bddce8ce9e985871a9c5c711fc4a7c6da2c8826a",
+      "matches": true
+    },
+    {
+      "path": "demo.html",
+      "source_sha256": "2e69088bc8de5ca25e4564c9a5edbed1f057a5a968711d02478f5a32f5cf05ae",
+      "deployed_sha256": "2e69088bc8de5ca25e4564c9a5edbed1f057a5a968711d02478f5a32f5cf05ae",
+      "matches": true
+    },
+    {
+      "path": "demo.mjs",
+      "source_sha256": "2c34675e3f5622d05461820859622b531de0c3bf530f49ca3aa74130155e7a19",
+      "deployed_sha256": "2c34675e3f5622d05461820859622b531de0c3bf530f49ca3aa74130155e7a19",
+      "matches": true
+    },
+    {
+      "path": "demo-messages.mjs",
+      "source_sha256": "c544271ef01ca3c454f4d9914763ffffbd78375892e05e292c7f7905c353780e",
+      "deployed_sha256": "c544271ef01ca3c454f4d9914763ffffbd78375892e05e292c7f7905c353780e",
+      "matches": true
+    },
+    {
+      "path": "site.css",
+      "source_sha256": "d453163afd6d696b0375636aa836b0e1e47277376f52255f5288ef42f6831ee2",
+      "deployed_sha256": "d453163afd6d696b0375636aa836b0e1e47277376f52255f5288ef42f6831ee2",
+      "matches": true
+    },
+    {
+      "path": "viewer-tour.mjs",
+      "source_sha256": "f4926eef2bb0466321d06552a17dd9bee914279bffbe8f1ed6026ef593986285",
+      "deployed_sha256": "f4926eef2bb0466321d06552a17dd9bee914279bffbe8f1ed6026ef593986285",
+      "matches": true
+    }
+  ]
+}

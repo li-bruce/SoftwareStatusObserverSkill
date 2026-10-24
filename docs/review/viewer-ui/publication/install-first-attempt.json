@@ -1,0 +1,14 @@
+{
+  "passed": false,
+  "commit": "03bad7facd42868c9c8553948475447ab91618fa",
+  "stage": "legacy_namespace",
+  "error": "AssertionError: the separate ~/.codex/skills/business-observer directory exists",
+  "completed_checks": [
+    "Anonymous clone matches the requested commit",
+    "All installed VibeLens files match the public source",
+    "All globally installed VibeLens files match the public source",
+    "The fresh project installation has no extra files"
+  ],
+  "finding": "The legacy directory was recreated after the earlier rename, with creation time 2026-10-24 17:41:01 local. Its origin was not established.",
+  "resolution": "Retain the unrelated directory and report its presence separately from VibeLens byte-identity verification. No product validation or business assertions were changed."
+}
