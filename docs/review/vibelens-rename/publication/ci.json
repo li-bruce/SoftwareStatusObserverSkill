@@ -1,0 +1,111 @@
+{
+  "checked_at": "2026-10-24T09:40:24.792737+00:00",
+  "commit": "86655a691f1f4110a082f29f2e8f8149cdd1be98",
+  "repository_id": 1425417229,
+  "repository": "li-bruce/VibeLens",
+  "homepage": "https://liblog.vip/VibeLens/",
+  "runs": [
+    {
+      "id": 40082262698,
+      "name": "Checks",
+      "event": "push",
+      "head_branch": "dev",
+      "head_sha": "86655a691f1f4110a082f29f2e8f8149cdd1be98",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/li-bruce/VibeLens/actions/runs/40082262698",
+      "jobs": [
+        {
+          "name": "test (windows-latest, 3.11)",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/li-bruce/VibeLens/actions/runs/40082262698/job/120838051628"
+        },
+        {
+          "name": "test (ubuntu-latest, 3.13)",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/li-bruce/VibeLens/actions/runs/40082262698/job/120838051773"
+        },
+        {
+          "name": "test (windows-latest, 3.13)",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/li-bruce/VibeLens/actions/runs/40082262698/job/120838051792"
+        },
+        {
+          "name": "test (ubuntu-latest, 3.11)",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/li-bruce/VibeLens/actions/runs/40082262698/job/120838051803"
+        },
+        {
+          "name": "database-live",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/li-bruce/VibeLens/actions/runs/40082262698/job/120838051837"
+        }
+      ]
+    },
+    {
+      "id": 40082262579,
+      "name": "Publish introduction",
+      "event": "push",
+      "head_branch": "main",
+      "head_sha": "86655a691f1f4110a082f29f2e8f8149cdd1be98",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/li-bruce/VibeLens/actions/runs/40082262579",
+      "jobs": [
+        {
+          "name": "deploy",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/li-bruce/VibeLens/actions/runs/40082262579/job/120838051025"
+        }
+      ]
+    },
+    {
+      "id": 40082262594,
+      "name": "Checks",
+      "event": "push",
+      "head_branch": "main",
+      "head_sha": "86655a691f1f4110a082f29f2e8f8149cdd1be98",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/li-bruce/VibeLens/actions/runs/40082262594",
+      "jobs": [
+        {
+          "name": "database-live",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/li-bruce/VibeLens/actions/runs/40082262594/job/120838050942"
+        },
+        {
+          "name": "test (ubuntu-latest, 3.13)",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/li-bruce/VibeLens/actions/runs/40082262594/job/120838051139"
+        },
+        {
+          "name": "test (windows-latest, 3.11)",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/li-bruce/VibeLens/actions/runs/40082262594/job/120838051214"
+        },
+        {
+          "name": "test (windows-latest, 3.13)",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/li-bruce/VibeLens/actions/runs/40082262594/job/120838051224"
+        },
+        {
+          "name": "test (ubuntu-latest, 3.11)",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/li-bruce/VibeLens/actions/runs/40082262594/job/120838051306"
+        }
+      ]
+    }
+  ]
+}

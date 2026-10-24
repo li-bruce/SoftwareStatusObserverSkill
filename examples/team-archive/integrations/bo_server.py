@@ -270,6 +270,8 @@ def serve(root, args, model, manifest, sources):
                     return self.reply(200,application.recordings.start(values.get("label",""),values.get("scope")))
                 if action=="recordings/stop":
                     return self.reply(200,application.recordings.stop())
+                if action=="recordings/clear":
+                    return self.reply(200,application.recordings.clear(values.get("id")))
                 result=application.command(action,values)
                 application.recordings.command(action,values,result)
                 return self.reply(200,result)

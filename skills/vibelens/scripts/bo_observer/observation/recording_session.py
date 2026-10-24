@@ -484,6 +484,32 @@ class Recordings:
                 raise ValueError("This recording belongs to an earlier graph version")
             return deepcopy(value)
 
+    def clear(self, ident):
+        """Remove one stopped, current-version recording; leave business data untouched."""
+        with self.operations:
+            # Never hold the recording lock while reading the application.
+            current = graph_version(self.provider())
+            with self.lock:
+                path = self._path(ident)
+                if self.active:
+                    raise ValueError("Stop recording before clearing a saved record")
+                if path.is_symlink() or not path.resolve().is_relative_to(self.directory.resolve()):
+                    raise ValueError("Invalid recording path")
+                if not path.is_file():
+                    raise ValueError("Recording not found")
+                value = json.loads(path.read_text(encoding="utf-8"))
+                if value.get("schema") != SCHEMA or value.get("id") != ident:
+                    raise ValueError("Invalid recording file")
+                if value.get("status") not in {"stopped", "interrupted", "limited"}:
+                    raise ValueError("Only stopped recordings can be cleared")
+                if graph_version(value["context"]) != current:
+                    raise ValueError("This recording belongs to an earlier graph version")
+                # On an I/O failure retain the catalog and cache for a safe retry.
+                path.unlink()
+                self.cached.pop(ident, None)
+                self.catalog.pop(ident, None)
+                return {"id": ident, "cleared": True}
+
     def list(self):
         # Read outside the recording lock: a provider may take the application's
         # lock while business operations deliver events back to this recorder.

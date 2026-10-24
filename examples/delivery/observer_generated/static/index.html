@@ -1,22 +1,326 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Developer runtime graph</title><link rel="stylesheet" href="/viewer.css"></head><body>
-<header><div class="brand"><span class="mark">◉</span><h1 id="title">Runtime graph</h1></div><div class="header-right"><select id="language" aria-label="Interface language"><option value="en">English</option><option value="zh-CN">&#20013;&#25991;</option></select><span id="connection">Connecting</span><a id="program-link" href="/control" target="_blank" rel="noopener">Open application ↗</a></div></header>
-<div id="discussion-bar" aria-label="Graph area discussed in the conversation"><span id="discussion-label"></span><button id="discussion-focus" hidden>Current discussion</button><button id="discussion-clear" hidden>Clear focus</button></div>
-<div class="toolbar"><label>View <select id="analysis-view" aria-label="Analysis view"></select></label><button id="analysis-details" aria-pressed="false" title="Show internal calls, resources, and decision dependencies">Analysis details</button><button id="code-local" aria-pressed="false" disabled>Local code</button><button id="code-more" hidden>Load more code</button><span id="code-status" role="status"></span><button id="show-all">All elements</button><button id="filter-toggle" disabled aria-expanded="false" aria-controls="filter-panel">Filters</button><div class="graph-search"><input id="node-search" type="search" aria-label="Search nodes" placeholder="Search nodes, parameters, notes" autocomplete="off"><div id="search-results" aria-label="Search results" hidden></div></div></div>
-<div class="record-bar"><select id="capture-mode" aria-label="Recording scope"><option value="all">All core events</option><option value="focused">Selected region only</option></select><button id="record-start" disabled>● Start recording</button><button id="record-stop" disabled>■ Stop recording</button><select id="record-list" aria-label="Choose a recording"><option value="">Live observation</option></select><span id="record-status" role="status"></span></div>
-<section id="replay" hidden aria-label="Recording replay"><div class="replay-controls"><button id="replay-prev" aria-label="Previous step">‹</button><button id="replay-play">Play</button><button id="replay-next" aria-label="Next step">›</button><input id="replay-range" type="range" min="0" value="0" aria-label="Replay position"><output id="replay-position"></output><select id="replay-grain" aria-label="Step detail"><option value="view">Current level</option><option value="events">Each raw event</option></select><select id="replay-speed" aria-label="Replay speed"><option value="1600">Slow</option><option value="900" selected>Normal</option><option value="300">Fast</option></select><button id="replay-live">Back to live</button></div><div class="replay-event-row"><select id="replay-events" aria-label="Recorded steps"></select><button id="replay-locate">Locate</button><button id="replay-export">Export</button><span id="replay-note"></span></div></section>
-<div class="workspace"><aside class="view-tools" aria-label="Canvas and node controls"><span class="rail-heading">Canvas</span><select id="layout" aria-label="Layout algorithm"><option value="cluster">Circular groups</option><option value="layered">Layered layout</option><option value="stress">Relationship layout</option></select><button id="arrange">Arrange</button><button id="undo-layout" disabled>Undo layout</button><button id="collapse">Collapse all</button><button id="expand">Expand one level</button><button id="fit">Fit to canvas</button><div class="zoom-controls"><button id="zoom-out" aria-label="Zoom out">−</button><button id="zoom-in" aria-label="Zoom in">＋</button></div><output id="zoom">100%</output><span class="rail-heading">Selected node</span><button id="focus-selection" disabled>Locate</button><button id="node-expand" disabled>Expand</button><button id="pin" disabled>Pin position</button><button id="core-toggle" disabled>☆ Core</button><button id="annotate" disabled>Name / note</button><button id="hide-node" disabled>Hide node</button><button id="details" disabled>Parameter values</button><button id="source" disabled>Source</button><button id="reference-origin" hidden>Original node</button><span id="layout-status" role="status"></span></aside>
-<main id="viewport" tabindex="0" aria-label="Unified graph. Drag a node or empty region space to move the group; drag outside regions to pan. Double-click to expand, scroll to zoom. Select a node and press F to locate, P to pin, arrow keys to move, or Esc to clear focus."><div id="canvas-host"></div><div id="semantic" class="accessible-graph"></div><div id="semantic-edges" class="accessible-graph" aria-label="Relations at the current level"></div><div id="empty" hidden></div><nav id="hierarchy-path" aria-label="Parent hierarchy"></nav>
-<section id="filter-panel" hidden aria-label="Graph filters"><div class="detail-heading"><strong>Visible content</strong><button id="close-filters" aria-label="Close filters">×</button></div>
-<fieldset><legend>Nodes</legend><div class="filter-bulk"><button data-filter-group="nodes" data-all="true">Select all</button><button data-filter-group="nodes" data-all="false">Clear</button></div><div id="filter-nodes" class="filter-options"></div></fieldset>
-<fieldset><legend>Edges</legend><div class="filter-bulk"><button data-filter-group="edges" data-all="true">Select all</button><button data-filter-group="edges" data-all="false">Clear</button></div><div id="filter-edges" class="filter-options"></div></fieldset>
-<fieldset><legend>Expanded regions</legend><div class="filter-bulk"><button data-filter-group="regions" data-all="true">Select all</button><button data-filter-group="regions" data-all="false">Clear</button></div><div id="filter-regions" class="filter-options"></div></fieldset>
-<label class="filter-depth-label">Scope <select id="filter-scope"><option value="all">All</option><option value="permission">Authorization</option><option value="execution">Execution configuration</option><option value="observed">Captured events</option><option value="blocked">Waiting or rejected</option><option value="shared">Shared members</option></select></label>
-<label class="filter-depth-label">Contains text <input id="filter-query" maxlength="100" placeholder="Name, function, or parameter"></label>
-<label class="filter-depth-label">Level <select id="filter-depth"><option value="all">All levels</option></select></label><p id="filter-count" role="status"></p><button id="filter-reset">Reset this view</button><strong id="hidden-elements-heading" hidden>Hidden elements</strong><div id="hidden-elements"></div><form id="save-view"><input id="custom-view-name" maxlength="40" required placeholder="Custom view name" aria-label="Custom view name"><button type="submit">Save view</button></form><button id="delete-view" hidden>Delete this custom view</button></section>
-<section id="edge-details" hidden aria-label="Original edge relations"><div class="detail-heading"><strong id="edge-title"></strong><button id="close-edge" aria-label="Close relation details">×</button></div><ul id="edge-members"></ul></section>
-<section id="node-details" hidden aria-label="Details beside the node"><div class="detail-heading"><strong id="detail-title"></strong><button id="close-detail" aria-label="Close details">×</button></div><div id="detail-rows"></div><form id="annotation-form" hidden><label for="node-name">Display name</label><input id="node-name" maxlength="80" autocomplete="off"><label for="node-note">Note</label><textarea id="node-note" maxlength="500" rows="4"></textarea><label class="core-label"><input id="node-core" type="checkbox">★ Mark as core</label><p class="subtle">Names and notes are saved in this project's personal view settings.</p><div class="annotation-actions"><button id="restore-name" type="button">Restore name</button><button type="submit">Done</button></div></form><button id="full-source" hidden>Complete file</button><pre id="source-code" hidden></pre></section><section id="step-changes" hidden aria-label="Changes in this step"><div class="change-heading"><strong id="change-title"></strong><span id="change-count"></span></div><div id="change-rows"></div></section></main>
-<aside id="legend-panel" aria-label="Legend"><span class="rail-heading">Nodes and regions</span><div id="legend-types"></div><p class="legend-note">Color identifies type; expanded regions keep that color. Dark fill marks a core or selected node. Badges show runtime status.</p><span class="rail-heading">Edges</span><div class="legend relation-legend" aria-label="Edge types"></div><span class="rail-heading">Node markers</span><dl><dt>▶ Running　✓ Finished</dt><dt>! Waiting / rejected</dt><dt>· Historical fact</dt><dt>＋N children　− Collapse</dt><dt>● Pinned　✎ Note　★ Core</dt><dt>↗ Shared entry for the same node</dt><dt>Filter boundary: the other end of a relation</dt></dl><p class="legend-note">Drag inside a region to move its group; drag outside to pan.</p></aside></div>
-<footer><span id="selection">Double-click to expand; drag a node or empty region space to move its group.</span><span id="renderer">PixiJS</span></footer>
-<div hidden aria-hidden="true"><select id="version"><option value="live">live</option></select><select id="case"><option value="live">live</option></select><select id="attempt"><option value="latest">latest</option></select><select id="step"><option value="latest">latest</option></select><span id="phase"></span><span id="context"></span><span id="binding"></span><button id="legend-toggle"></button><button id="legend-close"></button><div id="node-legend"></div><div class="graph-legends"></div></div>
-<script src="/pixi.min.js"></script><script src="/elk.bundled.js"></script><script type="module" src="/viewer.js"></script></body></html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>VibeLens</title>
+    <link rel="stylesheet" href="/viewer.css" />
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <span class="mark">◉</span>
+        <h1 id="title">VibeLens</h1>
+        <span id="project-title"></span>
+      </div>
+      <div class="header-right">
+        <select id="language" aria-label="Interface language">
+          <option value="en">English</option>
+          <option value="zh-CN">&#20013;&#25991;</option></select
+        ><span id="connection">Connecting</span
+        ><a id="program-link" href="/control" target="_blank" rel="noopener">Open application ↗</a>
+      </div>
+    </header>
+    <div class="toolbar">
+      <label
+        >View
+        <select id="analysis-view" aria-label="Analysis view"></select></label
+      ><button
+        id="analysis-details"
+        aria-pressed="false"
+        title="Show internal calls, resources, and decision dependencies"
+      >
+        Analysis details</button
+      ><button id="code-local" aria-pressed="false" disabled>Local code</button
+      ><button id="code-more" hidden>Load more code</button
+      ><span id="code-status" role="status"></span><button id="show-all">All elements</button
+      ><button id="filter-toggle" disabled aria-expanded="false" aria-controls="filter-panel">
+        Filters
+      </button>
+      <div class="graph-search">
+        <input
+          id="node-search"
+          type="search"
+          aria-label="Search nodes"
+          placeholder="Search nodes, parameters, notes"
+          autocomplete="off"
+        />
+        <div id="search-results" aria-label="Search results" hidden></div>
+      </div>
+    </div>
+    <div class="record-bar">
+      <select id="capture-mode" aria-label="Recording scope">
+        <option value="all">All core events</option>
+        <option value="focused">Selected region only</option></select
+      ><button
+        id="record-start"
+        data-icon="record"
+        aria-label="Start recording"
+        title="Start recording"
+        disabled
+      ></button
+      ><button
+        id="record-stop"
+        data-icon="stop"
+        aria-label="Stop recording"
+        title="Stop recording"
+        disabled
+      ></button
+      ><button
+        id="record-clear"
+        data-icon="clear"
+        aria-label="Clear selected recording"
+        title="Clear selected recording"
+        disabled
+      ></button
+      ><select id="record-list" aria-label="Choose a recording">
+        <option value="">Live observation</option></select
+      ><span id="record-status" role="status"></span>
+    </div>
+    <section id="replay" hidden aria-label="Recording replay">
+      <div class="replay-controls">
+        <button
+          id="replay-prev"
+          data-icon="previous"
+          aria-label="Previous step"
+          title="Previous step"
+        ></button
+        ><button id="replay-play" data-icon="play" aria-label="Play" title="Play"></button
+        ><button id="replay-next" data-icon="next" aria-label="Next step" title="Next step"></button
+        ><input
+          id="replay-range"
+          type="range"
+          min="0"
+          value="0"
+          aria-label="Replay position"
+        /><output id="replay-position"></output
+        ><select id="replay-grain" aria-label="Step detail">
+          <option value="view">Current level</option>
+          <option value="events">Each raw event</option></select
+        ><select id="replay-speed" aria-label="Replay speed">
+          <option value="1600">Slow</option>
+          <option value="900" selected>Normal</option>
+          <option value="300">Fast</option></select
+        ><button
+          id="replay-live"
+          data-icon="live"
+          aria-label="Back to live"
+          title="Back to live"
+        ></button>
+      </div>
+      <div class="replay-event-row">
+        <select id="replay-events" aria-label="Recorded steps"></select
+        ><button id="replay-locate" data-icon="locate" aria-label="Locate" title="Locate"></button
+        ><button id="replay-export" data-icon="download" aria-label="Export" title="Export"></button
+        ><span id="replay-note"></span>
+      </div>
+    </section>
+    <div class="workspace">
+      <main
+        id="viewport"
+        tabindex="0"
+        aria-label="Unified graph. Drag a node or empty region space to move the group; drag outside regions to pan. Double-click to expand, scroll to zoom. Select a node and press F to locate, P to pin, arrow keys to move, or Esc to clear focus."
+      >
+        <div id="canvas-host"></div>
+        <div id="semantic" class="accessible-graph"></div>
+        <div
+          id="semantic-edges"
+          class="accessible-graph"
+          aria-label="Relations at the current level"
+        ></div>
+        <div id="empty" hidden></div>
+        <nav id="hierarchy-path" aria-label="Parent hierarchy"></nav>
+        <section id="filter-panel" hidden aria-label="Graph filters">
+          <div class="detail-heading">
+            <strong>Visible content</strong
+            ><button id="close-filters" aria-label="Close filters">×</button>
+          </div>
+          <fieldset>
+            <legend>Nodes</legend>
+            <div class="filter-bulk">
+              <button data-filter-group="nodes" data-all="true">Select all</button
+              ><button data-filter-group="nodes" data-all="false">Clear</button>
+            </div>
+            <div id="filter-nodes" class="filter-options"></div>
+          </fieldset>
+          <fieldset>
+            <legend>Edges</legend>
+            <div class="filter-bulk">
+              <button data-filter-group="edges" data-all="true">Select all</button
+              ><button data-filter-group="edges" data-all="false">Clear</button>
+            </div>
+            <div id="filter-edges" class="filter-options"></div>
+          </fieldset>
+          <fieldset>
+            <legend>Expanded regions</legend>
+            <div class="filter-bulk">
+              <button data-filter-group="regions" data-all="true">Select all</button
+              ><button data-filter-group="regions" data-all="false">Clear</button>
+            </div>
+            <div id="filter-regions" class="filter-options"></div>
+          </fieldset>
+          <label class="filter-depth-label"
+            >Scope
+            <select id="filter-scope">
+              <option value="all">All</option>
+              <option value="permission">Authorization</option>
+              <option value="execution">Execution configuration</option>
+              <option value="observed">Captured events</option>
+              <option value="blocked">Waiting or rejected</option>
+              <option value="shared">Shared members</option>
+            </select></label
+          >
+          <label class="filter-depth-label"
+            >Contains text
+            <input id="filter-query" maxlength="100" placeholder="Name, function, or parameter"
+          /></label>
+          <label class="filter-depth-label"
+            >Level
+            <select id="filter-depth">
+              <option value="all">All levels</option>
+            </select></label
+          >
+          <p id="filter-count" role="status"></p>
+          <button id="filter-reset">Reset this view</button
+          ><strong id="hidden-elements-heading" hidden>Hidden elements</strong>
+          <div id="hidden-elements"></div>
+          <form id="save-view">
+            <input
+              id="custom-view-name"
+              maxlength="40"
+              required
+              placeholder="Custom view name"
+              aria-label="Custom view name"
+            /><button type="submit">Save view</button>
+          </form>
+          <button id="delete-view" hidden>Delete this custom view</button>
+        </section>
+        <section id="edge-details" hidden aria-label="Original edge relations">
+          <div class="detail-heading">
+            <strong id="edge-title"></strong
+            ><button id="close-edge" aria-label="Close relation details">×</button>
+          </div>
+          <ul id="edge-members"></ul>
+        </section>
+        <section id="node-details" hidden aria-label="Details beside the node">
+          <div class="detail-heading">
+            <strong id="detail-title"></strong
+            ><button id="close-detail" aria-label="Close details">×</button>
+          </div>
+          <div id="detail-rows"></div>
+          <form id="annotation-form" hidden>
+            <label for="node-name">Display name</label
+            ><input id="node-name" maxlength="80" autocomplete="off" /><label for="node-note"
+              >Note</label
+            ><textarea id="node-note" maxlength="500" rows="4"></textarea
+            ><label class="core-label"
+              ><input id="node-core" type="checkbox" />★ Mark as core</label
+            >
+            <p class="subtle">
+              Names and notes are saved in this project's personal view settings.
+            </p>
+            <div class="annotation-actions">
+              <button id="restore-name" type="button">Restore name</button
+              ><button type="submit">Done</button>
+            </div>
+          </form>
+          <button id="full-source" hidden>Complete file</button>
+          <pre id="source-code" hidden></pre>
+        </section>
+        <section id="step-changes" hidden aria-label="Changes in this step">
+          <div class="change-heading">
+            <strong id="change-title"></strong><span id="change-count"></span>
+          </div>
+          <div id="change-rows"></div>
+        </section>
+        <div class="canvas-tools" role="toolbar" aria-label="Canvas controls">
+          <button
+            id="layout-toggle"
+            data-icon="layout"
+            aria-label="Layout"
+            aria-expanded="false"
+            aria-controls="layout-panel"
+          ></button>
+          <button id="undo-layout" data-icon="undo" aria-label="Undo layout" disabled></button>
+          <button id="collapse" data-icon="collapse" aria-label="Collapse all"></button>
+          <button id="expand" data-icon="expand" aria-label="Expand one level"></button>
+          <button id="fit" data-icon="fit" aria-label="Fit to canvas"></button>
+          <span class="tool-divider"></span>
+          <button id="zoom-out" data-icon="minus" aria-label="Zoom out"></button>
+          <output id="zoom">100%</output>
+          <button id="zoom-in" data-icon="plus" aria-label="Zoom in"></button>
+        </div>
+        <section id="layout-panel" class="small-popover" hidden aria-label="Layout settings">
+          <label for="layout">Layout</label>
+          <select id="layout" aria-label="Layout algorithm">
+            <option value="cluster">Circular groups</option>
+            <option value="layered">Layered layout</option>
+            <option value="stress">Relationship layout</option>
+          </select>
+          <button id="arrange">Arrange</button>
+        </section>
+        <button
+          id="selection-menu"
+          data-icon="more"
+          aria-label="Selection actions"
+          aria-haspopup="menu"
+          aria-controls="graph-menu"
+          hidden
+        ></button>
+        <section id="graph-menu" class="context-menu" role="menu" aria-label="Graph actions" hidden>
+          <strong data-menu-title></strong>
+          <div data-menu-kind="node">
+            <button id="node-expand" role="menuitem" disabled>Expand</button>
+            <button id="focus-selection" role="menuitem" disabled>Locate</button>
+            <button id="details" role="menuitem" disabled>Parameter values</button>
+            <button id="source" role="menuitem" disabled>Source</button>
+            <div role="separator"></div>
+            <button id="annotate" role="menuitem" disabled>Name / note</button>
+            <button id="core-toggle" role="menuitem" disabled>Core</button>
+            <button id="pin" role="menuitem" disabled>Pin position</button>
+            <button id="hide-node" role="menuitem" disabled>Hide node</button>
+            <button id="reference-origin" role="menuitem" hidden>Original node</button>
+          </div>
+          <div data-menu-kind="edge" hidden>
+            <button id="edge-inspect" role="menuitem">Relation details</button>
+            <button id="edge-from" role="menuitem">Locate source node</button>
+            <button id="edge-to" role="menuitem">Locate target node</button>
+            <div role="separator"></div>
+            <button id="edge-hide" role="menuitem">Hide relation</button>
+          </div>
+        </section>
+        <aside id="legend-panel" aria-label="Legend">
+          <div id="legend-types" aria-label="Visible node types"></div>
+          <div class="legend relation-legend" aria-label="Visible edge types"></div>
+          <div class="marker-legend">
+            <span title="Running">▶</span><span title="Finished">✓</span
+            ><span title="Waiting or rejected">!</span><span title="Core node">★</span
+            ><span title="Pinned position">●</span><span title="Note">✎</span
+            ><span title="Shared node">↗</span>
+          </div>
+        </aside>
+      </main>
+    </div>
+    <footer>
+      <span id="selection">Right-click a node or edge for actions.</span
+      ><span id="layout-status" role="status"></span><span id="renderer">PixiJS</span>
+    </footer>
+    <div hidden aria-hidden="true">
+      <select id="version">
+        <option value="live">live</option></select
+      ><select id="case">
+        <option value="live">live</option></select
+      ><select id="attempt">
+        <option value="latest">latest</option></select
+      ><select id="step">
+        <option value="latest">latest</option></select
+      ><span id="phase"></span><span id="context"></span><span id="binding"></span
+      ><button id="legend-toggle"></button><button id="legend-close"></button>
+      <div id="node-legend"></div>
+      <div class="graph-legends"></div>
+    </div>
+    <script src="/pixi.min.js"></script>
+    <script src="/elk.bundled.js"></script>
+    <script type="module" src="/viewer.js"></script>
+  </body>
+</html>

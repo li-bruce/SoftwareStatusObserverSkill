@@ -45,6 +45,7 @@ def main():
     run(ROOT, 'tools/test_demo_launcher.py')
     run(ROOT, 'tools/test_assessment_fixes.py')
     run(ROOT, 'tools/test_web_continuity.py')
+    run(ROOT, 'tests/test_interface_language.py')
     run(ROOT, 'tools/test_workflow_migration.py')
     run(ROOT, 'tools/test_archive_service_migration.py')
     run(ROOT, 'examples/python-modes/test_modes.py')

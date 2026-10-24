@@ -1,6 +1,6 @@
 {
   "schema": "bo-maintenance/v1",
-  "source_id": "467d33a73e77c177b5be87303e9793f1a5f2f2ab8ffb265b05efe23ed79d4748",
+  "source_id": "dc4d6fb1988dafa6785923735dc4bb213d592075c174f02366d2a7dad513d3ae",
   "inventory": {
     "files": {
       "archive_app/__init__.py": "c4cc8d894a9cb6e2da5510317e540d22b50b75b2a187f86675d20e86d967f9bf",
@@ -78,6 +78,7 @@
       "observer_runtime/bo_observer/web/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/bo_observer/web/bo_design.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/bo_observer/web/bo_web.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
+      "observer_runtime/bo_observer/web/interface_language.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/bo_observer/web/view_preferences.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/bo_observer/workflow/__init__.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
       "observer_runtime/bo_observer/workflow/bo_sync.py": "Shared tool implementation; copied-source integrity and tool tests cover it.",
@@ -170,6 +171,7 @@
       "run.py": "Server startup; watched and exercised by HTTP tests.",
       "static/graph/analysis.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
       "static/graph/code-layer.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
+      "static/graph/controls.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
       "static/graph/conversation.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
       "static/graph/data-layer.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
       "static/graph/elk-worker.min.js": "Reviewed graph viewer assets; runtime manifest checks their exact bytes.",
@@ -2795,5 +2797,5 @@
     "run.py::main",
     "static/app.js::bo_record"
   ],
-  "candidate_id": "24f4ddaf4c5cce73db72857b11f94b0ab6b969e871778541aebe611991c59119"
+  "candidate_id": "49c5d8870ca919444098ff257817dee87bb6e2e9c151fb14cd7ce52f4e477b86"
 }

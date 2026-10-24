@@ -86,13 +86,18 @@ async function waitReady() {
   }
   throw Error("Demo server did not become ready: " + logs);
 }
+async function menuClick(selector) {
+  await page.click('#selection-menu');
+  await page.click(selector);
+}
+
 try {
   await waitReady();
   const launch = { headless: true, args: ["--enable-unsafe-swiftshader"] };
   if (process.env.BO_BROWSER_EXECUTABLE) launch.executablePath = process.env.BO_BROWSER_EXECUTABLE;
   browser = await chromium.launch(launch);
   page = await browser.newPage({ viewport: { width: 1550, height: 1040 }, deviceScaleFactor: 1 });
-  page.on("pageerror", (error) => errors.push(error.message));
+  page.on("pageerror", (error) => errors.push(error.stack || error.message));
   page.on("console", (message) => {
     if (message.type() === "error") errors.push(message.text());
   });
@@ -104,7 +109,7 @@ try {
   for (const [id, node] of Object.entries(await nodes())) {
     if (node.nodeType !== "dataset") continue;
     await pick(id);
-    await page.click("#node-expand");
+    await menuClick("#node-expand");
   }
   await page.click("#fit");
   await page.waitForTimeout(300);
@@ -165,7 +170,7 @@ try {
     ),
   );
   await pick("select");
-  await page.click("#details");
+  await menuClick("#details");
   await page.waitForFunction(() =>
     document.getElementById("detail-rows").textContent.includes("12 → 7"),
   );
@@ -201,13 +206,13 @@ try {
   await page.mouse.down();
   await page.mouse.move(Number(point.screenX) + 55, Number(point.screenY) + 36, { steps: 6 });
   await page.mouse.up();
-  await page.click("#pin");
+  await menuClick("#pin");
   await page.click("#filter-toggle");
   await page.locator('#filter-edges input[value="writes"]').uncheck();
   await page.click("#close-filters");
   assert.equal(await page.locator('#semantic-edges [data-relation-type="writes"]').count(), 0);
   await pick("transaction");
-  await page.click("#hide-node");
+  await menuClick("#hide-node");
   assert.ok(!(await nodes()).transaction);
   await page.waitForTimeout(650);
   checkpoints.beforeUpgrade = await nodes();
@@ -248,7 +253,7 @@ try {
   for (const [id, node] of Object.entries(await nodes())) {
     if (node.nodeType !== "dataset" || node.expanded === "true") continue;
     await pick(id);
-    await page.click("#node-expand");
+    await menuClick("#node-expand");
   }
   await page.click("#fit");
   await page.waitForTimeout(350);

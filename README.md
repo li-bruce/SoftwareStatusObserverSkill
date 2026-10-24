@@ -95,7 +95,7 @@ Alternatively, install with the Skills CLI:
 npx skills add li-bruce/VibeLens --skill vibelens
 ```
 
-You can also ask Codex's Skill installer to install from [the Skill directory](https://github.com/li-bruce/VibeLens/tree/main/skills/vibelens). Use `main` for current updates or `v0.7.1` for this fixed release. Existing `business-observer` installations have an explicit [migration command](docs/rename-vibelens.md). See the [release notes](docs/releases/v0.7.1.md), [independent application trial](docs/review/release-v0.7.0/README.md), and [implementation assessment](docs/assessment/2026-10-24/README.md).
+You can also ask Codex's Skill installer to install from [the Skill directory](https://github.com/li-bruce/VibeLens/tree/main/skills/vibelens). Use `main` for current updates or `v0.7.2` for this fixed release. Existing `business-observer` installations have an explicit [migration command](docs/rename-vibelens.md). See the [release notes](docs/releases/v0.7.2.md), [independent application trial](docs/review/release-v0.7.0/README.md), and [implementation assessment](docs/assessment/2026-10-24/README.md).
 
 English is the maintained source/documentation language. Conversation follows the user; the viewer offers English/Chinese and saves the preference in the project. Original answers and historical evidence retain their original language.
 

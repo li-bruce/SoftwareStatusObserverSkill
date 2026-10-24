@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "checks": [
+    "English fallback, live conversation language, translated accessible icons, persisted manual override",
+    "Actual pointer context menu, keyboard navigation, edge actions, compact legend, persisted notes/core/pin",
+    "No discussion bar; Escape and blank-canvas dismissal; persisted dismissal and new-revision focus; silent stale removal",
+    "Quiet stale focus, real operation capture/replay, active-clear rejection, delayed-load clear guard, isolated selected-record clear, zero observer-only events"
+  ],
+  "errors": [],
+  "recordedEvents": 10,
+  "remainingRecordings": 1
+}

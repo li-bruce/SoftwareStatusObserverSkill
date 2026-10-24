@@ -1,0 +1,165 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Database demo: http://127.0.0.1:8871/graph
+Disposable application: C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\.validation\bo-database-demo-2k9ba42j
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 56599)
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\vibelens\scripts\bo_observer\service.py", line 473, in do_GET
+    return self.reply(200, session.web.get(self.path))
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\vibelens\scripts\bo_observer\service.py", line 438, in reply
+    self.wfile.write(raw)
+    ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\socketserver.py", line 845, in write
+    self._sock.sendall(b)
+    ~~~~~~~~~~~~~~~~~~^^^
+ConnectionAbortedError: [WinError 10053] 你的主机中的软件中止了一个已建立的连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\miniforge3\Lib\socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\socketserver.py", line 766, in __init__
+    self.handle()
+    ~~~~~~~~~~~^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\http\server.py", line 447, in handle
+    self.handle_one_request()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\http\server.py", line 435, in handle_one_request
+    method()
+    ~~~~~~^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\database_demo.py", line 422, in do_GET
+    return super().do_GET()
+           ~~~~~~~~~~~~~~^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\vibelens\scripts\bo_observer\service.py", line 394, in handle
+    return method(handler, current)
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\vibelens\scripts\bo_observer\service.py", line 511, in do_GET
+    return self.reply(400, {"error": str(exc)})
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\vibelens\scripts\bo_observer\service.py", line 437, in reply
+    self.end_headers()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\http\server.py", line 549, in end_headers
+    self.flush_headers()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\http\server.py", line 553, in flush_headers
+    self.wfile.write(b"".join(self._headers_buffer))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\socketserver.py", line 845, in write
+    self._sock.sendall(b)
+    ~~~~~~~~~~~~~~~~~~^^^
+ConnectionAbortedError: [WinError 10053] 你的主机中的软件中止了一个已建立的连接。
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 64384)
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\vibelens\scripts\bo_observer\service.py", line 473, in do_GET
+    return self.reply(200, session.web.get(self.path))
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\vibelens\scripts\bo_observer\service.py", line 438, in reply
+    self.wfile.write(raw)
+    ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\socketserver.py", line 845, in write
+    self._sock.sendall(b)
+    ~~~~~~~~~~~~~~~~~~^^^
+ConnectionAbortedError: [WinError 10053] 你的主机中的软件中止了一个已建立的连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\miniforge3\Lib\socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\socketserver.py", line 766, in __init__
+    self.handle()
+    ~~~~~~~~~~~^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\http\server.py", line 447, in handle
+    self.handle_one_request()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\http\server.py", line 435, in handle_one_request
+    method()
+    ~~~~~~^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\database_demo.py", line 422, in do_GET
+    return super().do_GET()
+           ~~~~~~~~~~~~~~^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\vibelens\scripts\bo_observer\service.py", line 394, in handle
+    return method(handler, current)
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\vibelens\scripts\bo_observer\service.py", line 511, in do_GET
+    return self.reply(400, {"error": str(exc)})
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\vibelens\scripts\bo_observer\service.py", line 437, in reply
+    self.end_headers()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\http\server.py", line 549, in end_headers
+    self.flush_headers()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\http\server.py", line 553, in flush_headers
+    self.wfile.write(b"".join(self._headers_buffer))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\socketserver.py", line 845, in write
+    self._sock.sendall(b)
+    ~~~~~~~~~~~~~~~~~~^^^
+ConnectionAbortedError: [WinError 10053] 你的主机中的软件中止了一个已建立的连接。
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 57577)
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\vibelens\scripts\bo_observer\service.py", line 473, in do_GET
+    return self.reply(200, session.web.get(self.path))
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\vibelens\scripts\bo_observer\service.py", line 438, in reply
+    self.wfile.write(raw)
+    ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\socketserver.py", line 845, in write
+    self._sock.sendall(b)
+    ~~~~~~~~~~~~~~~~~~^^^
+ConnectionAbortedError: [WinError 10053] 你的主机中的软件中止了一个已建立的连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\miniforge3\Lib\socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\socketserver.py", line 766, in __init__
+    self.handle()
+    ~~~~~~~~~~~^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\http\server.py", line 447, in handle
+    self.handle_one_request()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\http\server.py", line 435, in handle_one_request
+    method()
+    ~~~~~~^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\database_demo.py", line 422, in do_GET
+    return super().do_GET()
+           ~~~~~~~~~~~~~~^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\vibelens\scripts\bo_observer\service.py", line 394, in handle
+    return method(handler, current)
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\vibelens\scripts\bo_observer\service.py", line 511, in do_GET
+    return self.reply(400, {"error": str(exc)})
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\skills\vibelens\scripts\bo_observer\service.py", line 437, in reply
+    self.end_headers()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\http\server.py", line 549, in end_headers
+    self.flush_headers()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\http\server.py", line 553, in flush_headers
+    self.wfile.write(b"".join(self._headers_buffer))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\socketserver.py", line 845, in write
+    self._sock.sendall(b)
+    ~~~~~~~~~~~~~~~~~~^^^
+ConnectionAbortedError: [WinError 10053] 你的主机中的软件中止了一个已建立的连接。
+----------------------------------------

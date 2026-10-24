@@ -8,21 +8,23 @@
       content="Understand the software you build with AI. Explore its business flows, inspect state and value changes, and follow an operation into the code."
     />
     <title>VibeLens — Understand what you build</title>
-    <link rel="stylesheet" href="site.css?rev=0.7.1" />
+    <link rel="stylesheet" href="site.css?rev=0.7.2" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <script type="module" src="site.js?rev=0.7.1"></script>
+    <script type="module" src="site.js?rev=0.7.2"></script>
   </head>
   <body>
     <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
     <header class="wrap nav">
       <a class="brand" href="index.html" data-local-link
-        ><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>VibeLens<span class="skill-tag">SKILL</span></a
+        ><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>VibeLens<span
+          class="skill-tag"
+          >SKILL</span
+        ></a
       >
       <nav aria-label="Main navigation" data-i18n-aria="navigation">
         <a href="#explore" data-i18n="nav.explore">Explore</a
         ><a href="demo.html" data-local-link data-i18n="nav.demo">Try the demo</a
-        ><a class="github" href="https://github.com/li-bruce/VibeLens"
-          >GitHub ↗</a
+        ><a class="github" href="https://github.com/li-bruce/VibeLens">GitHub ↗</a
         ><button class="language" id="language" type="button" aria-label="Switch to Chinese">
           中文
         </button>
@@ -101,9 +103,9 @@
         <div class="problem-grid">
           <h2 data-i18n="problem.title">The screen works.<br />What happens inside?</h2>
           <p data-i18n="problem.body">
-            During vibe coding, each change can touch several parts of a program. VibeLens
-            helps you follow those connections: what triggered an action, which decision allowed it,
-            and which value changed.
+            During vibe coding, each change can touch several parts of a program. VibeLens helps you
+            follow those connections: what triggered an action, which decision allowed it, and which
+            value changed.
           </p>
         </div>
       </section>
@@ -325,6 +327,152 @@
           </div>
         </div>
       </section>
+      <section
+        class="wrap section-space viewer-tour"
+        id="viewer-tour"
+        data-step="overview"
+        aria-label="Viewer tour"
+        data-i18n-aria="tour.aria"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow" data-i18n="tour.kicker">Inside VibeLens</p>
+            <h2 data-i18n="tour.title">A closer look,<br />one step at a time.</h2>
+          </div>
+          <p data-i18n="tour.body">
+            Expand a flow, leave a note, and replay an operation. Keep the graph in view as you
+            inspect the details.
+          </p>
+        </div>
+        <div class="tour-window">
+          <div class="tour-top">
+            <strong>◉ VibeLens</strong
+            ><span data-tour-copy="tour.illustration">Illustrated tour</span
+            ><span class="tour-window-dots" aria-hidden="true">● ● ●</span>
+          </div>
+          <div class="tour-toolbar">
+            <span data-tour-copy="tour.business">Business flow</span
+            ><span class="tour-record-icon" aria-hidden="true">●</span
+            ><span aria-hidden="true">■</span><span aria-hidden="true">⊘</span
+            ><span class="tour-record-label" data-tour-copy="tour.recording">Recording</span
+            ><span class="tour-replay-label" data-tour-copy="tour.replay">Step 2 of 3</span>
+          </div>
+          <svg
+            class="tour-canvas"
+            viewBox="0 0 960 340"
+            role="img"
+            aria-label="Expand a flow and inspect its state and values"
+            data-i18n-aria="tour.graph"
+          >
+            <defs>
+              <marker
+                id="tour-arrow"
+                markerWidth="6"
+                markerHeight="6"
+                refX="5"
+                refY="3"
+                orient="auto"
+              >
+                <path d="M0 0L6 3L0 6Z" fill="#748cba" />
+              </marker>
+            </defs>
+            <g stroke="#748cba" fill="none" stroke-width="2" marker-end="url(#tour-arrow)">
+              <path d="M211 172H333" />
+              <path d="M628 172H749" />
+            </g>
+            <g class="tour-overview-node">
+              <circle cx="480" cy="172" r="35" fill="#e4ecff" stroke="#356dca" stroke-width="2" />
+              <text x="480" y="233" text-anchor="middle" data-tour-copy="node.process">
+                Process
+              </text>
+              <text x="480" y="178" text-anchor="middle" class="tour-plus">+</text>
+            </g>
+            <g class="tour-expanded">
+              <circle cx="480" cy="172" r="144" fill="#f0f5ff" stroke="#b2c8ef" stroke-width="2" />
+              <text
+                x="480"
+                y="62"
+                text-anchor="middle"
+                font-weight="600"
+                data-tour-copy="node.process"
+              >
+                Process
+              </text>
+              <path
+                class="tour-active-edge"
+                d="M421 155L538 155"
+                stroke="#55a49a"
+                stroke-width="2"
+                marker-end="url(#tour-arrow)"
+              />
+              <path
+                d="M400 182L465 242M551 180L495 240"
+                stroke="#a299c2"
+                fill="none"
+                stroke-dasharray="5 4"
+              />
+              <path
+                d="M395 126L421 141V170L395 185L369 170V141Z"
+                fill="#d8f1eb"
+                stroke="#298578"
+                stroke-width="2"
+              />
+              <text x="395" y="210" text-anchor="middle" class="tour-code">validate()</text>
+              <circle
+                class="tour-state-node"
+                cx="565"
+                cy="155"
+                r="28"
+                fill="#eee6f8"
+                stroke="#8b69ac"
+                stroke-width="2"
+              />
+              <text x="565" y="210" text-anchor="middle" data-tour-copy="tour.state">State</text>
+              <path d="M455 225H505V269H455Z" fill="#fff2d9" stroke="#c4974b" stroke-width="2" />
+              <text x="480" y="254" text-anchor="middle" class="tour-code">3</text>
+              <text x="480" y="292" text-anchor="middle" class="tour-code">count</text>
+              <circle class="tour-pulse" cx="480" cy="155" r="6" fill="#298578" />
+            </g>
+            <g>
+              <circle cx="175" cy="172" r="35" fill="#e4ecff" stroke="#356dca" stroke-width="2" />
+              <text x="175" y="233" text-anchor="middle" data-tour-copy="node.request">
+                Request
+              </text>
+              <circle cx="785" cy="172" r="35" fill="#e4ecff" stroke="#356dca" stroke-width="2" />
+              <text x="785" y="233" text-anchor="middle" data-tour-copy="node.result">Result</text>
+            </g>
+            <g class="tour-note">
+              <rect x="592" y="67" width="155" height="104" rx="8" fill="#fff" stroke="#d6deea" />
+              <text x="608" y="95" font-weight="600" data-tour-copy="tour.note">Name / note</text>
+              <text x="608" y="124" data-tour-copy="tour.core">★ Mark as core</text>
+              <text x="608" y="152" data-tour-copy="tour.pin">Pin position</text>
+            </g>
+            <g class="tour-cursor" transform="translate(502 178)">
+              <path
+                d="M0 0V25L7 19L13 30L18 27L12 17L23 15Z"
+                fill="#263449"
+                stroke="white"
+                stroke-width="2"
+              />
+            </g>
+          </svg>
+          <div class="tour-values">
+            <span class="tour-change" data-tour-copy="tour.change"
+              >State: ready → complete · count: 2 → 3</span
+            ><span class="tour-hint" data-tour-copy="tour.hint">Right-click a node for actions</span
+            ><span class="tour-legend" data-tour-copy="tour.legend"
+              >● Flow · ⬡ Function · ● State</span
+            >
+          </div>
+        </div>
+        <div class="tour-controls">
+          <p id="tour-caption"></p>
+          <span id="tour-count"></span
+          ><button id="tour-play" type="button" aria-label="Pause tour">Ⅱ</button
+          ><button id="tour-next" type="button" aria-label="Next step">→</button>
+        </div>
+      </section>
+
       <section class="wrap section-space">
         <div class="section-heading">
           <div>
@@ -374,8 +522,8 @@
             <p class="eyebrow" data-i18n="install.kicker">Start with your own project</p>
             <h2 data-i18n="install.title">Bring the graph into<br />your next conversation.</h2>
             <p data-i18n="install.body">
-              Install VibeLens from GitHub, then open a new conversation in your project
-              and describe what you want to build.
+              Install VibeLens from GitHub, then open a new conversation in your project and
+              describe what you want to build.
             </p>
             <a
               class="button primary"
@@ -407,10 +555,9 @@
           href="https://github.com/li-bruce/VibeLens/blob/main/docs/review/english-gallery/README.md"
           data-i18n="footer.evidence"
           >Test records</a
-        ><a href="https://github.com/li-bruce/VibeLens/blob/main/LICENSE"
-          >MIT License</a
-        >
+        ><a href="https://github.com/li-bruce/VibeLens/blob/main/LICENSE">MIT License</a>
       </div>
     </footer>
+    <script type="module" src="viewer-tour.mjs?rev=0.7.2"></script>
   </body>
 </html>

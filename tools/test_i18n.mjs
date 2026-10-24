@@ -5,7 +5,10 @@ import {projectStorage} from '../skills/vibelens/assets/stategraph-viewer/prefer
 import {connectionStatus} from '../skills/vibelens/assets/stategraph-viewer/view-lifecycle.js';
 
 assert.equal(chooseLocale(), 'en');
-assert.equal(chooseLocale({languages:['fr-FR','zh-TW']}), 'zh-CN');
+assert.equal(chooseLocale({languages:['fr-FR','zh-TW']}), 'en');
+assert.equal(chooseLocale({conversation:'zh-TW'}), 'zh-CN');
+assert.equal(chooseLocale({conversation:'fr-FR'}), 'en');
+assert.equal(chooseLocale({saved:'en',conversation:'zh-CN'}), 'en');
 assert.equal(chooseLocale({explicit:'en',saved:'zh-CN',languages:['zh']}), 'en');
 assert.equal(chooseLocale({saved:'zh-CN',languages:['en']}), 'zh-CN');
 setLocale('en');

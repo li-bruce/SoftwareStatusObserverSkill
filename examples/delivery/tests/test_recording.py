@@ -63,6 +63,39 @@ class RecordingTests(unittest.TestCase):
         self.assertEqual(saved["status"],"stopped")
         self.assertEqual(saved["gaps"],[])
 
+    def test_clear_removes_only_selected_record_and_never_changes_business(self):
+        first = self.rec.start()["id"]
+        self.event(1)
+        self.rec.stop()
+        second = self.rec.start()["id"]
+        with self.assertRaisesRegex(ValueError, "Stop recording"):
+            self.rec.clear(first)
+        self.rec.stop()
+        before = deepcopy(self.view)
+        self.assertEqual(self.rec.clear(first), {"id": first, "cleared": True})
+        self.assertEqual(self.view, before)
+        self.assertFalse(self.rec._path(first).exists())
+        self.assertNotIn(first, self.rec.cached)
+        self.assertNotIn(first, self.rec.catalog)
+        self.assertEqual([x['id'] for x in self.rec.list()['recordings']], [second])
+        with self.assertRaisesRegex(ValueError, 'not found'):
+            self.rec.get(first)
+        with self.assertRaisesRegex(ValueError, 'Invalid recording ID'):
+            self.rec.clear('../business')
+
+    def test_clear_rejects_old_versions_and_keeps_cache_on_io_failure(self):
+        ident = self.rec.start()['id']
+        self.rec.stop()
+        original = self.rec.get(ident)
+        with patch.object(Path, 'unlink', side_effect=OSError('locked')):
+            with self.assertRaisesRegex(OSError, 'locked'):
+                self.rec.clear(ident)
+        self.assertEqual(self.rec.get(ident), original)
+        self.view['manifest']['build_id'] = 'b2'
+        with self.assertRaisesRegex(ValueError, 'earlier graph version'):
+            self.rec.clear(ident)
+        self.assertTrue(self.rec._path(ident).is_file())
+
     def test_empty_record_does_not_invent_events(self):
         ident=self.rec.start()["id"];self.rec.stop()
         self.assertEqual(self.rec.get(ident)["events"],[])

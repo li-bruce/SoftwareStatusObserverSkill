@@ -9,6 +9,7 @@ import hashlib
 import json
 from pathlib import Path
 from urllib.parse import urlsplit
+from .interface_language import read_language, set_language
 
 try:
     from ...behavior_model import contained
@@ -55,8 +56,9 @@ class BODesign:
         return {n["id"]: (n.get("model_nodes") or [n["id"]]) for n in nodes}
 
     def snapshot(self):
+        language = read_language(self.root)["conversation_locale"]
         if not self.path.exists():
-            return {"available": False}
+            return {"available": False, "locale": language}
         doc = self.document()
         path = contained(self.root, "bo_stategraph/config/design-focus.json")
         focus = read(path) if path.exists() else {"schema": 1, "nodes": [], "label": ""}
@@ -70,6 +72,7 @@ class BODesign:
             raise ValueError("Invalid conversation focus configuration")
         return {
             "available": True,
+            "locale": language,
             "revision": bo_digest(focus),
             "nodes": focus["nodes"],
             "label": focus["label"],
@@ -245,12 +248,14 @@ class BODesign:
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("action", choices=["show", "focus", "preview"])
+    p.add_argument("action", choices=["show", "focus", "preview", "language"])
     p.add_argument("--root", default=".")
     p.add_argument("--discovery")
     p.add_argument("--nodes", nargs="*", default=[])
     p.add_argument("--decision")
     p.add_argument("--label", default="")
+    p.add_argument("--locale", choices=["en", "zh-CN"])
+    p.add_argument("--source", help="Conversation message or explicit language preference")
     p.add_argument("--url", help="Actual graph URL, checked by the calling developer")
     p.add_argument("--max-nodes", type=int, default=12)
     p.add_argument(
@@ -259,6 +264,9 @@ def main():
     a = p.parse_args()
     try:
         design = BODesign(a.root, a.discovery)
+        if a.action == "language":
+            print(json.dumps(set_language(design.root, a.locale, a.source), indent=2))
+            return 0
         if a.action == "preview":
             result = design.preview(a.url or "", a.nodes, max_nodes=a.max_nodes)
             if a.out:

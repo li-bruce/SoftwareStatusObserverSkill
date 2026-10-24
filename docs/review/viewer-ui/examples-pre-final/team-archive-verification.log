@@ -1,0 +1,101 @@
+{
+  "valid": true,
+  "errors": [],
+  "candidate_id": "3d5ba742a4a9dfc05366546c9ac4f0cf18e404e680fc913866dee74f415f0d55",
+  "reports": {
+    "mapping": {
+      "status": "passed",
+      "errors": [],
+      "database": {
+        "configured": false,
+        "valid": true,
+        "errors": [],
+        "changed": false
+      },
+      "code_structure": {
+        "enabled": false,
+        "valid": true,
+        "status": "not_enabled",
+        "errors": []
+      },
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+      "stategraph_export": "checked",
+      "witnesses": 480,
+      "projection_checks": 1113,
+      "implementation": {
+        "errors": [],
+        "events_checked": 53,
+        "features": 22
+      }
+    },
+    "state_rules": {
+      "status": "passed",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "passed",
+      "errors": [],
+      "assertions": {
+        "required": 189,
+        "executed": 189
+      },
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "review_hash": "095fadc9be0dca1d1f17662c1c2ace9698e21b385b09e1a8ffb0cd3a3f23083e",
+  "observations_hash": "74607854eb0659e80ecfbaca3bc6a15667481a79afc70d22aa45b779d6f758e3",
+  "tests": [
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/tests.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tooling/graph_tests.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/test_recording.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tooling/test_recorded_views.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/test_stategraph_module.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "checked_at": "2026-10-24T09:57:45.297321+00:00",
+  "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+}
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe

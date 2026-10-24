@@ -119,7 +119,7 @@ def serve(port=8797):
         def do_POST(self):
             if not bo_web.allowed(urlparse(self.path).path):return self.send({'error':"Debug Web is disabled",'code':'bo_web_disabled'},404)
             if urlparse(self.path).path.startswith('/api/design'):return self.send({'error':"The graph is read-only; request changes in the development conversation"},405)
-            if self.path not in ('/api/command','/api/preferences','/api/recordings/start','/api/recordings/stop'):
+            if self.path not in ('/api/command','/api/preferences','/api/recordings/start','/api/recordings/stop','/api/recordings/clear'):
                 return self.send({'error':'unknown path'},404)
             origin=self.headers.get('Origin')
             if origin and origin!='http://'+self.headers.get('Host',''):return self.send({'error':'origin'},403)
@@ -132,6 +132,7 @@ def serve(port=8797):
                 if self.path=='/api/preferences':return self.send(session.preferences.save(data))
                 if self.path=='/api/recordings/start':return self.send(session.recordings.start(data.get('label',''),data.get('scope')))
                 if self.path=='/api/recordings/stop':return self.send(session.recordings.stop())
+                if self.path=='/api/recordings/clear':return self.send(session.recordings.clear(data.get('id')))
                 action=data.pop('action')
                 if action in ('prepare','execute'):
                     with session.lock:

@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "{python}",
+    "-B",
+    "-X",
+    "utf8",
+    "tooling/graph_fixture.py"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"valid\": true, \"fixture\": \"scratch/graph-fixture.json\"}\n",
+  "stderr": "Failed to find real location of C:\\Users\\Lvi_P\\miniforge3\\python.exe\n"
+}

@@ -1,6 +1,6 @@
 # VibeLens rename acceptance
 
-Requested on 2026-10-24. Local checks passed; publication checks are pending.
+Requested on 2026-10-24. Local checks and publication verification passed at commit `86655a6`.
 
 ## Scope
 
@@ -42,7 +42,9 @@ The GitHub repository is now `li-bruce/VibeLens`, retaining repository ID
 `1425417229`. The current checkout's `origin` uses the new URL. The local Codex
 installation was migrated with a full backup outside the active skills directory.
 
-The complete repository suite will run in the existing GitHub matrix (Windows and
-Linux, Python 3.11 and 3.13), alongside live database checks. New Pages asset
-identity, deployed-browser checks, release SHA-256 and a public fresh-install
-receipt will be added after publication. The previous release remains unchanged.
+The complete repository suite passed in the existing GitHub matrix (Windows and
+Linux, Python 3.11 and 3.13), alongside live database checks. See [CI](publication/ci.json),
+[deployed Pages asset identity](publication/pages.json), [release and archive identity](publication/release.json),
+and [fresh public installation](publication/installation.json). The public and local
+installations match all 172 files at `86655a6`; the old installation has a retained backup.
+The previous release remains unchanged. Later UI changes have separate evidence.

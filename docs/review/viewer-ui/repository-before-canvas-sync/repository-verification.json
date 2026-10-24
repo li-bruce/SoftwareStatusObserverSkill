@@ -1,0 +1,7 @@
+{
+  "passed": false,
+  "command": "python -B -X utf8 tools/verify.py --database",
+  "exit_code": 1,
+  "seconds": 0.74,
+  "finished_at": "2026-10-24T10:05:52.806664+00:00"
+}

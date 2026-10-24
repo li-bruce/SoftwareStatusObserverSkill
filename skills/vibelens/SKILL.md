@@ -20,6 +20,8 @@ Before behavior implementation, show a compact business-network diagram directly
 
 Route business ownership, permissions, and state meaning to the user. Reconcile parameter bindings, callback targets, types, and capture locations with the coding process. Implementation answers must reference current source and an actual verification case; prose is not runtime evidence. Keep unresolved dynamic targets unknown.
 
+Before sharing the first graph URL, record the conversation language with `bo_design.py language` as described in step 4. The user can override it in the page.
+
 When the requested software stores data, reuse its database choice or run `bo_db.py guide --root PROJECT` to prepare a short selection question. Recommend a database that fits the stated workload, explain the tradeoff, and record the user's choice. Keep confirmed business scope unchanged. See [database observation](references/database-observation.md) for supported stores and model layers.
 
 ## 2. Establish declarations, adapters, and expectations
@@ -69,7 +71,11 @@ Keep project, node, and relation IDs stable across iterations. Use explicit `pre
 
 ## 4. Present and inspect
 
+Use English for the default interface. Set its language from the user's current conversation with `bo_design.py language --root PROJECT --locale en|zh-CN --source CONVERSATION_REFERENCE`; repeat when the conversation language changes. A user's manual Web language choice takes precedence. Keep graph IDs, source code, and user-authored labels and notes unchanged. See [interface language](references/interface-language.md).
+
 Reuse the complete `assets/stategraph-viewer/` interaction. After each batch, provide the updated graph and a brief explanation of changes. Start at high-level nodes, then expand important functions, states, and values; reveal advanced details on demand. Any expanded node uses a region with its type's color. Preserve group dragging, saved layouts, typed edges, notes, core markers, search, source navigation, and replay.
+
+Keep the canvas central. Use node/edge context menus (also Shift+F10 and selection actions), a compact visible-type legend, and labeled recording icons. Clear removes only the selected stopped recording; it leaves application data and other recordings intact. Show conversation focus directly on the graph, with no separate discussion bar. Clicking empty canvas or pressing Escape dismisses it; expired focus clears silently.
 
 Keep the code layer optional. Offer **Local code** for a selected region and **Code structure** for the full indexed source scope. Honor display budgets and show boundary/omission information. The existing state and business graph must work when the code layer is closed.
 

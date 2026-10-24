@@ -25,6 +25,13 @@ Most Python files directly under scripts are small import/CLI entry points retai
 
 ## Three paths through the implementation
 
+The viewer's [controls.js](../skills/vibelens/assets/stategraph-viewer/controls.js) owns
+SVG icons and context-menu keyboard behavior. [i18n.js](../skills/vibelens/assets/stategraph-viewer/i18n.js)
+resolves URL, personal and conversation language. The conversation setting is validated
+by [interface_language.py](../skills/vibelens/scripts/bo_observer/web/interface_language.py);
+it never changes graph identities or business data. Recording deletion stays in the
+recording service and removes one stopped interval after version and identity checks.
+
 ### 1. A coding iteration changes the graph
 
 1. [workflow/bo_sync.py](../skills/vibelens/scripts/bo_observer/workflow/bo_sync.py): source_inventory enumerates the declared project scope independently of existing graph nodes. maintenance_task compares that inventory with the last accepted baseline.

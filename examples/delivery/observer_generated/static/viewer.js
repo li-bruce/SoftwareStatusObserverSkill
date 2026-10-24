@@ -1,11 +1,25 @@
 import { t as boTranslate } from "./i18n.js";
-import { locale, translateShell, restoreLocale, saveLocale, localeURL } from "./i18n.js";
+import {
+  locale,
+  translateShell,
+  restoreLocale,
+  saveLocale,
+  localeURL,
+  chooseLocale,
+  storedLocale,
+} from "./i18n.js";
+import { iconButton, installIcons, createContextMenu } from "./controls.js";
 import { createGraphRenderer, nodePoint, bezierAt } from "./renderer.js";
 import { createConversationFocus, discussionContext } from "./conversation.js";
 import { projectStorage } from "./preferences.js";
 import { createPoller } from "./polling.js";
 import { migrateNodeIds } from "./layout.js";
-import { projectLayoutKey, graphVersion, recordingMatches, connectionStatus } from "./view-lifecycle.js";
+import {
+  projectLayoutKey,
+  graphVersion,
+  recordingMatches,
+  connectionStatus,
+} from "./view-lifecycle.js";
 import { databaseWarning, dataRelationEvidence } from "./data-layer.js";
 import { CodeLayer, withCodeGraph, codeTypes, codeRelations, codeSummary } from "./code-layer.js";
 const codeLayer = new CodeLayer();
@@ -104,6 +118,8 @@ let recording = null,
   replayIndex = 0,
   playTimer = null,
   recordBusy = false,
+  recordLoading = false,
+  recordLoadId = 0,
   recordActive = false,
   lastRecordPoll = 0,
   latestLive = null;
@@ -132,9 +148,11 @@ try {
 const storage = await projectStorage(legacyStorage, (message) => {
   if ($("layout-status")) $("layout-status").textContent = message;
 });
-const restoredLocaleURL = restoreLocale(storage, window.location.href, navigator.languages);
+const restoredLocaleURL = restoreLocale(storage, window.location.href);
 if (restoredLocaleURL) window.location.replace(restoredLocaleURL);
 translateShell(document);
+installIcons(document);
+const contextMenu = createContextMenu($("graph-menu"));
 $("language").value = locale();
 $("language").addEventListener("change", async (event) => {
   event.target.disabled = true;
@@ -175,10 +193,18 @@ function point(box) {
   return nodePoint(graph, presentation, box);
 }
 function updatePresentation() {
-  for (const item of document.querySelectorAll("[data-code-legend]"))
-    item.hidden = !codeLayer.slice;
   presentation = presentationGraph(graph, preferences.filters);
   renderedEdges = presentation.edges;
+  const visibleTypes = new Set(
+    graph.boxes
+      .filter((box) => presentation.glyphs.has(box.id) || presentation.regions.has(box.id))
+      .map((box) => box.type),
+  );
+  const visibleRelations = new Set(renderedEdges.map((edge) => edge.type));
+  for (const item of document.querySelectorAll("[data-legend-node]"))
+    item.hidden = !visibleTypes.has(item.dataset.legendNode);
+  for (const item of document.querySelectorAll("[data-legend-edge]"))
+    item.hidden = !visibleRelations.has(item.dataset.legendEdge);
   $("empty").hidden = !!(presentation.glyphs.size + presentation.regions.size);
   if (!$("empty").hidden)
     $("empty").textContent = boTranslate("No matching nodes. Change the view or filters.");
@@ -370,7 +396,7 @@ async function arrange(initial = false) {
 }
 function plotArea() {
   const top = 42,
-    bottom = $("step-changes").hidden ? 24 : Math.min(160, $("step-changes").offsetHeight + 25);
+    bottom = $("step-changes").hidden ? 92 : Math.min(240, $("step-changes").offsetHeight + 90);
   return {
     top,
     height: Math.max(60, app.screen.height - top - bottom),
@@ -406,6 +432,10 @@ function select(id) {
   updateActions();
   schedule();
   saveSoon();
+}
+function clearCanvasFocus() {
+  conversation.clear();
+  select(null);
 }
 function frameDiscussion() {
   const boxes = [...discussionContext(graph, conversation.ids).nodes]
@@ -532,11 +562,12 @@ function updateActions() {
   $("hide-node").disabled = !b;
   $("details").disabled = !b;
   $("source").disabled = !binding;
+  $("selection-menu").hidden = !b && !selectedEdge;
   $("selection").textContent = b
     ? `${nodeTypes[b.type].label} · ${displayName(b.node, preferences)}` +
       (b.open ? boTranslate(" \u00B7 Drag empty space inside a region to move its group") : "") +
       (binding ? ` · ${binding.path}:${binding.line}` : "")
-    : boTranslate("Double-click to expand; drag a node or empty region space to move its group.");
+    : boTranslate("Right-click a node or edge for actions.");
 }
 function updateSemantic() {
   const host = $("semantic"),
@@ -656,6 +687,7 @@ let selectedEdge = null;
 function showEdge(edge) {
   select(null);
   selectedEdge = edge.id;
+  updateActions();
   updateEdgeDetail();
 }
 function updateEdgeDetail() {
@@ -857,8 +889,67 @@ function hitAt(e) {
   const r = app.canvas.getBoundingClientRect();
   return pickHit(hits, (e.clientX - r.left - pan.x) / scale, (e.clientY - r.top - pan.y) / scale);
 }
+// Pointer and keyboard users share the same selection and action handlers.
+function openSelectionMenu(x, y, target = $("viewport")) {
+  const box = graph?.byId.get(selected);
+  const edge = renderedEdges.find((item) => item.id === selectedEdge);
+  if (!box && !edge) return;
+  updateActions();
+  const title = box
+    ? displayName(box.node, preferences)
+    : (relationStyles[edge.type] || relationStyles.other).label;
+  contextMenu.open(box ? "node" : "edge", title, x, y, target);
+}
+$("viewport").addEventListener("contextmenu", (event) => {
+  const node = event.target.closest("[data-node-id]");
+  const semanticEdge = event.target.closest("[data-edge-id]");
+  if (event.target !== app.canvas && !node && !semanticEdge) return;
+  const hit = event.target === app.canvas ? hitAt(event) : null;
+  const id = node?.dataset.nodeId || hit?.id || hit?.region || hit?.expand;
+  const edge = hit?.edge || renderedEdges.find((item) => item.id === semanticEdge?.dataset.edgeId);
+  if (!id && !edge) return;
+  event.preventDefault();
+  contextMenu.close();
+  select(id || null);
+  if (edge && !id) selectedEdge = edge.id;
+  openSelectionMenu(
+    event.clientX,
+    event.clientY,
+    event.target === app.canvas ? $("viewport") : event.target,
+  );
+});
+$("selection-menu").onclick = (event) => {
+  const bounds = event.currentTarget.getBoundingClientRect();
+  openSelectionMenu(bounds.left, bounds.bottom + 6, event.currentTarget);
+};
+$("edge-inspect").onclick = updateEdgeDetail;
+for (const [id, endpoint] of [
+  ["edge-from", "from"],
+  ["edge-to", "to"],
+])
+  $(id).onclick = () => {
+    const edge = renderedEdges.find((item) => item.id === selectedEdge);
+    if (edge) {
+      revealResult(edge[endpoint]);
+      focusSelection();
+    }
+  };
+$("edge-hide").onclick = () => {
+  const edge = renderedEdges.find((item) => item.id === selectedEdge);
+  if (!edge) return;
+  for (const member of edge.members)
+    if (!preferences.filters.hiddenEdges.includes(member.id))
+      preferences.filters.hiddenEdges.push(member.id);
+  select(null);
+  applyFilters();
+};
+$("layout-toggle").onclick = () => {
+  $("layout-panel").hidden = !$("layout-panel").hidden;
+  $("layout-toggle").setAttribute("aria-expanded", String(!$("layout-panel").hidden));
+};
 app.canvas.addEventListener("pointerdown", (e) => {
   if (e.button !== 0 || gesture.active) return;
+  contextMenu.close();
   const hit = hitAt(e);
   cancelLayout();
   app.canvas.setPointerCapture(e.pointerId);
@@ -888,7 +979,7 @@ function endDrag(e, cancelled = false) {
     if (h?.expand) toggle(h.expand);
     else if (h?.region) select(h.region);
     else if (h?.edge) showEdge(h.edge);
-    else if (!h) select(null);
+    else if (!h) clearCanvasFocus();
   }
   save();
   schedule();
@@ -911,6 +1002,20 @@ app.canvas.addEventListener(
   { passive: false },
 );
 $("viewport").addEventListener("keydown", (e) => {
+  if (e.target.closest("#graph-menu")) return;
+  if (e.key === "ContextMenu" || (e.shiftKey && e.key === "F10")) {
+    e.preventDefault();
+    const node = e.target.closest("[data-node-id]");
+    const edge = e.target.closest("[data-edge-id]");
+    if (node) select(node.dataset.nodeId);
+    if (edge) {
+      select(null);
+      selectedEdge = edge.dataset.edgeId;
+    }
+    const rect = $("viewport").getBoundingClientRect();
+    openSelectionMenu(rect.left + rect.width / 2, rect.top + rect.height / 2, e.target);
+    return;
+  }
   if (
     e.target.closest(
       "input,textarea,select,#node-details,#edge-details,#semantic-edges,#filter-panel,#legend-panel",
@@ -928,7 +1033,7 @@ $("viewport").addEventListener("keydown", (e) => {
   }
   if (e.key === "Escape") {
     detailMode = null;
-    select(null);
+    clearCanvasFocus();
   }
   const delta = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[
     e.key
@@ -951,7 +1056,11 @@ $("viewport").addEventListener("keydown", (e) => {
 $("fit").onclick = fit;
 $("zoom-in").onclick = () => zoom(1.2);
 $("zoom-out").onclick = () => zoom(1 / 1.2);
-$("arrange").onclick = () => arrange();
+$("arrange").onclick = () => {
+  $("layout-panel").hidden = true;
+  $("layout-toggle").setAttribute("aria-expanded", "false");
+  arrange();
+};
 $("undo-layout").onclick = () => {
   if (!undo) return;
   cancelLayout();
@@ -974,6 +1083,7 @@ $("collapse").onclick = () => {
 };
 $("focus-selection").onclick = focusSelection;
 $("expand").onclick = () => {
+  if (!graph) return;
   cancelLayout();
   const roots = graph.boxes.filter((b) => !b.node.parent).map((b) => b.id);
   for (const id of roots) expanded.add(id);
@@ -1231,7 +1341,7 @@ document.addEventListener("pointerdown", (e) => {
 });
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && !e.target.closest("#viewport,.graph-search,input,textarea,select")) {
-    select(null);
+    clearCanvasFocus();
     $("viewport").focus({ preventScroll: true });
   }
 });
@@ -1373,11 +1483,8 @@ async function poll() {
       return;
     }
     view = withCodeGraph(next, codeSlice);
-    $("title").textContent =
-      (view.model.presentation.subject || boTranslate("Application")) +
-      (next.stage === "design"
-        ? boTranslate(" \u00B7 design graph")
-        : boTranslate(" \u00B7 runtime graph"));
+    $("project-title").textContent = view.model.presentation.subject || boTranslate("Application");
+    document.title = "VibeLens · " + $("project-title").textContent;
     const baseKey = projectLayoutKey(next, storage);
     loadAnalysis(baseKey);
     const nextStorageKey = baseKey + (analysisId === "overview" ? "" : ":view:" + analysisId);
@@ -1482,6 +1589,8 @@ async function poll() {
   }
 }
 function changeView() {
+  stopAnimation();
+  contextMenu.close();
   cancelLayout();
   choice = "latest";
   step = "latest";
@@ -1707,12 +1816,10 @@ for (const [type, style] of Object.entries(nodeTypes)) {
   compact.append(legendGlyph(type, style), document.createTextNode(style.label));
   legendHost.append(compact);
   const row = document.createElement("div"),
-    label = document.createElement("div"),
-    description = document.createElement("span");
-  if (type.startsWith("code-")) row.dataset.codeLegend = type;
+    label = document.createElement("span");
+  row.dataset.legendNode = type;
+  row.title = meanings[type] || style.label;
   label.textContent = style.label;
-  description.textContent = meanings[type];
-  label.append(description);
   row.append(legendGlyph(type, style), label);
   $("legend-types").append(row);
 }
@@ -1721,14 +1828,11 @@ edgeLegend.replaceChildren();
 for (const [type, style] of Object.entries(relationStyles))
   if (!["contains", "other"].includes(type)) {
     const label = document.createElement("span");
-    if (type.startsWith("code-")) label.dataset.codeLegend = type;
+    label.dataset.legendEdge = type;
+    label.title = style.label;
     label.append(legendRelation(style), document.createTextNode(style.label));
     edgeLegend.append(label);
   }
-const runtimeLegend = document.createElement("span");
-runtimeLegend.className = "runtime-key";
-runtimeLegend.textContent = boTranslate("\u25CF Runtime evidence");
-edgeLegend.append(runtimeLegend);
 function boVisible() {
   return graph.boxes.filter((b) => presentation.glyphs.has(b.id) || presentation.regions.has(b.id));
 }
@@ -1909,7 +2013,14 @@ function animateEvent(event) {
   const started = performance.now();
   animationUntil = started + 650;
   const tick = (now) => {
-    if (now >= animationUntil || disposed || document.hidden || contextLost) {
+    if (
+      now >= animationUntil ||
+      disposed ||
+      document.hidden ||
+      contextLost ||
+      !graph ||
+      !presentation
+    ) {
       stopAnimation();
       return;
     }
@@ -1953,8 +2064,10 @@ function animateEvent(event) {
   animationFrame = requestAnimationFrame(tick);
 }
 async function refreshRecordings(next, force = false) {
+  $("record-clear").disabled = recordBusy || recordLoading || recordActive || !recording;
   $("record-start").disabled =
     recordBusy ||
+    recordLoading ||
     recordActive ||
     !!recording ||
     next.historical ||
@@ -1964,6 +2077,9 @@ async function refreshRecordings(next, force = false) {
   try {
     const listing = await recordingRequest("");
     recordActive = !!listing.active;
+    document.querySelector(".record-bar").dataset.recording = String(recordActive);
+    $("record-start").setAttribute("aria-pressed", String(recordActive));
+    $("record-clear").disabled = recordBusy || recordLoading || recordActive || !recording;
     $("capture-mode").disabled = recordActive || !!recording;
     $("record-start").disabled ||= !!listing.active;
     $("record-stop").disabled = recordBusy || !listing.active;
@@ -1989,7 +2105,7 @@ async function refreshRecordings(next, force = false) {
       );
       $("record-list").dataset.options = optionKey;
     }
-    $("record-list").value = selected;
+    if (!recordLoading) $("record-list").value = selected;
     const scopeName =
       listing.active?.capture?.mode === "focused"
         ? listing.active.capture.roots
@@ -2006,7 +2122,7 @@ async function refreshRecordings(next, force = false) {
         ? listing.error
         : recording
           ? ""
-          : boTranslate("Only connected core events are captured");
+          : "";
   } catch (error) {
     $("record-status").textContent = error.message;
     $("record-start").disabled = true;
@@ -2039,10 +2155,25 @@ $("record-stop").onclick = async () => {
     lastRecordPoll = 0;
   }
 };
+$("record-clear").onclick = async () => {
+  if (!recording || recordActive || recordBusy || recordLoading) return;
+  recordBusy = true;
+  $("record-clear").disabled = true;
+  try {
+    await recordingRequest("/clear", { id: recording.id });
+    leaveRecording();
+    await refreshRecordings(latestLive, true);
+  } catch (error) {
+    $("record-status").textContent = error.message;
+  } finally {
+    recordBusy = false;
+    lastRecordPoll = 0;
+  }
+};
 function stopPlayback() {
   clearTimeout(playTimer);
   playTimer = null;
-  $("replay-play").textContent = boTranslate("Play");
+  iconButton($("replay-play"), "play", boTranslate("Play"));
 }
 function seek(index, locate = false) {
   if (!recording) return;
@@ -2062,25 +2193,43 @@ function seek(index, locate = false) {
 async function openRecording(id) {
   stopPlayback();
   stopAnimation();
-  const saved = await recordingRequest("/" + encodeURIComponent(id));
-  if (saved.schema !== "stategraph-recording/v1")
-    throw Error(boTranslate("Unsupported recording format"));
-  if (latestLive && !recordingMatches(saved, latestLive))
-    throw Error(boTranslate("This recording belongs to an earlier graph version."));
-  if (!recording) replayReturnAnalysis = analysisId === "code" ? analysisId : null;
-  recording = saved;
-  replayItems = timeline(saved);
-  boPlanKey = "";
-  $("replay").hidden = false;
-  document.body.classList.add("is-replay");
-  for (const id of ["version", "case", "attempt", "step"]) $(id).disabled = true;
-  if (analysisId === "code") changeAnalysis("overview");
-  updateAnalysisOptions();
-  $("code-local").disabled = true;
-  $("code-more").hidden = true;
-  seek(0);
+  const requestId = ++recordLoadId;
+  recordLoading = true;
+  $("record-clear").disabled = true;
+  try {
+    const saved = await recordingRequest("/" + encodeURIComponent(id));
+    if (requestId !== recordLoadId) return;
+    if (saved.schema !== "stategraph-recording/v1")
+      throw Error(boTranslate("Unsupported recording format"));
+    if (latestLive && !recordingMatches(saved, latestLive))
+      throw Error(boTranslate("This recording belongs to an earlier graph version."));
+    if (!recording) replayReturnAnalysis = analysisId === "code" ? analysisId : null;
+    recording = saved;
+    $("record-list").value = saved.id;
+    replayItems = timeline(saved);
+    boPlanKey = "";
+    $("replay").hidden = false;
+    document.body.classList.add("is-replay");
+    for (const id of ["version", "case", "attempt", "step"]) $(id).disabled = true;
+    if (analysisId === "code") changeAnalysis("overview");
+    updateAnalysisOptions();
+    $("code-local").disabled = true;
+    $("code-more").hidden = true;
+    seek(0);
+  } catch (error) {
+    if (requestId === recordLoadId) $("record-list").value = recording?.id || "";
+    throw error;
+  } finally {
+    if (requestId === recordLoadId) {
+      recordLoading = false;
+      $("record-clear").disabled = recordBusy || recordActive || !recording;
+    }
+  }
 }
 function leaveRecording() {
+  recordLoadId++;
+  recordLoading = false;
+  $("record-clear").disabled = true;
   stopPlayback();
   stopAnimation();
   recording = null;
@@ -2139,7 +2288,7 @@ $("replay-play").onclick = () => {
     seek(next);
     playTimer = setTimeout(advance, Number($("replay-speed").value));
   };
-  $("replay-play").textContent = boTranslate("Pause");
+  iconButton($("replay-play"), "pause", boTranslate("Pause"));
   playTimer = setTimeout(advance, Number($("replay-speed").value));
 };
 $("replay-export").onclick = () => {
@@ -2174,6 +2323,18 @@ window.graphDebug = {
 const conversation = createConversationFocus({
   onFocus: showDiscussion,
   onClear: () => schedule(),
+  onLocale: async (conversation) => {
+    const desired = chooseLocale({
+      explicit: new URL(window.location.href).searchParams.get("lang"),
+      saved: storedLocale(storage),
+      conversation,
+    });
+    if (desired !== locale()) {
+      save();
+      await storage.flush();
+      window.location.reload();
+    }
+  },
   readState: () => analysisSettings?.discussion,
   hasSavedView: () => analysisWasSaved,
   writeState: (state) => {

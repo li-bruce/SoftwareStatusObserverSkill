@@ -1,0 +1,24 @@
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Failed to find real location of C:\Users\Lvi_P\miniforge3\python.exe
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\check_package.py", line 66, in <module>
+    check()
+    ~~~~~^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\check_package.py", line 38, in check
+    if asset.is_file(): assert asset.read_bytes() == (ROOT/directory/asset.name).read_bytes(), f'Viewer copy stale: {directory}/{asset.name}'
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Viewer copy stale: examples/delivery/integrations/bo_view/conversation.js
+Traceback (most recent call last):
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\verify.py", line 92, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\verify.py", line 24, in main
+    run(ROOT, 'tools/check_package.py')
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\Documents\Work\CF\平台软著\SoftwareStatusObserverSkill\tools\verify.py", line 15, in run
+    subprocess.run([sys.executable, '-B', '-X', 'utf8', *map(str, args)], cwd=cwd, check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lvi_P\miniforge3\Lib\subprocess.py", line 577, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['C:\\Users\\Lvi_P\\Documents\\Work\\CF\\平台软著\\SoftwareStatusObserverSkill\\.venv\\Scripts\\python.exe', '-B', '-X', 'utf8', 'tools/check_package.py']' returned non-zero exit status 1.

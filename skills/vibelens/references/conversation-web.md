@@ -15,11 +15,11 @@ python <skill>/scripts/bo_web.py serve --root <project> --port 8830
 python <skill>/scripts/bo_design.py focus --root <project> --decision D1 --label "Confirm whether download waits for preview"
 ```
 
-Open `http://127.0.0.1:8830/graph` in the development tool's browser. The page highlights current nodes/edges/regions. Users may clear focus and inspect the full graph. Keep the label within 120 characters; do not repeat the conversation. Use `--nodes node_a node_b` for node focus or `focus --nodes` to clear it.
+Open `http://127.0.0.1:8830/graph` in the development tool's browser. The page highlights current nodes/edges/regions directly, with no discussion bar. Users can click empty canvas or press Escape to dismiss focus and inspect the full graph. Dismissal survives reloads. Keep the metadata label within 120 characters. Use `--nodes node_a node_b` for node focus or `focus --nodes` to clear it.
 
 Always present the first graph in the conversation as well. After checking the actual Web URL, run `bo_design.py preview --root <project> --url http://127.0.0.1:8830/graph --out review/design-preview.md`. This extracts Mermaid and matching JSON from the same design projection, preserving IDs, relations, scope, and unanswered questions. Embed the diagram in the reply, include the clickable URL, and ask whether the current understanding is right. Use the user's language without changing graph identities. If corrected, update discovery and regenerate both views. Proceed with behavior implementation after confirmation of that scope; an existing explicit confirmation may be reused. Do not turn page opening, silence, or a saved screenshot into approval. A failed Web launch must be disclosed; the inline draft remains useful but is not evidence that Web works.
 
-After an answer, AI updates requirements, decisions, graph, scenarios, and focus. Web reloads the projection. Stale focus is marked explicitly. Focus changes presentation only, never answers or check outcomes. Existing history/mapping gates remain active.
+After an answer, AI updates requirements, decisions, graph, scenarios, and focus. Web reloads the projection. The API marks stale focus; the viewer clears its highlights silently. Focus changes presentation only, never answers or check outcomes. Existing history/mapping gates remain active.
 
 ## Continue into implementation
 

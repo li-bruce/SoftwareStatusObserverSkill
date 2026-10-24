@@ -1,4 +1,4 @@
-import { initialize, t, locale, onLanguageChange } from "./site-ui.mjs?rev=0.7.1";
+import { initialize, t, locale, onLanguageChange } from "./site-ui.mjs?rev=0.7.2";
 
 const views = ["business", "state", "decision", "function", "data", "source", "mixed"];
 let view = "business";

@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "checks": [
+    "English fallback, live conversation language, translated accessible icons, persisted manual override",
+    "Actual pointer context menu, keyboard navigation, edge actions, compact legend, persisted notes/core/pin"
+  ],
+  "errors": [],
+  "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n7 !== 2\n\n    at file:///C:/Users/Lvi_P/Documents/Work/CF/%E5%B9%B3%E5%8F%B0%E8%BD%AF%E8%91%97/SoftwareStatusObserverSkill/tools/test_viewer_controls.mjs:93:67\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"
+}

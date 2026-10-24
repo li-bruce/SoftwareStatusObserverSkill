@@ -1,0 +1,49 @@
+{
+  "passed": true,
+  "url": "https://li-bruce.github.io/VibeLens/",
+  "commit": "86655a691f1f4110a082f29f2e8f8149cdd1be98",
+  "checks": [
+    {
+      "path": "index.html",
+      "source_sha256": "1c34c897545905cffff73f24cdb1ea789932e799b96f60a91aa340e26ace7e3a",
+      "deployed_sha256": "1c34c897545905cffff73f24cdb1ea789932e799b96f60a91aa340e26ace7e3a",
+      "matches": true
+    },
+    {
+      "path": "site.js",
+      "source_sha256": "27e6a46076efe5f62d8db504f8af7cf4aad353b9a2ab1d94a153a5c3d24e65c3",
+      "deployed_sha256": "27e6a46076efe5f62d8db504f8af7cf4aad353b9a2ab1d94a153a5c3d24e65c3",
+      "matches": true
+    },
+    {
+      "path": "messages.mjs",
+      "source_sha256": "651385c1886a4207e52dd3d29a5f9dcb17fecd7ca2d345210e751a65373fe0d9",
+      "deployed_sha256": "651385c1886a4207e52dd3d29a5f9dcb17fecd7ca2d345210e751a65373fe0d9",
+      "matches": true
+    },
+    {
+      "path": "site-ui.mjs",
+      "source_sha256": "8f6eaba1d4f61a198693bd419c8582735c3ce7e33ed8862624b635436d37e152",
+      "deployed_sha256": "8f6eaba1d4f61a198693bd419c8582735c3ce7e33ed8862624b635436d37e152",
+      "matches": true
+    },
+    {
+      "path": "demo.html",
+      "source_sha256": "1f4854e917dffab240c7ef2b3be607e2dfa4c1d0ce6ead1587b4d5ab3ed33ba8",
+      "deployed_sha256": "1f4854e917dffab240c7ef2b3be607e2dfa4c1d0ce6ead1587b4d5ab3ed33ba8",
+      "matches": true
+    },
+    {
+      "path": "demo.mjs",
+      "source_sha256": "9b61d515f83757509b3d60b9f0bc48d238922763169c2cc078d06fdb932540fc",
+      "deployed_sha256": "9b61d515f83757509b3d60b9f0bc48d238922763169c2cc078d06fdb932540fc",
+      "matches": true
+    },
+    {
+      "path": "demo-messages.mjs",
+      "source_sha256": "c544271ef01ca3c454f4d9914763ffffbd78375892e05e292c7f7905c353780e",
+      "deployed_sha256": "c544271ef01ca3c454f4d9914763ffffbd78375892e05e292c7f7905c353780e",
+      "matches": true
+    }
+  ]
+}

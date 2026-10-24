@@ -1,5 +1,5 @@
 {
-  "source": "SoftwareStatusObserverSkill/skills/business-observer",
+  "source": "VibeLens/skills/vibelens",
   "release": "2026.10-db-vis",
   "protocols": {
     "behavior": 3,

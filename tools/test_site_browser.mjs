@@ -32,6 +32,20 @@ try {
     assert.equal(await page.locator("a.github").getAttribute("href"), "https://github.com/li-bruce/VibeLens");
     assert.match(await page.locator("#install-prompt").textContent(), /\$vibelens/);
     assert.equal(await page.locator("[data-view]").count(), 7);
+    await page.locator('#viewer-tour').scrollIntoViewIfNeeded();
+    await page.click('#tour-next');
+    assert.equal(await page.locator('#tour-play').getAttribute('aria-pressed'), 'false');
+    for (const step of ['note', 'record', 'replay', 'overview', 'expand']) {
+      await page.click('#tour-next');
+      assert.equal(await page.locator('#viewer-tour').getAttribute('data-step'), step);
+      assert.ok((await page.locator('#tour-caption').textContent()).length > 10);
+    }
+    await page.locator('#viewer-tour').screenshot({path:path.join(output, language+'-viewer-tour.png')});
+    const tourCaption = await page.locator('#tour-caption').textContent();
+    await page.click('#language');
+    assert.notEqual(await page.locator('#tour-caption').textContent(), tourCaption);
+    await page.click('#language');
+    checks.push(language + ': controllable five-step viewer animation and translated captions');
     for (const view of ["business", "state", "decision", "function", "data", "source", "mixed"]) {
       await page.click("#tab-" + view);
       assert.equal(await page.locator("#tab-" + view).getAttribute("aria-selected"), "true");
@@ -68,6 +82,14 @@ try {
   assert.ok((await page.locator("#change-detail").innerText()).length > 15);
   await page.screenshot({path: path.join(output, "demo-replay.png"), fullPage: true});
   checks.push("Separate sample walkthrough: record, upload, approve, stop and inspect replay");
+  const quiet = await browser.newPage({reducedMotion:'reduce'});
+  await quiet.goto(base+'/?lang=en');
+  await quiet.locator('#viewer-tour').scrollIntoViewIfNeeded();
+  await quiet.waitForTimeout(3000);
+  assert.equal(await quiet.locator('#viewer-tour').getAttribute('data-step'),'overview');
+  assert.equal(await quiet.locator('#tour-play').getAttribute('aria-pressed'),'false');
+  await quiet.close();
+  checks.push('Reduced-motion tour stays paused until explicitly played');
   assert.deepEqual(errors, []);
   await writeFile(path.join(output, "result.json"), JSON.stringify({passed: true, url: base, checks, errors}, null, 2));
   console.log("PASS: bilingual seven-view introduction, 390px layout and independent recording walkthrough.");

@@ -537,6 +537,8 @@ def make_server(session, port=8830, *, token=None, origins=(), assets=ASSETS):
                     )
                 if path == "/api/recordings/stop":
                     return self.reply(200, session.recordings.stop())
+                if path == "/api/recordings/clear":
+                    return self.reply(200, session.recordings.clear(body.get("id")))
                 return self.reply(405, {"error": "No business commands are exposed"})
             except PreferenceConflict as exc:
                 return self.reply(409, {"error": str(exc)})

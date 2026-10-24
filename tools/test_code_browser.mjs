@@ -24,6 +24,10 @@ async function pick(id) {
   await page.locator("#semantic [data-node-id]").evaluateAll((nodes,id)=>nodes.find(n=>n.dataset.nodeId===id).click(),id);
 }
 async function shot(name) { await page.screenshot({path:path.join(output,name+".png"),fullPage:true}); }
+async function menuClick(selector) {
+  await page.click('#selection-menu');
+  await page.click(selector);
+}
 try {
   for(let i=0;i<80;i++) {try {await api("/api/bo/health");break;} catch {await sleep(250);} }
   const launch = {headless:true,args:["--enable-unsafe-swiftshader"]};
@@ -51,30 +55,31 @@ try {
   await page.click("#expand"); await page.click("#fit");
   checkpoints.all=await api("/api/code/graph");
   const file=checkpoints.all.nodes.find(n=>n.code_role==="file"&&n.label==="gallery.py");
-  await pick(file.id); await page.click("#pin"); await page.click("#annotate");
+  await pick(file.id); await menuClick("#pin"); await menuClick("#annotate");
   await page.fill("#node-note","Review this file after each schema change");
   await page.locator('#annotation-form button[type="submit"]').click();
   await page.waitForFunction(async()=>Object.entries((await (await fetch('/api/preferences')).json()).entries).some(([key,value])=>key.endsWith(':analysis')&&JSON.parse(value).selected==='code'));
   await page.reload();
-  await page.waitForSelector('#discussion-clear',{state:'visible'});
-  assert.equal(await page.inputValue('#analysis-view'),'code', 'an existing discussion must not override the saved code view');
   await page.waitForSelector('#semantic [data-node-type="code-file"]',{state:"attached"});
+  await page.waitForFunction(async()=>Object.entries((await (await fetch('/api/preferences')).json()).entries).some(([key,value])=>key.endsWith(':analysis')&&JSON.parse(value).discussion?.active===true));
+  assert.equal(await page.locator('#discussion-bar').count(),0);
+  assert.equal(await page.inputValue('#analysis-view'),'code', 'an existing discussion must not override the saved code view');
   checkpoints.discussionReloadPreservesView = true;
-  await page.click('#discussion-clear');
+  await page.locator('#viewport').focus(); await page.keyboard.press('Escape');
   await page.waitForFunction(async()=>Object.entries((await (await fetch('/api/preferences')).json()).entries).some(([key,value])=>key.endsWith(':analysis')&&JSON.parse(value).discussion?.active===false));
   await page.reload();
-  await page.waitForFunction(()=>document.getElementById('discussion-label').textContent==='Publish pictures');
+  await page.waitForSelector('#semantic [data-node-type="code-file"]',{state:"attached"});
   assert.equal(await page.inputValue('#analysis-view'),'code');
-  assert.equal(await page.locator('#discussion-clear').evaluate(n=>n.hidden),true);
+  assert.equal(await page.locator('#semantic [data-discussion="true"]').count(),0);
   checkpoints.dismissedDiscussionSurvivesReload = true;
   await page.waitForTimeout(900);
   checkpoints.layoutBefore = await page.locator('#semantic [data-node-id]').evaluateAll((nodes,id)=>({...nodes.find(n=>n.dataset.nodeId===id).dataset}),file.id);
   await shot("03-complete-code-view");
   await page.reload(); await page.waitForSelector('#semantic [data-node-type="code-function"]',{state:"attached"});
-  await pick(file.id); await page.click("#annotate");
+  await pick(file.id); await menuClick("#annotate");
   assert.equal(await page.inputValue("#node-note"),"Review this file after each schema change");
   await page.locator('#annotation-form button[type="submit"]').click();
-  await page.click("#source"); await page.click("#full-source");
+  await menuClick("#source"); await page.click("#full-source");
   await page.waitForFunction(()=>document.getElementById("source-code").textContent.includes("def publish"));
   await page.click("#close-detail");
   const projectPath=logs.match(/Disposable application: (.+)/)?.[1].trim();
@@ -135,7 +140,7 @@ try {
   assert.equal(checkpoints.layoutAfter.x,checkpoints.layoutBefore.x);
   assert.equal(checkpoints.layoutAfter.y,checkpoints.layoutBefore.y);
   assert.equal(checkpoints.layoutAfter.pinned,"true");
-  await pick(file.id); await page.click("#annotate");
+  await pick(file.id); await menuClick("#annotate");
   assert.equal(await page.inputValue("#node-note"),"Review this file after each schema change");
   await page.locator('#annotation-form button[type="submit"]').click();
   await page.selectOption("#language","zh-CN");

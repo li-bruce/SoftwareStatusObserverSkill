@@ -1,0 +1,100 @@
+{
+  "valid": true,
+  "errors": [],
+  "candidate_id": "e315da2f9992d82b8d04cb505bc49f8dbed728531a3adf9ab51114a8b23d17ec",
+  "reports": {
+    "mapping": {
+      "status": "passed",
+      "errors": [],
+      "database": {
+        "configured": false,
+        "valid": true,
+        "errors": [],
+        "changed": false
+      },
+      "code_structure": {
+        "enabled": false,
+        "valid": true,
+        "status": "not_enabled",
+        "errors": []
+      },
+      "scope": "Inventoried source, classified symbols, loaded declaration, required probes and actual value witnesses",
+      "stategraph_export": "checked",
+      "witnesses": 480,
+      "projection_checks": 1113,
+      "implementation": {
+        "errors": [],
+        "events_checked": 53,
+        "features": 22
+      }
+    },
+    "state_rules": {
+      "status": "passed",
+      "errors": []
+    },
+    "project_checks": {
+      "status": "passed",
+      "errors": [],
+      "scope": "Configured project tests, architecture and viewer checks"
+    },
+    "business": {
+      "status": "passed",
+      "errors": [],
+      "assertions": {
+        "required": 189,
+        "executed": 189
+      },
+      "scope": "Authored business and whitebox expectations; this does not prove all user intent"
+    }
+  },
+  "review_hash": "54ac42f775ddceb01d20a2d7a3fab6bd0fc78f4bbb461c04e8f29bc6c3e6d882",
+  "observations_hash": "391f05a71edc6eead1536cff8884aa8a4231aa1a698516204470291d7832d7a3",
+  "tests": [
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/tests.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tooling/graph_tests.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/test_recording.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tooling/test_recorded_views.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "{python}",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/test_stategraph_module.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "checked_at": "2026-10-24T10:02:17.918828+00:00",
+  "meaning": "Selected structural consistency and explicit observed requirements; not arbitrary semantic equivalence."
+}

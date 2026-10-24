@@ -10,17 +10,23 @@ export function normalizeLocale(value) {
       ? "en"
       : null;
 }
-export function chooseLocale({ explicit, saved, languages = [] } = {}) {
+export function chooseLocale({ explicit, saved, conversation } = {}) {
   return (
-    normalizeLocale(explicit) ||
-    normalizeLocale(saved) ||
-    languages.map(normalizeLocale).find(Boolean) ||
-    "en"
+    normalizeLocale(explicit) || normalizeLocale(saved) || normalizeLocale(conversation) || "en"
   );
 }
 const browser = typeof window !== "undefined";
 const explicit = browser ? new URL(window.location.href).searchParams.get("lang") : null;
-let current = chooseLocale({ explicit, languages: browser ? navigator.languages : [] });
+// Read the agent-recorded language before modules create their translated labels.
+// A browser locale alone does not change an English-first project.
+let conversationLocale = null;
+if (browser) {
+  try {
+    const response = await fetch("/api/design", { cache: "no-store" });
+    if (response.ok) conversationLocale = (await response.json()).locale;
+  } catch {}
+}
+let current = chooseLocale({ explicit, conversation: conversationLocale });
 export function locale() {
   return current;
 }
@@ -73,12 +79,12 @@ export function localeURL(href, value) {
   url.searchParams.set("lang", normalizeLocale(value) || "en");
   return url.href;
 }
-export function restoreLocale(storage, href, languages) {
+export function restoreLocale(storage, href, conversation = conversationLocale) {
   const url = new URL(href);
   const desired = chooseLocale({
     explicit: url.searchParams.get("lang"),
     saved: storedLocale(storage),
-    languages,
+    conversation,
   });
   return desired === current ? null : localeURL(href, desired);
 }

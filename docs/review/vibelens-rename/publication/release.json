@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "tag": "v0.7.1",
+  "commit": "86655a691f1f4110a082f29f2e8f8149cdd1be98",
+  "url": "https://github.com/li-bruce/VibeLens/releases/tag/v0.7.1",
+  "notes_match": true,
+  "asset": {
+    "name": "vibelens-v0.7.1-skill.zip",
+    "sha256": "b48807b75bd66d0fd95c67939bea7323d362415b27f967d827bfdd6691a25814",
+    "url": "https://github.com/li-bruce/VibeLens/releases/download/v0.7.1/vibelens-v0.7.1-skill.zip"
+  }
+}

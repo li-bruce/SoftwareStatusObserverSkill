@@ -19,6 +19,16 @@ At first use, explicitly choose **drive** or **observe**. Both maintain observat
 
 ## Read the graph
 
+The viewer is named **VibeLens**. It starts in English and follows the language recorded
+from your coding conversation. A manual language choice in the page takes precedence.
+Right-click a node or edge for its actions; keyboard users can press Shift+F10 or use
+the selected-item menu. The compact legend lists the visible types, with meanings on hover.
+
+The circle starts recording, the square stops it, and the crossed-circle clears the
+selected stopped recording. Tooltips name every icon. Clearing leaves business data
+and other recordings intact. Conversation focus appears on the graph itself. Click
+empty canvas or press Escape to dismiss it; the dismissal survives reloads.
+
 | Level | Question |
 |---|---|
 | Business flow | What steps does this operation follow, and why did it stop? |
