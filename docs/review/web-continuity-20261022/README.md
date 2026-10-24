@@ -12,13 +12,13 @@
 
 交付阶段可要求“隐藏图入口”“关闭调试 Web”或“导出不含页面的业务核心包”。设置位于 `bo_stategraph/config/web.json`；隐藏入口仍允许直接访问，关闭 Web 则拒绝图、源码、记录及配置等调试 HTTP 接口。程序状态模块和业务执行保留，采集模式单独控制。导出不会删除开发目录。
 
-完整命令和接入约定见[对话与 Web 图](../../../skills/business-observer/references/conversation-web.md)。
+完整命令和接入约定见[对话与 Web 图](https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/references/conversation-web.md)。
 
 ## 实现
 
-- [bo_design.py](../../../skills/business-observer/scripts/bo_design.py) 从已有需求记录生成只读草图，使用稳定实现标识；根据对话问题或节点集合设置聚焦。它不改用户决定、不接受页面回答、不生成验收结论。需求变更后旧聚焦会标为待更新。
-- [bo_web.py](../../../skills/business-observer/scripts/bo_web.py) 提供立项阶段的本地图服务、Web 可见性控制及核心包导出命令。两套示例接入同一控制模块；交付示例的业务页面改读业务数据接口，与调试接口分开，但仍以同一个 Store 为实际数据来源。
-- [conversation.js](../../../skills/business-observer/assets/stategraph-viewer/conversation.js) 读取讨论范围；[glyphs.js](../../../skills/business-observer/assets/stategraph-viewer/glyphs.js) 统一画布和图例的类型填充。核心、选中及关联节点有不同强调程度，运行结果仍由独立角标表示。
+- [bo_design.py](https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/scripts/bo_design.py) 从已有需求记录生成只读草图，使用稳定实现标识；根据对话问题或节点集合设置聚焦。它不改用户决定、不接受页面回答、不生成验收结论。需求变更后旧聚焦会标为待更新。
+- [bo_web.py](https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/scripts/bo_web.py) 提供立项阶段的本地图服务、Web 可见性控制及核心包导出命令。两套示例接入同一控制模块；交付示例的业务页面改读业务数据接口，与调试接口分开，但仍以同一个 Store 为实际数据来源。
+- [conversation.js](https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/assets/stategraph-viewer/conversation.js) 读取讨论范围；[glyphs.js](https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/assets/stategraph-viewer/glyphs.js) 统一画布和图例的类型填充。核心、选中及关联节点有不同强调程度，运行结果仍由独立角标表示。
 - 个人配置支持明确列出的旧项目标识迁移，保留原条目和修订。归档示例统一设计和运行时的配置标识；无关项目配置仍拒绝读取。
 
 ## 最后一轮结果

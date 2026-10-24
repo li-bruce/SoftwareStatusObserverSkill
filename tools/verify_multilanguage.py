@@ -10,7 +10,7 @@ from setup_adapters import configure
 
 ROOT=Path(__file__).resolve().parents[1]
 EXAMPLE=ROOT/'examples/multilanguage'
-sys.path.insert(0,str(ROOT/'skills/business-observer/scripts'))
+sys.path.insert(0,str(ROOT/'skills/vibelens/scripts'))
 from behavior_model import capture
 from code_structure import scan
 from bo_sync import source_inventory

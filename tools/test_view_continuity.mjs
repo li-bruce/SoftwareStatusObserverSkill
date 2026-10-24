@@ -1,12 +1,12 @@
 import assert from "node:assert/strict";
-import * as layout from "../skills/business-observer/assets/stategraph-viewer/layout.js";
-import { layoutGraph } from "../skills/business-observer/assets/stategraph-viewer/graph-core.js";
-import { projectStorage } from "../skills/business-observer/assets/stategraph-viewer/preferences.js";
+import * as layout from "../skills/vibelens/assets/stategraph-viewer/layout.js";
+import { layoutGraph } from "../skills/vibelens/assets/stategraph-viewer/graph-core.js";
+import { projectStorage } from "../skills/vibelens/assets/stategraph-viewer/preferences.js";
 import {
   projectLayoutKey,
   graphVersion,
   recordingMatches,
-} from "../skills/business-observer/assets/stategraph-viewer/view-lifecycle.js";
+} from "../skills/vibelens/assets/stategraph-viewer/view-lifecycle.js";
 
 // A code iteration adds a feature while an unrelated advanced call crosses two
 // collapsed groups. Root hints deliberately omit the new feature and states.

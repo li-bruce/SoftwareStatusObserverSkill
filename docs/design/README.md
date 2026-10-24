@@ -1,6 +1,6 @@
 # Design history
 
-These Chinese design notes preserve earlier reasoning. Current behavior and limitations are documented in the [English product overview](../../README.md), [Skill workflow](../../skills/business-observer/SKILL.md), and [source/data analysis](../source-data-and-language.md).
+These Chinese design notes preserve earlier reasoning. Current behavior and limitations are documented in the [English product overview](../../README.md), [Skill workflow](../../skills/vibelens/SKILL.md), and [source/data analysis](../source-data-and-language.md).
 
 - [Unified graph](unified-graph.zh-CN.md): abstract rules, runtime facts, source relationships, and evidence boundaries.
 - [Focused graph module](focus-module.zh-CN.md): extraction, abstraction, and explicit external boundaries.

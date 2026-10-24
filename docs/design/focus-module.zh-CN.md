@@ -2,7 +2,7 @@
 
 [返回路线](roadmap.zh-CN.md) · [统一图契约](unified-graph.zh-CN.md)
 
-状态：基础提取器已实现，见 [命令与格式](../../skills/business-observer/references/focus-and-sharing.md)。当前支持稳定节点锚点、关系过滤、预算、版本、运行选择、原关系边界、JSON/Markdown。下文的自然语言定位、分页索引、页面专用入口和语义编辑冲突属于后续接口设计。
+状态：基础提取器已实现，见 [命令与格式](../../skills/vibelens/references/focus-and-sharing.md)。当前支持稳定节点锚点、关系过滤、预算、版本、运行选择、原关系边界、JSON/Markdown。下文的自然语言定位、分页索引、页面专用入口和语义编辑冲突属于后续接口设计。
 
 ## 职责
 

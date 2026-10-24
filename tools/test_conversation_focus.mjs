@@ -1,6 +1,6 @@
 /** A known discussion must not override a developer's saved analysis view. */
 import assert from "node:assert/strict";
-import { createConversationFocus } from "../skills/business-observer/assets/stategraph-viewer/conversation.js";
+import { createConversationFocus } from "../skills/vibelens/assets/stategraph-viewer/conversation.js";
 
 let persisted = null, now = 10000, focuses = 0, clears = 0;
 let scope = { available: true, revision: "confirmed-1", stale: false, nodes: ["review"], label: "Review flow" };

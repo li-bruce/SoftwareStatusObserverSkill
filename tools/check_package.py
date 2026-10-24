@@ -6,14 +6,14 @@ import sys
 from document_links import document_link_errors
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL = ROOT/'skills/business-observer'
+SKILL = ROOT/'skills/vibelens'
 
 
 def check():
     sys.path.insert(0, str(SKILL/'scripts'))
     from bo_upgrade import bridge_source, CORE
     text = (SKILL/'SKILL.md').read_text(encoding='utf-8')
-    assert text.startswith('---\nname: business-observer\n'), 'Skill identity/frontmatter missing'
+    assert text.startswith('---\nname: vibelens\n'), 'Skill identity/frontmatter missing'
     assert re.search(r'^description: .+', text, re.M), 'Skill trigger description missing'
     scripts = [p for p in (SKILL/'scripts').rglob('*') if p.is_file() and
                p.suffix in {'.py','.mjs','.json'} and not set(p.parts)&{'__pycache__','node_modules'}]

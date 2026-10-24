@@ -20,7 +20,7 @@
 
 比较了 [Bubble Sets](https://vialab.science.uoit.ca/wp-content/publication_media/pdf/col2009c.pdf)、[LineSets](https://www.microsoft.com/en-us/research/publication/design-study-of-linesets-a-novel-set-visualization-technique/)、[KelpFusion](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/12/kelpfusion_tvcg2013.pdf) 和 [UpSet](https://upset.app/)。区域、连接线与交集矩阵各有适用场景；这里按圆形展开和源码定位的需求作取舍，没有进行真人对比实验。
 
-接入协议和验证要求见 [Skill 参考](../../../skills/business-observer/references/recorded-analysis.md)。
+接入协议和验证要求见 [Skill 参考](https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/references/recorded-analysis.md)。
 
 ## 验证材料
 

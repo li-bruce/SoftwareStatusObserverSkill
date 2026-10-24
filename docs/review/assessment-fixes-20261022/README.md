@@ -84,7 +84,7 @@
 
 本材料记录本地验收，后续发布记录见 Git 历史。新项目使用本地安装后的 `$business-observer`。AI 负责建立映射清单、源码绑定和探针，用户继续只讨论业务、回答关键问题和查看更新图。
 
-已有项目升级时，先保存正常变更基线，按 [独立模块说明](../../../skills/business-observer/references/independent-python.md) 升级公共文件；再按 [映射清单说明](../../../skills/business-observer/references/mapping-contract.md) 补齐 `sync.json.mapping_contract` 和实际场景投影。不能新建基线跳过旧检查。
+已有项目升级时，先保存正常变更基线，按 [独立模块说明](https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/references/independent-python.md) 升级公共文件；再按 [映射清单说明](https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/references/mapping-contract.md) 补齐 `sync.json.mapping_contract` 和实际场景投影。不能新建基线跳过旧检查。
 
 仓库根目录执行：
 

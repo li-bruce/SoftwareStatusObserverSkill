@@ -6,7 +6,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPTS = ROOT/'skills/business-observer/scripts'
+SCRIPTS = ROOT/'skills/vibelens/scripts'
 
 
 def save(path, value):

@@ -10,7 +10,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL = ROOT / "skills/business-observer"
+SKILL = ROOT / "skills/vibelens"
 VENDOR_FILES = {"pixi.min.js", "elk.bundled.js", "elk-worker.min.js"}
 
 

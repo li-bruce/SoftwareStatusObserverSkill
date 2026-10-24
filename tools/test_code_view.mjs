@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
-import { CodeLayer, withCodeGraph, codeTypes, codeRelations, codeSummary } from "../skills/business-observer/assets/stategraph-viewer/code-layer.js";
-import { profileFor } from "../skills/business-observer/assets/stategraph-viewer/analysis.js";
-import { nodeType, relationType, status } from "../skills/business-observer/assets/stategraph-viewer/graph-core.js";
-import { emptyFilters, cleanFilters, relationStyles } from "../skills/business-observer/assets/stategraph-viewer/layout.js";
-import { meanings, glyphShapes } from "../skills/business-observer/assets/stategraph-viewer/glyphs.js";
+import { CodeLayer, withCodeGraph, codeTypes, codeRelations, codeSummary } from "../skills/vibelens/assets/stategraph-viewer/code-layer.js";
+import { profileFor } from "../skills/vibelens/assets/stategraph-viewer/analysis.js";
+import { nodeType, relationType, status } from "../skills/vibelens/assets/stategraph-viewer/graph-core.js";
+import { emptyFilters, cleanFilters, relationStyles } from "../skills/vibelens/assets/stategraph-viewer/layout.js";
+import { meanings, glyphShapes } from "../skills/vibelens/assets/stategraph-viewer/glyphs.js";
 
 const view = { model: { nodes: [{id: "business"}], edges: [], graph_roots: ["business"] }, manifest: { build_id: "original", bindings: {} } };
 const slice = { schema: "bo-code-graph/v1", revision: "source-1", nodes: [{id: "file", code_role: "file"}, {id: "fn", parent: "file", code_role: "function"}], edges: [{id: "binding", from: "business", to: "fn", origin: "code-index", code_relation: "maps"}], bindings: {fn: {path: "app.py", line: 1}} };

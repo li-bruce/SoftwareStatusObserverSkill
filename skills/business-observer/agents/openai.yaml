@@ -1,4 +1,0 @@
-interface:
-  display_name: "Business Observer"
-  short_description: "Debug AI implementations through business, source, and runtime graphs"
-  default_prompt: "Use $business-observer for this feature. Confirm my business intent and whether I want drive or observe mode. Maintain source mappings, runtime capture, and checks during development, then show the updated graph and actual results. Converse in my language."

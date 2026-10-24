@@ -2,7 +2,7 @@
 
 [返回路线](roadmap.zh-CN.md) · [关系与探针](unified-graph.zh-CN.md) · [局部图模块](focus-module.zh-CN.md)
 
-状态：v0.4 已将白盒字段检查接入 `change_sync verify`，并提供局部图与显式文件清单导出。通用场景生成、语义合并和在线协作仍是后续设计。实际格式和命令见 [持续开发](../../skills/business-observer/references/continuous-development.md) 与 [局部图和共享](../../skills/business-observer/references/focus-and-sharing.md)。
+状态：v0.4 已将白盒字段检查接入 `change_sync verify`，并提供局部图与显式文件清单导出。通用场景生成、语义合并和在线协作仍是后续设计。实际格式和命令见 [持续开发](../../skills/vibelens/references/continuous-development.md) 与 [局部图和共享](../../skills/vibelens/references/focus-and-sharing.md)。
 
 ## 开发前要构建哪些测试材料
 
@@ -34,7 +34,7 @@ observation_requirements, isolation_and_reset, decision_status
 
 ## 一个直接关系样例的验收矩阵
 
-这是直接关系这一类的测试设计，不代表全部权限情况，也不是本轮运行结果。更广的群组、角色、有效继承、OR/AND/排除、租户和上下文情况按 [权限清单](../../skills/business-observer/references/authorization-patterns.md) 选择。下面限定 R1 为一跳删除权限、D1 为 A→B、B→C；不能把它推广为所有层级规则都不继承。
+这是直接关系这一类的测试设计，不代表全部权限情况，也不是本轮运行结果。更广的群组、角色、有效继承、OR/AND/排除、租户和上下文情况按 [权限清单](../../skills/vibelens/references/authorization-patterns.md) 选择。下面限定 R1 为一跳删除权限、D1 为 A→B、B→C；不能把它推广为所有层级规则都不继承。
 
 | ID | 场景 | 独立预期 |
 |---|---|---|

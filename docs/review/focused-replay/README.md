@@ -37,6 +37,6 @@
 
 ## 表达边界
 
-[类型、规则和采集方案](../../../skills/business-observer/references/types-rules-capture.md) 区分已实现与后续接入：当前静态分析识别 class 与方法，但没有通用对象堆/实例视图；当前规则示例没有接入 DMN、OpenFGA 或 SpiceDB 的通用解释适配器。规则结构与本次实例绑定、最小关系解释子图的方案已写入 Skill。
+[类型、规则和采集方案](https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/references/types-rules-capture.md) 区分已实现与后续接入：当前静态分析识别 class 与方法，但没有通用对象堆/实例视图；当前规则示例没有接入 DMN、OpenFGA 或 SpiceDB 的通用解释适配器。规则结构与本次实例绑定、最小关系解释子图的方案已写入 Skill。
 
 当前采集是显式观测端口与同进程后台线程，不是独立采集进程。全部采集只覆盖已接入的核心探针，不能保证每行代码、每个变量或每个函数都有记录。局部记录保留必要的完整状态边界，但不能补录范围外的函数值。当前检查是选定场景和浏览器操作的证据，不是全程序语义证明、负载基准或真人易用性研究。

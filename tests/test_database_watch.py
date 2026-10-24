@@ -15,7 +15,7 @@ from urllib.error import HTTPError, URLError
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tests"))
-sys.path.insert(0, str(ROOT / "skills/business-observer/scripts"))
+sys.path.insert(0, str(ROOT / "skills/vibelens/scripts"))
 
 import test_database_sync as database_fixture
 from bo_observer.data.sync import synchronize

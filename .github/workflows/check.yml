@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: '22'
       - run: python -m pip install -r examples/delivery/requirements.txt
-      - run: python -m pip install -r skills/business-observer/requirements.txt -r skills/business-observer/requirements-database.txt
+      - run: python -m pip install -r skills/vibelens/requirements.txt -r skills/vibelens/requirements-database.txt
       - run: python tools/setup_adapters.py
       - run: npm ci --prefix examples/multilanguage
       - run: python tools/verify.py --database
@@ -33,7 +33,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: python -m pip install -r skills/business-observer/requirements.txt -r skills/business-observer/requirements-database.txt
+      - run: python -m pip install -r skills/vibelens/requirements.txt -r skills/vibelens/requirements-database.txt
       - run: npm ci --prefix tools/database-native
       - run: docker compose -f examples/database-observer/compose.yaml up -d --wait
       - run: python tools/verify_databases.py --live --native

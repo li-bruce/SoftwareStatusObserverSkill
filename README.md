@@ -1,10 +1,12 @@
-# Business Observer
+# VibeLens
 
 **See what your coding agent built — and what the program actually does.**
 
-[中文](README.zh-CN.md) · [Product introduction](https://li-bruce.github.io/SoftwareStatusObserverSkill/?lang=en) · [Interactive demo](https://li-bruce.github.io/SoftwareStatusObserverSkill/demo.html?lang=en) · [Installation & usage](docs/usage.en.md) · [Source guide](docs/source-guide.en.md)
+Previously named Business Observer (`business-observer`). [Rename and migration](docs/rename-vibelens.md).
 
-Vibe coding can produce a working screen while leaving its decisions, state changes, and internal dependencies difficult to inspect. `business-observer` keeps a developer-facing graph connected to the implementation: business flows, state machines, decision dependencies, important functions, parameters, and actual runtime evidence.
+[中文](README.zh-CN.md) · [Product introduction](https://li-bruce.github.io/VibeLens/?lang=en) · [Interactive demo](https://li-bruce.github.io/VibeLens/demo.html?lang=en) · [Installation & usage](docs/usage.en.md) · [Source guide](docs/source-guide.en.md)
+
+Vibe coding can produce a working screen while leaving its decisions, state changes, and internal dependencies difficult to inspect. `vibelens` keeps a developer-facing graph connected to the implementation: business flows, state machines, decision dependencies, important functions, parameters, and actual runtime evidence.
 
 ![Five connected views of one operation: business, state, decisions, functions and values, and source](docs/site/layers.svg)
 
@@ -71,15 +73,15 @@ Viewing, reporting, polling, layout, and recording controls do not create busine
 Install the **complete** Skill folder in your project:
 
 ```bash
-git clone https://github.com/li-bruce/SoftwareStatusObserverSkill.git
-cd SoftwareStatusObserverSkill
+git clone https://github.com/li-bruce/VibeLens.git
+cd VibeLens
 python tools/install_skill.py --project /path/to/your-project
 ```
 
-The installer writes `.agents/skills/business-observer` and stops if that directory exists, preserving local changes. Open a new Codex conversation in the target project:
+The installer writes `.agents/skills/vibelens` and stops if that directory exists, preserving local changes. Open a new Codex conversation in the target project:
 
 ```text
-Use $business-observer to build an image review gallery.
+Use $vibelens to build an image review gallery.
 A person uploads an image. A reviewer decides whether it appears in the exhibition.
 Show the first business graph in this conversation and give me its Web address.
 Confirm unclear details before implementation, and keep the graph in sync while coding.
@@ -87,7 +89,13 @@ Confirm unclear details before implementation, and keep the graph in sync while 
 
 Answer the important business questions, choose drive or observe, and confirm the initial graph. The AI handles the intermediate artifacts and checks.
 
-Alternatively, ask Codex's Skill installer to install from [the Skill directory](https://github.com/li-bruce/SoftwareStatusObserverSkill/tree/main/skills/business-observer). Use `main` for current updates or `v0.7.0` for this fixed release. See the [release notes](docs/releases/v0.7.0.md), [independent application trial](docs/review/release-v0.7.0/README.md), and [implementation assessment](docs/assessment/2026-10-24/README.md).
+Alternatively, install with the Skills CLI:
+
+```bash
+npx skills add li-bruce/VibeLens --skill vibelens
+```
+
+You can also ask Codex's Skill installer to install from [the Skill directory](https://github.com/li-bruce/VibeLens/tree/main/skills/vibelens). Use `main` for current updates or `v0.7.1` for this fixed release. Existing `business-observer` installations have an explicit [migration command](docs/rename-vibelens.md). See the [release notes](docs/releases/v0.7.1.md), [independent application trial](docs/review/release-v0.7.0/README.md), and [implementation assessment](docs/assessment/2026-10-24/README.md).
 
 English is the maintained source/documentation language. Conversation follows the user; the viewer offers English/Chinese and saves the preference in the project. Original answers and historical evidence retain their original language.
 
@@ -99,7 +107,7 @@ Shared services require Python 3.11–3.13. JS/TS/React/Vue analysis requires No
 python -m venv .venv
 # Windows: .venv\Scripts\Activate.ps1
 # macOS/Linux: source .venv/bin/activate
-python -m pip install -r examples/delivery/requirements.txt -r skills/business-observer/requirements.txt
+python -m pip install -r examples/delivery/requirements.txt -r skills/vibelens/requirements.txt
 python tools/setup_adapters.py
 npm ci --prefix examples/multilanguage
 python tools/multilanguage_demo.py --mode drive
@@ -121,7 +129,7 @@ To read or modify the implementation, start with the [source guide](docs/source-
 
 | Part | Responsibility |
 |---|---|
-| `skills/business-observer/SKILL.md` | Agent guidance, clarification, iteration, and acceptance |
+| `skills/vibelens/SKILL.md` | Agent guidance, clarification, iteration, and acceptance |
 | `scripts/bo_observer/graph/` | Graph projection, source relationships, focused extraction |
 | `scripts/bo_observer/workflow/` | Source inventory, mapping and semantic verification |
 | `scripts/bo_observer/observation/` | Bounded capture, recording, replay facts, retention |
@@ -130,13 +138,13 @@ To read or modify the implementation, start with the [source guide](docs/source-
 | `scripts/bo_observer/adapters/` | Native Python/JS execution, probes, and source adapters |
 | Target project's `bo_stategraph/` | Declarations, native execution, private view preferences |
 
-[JSON protocols and language support](skills/business-observer/references/multilanguage.md) · [Source depth and database relationships](docs/source-data-and-language.md) · [Recording](skills/business-observer/references/recorded-analysis.md) · [Development checks](skills/business-observer/references/continuous-development.md)
+[JSON protocols and language support](skills/vibelens/references/multilanguage.md) · [Source depth and database relationships](docs/source-data-and-language.md) · [Recording](skills/vibelens/references/recorded-analysis.md) · [Development checks](skills/vibelens/references/continuous-development.md)
 
 The [development roadmap](docs/development/dev-roadmap.md) records implemented source and database views and the remaining API relationship work.
 
-Current adapters inventory Python, JS/TS, React, and Vue source. **Local code** opens source relationships around a selected region; **Code structure** explores the indexed project. Files, classes, functions, parameters, imports, inheritance and call occurrences use stable identities and refresh after edits. Large displays show limits and explicit boundaries; CLI export retains the complete indexed structure. Unresolved dynamic calls stay unknown. [Source view and commands](skills/business-observer/references/code-structure.md).
+Current adapters inventory Python, JS/TS, React, and Vue source. **Local code** opens source relationships around a selected region; **Code structure** explores the indexed project. Files, classes, functions, parameters, imports, inheritance and call occurrences use stable identities and refresh after edits. Large displays show limits and explicit boundaries; CLI export retains the complete indexed structure. Unresolved dynamic calls stay unknown. [Source view and commands](skills/vibelens/references/code-structure.md).
 
-**Database structure** and **Data operations** views connect tables, document collections, key patterns, graph labels, query targets, selected values, transformations, and transaction outcomes. SQLite, PostgreSQL, MongoDB, Redis and Neo4j have real-runtime checks; Python and Node.js share the same JSON protocol. The data watcher refreshes the graph after model/schema changes and retains personal view settings. [Run the database example](examples/database-observer/README.md) · [Support and boundaries](skills/business-observer/references/database-observation.md) · [Review evidence](docs/review/db-vis/README.md).
+**Database structure** and **Data operations** views connect tables, document collections, key patterns, graph labels, query targets, selected values, transformations, and transaction outcomes. SQLite, PostgreSQL, MongoDB, Redis and Neo4j have real-runtime checks; Python and Node.js share the same JSON protocol. The data watcher refreshes the graph after model/schema changes and retains personal view settings. [Run the database example](examples/database-observer/README.md) · [Support and boundaries](skills/vibelens/references/database-observation.md) · [Review evidence](docs/review/db-vis/README.md).
 
 Automatic column lineage, typed API relationships, additional database adapters, incremental APIs and performance baselines remain extensions. The tool captures selected fields and supported relationships; it does not prove every possible execution or execute business commands through graph edits.
 

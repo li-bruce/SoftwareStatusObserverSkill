@@ -8,7 +8,7 @@ import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT/'skills/business-observer/scripts'))
+sys.path.insert(0, str(ROOT/'skills/vibelens/scripts'))
 from code_structure import scan, enrich
 from implementation_coverage import static_errors, observer_reclassifications, protected_errors, protected_captures
 from observation_scope import bo_internal, bo_is_internal, endpoint_paths, observer_exclusion, observer_route

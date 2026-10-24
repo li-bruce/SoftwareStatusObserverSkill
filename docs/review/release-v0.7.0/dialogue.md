@@ -118,7 +118,7 @@ flowchart LR
 
 ![业务图实际页面](screenshots/002-design-full.jpg)
 
-等待确认遵循你“确认后再实现”的要求，也对应指定 [business-observer Skill](../../../skills/business-observer/SKILL.md) 的 “continue once that scope is confirmed”。
+等待确认遵循你“确认后再实现”的要求，也对应指定 [business-observer Skill](https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/SKILL.md) 的 “continue once that scope is confirmed”。
 
 
 

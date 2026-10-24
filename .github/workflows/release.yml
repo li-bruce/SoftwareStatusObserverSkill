@@ -39,7 +39,7 @@ jobs:
             fi
           else
             gh release create "$RELEASE_TAG" --verify-tag --draft \
-              --title "Business Observer $RELEASE_TAG" \
+              --title "VibeLens $RELEASE_TAG" \
               --notes-file "$notes" "${assets[@]}"
             gh release edit "$RELEASE_TAG" --draft=false
           fi

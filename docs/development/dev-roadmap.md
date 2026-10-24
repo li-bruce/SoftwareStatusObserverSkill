@@ -18,7 +18,7 @@ Status: database work and optional source neighborhoods are merged into `dev`. T
 | Data / database | Strict catalogs, SQLAlchemy/Mongoose exports, SQLAlchemy/PyMongo/Redis/Neo4j metadata, native Python/Node query and transformation capture, data views and automatic refresh. Real SQLite and four-server tests. | Additional database adapters, arbitrary DTO/entity mapping, automatic column lineage, and database-internal execution plans. |
 | API | Python route decorators, JS route registrations, DOM/JSX/Vue handlers appear in source inventory and mapping checks. | Typed endpoint nodes, method/path identity, request/response contracts, client-to-endpoint and endpoint-to-handler relations. No general OpenAPI import or verified cross-service request matching exists yet. |
 
-Source pointers: [Python extraction and graph projection](../../skills/business-observer/scripts/bo_observer/graph/code_structure.py), [JS/TS/SFC extraction](../../skills/business-observer/scripts/bo_observer/adapters/javascript/scan.mjs), [current capability boundary](../source-data-and-language.md).
+Source pointers: [Python extraction and graph projection](../../skills/vibelens/scripts/bo_observer/graph/code_structure.py), [JS/TS/SFC extraction](../../skills/vibelens/scripts/bo_observer/adapters/javascript/scan.mjs), [current capability boundary](../source-data-and-language.md).
 
 ## Planned work and acceptance
 

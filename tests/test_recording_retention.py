@@ -8,7 +8,7 @@ import unittest
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path[:0] = [str(ROOT / "skills/business-observer/scripts"), str(ROOT / "tools")]
+sys.path[:0] = [str(ROOT / "skills/vibelens/scripts"), str(ROOT / "tools")]
 from bo_observer.service import GraphSession
 from bo_observer.observation import bo_retention
 from test_multilanguage import project_fixture

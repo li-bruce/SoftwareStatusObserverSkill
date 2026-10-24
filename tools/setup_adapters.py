@@ -5,7 +5,7 @@ import shutil
 import subprocess
 
 ROOT=Path(__file__).resolve().parents[1]
-ADAPTER=ROOT/'skills/business-observer/scripts/bo_observer/adapters/javascript'
+ADAPTER=ROOT/'skills/vibelens/scripts/bo_observer/adapters/javascript'
 
 def configure():
     os.environ['BO_ADAPTER_HOME']=str(ADAPTER)

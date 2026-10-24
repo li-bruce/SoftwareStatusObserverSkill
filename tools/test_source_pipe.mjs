@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {spawn} from 'node:child_process';
 import {setTimeout as delay} from 'node:timers/promises';
 
-const scanner = new URL('../skills/business-observer/scripts/bo_observer/adapters/javascript/scan.mjs', import.meta.url);
+const scanner = new URL('../skills/vibelens/scripts/bo_observer/adapters/javascript/scan.mjs', import.meta.url);
 
 async function parse(input) {
   const child = spawn(process.execPath, ['--input-type=module', '-e',

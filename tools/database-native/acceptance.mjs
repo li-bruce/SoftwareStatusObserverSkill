@@ -9,12 +9,12 @@ import pg from "pg";
 import mongoose from "mongoose";
 import { createClient } from "redis";
 import neo4j from "neo4j-driver";
-import { BOProbe } from "../../skills/business-observer/scripts/bo_observer/adapters/javascript/bo_runtime.mjs";
+import { BOProbe } from "../../skills/vibelens/scripts/bo_observer/adapters/javascript/bo_runtime.mjs";
 import {
   BODataRuntime,
   bo_internal,
   bo_mongoose_catalog,
-} from "../../skills/business-observer/scripts/bo_observer/adapters/javascript/bo_data.mjs";
+} from "../../skills/vibelens/scripts/bo_observer/adapters/javascript/bo_data.mjs";
 
 function fixture(store) {
   const inputs = { operation: "string", statement: "string", parameters: { limit: "number" } };

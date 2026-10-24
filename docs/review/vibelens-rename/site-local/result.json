@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "url": "http://127.0.0.1:8873",
+  "checks": [
+    "en: seven connected views and language switch",
+    "zh-CN: seven connected views and language switch",
+    "Separate sample walkthrough: record, upload, approve, stop and inspect replay"
+  ],
+  "errors": []
+}

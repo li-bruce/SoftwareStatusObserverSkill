@@ -1,4 +1,4 @@
-# Business Observer
+# VibeLens
 
 The maintained English homepage is [README.md](README.md).
 

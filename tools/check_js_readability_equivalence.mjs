@@ -8,11 +8,11 @@ import { parseArgs } from "node:util";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const { values } = parseArgs({
-  options: { base: { type: "string" }, out: { type: "string" } },
+  options: { base: { type: "string" }, out: { type: "string" }, "base-skill-path": { type: "string", default: "skills/vibelens" } },
 });
 if (!values.base) throw Error("Pass --base <commit> to select the comparison revision.");
-const adapter = "skills/business-observer/scripts/bo_observer/adapters/javascript/";
-const viewer = "skills/business-observer/assets/stategraph-viewer/";
+const adapter = "skills/vibelens/scripts/bo_observer/adapters/javascript/";
+const viewer = "skills/vibelens/assets/stategraph-viewer/";
 const require = createRequire(path.join(root, adapter, "package.json"));
 const ts = require("typescript");
 const vendor = new Set(["pixi.min.js", "elk.bundled.js", "elk-worker.min.js"]);
@@ -49,7 +49,8 @@ function syntax(source, name) {
 }
 
 const changes = files.filter((name) => {
-  const before = execFileSync("git", ["show", values.base + ":" + name], {
+  const baselineName = values["base-skill-path"].replace(/\/$/, "") + name.slice("skills/vibelens".length);
+  const before = execFileSync("git", ["show", values.base + ":" + baselineName], {
     cwd: root,
     encoding: "utf8",
     maxBuffer: 10 * 1024 * 1024,

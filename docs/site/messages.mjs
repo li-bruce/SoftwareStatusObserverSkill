@@ -68,8 +68,8 @@ export const extra = {
   "copy.done": ["Copied", "已复制"],
   "copy.failed": ["Select the prompt to copy it.", "请选中文字复制。"],
   "install.prompt": [
-    "Use $business-observer for this project.\\nI want to build: [describe your project].\\nShow me the first business graph in this conversation and its Web address. Let's confirm the flow before implementation.",
-    "在这个项目中使用 $business-observer。\\n我想开发：[描述你的项目]。\\n请先在对话中展示业务图，并给我 Web 查看地址。确认流程后再开始实现。",
+    "Use $vibelens for this project.\\nI want to build: [describe your project].\\nShow me the first business graph in this conversation and its Web address. Let's confirm the flow before implementation.",
+    "在这个项目中使用 $vibelens。\\n我想开发：[描述你的项目]。\\n请先在对话中展示业务图，并给我 Web 查看地址。确认流程后再开始实现。",
   ],
 };
 export const chinese = {
@@ -93,7 +93,7 @@ export const chinese = {
   "problem.kicker": "理解每次修改的影响",
   "problem.title": "页面能用了，\\n内部怎样运行？",
   "problem.body":
-    "在 vibe coding 过程中，一次修改可能影响程序的多个部分。Business Observer 帮你沿着这些联系查看：谁触发了操作、什么条件允许执行、哪些数值发生了变化。",
+    "在 vibe coding 过程中，一次修改可能影响程序的多个部分。VibeLens 帮你沿着这些联系查看：谁触发了操作、什么条件允许执行、哪些数值发生了变化。",
   "explore.kicker": "选择需要的细节",
   "explore.title": "先看流程，\\n再沿着关系深入。",
   "explore.body":
@@ -145,7 +145,7 @@ export const chinese = {
   "demoLink.button": "打开交互演示 ↗",
   "install.kicker": "用于你自己的项目",
   "install.title": "让下一次开发对话，\\n有一张图可看。",
-  "install.body": "从 GitHub 安装 Business Observer，在项目中打开新对话，描述你想开发的内容。",
+  "install.body": "从 GitHub 安装 VibeLens，在项目中打开新对话，描述你想开发的内容。",
   "install.guide": "安装与使用说明 ↗",
   "install.promptLabel": "可以这样开始",
   "install.copy": "复制提示词",

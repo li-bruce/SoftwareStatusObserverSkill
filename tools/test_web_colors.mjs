@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
-import {nodeTypes} from '../skills/business-observer/assets/stategraph-viewer/graph-core.js';
-import {glyphAppearance} from '../skills/business-observer/assets/stategraph-viewer/glyphs.js';
+import {nodeTypes} from '../skills/vibelens/assets/stategraph-viewer/graph-core.js';
+import {glyphAppearance} from '../skills/vibelens/assets/stategraph-viewer/glyphs.js';
 const luminance=c=>[16,8,0].map(s=>((c>>s)&255)/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4).reduce((n,v,i)=>n+v*[.2126,.7152,.0722][i],0);
 for(const [type,{color}] of Object.entries(nodeTypes)){
   const normal=glyphAppearance(color),core=glyphAppearance(color,{core:true});

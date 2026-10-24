@@ -7,7 +7,7 @@ import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-for folder in (ROOT / "skills/business-observer/scripts", ROOT / "observer_runtime", ROOT / "observer_generated/runtime"):
+for folder in (ROOT / "skills/vibelens/scripts", ROOT / "observer_runtime", ROOT / "observer_generated/runtime"):
     if folder.is_dir(): sys.path.insert(0, str(folder))
 from bo_stategraph import BOStateGraph, bo_export_view, bo_read_export
 from change_sync import config

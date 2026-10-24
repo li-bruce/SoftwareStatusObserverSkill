@@ -7,7 +7,7 @@ import sys
 import tempfile
 import unittest
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "skills/business-observer/scripts"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "skills/vibelens/scripts"))
 from behavior_model import ast_fingerprint
 from code_structure import parse_unit, scan, enrich
 

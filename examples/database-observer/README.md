@@ -9,7 +9,7 @@ or Node.js code executes the application.
 From the repository root, with Python 3.11+:
 
 ```bash
-python -m pip install -r skills/business-observer/requirements.txt -r skills/business-observer/requirements-database.txt
+python -m pip install -r skills/vibelens/requirements.txt -r skills/vibelens/requirements-database.txt
 python tools/database_demo.py --port 8868
 ```
 
@@ -74,5 +74,5 @@ to an existing installation; `BO_BROWSER_EXECUTABLE` can select an installed Chr
 `BO_BROWSER_EVIDENCE` chooses a new screenshot/report directory. The test launches
 and stops its own disposable application.
 
-For an application integration, follow [database observation](../../skills/business-observer/references/database-observation.md).
+For an application integration, follow [database observation](../../skills/vibelens/references/database-observation.md).
 Recorded failures, fixes and screenshots are in [the review](../../docs/review/db-vis/README.md).

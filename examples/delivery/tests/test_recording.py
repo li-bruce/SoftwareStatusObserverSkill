@@ -9,7 +9,7 @@ import unittest
 from unittest.mock import patch
 
 ROOT = Path(__file__).absolute().parents[1]
-choices = [ROOT/"skills/business-observer/scripts/recording_session.py",
+choices = [ROOT/"skills/vibelens/scripts/recording_session.py",
            ROOT/"observer_runtime/recording_session.py",
            ROOT/"observer_generated/runtime/recording_session.py"]
 spec = importlib.util.spec_from_file_location("recording_under_test", next(p for p in choices if p.exists()))

@@ -18,7 +18,7 @@ import sys
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPTS = ROOT / "skills/business-observer/scripts"
+SCRIPTS = ROOT / "skills/vibelens/scripts"
 sys.path.insert(0, str(ROOT / "tests"))
 sys.path.insert(0, str(SCRIPTS))
 
@@ -59,7 +59,7 @@ def trial(output):
                 "id": ident,
                 "command": [
                     "python",
-                    "skills/business-observer/scripts/bo_db.py",
+                    "skills/vibelens/scripts/bo_db.py",
                     action,
                     "--root",
                     "$TRIAL",
@@ -209,7 +209,7 @@ def trial(output):
             "kind": "scripted-simulated-dialogue",
             "date": "2026-10-24",
             "skill_sha256": hashlib.sha256(
-                (ROOT / "skills/business-observer/SKILL.md").read_bytes()
+                (ROOT / "skills/vibelens/SKILL.md").read_bytes()
             ).hexdigest(),
             "scope": "Storage selection, native model export, real SQLite schema update, runtime query and observer exclusion. Existing business graph uses the shared integration fixture.",
             "limitations": [

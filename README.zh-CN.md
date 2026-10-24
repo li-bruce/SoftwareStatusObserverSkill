@@ -1,10 +1,12 @@
-# Business Observer
+# VibeLens
 
 **帮助开发者看懂 AI 实现的代码，以及程序真正发生的行为。**
 
-[English](README.md) · [产品介绍](https://li-bruce.github.io/SoftwareStatusObserverSkill/?lang=zh-CN) · [交互演示](https://li-bruce.github.io/SoftwareStatusObserverSkill/demo.html?lang=zh-CN) · [安装与使用](docs/usage.zh-CN.md) · [源码导览](docs/source-guide.zh-CN.md)
+原名 Business Observer（`business-observer`）。[更名与迁移说明](docs/rename-vibelens.md)。
 
-Vibe coding 可以很快做出能用的页面，但内部状态、判断和调用关系往往难以掌握。`business-observer` 在开发过程中维护一张面向开发者的状态网，把业务流程、状态、判定依赖、关键函数、参数与实际运行事实联系起来。
+[English](README.md) · [产品介绍](https://li-bruce.github.io/VibeLens/?lang=zh-CN) · [交互演示](https://li-bruce.github.io/VibeLens/demo.html?lang=zh-CN) · [安装与使用](docs/usage.zh-CN.md) · [源码导览](docs/source-guide.zh-CN.md)
+
+Vibe coding 可以很快做出能用的页面，但内部状态、判断和调用关系往往难以掌握。`vibelens` 在开发过程中维护一张面向开发者的状态网，把业务流程、状态、判定依赖、关键函数、参数与实际运行事实联系起来。
 
 ![从业务流程逐层深入到状态、判断、函数与参数，以及源码](docs/site/layers.svg)
 
@@ -63,35 +65,37 @@ Skill 本身不是监听所有编辑器的后台程序。扫描发现变化后�
 ## 安装并开始
 
 ```bash
-git clone https://github.com/li-bruce/SoftwareStatusObserverSkill.git
-cd SoftwareStatusObserverSkill
+git clone https://github.com/li-bruce/VibeLens.git
+cd VibeLens
 python tools/install_skill.py --project /path/to/your-project
 ```
 
-脚本安装完整目录到项目的 `.agents/skills/business-observer`，已有目录会停止，避免覆盖修改。然后在该项目的新对话中输入：
+脚本安装完整目录到项目的 `.agents/skills/vibelens`，已有目录会停止，避免覆盖修改。然后在该项目的新对话中输入：
 
 ```text
-在这个项目中使用 $business-observer。
+在这个项目中使用 $vibelens。
 我想开发：[描述你的项目]。
 先在对话中展示业务图，并提供可打开的 Web 地址。
 确认没有理解偏差后，再开始实现，并持续更新图和检查。
 ```
 
+也可以运行 `npx skills add li-bruce/VibeLens --skill vibelens`。已有旧安装可使用 [迁移命令](docs/rename-vibelens.md)，先保留完整备份，再切换到新名称；项目的运行模块和个人布局继续沿用。
+
 你只需要回答重要业务问题、选择模式并查看图；中间文件和验证由 AI 处理。维护中的源码、注释、Skill 与默认文档使用英文；对话跟随用户语言，界面可切换中英文。原始对话与历史证据不改写。
 
 依赖与完整命令见[使用说明](docs/usage.zh-CN.md)和[英文首页](README.md)。本地产品介绍可通过 `python -m http.server 8862 --bind 127.0.0.1` 启动，然后打开[介绍页](http://127.0.0.1:8862/docs/site/?lang=zh-CN)。
 
-[独立交互演示](https://li-bruce.github.io/SoftwareStatusObserverSkill/demo.html?lang=zh-CN)用示例数据展示对话确认、图的展开、记录回放和需求迭代。阅读实现时，可以从[源码导览](docs/source-guide.zh-CN.md)了解模块职责及主要调用路径；本轮改动的比较、失败与复测记录见[验收材料](docs/review/readability-20261023/README.md)。
+[独立交互演示](https://li-bruce.github.io/VibeLens/demo.html?lang=zh-CN)用示例数据展示对话确认、图的展开、记录回放和需求迭代。阅读实现时，可以从[源码导览](docs/source-guide.zh-CN.md)了解模块职责及主要调用路径；本轮改动的比较、失败与复测记录见[验收材料](docs/review/readability-20261023/README.md)。
 
 ## 当前边界
 
-当前支持 Python、JS/TS、React、Vue 的源码盘点与原生采集。“局部代码”按选中区域打开关联结构，“代码结构”查看已索引的项目，包含文件、类、函数、参数、导入、继承与调用关系。代码修改后自动刷新，未解析的动态调用保留未知。大图显示数量限制和边界，完整索引可以导出为 JSON。[源码视图和命令](skills/business-observer/references/code-structure.md)。
+当前支持 Python、JS/TS、React、Vue 的源码盘点与原生采集。“局部代码”按选中区域打开关联结构，“代码结构”查看已索引的项目，包含文件、类、函数、参数、导入、继承与调用关系。代码修改后自动刷新，未解析的动态调用保留未知。大图显示数量限制和边界，完整索引可以导出为 JSON。[源码视图和命令](skills/vibelens/references/code-structure.md)。
 
-数据库结构与数据操作视图连接表、文档集合、键模式、图数据库标签、查询目标、选定参数、数据处理和事务结果。SQLite、PostgreSQL、MongoDB、Redis、Neo4j 已有真实运行测试；Python 与 Node.js 使用统一 JSON 协议。模型或数据库结构变化后自动刷新图，并保留个人布局。[运行数据库示例](examples/database-observer/README.md) · [支持范围](skills/business-observer/references/database-observation.md) · [验收材料](docs/review/db-vis/README.md)。
+数据库结构与数据操作视图连接表、文档集合、键模式、图数据库标签、查询目标、选定参数、数据处理和事务结果。SQLite、PostgreSQL、MongoDB、Redis、Neo4j 已有真实运行测试；Python 与 Node.js 使用统一 JSON 协议。模型或数据库结构变化后自动刷新图，并保留个人布局。[运行数据库示例](examples/database-observer/README.md) · [支持范围](skills/vibelens/references/database-observation.md) · [验收材料](docs/review/db-vis/README.md)。
 
 自动列血缘、专门的 API 关系、更多数据库适配、增量接口和性能基线仍待扩展。采集针对选定字段和支持的关系；完整动态调用解析、所有执行情况的正确性、编辑图执行业务命令均不在当前能力范围。
 
-[架构与协议](skills/business-observer/references/multilanguage.md) · [源码及数据层分析](docs/source-data-and-language.md) · [测试证据](docs/review/english-gallery/README.md)
+[架构与协议](skills/vibelens/references/multilanguage.md) · [源码及数据层分析](docs/source-data-and-language.md) · [测试证据](docs/review/english-gallery/README.md)
 
 许可证：[MIT](LICENSE)。可视化使用开源 PixiJS、ELK.js，不包含 yFiles 专有代码。见[第三方声明](THIRD_PARTY_NOTICES.md)。
 

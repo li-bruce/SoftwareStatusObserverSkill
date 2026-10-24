@@ -9,7 +9,7 @@ import {BOProbe,BOExecutor} from '../bo_stategraph/bo_runtime.mjs';
 import {bo_runner} from '../integrations/bo_runner.mjs';
 import {advance,available} from '../src/job.mjs';
 const root=new URL('../',import.meta.url);
-const adapterRequire=createRequire(new URL('../../../skills/business-observer/scripts/bo_observer/adapters/javascript/package.json',import.meta.url));
+const adapterRequire=createRequire(new URL('../../../skills/vibelens/scripts/bo_observer/adapters/javascript/package.json',import.meta.url));
 const ts=adapterRequire('typescript'),sfc=adapterRequire('@vue/compiler-sfc');
 const project=JSON.parse(readFileSync(new URL('bo_stategraph/project.json',root),'utf8'));
 const input=process.env.BO_TEST_BUILD||'component-test';

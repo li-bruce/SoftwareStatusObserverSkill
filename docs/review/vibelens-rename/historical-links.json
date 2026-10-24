@@ -1,0 +1,82 @@
+{
+  "passed": true,
+  "documents": 10,
+  "links": [
+    {
+      "document": "docs/assessment/2026-10-24/README.md",
+      "before": "../../../skills/business-observer/references/iteration-graph-checks.md",
+      "after": "https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/references/iteration-graph-checks.md"
+    },
+    {
+      "document": "docs/review/assessment-fixes-20261022/README.md",
+      "before": "../../../skills/business-observer/references/independent-python.md",
+      "after": "https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/references/independent-python.md"
+    },
+    {
+      "document": "docs/review/assessment-fixes-20261022/README.md",
+      "before": "../../../skills/business-observer/references/mapping-contract.md",
+      "after": "https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/references/mapping-contract.md"
+    },
+    {
+      "document": "docs/review/db-vis/README.md",
+      "before": "../../../skills/business-observer/references/database-observation.md",
+      "after": "https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/references/database-observation.md"
+    },
+    {
+      "document": "docs/review/english-gallery/README.md",
+      "before": "../../../skills/business-observer/SKILL.md",
+      "after": "https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/SKILL.md"
+    },
+    {
+      "document": "docs/review/focused-replay/README.md",
+      "before": "../../../skills/business-observer/references/types-rules-capture.md",
+      "after": "https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/references/types-rules-capture.md"
+    },
+    {
+      "document": "docs/review/implementation-coverage/README.md",
+      "before": "../../../skills/business-observer/references/implementation-coverage.md",
+      "after": "https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/references/implementation-coverage.md"
+    },
+    {
+      "document": "docs/review/observer-noise/README.md",
+      "before": "../../../skills/business-observer/references/observer-exclusion.md",
+      "after": "https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/references/observer-exclusion.md"
+    },
+    {
+      "document": "docs/review/recorded-views/README.md",
+      "before": "../../../skills/business-observer/references/recorded-analysis.md",
+      "after": "https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/references/recorded-analysis.md"
+    },
+    {
+      "document": "docs/review/release-v0.7.0/dialogue.md",
+      "before": "../../../skills/business-observer/SKILL.md",
+      "after": "https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/SKILL.md"
+    },
+    {
+      "document": "docs/review/web-continuity-20261022/README.md",
+      "before": "../../../skills/business-observer/references/conversation-web.md",
+      "after": "https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/references/conversation-web.md"
+    },
+    {
+      "document": "docs/review/web-continuity-20261022/README.md",
+      "before": "../../../skills/business-observer/scripts/bo_design.py",
+      "after": "https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/scripts/bo_design.py"
+    },
+    {
+      "document": "docs/review/web-continuity-20261022/README.md",
+      "before": "../../../skills/business-observer/scripts/bo_web.py",
+      "after": "https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/scripts/bo_web.py"
+    },
+    {
+      "document": "docs/review/web-continuity-20261022/README.md",
+      "before": "../../../skills/business-observer/assets/stategraph-viewer/conversation.js",
+      "after": "https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/assets/stategraph-viewer/conversation.js"
+    },
+    {
+      "document": "docs/review/web-continuity-20261022/README.md",
+      "before": "../../../skills/business-observer/assets/stategraph-viewer/glyphs.js",
+      "after": "https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/assets/stategraph-viewer/glyphs.js"
+    }
+  ],
+  "meaning": "Original report bytes retained except for these source-navigation targets."
+}

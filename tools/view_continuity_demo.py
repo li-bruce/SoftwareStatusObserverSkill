@@ -16,14 +16,14 @@ import threading
 from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "skills/business-observer/scripts"))
+sys.path.insert(0, str(ROOT / "skills/vibelens/scripts"))
 from recording_session import Recordings
 from view_preferences import Preferences
 
 
 def serve(directory, port):
     directory.mkdir(parents=True, exist_ok=True)
-    assets = ROOT / "skills/business-observer/assets/stategraph-viewer"
+    assets = ROOT / "skills/vibelens/assets/stategraph-viewer"
     preferences = Preferences(directory, "view-continuity-fixture")
     lock = threading.RLock()
     version, events = 1, []

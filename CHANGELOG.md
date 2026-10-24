@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.1 — 2026-10-24
+
+- Rename the product and repository to **VibeLens**; use `$vibelens` and `skills/vibelens`.
+- Update the English/Chinese introduction, installation commands, CI paths and source guides.
+- Add explicit legacy installation migration with a complete backup, failure rollback and existing-file protection.
+- Preserve runtime modules, JSON protocol identifiers, layout keys and recorded evidence. Historical source links point to their fixed `v0.7.0` paths.
+- [Migration instructions](docs/rename-vibelens.md) and [rename acceptance](docs/review/vibelens-rename/README.md).
+
 ## 0.7.0 — 2026-10-24
 
 ### Optional code structure
@@ -19,7 +27,7 @@
 - Capture Python and Node operations with explicit data targets and field selection. Exclude observer queries and reporting. Redact unselected SQL literals and distinguish statement success from transaction commit.
 - Add bilingual data views, relationship details, selected-value replay and schema-change continuity to the Web viewer. Preserve personal layouts and filters.
 - Guide storage selection in the Skill and require model export, capture, source mapping and actual database cases during each relevant development iteration.
-- [Acceptance](docs/review/db-vis/README.md): full repository regression, 77 data cases, actual PostgreSQL/MongoDB/Redis/Neo4j collectors and Python/Node clients, real SQLite browser recording/replay, both example upgrades and Git-export installation passed locally. Failed attempts and repairs are retained. The [database branch CI](https://github.com/li-bruce/SoftwareStatusObserverSkill/actions/runs/40013071589) also passed.
+- [Acceptance](docs/review/db-vis/README.md): full repository regression, 77 data cases, actual PostgreSQL/MongoDB/Redis/Neo4j collectors and Python/Node clients, real SQLite browser recording/replay, both example upgrades and Git-export installation passed locally. Failed attempts and repairs are retained. The [database branch CI](https://github.com/li-bruce/VibeLens/actions/runs/40013071589) also passed.
 - MySQL live verification, database-internal execution plans and automatic column lineage remain outside this delivery.
 
 ### Acceptance and architecture repairs
@@ -41,7 +49,7 @@
 
 ## 0.6.0 — 2026-10-23
 
-[Release notes](docs/releases/v0.6.0.md) · [Live introduction](https://li-bruce.github.io/SoftwareStatusObserverSkill/)
+[Release notes](docs/releases/v0.6.0.md) · [Live introduction](https://li-bruce.github.io/VibeLens/)
 
 ### English presentation and independent gallery trials
 

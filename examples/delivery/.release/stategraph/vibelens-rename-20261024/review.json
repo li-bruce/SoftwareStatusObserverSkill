@@ -1,0 +1,31 @@
+{
+  "candidate_id": "72b3e4c34beb5b0514a8484e8a590c6f0c0848aaeafdd94c03f166c48c898fb8",
+  "decisions": {
+    "business": {
+      "action": "unchanged",
+      "reason": "Rename the public Skill and update integration test and documentation paths. Business source, graph identities, runtime contracts, probes and independent acceptance expectations remain unchanged."
+    },
+    "state_machine": {
+      "action": "unchanged",
+      "reason": "Rename the public Skill and update integration test and documentation paths. Business source, graph identities, runtime contracts, probes and independent acceptance expectations remain unchanged."
+    },
+    "abstraction": {
+      "action": "unchanged",
+      "reason": "Rename the public Skill and update integration test and documentation paths. Business source, graph identities, runtime contracts, probes and independent acceptance expectations remain unchanged."
+    },
+    "probes": {
+      "action": "unchanged",
+      "reason": "Rename the public Skill and update integration test and documentation paths. Business source, graph identities, runtime contracts, probes and independent acceptance expectations remain unchanged."
+    }
+  },
+  "excluded_symbols": {
+    "app/ports.py::BOEvents": "Application-owned optional diagnostics boundary; its actual business callers remain mapped. The implementation plan already classifies its constructor and emitter as observer support.",
+    "app/ports.py::BOEvents.__init__": "Stores the optional diagnostics callback and error counter only. Existing implementation observer classification is retained; no business action is excluded.",
+    "app/ports.py::BOEvents.bo_emit": "Invokes the optional observer callback with its capture gate and isolates callback exceptions. All business calls and their required runtime values remain mapped.",
+    "app/service.py::Delivery": "Class container; its actual business methods remain in the existing graph and independent implementation inventory.",
+    "app/store.py::Store": "Storage class container; its query and effect methods remain mapped by the existing graph and support inventory.",
+    "bo_stategraph/workflow.py::ActivityExecution": "Execution class container; its activity, resource, join and state methods retain existing graph and runtime checks.",
+    "bo_stategraph/workflow.py::ActivityState": "Activity-state enumeration; declared states and actual execution values retain existing contract validation.",
+    "bo_stategraph/workflow.py::Phase": "Main-phase enumeration; machine declaration and transition validation retain existing checks."
+  }
+}

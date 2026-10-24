@@ -2,22 +2,22 @@
 
 [English](source-guide.en.md) · [使用说明](usage.zh-CN.md) · [架构说明](refactor-multilanguage.md)
 
-这份导览按实际执行路径介绍源码。维护中的实现位于 [skills/business-observer](../skills/business-observer/)，示例项目中的同名模块是安装副本，用于验证接入真实项目后的行为。
+这份导览按实际执行路径介绍源码。维护中的实现位于 [skills/vibelens](../skills/vibelens/)，示例项目中的同名模块是安装副本，用于验证接入真实项目后的行为。
 
 ## 先找到对应目录
 
-数据库部分从 [data/contract.py](../skills/business-observer/scripts/bo_observer/data/contract.py) 的 JSON 校验开始，依次是 `catalog.py` 读取原生元数据、`projection.py` 生成同一张图的节点与关系、`sync.py` 更新与独立核验。`runtime.py` 和原生 `bo_data.mjs` 观察实际调用，`watcher.py` 切换已校验的 Web 图版本。记录、回放及个人配置继续使用现有共用服务。完整接口见[数据库接入说明](../skills/business-observer/references/database-observation.md)。
+数据库部分从 [data/contract.py](../skills/vibelens/scripts/bo_observer/data/contract.py) 的 JSON 校验开始，依次是 `catalog.py` 读取原生元数据、`projection.py` 生成同一张图的节点与关系、`sync.py` 更新与独立核验。`runtime.py` 和原生 `bo_data.mjs` 观察实际调用，`watcher.py` 切换已校验的 Web 图版本。记录、回放及个人配置继续使用现有共用服务。完整接口见[数据库接入说明](../skills/vibelens/references/database-observation.md)。
 
 | 位置 | 负责什么 |
 |---|---|
-| [SKILL.md](../skills/business-observer/SKILL.md) | 开发对话、业务图确认、迭代检查的操作流程。 |
-| [scripts/bo.py](../skills/business-observer/scripts/bo.py) | 原生项目的启动、校验、源码检索与导出入口。 |
-| [scripts/bo_stategraph.py](../skills/business-observer/scripts/bo_stategraph.py) | 独立状态声明、观测到的实例与完整关系结构导出。 |
-| [scripts/bo_contracts.py](../skills/business-observer/scripts/bo_contracts.py) | 参数类型、状态层次、活动状态计算和声明的严格校验。 |
-| [scripts/execution_contract.py](../skills/business-observer/scripts/execution_contract.py) | 并发活动、汇合、资源与运行配置的约束。 |
-| [scripts/bo_observer](../skills/business-observer/scripts/bo_observer/) | 共用服务、语言适配、开发检查及 Web 支持。 |
-| [assets/stategraph-viewer](../skills/business-observer/assets/stategraph-viewer/) | 项目实际使用的图页面、布局、记录和回放。 |
-| [schemas](../skills/business-observer/scripts/bo_observer/schemas/) | 各语言与服务之间使用的 JSON 协议。 |
+| [SKILL.md](../skills/vibelens/SKILL.md) | 开发对话、业务图确认、迭代检查的操作流程。 |
+| [scripts/bo.py](../skills/vibelens/scripts/bo.py) | 原生项目的启动、校验、源码检索与导出入口。 |
+| [scripts/bo_stategraph.py](../skills/vibelens/scripts/bo_stategraph.py) | 独立状态声明、观测到的实例与完整关系结构导出。 |
+| [scripts/bo_contracts.py](../skills/vibelens/scripts/bo_contracts.py) | 参数类型、状态层次、活动状态计算和声明的严格校验。 |
+| [scripts/execution_contract.py](../skills/vibelens/scripts/execution_contract.py) | 并发活动、汇合、资源与运行配置的约束。 |
+| [scripts/bo_observer](../skills/vibelens/scripts/bo_observer/) | 共用服务、语言适配、开发检查及 Web 支持。 |
+| [assets/stategraph-viewer](../skills/vibelens/assets/stategraph-viewer/) | 项目实际使用的图页面、布局、记录和回放。 |
+| [schemas](../skills/vibelens/scripts/bo_observer/schemas/) | 各语言与服务之间使用的 JSON 协议。 |
 | [examples](../examples/) | 可运行项目、业务逻辑和验收场景。 |
 | [tools](../tools/) 与 [tests](../tests/) | 安装、同步安装副本、仓库验收。 |
 | [docs/site](site/) | 产品介绍页和独立的浏览器示例演示。 |
@@ -29,23 +29,23 @@ scripts 根目录下多数小文件负责转发导入或命令调用。需要修
 
 ### 一次代码修改怎样更新到图中
 
-1. [workflow/bo_sync.py](../skills/business-observer/scripts/bo_observer/workflow/bo_sync.py) 的 source_inventory 从项目范围枚举源码，maintenance_task 与上次验收基线比较。因此新增文件也在检查范围内。
-2. [sources.py](../skills/business-observer/scripts/bo_observer/sources.py) 的 scan 分派 Python、JavaScript 等语言解析；只有文件和解析器版本都匹配时才复用缓存。无法确定的调用会保留。
-3. [graph/code_structure.py](../skills/business-observer/scripts/bo_observer/graph/code_structure.py) 提取 Python 声明，并通过 enrich 把局部源码结构关联到上层节点。
-4. [development.py](../skills/business-observer/scripts/bo_observer/development.py) 将业务含义问题交给用户确认，将未明确的实现关系交给编码阶段处理。
-5. [workflow/change_sync.py](../skills/business-observer/scripts/bo_observer/workflow/change_sync.py) 检查当前候选、影响范围和评审记录。
-6. [workflow/sync_verify.py](../skills/business-observer/scripts/bo_observer/workflow/sync_verify.py) 运行约定的观测与测试，分别报告映射、状态规则、业务断言和项目检查。
+1. [workflow/bo_sync.py](../skills/vibelens/scripts/bo_observer/workflow/bo_sync.py) 的 source_inventory 从项目范围枚举源码，maintenance_task 与上次验收基线比较。因此新增文件也在检查范围内。
+2. [sources.py](../skills/vibelens/scripts/bo_observer/sources.py) 的 scan 分派 Python、JavaScript 等语言解析；只有文件和解析器版本都匹配时才复用缓存。无法确定的调用会保留。
+3. [graph/code_structure.py](../skills/vibelens/scripts/bo_observer/graph/code_structure.py) 提取 Python 声明，并通过 enrich 把局部源码结构关联到上层节点。
+4. [development.py](../skills/vibelens/scripts/bo_observer/development.py) 将业务含义问题交给用户确认，将未明确的实现关系交给编码阶段处理。
+5. [workflow/change_sync.py](../skills/vibelens/scripts/bo_observer/workflow/change_sync.py) 检查当前候选、影响范围和评审记录。
+6. [workflow/sync_verify.py](../skills/vibelens/scripts/bo_observer/workflow/sync_verify.py) 运行约定的观测与测试，分别报告映射、状态规则、业务断言和项目检查。
 
 扫描与检查只更新诊断信息。只有当前候选通过完整验证后，accept 才推进验收基线。
 
 ### 一次业务操作怎样进入运行图
 
-1. 应用完成业务判断，通过 [Python BOProbe](../skills/business-observer/scripts/bo_observer/adapters/python/bo_probe.py) 或 [JavaScript BOProbe](../skills/business-observer/scripts/bo_observer/adapters/javascript/bo_runtime.mjs) 提交指定参数。
+1. 应用完成业务判断，通过 [Python BOProbe](../skills/vibelens/scripts/bo_observer/adapters/python/bo_probe.py) 或 [JavaScript BOProbe](../skills/vibelens/scripts/bo_observer/adapters/javascript/bo_runtime.mjs) 提交指定参数。
 2. 适配器筛选采集字段、抑制观测自身的事件，并排队发送。传输失败单独计数。
-3. [protocol.py](../skills/business-observer/scripts/bo_observer/protocol.py) 校验项目、构建版本、类型及消息大小。
-4. [service.py](../skills/business-observer/scripts/bo_observer/service.py) 的 GraphSession.event 保存事件标识、来源顺序和依赖；snapshot 将真实状态关联到对应事件。
-5. [bo_stategraph.py](../skills/business-observer/scripts/bo_stategraph.py) 的 bo_observe 对照声明检查实际状态及版本。实际状态与声明冲突时保留原始事实并报告差异。
-6. [observation/recording_session.py](../skills/business-observer/scripts/bo_observer/observation/recording_session.py) 保存指定时间段及缺失信息。view/export 返回结构和保留的运行事实。
+3. [protocol.py](../skills/vibelens/scripts/bo_observer/protocol.py) 校验项目、构建版本、类型及消息大小。
+4. [service.py](../skills/vibelens/scripts/bo_observer/service.py) 的 GraphSession.event 保存事件标识、来源顺序和依赖；snapshot 将真实状态关联到对应事件。
+5. [bo_stategraph.py](../skills/vibelens/scripts/bo_stategraph.py) 的 bo_observe 对照声明检查实际状态及版本。实际状态与声明冲突时保留原始事实并报告差异。
+6. [observation/recording_session.py](../skills/vibelens/scripts/bo_observer/observation/recording_session.py) 保存指定时间段及缺失信息。view/export 返回结构和保留的运行事实。
 
 驱动模式还会在应用自身调用 BOExecutor.step，依据声明求取下一状态；观察模式由应用自己的逻辑决定。两种模式遵守相同的观测协议。
 
@@ -53,26 +53,26 @@ scripts 根目录下多数小文件负责转发导入或命令调用。需要修
 
 | 文件 | 阅读重点 |
 |---|---|
-| [viewer.js](../skills/business-observer/assets/stategraph-viewer/viewer.js) | 页面按钮、数据刷新和记录选择的连接入口。 |
-| [graph-core.js](../skills/business-observer/assets/stategraph-viewer/graph-core.js) | 节点值、源码关联、事件筛选与图内容。 |
-| [layout.js](../skills/business-observer/assets/stategraph-viewer/layout.js) | 展开收起、分组位置、筛选和批注。 |
-| [view-lifecycle.js](../skills/business-observer/assets/stategraph-viewer/view-lifecycle.js) | 项目视图的稳定标识，以及录制与当前图版本的匹配。 |
-| [renderer.js](../skills/business-observer/assets/stategraph-viewer/renderer.js) | Pixi 绘制和鼠标可命中的区域。 |
-| [recording.js](../skills/business-observer/assets/stategraph-viewer/recording.js) | 回放步骤及运行证据支持的连线传递。 |
-| [runtime-frames.js](../skills/business-observer/assets/stategraph-viewer/runtime-frames.js) | 查找事件对应的精确快照，比较状态和资源。 |
-| [replay-steps.js](../skills/business-observer/assets/stategraph-viewer/replay-steps.js) | 按当前观察层级展示相关变化。 |
-| [preferences.js](../skills/business-observer/assets/stategraph-viewer/preferences.js) | 通过项目接口保存个人显示配置。 |
-| [polling.js](../skills/business-observer/assets/stategraph-viewer/polling.js) | 串行刷新及暂停、销毁控制。 |
+| [viewer.js](../skills/vibelens/assets/stategraph-viewer/viewer.js) | 页面按钮、数据刷新和记录选择的连接入口。 |
+| [graph-core.js](../skills/vibelens/assets/stategraph-viewer/graph-core.js) | 节点值、源码关联、事件筛选与图内容。 |
+| [layout.js](../skills/vibelens/assets/stategraph-viewer/layout.js) | 展开收起、分组位置、筛选和批注。 |
+| [view-lifecycle.js](../skills/vibelens/assets/stategraph-viewer/view-lifecycle.js) | 项目视图的稳定标识，以及录制与当前图版本的匹配。 |
+| [renderer.js](../skills/vibelens/assets/stategraph-viewer/renderer.js) | Pixi 绘制和鼠标可命中的区域。 |
+| [recording.js](../skills/vibelens/assets/stategraph-viewer/recording.js) | 回放步骤及运行证据支持的连线传递。 |
+| [runtime-frames.js](../skills/vibelens/assets/stategraph-viewer/runtime-frames.js) | 查找事件对应的精确快照，比较状态和资源。 |
+| [replay-steps.js](../skills/vibelens/assets/stategraph-viewer/replay-steps.js) | 按当前观察层级展示相关变化。 |
+| [preferences.js](../skills/vibelens/assets/stategraph-viewer/preferences.js) | 通过项目接口保存个人显示配置。 |
+| [polling.js](../skills/vibelens/assets/stategraph-viewer/polling.js) | 串行刷新及暂停、销毁控制。 |
 
 完整模型、当前视图、运行证据各自保存。筛选视图保留完整模型，移动节点或回放记录仅改变显示。
 
 ## 修改和排版约定
 
-源码关系由 [code_graph/index.py](../skills/business-observer/scripts/bo_observer/code_graph/index.py) 生成，query.py 提取局部和边界，service.py 管理索引刷新、版本校验和源码读取。用户可以按需打开“局部代码”或“代码结构”。静态连线与实际运行记录分别保留。
+源码关系由 [code_graph/index.py](../skills/vibelens/scripts/bo_observer/code_graph/index.py) 生成，query.py 提取局部和边界，service.py 管理索引刷新、版本校验和源码读取。用户可以按需打开“局部代码”或“代码结构”。静态连线与实际运行记录分别保留。
 
-[session_lifecycle.py](../skills/business-observer/scripts/bo_observer/session_lifecycle.py) 管理每个请求使用的图版本。切换版本后，旧会话在最后一个请求完成时释放；耗时的源码解析和响应写入不占用全局会话锁。
+[session_lifecycle.py](../skills/vibelens/scripts/bo_observer/session_lifecycle.py) 管理每个请求使用的图版本。切换版本后，旧会话在最后一个请求完成时释放；耗时的源码解析和响应写入不占用全局会话锁。
 
-[data/evidence.py](../skills/business-observer/scripts/bo_observer/data/evidence.py) 统一数据操作和功能映射中的证据校验。它按实际结果检查字段，例如失败时的错误类型、已知行数、事务提交或回滚；普通功能的采集字段检查继续保持严格。
+[data/evidence.py](../skills/vibelens/scripts/bo_observer/data/evidence.py) 统一数据操作和功能映射中的证据校验。它按实际结果检查字段，例如失败时的错误类型、已知行数、事务提交或回滚；普通功能的采集字段检查继续保持严格。
 
 主要函数用英文说明用途，在容易误读的位置解释顺序、所有权和失败处理。校验、状态修改等操作分行展开。源码可读性调整保持公开名称、协议字段、图 ID 及受保护的验收要求。
 

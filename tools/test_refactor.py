@@ -13,7 +13,7 @@ import zipfile
 from unittest.mock import patch
 
 ROOT=Path(__file__).resolve().parents[1]
-sys.path.insert(0,str(ROOT/'skills/business-observer/scripts'))
+sys.path.insert(0,str(ROOT/'skills/vibelens/scripts'))
 from bo_stategraph import BOStateGraph, bo_validate_export, bo_digest
 from bo_contracts import active_states, value_errors
 from statechart_contract import validate_chart
@@ -229,7 +229,7 @@ class RefactorTests(unittest.TestCase):
     def test_scanning_does_not_acknowledge_pending_change(self):
         cfg={'code_files':['app.py'],'watch_files':[]}
         (self.root/'app.py').write_text('x=1\n');(self.root/'sync.json').write_text(json.dumps(cfg))
-        command=[sys.executable,'-B','-X','utf8',str(ROOT/'skills/business-observer/scripts/bo_sync.py'),'scan','--root',str(self.root)]
+        command=[sys.executable,'-B','-X','utf8',str(ROOT/'skills/vibelens/scripts/bo_sync.py'),'scan','--root',str(self.root)]
         for _ in range(2):
             output=subprocess.run(command,capture_output=True,text=True,encoding='utf-8',check=True)
             self.assertEqual(json.loads(output.stdout)['status'],'needs_update')
@@ -252,7 +252,7 @@ class RefactorTests(unittest.TestCase):
         log=self.root/'watch.log'
         with log.open('w',encoding='utf-8') as stream:
             process=subprocess.Popen([sys.executable,'-B','-X','utf8',
-                str(ROOT/'skills/business-observer/scripts/bo_sync.py'),'watch','--root',str(self.root),'--interval','.1'],
+                str(ROOT/'skills/vibelens/scripts/bo_sync.py'),'watch','--root',str(self.root),'--interval','.1'],
                 stdout=stream,stderr=stream)
             def wait_for(predicate):
                 deadline=time.monotonic()+8
@@ -299,7 +299,7 @@ class RefactorTests(unittest.TestCase):
         project=self.copy_project()
         private=project/'bo_stategraph/config/views/local.json'
         private.parent.mkdir(parents=True,exist_ok=True);private.write_text('{"note":"personal"}')
-        result=subprocess.run([sys.executable,'-B','-X','utf8',str(ROOT/'skills/business-observer/scripts/architecture_guard.py'),
+        result=subprocess.run([sys.executable,'-B','-X','utf8',str(ROOT/'skills/vibelens/scripts/architecture_guard.py'),
             'package','--root',str(project),'--out','dist/core.zip'],capture_output=True,text=True,encoding='utf-8')
         self.assertEqual(result.returncode,0,result.stdout+result.stderr)
         with zipfile.ZipFile(project/'dist/core.zip') as package:
@@ -369,7 +369,7 @@ class RefactorTests(unittest.TestCase):
         before=manifest.read_bytes()
         # A new canonical source changes two files, then the second copy fails.
         import shutil
-        source=self.root/'candidate';shutil.copytree(ROOT/'skills/business-observer/scripts',source,ignore=shutil.ignore_patterns('__pycache__'))
+        source=self.root/'candidate';shutil.copytree(ROOT/'skills/vibelens/scripts',source,ignore=shutil.ignore_patterns('__pycache__'))
         for name in ('bo_contracts.py','bo_stategraph.py'):
             p=source/name;p.write_text(p.read_text(encoding='utf-8')+'\n# candidate\n',encoding='utf-8')
         original=shutil.copyfile

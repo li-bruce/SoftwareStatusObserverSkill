@@ -8,7 +8,7 @@ import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT/"skills/business-observer/scripts"))
+sys.path.insert(0, str(ROOT/"skills/vibelens/scripts"))
 sys.path.insert(0, str(ROOT/"examples/delivery"))
 from whitebox_contract import assess, static_errors, schema_errors, assertion_errors
 from code_structure import scan
@@ -18,7 +18,7 @@ from app.ports import Events
 
 class WhiteboxTests(unittest.TestCase):
     def setUp(self):
-        self.contract = json.loads((ROOT/"skills/business-observer/assets/whitebox.example.json").read_text(encoding="utf-8"))
+        self.contract = json.loads((ROOT/"skills/vibelens/assets/whitebox.example.json").read_text(encoding="utf-8"))
         self.model = {"revision": "v1", "nodes": [{"id": "permission", "source": {"path": "app/policy.py", "symbol": "allowed"}}]}
         self.event = {"id": "e1", "run_id": "run1", "attempt": "a1", "call_id": "c1", "entity": "job1",
                       "build_id": "b1", "model_revision": "v1", "node": "permission", "phase": "decision",

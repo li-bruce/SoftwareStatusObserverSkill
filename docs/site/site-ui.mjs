@@ -1,4 +1,4 @@
-import { extra, chinese } from "./messages.mjs?rev=0.7.0";
+import { extra, chinese } from "./messages.mjs?rev=0.7.1";
 
 const defaults = new Map(
   [...document.querySelectorAll("[data-i18n]")].map((element) => [
@@ -65,7 +65,7 @@ export function localize() {
   const toggle = document.getElementById("language");
   toggle.textContent = language === "en" ? "中文" : "English";
   toggle.setAttribute("aria-label", language === "en" ? "Switch to Chinese" : "Switch to English");
-  const prefix = "https://github.com/li-bruce/SoftwareStatusObserverSkill/blob/main/docs/";
+  const prefix = "https://github.com/li-bruce/VibeLens/blob/main/docs/";
   for (const [id, path] of [
     ["usage-link", "usage"],
     ["source-link", "source-guide"],

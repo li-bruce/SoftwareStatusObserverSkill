@@ -1,6 +1,6 @@
-import { DemoSession } from "./demo-model.mjs?rev=0.7.0";
-import { messages } from "./demo-messages.mjs?rev=0.7.0";
-import { initialize, t, locale, onLanguageChange } from "./site-ui.mjs?rev=0.7.0";
+import { DemoSession } from "./demo-model.mjs?rev=0.7.1";
+import { messages } from "./demo-messages.mjs?rev=0.7.1";
+import { initialize, t, locale, onLanguageChange } from "./site-ui.mjs?rev=0.7.1";
 
 const session = new DemoSession();
 const stages = ["conversation", "inspect", "record", "iterate"];
@@ -242,8 +242,8 @@ function renderControls() {
 function render() {
   document.title =
     locale() === "en"
-      ? "Business Observer — Interactive walkthrough"
-      : "Business Observer · 交互演示";
+      ? "VibeLens — Interactive walkthrough"
+      : "VibeLens · 交互演示";
   document.querySelectorAll("[data-stage]").forEach((button) => {
     const selected = button.dataset.stage === stage;
     button.setAttribute("aria-selected", String(selected));

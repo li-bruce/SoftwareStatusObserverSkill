@@ -4,12 +4,12 @@
 
 ## 在自己的项目中使用
 
-按首页安装完整的 `business-observer` 目录，不要只复制 `SKILL.md`。安装后在项目的新对话中使用 `$business-observer`，并描述要实现或修改的功能。
+按首页安装完整的 `vibelens` 目录，不要只复制 `SKILL.md`。安装后在项目的新对话中使用 `$vibelens`，并描述要实现或修改的功能。
 
 例如：
 
 ```text
-使用 $business-observer 为文件导出功能加入审批。
+使用 $vibelens 为文件导出功能加入审批。
 导出前需要权限检查和内容检查；请先按我的描述建图并确认理解一致，
 再开发程序，并让我能从运行图看到判断条件、关键参数和对应函数。
 ```
@@ -20,15 +20,15 @@ Skill 先把你已描述的行为、对象和条件整理成图，用必要的�
 
 明确后，按项目原有方式继续开发。AI 自行维护模型、状态机、源码映射、探针和检查材料；你不需要填写内部记录或手动同步。每轮结束打开更新图，查看变化、展开内部关系、检索关键参数和函数，再提出下一步修改。
 
-首次接入时明确选择：**基于状态图开发（drive）**，或 **只观察项目实现（observe）**。两种方式都维护监控和映射检查。业务含义有歧义时问你，实现细节由 AI 对照源码与用例核实。Python、Node、React、Vue 接入见[多语言示例](../examples/multilanguage/README.md)与[协议说明](../skills/business-observer/references/multilanguage.md)。
+首次接入时明确选择：**基于状态图开发（drive）**，或 **只观察项目实现（observe）**。两种方式都维护监控和映射检查。业务含义有歧义时问你，实现细节由 AI 对照源码与用例核实。Python、Node、React、Vue 接入见[多语言示例](../examples/multilanguage/README.md)与[协议说明](../skills/vibelens/references/multilanguage.md)。
 
 ## 看懂运行图
 
 可采用任何方案设计、规定的开发流程或编码 Skill。business-observer 作为必需支线贯穿整个过程：开始实现前保存独立预期和关键参数要求；编码中绑定真实函数并接入探针；每个功能完成时执行检查。其他编码 Skill 可以负责实现，但需要遵守同一模型、参数和验证约定。
 
-AI 会接入白盒检查，核对核心函数、参数类型、真实输入与结果及运行版本。中间记录保存在项目内，需要排查接入问题时可以查看[全过程开发说明](../skills/business-observer/references/continuous-development.md)。
+AI 会接入白盒检查，核对核心函数、参数类型、真实输入与结果及运行版本。中间记录保存在项目内，需要排查接入问题时可以查看[全过程开发说明](../skills/vibelens/references/continuous-development.md)。
 
-对话中可让 AI：“从完整图提取我正在修改的部分，保留范围外的条件和源码关联，先展示给我确认。”工具输出 JSON 与 Markdown；显示在对话中的静态图不等于可交互页面。共享或换环境使用[局部图与导出命令](../skills/business-observer/references/focus-and-sharing.md)。
+对话中可让 AI：“从完整图提取我正在修改的部分，保留范围外的条件和源码关联，先展示给我确认。”工具输出 JSON 与 Markdown；显示在对话中的静态图不等于可交互页面。共享或换环境使用[局部图与导出命令](../skills/vibelens/references/focus-and-sharing.md)。
 
 | 层次 | 要回答的问题 |
 |---|---|
@@ -52,7 +52,7 @@ AI 会接入白盒检查，核对核心函数、参数类型、真实输入与�
 
 搜索名称、函数、参数或备注，可找到收起层级中的节点。结果会注明所属节点、输入／输出和类型；选中后展开相关层级并定位，其他展开区域和位置保留。参数节点的“源码”会打开采集该参数的函数。
 
-布局与样式依赖均开源：PixiJS 为 MIT、ELK.js 为 EPL-2.0，自写 JS/CSS 为 MIT；没有引入 yFiles 代码，见 [第三方声明](../THIRD_PARTY_NOTICES.md)。规则权限的表达方案见 [ReBAC 图设计](../skills/business-observer/references/rebac-graph.md)，当前示例已有真实子条件采集；通用 ReBAC 引擎适配仍待接入。
+布局与样式依赖均开源：PixiJS 为 MIT、ELK.js 为 EPL-2.0，自写 JS/CSS 为 MIT；没有引入 yFiles 代码，见 [第三方声明](../THIRD_PARTY_NOTICES.md)。规则权限的表达方案见 [ReBAC 图设计](../skills/vibelens/references/rebac-graph.md)，当前示例已有真实子条件采集；通用 ReBAC 引擎适配仍待接入。
 
 ## 接入维护者：内部同步命令
 
@@ -68,7 +68,7 @@ python observer_generated/runtime/bo_sync.py scan --root .
 python tooling/dev.py inspect
 ```
 
-审阅 `.stategraph/my-change/impact.json`，填写同目录的 `review.json`：记录当前 `candidate_id`，说明业务、状态机、抽象和探针各自更新了什么，或为何无需改变。具体格式见 [伴随修改检查](../skills/business-observer/references/cochange.md)。需要改变已有业务规则时，`begin` 的 `--requirements` 应明确列出相应需求 ID。
+审阅 `.stategraph/my-change/impact.json`，填写同目录的 `review.json`：记录当前 `candidate_id`，说明业务、状态机、抽象和探针各自更新了什么，或为何无需改变。具体格式见 [伴随修改检查](../skills/vibelens/references/cochange.md)。需要改变已有业务规则时，`begin` 的 `--requirements` 应明确列出相应需求 ID。
 
 ```bash
 python tooling/dev.py verify
@@ -79,13 +79,13 @@ python tooling/dev.py archive --label my-change
 
 `verify` 运行真实程序和反例；`accept` 只接受同一个已验证版本；`check` 在交付前核对当前内容。之后修改源码、图、规则、工具或测试，会让旧验收失效。不要通过改写预期结果来掩盖 bug。
 
-从项目根目录独立盘点源码，用模型中的 `implementation` 对应功能、辅助实现、参数和实际场景。不能用一段排除理由代替功能映射；缺参数或事件会失败。旧项目更新 Skill 后需按[实现覆盖说明](../skills/business-observer/references/implementation-coverage.md)补齐清单，继续原有变更并验收。验证分别报告实现映射、状态约束、业务规则和项目检查，程序有 bug 而图如实显示时两者分别报告。
+从项目根目录独立盘点源码，用模型中的 `implementation` 对应功能、辅助实现、参数和实际场景。不能用一段排除理由代替功能映射；缺参数或事件会失败。旧项目更新 Skill 后需按[实现覆盖说明](../skills/vibelens/references/implementation-coverage.md)补齐清单，继续原有变更并验收。验证分别报告实现映射、状态约束、业务规则和项目检查，程序有 bug 而图如实显示时两者分别报告。
 
 `sync.json` 中的命令使用参数数组，不执行 shell。`{python}` 表示运行检查脚本的当前 Python，避免写入机器专属路径。首次启动只恢复随版本发布的已审阅基线；修改后的内容不会自动获得通过。
 
 ## 隔离与运行模式
 
-业务层通过自己定义的中立接口 `app/ports.py` 接入观测。完整状态执行、资源约束、统一查询位于独立的 `bo_stategraph/`，关闭观测时仍保留。`integrations/bo_*.py` 和运行工具负责可选采集与页面，不把第二套模拟状态插进业务函数。升级已有项目见[模块迁移步骤](../skills/business-observer/references/independent-python.md)。
+业务层通过自己定义的中立接口 `app/ports.py` 接入观测。完整状态执行、资源约束、统一查询位于独立的 `bo_stategraph/`，关闭观测时仍保留。`integrations/bo_*.py` 和运行工具负责可选采集与页面，不把第二套模拟状态插进业务函数。升级已有项目见[模块迁移步骤](../skills/vibelens/references/independent-python.md)。
 
 ```bash
 python tooling/dev.py ownership

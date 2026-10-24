@@ -13,7 +13,7 @@ import unittest
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / 'skills/business-observer/scripts'))
+sys.path.insert(0, str(ROOT / 'skills/vibelens/scripts'))
 from bo_stategraph import BOStateGraph, bo_export_view, bo_validate_export, bo_digest
 from bo_contracts import validate_chart, validate_runtime_definition
 from mapping_contract import assess
@@ -272,7 +272,7 @@ class RuntimeTests(unittest.TestCase):
             (root/'sync.json').write_text(json.dumps({'code_files':['app.py'],'source_scope':{'roots':['.']}}))
             target=root/'.stategraph/maintenance.json'
             with (root/'watch.log').open('w',encoding='utf-8') as log:
-                proc=subprocess.Popen([sys.executable,'-B','-X','utf8',str(ROOT/'skills/business-observer/scripts/bo_sync.py'),
+                proc=subprocess.Popen([sys.executable,'-B','-X','utf8',str(ROOT/'skills/vibelens/scripts/bo_sync.py'),
                     'watch','--root',str(root),'--interval','.1'],stdout=log,stderr=log)
                 handle=None
                 try:

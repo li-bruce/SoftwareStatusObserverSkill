@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {t, setLocale, chooseLocale, localeURL, saveLocale, storedLocale} from '../skills/business-observer/assets/stategraph-viewer/i18n.js';
-import {projectStorage} from '../skills/business-observer/assets/stategraph-viewer/preferences.js';
-import {connectionStatus} from '../skills/business-observer/assets/stategraph-viewer/view-lifecycle.js';
+import {t, setLocale, chooseLocale, localeURL, saveLocale, storedLocale} from '../skills/vibelens/assets/stategraph-viewer/i18n.js';
+import {projectStorage} from '../skills/vibelens/assets/stategraph-viewer/preferences.js';
+import {connectionStatus} from '../skills/vibelens/assets/stategraph-viewer/view-lifecycle.js';
 
 assert.equal(chooseLocale(), 'en');
 assert.equal(chooseLocale({languages:['fr-FR','zh-TW']}), 'zh-CN');
@@ -50,7 +50,7 @@ const conflict=await projectStorage(null,()=>{},async(_url,options)=>options.met
   ? {ok:false,status:409,json:async()=>({error:'conflict'})}
   : {ok:true,json:async()=>structuredClone(server)});
 await assert.rejects(saveLocale(conflict,'en'),/not saved/);
-const html=await readFile(new URL('../skills/business-observer/assets/stategraph-viewer/index.html',import.meta.url),'utf8');
+const html=await readFile(new URL('../skills/vibelens/assets/stategraph-viewer/index.html',import.meta.url),'utf8');
 assert.match(html,/<html lang="en">/);
 assert.match(html,/id="language"/);
 assert.doesNotMatch(html,/[\u3400-\u9fff]/);

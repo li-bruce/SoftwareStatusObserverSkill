@@ -7,7 +7,7 @@ The request combines English maintenance, a bilingual graph viewer, a conversati
 ## Review first
 
 - [Illustrated introduction](../../site/index.html) and [default README](../../../README.md).
-- [Current Skill instructions](../../../skills/business-observer/SKILL.md), including the opening inline diagram, mode choice, and per-iteration checks.
+- [Current Skill instructions](https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/SKILL.md), including the opening inline diagram, mode choice, and per-iteration checks.
 - [Failures, repairs, and retests](failures-and-fixes.md). Earlier failures remain failures in their original files.
 - [Complete-suite result](38-full-suite-result.json) and [raw successful log](37-full-suite-retest.log).
 - [Source depth, database relationships, and language policy](../../source-data-and-language.md), separating implemented behavior from extensions.

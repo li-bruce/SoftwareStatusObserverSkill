@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
-import * as core from "../skills/business-observer/assets/stategraph-viewer/graph-core.js";
-import * as layout from "../skills/business-observer/assets/stategraph-viewer/layout.js";
-import * as analysis from "../skills/business-observer/assets/stategraph-viewer/analysis.js";
+import * as core from "../skills/vibelens/assets/stategraph-viewer/graph-core.js";
+import * as layout from "../skills/vibelens/assets/stategraph-viewer/layout.js";
+import * as analysis from "../skills/vibelens/assets/stategraph-viewer/analysis.js";
 import {
   dataLines,
   dataRoles,
@@ -10,15 +10,15 @@ import {
   dataStatusClass,
   dataRelationEvidence,
   observedDataTransfer,
-} from "../skills/business-observer/assets/stategraph-viewer/data-layer.js";
-import { glyphShapes } from "../skills/business-observer/assets/stategraph-viewer/glyphs.js";
-import { transferEdges } from "../skills/business-observer/assets/stategraph-viewer/recording.js";
+} from "../skills/vibelens/assets/stategraph-viewer/data-layer.js";
+import { glyphShapes } from "../skills/vibelens/assets/stategraph-viewer/glyphs.js";
+import { transferEdges } from "../skills/vibelens/assets/stategraph-viewer/recording.js";
 import {
   boStepDetail,
   boStepPlan,
   boTransferLabel,
-} from "../skills/business-observer/assets/stategraph-viewer/replay-steps.js";
-import { setLocale } from "../skills/business-observer/assets/stategraph-viewer/i18n.js";
+} from "../skills/vibelens/assets/stategraph-viewer/replay-steps.js";
+import { setLocale } from "../skills/vibelens/assets/stategraph-viewer/i18n.js";
 
 // Two storage families, a concrete query, application processing, and a write
 // share one ordinary graph. All runtime assertions use existing probe events.

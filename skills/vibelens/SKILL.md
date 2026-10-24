@@ -1,10 +1,10 @@
 ---
-name: business-observer
+name: vibelens
 license: MIT
 description: Maintain a business and state graph while developing or changing Python, Node.js, React, or Vue software. Link confirmed intent to source, selected parameters, and runtime evidence so developers can debug AI implementations and verify mapping separately from business correctness.
 ---
 
-# Business Observer
+# VibeLens
 
 Help developers understand what the AI actually implemented. Business behavior, states, important functions, parameters, and runtime evidence belong to one graph with progressive detail. The user may choose any application architecture, framework, or coding workflow.
 

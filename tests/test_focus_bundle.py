@@ -9,7 +9,7 @@ import unittest
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT/"skills/business-observer/scripts"))
+sys.path.insert(0, str(ROOT/"skills/vibelens/scripts"))
 from focus_graph import extract, markdown
 from project_bundle import export, inspect, MANIFEST
 
@@ -104,7 +104,7 @@ class BundleTests(unittest.TestCase):
             root = Path(tmp)
             model = {"revision": "r1", "nodes": [{"id": "n", "kind": "data", "label": "Document"}], "edges": []}
             (root/"model.json").write_text(json.dumps(model), encoding="utf-8")
-            (root/"whitebox.json").write_bytes((ROOT/"skills/business-observer/assets/whitebox.example.json").read_bytes())
+            (root/"whitebox.json").write_bytes((ROOT/"skills/vibelens/assets/whitebox.example.json").read_bytes())
             (root/"bundle.json").write_text(json.dumps({
                 "schema_version": 1, "project_id": "cli-test", "kind": "review",
                 "data_policy": "synthetic-only", "files": ["model.json"]}), encoding="utf-8")
@@ -116,7 +116,7 @@ class BundleTests(unittest.TestCase):
             for script, *args in commands:
                 with self.subTest(script=script, args=args):
                     result = subprocess.run([sys.executable, "-X", "utf8", str(
-                        ROOT/"skills/business-observer/scripts"/script), *args, "--root", "."],
+                        ROOT/"skills/vibelens/scripts"/script), *args, "--root", "."],
                         cwd=root, capture_output=True, text=True, encoding="utf-8")
                     self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
                     self.assertTrue(json.loads(result.stdout)["valid"])

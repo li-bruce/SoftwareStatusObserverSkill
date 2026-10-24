@@ -5,7 +5,7 @@ This synthetic task starts when a slot is available, waits when it is not, and c
 From the repository root:
 
 ```bash
-python -m pip install -r skills/business-observer/requirements.txt
+python -m pip install -r skills/vibelens/requirements.txt
 python tools/setup_adapters.py
 npm ci --prefix examples/multilanguage
 python tools/multilanguage_demo.py --mode drive

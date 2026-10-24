@@ -12,7 +12,7 @@ from urllib.request import Request,urlopen
 from urllib.error import HTTPError
 
 ROOT=Path(__file__).resolve().parents[1]
-SCRIPTS=ROOT/'skills/business-observer/scripts'
+SCRIPTS=ROOT/'skills/vibelens/scripts'
 sys.path.insert(0,str(SCRIPTS))
 from code_structure import scan,enrich
 from bo_sync import source_inventory
@@ -326,7 +326,7 @@ console.log(JSON.stringify({{state:r.state, errors:p.bo_errors, flushed}}));
             from bo_stategraph import bo_validate_export
             exported=bo_validate_export(session.export())
             self.assertEqual(len(exported['runtime']['runtime_frames']['frames']),4)
-            viewer=ROOT/'skills/business-observer/assets/stategraph-viewer'
+            viewer=ROOT/'skills/vibelens/assets/stategraph-viewer'
             result=self.node(f"""import fs from 'node:fs';import {{timeline,frame,transferEdges}} from {json.dumps((viewer/'recording.js').as_uri())};
 import {{boStepPlan,boStepDetail}} from {json.dumps((viewer/'replay-steps.js').as_uri())};import {{layoutGraph,selectedConfiguration}} from {json.dumps((viewer/'graph-core.js').as_uri())};
 const r=JSON.parse(fs.readFileSync(0,'utf8'));r.events.at(-1).observed_at='2000-01-01T00:00:00Z';const items=timeline(r),all=new Map(r.context.model.nodes.map(n=>[n.id,n])),visible=r.context.model.nodes.filter(n=>n.kind==='state').map(n=>({{id:n.id,node:n,type:'state'}}));

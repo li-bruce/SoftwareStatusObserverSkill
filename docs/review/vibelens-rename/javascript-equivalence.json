@@ -1,0 +1,7 @@
+{
+  "base": "v0.7.0",
+  "javascript_modules": 20,
+  "executable_ast_changes": [],
+  "valid": true,
+  "scope": "TypeScript syntax trees; comments, source locations and redundant parentheses excluded"
+}

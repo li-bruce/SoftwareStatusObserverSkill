@@ -7,7 +7,7 @@ import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT/'skills/business-observer/scripts'))
+sys.path.insert(0, str(ROOT/'skills/vibelens/scripts'))
 from code_structure import scan, enrich
 from implementation_coverage import static_errors, runtime_errors, protected_errors, protected_captures, inventory_errors
 from bo_sync import source_inventory
@@ -177,7 +177,7 @@ class CoverageTests(unittest.TestCase):
         self.assertTrue(static_errors({'schema':'bo-implementation/v1','features':['wrong']},self.model,self.index))
 
     def test_installed_skill_is_not_part_of_application_source(self):
-        tool=self.root/'.agents/skills/business-observer/helper.py'
+        tool=self.root/'.agents/skills/vibelens/helper.py'
         tool.parent.mkdir(parents=True);tool.write_text('def helper(): return 1\n',encoding='utf-8')
         inventory=source_inventory(self.root,{'source_scope':{'roots':['.']}})
         self.assertEqual(set(inventory['files']),{'app.py'})

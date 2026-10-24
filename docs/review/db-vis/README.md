@@ -92,7 +92,7 @@ rows, and zero additional business events from an observer-only query.
 ## Boundaries and reproduction
 
 Follow [the example](../../../examples/database-observer/README.md) and
-[the integration reference](../../../skills/business-observer/references/database-observation.md).
+[the integration reference](https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/references/database-observation.md).
 The graph distinguishes database enforcement, application declarations, partial
 metadata and observed operations. Generic native target bindings remain labeled
 as supplied by the application. SQLAlchemy MySQL integration is available through

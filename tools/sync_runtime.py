@@ -5,7 +5,7 @@ import json
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL = ROOT / 'skills/business-observer'
+SKILL = ROOT / 'skills/vibelens'
 CORE = ('bo_contracts.py', 'execution_contract.py')
 
 
@@ -35,7 +35,7 @@ def sync():
                                      ('team-archive','observer_runtime',['static/graph'])]:
         root=ROOT/'examples'/project
         result=apply(root,runtime=runtime,viewers=viewers)
-        origin={'source':'SoftwareStatusObserverSkill/skills/business-observer',
+        origin={'source':'VibeLens/skills/vibelens',
                 'release':result['release'],'protocols':result['protocols'],
                 'manifest':('../../' if project=='delivery' else '../')+'bo_stategraph/runtime-version.json'}
         (root/runtime/'origin.json').write_text(json.dumps(origin,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')

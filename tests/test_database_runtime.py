@@ -9,7 +9,7 @@ import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "skills/business-observer/scripts"))
+sys.path.insert(0, str(ROOT / "skills/vibelens/scripts"))
 
 from bo_observer.adapters.python.bo_probe import BOProbe
 from bo_observer.data.runtime import BODataRuntime, bo_query_shape, _bo_sql_access

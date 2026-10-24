@@ -28,6 +28,9 @@ try {
     await page.goto(base + "/?lang=" + language);
     await page.waitForSelector("#concept-graph svg");
     assert.equal(await page.locator("html").getAttribute("lang"), language);
+    assert.match(await page.locator(".brand").innerText(), /^VibeLens/);
+    assert.equal(await page.locator("a.github").getAttribute("href"), "https://github.com/li-bruce/VibeLens");
+    assert.match(await page.locator("#install-prompt").textContent(), /\$vibelens/);
     assert.equal(await page.locator("[data-view]").count(), 7);
     for (const view of ["business", "state", "decision", "function", "data", "source", "mixed"]) {
       await page.click("#tab-" + view);
@@ -53,6 +56,8 @@ try {
     await page.setViewportSize({width: 1440, height: 1000});
   }
   await page.goto(base + "/demo.html?lang=zh-CN");
+  assert.match(await page.locator(".brand").innerText(), /^VibeLens/);
+  assert.equal(await page.locator("a.github").getAttribute("href"), "https://github.com/li-bruce/VibeLens");
   await page.click("#stage-record");
   await page.click("#start");
   await page.click("#upload");

@@ -9,7 +9,7 @@ import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPTS = ROOT / "skills/business-observer/scripts"
+SCRIPTS = ROOT / "skills/vibelens/scripts"
 sys.path.insert(0, str(SCRIPTS))
 sys.path.insert(0, str(ROOT / "tools"))
 

@@ -118,6 +118,6 @@ flowchart LR
 ## 当前已有与需要新增
 
 - 复用：`requirements_dialogue.py`、`code_structure.py`、`change_sync.py`、状态/内部活动契约、隔离检查、现有统一图和布局标注。
-- v0.4 新增：`whitebox_contract.py` 的源码/参数/真实事件检查，`focus_graph.py` 的来源与边界保留，`project_bundle.py` 的显式清单导出和完整性检查；[持续开发约定](../../skills/business-observer/references/continuous-development.md) 可与其他开发方法配合。
+- v0.4 新增：`whitebox_contract.py` 的源码/参数/真实事件检查，`focus_graph.py` 的来源与边界保留，`project_bundle.py` 的显式清单导出和完整性检查；[持续开发约定](../../skills/vibelens/references/continuous-development.md) 可与其他开发方法配合。
 - 后续：引擎原生解释适配、局部图的语义修改建议与冲突处理、多人在线协作。当前用 Git 处理源码和约定的协作，不声称已有图规则编辑器。
 - 仍需按项目确认：真实规则引擎与数据读取范围、删除或恢复的效果、可公开数据、其他语言的接入方式。单一示例的规则不成为通用默认。

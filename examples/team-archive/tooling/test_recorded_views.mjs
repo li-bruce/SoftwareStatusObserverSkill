@@ -3,7 +3,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import assert from 'node:assert/strict';
 const root=path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-const folder=['skills/business-observer/assets/stategraph-viewer','static/graph','integrations/bo_view'].map(p=>path.join(root,p)).find(p=>fs.existsSync(p));
+const folder=['skills/vibelens/assets/stategraph-viewer','static/graph','integrations/bo_view'].map(p=>path.join(root,p)).find(p=>fs.existsSync(p));
 const urls=new Map();
 function url(name){
   if(urls.has(name))return urls.get(name);

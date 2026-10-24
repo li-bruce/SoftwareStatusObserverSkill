@@ -28,7 +28,7 @@ def main():
     children=[]
     options={'creationflags':subprocess.CREATE_NO_WINDOW} if sys.platform=='win32' else {}
     try:
-        children.append(subprocess.Popen([sys.executable,'-B','-X','utf8',str(ROOT/'skills/business-observer/scripts/bo.py'),'serve','--root',str(EXAMPLE),'--port',str(a.graph_port),'--origin',f'http://127.0.0.1:{a.app_port}'],cwd=ROOT,**options))
+        children.append(subprocess.Popen([sys.executable,'-B','-X','utf8',str(ROOT/'skills/vibelens/scripts/bo.py'),'serve','--root',str(EXAMPLE),'--port',str(a.graph_port),'--origin',f'http://127.0.0.1:{a.app_port}'],cwd=ROOT,**options))
         deadline=time.monotonic()+15
         graph_ready=False
         while time.monotonic()<deadline:

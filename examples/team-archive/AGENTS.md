@@ -2,7 +2,7 @@
 
 This is a developer-debugging example with synthetic data. The application architecture, framework, and coding method remain open.
 
-Before each relevant iteration, read the repository Skill at `../../skills/business-observer/SKILL.md`, intent.json, discovery.json, behavior.json, and the current validation result. When copying this example separately, install the same Skill revision and update that path. Preserve confirmed rules and stable node IDs. Observation and verification must be maintained during development.
+Before each relevant iteration, read the repository Skill at `../../skills/vibelens/SKILL.md`, intent.json, discovery.json, behavior.json, and the current validation result. When copying this example separately, install the same Skill revision and update that path. Preserve confirmed rules and stable node IDs. Observation and verification must be maintained during development.
 
 First launch uses `python tools/archive_demo.py --prepare-only` from the repository root to restore the published acceptance record. It does not accept edited content. Continue an unfinished change; never replace its baseline to hide omissions.
 

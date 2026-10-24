@@ -19,7 +19,7 @@ Cover all implemented features. Missing state, source mapping, capture, or verif
 At first integration, merge a short contract into the project's existing instruction file, preserving other rules. Replace every placeholder with real relative paths and runnable commands:
 
 ```text
-This project uses business-observer for its developer runtime graph.
+This project uses VibeLens for its developer runtime graph.
 Ask for drive or observe at first setup, record the answer and source; reuse an existing choice.
 Both modes require monitoring, source-driven state updates, parameter/function mappings, graph, and checks.
 Read the project rules, current graph, and Skill; preserve the existing design/coding workflow.

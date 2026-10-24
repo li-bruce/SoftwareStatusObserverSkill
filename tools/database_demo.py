@@ -15,7 +15,7 @@ import threading
 import uuid
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPTS = ROOT / "skills/business-observer/scripts"
+SCRIPTS = ROOT / "skills/vibelens/scripts"
 sys.path.insert(0, str(SCRIPTS))
 
 from sqlalchemy import create_engine, text
@@ -411,7 +411,7 @@ class Demo:
 def serve(root, port):
     demo = Demo(root)
     server = make_server(
-        demo, port, assets=ROOT / "skills/business-observer/assets/stategraph-viewer"
+        demo, port, assets=ROOT / "skills/vibelens/assets/stategraph-viewer"
     )
     base = server.RequestHandlerClass
 

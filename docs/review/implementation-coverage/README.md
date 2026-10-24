@@ -59,6 +59,6 @@ node tools/test_view_coverage.mjs
 python -B -X utf8 tools/test_implementation_coverage.py
 ```
 
-Skill 已同步要求 AI 在每个编码阶段处理独立源码清单、更新图和探针，再执行 `inspect → verify → accept → check`。用户仍通过对话确认含义，无须维护这份清单。旧项目升级运行模块后，需要补齐实现契约、遗漏的映射和采集；没有清单会明确失败，不会沿用旧的通过结论。具体协议见 [实现覆盖](../../../skills/business-observer/references/implementation-coverage.md)。
+Skill 已同步要求 AI 在每个编码阶段处理独立源码清单、更新图和探针，再执行 `inspect → verify → accept → check`。用户仍通过对话确认含义，无须维护这份清单。旧项目升级运行模块后，需要补齐实现契约、遗漏的映射和采集；没有清单会明确失败，不会沿用旧的通过结论。具体协议见 [实现覆盖](https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/references/implementation-coverage.md)。
 
 本次没有修改原试用项目，也没有据此宣布其登录和消息图已经修复。静态扫描及有限运行场景不能证明任意动态分派、所有执行路径或自然语言意图；未解析调用、未观测辅助实现仍保留边界。映射正确与业务正确继续分别报告。

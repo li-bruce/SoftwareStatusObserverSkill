@@ -1,11 +1,11 @@
 /** Native callback/capture contracts. Real server acceptance lives in the live database suite. */
 import assert from "node:assert/strict";
-import { BOProbe } from "../skills/business-observer/scripts/bo_observer/adapters/javascript/bo_runtime.mjs";
+import { BOProbe } from "../skills/vibelens/scripts/bo_observer/adapters/javascript/bo_runtime.mjs";
 import {
   BODataRuntime,
   bo_internal,
   bo_command_shape,
-} from "../skills/business-observer/scripts/bo_observer/adapters/javascript/bo_data.mjs";
+} from "../skills/vibelens/scripts/bo_observer/adapters/javascript/bo_data.mjs";
 
 const input = { operation: "string", statement: "string", parameters: { limit: "number" } };
 const output = {

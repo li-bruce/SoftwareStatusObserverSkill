@@ -6,7 +6,7 @@ from pathlib import Path
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "skills/business-observer/scripts"))
+sys.path.insert(0, str(ROOT / "skills/vibelens/scripts"))
 
 from bo_observer.data.contract import validate_catalog
 from bo_observer.protocol import schema_check

@@ -6,7 +6,7 @@ components keep their own copyright notices and licenses.
 The optional database feature installs SQLAlchemy (MIT), pg8000 (BSD-3-Clause),
 PyMongo (Apache-2.0), redis-py (MIT), the Neo4j Python driver (Apache-2.0 AND Python-2.0), SQLGlot
 (MIT), and Pygments (BSD-2-Clause). Versions are pinned in
-[requirements-database.txt](skills/business-observer/requirements-database.txt).
+[requirements-database.txt](skills/vibelens/requirements-database.txt).
 Native acceptance uses pg, Mongoose and redis (MIT), mongodb and neo4j-driver
 (Apache-2.0), with versions and transitive dependencies in
 [the native lockfile](tools/database-native/package-lock.json). These packages

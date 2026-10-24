@@ -7,7 +7,7 @@ import sys
 import tempfile
 import unittest
 ROOT=Path(__file__).resolve().parents[1]
-SKILL=ROOT/'skills/business-observer'
+SKILL=ROOT/'skills/vibelens'
 TEMP=ROOT/'.validation/dialogue'
 TEMP.mkdir(parents=True,exist_ok=True)
 sys.path.insert(0,str(SKILL/'scripts'))

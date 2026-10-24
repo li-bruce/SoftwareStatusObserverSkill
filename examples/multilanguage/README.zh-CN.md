@@ -5,7 +5,7 @@
 在仓库根目录安装依赖：
 
 ```bash
-python -m pip install -r skills/business-observer/requirements.txt
+python -m pip install -r skills/vibelens/requirements.txt
 python tools/setup_adapters.py
 npm ci --prefix examples/multilanguage
 ```

@@ -39,7 +39,7 @@ No project-size benchmark was measured for this proposal. A file-completeness ch
 
 Yes, where they explain business decisions and effects. Add them to the same typed graph, collapsed by default. Do not load every table or database row into the opening business view.
 
-The data layer implements a versioned database catalog, SQLAlchemy metadata and native model exports, MongoDB/Redis/Neo4j collectors, and selected data-operation capture. It retains the existing typed fields, parameters, class/source relationships, and independently checked authoritative values. Automatic column lineage remains outside the implementation. See [the implemented scope](../skills/business-observer/references/database-observation.md).
+The data layer implements a versioned database catalog, SQLAlchemy metadata and native model exports, MongoDB/Redis/Neo4j collectors, and selected data-operation capture. It retains the existing typed fields, parameters, class/source relationships, and independently checked authoritative values. Automatic column lineage remains outside the implementation. See [the implemented scope](../skills/vibelens/references/database-observation.md).
 
 The data layer distinguishes three kinds of evidence:
 

@@ -963,6 +963,10 @@
         "bo_stategraph/runtime-version.json",
         "observer_runtime/bo_observer/service.py"
       ]
+    },
+    {
+      "reason": "Rename the public Skill and update integration test and documentation paths. Business source, graph identities, runtime contracts, probes and independent acceptance expectations remain unchanged.",
+      "changed": []
     }
   ],
   "core_layers": [

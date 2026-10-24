@@ -12,7 +12,7 @@ from urllib.request import urlopen
 from urllib.error import HTTPError
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path[:0] = [str(ROOT / "skills/business-observer/scripts"), str(ROOT / "tools")]
+sys.path[:0] = [str(ROOT / "skills/vibelens/scripts"), str(ROOT / "tools")]
 from bo_observer.code_graph.service import CodeGraph
 from bo_observer.code_graph.query import query
 from bo_observer.service import GraphSession, make_server

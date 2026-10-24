@@ -2,20 +2,20 @@
 
 [中文](source-guide.zh-CN.md) · [Usage](usage.en.md) · [Architecture](refactor-multilanguage.md)
 
-Read this guide when you want to change the Skill, inspect a recorded value, or find the code behind a graph interaction. The maintained implementation lives in [skills/business-observer](../skills/business-observer/). Example projects contain installed copies to test real project integration.
+Read this guide when you want to change the Skill, inspect a recorded value, or find the code behind a graph interaction. The maintained implementation lives in [skills/vibelens](../skills/vibelens/). Example projects contain installed copies to test real project integration.
 
 ## Repository map
 
 | Location | What to read or change here |
 |---|---|
-| [SKILL.md](../skills/business-observer/SKILL.md) | The conversation and iteration workflow followed by the coding agent. |
-| [scripts/bo.py](../skills/business-observer/scripts/bo.py) | Entry point for serving, validating, inspecting, and exporting a native project. |
-| [scripts/bo_stategraph.py](../skills/business-observer/scripts/bo_stategraph.py) | Independent state declaration, observed instances, and complete graph export. |
-| [scripts/bo_contracts.py](../skills/business-observer/scripts/bo_contracts.py) | Value types, state hierarchy, active-state calculation, and strict declaration checks. |
-| [scripts/execution_contract.py](../skills/business-observer/scripts/execution_contract.py) | Activity, join, resource, and runtime-configuration constraints. |
-| [scripts/bo_observer](../skills/business-observer/scripts/bo_observer/) | Shared services, language adapters, development checks, and Web support. |
-| [assets/stategraph-viewer](../skills/business-observer/assets/stategraph-viewer/) | The real project's interactive graph, layout, recording, and replay UI. |
-| [schemas](../skills/business-observer/scripts/bo_observer/schemas/) | Versioned JSON contracts used at language and service boundaries. |
+| [SKILL.md](../skills/vibelens/SKILL.md) | The conversation and iteration workflow followed by the coding agent. |
+| [scripts/bo.py](../skills/vibelens/scripts/bo.py) | Entry point for serving, validating, inspecting, and exporting a native project. |
+| [scripts/bo_stategraph.py](../skills/vibelens/scripts/bo_stategraph.py) | Independent state declaration, observed instances, and complete graph export. |
+| [scripts/bo_contracts.py](../skills/vibelens/scripts/bo_contracts.py) | Value types, state hierarchy, active-state calculation, and strict declaration checks. |
+| [scripts/execution_contract.py](../skills/vibelens/scripts/execution_contract.py) | Activity, join, resource, and runtime-configuration constraints. |
+| [scripts/bo_observer](../skills/vibelens/scripts/bo_observer/) | Shared services, language adapters, development checks, and Web support. |
+| [assets/stategraph-viewer](../skills/vibelens/assets/stategraph-viewer/) | The real project's interactive graph, layout, recording, and replay UI. |
+| [schemas](../skills/vibelens/scripts/bo_observer/schemas/) | Versioned JSON contracts used at language and service boundaries. |
 | [examples](../examples/) | Executable applications with their own business rules and acceptance contracts. |
 | [tools](../tools/) and [tests](../tests/) | Installation, managed-copy synchronization, and repository acceptance checks. |
 | [docs/site](site/) | The bilingual product page and its separate browser-only sample walkthrough. |
@@ -27,27 +27,27 @@ Most Python files directly under scripts are small import/CLI entry points retai
 
 ### 1. A coding iteration changes the graph
 
-1. [workflow/bo_sync.py](../skills/business-observer/scripts/bo_observer/workflow/bo_sync.py): source_inventory enumerates the declared project scope independently of existing graph nodes. maintenance_task compares that inventory with the last accepted baseline.
-2. [sources.py](../skills/business-observer/scripts/bo_observer/sources.py): scan dispatches Python and JavaScript-family analysis. It caches only matching source/parser versions and retains unresolved calls.
-3. [graph/code_structure.py](../skills/business-observer/scripts/bo_observer/graph/code_structure.py): parse_unit extracts Python declarations; enrich combines the authored abstraction with local source nodes.
-4. [development.py](../skills/business-observer/scripts/bo_observer/development.py): questions separates business questions for the user from unresolved implementation questions for the coding agent.
-5. [workflow/change_sync.py](../skills/business-observer/scripts/bo_observer/workflow/change_sync.py): inspect compares the candidate with its baseline and checks the review. Acceptance requires the exact candidate's successful verification receipt.
-6. [workflow/sync_verify.py](../skills/business-observer/scripts/bo_observer/workflow/sync_verify.py): verify runs the configured observations and tests, then reports mapping, state constraints, business assertions, and project checks separately.
+1. [workflow/bo_sync.py](../skills/vibelens/scripts/bo_observer/workflow/bo_sync.py): source_inventory enumerates the declared project scope independently of existing graph nodes. maintenance_task compares that inventory with the last accepted baseline.
+2. [sources.py](../skills/vibelens/scripts/bo_observer/sources.py): scan dispatches Python and JavaScript-family analysis. It caches only matching source/parser versions and retains unresolved calls.
+3. [graph/code_structure.py](../skills/vibelens/scripts/bo_observer/graph/code_structure.py): parse_unit extracts Python declarations; enrich combines the authored abstraction with local source nodes.
+4. [development.py](../skills/vibelens/scripts/bo_observer/development.py): questions separates business questions for the user from unresolved implementation questions for the coding agent.
+5. [workflow/change_sync.py](../skills/vibelens/scripts/bo_observer/workflow/change_sync.py): inspect compares the candidate with its baseline and checks the review. Acceptance requires the exact candidate's successful verification receipt.
+6. [workflow/sync_verify.py](../skills/vibelens/scripts/bo_observer/workflow/sync_verify.py): verify runs the configured observations and tests, then reports mapping, state constraints, business assertions, and project checks separately.
 
 An inspection does not advance the accepted baseline. Acceptance is the explicit boundary after all configured checks succeed.
 
 ### 2. A program operation appears in the graph
 
-1. The application makes its business decision and calls its native adapter's BOProbe.record with selected values: [Python](../skills/business-observer/scripts/bo_observer/adapters/python/bo_probe.py) or [JavaScript](../skills/business-observer/scripts/bo_observer/adapters/javascript/bo_runtime.mjs).
+1. The application makes its business decision and calls its native adapter's BOProbe.record with selected values: [Python](../skills/vibelens/scripts/bo_observer/adapters/python/bo_probe.py) or [JavaScript](../skills/vibelens/scripts/bo_observer/adapters/javascript/bo_runtime.mjs).
 2. The adapter filters fields, suppresses observation of its own work, and queues delivery. Transport failures are counted separately from the business result.
-3. [protocol.py](../skills/business-observer/scripts/bo_observer/protocol.py) checks project/build identity, field types, and envelope limits.
-4. [service.py](../skills/business-observer/scripts/bo_observer/service.py): GraphSession.event retains producer identity, ordering, and dependencies. snapshot attaches the application's state to the corresponding event.
-5. [bo_stategraph.py](../skills/business-observer/scripts/bo_stategraph.py): bo_observe checks the actual state/revision against the declaration. It records a mismatch as evidence instead of replacing the reported state with an expected state.
-6. [observation/recording_session.py](../skills/business-observer/scripts/bo_observer/observation/recording_session.py) saves bounded recording intervals and explicit gaps. view/export serve the declared graph and retained evidence.
+3. [protocol.py](../skills/vibelens/scripts/bo_observer/protocol.py) checks project/build identity, field types, and envelope limits.
+4. [service.py](../skills/vibelens/scripts/bo_observer/service.py): GraphSession.event retains producer identity, ordering, and dependencies. snapshot attaches the application's state to the corresponding event.
+5. [bo_stategraph.py](../skills/vibelens/scripts/bo_stategraph.py): bo_observe checks the actual state/revision against the declaration. It records a mismatch as evidence instead of replacing the reported state with an expected state.
+6. [observation/recording_session.py](../skills/vibelens/scripts/bo_observer/observation/recording_session.py) saves bounded recording intervals and explicit gaps. view/export serve the declared graph and retained evidence.
 
 In drive mode, the application's native BOExecutor.step also reads the agreed definition. In observe mode, the application implements the decisions itself. Both paths use the same observation contract.
 
-[session_lifecycle.py](../skills/business-observer/scripts/bo_observer/session_lifecycle.py)
+[session_lifecycle.py](../skills/vibelens/scripts/bo_observer/session_lifecycle.py)
 pins one graph session for each request and retires replaced sessions after their
 last request. The short host lock protects ownership only. Parsing source and
 writing an HTTP response do not hold it, so a slow code view can coexist with
@@ -57,39 +57,39 @@ event ingestion and a build reload.
 
 | Viewer module | Responsibility |
 |---|---|
-| [viewer.js](../skills/business-observer/assets/stategraph-viewer/viewer.js) | Connect controls, graph data, live updates, and recording selection. Start here for UI wiring. |
-| [graph-core.js](../skills/business-observer/assets/stategraph-viewer/graph-core.js) | Resolve node values, source bindings, event selection, and visible graph content. |
-| [layout.js](../skills/business-observer/assets/stategraph-viewer/layout.js) | Expand/collapse regions, position groups, apply filters, and retain annotations. |
-| [view-lifecycle.js](../skills/business-observer/assets/stategraph-viewer/view-lifecycle.js) | Keep project view identity stable across builds; compare recording and live graph versions. |
-| [renderer.js](../skills/business-observer/assets/stategraph-viewer/renderer.js) | Draw nodes, regions, and edges in Pixi; maintain hit regions for interaction. |
-| [recording.js](../skills/business-observer/assets/stategraph-viewer/recording.js) | Construct replay frames and evidence-supported transfers. |
-| [runtime-frames.js](../skills/business-observer/assets/stategraph-viewer/runtime-frames.js) | Locate exact snapshots and compare state/resource changes. |
-| [replay-steps.js](../skills/business-observer/assets/stategraph-viewer/replay-steps.js) | Choose which recorded changes are meaningful at the current view level. |
-| [preferences.js](../skills/business-observer/assets/stategraph-viewer/preferences.js) | Save personal view state through the project preference API. |
-| [polling.js](../skills/business-observer/assets/stategraph-viewer/polling.js) | Serialize refresh tasks and control their lifecycle. |
+| [viewer.js](../skills/vibelens/assets/stategraph-viewer/viewer.js) | Connect controls, graph data, live updates, and recording selection. Start here for UI wiring. |
+| [graph-core.js](../skills/vibelens/assets/stategraph-viewer/graph-core.js) | Resolve node values, source bindings, event selection, and visible graph content. |
+| [layout.js](../skills/vibelens/assets/stategraph-viewer/layout.js) | Expand/collapse regions, position groups, apply filters, and retain annotations. |
+| [view-lifecycle.js](../skills/vibelens/assets/stategraph-viewer/view-lifecycle.js) | Keep project view identity stable across builds; compare recording and live graph versions. |
+| [renderer.js](../skills/vibelens/assets/stategraph-viewer/renderer.js) | Draw nodes, regions, and edges in Pixi; maintain hit regions for interaction. |
+| [recording.js](../skills/vibelens/assets/stategraph-viewer/recording.js) | Construct replay frames and evidence-supported transfers. |
+| [runtime-frames.js](../skills/vibelens/assets/stategraph-viewer/runtime-frames.js) | Locate exact snapshots and compare state/resource changes. |
+| [replay-steps.js](../skills/vibelens/assets/stategraph-viewer/replay-steps.js) | Choose which recorded changes are meaningful at the current view level. |
+| [preferences.js](../skills/vibelens/assets/stategraph-viewer/preferences.js) | Save personal view state through the project preference API. |
+| [polling.js](../skills/vibelens/assets/stategraph-viewer/polling.js) | Serialize refresh tasks and control their lifecycle. |
 
 The complete model, the selected view, and the captured evidence are separate values. Filtering a view must preserve the complete model. Moving a node or replaying a step must not execute a business command.
 
 ## Database structure and operations
 
-Start at [data/contract.py](../skills/business-observer/scripts/bo_observer/data/contract.py) for strict JSON and identity, then [catalog.py](../skills/business-observer/scripts/bo_observer/data/catalog.py) for native metadata, [projection.py](../skills/business-observer/scripts/bo_observer/data/projection.py) for graph nodes and relations, and [sync.py](../skills/business-observer/scripts/bo_observer/data/sync.py) for refresh and independent verification. [runtime.py](../skills/business-observer/scripts/bo_observer/data/runtime.py) and [bo_data.mjs](../skills/business-observer/scripts/bo_observer/adapters/javascript/bo_data.mjs) observe native calls. [watcher.py](../skills/business-observer/scripts/bo_observer/data/watcher.py) replaces the validated Web build; [data-layer.js](../skills/business-observer/assets/stategraph-viewer/data-layer.js) renders its provenance and values. These modules share the existing event, recording and preference services.
+Start at [data/contract.py](../skills/vibelens/scripts/bo_observer/data/contract.py) for strict JSON and identity, then [catalog.py](../skills/vibelens/scripts/bo_observer/data/catalog.py) for native metadata, [projection.py](../skills/vibelens/scripts/bo_observer/data/projection.py) for graph nodes and relations, and [sync.py](../skills/vibelens/scripts/bo_observer/data/sync.py) for refresh and independent verification. [runtime.py](../skills/vibelens/scripts/bo_observer/data/runtime.py) and [bo_data.mjs](../skills/vibelens/scripts/bo_observer/adapters/javascript/bo_data.mjs) observe native calls. [watcher.py](../skills/vibelens/scripts/bo_observer/data/watcher.py) replaces the validated Web build; [data-layer.js](../skills/vibelens/assets/stategraph-viewer/data-layer.js) renders its provenance and values. These modules share the existing event, recording and preference services.
 
 ## Optional source structure
 
 Database feature coverage and database-specific checks both use
-[data/evidence.py](../skills/business-observer/scripts/bo_observer/data/evidence.py).
+[data/evidence.py](../skills/vibelens/scripts/bo_observer/data/evidence.py).
 It requires fields according to the real outcome: an error type on failure,
 row counts when known, and a committed/rolled-back result for transactions.
 Configuration, generated capture and source identity must all match before this
 specialized contract applies. Ordinary feature capture checks remain strict.
 
-[code_graph/index.py](../skills/business-observer/scripts/bo_observer/code_graph/index.py)
+[code_graph/index.py](../skills/vibelens/scripts/bo_observer/code_graph/index.py)
 turns parser facts into stable code nodes and typed relations. Its neighboring
-[query.py](../skills/business-observer/scripts/bo_observer/code_graph/query.py)
+[query.py](../skills/vibelens/scripts/bo_observer/code_graph/query.py)
 extracts bounded regions and exact boundary endpoints.
-[service.py](../skills/business-observer/scripts/bo_observer/code_graph/service.py)
+[service.py](../skills/vibelens/scripts/bo_observer/code_graph/service.py)
 owns source refresh, revision-bound file access and independent export checks.
-[code-layer.js](../skills/business-observer/assets/stategraph-viewer/code-layer.js)
+[code-layer.js](../skills/vibelens/assets/stategraph-viewer/code-layer.js)
 loads this optional projection without changing the authored model or claiming
 runtime execution. Read [the design](development/code-vis.md) for scope and limits.
 

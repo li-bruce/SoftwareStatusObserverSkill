@@ -153,7 +153,7 @@ clarification stays in conversation; implementation reconciliation belongs with
 the coding work. The agent performs graph maintenance without making the user
 manage intermediate files.
 
-The [iteration graph checks](../../../skills/business-observer/references/iteration-graph-checks.md)
+The [iteration graph checks](https://github.com/li-bruce/VibeLens/blob/v0.7.0/skills/business-observer/references/iteration-graph-checks.md)
 now make case selection explicit: inspect changed nodes, neighboring consumers,
 shared helpers, state/data dependencies and display boundaries. Run the affected
 feature cases and an applicable negative control in an isolated copy. Keep the
